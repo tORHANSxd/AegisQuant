@@ -1,0 +1,40 @@
+schema_version: "1.0.0"
+status: "p00_initial_draft"
+event_types:
+  - event_type: EXCHANGE_SECURITY_INCIDENT
+    parent: OPERATIONAL_RISK
+    required_entities: [VENUE]
+    evidence_minimum: [OFFICIAL_STATEMENT_OR_TWO_INDEPENDENT_SOURCES]
+    direct_order_action_allowed: false
+  - event_type: EXCHANGE_LISTING_CHANGE
+    parent: MARKET_STRUCTURE
+    required_entities: [VENUE, ASSET_OR_INSTRUMENT]
+    evidence_minimum: [OFFICIAL_VENUE_ANNOUNCEMENT]
+    direct_order_action_allowed: false
+  - event_type: PROTOCOL_SECURITY_INCIDENT
+    parent: OPERATIONAL_RISK
+    required_entities: [PROTOCOL]
+    evidence_minimum: [ONCHAIN_EVIDENCE_AND_CORROBORATION]
+    direct_order_action_allowed: false
+  - event_type: REGULATORY_ACTION
+    parent: POLICY
+    required_entities: [AUTHORITY, AFFECTED_ENTITY_OR_ASSET]
+    evidence_minimum: [PRIMARY_AUTHORITY_DOCUMENT]
+    direct_order_action_allowed: false
+  - event_type: NETWORK_UPGRADE
+    parent: TECHNOLOGY
+    required_entities: [NETWORK]
+    evidence_minimum: [OFFICIAL_REPOSITORY_OR_FOUNDATION_NOTICE]
+    direct_order_action_allowed: false
+  - event_type: STABLECOIN_DEPEG
+    parent: MARKET_RISK
+    required_entities: [ASSET]
+    evidence_minimum: [MULTI_VENUE_PRICE_EVIDENCE]
+    direct_order_action_allowed: false
+invariants:
+  statuses: [RUMOR, EMERGING, CORROBORATED, CONFIRMED, DENIED, RESOLVED]
+  evidence_required: true
+  conflict_evidence_retained: true
+  uncertainty_required: true
+  abstain_without_evidence: true
+  social_engagement_is_point_in_time: true

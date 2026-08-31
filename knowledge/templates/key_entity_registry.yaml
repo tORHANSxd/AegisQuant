@@ -1,0 +1,26 @@
+schema_version: "1.0.0"
+status: "p00_initial_draft"
+entity_classes:
+  - ASSET
+  - INSTRUMENT
+  - VENUE
+  - PROTOCOL
+  - NETWORK
+  - ORGANIZATION
+  - PERSON
+  - AUTHORITY
+required_fields:
+  - entity_id
+  - entity_class
+  - canonical_name
+  - aliases
+  - valid_from
+  - valid_to
+  - source_evidence_ids
+  - revision
+identity_rules:
+  external_ids_are_namespaced: true
+  aliases_are_time_versioned: true
+  merges_are_reversible: true
+  evidence_is_mandatory: true
+  unresolved_entities_are_not_auto_merged: true

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P00",
+  "runtime": "Python 3.14.7 candidate",
+  "generated_at_utc": "2026-08-31T06:46:06.518153Z",
+  "command": [
+    "run",
+    "--isolated",
+    "--python",
+    "3.14.7",
+    "--all-groups",
+    "--frozen",
+    "python",
+    "-m",
+    "pytest",
+    "tests/contract/test_candidate_runtime.py",
+    "tests/contract/test_nautilus_replay.py"
+  ],
+  "exit_code": 0,
+  "duration_seconds": 17.981,
+  "status": "passed",
+  "output_tail": "============================= test session starts =============================\nplatform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0\nrootdir: D:\\Personal\\Quantitative_Trading\nconfigfile: pyproject.toml\nplugins: hypothesis-6.167.1, asyncio-1.4.0\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 2 items\n\ntests\\contract\\test_candidate_runtime.py .                               [ 50%]\ntests\\contract\\test_nautilus_replay.py .                                 [100%]\n\n============================== warnings summary ===============================\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\n  D:\\Personal\\Quantitative_Trading\\tests\\contract\\test_nautilus_replay.py:50: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.\n    engine.run()\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n======================== 2 passed, 4 warnings in 7.14s ========================\n\nInstalled 83 packages in 5.39s"
+}

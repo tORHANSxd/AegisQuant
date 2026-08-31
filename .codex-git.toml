@@ -1,0 +1,12 @@
+need_git = true
+mode = "archive"
+branch = "main"
+remote = "origin"
+archive_root = "D:\\Workspace\\git"
+agent_name = "Codex"
+repo_name = ""
+exclude = [
+  "incoming/joinquant",
+  "data/external/joinquant/raw_private",
+  "data/external/joinquant/normalized",
+]

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegisquant.local/schemas/source-processing-policy-v1.json",
+  "title": "SourceProcessingPolicy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_policy_id",
+    "provider_id",
+    "policy_status",
+    "access_method",
+    "approved_use_case",
+    "content_scope",
+    "raw_storage",
+    "derived_storage",
+    "cloud_inference",
+    "foundation_model_training",
+    "fine_tuning",
+    "display_mode",
+    "deletion_sync_required",
+    "revision_sync_required",
+    "redistribution",
+    "retention_days",
+    "pii_mode",
+    "policy_checked_at",
+    "terms_version_hash"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "source_policy_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{2,63}$" },
+    "provider_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
+    "policy_status": { "enum": ["APPROVED", "RESTRICTED", "DENIED"] },
+    "access_method": {
+      "enum": ["NONE", "OFFICIAL_API", "PUBLIC_FEED", "LICENSED_EXPORT", "LOCAL_FILE"]
+    },
+    "approved_use_case": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "content_scope": { "type": "string", "minLength": 1, "maxLength": 512 },
+    "raw_storage": { "enum": ["ENCRYPTED_LOCAL", "METADATA_ONLY", "PROHIBITED"] },
+    "derived_storage": { "enum": ["ALLOWED", "AGGREGATE_ONLY", "PROHIBITED"] },
+    "cloud_inference": { "enum": ["ALLOWED", "LOCAL_ONLY", "PROHIBITED"] },
+    "foundation_model_training": { "const": "PROHIBITED" },
+    "fine_tuning": { "enum": ["PROHIBITED", "EXPLICIT_APPROVAL_REQUIRED"] },
+    "display_mode": { "enum": ["REHYDRATE", "DERIVED_ONLY", "FULL_WHEN_LICENSED", "NONE"] },
+    "deletion_sync_required": { "type": "boolean" },
+    "revision_sync_required": { "type": "boolean" },
+    "redistribution": { "enum": ["IDS_ONLY", "PROHIBITED", "LICENSED"] },
+    "retention_days": { "type": "integer", "minimum": 0 },
+    "pii_mode": { "enum": ["MINIMIZE_AND_PSEUDONYMIZE", "PROHIBITED"] },
+    "policy_checked_at": { "type": "string", "format": "date-time" },
+    "terms_version_hash": {
+      "oneOf": [
+        { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        { "type": "null" }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "policy_status": { "const": "DENIED" } } },
+      "then": {
+        "properties": {
+          "access_method": { "const": "NONE" },
+          "raw_storage": { "const": "PROHIBITED" },
+          "derived_storage": { "const": "PROHIBITED" },
+          "cloud_inference": { "const": "PROHIBITED" },
+          "fine_tuning": { "const": "PROHIBITED" },
+          "display_mode": { "const": "NONE" },
+          "redistribution": { "const": "PROHIBITED" },
+          "retention_days": { "const": 0 }
+        }
+      }
+    }
+  ]
+}

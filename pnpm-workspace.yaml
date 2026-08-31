@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+
+strictPeerDependencies: true
+saveExact: true
+
+allowBuilds:
+  "unrs-resolver@1.12.2": true

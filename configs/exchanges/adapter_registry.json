@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/exchange_adapter_registry.schema.json",
+  "schema_version": "1.0.0",
+  "live_trading_locked": true,
+  "order_submission_enabled": false,
+  "public_market_data_adapters": [],
+  "paper_adapters": [],
+  "testnet_adapters": [],
+  "live_adapters": []
+}

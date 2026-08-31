@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at_utc": "2026-08-31T05:59:32.303871Z",
+  "collector": "scripts/collect_host_capabilities.py",
+  "network_access_performed": false,
+  "secrets_read": false,
+  "operating_system": {
+    "system": "Windows",
+    "release": "11",
+    "version": "10.0.26100",
+    "machine": "AMD64"
+  },
+  "cpu": {
+    "logical_count": 12,
+    "name": "12th Gen Intel(R) Core(TM) i5-12450H"
+  },
+  "memory": {
+    "total_bytes": 16890716160
+  },
+  "workspace_disk": {
+    "total_bytes": 275659091968,
+    "used_bytes": 198027710464,
+    "free_bytes": 77631381504
+  },
+  "runtimes": {
+    "python": {
+      "version": "3.13.9",
+      "implementation": "CPython",
+      "executable_major_minor": "3.13"
+    },
+    "node": {
+      "available": true,
+      "exit_code": 0,
+      "output": "v24.12.0"
+    },
+    "pnpm": {
+      "available": true,
+      "exit_code": 0,
+      "output": "11.24.0"
+    },
+    "uv": {
+      "available": false,
+      "exit_code": null,
+      "output": ""
+    }
+  },
+  "platform_tools": {
+    "wsl": {
+      "available": true,
+      "exit_code": 0,
+      "output": "WSL 版本: 2.7.10.0\r\n内核版本: 6.18.33.2-2\r\nWSLg 版本: 1.0.73.2\r\nMSRDC 版本: 1.2.6676\r\nDirect3D 版本: 1.611.1-81528511\r\nDXCore 版本: 10.0.26100.1-240331-1435.ge-release\r\nWindows: 10.0.26100.3476"
+    },
+    "docker": {
+      "available": false,
+      "exit_code": null,
+      "output": ""
+    },
+    "nvidia_smi": {
+      "available": false,
+      "exit_code": null,
+      "output": ""
+    }
+  }
+}

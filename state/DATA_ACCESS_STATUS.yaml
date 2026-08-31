@@ -1,0 +1,18 @@
+schema_version: "1.0.0"
+phase: P00
+checked_at_utc: "2026-08-31T00:00:00Z"
+external_network_data_collection: disabled
+private_api_access: disabled
+real_trading_account_connection: disabled
+secret_loading: disabled
+user_local_paths:
+  raw_market_data: not_provided
+  historical_results: not_provided
+  legacy_strategy_source: not_provided
+  r331: not_provided
+source_policies:
+  approved: 0
+  restricted: 0
+  default: DENIED
+credentials_received: 0
+plaintext_secrets_written: 0

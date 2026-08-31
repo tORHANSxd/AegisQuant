@@ -1,0 +1,23 @@
+schema_version: "1.0.0"
+phase: P00
+risks:
+  - id: P00-RISK-001
+    severity: medium
+    status: open
+    title: NautilusTrader upstream maturity is Beta
+    containment: Restrict use to deterministic replay contract; no trading adapters are registered.
+  - id: P00-RISK-002
+    severity: medium
+    status: open
+    title: Windows client support is not an explicit upstream production guarantee
+    containment: Treat local import and replay as a P00-only contract and retain WSL as a future option.
+  - id: P00-RISK-003
+    severity: low
+    status: open
+    title: Docker and NVIDIA CUDA tooling are absent on the host
+    containment: P00 does not require containers or GPU; record capability without claiming availability.
+  - id: P00-RISK-004
+    severity: low
+    status: open
+    title: User data paths and optional provider permissions are not provided
+    containment: Keep every provider denied and defer path access until explicit future authorization.

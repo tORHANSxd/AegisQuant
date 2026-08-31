@@ -1,0 +1,11 @@
+schema_version: "1.0.0"
+phase: P00
+default_action: DENY
+approved_sources: []
+approval_requirements:
+  primary_or_official_identity_verified: true
+  source_processing_policy_required: true
+  terms_version_hash_required: true
+  permitted_use_case_required: true
+  review_expiry_required: true
+empty_list_semantics: No source is approved

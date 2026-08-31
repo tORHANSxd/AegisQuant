@@ -1,0 +1,5 @@
+{
+  "status": "not_applicable",
+  "reason": "P00 contains no container image or infrastructure-as-code input",
+  "scannable_files": []
+}

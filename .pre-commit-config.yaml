@@ -1,0 +1,35 @@
+minimum_pre_commit_version: "4.6.2"
+default_install_hook_types: [pre-commit]
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-format
+        name: Ruff format check
+        entry: uv run --frozen ruff format --check
+        language: system
+        types: [python]
+      - id: ruff-lint
+        name: Ruff lint
+        entry: uv run --frozen ruff check
+        language: system
+        types: [python]
+      - id: pyright
+        name: Pyright strict
+        entry: uv run --frozen pyright --project pyproject.toml
+        language: system
+        pass_filenames: false
+      - id: traceability
+        name: Frozen traceability matrix
+        entry: uv run --frozen python scripts/generate_traceability.py --p00-status verified --check
+        language: system
+        pass_filenames: false
+      - id: web-lint
+        name: Web lint
+        entry: pnpm lint
+        language: system
+        pass_filenames: false
+      - id: web-typecheck
+        name: Web type check
+        entry: pnpm typecheck
+        language: system
+        pass_filenames: false

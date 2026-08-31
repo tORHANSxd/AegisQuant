@@ -1,0 +1,7 @@
+environment = "development"
+phase = "P00"
+live_trading = false
+order_submission_enabled = false
+network_private_api_enabled = false
+secret_loading_enabled = false
+web_mode = "read_only"

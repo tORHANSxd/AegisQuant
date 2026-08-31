@@ -1,0 +1,67 @@
+schema_version: "1.0.0"
+phase: P00
+collection_status: not_started
+requests:
+  - request_id: P00-INPUT-LOCAL-ASSETS
+    scope: market_data_historical_results_legacy_strategies_r331
+    value_type: existence_and_readonly_absolute_paths
+    status: not_provided
+    required_for_p00: false
+    secret: false
+  - request_id: P00-INPUT-HOST-PREFERENCES
+    scope: disk_limit_windows_wsl_docker_gpu
+    value_type: limits_and_preferences
+    status: not_provided
+    required_for_p00: false
+    secret: false
+  - request_id: P00-INPUT-JOINQUANT
+    scope: market_frequency_export_and_quota_capabilities
+    value_type: permission_and_subscription_description
+    status: not_provided
+    required_for_p00: false
+    secret: false
+  - request_id: P00-INPUT-X-DEVELOPER
+    scope: approved_use_case_region_and_monthly_quota
+    value_type: permission_intent_and_limits
+    status: not_provided
+    required_for_p00: false
+    secret: false
+  - request_id: P00-INPUT-TELEGRAM
+    scope: authorized_public_channel_allowlist_and_research_account_status
+    value_type: authorization_description
+    status: not_provided
+    required_for_p00: false
+    secret: false
+  - request_id: P00-INPUT-YOUTUBE-GITHUB
+    scope: readonly_api_or_webhook_permission_intent
+    value_type: permission_intent_and_limits
+    status: not_provided
+    required_for_p00: false
+    secret: false
+  - request_id: P00-INPUT-NEWS-SUBSCRIPTIONS
+    scope: provider_plan_region_redistribution_and_quota
+    value_type: subscription_description
+    status: not_provided
+    required_for_p00: false
+    secret: false
+  - request_id: P00-INPUT-TESTNET
+    scope: isolated_testnet_account_availability
+    value_type: availability_status_only
+    status: not_provided
+    required_for_p00: false
+    secret: false
+  - request_id: P00-INPUT-RISK-PREFERENCES
+    scope: budget_markets_prohibited_assets_and_loss_tolerance
+    value_type: questionnaire_answers
+    status: not_provided
+    required_for_p00: false
+    secret: false
+prohibited_values:
+  - password
+  - browser_cookie
+  - verification_code
+  - api_secret
+  - private_key
+  - session_file
+  - access_token
+  - withdrawal_credential

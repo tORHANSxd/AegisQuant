@@ -1,0 +1,22 @@
+{
+  "$schema": "../../schemas/source_processing_policy.schema.json",
+  "source_policy_id": "default_deny_v1",
+  "provider_id": "unregistered",
+  "policy_status": "DENIED",
+  "access_method": "NONE",
+  "approved_use_case": "No external source use is approved by default",
+  "content_scope": "All content from an unregistered or unreviewed provider",
+  "raw_storage": "PROHIBITED",
+  "derived_storage": "PROHIBITED",
+  "cloud_inference": "PROHIBITED",
+  "foundation_model_training": "PROHIBITED",
+  "fine_tuning": "PROHIBITED",
+  "display_mode": "NONE",
+  "deletion_sync_required": true,
+  "revision_sync_required": true,
+  "redistribution": "PROHIBITED",
+  "retention_days": 0,
+  "pii_mode": "PROHIBITED",
+  "policy_checked_at": "2026-08-31T00:00:00Z",
+  "terms_version_hash": null
+}

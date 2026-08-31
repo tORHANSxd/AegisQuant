@@ -1,0 +1,52 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.pytest_tmp/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# JavaScript
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+coverage/
+playwright-report/
+test-results/
+
+# Local tools and IDE state
+.tools/
+.idea/
+.vscode/
+*.swp
+Thumbs.db
+.DS_Store
+
+# Secrets and local environment overrides
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.session
+
+# Runtime data and large artifacts
+data/raw/**
+data/bronze/**
+data/silver/**
+data/gold/**
+data/quarantine/**
+knowledge/news_archive/**
+knowledge/social_archive/**
+models/**/*.bin
+models/**/*.safetensors
+
+# Generated scratch files
+*.tmp
+*.log

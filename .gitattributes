@@ -1,0 +1,11 @@
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.zip binary
+*.parquet binary
+AegisQuant_v3.1_Multimodal_Event_Intelligence_Codex_Master_Taskbook.md whitespace=-trailing-space
+docs/spec/AegisQuant_Master_Taskbook_v3_1.md whitespace=-trailing-space

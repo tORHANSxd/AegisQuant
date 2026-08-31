@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P00",
+  "policy": {
+    "exact_direct_versions": true,
+    "lockfiles_required": ["uv.lock", "pnpm-lock.yaml"],
+    "candidate_runtime_is_production": false,
+    "contract_failure_blocks_acceptance": true
+  },
+  "runtimes": [
+    {
+      "name": "Python production baseline",
+      "target": "3.13.15",
+      "actual": "3.13.15",
+      "role": "production_baseline",
+      "source": "https://www.python.org/downloads/release/python-31315/",
+      "contract": "passed"
+    },
+    {
+      "name": "Python compatibility candidate",
+      "target": "3.14.7",
+      "actual": "3.14.7",
+      "role": "candidate_only",
+      "source": "https://www.python.org/downloads/",
+      "contract": "passed"
+    },
+    {
+      "name": "Node.js",
+      "target": "24.20.0",
+      "actual": "24.20.0",
+      "role": "lts_baseline",
+      "source": "https://nodejs.org/en/download/archive/v24.20.0",
+      "contract": "passed"
+    },
+    {
+      "name": "pnpm",
+      "target": "11.24.0",
+      "actual": "11.24.0",
+      "role": "package_manager",
+      "source": "https://www.npmjs.com/package/pnpm/v/11.24.0",
+      "contract": "passed"
+    }
+  ],
+  "core_dependencies": [
+    {
+      "name": "nautilus-trader",
+      "version": "1.231.0",
+      "maturity": "Beta",
+      "contract": "passed",
+      "live_use_allowed": false
+    },
+    { "name": "next", "version": "16.3.3", "contract": "passed" },
+    { "name": "react", "version": "19.2.8", "contract": "passed" },
+    { "name": "react-dom", "version": "19.2.8", "contract": "passed" }
+  ],
+  "toolchain_compatibility_decisions": [
+    {
+      "name": "eslint",
+      "latest_observed": "10.9.1",
+      "selected": "9.39.5",
+      "reason": "Next.js transitive ESLint plugins declare support through major 9"
+    },
+    {
+      "name": "typescript",
+      "latest_observed": "7.0.2",
+      "selected": "6.0.3",
+      "reason": "typescript-eslint 8.68.0 requires TypeScript >=4.8.4 and <6.1.0"
+    },
+    {
+      "name": "next-type-generation",
+      "latest_observed": "official docs describe experimental.isolatedDevBuild",
+      "selected": "next typegen with tsconfig.check.json",
+      "reason": "Next.js 16.3.3 rejects that documented field; repeated typecheck/build/E2E contracts pass with an isolated production type configuration"
+    }
+  ],
+  "deferred_components": [
+    "database",
+    "message_broker",
+    "object_storage",
+    "exchange_private_api",
+    "live_execution_adapter",
+    "container_runtime",
+    "gpu_runtime"
+  ],
+  "verification": {
+    "verified_at_utc": "2026-08-31T06:37:09Z",
+    "python_lock": "uv.lock",
+    "javascript_lock": "pnpm-lock.yaml",
+    "python_313_tests": "42 collected",
+    "python_314_contract_tests": "2 passed",
+    "nautilus_replay": "two fresh engines produced identical stable state",
+    "web": "lint, typecheck, 2 unit tests, production build, and Chromium e2e passed",
+    "dependency_audits": "Python and JavaScript audits passed"
+  },
+  "installer_observations": [
+    {
+      "tool": "uv 0.12.7",
+      "observation": "parallel runtime installation returned exit 2 while creating minor-version junctions",
+      "resolution": "exact 3.13.15 and 3.14.7 interpreter paths both executed and passed contracts"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "aegisquant",
+  "version": "3.1.0-dev.0",
+  "private": true,
+  "packageManager": "pnpm@11.24.0",
+  "engines": {
+    "node": "24.20.0",
+    "pnpm": "11.24.0"
+  },
+  "scripts": {
+    "build": "pnpm --filter @aegisquant/web build",
+    "e2e": "pnpm --filter @aegisquant/web e2e",
+    "lint": "pnpm --filter @aegisquant/web lint",
+    "test": "pnpm --filter @aegisquant/web test",
+    "typecheck": "pnpm --filter @aegisquant/web typecheck",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+  }
+}
