@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "phase": "P00",
-  "generated_at_utc": "2026-08-31T07:18:07.108847Z",
-  "implementation_commit": "f47ac5f0a0f199a82ed3bb4c9a5094eb2424c201",
+  "generated_at_utc": "2026-08-31T07:21:25.050965Z",
+  "implementation_commit": "05af2c7b40cbd7bfdd0a21727113010b5ee3e01a",
   "hash_algorithm": "SHA-256",
   "artifact_count": 119,
   "excluded_from_hash_set": {
@@ -326,7 +326,7 @@
       "path": "reports/compatibility/NAUTILUS_COMPATIBILITY.json",
       "category": "evidence",
       "size_bytes": 1639,
-      "sha256": "87bbb4f82bb7e99bf5b51dfbeafb24fb6f40edb0e5b76446f57a7cc28ed25676"
+      "sha256": "939f49b08c53473a92297c4539ef09c335e928a9d146ff05297015472b0528db"
     },
     {
       "path": "reports/licenses/COMPLIANCE_SUMMARY.json",
@@ -350,7 +350,7 @@
       "path": "reports/phases/P00/ACCEPTANCE.md",
       "category": "evidence",
       "size_bytes": 1315,
-      "sha256": "8adee522b9b66a285f602a4ced6d392967ba5b17618aea2e64d02af1c946d262"
+      "sha256": "24fe637a69ebcca58473e021e242fab1279053d11e0f1841ec814465bbfaf7b6"
     },
     {
       "path": "reports/phases/P00/ADR_REFERENCES.md",
@@ -362,7 +362,7 @@
       "path": "reports/phases/P00/CI_RESULTS.json",
       "category": "evidence",
       "size_bytes": 11941,
-      "sha256": "2848f750cd8b90e3342790ba11db91d075967aab9592a364cfb0a51c6a154178"
+      "sha256": "d6a8654933279cfde98be52fed61acc9e8798d7c078dc0399e695861431d6feb"
     },
     {
       "path": "reports/phases/P00/NEXT_ACTIONS.md",
@@ -380,7 +380,7 @@
       "path": "reports/phases/P00/PYTHON_314_CONTRACT.json",
       "category": "evidence",
       "size_bytes": 1916,
-      "sha256": "0232e7ad06fbb3e63d8975a1c377c6a65417b921edfe9c3f912ca09d5b0b3720"
+      "sha256": "071d53b9686ca97afca2e36046728c41270b2fda6c864171bc1cf4551a807485"
     },
     {
       "path": "reports/phases/P00/RISKS.md",
@@ -392,25 +392,25 @@
       "path": "reports/phases/P00/SUMMARY.md",
       "category": "evidence",
       "size_bytes": 1339,
-      "sha256": "75b3051bd047992af2d8be70cb69f34a1349168669e28e88a6525aaff4672bdc"
+      "sha256": "80091c77998655210d15ce620275eecfa8e932e70a18867cc08b67fb2eb94c2c"
     },
     {
       "path": "reports/phases/P00/TEST_RESULTS.json",
       "category": "evidence",
       "size_bytes": 2250,
-      "sha256": "7cc894133081e873955384176bd7aa8df5607d43eb017453ff38bc53b6015a2c"
+      "sha256": "aed6a941012665d1a357c7b5bdcb7f5d2c2574ae2b7c942c3d48719e2636b2ff"
     },
     {
       "path": "reports/sbom/javascript.cdx.json",
       "category": "evidence",
       "size_bytes": 77289,
-      "sha256": "d08dff3fbbbc61e6fc0f220aee1f0585cd5d4513b33e3f75e6d3fd1e93f5cc0f"
+      "sha256": "c425c8a400e8e8fd08a045d9ffe173d4e2d8059a8436bba442dab91a893a8773"
     },
     {
       "path": "reports/sbom/python.cdx.json",
       "category": "evidence",
       "size_bytes": 11510,
-      "sha256": "8d83bb3ce80110464135f97fd94dc0460223ea5f265ca71722354a798b2adfbb"
+      "sha256": "5355299bbaa15654e1846dcd44ce03fbddb87803b3ea2bde356dddf2fe9ffc4e"
     },
     {
       "path": "reports/security/BANDIT_TRIAGE.md",
@@ -422,7 +422,7 @@
       "path": "reports/security/SECURITY_SCAN_RESULTS.json",
       "category": "evidence",
       "size_bytes": 389,
-      "sha256": "51db9ad7263592cb36e361c05b5e66b96ba098f95c99936ef7acce3b6f92da60"
+      "sha256": "b90838df6ed20b14eaba8c70b51886b8dd5e1b288698e71ed157a0fbe0478003"
     },
     {
       "path": "reports/security/THREAT_MODEL_DRAFT.md",
@@ -434,7 +434,7 @@
       "path": "reports/security/bandit.json",
       "category": "evidence",
       "size_bytes": 4811,
-      "sha256": "682dfb8ae122d745ba0f12aa1b0c6bbd8de386ee8d2652e706519e1a2fcdf45e"
+      "sha256": "852f60c08c43b3f980231c17e0c5659b05b779e4fb2b8cbf65fe6b7c59078f2e"
     },
     {
       "path": "reports/security/container_iac_scan.json",
@@ -446,7 +446,7 @@
       "path": "reports/security/detect_secrets.json",
       "category": "evidence",
       "size_bytes": 3011,
-      "sha256": "ea21e2f99895692c45f98bd3778c8343d4ebb660497bc0cedb0876429d3c6c37"
+      "sha256": "60f0440e5eb366ae7874f9929f6c641a92de61d38a629b071f759b2a515a0d4b"
     },
     {
       "path": "reports/security/javascript_dependency_audit.json",
@@ -560,7 +560,7 @@
       "path": "state/DEPENDENCY_MATRIX.json",
       "category": "project_state",
       "size_bytes": 3259,
-      "sha256": "5e4b39aa443aa49b6538aec9af2c7a1d32836f73c39730b34cfcd060c932981e"
+      "sha256": "128b78acd897927e57b7ef8e09d56dffd8efdbee3e79a09e96f1369e98e3dff9"
     },
     {
       "path": "state/DIRECTORY_MANIFEST.json",

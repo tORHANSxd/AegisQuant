@@ -83,7 +83,7 @@
     "gpu_runtime"
   ],
   "verification": {
-    "verified_at_utc": "2026-08-31T07:12:41Z",
+    "verified_at_utc": "2026-08-31T07:20:02Z",
     "python_lock": "uv.lock",
     "javascript_lock": "pnpm-lock.yaml",
     "python_313_tests": "50 passed",

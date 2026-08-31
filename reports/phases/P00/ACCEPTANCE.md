@@ -2,7 +2,7 @@
 
 ## 结论：ACCEPTED
 
-- 验收对象：`f47ac5f0a0f199a82ed3bb4c9a5094eb2424c201`
+- 验收对象：`05af2c7b40cbd7bfdd0a21727113010b5ee3e01a`
 - 完整门禁证据：`reports/phases/P00/CI_RESULTS.json`
 
 | 任务书接受条件 | 结果 | 证据 |
