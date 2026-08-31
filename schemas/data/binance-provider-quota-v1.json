@@ -1,0 +1,31 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-provider-quota/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "credential_quota_used": {
+      "default": false,
+      "title": "Credential Quota Used",
+      "type": "boolean"
+    },
+    "observed_used_weight": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Observed Used Weight",
+      "type": "object"
+    },
+    "ws_connection_attempt_limit_per_five_minutes": {
+      "default": 300,
+      "title": "Ws Connection Attempt Limit Per Five Minutes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "observed_used_weight"
+  ],
+  "title": "ProviderQuota",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-provider-quota",
+  "x-aegisquant-schema-version": "1.0.0"
+}

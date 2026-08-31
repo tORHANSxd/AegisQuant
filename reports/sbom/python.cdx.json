@@ -4,7 +4,7 @@
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-31T12:43:34.084181Z",
+    "timestamp": "2026-08-31T15:38:38.611204Z",
     "component": {
       "type": "application",
       "name": "aegisquant-python",
@@ -29,6 +29,12 @@
       "name": "annotated-types",
       "version": "0.8.0",
       "purl": "pkg:pypi/annotated-types@0.8.0"
+    },
+    {
+      "type": "library",
+      "name": "anyio",
+      "version": "4.14.2",
+      "purl": "pkg:pypi/anyio@4.14.2"
     },
     {
       "type": "library",
@@ -167,6 +173,24 @@
       "name": "greenlet",
       "version": "3.5.5",
       "purl": "pkg:pypi/greenlet@3.5.5"
+    },
+    {
+      "type": "library",
+      "name": "h11",
+      "version": "0.16.0",
+      "purl": "pkg:pypi/h11@0.16.0"
+    },
+    {
+      "type": "library",
+      "name": "httpcore",
+      "version": "1.0.9",
+      "purl": "pkg:pypi/httpcore@1.0.9"
+    },
+    {
+      "type": "library",
+      "name": "httpx",
+      "version": "0.28.1",
+      "purl": "pkg:pypi/httpx@0.28.1"
     },
     {
       "type": "library",
@@ -623,6 +647,12 @@
       "name": "webcolors",
       "version": "25.10.0",
       "purl": "pkg:pypi/webcolors@25.10.0"
+    },
+    {
+      "type": "library",
+      "name": "websockets",
+      "version": "17.1",
+      "purl": "pkg:pypi/websockets@17.1"
     }
   ]
 }

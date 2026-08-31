@@ -61,3 +61,41 @@ providers:
     status: "candidate"
     owner: "user"
     source_policy_id: "user_local_assets_deny_v1"
+  - provider_id: "binance_public"
+    provider_name: "Binance official public market data"
+    provider_type: "exchange"
+    access_method: "rest"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints:
+      - "public_market_data_only"
+      - "operator_must_obey_local_access_rules"
+    rate_limits:
+      spot_rest_weight_per_minute: 6000
+      spot_ws_incoming_messages_per_second: 5
+      usdm_ws_incoming_messages_per_second: 10
+      ws_connection_attempts_per_five_minutes: 300
+    latency_expectation_ms: null
+    revision_policy: "append_raw_observation_and_changelog_revision"
+    supported_datasets:
+      - "spot_instruments"
+      - "spot_klines"
+      - "spot_trades"
+      - "spot_book_ticker"
+      - "spot_depth"
+      - "usdm_instruments"
+      - "usdm_klines"
+      - "usdm_trades"
+      - "usdm_book_ticker"
+      - "usdm_depth"
+      - "usdm_mark_index"
+      - "usdm_funding"
+      - "usdm_open_interest"
+    time_semantics_documented: true
+    retention_policy: "Append-only public raw observations for 30 days; immutable manifests outlive payload retention"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "binance_public_v1"

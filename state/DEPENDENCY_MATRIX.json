@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "phase": "P02",
+  "phase": "P03",
   "policy": {
     "exact_direct_versions": true,
     "lockfiles_required": ["uv.lock", "pnpm-lock.yaml"],
@@ -83,6 +83,20 @@
       "source": "https://pypi.org/project/duckdb/1.5.5/",
       "contract": "passed",
       "external_access": false
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "source": "https://pypi.org/project/httpx/0.28.1/",
+      "contract": "passed",
+      "purpose": "unsigned public REST with injected offline transport"
+    },
+    {
+      "name": "websockets",
+      "version": "17.1",
+      "source": "https://pypi.org/project/websockets/17.1/",
+      "contract": "passed",
+      "purpose": "public market-stream lifecycle and automatic protocol ping-pong"
     },
     {
       "name": "polars",
@@ -169,17 +183,17 @@
     "gpu_runtime"
   ],
   "verification": {
-    "verified_at_utc": "2026-08-31T12:43:53.294921Z",
+    "verified_at_utc": "2026-08-31T15:39:00.208664Z",
     "python_lock": "uv.lock",
     "javascript_lock": "pnpm-lock.yaml",
-    "python_313_tests": "119 passed; 4 upstream warnings",
-    "python_314_contract_tests": "83 passed; 4 upstream warnings",
+    "python_313_tests": "159 passed; 4 upstream Nautilus/Pandas warnings",
+    "python_314_contract_tests": "123 passed; 4 upstream Nautilus/Pandas warnings",
     "postgresql_contracts": "PostgreSQL 18.6 empty-database upgrade/downgrade plus 3 real integration tests passed",
-    "schema_contracts": "31 generated artifacts verified",
+    "schema_contracts": "49 generated artifacts verified",
     "data_foundation_contracts": "4096-file bounded read-only inventory, 1000000-row Parquet benchmark, immutable revision, atomic registration, quarantine, tombstone, and PIT leakage contracts passed",
     "nautilus_replay": "two fresh engines produced identical stable state",
     "web": "lint, typecheck, 2 unit tests, production build, and 1 Chromium E2E test passed",
-    "local_ci": "18 of 18 stages passed",
+    "local_ci": "19 of 19 stages passed",
     "dependency_audits": "Python and JavaScript audits passed; Bandit and plaintext-secret scans reported zero findings"
   },
   "installer_observations": [

@@ -142,7 +142,7 @@
       "path": "schemas/config/source-processing-policy-domain-v1.json",
       "schema_name": "aegisquant.source-processing-policy",
       "schema_version": "1.0.0",
-      "sha256": "902bd45a76561f7cf81866537940d386f2f8f3df2b8d4d46814626489413257b"
+      "sha256": "aca1118ae51b0c7543aa5e29b4900e0a7ce243c1fc6810e9b5c734e3f46dbfcb"
     }
   ],
   "schema_version": "1.0.0"

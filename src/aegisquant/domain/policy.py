@@ -28,6 +28,7 @@ class AccessMethod(StrEnum):
 
 class RawStorageMode(StrEnum):
     ENCRYPTED_LOCAL = "ENCRYPTED_LOCAL"
+    PUBLIC_APPEND_ONLY = "PUBLIC_APPEND_ONLY"
     METADATA_ONLY = "METADATA_ONLY"
     PROHIBITED = "PROHIBITED"
 

@@ -57,3 +57,22 @@ policies:
     pii_mode: "PROHIBITED"
     policy_checked_at: "2026-08-31T10:59:00Z"
     terms_version_hash: null
+  - source_policy_id: "binance_public_v1"
+    provider_id: "binance_public"
+    policy_status: "APPROVED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "public market-data research ingestion and deterministic replay"
+    content_scope: "Binance Spot and USD-M public market-data REST WebSocket and public archive responses only"
+    raw_storage: "PUBLIC_APPEND_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: false
+    revision_sync_required: false
+    redistribution: "PROHIBITED"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-08-31T14:05:22Z"
+    terms_version_hash: "531657e941679bbeea45203d80e0246b1c71006c618a602dd758510e3989ce80"

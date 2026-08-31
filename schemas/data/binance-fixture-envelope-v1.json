@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "Product": {
+      "enum": [
+        "SPOT",
+        "USD_M"
+      ],
+      "title": "Product",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-fixture-envelope/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "channel": {
+      "title": "Channel",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "payload": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "items": {},
+          "type": "array"
+        }
+      ],
+      "title": "Payload"
+    },
+    "payload_sha256": {
+      "title": "Payload Sha256",
+      "type": "string"
+    },
+    "product": {
+      "$ref": "#/$defs/Product"
+    },
+    "sequence": {
+      "minimum": 0,
+      "title": "Sequence",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "sequence",
+    "product",
+    "channel",
+    "observed_at",
+    "payload",
+    "payload_sha256"
+  ],
+  "title": "FixtureEnvelope",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-fixture-envelope",
+  "x-aegisquant-schema-version": "1.0.0"
+}

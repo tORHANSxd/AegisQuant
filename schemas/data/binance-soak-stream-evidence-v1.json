@@ -1,0 +1,132 @@
+{
+  "$defs": {
+    "Product": {
+      "enum": [
+        "SPOT",
+        "USD_M"
+      ],
+      "title": "Product",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-soak-stream-evidence/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "applied_count": {
+      "minimum": 0,
+      "title": "Applied Count",
+      "type": "integer"
+    },
+    "duplicate_count": {
+      "minimum": 0,
+      "title": "Duplicate Count",
+      "type": "integer"
+    },
+    "first_message_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "First Message At"
+    },
+    "forced_rollover_count": {
+      "minimum": 0,
+      "title": "Forced Rollover Count",
+      "type": "integer"
+    },
+    "hash_chain_sha256": {
+      "title": "Hash Chain Sha256",
+      "type": "string"
+    },
+    "last_message_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Last Message At"
+    },
+    "late_count": {
+      "minimum": 0,
+      "title": "Late Count",
+      "type": "integer"
+    },
+    "maximum_inter_message_ms": {
+      "minimum": 0,
+      "title": "Maximum Inter Message Ms",
+      "type": "integer"
+    },
+    "message_count": {
+      "minimum": 0,
+      "title": "Message Count",
+      "type": "integer"
+    },
+    "product": {
+      "$ref": "#/$defs/Product"
+    },
+    "reconnect_count": {
+      "minimum": 0,
+      "title": "Reconnect Count",
+      "type": "integer"
+    },
+    "recovery_count": {
+      "minimum": 0,
+      "title": "Recovery Count",
+      "type": "integer"
+    },
+    "sequence_gap_count": {
+      "minimum": 0,
+      "title": "Sequence Gap Count",
+      "type": "integer"
+    },
+    "snapshot_count": {
+      "minimum": 0,
+      "title": "Snapshot Count",
+      "type": "integer"
+    },
+    "stream_url": {
+      "title": "Stream Url",
+      "type": "string"
+    },
+    "witness_samples": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Witness Samples",
+      "type": "array"
+    }
+  },
+  "required": [
+    "product",
+    "stream_url",
+    "message_count",
+    "applied_count",
+    "duplicate_count",
+    "late_count",
+    "sequence_gap_count",
+    "recovery_count",
+    "snapshot_count",
+    "reconnect_count",
+    "forced_rollover_count",
+    "first_message_at",
+    "last_message_at",
+    "maximum_inter_message_ms",
+    "hash_chain_sha256",
+    "witness_samples"
+  ],
+  "title": "SoakStreamEvidence",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-soak-stream-evidence",
+  "x-aegisquant-schema-version": "1.0.0"
+}

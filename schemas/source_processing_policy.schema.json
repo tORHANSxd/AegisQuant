@@ -35,7 +35,9 @@
     },
     "approved_use_case": { "type": "string", "minLength": 1, "maxLength": 256 },
     "content_scope": { "type": "string", "minLength": 1, "maxLength": 512 },
-    "raw_storage": { "enum": ["ENCRYPTED_LOCAL", "METADATA_ONLY", "PROHIBITED"] },
+    "raw_storage": {
+      "enum": ["ENCRYPTED_LOCAL", "PUBLIC_APPEND_ONLY", "METADATA_ONLY", "PROHIBITED"]
+    },
     "derived_storage": { "enum": ["ALLOWED", "AGGREGATE_ONLY", "PROHIBITED"] },
     "cloud_inference": { "enum": ["ALLOWED", "LOCAL_ONLY", "PROHIBITED"] },
     "foundation_model_training": { "const": "PROHIBITED" },

@@ -3,6 +3,7 @@
     "RawStorageMode": {
       "enum": [
         "ENCRYPTED_LOCAL",
+        "PUBLIC_APPEND_ONLY",
         "METADATA_ONLY",
         "PROHIBITED"
       ],

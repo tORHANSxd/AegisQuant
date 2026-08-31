@@ -1,0 +1,283 @@
+{
+  "$defs": {
+    "PriceBasis": {
+      "enum": [
+        "TRADE",
+        "MARK",
+        "INDEX"
+      ],
+      "title": "PriceBasis",
+      "type": "string"
+    },
+    "Product": {
+      "enum": [
+        "SPOT",
+        "USD_M"
+      ],
+      "title": "Product",
+      "type": "string"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "provider_id": {
+          "default": {
+            "value": "binance_public"
+          },
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "raw_sha256": {
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "source_request_hash": {
+          "title": "Source Request Hash",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "source_request_hash",
+        "raw_sha256"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "QualityStatus": {
+      "enum": [
+        "VALID",
+        "WARNING",
+        "QUARANTINE"
+      ],
+      "title": "QualityStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-kline/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_time": {
+      "format": "date-time",
+      "title": "Available Time",
+      "type": "string"
+    },
+    "base_volume": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Base Volume"
+    },
+    "close": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Close"
+    },
+    "close_time": {
+      "format": "date-time",
+      "title": "Close Time",
+      "type": "string"
+    },
+    "event_time": {
+      "format": "date-time",
+      "title": "Event Time",
+      "type": "string"
+    },
+    "high": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "High"
+    },
+    "ingest_time": {
+      "format": "date-time",
+      "title": "Ingest Time",
+      "type": "string"
+    },
+    "interval": {
+      "title": "Interval",
+      "type": "string"
+    },
+    "is_closed": {
+      "title": "Is Closed",
+      "type": "boolean"
+    },
+    "low": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Low"
+    },
+    "open": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Open"
+    },
+    "open_time": {
+      "format": "date-time",
+      "title": "Open Time",
+      "type": "string"
+    },
+    "price_basis": {
+      "$ref": "#/$defs/PriceBasis"
+    },
+    "processed_time": {
+      "format": "date-time",
+      "title": "Processed Time",
+      "type": "string"
+    },
+    "product": {
+      "$ref": "#/$defs/Product"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "quality_codes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Quality Codes",
+      "type": "array"
+    },
+    "quality_status": {
+      "$ref": "#/$defs/QualityStatus"
+    },
+    "quote_volume": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Quote Volume"
+    },
+    "revision_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Revision Time"
+    },
+    "symbol": {
+      "title": "Symbol",
+      "type": "string"
+    },
+    "taker_buy_base_volume": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Taker Buy Base Volume"
+    },
+    "taker_buy_quote_volume": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Taker Buy Quote Volume"
+    },
+    "trade_count": {
+      "minimum": 0,
+      "title": "Trade Count",
+      "type": "integer"
+    },
+    "trading_day_utc": {
+      "title": "Trading Day Utc",
+      "type": "string"
+    }
+  },
+  "required": [
+    "product",
+    "symbol",
+    "event_time",
+    "available_time",
+    "ingest_time",
+    "processed_time",
+    "quality_status",
+    "provenance",
+    "price_basis",
+    "interval",
+    "open_time",
+    "close_time",
+    "open",
+    "high",
+    "low",
+    "close",
+    "base_volume",
+    "quote_volume",
+    "trade_count",
+    "taker_buy_base_volume",
+    "taker_buy_quote_volume",
+    "is_closed",
+    "trading_day_utc"
+  ],
+  "title": "KlineRecord",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-kline",
+  "x-aegisquant-schema-version": "1.0.0"
+}

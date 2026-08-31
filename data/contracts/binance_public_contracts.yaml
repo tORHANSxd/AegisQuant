@@ -1,0 +1,72 @@
+schema_version: "1.0.0"
+reviewed_at_utc: "2026-08-31T14:05:22Z"
+provider_id: "binance_public"
+authentication: "none"
+forbidden_capabilities:
+  - "account"
+  - "orders"
+  - "user_data_stream"
+  - "private_websocket"
+  - "signed_request"
+rest_hosts:
+  spot: "https://data-api.binance.vision"
+  usdm: "https://fapi.binance.com"
+  public_archive: "https://data.binance.vision"
+websocket_hosts:
+  spot: "wss://data-stream.binance.vision"
+  usdm_public: "wss://fstream.binance.com/public"
+  usdm_market: "wss://fstream.binance.com/market"
+rest_endpoints:
+  - {name: spot_time, product: SPOT, path: /api/v3/time, weight: 1, pagination: none}
+  - {name: spot_exchange_info, product: SPOT, path: /api/v3/exchangeInfo, weight: 20, pagination: none}
+  - {name: spot_depth, product: SPOT, path: /api/v3/depth, weight: dynamic, pagination: none}
+  - {name: spot_trades, product: SPOT, path: /api/v3/trades, weight: 25, pagination: limit}
+  - {name: spot_agg_trades, product: SPOT, path: /api/v3/aggTrades, weight: 4, pagination: fromId}
+  - {name: spot_klines, product: SPOT, path: /api/v3/klines, weight: 2, pagination: startTime}
+  - {name: spot_book_ticker, product: SPOT, path: /api/v3/ticker/bookTicker, weight: dynamic, pagination: none}
+  - {name: usdm_time, product: USD_M, path: /fapi/v1/time, weight: 1, pagination: none}
+  - {name: usdm_exchange_info, product: USD_M, path: /fapi/v1/exchangeInfo, weight: 1, pagination: none}
+  - {name: usdm_depth, product: USD_M, path: /fapi/v1/depth, weight: dynamic, pagination: none}
+  - {name: usdm_trades, product: USD_M, path: /fapi/v1/trades, weight: dynamic, pagination: limit}
+  - {name: usdm_agg_trades, product: USD_M, path: /fapi/v1/aggTrades, weight: 20, pagination: fromId}
+  - {name: usdm_klines, product: USD_M, path: /fapi/v1/klines, weight: dynamic, pagination: startTime}
+  - {name: usdm_mark_klines, product: USD_M, path: /fapi/v1/markPriceKlines, weight: dynamic, pagination: startTime}
+  - {name: usdm_index_klines, product: USD_M, path: /fapi/v1/indexPriceKlines, weight: dynamic, pagination: startTime}
+  - {name: usdm_mark_index, product: USD_M, path: /fapi/v1/premiumIndex, weight: 10, pagination: none}
+  - {name: usdm_funding, product: USD_M, path: /fapi/v1/fundingRate, weight: shared_500_per_5m, pagination: startTime}
+  - {name: usdm_open_interest, product: USD_M, path: /fapi/v1/openInterest, weight: 1, pagination: none}
+  - {name: usdm_open_interest_history, product: USD_M, path: /futures/data/openInterestHist, weight: 0, pagination: startTime_latest_month_only}
+  - {name: usdm_book_ticker, product: USD_M, path: /fapi/v1/ticker/bookTicker, weight: dynamic, pagination: none}
+websocket_streams:
+  - {name: spot_trade, product: SPOT, route: spot, suffix: "@trade"}
+  - {name: spot_agg_trade, product: SPOT, route: spot, suffix: "@aggTrade"}
+  - {name: spot_kline, product: SPOT, route: spot, suffix: "@kline_<interval>"}
+  - {name: spot_book_ticker, product: SPOT, route: spot, suffix: "@bookTicker"}
+  - {name: spot_depth, product: SPOT, route: spot, suffix: "@depth@1000ms"}
+  - {name: usdm_book_ticker, product: USD_M, route: usdm_public, suffix: "@bookTicker"}
+  - {name: usdm_depth, product: USD_M, route: usdm_public, suffix: "@depth@500ms"}
+  - {name: usdm_agg_trade, product: USD_M, route: usdm_market, suffix: "@aggTrade"}
+  - {name: usdm_kline, product: USD_M, route: usdm_market, suffix: "@kline_<interval>"}
+  - {name: usdm_mark_price, product: USD_M, route: usdm_market, suffix: "@markPrice@1s"}
+connection_contracts:
+  spot:
+    maximum_connection_age_seconds: 86400
+    server_ping_interval_seconds: 20
+    pong_deadline_seconds: 60
+    incoming_messages_per_second: 5
+    maximum_streams_per_connection: 1024
+    connection_attempts_per_five_minutes_per_ip: 300
+  usdm:
+    maximum_connection_age_seconds: 86400
+    server_ping_interval_seconds: 180
+    pong_deadline_seconds: 600
+    incoming_messages_per_second: 10
+    maximum_streams_per_connection: 1024
+source_documents:
+  spot_rest: "https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints"
+  spot_ws: "https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams"
+  spot_changelog: "https://github.com/binance/binance-spot-api-docs/blob/master/CHANGELOG.md"
+  usdm_rest: "https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api"
+  usdm_ws_change: "https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Important-WebSocket-Change-Notice"
+  usdm_ws_connect: "https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Connect"
+  public_history: "https://github.com/binance/binance-public-data"

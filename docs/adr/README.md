@@ -8,3 +8,4 @@ ADR 一经接受不原地抹除；变化通过新 ADR supersede。每份记录�
 - ADR-0003：Live Trading 锁
 - ADR-0004：P01 领域契约与 PostgreSQL 技术栈
 - ADR-0005：P02 列式数据底座与本地安全查询契约
+- ADR-0006：Binance 公开市场数据契约与安全边界

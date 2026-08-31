@@ -1,0 +1,70 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-fixture-manifest/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contains_credentials": {
+      "default": false,
+      "title": "Contains Credentials",
+      "type": "boolean"
+    },
+    "event_count": {
+      "minimum": 0,
+      "title": "Event Count",
+      "type": "integer"
+    },
+    "file": {
+      "title": "File",
+      "type": "string"
+    },
+    "first_observed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "First Observed At"
+    },
+    "last_observed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Last Observed At"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sha256": {
+      "title": "Sha256",
+      "type": "string"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "required": [
+    "file",
+    "sha256",
+    "event_count",
+    "first_observed_at",
+    "last_observed_at",
+    "source"
+  ],
+  "title": "FixtureManifest",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-fixture-manifest",
+  "x-aegisquant-schema-version": "1.0.0"
+}

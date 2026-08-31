@@ -18,6 +18,7 @@ REQUIRED_REPORTS = {
     "SUMMARY.md",
     "TEST_RESULTS.json",
 }
+P02_ARTIFACT_MANIFEST_SHA256 = "1fc4ff4c28787477d208afee8ba2bb27435e90a16f2a4732f03aa1282cd6d5ee"
 
 
 def load_state(project_root: Path) -> dict[str, object]:
@@ -29,15 +30,19 @@ def load_state(project_root: Path) -> dict[str, object]:
     )
 
 
-def test_p02_is_the_only_active_phase_and_live_remains_locked(project_root: Path) -> None:
+def test_p02_acceptance_is_preserved_while_p03_is_active_and_live_remains_locked(
+    project_root: Path,
+) -> None:
     state = load_state(project_root)
     previous = cast(dict[str, object], state["previous_phase"])
-    assert state["current_phase"] == "P02"
-    assert state["next_phase"] == "P03"
-    assert state["status"] in {"in_progress", "accepted"}
+    assert state["current_phase"] == "P03"
+    assert state["next_phase"] == "P04"
+    assert state["status"] == "in_progress"
     assert state["live_trading_locked"] is True
-    assert previous["phase"] == "P01"
+    assert previous["phase"] == "P02"
     assert previous["status"] == "accepted"
+    assert previous["commit_sha"] == "547bcee62734bc0896a7d51a1a52a0df209d3dc1"
+    assert previous["evidence_commit_sha"] == "49f280f226db300b261253a24d3b3260b198ad6a"
     assert not (project_root / "src/aegisquant/providers").exists()
     assert not (project_root / "src/aegisquant/live").exists()
 
@@ -74,18 +79,13 @@ def test_mandatory_p02_data_artifacts_are_real_and_explicitly_synthetic(
 
 
 def test_p02_report_set_and_manifest_match_acceptance_state(project_root: Path) -> None:
-    state = load_state(project_root)
     report_dir = project_root / "reports/phases/P02"
-    assert (report_dir / "PLAN.md").is_file()
-    if state["status"] != "accepted":
-        return
-
     for name in REQUIRED_REPORTS:
         path = report_dir / name
         assert path.is_file() and path.stat().st_size > 0, name
     results = json.loads((report_dir / "TEST_RESULTS.json").read_text(encoding="utf-8"))
     assert results["phase"] == "P02"
-    assert results["commit_sha"] == state["commit_sha"]
+    assert results["commit_sha"] == "547bcee62734bc0896a7d51a1a52a0df209d3dc1"
     assert results["passed"] > 0
     assert results["failed"] == 0
     assert results["skipped"] == 0
@@ -94,9 +94,8 @@ def test_p02_report_set_and_manifest_match_acceptance_state(project_root: Path) 
     manifest_path = report_dir / "ARTIFACT_MANIFEST.json"
     manifest_raw = manifest_path.read_bytes()
     manifest = json.loads(manifest_raw)
-    assert state["accepted_at_utc"]
-    assert state["commit_sha"] == manifest["implementation_commit"]
-    assert state["artifact_manifest_sha256"] == hashlib.sha256(manifest_raw).hexdigest()
+    assert manifest["implementation_commit"] == "547bcee62734bc0896a7d51a1a52a0df209d3dc1"
+    assert hashlib.sha256(manifest_raw).hexdigest() == P02_ARTIFACT_MANIFEST_SHA256
     assert manifest["phase"] == "P02"
     assert manifest["artifact_count"] == len(manifest["artifacts"])
     assert "state/PROJECT_PHASE_STATE.yaml" not in {

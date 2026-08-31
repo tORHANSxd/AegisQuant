@@ -14,6 +14,7 @@ dependencies = [
   "alembic==1.19.1",
   "cryptography==50.0.1",
   "duckdb==1.5.5",
+  "httpx==0.28.1",
   "jsonschema==4.26.0",
   "polars==1.44.1",
   "psycopg[binary]==3.3.4",
@@ -22,6 +23,7 @@ dependencies = [
   "pydantic==2.13.5",
   "PyYAML==6.0.3",
   "SQLAlchemy==2.0.52",
+  "websockets==17.1",
 ]
 
 [project.scripts]

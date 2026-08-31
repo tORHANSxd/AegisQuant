@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://aegisquant.local/schemas/exchange-adapter-registry-v1.json",
-  "title": "AegisQuant P00 exchange adapter registry",
+  "title": "AegisQuant exchange adapter registry",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -18,7 +18,47 @@
     "schema_version": { "const": "1.0.0" },
     "live_trading_locked": { "const": true },
     "order_submission_enabled": { "const": false },
-    "public_market_data_adapters": { "type": "array", "maxItems": 0 },
+    "public_market_data_adapters": {
+      "type": "array",
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "adapter_id",
+          "provider_id",
+          "venue",
+          "products",
+          "transports",
+          "credentials_required",
+          "private_api_enabled",
+          "order_submission_enabled",
+          "contract_inventory"
+        ],
+        "properties": {
+          "adapter_id": { "const": "binance-public-v1" },
+          "provider_id": { "const": "binance_public" },
+          "venue": { "const": "BINANCE" },
+          "products": {
+            "type": "array",
+            "prefixItems": [{ "const": "SPOT" }, { "const": "USD_M" }],
+            "items": false
+          },
+          "transports": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": { "enum": ["REST", "WEBSOCKET", "PUBLIC_ARCHIVE"] }
+          },
+          "credentials_required": { "const": false },
+          "private_api_enabled": { "const": false },
+          "order_submission_enabled": { "const": false },
+          "contract_inventory": {
+            "const": "data/contracts/binance_public_contracts.yaml"
+          }
+        }
+      }
+    },
     "paper_adapters": { "type": "array", "maxItems": 0 },
     "testnet_adapters": { "type": "array", "maxItems": 0 },
     "live_adapters": { "type": "array", "maxItems": 0 }

@@ -1,0 +1,48 @@
+{
+  "SPOT": [
+    {
+      "disposition": "APPLIED",
+      "reason_code": "AQ-DATA-ORDERBOOK-APPLIED",
+      "recovery_required": false,
+      "watermark": 102
+    },
+    {
+      "disposition": "DUPLICATE",
+      "reason_code": "AQ-DATA-ORDERBOOK-DUPLICATE",
+      "recovery_required": false,
+      "watermark": 102
+    },
+    {
+      "disposition": "LATE",
+      "reason_code": "AQ-DATA-ORDERBOOK-LATE",
+      "recovery_required": false,
+      "watermark": 102
+    },
+    {
+      "disposition": "GAP",
+      "reason_code": "AQ-DATA-ORDERBOOK-SPOT-SEQUENCE-GAP",
+      "recovery_required": true,
+      "watermark": 102
+    }
+  ],
+  "USD_M": [
+    {
+      "disposition": "APPLIED",
+      "reason_code": "AQ-DATA-ORDERBOOK-APPLIED",
+      "recovery_required": false,
+      "watermark": 201
+    },
+    {
+      "disposition": "APPLIED",
+      "reason_code": "AQ-DATA-ORDERBOOK-APPLIED",
+      "recovery_required": false,
+      "watermark": 202
+    },
+    {
+      "disposition": "GAP",
+      "reason_code": "AQ-DATA-ORDERBOOK-USDM-PREVIOUS-SEQUENCE-GAP",
+      "recovery_required": true,
+      "watermark": 202
+    }
+  ]
+}

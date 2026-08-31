@@ -3,7 +3,19 @@
   "schema_version": "1.0.0",
   "live_trading_locked": true,
   "order_submission_enabled": false,
-  "public_market_data_adapters": [],
+  "public_market_data_adapters": [
+    {
+      "adapter_id": "binance-public-v1",
+      "provider_id": "binance_public",
+      "venue": "BINANCE",
+      "products": ["SPOT", "USD_M"],
+      "transports": ["REST", "WEBSOCKET", "PUBLIC_ARCHIVE"],
+      "credentials_required": false,
+      "private_api_enabled": false,
+      "order_submission_enabled": false,
+      "contract_inventory": "data/contracts/binance_public_contracts.yaml"
+    }
+  ],
   "paper_adapters": [],
   "testnet_adapters": [],
   "live_adapters": []

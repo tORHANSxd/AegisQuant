@@ -1,0 +1,11 @@
+{
+  "book_vs_ticker": {
+    "issues": [],
+    "passed": true
+  },
+  "kline_vs_trades": {
+    "issues": [],
+    "passed": true
+  },
+  "passed": true
+}

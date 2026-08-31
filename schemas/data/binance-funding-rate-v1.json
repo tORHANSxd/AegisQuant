@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "Product": {
+      "enum": [
+        "SPOT",
+        "USD_M"
+      ],
+      "title": "Product",
+      "type": "string"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "provider_id": {
+          "default": {
+            "value": "binance_public"
+          },
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "raw_sha256": {
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "source_request_hash": {
+          "title": "Source Request Hash",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "source_request_hash",
+        "raw_sha256"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "QualityStatus": {
+      "enum": [
+        "VALID",
+        "WARNING",
+        "QUARANTINE"
+      ],
+      "title": "QualityStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-funding-rate/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_time": {
+      "format": "date-time",
+      "title": "Available Time",
+      "type": "string"
+    },
+    "event_time": {
+      "format": "date-time",
+      "title": "Event Time",
+      "type": "string"
+    },
+    "funding_rate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Funding Rate"
+    },
+    "funding_time": {
+      "format": "date-time",
+      "title": "Funding Time",
+      "type": "string"
+    },
+    "ingest_time": {
+      "format": "date-time",
+      "title": "Ingest Time",
+      "type": "string"
+    },
+    "is_final": {
+      "title": "Is Final",
+      "type": "boolean"
+    },
+    "mark_price": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mark Price"
+    },
+    "processed_time": {
+      "format": "date-time",
+      "title": "Processed Time",
+      "type": "string"
+    },
+    "product": {
+      "$ref": "#/$defs/Product"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "quality_codes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Quality Codes",
+      "type": "array"
+    },
+    "quality_status": {
+      "$ref": "#/$defs/QualityStatus"
+    },
+    "revision_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Revision Time"
+    },
+    "symbol": {
+      "title": "Symbol",
+      "type": "string"
+    }
+  },
+  "required": [
+    "product",
+    "symbol",
+    "event_time",
+    "available_time",
+    "ingest_time",
+    "processed_time",
+    "quality_status",
+    "provenance",
+    "funding_time",
+    "funding_rate",
+    "is_final"
+  ],
+  "title": "FundingRateRecord",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-funding-rate",
+  "x-aegisquant-schema-version": "1.0.0"
+}

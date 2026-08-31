@@ -24,6 +24,27 @@ from aegisquant.data.models import (
     ProviderRegistryDocument,
     QualityReport,
 )
+from aegisquant.data.providers.binance.adapter import (
+    DatasetDescriptor,
+    ProviderHealth,
+    ProviderQuota,
+)
+from aegisquant.data.providers.binance.changelog import ChangelogSnapshot
+from aegisquant.data.providers.binance.models import (
+    BookTickerRecord,
+    ConnectionHealth,
+    DepthDeltaRecord,
+    FundingRateRecord,
+    InstrumentSnapshot,
+    KlineRecord,
+    MarkIndexRecord,
+    OpenInterestRecord,
+    RawResponseEnvelope,
+    SoakEvidence,
+    SoakStreamEvidence,
+    TradeRecord,
+)
+from aegisquant.data.providers.binance.replay import FixtureEnvelope, FixtureManifest
 from aegisquant.domain.accounting import JournalEntry, PositionLot
 from aegisquant.domain.execution import Fill, OrderCommand, OrderIntent, VenueOrder
 from aegisquant.domain.intelligence import (
@@ -163,6 +184,114 @@ DATA_CONTRACTS: Final = (
         "1.0.0",
         TransformationLineage,
         Path("transformation-lineage-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-instrument-snapshot",
+        "1.0.0",
+        InstrumentSnapshot,
+        Path("binance-instrument-snapshot-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-kline",
+        "1.0.0",
+        KlineRecord,
+        Path("binance-kline-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-trade",
+        "1.0.0",
+        TradeRecord,
+        Path("binance-trade-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-book-ticker",
+        "1.0.0",
+        BookTickerRecord,
+        Path("binance-book-ticker-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-depth-delta",
+        "1.0.0",
+        DepthDeltaRecord,
+        Path("binance-depth-delta-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-mark-index",
+        "1.0.0",
+        MarkIndexRecord,
+        Path("binance-mark-index-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-funding-rate",
+        "1.0.0",
+        FundingRateRecord,
+        Path("binance-funding-rate-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-open-interest",
+        "1.0.0",
+        OpenInterestRecord,
+        Path("binance-open-interest-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-raw-response",
+        "1.0.0",
+        RawResponseEnvelope,
+        Path("binance-raw-response-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-connection-health",
+        "1.0.0",
+        ConnectionHealth,
+        Path("binance-connection-health-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-dataset-descriptor",
+        "1.0.0",
+        DatasetDescriptor,
+        Path("binance-dataset-descriptor-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-provider-health",
+        "1.0.0",
+        ProviderHealth,
+        Path("binance-provider-health-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-provider-quota",
+        "1.0.0",
+        ProviderQuota,
+        Path("binance-provider-quota-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-fixture-envelope",
+        "1.0.0",
+        FixtureEnvelope,
+        Path("binance-fixture-envelope-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-fixture-manifest",
+        "1.0.0",
+        FixtureManifest,
+        Path("binance-fixture-manifest-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-changelog-snapshot",
+        "1.0.0",
+        ChangelogSnapshot,
+        Path("binance-changelog-snapshot-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-soak-stream-evidence",
+        "1.0.0",
+        SoakStreamEvidence,
+        Path("binance-soak-stream-evidence-v1.json"),
+    ),
+    Contract(
+        "aegisquant.binance-soak-evidence",
+        "1.0.0",
+        SoakEvidence,
+        Path("binance-soak-evidence-v1.json"),
     ),
 )
 

@@ -1,4 +1,4 @@
-"""Generate CycloneDX inventories and dependency license evidence for P02."""
+"""Generate CycloneDX inventories and dependency license evidence for P03."""
 
 from __future__ import annotations
 
@@ -172,7 +172,7 @@ def main() -> int:
     )
     summary = {
         "schema_version": "1.0.0",
-        "phase": "P02",
+        "phase": "P03",
         "status": "passed",
         "python_component_count": len(python_components),
         "javascript_component_count": len(javascript_components),

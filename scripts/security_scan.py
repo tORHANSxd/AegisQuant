@@ -1,4 +1,4 @@
-"""Run P02 secret and dependency audits without accessing any account."""
+"""Run P03 secret and dependency audits without accessing any account."""
 
 from __future__ import annotations
 
@@ -18,7 +18,8 @@ DETECT_EXCLUDE = (
 )
 DETECT_LINE_EXCLUDE = (
     r"(?i)(?:.*(?:sha-?256|sha1|spec_sha256|artifact_manifest_sha256|expected_sha256|"
-    r"commit_sha|pinned_commit|terms_version_hash|P00_EVIDENCE_COMMIT|"
+    r"commit_sha|request_hash|evidence_commit|implementation_commit|pinned_commit|"
+    r"terms_version_hash|P00_EVIDENCE_COMMIT|"
     r"P00_IMPLEMENTATION_COMMIT).*|"
     r".*secret_loading.*(?:false|disabled).*|.*credentials_received.*0.*|"
     r".*plaintext_secrets_written.*0.*)"
@@ -119,7 +120,7 @@ def main() -> int:
     ]
     infrastructure = {
         "status": "not_applicable" if not container_files else "review_required",
-        "reason": "P02 contains no container image or infrastructure-as-code input",
+        "reason": "P03 contains no container image or infrastructure-as-code input",
         "scannable_files": container_files,
     }
     (report_dir / "container_iac_scan.json").write_text(
@@ -136,7 +137,7 @@ def main() -> int:
     }
     payload = {
         "schema_version": "1.0.0",
-        "phase": "P02",
+        "phase": "P03",
         "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "status": "passed" if all(checks.values()) else "failed",
         "checks": checks,

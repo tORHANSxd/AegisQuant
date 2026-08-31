@@ -1,0 +1,10 @@
+{
+  "credentials_accessed": false,
+  "installed_version": "1.231.0",
+  "routes_match_p03_contract": true,
+  "spot_instrument_example": "BTCUSDT.BINANCE",
+  "spot_market_ws_base": "wss://stream.binance.com:9443",
+  "usdm_instrument_example": "BTCUSDT-PERP.BINANCE",
+  "usdm_market_ws_base": "wss://fstream.binance.com/market",
+  "usdm_public_ws_base": "wss://fstream.binance.com/public"
+}

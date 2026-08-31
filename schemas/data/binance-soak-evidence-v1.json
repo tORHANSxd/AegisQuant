@@ -1,0 +1,264 @@
+{
+  "$defs": {
+    "Product": {
+      "enum": [
+        "SPOT",
+        "USD_M"
+      ],
+      "title": "Product",
+      "type": "string"
+    },
+    "SoakStreamEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "applied_count": {
+          "minimum": 0,
+          "title": "Applied Count",
+          "type": "integer"
+        },
+        "duplicate_count": {
+          "minimum": 0,
+          "title": "Duplicate Count",
+          "type": "integer"
+        },
+        "first_message_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "First Message At"
+        },
+        "forced_rollover_count": {
+          "minimum": 0,
+          "title": "Forced Rollover Count",
+          "type": "integer"
+        },
+        "hash_chain_sha256": {
+          "title": "Hash Chain Sha256",
+          "type": "string"
+        },
+        "last_message_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Last Message At"
+        },
+        "late_count": {
+          "minimum": 0,
+          "title": "Late Count",
+          "type": "integer"
+        },
+        "maximum_inter_message_ms": {
+          "minimum": 0,
+          "title": "Maximum Inter Message Ms",
+          "type": "integer"
+        },
+        "message_count": {
+          "minimum": 0,
+          "title": "Message Count",
+          "type": "integer"
+        },
+        "product": {
+          "$ref": "#/$defs/Product"
+        },
+        "reconnect_count": {
+          "minimum": 0,
+          "title": "Reconnect Count",
+          "type": "integer"
+        },
+        "recovery_count": {
+          "minimum": 0,
+          "title": "Recovery Count",
+          "type": "integer"
+        },
+        "sequence_gap_count": {
+          "minimum": 0,
+          "title": "Sequence Gap Count",
+          "type": "integer"
+        },
+        "snapshot_count": {
+          "minimum": 0,
+          "title": "Snapshot Count",
+          "type": "integer"
+        },
+        "stream_url": {
+          "title": "Stream Url",
+          "type": "string"
+        },
+        "witness_samples": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Witness Samples",
+          "type": "array"
+        }
+      },
+      "required": [
+        "product",
+        "stream_url",
+        "message_count",
+        "applied_count",
+        "duplicate_count",
+        "late_count",
+        "sequence_gap_count",
+        "recovery_count",
+        "snapshot_count",
+        "reconnect_count",
+        "forced_rollover_count",
+        "first_message_at",
+        "last_message_at",
+        "maximum_inter_message_ms",
+        "hash_chain_sha256",
+        "witness_samples"
+      ],
+      "title": "SoakStreamEvidence",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-soak-evidence/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_access_performed": {
+      "default": false,
+      "title": "Account Access Performed",
+      "type": "boolean"
+    },
+    "actual_monotonic_duration_seconds": {
+      "minimum": 0,
+      "title": "Actual Monotonic Duration Seconds",
+      "type": "number"
+    },
+    "actual_wall_duration_seconds": {
+      "minimum": 0,
+      "title": "Actual Wall Duration Seconds",
+      "type": "number"
+    },
+    "authentication_used": {
+      "default": false,
+      "title": "Authentication Used",
+      "type": "boolean"
+    },
+    "errors": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "finished_at_utc": {
+      "format": "date-time",
+      "title": "Finished At Utc",
+      "type": "string"
+    },
+    "host_pause_detected": {
+      "title": "Host Pause Detected",
+      "type": "boolean"
+    },
+    "live_trading_locked": {
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "manual_outage_recovered": {
+      "title": "Manual Outage Recovered",
+      "type": "boolean"
+    },
+    "manual_outage_requested": {
+      "title": "Manual Outage Requested",
+      "type": "boolean"
+    },
+    "order_capability_present": {
+      "default": false,
+      "title": "Order Capability Present",
+      "type": "boolean"
+    },
+    "phase": {
+      "default": "P03",
+      "title": "Phase",
+      "type": "string"
+    },
+    "process_id": {
+      "minimum": 1,
+      "title": "Process Id",
+      "type": "integer"
+    },
+    "public_market_data_only": {
+      "default": true,
+      "title": "Public Market Data Only",
+      "type": "boolean"
+    },
+    "qualifying_acceptance": {
+      "title": "Qualifying Acceptance",
+      "type": "boolean"
+    },
+    "requested_duration_seconds": {
+      "minimum": 1,
+      "title": "Requested Duration Seconds",
+      "type": "integer"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "started_at_utc": {
+      "format": "date-time",
+      "title": "Started At Utc",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "streams": {
+      "items": {
+        "$ref": "#/$defs/SoakStreamEvidence"
+      },
+      "title": "Streams",
+      "type": "array"
+    },
+    "test_mode": {
+      "title": "Test Mode",
+      "type": "boolean"
+    },
+    "unexplained_sequence_gap_count": {
+      "minimum": 0,
+      "title": "Unexplained Sequence Gap Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "status",
+    "qualifying_acceptance",
+    "test_mode",
+    "requested_duration_seconds",
+    "actual_monotonic_duration_seconds",
+    "actual_wall_duration_seconds",
+    "started_at_utc",
+    "finished_at_utc",
+    "process_id",
+    "host_pause_detected",
+    "manual_outage_requested",
+    "manual_outage_recovered",
+    "unexplained_sequence_gap_count",
+    "errors",
+    "streams"
+  ],
+  "title": "SoakEvidence",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-soak-evidence",
+  "x-aegisquant-schema-version": "1.0.0"
+}

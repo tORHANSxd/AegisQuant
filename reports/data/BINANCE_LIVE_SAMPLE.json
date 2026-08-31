@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P03",
+  "status": "passed",
+  "started_at_utc": "2026-08-31T15:27:37.087429Z",
+  "finished_at_utc": "2026-08-31T15:27:47.411760Z",
+  "duration_seconds": 10.324331,
+  "network_scope": "Binance official public market data only",
+  "authentication_used": false,
+  "cookies_used": false,
+  "account_access_performed": false,
+  "order_capability_present": false,
+  "live_trading_locked": true,
+  "rest": [
+    {
+      "endpoint": "spot_time",
+      "request_url": "https://data-api.binance.vision/api/v3/time",
+      "request_hash": "4825960bfbd9f7b41618a337b97092a2617bae8ddb151a53e737fab77925848d",
+      "status_code": 200,
+      "received_at_utc": "2026-08-31T15:27:37.540873Z",
+      "elapsed_ms": 384,
+      "content_bytes": 28,
+      "content_sha256": "fa5c4a2a32d0f02741d80031266ab9a8f47ce2090abfdae9ecf0317e2202b709",
+      "rate_limit_headers": {
+        "x-mbx-used-weight": "1",
+        "x-mbx-used-weight-1m": "1"
+      }
+    },
+    {
+      "endpoint": "spot_exchange_info",
+      "request_url": "https://data-api.binance.vision/api/v3/exchangeInfo?symbol=BTCUSDT",
+      "request_hash": "c9856b9ef76b07e23ecfc8201bbdc00ca56d2196f50a4e751518d45a98fdbc79",
+      "status_code": 200,
+      "received_at_utc": "2026-08-31T15:27:37.641547Z",
+      "elapsed_ms": 100,
+      "content_bytes": 5335,
+      "content_sha256": "fd17fac66a032117e8c3994c98b662d9243407e11cb05ffcd42a6294b1bfda91",
+      "rate_limit_headers": {
+        "x-mbx-used-weight": "21",
+        "x-mbx-used-weight-1m": "21"
+      }
+    },
+    {
+      "endpoint": "spot_depth",
+      "request_url": "https://data-api.binance.vision/api/v3/depth?symbol=BTCUSDT&limit=100",
+      "request_hash": "30bf2499a5454458967a5b8ec3f68e142a990974c2aad100ba249d0780a99e05",
+      "status_code": 200,
+      "received_at_utc": "2026-08-31T15:27:37.742519Z",
+      "elapsed_ms": 100,
+      "content_bytes": 6446,
+      "content_sha256": "32163139e1d7242519989a7f12fc12ead24fa4e5b58298421909514994798ad2",
+      "rate_limit_headers": {
+        "x-mbx-used-weight": "26",
+        "x-mbx-used-weight-1m": "26"
+      }
+    },
+    {
+      "endpoint": "usdm_time",
+      "request_url": "https://fapi.binance.com/fapi/v1/time",
+      "request_hash": "a98c2b855c1cb447b05c8b61e3affcc4268c32e79d51410cf632af49142095ec",
+      "status_code": 200,
+      "received_at_utc": "2026-08-31T15:27:38.628606Z",
+      "elapsed_ms": 885,
+      "content_bytes": 28,
+      "content_sha256": "a46c76e75da28ae8a0c8a1dab5d02130e0bd853b3810036d620d6627bbfd0ed3",
+      "rate_limit_headers": {
+        "x-mbx-used-weight-1m": "8"
+      }
+    },
+    {
+      "endpoint": "usdm_exchange_info",
+      "request_url": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+      "request_hash": "0fc9fc2c23fd65d29a86c0a28e7318f588a62e162614f7c32d52d20b3a6c590b",
+      "status_code": 200,
+      "received_at_utc": "2026-08-31T15:27:39.248771Z",
+      "elapsed_ms": 619,
+      "content_bytes": 1091863,
+      "content_sha256": "a5eea6186b7bdfbce2545cc6b18e901e02cde4d83015b620b6561af3505a6053",
+      "rate_limit_headers": {
+        "x-mbx-used-weight-1m": "9"
+      }
+    },
+    {
+      "endpoint": "usdm_depth",
+      "request_url": "https://fapi.binance.com/fapi/v1/depth?symbol=BTCUSDT&limit=100",
+      "request_hash": "75880e3cf3f5f48d7b66f68b709ee79c15a4b4dcde51f56daa114137b74b5af5",
+      "status_code": 200,
+      "received_at_utc": "2026-08-31T15:27:39.678914Z",
+      "elapsed_ms": 429,
+      "content_bytes": 4286,
+      "content_sha256": "b27465587a6e093dfbe450171af5957bd2923e7c1e0c806e8985c2ef1d13aa24",
+      "rate_limit_headers": {
+        "x-mbx-used-weight-1m": "14"
+      }
+    },
+    {
+      "endpoint": "usdm_mark_index",
+      "request_url": "https://fapi.binance.com/fapi/v1/premiumIndex?symbol=BTCUSDT",
+      "request_hash": "f5900c51239923342eff8ddaaf9f029965aa93e71d25293f9f4a3cc56dc88c3c",
+      "status_code": 200,
+      "received_at_utc": "2026-08-31T15:27:40.103950Z",
+      "elapsed_ms": 424,
+      "content_bytes": 231,
+      "content_sha256": "fe9f1303264d74ead82bcc7da9a5918c6e5399be07ce6bec610c7a9f4aaa9dde",
+      "rate_limit_headers": {
+        "x-mbx-used-weight-1m": "15"
+      }
+    },
+    {
+      "endpoint": "usdm_funding",
+      "request_url": "https://fapi.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT&limit=1",
+      "request_hash": "337a6ff7874929dc9f41559369e107c77217c737b0c68d351d02bbaabe33925e",
+      "status_code": 200,
+      "received_at_utc": "2026-08-31T15:27:40.532840Z",
+      "elapsed_ms": 428,
+      "content_bytes": 127,
+      "content_sha256": "586d3f426279952e1c2c799aafc034d783da1ade22f1262e5f9825d782381f77",
+      "rate_limit_headers": {}
+    },
+    {
+      "endpoint": "usdm_open_interest",
+      "request_url": "https://fapi.binance.com/fapi/v1/openInterest?symbol=BTCUSDT",
+      "request_hash": "f71c0d80e15dbe46cc212f2fb330e5cca8f43e4e9380e9047c2334fca94bdc8c",
+      "status_code": 200,
+      "received_at_utc": "2026-08-31T15:27:40.961318Z",
+      "elapsed_ms": 428,
+      "content_bytes": 69,
+      "content_sha256": "695f2429a622d7c471030021de24b19225c85a25e9751ffc73f0d78ded592c49",
+      "rate_limit_headers": {
+        "x-mbx-used-weight-1m": "16"
+      }
+    }
+  ],
+  "websocket": [
+    {
+      "url": "wss://data-stream.binance.vision/ws/btcusdt@bookTicker",
+      "connected_at_utc": "2026-08-31T15:27:40.962040Z",
+      "received_at_utc": "2026-08-31T15:27:46.513520Z",
+      "bytes": 107,
+      "sha256": "1e26ad7de0019348b668b696f11db0d3cef53b7beb55c13219273e49dde13955",
+      "json_keys": [
+        "A",
+        "B",
+        "a",
+        "b",
+        "s",
+        "u"
+      ],
+      "event_type": null,
+      "symbol": "BTCUSDT"
+    },
+    {
+      "url": "wss://data-stream.binance.vision/ws/btcusdt@depth@1000ms",
+      "connected_at_utc": "2026-08-31T15:27:40.962179Z",
+      "received_at_utc": "2026-08-31T15:27:47.352333Z",
+      "bytes": 5888,
+      "sha256": "eb4760a27de7436905b72ae11337a1e3603d59103dccdd61c8764dea0b6cc739",
+      "json_keys": [
+        "E",
+        "U",
+        "a",
+        "b",
+        "e",
+        "s",
+        "u"
+      ],
+      "event_type": "depthUpdate",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "url": "wss://fstream.binance.com/public/ws/btcusdt@depth@500ms",
+      "connected_at_utc": "2026-08-31T15:27:40.962898Z",
+      "received_at_utc": "2026-08-31T15:27:46.512395Z",
+      "bytes": 13144,
+      "sha256": "8bed66491dd78939e2a9086a6b17cba7d7555e743592a399980561f760a46801",
+      "json_keys": [
+        "E",
+        "T",
+        "U",
+        "a",
+        "b",
+        "e",
+        "ps",
+        "pu",
+        "s",
+        "st",
+        "u"
+      ],
+      "event_type": "depthUpdate",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "url": "wss://fstream.binance.com/market/ws/btcusdt@aggTrade",
+      "connected_at_utc": "2026-08-31T15:27:40.963460Z",
+      "received_at_utc": "2026-08-31T15:27:46.512960Z",
+      "bytes": 167,
+      "sha256": "c42a929ff0fa26863f275882f72255c266697aa742986183e23b5a8046439ce9",
+      "json_keys": [
+        "E",
+        "T",
+        "a",
+        "e",
+        "f",
+        "l",
+        "m",
+        "nq",
+        "p",
+        "q",
+        "s",
+        "st"
+      ],
+      "event_type": "aggTrade",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "url": "wss://fstream.binance.com/market/ws/btcusdt@markPrice@1s",
+      "connected_at_utc": "2026-08-31T15:27:40.963922Z",
+      "received_at_utc": "2026-08-31T15:27:47.404930Z",
+      "bytes": 182,
+      "sha256": "b4ac19b0647e9d3f41102b3040ec2fddcaff895fd1a7c28b22724a4f9be589b7",
+      "json_keys": [
+        "E",
+        "P",
+        "T",
+        "ap",
+        "e",
+        "i",
+        "p",
+        "r",
+        "s",
+        "st"
+      ],
+      "event_type": "markPriceUpdate",
+      "symbol": "BTCUSDT"
+    }
+  ],
+  "recorded_fixture": {
+    "path": "D:/Personal/Quantitative_Trading/tests/fixtures/binance/recorded_public.jsonl",
+    "sha256": "89b425fe15cc14cace5de272e2d22ce8b620e45bb1fb01ab0ee5e90be5af3a7d",
+    "event_count": 5,
+    "contains_credentials": false
+  }
+}

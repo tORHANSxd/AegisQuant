@@ -1,4 +1,4 @@
-"""Immutable content revisions, AES-GCM restricted storage, and tombstones."""
+"""Immutable public/restricted content revisions and tombstones."""
 
 from __future__ import annotations
 
@@ -152,7 +152,7 @@ class RevisionArchive:
         cipher: RestrictedContentCipher | None = None,
         parent_record_id: ArtifactId | None = None,
     ) -> RevisionRecord:
-        """Append one immutable revision without ever persisting a plaintext key."""
+        """Append one immutable revision under the registered source policy."""
         provider_id = policy.provider_id
         self.provider_registry.require_archive(provider_id, policy)
         if revision < 1:
@@ -188,9 +188,11 @@ class RevisionArchive:
         record_id = ArtifactId(canonical_sha256(identity))
         document_root = self._document_root(provider_id, source_document_id)
         final_directory = document_root / f"{revision:08d}-{record_id}"
-        payload_path = (
-            "content.enc.json" if policy.raw_storage is RawStorageMode.ENCRYPTED_LOCAL else None
-        )
+        payload_path = {
+            RawStorageMode.ENCRYPTED_LOCAL: "content.enc.json",
+            RawStorageMode.PUBLIC_APPEND_ONLY: "content.raw",
+            RawStorageMode.METADATA_ONLY: None,
+        }[policy.raw_storage]
         record = RevisionRecord(
             record_id=record_id,
             source_document_id=source_document_id,
@@ -214,8 +216,8 @@ class RevisionArchive:
         document_root.mkdir(parents=True, exist_ok=True)
         staging = Path(tempfile.mkdtemp(prefix="revision-", dir=document_root))
         try:
-            if payload_path is not None:
-                if cipher is None:
+            if policy.raw_storage is RawStorageMode.ENCRYPTED_LOCAL:
+                if cipher is None or payload_path is None:
                     raise RuntimeError("encrypted archive reached storage without a cipher")
                 aad = self._aad(
                     provider_id=provider_id,
@@ -228,6 +230,13 @@ class RevisionArchive:
                 (staging / payload_path).write_bytes(
                     canonical_json_bytes(encrypted.model_dump(mode="json"))
                 )
+            elif policy.raw_storage is RawStorageMode.PUBLIC_APPEND_ONLY:
+                if payload_path is None:
+                    raise RuntimeError("public archive reached storage without a payload path")
+                with (staging / payload_path).open("xb") as destination:
+                    destination.write(content)
+                    destination.flush()
+                    os.fsync(destination.fileno())
             (staging / "record.json").write_bytes(
                 canonical_json_bytes(record.model_dump(mode="json"))
             )
@@ -288,7 +297,7 @@ class RevisionArchive:
         self,
         *,
         record: RevisionRecord,
-        cipher: RestrictedContentCipher,
+        cipher: RestrictedContentCipher | None = None,
     ) -> bytes | None:
         tombstones = (
             self.root
@@ -307,7 +316,18 @@ class RevisionArchive:
         document_root = self._document_root(record.provider_id, record.source_document_id)
         directory = document_root / f"{record.revision:08d}-{record.record_id}"
         if record.payload_path is None:
-            raise ValueError("encrypted revision is missing its payload path")
+            raise ValueError("stored revision is missing its payload path")
+        if record.storage_mode is RawStorageMode.PUBLIC_APPEND_ONLY:
+            plaintext = (directory / record.payload_path).read_bytes()
+            if hashlib.sha256(plaintext).hexdigest() != record.content_sha256:
+                raise ValueError("AQ-DATA-CONTENT-HASH-MISMATCH: public content differs")
+            return plaintext
+        if cipher is None:
+            raise DomainError(
+                "AQ-SECURITY-ENCRYPTION-KEY-REQUIRED",
+                ErrorDisposition.NO_RETRY,
+                str(record.source_document_id),
+            )
         encrypted = EncryptedContent.model_validate_json(
             (directory / record.payload_path).read_bytes()
         )

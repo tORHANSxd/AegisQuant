@@ -62,7 +62,7 @@
       "path": "schemas/data/revision-record-v1.json",
       "schema_name": "aegisquant.revision-record",
       "schema_version": "1.0.0",
-      "sha256": "48b896277d6e23a86fdd47594f891ceaaa92a3134000b74e9688877fadb25901"
+      "sha256": "daaf1973f0c0c32bb211d3d68c8c0cb1c77f871d2205a351c1821fdcff72b336"
     },
     {
       "compatibility": "BACKWARD",
@@ -87,6 +87,150 @@
       "schema_name": "aegisquant.transformation-lineage",
       "schema_version": "1.0.0",
       "sha256": "319a33f001c13cd124f3bb4ade7bd43e426373c2d20ad77efeaa2282ec00889a"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.InstrumentSnapshot",
+      "path": "schemas/data/binance-instrument-snapshot-v1.json",
+      "schema_name": "aegisquant.binance-instrument-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "fc9f66f8cdd199c91fd8c6a5afdebebb8f5e2888991c4f49a96a985e6d88766e"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.KlineRecord",
+      "path": "schemas/data/binance-kline-v1.json",
+      "schema_name": "aegisquant.binance-kline",
+      "schema_version": "1.0.0",
+      "sha256": "9c7c7230a7cbcdf5456238b06839f4439d64cc1136dfb84deb6b7fa25d30c7ce"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.TradeRecord",
+      "path": "schemas/data/binance-trade-v1.json",
+      "schema_name": "aegisquant.binance-trade",
+      "schema_version": "1.0.0",
+      "sha256": "4d5131be6231e5ec744484364184a36a0e808a3146c6d1da6bd28b7030e6dceb"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.BookTickerRecord",
+      "path": "schemas/data/binance-book-ticker-v1.json",
+      "schema_name": "aegisquant.binance-book-ticker",
+      "schema_version": "1.0.0",
+      "sha256": "762e77e956512e4b9218ae5e903893dd44c0282c1fdcba2376f714288edeb894"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.DepthDeltaRecord",
+      "path": "schemas/data/binance-depth-delta-v1.json",
+      "schema_name": "aegisquant.binance-depth-delta",
+      "schema_version": "1.0.0",
+      "sha256": "6f1a5f170b1d35eeb15d4ae4392592d3d3a8c3d53bb721530eaba8474dc26e1d"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.MarkIndexRecord",
+      "path": "schemas/data/binance-mark-index-v1.json",
+      "schema_name": "aegisquant.binance-mark-index",
+      "schema_version": "1.0.0",
+      "sha256": "e0c7fe6ea009c6f16a8dc5f618fc5abb1c7deecb763b6d249b5794057f6d88e4"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.FundingRateRecord",
+      "path": "schemas/data/binance-funding-rate-v1.json",
+      "schema_name": "aegisquant.binance-funding-rate",
+      "schema_version": "1.0.0",
+      "sha256": "5e7a4886f8b99eb0bd811fec6d6a104cd1c20c37d1c00750caa7613093e8ce85"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.OpenInterestRecord",
+      "path": "schemas/data/binance-open-interest-v1.json",
+      "schema_name": "aegisquant.binance-open-interest",
+      "schema_version": "1.0.0",
+      "sha256": "344ffb4175cd81e368564eb6a5ecc7aa934a6effd1ee7b52d4b10c335f1ad045"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.RawResponseEnvelope",
+      "path": "schemas/data/binance-raw-response-v1.json",
+      "schema_name": "aegisquant.binance-raw-response",
+      "schema_version": "1.0.0",
+      "sha256": "a8f2934b13bda3af34b1a72e11b83a16afa2bb1af77241b8bcd53f792b90ae03"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.ConnectionHealth",
+      "path": "schemas/data/binance-connection-health-v1.json",
+      "schema_name": "aegisquant.binance-connection-health",
+      "schema_version": "1.0.0",
+      "sha256": "8a43d47e58f4f1c9658bc687b30f851a3e3b0542b69d785f68b16ad5e5c62b44"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.adapter.DatasetDescriptor",
+      "path": "schemas/data/binance-dataset-descriptor-v1.json",
+      "schema_name": "aegisquant.binance-dataset-descriptor",
+      "schema_version": "1.0.0",
+      "sha256": "330e525900fe528f9dc37986ff1af4d67af35afa5fe0ab2a5d234b8523417387"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.adapter.ProviderHealth",
+      "path": "schemas/data/binance-provider-health-v1.json",
+      "schema_name": "aegisquant.binance-provider-health",
+      "schema_version": "1.0.0",
+      "sha256": "bf3103252bf76794d1953112901acb8d3050b2023cc978056ea30ed8df62dbfc"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.adapter.ProviderQuota",
+      "path": "schemas/data/binance-provider-quota-v1.json",
+      "schema_name": "aegisquant.binance-provider-quota",
+      "schema_version": "1.0.0",
+      "sha256": "1f29265621b75ad52bd676b40c8277ce95e637746fe9fab7f02944a5978a7922"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.replay.FixtureEnvelope",
+      "path": "schemas/data/binance-fixture-envelope-v1.json",
+      "schema_name": "aegisquant.binance-fixture-envelope",
+      "schema_version": "1.0.0",
+      "sha256": "502a797ed3a823297c89f3c13d91e353fd86117c7b09c09ac1faa70eefde5892"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.replay.FixtureManifest",
+      "path": "schemas/data/binance-fixture-manifest-v1.json",
+      "schema_name": "aegisquant.binance-fixture-manifest",
+      "schema_version": "1.0.0",
+      "sha256": "494cdc4b5be509289105e2c51c0563d82e5694a7e275b1ff722b39fc58b8374e"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.changelog.ChangelogSnapshot",
+      "path": "schemas/data/binance-changelog-snapshot-v1.json",
+      "schema_name": "aegisquant.binance-changelog-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "1b1aecb045afeb2e4807c0827da1bc26d31cdee351d419f589eddfeacc09f2db"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.SoakStreamEvidence",
+      "path": "schemas/data/binance-soak-stream-evidence-v1.json",
+      "schema_name": "aegisquant.binance-soak-stream-evidence",
+      "schema_version": "1.0.0",
+      "sha256": "982231006b68307b7bcf3ea48a666577da1c5be1d8690a9dc9752c4299ffbf54"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.binance.models.SoakEvidence",
+      "path": "schemas/data/binance-soak-evidence-v1.json",
+      "schema_name": "aegisquant.binance-soak-evidence",
+      "schema_version": "1.0.0",
+      "sha256": "c5c1a5e081670dc8057ba203cb1c98ff0b2ec70640bf8c8f0d210205a886048d"
     }
   ],
   "schema_version": "1.0.0"

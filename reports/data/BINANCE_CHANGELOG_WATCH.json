@@ -1,0 +1,26 @@
+{
+  "network_used": false,
+  "schema_version": "1.0.0",
+  "snapshots": [
+    {
+      "changed": false,
+      "content_bytes": 120,
+      "content_sha256": "7ab7357540c73f3a507c9a7db84c5464ad8f986c7a2d87fbda3e5e9e0e178161",
+      "latest_entry_date": "2026-07-27",
+      "observed_at": "2026-08-31T14:30:00Z",
+      "previous_sha256": null,
+      "source_name": "binance_spot",
+      "source_url": "https://github.com/binance/binance-spot-api-docs/blob/master/CHANGELOG.md"
+    },
+    {
+      "changed": false,
+      "content_bytes": 90,
+      "content_sha256": "ee8f0c6ecff180460a96d7a13cb7275c61168cdd5ff4306dfabff3655098e857",
+      "latest_entry_date": "2026-08-26",
+      "observed_at": "2026-08-31T14:30:00Z",
+      "previous_sha256": null,
+      "source_name": "binance_usdm",
+      "source_url": "https://developers.binance.com/docs/derivatives/change-log"
+    }
+  ]
+}

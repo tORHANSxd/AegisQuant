@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P03",
+  "runtime": "Python 3.14.7 candidate",
+  "generated_at_utc": "2026-08-31T15:37:37.594006Z",
+  "command": [
+    "run",
+    "--isolated",
+    "--python",
+    "3.14.7",
+    "--all-groups",
+    "--frozen",
+    "python",
+    "-m",
+    "pytest",
+    "tests/architecture",
+    "tests/unit",
+    "tests/property",
+    "tests/contract",
+    "tests/p02",
+    "tests/p03",
+    "tests/chaos",
+    "tests/performance",
+    "tests/security"
+  ],
+  "exit_code": 0,
+  "duration_seconds": 26.904,
+  "status": "passed",
+  "output_tail": "============================= test session starts =============================\nplatform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0\nrootdir: D:\\Personal\\Quantitative_Trading\nconfigfile: pyproject.toml\nplugins: anyio-4.14.2, hypothesis-6.167.1, asyncio-1.4.0\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 123 items\n\ntests\\architecture\\test_domain_boundaries.py ...                         [  2%]\ntests\\unit\\domain\\test_accounting.py ..                                  [  4%]\ntests\\unit\\domain\\test_entities.py ....                                  [  7%]\ntests\\unit\\domain\\test_errors.py ..                                      [  8%]\ntests\\unit\\domain\\test_execution.py ..                                   [ 10%]\ntests\\unit\\domain\\test_identifiers_time_values.py .....                  [ 14%]\ntests\\unit\\domain\\test_intelligence.py ...                               [ 17%]\ntests\\unit\\domain\\test_policy.py ..                                      [ 18%]\ntests\\property\\test_data_properties.py ..                                [ 20%]\ntests\\property\\test_domain_properties.py .....                           [ 24%]\ntests\\contract\\test_candidate_runtime.py .                               [ 25%]\ntests\\contract\\test_columnar_runtime.py ...                              [ 27%]\ntests\\contract\\test_config_contract.py ...                               [ 30%]\ntests\\contract\\test_event_contracts.py ...                               [ 32%]\ntests\\contract\\test_nautilus_replay.py .                                 [ 33%]\ntests\\contract\\test_source_policy.py .........                           [ 40%]\ntests\\p02\\test_archive_scanner.py ....                                   [ 43%]\ntests\\p02\\test_phase_evidence.py ....                                    [ 47%]\ntests\\p02\\test_pit_query.py ....                                         [ 50%]\ntests\\p02\\test_registry_lake.py .......                                  [ 56%]\ntests\\p03\\test_contract_inventory.py ....                                [ 59%]\ntests\\p03\\test_history_archive.py ....                                   [ 62%]\ntests\\p03\\test_nautilus_semantics.py .                                   [ 63%]\ntests\\p03\\test_normalization.py ....                                     [ 66%]\ntests\\p03\\test_orderbook.py ...                                          [ 69%]\ntests\\p03\\test_phase_evidence.py ...                                     [ 71%]\ntests\\p03\\test_quality_replay_changelog.py ....                          [ 74%]\ntests\\p03\\test_rest.py .....                                             [ 78%]\ntests\\p03\\test_soak_state.py ..                                          [ 80%]\ntests\\p03\\test_websocket_lifecycle.py ....                               [ 83%]\ntests\\chaos\\test_atomic_data_lake.py .                                   [ 84%]\ntests\\performance\\test_data_foundation_evidence.py ..                    [ 86%]\ntests\\security\\test_binance_public_only.py ......                        [ 91%]\ntests\\security\\test_data_foundation_security.py ..                       [ 92%]\ntests\\security\\test_import_side_effects.py .                             [ 93%]\ntests\\security\\test_live_lock.py ......                                  [ 98%]\ntests\\security\\test_secret_boundaries.py ..                              [100%]\n\n============================== warnings summary ===============================\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\n  D:\\Personal\\Quantitative_Trading\\tests\\contract\\test_nautilus_replay.py:50: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.\n    engine.run()\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n====================== 123 passed, 4 warnings in 17.31s =======================\n\nInstalled 107 packages in 4.52s"
+}

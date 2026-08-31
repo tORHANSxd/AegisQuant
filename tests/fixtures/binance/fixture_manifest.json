@@ -1,0 +1,85 @@
+{
+  "contains_credentials": false,
+  "file_count": 15,
+  "files": [
+    {
+      "path": "tests/fixtures/binance/recorded_public.jsonl",
+      "sha256": "89b425fe15cc14cace5de272e2d22ce8b620e45bb1fb01ab0ee5e90be5af3a7d",
+      "size_bytes": 20684
+    },
+    {
+      "path": "tests/fixtures/binance/spot/book_ticker.json",
+      "sha256": "c5cac924c219e7f6a1665ca647011d9f00e56899345ccd07e7637d5106682800",
+      "size_bytes": 84
+    },
+    {
+      "path": "tests/fixtures/binance/spot/depth_events.json",
+      "sha256": "e4259ecece028522c8592411fc66e3759137c97d33b64107e49eb931270b2528",
+      "size_bytes": 458
+    },
+    {
+      "path": "tests/fixtures/binance/spot/depth_snapshot.json",
+      "sha256": "36951d7c909f037f2d75b71cd2bc3de23d298b39799454b4d179be8eb94041e0",
+      "size_bytes": 87
+    },
+    {
+      "path": "tests/fixtures/binance/spot/exchange_info.json",
+      "sha256": "ac1ab542710612308d756c21b131d759a4d24dcf46e7a013931365920a2a8290",
+      "size_bytes": 924
+    },
+    {
+      "path": "tests/fixtures/binance/spot/kline.json",
+      "sha256": "e93af585292725e0d54a591af985ebb5e0c60d46efea58a1c96e3034ef2a4edd",
+      "size_bytes": 116
+    },
+    {
+      "path": "tests/fixtures/binance/spot/trades.json",
+      "sha256": "6097338dfebbcb3c06f6796c2db088b82b838aa9f6e3de5ba6815e30b249d32d",
+      "size_bytes": 260
+    },
+    {
+      "path": "tests/fixtures/binance/spot_changelog.md",
+      "sha256": "7ab7357540c73f3a507c9a7db84c5464ad8f986c7a2d87fbda3e5e9e0e178161",
+      "size_bytes": 120
+    },
+    {
+      "path": "tests/fixtures/binance/usdm/depth_events.json",
+      "sha256": "85519116bf0621ef737f40bbbf3cd8d77a1a30f3549c86e4f9e47e972d34ed16",
+      "size_bytes": 383
+    },
+    {
+      "path": "tests/fixtures/binance/usdm/depth_snapshot.json",
+      "sha256": "479090ed0191a8fa151650d03a228ed643d87c672597a9920f5f21404bf6ab57",
+      "size_bytes": 107
+    },
+    {
+      "path": "tests/fixtures/binance/usdm/exchange_info.json",
+      "sha256": "b8671442e786a20b5d55bd434487d3d7282e7fcbddf2b7ef4fa88b010840f0c0",
+      "size_bytes": 614
+    },
+    {
+      "path": "tests/fixtures/binance/usdm/funding.json",
+      "sha256": "2aa32a9eb8c026e52197488170c6dc2f4ee79e71e48eb6a8826a0b8d9444e7f7",
+      "size_bytes": 97
+    },
+    {
+      "path": "tests/fixtures/binance/usdm/mark_index.json",
+      "sha256": "d6659287befbc01d43f880b18f6afdfe633bfa26ad9510de5c584897d2fd2372",
+      "size_bytes": 208
+    },
+    {
+      "path": "tests/fixtures/binance/usdm/open_interest.json",
+      "sha256": "2943e334caa64523ae75bfa459a5ab82d2de2001b3d7f95774c1fb98b94fbbf3",
+      "size_bytes": 69
+    },
+    {
+      "path": "tests/fixtures/binance/usdm_changelog.md",
+      "sha256": "ee8f0c6ecff180460a96d7a13cb7275c61168cdd5ff4306dfabff3655098e857",
+      "size_bytes": 90
+    }
+  ],
+  "generated_at_utc": "2026-08-31T14:30:00Z",
+  "schema_version": "1.0.0",
+  "source": "Binance official public market-data documentation examples and bounded public frames",
+  "total_bytes": 24301
+}

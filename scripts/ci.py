@@ -1,4 +1,4 @@
-"""Run the complete P02 verification pipeline and emit machine-readable evidence."""
+"""Run the complete P03 verification pipeline and emit machine-readable evidence."""
 
 from __future__ import annotations
 
@@ -54,7 +54,7 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
 
 
 def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
-    """Return the ordered, complete P02 test pipeline."""
+    """Return the ordered, complete P03 test pipeline."""
     pnpm = resolve_command("pnpm")
     return [
         ("postgres-runtime", [sys.executable, "scripts/setup_postgres.py"]),
@@ -69,6 +69,8 @@ def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
                 "P01=verified",
                 "--phase-status",
                 "P02=verified",
+                "--phase-status",
+                "P03=verified",
                 "--check",
             ],
         ),
@@ -76,6 +78,10 @@ def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
         (
             "p02-data-evidence",
             [sys.executable, "scripts/generate_p02_data_evidence.py", "--check"],
+        ),
+        (
+            "p03-binance-evidence",
+            [sys.executable, "scripts/generate_p03_binance_evidence.py", "--check"],
         ),
         ("ruff-format", [sys.executable, "-m", "ruff", "format", "--check", "."]),
         ("ruff-lint", [sys.executable, "-m", "ruff", "check", "."]),
@@ -105,7 +111,7 @@ def main() -> int:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("reports/phases/P02/CI_RESULTS.json"),
+        default=Path("reports/phases/P03/CI_RESULTS.json"),
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
@@ -113,7 +119,7 @@ def main() -> int:
     passed = all(result.exit_code == 0 for result in results)
     payload = {
         "schema_version": "1.0.0",
-        "phase": "P02",
+        "phase": "P03",
         "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "status": "passed" if passed else "failed",
         "stage_count": len(results),
@@ -128,7 +134,7 @@ def main() -> int:
         encoding="utf-8",
         newline="\n",
     )
-    print(f"P02 verification status: {payload['status']}")
+    print(f"P03 verification status: {payload['status']}")
     return 0 if passed else 1
 
 

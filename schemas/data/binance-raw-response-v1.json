@@ -1,0 +1,66 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-raw-response/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "content": {
+      "format": "binary",
+      "title": "Content",
+      "type": "string"
+    },
+    "content_sha256": {
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "elapsed_ms": {
+      "minimum": 0,
+      "title": "Elapsed Ms",
+      "type": "integer"
+    },
+    "endpoint": {
+      "title": "Endpoint",
+      "type": "string"
+    },
+    "rate_limit_headers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Rate Limit Headers",
+      "type": "object"
+    },
+    "received_at": {
+      "format": "date-time",
+      "title": "Received At",
+      "type": "string"
+    },
+    "request_hash": {
+      "title": "Request Hash",
+      "type": "string"
+    },
+    "request_url": {
+      "title": "Request Url",
+      "type": "string"
+    },
+    "status_code": {
+      "maximum": 599,
+      "minimum": 100,
+      "title": "Status Code",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "endpoint",
+    "request_url",
+    "request_hash",
+    "status_code",
+    "received_at",
+    "elapsed_ms",
+    "rate_limit_headers",
+    "content_sha256",
+    "content"
+  ],
+  "title": "RawResponseEnvelope",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-raw-response",
+  "x-aegisquant-schema-version": "1.0.0"
+}

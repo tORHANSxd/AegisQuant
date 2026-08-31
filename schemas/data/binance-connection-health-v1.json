@@ -1,0 +1,85 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-connection-health/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "connected_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Connected At"
+    },
+    "duplicate_count": {
+      "minimum": 0,
+      "title": "Duplicate Count",
+      "type": "integer"
+    },
+    "forced_rollover_count": {
+      "minimum": 0,
+      "title": "Forced Rollover Count",
+      "type": "integer"
+    },
+    "gap_count": {
+      "minimum": 0,
+      "title": "Gap Count",
+      "type": "integer"
+    },
+    "last_message_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Last Message At"
+    },
+    "late_count": {
+      "minimum": 0,
+      "title": "Late Count",
+      "type": "integer"
+    },
+    "message_count": {
+      "minimum": 0,
+      "title": "Message Count",
+      "type": "integer"
+    },
+    "reconnect_count": {
+      "minimum": 0,
+      "title": "Reconnect Count",
+      "type": "integer"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "stream_url": {
+      "title": "Stream Url",
+      "type": "string"
+    }
+  },
+  "required": [
+    "stream_url",
+    "connected_at",
+    "last_message_at",
+    "reconnect_count",
+    "message_count",
+    "duplicate_count",
+    "late_count",
+    "gap_count",
+    "forced_rollover_count",
+    "status"
+  ],
+  "title": "ConnectionHealth",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-connection-health",
+  "x-aegisquant-schema-version": "1.0.0"
+}

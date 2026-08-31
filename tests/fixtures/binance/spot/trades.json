@@ -1,0 +1,4 @@
+[
+  {"id":1,"price":"100.00","qty":"1.00000000","quoteQty":"100.00","time":1700000001000,"isBuyerMaker":false,"isBestMatch":true},
+  {"id":2,"price":"101.00","qty":"2.00000000","quoteQty":"202.00","time":1700000002000,"isBuyerMaker":true,"isBestMatch":true}
+]

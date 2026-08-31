@@ -15,6 +15,11 @@
       "vulns": []
     },
     {
+      "name": "anyio",
+      "version": "4.14.2",
+      "vulns": []
+    },
+    {
       "name": "arrow",
       "version": "1.4.0",
       "vulns": []
@@ -127,6 +132,21 @@
     {
       "name": "greenlet",
       "version": "3.5.5",
+      "vulns": []
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "vulns": []
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "vulns": []
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
       "vulns": []
     },
     {
@@ -507,6 +527,11 @@
     {
       "name": "webcolors",
       "version": "25.10.0",
+      "vulns": []
+    },
+    {
+      "name": "websockets",
+      "version": "17.1",
       "vulns": []
     }
   ],

@@ -1,0 +1,69 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.binance-changelog-snapshot/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "changed": {
+      "title": "Changed",
+      "type": "boolean"
+    },
+    "content_bytes": {
+      "minimum": 1,
+      "title": "Content Bytes",
+      "type": "integer"
+    },
+    "content_sha256": {
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "latest_entry_date": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Latest Entry Date"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "previous_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Previous Sha256"
+    },
+    "source_name": {
+      "title": "Source Name",
+      "type": "string"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_name",
+    "source_url",
+    "observed_at",
+    "content_sha256",
+    "content_bytes",
+    "latest_entry_date",
+    "previous_sha256",
+    "changed"
+  ],
+  "title": "ChangelogSnapshot",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.binance-changelog-snapshot",
+  "x-aegisquant-schema-version": "1.0.0"
+}
