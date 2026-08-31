@@ -1,0 +1,63 @@
+schema_version: "1.0.0"
+providers:
+  - provider_id: "synthetic_fixture"
+    provider_name: "AegisQuant deterministic synthetic fixtures"
+    provider_type: "local"
+    access_method: "file"
+    authority_level: "derived"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: []
+    rate_limits: {}
+    latency_expectation_ms: 0
+    revision_policy: "append_revision"
+    supported_datasets:
+      - "synthetic_asset_inventory"
+      - "synthetic_short_text_events"
+    time_semantics_documented: true
+    retention_policy: "Generated fixtures may be deleted after reproducibility evidence is retained"
+    quality_score: "1"
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "synthetic_fixture_v1"
+  - provider_id: "apache_parquet_testing"
+    provider_name: "Apache Parquet Testing compatibility files"
+    provider_type: "vendor"
+    access_method: "file"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: []
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "pinned_commit"
+    supported_datasets:
+      - "alltypes_plain_parquet"
+    time_semantics_documented: true
+    retention_policy: "Retain provenance and hash; process the public sample in memory"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "apache_parquet_testing_v1"
+  - provider_id: "user_local_assets"
+    provider_name: "User-authorized local assets"
+    provider_type: "local"
+    access_method: "file"
+    authority_level: "primary"
+    license_status: "unknown"
+    credentials_required: false
+    regions_or_account_constraints:
+      - "explicit_read_only_path_authorization_required"
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "never_modify_source"
+    supported_datasets: []
+    time_semantics_documented: false
+    retention_policy: "No access or retention before explicit authorization"
+    quality_score: null
+    incremental_value_score: null
+    status: "candidate"
+    owner: "user"
+    source_policy_id: "user_local_assets_deny_v1"

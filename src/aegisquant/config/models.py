@@ -32,9 +32,9 @@ class RuntimeConfig(StrictConfigModel):
     secret_loading_enabled: bool = False
 
     @model_validator(mode="after")
-    def enforce_p01_lock(self) -> RuntimeConfig:
+    def enforce_safety_lock(self) -> RuntimeConfig:
         if self.environment is RuntimeEnvironment.LIVE:
-            raise ValueError("AQ-SECURITY-LIVE-LOCKED: Live environment is unavailable in P01")
+            raise ValueError("AQ-SECURITY-LIVE-LOCKED: Live environment is unavailable")
         if self.live_trading or self.order_submission_enabled or self.secret_loading_enabled:
             raise ValueError("AQ-SECURITY-LIVE-LOCKED: runtime capability is locked")
         return self

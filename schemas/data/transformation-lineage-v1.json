@@ -1,0 +1,46 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.transformation-lineage/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "code_commit": {
+      "title": "Code Commit",
+      "type": "string"
+    },
+    "config_hash": {
+      "title": "Config Hash",
+      "type": "string"
+    },
+    "input_manifest_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Manifest Hashes",
+      "type": "array"
+    },
+    "source_request_hash": {
+      "title": "Source Request Hash",
+      "type": "string"
+    },
+    "transform_name": {
+      "title": "Transform Name",
+      "type": "string"
+    },
+    "transform_version": {
+      "title": "Transform Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "transform_name",
+    "transform_version",
+    "input_manifest_hashes",
+    "code_commit",
+    "config_hash",
+    "source_request_hash"
+  ],
+  "title": "TransformationLineage",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.transformation-lineage",
+  "x-aegisquant-schema-version": "1.0.0"
+}

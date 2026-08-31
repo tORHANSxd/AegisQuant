@@ -30,11 +30,12 @@ def download(url: str, target: Path) -> None:
     if url != ARCHIVE_URL or not url.startswith("https://"):
         raise ValueError("only the pinned HTTPS PostgreSQL archive URL is allowed")
     partial = target.with_suffix(".partial")
-    request = urllib.request.Request(  # noqa: S310  # nosec B310 - pinned HTTPS URL
-        url, headers={"User-Agent": "AegisQuant-P01-bootstrap"}
+    # The URL is equality-checked against the pinned HTTPS archive above.
+    request = urllib.request.Request(  # noqa: S310  # nosec B310
+        url, headers={"User-Agent": "AegisQuant-bootstrap"}
     )
     with (
-        urllib.request.urlopen(  # noqa: S310  # nosec B310 - pinned HTTPS request
+        urllib.request.urlopen(  # noqa: S310  # nosec B310
             request, timeout=60
         ) as response,
         partial.open("wb") as output,

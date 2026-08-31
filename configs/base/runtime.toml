@@ -1,5 +1,5 @@
 environment = "development"
-phase = "P00"
+phase = "P02"
 live_trading = false
 order_submission_enabled = false
 network_private_api_enabled = false

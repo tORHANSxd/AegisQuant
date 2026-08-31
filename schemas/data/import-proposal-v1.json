@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "ImportAction": {
+      "enum": [
+        "REVIEW",
+        "REJECT",
+        "ELIGIBLE_AFTER_APPROVAL"
+      ],
+      "title": "ImportAction",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.import-proposal/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/ImportAction"
+    },
+    "dataset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "relative_path": {
+      "title": "Relative Path",
+      "type": "string"
+    },
+    "requires_static_analysis": {
+      "title": "Requires Static Analysis",
+      "type": "boolean"
+    },
+    "requires_user_approval": {
+      "default": true,
+      "title": "Requires User Approval",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "relative_path",
+    "action",
+    "reasons",
+    "requires_static_analysis"
+  ],
+  "title": "ImportProposal",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.import-proposal",
+  "x-aegisquant-schema-version": "1.0.0"
+}

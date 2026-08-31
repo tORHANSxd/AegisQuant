@@ -12,7 +12,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Final
 
-DEFAULT_PHASE: Final = "P01"
+DEFAULT_PHASE: Final = "P02"
 STATE_PATH: Final = "state/PROJECT_PHASE_STATE.yaml"
 COMMIT_RE: Final = re.compile(r"[0-9a-f]{40}")
 
@@ -140,7 +140,7 @@ def check(root: Path, output: Path, phase: str) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", default=DEFAULT_PHASE, choices=("P00", "P01"))
+    parser.add_argument("--phase", default=DEFAULT_PHASE, choices=("P00", "P01", "P02"))
     parser.add_argument("--output", type=Path)
     parser.add_argument("--implementation-commit")
     parser.add_argument("--check", action="store_true")

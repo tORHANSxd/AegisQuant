@@ -84,7 +84,7 @@ class Environment(DomainModel):
     @model_validator(mode="after")
     def enforce_live_lock(self) -> Environment:
         if self.stage is DeploymentStage.LIVE or not self.live_trading_locked:
-            raise ValueError("AQ-SECURITY-LIVE-LOCKED: P01 cannot enter Live")
+            raise ValueError("AQ-SECURITY-LIVE-LOCKED: Live environment is disabled")
         return self
 
 

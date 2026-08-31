@@ -1,7 +1,8 @@
 schema_version: "1.0.0"
-phase: P00
-checked_at_utc: "2026-08-31T00:00:00Z"
-external_network_data_collection: disabled
+phase: P02
+checked_at_utc: "2026-08-31T12:15:14Z"
+external_network_data_collection: public_metadata_contract_only
+public_compatibility_sample_fetch: completed_in_memory_from_pinned_commit
 private_api_access: disabled
 real_trading_account_connection: disabled
 secret_loading: disabled
@@ -11,8 +12,9 @@ user_local_paths:
   legacy_strategy_source: not_provided
   r331: not_provided
 source_policies:
-  approved: 0
+  approved: 2
   restricted: 0
+  denied: 1
   default: DENIED
 credentials_received: 0
 plaintext_secrets_written: 0

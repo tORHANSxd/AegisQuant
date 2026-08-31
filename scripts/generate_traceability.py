@@ -223,6 +223,98 @@ REQUIREMENT_OVERRIDES: Final = {
     ),
     6001: ("migrations/", "tests/integration/test_postgres_contract.py"),
     6002: ("src/aegisquant/domain/", "tests/property/test_domain_properties.py"),
+    6014: (
+        "src/aegisquant/data/provider_registry.py; data/catalogs/provider_registry.yaml",
+        "tests/unit/data/test_provider_registry.py",
+    ),
+    6015: (
+        "src/aegisquant/data/lake.py; data/manifests/",
+        "tests/unit/data/test_lake.py; tests/chaos/data/test_atomic_lake_write.py",
+    ),
+    6016: (
+        "src/aegisquant/data/manifest.py; src/aegisquant/data/lineage.py",
+        "tests/unit/data/test_manifest.py",
+    ),
+    6017: (
+        "src/aegisquant/data/query.py; src/aegisquant/data/transforms.py",
+        "tests/contract/test_columnar_stack.py",
+    ),
+    6018: (
+        "src/aegisquant/data/quality.py; data/quarantine/",
+        "tests/unit/data/test_quality.py",
+    ),
+    6019: (
+        "src/aegisquant/data/models.py; src/aegisquant/data/pit.py",
+        "tests/property/test_pit_properties.py",
+    ),
+    6020: (
+        "src/aegisquant/data/archive.py",
+        "tests/unit/data/test_archive.py",
+    ),
+    6021: (
+        "src/aegisquant/data/pit.py; reports/data/PIT_LEAKAGE_TESTS.md",
+        "tests/property/test_pit_properties.py",
+    ),
+    6022: (
+        "src/aegisquant/data/scanner.py; reports/data/LOCAL_ASSET_INVENTORY.parquet",
+        "tests/unit/data/test_scanner.py",
+    ),
+    6023: (
+        "src/aegisquant/data/scanner.py",
+        "tests/security/test_read_only_scanner.py",
+    ),
+    6024: (
+        "src/aegisquant/data/catalog.py",
+        "tests/unit/data/test_catalog.py",
+    ),
+    6025: (
+        "src/aegisquant/data/provider_registry.py",
+        "tests/unit/data/test_provider_registry.py",
+    ),
+    6026: (
+        "src/aegisquant/data/cli.py; src/aegisquant/data/catalog.py",
+        "tests/contract/test_data_cli.py",
+    ),
+    6027: (
+        "scripts/run_data_benchmark.py; reports/data/DATA_LAKE_BENCHMARK.md",
+        "tests/performance/test_data_foundation.py",
+    ),
+    6028: (
+        "docs/data_storage_lifecycle.md",
+        "tests/p02/test_required_artifacts.py",
+    ),
+    6032: (
+        "src/aegisquant/data/scanner.py; reports/access/LOCAL_PATH_REQUESTS.md",
+        "tests/security/test_read_only_scanner.py",
+    ),
+    6033: (
+        "scripts/generate_p02_evidence.py; reports/data/LOCAL_ASSET_INVENTORY.md",
+        "tests/p02/test_required_artifacts.py",
+    ),
+    6047: (
+        "src/aegisquant/data/manifest.py",
+        "tests/property/test_data_foundation_properties.py",
+    ),
+    6048: (
+        "src/aegisquant/data/lake.py",
+        "tests/chaos/data/test_atomic_lake_write.py",
+    ),
+    6049: (
+        "src/aegisquant/data/archive.py",
+        "tests/unit/data/test_archive.py",
+    ),
+    6050: (
+        "src/aegisquant/data/pit.py",
+        "tests/property/test_pit_properties.py",
+    ),
+    6051: (
+        "src/aegisquant/data/quality.py",
+        "tests/unit/data/test_quality.py",
+    ),
+    6052: (
+        "reports/data/DATA_LAKE_BENCHMARK.md",
+        "tests/performance/test_data_foundation.py",
+    ),
     6865: ("state/SPEC_INDEX.md", "tests/p00/test_spec_integrity.py"),
     6867: ("state/PROJECT_PHASE_STATE.yaml", "tests/p00/test_phase_boundary.py"),
     6869: ("reports/phases/P00/", "tests/p00/test_required_reports.py"),

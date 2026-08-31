@@ -31,11 +31,18 @@ def load_state(project_root: Path) -> dict[str, object]:
     return payload
 
 
+def p01_acceptance_record(state: dict[str, object]) -> dict[str, object] | None:
+    if state["current_phase"] == "P01":
+        return state
+    previous = cast(dict[str, object], state["previous_phase"])
+    if previous["phase"] == "P01":
+        return previous
+    return None
+
+
 def test_p01_phase_boundary_and_traceability(project_root: Path) -> None:
     state = load_state(project_root)
-    assert state["current_phase"] == "P01"
-    assert state["next_phase"] == "P02"
-    assert state["status"] in {"in_progress", "accepted"}
+    assert int(str(state["current_phase"])[1:]) >= 1
     assert state["live_trading_locked"] is True
 
     with (project_root / "state/REQUIREMENTS_TRACEABILITY.csv").open(
@@ -49,10 +56,11 @@ def test_p01_phase_boundary_and_traceability(project_root: Path) -> None:
 
 def test_p01_report_set_matches_phase_status(project_root: Path) -> None:
     state = load_state(project_root)
+    record = p01_acceptance_record(state)
     report_dir = project_root / "reports/phases/P01"
     assert (report_dir / "PLAN.md").is_file()
 
-    if state["status"] != "accepted":
+    if record is None or record["status"] != "accepted":
         return
 
     for name in REQUIRED_REPORTS:
@@ -62,7 +70,7 @@ def test_p01_report_set_matches_phase_status(project_root: Path) -> None:
 
     results = json.loads((report_dir / "TEST_RESULTS.json").read_text(encoding="utf-8"))
     assert results["phase"] == "P01"
-    assert results["commit_sha"] == state["commit_sha"]
+    assert results["commit_sha"] == record["commit_sha"]
     assert results["passed"] > 0
     assert results["failed"] == 0
     assert results["skipped"] == 0
@@ -71,17 +79,18 @@ def test_p01_report_set_matches_phase_status(project_root: Path) -> None:
 
 def test_accepted_p01_state_is_bound_to_manifest(project_root: Path) -> None:
     state = load_state(project_root)
-    if state["status"] != "accepted":
+    record = p01_acceptance_record(state)
+    if record is None or record["status"] != "accepted":
         return
 
     manifest_path = project_root / "reports/phases/P01/ARTIFACT_MANIFEST.json"
     manifest_raw = manifest_path.read_bytes()
     manifest = json.loads(manifest_raw)
 
-    assert state["accepted_at_utc"]
-    assert state["commit_sha"] == manifest["implementation_commit"]
-    assert len(str(state["commit_sha"])) == 40
-    assert state["artifact_manifest_sha256"] == hashlib.sha256(manifest_raw).hexdigest()
+    assert record["accepted_at_utc"]
+    assert record["commit_sha"] == manifest["implementation_commit"]
+    assert len(str(record["commit_sha"])) == 40
+    assert record["artifact_manifest_sha256"] == hashlib.sha256(manifest_raw).hexdigest()
     assert manifest["phase"] == "P01"
     assert manifest["artifact_count"] == len(manifest["artifacts"])
     assert "state/PROJECT_PHASE_STATE.yaml" not in {

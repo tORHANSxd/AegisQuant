@@ -29,7 +29,10 @@ def test_data_access_state_records_no_connection(project_root: Path) -> None:
         (project_root / "state/DATA_ACCESS_STATUS.yaml").read_text(encoding="utf-8")
     )
 
-    assert payload["external_network_data_collection"] == "disabled"
+    assert payload["external_network_data_collection"] in {
+        "disabled",
+        "public_metadata_contract_only",
+    }
     assert payload["real_trading_account_connection"] == "disabled"
     assert payload["secret_loading"] == "disabled"
     assert payload["credentials_received"] == 0

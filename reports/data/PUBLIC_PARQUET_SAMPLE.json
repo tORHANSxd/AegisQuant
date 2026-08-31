@@ -1,0 +1,15 @@
+{
+  "arrow_schema": "id: int32\nbool_col: bool\ntinyint_col: int32\nsmallint_col: int32\nint_col: int32\nbigint_col: int64\nfloat_col: float\ndouble_col: double\ndate_string_col: binary\nstring_col: binary\ntimestamp_col: timestamp[ns]",
+  "credentials_used": false,
+  "git_blob_sha1": "a63f5dca7c3821909748f34752966a0d7e08d47f",
+  "pinned_commit": "09f3cdbde45302f0f0c689c950e465e98a9df960",
+  "processing_mode": "in_memory_metadata_only",
+  "provider_id": "apache_parquet_testing",
+  "raw_bytes_retained": false,
+  "row_count": 8,
+  "row_group_count": 1,
+  "sha256": "12a618d20a59ee0967fef45e7ec1ff6d451e724838edc1bbeac780ca15e8fcc4",
+  "size_bytes": 1851,
+  "url": "https://raw.githubusercontent.com/apache/parquet-testing/09f3cdbde45302f0f0c689c950e465e98a9df960/data/alltypes_plain.parquet",
+  "verified_at_utc": "2026-08-31T12:15:06.079874Z"
+}

@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "QualityIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_rows": {
+          "minimum": 0,
+          "title": "Affected Rows",
+          "type": "integer"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/QualitySeverity"
+        }
+      },
+      "required": [
+        "rule_id",
+        "severity",
+        "message",
+        "affected_rows"
+      ],
+      "title": "QualityIssue",
+      "type": "object"
+    },
+    "QualitySeverity": {
+      "enum": [
+        "INFO",
+        "WARNING",
+        "ERROR"
+      ],
+      "title": "QualitySeverity",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.quality-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "dataset_name": {
+      "title": "Dataset Name",
+      "type": "string"
+    },
+    "evaluated_at": {
+      "format": "date-time",
+      "title": "Evaluated At",
+      "type": "string"
+    },
+    "issues": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/QualityIssue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "quality_report_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Quality Report Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "quality_report_id",
+    "dataset_name",
+    "evaluated_at",
+    "passed"
+  ],
+  "title": "QualityReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.quality-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

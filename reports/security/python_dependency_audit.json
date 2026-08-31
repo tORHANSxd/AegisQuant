@@ -45,6 +45,11 @@
       "vulns": []
     },
     {
+      "name": "cffi",
+      "version": "2.1.1",
+      "vulns": []
+    },
+    {
       "name": "cfgv",
       "version": "3.5.0",
       "vulns": []
@@ -70,6 +75,11 @@
       "vulns": []
     },
     {
+      "name": "cryptography",
+      "version": "50.0.1",
+      "vulns": []
+    },
+    {
       "name": "cyclonedx-bom",
       "version": "7.3.1",
       "vulns": []
@@ -92,6 +102,11 @@
     {
       "name": "distlib",
       "version": "0.4.3",
+      "vulns": []
+    },
+    {
+      "name": "duckdb",
+      "version": "1.5.5",
       "vulns": []
     },
     {
@@ -265,6 +280,16 @@
       "vulns": []
     },
     {
+      "name": "polars",
+      "version": "1.44.1",
+      "vulns": []
+    },
+    {
+      "name": "polars-runtime-32",
+      "version": "1.44.1",
+      "vulns": []
+    },
+    {
       "name": "portion",
       "version": "2.6.2",
       "vulns": []
@@ -277,6 +302,11 @@
     {
       "name": "prettytable",
       "version": "3.18.0",
+      "vulns": []
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2",
       "vulns": []
     },
     {
@@ -297,6 +327,16 @@
     {
       "name": "pyarrow",
       "version": "25.0.1",
+      "vulns": []
+    },
+    {
+      "name": "pyarrow-stubs",
+      "version": "20.0.0.20260819",
+      "vulns": []
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
       "vulns": []
     },
     {

@@ -1,0 +1,72 @@
+{
+  "$defs": {
+    "LakeLayer": {
+      "enum": [
+        "raw",
+        "bronze",
+        "silver",
+        "gold",
+        "quarantine"
+      ],
+      "title": "LakeLayer",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.catalog-entry/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "dataset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dataset_name": {
+      "title": "Dataset Name",
+      "type": "string"
+    },
+    "layer": {
+      "$ref": "#/$defs/LakeLayer"
+    },
+    "manifest_hash": {
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "manifest_path": {
+      "title": "Manifest Path",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "row_count": {
+      "minimum": 0,
+      "title": "Row Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "manifest_hash",
+    "manifest_path",
+    "dataset_name",
+    "provider_id",
+    "layer",
+    "schema_version",
+    "row_count"
+  ],
+  "title": "CatalogEntry",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.catalog-entry",
+  "x-aegisquant-schema-version": "1.0.0"
+}

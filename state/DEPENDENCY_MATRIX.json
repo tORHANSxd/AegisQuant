@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "phase": "P01",
+  "phase": "P02",
   "policy": {
     "exact_direct_versions": true,
     "lockfiles_required": ["uv.lock", "pnpm-lock.yaml"],
@@ -78,6 +78,46 @@
       "contract": "passed"
     },
     {
+      "name": "duckdb",
+      "version": "1.5.5",
+      "source": "https://pypi.org/project/duckdb/1.5.5/",
+      "contract": "passed",
+      "external_access": false
+    },
+    {
+      "name": "polars",
+      "version": "1.44.1",
+      "source": "https://pypi.org/project/polars/1.44.1/",
+      "contract": "passed"
+    },
+    {
+      "name": "pyarrow",
+      "version": "25.0.1",
+      "source": "https://pypi.org/project/pyarrow/25.0.1/",
+      "contract": "passed"
+    },
+    {
+      "name": "cryptography",
+      "version": "50.0.1",
+      "source": "https://pypi.org/project/cryptography/50.0.1/",
+      "contract": "passed",
+      "purpose": "AES-256-GCM restricted revision archive"
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2",
+      "source": "https://pypi.org/project/psutil/7.2.2/",
+      "contract": "passed",
+      "purpose": "bounded benchmark RSS sampling"
+    },
+    {
+      "name": "pyarrow-stubs",
+      "version": "20.0.0.20260819",
+      "source": "https://pypi.org/project/pyarrow-stubs/20.0.0.20260819/",
+      "contract": "passed_with_runtime_adapter",
+      "role": "development_only"
+    },
+    {
       "name": "nautilus-trader",
       "version": "1.231.0",
       "maturity": "Beta",
@@ -106,6 +146,18 @@
       "latest_observed": "official docs describe experimental.isolatedDevBuild",
       "selected": "next typegen with tsconfig.check.json",
       "reason": "Next.js 16.3.3 rejects that documented field; repeated typecheck/build/E2E contracts pass with an isolated production type configuration"
+    },
+    {
+      "name": "pyarrow-type-contract",
+      "latest_observed": "pyarrow-stubs 20.0.0.20260819",
+      "selected": "PyArrow 25.0.1 plus narrow typed adapters",
+      "reason": "The third-party stubs trail the stable runtime; strict Pyright and dual-runtime Parquet contracts remain mandatory"
+    },
+    {
+      "name": "duckdb-httpfs-security-setting",
+      "latest_observed": "enable_global_s3_configuration belongs to the unloaded httpfs extension",
+      "selected": "do not load httpfs; disable external access and extension auto-loading, then lock configuration",
+      "reason": "Loading a network extension merely to disable its setting would widen the attack surface"
     }
   ],
   "deferred_components": [
@@ -117,17 +169,18 @@
     "gpu_runtime"
   ],
   "verification": {
-    "verified_at_utc": "2026-08-31T09:22:15.8124341Z",
+    "verified_at_utc": "2026-08-31T12:43:53.294921Z",
     "python_lock": "uv.lock",
     "javascript_lock": "pnpm-lock.yaml",
-    "python_313_tests": "90 passed; 4 upstream warnings",
-    "python_314_contract_tests": "45 passed; 4 upstream warnings",
+    "python_313_tests": "119 passed; 4 upstream warnings",
+    "python_314_contract_tests": "83 passed; 4 upstream warnings",
     "postgresql_contracts": "PostgreSQL 18.6 empty-database upgrade/downgrade plus 3 real integration tests passed",
-    "schema_contracts": "19 generated artifacts verified",
+    "schema_contracts": "31 generated artifacts verified",
+    "data_foundation_contracts": "4096-file bounded read-only inventory, 1000000-row Parquet benchmark, immutable revision, atomic registration, quarantine, tombstone, and PIT leakage contracts passed",
     "nautilus_replay": "two fresh engines produced identical stable state",
     "web": "lint, typecheck, 2 unit tests, production build, and 1 Chromium E2E test passed",
-    "local_ci": "17 of 17 stages passed",
-    "dependency_audits": "Python and JavaScript audits passed"
+    "local_ci": "18 of 18 stages passed",
+    "dependency_audits": "Python and JavaScript audits passed; Bandit and plaintext-secret scans reported zero findings"
   },
   "installer_observations": [
     {
@@ -138,7 +191,7 @@
     {
       "tool": "system Node.js",
       "observation": "host capability snapshot found 24.12.0",
-      "resolution": "P01 verification prepended the ignored pinned Node.js 24.20.0 runtime; CI uses setup-node 24.20.0"
+      "resolution": "P02 verification prepended the ignored pinned Node.js 24.20.0 runtime; CI uses setup-node 24.20.0"
     }
   ]
 }

@@ -1,0 +1,67 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.ingest-checkpoint/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "byte_offset": {
+      "minimum": 0,
+      "title": "Byte Offset",
+      "type": "integer"
+    },
+    "cursor": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cursor"
+    },
+    "dataset_name": {
+      "title": "Dataset Name",
+      "type": "string"
+    },
+    "last_completed_content_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Completed Content Hash"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "source_request_hash": {
+      "title": "Source Request Hash",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "provider_id",
+    "dataset_name",
+    "byte_offset",
+    "source_request_hash",
+    "updated_at"
+  ],
+  "title": "IngestCheckpoint",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.ingest-checkpoint",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,4 +1,4 @@
-"""Generate and verify deterministic P01 event and configuration JSON Schemas."""
+"""Generate and verify deterministic event, configuration, and data JSON Schemas."""
 
 from __future__ import annotations
 
@@ -12,6 +12,18 @@ from typing import Final
 from pydantic import BaseModel
 
 from aegisquant.config.models import AppConfig
+from aegisquant.data.archive import RevisionRecord, TombstoneRecord
+from aegisquant.data.catalog import CatalogEntry
+from aegisquant.data.checkpoint import IngestCheckpoint
+from aegisquant.data.lineage import TransformationLineage
+from aegisquant.data.models import (
+    ContentTimeSemantics,
+    DatasetManifest,
+    ImportProposal,
+    InventoryRecord,
+    ProviderRegistryDocument,
+    QualityReport,
+)
 from aegisquant.domain.accounting import JournalEntry, PositionLot
 from aegisquant.domain.execution import Fill, OrderCommand, OrderIntent, VenueOrder
 from aegisquant.domain.intelligence import (
@@ -85,6 +97,75 @@ CONFIG_CONTRACTS: Final = (
     ),
 )
 
+DATA_CONTRACTS: Final = (
+    Contract(
+        "aegisquant.provider-registry",
+        "1.0.0",
+        ProviderRegistryDocument,
+        Path("provider-registry-v1.json"),
+    ),
+    Contract(
+        "aegisquant.content-time-semantics",
+        "1.0.0",
+        ContentTimeSemantics,
+        Path("content-time-semantics-v1.json"),
+    ),
+    Contract(
+        "aegisquant.dataset-manifest",
+        "1.0.0",
+        DatasetManifest,
+        Path("dataset-manifest-v1.json"),
+    ),
+    Contract(
+        "aegisquant.quality-report",
+        "1.0.0",
+        QualityReport,
+        Path("quality-report-v1.json"),
+    ),
+    Contract(
+        "aegisquant.inventory-record",
+        "1.0.0",
+        InventoryRecord,
+        Path("inventory-record-v1.json"),
+    ),
+    Contract(
+        "aegisquant.import-proposal",
+        "1.0.0",
+        ImportProposal,
+        Path("import-proposal-v1.json"),
+    ),
+    Contract(
+        "aegisquant.ingest-checkpoint",
+        "1.0.0",
+        IngestCheckpoint,
+        Path("ingest-checkpoint-v1.json"),
+    ),
+    Contract(
+        "aegisquant.revision-record",
+        "1.0.0",
+        RevisionRecord,
+        Path("revision-record-v1.json"),
+    ),
+    Contract(
+        "aegisquant.tombstone-record",
+        "1.0.0",
+        TombstoneRecord,
+        Path("tombstone-record-v1.json"),
+    ),
+    Contract(
+        "aegisquant.catalog-entry",
+        "1.0.0",
+        CatalogEntry,
+        Path("catalog-entry-v1.json"),
+    ),
+    Contract(
+        "aegisquant.transformation-lineage",
+        "1.0.0",
+        TransformationLineage,
+        Path("transformation-lineage-v1.json"),
+    ),
+)
+
 
 def schema_bytes(contract: Contract) -> bytes:
     schema = contract.model.model_json_schema(mode="validation")
@@ -122,6 +203,28 @@ def expected_outputs(root: Path) -> dict[Path, bytes]:
     }
     outputs[root / "schemas/events/registry.json"] = (
         json.dumps(registry, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    ).encode()
+    data_registry_entries: list[dict[str, str]] = []
+    for contract in DATA_CONTRACTS:
+        path = root / "schemas/data" / contract.path
+        raw = schema_bytes(contract)
+        outputs[path] = raw
+        data_registry_entries.append(
+            {
+                "schema_name": contract.schema_name,
+                "schema_version": contract.version,
+                "model": f"{contract.model.__module__}.{contract.model.__name__}",
+                "path": path.relative_to(root).as_posix(),
+                "sha256": hashlib.sha256(raw).hexdigest(),
+                "compatibility": "BACKWARD",
+            }
+        )
+    data_registry = {
+        "schema_version": "1.0.0",
+        "data_contracts": data_registry_entries,
+    }
+    outputs[root / "schemas/data/registry.json"] = (
+        json.dumps(data_registry, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     ).encode()
     return outputs
 

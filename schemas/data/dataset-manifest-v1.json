@@ -1,0 +1,207 @@
+{
+  "$defs": {
+    "DatasetFile": {
+      "additionalProperties": false,
+      "properties": {
+        "max_time": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Time"
+        },
+        "min_time": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Time"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "rows": {
+          "minimum": 0,
+          "title": "Rows",
+          "type": "integer"
+        },
+        "schema_sha256": {
+          "title": "Schema Sha256",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "rows",
+        "schema_sha256"
+      ],
+      "title": "DatasetFile",
+      "type": "object"
+    },
+    "LakeLayer": {
+      "enum": [
+        "raw",
+        "bronze",
+        "silver",
+        "gold",
+        "quarantine"
+      ],
+      "title": "LakeLayer",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.dataset-manifest/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_time_policy": {
+      "title": "Available Time Policy",
+      "type": "string"
+    },
+    "created_at_utc": {
+      "format": "date-time",
+      "title": "Created At Utc",
+      "type": "string"
+    },
+    "dataset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dataset_name": {
+      "title": "Dataset Name",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/DatasetFile"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "layer": {
+      "$ref": "#/$defs/LakeLayer"
+    },
+    "lineage_hash": {
+      "title": "Lineage Hash",
+      "type": "string"
+    },
+    "manifest_version": {
+      "default": "1.0.0",
+      "title": "Manifest Version",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "quality_report_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Quality Report Id",
+      "type": "string"
+    },
+    "row_count": {
+      "minimum": 0,
+      "title": "Row Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_request_hash": {
+      "title": "Source Request Hash",
+      "type": "string"
+    },
+    "time_range": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      ],
+      "title": "Time Range",
+      "type": "array"
+    },
+    "transform_commit": {
+      "title": "Transform Commit",
+      "type": "string"
+    },
+    "transform_config_hash": {
+      "title": "Transform Config Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "dataset_name",
+    "schema_version",
+    "provider_id",
+    "layer",
+    "time_range",
+    "available_time_policy",
+    "files",
+    "row_count",
+    "transform_commit",
+    "transform_config_hash",
+    "source_request_hash",
+    "quality_report_id",
+    "lineage_hash",
+    "created_at_utc"
+  ],
+  "title": "DatasetManifest",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.dataset-manifest",
+  "x-aegisquant-schema-version": "1.0.0"
+}

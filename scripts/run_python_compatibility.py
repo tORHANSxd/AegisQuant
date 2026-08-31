@@ -1,4 +1,4 @@
-"""Run P00/P01 contracts in an isolated Python 3.14 candidate environment."""
+"""Run P00-P02 contracts in an isolated Python 3.14 candidate environment."""
 
 from __future__ import annotations
 
@@ -31,6 +31,10 @@ def main() -> int:
         "tests/unit",
         "tests/property",
         "tests/contract",
+        "tests/p02",
+        "tests/chaos",
+        "tests/performance",
+        "tests/security",
     ]
     started = time.perf_counter()
     # uv is resolved before use and receives fixed arguments.
@@ -45,7 +49,7 @@ def main() -> int:
     )
     payload = {
         "schema_version": "1.0.0",
-        "phase": "P01",
+        "phase": "P02",
         "runtime": "Python 3.14.7 candidate",
         "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "command": command[1:],
@@ -54,7 +58,7 @@ def main() -> int:
         "status": "passed" if result.returncode == 0 else "failed",
         "output_tail": "\n".join((result.stdout, result.stderr)).strip()[-12_000:],
     }
-    output = root / "reports/phases/P01/PYTHON_314_CONTRACT.json"
+    output = root / "reports/phases/P02/PYTHON_314_CONTRACT.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",

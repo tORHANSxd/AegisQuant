@@ -18,6 +18,9 @@ REQUIRED_REPORTS = {
     "SUMMARY.md",
     "TEST_RESULTS.json",
 }
+P00_EVIDENCE_COMMIT = "ab2bb4ae48c734729846745f23e23f257b4c75c7"
+P00_IMPLEMENTATION_COMMIT = "05af2c7b40cbd7bfdd0a21727113010b5ee3e01a"
+P00_MANIFEST_SHA256 = "bf2ed78cc3566d70fb4973b4097414f77da242bc2e78753d4f4fe097452d7497"
 
 
 def test_all_mandatory_p00_reports_exist(project_root: Path) -> None:
@@ -61,20 +64,17 @@ def test_results_follow_the_spec_schema(project_root: Path) -> None:
 
 
 def test_accepted_state_is_bound_to_manifest(project_root: Path) -> None:
-    state = yaml.safe_load(
-        (project_root / "state/PROJECT_PHASE_STATE.yaml").read_text(encoding="utf-8")
-    )
     manifest_path = project_root / "reports/phases/P00/ARTIFACT_MANIFEST.json"
     manifest_raw = manifest_path.read_bytes()
     manifest = json.loads(manifest_raw)
 
-    previous = state["previous_phase"]
-    assert previous["status"] == "accepted"
-    assert previous["phase"] == "P00"
+    state = yaml.safe_load(
+        (project_root / "state/PROJECT_PHASE_STATE.yaml").read_text(encoding="utf-8")
+    )
     assert state["live_trading_locked"] is True
-    assert previous["commit_sha"] == manifest["implementation_commit"]
-    assert len(previous["evidence_commit_sha"]) == 40
-    assert previous["artifact_manifest_sha256"] == hashlib.sha256(manifest_raw).hexdigest()
+    assert manifest["phase"] == "P00"
+    assert manifest["implementation_commit"] == P00_IMPLEMENTATION_COMMIT
+    assert hashlib.sha256(manifest_raw).hexdigest() == P00_MANIFEST_SHA256
 
 
 def test_manifest_hashes_every_declared_artifact(project_root: Path) -> None:
@@ -90,13 +90,9 @@ def test_manifest_hashes_every_declared_artifact(project_root: Path) -> None:
     assert "reports/phases/P00/ARTIFACT_MANIFEST.json" not in paths
     git = shutil.which("git")
     assert git is not None
-    state = yaml.safe_load(
-        (project_root / "state/PROJECT_PHASE_STATE.yaml").read_text(encoding="utf-8")
-    )
-    evidence_commit = state["previous_phase"]["evidence_commit_sha"]
     for entry in entries:
         result = subprocess.run(  # nosec B603 - fixed read-only Git query
-            [git, "show", f"{evidence_commit}:{entry['path']}"],
+            [git, "show", f"{P00_EVIDENCE_COMMIT}:{entry['path']}"],
             cwd=project_root,
             check=False,
             capture_output=True,

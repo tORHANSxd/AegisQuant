@@ -1,0 +1,93 @@
+{
+  "data_contracts": [
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.models.ProviderRegistryDocument",
+      "path": "schemas/data/provider-registry-v1.json",
+      "schema_name": "aegisquant.provider-registry",
+      "schema_version": "1.0.0",
+      "sha256": "e834d96568b0e3b5ed6a3bf4f247697a28ac65b0daa8560b820dc7891a0dd773"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.models.ContentTimeSemantics",
+      "path": "schemas/data/content-time-semantics-v1.json",
+      "schema_name": "aegisquant.content-time-semantics",
+      "schema_version": "1.0.0",
+      "sha256": "4d5cadc5ad623318288b48f97b8ac3b20136bca40c347e14fd1911d031b6c304"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.models.DatasetManifest",
+      "path": "schemas/data/dataset-manifest-v1.json",
+      "schema_name": "aegisquant.dataset-manifest",
+      "schema_version": "1.0.0",
+      "sha256": "5a1325696cf9016472c988fab33c768dac57002713348624be7b30cc8aff7282"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.models.QualityReport",
+      "path": "schemas/data/quality-report-v1.json",
+      "schema_name": "aegisquant.quality-report",
+      "schema_version": "1.0.0",
+      "sha256": "ec9a78718904c233524d64c35779adfe5c379588f9dcfd588a3b427605de2f82"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.models.InventoryRecord",
+      "path": "schemas/data/inventory-record-v1.json",
+      "schema_name": "aegisquant.inventory-record",
+      "schema_version": "1.0.0",
+      "sha256": "966467a08217022bb6c03c27035c29d550d1739cea680824ae87096d6c60a8de"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.models.ImportProposal",
+      "path": "schemas/data/import-proposal-v1.json",
+      "schema_name": "aegisquant.import-proposal",
+      "schema_version": "1.0.0",
+      "sha256": "2bc7be68148cfd6e016b6d024bd592f4644feaf0997b49eda5e8ca8a8b429a20"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.checkpoint.IngestCheckpoint",
+      "path": "schemas/data/ingest-checkpoint-v1.json",
+      "schema_name": "aegisquant.ingest-checkpoint",
+      "schema_version": "1.0.0",
+      "sha256": "7f75ea5b0df7ed38b4e1a0cd45f8dbe917ddeee9dc6738f94347b689ddef3b23"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.archive.RevisionRecord",
+      "path": "schemas/data/revision-record-v1.json",
+      "schema_name": "aegisquant.revision-record",
+      "schema_version": "1.0.0",
+      "sha256": "48b896277d6e23a86fdd47594f891ceaaa92a3134000b74e9688877fadb25901"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.archive.TombstoneRecord",
+      "path": "schemas/data/tombstone-record-v1.json",
+      "schema_name": "aegisquant.tombstone-record",
+      "schema_version": "1.0.0",
+      "sha256": "eecb55696e64d94ea3a024b256b6a5dc8d6c383ed4cb1a265ee264acd04cd14e"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.catalog.CatalogEntry",
+      "path": "schemas/data/catalog-entry-v1.json",
+      "schema_name": "aegisquant.catalog-entry",
+      "schema_version": "1.0.0",
+      "sha256": "8795f6b41de597fb0288420a551a3121a579adfc251c9c3496cbe14a1930a819"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.lineage.TransformationLineage",
+      "path": "schemas/data/transformation-lineage-v1.json",
+      "schema_name": "aegisquant.transformation-lineage",
+      "schema_version": "1.0.0",
+      "sha256": "319a33f001c13cd124f3bb4ade7bd43e426373c2d20ad77efeaa2282ec00889a"
+    }
+  ],
+  "schema_version": "1.0.0"
+}

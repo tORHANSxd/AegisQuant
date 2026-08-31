@@ -84,6 +84,12 @@
     "Version": "2026.7.22"
   },
   {
+    "License": "MIT-0",
+    "Name": "cffi",
+    "URL": "https://cffi.readthedocs.io/en/latest/whatsnew.html",
+    "Version": "2.1.1"
+  },
+  {
     "License": "MIT",
     "Name": "cfgv",
     "URL": "https://github.com/asottile/cfgv",
@@ -114,6 +120,12 @@
     "Version": "0.4.6"
   },
   {
+    "License": "Apache-2.0 OR BSD-3-Clause",
+    "Name": "cryptography",
+    "URL": "https://github.com/pyca/cryptography",
+    "Version": "50.0.1"
+  },
+  {
     "License": "Apache Software License",
     "Name": "cyclonedx-bom",
     "URL": "https://github.com/CycloneDX/cyclonedx-python/#readme",
@@ -142,6 +154,12 @@
     "Name": "distlib",
     "URL": "https://github.com/pypa/distlib",
     "Version": "0.4.3"
+  },
+  {
+    "License": "MIT License",
+    "Name": "duckdb",
+    "URL": "https://github.com/duckdb/duckdb-python",
+    "Version": "1.5.5"
   },
   {
     "License": "MIT",
@@ -324,6 +342,18 @@
     "Version": "1.6.0"
   },
   {
+    "License": "MIT License",
+    "Name": "polars",
+    "URL": "https://www.pola.rs/",
+    "Version": "1.44.1"
+  },
+  {
+    "License": "MIT License",
+    "Name": "polars-runtime-32",
+    "URL": "https://www.pola.rs/",
+    "Version": "1.44.1"
+  },
+  {
     "License": "LGPL-3.0-or-later",
     "Name": "portion",
     "URL": "https://github.com/AlexandreDecan/portion",
@@ -334,6 +364,12 @@
     "Name": "pre_commit",
     "URL": "https://github.com/pre-commit/pre-commit",
     "Version": "4.6.2"
+  },
+  {
+    "License": "BSD-3-Clause",
+    "Name": "psutil",
+    "URL": "https://github.com/giampaolo/psutil",
+    "Version": "7.2.2"
   },
   {
     "License": "LGPL-3.0-only",
@@ -358,6 +394,18 @@
     "Name": "pyarrow",
     "URL": "https://arrow.apache.org/",
     "Version": "25.0.1"
+  },
+  {
+    "License": "BSD-2-Clause",
+    "Name": "pyarrow-stubs",
+    "URL": "https://github.com/zen-xu/pyarrow-stubs",
+    "Version": "20.0.0.20260819"
+  },
+  {
+    "License": "BSD-3-Clause",
+    "Name": "pycparser",
+    "URL": "https://github.com/eliben/pycparser",
+    "Version": "3.0"
   },
   {
     "License": "MIT",

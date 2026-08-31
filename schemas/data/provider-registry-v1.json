@@ -1,0 +1,228 @@
+{
+  "$defs": {
+    "AuthorityLevel": {
+      "enum": [
+        "primary",
+        "secondary",
+        "derived"
+      ],
+      "title": "AuthorityLevel",
+      "type": "string"
+    },
+    "LicenseStatus": {
+      "enum": [
+        "approved",
+        "restricted",
+        "unknown",
+        "rejected"
+      ],
+      "title": "LicenseStatus",
+      "type": "string"
+    },
+    "ProviderAccessMethod": {
+      "enum": [
+        "rest",
+        "websocket",
+        "sdk",
+        "file",
+        "manual_export"
+      ],
+      "title": "ProviderAccessMethod",
+      "type": "string"
+    },
+    "ProviderRegistryEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "access_method": {
+          "$ref": "#/$defs/ProviderAccessMethod"
+        },
+        "authority_level": {
+          "$ref": "#/$defs/AuthorityLevel"
+        },
+        "credentials_required": {
+          "title": "Credentials Required",
+          "type": "boolean"
+        },
+        "incremental_value_score": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Incremental Value Score"
+        },
+        "latency_expectation_ms": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latency Expectation Ms"
+        },
+        "license_status": {
+          "$ref": "#/$defs/LicenseStatus"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "provider_name": {
+          "title": "Provider Name",
+          "type": "string"
+        },
+        "provider_type": {
+          "$ref": "#/$defs/ProviderType"
+        },
+        "quality_score": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality Score"
+        },
+        "rate_limits": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Rate Limits",
+          "type": "object"
+        },
+        "regions_or_account_constraints": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Regions Or Account Constraints",
+          "type": "array"
+        },
+        "retention_policy": {
+          "title": "Retention Policy",
+          "type": "string"
+        },
+        "revision_policy": {
+          "title": "Revision Policy",
+          "type": "string"
+        },
+        "source_policy_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Source Policy Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ProviderStatus"
+        },
+        "supported_datasets": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Supported Datasets",
+          "type": "array"
+        },
+        "time_semantics_documented": {
+          "title": "Time Semantics Documented",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "provider_id",
+        "provider_name",
+        "provider_type",
+        "access_method",
+        "authority_level",
+        "license_status",
+        "credentials_required",
+        "revision_policy",
+        "time_semantics_documented",
+        "retention_policy",
+        "status",
+        "owner",
+        "source_policy_id"
+      ],
+      "title": "ProviderRegistryEntry",
+      "type": "object"
+    },
+    "ProviderStatus": {
+      "enum": [
+        "candidate",
+        "trial",
+        "approved",
+        "degraded",
+        "retired"
+      ],
+      "title": "ProviderStatus",
+      "type": "string"
+    },
+    "ProviderType": {
+      "enum": [
+        "exchange",
+        "macro",
+        "onchain",
+        "news",
+        "community",
+        "vendor",
+        "local"
+      ],
+      "title": "ProviderType",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.provider-registry/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "providers": {
+      "items": {
+        "$ref": "#/$defs/ProviderRegistryEntry"
+      },
+      "title": "Providers",
+      "type": "array"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "providers"
+  ],
+  "title": "ProviderRegistryDocument",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.provider-registry",
+  "x-aegisquant-schema-version": "1.0.0"
+}

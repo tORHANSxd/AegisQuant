@@ -31,8 +31,8 @@ def assert_live_locked(
     """Validate all lock inputs and fail closed on any Live capability request."""
     adapters = tuple(registered_live_adapters)
     if LIVE_TRADING or config_live or environment_live:
-        _reject("Live Trading must remain disabled through P01")
+        _reject("Live Trading must remain disabled")
     if ORDER_SUBMISSION_ENABLED or order_submission_enabled:
-        _reject("order submission must remain disabled through P01")
+        _reject("order submission must remain disabled")
     if LIVE_ADAPTERS or adapters:
-        _reject("the Live adapter registry must remain empty through P01")
+        _reject("the Live adapter registry must remain empty")

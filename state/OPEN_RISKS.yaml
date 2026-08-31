@@ -1,5 +1,5 @@
 schema_version: "1.0.0"
-phase: P01
+phase: P02
 risks:
   - id: P00-RISK-001
     severity: medium
@@ -19,8 +19,8 @@ risks:
   - id: P00-RISK-004
     severity: low
     status: open
-    title: User data paths and optional provider permissions are not provided
-    containment: Keep every provider denied and defer path access until explicit future authorization.
+    title: User data paths and optional private-provider permissions are not provided
+    containment: Keep user_local_assets and every private provider denied; allow only deterministic synthetic fixtures and the pinned Apache metadata-only sample.
   - id: P00-RISK-005
     severity: low
     status: open
@@ -56,3 +56,28 @@ risks:
     status: open
     title: Host Node.js 24.12.0 differs from the locked 24.20.0 baseline
     containment: Prepend the ignored pinned 24.20.0 runtime for local CI and keep remote CI fixed to the same version.
+  - id: P02-RISK-001
+    severity: medium
+    status: open
+    title: PyArrow type stubs target API 20 while runtime is PyArrow 25.0.1
+    containment: Keep adapters narrow, retain strict Pyright, and require Python 3.13/3.14 Arrow/Parquet runtime contracts before upgrades.
+  - id: P02-RISK-002
+    severity: medium
+    status: open
+    title: Host free space is below the 500 GiB recommendation for a 200 GiB immutable lake
+    containment: Do not generate 100/200 GiB files on this host; use the measured one-million-row benchmark only for explicit linear estimates and require a larger volume before real-scale validation.
+  - id: P02-RISK-003
+    severity: low
+    status: open
+    title: No real user asset path was authorized
+    containment: Inventory only the generated 4,096-file synthetic fixture, set real_user_assets_scanned=false, and require explicit read-only path authorization before any future scan.
+  - id: P02-RISK-004
+    severity: low
+    status: open
+    title: Public Parquet compatibility evidence depends on a remote GitHub object remaining available
+    containment: Pin commit, SHA-256 and Git blob SHA-1; retain metadata evidence only and never silently substitute another sample.
+  - id: P02-RISK-005
+    severity: medium
+    status: open
+    title: No independent backup destination is configured
+    containment: Keep recovery order and capacity policy documented; require a verified backup/restore drill before treating the lake as durable production storage.

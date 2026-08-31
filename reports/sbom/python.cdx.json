@@ -4,7 +4,7 @@
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-31T09:28:52.708145Z",
+    "timestamp": "2026-08-31T12:43:34.084181Z",
     "component": {
       "type": "application",
       "name": "aegisquant-python",
@@ -68,6 +68,12 @@
     },
     {
       "type": "library",
+      "name": "cffi",
+      "version": "2.1.1",
+      "purl": "pkg:pypi/cffi@2.1.1"
+    },
+    {
+      "type": "library",
       "name": "cfgv",
       "version": "3.5.0",
       "purl": "pkg:pypi/cfgv@3.5.0"
@@ -98,6 +104,12 @@
     },
     {
       "type": "library",
+      "name": "cryptography",
+      "version": "50.0.1",
+      "purl": "pkg:pypi/cryptography@50.0.1"
+    },
+    {
+      "type": "library",
       "name": "cyclonedx-bom",
       "version": "7.3.1",
       "purl": "pkg:pypi/cyclonedx-bom@7.3.1"
@@ -125,6 +137,12 @@
       "name": "distlib",
       "version": "0.4.3",
       "purl": "pkg:pypi/distlib@0.4.3"
+    },
+    {
+      "type": "library",
+      "name": "duckdb",
+      "version": "1.5.5",
+      "purl": "pkg:pypi/duckdb@1.5.5"
     },
     {
       "type": "library",
@@ -332,6 +350,18 @@
     },
     {
       "type": "library",
+      "name": "polars",
+      "version": "1.44.1",
+      "purl": "pkg:pypi/polars@1.44.1"
+    },
+    {
+      "type": "library",
+      "name": "polars-runtime-32",
+      "version": "1.44.1",
+      "purl": "pkg:pypi/polars-runtime-32@1.44.1"
+    },
+    {
+      "type": "library",
       "name": "portion",
       "version": "2.6.2",
       "purl": "pkg:pypi/portion@2.6.2"
@@ -347,6 +377,12 @@
       "name": "prettytable",
       "version": "3.18.0",
       "purl": "pkg:pypi/prettytable@3.18.0"
+    },
+    {
+      "type": "library",
+      "name": "psutil",
+      "version": "7.2.2",
+      "purl": "pkg:pypi/psutil@7.2.2"
     },
     {
       "type": "library",
@@ -371,6 +407,18 @@
       "name": "pyarrow",
       "version": "25.0.1",
       "purl": "pkg:pypi/pyarrow@25.0.1"
+    },
+    {
+      "type": "library",
+      "name": "pyarrow-stubs",
+      "version": "20.0.0.20260819",
+      "purl": "pkg:pypi/pyarrow-stubs@20.0.0.20260819"
+    },
+    {
+      "type": "library",
+      "name": "pycparser",
+      "version": "3.0",
+      "purl": "pkg:pypi/pycparser@3.0"
     },
     {
       "type": "library",

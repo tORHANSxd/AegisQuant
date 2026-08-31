@@ -10,11 +10,15 @@ def test_phase_state_advances_one_accepted_phase_at_a_time(project_root: Path) -
         (project_root / "state/PROJECT_PHASE_STATE.yaml").read_text(encoding="utf-8")
     )
 
-    assert payload["current_phase"] == "P01"
-    assert payload["next_phase"] == "P02"
+    current_number = int(payload["current_phase"][1:])
+    next_number = int(payload["next_phase"][1:])
+    previous_number = int(payload["previous_phase"]["phase"][1:])
+
+    assert current_number >= 1
+    assert next_number == current_number + 1
+    assert previous_number == current_number - 1
     assert payload["status"] in {"in_progress", "accepted"}
     assert payload["live_trading_locked"] is True
-    assert payload["previous_phase"]["phase"] == "P00"
     assert payload["previous_phase"]["status"] == "accepted"
 
 

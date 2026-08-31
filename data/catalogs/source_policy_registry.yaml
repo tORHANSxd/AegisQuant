@@ -1,0 +1,59 @@
+schema_version: "1.0.0"
+policies:
+  - source_policy_id: "synthetic_fixture_v1"
+    provider_id: "synthetic_fixture"
+    policy_status: "APPROVED"
+    access_method: "LOCAL_FILE"
+    approved_use_case: "deterministic local data-foundation verification"
+    content_scope: "generated fixtures containing no user or external source content"
+    raw_storage: "ENCRYPTED_LOCAL"
+    derived_storage: "ALLOWED"
+    cloud_inference: "LOCAL_ONLY"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-08-31T10:59:00Z"
+    terms_version_hash: null
+  - source_policy_id: "apache_parquet_testing_v1"
+    provider_id: "apache_parquet_testing"
+    policy_status: "APPROVED"
+    access_method: "PUBLIC_FEED"
+    approved_use_case: "in-memory Parquet compatibility verification"
+    content_scope: "Apache Parquet compatibility sample at pinned commit 09f3cdbde45302f0f0c689c950e465e98a9df960"
+    raw_storage: "METADATA_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "FULL_WHEN_LICENSED"
+    deletion_sync_required: false
+    revision_sync_required: true
+    redistribution: "LICENSED"
+    retention_days: 0
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-08-31T10:59:00Z"
+    terms_version_hash: "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  - source_policy_id: "user_local_assets_deny_v1"
+    provider_id: "user_local_assets"
+    policy_status: "DENIED"
+    access_method: "NONE"
+    approved_use_case: "No local path has been authorized"
+    content_scope: "All user files until an explicit read-only path grant is recorded"
+    raw_storage: "PROHIBITED"
+    derived_storage: "PROHIBITED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "NONE"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 0
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-08-31T10:59:00Z"
+    terms_version_hash: null

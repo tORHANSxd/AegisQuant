@@ -1,0 +1,80 @@
+{
+  "benchmark": {
+    "aggregate_query_seconds": 0.028985,
+    "aggregate_rows_per_second": 34500008.78,
+    "all_files_materialized_in_ram": false,
+    "batch_rows": 100000,
+    "benchmark_file_retained": false,
+    "compressed_scan_mib_per_second": 329.489,
+    "compressed_size_bytes": 10014329,
+    "estimated_100_gib_scan_seconds": 310.784,
+    "estimated_200_gib_scan_seconds": 621.568,
+    "query_rss_peak_bytes": 187461632,
+    "query_rss_peak_delta_bytes": 66289664,
+    "query_shape": "DuckDB Parquet aggregate with one projected numeric column",
+    "row_count": 1000000,
+    "row_group_count": 10,
+    "rss_before_bytes": 121171968,
+    "value_sum": 49995000.0,
+    "write_rows_per_second": 1469623.47,
+    "write_rss_peak_bytes": 185794560,
+    "write_rss_peak_delta_bytes": 64622592,
+    "write_seconds": 0.680446
+  },
+  "capacity_snapshot": {
+    "recommended_200_gib_working_space_bytes": 536870912000,
+    "workspace_volume_free_bytes": 74438582272,
+    "workspace_volume_total_bytes": 275659091968
+  },
+  "generated_at_utc": "2026-08-31T12:15:14.054343Z",
+  "inventory": {
+    "duration_seconds": 2.752432,
+    "files_per_second": 1488.139,
+    "inventory_sha256": "24eeb718775abfe3796669e2850cef42d83b6a9a63e9b5f589e5dcc1ef06757c",
+    "inventory_size_bytes": 81478,
+    "proposal_count": 4096,
+    "proposals_sha256": "4d6244b33932763981b19a0768867ebbb249ee01f5911fed2b46674d5def7ec3",
+    "real_user_assets_scanned": false,
+    "rss_baseline_bytes": 75694080,
+    "rss_peak_bytes": 121745408,
+    "rss_peak_delta_bytes": 46051328,
+    "source_execution_performed": false,
+    "source_fixture_retained": false,
+    "synthetic_file_count": 4096
+  },
+  "live_trading_locked": true,
+  "phase": "P02",
+  "pit_contracts": {
+    "command": [
+      "-m",
+      "pytest",
+      "tests/property/test_data_properties.py",
+      "tests/p02/test_pit_query.py",
+      "-q"
+    ],
+    "duration_seconds": 2.269717,
+    "exit_code": 0,
+    "output_tail": "......                                                                   [100%]\n6 passed in 1.72s",
+    "passed": 6,
+    "status": "passed"
+  },
+  "plaintext_secrets_written": false,
+  "public_sample": {
+    "arrow_schema": "id: int32\nbool_col: bool\ntinyint_col: int32\nsmallint_col: int32\nint_col: int32\nbigint_col: int64\nfloat_col: float\ndouble_col: double\ndate_string_col: binary\nstring_col: binary\ntimestamp_col: timestamp[ns]",
+    "credentials_used": false,
+    "git_blob_sha1": "a63f5dca7c3821909748f34752966a0d7e08d47f",
+    "pinned_commit": "09f3cdbde45302f0f0c689c950e465e98a9df960",
+    "processing_mode": "in_memory_metadata_only",
+    "provider_id": "apache_parquet_testing",
+    "raw_bytes_retained": false,
+    "row_count": 8,
+    "row_group_count": 1,
+    "sha256": "12a618d20a59ee0967fef45e7ec1ff6d451e724838edc1bbeac780ca15e8fcc4",
+    "size_bytes": 1851,
+    "url": "https://raw.githubusercontent.com/apache/parquet-testing/09f3cdbde45302f0f0c689c950e465e98a9df960/data/alltypes_plain.parquet",
+    "verified_at_utc": "2026-08-31T12:15:06.079874Z"
+  },
+  "real_account_access_performed": false,
+  "real_user_assets_scanned": false,
+  "schema_version": "1.0.0"
+}
