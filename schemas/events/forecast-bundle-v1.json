@@ -1,0 +1,313 @@
+{
+  "$defs": {
+    "DirectionProbabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "down": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Down"
+        },
+        "flat": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Flat"
+        },
+        "up": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Up"
+        }
+      },
+      "required": [
+        "up",
+        "flat",
+        "down"
+      ],
+      "title": "DirectionProbabilities",
+      "type": "object"
+    },
+    "ForecastDistribution": {
+      "additionalProperties": false,
+      "properties": {
+        "mean": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean"
+        },
+        "q05": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q05"
+        },
+        "q50": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q50"
+        },
+        "q95": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q95"
+        },
+        "std": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Std"
+        }
+      },
+      "required": [
+        "mean",
+        "std",
+        "q05",
+        "q50",
+        "q95"
+      ],
+      "title": "ForecastDistribution",
+      "type": "object"
+    },
+    "ForecastHorizon": {
+      "enum": [
+        "5m",
+        "30m",
+        "1h",
+        "4h",
+        "1d",
+        "7d"
+      ],
+      "title": "ForecastHorizon",
+      "type": "string"
+    },
+    "ForecastTarget": {
+      "enum": [
+        "net_return",
+        "volatility",
+        "tail_loss",
+        "fill_probability",
+        "slippage"
+      ],
+      "title": "ForecastTarget",
+      "type": "string"
+    },
+    "ForecastUncertainty": {
+      "additionalProperties": false,
+      "properties": {
+        "aleatoric": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Aleatoric"
+        },
+        "ensemble_disagreement": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Ensemble Disagreement"
+        },
+        "epistemic": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Epistemic"
+        }
+      },
+      "required": [
+        "epistemic",
+        "aleatoric",
+        "ensemble_disagreement"
+      ],
+      "title": "ForecastUncertainty",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.forecast-bundle/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "abstain_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Abstain Reason"
+    },
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "calibration_version": {
+      "title": "Calibration Version",
+      "type": "string"
+    },
+    "code_commit": {
+      "title": "Code Commit",
+      "type": "string"
+    },
+    "dataset_manifest_hash": {
+      "title": "Dataset Manifest Hash",
+      "type": "string"
+    },
+    "distribution": {
+      "$ref": "#/$defs/ForecastDistribution"
+    },
+    "feature_snapshot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Feature Snapshot Id",
+      "type": "string"
+    },
+    "forecast_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Forecast Id",
+      "type": "string"
+    },
+    "horizon": {
+      "$ref": "#/$defs/ForecastHorizon"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "model_version_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Model Version Id",
+      "type": "string"
+    },
+    "probabilities": {
+      "$ref": "#/$defs/DirectionProbabilities"
+    },
+    "regime_id": {
+      "title": "Regime Id",
+      "type": "string"
+    },
+    "should_abstain": {
+      "title": "Should Abstain",
+      "type": "boolean"
+    },
+    "target": {
+      "$ref": "#/$defs/ForecastTarget"
+    },
+    "uncertainty": {
+      "$ref": "#/$defs/ForecastUncertainty"
+    }
+  },
+  "required": [
+    "forecast_id",
+    "model_version_id",
+    "instrument_id",
+    "as_of_time",
+    "horizon",
+    "target",
+    "distribution",
+    "probabilities",
+    "calibration_version",
+    "uncertainty",
+    "regime_id",
+    "feature_snapshot_id",
+    "dataset_manifest_hash",
+    "code_commit",
+    "should_abstain"
+  ],
+  "title": "ForecastBundle",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.forecast-bundle",
+  "x-aegisquant-schema-version": "1.0.0"
+}

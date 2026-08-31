@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "OrderCommandType": {
+      "enum": [
+        "PLACE",
+        "CANCEL",
+        "AMEND"
+      ],
+      "title": "OrderCommandType",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.order-command/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "client_order_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Client Order Id",
+      "type": "string"
+    },
+    "command_type": {
+      "$ref": "#/$defs/OrderCommandType"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "order_intent_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Order Intent Id",
+      "type": "string"
+    },
+    "replaces_client_order_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Replaces Client Order Id"
+    },
+    "venue_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Venue Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "client_order_id",
+    "order_intent_id",
+    "venue_id",
+    "command_type",
+    "issued_at",
+    "idempotency_key"
+  ],
+  "title": "OrderCommand",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.order-command",
+  "x-aegisquant-schema-version": "1.0.0"
+}

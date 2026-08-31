@@ -1,10 +1,17 @@
 spec_version: "3.1.0"
 spec_sha256: "1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f"
-current_phase: "P00"
-status: "accepted"
-started_at_utc: "2026-08-31T05:43:08.443796Z"
-accepted_at_utc: "2026-08-31T07:20:33.823320Z"
-commit_sha: "05af2c7b40cbd7bfdd0a21727113010b5ee3e01a"
-artifact_manifest_sha256: "bf2ed78cc3566d70fb4973b4097414f77da242bc2e78753d4f4fe097452d7497"
+current_phase: "P01"
+status: "in_progress"
+started_at_utc: "2026-08-31T08:11:12.719313Z"
+accepted_at_utc: null
+commit_sha: null
+artifact_manifest_sha256: null
 live_trading_locked: true
-next_phase: "P01"
+next_phase: "P02"
+previous_phase:
+  phase: "P00"
+  status: "accepted"
+  accepted_at_utc: "2026-08-31T07:20:33.823320Z"
+  commit_sha: "05af2c7b40cbd7bfdd0a21727113010b5ee3e01a"
+  evidence_commit_sha: "ab2bb4ae48c734729846745f23e23f257b4c75c7"
+  artifact_manifest_sha256: "bf2ed78cc3566d70fb4973b4097414f77da242bc2e78753d4f4fe097452d7497"

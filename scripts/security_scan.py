@@ -1,4 +1,4 @@
-"""Run P00 secret and dependency audits without accessing any account."""
+"""Run P01 secret and dependency audits without accessing any account."""
 
 from __future__ import annotations
 
@@ -117,7 +117,7 @@ def main() -> int:
     ]
     infrastructure = {
         "status": "not_applicable" if not container_files else "review_required",
-        "reason": "P00 contains no container image or infrastructure-as-code input",
+        "reason": "P01 contains no container image or infrastructure-as-code input",
         "scannable_files": container_files,
     }
     (report_dir / "container_iac_scan.json").write_text(
@@ -134,7 +134,7 @@ def main() -> int:
     }
     payload = {
         "schema_version": "1.0.0",
-        "phase": "P00",
+        "phase": "P01",
         "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "status": "passed" if all(checks.values()) else "failed",
         "checks": checks,

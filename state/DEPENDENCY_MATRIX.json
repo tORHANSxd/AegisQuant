@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "phase": "P00",
+  "phase": "P01",
   "policy": {
     "exact_direct_versions": true,
     "lockfiles_required": ["uv.lock", "pnpm-lock.yaml"],
@@ -39,9 +39,44 @@
       "role": "package_manager",
       "source": "https://www.npmjs.com/package/pnpm/v/11.24.0",
       "contract": "passed"
+    },
+    {
+      "name": "PostgreSQL",
+      "target": "18.6",
+      "actual": "18.6",
+      "role": "disposable_loopback_contract_database",
+      "source": "https://www.postgresql.org/download/windows/",
+      "archive_url": "https://get.enterprisedb.com/postgresql/postgresql-18.6-1-windows-x64-binaries.zip",
+      "archive_sha256": "fbe23da234ee31547bf8a36d29dfd81e82b849df2d2b78d2eecb43d360252f8c",
+      "archive_size_bytes": 343808005,
+      "contract": "passed"
     }
   ],
   "core_dependencies": [
+    {
+      "name": "pydantic",
+      "version": "2.13.5",
+      "source": "https://pypi.org/project/pydantic/2.13.5/",
+      "contract": "passed"
+    },
+    {
+      "name": "SQLAlchemy",
+      "version": "2.0.52",
+      "source": "https://pypi.org/project/SQLAlchemy/2.0.52/",
+      "contract": "passed"
+    },
+    {
+      "name": "alembic",
+      "version": "1.19.1",
+      "source": "https://pypi.org/project/alembic/1.19.1/",
+      "contract": "passed"
+    },
+    {
+      "name": "psycopg",
+      "version": "3.3.4",
+      "source": "https://pypi.org/project/psycopg/3.3.4/",
+      "contract": "passed"
+    },
     {
       "name": "nautilus-trader",
       "version": "1.231.0",
@@ -74,7 +109,6 @@
     }
   ],
   "deferred_components": [
-    "database",
     "message_broker",
     "object_storage",
     "exchange_private_api",
@@ -83,13 +117,16 @@
     "gpu_runtime"
   ],
   "verification": {
-    "verified_at_utc": "2026-08-31T07:20:02Z",
+    "verified_at_utc": "2026-08-31T09:22:15.8124341Z",
     "python_lock": "uv.lock",
     "javascript_lock": "pnpm-lock.yaml",
-    "python_313_tests": "50 passed",
-    "python_314_contract_tests": "2 passed",
+    "python_313_tests": "90 passed; 4 upstream warnings",
+    "python_314_contract_tests": "45 passed; 4 upstream warnings",
+    "postgresql_contracts": "PostgreSQL 18.6 empty-database upgrade/downgrade plus 3 real integration tests passed",
+    "schema_contracts": "19 generated artifacts verified",
     "nautilus_replay": "two fresh engines produced identical stable state",
-    "web": "lint, typecheck, 2 unit tests, production build, and Chromium e2e passed",
+    "web": "lint, typecheck, 2 unit tests, production build, and 1 Chromium E2E test passed",
+    "local_ci": "17 of 17 stages passed",
     "dependency_audits": "Python and JavaScript audits passed"
   },
   "installer_observations": [
@@ -97,6 +134,11 @@
       "tool": "uv 0.12.7",
       "observation": "parallel runtime installation returned exit 2 while creating minor-version junctions",
       "resolution": "exact 3.13.15 and 3.14.7 interpreter paths both executed and passed contracts"
+    },
+    {
+      "tool": "system Node.js",
+      "observation": "host capability snapshot found 24.12.0",
+      "resolution": "P01 verification prepended the ignored pinned Node.js 24.20.0 runtime; CI uses setup-node 24.20.0"
     }
   ]
 }

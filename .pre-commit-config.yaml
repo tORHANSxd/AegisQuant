@@ -20,7 +20,12 @@ repos:
         pass_filenames: false
       - id: traceability
         name: Frozen traceability matrix
-        entry: uv run --frozen python scripts/generate_traceability.py --p00-status verified --check
+        entry: uv run --frozen python scripts/generate_traceability.py --phase-status P00=verified --phase-status P01=verified --check
+        language: system
+        pass_filenames: false
+      - id: schemas
+        name: Generated P01 schemas
+        entry: uv run --frozen python scripts/generate_schemas.py --check
         language: system
         pass_filenames: false
       - id: web-lint

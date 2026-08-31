@@ -1,4 +1,4 @@
-"""Generate or verify the P00 artifact manifest without self-referential hashes."""
+"""Generate or verify a phase artifact manifest without self-referential hashes."""
 
 from __future__ import annotations
 
@@ -12,13 +12,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Final
 
-MANIFEST_PATH: Final = Path("reports/phases/P00/ARTIFACT_MANIFEST.json")
-EXCLUDED_PATHS: Final = frozenset(
-    {
-        MANIFEST_PATH.as_posix(),
-        "state/PROJECT_PHASE_STATE.yaml",
-    }
-)
+DEFAULT_PHASE: Final = "P01"
+STATE_PATH: Final = "state/PROJECT_PHASE_STATE.yaml"
 COMMIT_RE: Final = re.compile(r"[0-9a-f]{40}")
 
 
@@ -39,7 +34,7 @@ def run_git(root: Path, arguments: list[str]) -> bytes:
     return result.stdout
 
 
-def repository_paths(root: Path) -> list[Path]:
+def repository_paths(root: Path, excluded_paths: frozenset[str]) -> list[Path]:
     """Return tracked and non-ignored untracked files in stable order."""
     raw = run_git(
         root,
@@ -56,7 +51,7 @@ def repository_paths(root: Path) -> list[Path]:
     paths = {
         Path(item.decode("utf-8"))
         for item in raw.split(b"\0")
-        if item and item.decode("utf-8") not in EXCLUDED_PATHS
+        if item and item.decode("utf-8") not in excluded_paths
     }
     missing = sorted(path.as_posix() for path in paths if not (root / path).is_file())
     if missing:
@@ -98,20 +93,21 @@ def verify_commit(root: Path, commit_sha: str) -> None:
     run_git(root, ["cat-file", "-e", f"{commit_sha}^{{commit}}"])
 
 
-def generate(root: Path, output: Path, commit_sha: str) -> None:
+def generate(root: Path, output: Path, commit_sha: str, phase: str) -> None:
     """Write the manifest using normalized LF endings."""
     verify_commit(root, commit_sha)
-    entries = [file_entry(root, path) for path in repository_paths(root)]
+    excluded_paths = frozenset({output.relative_to(root).as_posix(), STATE_PATH})
+    entries = [file_entry(root, path) for path in repository_paths(root, excluded_paths)]
     payload = {
         "schema_version": "1.0.0",
-        "phase": "P00",
+        "phase": phase,
         "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "implementation_commit": commit_sha,
         "hash_algorithm": "SHA-256",
         "artifact_count": len(entries),
         "excluded_from_hash_set": {
-            MANIFEST_PATH.as_posix(): "self-reference",
-            "state/PROJECT_PHASE_STATE.yaml": "contains this manifest's SHA-256",
+            output.relative_to(root).as_posix(): "self-reference",
+            STATE_PATH: "contains this manifest's SHA-256",
         },
         "artifacts": entries,
     }
@@ -124,15 +120,16 @@ def generate(root: Path, output: Path, commit_sha: str) -> None:
     print(f"wrote {len(entries)} artifacts to {output}")
 
 
-def check(root: Path, output: Path) -> None:
+def check(root: Path, output: Path, phase: str) -> None:
     """Verify every declared path, size, hash, exclusion, and commit reference."""
     payload = json.loads(output.read_text(encoding="utf-8"))
     commit_sha = payload["implementation_commit"]
     if not isinstance(commit_sha, str):
         raise RuntimeError("manifest implementation_commit is invalid")
     verify_commit(root, commit_sha)
-    actual_entries = [file_entry(root, path) for path in repository_paths(root)]
-    if payload.get("phase") != "P00" or payload.get("hash_algorithm") != "SHA-256":
+    excluded_paths = frozenset({output.relative_to(root).as_posix(), STATE_PATH})
+    actual_entries = [file_entry(root, path) for path in repository_paths(root, excluded_paths)]
+    if payload.get("phase") != phase or payload.get("hash_algorithm") != "SHA-256":
         raise RuntimeError("manifest metadata is invalid")
     if payload.get("artifact_count") != len(actual_entries):
         raise RuntimeError("manifest artifact_count is stale")
@@ -143,18 +140,20 @@ def check(root: Path, output: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=MANIFEST_PATH)
+    parser.add_argument("--phase", default=DEFAULT_PHASE, choices=("P00", "P01"))
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--implementation-commit")
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    output = root / args.output
+    output_path = args.output or Path(f"reports/phases/{args.phase}/ARTIFACT_MANIFEST.json")
+    output = root / output_path
     if args.check:
-        check(root, output)
+        check(root, output, args.phase)
         return 0
     if args.implementation_commit is None:
         raise SystemExit("--implementation-commit is required when generating")
-    generate(root, output, args.implementation_commit)
+    generate(root, output, args.implementation_commit, args.phase)
     return 0
 
 

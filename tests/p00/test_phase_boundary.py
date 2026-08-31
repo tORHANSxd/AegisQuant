@@ -1,12 +1,17 @@
-"""Ensure P00 does not contain future-phase implementation."""
+"""Ensure the frozen P00 artifact snapshot contained no future implementation."""
 
+import json
 from pathlib import Path
 
 
 def test_only_bootstrap_package_contains_python_implementation(project_root: Path) -> None:
-    package_root = project_root / "src/aegisquant"
+    manifest = json.loads(
+        (project_root / "reports/phases/P00/ARTIFACT_MANIFEST.json").read_text(encoding="utf-8")
+    )
     implementation_files = {
-        path.relative_to(package_root).as_posix() for path in package_root.rglob("*.py")
+        Path(entry["path"]).relative_to("src/aegisquant").as_posix()
+        for entry in manifest["artifacts"]
+        if entry["path"].startswith("src/aegisquant/") and entry["path"].endswith(".py")
     }
 
     assert implementation_files == {
@@ -17,5 +22,10 @@ def test_only_bootstrap_package_contains_python_implementation(project_root: Pat
 
 
 def test_future_service_directories_are_empty(project_root: Path) -> None:
-    files = [path for path in (project_root / "services").rglob("*") if path.is_file()]
-    assert files == []
+    manifest = json.loads(
+        (project_root / "reports/phases/P00/ARTIFACT_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    service_files = [
+        entry["path"] for entry in manifest["artifacts"] if entry["path"].startswith("services/")
+    ]
+    assert service_files == []

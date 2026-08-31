@@ -1,0 +1,311 @@
+{
+  "$defs": {
+    "IncrementalTrade": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_cost": {
+          "$ref": "#/$defs/Money"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "quantity_delta": {
+          "$ref": "#/$defs/Quantity"
+        }
+      },
+      "required": [
+        "instrument_id",
+        "quantity_delta",
+        "expected_cost"
+      ],
+      "title": "IncrementalTrade",
+      "type": "object"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "description": "Signed monetary amount denominated in one explicit asset.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "PortfolioTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "current_weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Current Weight"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "target_notional": {
+          "$ref": "#/$defs/Money"
+        },
+        "target_quantity": {
+          "$ref": "#/$defs/Quantity"
+        },
+        "target_weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Target Weight"
+        }
+      },
+      "required": [
+        "instrument_id",
+        "current_weight",
+        "target_weight",
+        "target_quantity",
+        "target_notional"
+      ],
+      "title": "PortfolioTarget",
+      "type": "object"
+    },
+    "Quantity": {
+      "additionalProperties": false,
+      "description": "Signed asset quantity, never an unlabelled scalar.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Quantity",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.portfolio-proposal/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Account Id",
+      "type": "string"
+    },
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "capacity_notional": {
+      "$ref": "#/$defs/Money"
+    },
+    "confidence": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Confidence"
+    },
+    "constraint_headroom": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "title": "Constraint Headroom",
+      "type": "object"
+    },
+    "expected_cost": {
+      "$ref": "#/$defs/Money"
+    },
+    "expected_return": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Expected Return"
+    },
+    "expected_risk": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Expected Risk"
+    },
+    "factor_exposures": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "title": "Factor Exposures",
+      "type": "object"
+    },
+    "incremental_trades": {
+      "items": {
+        "$ref": "#/$defs/IncrementalTrade"
+      },
+      "title": "Incremental Trades",
+      "type": "array"
+    },
+    "market_state_exposures": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "title": "Market State Exposures",
+      "type": "object"
+    },
+    "proposal_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "strategy_contributions": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "title": "Strategy Contributions",
+      "type": "object"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/PortfolioTarget"
+      },
+      "title": "Targets",
+      "type": "array"
+    },
+    "valid_until": {
+      "format": "date-time",
+      "title": "Valid Until",
+      "type": "string"
+    }
+  },
+  "required": [
+    "proposal_id",
+    "account_id",
+    "as_of_time",
+    "valid_until",
+    "targets",
+    "incremental_trades",
+    "expected_return",
+    "expected_risk",
+    "expected_cost",
+    "capacity_notional",
+    "strategy_contributions",
+    "factor_exposures",
+    "market_state_exposures",
+    "constraint_headroom",
+    "confidence"
+  ],
+  "title": "PortfolioProposal",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.portfolio-proposal",
+  "x-aegisquant-schema-version": "1.0.0"
+}

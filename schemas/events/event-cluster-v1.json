@@ -1,0 +1,186 @@
+{
+  "$defs": {
+    "EventClusterStatus": {
+      "enum": [
+        "RUMOR",
+        "EMERGING",
+        "CORROBORATED",
+        "CONFIRMED",
+        "DENIED",
+        "RESOLVED"
+      ],
+      "title": "EventClusterStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.event-cluster/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "claim_ids": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "title": "Claim Ids",
+      "type": "array"
+    },
+    "claimed_event_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Claimed Event Time"
+    },
+    "contradicting_evidence_ids": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "title": "Contradicting Evidence Ids",
+      "type": "array"
+    },
+    "credibility_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Credibility Score"
+    },
+    "entity_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Entity Ids",
+      "type": "array"
+    },
+    "event_cluster_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Cluster Id",
+      "type": "string"
+    },
+    "event_type": {
+      "title": "Event Type",
+      "type": "string"
+    },
+    "first_observed_time": {
+      "format": "date-time",
+      "title": "First Observed Time",
+      "type": "string"
+    },
+    "independent_source_count": {
+      "title": "Independent Source Count",
+      "type": "integer"
+    },
+    "last_updated_time": {
+      "format": "date-time",
+      "title": "Last Updated Time",
+      "type": "string"
+    },
+    "manipulation_risk": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Manipulation Risk"
+    },
+    "official_confirmation_ids": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "title": "Official Confirmation Ids",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/EventClusterStatus"
+    },
+    "supersedes_event_cluster_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Event Cluster Id"
+    },
+    "supporting_evidence_ids": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "title": "Supporting Evidence Ids",
+      "type": "array"
+    },
+    "uncertainty": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Uncertainty"
+    }
+  },
+  "required": [
+    "event_cluster_id",
+    "event_type",
+    "status",
+    "entity_ids",
+    "first_observed_time",
+    "last_updated_time",
+    "claim_ids",
+    "supporting_evidence_ids",
+    "contradicting_evidence_ids",
+    "independent_source_count",
+    "official_confirmation_ids",
+    "credibility_score",
+    "manipulation_risk",
+    "uncertainty"
+  ],
+  "title": "EventCluster",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.event-cluster",
+  "x-aegisquant-schema-version": "1.0.0"
+}

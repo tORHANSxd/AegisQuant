@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "AssertionMode": {
+      "enum": [
+        "FACT",
+        "FORECAST",
+        "OPINION",
+        "RUMOR",
+        "DENIAL",
+        "QUESTION"
+      ],
+      "title": "AssertionMode",
+      "type": "string"
+    },
+    "Polarity": {
+      "enum": [
+        "AFFIRM",
+        "NEGATE",
+        "UNCERTAIN"
+      ],
+      "title": "Polarity",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.claim-record/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assertion_mode": {
+      "$ref": "#/$defs/AssertionMode"
+    },
+    "claim_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "claim_text_normalized": {
+      "title": "Claim Text Normalized",
+      "type": "string"
+    },
+    "content_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Content Id",
+      "type": "string"
+    },
+    "credibility_prior": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Credibility Prior"
+    },
+    "event_type": {
+      "title": "Event Type",
+      "type": "string"
+    },
+    "evidence_spans": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Spans",
+      "type": "array"
+    },
+    "extractor_versions": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "title": "Extractor Versions",
+      "type": "array"
+    },
+    "novelty_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Novelty Score"
+    },
+    "object_entity_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Object Entity Ids",
+      "type": "array"
+    },
+    "polarity": {
+      "$ref": "#/$defs/Polarity"
+    },
+    "predicate": {
+      "title": "Predicate",
+      "type": "string"
+    },
+    "prompt_injection_flags": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Prompt Injection Flags",
+      "type": "array"
+    },
+    "source_independence_group": {
+      "title": "Source Independence Group",
+      "type": "string"
+    },
+    "subject_entity_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Subject Entity Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "claim_id",
+    "content_id",
+    "claim_text_normalized",
+    "subject_entity_ids",
+    "predicate",
+    "object_entity_ids",
+    "event_type",
+    "assertion_mode",
+    "polarity",
+    "evidence_spans",
+    "extractor_versions",
+    "source_independence_group",
+    "credibility_prior",
+    "novelty_score"
+  ],
+  "title": "ClaimRecord",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.claim-record",
+  "x-aegisquant-schema-version": "1.0.0"
+}

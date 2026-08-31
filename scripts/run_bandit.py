@@ -1,4 +1,4 @@
-"""Run Bandit and write normalized machine-readable P00 evidence."""
+"""Run Bandit and write normalized machine-readable P01 evidence."""
 
 from __future__ import annotations
 

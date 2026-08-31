@@ -4,7 +4,7 @@
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-31T07:19:41.979185Z",
+    "timestamp": "2026-08-31T09:28:52.708145Z",
     "component": {
       "type": "application",
       "name": "aegisquant-python",
@@ -17,6 +17,18 @@
       "name": "aegisquant",
       "version": "3.1.0.dev0",
       "purl": "pkg:pypi/aegisquant@3.1.0.dev0"
+    },
+    {
+      "type": "library",
+      "name": "alembic",
+      "version": "1.19.1",
+      "purl": "pkg:pypi/alembic@1.19.1"
+    },
+    {
+      "type": "library",
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "purl": "pkg:pypi/annotated-types@0.8.0"
     },
     {
       "type": "library",
@@ -134,6 +146,12 @@
     },
     {
       "type": "library",
+      "name": "greenlet",
+      "version": "3.5.5",
+      "purl": "pkg:pypi/greenlet@3.5.5"
+    },
+    {
+      "type": "library",
       "name": "hypothesis",
       "version": "6.167.1",
       "purl": "pkg:pypi/hypothesis@6.167.1"
@@ -200,9 +218,21 @@
     },
     {
       "type": "library",
+      "name": "Mako",
+      "version": "1.4.1",
+      "purl": "pkg:pypi/mako@1.4.1"
+    },
+    {
+      "type": "library",
       "name": "markdown-it-py",
       "version": "4.2.0",
       "purl": "pkg:pypi/markdown-it-py@4.2.0"
+    },
+    {
+      "type": "library",
+      "name": "MarkupSafe",
+      "version": "3.0.3",
+      "purl": "pkg:pypi/markupsafe@3.0.3"
     },
     {
       "type": "library",
@@ -320,6 +350,18 @@
     },
     {
       "type": "library",
+      "name": "psycopg",
+      "version": "3.3.4",
+      "purl": "pkg:pypi/psycopg@3.3.4"
+    },
+    {
+      "type": "library",
+      "name": "psycopg-binary",
+      "version": "3.3.4",
+      "purl": "pkg:pypi/psycopg-binary@3.3.4"
+    },
+    {
+      "type": "library",
       "name": "py-serializable",
       "version": "2.1.0",
       "purl": "pkg:pypi/py-serializable@2.1.0"
@@ -329,6 +371,18 @@
       "name": "pyarrow",
       "version": "25.0.1",
       "purl": "pkg:pypi/pyarrow@25.0.1"
+    },
+    {
+      "type": "library",
+      "name": "pydantic",
+      "version": "2.13.5",
+      "purl": "pkg:pypi/pydantic@2.13.5"
+    },
+    {
+      "type": "library",
+      "name": "pydantic_core",
+      "version": "2.46.5",
+      "purl": "pkg:pypi/pydantic_core@2.46.5"
     },
     {
       "type": "library",
@@ -446,6 +500,12 @@
     },
     {
       "type": "library",
+      "name": "SQLAlchemy",
+      "version": "2.0.52",
+      "purl": "pkg:pypi/sqlalchemy@2.0.52"
+    },
+    {
+      "type": "library",
       "name": "stevedore",
       "version": "5.9.1",
       "purl": "pkg:pypi/stevedore@5.9.1"
@@ -467,6 +527,12 @@
       "name": "tqdm",
       "version": "4.70.0",
       "purl": "pkg:pypi/tqdm@4.70.0"
+    },
+    {
+      "type": "library",
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "purl": "pkg:pypi/typing-inspection@0.4.4"
     },
     {
       "type": "library",

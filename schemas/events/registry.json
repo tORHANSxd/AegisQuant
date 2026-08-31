@@ -1,0 +1,149 @@
+{
+  "event_contracts": [
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.serialization.EventEnvelope",
+      "path": "schemas/events/event-envelope-v1.json",
+      "schema_name": "aegisquant.event-envelope",
+      "schema_version": "1.0.0",
+      "sha256": "87553dc32cb371203a2cb6bf25321f659b13f4b0a03e888e89d1c6e2f50d32cf"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.MarketEvent",
+      "path": "schemas/events/market-event-v1.json",
+      "schema_name": "aegisquant.market-event",
+      "schema_version": "1.0.0",
+      "sha256": "5ce7c96430bbedb23c835a55ca78e375c9a354b9c023e94c3304c19628d5d4be"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.RawContentEnvelope",
+      "path": "schemas/events/raw-content-envelope-v1.json",
+      "schema_name": "aegisquant.raw-content-envelope",
+      "schema_version": "1.0.0",
+      "sha256": "14adc55d1d53381caac31c7267a113cd738bae42aeb811a42187f296b94357e4"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.ClaimRecord",
+      "path": "schemas/events/claim-record-v1.json",
+      "schema_name": "aegisquant.claim-record",
+      "schema_version": "1.0.0",
+      "sha256": "51918c635c33de8d94ab96937b6aa2c7cea9e12dd705c2beb9e61511049b331c"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.EventCluster",
+      "path": "schemas/events/event-cluster-v1.json",
+      "schema_name": "aegisquant.event-cluster",
+      "schema_version": "1.0.0",
+      "sha256": "ac663946f8a6f874311627f85e0633bd438a9bcc1264f13c9f8821f810f4180d"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.EventImpactForecast",
+      "path": "schemas/events/event-impact-forecast-v1.json",
+      "schema_name": "aegisquant.event-impact-forecast",
+      "schema_version": "1.0.0",
+      "sha256": "86cea39d9c5988acbb993ee82108d94349f7b357ddf0d35948f4fb14ccd3e24b"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.ForecastBundle",
+      "path": "schemas/events/forecast-bundle-v1.json",
+      "schema_name": "aegisquant.forecast-bundle",
+      "schema_version": "1.0.0",
+      "sha256": "ca58a8764f114390e29ddce3da952ee799daa9aebcc1b79de753c2cd13bdbe01"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.AlphaSignal",
+      "path": "schemas/events/alpha-signal-v1.json",
+      "schema_name": "aegisquant.alpha-signal",
+      "schema_version": "1.0.0",
+      "sha256": "6e5b11b9eed062aa53ca2b833939c005f224f499b2c8ddd4e444ca5834864ccd"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.PortfolioProposal",
+      "path": "schemas/events/portfolio-proposal-v1.json",
+      "schema_name": "aegisquant.portfolio-proposal",
+      "schema_version": "1.0.0",
+      "sha256": "27ca39a2b5122c7c482865ea9401b11a2858e22fe4fca0219b286b3095dea558"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.RiskDecision",
+      "path": "schemas/events/risk-decision-v1.json",
+      "schema_name": "aegisquant.risk-decision",
+      "schema_version": "1.0.0",
+      "sha256": "bf0b622f883103c9a8accfe21bb8cc81994c171e09cf701f4958886c2fe1cfe8"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.execution.OrderIntent",
+      "path": "schemas/events/order-intent-v1.json",
+      "schema_name": "aegisquant.order-intent",
+      "schema_version": "1.0.0",
+      "sha256": "3d514ecf62a5b049c1eb2a03f0d3505f5974261d952f88bdd5cbe757d380d972"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.execution.OrderCommand",
+      "path": "schemas/events/order-command-v1.json",
+      "schema_name": "aegisquant.order-command",
+      "schema_version": "1.0.0",
+      "sha256": "39f46c3041641fee81a958fccdb02275ae540e550a2e5d3454ebc7fb16972caa"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.execution.VenueOrder",
+      "path": "schemas/events/venue-order-v1.json",
+      "schema_name": "aegisquant.venue-order",
+      "schema_version": "1.0.0",
+      "sha256": "731ebd310033be60d24b0b763f88dc063c92760d7e776469169809aa766e3ef9"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.execution.Fill",
+      "path": "schemas/events/fill-v1.json",
+      "schema_name": "aegisquant.fill",
+      "schema_version": "1.0.0",
+      "sha256": "e8d27c78ff47b30338c9899c10ca70615967cffcd39896e1ad3db1f0736c04b0"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.accounting.JournalEntry",
+      "path": "schemas/events/journal-entry-v1.json",
+      "schema_name": "aegisquant.journal-entry",
+      "schema_version": "1.0.0",
+      "sha256": "cbe53cf4e1de803e77bd42242a9e6b2da1624bf3461e20577b981d1d63274cf4"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.accounting.PositionLot",
+      "path": "schemas/events/position-lot-v1.json",
+      "schema_name": "aegisquant.position-lot",
+      "schema_version": "1.0.0",
+      "sha256": "9ac5bfb07d79bb9a83114a169accd878fbeba99d8102f9561706ff7127fbaae9"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.config.models.AppConfig",
+      "path": "schemas/config/app-config-v1.json",
+      "schema_name": "aegisquant.app-config",
+      "schema_version": "1.0.0",
+      "sha256": "f6e38282e26ec047fafe22287ea82a5d481aa0c15585d99f813cf74c5f1e40dd"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.policy.SourceProcessingPolicy",
+      "path": "schemas/config/source-processing-policy-domain-v1.json",
+      "schema_name": "aegisquant.source-processing-policy",
+      "schema_version": "1.0.0",
+      "sha256": "902bd45a76561f7cf81866537940d386f2f8f3df2b8d4d46814626489413257b"
+    }
+  ],
+  "schema_version": "1.0.0"
+}

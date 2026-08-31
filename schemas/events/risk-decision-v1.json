@@ -1,0 +1,252 @@
+{
+  "$defs": {
+    "LimitResult": {
+      "additionalProperties": false,
+      "properties": {
+        "limit": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Limit"
+        },
+        "limit_code": {
+          "title": "Limit Code",
+          "type": "string"
+        },
+        "observed": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Observed"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "limit_code",
+        "passed",
+        "observed",
+        "limit",
+        "unit"
+      ],
+      "title": "LimitResult",
+      "type": "object"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "description": "Signed monetary amount denominated in one explicit asset.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "PortfolioTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "current_weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Current Weight"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "target_notional": {
+          "$ref": "#/$defs/Money"
+        },
+        "target_quantity": {
+          "$ref": "#/$defs/Quantity"
+        },
+        "target_weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Target Weight"
+        }
+      },
+      "required": [
+        "instrument_id",
+        "current_weight",
+        "target_weight",
+        "target_quantity",
+        "target_notional"
+      ],
+      "title": "PortfolioTarget",
+      "type": "object"
+    },
+    "Quantity": {
+      "additionalProperties": false,
+      "description": "Signed asset quantity, never an unlabelled scalar.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Quantity",
+      "type": "object"
+    },
+    "RiskDecisionType": {
+      "enum": [
+        "APPROVE",
+        "CLIP",
+        "REDUCE_ONLY",
+        "REJECT",
+        "HALT"
+      ],
+      "title": "RiskDecisionType",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.risk-decision/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_snapshot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Account Snapshot Id",
+      "type": "string"
+    },
+    "approved_targets": {
+      "items": {
+        "$ref": "#/$defs/PortfolioTarget"
+      },
+      "title": "Approved Targets",
+      "type": "array"
+    },
+    "decision": {
+      "$ref": "#/$defs/RiskDecisionType"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "limit_results": {
+      "items": {
+        "$ref": "#/$defs/LimitResult"
+      },
+      "title": "Limit Results",
+      "type": "array"
+    },
+    "proposal_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "risk_decision_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Risk Decision Id",
+      "type": "string"
+    },
+    "risk_policy_version": {
+      "title": "Risk Policy Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "risk_decision_id",
+    "proposal_id",
+    "decision",
+    "approved_targets",
+    "limit_results",
+    "reason_codes",
+    "risk_policy_version",
+    "account_snapshot_id",
+    "expires_at"
+  ],
+  "title": "RiskDecision",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.risk-decision",
+  "x-aegisquant-schema-version": "1.0.0"
+}

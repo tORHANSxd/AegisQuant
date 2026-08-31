@@ -5,7 +5,7 @@ import re
 import tomllib
 from pathlib import Path
 
-EXACT_REQUIREMENT = re.compile(r"^[A-Za-z0-9_.-]+==[^=<>~!]+$")
+EXACT_REQUIREMENT = re.compile(r"^[A-Za-z0-9_.-]+(?:\[[A-Za-z0-9_,.-]+\])?==[^=<>~!]+$")
 
 
 def test_python_direct_dependencies_are_exact(project_root: Path) -> None:

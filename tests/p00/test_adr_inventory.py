@@ -10,8 +10,9 @@ def test_required_p00_decisions_are_accepted(project_root: Path) -> None:
         "ADR-0001-runtime-and-version-policy.md",
         "ADR-0002-event-engine-selection.md",
         "ADR-0003-live-lock.md",
+        "ADR-0004-p01-domain-and-postgresql-stack.md",
     ]
     for path in adr_paths:
         content = path.read_text(encoding="utf-8")
         assert "状态：Accepted" in content
-        assert "P00" in content
+        assert "P00" in content or "P01" in content

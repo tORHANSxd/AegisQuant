@@ -1,0 +1,210 @@
+{
+  "$defs": {
+    "ContentType": {
+      "enum": [
+        "POST",
+        "ARTICLE",
+        "ANNOUNCEMENT",
+        "VIDEO_META",
+        "CHANNEL_MESSAGE",
+        "RELEASE",
+        "FILING"
+      ],
+      "title": "ContentType",
+      "type": "string"
+    },
+    "QualityState": {
+      "enum": [
+        "GOOD",
+        "DEGRADED",
+        "STALE",
+        "INVALID"
+      ],
+      "title": "QualityState",
+      "type": "string"
+    },
+    "RightsState": {
+      "enum": [
+        "ALLOWED",
+        "LIMITED",
+        "UNKNOWN",
+        "PROHIBITED"
+      ],
+      "title": "RightsState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.raw-content-envelope/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "author_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Author Time"
+    },
+    "available_time": {
+      "format": "date-time",
+      "title": "Available Time",
+      "type": "string"
+    },
+    "canonical_url": {
+      "title": "Canonical Url",
+      "type": "string"
+    },
+    "content_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Content Id",
+      "type": "string"
+    },
+    "content_type": {
+      "$ref": "#/$defs/ContentType"
+    },
+    "deleted_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deleted Time"
+    },
+    "engagement_snapshot_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Engagement Snapshot Id"
+    },
+    "first_observed_time": {
+      "format": "date-time",
+      "title": "First Observed Time",
+      "type": "string"
+    },
+    "ingest_time": {
+      "format": "date-time",
+      "title": "Ingest Time",
+      "type": "string"
+    },
+    "language": {
+      "title": "Language",
+      "type": "string"
+    },
+    "modified_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modified Time"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "provider_native_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Native Id",
+      "type": "string"
+    },
+    "published_time": {
+      "format": "date-time",
+      "title": "Published Time",
+      "type": "string"
+    },
+    "quality_state": {
+      "$ref": "#/$defs/QualityState"
+    },
+    "raw_content_hash": {
+      "title": "Raw Content Hash",
+      "type": "string"
+    },
+    "raw_object_uri": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Raw Object Uri"
+    },
+    "revision": {
+      "title": "Revision",
+      "type": "integer"
+    },
+    "rights_state": {
+      "$ref": "#/$defs/RightsState"
+    },
+    "source_identity_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Identity Id",
+      "type": "string"
+    },
+    "source_policy_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Policy Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "content_id",
+    "provider_id",
+    "provider_native_id",
+    "source_identity_id",
+    "content_type",
+    "canonical_url",
+    "published_time",
+    "first_observed_time",
+    "available_time",
+    "ingest_time",
+    "language",
+    "raw_content_hash",
+    "revision",
+    "source_policy_id",
+    "rights_state",
+    "quality_state"
+  ],
+  "title": "RawContentEnvelope",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.raw-content-envelope",
+  "x-aegisquant-schema-version": "1.0.0"
+}

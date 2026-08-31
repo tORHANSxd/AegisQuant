@@ -7,7 +7,7 @@ import csv
 import hashlib
 import io
 import re
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
@@ -109,7 +109,7 @@ TEST_BY_PHASE: Final = {
     "P18": "tests/e2e/live_readiness/; tests/chaos/",
 }
 
-P00_OVERRIDES: Final = {
+REQUIREMENT_OVERRIDES: Final = {
     46: (
         "state/SPEC_INDEX.md; state/REQUIREMENTS_TRACEABILITY.csv",
         "tests/p00/test_traceability.py",
@@ -181,6 +181,48 @@ P00_OVERRIDES: Final = {
         "tests/p00/test_required_reports.py",
     ),
     5957: ("state/PROJECT_PHASE_STATE.yaml", "tests/p00/test_phase_boundary.py"),
+    5969: (
+        "src/aegisquant/domain/identifiers.py; src/aegisquant/domain/time.py; "
+        "src/aegisquant/domain/values.py",
+        "tests/unit/domain/; tests/property/test_domain_properties.py",
+    ),
+    5970: ("src/aegisquant/domain/entities.py", "tests/unit/domain/test_entities.py"),
+    5971: (
+        "src/aegisquant/domain/intelligence.py",
+        "tests/unit/domain/test_intelligence.py; tests/contract/test_event_contracts.py",
+    ),
+    5972: ("src/aegisquant/domain/policy.py", "tests/unit/domain/test_policy.py"),
+    5973: ("src/aegisquant/domain/execution.py", "tests/unit/domain/test_execution.py"),
+    5974: ("src/aegisquant/domain/accounting.py", "tests/unit/domain/test_accounting.py"),
+    5975: (
+        "src/aegisquant/domain/serialization.py; schemas/events/",
+        "tests/contract/test_event_contracts.py",
+    ),
+    5976: ("src/aegisquant/domain/errors.py", "tests/unit/domain/test_errors.py"),
+    5977: ("src/aegisquant/config/; schemas/config/", "tests/contract/test_config_contract.py"),
+    5978: (
+        "src/aegisquant/persistence/; migrations/",
+        "tests/integration/test_postgres_contract.py",
+    ),
+    5979: ("schemas/events/", "tests/contract/test_event_contracts.py"),
+    5980: ("src/aegisquant/domain/", "tests/property/test_domain_properties.py"),
+    5981: (
+        "migrations/; docs/database_boundaries.md",
+        "tests/integration/test_postgres_contract.py",
+    ),
+    5996: ("src/aegisquant/domain/", "tests/architecture/test_domain_boundaries.py"),
+    5997: ("src/aegisquant/domain/time.py", "tests/architecture/test_domain_boundaries.py"),
+    5998: ("src/aegisquant/domain/values.py", "tests/property/test_domain_properties.py"),
+    5999: (
+        "src/aegisquant/domain/serialization.py; schemas/events/",
+        "tests/contract/test_event_contracts.py",
+    ),
+    6000: (
+        "src/aegisquant/persistence/messaging.py",
+        "tests/integration/test_postgres_contract.py",
+    ),
+    6001: ("migrations/", "tests/integration/test_postgres_contract.py"),
+    6002: ("src/aegisquant/domain/", "tests/property/test_domain_properties.py"),
     6865: ("state/SPEC_INDEX.md", "tests/p00/test_spec_integrity.py"),
     6867: ("state/PROJECT_PHASE_STATE.yaml", "tests/p00/test_phase_boundary.py"),
     6869: ("reports/phases/P00/", "tests/p00/test_required_reports.py"),
@@ -297,14 +339,22 @@ def primary_phase(owner_phase: str) -> str:
 
 
 def artifact_and_test(requirement: Requirement) -> tuple[str, str]:
-    override = P00_OVERRIDES.get(requirement.line_number)
+    override = REQUIREMENT_OVERRIDES.get(requirement.line_number)
     if override is not None:
         return override
     phase = primary_phase(requirement.owner_phase)
     return ARTIFACT_BY_PHASE[phase], TEST_BY_PHASE[phase]
 
 
-def render_csv(requirements: Iterable[Requirement], p00_status: str) -> str:
+def phase_status(owner_phase: str, statuses: Mapping[str, str]) -> str:
+    """Return the status of the earliest owning phase."""
+    phase = primary_phase(owner_phase)
+    if phase == "ALL":
+        return "active_global"
+    return statuses.get(phase, "planned_future")
+
+
+def render_csv(requirements: Iterable[Requirement], statuses: Mapping[str, str]) -> str:
     """Render the full deterministic matrix using normalized LF endings."""
     output_file = io.StringIO(newline="")
     writer = csv.writer(output_file, lineterminator="\n")
@@ -326,14 +376,7 @@ def render_csv(requirements: Iterable[Requirement], p00_status: str) -> str:
     )
     for requirement in requirements:
         artifact, test = artifact_and_test(requirement)
-        phase = primary_phase(requirement.owner_phase)
-        status = (
-            p00_status
-            if "P00" in requirement.owner_phase
-            else "active_global"
-            if phase == "ALL"
-            else "planned_future"
-        )
+        status = phase_status(requirement.owner_phase, statuses)
         writer.writerow(
             (
                 f"AQ-R{requirement.line_number:04d}-{requirement.occurrence:02d}",
@@ -353,10 +396,26 @@ def render_csv(requirements: Iterable[Requirement], p00_status: str) -> str:
     return output_file.getvalue()
 
 
-def write_csv(requirements: Iterable[Requirement], output_path: Path, p00_status: str) -> None:
+def write_csv(
+    requirements: Iterable[Requirement], output_path: Path, statuses: Mapping[str, str]
+) -> None:
     """Write a rendered matrix to disk."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(render_csv(requirements, p00_status), encoding="utf-8", newline="")
+    output_path.write_text(render_csv(requirements, statuses), encoding="utf-8", newline="")
+
+
+def parse_phase_statuses(values: Iterable[str]) -> dict[str, str]:
+    """Parse repeatable PHASE=STATUS command-line values."""
+    statuses: dict[str, str] = {}
+    allowed_statuses = {"planned", "verified"}
+    for value in values:
+        phase, separator, status = value.partition("=")
+        if separator != "=" or not re.fullmatch(r"P(?:0[0-9]|1[0-8])", phase):
+            raise ValueError(f"invalid phase status: {value}")
+        if status not in allowed_statuses:
+            raise ValueError(f"invalid phase status: {value}")
+        statuses[phase] = status
+    return statuses
 
 
 def main() -> int:
@@ -371,7 +430,18 @@ def main() -> int:
         type=Path,
         default=Path("state/REQUIREMENTS_TRACEABILITY.csv"),
     )
-    parser.add_argument("--p00-status", choices=("planned", "verified"), default="planned")
+    parser.add_argument(
+        "--phase-status",
+        action="append",
+        default=[],
+        metavar="PHASE=STATUS",
+        help="repeatable phase status, for example P00=verified",
+    )
+    parser.add_argument(
+        "--p00-status",
+        choices=("planned", "verified"),
+        help="deprecated compatibility alias for --phase-status P00=...",
+    )
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
 
@@ -381,13 +451,20 @@ def main() -> int:
         raise SystemExit(f"spec hash mismatch: {actual_hash}")
     text = raw.decode("utf-8")
     requirements = requirements_from_lines(text.splitlines())
-    rendered = render_csv(requirements, args.p00_status)
+    try:
+        statuses = parse_phase_statuses(args.phase_status)
+    except ValueError as error:
+        parser.error(str(error))
+    if args.p00_status is not None:
+        statuses["P00"] = args.p00_status
+    statuses.setdefault("P00", "planned")
+    rendered = render_csv(requirements, statuses)
     if args.check:
         if not args.output.is_file() or args.output.read_text(encoding="utf-8") != rendered:
             raise SystemExit("traceability matrix is stale")
         print(f"verified {len(requirements)} requirements in {args.output}")
         return 0
-    write_csv(requirements, args.output, args.p00_status)
+    write_csv(requirements, args.output, statuses)
     print(f"wrote {len(requirements)} requirements to {args.output}")
     return 0
 

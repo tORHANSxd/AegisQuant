@@ -6,6 +6,18 @@
     "Version": "0.14.4"
   },
   {
+    "License": "MIT",
+    "Name": "Mako",
+    "URL": "https://www.makotemplates.org/",
+    "Version": "1.4.1"
+  },
+  {
+    "License": "BSD-3-Clause",
+    "Name": "MarkupSafe",
+    "URL": "https://github.com/pallets/markupsafe/",
+    "Version": "3.0.3"
+  },
+  {
     "License": "MIT License",
     "Name": "PyYAML",
     "URL": "https://pyyaml.org/",
@@ -18,10 +30,28 @@
     "Version": "2.21.0"
   },
   {
+    "License": "MIT",
+    "Name": "SQLAlchemy",
+    "URL": "https://www.sqlalchemy.org",
+    "Version": "2.0.52"
+  },
+  {
     "License": "Proprietary",
     "Name": "aegisquant",
     "URL": "UNKNOWN",
     "Version": "3.1.0.dev0"
+  },
+  {
+    "License": "MIT",
+    "Name": "alembic",
+    "URL": "https://alembic.sqlalchemy.org",
+    "Version": "1.19.1"
+  },
+  {
+    "License": "MIT",
+    "Name": "annotated-types",
+    "URL": "https://github.com/annotated-types/annotated-types",
+    "Version": "0.8.0"
   },
   {
     "License": "Apache Software License",
@@ -130,6 +160,12 @@
     "Name": "fsspec",
     "URL": "https://github.com/fsspec/filesystem_spec",
     "Version": "2026.2.0"
+  },
+  {
+    "License": "MIT AND PSF-2.0",
+    "Name": "greenlet",
+    "URL": "https://greenlet.readthedocs.io",
+    "Version": "3.5.5"
   },
   {
     "License": "MPL-2.0",
@@ -300,6 +336,18 @@
     "Version": "4.6.2"
   },
   {
+    "License": "LGPL-3.0-only",
+    "Name": "psycopg",
+    "URL": "https://psycopg.org/",
+    "Version": "3.3.4"
+  },
+  {
+    "License": "LGPL-3.0-only",
+    "Name": "psycopg-binary",
+    "URL": "https://psycopg.org/",
+    "Version": "3.3.4"
+  },
+  {
     "License": "Apache Software License",
     "Name": "py-serializable",
     "URL": "https://github.com/madpah/serializable#readme",
@@ -310,6 +358,18 @@
     "Name": "pyarrow",
     "URL": "https://arrow.apache.org/",
     "Version": "25.0.1"
+  },
+  {
+    "License": "MIT",
+    "Name": "pydantic",
+    "URL": "https://github.com/pydantic/pydantic",
+    "Version": "2.13.5"
+  },
+  {
+    "License": "MIT",
+    "Name": "pydantic_core",
+    "URL": "https://github.com/pydantic",
+    "Version": "2.46.5"
   },
   {
     "License": "MIT",
@@ -436,6 +496,12 @@
     "Name": "tqdm",
     "URL": "https://tqdm.github.io",
     "Version": "4.70.0"
+  },
+  {
+    "License": "MIT",
+    "Name": "typing-inspection",
+    "URL": "https://github.com/pydantic/typing-inspection",
+    "Version": "0.4.4"
   },
   {
     "License": "PSF-2.0",

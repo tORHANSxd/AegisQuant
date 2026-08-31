@@ -1,0 +1,188 @@
+{
+  "$defs": {
+    "LotSide": {
+      "enum": [
+        "LONG",
+        "SHORT"
+      ],
+      "title": "LotSide",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "description": "Signed monetary amount denominated in one explicit asset.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "Price": {
+      "additionalProperties": false,
+      "description": "Positive quote-asset amount per one base-asset unit.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Amount"
+        },
+        "base_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Base Asset Id",
+          "type": "string"
+        },
+        "quote_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Quote Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "base_asset_id",
+        "quote_asset_id"
+      ],
+      "title": "Price",
+      "type": "object"
+    },
+    "Quantity": {
+      "additionalProperties": false,
+      "description": "Signed asset quantity, never an unlabelled scalar.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Quantity",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.position-lot/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Account Id",
+      "type": "string"
+    },
+    "closed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Closed At"
+    },
+    "entry_price": {
+      "$ref": "#/$defs/Price"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "opened_at": {
+      "format": "date-time",
+      "title": "Opened At",
+      "type": "string"
+    },
+    "opened_quantity": {
+      "$ref": "#/$defs/Quantity"
+    },
+    "opening_fees": {
+      "$ref": "#/$defs/Money"
+    },
+    "position_lot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Position Lot Id",
+      "type": "string"
+    },
+    "remaining_quantity": {
+      "$ref": "#/$defs/Quantity"
+    },
+    "side": {
+      "$ref": "#/$defs/LotSide"
+    }
+  },
+  "required": [
+    "position_lot_id",
+    "account_id",
+    "instrument_id",
+    "side",
+    "opened_quantity",
+    "remaining_quantity",
+    "entry_price",
+    "opening_fees",
+    "opened_at"
+  ],
+  "title": "PositionLot",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.position-lot",
+  "x-aegisquant-schema-version": "1.0.0"
+}

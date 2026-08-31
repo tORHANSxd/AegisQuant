@@ -1,0 +1,187 @@
+{
+  "$defs": {
+    "OrderSide": {
+      "enum": [
+        "BUY",
+        "SELL"
+      ],
+      "title": "OrderSide",
+      "type": "string"
+    },
+    "OrderType": {
+      "enum": [
+        "MARKET",
+        "LIMIT"
+      ],
+      "title": "OrderType",
+      "type": "string"
+    },
+    "Price": {
+      "additionalProperties": false,
+      "description": "Positive quote-asset amount per one base-asset unit.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Amount"
+        },
+        "base_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Base Asset Id",
+          "type": "string"
+        },
+        "quote_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Quote Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "base_asset_id",
+        "quote_asset_id"
+      ],
+      "title": "Price",
+      "type": "object"
+    },
+    "Quantity": {
+      "additionalProperties": false,
+      "description": "Signed asset quantity, never an unlabelled scalar.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Quantity",
+      "type": "object"
+    },
+    "TimeInForce": {
+      "enum": [
+        "GTC",
+        "IOC",
+        "FOK"
+      ],
+      "title": "TimeInForce",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.order-intent/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "limit_price": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Price"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "order_intent_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Order Intent Id",
+      "type": "string"
+    },
+    "order_type": {
+      "$ref": "#/$defs/OrderType"
+    },
+    "quantity": {
+      "$ref": "#/$defs/Quantity"
+    },
+    "reduce_only": {
+      "title": "Reduce Only",
+      "type": "boolean"
+    },
+    "risk_decision_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Risk Decision Id",
+      "type": "string"
+    },
+    "side": {
+      "$ref": "#/$defs/OrderSide"
+    },
+    "time_in_force": {
+      "$ref": "#/$defs/TimeInForce"
+    },
+    "valid_until": {
+      "format": "date-time",
+      "title": "Valid Until",
+      "type": "string"
+    }
+  },
+  "required": [
+    "order_intent_id",
+    "risk_decision_id",
+    "instrument_id",
+    "side",
+    "order_type",
+    "quantity",
+    "time_in_force",
+    "reduce_only",
+    "created_at",
+    "valid_until",
+    "idempotency_key"
+  ],
+  "title": "OrderIntent",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.order-intent",
+  "x-aegisquant-schema-version": "1.0.0"
+}

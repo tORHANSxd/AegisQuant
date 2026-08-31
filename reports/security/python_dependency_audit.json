@@ -5,6 +5,16 @@
       "skip_reason": "Dependency not found on PyPI and could not be audited: aegisquant (3.1.0.dev0)"
     },
     {
+      "name": "alembic",
+      "version": "1.19.1",
+      "vulns": []
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "vulns": []
+    },
+    {
       "name": "arrow",
       "version": "1.4.0",
       "vulns": []
@@ -100,6 +110,11 @@
       "vulns": []
     },
     {
+      "name": "greenlet",
+      "version": "3.5.5",
+      "vulns": []
+    },
+    {
       "name": "hypothesis",
       "version": "6.167.1",
       "vulns": []
@@ -155,8 +170,18 @@
       "vulns": []
     },
     {
+      "name": "mako",
+      "version": "1.4.1",
+      "vulns": []
+    },
+    {
       "name": "markdown-it-py",
       "version": "4.2.0",
+      "vulns": []
+    },
+    {
+      "name": "markupsafe",
+      "version": "3.0.3",
       "vulns": []
     },
     {
@@ -255,6 +280,16 @@
       "vulns": []
     },
     {
+      "name": "psycopg",
+      "version": "3.3.4",
+      "vulns": []
+    },
+    {
+      "name": "psycopg-binary",
+      "version": "3.3.4",
+      "vulns": []
+    },
+    {
       "name": "py-serializable",
       "version": "2.1.0",
       "vulns": []
@@ -262,6 +297,16 @@
     {
       "name": "pyarrow",
       "version": "25.0.1",
+      "vulns": []
+    },
+    {
+      "name": "pydantic",
+      "version": "2.13.5",
+      "vulns": []
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.46.5",
       "vulns": []
     },
     {
@@ -360,6 +405,11 @@
       "vulns": []
     },
     {
+      "name": "sqlalchemy",
+      "version": "2.0.52",
+      "vulns": []
+    },
+    {
       "name": "stevedore",
       "version": "5.9.1",
       "vulns": []
@@ -382,6 +432,11 @@
     {
       "name": "typing-extensions",
       "version": "4.16.0",
+      "vulns": []
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
       "vulns": []
     },
     {

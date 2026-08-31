@@ -1,0 +1,96 @@
+{
+  "$defs": {
+    "DatabaseConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "dsn_secret_key": {
+          "title": "Dsn Secret Key",
+          "type": "string"
+        },
+        "pool_size": {
+          "default": 5,
+          "title": "Pool Size",
+          "type": "integer"
+        },
+        "statement_timeout_ms": {
+          "default": 30000,
+          "title": "Statement Timeout Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "dsn_secret_key"
+      ],
+      "title": "DatabaseConfig",
+      "type": "object"
+    },
+    "RuntimeConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "display_timezone": {
+          "default": "UTC",
+          "title": "Display Timezone",
+          "type": "string"
+        },
+        "environment": {
+          "$ref": "#/$defs/RuntimeEnvironment"
+        },
+        "live_trading": {
+          "default": false,
+          "title": "Live Trading",
+          "type": "boolean"
+        },
+        "order_submission_enabled": {
+          "default": false,
+          "title": "Order Submission Enabled",
+          "type": "boolean"
+        },
+        "secret_loading_enabled": {
+          "default": false,
+          "title": "Secret Loading Enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "environment"
+      ],
+      "title": "RuntimeConfig",
+      "type": "object"
+    },
+    "RuntimeEnvironment": {
+      "enum": [
+        "RESEARCH",
+        "PAPER",
+        "TESTNET",
+        "CANARY",
+        "LIVE"
+      ],
+      "title": "RuntimeEnvironment",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.app-config/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "database": {
+      "$ref": "#/$defs/DatabaseConfig"
+    },
+    "runtime": {
+      "$ref": "#/$defs/RuntimeConfig"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "runtime",
+    "database"
+  ],
+  "title": "AppConfig",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.app-config",
+  "x-aegisquant-schema-version": "1.0.0"
+}

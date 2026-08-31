@@ -5,6 +5,9 @@ import sys
 from importlib.metadata import version
 
 import jsonschema
+import psycopg
+import pydantic
+import sqlalchemy
 import yaml
 
 import aegisquant
@@ -16,4 +19,8 @@ def test_runtime_is_supported_and_core_packages_import() -> None:
     assert aegisquant.__version__ == "3.1.0.dev0"
     assert jsonschema.__name__ == "jsonschema"
     assert version("jsonschema") == "4.26.0"
+    assert pydantic.__version__ == "2.13.5"
+    assert sqlalchemy.__version__ == "2.0.52"
+    assert psycopg.__version__ == "3.3.4"
+    assert version("alembic") == "1.19.1"
     assert yaml.__version__ == "6.0.3"

@@ -1,0 +1,197 @@
+{
+  "$defs": {
+    "AccessMethod": {
+      "enum": [
+        "NONE",
+        "OFFICIAL_API",
+        "PUBLIC_FEED",
+        "LICENSED_EXPORT",
+        "LOCAL_FILE"
+      ],
+      "title": "AccessMethod",
+      "type": "string"
+    },
+    "CloudInferenceMode": {
+      "enum": [
+        "ALLOWED",
+        "LOCAL_ONLY",
+        "PROHIBITED"
+      ],
+      "title": "CloudInferenceMode",
+      "type": "string"
+    },
+    "DerivedStorageMode": {
+      "enum": [
+        "ALLOWED",
+        "AGGREGATE_ONLY",
+        "PROHIBITED"
+      ],
+      "title": "DerivedStorageMode",
+      "type": "string"
+    },
+    "DisplayMode": {
+      "enum": [
+        "REHYDRATE",
+        "DERIVED_ONLY",
+        "FULL_WHEN_LICENSED",
+        "NONE"
+      ],
+      "title": "DisplayMode",
+      "type": "string"
+    },
+    "FineTuningMode": {
+      "enum": [
+        "PROHIBITED",
+        "EXPLICIT_APPROVAL_REQUIRED"
+      ],
+      "title": "FineTuningMode",
+      "type": "string"
+    },
+    "PiiMode": {
+      "enum": [
+        "MINIMIZE_AND_PSEUDONYMIZE",
+        "PROHIBITED"
+      ],
+      "title": "PiiMode",
+      "type": "string"
+    },
+    "PolicyStatus": {
+      "enum": [
+        "APPROVED",
+        "RESTRICTED",
+        "DENIED"
+      ],
+      "title": "PolicyStatus",
+      "type": "string"
+    },
+    "RawStorageMode": {
+      "enum": [
+        "ENCRYPTED_LOCAL",
+        "METADATA_ONLY",
+        "PROHIBITED"
+      ],
+      "title": "RawStorageMode",
+      "type": "string"
+    },
+    "RedistributionMode": {
+      "enum": [
+        "IDS_ONLY",
+        "PROHIBITED",
+        "LICENSED"
+      ],
+      "title": "RedistributionMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.source-processing-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "access_method": {
+      "$ref": "#/$defs/AccessMethod"
+    },
+    "approved_use_case": {
+      "title": "Approved Use Case",
+      "type": "string"
+    },
+    "cloud_inference": {
+      "$ref": "#/$defs/CloudInferenceMode"
+    },
+    "content_scope": {
+      "title": "Content Scope",
+      "type": "string"
+    },
+    "deletion_sync_required": {
+      "title": "Deletion Sync Required",
+      "type": "boolean"
+    },
+    "derived_storage": {
+      "$ref": "#/$defs/DerivedStorageMode"
+    },
+    "display_mode": {
+      "$ref": "#/$defs/DisplayMode"
+    },
+    "fine_tuning": {
+      "$ref": "#/$defs/FineTuningMode"
+    },
+    "foundation_model_training": {
+      "default": "PROHIBITED",
+      "title": "Foundation Model Training",
+      "type": "string"
+    },
+    "pii_mode": {
+      "$ref": "#/$defs/PiiMode"
+    },
+    "policy_checked_at": {
+      "format": "date-time",
+      "title": "Policy Checked At",
+      "type": "string"
+    },
+    "policy_status": {
+      "$ref": "#/$defs/PolicyStatus"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "raw_storage": {
+      "$ref": "#/$defs/RawStorageMode"
+    },
+    "redistribution": {
+      "$ref": "#/$defs/RedistributionMode"
+    },
+    "retention_days": {
+      "title": "Retention Days",
+      "type": "integer"
+    },
+    "revision_sync_required": {
+      "title": "Revision Sync Required",
+      "type": "boolean"
+    },
+    "source_policy_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Policy Id",
+      "type": "string"
+    },
+    "terms_version_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Terms Version Hash"
+    }
+  },
+  "required": [
+    "source_policy_id",
+    "provider_id",
+    "policy_status",
+    "access_method",
+    "approved_use_case",
+    "content_scope",
+    "raw_storage",
+    "derived_storage",
+    "cloud_inference",
+    "fine_tuning",
+    "display_mode",
+    "deletion_sync_required",
+    "revision_sync_required",
+    "redistribution",
+    "retention_days",
+    "pii_mode",
+    "policy_checked_at"
+  ],
+  "title": "SourceProcessingPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.source-processing-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

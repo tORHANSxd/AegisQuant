@@ -1,4 +1,4 @@
-"""P00 Live Trading lock with no unlock path and no import side effects."""
+"""Phase-independent Live Trading lock with no unlock path or import side effects."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ LIVE_ADAPTERS: Final[tuple[str, ...]] = ()
 
 
 class LiveTradingLockedError(RuntimeError):
-    """Raised whenever configuration attempts to cross the P00 Live boundary."""
+    """Raised whenever configuration attempts to cross the locked Live boundary."""
 
     code: Final = ERROR_CODE
 
@@ -31,8 +31,8 @@ def assert_live_locked(
     """Validate all lock inputs and fail closed on any Live capability request."""
     adapters = tuple(registered_live_adapters)
     if LIVE_TRADING or config_live or environment_live:
-        _reject("Live Trading must remain disabled during P00")
+        _reject("Live Trading must remain disabled through P01")
     if ORDER_SUBMISSION_ENABLED or order_submission_enabled:
-        _reject("order submission must remain disabled during P00")
+        _reject("order submission must remain disabled through P01")
     if LIVE_ADAPTERS or adapters:
-        _reject("the Live adapter registry must remain empty during P00")
+        _reject("the Live adapter registry must remain empty through P01")
