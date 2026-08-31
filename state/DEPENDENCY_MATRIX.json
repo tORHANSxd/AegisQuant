@@ -83,10 +83,10 @@
     "gpu_runtime"
   ],
   "verification": {
-    "verified_at_utc": "2026-08-31T06:37:09Z",
+    "verified_at_utc": "2026-08-31T07:12:41Z",
     "python_lock": "uv.lock",
     "javascript_lock": "pnpm-lock.yaml",
-    "python_313_tests": "42 collected",
+    "python_313_tests": "50 passed",
     "python_314_contract_tests": "2 passed",
     "nautilus_replay": "two fresh engines produced identical stable state",
     "web": "lint, typecheck, 2 unit tests, production build, and Chromium e2e passed",

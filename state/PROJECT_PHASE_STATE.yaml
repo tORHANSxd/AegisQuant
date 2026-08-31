@@ -1,10 +1,10 @@
 spec_version: "3.1.0"
 spec_sha256: "1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f"
 current_phase: "P00"
-status: "in_progress"
+status: "accepted"
 started_at_utc: "2026-08-31T05:43:08.443796Z"
-accepted_at_utc: null
-commit_sha: null
-artifact_manifest_sha256: null
+accepted_at_utc: "2026-08-31T07:13:33.850669Z"
+commit_sha: "f47ac5f0a0f199a82ed3bb4c9a5094eb2424c201"
+artifact_manifest_sha256: "22fe31e45ad59eb6da8c65556cbff80e6352d178315d4fa9d84560bd55ebc6bc"
 live_trading_locked: true
 next_phase: "P01"

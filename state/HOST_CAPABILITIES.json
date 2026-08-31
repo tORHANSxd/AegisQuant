@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at_utc": "2026-08-31T05:59:32.303871Z",
+  "generated_at_utc": "2026-08-31T07:06:10.830489Z",
   "collector": "scripts/collect_host_capabilities.py",
   "network_access_performed": false,
   "secrets_read": false,
@@ -19,12 +19,12 @@
   },
   "workspace_disk": {
     "total_bytes": 275659091968,
-    "used_bytes": 198027710464,
-    "free_bytes": 77631381504
+    "used_bytes": 199655522304,
+    "free_bytes": 76003569664
   },
   "runtimes": {
     "python": {
-      "version": "3.13.9",
+      "version": "3.13.15",
       "implementation": "CPython",
       "executable_major_minor": "3.13"
     },

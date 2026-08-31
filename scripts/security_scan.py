@@ -17,7 +17,7 @@ DETECT_EXCLUDE = (
     r"pnpm-lock\.yaml|uv\.lock|\.tsbuildinfo$"
 )
 DETECT_LINE_EXCLUDE = (
-    r"(?i)(?:.*(?:sha-?256|spec_sha256|artifact_manifest_sha256|expected_sha256).*|"
+    r"(?i)(?:.*(?:sha-?256|spec_sha256|artifact_manifest_sha256|expected_sha256|commit_sha).*|"
     r".*secret_loading.*(?:false|disabled).*|.*credentials_received.*0.*|"
     r".*plaintext_secrets_written.*0.*)"
 )
@@ -70,7 +70,9 @@ def main() -> int:
     )
     detect_payload = parsed_json(detect_result.stdout)
     (report_dir / "detect_secrets.json").write_text(
-        json.dumps(detect_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(detect_payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
     typed_detect = (
         cast("dict[object, object]", detect_payload) if isinstance(detect_payload, dict) else {}
@@ -89,13 +91,17 @@ def main() -> int:
     python_result = run([sys.executable, "-m", "pip_audit", "--local", "--format", "json"], root)
     python_payload = parsed_json(python_result.stdout)
     (report_dir / "python_dependency_audit.json").write_text(
-        json.dumps(python_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(python_payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
 
     javascript_result = run([pnpm, "audit", "--json", "--audit-level", "high"], root)
     javascript_payload = parsed_json(javascript_result.stdout)
     (report_dir / "javascript_dependency_audit.json").write_text(
-        json.dumps(javascript_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(javascript_payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
 
     container_files = [
@@ -115,7 +121,9 @@ def main() -> int:
         "scannable_files": container_files,
     }
     (report_dir / "container_iac_scan.json").write_text(
-        json.dumps(infrastructure, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(infrastructure, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
 
     checks = {
@@ -136,7 +144,9 @@ def main() -> int:
     # This is a boolean audit outcome, not a credential value.
     payload["secret_store_access_performed"] = False  # nosec B105
     (report_dir / "SECURITY_SCAN_RESULTS.json").write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
     print(json.dumps(payload, ensure_ascii=False))
     return 0 if payload["status"] == "passed" else 1

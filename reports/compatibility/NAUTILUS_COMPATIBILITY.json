@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "phase": "P00",
-  "generated_at_utc": "2026-08-31T06:46:10.061089Z",
+  "generated_at_utc": "2026-08-31T07:11:57.669989Z",
   "package": "nautilus-trader",
   "version": "1.231.0",
   "license": "LGPL-3.0-or-later",
@@ -24,7 +24,7 @@
     "-q"
   ],
   "baseline_replay_exit_code": 0,
-  "duration_seconds": 3.392,
-  "output_tail": ".                                                                        [100%]\n============================== warnings summary ===============================\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\n  D:\\Personal\\Quantitative_Trading\\tests\\contract\\test_nautilus_replay.py:50: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.\n    engine.run()\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 4 warnings in 2.46s",
+  "duration_seconds": 1.862,
+  "output_tail": ".                                                                        [100%]\n============================== warnings summary ===============================\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\n  D:\\Personal\\Quantitative_Trading\\tests\\contract\\test_nautilus_replay.py:50: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.\n    engine.run()\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1 passed, 4 warnings in 1.25s",
   "status": "passed"
 }

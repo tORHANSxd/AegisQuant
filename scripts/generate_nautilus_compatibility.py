@@ -72,7 +72,11 @@ def main() -> int:
     }
     output = root / "reports/compatibility/NAUTILUS_COMPATIBILITY.json"
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    output.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     print(f"NautilusTrader compatibility: {payload['status']}")
     return 0 if passed else 1
 

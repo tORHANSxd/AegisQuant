@@ -21,3 +21,18 @@ risks:
     status: open
     title: User data paths and optional provider permissions are not provided
     containment: Keep every provider denied and defer path access until explicit future authorization.
+  - id: P00-RISK-005
+    severity: low
+    status: open
+    title: Nautilus replay emits a pandas Timestamp.utcnow deprecation warning
+    containment: Keep the deterministic contract and monitor upstream before any dependency upgrade.
+  - id: P00-RISK-006
+    severity: low
+    status: open
+    title: GitHub Actions has not executed on a remote repository
+    containment: Pin every action to a commit SHA and retain the passing complete local CI as P00 evidence.
+  - id: P00-RISK-007
+    severity: low
+    status: open
+    title: uv minor-version junction creation returned exit 2 during runtime bootstrap
+    containment: Use exact interpreter paths and require both runtime contracts to pass.

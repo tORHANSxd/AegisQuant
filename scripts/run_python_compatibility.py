@@ -53,7 +53,11 @@ def main() -> int:
         "output_tail": "\n".join((result.stdout, result.stderr)).strip()[-12_000:],
     }
     output = root / "reports/phases/P00/PYTHON_314_CONTRACT.json"
-    output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    output.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     print(payload["output_tail"])
     print(f"candidate Python contract: {payload['status']}")
     return result.returncode

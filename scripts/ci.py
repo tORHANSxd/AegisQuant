@@ -70,6 +70,7 @@ def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
         ("ruff-format", [sys.executable, "-m", "ruff", "format", "--check", "."]),
         ("ruff-lint", [sys.executable, "-m", "ruff", "check", "."]),
         ("pyright-strict", [sys.executable, "-m", "pyright", "--project", "pyproject.toml"]),
+        ("pytest", [sys.executable, "-m", "pytest"]),
         ("python-candidate", [sys.executable, "scripts/run_python_compatibility.py"]),
         (
             "nautilus-compatibility",
@@ -77,24 +78,10 @@ def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
         ),
         (
             "bandit",
-            [
-                sys.executable,
-                "-m",
-                "bandit",
-                "-c",
-                "pyproject.toml",
-                "-r",
-                "src",
-                "scripts",
-                "-f",
-                "json",
-                "-o",
-                "reports/security/bandit.json",
-            ],
+            [sys.executable, "scripts/run_bandit.py"],
         ),
         ("security", [sys.executable, "scripts/security_scan.py"]),
         ("compliance-artifacts", [sys.executable, "scripts/generate_compliance_artifacts.py"]),
-        ("pytest", [sys.executable, "-m", "pytest"]),
         ("web-lint", [pnpm, "lint"]),
         ("web-typecheck", [pnpm, "typecheck"]),
         ("web-unit", [pnpm, "test"]),
@@ -126,7 +113,11 @@ def main() -> int:
     }
     output = root / args.output
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    output.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     print(f"P00 verification status: {payload['status']}")
     return 0 if passed else 1
 

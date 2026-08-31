@@ -151,16 +151,24 @@ def main() -> int:
         javascript_components,
     )
     (sbom_dir / "python.cdx.json").write_text(
-        json.dumps(python_bom, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(python_bom, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
     (sbom_dir / "javascript.cdx.json").write_text(
-        json.dumps(javascript_bom, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(javascript_bom, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
     (license_dir / "python.json").write_text(
-        json.dumps(python_licenses, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(python_licenses, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
     (license_dir / "javascript.json").write_text(
-        json.dumps(javascript_licenses, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(javascript_licenses, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
     summary = {
         "schema_version": "1.0.0",
@@ -179,7 +187,9 @@ def main() -> int:
         ],
     }
     (license_dir / "COMPLIANCE_SUMMARY.json").write_text(
-        json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
     print(json.dumps(summary, ensure_ascii=False))
     return 0
