@@ -1,5 +1,5 @@
 schema_version: "1.0.0"
-phase: P00
+phase: P01
 risks:
   - id: P00-RISK-001
     severity: medium
@@ -36,3 +36,23 @@ risks:
     status: open
     title: uv minor-version junction creation returned exit 2 during runtime bootstrap
     containment: Use exact interpreter paths and require both runtime contracts to pass.
+  - id: P01-RISK-001
+    severity: medium
+    status: open
+    title: EDB Windows ZIP has no independently observed upstream signature or checksum list
+    containment: Download only from the HTTPS URL linked by the official PostgreSQL page, pin the observed SHA-256, and prohibit production use.
+  - id: P01-RISK-002
+    severity: medium
+    status: open
+    title: Disposable loopback PostgreSQL contract clusters use trust authentication
+    containment: Bind only to a random loopback port in a temporary directory; never register a service, expose the port, or reuse the data directory.
+  - id: P01-RISK-003
+    severity: medium
+    status: open
+    title: Domain, accounting, risk, and order artifacts are contracts rather than complete engines
+    containment: Require later state-machine, reconciliation, risk, recovery, and failure tests before claiming those capabilities.
+  - id: P01-RISK-004
+    severity: low
+    status: open
+    title: Host Node.js 24.12.0 differs from the locked 24.20.0 baseline
+    containment: Prepend the ignored pinned 24.20.0 runtime for local CI and keep remote CI fixed to the same version.
