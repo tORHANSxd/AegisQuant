@@ -17,6 +17,7 @@ next-env.d.ts
 coverage/
 playwright-report/
 test-results/
+storybook-static/
 
 # Local tools and IDE state
 .tools/

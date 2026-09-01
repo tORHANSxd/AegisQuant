@@ -61,6 +61,9 @@ EXPECTED_TABLES = {
     "instrument_registry",
     "outbox_messages",
     "provider_registry",
+    "read_model_projection_checkpoints",
+    "read_model_records",
+    "read_model_snapshot_state",
     "source_document_registry",
 }
 

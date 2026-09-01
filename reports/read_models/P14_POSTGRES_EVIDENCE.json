@@ -1,0 +1,24 @@
+{
+  "atomic_replace_contract": "one caller-owned SQLAlchemy transaction",
+  "database_contract": "PostgreSQL",
+  "mandatory_ci_command": "python -m pytest tests/integration/test_p14_readmodels.py",
+  "mandatory_ci_test": "tests/integration/test_p14_readmodels.py",
+  "migration": "migrations/versions/20260902_0003_p14_read_models.py",
+  "migration_sha256": "5cebbbdd88f7fdf6247ab1281caac91507ccb66b0e1ddd268dd36d83a30d868b",
+  "persistence_sha256": "27cd6ae91dc322e2847e84c327b03cfda94ecc60359f3fa43cf2b118da3e322c",
+  "read_api_grants": [
+    "CONNECT",
+    "USAGE",
+    "SELECT"
+  ],
+  "read_api_role": "aegisquant_read_api",
+  "read_api_write_grants": [],
+  "schema_version": "p14-postgres-evidence-v1",
+  "sqlite_or_mock_used_for_acceptance": false,
+  "tables": [
+    "read_model_records",
+    "read_model_projection_checkpoints",
+    "read_model_snapshot_state"
+  ],
+  "verification_mode": "real disposable PostgreSQL in the P14 CI gate"
+}

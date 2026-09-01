@@ -26,13 +26,14 @@ def test_p08_is_preserved_in_deferred_queue_after_later_phase_started(
     deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
     p08 = next(item for item in deferred if item["phase"] == "P08")
     current_phase = cast("str", state["current_phase"])
-    assert current_phase in {"P09", "P10", "P11", "P12", "P13"}
+    assert current_phase in {"P09", "P10", "P11", "P12", "P13", "P14"}
     expected_next = {
         "P09": "P10",
         "P10": "P11",
         "P11": "P12",
         "P12": "P13",
         "P13": "P14",
+        "P14": "P15",
     }
     assert state["next_phase"] == expected_next[current_phase]
     assert state["status"] == "in_progress"
@@ -42,14 +43,16 @@ def test_p08_is_preserved_in_deferred_queue_after_later_phase_started(
     assert p08["status"] == "implementation_verified_acceptance_deferred"
     assert p08["accepted_at_utc"] is None
     required = {"P05", "P06", "P07", "P08"}
-    if current_phase in {"P10", "P11", "P12", "P13"}:
+    if current_phase in {"P10", "P11", "P12", "P13", "P14"}:
         required.add("P09")
-    if current_phase in {"P11", "P12", "P13"}:
+    if current_phase in {"P11", "P12", "P13", "P14"}:
         required.add("P10")
-    if current_phase in {"P12", "P13"}:
+    if current_phase in {"P12", "P13", "P14"}:
         required.add("P11")
-    if current_phase == "P13":
+    if current_phase in {"P13", "P14"}:
         required.add("P12")
+    if current_phase == "P14":
+        required.add("P13")
     assert {item["phase"] for item in deferred} >= required
     assert not (project_root / "reports/phases/P08/ACCEPTANCE.md").exists()
 
@@ -139,9 +142,9 @@ def test_p08_reports_and_compliance_are_complete_without_formal_acceptance(
     security = _json(project_root / "reports/security/SECURITY_SCAN_RESULTS.json")
     mutation = _json(project_root / "reports/testing/P08_MUTATION_RESULTS.json")
     holdout = _json(project_root / "reports/data/P07_HOLDOUT_EVIDENCE.json")
-    assert compliance["phase"] in {"P08", "P09", "P10", "P11", "P12", "P13"}
+    assert compliance["phase"] in {"P08", "P09", "P10", "P11", "P12", "P13", "P14"}
     assert compliance["status"] == "passed"
-    assert security["phase"] in {"P08", "P09", "P10", "P11", "P12", "P13"}
+    assert security["phase"] in {"P08", "P09", "P10", "P11", "P12", "P13", "P14"}
     assert security["status"] == "passed"
     assert mutation["status"] == "passed"
     assert cast(float, mutation["score"]) >= cast(float, mutation["threshold"])

@@ -8,7 +8,19 @@ FORBIDDEN = re.compile(r"\b(?:TODO|FIXME|NotImplementedError)\b|\.\.\.\s*(?:#.*)
 
 
 def test_no_incomplete_markers_in_implementation(project_root: Path) -> None:
-    excluded = {"node_modules", ".venv", ".tools", ".git", ".next"}
+    excluded = {
+        "node_modules",
+        ".venv",
+        ".tools",
+        ".git",
+        ".next",
+        ".runtime",
+        "coverage",
+        "generated",
+        "playwright-report",
+        "storybook-static",
+        "test-results",
+    }
     violations: list[str] = []
     for path in project_root.rglob("*"):
         if not path.is_file() or path.suffix not in TEXT_SUFFIXES:

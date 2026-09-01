@@ -36,6 +36,7 @@ dependencies = [
     { name = "alembic" },
     { name = "cryptography" },
     { name = "duckdb" },
+    { name = "fastapi" },
     { name = "httpx" },
     { name = "jsonschema" },
     { name = "numpy" },
@@ -47,6 +48,7 @@ dependencies = [
     { name = "pyyaml" },
     { name = "scikit-learn" },
     { name = "sqlalchemy" },
+    { name = "uvicorn" },
     { name = "websockets" },
 ]
 
@@ -85,6 +87,7 @@ requires-dist = [
     { name = "alembic", specifier = "==1.19.1" },
     { name = "cryptography", specifier = "==50.0.1" },
     { name = "duckdb", specifier = "==1.5.5" },
+    { name = "fastapi", specifier = "==0.141.1" },
     { name = "httpx", specifier = "==0.28.1" },
     { name = "jsonschema", specifier = "==4.26.0" },
     { name = "numpy", specifier = "==2.5.2" },
@@ -96,6 +99,7 @@ requires-dist = [
     { name = "pyyaml", specifier = "==6.0.3" },
     { name = "scikit-learn", specifier = "==1.9.0" },
     { name = "sqlalchemy", specifier = "==2.0.52" },
+    { name = "uvicorn", specifier = "==0.52.4" },
     { name = "websockets", specifier = "==17.1" },
 ]
 

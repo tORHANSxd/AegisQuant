@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P14",
+  "environment": "local-production-loopback",
+  "metric": "overview_domcontentloaded_ms",
+  "samples_ms": [
+    73,
+    74,
+    80,
+    88,
+    101
+  ],
+  "p75_ms": 88,
+  "target_p75_ms": 1500,
+  "status": "passed",
+  "qualifies_as_12h_or_24h_acceptance": false
+}

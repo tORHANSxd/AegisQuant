@@ -25,7 +25,7 @@ def test_p11_state_is_current_deferred_live_locked_and_p10_is_preserved(
     )
     previous = cast("dict[str, object]", state["previous_phase"])
     deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
-    assert state["current_phase"] in {"P11", "P12", "P13"}
+    assert state["current_phase"] in {"P11", "P12", "P13", "P14"}
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["formal_acceptance_deferred"] is True
@@ -49,12 +49,18 @@ def test_p11_state_is_current_deferred_live_locked_and_p10_is_preserved(
         assert previous["phase"] == "P11"
         assert previous["evidence_commit_sha"] == p11["evidence_commit_sha"]
         required.add("P11")
-    else:
+    elif state["current_phase"] == "P13":
         p11 = next(item for item in deferred if item["phase"] == "P11")
         assert state["next_phase"] == "P14"
         assert previous["phase"] == "P12"
         assert p11["status"] == "implementation_verified_acceptance_deferred"
         required.update({"P11", "P12"})
+    else:
+        p11 = next(item for item in deferred if item["phase"] == "P11")
+        assert state["next_phase"] == "P15"
+        assert previous["phase"] == "P13"
+        assert p11["status"] == "implementation_verified_acceptance_deferred"
+        required.update({"P11", "P12", "P13"})
     assert {item["phase"] for item in deferred} >= required
     assert not (project_root / "reports/phases/P11/ACCEPTANCE.md").exists()
     assert not (project_root / "src/aegisquant/live").exists()
@@ -207,6 +213,8 @@ def test_p11_phase_reports_and_security_evidence_are_complete(project_root: Path
     assert mutation["status"] == "passed"
     assert cast("float", mutation["score"]) >= cast("float", mutation["threshold"])
     assert mutation["survived"] == 0 and mutation["invalid"] == 0
-    assert security["phase"] in {"P11", "P12", "P13"} and security["secret_finding_count"] == 0
-    assert compliance["phase"] in {"P11", "P12", "P13"}
+    assert (
+        security["phase"] in {"P11", "P12", "P13", "P14"} and security["secret_finding_count"] == 0
+    )
+    assert compliance["phase"] in {"P11", "P12", "P13", "P14"}
     assert compliance["python_unknown_license_count"] == 0

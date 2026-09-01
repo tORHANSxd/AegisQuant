@@ -1,0 +1,25 @@
+{
+  "api_runtime": "FastAPI on loopback",
+  "benchmark": "reports/performance/P14_OVERVIEW_BENCHMARK.json",
+  "benchmark_p75_ms": 88,
+  "benchmark_status": "passed",
+  "benchmark_target_p75_ms": 1500,
+  "browser": "chromium",
+  "formal_acceptance_performed": false,
+  "qualifies_as_12h_or_24h_acceptance": false,
+  "responsive_viewport": {
+    "height": 844,
+    "width": 390
+  },
+  "schema_version": "p14-e2e-evidence-v1",
+  "test_count": 4,
+  "test_titles": [
+    "overview is read-only, traceable, and visually stable",
+    "intelligence links events to evidence and source policy",
+    "overview responsive layout remains usable on a narrow viewport",
+    "warm local overview p75 stays below 1.5 seconds"
+  ],
+  "visual_baseline": "apps/web/e2e/dashboard.spec.ts-snapshots/overview-chromium-win32.png",
+  "visual_baseline_sha256": "17a571c07e73eecac7daf3b7d0b448cd0b2673fea9bc8e5d5325104881e7b530",
+  "web_runtime": "Next.js production build on loopback"
+}

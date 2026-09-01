@@ -1,0 +1,216 @@
+{
+  "allowed_topics": [
+    "account.summary",
+    "data.health",
+    "intelligence.events",
+    "intelligence.narratives",
+    "intelligence.sources",
+    "orders.live",
+    "pnl.live",
+    "positions.live",
+    "risk.state"
+  ],
+  "event_schema": {
+    "$defs": {
+      "JsonValue": {}
+    },
+    "additionalProperties": false,
+    "properties": {
+      "event_id": {
+        "maxLength": 255,
+        "minLength": 1,
+        "title": "Event Id",
+        "type": "string"
+      },
+      "event_time": {
+        "format": "date-time",
+        "title": "Event Time",
+        "type": "string"
+      },
+      "message_type": {
+        "enum": [
+          "snapshot",
+          "increment",
+          "heartbeat"
+        ],
+        "title": "Message Type",
+        "type": "string"
+      },
+      "payload": {
+        "additionalProperties": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "title": "Payload",
+        "type": "object"
+      },
+      "schema_version": {
+        "const": "1",
+        "default": "1",
+        "title": "Schema Version",
+        "type": "string"
+      },
+      "sequence": {
+        "minimum": 0,
+        "title": "Sequence",
+        "type": "integer"
+      },
+      "server_time": {
+        "format": "date-time",
+        "title": "Server Time",
+        "type": "string"
+      },
+      "topic": {
+        "maxLength": 128,
+        "minLength": 1,
+        "title": "Topic",
+        "type": "string"
+      }
+    },
+    "required": [
+      "message_type",
+      "topic",
+      "event_id",
+      "event_time",
+      "server_time",
+      "sequence",
+      "payload"
+    ],
+    "title": "StreamEvent",
+    "type": "object"
+  },
+  "heartbeat_seconds": 15,
+  "path": "/ws/v1/stream",
+  "recovery_endpoint": "/api/v1/stream/snapshot",
+  "recovery_rule": "On a sequence gap, stop applying increments and fetch a REST snapshot before resuming.",
+  "schema_version": "p14-websocket-contract-v1",
+  "snapshot_schema": {
+    "$defs": {
+      "JsonValue": {},
+      "StreamEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "event_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Event Id",
+            "type": "string"
+          },
+          "event_time": {
+            "format": "date-time",
+            "title": "Event Time",
+            "type": "string"
+          },
+          "message_type": {
+            "enum": [
+              "snapshot",
+              "increment",
+              "heartbeat"
+            ],
+            "title": "Message Type",
+            "type": "string"
+          },
+          "payload": {
+            "additionalProperties": {
+              "$ref": "#/$defs/JsonValue"
+            },
+            "title": "Payload",
+            "type": "object"
+          },
+          "schema_version": {
+            "const": "1",
+            "default": "1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sequence": {
+            "minimum": 0,
+            "title": "Sequence",
+            "type": "integer"
+          },
+          "server_time": {
+            "format": "date-time",
+            "title": "Server Time",
+            "type": "string"
+          },
+          "topic": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_type",
+          "topic",
+          "event_id",
+          "event_time",
+          "server_time",
+          "sequence",
+          "payload"
+        ],
+        "title": "StreamEvent",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "messages": {
+        "items": {
+          "$ref": "#/$defs/StreamEvent"
+        },
+        "title": "Messages",
+        "type": "array"
+      },
+      "recovery_required": {
+        "const": false,
+        "default": false,
+        "title": "Recovery Required",
+        "type": "boolean"
+      },
+      "schema_version": {
+        "const": "1",
+        "default": "1",
+        "title": "Schema Version",
+        "type": "string"
+      }
+    },
+    "required": [
+      "messages"
+    ],
+    "title": "StreamSnapshotResponse",
+    "type": "object"
+  },
+  "subscribe_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "action": {
+        "const": "subscribe",
+        "title": "Action",
+        "type": "string"
+      },
+      "schema_version": {
+        "const": "1",
+        "title": "Schema Version",
+        "type": "string"
+      },
+      "topics": {
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 16,
+        "minItems": 1,
+        "title": "Topics",
+        "type": "array"
+      }
+    },
+    "required": [
+      "action",
+      "schema_version",
+      "topics"
+    ],
+    "title": "StreamSubscribe",
+    "type": "object"
+  },
+  "subscriber_queue_capacity": 64,
+  "subscription_limit": 16
+}

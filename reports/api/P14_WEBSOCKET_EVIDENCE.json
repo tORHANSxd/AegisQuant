@@ -1,0 +1,40 @@
+{
+  "allowed_origins": [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "http://testserver"
+  ],
+  "gap_recovery_rule": "stop increments, fetch REST snapshot, then resume",
+  "heartbeat_seconds": 15,
+  "initial_message_types": [
+    "snapshot",
+    "snapshot"
+  ],
+  "initial_topics": [
+    "account.summary",
+    "risk.state"
+  ],
+  "loopback_only_origins": true,
+  "monotonic_increment_verified": true,
+  "network_requests_performed": 0,
+  "overflow_unsubscribes": true,
+  "path": "/ws/v1/stream",
+  "queue_size_after_overflow": 64,
+  "queued_before_overflow": 2,
+  "recovery_endpoint": "/api/v1/stream/snapshot",
+  "remote_origin_rejected_by_contract": true,
+  "schema_version": "p14-websocket-evidence-v1",
+  "subscriber_queue_capacity": 64,
+  "test": "tests/contract/api/test_websocket.py",
+  "topics": [
+    "account.summary",
+    "data.health",
+    "intelligence.events",
+    "intelligence.narratives",
+    "intelligence.sources",
+    "orders.live",
+    "pnl.live",
+    "positions.live",
+    "risk.state"
+  ]
+}

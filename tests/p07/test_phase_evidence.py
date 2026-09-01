@@ -23,7 +23,16 @@ def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) ->
     )
     previous = cast(dict[str, object], state["previous_phase"])
     deferred = cast(list[dict[str, object]], state["deferred_acceptance_queue"])
-    assert state["current_phase"] in {"P07", "P08", "P09", "P10", "P11", "P12", "P13"}
+    assert state["current_phase"] in {
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+    }
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["formal_acceptance_deferred"] is True
@@ -67,7 +76,7 @@ def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) ->
             "P10",
             "P11",
         }
-    else:
+    elif state["current_phase"] == "P13":
         assert state["next_phase"] == "P14"
         assert previous["phase"] == "P12"
         assert {item["phase"] for item in deferred} >= {
@@ -79,6 +88,20 @@ def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) ->
             "P10",
             "P11",
             "P12",
+        }
+    else:
+        assert state["next_phase"] == "P15"
+        assert previous["phase"] == "P13"
+        assert {item["phase"] for item in deferred} >= {
+            "P05",
+            "P06",
+            "P07",
+            "P08",
+            "P09",
+            "P10",
+            "P11",
+            "P12",
+            "P13",
         }
     assert previous["status"] == "in_progress"
     assert not (project_root / "reports/phases/P07/ACCEPTANCE.md").exists()
@@ -155,6 +178,15 @@ def test_p07_scoreboard_and_dependency_contract_are_explicit(project_root: Path)
     assert dependency["ai_trader_code_copied_or_executed"] is False
     assert external["r331_state"] == "not_provided"
     assert external["fabricated_baseline"] is False
-    assert compliance["phase"] in {"P07", "P08", "P09", "P10", "P11", "P12", "P13"}
+    assert compliance["phase"] in {
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+    }
     assert compliance["status"] == "passed"
     assert compliance["python_unknown_license_count"] == 0

@@ -4,8 +4,11 @@
     "next-env.d.ts",
     "app/**/*.ts",
     "app/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     "tests/**/*.ts",
     "tests/**/*.tsx",
+    "proxy.ts",
     "next.config.ts",
     "vitest.config.ts",
     ".next/types/**/*.ts"
@@ -13,6 +16,9 @@
   "exclude": [
     "node_modules",
     "e2e",
+    ".storybook",
+    "openapi-ts.config.ts",
+    "src/**/*.stories.tsx",
     ".next/dev"
   ]
 }

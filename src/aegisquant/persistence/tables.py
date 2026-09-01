@@ -371,3 +371,61 @@ daily_ledger_snapshots = Table(
     CheckConstraint("ledger_entry_count >= 0", name="nonnegative_entry_count"),
     CheckConstraint("signature_algorithm = 'Ed25519'", name="valid_signature_algorithm"),
 )
+
+read_model_records = Table(
+    "read_model_records",
+    metadata,
+    Column("projection", String(64), primary_key=True),
+    Column("entity_id", String(255), primary_key=True),
+    Column("schema_version", String(32), nullable=False),
+    Column("source_sequence", BigInteger, nullable=False),
+    Column("as_of_time", DateTime(timezone=True), nullable=False),
+    Column("projected_at", DateTime(timezone=True), nullable=False),
+    Column("source_watermark", String(96), nullable=False),
+    Column("quality_state", String(32), nullable=False),
+    Column("authoritative", Boolean, nullable=False),
+    Column("estimated", Boolean, nullable=False),
+    Column("source_artifact", Text, nullable=False),
+    Column("source_sha256", String(64), nullable=False),
+    Column("payload", JSONB, nullable=False),
+    Column("content_sha256", String(64), nullable=False),
+    CheckConstraint("source_sequence >= 1", name="positive_source_sequence"),
+    CheckConstraint("projected_at >= as_of_time", name="valid_time_order"),
+    CheckConstraint("NOT (authoritative AND estimated)", name="valid_authority_state"),
+    CheckConstraint(
+        "quality_state IN ('LIVE', 'STALE', 'DEGRADED', 'DISCONNECTED', 'ERROR', 'ESTIMATED')",
+        name="valid_quality_state",
+    ),
+)
+
+Index(
+    "ix_read_model_records_projection_as_of",
+    read_model_records.c.projection,
+    read_model_records.c.as_of_time,
+)
+
+read_model_projection_checkpoints = Table(
+    "read_model_projection_checkpoints",
+    metadata,
+    Column("projection", String(64), primary_key=True),
+    Column("last_sequence", BigInteger, nullable=False),
+    Column("source_watermark", String(96), nullable=False),
+    Column("projected_at", DateTime(timezone=True), nullable=False),
+    Column("record_count", Integer, nullable=False),
+    Column("state_sha256", String(64), nullable=False),
+    CheckConstraint("last_sequence >= 1", name="positive_last_sequence"),
+    CheckConstraint("record_count >= 0", name="nonnegative_record_count"),
+)
+
+read_model_snapshot_state = Table(
+    "read_model_snapshot_state",
+    metadata,
+    Column("singleton_id", Integer, primary_key=True),
+    Column("schema_version", String(32), nullable=False),
+    Column("rebuild_id", String(255), nullable=False),
+    Column("rebuilt_at", DateTime(timezone=True), nullable=False),
+    Column("source_event_count", BigInteger, nullable=False),
+    Column("content_sha256", String(64), nullable=False),
+    CheckConstraint("singleton_id = 1", name="singleton"),
+    CheckConstraint("source_event_count >= 1", name="positive_source_event_count"),
+)

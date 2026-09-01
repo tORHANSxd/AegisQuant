@@ -21,3 +21,4 @@ ADR 一经接受不原地抹除；变化通过新 ADR supersede。每份记录�
 - ADR-0016：P11 组合构建、独立风险与单向安全状态政策
 - ADR-0017：P12 Testnet 执行、恢复与原子资金事实政策
 - ADR-0018：P13 Paper、Shadow、Chaos 与稳定性验证政策
+- ADR-0019：P14 Read Model、API、实时流与看板契约

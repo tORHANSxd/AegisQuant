@@ -1,0 +1,565 @@
+{
+  "checkpoints": [
+    {
+      "last_sequence": 1,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_account_overview",
+      "record_count": 1,
+      "source_watermark": "1:a59931869a2973adc504ce57091f75eba020dda277eb1de79bdcd1c9bff528d9",
+      "state_sha256": "2ff9a3ba82bd82bdba35294d5cd4f5291f5e5030e12635f9ad56924187d1e2c6"
+    },
+    {
+      "last_sequence": 2,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_daily_pnl",
+      "record_count": 1,
+      "source_watermark": "2:cc105b9f7d7ffdc4bd830358010fe7da06969391ad013b0cc25dc90380140ef5",
+      "state_sha256": "c9fa80b3f52edf34b0b4875d77fa6493af0688bec22688ff78210fd419ee4869"
+    },
+    {
+      "last_sequence": 11,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_data_health",
+      "record_count": 2,
+      "source_watermark": "11:a5a600f560f43ce44accc8134191ec88a3d8ba5be7858847121f8365c333f725",
+      "state_sha256": "9bd92787406ab89f4eaf0e4522fa53184d9b5c8c5a549db44e5e1fa5cb0d1fb7"
+    },
+    {
+      "last_sequence": 14,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_event_claims",
+      "record_count": 1,
+      "source_watermark": "14:ebcb77c55b8c8ba517dffce3030f6086025f8294009f88ce9daf7b9b16ad9934",
+      "state_sha256": "a9923b409eaf591b2e06da572436f56b27cdb5e395c931e965194ca3e31550d7"
+    },
+    {
+      "last_sequence": 13,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_event_clusters",
+      "record_count": 1,
+      "source_watermark": "13:0ad182b5e1cd48c4e1baa39d4c87f98a1f4023e10406ffb6d5b2f41f4b0b3b54",
+      "state_sha256": "2012e79fa5c2475965c43729bed4cf606190cf4a8e4855c6d1b4488c4c7e727b"
+    },
+    {
+      "last_sequence": 6,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_models",
+      "record_count": 1,
+      "source_watermark": "6:e802667d576d6e9d2ad34aa7d6db82b11be62d28a8ef56b781f3c3fca744edeb",
+      "state_sha256": "667676189800ca64e5faa0bc07b1d549b8a17a6b0adfc29f011f054b318738a3"
+    },
+    {
+      "last_sequence": 15,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_narrative_states",
+      "record_count": 1,
+      "source_watermark": "15:192752f402cd257626362798846c2179ef0adffc14c0e9c9d6de44bb31cbc074",
+      "state_sha256": "20754d0ffd475fa2e057eb4bb1c1dbd765bae410df112e4231a3cf811697f384"
+    },
+    {
+      "last_sequence": 8,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_orders",
+      "record_count": 2,
+      "source_watermark": "8:0298c7406d4f7c9dd9d4db306a9591b557f20f00bd226eaedd5170b5fea16f3d",
+      "state_sha256": "5e2b0ef01be9dfd1bcaec93c8e99ad4be519325facc54e39fe542939057eedcd"
+    },
+    {
+      "last_sequence": 3,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_positions_current",
+      "record_count": 1,
+      "source_watermark": "3:7d21cf0ed0f785a027d9f500a1c246a06bdb1f6213e9abdda860f1b20dcf39b7",
+      "state_sha256": "2abe1bbb535e933fbe14b7e5274713c06d1cad4e4b00c97fe7ba68129d0dc858"
+    },
+    {
+      "last_sequence": 4,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_risk_summary",
+      "record_count": 1,
+      "source_watermark": "4:b72413ef3eb971b3976552519cf78069c2e0a4ea54057ccbd8b5940dd1b2a74c",
+      "state_sha256": "d1eb763df597693a6391dae2729940b3badb2a0969d43fbdc097445406cb40dc"
+    },
+    {
+      "last_sequence": 12,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_source_policy_status",
+      "record_count": 2,
+      "source_watermark": "12:154735497e189f47df74ee7ccdff40190ac8b8c322c34c84c1b7b1b60970922d",
+      "state_sha256": "9aedbd93dad54bcce5defde144b8e9fad12fdcbafa08b39e80145c4855d575c9"
+    },
+    {
+      "last_sequence": 5,
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_strategies",
+      "record_count": 1,
+      "source_watermark": "5:3c7b246ee2ec95a802804cddd9c1439a079a5bc1262db296b34405ca32c140d7",
+      "state_sha256": "31f0662346265dcf0faaae349bfd12d17d74249826992b8caf64f602cd22eeda"
+    }
+  ],
+  "content_sha256": "fe10455af9c1c4ed9e45a8010b6a87f5ef2102f2c6a57ac78b733a1429349325",
+  "rebuild_id": "77897d825c6e89535fed1fd99ebe12fa43b1b23b51c39361c6d8bbbe57d24596",
+  "rebuilt_at": "2026-09-01T21:50:00Z",
+  "records": [
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "36fc4dca259547360e762dad91ee7b9215ec7cec1171c34d04e5f7e67c885245",
+      "entity_id": "paper-account",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "cash": "10001.889840136",
+        "environment": "RESEARCH",
+        "equity": "10001.889840136",
+        "equity_curve": [
+          {
+            "time": "2026-09-01T08:00:00Z",
+            "value": "10000"
+          },
+          {
+            "time": "2026-09-01T08:00:01Z",
+            "value": "9999.945453132"
+          },
+          {
+            "time": "2026-09-01T08:00:03Z",
+            "value": "10001.889840136"
+          },
+          {
+            "time": "2026-09-01T08:00:05Z",
+            "value": "10001.889840136"
+          }
+        ],
+        "gross_exposure": "0",
+        "last_reconciliation_at": "2026-09-01T08:00:05Z",
+        "leverage": "0",
+        "live_trading_locked": true,
+        "margin_utilization": "0",
+        "net_exposure": "0",
+        "open_order_count": 0,
+        "reporting_asset_id": "USDT",
+        "source_scope": "P06 deterministic historical replay",
+        "unknown_order_count": 0
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_account_overview",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/equity_curve.parquet",
+      "source_sequence": 1,
+      "source_sha256": "364af555899cc7f8832065b1cf3e2d5b5580c4485468ae8f74f54b23944fa5da",
+      "source_watermark": "1:a59931869a2973adc504ce57091f75eba020dda277eb1de79bdcd1c9bff528d9"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "205bab23f5f83f5bc4bb1dac456ebb504bac7d2f6941eacd34c2bc987330930d",
+      "entity_id": "paper-account:2026-09-01",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "business_date": "2026-09-01",
+        "fees": "0.040799864",
+        "funding": "0",
+        "net": "1.889840136",
+        "pnl_curve": [
+          {
+            "time": "2026-09-01T08:00:00Z",
+            "value": "0"
+          },
+          {
+            "time": "2026-09-01T08:00:01Z",
+            "value": "-0.054546868"
+          },
+          {
+            "time": "2026-09-01T08:00:03Z",
+            "value": "1.889840136"
+          },
+          {
+            "time": "2026-09-01T08:00:05Z",
+            "value": "1.889840136"
+          }
+        ],
+        "realized": "2.000000000",
+        "reporting_asset_id": "USDT",
+        "source_scope": "P06 deterministic historical replay",
+        "unrealized": "0"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_daily_pnl",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/pnl_attribution.parquet",
+      "source_sequence": 2,
+      "source_sha256": "409304a0ffbd595791be5e0717677082ac693d75088d4791e883829bbb478dca",
+      "source_watermark": "2:cc105b9f7d7ffdc4bd830358010fe7da06969391ad013b0cc25dc90380140ef5"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "7debae4a800c3c814168a342c24d4e9bfa92bac055b4065752816177cb68d906",
+      "entity_id": "gdelt",
+      "estimated": false,
+      "payload": {
+        "gap_count": 0,
+        "last_success_at": "2026-09-01T18:00:00Z",
+        "latency_ms": null,
+        "policy_status": "RISK_ONLY",
+        "provider_id": "gdelt",
+        "reason_codes": [
+          "NO_EVENT_INCREMENT",
+          "POSITIVE_RISK_INCREMENT"
+        ],
+        "state": "STALE"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_data_health",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 9,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "9:2ab48eedb0e58ae9b6be904ed3b3fbd4beba3de34952ff80088ab5eaa51c7e4a"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "10f0f37fed54edc08220804328e3fae10f59eac71e6caac5783fcd6a0ea1f566",
+      "entity_id": "x",
+      "estimated": false,
+      "payload": {
+        "gap_count": 1,
+        "last_success_at": null,
+        "latency_ms": null,
+        "policy_status": "RETIRE",
+        "provider_id": "x",
+        "reason_codes": [
+          "LOW_COVERAGE_OR_RELIABILITY"
+        ],
+        "state": "DEGRADED"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_data_health",
+      "quality_state": "DEGRADED",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 11,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "11:a5a600f560f43ce44accc8134191ec88a3d8ba5be7858847121f8365c333f725"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "3117bbe5976578081d3d24a23b5bb19313e159d4a7029e9b996855db2380f674",
+      "entity_id": "evidence-1",
+      "estimated": false,
+      "payload": {
+        "available_at": "2026-09-01T18:00:00Z",
+        "claim_id": "claim-1",
+        "event_cluster_id": "event-cluster-1",
+        "evidence_id": "evidence-1",
+        "lawful_excerpt_available": false,
+        "model_version": "committee-p10-v1",
+        "policy_id": "official_web_catalog_v1",
+        "relation": "SUPPORTS",
+        "source_family_id": "official-family"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_event_claims",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 14,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "14:ebcb77c55b8c8ba517dffce3030f6086025f8294009f88ce9daf7b9b16ad9934"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": false,
+      "content_sha256": "a4123e746a1f211f4c612ef2933224bf34b7a7e26714e7105134ee41bb8848bd",
+      "entity_id": "event-cluster-1",
+      "estimated": true,
+      "payload": {
+        "affected_assets": [
+          "BTC",
+          "ETH"
+        ],
+        "confidence": "0.7",
+        "event_cluster_id": "event-cluster-1",
+        "evidence_ids": [
+          "evidence-1"
+        ],
+        "impact_1d": "0.00047025",
+        "impact_30m": "0.00015675",
+        "impact_4h": "0.00031350",
+        "impact_5m": "0.00006270",
+        "impact_7d": "0.00062700",
+        "impact_score": "0.2",
+        "independent_family_count": 2,
+        "price_led_event": true,
+        "risk_action": "CAUTION",
+        "status": "CONFIRMED"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_event_clusters",
+      "quality_state": "ESTIMATED",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P10_FUSION_EVIDENCE.json",
+      "source_sequence": 13,
+      "source_sha256": "b4578a59f3d1dba98850680c54b9b91a05ed86ac76503c8a223f53e7fbe6abd1",
+      "source_watermark": "13:0ad182b5e1cd48c4e1baa39d4c87f98a1f4023e10406ffb6d5b2f41f4b0b3b54"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "ea89943284842783fa2a0d64fee4d7da257a976002875019301e3b897b969a2a",
+      "entity_id": "linear-fair",
+      "estimated": false,
+      "payload": {
+        "family": "LINEAR",
+        "final_holdout_opened": false,
+        "live_calibration_claimed": false,
+        "metric_name": "mean_squared_error",
+        "metric_value": "0.571875",
+        "modality": "MARKET_ONLY",
+        "model_id": "linear-fair",
+        "observations": 4,
+        "status": "BASELINE",
+        "version": "p07-fair-v1"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_models",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P07_MODEL_EVIDENCE.json",
+      "source_sequence": 6,
+      "source_sha256": "f0d6daa5ff2947a22384f3c27bf5ab3ef2ccfe611ee44b40c18890b8b9e985aa",
+      "source_watermark": "6:e802667d576d6e9d2ad34aa7d6db82b11be62d28a8ef56b781f3c3fca744edeb"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": false,
+      "content_sha256": "d1e84e2ce3af426e9969f6b6eb2b1d50a8a84ae871e71b0d533ec6b344f13150",
+      "entity_id": "fdb66089d3a50f809211eacab2f0cda107599cf62ae2ce45907a64287fe07159",
+      "estimated": true,
+      "payload": {
+        "attention_half_life_minutes": null,
+        "coordination_risk": "0",
+        "independent_author_count": 2,
+        "narrative_id": "fdb66089d3a50f809211eacab2f0cda107599cf62ae2ce45907a64287fe07159",
+        "propagation_stage": "CROSS_PLATFORM",
+        "topic": "spot bitcoin ETF approval",
+        "velocity": null
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_narrative_states",
+      "quality_state": "ESTIMATED",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 15,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "15:192752f402cd257626362798846c2179ef0adffc14c0e9c9d6de44bb31cbc074"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:01Z",
+      "authoritative": true,
+      "content_sha256": "5021026656ee9dc1d8c8e9322203f2de57a411b8a087685e2fe3f2ce1ca9fbb8",
+      "entity_id": "benchmark-1",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "average_fill_price": "101.03434",
+        "completed_at": "2026-09-01T08:00:01Z",
+        "filled_quantity": "1",
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "order_id": "benchmark-1",
+        "order_type": "MARKET",
+        "quantity": "1",
+        "side": "BUY",
+        "status": "FILLED",
+        "strategy_id": "p06-buy-hold",
+        "submitted_at": "2026-09-01T08:00:00.000001Z",
+        "venue_id": "SIM",
+        "virtual": true
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_orders",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/orders.parquet",
+      "source_sequence": 7,
+      "source_sha256": "601bcb84dc06d3c9d9bf334a2bae31f12c0719acc7ca28bfc2308c1fb01ce87d",
+      "source_watermark": "7:068a4abd2d5630ad8508d060b78897cabbef88a41186dbbd9c48ecd2ddf4c996"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:03Z",
+      "authoritative": true,
+      "content_sha256": "d851072fd796478f72823c8e0cc481527f21a6bb3943c0b4aebd1c969bc0aedd",
+      "entity_id": "benchmark-2",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "average_fill_price": "102.96498",
+        "completed_at": "2026-09-01T08:00:03Z",
+        "filled_quantity": "1",
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "order_id": "benchmark-2",
+        "order_type": "MARKET",
+        "quantity": "1",
+        "side": "SELL",
+        "status": "FILLED",
+        "strategy_id": "p06-buy-hold",
+        "submitted_at": "2026-09-01T08:00:02.000001Z",
+        "venue_id": "SIM",
+        "virtual": true
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_orders",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/orders.parquet",
+      "source_sequence": 8,
+      "source_sha256": "601bcb84dc06d3c9d9bf334a2bae31f12c0719acc7ca28bfc2308c1fb01ce87d",
+      "source_watermark": "8:0298c7406d4f7c9dd9d4db306a9591b557f20f00bd226eaedd5170b5fea16f3d"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "7a4de49f718a8e746ede964537a65efcea05cb8174f362c6a58009817d10cdf8",
+      "entity_id": "paper-account:SIM:SPOT:BTCUSDT",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "average_entry_price": null,
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "mark_price": "103",
+        "position_id": "paper-account:SIM:SPOT:BTCUSDT",
+        "quantity": "0",
+        "reporting_asset_id": "USDT",
+        "source_scope": "P06 deterministic historical replay",
+        "strategy_id": "p06-buy-hold",
+        "unrealized_pnl": "0"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_positions_current",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/positions.parquet",
+      "source_sequence": 3,
+      "source_sha256": "2434ad2dd49dcdc2d52046c76069fac095da0358ea1a9bf9abd207b88e65cec0",
+      "source_watermark": "3:7d21cf0ed0f785a027d9f500a1c246a06bdb1f6213e9abdda860f1b20dcf39b7"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "01711edbebc0b75201f1dc0f18f22e000520998fdec0437dbfdd608a741eb2d7",
+      "entity_id": "paper-account",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "daily_pnl_fraction": "0",
+        "drawdown_fraction": "0",
+        "gross_weight": "0",
+        "ledger_reconciled": true,
+        "liquidity_score": "0.90",
+        "margin_utilization": "0.20",
+        "new_risk_allowed": true,
+        "reason_codes": [
+          "AQ-RISK-NORMAL"
+        ],
+        "source_snapshot_sha256": "7b7ad648a0fa6d197b1a0e13fe75cd51307b72a3dc89545e66c35e82160cb90b",
+        "state": "NORMAL"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_risk_summary",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P11_RISK_DECISION_EVIDENCE.json",
+      "source_sequence": 4,
+      "source_sha256": "0b0082ccf005d1b758836048fd0b559eafbe0474a177aa983af9b52f65ee9650",
+      "source_watermark": "4:b72413ef3eb971b3976552519cf78069c2e0a4ea54057ccbd8b5940dd1b2a74c"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "110c648ac1e00f9aa52334eb15f653f58ab380a7a67571b6cac8062e28de3741",
+      "entity_id": "gdelt",
+      "estimated": false,
+      "payload": {
+        "disposition": "RISK_ONLY",
+        "gap_count": 0,
+        "last_success_at": "2026-09-01T18:00:00Z",
+        "policy_status": "VERIFIED_FIXTURE_POLICY",
+        "reason_codes": [
+          "NO_EVENT_INCREMENT",
+          "POSITIVE_RISK_INCREMENT"
+        ],
+        "runtime_state": "READY",
+        "source_id": "gdelt"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_source_policy_status",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 10,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "10:144cc97e7aaf18b6eed8330ac797f338cc2e0717451daf765db3ba58e9ebd47a"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "18f9f60b157060fdc579f3437fa169fb407c680b8ed4bd4374fdd6d73c8dd624",
+      "entity_id": "x",
+      "estimated": false,
+      "payload": {
+        "disposition": "RETIRE",
+        "gap_count": 1,
+        "last_success_at": null,
+        "policy_status": "VERIFIED_FIXTURE_POLICY",
+        "reason_codes": [
+          "LOW_COVERAGE_OR_RELIABILITY"
+        ],
+        "runtime_state": "AWAITING_CREDENTIALS",
+        "source_id": "x"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_source_policy_status",
+      "quality_state": "DEGRADED",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 12,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "12:154735497e189f47df74ee7ccdff40190ac8b8c322c34c84c1b7b1b60970922d"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "418b96eb11690a91f94f88c6c2a81cb234190bbf87ef8c33921afc9037f03b86",
+      "entity_id": "p06-buy-hold",
+      "estimated": false,
+      "payload": {
+        "current_signal": "0",
+        "maximum_drawdown": "0.0000054546868",
+        "model_id": "linear-fair",
+        "net_pnl": "1.889840136",
+        "production_alpha_claimed": false,
+        "reporting_asset_id": "USDT",
+        "status": "RESEARCH",
+        "strategy_id": "p06-buy-hold",
+        "turnover": "0.02039803236520651240233229329",
+        "version": "p06-buy-hold-v1"
+      },
+      "projected_at": "2026-09-01T21:50:00Z",
+      "projection": "rm_strategies",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/run_manifest.json",
+      "source_sequence": 5,
+      "source_sha256": "cf101f5b42183d85a321edea12e9e07f8e354e3baae02e9264fae2609ae2f926",
+      "source_watermark": "5:3c7b246ee2ec95a802804cddd9c1439a079a5bc1262db296b34405ca32c140d7"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_event_count": 15
+}

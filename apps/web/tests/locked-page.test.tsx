@@ -1,22 +1,30 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-import HomePage from "../app/page";
+vi.mock("next/navigation", () => ({ usePathname: () => "/overview" }));
+vi.mock("../src/components/realtime-status", () => ({
+  RealtimeStatus: () => <span>STREAM DISCONNECTED</span>,
+}));
+vi.mock("../src/components/preferences", () => ({
+  PreferenceControls: () => <span>显示偏好</span>,
+}));
 
-describe("P00 locked page", () => {
-  it("shows the immutable development and Live lock state", () => {
-    render(<HomePage />);
+import { AppShell } from "../src/components/app-shell";
 
-    expect(screen.getByText("DEVELOPMENT")).toBeVisible();
-    expect(screen.getByText("LIVE LOCKED")).toBeVisible();
-    expect(screen.getByText("真实订单提交已禁用")).toBeVisible();
+describe("P14 read-only app shell", () => {
+  it("shows environment, permission, and immutable Live lock", () => {
+    render(<AppShell><p>内容</p></AppShell>);
+
+    expect(screen.getByText("RESEARCH ENVIRONMENT")).toBeVisible();
+    expect(screen.getByText("LIVE TRADING LOCKED")).toBeVisible();
+    expect(screen.getByText("VIEWER · READ ONLY")).toBeVisible();
+    expect(screen.getByRole("link", { name: "总览" })).toHaveAttribute("aria-current", "page");
   });
 
-  it("does not expose trading or unlock controls", () => {
-    render(<HomePage />);
+  it("contains no trading, credential, or unlock controls", () => {
+    render(<AppShell><p>内容</p></AppShell>);
 
-    expect(screen.queryByRole("button")).not.toBeInTheDocument();
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
-    expect(screen.queryByRole("link")).not.toBeInTheDocument();
+    expect(screen.queryByText(/提交订单|解锁实盘|API Secret/i)).not.toBeInTheDocument();
   });
 });

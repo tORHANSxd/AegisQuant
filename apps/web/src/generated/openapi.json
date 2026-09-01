@@ -1,0 +1,3801 @@
+{
+  "components": {
+    "schemas": {
+      "AccountOverviewPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Account Id",
+            "type": "string"
+          },
+          "cash": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Cash",
+            "type": "string"
+          },
+          "environment": {
+            "enum": [
+              "RESEARCH",
+              "PAPER",
+              "SHADOW"
+            ],
+            "title": "Environment",
+            "type": "string"
+          },
+          "equity": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Equity",
+            "type": "string"
+          },
+          "equity_curve": {
+            "items": {
+              "$ref": "#/components/schemas/TimeValuePoint"
+            },
+            "minItems": 1,
+            "title": "Equity Curve",
+            "type": "array"
+          },
+          "gross_exposure": {
+            "ge": "0",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Gross Exposure",
+            "type": "string"
+          },
+          "last_reconciliation_at": {
+            "format": "date-time",
+            "title": "Last Reconciliation At",
+            "type": "string"
+          },
+          "leverage": {
+            "ge": "0",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Leverage",
+            "type": "string"
+          },
+          "live_trading_locked": {
+            "const": true,
+            "title": "Live Trading Locked",
+            "type": "boolean"
+          },
+          "margin_utilization": {
+            "ge": "0",
+            "le": "1",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Margin Utilization",
+            "type": "string"
+          },
+          "net_exposure": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Net Exposure",
+            "type": "string"
+          },
+          "open_order_count": {
+            "minimum": 0.0,
+            "title": "Open Order Count",
+            "type": "integer"
+          },
+          "reporting_asset_id": {
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Reporting Asset Id",
+            "type": "string"
+          },
+          "source_scope": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Source Scope",
+            "type": "string"
+          },
+          "unknown_order_count": {
+            "minimum": 0.0,
+            "title": "Unknown Order Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "account_id",
+          "environment",
+          "reporting_asset_id",
+          "equity",
+          "cash",
+          "gross_exposure",
+          "net_exposure",
+          "leverage",
+          "margin_utilization",
+          "open_order_count",
+          "unknown_order_count",
+          "last_reconciliation_at",
+          "live_trading_locked",
+          "equity_curve",
+          "source_scope"
+        ],
+        "title": "AccountOverviewPayload",
+        "type": "object"
+      },
+      "AccountPage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AccountRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "required": [
+          "items",
+          "page"
+        ],
+        "title": "AccountPage",
+        "type": "object"
+      },
+      "AccountRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/AccountOverviewPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "AccountRecord",
+        "type": "object"
+      },
+      "ClaimEvidencePayload": {
+        "additionalProperties": false,
+        "properties": {
+          "available_at": {
+            "format": "date-time",
+            "title": "Available At",
+            "type": "string"
+          },
+          "claim_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Claim Id",
+            "type": "string"
+          },
+          "event_cluster_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Event Cluster Id",
+            "type": "string"
+          },
+          "evidence_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Evidence Id",
+            "type": "string"
+          },
+          "lawful_excerpt_available": {
+            "title": "Lawful Excerpt Available",
+            "type": "boolean"
+          },
+          "model_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Model Version",
+            "type": "string"
+          },
+          "policy_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Policy Id",
+            "type": "string"
+          },
+          "relation": {
+            "enum": [
+              "SUPPORTS",
+              "REFUTES"
+            ],
+            "title": "Relation",
+            "type": "string"
+          },
+          "source_family_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Source Family Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence_id",
+          "event_cluster_id",
+          "claim_id",
+          "relation",
+          "source_family_id",
+          "policy_id",
+          "model_version",
+          "available_at",
+          "lawful_excerpt_available"
+        ],
+        "title": "ClaimEvidencePayload",
+        "type": "object"
+      },
+      "ClaimRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ClaimEvidencePayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "ClaimRecord",
+        "type": "object"
+      },
+      "DailyPnLPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Account Id",
+            "type": "string"
+          },
+          "business_date": {
+            "format": "date",
+            "title": "Business Date",
+            "type": "string"
+          },
+          "fees": {
+            "ge": "0",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Fees",
+            "type": "string"
+          },
+          "funding": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Funding",
+            "type": "string"
+          },
+          "net": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Net",
+            "type": "string"
+          },
+          "pnl_curve": {
+            "items": {
+              "$ref": "#/components/schemas/TimeValuePoint"
+            },
+            "minItems": 1,
+            "title": "Pnl Curve",
+            "type": "array"
+          },
+          "realized": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Realized",
+            "type": "string"
+          },
+          "reporting_asset_id": {
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Reporting Asset Id",
+            "type": "string"
+          },
+          "source_scope": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Source Scope",
+            "type": "string"
+          },
+          "unrealized": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Unrealized",
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id",
+          "business_date",
+          "reporting_asset_id",
+          "realized",
+          "unrealized",
+          "fees",
+          "funding",
+          "net",
+          "pnl_curve",
+          "source_scope"
+        ],
+        "title": "DailyPnLPayload",
+        "type": "object"
+      },
+      "DataHealthPage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DataHealthRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "required": [
+          "items",
+          "page"
+        ],
+        "title": "DataHealthPage",
+        "type": "object"
+      },
+      "DataHealthPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "gap_count": {
+            "minimum": 0.0,
+            "title": "Gap Count",
+            "type": "integer"
+          },
+          "last_success_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Success At"
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms"
+          },
+          "policy_status": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Policy Status",
+            "type": "string"
+          },
+          "provider_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Provider Id",
+            "type": "string"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Reason Codes",
+            "type": "array"
+          },
+          "state": {
+            "enum": [
+              "READY",
+              "STALE",
+              "DEGRADED",
+              "DISCONNECTED",
+              "ERROR"
+            ],
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "provider_id",
+          "state",
+          "last_success_at",
+          "gap_count",
+          "policy_status",
+          "reason_codes"
+        ],
+        "title": "DataHealthPayload",
+        "type": "object"
+      },
+      "DataHealthRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/DataHealthPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "DataHealthRecord",
+        "type": "object"
+      },
+      "EventImpactPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "affected_assets": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Affected Assets",
+            "type": "array"
+          },
+          "confidence": {
+            "ge": "0",
+            "le": "1",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Confidence",
+            "type": "string"
+          },
+          "event_cluster_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Event Cluster Id",
+            "type": "string"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "impact_1d": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Impact 1D",
+            "type": "string"
+          },
+          "impact_30m": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Impact 30M",
+            "type": "string"
+          },
+          "impact_4h": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Impact 4H",
+            "type": "string"
+          },
+          "impact_5m": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Impact 5M",
+            "type": "string"
+          },
+          "impact_7d": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Impact 7D",
+            "type": "string"
+          },
+          "impact_score": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Impact Score",
+            "type": "string"
+          },
+          "independent_family_count": {
+            "minimum": 0.0,
+            "title": "Independent Family Count",
+            "type": "integer"
+          },
+          "price_led_event": {
+            "title": "Price Led Event",
+            "type": "boolean"
+          },
+          "risk_action": {
+            "enum": [
+              "INFO",
+              "WATCH",
+              "CAUTION",
+              "REDUCE",
+              "HALT"
+            ],
+            "title": "Risk Action",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "FORMING",
+              "CONFIRMED",
+              "REFUTED",
+              "RESOLVED"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "event_cluster_id",
+          "status",
+          "confidence",
+          "impact_score",
+          "independent_family_count",
+          "evidence_ids",
+          "affected_assets",
+          "price_led_event",
+          "risk_action",
+          "impact_5m",
+          "impact_30m",
+          "impact_4h",
+          "impact_1d",
+          "impact_7d"
+        ],
+        "title": "EventImpactPayload",
+        "type": "object"
+      },
+      "EventPage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EventRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "required": [
+          "items",
+          "page"
+        ],
+        "title": "EventPage",
+        "type": "object"
+      },
+      "EventRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/EventImpactPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "EventRecord",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HealthResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "live_trading_locked": {
+            "const": true,
+            "title": "Live Trading Locked",
+            "type": "boolean"
+          },
+          "read_model_records": {
+            "minimum": 0.0,
+            "title": "Read Model Records",
+            "type": "integer"
+          },
+          "read_model_snapshot_sha256": {
+            "title": "Read Model Snapshot Sha256",
+            "type": "string"
+          },
+          "real_account_connected": {
+            "const": false,
+            "title": "Real Account Connected",
+            "type": "boolean"
+          },
+          "service": {
+            "const": "aegisquant-read-api",
+            "title": "Service",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "ok",
+              "degraded"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "trading_write_capability": {
+            "const": false,
+            "title": "Trading Write Capability",
+            "type": "boolean"
+          },
+          "version": {
+            "const": "3.1.0.dev0",
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "service",
+          "version",
+          "read_model_records",
+          "read_model_snapshot_sha256",
+          "live_trading_locked",
+          "real_account_connected",
+          "trading_write_capability"
+        ],
+        "title": "HealthResponse",
+        "type": "object"
+      },
+      "IntelligenceResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "claims": {
+            "items": {
+              "$ref": "#/components/schemas/ClaimRecord"
+            },
+            "title": "Claims",
+            "type": "array"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/EventRecord"
+            },
+            "title": "Events",
+            "type": "array"
+          },
+          "live_trading_locked": {
+            "const": true,
+            "title": "Live Trading Locked",
+            "type": "boolean"
+          },
+          "narratives": {
+            "items": {
+              "$ref": "#/components/schemas/NarrativeRecord"
+            },
+            "title": "Narratives",
+            "type": "array"
+          },
+          "snapshot_sha256": {
+            "title": "Snapshot Sha256",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRecord"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "events",
+          "claims",
+          "narratives",
+          "sources",
+          "snapshot_sha256",
+          "live_trading_locked"
+        ],
+        "title": "IntelligenceResponse",
+        "type": "object"
+      },
+      "JsonValue": {},
+      "ModelPage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ModelRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "required": [
+          "items",
+          "page"
+        ],
+        "title": "ModelPage",
+        "type": "object"
+      },
+      "ModelPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "family": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Family",
+            "type": "string"
+          },
+          "final_holdout_opened": {
+            "const": false,
+            "title": "Final Holdout Opened",
+            "type": "boolean"
+          },
+          "live_calibration_claimed": {
+            "const": false,
+            "title": "Live Calibration Claimed",
+            "type": "boolean"
+          },
+          "metric_name": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Metric Name",
+            "type": "string"
+          },
+          "metric_value": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Metric Value",
+            "type": "string"
+          },
+          "modality": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Modality",
+            "type": "string"
+          },
+          "model_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Model Id",
+            "type": "string"
+          },
+          "observations": {
+            "minimum": 0.0,
+            "title": "Observations",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "BASELINE",
+              "CHALLENGER",
+              "CHAMPION",
+              "RETIRED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "model_id",
+          "family",
+          "version",
+          "status",
+          "metric_name",
+          "metric_value",
+          "observations",
+          "modality",
+          "final_holdout_opened",
+          "live_calibration_claimed"
+        ],
+        "title": "ModelPayload",
+        "type": "object"
+      },
+      "ModelRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ModelPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "ModelRecord",
+        "type": "object"
+      },
+      "NarrativePage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NarrativeRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "required": [
+          "items",
+          "page"
+        ],
+        "title": "NarrativePage",
+        "type": "object"
+      },
+      "NarrativePayload": {
+        "additionalProperties": false,
+        "properties": {
+          "attention_half_life_minutes": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attention Half Life Minutes"
+          },
+          "coordination_risk": {
+            "ge": "0",
+            "le": "1",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Coordination Risk",
+            "type": "string"
+          },
+          "independent_author_count": {
+            "minimum": 0.0,
+            "title": "Independent Author Count",
+            "type": "integer"
+          },
+          "narrative_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Narrative Id",
+            "type": "string"
+          },
+          "propagation_stage": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Propagation Stage",
+            "type": "string"
+          },
+          "topic": {
+            "maxLength": 512,
+            "minLength": 1,
+            "title": "Topic",
+            "type": "string"
+          },
+          "velocity": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Velocity"
+          }
+        },
+        "required": [
+          "narrative_id",
+          "topic",
+          "propagation_stage",
+          "independent_author_count",
+          "coordination_risk",
+          "velocity"
+        ],
+        "title": "NarrativePayload",
+        "type": "object"
+      },
+      "NarrativeRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/NarrativePayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "NarrativeRecord",
+        "type": "object"
+      },
+      "OrderPage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/OrderRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "required": [
+          "items",
+          "page"
+        ],
+        "title": "OrderPage",
+        "type": "object"
+      },
+      "OrderPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Account Id",
+            "type": "string"
+          },
+          "average_fill_price": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Average Fill Price"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          },
+          "filled_quantity": {
+            "ge": "0",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Filled Quantity",
+            "type": "string"
+          },
+          "instrument_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Instrument Id",
+            "type": "string"
+          },
+          "order_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Order Id",
+            "type": "string"
+          },
+          "order_type": {
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Order Type",
+            "type": "string"
+          },
+          "quantity": {
+            "ge": "0",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Quantity",
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "BUY",
+              "SELL"
+            ],
+            "title": "Side",
+            "type": "string"
+          },
+          "status": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Status",
+            "type": "string"
+          },
+          "strategy_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Strategy Id",
+            "type": "string"
+          },
+          "submitted_at": {
+            "format": "date-time",
+            "title": "Submitted At",
+            "type": "string"
+          },
+          "venue_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Venue Id",
+            "type": "string"
+          },
+          "virtual": {
+            "const": true,
+            "title": "Virtual",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "order_id",
+          "account_id",
+          "strategy_id",
+          "instrument_id",
+          "venue_id",
+          "side",
+          "order_type",
+          "quantity",
+          "filled_quantity",
+          "average_fill_price",
+          "status",
+          "submitted_at",
+          "completed_at",
+          "virtual"
+        ],
+        "title": "OrderPayload",
+        "type": "object"
+      },
+      "OrderRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/OrderPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "OrderRecord",
+        "type": "object"
+      },
+      "OverviewResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "account": {
+            "$ref": "#/components/schemas/AccountRecord"
+          },
+          "data_health": {
+            "items": {
+              "$ref": "#/components/schemas/DataHealthRecord"
+            },
+            "title": "Data Health",
+            "type": "array"
+          },
+          "live_trading_locked": {
+            "const": true,
+            "title": "Live Trading Locked",
+            "type": "boolean"
+          },
+          "models": {
+            "items": {
+              "$ref": "#/components/schemas/ModelRecord"
+            },
+            "title": "Models",
+            "type": "array"
+          },
+          "orders": {
+            "items": {
+              "$ref": "#/components/schemas/OrderRecord"
+            },
+            "title": "Orders",
+            "type": "array"
+          },
+          "pnl": {
+            "$ref": "#/components/schemas/PnLRecord"
+          },
+          "positions": {
+            "items": {
+              "$ref": "#/components/schemas/PositionRecord"
+            },
+            "title": "Positions",
+            "type": "array"
+          },
+          "risk": {
+            "$ref": "#/components/schemas/RiskRecord"
+          },
+          "snapshot_sha256": {
+            "title": "Snapshot Sha256",
+            "type": "string"
+          },
+          "strategies": {
+            "items": {
+              "$ref": "#/components/schemas/StrategyRecord"
+            },
+            "title": "Strategies",
+            "type": "array"
+          }
+        },
+        "required": [
+          "account",
+          "pnl",
+          "positions",
+          "risk",
+          "strategies",
+          "models",
+          "orders",
+          "data_health",
+          "snapshot_sha256",
+          "live_trading_locked"
+        ],
+        "title": "OverviewResponse",
+        "type": "object"
+      },
+      "PageMeta": {
+        "additionalProperties": false,
+        "properties": {
+          "limit": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "limit",
+          "total"
+        ],
+        "title": "PageMeta",
+        "type": "object"
+      },
+      "PnLRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/DailyPnLPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "PnLRecord",
+        "type": "object"
+      },
+      "PositionPage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PositionRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "required": [
+          "items",
+          "page"
+        ],
+        "title": "PositionPage",
+        "type": "object"
+      },
+      "PositionPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Account Id",
+            "type": "string"
+          },
+          "average_entry_price": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Average Entry Price"
+          },
+          "instrument_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Instrument Id",
+            "type": "string"
+          },
+          "mark_price": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Mark Price",
+            "type": "string"
+          },
+          "position_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Position Id",
+            "type": "string"
+          },
+          "quantity": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Quantity",
+            "type": "string"
+          },
+          "reporting_asset_id": {
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Reporting Asset Id",
+            "type": "string"
+          },
+          "source_scope": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Source Scope",
+            "type": "string"
+          },
+          "strategy_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Strategy Id",
+            "type": "string"
+          },
+          "unrealized_pnl": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Unrealized Pnl",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position_id",
+          "account_id",
+          "instrument_id",
+          "strategy_id",
+          "quantity",
+          "average_entry_price",
+          "mark_price",
+          "unrealized_pnl",
+          "reporting_asset_id",
+          "source_scope"
+        ],
+        "title": "PositionPayload",
+        "type": "object"
+      },
+      "PositionRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/PositionPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "PositionRecord",
+        "type": "object"
+      },
+      "ProjectionKind": {
+        "enum": [
+          "rm_account_overview",
+          "rm_daily_pnl",
+          "rm_positions_current",
+          "rm_risk_summary",
+          "rm_strategies",
+          "rm_models",
+          "rm_orders",
+          "rm_data_health",
+          "rm_event_clusters",
+          "rm_event_claims",
+          "rm_narrative_states",
+          "rm_source_policy_status"
+        ],
+        "title": "ProjectionKind",
+        "type": "string"
+      },
+      "QualityState": {
+        "enum": [
+          "LIVE",
+          "STALE",
+          "DEGRADED",
+          "DISCONNECTED",
+          "ERROR",
+          "ESTIMATED"
+        ],
+        "title": "QualityState",
+        "type": "string"
+      },
+      "RiskRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/RiskSummaryPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "RiskRecord",
+        "type": "object"
+      },
+      "RiskSummaryPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Account Id",
+            "type": "string"
+          },
+          "daily_pnl_fraction": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Daily Pnl Fraction",
+            "type": "string"
+          },
+          "drawdown_fraction": {
+            "ge": "0",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Drawdown Fraction",
+            "type": "string"
+          },
+          "gross_weight": {
+            "ge": "0",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Gross Weight",
+            "type": "string"
+          },
+          "ledger_reconciled": {
+            "title": "Ledger Reconciled",
+            "type": "boolean"
+          },
+          "liquidity_score": {
+            "ge": "0",
+            "le": "1",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Liquidity Score",
+            "type": "string"
+          },
+          "margin_utilization": {
+            "ge": "0",
+            "le": "1",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Margin Utilization",
+            "type": "string"
+          },
+          "new_risk_allowed": {
+            "title": "New Risk Allowed",
+            "type": "boolean"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Reason Codes",
+            "type": "array"
+          },
+          "source_snapshot_sha256": {
+            "title": "Source Snapshot Sha256",
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "NORMAL",
+              "CAUTION",
+              "REDUCE_ONLY",
+              "HALTED"
+            ],
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id",
+          "state",
+          "daily_pnl_fraction",
+          "drawdown_fraction",
+          "gross_weight",
+          "margin_utilization",
+          "liquidity_score",
+          "new_risk_allowed",
+          "ledger_reconciled",
+          "reason_codes",
+          "source_snapshot_sha256"
+        ],
+        "title": "RiskSummaryPayload",
+        "type": "object"
+      },
+      "SourcePage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "required": [
+          "items",
+          "page"
+        ],
+        "title": "SourcePage",
+        "type": "object"
+      },
+      "SourcePolicyPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "disposition": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Disposition",
+            "type": "string"
+          },
+          "gap_count": {
+            "minimum": 0.0,
+            "title": "Gap Count",
+            "type": "integer"
+          },
+          "last_success_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Success At"
+          },
+          "policy_status": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Policy Status",
+            "type": "string"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Reason Codes",
+            "type": "array"
+          },
+          "runtime_state": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Runtime State",
+            "type": "string"
+          },
+          "source_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Source Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_id",
+          "runtime_state",
+          "disposition",
+          "policy_status",
+          "last_success_at",
+          "gap_count",
+          "reason_codes"
+        ],
+        "title": "SourcePolicyPayload",
+        "type": "object"
+      },
+      "SourceRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SourcePolicyPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "SourceRecord",
+        "type": "object"
+      },
+      "StrategyPage": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/StrategyRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "required": [
+          "items",
+          "page"
+        ],
+        "title": "StrategyPage",
+        "type": "object"
+      },
+      "StrategyPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "current_signal": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Current Signal",
+            "type": "string"
+          },
+          "maximum_drawdown": {
+            "ge": "0",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Maximum Drawdown",
+            "type": "string"
+          },
+          "model_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Model Id",
+            "type": "string"
+          },
+          "net_pnl": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Net Pnl",
+            "type": "string"
+          },
+          "production_alpha_claimed": {
+            "const": false,
+            "title": "Production Alpha Claimed",
+            "type": "boolean"
+          },
+          "reporting_asset_id": {
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Reporting Asset Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "RESEARCH",
+              "PAPER",
+              "SHADOW",
+              "RETIRED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "strategy_id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Strategy Id",
+            "type": "string"
+          },
+          "turnover": {
+            "ge": "0",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Turnover",
+            "type": "string"
+          },
+          "version": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "strategy_id",
+          "version",
+          "status",
+          "reporting_asset_id",
+          "net_pnl",
+          "maximum_drawdown",
+          "turnover",
+          "current_signal",
+          "model_id",
+          "production_alpha_claimed"
+        ],
+        "title": "StrategyPayload",
+        "type": "object"
+      },
+      "StrategyRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "as_of_time": {
+            "format": "date-time",
+            "title": "As Of Time",
+            "type": "string"
+          },
+          "authoritative": {
+            "title": "Authoritative",
+            "type": "boolean"
+          },
+          "content_sha256": {
+            "title": "Content Sha256",
+            "type": "string"
+          },
+          "entity_id": {
+            "title": "Entity Id",
+            "type": "string"
+          },
+          "estimated": {
+            "title": "Estimated",
+            "type": "boolean"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/StrategyPayload"
+          },
+          "projected_at": {
+            "format": "date-time",
+            "title": "Projected At",
+            "type": "string"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/ProjectionKind"
+          },
+          "quality_state": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "schema_version": {
+            "const": "1.0.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_artifact": {
+            "title": "Source Artifact",
+            "type": "string"
+          },
+          "source_sequence": {
+            "minimum": 1.0,
+            "title": "Source Sequence",
+            "type": "integer"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          },
+          "source_watermark": {
+            "title": "Source Watermark",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "projection",
+          "entity_id",
+          "source_sequence",
+          "as_of_time",
+          "projected_at",
+          "source_watermark",
+          "quality_state",
+          "authoritative",
+          "estimated",
+          "source_artifact",
+          "source_sha256",
+          "content_sha256",
+          "payload"
+        ],
+        "title": "StrategyRecord",
+        "type": "object"
+      },
+      "StreamEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "event_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Event Id",
+            "type": "string"
+          },
+          "event_time": {
+            "format": "date-time",
+            "title": "Event Time",
+            "type": "string"
+          },
+          "message_type": {
+            "enum": [
+              "snapshot",
+              "increment",
+              "heartbeat"
+            ],
+            "title": "Message Type",
+            "type": "string"
+          },
+          "payload": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Payload",
+            "type": "object"
+          },
+          "schema_version": {
+            "const": "1",
+            "default": "1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sequence": {
+            "minimum": 0.0,
+            "title": "Sequence",
+            "type": "integer"
+          },
+          "server_time": {
+            "format": "date-time",
+            "title": "Server Time",
+            "type": "string"
+          },
+          "topic": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_type",
+          "topic",
+          "event_id",
+          "event_time",
+          "server_time",
+          "sequence",
+          "payload"
+        ],
+        "title": "StreamEvent",
+        "type": "object"
+      },
+      "StreamSnapshotResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/StreamEvent"
+            },
+            "title": "Messages",
+            "type": "array"
+          },
+          "recovery_required": {
+            "const": false,
+            "default": false,
+            "title": "Recovery Required",
+            "type": "boolean"
+          },
+          "schema_version": {
+            "const": "1",
+            "default": "1",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "messages"
+        ],
+        "title": "StreamSnapshotResponse",
+        "type": "object"
+      },
+      "TimeValuePoint": {
+        "additionalProperties": false,
+        "properties": {
+          "time": {
+            "format": "date-time",
+            "title": "Time",
+            "type": "string"
+          },
+          "value": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "time",
+          "value"
+        ],
+        "title": "TimeValuePoint",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Local operator"
+    },
+    "description": "Versioned Read Model API. It exposes no trading writes, no credential input, and no LIVE_TRADING unlock capability.",
+    "license": {
+      "name": "Private local project"
+    },
+    "summary": "Loopback-only, read-only P14 dashboard API",
+    "title": "AegisQuant Read API",
+    "version": "3.1.0.dev0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/accounts": {
+      "get": {
+        "operationId": "accounts_api_v1_accounts_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/QualityState"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Quality State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Accounts",
+        "tags": [
+          "account"
+        ]
+      }
+    },
+    "/api/v1/accounts/{account_id}": {
+      "get": {
+        "operationId": "account_api_v1_accounts__account_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "account_id",
+            "required": true,
+            "schema": {
+              "title": "Account Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountRecord"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Account",
+        "tags": [
+          "account"
+        ]
+      }
+    },
+    "/api/v1/accounts/{account_id}/pnl": {
+      "get": {
+        "operationId": "account_pnl_api_v1_accounts__account_id__pnl_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "account_id",
+            "required": true,
+            "schema": {
+              "title": "Account Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PnLRecord"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Account Pnl",
+        "tags": [
+          "account"
+        ]
+      }
+    },
+    "/api/v1/data/health": {
+      "get": {
+        "operationId": "data_health_api_v1_data_health_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "State"
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/QualityState"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Quality State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataHealthPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Data Health",
+        "tags": [
+          "data"
+        ]
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health",
+        "tags": [
+          "system"
+        ]
+      }
+    },
+    "/api/v1/intelligence/events": {
+      "get": {
+        "operationId": "events_api_v1_intelligence_events_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/QualityState"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Quality State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Events",
+        "tags": [
+          "intelligence"
+        ]
+      }
+    },
+    "/api/v1/intelligence/events/{event_cluster_id}": {
+      "get": {
+        "operationId": "event_api_v1_intelligence_events__event_cluster_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "event_cluster_id",
+            "required": true,
+            "schema": {
+              "title": "Event Cluster Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventRecord"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Event",
+        "tags": [
+          "intelligence"
+        ]
+      }
+    },
+    "/api/v1/intelligence/events/{event_cluster_id}/evidence": {
+      "get": {
+        "operationId": "event_evidence_api_v1_intelligence_events__event_cluster_id__evidence_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "event_cluster_id",
+            "required": true,
+            "schema": {
+              "title": "Event Cluster Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ClaimRecord"
+                  },
+                  "title": "Response Event Evidence Api V1 Intelligence Events  Event Cluster Id  Evidence Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Event Evidence",
+        "tags": [
+          "intelligence"
+        ]
+      }
+    },
+    "/api/v1/intelligence/narratives": {
+      "get": {
+        "operationId": "narratives_api_v1_intelligence_narratives_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/QualityState"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Quality State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NarrativePage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Narratives",
+        "tags": [
+          "intelligence"
+        ]
+      }
+    },
+    "/api/v1/intelligence/overview": {
+      "get": {
+        "operationId": "intelligence_overview_api_v1_intelligence_overview_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntelligenceResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Intelligence Overview",
+        "tags": [
+          "intelligence"
+        ]
+      }
+    },
+    "/api/v1/intelligence/sources": {
+      "get": {
+        "operationId": "sources_api_v1_intelligence_sources_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/QualityState"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Quality State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourcePage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Sources",
+        "tags": [
+          "intelligence"
+        ]
+      }
+    },
+    "/api/v1/models": {
+      "get": {
+        "operationId": "models_api_v1_models_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/QualityState"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Quality State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Models",
+        "tags": [
+          "research"
+        ]
+      }
+    },
+    "/api/v1/orders": {
+      "get": {
+        "operationId": "orders_api_v1_orders_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "account_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Account Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "strategy_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Strategy Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/QualityState"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Quality State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Orders",
+        "tags": [
+          "execution"
+        ]
+      }
+    },
+    "/api/v1/overview": {
+      "get": {
+        "operationId": "overview_api_v1_overview_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OverviewResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Overview",
+        "tags": [
+          "dashboard"
+        ]
+      }
+    },
+    "/api/v1/positions": {
+      "get": {
+        "operationId": "positions_api_v1_positions_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "account_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Account Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "instrument_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Instrument Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "strategy_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Strategy Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/QualityState"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Quality State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PositionPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Positions",
+        "tags": [
+          "portfolio"
+        ]
+      }
+    },
+    "/api/v1/risk/summary": {
+      "get": {
+        "operationId": "risk_summary_api_v1_risk_summary_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "account_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Account Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RiskRecord"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Risk Summary",
+        "tags": [
+          "risk"
+        ]
+      }
+    },
+    "/api/v1/strategies": {
+      "get": {
+        "operationId": "strategies_api_v1_strategies_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality_state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/QualityState"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Quality State"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StrategyPage"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Strategies",
+        "tags": [
+          "research"
+        ]
+      }
+    },
+    "/api/v1/stream/snapshot": {
+      "get": {
+        "operationId": "stream_snapshot_api_v1_stream_snapshot_get",
+        "parameters": [
+          {
+            "description": "Comma-separated stream topics; omitted returns every topic.",
+            "in": "query",
+            "name": "topics",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Comma-separated stream topics; omitted returns every topic.",
+              "title": "Topics"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreamSnapshotResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Stream Snapshot",
+        "tags": [
+          "stream"
+        ]
+      }
+    }
+  }
+}

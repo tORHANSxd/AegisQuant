@@ -161,8 +161,18 @@ def _apply_turnover(
     if turnover <= maximum_turnover:
         return
     scale = maximum_turnover / turnover if turnover > ZERO else ZERO
+    remaining = maximum_turnover
     for index, signal in enumerate(signals):
-        weights[index] = canonical_result(signal.current_weight + deltas[index] * scale)
+        scaled_delta = canonical_result(deltas[index] * scale)
+        magnitude = min(abs(scaled_delta), remaining)
+        direction = ONE if scaled_delta > ZERO else Decimal("-1")
+        candidate = canonical_result(signal.current_weight + direction * magnitude)
+        realized = abs(candidate - signal.current_weight)
+        if realized > remaining:
+            candidate = signal.current_weight
+            realized = ZERO
+        weights[index] = candidate
+        remaining = canonical_result(max(ZERO, remaining - realized))
         reasons[index].append("AQ-PORTFOLIO-TURNOVER-CONSTRAINT")
 
 

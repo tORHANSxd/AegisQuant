@@ -54,7 +54,7 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
 
 
 def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
-    """Return the ordered P03-P13 pipeline without network soak execution."""
+    """Return the ordered P03-P14 pipeline without network soak execution."""
     pnpm = resolve_command("pnpm")
     phase_status = [
         "P00=verified",
@@ -62,40 +62,42 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
         "P02=verified",
         "P03=verified",
     ]
-    if phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         phase_status.append("P04=verified")
-    if phase in {"P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         phase_status.append("P05=planned")
-    if phase in {"P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         phase_status.append("P06=planned")
-    if phase in {"P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         phase_status.append("P07=planned")
-    if phase in {"P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         phase_status.append("P08=planned")
-    if phase in {"P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P09", "P10", "P11", "P12", "P13", "P14"}:
         phase_status.append("P09=planned")
-    if phase in {"P10", "P11", "P12", "P13"}:
+    if phase in {"P10", "P11", "P12", "P13", "P14"}:
         phase_status.append("P10=planned")
-    if phase in {"P11", "P12", "P13"}:
+    if phase in {"P11", "P12", "P13", "P14"}:
         phase_status.append("P11=planned")
-    if phase in {"P12", "P13"}:
+    if phase in {"P12", "P13", "P14"}:
         phase_status.append("P12=planned")
-    if phase == "P13":
+    if phase in {"P13", "P14"}:
         phase_status.append("P13=planned")
+    if phase == "P14":
+        phase_status.append("P14=planned")
     evidence_stages: list[tuple[str, list[str]]] = [
         (
             "p03-binance-evidence",
             [sys.executable, "scripts/generate_p03_binance_evidence.py", "--check"],
         )
     ]
-    if phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         evidence_stages.append(
             (
                 "p04-multivenue-event-evidence",
                 [sys.executable, "scripts/generate_p04_evidence.py", "--check"],
             )
         )
-    if phase in {"P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         evidence_stages.extend(
             (
                 (
@@ -108,7 +110,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         evidence_stages.extend(
             (
                 (
@@ -125,7 +127,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         evidence_stages.extend(
             (
                 (
@@ -138,7 +140,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P08", "P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
         evidence_stages.extend(
             (
                 (
@@ -151,7 +153,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P09", "P10", "P11", "P12", "P13"}:
+    if phase in {"P09", "P10", "P11", "P12", "P13", "P14"}:
         evidence_stages.extend(
             (
                 (
@@ -164,7 +166,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P10", "P11", "P12", "P13"}:
+    if phase in {"P10", "P11", "P12", "P13", "P14"}:
         evidence_stages.extend(
             (
                 (
@@ -177,7 +179,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P11", "P12", "P13"}:
+    if phase in {"P11", "P12", "P13", "P14"}:
         evidence_stages.extend(
             (
                 (
@@ -190,7 +192,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P12", "P13"}:
+    if phase in {"P12", "P13", "P14"}:
         evidence_stages.extend(
             (
                 (
@@ -203,7 +205,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase == "P13":
+    if phase in {"P13", "P14"}:
         evidence_stages.extend(
             (
                 (
@@ -213,6 +215,27 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 (
                     "p13-mutation",
                     [sys.executable, "-m", "scripts.run_p13_mutation", "--check"],
+                ),
+            )
+        )
+    if phase == "P14":
+        evidence_stages.extend(
+            (
+                (
+                    "p14-read-api-web-contracts",
+                    [sys.executable, "-m", "scripts.generate_p14_contracts", "--check"],
+                ),
+                (
+                    "p14-read-api-web-evidence",
+                    [sys.executable, "-m", "scripts.generate_p14_evidence", "--check"],
+                ),
+                (
+                    "p14-typescript-client-drift",
+                    [sys.executable, "-m", "scripts.check_p14_client"],
+                ),
+                (
+                    "p14-mutation",
+                    [sys.executable, "-m", "scripts.run_p14_mutation", "--check"],
                 ),
             )
         )
@@ -257,6 +280,11 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
         ("web-lint", [pnpm, "lint"]),
         ("web-typecheck", [pnpm, "typecheck"]),
         ("web-unit", [pnpm, "test"]),
+        *(
+            [("web-storybook", [pnpm, "--filter", "@aegisquant/web", "build-storybook"])]
+            if phase == "P14"
+            else []
+        ),
         ("web-build", [pnpm, "build"]),
         ("web-e2e", [pnpm, "e2e"]),
     ]
@@ -278,8 +306,9 @@ def main() -> int:
             "P11",
             "P12",
             "P13",
+            "P14",
         ),
-        default="P13",
+        default="P14",
     )
     parser.add_argument(
         "--output",

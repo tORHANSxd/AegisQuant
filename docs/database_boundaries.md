@@ -13,7 +13,19 @@ Kafka 或 TimescaleDB，也不允许用 SQLite/Mock 代替 PostgreSQL 契约测�
 - `inbox_messages`：按 `consumer_name + message_id` 以及
   `consumer_name + idempotency_key` 双重去重。
 - `provider_registry`、`source_document_registry`、`instrument_registry`、
-  `event_schema_registry`：基础版本化 Registry。
+`event_schema_registry`：基础版本化 Registry。
+
+P14 新增独立查询边界：
+
+- `read_model_records`：按 `projection + entity_id` 保存不可变查询记录、时间语义、来源水位、
+  质量状态和内容哈希；
+- `read_model_projection_checkpoints`：保存每个投影的最后序列、水位、记录数和状态哈希；
+- `read_model_snapshot_state`：单例快照头，用于验证完整重建 ID、事件数和快照 SHA-256。
+
+Read Model 替换必须在一个 PostgreSQL 事务中完成。读者只能看到旧快照或完整新快照，不能看到
+删除一半、插入一半的中间状态。`aegisquant_read_api` 服务角色只授予上述三张表的 `SELECT`；
+真实 PostgreSQL 契约测试证明该角色的 `DELETE` 被数据库拒绝。网页不持有数据库 DSN，也不直连
+任何交易核心表。
 
 ## 写事务
 
@@ -39,6 +51,8 @@ exactly-once 网络语义。
 ## Migration
 
 - Alembic revision `20260831_0001` 是不可变 baseline。
+- Alembic revision `20260901_0002` 增加权威会计与对账存储；
+  revision `20260902_0003` 增加 P14 Read Model 存储。
 - 发布后的 migration 不原地修改；修正通过新 revision。
 - CI 从真实空库执行 `upgrade head`，核对表和约束，再执行 `downgrade base`。
 - Alembic URL 只能在运行时通过 `AEGISQUANT_TEST_DATABASE_URL` 提供；仓库不保存 DSN、

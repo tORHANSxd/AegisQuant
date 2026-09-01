@@ -41,3 +41,28 @@ def test_capacity_impact_turnover_and_group_limits_only_reduce_targets() -> None
     )
     assert sum(abs(leg.target_weight) for leg in result.legs) <= Decimal("0.45")
     assert any("AQ-PORTFOLIO-CAPACITY-CONSTRAINT" in leg.constraint_reasons for leg in result.legs)
+
+
+def test_turnover_projection_does_not_overshoot_by_decimal_rounding() -> None:
+    result = proposal(
+        custom_signals=(
+            signal(
+                asset=BTC,
+                instrument="BTC-USDT-PERP",
+                raw_score=Decimal("0.439"),
+                confidence=Decimal("0.360"),
+                adv=Decimal("344017"),
+                impact_bps=Decimal("79.99"),
+            ),
+            signal(
+                asset=ETH,
+                instrument="ETH-USDT-PERP",
+                raw_score=Decimal("0.439"),
+                confidence=Decimal("0.804"),
+                adv=Decimal("344017"),
+                impact_bps=Decimal("79.99"),
+            ),
+        )
+    )
+
+    assert result.turnover <= construction_policy().maximum_turnover

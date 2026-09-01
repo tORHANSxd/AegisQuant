@@ -1,0 +1,22 @@
+{
+  "charts": [
+    "EquityChart",
+    "DrawdownChart",
+    "CandlestickTradeChart",
+    "AttributionWaterfall",
+    "PnLHeatmap",
+    "ExposureTreemap",
+    "CorrelationMatrix",
+    "ModelCalibrationChart"
+  ],
+  "client_lazy_loading": true,
+  "libraries": {
+    "echarts": "6.1.0",
+    "lightweight-charts": "5.2.1"
+  },
+  "missing_charts": [],
+  "schema_version": "p14-chart-evidence-v1",
+  "semantic_data_table_present": true,
+  "test": "apps/web/tests/charts.test.tsx",
+  "text_summary_present": true
+}

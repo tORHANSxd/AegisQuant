@@ -1,0 +1,101 @@
+{
+  "config_sha256": "a79781af58379995d960d5280bee34a6236bc80a8289727cec345baaa099f616",
+  "drift_check": "python scripts/check_p14_client.py",
+  "generated_file_count": 16,
+  "generated_files": [
+    {
+      "path": "apps/web/src/generated/client/client/client.gen.ts",
+      "sha256": "8a17b0bf1540258734a128f176f6cb915c849b97d8064a613dba5ef8390e58d9",
+      "size_bytes": 7759
+    },
+    {
+      "path": "apps/web/src/generated/client/client/index.ts",
+      "sha256": "949cc7333527c91928c32410c4a4a2dd2b90b99fe080eb8ce4505647852fbe1b",
+      "size_bytes": 861
+    },
+    {
+      "path": "apps/web/src/generated/client/client/types.gen.ts",
+      "sha256": "1a182888235bc21fa2efeb0409589ddf833317b8dd7db4855f198dfc1c47bb4a",
+      "size_bytes": 6731
+    },
+    {
+      "path": "apps/web/src/generated/client/client/utils.gen.ts",
+      "sha256": "dce96188f7dfd8e9e5543199a42a5117e23042a7dd48e1ceaff9bb20898f8522",
+      "size_bytes": 8503
+    },
+    {
+      "path": "apps/web/src/generated/client/client.gen.ts",
+      "sha256": "b325822184abc7aed91c42bb1ea0697bb8ae178833c3fca97f6ec498398c1377",
+      "size_bytes": 816
+    },
+    {
+      "path": "apps/web/src/generated/client/core/auth.gen.ts",
+      "sha256": "4b4aca5bd9b2c43a112bb74617295278d84f86360ada71a8db57f09cd0c254f4",
+      "size_bytes": 1056
+    },
+    {
+      "path": "apps/web/src/generated/client/core/bodySerializer.gen.ts",
+      "sha256": "a74163de6731f06f185948895cc4b5f8900e7d30ce76b9588717bad99ab165a7",
+      "size_bytes": 2488
+    },
+    {
+      "path": "apps/web/src/generated/client/core/params.gen.ts",
+      "sha256": "097c75f6e269c6c8680641091832a69b38e8828e8ee8465318d32a177593330f",
+      "size_bytes": 4248
+    },
+    {
+      "path": "apps/web/src/generated/client/core/pathSerializer.gen.ts",
+      "sha256": "6e80a19627d36fd2a9e8daee113713b2e047d107d42ead9b4a9ab344690b998c",
+      "size_bytes": 4295
+    },
+    {
+      "path": "apps/web/src/generated/client/core/queryKeySerializer.gen.ts",
+      "sha256": "adc570c9357a08624cce81dc503abd8d8ff60a76d25bd4d3a4afbe349d82d1f0",
+      "size_bytes": 2922
+    },
+    {
+      "path": "apps/web/src/generated/client/core/serverSentEvents.gen.ts",
+      "sha256": "df993567abbe3e5b477d81517fb967cf63cf40b7866957d5dc6cc03238cb1426",
+      "size_bytes": 7204
+    },
+    {
+      "path": "apps/web/src/generated/client/core/types.gen.ts",
+      "sha256": "0c33c5e096608fc1f859d89bc17ce428e306c7aa3c2c30acd8affa5a734370af",
+      "size_bytes": 3459
+    },
+    {
+      "path": "apps/web/src/generated/client/core/utils.gen.ts",
+      "sha256": "1b637c521d8136dfdbf8dfc4fcc8bb73e0c554466e4d2ca9c9086d4c712983c4",
+      "size_bytes": 3417
+    },
+    {
+      "path": "apps/web/src/generated/client/index.ts",
+      "sha256": "0a8b56af456e5bf1480a3168db182cc4e4716edde2658859f0d847efe53622c3",
+      "size_bytes": 4935
+    },
+    {
+      "path": "apps/web/src/generated/client/sdk.gen.ts",
+      "sha256": "ddec389c27c984451059d258c9a30d47f88a5ba7011fe1cb289d2838b7178ec7",
+      "size_bytes": 11397
+    },
+    {
+      "path": "apps/web/src/generated/client/types.gen.ts",
+      "sha256": "8bbda8caed435a5484f8031a62a9a6f789871326f432bb96d017329a7f517d9f",
+      "size_bytes": 39889
+    }
+  ],
+  "generator": "@hey-api/openapi-ts",
+  "generator_version": "0.99.0",
+  "openapi_runtime_matches_checked_artifact": true,
+  "openapi_sha256": "82d4c955cc158af08a80bd348ddbeb0b78781e409d670b9414b0790d47562f87",
+  "required_symbols": [
+    "OverviewResponse",
+    "IntelligenceResponse",
+    "StreamSnapshotResponse",
+    "QualityState",
+    "overviewApiV1OverviewGet"
+  ],
+  "required_symbols_present": true,
+  "schema_version": "p14-client-contract-v1",
+  "websocket_schema_sha256": "4a513f594f962bef707fc3e83725d556685c6ea9227c0eb50a816a1f51e10339"
+}

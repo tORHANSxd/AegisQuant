@@ -1,0 +1,24 @@
+{
+  "missing_states": [],
+  "provenance_fields": [
+    "as_of_time",
+    "latency_ms",
+    "source",
+    "authoritative",
+    "estimated",
+    "last_success_at"
+  ],
+  "rest_gap_recovery": "/api/v1/stream/snapshot",
+  "schema_version": "p14-state-evidence-v1",
+  "states": [
+    "LOADING",
+    "EMPTY",
+    "LIVE",
+    "STALE",
+    "DEGRADED",
+    "DISCONNECTED",
+    "ERROR",
+    "PERMISSION_DENIED"
+  ],
+  "test": "apps/web/tests/data-state.test.tsx; apps/web/tests/realtime.test.ts"
+}
