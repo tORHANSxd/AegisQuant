@@ -42,8 +42,28 @@ def test_p03_boundary_is_explicit_and_live_trading_remains_locked(
     project_root: Path,
 ) -> None:
     state = load_state(project_root)
-    assert state["current_phase"] in {"P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10"}
-    assert state["next_phase"] in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11"}
+    assert state["current_phase"] in {
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+    }
+    assert state["next_phase"] in {
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+    }
     assert state["status"] in {"in_progress", "accepted", "accepted_with_waiver"}
     assert state["live_trading_locked"] is True
     assert not (project_root / "src/aegisquant/live").exists()

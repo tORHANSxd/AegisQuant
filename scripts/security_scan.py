@@ -25,6 +25,7 @@ DETECT_LINE_EXCLUDE = (
     r"terms_version_hash|P00_EVIDENCE_COMMIT|"
     r"P00_IMPLEMENTATION_COMMIT).*|"
     r'.*"(?:ledger_snapshot_id|payload_hash|public_key_base64|signature_base64|'
+    r"public_key_hex|signature_hex|"
     r'(?:source_|rebuilt_)?(?:last_event_hash|state_hash))"\s*:.*|'
     r'.*"revision"\s*:.*|.*revision\s*=.*|'
     r".*secret_loading.*(?:false|disabled).*|.*credentials_received.*0.*|"
@@ -58,8 +59,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--phase",
-        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10"),
-        default="P10",
+        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11"),
+        default="P11",
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
