@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P04",
+  "commit_sha": "2ad3f0ffdd76fba5e81ce9d12eb70bef31c2d84d",
+  "environment_fingerprint": "sha256:311ea7a93cc3046ccd05ba389e4bda8231f01db8be625194bc0c3779d44bd5c1",
+  "generated_at_utc": "2026-09-01T06:42:03.7425103Z",
+  "suites": [
+    {
+      "name": "local-ci-gates",
+      "artifact": "reports/phases/P04/CI_RESULTS.json",
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": false
+    },
+    {
+      "name": "python-3.13-pytest",
+      "artifact": "reports/phases/P04/CI_RESULTS.json#pytest",
+      "passed": 219,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "python-3.14-candidate-contract",
+      "artifact": "reports/phases/P04/PYTHON_314_CONTRACT.json",
+      "passed": 183,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "web-unit",
+      "artifact": "reports/phases/P04/CI_RESULTS.json#web-unit",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "web-chromium-e2e",
+      "artifact": "reports/phases/P04/CI_RESULTS.json#web-e2e",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    }
+  ],
+  "aggregation_note": "passed/failed/skipped 仅汇总独立测试执行；20 个 CI 门不重复计数",
+  "passed": 405,
+  "failed": 0,
+  "skipped": 0,
+  "waived": 0,
+  "known_flakes": [
+    {
+      "id": "P04-OBS-WINDOWS-ATOMIC-RENAME",
+      "observations": 1,
+      "reproduced": false,
+      "final_gate": "passed",
+      "tracked_as": "P04-RISK-006"
+    }
+  ],
+  "warnings": [
+    {
+      "id": "P04-WARN-NAUTILUS-PANDAS-UTCNOW",
+      "count_across_runtime_runs": 8,
+      "blocking": false,
+      "tracked_as": "P00-RISK-005"
+    },
+    {
+      "id": "P04-WARN-NODE-ENGINE-MISMATCH",
+      "expected": "24.20.0",
+      "actual": "24.12.0",
+      "blocking": false,
+      "tracked_as": "P04-RISK-007"
+    }
+  ],
+  "coverage": {
+    "status": "not_collected",
+    "reason": "P04 以场所契约、序列恢复、PIT 回放、故障隔离和安全负向测试直接覆盖高风险不变量；任务书未规定单一行覆盖率门槛",
+    "next_required_phase": "新增生产来源或扩大解析分支前按风险建立增量覆盖门"
+  },
+  "mutation": {
+    "status": "not_collected",
+    "reason": "P04 已使用缺口、重复、乱序、删除、转载、额度耗尽和提示词注入反例；未伪造 mutation score",
+    "next_required_phase": "规则流水线进入模型或交易决策边界前评估"
+  },
+  "performance": {
+    "status": "not_collected",
+    "reason": "P04 是离线契约验收；业主明确不要求 P03 的 12/24 小时验收，因此不声明在线采集 SLA",
+    "next_required_phase": "任何生产采集 SLA 声明前建立新的、经批准的持续运行验收"
+  },
+  "security_findings": [],
+  "security_summary": {
+    "secret_findings": 0,
+    "bandit_findings": 0,
+    "python_dependency_audit": "passed",
+    "javascript_dependency_audit": "passed",
+    "real_account_access_performed": false,
+    "secret_store_access_performed": false,
+    "plaintext_secrets_written": false,
+    "authentication_used": false,
+    "order_capability_present": false,
+    "live_trading_locked": true
+  },
+  "result": "pass"
+}
