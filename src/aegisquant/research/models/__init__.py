@@ -1,4 +1,4 @@
-"""Classical baseline models for P07 research."""
+"""P07 baselines plus P08 probabilistic model families."""
 
 from aegisquant.research.models.baselines import (
     BaselineDataset,

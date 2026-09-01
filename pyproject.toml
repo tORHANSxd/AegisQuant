@@ -43,6 +43,15 @@ dev = [
 event-engine = [
   "nautilus-trader==1.231.0",
 ]
+research = [
+  "catboost==1.2.10",
+  "chronos-forecasting==2.3.1",
+  "lightgbm==4.7.0",
+  "mlflow-skinny==3.15.2",
+  "optuna==4.9.0",
+  "torch==2.13.0",
+  "xgboost==3.4.1",
+]
 security = [
   "bandit==1.9.4",
   "cyclonedx-bom==7.3.1",

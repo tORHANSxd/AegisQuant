@@ -14,7 +14,7 @@ def _json(path: Path) -> dict[str, object]:
     return cast(dict[str, object], json.loads(path.read_text(encoding="utf-8")))
 
 
-def test_p07_state_is_in_progress_live_locked_and_stops_before_p08(project_root: Path) -> None:
+def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) -> None:
     state = cast(
         dict[str, object],
         yaml.safe_load(
@@ -23,15 +23,20 @@ def test_p07_state_is_in_progress_live_locked_and_stops_before_p08(project_root:
     )
     previous = cast(dict[str, object], state["previous_phase"])
     deferred = cast(list[dict[str, object]], state["deferred_acceptance_queue"])
-    assert state["current_phase"] == "P07"
-    assert state["next_phase"] == "P08"
+    assert state["current_phase"] in {"P07", "P08"}
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["formal_acceptance_deferred"] is True
     assert state["live_trading_locked"] is True
-    assert previous["phase"] == "P06"
+    if state["current_phase"] == "P07":
+        assert state["next_phase"] == "P08"
+        assert previous["phase"] == "P06"
+        assert {item["phase"] for item in deferred} >= {"P05", "P06"}
+    else:
+        assert state["next_phase"] == "P09"
+        assert previous["phase"] == "P07"
+        assert {item["phase"] for item in deferred} >= {"P05", "P06", "P07"}
     assert previous["status"] == "in_progress"
-    assert {item["phase"] for item in deferred} >= {"P05", "P06"}
     assert not (project_root / "reports/phases/P07/ACCEPTANCE.md").exists()
     assert not (project_root / "src/aegisquant/live").exists()
 
@@ -106,6 +111,6 @@ def test_p07_scoreboard_and_dependency_contract_are_explicit(project_root: Path)
     assert dependency["ai_trader_code_copied_or_executed"] is False
     assert external["r331_state"] == "not_provided"
     assert external["fabricated_baseline"] is False
-    assert compliance["phase"] == "P07"
+    assert compliance["phase"] in {"P07", "P08"}
     assert compliance["status"] == "passed"
     assert compliance["python_unknown_license_count"] == 0

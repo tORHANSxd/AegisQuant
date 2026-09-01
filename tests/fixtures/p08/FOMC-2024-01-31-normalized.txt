@@ -1,0 +1,6 @@
+source_url=https://www.federalreserve.gov/newsevents/pressreleases/monetary20240131a.htm
+release_date=2024-01-31
+release_time_label=For release at 2:00 p.m. EST
+available_time_utc=2024-01-31T19:00:00Z
+fact=The Committee maintained the federal funds target range at 5.25% to 5.50%.
+fact=The Committee said a rate reduction was not expected until confidence in sustainable movement toward 2% inflation increased.

@@ -38,7 +38,7 @@ def test_p06_state_is_in_progress_with_live_lock_and_deferred_acceptance(
     previous = cast(dict[str, object], state["previous_phase"])
     deferred = cast(list[dict[str, object]], state["deferred_acceptance_queue"])
 
-    assert state["current_phase"] in {"P06", "P07"}
+    assert state["current_phase"] in {"P06", "P07", "P08"}
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["live_trading_locked"] is True
@@ -47,11 +47,19 @@ def test_p06_state_is_in_progress_with_live_lock_and_deferred_acceptance(
     if state["current_phase"] == "P06":
         assert state["next_phase"] == "P07"
         assert previous["phase"] == "P05"
-    else:
+    elif state["current_phase"] == "P07":
         assert state["next_phase"] == "P08"
         assert previous["phase"] == "P06"
         assert {item["phase"] for item in deferred} >= {"P05", "P06"}
-    assert _p06_record(state)["status"] == "in_progress"
+    else:
+        assert state["next_phase"] == "P09"
+        assert previous["phase"] == "P07"
+        assert {item["phase"] for item in deferred} >= {"P05", "P06", "P07"}
+    if state["current_phase"] == "P08":
+        p06 = next(item for item in deferred if item["phase"] == "P06")
+        assert p06["status"] == "implementation_verified_acceptance_deferred"
+    else:
+        assert _p06_record(state)["status"] == "in_progress"
     assert not (project_root / "reports/phases/P06/ACCEPTANCE.md").exists()
     assert not (project_root / "src/aegisquant/live").exists()
 

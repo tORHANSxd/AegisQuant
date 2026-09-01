@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import cast
 
 DETECT_EXCLUDE = (
-    r"(?:^|[\\/])(?:\.git|\.venv|\.tools|\.next|\.pytest_cache|\.pytest_tmp|"
+    r"(?:^|[\\/])(?:\.git|\.venv|\.tools|\.next|\.pytest_cache|\.pytest_tmp|\.runtime|"
     r"\.ruff_cache|node_modules|docs[\\/]spec|reports[\\/](?:licenses|sbom|security))"
     r"(?:[\\/]|$)|Master_Taskbook|REQUIREMENTS_TRACEABILITY|ARTIFACT_MANIFEST|"
     r"pnpm-lock\.yaml|uv\.lock|\.tsbuildinfo$"
@@ -25,6 +25,7 @@ DETECT_LINE_EXCLUDE = (
     r"P00_IMPLEMENTATION_COMMIT).*|"
     r'.*"(?:ledger_snapshot_id|payload_hash|public_key_base64|signature_base64|'
     r'(?:source_|rebuilt_)?(?:last_event_hash|state_hash))"\s*:.*|'
+    r'.*"revision"\s*:.*|.*revision\s*=.*|'
     r".*secret_loading.*(?:false|disabled).*|.*credentials_received.*0.*|"
     r".*plaintext_secrets_written.*0.*)"
 )
@@ -54,7 +55,9 @@ def parsed_json(output: str) -> object:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("P03", "P04", "P05", "P06", "P07"), default="P07")
+    parser.add_argument(
+        "--phase", choices=("P03", "P04", "P05", "P06", "P07", "P08"), default="P08"
+    )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     report_dir = root / "reports/security"

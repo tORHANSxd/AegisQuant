@@ -1,0 +1,25 @@
+requirement_id,category,requirement,implementation,test,evidence,status
+P08-T01,task,"部署 MLflow、Experiment Ledger 和内容寻址 Artifact Registry",src/aegisquant/research/experiments/,tests/research/test_experiment_factory.py,reports/data/P08_EXPERIMENT_EVIDENCE.json,verified
+P08-T02,task,"集成 Optuna 并记录全部 trial 和搜索预算",src/aegisquant/research/experiments/optimization.py,tests/research/test_experiment_factory.py,reports/data/P08_EXPERIMENT_EVIDENCE.json,verified
+P08-T03,task,"实现 Hypothesis Spec、审批队列和资源预算",src/aegisquant/research/hypotheses/,tests/research/test_hypothesis_queue.py,reports/data/P08_HYPOTHESIS_EVIDENCE.json,verified
+P08-T04,task,"实现 LightGBM、CatBoost、XGBoost 统一接口",src/aegisquant/research/models/tree.py,tests/research/test_model_factory.py,reports/data/P08_MODEL_COUNCIL_EVIDENCE.json,verified
+P08-T05,task,"实现至少两个轻量深度时序候选",src/aegisquant/research/models/deep.py,tests/research/test_model_factory.py,reports/data/P08_MODEL_COUNCIL_EVIDENCE.json,verified
+P08-T06,task,"建立 Chronos-2、Moirai 2、TimesFM 3、Kronos 插件与有限评测",src/aegisquant/research/models/foundation.py,tests/research/test_foundation_plugins.py,reports/data/P08_FOUNDATION_MODEL_EVIDENCE.json,verified
+P08-T07,task,"实现预测分布、校准、conformal 区间和 abstain",src/aegisquant/research/models/uncertainty.py,tests/research/test_uncertainty.py,reports/data/P08_UNCERTAINTY_EVIDENCE.json,verified
+P08-T08,task,"实现 OOF stacking 和 point-in-time 状态门控",src/aegisquant/research/models/ensemble.py,tests/research/test_oof_stacking.py,reports/data/P08_ENSEMBLE_EVIDENCE.json,verified
+P08-T09,task,"实现 drift/OOD 基础监控和降级动作",src/aegisquant/research/models/monitoring.py,tests/research/test_drift_ood.py,reports/data/P08_DRIFT_EVIDENCE.json,verified
+P08-T10,task,"建立 Champion/Challenger、Model Card 和显式晋升提案",src/aegisquant/research/registry/,tests/research/test_model_registry.py,reports/data/P08_REGISTRY_EVIDENCE.json,verified
+P08-T11,task,"建立 LLM Provider、RAG 安全边界、Source Policy Gate 和结构化输出",src/aegisquant/intelligence/providers.py; src/aegisquant/intelligence/rag.py,tests/security/prompt_safety/,reports/data/P08_PROMPT_SAFETY_EVIDENCE.json,verified
+P08-T12,task,"实现 Event Expert Committee 和只基于证据的 Arbiter",src/aegisquant/intelligence/committee.py,tests/unit/intelligence/test_committee.py,reports/data/P08_EVENT_COMMITTEE_EVIDENCE.json,verified
+P08-T13,task,"实现 Claim/Event Graph、冲突、事件状态和多时间尺度 EventImpactForecast",src/aegisquant/intelligence/graph.py; src/aegisquant/intelligence/impact.py,tests/unit/intelligence/test_event_graph.py,reports/data/P08_EVENT_GRAPH_EVIDENCE.json,verified
+P08-T14,task,"实现 Market-only、Event-only、Fused 公平比较与 abstain",src/aegisquant/research/council.py,tests/research/test_model_council.py,reports/data/P08_MODEL_COUNCIL_EVIDENCE.json,verified
+P08-T15,task,"AI 只能创建 Hypothesis、Experiment、Event Proposal",src/aegisquant/research/proposals.py; src/aegisquant/intelligence/committee.py,tests/security/prompt_safety/test_proposal_boundaries.py,reports/data/P08_PROMPT_SAFETY_EVIDENCE.json,verified
+P08-T16,task,"预算 GPU 显存、训练时间、推断延迟、来源调用和云模型成本",src/aegisquant/research/budgets.py,tests/research/test_resource_budgets.py,reports/data/P08_RESOURCE_EVIDENCE.json,verified
+P08-T17,task,"运行完整 Model Council 公平比较和一个历史事件回放",scripts/generate_p08_evidence.py,tests/p08/test_phase_evidence.py,reports/data/P08_MODEL_COUNCIL_EVIDENCE.json; reports/data/P08_EVENT_REPLAY_EVIDENCE.json,verified
+P08-A01,acceptance,"复杂模型不因类别自动获得优势且可能被淘汰",src/aegisquant/research/council.py,tests/research/test_model_council.py,reports/data/P08_MODEL_COUNCIL_EVIDENCE.json,in_progress
+P08-A02,acceptance,"所有模型使用相同 split、成本和搜索预算报告",src/aegisquant/research/council.py,tests/research/test_model_council.py,reports/data/P08_MODEL_COUNCIL_EVIDENCE.json,in_progress
+P08-A03,acceptance,"AI 输出无效 schema 时不会启动实验",src/aegisquant/research/proposals.py,tests/security/prompt_safety/test_proposal_boundaries.py,reports/data/P08_PROMPT_SAFETY_EVIDENCE.json,in_progress
+P08-A04,acceptance,"外部文本提示词不能获得工具或秘密",src/aegisquant/intelligence/rag.py,tests/security/prompt_safety/test_prompt_firewall.py,reports/data/P08_PROMPT_SAFETY_EVIDENCE.json,in_progress
+P08-A05,acceptance,"模型能因低置信度或高分歧输出 abstain",src/aegisquant/research/models/uncertainty.py,tests/research/test_uncertainty.py,reports/data/P08_UNCERTAINTY_EVIDENCE.json,in_progress
+P08-A06,acceptance,"基础模型权重和许可证具有哈希与记录",src/aegisquant/research/models/foundation.py,tests/research/test_foundation_plugins.py,reports/data/P08_FOUNDATION_MODEL_EVIDENCE.json,in_progress
+P08-A07,acceptance,"4070 Ti 资源上限得到遵守且 OOM 可恢复",src/aegisquant/research/budgets.py,tests/research/test_resource_budgets.py,reports/data/P08_RESOURCE_EVIDENCE.json,in_progress

@@ -1,9 +1,11 @@
 """Pagination, checkpoints, public raw archive, and official ZIP checksum tests."""
 
 import hashlib
+import os
 from pathlib import Path
 
 import httpx
+import pytest
 
 from aegisquant.data.archive import RevisionArchive
 from aegisquant.data.checkpoint import CheckpointStore
@@ -86,6 +88,38 @@ def test_public_append_only_revision_rehydrates_without_a_secret(
     assert record.payload_path == "content.raw"
     assert archive.rehydrate(record=record) == content
     assert record.content_sha256 == hashlib.sha256(content).hexdigest()
+
+
+def test_revision_publication_retries_one_transient_filesystem_lock(
+    tmp_path: Path,
+    project_root: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    providers, _, policy = registries(project_root)
+    archive = RevisionArchive(tmp_path / "archive", providers)
+    actual_replace = os.replace
+    attempts = 0
+
+    def flaky_replace(source: str | Path, destination: str | Path) -> None:
+        nonlocal attempts
+        attempts += 1
+        if attempts == 1:
+            raise PermissionError("simulated transient filesystem lock")
+        actual_replace(source, destination)
+
+    monkeypatch.setattr("aegisquant.data.archive.os.replace", flaky_replace)
+    record = archive.archive_revision(
+        policy=policy,
+        source_document_id=SourceDocumentId("binance:transient-lock-test"),
+        provider_native_id=ProviderNativeId("transient-lock-test"),
+        revision=1,
+        content=b'{"public":true}',
+        available_time=OBSERVED,
+        ingest_time=OBSERVED,
+    )
+
+    assert attempts == 2
+    assert archive.rehydrate(record=record) == b'{"public":true}'
 
 
 def test_public_archive_download_requires_matching_official_checksum(tmp_path: Path) -> None:

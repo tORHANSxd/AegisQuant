@@ -1,0 +1,31 @@
+{
+  "schema_version": "p08-historical-replay-fixture-v1",
+  "event": {
+    "name": "FOMC monetary policy statement",
+    "source_url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240131a.htm",
+    "release_label": "For release at 2:00 p.m. EST",
+    "available_time_utc": "2024-01-31T19:00:00Z",
+    "retrieved_at_utc": "2026-09-01T13:55:00Z",
+    "retrieved_html_sha256": "e91dc4f9563d1277e79af3249f094355b1f0a13b2797f87a2dae3673bae055a5",
+    "normalized_fixture": "FOMC-2024-01-31-normalized.txt",
+    "normalized_fixture_sha256": "f03c58ccf77317e69b29b5e5fb03ba89a9d7fd52274adf482e22b6d458c9771f",
+    "source_class": "official_primary"
+  },
+  "market": {
+    "name": "Binance Vision BTCUSDT spot 1m klines",
+    "archive_url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1m/BTCUSDT-1m-2024-01-31.zip",
+    "checksum_url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1m/BTCUSDT-1m-2024-01-31.zip.CHECKSUM",
+    "archive_sha256": "cfe05b3595bc5405b77b3e30ce7575ab038261ad7a4dae82e8948db8d23beb72",
+    "subset_fixture": "BTCUSDT-1m-2024-01-31-1850-1910UTC.csv",
+    "subset_fixture_sha256": "aa393cb4afa53d77854f960f6bd887090d2dba86202edc933aa62f8b8a894ad3",
+    "rows": 21,
+    "window_start_utc": "2024-01-31T18:50:00Z",
+    "window_end_utc": "2024-01-31T19:10:00Z",
+    "source_class": "public_exchange_archive"
+  },
+  "claims": {
+    "causal_inference": false,
+    "alpha_claim": false,
+    "purpose": "point-in-time replay and evidence latency contract only"
+  }
+}

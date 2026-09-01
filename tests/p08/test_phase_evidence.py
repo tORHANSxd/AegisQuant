@@ -1,0 +1,133 @@
+"""P08 implementation evidence and deferred formal-acceptance gates."""
+
+from __future__ import annotations
+
+import csv
+import json
+from pathlib import Path
+from typing import cast
+
+import yaml
+
+
+def _json(path: Path) -> dict[str, object]:
+    return cast("dict[str, object]", json.loads(path.read_text(encoding="utf-8")))
+
+
+def test_p08_state_is_verified_acceptance_deferred_live_locked_and_stops_before_p09(
+    project_root: Path,
+) -> None:
+    state = cast(
+        "dict[str, object]",
+        yaml.safe_load(
+            (project_root / "state/PROJECT_PHASE_STATE.yaml").read_text(encoding="utf-8")
+        ),
+    )
+    previous = cast("dict[str, object]", state["previous_phase"])
+    deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
+    assert state["current_phase"] == "P08"
+    assert state["next_phase"] == "P09"
+    assert state["status"] == "in_progress"
+    assert state["implementation_status"] == "verified_acceptance_deferred"
+    assert state["accepted_at_utc"] is None
+    assert state["formal_acceptance_deferred"] is True
+    assert state["live_trading_locked"] is True
+    assert previous["phase"] == "P07"
+    assert {item["phase"] for item in deferred} >= {"P05", "P06", "P07"}
+    assert not (project_root / "reports/phases/P08/ACCEPTANCE.md").exists()
+    assert not (project_root / "src/aegisquant/static_analysis").exists()
+
+
+def test_p08_traceability_has_verified_tasks_and_deferred_acceptance_rows(
+    project_root: Path,
+) -> None:
+    with (project_root / "reports/phases/P08/REQUIREMENTS_TRACEABILITY.csv").open(
+        encoding="utf-8", newline=""
+    ) as source:
+        rows = list(csv.DictReader(source))
+    assert len(rows) == 24
+    assert len({row["requirement_id"] for row in rows}) == 24
+    tasks = [row for row in rows if row["category"] == "task"]
+    acceptance = [row for row in rows if row["category"] == "acceptance"]
+    assert len(tasks) == 17
+    assert {row["status"] for row in tasks} == {"verified"}
+    assert len(acceptance) == 7
+    assert {row["status"] for row in acceptance} == {"in_progress"}
+    for row in rows:
+        for implementation in row["implementation"].split("; "):
+            assert (project_root / implementation).exists(), row["requirement_id"]
+        assert (project_root / row["test"]).exists(), row["requirement_id"]
+        for evidence in row["evidence"].split("; "):
+            assert (project_root / evidence).exists(), row["requirement_id"]
+
+
+def test_p08_research_factory_council_foundation_and_safety_evidence(project_root: Path) -> None:
+    data = project_root / "reports/data"
+    experiments = _json(data / "P08_EXPERIMENT_EVIDENCE.json")
+    council = _json(data / "P08_MODEL_COUNCIL_EVIDENCE.json")
+    foundation = _json(data / "P08_FOUNDATION_MODEL_EVIDENCE.json")
+    uncertainty = _json(data / "P08_UNCERTAINTY_EVIDENCE.json")
+    ensemble = _json(data / "P08_ENSEMBLE_EVIDENCE.json")
+    drift = _json(data / "P08_DRIFT_EVIDENCE.json")
+    prompt = _json(data / "P08_PROMPT_SAFETY_EVIDENCE.json")
+    committee = _json(data / "P08_EVENT_COMMITTEE_EVIDENCE.json")
+    replay = _json(data / "P08_EVENT_REPLAY_EVIDENCE.json")
+    resource = _json(data / "P08_RESOURCE_EVIDENCE.json")
+
+    assert experiments["all_trials_recorded"] is True
+    assert experiments["failed_and_pruned_retained"] is True
+    assert experiments["optuna_trial_count"] == 3
+    assert council["fair_comparison"] is True
+    assert council["complexity_privilege"] is False
+    assert council["selected_model_id"] == "linear-fused"
+    assert council["final_holdout_opened"] is False
+    finite = cast("dict[str, object]", foundation["finite_evaluation"])
+    assert (
+        finite["verified_weight_sha256"]
+        == (
+            "492290ae82bb89f9769e3479ce90b3179de1f33e600c34daa0352531538b23cd"  # pragma: allowlist secret
+        )
+    )
+    assert foundation["restricted_models_executed"] is False
+    assert uncertainty["should_abstain"] is True
+    assert ensemble["oof_exact_coverage"] is True
+    assert ensemble["train_validation_overlap"] is False
+    assert drift["ood_abstain"] is True
+    assert prompt["rejected_count"] == prompt["attack_count"] == 2
+    assert prompt["tool_calls_allowed"] is False
+    assert prompt["secret_access_allowed"] is False
+    assert committee["evidence_escalation"] is False
+    assert replay["point_in_time"] is True
+    assert replay["causal_inference"] is False
+    assert replay["alpha_claim"] is False
+    assert resource["oom_recovered"] is True
+    assert resource["gpu_contract"] == "formal_4070_ti_acceptance_deferred"
+
+
+def test_p08_reports_and_compliance_are_complete_without_formal_acceptance(
+    project_root: Path,
+) -> None:
+    phase = project_root / "reports/phases/P08"
+    required = {
+        "PLAN.md",
+        "SUMMARY.md",
+        "TEST_RESULTS.json",
+        "RISKS.md",
+        "NEXT_ACTIONS.md",
+        "ADR_REFERENCES.md",
+        "REQUIREMENTS_TRACEABILITY.csv",
+    }
+    assert required.issubset({path.name for path in phase.iterdir() if path.is_file()})
+    assert not (phase / "ACCEPTANCE.md").exists()
+    compliance = _json(project_root / "reports/licenses/COMPLIANCE_SUMMARY.json")
+    security = _json(project_root / "reports/security/SECURITY_SCAN_RESULTS.json")
+    mutation = _json(project_root / "reports/testing/P08_MUTATION_RESULTS.json")
+    holdout = _json(project_root / "reports/data/P07_HOLDOUT_EVIDENCE.json")
+    assert compliance["phase"] == "P08"
+    assert compliance["status"] == "passed"
+    assert security["phase"] == "P08"
+    assert security["status"] == "passed"
+    assert mutation["status"] == "passed"
+    assert cast(float, mutation["score"]) >= cast(float, mutation["threshold"])
+    assert holdout["state"] == "LOCKED"
+    assert holdout["loader_invocations"] == 0

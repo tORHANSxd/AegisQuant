@@ -7,6 +7,7 @@ import hashlib
 import os
 import shutil
 import tempfile
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -105,6 +106,18 @@ class RestrictedContentCipher:
 
 def _opaque_segment(value: object) -> str:
     return hashlib.sha256(str(value).encode("utf-8")).hexdigest()
+
+
+def _replace_directory(source: Path, destination: Path) -> None:
+    """Retry bounded transient filesystem locks while preserving atomic publication."""
+    for attempt in range(3):
+        try:
+            os.replace(source, destination)
+            return
+        except PermissionError:
+            if attempt == 2:
+                raise
+            time.sleep(0.02 * (attempt + 1))
 
 
 @dataclass(frozen=True, slots=True)
@@ -240,7 +253,7 @@ class RevisionArchive:
             (staging / "record.json").write_bytes(
                 canonical_json_bytes(record.model_dump(mode="json"))
             )
-            os.replace(staging, final_directory)
+            _replace_directory(staging, final_directory)
             return record
         except Exception:
             if staging.exists():
