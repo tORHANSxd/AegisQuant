@@ -4,7 +4,7 @@
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-01T09:14:29.580182Z",
+    "timestamp": "2026-09-01T10:46:27.952382Z",
     "component": {
       "type": "application",
       "name": "aegisquant-python",
@@ -101,6 +101,12 @@
       "name": "click",
       "version": "8.5.0",
       "purl": "pkg:pypi/click@8.5.0"
+    },
+    {
+      "type": "library",
+      "name": "cloudpickle",
+      "version": "3.1.2",
+      "purl": "pkg:pypi/cloudpickle@3.1.2"
     },
     {
       "type": "library",
@@ -224,6 +230,12 @@
     },
     {
       "type": "library",
+      "name": "joblib",
+      "version": "1.6.0",
+      "purl": "pkg:pypi/joblib@1.6.0"
+    },
+    {
+      "type": "library",
       "name": "jsonpointer",
       "version": "3.1.1",
       "purl": "pkg:pypi/jsonpointer@3.1.1"
@@ -293,6 +305,12 @@
       "name": "msgspec",
       "version": "0.21.1",
       "purl": "pkg:pypi/msgspec@0.21.1"
+    },
+    {
+      "type": "library",
+      "name": "narwhals",
+      "version": "2.25.0",
+      "purl": "pkg:pypi/narwhals@2.25.0"
     },
     {
       "type": "library",
@@ -560,6 +578,18 @@
     },
     {
       "type": "library",
+      "name": "scikit-learn",
+      "version": "1.9.0",
+      "purl": "pkg:pypi/scikit-learn@1.9.0"
+    },
+    {
+      "type": "library",
+      "name": "scipy",
+      "version": "1.18.1",
+      "purl": "pkg:pypi/scipy@1.18.1"
+    },
+    {
+      "type": "library",
       "name": "six",
       "version": "1.17.0",
       "purl": "pkg:pypi/six@1.17.0"
@@ -581,6 +611,12 @@
       "name": "stevedore",
       "version": "5.9.1",
       "purl": "pkg:pypi/stevedore@5.9.1"
+    },
+    {
+      "type": "library",
+      "name": "threadpoolctl",
+      "version": "3.6.0",
+      "purl": "pkg:pypi/threadpoolctl@3.6.0"
     },
     {
       "type": "library",

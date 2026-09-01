@@ -121,6 +121,12 @@
   },
   {
     "License": "BSD License",
+    "Name": "cloudpickle",
+    "URL": "https://github.com/cloudpipe/cloudpickle",
+    "Version": "3.1.2"
+  },
+  {
+    "License": "BSD License",
     "Name": "colorama",
     "URL": "https://github.com/tartley/colorama",
     "Version": "0.4.6"
@@ -240,6 +246,12 @@
     "Version": "20.11.0"
   },
   {
+    "License": "BSD-3-Clause",
+    "Name": "joblib",
+    "URL": "https://joblib.readthedocs.io",
+    "Version": "1.6.0"
+  },
+  {
     "License": "BSD License",
     "Name": "jsonpointer",
     "URL": "https://github.com/stefankoegl/python-json-pointer",
@@ -298,6 +310,12 @@
     "Name": "msgspec",
     "URL": "https://jcristharif.com/msgspec/",
     "Version": "0.21.1"
+  },
+  {
+    "License": "MIT",
+    "Name": "narwhals",
+    "URL": "https://github.com/narwhals-dev/narwhals",
+    "Version": "2.25.0"
   },
   {
     "License": "GNU Lesser General Public License v3 or later (LGPLv3+)",
@@ -534,6 +552,18 @@
     "Version": "0.16.5"
   },
   {
+    "License": "BSD-3-Clause",
+    "Name": "scikit-learn",
+    "URL": "https://scikit-learn.org",
+    "Version": "1.9.0"
+  },
+  {
+    "License": "BSD License",
+    "Name": "scipy",
+    "URL": "https://scipy.org/",
+    "Version": "1.18.1"
+  },
+  {
     "License": "MIT License",
     "Name": "six",
     "URL": "https://github.com/benjaminp/six",
@@ -550,6 +580,12 @@
     "Name": "stevedore",
     "URL": "https://docs.openstack.org/stevedore",
     "Version": "5.9.1"
+  },
+  {
+    "License": "BSD License",
+    "Name": "threadpoolctl",
+    "URL": "https://github.com/joblib/threadpoolctl",
+    "Version": "3.6.0"
   },
   {
     "License": "MIT",

@@ -75,6 +75,11 @@
       "vulns": []
     },
     {
+      "name": "cloudpickle",
+      "version": "3.1.2",
+      "vulns": []
+    },
+    {
       "name": "colorama",
       "version": "0.4.6",
       "vulns": []
@@ -175,6 +180,11 @@
       "vulns": []
     },
     {
+      "name": "joblib",
+      "version": "1.6.0",
+      "vulns": []
+    },
+    {
       "name": "jsonpointer",
       "version": "3.1.1",
       "vulns": []
@@ -232,6 +242,11 @@
     {
       "name": "msgspec",
       "version": "0.21.1",
+      "vulns": []
+    },
+    {
+      "name": "narwhals",
+      "version": "2.25.0",
       "vulns": []
     },
     {
@@ -455,6 +470,16 @@
       "vulns": []
     },
     {
+      "name": "scikit-learn",
+      "version": "1.9.0",
+      "vulns": []
+    },
+    {
+      "name": "scipy",
+      "version": "1.18.1",
+      "vulns": []
+    },
+    {
       "name": "six",
       "version": "1.17.0",
       "vulns": []
@@ -472,6 +497,11 @@
     {
       "name": "stevedore",
       "version": "5.9.1",
+      "vulns": []
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.6.0",
       "vulns": []
     },
     {

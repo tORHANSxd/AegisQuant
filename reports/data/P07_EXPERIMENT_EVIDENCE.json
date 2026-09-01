@@ -1,0 +1,1 @@
+{"entry_count":3,"failure_and_error_retained":true,"ledger_path":"reports/research/P07/EXPERIMENT_LEDGER.jsonl","ledger_tail_sha256":"e64d9519f2fd262db76ac6b4571e40472a5d875b4414614212e4c513cc12593e","run_ids":["succeeded","failed","error"],"schema_version":"p07-experiment-evidence-v1","statuses":["SUCCEEDED","FAILED","ERROR"]}
