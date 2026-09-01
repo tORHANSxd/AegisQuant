@@ -1,0 +1,27 @@
+{
+  "incident_id": "P13-database-drill",
+  "schema_version": "p13-incident-timeline-v1",
+  "severity": "SEV0",
+  "timeline": [
+    {
+      "event_type": "DETECTED",
+      "evidence_ids": [
+        "alert-P13-database-drill"
+      ],
+      "occurred_at": "2026-09-01T20:00:01Z",
+      "operator_action_required": true,
+      "sequence": 1,
+      "state": "HALTED"
+    },
+    {
+      "event_type": "RECOVERED",
+      "evidence_ids": [
+        "recovery-P13-database-drill"
+      ],
+      "occurred_at": "2026-09-01T20:00:02Z",
+      "operator_action_required": false,
+      "sequence": 2,
+      "state": "RUNNING"
+    }
+  ]
+}

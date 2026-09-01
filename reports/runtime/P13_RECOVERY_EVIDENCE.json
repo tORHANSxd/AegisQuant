@@ -1,0 +1,18 @@
+{
+  "duplicate_fill_count": 0,
+  "duplicate_order_count": 0,
+  "economic_order_count_after": 1,
+  "economic_order_count_before": 1,
+  "fill_ids_after": [
+    "paper-fill-9e256e988c0a4fc47fd416e7"
+  ],
+  "fill_ids_before": [
+    "paper-fill-9e256e988c0a4fc47fd416e7"
+  ],
+  "mode_after": "PAPER",
+  "mode_before": "PAPER",
+  "paper_checkpoint_sha256": "520b5783a420faf25decdc083b4bdbe4d0ba9f80ea857e1153df3124c5a3f12a",
+  "restored_checkpoint_sha256": "520b5783a420faf25decdc083b4bdbe4d0ba9f80ea857e1153df3124c5a3f12a",
+  "schema_version": "p13-recovery-evidence-v1",
+  "unknown_funds_fact_count": 0
+}

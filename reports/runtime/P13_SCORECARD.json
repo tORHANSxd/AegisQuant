@@ -1,0 +1,21 @@
+{
+  "negative_results_preserved": true,
+  "schema_version": "p13-scorecard-v1",
+  "scorecard": {
+    "degraded_cycle_count": 6,
+    "fill_rate": "0.6666666666666666666666666667",
+    "mean_adverse_slippage_bps": "2.0000",
+    "observation_count": 3,
+    "p95_adverse_slippage_bps": "2.0000",
+    "production_capacity_claimed": false,
+    "reason_codes": [
+      "AQ-RUNTIME-SCORECARD-NONPRODUCTION"
+    ],
+    "reconciliation_difference_count": 1,
+    "rejection_count": 0,
+    "restart_count": 1,
+    "strategy_id": "strategy-p12",
+    "testnet_pnl_included": false
+  },
+  "testnet_pnl_used": false
+}

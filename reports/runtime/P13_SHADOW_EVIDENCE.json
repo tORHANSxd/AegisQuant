@@ -1,0 +1,69 @@
+{
+  "account_observation": {
+    "balances": [],
+    "credential_values_accessed": false,
+    "observed_at": "2026-09-01T20:00:00Z",
+    "open_order_ids": [],
+    "snapshot_id": "shadow-empty-account",
+    "venue_id": "BINANCE-TESTNET",
+    "write_permissions": false
+  },
+  "credential_values_accessed": false,
+  "public_methods": [
+    "evaluate",
+    "observe_account"
+  ],
+  "real_account_access_performed": false,
+  "schema_version": "p13-shadow-evidence-v1",
+  "trace": {
+    "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+    "command_sha256": "6a37be8dc65f8f054eaadf2aca4bb74968165f09dbbeebd523cbbe9a90c4fa5b",
+    "decision_time": "2026-09-01T20:00:02Z",
+    "economic_idempotency_key": "economic-intent-p12",
+    "executable_price": {
+      "amount": "49990",
+      "base_asset_id": "BTC",
+      "quote_asset_id": "USDT"
+    },
+    "expected_price": {
+      "amount": "50000",
+      "base_asset_id": "BTC",
+      "quote_asset_id": "USDT"
+    },
+    "fee": {
+      "amount": "0",
+      "asset_id": "USDT"
+    },
+    "fill_price": null,
+    "filled_quantity": {
+      "amount": "0",
+      "asset_id": "BTC"
+    },
+    "hypothetical": true,
+    "instrument_id": "BTC-USDT-PERP",
+    "market_available_at": "2026-09-01T20:00:03Z",
+    "mode": "SHADOW",
+    "model_version_id": "model-p13-v1",
+    "prediction_id": "prediction-p13",
+    "reason_codes": [
+      "AQ-RUNTIME-SHADOW-NO-WRITE"
+    ],
+    "requested_quantity": {
+      "amount": "1",
+      "asset_id": "BTC"
+    },
+    "risk_decision_id": "risk-p12-approved",
+    "side": "BUY",
+    "status": "HYPOTHETICAL_ONLY",
+    "strategy_id": "strategy-p12",
+    "target_quantity": {
+      "amount": "1",
+      "asset_id": "BTC"
+    },
+    "trace_id": "shadow-cde5cc0ca7faf1dc70045081",
+    "write_attempted": false
+  },
+  "venue_network_requests_performed": 0,
+  "write_capability": false,
+  "write_methods_present": []
+}

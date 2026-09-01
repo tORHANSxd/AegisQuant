@@ -1,0 +1,13 @@
+{
+  "incident_id": "P13-model-drill",
+  "real_funds_impacted": false,
+  "recovery_evidence": {
+    "checkpoint_verified": true,
+    "duplicate_fill_count": 0,
+    "duplicate_order_count": 0,
+    "reconciliation_clear": true,
+    "recovered_mode_unchanged": true,
+    "unknown_funds_fact_count": 0
+  },
+  "schema_version": "p13-incident-recovery-v1"
+}

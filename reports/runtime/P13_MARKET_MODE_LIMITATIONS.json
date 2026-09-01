@@ -1,0 +1,17 @@
+{
+  "limitations": {
+    "paper_uses_virtual_fills": true,
+    "real_account_access_performed": false,
+    "reason_codes": [
+      "AQ-RUNTIME-PAPER-FILLS-ARE-VIRTUAL",
+      "AQ-RUNTIME-SHADOW-IS-READ-ONLY",
+      "AQ-RUNTIME-TESTNET-PNL-EXCLUDED"
+    ],
+    "shadow_has_write_capability": false,
+    "simulated_liquidity_is_live_capacity_evidence": false,
+    "testnet_pnl_is_strategy_evidence": false,
+    "venue_network_requests_performed": 0
+  },
+  "schema_version": "p13-market-mode-limitations-v1",
+  "testnet_pnl_interpretation": "API_AND_RECOVERY_ONLY"
+}

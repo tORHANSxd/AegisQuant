@@ -1,0 +1,195 @@
+{
+  "comparison": {
+    "identity_fields": [
+      "prediction_id",
+      "strategy_id",
+      "model_version_id",
+      "risk_decision_id",
+      "instrument_id",
+      "client_order_id",
+      "economic_idempotency_key",
+      "command_sha256",
+      "side",
+      "target_quantity",
+      "requested_quantity",
+      "expected_price"
+    ],
+    "mismatch_fields": [],
+    "modes": [
+      "HISTORICAL_REPLAY",
+      "PAPER",
+      "SHADOW"
+    ],
+    "permitted_difference_fields": [
+      "mode",
+      "trace_id",
+      "market_available_at",
+      "executable_price",
+      "fill_price",
+      "filled_quantity",
+      "fee",
+      "status",
+      "reason_codes",
+      "hypothetical"
+    ],
+    "reason_codes": [
+      "AQ-RUNTIME-SEMANTICS-EQUAL"
+    ],
+    "semantic_identity_equal": true
+  },
+  "schema_version": "p13-semantic-comparison-v1",
+  "traces": [
+    {
+      "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+      "command_sha256": "6a37be8dc65f8f054eaadf2aca4bb74968165f09dbbeebd523cbbe9a90c4fa5b",
+      "decision_time": "2026-09-01T20:00:02Z",
+      "economic_idempotency_key": "economic-intent-p12",
+      "executable_price": {
+        "amount": "49990",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "expected_price": {
+        "amount": "50000",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "fee": {
+        "amount": "9.9999996",
+        "asset_id": "USDT"
+      },
+      "fill_price": {
+        "amount": "49999.9980",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "filled_quantity": {
+        "amount": "0.50",
+        "asset_id": "BTC"
+      },
+      "hypothetical": false,
+      "instrument_id": "BTC-USDT-PERP",
+      "market_available_at": "2026-09-01T20:00:03Z",
+      "mode": "HISTORICAL_REPLAY",
+      "model_version_id": "model-p13-v1",
+      "prediction_id": "prediction-p13",
+      "reason_codes": [
+        "AQ-RUNTIME-PAPER-VIRTUAL-FILL"
+      ],
+      "requested_quantity": {
+        "amount": "1",
+        "asset_id": "BTC"
+      },
+      "risk_decision_id": "risk-p12-approved",
+      "side": "BUY",
+      "status": "PARTIALLY_FILLED",
+      "strategy_id": "strategy-p12",
+      "target_quantity": {
+        "amount": "1",
+        "asset_id": "BTC"
+      },
+      "trace_id": "historical_replay-50e8d0a7b59ee74e29f92e51",
+      "write_attempted": false
+    },
+    {
+      "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+      "command_sha256": "6a37be8dc65f8f054eaadf2aca4bb74968165f09dbbeebd523cbbe9a90c4fa5b",
+      "decision_time": "2026-09-01T20:00:02Z",
+      "economic_idempotency_key": "economic-intent-p12",
+      "executable_price": {
+        "amount": "49990",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "expected_price": {
+        "amount": "50000",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "fee": {
+        "amount": "9.9999996",
+        "asset_id": "USDT"
+      },
+      "fill_price": {
+        "amount": "49999.9980",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "filled_quantity": {
+        "amount": "0.50",
+        "asset_id": "BTC"
+      },
+      "hypothetical": false,
+      "instrument_id": "BTC-USDT-PERP",
+      "market_available_at": "2026-09-01T20:00:03Z",
+      "mode": "PAPER",
+      "model_version_id": "model-p13-v1",
+      "prediction_id": "prediction-p13",
+      "reason_codes": [
+        "AQ-RUNTIME-PAPER-VIRTUAL-FILL"
+      ],
+      "requested_quantity": {
+        "amount": "1",
+        "asset_id": "BTC"
+      },
+      "risk_decision_id": "risk-p12-approved",
+      "side": "BUY",
+      "status": "PARTIALLY_FILLED",
+      "strategy_id": "strategy-p12",
+      "target_quantity": {
+        "amount": "1",
+        "asset_id": "BTC"
+      },
+      "trace_id": "paper-50e8d0a7b59ee74e29f92e51",
+      "write_attempted": false
+    },
+    {
+      "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+      "command_sha256": "6a37be8dc65f8f054eaadf2aca4bb74968165f09dbbeebd523cbbe9a90c4fa5b",
+      "decision_time": "2026-09-01T20:00:02Z",
+      "economic_idempotency_key": "economic-intent-p12",
+      "executable_price": {
+        "amount": "49990",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "expected_price": {
+        "amount": "50000",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "fee": {
+        "amount": "0",
+        "asset_id": "USDT"
+      },
+      "fill_price": null,
+      "filled_quantity": {
+        "amount": "0",
+        "asset_id": "BTC"
+      },
+      "hypothetical": true,
+      "instrument_id": "BTC-USDT-PERP",
+      "market_available_at": "2026-09-01T20:00:03Z",
+      "mode": "SHADOW",
+      "model_version_id": "model-p13-v1",
+      "prediction_id": "prediction-p13",
+      "reason_codes": [
+        "AQ-RUNTIME-SHADOW-NO-WRITE"
+      ],
+      "requested_quantity": {
+        "amount": "1",
+        "asset_id": "BTC"
+      },
+      "risk_decision_id": "risk-p12-approved",
+      "side": "BUY",
+      "status": "HYPOTHETICAL_ONLY",
+      "strategy_id": "strategy-p12",
+      "target_quantity": {
+        "amount": "1",
+        "asset_id": "BTC"
+      },
+      "trace_id": "shadow-cde5cc0ca7faf1dc70045081",
+      "write_attempted": false
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "result": {
+    "checkpoint_sha256": "c25aa43866045b07a4548bb577e734a37ed2afc3b2e619d5414777bf1d7794da",
+    "duplicate_fill_count": 0,
+    "duplicate_order_count": 0,
+    "economic_order_count": 1,
+    "fill_ids": [
+      "paper-fill-bc4018e7263b0284395daccb",
+      "paper-fill-dfc1bb0c6249a4bbf5db5381",
+      "paper-fill-ecbc3e32e76dd6b4ce260918",
+      "paper-fill-e88a776d552e366089ea0053"
+    ],
+    "mode": "HISTORICAL_REPLAY",
+    "normalized_fixture": true,
+    "observation_count": 4,
+    "raw_tick_data_claimed": false,
+    "reason_codes": [
+      "AQ-RUNTIME-HISTORICAL-NORMALIZED-REPLAY"
+    ],
+    "scenario_id": "normalized-liquidity-dislocation-v1",
+    "venue_network_requests_performed": 0
+  },
+  "scenario": {
+    "label": "重大加密资产流动性错位形态（归一化夹具）",
+    "normalized_fixture": true,
+    "observations": [
+      {
+        "ask_price": {
+          "amount": "49990",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "ask_quantity": {
+          "amount": "2",
+          "asset_id": "BTC"
+        },
+        "available_at": "2026-09-01T20:00:03Z",
+        "bid_price": {
+          "amount": "49980",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "bid_quantity": {
+          "amount": "2",
+          "asset_id": "BTC"
+        },
+        "event_id": "normalized-liquidity-0",
+        "event_time": "2026-09-01T20:00:02.800000Z",
+        "instrument_id": "BTC-USDT-PERP",
+        "last_price": {
+          "amount": "49985",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "received_at": "2026-09-01T20:00:03.050000Z",
+        "sequence": 1,
+        "source_id": "p13-normalized-public-history-fixture",
+        "source_sha256": "6aee5696ed73d7443d22adf3acb710b76fa9a92ce1522d320c97fd6a87d4fce6",
+        "venue_id": "BINANCE-TESTNET"
+      },
+      {
+        "ask_price": {
+          "amount": "48540.290",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "ask_quantity": {
+          "amount": "0.60",
+          "asset_id": "BTC"
+        },
+        "available_at": "2026-09-01T20:01:03Z",
+        "bid_price": {
+          "amount": "48480.60",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "bid_quantity": {
+          "amount": "0.60",
+          "asset_id": "BTC"
+        },
+        "event_id": "normalized-liquidity-1",
+        "event_time": "2026-09-01T20:01:02.800000Z",
+        "instrument_id": "BTC-USDT-PERP",
+        "last_price": {
+          "amount": "48510.445",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "received_at": "2026-09-01T20:01:03.050000Z",
+        "sequence": 2,
+        "source_id": "p13-normalized-public-history-fixture",
+        "source_sha256": "f70be27a0cf55b8dbedb2b007cbb269949e95562db2740dd6154ff17283a5bd4",
+        "venue_id": "BINANCE-TESTNET"
+      },
+      {
+        "ask_price": {
+          "amount": "46690.660",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "ask_quantity": {
+          "amount": "0.24",
+          "asset_id": "BTC"
+        },
+        "available_at": "2026-09-01T20:02:03Z",
+        "bid_price": {
+          "amount": "46481.40",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "bid_quantity": {
+          "amount": "0.24",
+          "asset_id": "BTC"
+        },
+        "event_id": "normalized-liquidity-2",
+        "event_time": "2026-09-01T20:02:02.800000Z",
+        "instrument_id": "BTC-USDT-PERP",
+        "last_price": {
+          "amount": "46586.030",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "received_at": "2026-09-01T20:02:03.050000Z",
+        "sequence": 3,
+        "source_id": "p13-normalized-public-history-fixture",
+        "source_sha256": "9b4c6dcc96fe0f49cca7f5048fd6d07be87b3d377dc6840398b14097a3a925ce",
+        "venue_id": "BINANCE-TESTNET"
+      },
+      {
+        "ask_price": {
+          "amount": "47590.480",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "ask_quantity": {
+          "amount": "0.90",
+          "asset_id": "BTC"
+        },
+        "available_at": "2026-09-01T20:03:03Z",
+        "bid_price": {
+          "amount": "47481.00",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "bid_quantity": {
+          "amount": "0.90",
+          "asset_id": "BTC"
+        },
+        "event_id": "normalized-liquidity-3",
+        "event_time": "2026-09-01T20:03:02.800000Z",
+        "instrument_id": "BTC-USDT-PERP",
+        "last_price": {
+          "amount": "47535.740",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "received_at": "2026-09-01T20:03:03.050000Z",
+        "sequence": 4,
+        "source_id": "p13-normalized-public-history-fixture",
+        "source_sha256": "dda008a1469820bda47e7bb4f792979a022cf04d77565f7e34faaa99bf632642",
+        "venue_id": "BINANCE-TESTNET"
+      }
+    ],
+    "raw_tick_data_claimed": false,
+    "scenario_id": "normalized-liquidity-dislocation-v1",
+    "source_description": "公开历史重大波动的一般化价差扩张与深度下降形态；不是交易所逐笔原始数据",
+    "source_sha256": "0df27e55885c6bb0667131de5c63d46e55db847a9e6708b535916a88edd38462"
+  },
+  "schema_version": "p13-historical-replay-v1"
+}

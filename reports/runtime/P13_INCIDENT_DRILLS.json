@@ -1,0 +1,285 @@
+{
+  "all_have_recovery_evidence": true,
+  "all_have_timeline": true,
+  "incident_count": 6,
+  "incidents": [
+    {
+      "alert": {
+        "alert_id": "alert-P13-network-drill",
+        "fault_kind": "NETWORK",
+        "new_risk_allowed": false,
+        "raised_at": "2026-09-01T20:00:01Z",
+        "reason_code": "AQ-RUNTIME-NETWORK-FAULT",
+        "runbook_path": "docs/runbooks/VENUE_DISCONNECT.md",
+        "severity": "SEV1",
+        "state": "DEGRADED"
+      },
+      "incident_id": "P13-network-drill",
+      "postmortem_required": true,
+      "real_funds_impacted": false,
+      "recovery_evidence": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "reconciliation_clear": true,
+        "recovered_mode_unchanged": true,
+        "unknown_funds_fact_count": 0
+      },
+      "status": "RECOVERED",
+      "timeline": [
+        {
+          "event_type": "DETECTED",
+          "evidence_ids": [
+            "alert-P13-network-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:01Z",
+          "operator_action_required": true,
+          "sequence": 1,
+          "state": "DEGRADED"
+        },
+        {
+          "event_type": "RECOVERED",
+          "evidence_ids": [
+            "recovery-P13-network-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:02Z",
+          "operator_action_required": false,
+          "sequence": 2,
+          "state": "RUNNING"
+        }
+      ]
+    },
+    {
+      "alert": {
+        "alert_id": "alert-P13-database-drill",
+        "fault_kind": "DATABASE",
+        "new_risk_allowed": false,
+        "raised_at": "2026-09-01T20:00:01Z",
+        "reason_code": "AQ-RUNTIME-DATABASE-FAULT",
+        "runbook_path": "docs/runbooks/DATABASE_FAILURE.md",
+        "severity": "SEV0",
+        "state": "HALTED"
+      },
+      "incident_id": "P13-database-drill",
+      "postmortem_required": true,
+      "real_funds_impacted": false,
+      "recovery_evidence": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "reconciliation_clear": true,
+        "recovered_mode_unchanged": true,
+        "unknown_funds_fact_count": 0
+      },
+      "status": "RECOVERED",
+      "timeline": [
+        {
+          "event_type": "DETECTED",
+          "evidence_ids": [
+            "alert-P13-database-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:01Z",
+          "operator_action_required": true,
+          "sequence": 1,
+          "state": "HALTED"
+        },
+        {
+          "event_type": "RECOVERED",
+          "evidence_ids": [
+            "recovery-P13-database-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:02Z",
+          "operator_action_required": false,
+          "sequence": 2,
+          "state": "RUNNING"
+        }
+      ]
+    },
+    {
+      "alert": {
+        "alert_id": "alert-P13-model-drill",
+        "fault_kind": "MODEL",
+        "new_risk_allowed": false,
+        "raised_at": "2026-09-01T20:00:01Z",
+        "reason_code": "AQ-RUNTIME-MODEL-FAULT",
+        "runbook_path": "docs/runbooks/MODEL_DRIFT.md",
+        "severity": "SEV1",
+        "state": "DEGRADED"
+      },
+      "incident_id": "P13-model-drill",
+      "postmortem_required": true,
+      "real_funds_impacted": false,
+      "recovery_evidence": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "reconciliation_clear": true,
+        "recovered_mode_unchanged": true,
+        "unknown_funds_fact_count": 0
+      },
+      "status": "RECOVERED",
+      "timeline": [
+        {
+          "event_type": "DETECTED",
+          "evidence_ids": [
+            "alert-P13-model-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:01Z",
+          "operator_action_required": true,
+          "sequence": 1,
+          "state": "DEGRADED"
+        },
+        {
+          "event_type": "RECOVERED",
+          "evidence_ids": [
+            "recovery-P13-model-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:02Z",
+          "operator_action_required": false,
+          "sequence": 2,
+          "state": "RUNNING"
+        }
+      ]
+    },
+    {
+      "alert": {
+        "alert_id": "alert-P13-data_source-drill",
+        "fault_kind": "DATA_SOURCE",
+        "new_risk_allowed": false,
+        "raised_at": "2026-09-01T20:00:01Z",
+        "reason_code": "AQ-RUNTIME-DATA_SOURCE-FAULT",
+        "runbook_path": "docs/runbooks/DATA_STALE.md",
+        "severity": "SEV1",
+        "state": "DEGRADED"
+      },
+      "incident_id": "P13-data_source-drill",
+      "postmortem_required": true,
+      "real_funds_impacted": false,
+      "recovery_evidence": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "reconciliation_clear": true,
+        "recovered_mode_unchanged": true,
+        "unknown_funds_fact_count": 0
+      },
+      "status": "RECOVERED",
+      "timeline": [
+        {
+          "event_type": "DETECTED",
+          "evidence_ids": [
+            "alert-P13-data_source-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:01Z",
+          "operator_action_required": true,
+          "sequence": 1,
+          "state": "DEGRADED"
+        },
+        {
+          "event_type": "RECOVERED",
+          "evidence_ids": [
+            "recovery-P13-data_source-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:02Z",
+          "operator_action_required": false,
+          "sequence": 2,
+          "state": "RUNNING"
+        }
+      ]
+    },
+    {
+      "alert": {
+        "alert_id": "alert-P13-clock-drill",
+        "fault_kind": "CLOCK",
+        "new_risk_allowed": false,
+        "raised_at": "2026-09-01T20:00:01Z",
+        "reason_code": "AQ-RUNTIME-CLOCK-FAULT",
+        "runbook_path": "docs/runbooks/CLOCK_DRIFT.md",
+        "severity": "SEV1",
+        "state": "HALTED"
+      },
+      "incident_id": "P13-clock-drill",
+      "postmortem_required": true,
+      "real_funds_impacted": false,
+      "recovery_evidence": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "reconciliation_clear": true,
+        "recovered_mode_unchanged": true,
+        "unknown_funds_fact_count": 0
+      },
+      "status": "RECOVERED",
+      "timeline": [
+        {
+          "event_type": "DETECTED",
+          "evidence_ids": [
+            "alert-P13-clock-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:01Z",
+          "operator_action_required": true,
+          "sequence": 1,
+          "state": "HALTED"
+        },
+        {
+          "event_type": "RECOVERED",
+          "evidence_ids": [
+            "recovery-P13-clock-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:02Z",
+          "operator_action_required": false,
+          "sequence": 2,
+          "state": "RUNNING"
+        }
+      ]
+    },
+    {
+      "alert": {
+        "alert_id": "alert-P13-process-drill",
+        "fault_kind": "PROCESS",
+        "new_risk_allowed": false,
+        "raised_at": "2026-09-01T20:00:01Z",
+        "reason_code": "AQ-RUNTIME-PROCESS-FAULT",
+        "runbook_path": "docs/runbooks/PROCESS_CRASH.md",
+        "severity": "SEV0",
+        "state": "RECOVERING"
+      },
+      "incident_id": "P13-process-drill",
+      "postmortem_required": true,
+      "real_funds_impacted": false,
+      "recovery_evidence": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "reconciliation_clear": true,
+        "recovered_mode_unchanged": true,
+        "unknown_funds_fact_count": 0
+      },
+      "status": "RECOVERED",
+      "timeline": [
+        {
+          "event_type": "DETECTED",
+          "evidence_ids": [
+            "alert-P13-process-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:01Z",
+          "operator_action_required": true,
+          "sequence": 1,
+          "state": "RECOVERING"
+        },
+        {
+          "event_type": "RECOVERED",
+          "evidence_ids": [
+            "recovery-P13-process-drill"
+          ],
+          "occurred_at": "2026-09-01T20:00:02Z",
+          "operator_action_required": false,
+          "sequence": 2,
+          "state": "RUNNING"
+        }
+      ]
+    }
+  ],
+  "schema_version": "p13-incident-drills-v1",
+  "sev0_or_sev1_count": 6
+}

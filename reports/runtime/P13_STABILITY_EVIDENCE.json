@@ -1,0 +1,28 @@
+{
+  "qualifies_as_12h_or_24h_acceptance": false,
+  "schema_version": "p13-stability-evidence-v1",
+  "stability": {
+    "bounded_state_verified": true,
+    "deferred_by_user": true,
+    "duplicate_fill_count": 0,
+    "duplicate_order_count": 0,
+    "final_state": "RUNNING",
+    "history_capacity": 128,
+    "history_peak": 128,
+    "logical_cycles": 10080,
+    "logical_duration_minutes": 10080,
+    "qualifying_wall_clock_acceptance": false,
+    "reason_codes": [
+      "AQ-RUNTIME-ACCELERATED-NONQUALIFYING",
+      "AQ-RUNTIME-WALL-CLOCK-ACCEPTANCE-DEFERRED"
+    ],
+    "required_wall_clock_hours": 12,
+    "restart_count": 1,
+    "rss_end_bytes": 41336832,
+    "rss_start_bytes": 41189376,
+    "unknown_funds_fact_count": 0,
+    "wall_clock_memory_acceptance_passed": false,
+    "wall_clock_seconds": "0.04687"
+  },
+  "timer_or_background_task_created": false
+}

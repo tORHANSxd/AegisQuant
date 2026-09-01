@@ -1,0 +1,49 @@
+{
+  "decomposition": [
+    "target_order_gap",
+    "expected_to_executable_bps",
+    "executable_to_fill_bps",
+    "decision_latency_ms",
+    "fill_ratio",
+    "fee_amount"
+  ],
+  "points": [
+    {
+      "decision_latency_ms": 1000,
+      "executable_to_fill_bps": "2.0000",
+      "expected_to_executable_bps": "-2.0000",
+      "fee_amount": "9.9999996",
+      "fill_ratio": "0.50",
+      "reason_codes": [
+        "AQ-RUNTIME-EXECUTION-ERROR-MEASURED"
+      ],
+      "target_order_gap": "0",
+      "trace_id": "historical_replay-50e8d0a7b59ee74e29f92e51"
+    },
+    {
+      "decision_latency_ms": 1000,
+      "executable_to_fill_bps": "2.0000",
+      "expected_to_executable_bps": "-2.0000",
+      "fee_amount": "9.9999996",
+      "fill_ratio": "0.50",
+      "reason_codes": [
+        "AQ-RUNTIME-EXECUTION-ERROR-MEASURED"
+      ],
+      "target_order_gap": "0",
+      "trace_id": "paper-50e8d0a7b59ee74e29f92e51"
+    },
+    {
+      "decision_latency_ms": 1000,
+      "executable_to_fill_bps": null,
+      "expected_to_executable_bps": "-2.0000",
+      "fee_amount": "0",
+      "fill_ratio": "0",
+      "reason_codes": [
+        "AQ-RUNTIME-EXECUTION-ERROR-MEASURED"
+      ],
+      "target_order_gap": "0",
+      "trace_id": "shadow-cde5cc0ca7faf1dc70045081"
+    }
+  ],
+  "schema_version": "p13-execution-error-analysis-v1"
+}

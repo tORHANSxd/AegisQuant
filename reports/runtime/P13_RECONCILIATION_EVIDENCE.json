@@ -1,0 +1,38 @@
+{
+  "authoritative_fact_repair_performed": false,
+  "clear": {
+    "authoritative_state_sha256": "34cdf68382e369b6ce28de9b88936139edf7a6993b37b857a9953332dcc2ce27",
+    "authoritative_state_unchanged": true,
+    "fee_difference": "0E-7",
+    "missing_ledger_fill_ids": [],
+    "missing_read_model_fill_ids": [],
+    "new_risk_allowed": true,
+    "notional_difference": "0.000000",
+    "reason_codes": [
+      "AQ-RUNTIME-RECONCILIATION-CLEAR"
+    ],
+    "snapshot_id": "p13-evidence-clear",
+    "status": "CLEAR",
+    "unknown_ledger_fill_ids": [],
+    "unknown_read_model_fill_ids": []
+  },
+  "difference": {
+    "authoritative_state_sha256": "fb5ca75bb44f254b75f6541a18d7c940ad1586775b28a0e18cf75c4ac1dc041a",
+    "authoritative_state_unchanged": true,
+    "fee_difference": "-9.9999996",
+    "missing_ledger_fill_ids": [
+      "paper-fill-9e256e988c0a4fc47fd416e7"
+    ],
+    "missing_read_model_fill_ids": [],
+    "new_risk_allowed": false,
+    "notional_difference": "-24999.999000",
+    "reason_codes": [
+      "AQ-RUNTIME-RECONCILIATION-DIFFERENCE"
+    ],
+    "snapshot_id": "p13-evidence-difference",
+    "status": "HALTED",
+    "unknown_ledger_fill_ids": [],
+    "unknown_read_model_fill_ids": []
+  },
+  "schema_version": "p13-reconciliation-evidence-v1"
+}

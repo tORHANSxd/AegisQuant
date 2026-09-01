@@ -1,0 +1,221 @@
+{
+  "checkpoint": {
+    "payload": {
+      "fills": [
+        {
+          "available_at": "2026-09-01T20:00:03Z",
+          "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+          "economic_idempotency_key": "economic-intent-p12",
+          "event_time": "2026-09-01T20:00:02.800000Z",
+          "executable_price": {
+            "amount": "49990",
+            "base_asset_id": "BTC",
+            "quote_asset_id": "USDT"
+          },
+          "fee": {
+            "amount": "9.9999996",
+            "asset_id": "USDT"
+          },
+          "fill_id": "paper-fill-9e256e988c0a4fc47fd416e7",
+          "fill_price": {
+            "amount": "49999.9980",
+            "base_asset_id": "BTC",
+            "quote_asset_id": "USDT"
+          },
+          "ingest_time": "2026-09-01T20:00:03.050000Z",
+          "quantity": {
+            "amount": "0.50",
+            "asset_id": "BTC"
+          },
+          "source_event_id": "market-p13-1"
+        }
+      ],
+      "mode": "PAPER",
+      "orders": [
+        {
+          "command": {
+            "command": {
+              "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+              "command_type": "PLACE",
+              "idempotency_key": "economic-intent-p12",
+              "issued_at": "2026-09-01T20:00:02Z",
+              "order_intent_id": "intent-p12",
+              "replaces_client_order_id": null,
+              "venue_id": "BINANCE-TESTNET"
+            },
+            "content_sha256": "6a37be8dc65f8f054eaadf2aca4bb74968165f09dbbeebd523cbbe9a90c4fa5b",
+            "environment": "SIMULATED",
+            "identity": {
+              "checksum": "cc1cc",
+              "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+              "economic_idempotency_key": "economic-intent-p12",
+              "order_intent_id": "intent-p12",
+              "release_id": "release-p12-v1",
+              "retry_generation": 0,
+              "slice_sequence": 0,
+              "strategy_id": "strategy-p12"
+            },
+            "instrument_id": "BTC-USDT-PERP",
+            "limit_price": {
+              "amount": "50000",
+              "base_asset_id": "BTC",
+              "quote_asset_id": "USDT"
+            },
+            "notional": "50000",
+            "order_type": "LIMIT",
+            "quantity": {
+              "amount": "1",
+              "asset_id": "BTC"
+            },
+            "reduce_only": false,
+            "reference_price": {
+              "amount": "50000",
+              "base_asset_id": "BTC",
+              "quote_asset_id": "USDT"
+            },
+            "risk_decision_id": "risk-p12-approved",
+            "rule_version": "binance-test-rules-v1",
+            "side": "BUY",
+            "time_in_force": "GTC"
+          },
+          "cumulative_quantity": {
+            "amount": "0.50",
+            "asset_id": "BTC"
+          },
+          "eligible_at": "2026-09-01T20:00:02.100000Z",
+          "processed_event_ids": [
+            "market-p13-1"
+          ],
+          "remaining_quantity": {
+            "amount": "0.50",
+            "asset_id": "BTC"
+          },
+          "status": "PARTIALLY_FILLED",
+          "submitted_at": "2026-09-01T20:00:02Z"
+        }
+      ],
+      "schema_version": "p13-paper-checkpoint-v1",
+      "sequence": 2
+    },
+    "payload_sha256": "520b5783a420faf25decdc083b4bdbe4d0ba9f80ea857e1153df3124c5a3f12a"
+  },
+  "duplicate_market_fill_count": 0,
+  "economic_order_count": 1,
+  "economic_replay": {
+    "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+    "disposition": "IDEMPOTENT_REPLAY",
+    "economic_order_created": false,
+    "reason_code": "AQ-RUNTIME-PAPER-ECONOMIC-REPLAY"
+  },
+  "fills": [
+    {
+      "available_at": "2026-09-01T20:00:03Z",
+      "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+      "economic_idempotency_key": "economic-intent-p12",
+      "event_time": "2026-09-01T20:00:02.800000Z",
+      "executable_price": {
+        "amount": "49990",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "fee": {
+        "amount": "9.9999996",
+        "asset_id": "USDT"
+      },
+      "fill_id": "paper-fill-9e256e988c0a4fc47fd416e7",
+      "fill_price": {
+        "amount": "49999.9980",
+        "base_asset_id": "BTC",
+        "quote_asset_id": "USDT"
+      },
+      "ingest_time": "2026-09-01T20:00:03.050000Z",
+      "quantity": {
+        "amount": "0.50",
+        "asset_id": "BTC"
+      },
+      "source_event_id": "market-p13-1"
+    }
+  ],
+  "first_submit": {
+    "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+    "disposition": "ACCEPTED",
+    "economic_order_created": true,
+    "reason_code": "AQ-RUNTIME-PAPER-ACCEPTED"
+  },
+  "mode": "PAPER",
+  "orders": [
+    {
+      "command": {
+        "command": {
+          "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+          "command_type": "PLACE",
+          "idempotency_key": "economic-intent-p12",
+          "issued_at": "2026-09-01T20:00:02Z",
+          "order_intent_id": "intent-p12",
+          "replaces_client_order_id": null,
+          "venue_id": "BINANCE-TESTNET"
+        },
+        "content_sha256": "6a37be8dc65f8f054eaadf2aca4bb74968165f09dbbeebd523cbbe9a90c4fa5b",
+        "environment": "SIMULATED",
+        "identity": {
+          "checksum": "cc1cc",
+          "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+          "economic_idempotency_key": "economic-intent-p12",
+          "order_intent_id": "intent-p12",
+          "release_id": "release-p12-v1",
+          "retry_generation": 0,
+          "slice_sequence": 0,
+          "strategy_id": "strategy-p12"
+        },
+        "instrument_id": "BTC-USDT-PERP",
+        "limit_price": {
+          "amount": "50000",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "notional": "50000",
+        "order_type": "LIMIT",
+        "quantity": {
+          "amount": "1",
+          "asset_id": "BTC"
+        },
+        "reduce_only": false,
+        "reference_price": {
+          "amount": "50000",
+          "base_asset_id": "BTC",
+          "quote_asset_id": "USDT"
+        },
+        "risk_decision_id": "risk-p12-approved",
+        "rule_version": "binance-test-rules-v1",
+        "side": "BUY",
+        "time_in_force": "GTC"
+      },
+      "cumulative_quantity": {
+        "amount": "0.50",
+        "asset_id": "BTC"
+      },
+      "eligible_at": "2026-09-01T20:00:02.100000Z",
+      "processed_event_ids": [
+        "market-p13-1"
+      ],
+      "remaining_quantity": {
+        "amount": "0.50",
+        "asset_id": "BTC"
+      },
+      "status": "PARTIALLY_FILLED",
+      "submitted_at": "2026-09-01T20:00:02Z"
+    }
+  ],
+  "real_account_access_performed": false,
+  "restored_duplicate_fill_count": 0,
+  "restored_fill_count": 1,
+  "restored_replay": {
+    "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+    "disposition": "IDEMPOTENT_REPLAY",
+    "economic_order_created": false,
+    "reason_code": "AQ-RUNTIME-PAPER-ECONOMIC-REPLAY"
+  },
+  "schema_version": "p13-paper-evidence-v1",
+  "venue_network_requests_performed": 0,
+  "virtual_fills": true
+}
