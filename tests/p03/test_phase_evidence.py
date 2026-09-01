@@ -32,16 +32,18 @@ def p03_record(state: dict[str, object]) -> dict[str, object]:
     if state["current_phase"] == "P03":
         return state
     previous = cast(dict[str, object], state["previous_phase"])
-    assert previous["phase"] == "P03"
-    return previous
+    if previous["phase"] == "P03":
+        return previous
+    history = cast(list[dict[str, object]], state.get("phase_history", []))
+    return next(item for item in history if item["phase"] == "P03")
 
 
 def test_p03_boundary_is_explicit_and_live_trading_remains_locked(
     project_root: Path,
 ) -> None:
     state = load_state(project_root)
-    assert state["current_phase"] in {"P03", "P04"}
-    assert state["next_phase"] in {"P04", "P05"}
+    assert state["current_phase"] in {"P03", "P04", "P05"}
+    assert state["next_phase"] in {"P04", "P05", "P06"}
     assert state["status"] in {"in_progress", "accepted", "accepted_with_waiver"}
     assert state["live_trading_locked"] is True
     assert not (project_root / "src/aegisquant/live").exists()

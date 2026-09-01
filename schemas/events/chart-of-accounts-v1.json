@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "AccountDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "account_type": {
+          "$ref": "#/$defs/AccountType"
+        },
+        "economic_balance": {
+          "title": "Economic Balance",
+          "type": "boolean"
+        },
+        "normal_balance": {
+          "$ref": "#/$defs/NormalBalance"
+        },
+        "role": {
+          "$ref": "#/$defs/AccountRole"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "account_id",
+        "role",
+        "account_type",
+        "normal_balance",
+        "venue",
+        "subject",
+        "economic_balance",
+        "version"
+      ],
+      "title": "AccountDefinition",
+      "type": "object"
+    },
+    "AccountRole": {
+      "enum": [
+        "CASH",
+        "MARGIN_COLLATERAL",
+        "POSITION_COST",
+        "POSITION_CLEARING",
+        "INVENTORY_CLEARING",
+        "BORROWED_ASSET",
+        "ACCRUED_INTEREST",
+        "OWNER_CAPITAL",
+        "TRADING_REALIZED_PNL",
+        "TRADING_LOSS",
+        "FUNDING_INCOME",
+        "FUNDING_EXPENSE",
+        "TRADING_FEE",
+        "TRADING_FEE_REBATE",
+        "BORROW_INTEREST",
+        "TRANSFER_FEE",
+        "RECONCILIATION_RESERVE"
+      ],
+      "title": "AccountRole",
+      "type": "string"
+    },
+    "AccountType": {
+      "enum": [
+        "ASSET",
+        "LIABILITY",
+        "EQUITY",
+        "INCOME",
+        "EXPENSE",
+        "MEMO"
+      ],
+      "title": "AccountType",
+      "type": "string"
+    },
+    "NormalBalance": {
+      "enum": [
+        "DEBIT",
+        "CREDIT"
+      ],
+      "title": "NormalBalance",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.chart-of-accounts/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "definitions": {
+      "items": {
+        "$ref": "#/$defs/AccountDefinition"
+      },
+      "title": "Definitions",
+      "type": "array"
+    },
+    "effective_from": {
+      "format": "date-time",
+      "title": "Effective From",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "effective_from",
+    "definitions"
+  ],
+  "title": "ChartOfAccounts",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.chart-of-accounts",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,86 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.daily-ledger-snapshot/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "last_event_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Last Event Hash",
+      "type": "string"
+    },
+    "ledger_entry_count": {
+      "minimum": 0,
+      "title": "Ledger Entry Count",
+      "type": "integer"
+    },
+    "ledger_snapshot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Ledger Snapshot Id",
+      "type": "string"
+    },
+    "ledger_state_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Ledger State Hash",
+      "type": "string"
+    },
+    "payload_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Payload Hash",
+      "type": "string"
+    },
+    "policy_version": {
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "previous_snapshot_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Previous Snapshot Hash",
+      "type": "string"
+    },
+    "public_key_base64": {
+      "minLength": 1,
+      "title": "Public Key Base64",
+      "type": "string"
+    },
+    "signature_algorithm": {
+      "const": "Ed25519",
+      "default": "Ed25519",
+      "title": "Signature Algorithm",
+      "type": "string"
+    },
+    "signature_base64": {
+      "minLength": 1,
+      "title": "Signature Base64",
+      "type": "string"
+    },
+    "snapshot_date": {
+      "format": "date",
+      "title": "Snapshot Date",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ledger_snapshot_id",
+    "snapshot_date",
+    "created_at",
+    "policy_version",
+    "ledger_entry_count",
+    "last_event_hash",
+    "ledger_state_hash",
+    "previous_snapshot_hash",
+    "payload_hash",
+    "public_key_base64",
+    "signature_base64"
+  ],
+  "title": "DailyLedgerSnapshot",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.daily-ledger-snapshot",
+  "x-aegisquant-schema-version": "1.0.0"
+}

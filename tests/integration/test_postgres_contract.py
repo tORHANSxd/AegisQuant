@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
+from decimal import Decimal
 from pathlib import Path
 
 import pytest
@@ -13,16 +14,47 @@ from alembic.config import Config
 from sqlalchemy import Engine, func, inspect, select
 from sqlalchemy.exc import IntegrityError
 
+from aegisquant.accounting.models import (
+    ReconciliationMode,
+    VenueAccountSnapshot,
+)
+from aegisquant.accounting.reconciliation import reconcile_account_snapshots
+from aegisquant.accounting.snapshots import Ed25519SnapshotSigner, create_daily_snapshot
+from aegisquant.domain.execution import OrderSide
+from aegisquant.domain.identifiers import AccountSnapshotId
+from aegisquant.persistence.accounting import (
+    append_ledger_record,
+    load_ledger_records,
+    persist_accounting_configuration,
+    store_daily_snapshot,
+    store_reconciliation_case,
+)
 from aegisquant.persistence.database import create_postgres_engine
 from aegisquant.persistence.messaging import (
     StoredEvent,
     append_event_with_outbox,
     record_inbox_once,
 )
-from aegisquant.persistence.tables import domain_events, inbox_messages, outbox_messages
+from aegisquant.persistence.tables import (
+    accounting_ledger_entries,
+    accounting_ledger_postings,
+    accounting_position_lots,
+    domain_events,
+    inbox_messages,
+    outbox_messages,
+)
+from tests.p05.helpers import NOW, fill, spot_instrument
+from tests.p05.helpers import engine as accounting_engine
 
 EXPECTED_TABLES = {
+    "account_reconciliation_cases",
+    "accounting_accounts",
+    "accounting_entry_templates",
+    "accounting_ledger_entries",
+    "accounting_ledger_postings",
+    "accounting_position_lots",
     "alembic_version",
+    "daily_ledger_snapshots",
     "domain_events",
     "event_schema_registry",
     "inbox_messages",
@@ -173,3 +205,70 @@ def test_outbox_failure_rolls_back_event_atomically(migrated_engine: Engine) -> 
             .where(domain_events.c.event_id == "event-second")
         )
         assert second_count == 0
+
+
+@pytest.mark.postgres
+def test_accounting_facts_projections_reconciliation_and_snapshots_are_durable(
+    migrated_engine: Engine, project_root: Path
+) -> None:
+    ledger = accounting_engine(project_root)
+    spec = spot_instrument()
+    ledger.process_fill(fill(spec, sequence=1, side=OrderSide.BUY, quantity="1", price="100"), spec)
+    ledger.process_fill(
+        fill(spec, sequence=2, side=OrderSide.SELL, quantity="0.5", price="120"), spec
+    )
+    snapshot = VenueAccountSnapshot(
+        account_snapshot_id=AccountSnapshotId("postgres-account-snapshot"),
+        venue="SIM",
+        as_of_time=NOW,
+        balances=(),
+        positions=(),
+    )
+    case = reconcile_account_snapshots(
+        local=snapshot,
+        venue=snapshot,
+        mode=ReconciliationMode.STARTUP,
+        opened_at=NOW,
+    )
+    signed = create_daily_snapshot(
+        engine=ledger,
+        signer=Ed25519SnapshotSigner.generate(),
+        snapshot_date=date(2026, 9, 1),
+        created_at=NOW,
+    )
+    with migrated_engine.begin() as connection:
+        persist_accounting_configuration(
+            connection,
+            chart=ledger.chart.snapshot(),
+            templates=tuple(ledger.templates.values()),
+        )
+        assert append_ledger_record(connection, record=ledger.records[0]) is True
+        assert append_ledger_record(connection, record=ledger.records[1]) is True
+        assert append_ledger_record(connection, record=ledger.records[1]) is False
+        assert store_reconciliation_case(connection, case=case) is True
+        assert store_reconciliation_case(connection, case=case) is False
+        assert store_daily_snapshot(connection, snapshot=signed) is True
+        assert store_daily_snapshot(connection, snapshot=signed) is False
+
+    with migrated_engine.connect() as connection:
+        loaded = load_ledger_records(connection)
+        assert loaded == ledger.records
+        assert connection.scalar(select(func.count()).select_from(accounting_ledger_entries)) == 2
+        assert connection.scalar(
+            select(func.count()).select_from(accounting_ledger_postings)
+        ) == sum(len(record.journal_entry.postings) for record in ledger.records)
+        remaining = connection.scalar(
+            select(accounting_position_lots.c.remaining_quantity).where(
+                accounting_position_lots.c.status == "OPEN"
+            )
+        )
+        assert remaining == Decimal("0.5")
+
+    conflict = ledger.records[1].model_copy(
+        update={"command_hash": "f" * 64, "event_hash": "e" * 64}
+    )
+    with (
+        pytest.raises(ValueError, match="PERSISTENCE-IDEMPOTENCY-CONFLICT"),
+        migrated_engine.begin() as connection,
+    ):
+        append_ledger_record(connection, record=conflict)

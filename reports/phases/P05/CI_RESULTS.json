@@ -1,0 +1,264 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P05",
+  "generated_at_utc": "2026-09-01T07:51:49.118943Z",
+  "status": "passed",
+  "stage_count": 22,
+  "passed_count": 22,
+  "failed_count": 0,
+  "results": [
+    {
+      "name": "postgres-runtime",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/setup_postgres.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.161,
+      "output_tail": "{\n  \"version\": \"18.6\",\n  \"archive_url\": \"https://get.enterprisedb.com/postgresql/postgresql-18.6-1-windows-x64-binaries.zip\",\n  \"archive_sha256\": \"fbe23da234ee31547bf8a36d29dfd81e82b849df2d2b78d2eecb43d360252f8c\",\n  \"bin_dir\": \"D:\\\\Personal\\\\Quantitative_Trading\\\\.tools\\\\postgresql-18.6\\\\pgsql\\\\bin\",\n  \"status\": \"ready\"\n}"
+    },
+    {
+      "name": "traceability",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_traceability.py",
+        "--phase-status",
+        "P00=verified",
+        "--phase-status",
+        "P01=verified",
+        "--phase-status",
+        "P02=verified",
+        "--phase-status",
+        "P03=verified",
+        "--phase-status",
+        "P04=verified",
+        "--phase-status",
+        "P05=planned",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.137,
+      "output_tail": "verified 466 requirements in state\\REQUIREMENTS_TRACEABILITY.csv"
+    },
+    {
+      "name": "schema-contracts",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.833,
+      "output_tail": "verified 82 generated schema artifacts"
+    },
+    {
+      "name": "p02-data-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p02_data_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.547,
+      "output_tail": "P02 data evidence contract: passed"
+    },
+    {
+      "name": "p03-binance-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p03_binance_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.486,
+      "output_tail": "verified 9 P03 Binance evidence artifacts"
+    },
+    {
+      "name": "p04-multivenue-event-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p04_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.578,
+      "output_tail": "verified 4 P04 evidence artifacts"
+    },
+    {
+      "name": "p05-accounting-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p05_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.408,
+      "output_tail": "verified 5 P05 evidence artifacts"
+    },
+    {
+      "name": "p05-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/run_p05_mutation.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 46.957,
+      "output_tail": "[short-side-sign] killed\n[inverse-pnl-operation] killed\n[fifo-close-quantity] killed\n[spot-inventory-gate] killed\n[idempotency-inserted-flag] killed\n[valuation-priority] killed\n[pnl-borrow-sign] killed\n[cashflow-interest-direction] killed\n[rounding-classification] killed\n[continuous-reconciliation-status] killed\n[snapshot-payload-hash] killed\n[journal-balance-comparison] killed\nP05 mutation score: 1.000 (threshold 0.900)"
+    },
+    {
+      "name": "ruff-format",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.119,
+      "output_tail": "249 files already formatted"
+    },
+    {
+      "name": "ruff-lint",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.129,
+      "output_tail": "All checks passed!"
+    },
+    {
+      "name": "pyright-strict",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pyright",
+        "--project",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 8.882,
+      "output_tail": "0 errors, 0 warnings, 0 informations"
+    },
+    {
+      "name": "pytest",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 34.516,
+      "output_tail": "============================= test session starts =============================\nplatform win32 -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0\nrootdir: D:\\Personal\\Quantitative_Trading\nconfigfile: pyproject.toml\ntestpaths: tests\nplugins: anyio-4.14.2, hypothesis-6.167.1, asyncio-1.4.0\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 238 items\n\ntests\\architecture\\test_domain_boundaries.py ...                         [  1%]\ntests\\chaos\\test_atomic_data_lake.py .                                   [  1%]\ntests\\contract\\providers\\test_comparison.py ...                          [  2%]\ntests\\contract\\providers\\test_exchange_adapters.py .......               [  5%]\ntests\\contract\\providers\\test_market_models.py ....                      [  7%]\ntests\\contract\\providers\\test_nautilus_multivenue.py .                   [  7%]\ntests\\contract\\providers\\test_sequence.py ..........                     [ 12%]\ntests\\contract\\providers\\test_source_adapters.py .................       [ 19%]\ntests\\contract\\test_candidate_runtime.py .                               [ 19%]\ntests\\contract\\test_columnar_runtime.py ...                              [ 21%]\ntests\\contract\\test_config_contract.py ...                               [ 22%]\ntests\\contract\\test_event_contracts.py ...                               [ 23%]\ntests\\contract\\test_nautilus_replay.py .                                 [ 23%]\ntests\\contract\\test_source_policy.py .........                           [ 27%]\ntests\\integration\\test_postgres_contract.py ....                         [ 29%]\ntests\\mutation\\test_p05_mutation_gate.py .                               [ 29%]\ntests\\p00\\test_access_requests.py ..                                     [ 30%]\ntests\\p00\\test_adr_inventory.py .                                        [ 31%]\ntests\\p00\\test_ci_security_artifacts.py ....                             [ 32%]\ntests\\p00\\test_dependency_locks.py ...                                   [ 34%]\ntests\\p00\\test_directory_manifest.py ..                                  [ 34%]\ntests\\p00\\test_host_capabilities.py .                                    [ 35%]\ntests\\p00\\test_intelligence_templates.py ..                              [ 36%]\ntests\\p00\\test_no_incomplete_implementation.py .                         [ 36%]\ntests\\p00\\test_phase_boundary.py ..                                      [ 37%]\ntests\\p00\\test_project_state.py ..                                       [ 38%]\ntests\\p00\\test_repository_baseline.py ..                                 [ 39%]\ntests\\p00\\test_required_reports.py ....                                  [ 40%]\ntests\\p00\\test_spec_integrity.py ..                                      [ 41%]\ntests\\p00\\test_traceability.py ..                                        [ 42%]\ntests\\p01\\test_phase_evidence.py ...                                     [ 43%]\ntests\\p02\\test_archive_scanner.py ....                                   [ 45%]\ntests\\p02\\test_phase_evidence.py ....                                    [ 47%]\ntests\\p02\\test_pit_query.py .....                                        [ 49%]\ntests\\p02\\test_registry_lake.py .......                                  [ 52%]\ntests\\p03\\test_contract_inventory.py ....                                [ 53%]\ntests\\p03\\test_history_archive.py ....                                   [ 55%]\ntests\\p03\\test_nautilus_semantics.py .                                   [ 55%]\ntests\\p03\\test_normalization.py ....                                     [ 57%]\ntests\\p03\\test_orderbook.py ...                                          [ 58%]\ntests\\p03\\test_phase_evidence.py ...                                     [ 60%]\ntests\\p03\\test_quality_replay_changelog.py ....                          [ 61%]\ntests\\p03\\test_rest.py .....                                             [ 63%]\ntests\\p03\\test_soak_state.py ..                                          [ 64%]\ntests\\p03\\test_websocket_lifecycle.py ....                               [ 66%]\ntests\\p04\\test_phase_evidence.py ....                                    [ 68%]\ntests\\p05\\test_ledger_core.py .........                                  [ 71%]\ntests\\p05\\test_snapshots.py ..                                           [ 72%]\ntests\\p05\\test_valuation_reconciliation.py ....                          [ 74%]\ntests\\performance\\test_accounting_performance.py .                       [ 74%]\ntests\\performance\\test_data_foundation_evidence.py ..                    [ 75%]\ntests\\property\\test_accounting_properties.py .                           [ 76%]\ntests\\property\\test_data_properties.py ..                                [ 76%]\ntests\\property\\test_domain_properties.py .....                           [ 78%]\ntests\\replay\\intelligence\\test_pipeline.py ....                          [ 80%]\ntests\\replay\\intelligence\\test_store.py ....                             [ 82%]\ntests\\security\\test_binance_public_only.py ......                        [ 84%]\ntests\\security\\test_data_foundation_security.py ..                       [ 85%]\ntests\\security\\test_import_side_effects.py .                             [ 86%]\ntests\\security\\test_live_lock.py ......                                  [ 88%]\ntests\\security\\test_p04_source_boundaries.py .....                       [ 90%]\ntests\\security\\test_secret_boundaries.py ..                              [ 91%]\ntests\\unit\\domain\\test_accounting.py ..                                  [ 92%]\ntests\\unit\\domain\\test_entities.py ....                                  [ 94%]\ntests\\unit\\domain\\test_errors.py ..                                      [ 94%]\ntests\\unit\\domain\\test_execution.py ..                                   [ 95%]\ntests\\unit\\domain\\test_identifiers_time_values.py .....                  [ 97%]\ntests\\unit\\domain\\test_intelligence.py ...                               [ 99%]\ntests\\unit\\domain\\test_policy.py ..                                      [100%]\n\n============================== warnings summary ===============================\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\n  D:\\Personal\\Quantitative_Trading\\tests\\contract\\test_nautilus_replay.py:50: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.\n    engine.run()\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n====================== 238 passed, 4 warnings in 32.87s ======================="
+    },
+    {
+      "name": "python-candidate",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/run_python_compatibility.py",
+        "--phase",
+        "P05"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 38.646,
+      "output_tail": "============================= test session starts =============================\nplatform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0\nrootdir: D:\\Personal\\Quantitative_Trading\nconfigfile: pyproject.toml\nplugins: anyio-4.14.2, hypothesis-6.167.1, asyncio-1.4.0\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 201 items\n\ntests\\architecture\\test_domain_boundaries.py ...                         [  1%]\ntests\\unit\\domain\\test_accounting.py ..                                  [  2%]\ntests\\unit\\domain\\test_entities.py ....                                  [  4%]\ntests\\unit\\domain\\test_errors.py ..                                      [  5%]\ntests\\unit\\domain\\test_execution.py ..                                   [  6%]\ntests\\unit\\domain\\test_identifiers_time_values.py .....                  [  8%]\ntests\\unit\\domain\\test_intelligence.py ...                               [ 10%]\ntests\\unit\\domain\\test_policy.py ..                                      [ 11%]\ntests\\property\\test_accounting_properties.py .                           [ 11%]\ntests\\property\\test_data_properties.py ..                                [ 12%]\ntests\\property\\test_domain_properties.py .....                           [ 15%]\ntests\\contract\\providers\\test_comparison.py ...                          [ 16%]\ntests\\contract\\providers\\test_exchange_adapters.py .......               [ 20%]\ntests\\contract\\providers\\test_market_models.py ....                      [ 22%]\ntests\\contract\\providers\\test_nautilus_multivenue.py .                   [ 22%]\ntests\\contract\\providers\\test_sequence.py ..........                     [ 27%]\ntests\\contract\\providers\\test_source_adapters.py .................       [ 36%]\ntests\\contract\\test_candidate_runtime.py .                               [ 36%]\ntests\\contract\\test_columnar_runtime.py ...                              [ 38%]\ntests\\contract\\test_config_contract.py ...                               [ 39%]\ntests\\contract\\test_event_contracts.py ...                               [ 41%]\ntests\\contract\\test_nautilus_replay.py .                                 [ 41%]\ntests\\contract\\test_source_policy.py .........                           [ 46%]\ntests\\p02\\test_archive_scanner.py ....                                   [ 48%]\ntests\\p02\\test_phase_evidence.py ....                                    [ 50%]\ntests\\p02\\test_pit_query.py .....                                        [ 52%]\ntests\\p02\\test_registry_lake.py .......                                  [ 56%]\ntests\\p03\\test_contract_inventory.py ....                                [ 58%]\ntests\\p03\\test_history_archive.py ....                                   [ 60%]\ntests\\p03\\test_nautilus_semantics.py .                                   [ 60%]\ntests\\p03\\test_normalization.py ....                                     [ 62%]\ntests\\p03\\test_orderbook.py ...                                          [ 64%]\ntests\\p03\\test_phase_evidence.py ...                                     [ 65%]\ntests\\p03\\test_quality_replay_changelog.py ....                          [ 67%]\ntests\\p03\\test_rest.py .....                                             [ 70%]\ntests\\p03\\test_soak_state.py ..                                          [ 71%]\ntests\\p03\\test_websocket_lifecycle.py ....                               [ 73%]\ntests\\chaos\\test_atomic_data_lake.py .                                   [ 73%]\ntests\\performance\\test_accounting_performance.py .                       [ 74%]\ntests\\performance\\test_data_foundation_evidence.py ..                    [ 75%]\ntests\\security\\test_binance_public_only.py ......                        [ 78%]\ntests\\security\\test_data_foundation_security.py ..                       [ 79%]\ntests\\security\\test_import_side_effects.py .                             [ 79%]\ntests\\security\\test_live_lock.py ......                                  [ 82%]\ntests\\security\\test_p04_source_boundaries.py .....                       [ 85%]\ntests\\security\\test_secret_boundaries.py ..                              [ 86%]\ntests\\replay\\intelligence\\test_pipeline.py ....                          [ 88%]\ntests\\replay\\intelligence\\test_store.py ....                             [ 90%]\ntests\\p04\\test_phase_evidence.py ....                                    [ 92%]\ntests\\p05\\test_ledger_core.py .........                                  [ 96%]\ntests\\p05\\test_snapshots.py ..                                           [ 97%]\ntests\\p05\\test_valuation_reconciliation.py ....                          [ 99%]\ntests\\mutation\\test_p05_mutation_gate.py .                               [100%]\n\n============================== warnings summary ===============================\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\n  D:\\Personal\\Quantitative_Trading\\tests\\contract\\test_nautilus_replay.py:50: Pandas4Warning: Timestamp.utcnow is deprecated and will be removed in a future version. Use Timestamp.now('UTC') instead.\n    engine.run()\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n====================== 201 passed, 4 warnings in 25.88s =======================\n\nInstalled 107 packages in 5.73s\ncandidate Python contract: passed"
+    },
+    {
+      "name": "nautilus-compatibility",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_nautilus_compatibility.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.715,
+      "output_tail": "NautilusTrader compatibility: passed"
+    },
+    {
+      "name": "bandit",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/run_bandit.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.76,
+      "output_tail": "[main]\tINFO\tprofile include tests: None\n[main]\tINFO\tprofile exclude tests: None\n[main]\tINFO\tcli include tests: None\n[main]\tINFO\tcli exclude tests: None\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:80\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:81\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:82\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:85\n[manager]\tWARNING\tTest in comment: bounded is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: input is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: rejects is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: DTD is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: entity is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: declarations is not a test name or id, ignoring\n[json]\tINFO\tJSON output written to file: D:\\Personal\\Quantitative_Trading\\reports\\security\\.bandit.raw.json\n\nBandit findings: 0"
+    },
+    {
+      "name": "security",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/security_scan.py",
+        "--phase",
+        "P05"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 65.163,
+      "output_tail": "{\"schema_version\": \"1.0.0\", \"phase\": \"P05\", \"generated_at_utc\": \"2026-09-01T07:51:15.060829Z\", \"status\": \"passed\", \"checks\": {\"detect_secrets\": true, \"python_dependency_audit\": true, \"javascript_dependency_audit\": true, \"container_iac\": true}, \"secret_finding_count\": 0, \"real_account_access_performed\": false, \"secret_store_access_performed\": false}"
+    },
+    {
+      "name": "compliance-artifacts",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_compliance_artifacts.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 4.325,
+      "output_tail": "{\"schema_version\": \"1.0.0\", \"phase\": \"P03\", \"status\": \"passed\", \"python_component_count\": 107, \"javascript_component_count\": 519, \"python_unknown_license_count\": 0, \"artifacts\": [\"reports/sbom/python.cdx.json\", \"reports/sbom/javascript.cdx.json\", \"reports/licenses/python.json\", \"reports/licenses/javascript.json\"]}"
+    },
+    {
+      "name": "web-lint",
+      "command": [
+        "C:\\Users\\SXD\\AppData\\Local\\pnpm\\pnpm.CMD",
+        "lint"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 5.6,
+      "output_tail": "[WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\n.                                        | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\napps/web                                 | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\n\n$ pnpm --filter @aegisquant/web lint\n$ eslint . --max-warnings 0"
+    },
+    {
+      "name": "web-typecheck",
+      "command": [
+        "C:\\Users\\SXD\\AppData\\Local\\pnpm\\pnpm.CMD",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.531,
+      "output_tail": "[WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\n.                                        | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\napps/web                                 | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\nGenerating route types...\n✓ Types generated successfully\n\n$ pnpm --filter @aegisquant/web typecheck\n$ next typegen && tsc --noEmit -p tsconfig.check.json"
+    },
+    {
+      "name": "web-unit",
+      "command": [
+        "C:\\Users\\SXD\\AppData\\Local\\pnpm\\pnpm.CMD",
+        "test"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 4.197,
+      "output_tail": "[WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\n.                                        | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\napps/web                                 | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\n\n RUN  v4.1.11 D:/Personal/Quantitative_Trading/apps/web\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  15:51:30\n   Duration  2.24s (transform 53ms, setup 306ms, import 87ms, tests 130ms, environment 1.43s)\n\n\n$ pnpm --filter @aegisquant/web test\n$ vitest run"
+    },
+    {
+      "name": "web-build",
+      "command": [
+        "C:\\Users\\SXD\\AppData\\Local\\pnpm\\pnpm.CMD",
+        "build"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 7.154,
+      "output_tail": "[WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\n.                                        | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\napps/web                                 | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\n▲ Next.js 16.3.3 (Turbopack)\n✓ Running next.config.ts took 37ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 410ms\n  Running TypeScript ...\n  Finished TypeScript in 1637ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/3) ...\n✓ Generating static pages using 4 workers (3/3) in 713ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n└ ○ /_not-found\n\n\n○  (Static)  prerendered as static content\n\n\n$ pnpm --filter @aegisquant/web build\n$ next build"
+    },
+    {
+      "name": "web-e2e",
+      "command": [
+        "C:\\Users\\SXD\\AppData\\Local\\pnpm\\pnpm.CMD",
+        "e2e"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 9.238,
+      "output_tail": "[WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\n.                                        | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\napps/web                                 | [WARN] Unsupported engine: wanted: {\"node\":\"24.20.0\"} (current: {\"node\":\"v24.12.0\",\"pnpm\":\"11.24.0\"})\n\nRunning 1 test using 1 worker\n\n  ok 1 [chromium] › e2e\\locked-page.spec.ts:3:1 › renders the P00 safety state without controls (1.0s)\n\n  1 passed (7.1s)\n\n$ pnpm --filter @aegisquant/web e2e\n$ playwright test\n[WebServer] (node:19040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] $ next dev --hostname 127.0.0.1\n[WebServer] (node:34564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:21332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n(node:5668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    }
+  ]
+}

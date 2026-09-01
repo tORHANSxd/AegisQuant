@@ -221,3 +221,23 @@ class IdempotencyKey(TypedId):
 
 class ProviderNativeId(ExternalId):
     kind = "provider-native"
+
+
+class EntryTemplateId(TypedId):
+    kind = "entry-template"
+
+
+class ValuationSnapshotId(TypedId):
+    kind = "valuation-snapshot"
+
+
+class ReconciliationCaseId(TypedId):
+    kind = "reconciliation-case"
+
+
+class AccountSnapshotId(TypedId):
+    kind = "account-snapshot"
+
+
+class LedgerSnapshotId(TypedId):
+    kind = "ledger-snapshot"

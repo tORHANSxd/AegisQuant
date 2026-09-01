@@ -32,18 +32,25 @@ def load_state(project_root: Path) -> dict[str, object]:
 def test_p04_boundary_preserves_p03_waiver_and_live_lock(project_root: Path) -> None:
     state = load_state(project_root)
     previous = cast(dict[str, object], state["previous_phase"])
-    assert state["current_phase"] == "P04"
-    assert state["next_phase"] == "P05"
+    assert state["current_phase"] in {"P04", "P05"}
     assert state["status"] in {"in_progress", "accepted"}
     assert state["live_trading_locked"] is True
-    assert previous["phase"] == "P03"
-    assert previous["status"] == "accepted_with_waiver"
-    waivers = cast(list[dict[str, object]], previous["waivers"])
+    history = cast(list[dict[str, object]], state.get("phase_history", []))
+    p03 = next(item for item in history if item["phase"] == "P03")
+    assert p03["status"] == "accepted_with_waiver"
+    waivers = cast(list[dict[str, object]], p03["waivers"])
     assert waivers[0]["requirement_id"] == "P03-A01"
     assert not (project_root / "reports/data/BINANCE_24H_SOAK.json").exists()
     assert not (project_root / "src/aegisquant/live").exists()
-    accounting_root = project_root / "src/aegisquant/accounting"
-    assert not accounting_root.exists() or not any(accounting_root.rglob("*.py"))
+    if state["current_phase"] == "P04":
+        assert state["next_phase"] == "P05"
+        assert previous["phase"] == "P03"
+        accounting_root = project_root / "src/aegisquant/accounting"
+        assert not accounting_root.exists() or not any(accounting_root.rglob("*.py"))
+    else:
+        assert state["next_phase"] == "P06"
+        assert previous["phase"] == "P04"
+        assert previous["status"] == "accepted"
 
 
 def test_p04_traceability_has_35_real_targets(project_root: Path) -> None:
@@ -58,7 +65,8 @@ def test_p04_traceability_has_35_real_targets(project_root: Path) -> None:
         *(f"P04-A{index:02d}" for index in range(1, 13)),
     }
     state = load_state(project_root)
-    expected_status = "verified" if state["status"] == "accepted" else "in_progress"
+    p04_is_closed = state["current_phase"] != "P04" or state["status"] == "accepted"
+    expected_status = "verified" if p04_is_closed else "in_progress"
     assert {row["status"] for row in rows} == {expected_status}
     for row in rows:
         assert (project_root / row["implementation"]).exists(), row["requirement_id"]
@@ -90,7 +98,8 @@ def test_p04_machine_evidence_is_explicitly_public_or_fixture_only(project_root:
 
 def test_closed_p04_is_bound_to_reports_manifest_and_ci(project_root: Path) -> None:
     state = load_state(project_root)
-    if state["status"] != "accepted":
+    p04_is_closed = state["current_phase"] != "P04" or state["status"] == "accepted"
+    if not p04_is_closed:
         return
     report_dir = project_root / "reports/phases/P04"
     for name in REQUIRED_REPORTS:
@@ -106,5 +115,10 @@ def test_closed_p04_is_bound_to_reports_manifest_and_ci(project_root: Path) -> N
     manifest_raw = (report_dir / "ARTIFACT_MANIFEST.json").read_bytes()
     manifest = json.loads(manifest_raw)
     assert manifest["phase"] == "P04"
-    assert state["commit_sha"] == manifest["implementation_commit"]
-    assert state["artifact_manifest_sha256"] == hashlib.sha256(manifest_raw).hexdigest()
+    phase_state = (
+        state
+        if state["current_phase"] == "P04"
+        else cast(dict[str, object], state["previous_phase"])
+    )
+    assert phase_state["commit_sha"] == manifest["implementation_commit"]
+    assert phase_state["artifact_manifest_sha256"] == hashlib.sha256(manifest_raw).hexdigest()

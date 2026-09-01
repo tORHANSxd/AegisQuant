@@ -1,0 +1,167 @@
+{
+  "$defs": {
+    "AccountingInstrument": {
+      "additionalProperties": false,
+      "properties": {
+        "base_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Base Asset Id",
+          "type": "string"
+        },
+        "contract_form": {
+          "$ref": "#/$defs/ContractForm"
+        },
+        "contract_multiplier": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Contract Multiplier"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "instrument_type": {
+          "$ref": "#/$defs/InstrumentType"
+        },
+        "quantity_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Quantity Asset Id",
+          "type": "string"
+        },
+        "quote_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Quote Asset Id",
+          "type": "string"
+        },
+        "settlement_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Settlement Asset Id",
+          "type": "string"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "instrument_id",
+        "venue",
+        "base_asset_id",
+        "quote_asset_id",
+        "settlement_asset_id",
+        "quantity_asset_id",
+        "instrument_type",
+        "contract_form",
+        "contract_multiplier"
+      ],
+      "title": "AccountingInstrument",
+      "type": "object"
+    },
+    "ContractForm": {
+      "enum": [
+        "SPOT",
+        "LINEAR",
+        "INVERSE"
+      ],
+      "title": "ContractForm",
+      "type": "string"
+    },
+    "InstrumentType": {
+      "enum": [
+        "SPOT",
+        "PERPETUAL",
+        "FUTURE",
+        "OPTION"
+      ],
+      "title": "InstrumentType",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.settlement-event/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_time": {
+      "format": "date-time",
+      "title": "Available Time",
+      "type": "string"
+    },
+    "event_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_time": {
+      "format": "date-time",
+      "title": "Event Time",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "instrument": {
+      "$ref": "#/$defs/AccountingInstrument"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "reference": {
+      "title": "Reference",
+      "type": "string"
+    },
+    "settlement_price": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "gt": "0",
+      "title": "Settlement Price"
+    }
+  },
+  "required": [
+    "event_id",
+    "instrument",
+    "settlement_price",
+    "event_time",
+    "available_time",
+    "recorded_at",
+    "idempotency_key",
+    "reference"
+  ],
+  "title": "SettlementEvent",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.settlement-event",
+  "x-aegisquant-schema-version": "1.0.0"
+}

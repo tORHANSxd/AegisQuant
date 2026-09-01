@@ -1,0 +1,19 @@
+requirement_id,category,requirement,implementation,test,evidence,status
+P05-T01,task,Chart of Accounts 和版本化分录模板,src/aegisquant/accounting/ledger.py,tests/p05/test_ledger_core.py,reports/data/P05_ACCOUNTING_EVIDENCE.json,in_progress
+P05-T02,task,现货买卖和永续开平加减仓反手,src/aegisquant/accounting/ledger.py,tests/p05/test_ledger_core.py,reports/data/P05_ACCOUNTING_EVIDENCE.json,in_progress
+P05-T03,task,明确 FIFO lot 政策并写 ADR,docs/adr/ADR-0009-p05-accounting-policy.md,tests/p05/test_ledger_core.py,docs/adr/ADR-0009-p05-accounting-policy.md,in_progress
+P05-T04,task,正向逆向合约 PnL,src/aegisquant/accounting/ledger.py,tests/p05/test_ledger_core.py,reports/data/P05_GOLDEN_RESULTS.json,in_progress
+P05-T05,task,手续费资金费率借贷和外部划转,src/aegisquant/accounting/ledger.py,tests/p05/test_ledger_core.py,reports/data/P05_GOLDEN_RESULTS.json,in_progress
+P05-T06,task,realized unrealized 与估值快照,src/aegisquant/accounting/models.py,tests/p05/test_valuation_reconciliation.py,reports/data/P05_ACCOUNTING_EVIDENCE.json,in_progress
+P05-T07,task,权威权益和 PnL 分解,src/aegisquant/accounting/ledger.py,tests/p05/test_ledger_core.py,reports/data/P05_GOLDEN_RESULTS.json,in_progress
+P05-T08,task,订单成交账本幂等关系,src/aegisquant/accounting/ledger.py,tests/p05/test_ledger_core.py,reports/data/P05_ACCOUNTING_EVIDENCE.json,in_progress
+P05-T09,task,账户快照比较与 Reconciliation Case,src/aegisquant/accounting/reconciliation.py,tests/p05/test_valuation_reconciliation.py,reports/data/P05_RECONCILIATION_EVIDENCE.json,in_progress
+P05-T10,task,模拟交易所启动持续断线对账,src/aegisquant/accounting/reconciliation.py,tests/p05/test_valuation_reconciliation.py,reports/data/P05_RECONCILIATION_EVIDENCE.json,in_progress
+P05-T11,task,每日签名快照和重建,src/aegisquant/accounting/snapshots.py,tests/p05/test_snapshots.py,reports/data/P05_SNAPSHOT_EVIDENCE.json,in_progress
+P05-T12,task,完整属性 Golden 和 mutation 测试,tests/property/test_accounting_properties.py,tests/mutation/test_p05_mutation_gate.py,reports/testing/P05_MUTATION_RESULTS.json,in_progress
+P05-A01,acceptance,所有分录借贷平衡,src/aegisquant/accounting/ledger.py,tests/property/test_accounting_properties.py,reports/data/P05_ACCOUNTING_EVIDENCE.json,in_progress
+P05-A02,acceptance,同一 Fill 重放只产生一次经济事实,src/aegisquant/accounting/ledger.py,tests/p05/test_ledger_core.py,reports/data/P05_ACCOUNTING_EVIDENCE.json,in_progress
+P05-A03,acceptance,随机成交序列可重建仓位和权益,src/aegisquant/accounting/ledger.py,tests/property/test_accounting_properties.py,reports/data/P05_REPLAY_EVIDENCE.json,in_progress
+P05-A04,acceptance,本地与模拟交易所差异可分类且不静默修正,src/aegisquant/accounting/reconciliation.py,tests/p05/test_valuation_reconciliation.py,reports/data/P05_RECONCILIATION_EVIDENCE.json,in_progress
+P05-A05,acceptance,账本事件重建哈希一致,src/aegisquant/accounting/snapshots.py,tests/p05/test_snapshots.py,reports/data/P05_REPLAY_EVIDENCE.json,in_progress
+P05-A06,acceptance,浮点数不能进入会计 API,src/aegisquant/accounting/models.py,tests/p05/test_ledger_core.py,reports/data/P05_ACCOUNTING_EVIDENCE.json,in_progress

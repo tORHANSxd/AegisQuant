@@ -1,0 +1,141 @@
+{
+  "$defs": {
+    "ReconciliationDifference": {
+      "additionalProperties": false,
+      "properties": {
+        "difference_type": {
+          "$ref": "#/$defs/ReconciliationDifferenceType"
+        },
+        "dimension": {
+          "title": "Dimension",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "local_value": {
+          "title": "Local Value",
+          "type": "string"
+        },
+        "venue_value": {
+          "title": "Venue Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "difference_type",
+        "dimension",
+        "key",
+        "local_value",
+        "venue_value",
+        "evidence"
+      ],
+      "title": "ReconciliationDifference",
+      "type": "object"
+    },
+    "ReconciliationDifferenceType": {
+      "enum": [
+        "EXPECTED_TIMING",
+        "MISSING_LOCAL_EVENT",
+        "MISSING_VENUE_EVENT",
+        "DUPLICATE_EVENT",
+        "ROUNDING",
+        "FEE_MISMATCH",
+        "POSITION_MISMATCH",
+        "BALANCE_MISMATCH",
+        "UNKNOWN_ORDER",
+        "UNEXPLAINED"
+      ],
+      "title": "ReconciliationDifferenceType",
+      "type": "string"
+    },
+    "ReconciliationMode": {
+      "enum": [
+        "STARTUP",
+        "CONTINUOUS",
+        "RECONNECT"
+      ],
+      "title": "ReconciliationMode",
+      "type": "string"
+    },
+    "ReconciliationStatus": {
+      "enum": [
+        "CLEAR",
+        "REVIEW_REQUIRED",
+        "HALTED"
+      ],
+      "title": "ReconciliationStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.reconciliation-case/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "differences": {
+      "items": {
+        "$ref": "#/$defs/ReconciliationDifference"
+      },
+      "title": "Differences",
+      "type": "array"
+    },
+    "local_snapshot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Local Snapshot Id",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/ReconciliationMode"
+    },
+    "new_orders_allowed": {
+      "title": "New Orders Allowed",
+      "type": "boolean"
+    },
+    "opened_at": {
+      "format": "date-time",
+      "title": "Opened At",
+      "type": "string"
+    },
+    "reconciliation_case_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Reconciliation Case Id",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ReconciliationStatus"
+    },
+    "venue_snapshot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Venue Snapshot Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "reconciliation_case_id",
+    "mode",
+    "local_snapshot_id",
+    "venue_snapshot_id",
+    "opened_at",
+    "status",
+    "new_orders_allowed",
+    "differences"
+  ],
+  "title": "ReconciliationCase",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.reconciliation-case",
+  "x-aegisquant-schema-version": "1.0.0"
+}

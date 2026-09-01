@@ -11,6 +11,21 @@ from typing import Final
 
 from pydantic import BaseModel
 
+from aegisquant.accounting.models import (
+    AccountingInstrument,
+    CashflowEvent,
+    ChartOfAccounts,
+    DailyLedgerSnapshot,
+    EntryTemplate,
+    EquitySnapshot,
+    LedgerRecord,
+    PnLBreakdown,
+    PositionLotState,
+    ReconciliationCase,
+    SettlementEvent,
+    ValuationSnapshot,
+    VenueAccountSnapshot,
+)
 from aegisquant.config.models import AppConfig
 from aegisquant.data.archive import RevisionRecord, TombstoneRecord
 from aegisquant.data.catalog import CatalogEntry
@@ -168,6 +183,84 @@ EVENT_CONTRACTS: Final = (
     Contract("aegisquant.fill", "1.0.0", Fill, Path("fill-v1.json")),
     Contract("aegisquant.journal-entry", "1.0.0", JournalEntry, Path("journal-entry-v1.json")),
     Contract("aegisquant.position-lot", "1.0.0", PositionLot, Path("position-lot-v1.json")),
+    Contract(
+        "aegisquant.accounting-instrument",
+        "1.0.0",
+        AccountingInstrument,
+        Path("accounting-instrument-v1.json"),
+    ),
+    Contract(
+        "aegisquant.chart-of-accounts",
+        "1.0.0",
+        ChartOfAccounts,
+        Path("chart-of-accounts-v1.json"),
+    ),
+    Contract(
+        "aegisquant.entry-template",
+        "1.0.0",
+        EntryTemplate,
+        Path("entry-template-v1.json"),
+    ),
+    Contract(
+        "aegisquant.ledger-record",
+        "1.0.0",
+        LedgerRecord,
+        Path("ledger-record-v1.json"),
+    ),
+    Contract(
+        "aegisquant.position-lot-state",
+        "1.0.0",
+        PositionLotState,
+        Path("position-lot-state-v1.json"),
+    ),
+    Contract(
+        "aegisquant.cashflow-event",
+        "1.0.0",
+        CashflowEvent,
+        Path("cashflow-event-v1.json"),
+    ),
+    Contract(
+        "aegisquant.settlement-event",
+        "1.0.0",
+        SettlementEvent,
+        Path("settlement-event-v1.json"),
+    ),
+    Contract(
+        "aegisquant.valuation-snapshot",
+        "1.0.0",
+        ValuationSnapshot,
+        Path("valuation-snapshot-v1.json"),
+    ),
+    Contract(
+        "aegisquant.equity-snapshot",
+        "1.0.0",
+        EquitySnapshot,
+        Path("equity-snapshot-v1.json"),
+    ),
+    Contract(
+        "aegisquant.pnl-breakdown",
+        "1.0.0",
+        PnLBreakdown,
+        Path("pnl-breakdown-v1.json"),
+    ),
+    Contract(
+        "aegisquant.venue-account-snapshot",
+        "1.0.0",
+        VenueAccountSnapshot,
+        Path("venue-account-snapshot-v1.json"),
+    ),
+    Contract(
+        "aegisquant.reconciliation-case",
+        "1.0.0",
+        ReconciliationCase,
+        Path("reconciliation-case-v1.json"),
+    ),
+    Contract(
+        "aegisquant.daily-ledger-snapshot",
+        "1.0.0",
+        DailyLedgerSnapshot,
+        Path("daily-ledger-snapshot-v1.json"),
+    ),
 )
 
 CONFIG_CONTRACTS: Final = (

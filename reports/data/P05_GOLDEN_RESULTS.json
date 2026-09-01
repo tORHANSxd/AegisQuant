@@ -1,0 +1,26 @@
+{
+  "cashflow_balanced": true,
+  "cashflow_entry_count": 4,
+  "dated_future_settlement": {
+    "realized_pnl": "60",
+    "remaining_lots": 0
+  },
+  "generated_at_utc": "2026-09-01T08:00:00Z",
+  "inverse_contract": {
+    "realized_pnl": "0.0009090909090909090909090909090",
+    "settlement_asset_id": "BTC"
+  },
+  "phase": "P05",
+  "schema_version": "1.0.0",
+  "spot_fifo": {
+    "asset_id": "USDT",
+    "realized_pnl": "25.0",
+    "remaining_lots": [
+      {
+        "entry_price": "110",
+        "remaining_quantity": "1.5",
+        "side": "LONG"
+      }
+    ]
+  }
+}

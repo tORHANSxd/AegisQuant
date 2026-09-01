@@ -54,7 +54,7 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
 
 
 def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
-    """Return the ordered P03/P04 pipeline without network soak execution."""
+    """Return the ordered P03-P05 pipeline without network soak execution."""
     pnpm = resolve_command("pnpm")
     phase_status = [
         "P00=verified",
@@ -62,19 +62,34 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
         "P02=verified",
         "P03=verified",
     ]
-    if phase == "P04":
+    if phase in {"P04", "P05"}:
         phase_status.append("P04=verified")
+    if phase == "P05":
+        phase_status.append("P05=planned")
     evidence_stages: list[tuple[str, list[str]]] = [
         (
             "p03-binance-evidence",
             [sys.executable, "scripts/generate_p03_binance_evidence.py", "--check"],
         )
     ]
-    if phase == "P04":
+    if phase in {"P04", "P05"}:
         evidence_stages.append(
             (
                 "p04-multivenue-event-evidence",
                 [sys.executable, "scripts/generate_p04_evidence.py", "--check"],
+            )
+        )
+    if phase == "P05":
+        evidence_stages.extend(
+            (
+                (
+                    "p05-accounting-evidence",
+                    [sys.executable, "scripts/generate_p05_evidence.py", "--check"],
+                ),
+                (
+                    "p05-mutation",
+                    [sys.executable, "scripts/run_p05_mutation.py"],
+                ),
             )
         )
     return [
@@ -122,7 +137,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("P03", "P04"), default="P04")
+    parser.add_argument("--phase", choices=("P03", "P04", "P05"), default="P05")
     parser.add_argument(
         "--output",
         type=Path,

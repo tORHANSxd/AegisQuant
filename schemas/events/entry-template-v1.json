@@ -1,0 +1,70 @@
+{
+  "$defs": {
+    "AccountRole": {
+      "enum": [
+        "CASH",
+        "MARGIN_COLLATERAL",
+        "POSITION_COST",
+        "POSITION_CLEARING",
+        "INVENTORY_CLEARING",
+        "BORROWED_ASSET",
+        "ACCRUED_INTEREST",
+        "OWNER_CAPITAL",
+        "TRADING_REALIZED_PNL",
+        "TRADING_LOSS",
+        "FUNDING_INCOME",
+        "FUNDING_EXPENSE",
+        "TRADING_FEE",
+        "TRADING_FEE_REBATE",
+        "BORROW_INTEREST",
+        "TRANSFER_FEE",
+        "RECONCILIATION_RESERVE"
+      ],
+      "title": "AccountRole",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.entry-template/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "effective_from": {
+      "format": "date-time",
+      "title": "Effective From",
+      "type": "string"
+    },
+    "entry_template_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Entry Template Id",
+      "type": "string"
+    },
+    "event_type": {
+      "title": "Event Type",
+      "type": "string"
+    },
+    "required_roles": {
+      "items": {
+        "$ref": "#/$defs/AccountRole"
+      },
+      "title": "Required Roles",
+      "type": "array"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "entry_template_id",
+    "version",
+    "event_type",
+    "required_roles",
+    "effective_from"
+  ],
+  "title": "EntryTemplate",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.entry-template",
+  "x-aegisquant-schema-version": "1.0.0"
+}

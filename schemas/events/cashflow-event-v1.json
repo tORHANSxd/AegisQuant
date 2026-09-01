@@ -1,0 +1,150 @@
+{
+  "$defs": {
+    "CashflowDirection": {
+      "enum": [
+        "INFLOW",
+        "OUTFLOW"
+      ],
+      "title": "CashflowDirection",
+      "type": "string"
+    },
+    "CashflowType": {
+      "enum": [
+        "FUNDING",
+        "BORROW",
+        "REPAY",
+        "BORROW_INTEREST",
+        "EXTERNAL_TRANSFER_IN",
+        "EXTERNAL_TRANSFER_OUT",
+        "TRANSFER_FEE",
+        "RECONCILIATION_ADJUSTMENT"
+      ],
+      "title": "CashflowType",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "description": "Signed monetary amount denominated in one explicit asset.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Money",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.cashflow-event/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "amount": {
+      "$ref": "#/$defs/Money"
+    },
+    "approval_reference": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Approval Reference"
+    },
+    "cashflow_type": {
+      "$ref": "#/$defs/CashflowType"
+    },
+    "direction": {
+      "$ref": "#/$defs/CashflowDirection"
+    },
+    "event_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_time": {
+      "format": "date-time",
+      "title": "Event Time",
+      "type": "string"
+    },
+    "evidence": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "reference": {
+      "title": "Reference",
+      "type": "string"
+    },
+    "supersedes_entry_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Entry Id"
+    },
+    "venue": {
+      "title": "Venue",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "venue",
+    "cashflow_type",
+    "direction",
+    "amount",
+    "event_time",
+    "recorded_at",
+    "idempotency_key",
+    "reference"
+  ],
+  "title": "CashflowEvent",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.cashflow-event",
+  "x-aegisquant-schema-version": "1.0.0"
+}

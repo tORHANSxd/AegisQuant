@@ -1,0 +1,44 @@
+{
+  "local": {
+    "account_snapshot_id": "local-snapshot-1",
+    "venue": "SIM",
+    "as_of_time": "2026-09-01T08:30:00Z",
+    "balances": [
+      {"key": "BTC", "amount": "1.25"},
+      {"key": "USDT", "amount": "1000.00"}
+    ],
+    "positions": [
+      {"key": "SIM:PERP:BTCUSDT", "amount": "2"}
+    ],
+    "open_order_ids": ["order-1"],
+    "fill_ids": ["fill-1", "fill-2"]
+  },
+  "matching_venue": {
+    "account_snapshot_id": "venue-snapshot-clear",
+    "venue": "SIM",
+    "as_of_time": "2026-09-01T08:30:01Z",
+    "balances": [
+      {"key": "BTC", "amount": "1.25"},
+      {"key": "USDT", "amount": "1000.00"}
+    ],
+    "positions": [
+      {"key": "SIM:PERP:BTCUSDT", "amount": "2"}
+    ],
+    "open_order_ids": ["order-1"],
+    "fill_ids": ["fill-1", "fill-2"]
+  },
+  "drifted_venue": {
+    "account_snapshot_id": "venue-snapshot-drift",
+    "venue": "SIM",
+    "as_of_time": "2026-09-01T08:30:01Z",
+    "balances": [
+      {"key": "BTC", "amount": "1.25000001"},
+      {"key": "USDT", "amount": "999.00"}
+    ],
+    "positions": [
+      {"key": "SIM:PERP:BTCUSDT", "amount": "1"}
+    ],
+    "open_order_ids": ["order-1", "order-unknown"],
+    "fill_ids": ["fill-1", "fill-2", "fill-venue-only"]
+  }
+}

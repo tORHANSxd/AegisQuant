@@ -93,7 +93,7 @@ TEST_BY_PHASE: Final = {
     "P02": "tests/unit/data/; tests/property/; tests/performance/",
     "P03": "tests/contract/binance/; tests/replay/",
     "P04": "tests/contract/providers/; tests/replay/intelligence/",
-    "P05": "tests/accounting/; tests/property/; tests/mutation/",
+    "P05": "tests/p05/; tests/property/; tests/mutation/",
     "P06": "tests/replay/; tests/performance/",
     "P07": "tests/unit/features/; tests/property/pit/; tests/research/",
     "P08": "tests/research/; tests/security/prompt_safety/",

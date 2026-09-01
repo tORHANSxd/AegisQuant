@@ -1,0 +1,30 @@
+{
+  "all_entries_balanced_by_asset": true,
+  "chart_version": "coa-v1",
+  "credentials_requested_or_stored": false,
+  "database_revision": "20260901_0002",
+  "entry_count": 3,
+  "entry_templates": [
+    "BORROW",
+    "BORROW_INTEREST",
+    "CONTRACT_SETTLEMENT",
+    "DERIVATIVE_FILL",
+    "EXTERNAL_TRANSFER",
+    "FUNDING_EXPENSE",
+    "FUNDING_INCOME",
+    "RECONCILIATION_ADJUSTMENT",
+    "REPAY",
+    "SPOT_FILL",
+    "TRANSFER_FEE"
+  ],
+  "fill_replay_inserted": false,
+  "fixture_only": true,
+  "float_rejected": true,
+  "generated_at_utc": "2026-09-01T08:00:00Z",
+  "live_trading_locked": true,
+  "phase": "P05",
+  "policy_version": "accounting-v1",
+  "real_account_access_performed": false,
+  "schema_version": "1.0.0",
+  "template_version": "entry-templates-v1"
+}

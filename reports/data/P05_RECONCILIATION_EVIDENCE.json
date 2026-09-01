@@ -1,0 +1,43 @@
+{
+  "cases": {
+    "CONTINUOUS": {
+      "case_id": "c4900fc1095aa4185251d365e29240b77ee92e8fe23f58495d10441ac8ea0d89",
+      "difference_count": 5,
+      "difference_types": [
+        "BALANCE_MISMATCH",
+        "MISSING_LOCAL_EVENT",
+        "POSITION_MISMATCH",
+        "ROUNDING",
+        "UNKNOWN_ORDER"
+      ],
+      "new_orders_allowed": false,
+      "status": "REVIEW_REQUIRED"
+    },
+    "RECONNECT": {
+      "case_id": "7b648f682d550b7e2e39605fb35bfd85a68ef111faebb014acb0db97d68f8bd2",
+      "difference_count": 5,
+      "difference_types": [
+        "BALANCE_MISMATCH",
+        "MISSING_LOCAL_EVENT",
+        "POSITION_MISMATCH",
+        "ROUNDING",
+        "UNKNOWN_ORDER"
+      ],
+      "new_orders_allowed": false,
+      "status": "HALTED"
+    },
+    "STARTUP": {
+      "case_id": "6daa2420650631c9811e44e8897749e4d317cc09505485e24fcdc6e09d361737",
+      "difference_count": 0,
+      "difference_types": [],
+      "new_orders_allowed": true,
+      "status": "CLEAR"
+    }
+  },
+  "fixture_only": true,
+  "generated_at_utc": "2026-09-01T08:00:00Z",
+  "local_snapshot_unchanged": true,
+  "phase": "P05",
+  "schema_version": "1.0.0",
+  "silent_adjustment_performed": false
+}

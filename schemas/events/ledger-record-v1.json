@@ -1,0 +1,480 @@
+{
+  "$defs": {
+    "ContractForm": {
+      "enum": [
+        "SPOT",
+        "LINEAR",
+        "INVERSE"
+      ],
+      "title": "ContractForm",
+      "type": "string"
+    },
+    "JournalEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "journal_entry_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Journal Entry Id",
+          "type": "string"
+        },
+        "postings": {
+          "items": {
+            "$ref": "#/$defs/LedgerPosting"
+          },
+          "title": "Postings",
+          "type": "array"
+        },
+        "reconciliation_adjustment": {
+          "default": false,
+          "title": "Reconciliation Adjustment",
+          "type": "boolean"
+        },
+        "recorded_at": {
+          "format": "date-time",
+          "title": "Recorded At",
+          "type": "string"
+        },
+        "supersedes_entry_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes Entry Id"
+        }
+      },
+      "required": [
+        "journal_entry_id",
+        "event_time",
+        "recorded_at",
+        "description",
+        "postings"
+      ],
+      "title": "JournalEntry",
+      "type": "object"
+    },
+    "LedgerPosting": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "amount": {
+          "$ref": "#/$defs/Money"
+        },
+        "memo": {
+          "title": "Memo",
+          "type": "string"
+        },
+        "posting_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Posting Id",
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/$defs/PostingSide"
+        }
+      },
+      "required": [
+        "posting_id",
+        "account_id",
+        "side",
+        "amount",
+        "memo"
+      ],
+      "title": "LedgerPosting",
+      "type": "object"
+    },
+    "LotAction": {
+      "enum": [
+        "OPEN",
+        "REDUCE",
+        "CLOSE"
+      ],
+      "title": "LotAction",
+      "type": "string"
+    },
+    "LotChange": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/LotAction"
+        },
+        "affected_quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Affected Quantity"
+        },
+        "lot_after": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PositionLotState"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "lot_before": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PositionLotState"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "realized_pnl": {
+          "$ref": "#/$defs/Money"
+        }
+      },
+      "required": [
+        "action",
+        "affected_quantity",
+        "realized_pnl"
+      ],
+      "title": "LotChange",
+      "type": "object"
+    },
+    "LotSide": {
+      "enum": [
+        "LONG",
+        "SHORT"
+      ],
+      "title": "LotSide",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "description": "Signed monetary amount denominated in one explicit asset.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "PositionLotState": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "closed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Closed At"
+        },
+        "contract_form": {
+          "$ref": "#/$defs/ContractForm"
+        },
+        "contract_multiplier": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Contract Multiplier"
+        },
+        "entry_price": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Entry Price"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "opened_at": {
+          "format": "date-time",
+          "title": "Opened At",
+          "type": "string"
+        },
+        "opened_quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Opened Quantity"
+        },
+        "opening_fee": {
+          "$ref": "#/$defs/Money"
+        },
+        "position_lot_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Position Lot Id",
+          "type": "string"
+        },
+        "quantity_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Quantity Asset Id",
+          "type": "string"
+        },
+        "quantity_unit": {
+          "$ref": "#/$defs/QuantityUnit"
+        },
+        "remaining_quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Remaining Quantity"
+        },
+        "settlement_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Settlement Asset Id",
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/$defs/LotSide"
+        },
+        "source_fill_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Source Fill Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "position_lot_id",
+        "account_id",
+        "instrument_id",
+        "side",
+        "quantity_unit",
+        "quantity_asset_id",
+        "opened_quantity",
+        "remaining_quantity",
+        "entry_price",
+        "contract_form",
+        "contract_multiplier",
+        "settlement_asset_id",
+        "opening_fee",
+        "source_fill_id",
+        "opened_at"
+      ],
+      "title": "PositionLotState",
+      "type": "object"
+    },
+    "PostingSide": {
+      "enum": [
+        "DEBIT",
+        "CREDIT"
+      ],
+      "title": "PostingSide",
+      "type": "string"
+    },
+    "QuantityUnit": {
+      "enum": [
+        "BASE_ASSET",
+        "CONTRACT"
+      ],
+      "title": "QuantityUnit",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.ledger-record/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "chart_version": {
+      "title": "Chart Version",
+      "type": "string"
+    },
+    "command_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Command Hash",
+      "type": "string"
+    },
+    "entry_template_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Entry Template Id",
+      "type": "string"
+    },
+    "event_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Event Hash",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "journal_entry": {
+      "$ref": "#/$defs/JournalEntry"
+    },
+    "lot_changes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/LotChange"
+      },
+      "title": "Lot Changes",
+      "type": "array"
+    },
+    "policy_version": {
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "previous_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Previous Hash",
+      "type": "string"
+    },
+    "source_fill_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Fill Id"
+    },
+    "source_order_intent_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Order Intent Id"
+    },
+    "template_version": {
+      "title": "Template Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "journal_entry",
+    "policy_version",
+    "chart_version",
+    "entry_template_id",
+    "template_version",
+    "idempotency_key",
+    "command_hash",
+    "previous_hash",
+    "event_hash"
+  ],
+  "title": "LedgerRecord",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.ledger-record",
+  "x-aegisquant-schema-version": "1.0.0"
+}

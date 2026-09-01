@@ -1,25 +1,40 @@
 spec_version: "3.1.0"
 spec_sha256: "1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f"
-current_phase: "P04"
-status: "accepted"
-started_at_utc: "2026-09-01T05:45:12.3020589Z"
-accepted_at_utc: "2026-09-01T06:43:45.9465320Z"
-commit_sha: "2ad3f0ffdd76fba5e81ce9d12eb70bef31c2d84d"
-artifact_manifest_sha256: "10547110551edb5fd0d5fd937656915cfa3b26801694752cb1d09e5b67a388fe"
+current_phase: "P05"
+status: "in_progress"
+started_at_utc: "2026-09-01T07:00:30.0392916Z"
+accepted_at_utc: null
+commit_sha: null
+artifact_manifest_sha256: null
 live_trading_locked: true
-next_phase: "P05"
+next_phase: "P06"
 waivers: []
 previous_phase:
-  phase: "P03"
-  status: "accepted_with_waiver"
-  accepted_at_utc: "2026-09-01T03:18:27.452548Z"
-  commit_sha: "8a2a8971c6ca8de40711bba392a37486b5e5799c"
-  evidence_commit_sha: "094645ac95715baebbab4be8a9713966a1a111c6"
-  artifact_manifest_sha256: "62b3be95fec9cc36f0a7bd663db558e3e14610c9f1d76bef3881a37fee0163a8"
-  waivers:
-    - waiver_id: "P03-WAIVER-001"
-      requirement_id: "P03-A01"
-      decision: "owner_approved"
-      approved_at_utc: "2026-09-01T03:07:59.4831618Z"
-      reason: "项目业主明确决定不执行 P03 的真实连续 24 小时公开流验收。"
-      evidence: "docs/adr/ADR-0007-p03-24h-soak-waiver.md"
+  phase: "P04"
+  status: "accepted"
+  accepted_at_utc: "2026-09-01T06:43:45.9465320Z"
+  commit_sha: "2ad3f0ffdd76fba5e81ce9d12eb70bef31c2d84d"
+  evidence_commit_sha: "dbfbc7dff3443f16f79d4ffb46ea165900821abf"
+  artifact_manifest_sha256: "10547110551edb5fd0d5fd937656915cfa3b26801694752cb1d09e5b67a388fe"
+  waivers: []
+phase_history:
+  - phase: "P03"
+    status: "accepted_with_waiver"
+    accepted_at_utc: "2026-09-01T03:18:27.452548Z"
+    commit_sha: "8a2a8971c6ca8de40711bba392a37486b5e5799c"
+    evidence_commit_sha: "094645ac95715baebbab4be8a9713966a1a111c6"
+    artifact_manifest_sha256: "62b3be95fec9cc36f0a7bd663db558e3e14610c9f1d76bef3881a37fee0163a8"
+    waivers:
+      - waiver_id: "P03-WAIVER-001"
+        requirement_id: "P03-A01"
+        decision: "owner_approved"
+        approved_at_utc: "2026-09-01T03:07:59.4831618Z"
+        reason: "项目业主明确决定不执行 P03 的真实连续 24 小时公开流验收。"
+        evidence: "docs/adr/ADR-0007-p03-24h-soak-waiver.md"
+  - phase: "P04"
+    status: "accepted"
+    accepted_at_utc: "2026-09-01T06:43:45.9465320Z"
+    commit_sha: "2ad3f0ffdd76fba5e81ce9d12eb70bef31c2d84d"
+    evidence_commit_sha: "dbfbc7dff3443f16f79d4ffb46ea165900821abf"
+    artifact_manifest_sha256: "10547110551edb5fd0d5fd937656915cfa3b26801694752cb1d09e5b67a388fe"
+    waivers: []

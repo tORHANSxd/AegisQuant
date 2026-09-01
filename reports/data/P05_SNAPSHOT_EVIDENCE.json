@@ -1,0 +1,14 @@
+{
+  "fixture_only_key": true,
+  "generated_at_utc": "2026-09-01T08:00:00Z",
+  "ledger_snapshot_id": "b6eb59e7344d454065dab524976989be586f02a639e444df96dad36152cf2a6e",
+  "payload_hash": "b2839c569d60be585a3fa8f849bb934225665ea7a7be5a50616d1e8fba7fdbbd",
+  "phase": "P05",
+  "private_key_persisted": false,
+  "public_key_base64": "l7PuCrrXVJZd5Kk1U+iZBsp1cCwFUXU5z+cdsJsLJ5Q=",
+  "rebuild_matches": true,
+  "schema_version": "1.0.0",
+  "signature_algorithm": "Ed25519",
+  "signature_base64": "dqBVNrHwsLEkyiUWgU/Mv40QF/TZa8dd4us7uDuOaUAvh5fv52ZqHrHO8p2/SehyLhm0Omn31hvJwhniVK7aCw==",
+  "signature_valid": true
+}

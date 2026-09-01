@@ -22,6 +22,8 @@ DETECT_LINE_EXCLUDE = (
     r"commit_sha|request_hash|evidence_commit|implementation_commit|pinned_commit|"
     r"terms_version_hash|P00_EVIDENCE_COMMIT|"
     r"P00_IMPLEMENTATION_COMMIT).*|"
+    r'.*"(?:ledger_snapshot_id|payload_hash|public_key_base64|signature_base64|'
+    r'(?:source_|rebuilt_)?(?:last_event_hash|state_hash))"\s*:.*|'
     r".*secret_loading.*(?:false|disabled).*|.*credentials_received.*0.*|"
     r".*plaintext_secrets_written.*0.*)"
 )
@@ -51,7 +53,7 @@ def parsed_json(output: str) -> object:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("P03", "P04"), default="P04")
+    parser.add_argument("--phase", choices=("P03", "P04", "P05"), default="P05")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     report_dir = root / "reports/security"

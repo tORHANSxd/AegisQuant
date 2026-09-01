@@ -1,0 +1,135 @@
+{
+  "$defs": {
+    "AccountBalance": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "account_id",
+        "asset_id",
+        "amount"
+      ],
+      "title": "AccountBalance",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.equity-snapshot/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_snapshot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Account Snapshot Id",
+      "type": "string"
+    },
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "balance_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Balance Value"
+    },
+    "equity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Equity"
+    },
+    "native_balances": {
+      "items": {
+        "$ref": "#/$defs/AccountBalance"
+      },
+      "title": "Native Balances",
+      "type": "array"
+    },
+    "policy_version": {
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "reporting_asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Reporting Asset Id",
+      "type": "string"
+    },
+    "unrealized_pnl_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Unrealized Pnl Value"
+    },
+    "valuation_snapshot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Valuation Snapshot Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "account_snapshot_id",
+    "as_of_time",
+    "reporting_asset_id",
+    "native_balances",
+    "balance_value",
+    "unrealized_pnl_value",
+    "equity",
+    "valuation_snapshot_id",
+    "policy_version"
+  ],
+  "title": "EquitySnapshot",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.equity-snapshot",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,12 @@
+{
+  "entry_count": 3,
+  "realized_pnl": "25.0",
+  "realized_asset": "USDT",
+  "open_lots": [
+    {
+      "entry_price": "110",
+      "remaining_quantity": "1.5",
+      "side": "LONG"
+    }
+  ]
+}

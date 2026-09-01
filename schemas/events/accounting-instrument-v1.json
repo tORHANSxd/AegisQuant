@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "ContractForm": {
+      "enum": [
+        "SPOT",
+        "LINEAR",
+        "INVERSE"
+      ],
+      "title": "ContractForm",
+      "type": "string"
+    },
+    "InstrumentType": {
+      "enum": [
+        "SPOT",
+        "PERPETUAL",
+        "FUTURE",
+        "OPTION"
+      ],
+      "title": "InstrumentType",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.accounting-instrument/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "base_asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Base Asset Id",
+      "type": "string"
+    },
+    "contract_form": {
+      "$ref": "#/$defs/ContractForm"
+    },
+    "contract_multiplier": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "gt": "0",
+      "title": "Contract Multiplier"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "instrument_type": {
+      "$ref": "#/$defs/InstrumentType"
+    },
+    "quantity_asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Quantity Asset Id",
+      "type": "string"
+    },
+    "quote_asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Quote Asset Id",
+      "type": "string"
+    },
+    "settlement_asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Settlement Asset Id",
+      "type": "string"
+    },
+    "venue": {
+      "title": "Venue",
+      "type": "string"
+    }
+  },
+  "required": [
+    "instrument_id",
+    "venue",
+    "base_asset_id",
+    "quote_asset_id",
+    "settlement_asset_id",
+    "quantity_asset_id",
+    "instrument_type",
+    "contract_form",
+    "contract_multiplier"
+  ],
+  "title": "AccountingInstrument",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.accounting-instrument",
+  "x-aegisquant-schema-version": "1.0.0"
+}

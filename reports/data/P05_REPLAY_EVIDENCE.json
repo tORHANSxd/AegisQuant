@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-09-01T08:00:00Z",
+  "hashes_match": true,
+  "phase": "P05",
+  "rebuilt_entry_count": 3,
+  "rebuilt_last_event_hash": "83b9e209ed64938beb13d967f77db8bece2751eb5b7246b1afc12034453d7f6f",
+  "rebuilt_state_hash": "61c0f0d16c1f25d3e3cdf9643d67bf1a2d402a8346619268f6299620dea7dbbd",
+  "schema_version": "1.0.0",
+  "source_entry_count": 3,
+  "source_last_event_hash": "83b9e209ed64938beb13d967f77db8bece2751eb5b7246b1afc12034453d7f6f",
+  "source_state_hash": "61c0f0d16c1f25d3e3cdf9643d67bf1a2d402a8346619268f6299620dea7dbbd"
+}

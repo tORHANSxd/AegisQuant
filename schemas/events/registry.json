@@ -186,6 +186,110 @@
     },
     {
       "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.AccountingInstrument",
+      "path": "schemas/events/accounting-instrument-v1.json",
+      "schema_name": "aegisquant.accounting-instrument",
+      "schema_version": "1.0.0",
+      "sha256": "e1c9d2106b2add8e8a1d2a9acd3d95b0eccc64106ffc3ae19a3eba7734d2aa16"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.ChartOfAccounts",
+      "path": "schemas/events/chart-of-accounts-v1.json",
+      "schema_name": "aegisquant.chart-of-accounts",
+      "schema_version": "1.0.0",
+      "sha256": "3d7d44a5ccbf90fb86ae92f1d165c795587729b6384157ab5afc0fb4c38d50df"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.EntryTemplate",
+      "path": "schemas/events/entry-template-v1.json",
+      "schema_name": "aegisquant.entry-template",
+      "schema_version": "1.0.0",
+      "sha256": "8012ced94ab9568fbf31b2e161e24bbf6a296a0bc2fb45a5770384cd2b805e0d"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.LedgerRecord",
+      "path": "schemas/events/ledger-record-v1.json",
+      "schema_name": "aegisquant.ledger-record",
+      "schema_version": "1.0.0",
+      "sha256": "377888305c7157fc9b4fdffaf549395e9dcc32effbb48e02d1ba31e154723803"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.PositionLotState",
+      "path": "schemas/events/position-lot-state-v1.json",
+      "schema_name": "aegisquant.position-lot-state",
+      "schema_version": "1.0.0",
+      "sha256": "550695a4ffba2e715125c6897eab7d7cd9d03b5d6a2dc3aaec46d5308c84baa7"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.CashflowEvent",
+      "path": "schemas/events/cashflow-event-v1.json",
+      "schema_name": "aegisquant.cashflow-event",
+      "schema_version": "1.0.0",
+      "sha256": "710be921e61f6239b8d25b4566f69f8b2d00dae61dc50f9d8fec57ff0bda1f81"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.SettlementEvent",
+      "path": "schemas/events/settlement-event-v1.json",
+      "schema_name": "aegisquant.settlement-event",
+      "schema_version": "1.0.0",
+      "sha256": "f4d01e2b6429fa1cdcc1611d930c440a94ccd566a696d217294b54add9423478"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.ValuationSnapshot",
+      "path": "schemas/events/valuation-snapshot-v1.json",
+      "schema_name": "aegisquant.valuation-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "ce8906ed1cc848dd2c17ec299d268a4e4a43ee045a44eb053f16f41bfb763e17"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.EquitySnapshot",
+      "path": "schemas/events/equity-snapshot-v1.json",
+      "schema_name": "aegisquant.equity-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "3d10c21ceea58c32e769bf7b59ef776080392cc592e006f3a26adbc1d64d4f37"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.PnLBreakdown",
+      "path": "schemas/events/pnl-breakdown-v1.json",
+      "schema_name": "aegisquant.pnl-breakdown",
+      "schema_version": "1.0.0",
+      "sha256": "c87bd08f7bf3e367317e4dd490b3fc5b486f26f1dec52cd77b9a565b695b869a"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.VenueAccountSnapshot",
+      "path": "schemas/events/venue-account-snapshot-v1.json",
+      "schema_name": "aegisquant.venue-account-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "7ef3c94c6b4d0f13ffa0a71b5aa47b12b80f47f323a60259ffcd6b1cf2bedbfa"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.ReconciliationCase",
+      "path": "schemas/events/reconciliation-case-v1.json",
+      "schema_name": "aegisquant.reconciliation-case",
+      "schema_version": "1.0.0",
+      "sha256": "06a49ee1564ee8b12b31b4516a49bd9bc8faaba706884fc947fcc607b9b734fa"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.accounting.models.DailyLedgerSnapshot",
+      "path": "schemas/events/daily-ledger-snapshot-v1.json",
+      "schema_name": "aegisquant.daily-ledger-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "a6fff215a443e0c1c7fc27a6ad3fd8df028381b9e092615c8611112ec259bf85"
+    },
+    {
+      "compatibility": "BACKWARD",
       "model": "aegisquant.config.models.AppConfig",
       "path": "schemas/config/app-config-v1.json",
       "schema_name": "aegisquant.app-config",

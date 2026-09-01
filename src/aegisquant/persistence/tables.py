@@ -1,13 +1,19 @@
 """SQLAlchemy Core metadata for the P01 PostgreSQL baseline."""
 
 from sqlalchemy import (
+    BigInteger,
+    Boolean,
     CheckConstraint,
     Column,
+    Date,
     DateTime,
     ForeignKey,
+    ForeignKeyConstraint,
+    Identity,
     Index,
     Integer,
     MetaData,
+    Numeric,
     String,
     Table,
     Text,
@@ -179,4 +185,189 @@ inbox_messages = Table(
     ),
     Column("result_code", String(64), nullable=False),
     UniqueConstraint("consumer_name", "idempotency_key"),
+)
+
+accounting_accounts = Table(
+    "accounting_accounts",
+    metadata,
+    Column("account_id", String(255), primary_key=True),
+    Column("chart_version", String(64), primary_key=True),
+    Column("role", String(64), nullable=False),
+    Column("account_type", String(32), nullable=False),
+    Column("normal_balance", String(16), nullable=False),
+    Column("venue", String(64), nullable=False),
+    Column("subject", String(255), nullable=False),
+    Column("economic_balance", Boolean, nullable=False),
+    Column("content_hash", String(64), nullable=False),
+    Column(
+        "created_at",
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=text("CURRENT_TIMESTAMP"),
+    ),
+    CheckConstraint(
+        "account_type IN ('ASSET', 'LIABILITY', 'EQUITY', 'INCOME', 'EXPENSE', 'MEMO')",
+        name="valid_account_type",
+    ),
+    CheckConstraint("normal_balance IN ('DEBIT', 'CREDIT')", name="valid_normal_balance"),
+)
+
+accounting_entry_templates = Table(
+    "accounting_entry_templates",
+    metadata,
+    Column("entry_template_id", String(255), primary_key=True),
+    Column("template_version", String(64), primary_key=True),
+    Column("event_type", String(64), nullable=False),
+    Column("effective_from", DateTime(timezone=True), nullable=False),
+    Column("payload", JSONB, nullable=False),
+    Column("content_hash", String(64), nullable=False),
+    Column(
+        "created_at",
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=text("CURRENT_TIMESTAMP"),
+    ),
+)
+
+accounting_ledger_entries = Table(
+    "accounting_ledger_entries",
+    metadata,
+    Column("journal_entry_id", String(255), primary_key=True),
+    Column("ledger_sequence", BigInteger, Identity(), nullable=False, unique=True),
+    Column("event_time", DateTime(timezone=True), nullable=False),
+    Column("recorded_at", DateTime(timezone=True), nullable=False),
+    Column("policy_version", String(64), nullable=False),
+    Column("chart_version", String(64), nullable=False),
+    Column("entry_template_id", String(255), nullable=False),
+    Column("template_version", String(64), nullable=False),
+    Column("source_fill_id", String(255), nullable=True, unique=True),
+    Column("source_order_intent_id", String(255), nullable=True),
+    Column("idempotency_key", String(255), nullable=False, unique=True),
+    Column("command_hash", String(64), nullable=False, unique=True),
+    Column("previous_hash", String(64), nullable=False),
+    Column("event_hash", String(64), nullable=False, unique=True),
+    Column("payload", JSONB, nullable=False),
+    Column(
+        "created_at",
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=text("CURRENT_TIMESTAMP"),
+    ),
+    ForeignKeyConstraint(
+        ["entry_template_id", "template_version"],
+        [
+            "accounting_entry_templates.entry_template_id",
+            "accounting_entry_templates.template_version",
+        ],
+        ondelete="RESTRICT",
+    ),
+    CheckConstraint("recorded_at >= event_time", name="valid_time_order"),
+)
+
+accounting_ledger_postings = Table(
+    "accounting_ledger_postings",
+    metadata,
+    Column("posting_id", String(255), primary_key=True),
+    Column(
+        "journal_entry_id",
+        String(255),
+        ForeignKey("accounting_ledger_entries.journal_entry_id", ondelete="RESTRICT"),
+        nullable=False,
+    ),
+    Column("posting_sequence", Integer, nullable=False),
+    Column("account_id", String(255), nullable=False),
+    Column("chart_version", String(64), nullable=False),
+    Column("side", String(16), nullable=False),
+    Column("asset_id", String(255), nullable=False),
+    Column("amount", Numeric(), nullable=False),
+    Column("memo", Text, nullable=False),
+    ForeignKeyConstraint(
+        ["account_id", "chart_version"],
+        ["accounting_accounts.account_id", "accounting_accounts.chart_version"],
+        ondelete="RESTRICT",
+    ),
+    UniqueConstraint("journal_entry_id", "posting_sequence"),
+    CheckConstraint("side IN ('DEBIT', 'CREDIT')", name="valid_side"),
+    CheckConstraint("amount > 0", name="positive_amount"),
+)
+
+accounting_position_lots = Table(
+    "accounting_position_lots",
+    metadata,
+    Column("position_lot_id", String(255), primary_key=True),
+    Column("account_id", String(255), nullable=False),
+    Column("instrument_id", String(255), nullable=False),
+    Column("side", String(16), nullable=False),
+    Column("remaining_quantity", Numeric(), nullable=False),
+    Column("status", String(16), nullable=False),
+    Column("opened_at", DateTime(timezone=True), nullable=False),
+    Column("closed_at", DateTime(timezone=True), nullable=True),
+    Column("source_fill_id", String(255), nullable=False),
+    Column("last_journal_entry_id", String(255), nullable=False),
+    Column("payload", JSONB, nullable=False),
+    Column("content_hash", String(64), nullable=False),
+    CheckConstraint("side IN ('LONG', 'SHORT')", name="valid_side"),
+    CheckConstraint("status IN ('OPEN', 'CLOSED')", name="valid_status"),
+    CheckConstraint("remaining_quantity >= 0", name="nonnegative_remaining"),
+    CheckConstraint(
+        "(status = 'OPEN' AND remaining_quantity > 0 AND closed_at IS NULL) OR "
+        "(status = 'CLOSED' AND remaining_quantity = 0 AND closed_at IS NOT NULL)",
+        name="valid_lifecycle",
+    ),
+)
+
+Index(
+    "ix_accounting_position_lots_instrument_open",
+    accounting_position_lots.c.instrument_id,
+    postgresql_where=accounting_position_lots.c.status == "OPEN",
+)
+
+account_reconciliation_cases = Table(
+    "account_reconciliation_cases",
+    metadata,
+    Column("reconciliation_case_id", String(255), primary_key=True),
+    Column("mode", String(16), nullable=False),
+    Column("status", String(32), nullable=False),
+    Column("new_orders_allowed", Boolean, nullable=False),
+    Column("local_snapshot_id", String(255), nullable=False),
+    Column("venue_snapshot_id", String(255), nullable=False),
+    Column("opened_at", DateTime(timezone=True), nullable=False),
+    Column("payload", JSONB, nullable=False),
+    Column("content_hash", String(64), nullable=False),
+    Column(
+        "created_at",
+        DateTime(timezone=True),
+        nullable=False,
+        server_default=text("CURRENT_TIMESTAMP"),
+    ),
+    CheckConstraint("mode IN ('STARTUP', 'CONTINUOUS', 'RECONNECT')", name="valid_mode"),
+    CheckConstraint("status IN ('CLEAR', 'REVIEW_REQUIRED', 'HALTED')", name="valid_status"),
+    CheckConstraint("new_orders_allowed = (status = 'CLEAR')", name="valid_order_gate"),
+)
+
+Index(
+    "ix_account_reconciliation_cases_status",
+    account_reconciliation_cases.c.status,
+    account_reconciliation_cases.c.opened_at,
+)
+
+daily_ledger_snapshots = Table(
+    "daily_ledger_snapshots",
+    metadata,
+    Column("ledger_snapshot_id", String(255), primary_key=True),
+    Column("snapshot_date", Date, nullable=False),
+    Column("created_at", DateTime(timezone=True), nullable=False),
+    Column("policy_version", String(64), nullable=False),
+    Column("ledger_entry_count", BigInteger, nullable=False),
+    Column("last_event_hash", String(64), nullable=False),
+    Column("ledger_state_hash", String(64), nullable=False),
+    Column("previous_snapshot_hash", String(64), nullable=False),
+    Column("payload_hash", String(64), nullable=False),
+    Column("public_key_base64", Text, nullable=False),
+    Column("signature_base64", Text, nullable=False),
+    Column("signature_algorithm", String(16), nullable=False),
+    Column("payload", JSONB, nullable=False),
+    UniqueConstraint("snapshot_date", "policy_version"),
+    CheckConstraint("ledger_entry_count >= 0", name="nonnegative_entry_count"),
+    CheckConstraint("signature_algorithm = 'Ed25519'", name="valid_signature_algorithm"),
 )

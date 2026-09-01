@@ -1,0 +1,153 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.pnl-breakdown/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "borrow_interest": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Borrow Interest"
+    },
+    "ending_equity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Ending Equity"
+    },
+    "funding_income_expense": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Funding Income Expense"
+    },
+    "net_external_transfers": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Net External Transfers"
+    },
+    "realized_trading_pnl": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Realized Trading Pnl"
+    },
+    "reconciliation_adjustments": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Reconciliation Adjustments"
+    },
+    "reporting_asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Reporting Asset Id",
+      "type": "string"
+    },
+    "starting_equity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Starting Equity"
+    },
+    "trading_fees": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Trading Fees"
+    },
+    "transfer_fees": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Transfer Fees"
+    },
+    "unrealized_pnl_change": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Unrealized Pnl Change"
+    }
+  },
+  "required": [
+    "reporting_asset_id",
+    "starting_equity",
+    "ending_equity",
+    "net_external_transfers",
+    "realized_trading_pnl",
+    "unrealized_pnl_change",
+    "funding_income_expense",
+    "borrow_interest",
+    "trading_fees",
+    "transfer_fees",
+    "reconciliation_adjustments"
+  ],
+  "title": "PnLBreakdown",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.pnl-breakdown",
+  "x-aegisquant-schema-version": "1.0.0"
+}
