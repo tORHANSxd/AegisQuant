@@ -1,0 +1,19 @@
+schema_version: "1"
+source_id: "jq_synthetic_trend_20260902"
+platform: "joinquant"
+url: "https://www.joinquant.com/view/community/detail/synthetic"
+title: "P09 项目自有合成趋势示例"
+author: "AegisQuant test fixture"
+published_at: "2026-09-02T00:00:00Z"
+updated_at: null
+exported_at_utc: "2026-09-02T01:00:00Z"
+export_method: "manual_test_fixture"
+user_had_access: true
+content_types:
+  - "html"
+  - "markdown"
+  - "python"
+  - "attachment"
+rights_status: "public_license"
+original_language: "zh-CN"
+notes: "项目自有合成夹具，不代表真实聚宽正文或收益。"

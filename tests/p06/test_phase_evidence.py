@@ -38,7 +38,7 @@ def test_p06_state_is_in_progress_with_live_lock_and_deferred_acceptance(
     previous = cast(dict[str, object], state["previous_phase"])
     deferred = cast(list[dict[str, object]], state["deferred_acceptance_queue"])
 
-    assert state["current_phase"] in {"P06", "P07", "P08"}
+    assert state["current_phase"] in {"P06", "P07", "P08", "P09"}
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["live_trading_locked"] is True
@@ -51,11 +51,15 @@ def test_p06_state_is_in_progress_with_live_lock_and_deferred_acceptance(
         assert state["next_phase"] == "P08"
         assert previous["phase"] == "P06"
         assert {item["phase"] for item in deferred} >= {"P05", "P06"}
-    else:
+    elif state["current_phase"] == "P08":
         assert state["next_phase"] == "P09"
         assert previous["phase"] == "P07"
         assert {item["phase"] for item in deferred} >= {"P05", "P06", "P07"}
-    if state["current_phase"] == "P08":
+    else:
+        assert state["next_phase"] == "P10"
+        assert previous["phase"] == "P08"
+        assert {item["phase"] for item in deferred} >= {"P05", "P06", "P07", "P08"}
+    if state["current_phase"] in {"P08", "P09"}:
         p06 = next(item for item in deferred if item["phase"] == "P06")
         assert p06["status"] == "implementation_verified_acceptance_deferred"
     else:

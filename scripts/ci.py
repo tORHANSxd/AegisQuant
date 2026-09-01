@@ -54,7 +54,7 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
 
 
 def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
-    """Return the ordered P03-P08 pipeline without network soak execution."""
+    """Return the ordered P03-P09 pipeline without network soak execution."""
     pnpm = resolve_command("pnpm")
     phase_status = [
         "P00=verified",
@@ -62,30 +62,32 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
         "P02=verified",
         "P03=verified",
     ]
-    if phase in {"P04", "P05", "P06", "P07", "P08"}:
+    if phase in {"P04", "P05", "P06", "P07", "P08", "P09"}:
         phase_status.append("P04=verified")
-    if phase in {"P05", "P06", "P07", "P08"}:
+    if phase in {"P05", "P06", "P07", "P08", "P09"}:
         phase_status.append("P05=planned")
-    if phase in {"P06", "P07", "P08"}:
+    if phase in {"P06", "P07", "P08", "P09"}:
         phase_status.append("P06=planned")
-    if phase in {"P07", "P08"}:
+    if phase in {"P07", "P08", "P09"}:
         phase_status.append("P07=planned")
-    if phase == "P08":
+    if phase in {"P08", "P09"}:
         phase_status.append("P08=planned")
+    if phase == "P09":
+        phase_status.append("P09=planned")
     evidence_stages: list[tuple[str, list[str]]] = [
         (
             "p03-binance-evidence",
             [sys.executable, "scripts/generate_p03_binance_evidence.py", "--check"],
         )
     ]
-    if phase in {"P04", "P05", "P06", "P07", "P08"}:
+    if phase in {"P04", "P05", "P06", "P07", "P08", "P09"}:
         evidence_stages.append(
             (
                 "p04-multivenue-event-evidence",
                 [sys.executable, "scripts/generate_p04_evidence.py", "--check"],
             )
         )
-    if phase in {"P05", "P06", "P07", "P08"}:
+    if phase in {"P05", "P06", "P07", "P08", "P09"}:
         evidence_stages.extend(
             (
                 (
@@ -98,7 +100,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P06", "P07", "P08"}:
+    if phase in {"P06", "P07", "P08", "P09"}:
         evidence_stages.extend(
             (
                 (
@@ -115,7 +117,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P07", "P08"}:
+    if phase in {"P07", "P08", "P09"}:
         evidence_stages.extend(
             (
                 (
@@ -128,7 +130,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase == "P08":
+    if phase in {"P08", "P09"}:
         evidence_stages.extend(
             (
                 (
@@ -138,6 +140,19 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 (
                     "p08-mutation",
                     [sys.executable, "-m", "scripts.run_p08_mutation", "--check"],
+                ),
+            )
+        )
+    if phase == "P09":
+        evidence_stages.extend(
+            (
+                (
+                    "p09-knowledge-intelligence-evidence",
+                    [sys.executable, "-m", "scripts.generate_p09_evidence", "--check"],
+                ),
+                (
+                    "p09-mutation",
+                    [sys.executable, "-m", "scripts.run_p09_mutation", "--check"],
                 ),
             )
         )
@@ -190,7 +205,9 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--phase", choices=("P03", "P04", "P05", "P06", "P07", "P08"), default="P08"
+        "--phase",
+        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09"),
+        default="P09",
     )
     parser.add_argument(
         "--output",
