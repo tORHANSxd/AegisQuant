@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P05",
+  "commit_sha": "98e41d047d15b2f7063bdb234dde2991e3f3b4b8",
+  "environment_fingerprint": "sha256:311ea7a93cc3046ccd05ba389e4bda8231f01db8be625194bc0c3779d44bd5c1",
+  "generated_at_utc": "2026-09-01T07:56:02.590176Z",
+  "formal_acceptance_performed": false,
+  "acceptance_status": "deferred_by_owner",
+  "suites": [
+    {
+      "name": "local-ci-gates",
+      "artifact": "reports/phases/P05/CI_RESULTS.json",
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": false
+    },
+    {
+      "name": "python-3.13-pytest",
+      "artifact": "reports/phases/P05/CI_RESULTS.json#pytest",
+      "passed": 238,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "python-3.14-candidate-contract",
+      "artifact": "reports/phases/P05/PYTHON_314_CONTRACT.json",
+      "passed": 201,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "web-unit",
+      "artifact": "reports/phases/P05/CI_RESULTS.json#web-unit",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "web-chromium-e2e",
+      "artifact": "reports/phases/P05/CI_RESULTS.json#web-e2e",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    }
+  ],
+  "aggregation_note": "passed/failed/skipped 汇总独立测试执行；22 个 CI 门不重复计数。",
+  "passed": 442,
+  "failed": 0,
+  "skipped": 0,
+  "waived": 0,
+  "known_flakes": [],
+  "warnings": [
+    {
+      "id": "P05-WARN-NAUTILUS-PANDAS-UTCNOW",
+      "count_across_runtime_runs": 8,
+      "blocking": false,
+      "tracked_as": "P05-RISK-007"
+    },
+    {
+      "id": "P05-WARN-NODE-ENGINE-MISMATCH",
+      "expected": "24.20.0",
+      "actual": "24.12.0",
+      "blocking": false,
+      "tracked_as": "P05-RISK-006"
+    }
+  ],
+  "coverage": {
+    "status": "not_collected",
+    "reason": "P05 任务书规定 Golden、属性、重建、对账和 mutation 门禁，未规定单一行覆盖率阈值；高风险语义由直接断言覆盖。"
+  },
+  "mutation": {
+    "status": "passed",
+    "artifact": "reports/testing/P05_MUTATION_RESULTS.json",
+    "killed": 12,
+    "survived": 0,
+    "score": 1.0,
+    "threshold": 0.9
+  },
+  "performance": {
+    "status": "passed",
+    "scenario": "2000 deterministic fills",
+    "threshold_seconds": 10,
+    "exact_duration_recorded": false,
+    "artifact": "tests/performance/test_accounting_performance.py"
+  },
+  "security_findings": [],
+  "security_summary": {
+    "secret_findings": 0,
+    "bandit_findings": 0,
+    "python_dependency_audit": "passed",
+    "javascript_dependency_audit": "passed",
+    "real_account_access_performed": false,
+    "secret_store_access_performed": false,
+    "plaintext_secrets_written": false,
+    "authentication_used": false,
+    "order_capability_present": false,
+    "live_trading_locked": true
+  },
+  "result": "implementation_verified_acceptance_deferred"
+}
