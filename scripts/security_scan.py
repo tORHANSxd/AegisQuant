@@ -60,8 +60,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--phase",
-        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11"),
-        default="P11",
+        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12"),
+        default="P12",
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]

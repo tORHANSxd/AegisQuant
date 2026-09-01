@@ -52,6 +52,7 @@ def test_p03_boundary_is_explicit_and_live_trading_remains_locked(
         "P09",
         "P10",
         "P11",
+        "P12",
     }
     assert state["next_phase"] in {
         "P04",
@@ -63,6 +64,7 @@ def test_p03_boundary_is_explicit_and_live_trading_remains_locked(
         "P10",
         "P11",
         "P12",
+        "P13",
     }
     assert state["status"] in {"in_progress", "accepted", "accepted_with_waiver"}
     assert state["live_trading_locked"] is True

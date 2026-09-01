@@ -1,28 +1,28 @@
 spec_version: "3.1.0"
 spec_sha256: "1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f"
-current_phase: "P11"
+current_phase: "P12"
 status: "in_progress"
-started_at_utc: "2026-09-01T18:41:00.7426340Z"
+started_at_utc: "2026-09-01T19:39:17.2834139Z"
 accepted_at_utc: null
 commit_sha: null
-artifact_manifest_sha256: "bbe63e32f5d12281be24300cbda286b83d3a18cc22f0fd55cf0817fb0868bb8e"
-implementation_status: "verified_acceptance_deferred"
-implementation_verified_at_utc: "2026-09-01T19:14:25.6631747Z"
-implementation_commit_sha: "7744354c993334a572a4e4e5a61e53eabc62453f"
+artifact_manifest_sha256: null
+implementation_status: "implementation_verified_acceptance_deferred"
+implementation_verified_at_utc: "2026-09-01T20:24:50.5085291Z"
+implementation_commit_sha: null
 evidence_commit_sha: null
 formal_acceptance_deferred: true
 live_trading_locked: true
-next_phase: "P12"
+next_phase: "P13"
 waivers: []
 previous_phase:
-  phase: "P10"
+  phase: "P11"
   status: "in_progress"
-  started_at_utc: "2026-09-01T17:53:31.7571316Z"
+  started_at_utc: "2026-09-01T18:41:00.7426340Z"
   accepted_at_utc: null
   commit_sha: null
-  implementation_commit_sha: "1ee49a5a8a460b6152b86393d6284c3fea82010d"
-  evidence_commit_sha: "0e64100cedd65b79bcb6c75bda232065baa92efb"
-  artifact_manifest_sha256: "1278c1585b8460f801c62831df42de773e99d56f047d15ea77884fb1cb5c9518"
+  implementation_commit_sha: "7744354c993334a572a4e4e5a61e53eabc62453f"
+  evidence_commit_sha: "986c2f4b746917804a55f4396f504b47505e9b78"
+  artifact_manifest_sha256: "bbe63e32f5d12281be24300cbda286b83d3a18cc22f0fd55cf0817fb0868bb8e"
   formal_acceptance_deferred: true
   waivers: []
 phase_history:
@@ -87,5 +87,12 @@ deferred_acceptance_queue:
     implementation_commit_sha: "1ee49a5a8a460b6152b86393d6284c3fea82010d"
     evidence_commit_sha: "0e64100cedd65b79bcb6c75bda232065baa92efb"
     artifact_manifest_sha256: "1278c1585b8460f801c62831df42de773e99d56f047d15ea77884fb1cb5c9518"
+    accepted_at_utc: null
+    decision: "docs/adr/ADR-0010-deferred-acceptance-sequencing.md"
+  - phase: "P11"
+    status: "implementation_verified_acceptance_deferred"
+    implementation_commit_sha: "7744354c993334a572a4e4e5a61e53eabc62453f"
+    evidence_commit_sha: "986c2f4b746917804a55f4396f504b47505e9b78"
+    artifact_manifest_sha256: "bbe63e32f5d12281be24300cbda286b83d3a18cc22f0fd55cf0817fb0868bb8e"
     accepted_at_utc: null
     decision: "docs/adr/ADR-0010-deferred-acceptance-sequencing.md"

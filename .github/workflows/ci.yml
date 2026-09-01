@@ -1,4 +1,4 @@
-name: P11 verification
+name: P12 verification
 
 on:
   push:
@@ -33,5 +33,5 @@ jobs:
           corepack prepare pnpm@11.24.0 --activate
           pnpm install --frozen-lockfile
           pnpm exec playwright install chromium
-      - name: Run complete P11 verification
-        run: uv run --frozen python scripts/ci.py --phase P11
+      - name: Run complete P12 verification
+        run: uv run --frozen python scripts/ci.py --phase P12
