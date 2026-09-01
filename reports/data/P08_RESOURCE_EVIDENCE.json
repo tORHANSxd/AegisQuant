@@ -1,0 +1,30 @@
+{
+  "schema_version": "p08-resource-evidence-v1",
+  "approved_budget": {
+    "max_trials": 3,
+    "max_train_seconds": "60",
+    "max_inference_latency_ms": "1000",
+    "max_ram_mb": "4096",
+    "max_gpu_memory_mb": "0",
+    "max_x_calls": 0,
+    "max_news_calls": 0,
+    "max_cloud_cost_usd": "0"
+  },
+  "over_budget_allowed": false,
+  "rejection_codes": [
+    "AQ-BUDGET-TRIALS",
+    "AQ-BUDGET-GPU-MEMORY",
+    "AQ-BUDGET-NEWS-CALLS",
+    "AQ-BUDGET-CLOUD-COST"
+  ],
+  "oom_attempted_batch_sizes": [
+    8,
+    4,
+    2
+  ],
+  "oom_final_batch_size": 2,
+  "oom_recovered": true,
+  "gpu_runtime": "unavailable",
+  "gpu_contract": "formal_4070_ti_acceptance_deferred",
+  "cpu_path_verified": true
+}

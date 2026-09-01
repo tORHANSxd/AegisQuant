@@ -1,0 +1,16 @@
+{
+  "schema_version": "p08-ensemble-evidence-v1",
+  "oof_sample_count": 4,
+  "oof_exact_coverage": true,
+  "train_validation_overlap": false,
+  "weights": {
+    "a": "0.7",
+    "b": "0.3"
+  },
+  "maximum_weight": "0.7",
+  "smoothed_weights": {
+    "a": "0.7",
+    "b": "0.3"
+  },
+  "final_holdout_opened": false
+}

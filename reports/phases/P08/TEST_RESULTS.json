@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P08",
+  "generated_at_utc": "2026-09-01T14:55:36.539825Z",
+  "implementation_commit": "aff9ae4224bd512c7ad95e25b0da0a637041e4b7",
+  "result": "pass",
+  "formal_acceptance_deferred": true,
+  "full_suite": {
+    "runtime": "Python 3.13.15",
+    "collected": 360,
+    "passed": 360,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 10,
+    "duration_seconds": 36.19
+  },
+  "python_314_contract": {
+    "runtime": "Python 3.14.7 candidate",
+    "collected": 323,
+    "passed": 323,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 10,
+    "duration_seconds": 49.59,
+    "status": "passed"
+  },
+  "focused_p08_suite": {
+    "runtime": "Python 3.13.15",
+    "collected": 28,
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 11.08
+  },
+  "machine_evidence": {
+    "artifacts": 14,
+    "generation_status": "passed",
+    "verification_status": "passed"
+  },
+  "mutation": {
+    "mutants_total": 8,
+    "killed": 8,
+    "survived": 0,
+    "invalid": 0,
+    "score": 1.0,
+    "threshold": 0.9,
+    "status": "passed"
+  },
+  "ci": {
+    "stages": 29,
+    "passed": 29,
+    "failed": 0,
+    "status": "passed",
+    "pre_final_attempt": {
+      "status": "failed",
+      "failed_stage": "pytest",
+      "reason": "transient Windows WinError 5 during atomic revision directory publication",
+      "resolution": "bounded atomic replace retry plus regression test; final full CI passed"
+    }
+  },
+  "security": {
+    "secret_findings": 0,
+    "python_dependency_audit": "passed",
+    "javascript_dependency_audit": "passed",
+    "bandit": "passed",
+    "python_unknown_licenses": 0,
+    "full_mlflow_installed": false,
+    "real_account_access_performed": false
+  },
+  "research_gates": {
+    "model_council_candidates": 8,
+    "selected_model_id": "linear-fused",
+    "complexity_privilege": false,
+    "foundation_weight_hash_verified": true,
+    "restricted_foundation_models_executed": false,
+    "event_replay_point_in_time": true,
+    "event_replay_causal_or_alpha_claim": false,
+    "final_holdout_state": "LOCKED",
+    "final_holdout_loader_invocations": 0
+  },
+  "gpu_4070_ti_formal_acceptance": "deferred_not_run_on_current_host",
+  "live_trading_locked": true,
+  "formal_acceptance_status": "deferred"
+}

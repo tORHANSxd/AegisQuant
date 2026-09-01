@@ -1,0 +1,12 @@
+{
+  "schema_version": "p08-registry-evidence-v1",
+  "model_card_sha256": "74aab09d8725fe23aaf7d05fbf5b54163023558ec407ba480223cba8d8e84bf4",
+  "registered_model": "aegisquant-p08",
+  "registered_version": "1",
+  "challenger_alias": "1",
+  "promotion_state": "APPROVED",
+  "approved_by": "rule:fair-development-oos",
+  "ai_self_approval": false,
+  "champion_alias_changed": false,
+  "final_holdout_opened": false
+}

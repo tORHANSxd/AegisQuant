@@ -1,0 +1,56 @@
+{
+  "schema_version": "p08-event-replay-evidence-v1",
+  "event_name": "FOMC monetary policy statement",
+  "event_source_url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240131a.htm",
+  "event_available_time_utc": "2024-01-31T19:00:00Z",
+  "market_archive_url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1m/BTCUSDT-1m-2024-01-31.zip",
+  "market_archive_sha256": "cfe05b3595bc5405b77b3e30ce7575ab038261ad7a4dae82e8948db8d23beb72",
+  "market_subset_sha256": "aa393cb4afa53d77854f960f6bd887090d2dba86202edc933aa62f8b8a894ad3",
+  "market_rows": 21,
+  "pre_event_rows_used_for_prediction": 10,
+  "post_event_rows_used_before_prediction": 0,
+  "decision_time_utc": "2024-01-31T19:00:00Z",
+  "evaluation_time_utc": "2024-01-31T19:10:00Z",
+  "common_cost_rate": "0.0005",
+  "comparisons": [
+    {
+      "modality": "MARKET_ONLY",
+      "prediction": "0.000391527105147903214867454",
+      "realized_return": "-0.0008583566709825805304023728",
+      "absolute_error": "0.0012498837761304837452698268",
+      "gross_return": "-0.0008583566709825805304023728",
+      "cost": "0.0005",
+      "net_return": "-0.0013583566709825805304023728",
+      "should_abstain": false
+    },
+    {
+      "modality": "EVENT_ONLY",
+      "prediction": "-0.0003",
+      "realized_return": "-0.0008583566709825805304023728",
+      "absolute_error": "0.0005583566709825805304023728",
+      "gross_return": "0.0008583566709825805304023728",
+      "cost": "0.0005",
+      "net_return": "0.0003583566709825805304023728",
+      "should_abstain": true
+    },
+    {
+      "modality": "FUSED",
+      "prediction": "0.000045763552573951607433727",
+      "realized_return": "-0.0008583566709825805304023728",
+      "absolute_error": "0.0009041202235565321378360998",
+      "gross_return": "-0.0008583566709825805304023728",
+      "cost": "0.0005",
+      "net_return": "-0.0013583566709825805304023728",
+      "should_abstain": true
+    }
+  ],
+  "modalities": [
+    "EVENT_ONLY",
+    "FUSED",
+    "MARKET_ONLY"
+  ],
+  "point_in_time": true,
+  "causal_inference": false,
+  "alpha_claim": false,
+  "final_holdout_opened": false
+}

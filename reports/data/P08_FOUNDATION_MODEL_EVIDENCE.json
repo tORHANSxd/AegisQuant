@@ -1,0 +1,79 @@
+{
+  "schema_version": "p08-foundation-model-evidence-v1",
+  "plugins": [
+    {
+      "family": "CHRONOS_2",
+      "model_id": "autogluon/chronos-2-small",
+      "revision": "ddec01313e50b6bc58ebaa92ede81bc24a3d9f9a",
+      "code_source": "https://github.com/amazon-science/chronos-forecasting",
+      "code_license": "Apache-2.0",
+      "weights_license": "Apache-2.0",
+      "weight_filename": "model.safetensors",
+      "weight_sha256": "492290ae82bb89f9769e3479ce90b3179de1f33e600c34daa0352531538b23cd",
+      "weight_size_bytes": 111749048,
+      "capability": "EVALUABLE",
+      "production_allowed": true,
+      "reason": "small Apache-2.0 checkpoint selected for finite CPU evaluation"
+    },
+    {
+      "family": "MOIRAI_2",
+      "model_id": "Salesforce/moirai-2.0-R-small",
+      "revision": "30f43ff08c8494f4943ae1521e9d4e94a0fbb389",
+      "code_source": "https://github.com/SalesforceAIResearch/uni2ts",
+      "code_license": "Apache-2.0",
+      "weights_license": "CC-BY-NC-4.0",
+      "weight_filename": "model.safetensors",
+      "weight_sha256": "fb5652a3db8ea572606221b7cb1e77bb8962b168e4d4cc752cf31ceb04074669",
+      "weight_size_bytes": 45557824,
+      "capability": "LICENSE_RESEARCH_ONLY",
+      "production_allowed": false,
+      "reason": "non-commercial weights are excluded from production candidates"
+    },
+    {
+      "family": "TIMESFM_3",
+      "model_id": "google/timesfm-3.0-pytorch",
+      "revision": "900fcab43d1bfe71733a33b3fec61a41fce28a27",
+      "code_source": "https://github.com/google-research/timesfm",
+      "code_license": "Apache-2.0",
+      "weights_license": "TimesFM-Non-Commercial-License-1.0",
+      "weight_filename": "model.safetensors",
+      "weight_sha256": "a7592b0a8432baee54483254e5647856911ce69e09d09a9bb65904b2d98f17da",
+      "weight_size_bytes": 1322898824,
+      "capability": "LICENSE_RESEARCH_ONLY",
+      "production_allowed": false,
+      "reason": "weights prohibit commercial and production use"
+    },
+    {
+      "family": "KRONOS",
+      "model_id": "NeoQuasar/Kronos-mini",
+      "revision": "f4e68697d9d5aed55cef5c96aabc3376bcad9f81",
+      "code_source": "https://github.com/shiyu-coder/Kronos",
+      "code_license": "MIT",
+      "weights_license": "MIT",
+      "weight_filename": "model.safetensors",
+      "weight_sha256": "a7d5f37e2e9fbd9891f7d7d4f72574512dd1f704fee14223e0a8cd0fbf54197c",
+      "weight_size_bytes": 16414000,
+      "capability": "STATIC_ANALYSIS_REQUIRED",
+      "production_allowed": false,
+      "reason": "external repository execution is blocked until P09 static analysis"
+    }
+  ],
+  "finite_evaluation": {
+    "family": "CHRONOS_2",
+    "model_id": "autogluon/chronos-2-small",
+    "revision": "ddec01313e50b6bc58ebaa92ede81bc24a3d9f9a",
+    "context_length": 32,
+    "prediction_length": 3,
+    "median": [
+      30.20248031616211,
+      31.062496185302734,
+      31.99530029296875
+    ],
+    "verified_weight_sha256": "492290ae82bb89f9769e3479ce90b3179de1f33e600c34daa0352531538b23cd",
+    "weight_size_bytes": 111749048,
+    "device": "cpu",
+    "torch_version": "2.13.0+cpu"
+  },
+  "restricted_models_executed": false,
+  "silent_fallback": false
+}

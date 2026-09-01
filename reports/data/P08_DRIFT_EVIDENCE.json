@@ -1,0 +1,42 @@
+{
+  "schema_version": "p08-drift-evidence-v1",
+  "stable": {
+    "metrics": {
+      "input_shift": "0",
+      "missingness_shift": "0",
+      "prediction_shift": "0",
+      "residual_shift": "0",
+      "calibration_shift": "0",
+      "latency_shift": "0"
+    },
+    "aggregate_score": "0",
+    "ood_score": "0",
+    "action": "NONE",
+    "reason_codes": []
+  },
+  "shifted": {
+    "metrics": {
+      "input_shift": "53.4522483824849",
+      "missingness_shift": "0",
+      "prediction_shift": "534.522483824849",
+      "residual_shift": "5345.22483824849",
+      "calibration_shift": "0",
+      "latency_shift": "0"
+    },
+    "aggregate_score": "5345.22483824849",
+    "ood_score": "53.4522483824849",
+    "action": "ABSTAIN",
+    "reason_codes": [
+      "AQ-MODEL-OOD"
+    ]
+  },
+  "monitored_dimensions": [
+    "calibration_shift",
+    "input_shift",
+    "latency_shift",
+    "missingness_shift",
+    "prediction_shift",
+    "residual_shift"
+  ],
+  "ood_abstain": true
+}

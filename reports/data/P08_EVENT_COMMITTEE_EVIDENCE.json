@@ -1,0 +1,44 @@
+{
+  "schema_version": "p08-event-committee-evidence-v1",
+  "roles": [
+    "CORROBORATION",
+    "ENTITY",
+    "EXTRACTOR",
+    "IMPACT",
+    "MARKET",
+    "ON_CHAIN",
+    "POLICY",
+    "SKEPTIC",
+    "SOURCE"
+  ],
+  "finding_count": 9,
+  "arbiter": {
+    "accepted_claim_ids": [
+      "p08-corroboration",
+      "p08-entity",
+      "p08-extractor",
+      "p08-impact",
+      "p08-market",
+      "p08-policy",
+      "p08-skeptic",
+      "p08-source"
+    ],
+    "evidence_ids": [
+      "btc-market",
+      "fomc-official"
+    ],
+    "semantic_confidence": "0.9",
+    "factual_confidence": "0",
+    "impact_confidence": "0.5",
+    "directional_score": "-0.2",
+    "evidence_coverage": "1",
+    "conflicts": [],
+    "should_abstain": true,
+    "abstain_reasons": [
+      "ON_CHAIN_EVIDENCE_UNAVAILABLE"
+    ],
+    "action": "RESEARCH_PROPOSAL_ONLY"
+  },
+  "evidence_escalation": false,
+  "publication_or_execution": false
+}

@@ -1,12 +1,22 @@
 {
   "dependencies": [
     {
+      "name": "accelerate",
+      "version": "1.14.0",
+      "vulns": []
+    },
+    {
       "name": "aegisquant",
       "skip_reason": "Dependency not found on PyPI and could not be audited: aegisquant (3.1.0.dev0)"
     },
     {
       "name": "alembic",
       "version": "1.19.1",
+      "vulns": []
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.5",
       "vulns": []
     },
     {
@@ -45,6 +55,16 @@
       "vulns": []
     },
     {
+      "name": "cachetools",
+      "version": "7.1.8",
+      "vulns": []
+    },
+    {
+      "name": "catboost",
+      "version": "1.2.10",
+      "vulns": []
+    },
+    {
       "name": "certifi",
       "version": "2026.7.22",
       "vulns": []
@@ -70,6 +90,11 @@
       "vulns": []
     },
     {
+      "name": "chronos-forecasting",
+      "version": "2.3.1",
+      "vulns": []
+    },
+    {
       "name": "click",
       "version": "8.5.0",
       "vulns": []
@@ -85,8 +110,23 @@
       "vulns": []
     },
     {
+      "name": "colorlog",
+      "version": "6.12.0",
+      "vulns": []
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.3",
+      "vulns": []
+    },
+    {
       "name": "cryptography",
       "version": "50.0.1",
+      "vulns": []
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1",
       "vulns": []
     },
     {
@@ -97,6 +137,11 @@
     {
       "name": "cyclonedx-python-lib",
       "version": "11.12.0",
+      "vulns": []
+    },
+    {
+      "name": "databricks-sdk",
+      "version": "0.133.0",
       "vulns": []
     },
     {
@@ -120,8 +165,23 @@
       "vulns": []
     },
     {
+      "name": "einops",
+      "version": "0.8.2",
+      "vulns": []
+    },
+    {
+      "name": "fastapi",
+      "version": "0.141.1",
+      "vulns": []
+    },
+    {
       "name": "filelock",
       "version": "3.32.4",
+      "vulns": []
+    },
+    {
+      "name": "fonttools",
+      "version": "4.64.0",
       "vulns": []
     },
     {
@@ -135,6 +195,26 @@
       "vulns": []
     },
     {
+      "name": "gitdb",
+      "version": "4.0.12",
+      "vulns": []
+    },
+    {
+      "name": "gitpython",
+      "version": "3.1.61",
+      "vulns": []
+    },
+    {
+      "name": "google-auth",
+      "version": "2.57.0",
+      "vulns": []
+    },
+    {
+      "name": "graphviz",
+      "version": "0.21",
+      "vulns": []
+    },
+    {
       "name": "greenlet",
       "version": "3.5.5",
       "vulns": []
@@ -145,6 +225,11 @@
       "vulns": []
     },
     {
+      "name": "hf-xet",
+      "version": "1.6.0",
+      "vulns": []
+    },
+    {
       "name": "httpcore",
       "version": "1.0.9",
       "vulns": []
@@ -152,6 +237,11 @@
     {
       "name": "httpx",
       "version": "0.28.1",
+      "vulns": []
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "1.29.0",
       "vulns": []
     },
     {
@@ -170,6 +260,11 @@
       "vulns": []
     },
     {
+      "name": "importlib-metadata",
+      "version": "9.0.1",
+      "vulns": []
+    },
+    {
       "name": "iniconfig",
       "version": "2.3.0",
       "vulns": []
@@ -177,6 +272,11 @@
     {
       "name": "isoduration",
       "version": "20.11.0",
+      "vulns": []
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.6",
       "vulns": []
     },
     {
@@ -200,6 +300,11 @@
       "vulns": []
     },
     {
+      "name": "kiwisolver",
+      "version": "1.5.1",
+      "vulns": []
+    },
+    {
       "name": "lark",
       "version": "1.3.1",
       "vulns": []
@@ -207,6 +312,11 @@
     {
       "name": "license-expression",
       "version": "30.4.4",
+      "vulns": []
+    },
+    {
+      "name": "lightgbm",
+      "version": "4.7.0",
       "vulns": []
     },
     {
@@ -230,8 +340,23 @@
       "vulns": []
     },
     {
+      "name": "matplotlib",
+      "version": "3.11.1",
+      "vulns": []
+    },
+    {
       "name": "mdurl",
       "version": "0.1.2",
+      "vulns": []
+    },
+    {
+      "name": "mlflow-skinny",
+      "version": "3.15.2",
+      "vulns": []
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
       "vulns": []
     },
     {
@@ -255,6 +380,11 @@
       "vulns": []
     },
     {
+      "name": "networkx",
+      "version": "3.6.1",
+      "vulns": []
+    },
+    {
       "name": "nodeenv",
       "version": "1.10.0",
       "vulns": []
@@ -262,6 +392,31 @@
     {
       "name": "numpy",
       "version": "2.5.2",
+      "vulns": []
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.44.0",
+      "vulns": []
+    },
+    {
+      "name": "opentelemetry-proto",
+      "version": "1.44.0",
+      "vulns": []
+    },
+    {
+      "name": "opentelemetry-sdk",
+      "version": "1.44.0",
+      "vulns": []
+    },
+    {
+      "name": "opentelemetry-semantic-conventions",
+      "version": "0.65b0",
+      "vulns": []
+    },
+    {
+      "name": "optuna",
+      "version": "4.9.0",
       "vulns": []
     },
     {
@@ -276,7 +431,12 @@
     },
     {
       "name": "pandas",
-      "version": "3.0.5",
+      "version": "2.3.3",
+      "vulns": []
+    },
+    {
+      "name": "pillow",
+      "version": "12.3.0",
       "vulns": []
     },
     {
@@ -310,6 +470,11 @@
       "vulns": []
     },
     {
+      "name": "plotly",
+      "version": "7.0.0",
+      "vulns": []
+    },
+    {
       "name": "pluggy",
       "version": "1.6.0",
       "vulns": []
@@ -340,6 +505,11 @@
       "vulns": []
     },
     {
+      "name": "protobuf",
+      "version": "6.33.6",
+      "vulns": []
+    },
+    {
       "name": "psutil",
       "version": "7.2.2",
       "vulns": []
@@ -367,6 +537,16 @@
     {
       "name": "pyarrow-stubs",
       "version": "20.0.0.20260819",
+      "vulns": []
+    },
+    {
+      "name": "pyasn1",
+      "version": "0.6.4",
+      "vulns": []
+    },
+    {
+      "name": "pyasn1-modules",
+      "version": "0.4.2",
       "vulns": []
     },
     {
@@ -420,6 +600,11 @@
       "vulns": []
     },
     {
+      "name": "python-dotenv",
+      "version": "1.2.3",
+      "vulns": []
+    },
+    {
       "name": "pytz",
       "version": "2026.3.post1",
       "vulns": []
@@ -432,6 +617,11 @@
     {
       "name": "referencing",
       "version": "0.37.0",
+      "vulns": []
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.3",
       "vulns": []
     },
     {
@@ -470,6 +660,11 @@
       "vulns": []
     },
     {
+      "name": "safetensors",
+      "version": "0.8.0",
+      "vulns": []
+    },
+    {
       "name": "scikit-learn",
       "version": "1.9.0",
       "vulns": []
@@ -480,8 +675,23 @@
       "vulns": []
     },
     {
+      "name": "setuptools",
+      "version": "84.0.0",
+      "vulns": []
+    },
+    {
+      "name": "shellingham",
+      "version": "1.5.4",
+      "vulns": []
+    },
+    {
       "name": "six",
       "version": "1.17.0",
+      "vulns": []
+    },
+    {
+      "name": "smmap",
+      "version": "5.0.3",
       "vulns": []
     },
     {
@@ -495,13 +705,33 @@
       "vulns": []
     },
     {
+      "name": "sqlparse",
+      "version": "0.6.0",
+      "vulns": []
+    },
+    {
+      "name": "starlette",
+      "version": "1.6.0",
+      "vulns": []
+    },
+    {
       "name": "stevedore",
       "version": "5.9.1",
       "vulns": []
     },
     {
+      "name": "sympy",
+      "version": "1.14.0",
+      "vulns": []
+    },
+    {
       "name": "threadpoolctl",
       "version": "3.6.0",
+      "vulns": []
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.1",
       "vulns": []
     },
     {
@@ -515,8 +745,23 @@
       "vulns": []
     },
     {
+      "name": "torch",
+      "version": "2.13.0",
+      "vulns": []
+    },
+    {
       "name": "tqdm",
       "version": "4.70.0",
+      "vulns": []
+    },
+    {
+      "name": "transformers",
+      "version": "5.16.1",
+      "vulns": []
+    },
+    {
+      "name": "typer",
+      "version": "0.27.2",
       "vulns": []
     },
     {
@@ -545,6 +790,11 @@
       "vulns": []
     },
     {
+      "name": "uvicorn",
+      "version": "0.52.4",
+      "vulns": []
+    },
+    {
       "name": "virtualenv",
       "version": "21.7.7",
       "vulns": []
@@ -562,6 +812,16 @@
     {
       "name": "websockets",
       "version": "17.1",
+      "vulns": []
+    },
+    {
+      "name": "xgboost",
+      "version": "3.4.1",
+      "vulns": []
+    },
+    {
+      "name": "zipp",
+      "version": "4.1.0",
       "vulns": []
     }
   ],

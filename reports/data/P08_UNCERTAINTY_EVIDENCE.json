@@ -1,0 +1,24 @@
+{
+  "schema_version": "p08-uncertainty-evidence-v1",
+  "calibration": {
+    "alpha": "0.1",
+    "residual_quantile": "0.4",
+    "sample_count": 4
+  },
+  "interval": {
+    "lower": "0.6",
+    "median": "1",
+    "upper": "1.4"
+  },
+  "interval_ordered": true,
+  "should_abstain": true,
+  "abstain_reasons": [
+    "COST_TOO_HIGH",
+    "HIGH_DISAGREEMENT",
+    "HIGH_UNCERTAINTY",
+    "LOW_EDGE",
+    "OUT_OF_DISTRIBUTION",
+    "RISK_LIMIT",
+    "STALE_DATA"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "p08-prompt-safety-evidence-v1",
+  "clean_context_evidence_id": "fomc-official",
+  "external_content_is_untrusted_data": true,
+  "tool_calls_allowed": false,
+  "secret_access_allowed": false,
+  "attack_count": 2,
+  "rejected_count": 2,
+  "rejection_codes": [
+    "AQ-RAG-PROMPT-INJECTION-REJECTED",
+    "AQ-RAG-SECRET-LIKE-CONTENT-REJECTED"
+  ],
+  "cloud_inference_performed": false,
+  "real_account_access_performed": false
+}

@@ -1,0 +1,99 @@
+{
+  "schema_version": "p08-event-graph-evidence-v1",
+  "node_count": 12,
+  "edge_count": 8,
+  "evidence_coverage": "1",
+  "conflicting_claim_ids": [],
+  "as_of_time": "2024-01-31T19:00:00+00:00",
+  "future_nodes": 0,
+  "impact_forecast": {
+    "impact_forecast_id": "1afab47f79b34c18b60feff91d34dba1fdbe029c577a433ddcd90beceacd0cb8",
+    "event_cluster_id": "event-fomc-2024-01-31",
+    "as_of_time": "2024-01-31T19:00:00Z",
+    "affected_exposure_ids": [
+      "asset:BTC"
+    ],
+    "horizons": {
+      "5m": {
+        "return_distribution": {
+          "mean": "0E-7",
+          "std": "0.0001215913663823539898547675690",
+          "q05": "-0.0002000",
+          "q50": "0E-7",
+          "q95": "0.0002000"
+        },
+        "volatility_delta": "0.0002",
+        "liquidity_delta": "0E-7",
+        "tail_risk_delta": "0.0002"
+      },
+      "30m": {
+        "return_distribution": {
+          "mean": "0E-7",
+          "std": "0.0003039784159558849746369189225",
+          "q05": "-0.0005000",
+          "q50": "0E-7",
+          "q95": "0.0005000"
+        },
+        "volatility_delta": "0.0005",
+        "liquidity_delta": "0E-7",
+        "tail_risk_delta": "0.0005"
+      },
+      "4h": {
+        "return_distribution": {
+          "mean": "0.000000",
+          "std": "0.0006079568319117699492738378450",
+          "q05": "-0.001000",
+          "q50": "0.000000",
+          "q95": "0.001000"
+        },
+        "volatility_delta": "0.001",
+        "liquidity_delta": "0.000000",
+        "tail_risk_delta": "0.001"
+      },
+      "1d": {
+        "return_distribution": {
+          "mean": "0E-7",
+          "std": "0.0009119352478676549239107567676",
+          "q05": "-0.0015000",
+          "q50": "0E-7",
+          "q95": "0.0015000"
+        },
+        "volatility_delta": "0.0015",
+        "liquidity_delta": "0E-7",
+        "tail_risk_delta": "0.0015"
+      },
+      "7d": {
+        "return_distribution": {
+          "mean": "0.000000",
+          "std": "0.001215913663823539898547675690",
+          "q05": "-0.002000",
+          "q50": "0.000000",
+          "q95": "0.002000"
+        },
+        "volatility_delta": "0.002",
+        "liquidity_delta": "0.000000",
+        "tail_risk_delta": "0.002"
+      }
+    },
+    "transmission_channels": [
+      "evidence_to_market"
+    ],
+    "market_already_moved_score": "0.2",
+    "corroboration_score": "0.9",
+    "source_quality_score": "0",
+    "novelty_score": "0.8",
+    "manipulation_risk": "0.1",
+    "model_disagreement": "0",
+    "evidence_ids": [
+      "btc-market",
+      "fomc-official"
+    ],
+    "model_versions": [
+      "evidence-impact-p08-v1"
+    ],
+    "should_abstain": true,
+    "abstain_reasons": [
+      "ON_CHAIN_EVIDENCE_UNAVAILABLE"
+    ]
+  }
+}

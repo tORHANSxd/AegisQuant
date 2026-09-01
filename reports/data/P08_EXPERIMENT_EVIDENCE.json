@@ -1,0 +1,30 @@
+{
+  "schema_version": "p08-experiment-evidence-v1",
+  "journal_event_count": 10,
+  "terminal_events": [
+    "ERROR",
+    "FAILED",
+    "PRUNED",
+    "SUCCEEDED",
+    "SUCCEEDED"
+  ],
+  "failed_and_pruned_retained": true,
+  "optuna_trial_count": 3,
+  "optuna_states": [
+    "COMPLETE",
+    "FAIL",
+    "PRUNED"
+  ],
+  "search_budget_trials": 3,
+  "mlflow_distribution": "mlflow-skinny",
+  "mlflow_version": "3.15.2",
+  "mlflow_backend": "SQLite",
+  "mlflow_run_count": 2,
+  "mlflow_statuses": [
+    "FAILED",
+    "FINISHED"
+  ],
+  "artifact_sha256": "530d85d142e61fd5bb9a3deea8ca3e78b0792f56c34faca8177fc69b36341c6a",
+  "artifact_content_addressed": true,
+  "all_trials_recorded": true
+}

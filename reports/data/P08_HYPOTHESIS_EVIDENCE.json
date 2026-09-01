@@ -1,0 +1,10 @@
+{
+  "schema_version": "p08-hypothesis-evidence-v1",
+  "spec_sha256": "1df0ecdd9dd620aaab8ce8fe585d184d161a4f914031f0cc743406049011956a",
+  "created_by": "ai",
+  "queue_events": 2,
+  "approved_count": 1,
+  "approval_actor": "rule:schema-budget",
+  "ai_self_approval": false,
+  "queue_tail_sha256": "42fab2ffd65f6f3210a956d9a1f18229eee5b174c555c4e02e7bf76485ca6cc2"
+}
