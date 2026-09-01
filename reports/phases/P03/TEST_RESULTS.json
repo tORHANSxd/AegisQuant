@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P03",
+  "commit_sha": "8a2a8971c6ca8de40711bba392a37486b5e5799c",
+  "environment_fingerprint": "sha256:311ea7a93cc3046ccd05ba389e4bda8231f01db8be625194bc0c3779d44bd5c1",
+  "generated_at_utc": "2026-09-01T03:18:27.452548Z",
+  "suites": [
+    {
+      "name": "local-ci-gates",
+      "artifact": "reports/phases/P03/CI_RESULTS.json",
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": false
+    },
+    {
+      "name": "python-3.13-pytest",
+      "artifact": "reports/phases/P03/CI_RESULTS.json#pytest",
+      "passed": 159,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "python-3.14-candidate-contract",
+      "artifact": "reports/phases/P03/PYTHON_314_CONTRACT.json",
+      "passed": 123,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "web-unit",
+      "artifact": "reports/phases/P03/CI_RESULTS.json#web-unit",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "web-chromium-e2e",
+      "artifact": "reports/phases/P03/CI_RESULTS.json#web-e2e",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "counted_in_total": true
+    },
+    {
+      "name": "p03-a01-real-24h-public-stream",
+      "artifact": "reports/data/BINANCE_SOAK_ATTEMPT_SUMMARY.json",
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "waived": 1,
+      "status": "waived",
+      "counted_in_total": false
+    }
+  ],
+  "aggregation_note": "passed/failed/skipped 只汇总独立测试执行；CI 门不重复计数，24 小时项单列 waived 且绝不计为通过",
+  "passed": 285,
+  "failed": 0,
+  "skipped": 0,
+  "waived": 1,
+  "known_flakes": [],
+  "warnings": [
+    {
+      "id": "P03-WARN-NAUTILUS-PANDAS-UTCNOW",
+      "count_per_runtime_run": 4,
+      "blocking": false,
+      "tracked_as": "P00-RISK-005"
+    }
+  ],
+  "coverage": {
+    "status": "not_collected",
+    "reason": "P03 以 parser、规范化、属性、重放、订单簿恢复、故障和安全契约直接覆盖风险；任务书未规定单一行覆盖率门槛",
+    "next_required_phase": "新增 P04 Provider 或扩大解析分支前按风险建立增量覆盖门"
+  },
+  "mutation": {
+    "status": "not_collected",
+    "reason": "P03 使用 fixture 反例、乱序重复、序列缺口和重连恢复测试验证核心不变量，未伪造 mutation score",
+    "next_required_phase": "Provider 组合和归一化规则稳定后评估"
+  },
+  "performance": {
+    "status": "not_collected",
+    "reason": "P03 的性能相关长时验收由业主豁免；两次实际尝试只保留为失败审计，不外推 SLA",
+    "next_required_phase": "任何生产采集 SLA 声明前必须重新执行合格的 86,400 秒双流运行"
+  },
+  "security_findings": [],
+  "security_summary": {
+    "secret_findings": 0,
+    "bandit_unreviewed_findings": 0,
+    "python_dependency_audit": "passed",
+    "javascript_dependency_audit": "passed",
+    "python_unknown_license_count": 0,
+    "real_account_access_performed": false,
+    "secret_store_access_performed": false,
+    "plaintext_secrets_written": false,
+    "authentication_used": false,
+    "order_capability_present": false,
+    "live_trading_locked": true
+  },
+  "result": "pass_with_waiver"
+}

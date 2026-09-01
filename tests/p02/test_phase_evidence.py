@@ -30,14 +30,14 @@ def load_state(project_root: Path) -> dict[str, object]:
     )
 
 
-def test_p02_acceptance_is_preserved_while_p03_is_active_and_live_remains_locked(
+def test_p02_acceptance_is_preserved_while_p03_is_current_and_live_remains_locked(
     project_root: Path,
 ) -> None:
     state = load_state(project_root)
     previous = cast(dict[str, object], state["previous_phase"])
     assert state["current_phase"] == "P03"
     assert state["next_phase"] == "P04"
-    assert state["status"] == "in_progress"
+    assert state["status"] in {"in_progress", "accepted", "accepted_with_waiver"}
     assert state["live_trading_locked"] is True
     assert previous["phase"] == "P02"
     assert previous["status"] == "accepted"

@@ -1,5 +1,5 @@
 schema_version: "1.0.0"
-phase: P02
+phase: P03
 risks:
   - id: P00-RISK-001
     severity: medium
@@ -81,3 +81,18 @@ risks:
     status: open
     title: No independent backup destination is configured
     containment: Keep recovery order and capacity policy documented; require a verified backup/restore drill before treating the lake as durable production storage.
+  - id: P03-RISK-001
+    severity: high
+    status: open
+    title: The 24-hour Binance public-stream acceptance was explicitly waived
+    containment: Keep P03 in accepted_with_waiver state, never claim 24-hour stability, and require a fresh qualifying 86,400-second run before any production collection SLA.
+  - id: P03-RISK-002
+    severity: medium
+    status: open
+    title: Binance USD-M REST depth returned HTTP 451 from the current network region
+    containment: Do not bypass regional controls; use only a legally permitted deployment region and official public endpoints if the soak requirement is reinstated.
+  - id: P03-RISK-003
+    severity: medium
+    status: open
+    title: Public exchange contracts and observed payload extensions can drift
+    containment: Keep fixture replay and changelog checks blocking, preserve unknown fields, and re-run public contract smoke tests before dependency or endpoint changes.

@@ -34,7 +34,7 @@ def test_p03_boundary_is_explicit_and_live_trading_remains_locked(
     state = load_state(project_root)
     assert state["current_phase"] == "P03"
     assert state["next_phase"] == "P04"
-    assert state["status"] in {"in_progress", "accepted"}
+    assert state["status"] in {"in_progress", "accepted", "accepted_with_waiver"}
     assert state["live_trading_locked"] is True
     assert not (project_root / "src/aegisquant/live").exists()
 
@@ -45,19 +45,29 @@ def test_p03_traceability_targets_are_real(project_root: Path) -> None:
         rows = list(csv.DictReader(matrix_file))
     assert len(rows) == 20
     assert len({row["requirement_id"] for row in rows}) == 20
-    assert {row["status"] for row in rows} <= {"in_progress", "verified"}
+    assert {row["status"] for row in rows} <= {"in_progress", "verified", "waived"}
     for row in rows:
         assert (project_root / row["implementation"]).exists(), row["requirement_id"]
         assert (project_root / row["test"]).exists(), row["requirement_id"]
 
     state = load_state(project_root)
-    expected_status = "verified" if state["status"] == "accepted" else "in_progress"
-    assert {row["status"] for row in rows} == {expected_status}
+    statuses = {row["requirement_id"]: row["status"] for row in rows}
+    if state["status"] == "in_progress":
+        assert set(statuses.values()) == {"in_progress"}
+    elif state["status"] == "accepted":
+        assert set(statuses.values()) == {"verified"}
+    else:
+        assert statuses["P03-A01"] == "waived"
+        assert {
+            status for requirement_id, status in statuses.items() if requirement_id != "P03-A01"
+        } == {"verified"}
 
 
-def test_p03_acceptance_requires_qualifying_24_hour_evidence(project_root: Path) -> None:
+def test_p03_acceptance_requires_qualifying_24_hour_evidence_or_explicit_waiver(
+    project_root: Path,
+) -> None:
     state = load_state(project_root)
-    if state["status"] != "accepted":
+    if state["status"] == "in_progress":
         assert state["accepted_at_utc"] is None
         return
 
@@ -66,9 +76,35 @@ def test_p03_acceptance_requires_qualifying_24_hour_evidence(project_root: Path)
         path = report_dir / name
         assert path.is_file() and path.stat().st_size > 0, name
 
-    evidence = json.loads(
-        (project_root / "reports/data/BINANCE_24H_SOAK.json").read_text(encoding="utf-8")
-    )
+    evidence_path = project_root / "reports/data/BINANCE_24H_SOAK.json"
+    if state["status"] == "accepted_with_waiver":
+        assert not evidence_path.exists()
+        waivers = cast(list[dict[str, object]], state["waivers"])
+        assert len(waivers) == 1
+        waiver = waivers[0]
+        assert waiver["waiver_id"] == "P03-WAIVER-001"
+        assert waiver["requirement_id"] == "P03-A01"
+        assert waiver["decision"] == "owner_approved"
+        assert (project_root / str(waiver["evidence"])).is_file()
+
+        summary = json.loads(
+            (project_root / "reports/data/BINANCE_SOAK_ATTEMPT_SUMMARY.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        assert summary["requirement_id"] == "P03-A01"
+        assert summary["acceptance_status"] == "waived"
+        assert summary["qualifying_24h_evidence_present"] is False
+        assert summary["qualifying_acceptance"] is False
+        assert all(attempt["qualifying_acceptance"] is False for attempt in summary["attempts"])
+
+        results = json.loads((report_dir / "TEST_RESULTS.json").read_text(encoding="utf-8"))
+        assert results["result"] == "pass_with_waiver"
+        assert results["failed"] == 0
+        assert results["waived"] == 1
+        return
+
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
     assert evidence["status"] == "passed"
     assert evidence["qualifying_acceptance"] is True
     assert evidence["test_mode"] is False

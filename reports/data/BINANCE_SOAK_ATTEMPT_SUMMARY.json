@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P03",
+  "requirement_id": "P03-A01",
+  "waiver_id": "P03-WAIVER-001",
+  "owner_decision_date": "2026-09-01",
+  "acceptance_status": "waived",
+  "qualifying_24h_evidence_present": false,
+  "qualifying_acceptance": false,
+  "attempts": [
+    {
+      "attempt_id": "P03-SOAK-ATTEMPT-001",
+      "requested_duration_seconds": 86400,
+      "actual_monotonic_duration_seconds": 34949.94099589996,
+      "status": "interrupted",
+      "qualifying_acceptance": false,
+      "final_acceptance_evidence_emitted": false,
+      "host_pause_detected": false,
+      "manual_outage_requested": true,
+      "manual_outage_recovered": true,
+      "streams": [
+        {
+          "product": "SPOT",
+          "message_count": 34891,
+          "sequence_gap_count": 0,
+          "reconnect_count": 8,
+          "snapshot_count": 5
+        },
+        {
+          "product": "USD_M",
+          "message_count": 69228,
+          "sequence_gap_count": 0,
+          "reconnect_count": 14,
+          "snapshot_count": 5
+        }
+      ],
+      "failure_reason": "运行在达到 86,400 秒前被外部中断；没有产生最终合格证据，不能拼接或推定通过。"
+    },
+    {
+      "attempt_id": "P03-SOAK-ATTEMPT-002",
+      "requested_duration_seconds": 86400,
+      "actual_monotonic_duration_seconds": 11.6085772998631,
+      "actual_wall_duration_seconds": 11.608578,
+      "status": "failed",
+      "qualifying_acceptance": false,
+      "final_acceptance_evidence_emitted": true,
+      "host_pause_detected": false,
+      "manual_outage_recovered": false,
+      "streams": [
+        {
+          "product": "SPOT",
+          "message_count": 6,
+          "sequence_gap_count": 0,
+          "snapshot_count": 1
+        },
+        {
+          "product": "USD_M",
+          "message_count": 0,
+          "sequence_gap_count": 0,
+          "snapshot_count": 0
+        }
+      ],
+      "failure_reason": "Binance USD-M 官方 REST 盘口快照 https://fapi.binance.com/fapi/v1/depth 返回 HTTP 451。"
+    }
+  ],
+  "security_boundary": {
+    "public_market_data_only": true,
+    "authentication_used": false,
+    "account_access_performed": false,
+    "order_capability_present": false,
+    "plaintext_secrets_written": false,
+    "live_trading_locked": true
+  },
+  "source_note": "摘要来自本机忽略目录中的原始运行状态；它只证明尝试发生及失败原因，不是 24 小时合格验收证据。"
+}

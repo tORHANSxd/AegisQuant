@@ -1,21 +1,21 @@
 requirement_id,category,requirement,implementation,test,evidence,status
-P03-T01,task,盘点 Binance 官方现行 REST 与 WS 契约,src/aegisquant/data/providers/binance/contracts.py,tests/p03/test_contract_inventory.py,reports/data/BINANCE_PUBLIC_CONTRACTS.md,in_progress
-P03-T02,task,采集 Spot 与 USDⓈ-M instrument 快照,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,reports/data/BINANCE_PUBLIC_CONTRACTS.md,in_progress
-P03-T03,task,覆盖 Kline trade aggTrade bookTicker depth mark index funding OI,src/aegisquant/data/providers/binance/models.py,tests/p03/test_normalization.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,in_progress
-P03-T04,task,实现 WS 连接订阅心跳重连限流和监控,src/aegisquant/data/providers/binance/websocket.py,tests/p03/test_websocket_lifecycle.py,reports/data/BINANCE_LIVE_SAMPLE.json,in_progress
-P03-T05,task,快照加增量订单簿重建与缺口恢复,src/aegisquant/data/providers/binance/orderbook.py,tests/p03/test_orderbook.py,reports/data/BINANCE_ORDERBOOK_RECOVERY.md,in_progress
-P03-T06,task,历史下载分页检查点重试和原始响应归档,src/aegisquant/data/providers/binance/history.py,tests/p03/test_history_archive.py,reports/data/BINANCE_PUBLIC_CONTRACTS.md,in_progress
-P03-T07,task,保存 PIT symbol 与 master data 版本,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,in_progress
-P03-T08,task,标记交易日边界和未完成 Kline,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,in_progress
-P03-T09,task,转换为统一 Silver schema,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,schemas/data/registry.json,in_progress
-P03-T10,task,执行 Kline 与 trades 及 book 与 ticker 一致性检查,src/aegisquant/data/providers/binance/quality.py,tests/p03/test_quality_replay_changelog.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,in_progress
-P03-T11,task,提供录制 fixture 与离线回放,src/aegisquant/data/providers/binance/replay.py,tests/p03/test_quality_replay_changelog.py,tests/fixtures/binance/fixture_manifest.json,in_progress
-P03-T12,task,建立 Binance Changelog watcher 基础,src/aegisquant/data/providers/binance/changelog.py,tests/p03/test_quality_replay_changelog.py,reports/data/BINANCE_CHANGELOG_WATCH.json,in_progress
-P03-T13,task,比较 Nautilus Binance 语义并记录差异,src/aegisquant/data/providers/binance/nautilus_compat.py,tests/p03/test_nautilus_semantics.py,reports/compatibility/BINANCE_NAUTILUS_SEMANTICS.md,in_progress
-P03-A01,acceptance,真实连续 24 小时公开流无无法解释的 sequence gap,scripts/run_binance_soak.py,tests/p03/test_soak_state.py,reports/data/BINANCE_24H_SOAK.json,in_progress
-P03-A02,acceptance,网络中断后自动重建订单簿和 watermark,src/aegisquant/data/providers/binance/orderbook.py,tests/p03/test_websocket_lifecycle.py,reports/data/BINANCE_ORDERBOOK_RECOVERY.md,in_progress
-P03-A03,acceptance,重复乱序迟到行为具有明确契约,src/aegisquant/data/providers/binance/orderbook.py,tests/p03/test_orderbook.py,reports/data/BINANCE_ORDERBOOK_RECOVERY.md,in_progress
-P03-A04,acceptance,可按时间查询 instrument rule 快照,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,in_progress
-P03-A05,acceptance,所有数据具有来源时间和质量字段,src/aegisquant/data/providers/binance/models.py,tests/p03/test_normalization.py,schemas/data/registry.json,in_progress
-P03-A06,acceptance,CI 离线且全部外部交互使用 fixture,scripts/ci.py,tests/security/test_binance_public_only.py,reports/phases/P03/TEST_RESULTS.json,in_progress
-P03-A07,acceptance,适配器没有账户和订单权限,src/aegisquant/data/providers/binance/contracts.py,tests/security/test_binance_public_only.py,reports/phases/P03/ACCEPTANCE.md,in_progress
+P03-T01,task,盘点 Binance 官方现行 REST 与 WS 契约,src/aegisquant/data/providers/binance/contracts.py,tests/p03/test_contract_inventory.py,reports/data/BINANCE_PUBLIC_CONTRACTS.md,verified
+P03-T02,task,采集 Spot 与 USDⓈ-M instrument 快照,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,reports/data/BINANCE_PUBLIC_CONTRACTS.md,verified
+P03-T03,task,覆盖 Kline trade aggTrade bookTicker depth mark index funding OI,src/aegisquant/data/providers/binance/models.py,tests/p03/test_normalization.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,verified
+P03-T04,task,实现 WS 连接订阅心跳重连限流和监控,src/aegisquant/data/providers/binance/websocket.py,tests/p03/test_websocket_lifecycle.py,reports/data/BINANCE_LIVE_SAMPLE.json,verified
+P03-T05,task,快照加增量订单簿重建与缺口恢复,src/aegisquant/data/providers/binance/orderbook.py,tests/p03/test_orderbook.py,reports/data/BINANCE_ORDERBOOK_RECOVERY.md,verified
+P03-T06,task,历史下载分页检查点重试和原始响应归档,src/aegisquant/data/providers/binance/history.py,tests/p03/test_history_archive.py,reports/data/BINANCE_PUBLIC_CONTRACTS.md,verified
+P03-T07,task,保存 PIT symbol 与 master data 版本,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,verified
+P03-T08,task,标记交易日边界和未完成 Kline,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,verified
+P03-T09,task,转换为统一 Silver schema,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,schemas/data/registry.json,verified
+P03-T10,task,执行 Kline 与 trades 及 book 与 ticker 一致性检查,src/aegisquant/data/providers/binance/quality.py,tests/p03/test_quality_replay_changelog.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,verified
+P03-T11,task,提供录制 fixture 与离线回放,src/aegisquant/data/providers/binance/replay.py,tests/p03/test_quality_replay_changelog.py,tests/fixtures/binance/fixture_manifest.json,verified
+P03-T12,task,建立 Binance Changelog watcher 基础,src/aegisquant/data/providers/binance/changelog.py,tests/p03/test_quality_replay_changelog.py,reports/data/BINANCE_CHANGELOG_WATCH.json,verified
+P03-T13,task,比较 Nautilus Binance 语义并记录差异,src/aegisquant/data/providers/binance/nautilus_compat.py,tests/p03/test_nautilus_semantics.py,reports/compatibility/BINANCE_NAUTILUS_SEMANTICS.md,verified
+P03-A01,acceptance,真实连续 24 小时公开流无无法解释的 sequence gap,scripts/run_binance_soak.py,tests/p03/test_soak_state.py,reports/data/BINANCE_SOAK_ATTEMPT_SUMMARY.json,waived
+P03-A02,acceptance,网络中断后自动重建订单簿和 watermark,src/aegisquant/data/providers/binance/orderbook.py,tests/p03/test_websocket_lifecycle.py,reports/data/BINANCE_ORDERBOOK_RECOVERY.md,verified
+P03-A03,acceptance,重复乱序迟到行为具有明确契约,src/aegisquant/data/providers/binance/orderbook.py,tests/p03/test_orderbook.py,reports/data/BINANCE_ORDERBOOK_RECOVERY.md,verified
+P03-A04,acceptance,可按时间查询 instrument rule 快照,src/aegisquant/data/providers/binance/normalization.py,tests/p03/test_normalization.py,reports/data/BINANCE_CONSISTENCY_CHECKS.md,verified
+P03-A05,acceptance,所有数据具有来源时间和质量字段,src/aegisquant/data/providers/binance/models.py,tests/p03/test_normalization.py,schemas/data/registry.json,verified
+P03-A06,acceptance,CI 离线且全部外部交互使用 fixture,scripts/ci.py,tests/security/test_binance_public_only.py,reports/phases/P03/TEST_RESULTS.json,verified
+P03-A07,acceptance,适配器没有账户和订单权限,src/aegisquant/data/providers/binance/contracts.py,tests/security/test_binance_public_only.py,reports/phases/P03/ACCEPTANCE.md,verified

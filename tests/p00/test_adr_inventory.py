@@ -1,5 +1,6 @@
 """P00 architecture decision inventory tests."""
 
+import re
 from pathlib import Path
 
 
@@ -15,4 +16,4 @@ def test_required_p00_decisions_are_accepted(project_root: Path) -> None:
     for path in adr_paths:
         content = path.read_text(encoding="utf-8")
         assert "状态：Accepted" in content
-        assert any(phase in content for phase in ("P00", "P01", "P02"))
+        assert re.search(r"\bP(?:0[0-9]|1[0-8])\b", content)
