@@ -1,0 +1,45 @@
+{
+  "reduce_only_supported": true,
+  "schema_version": "p12-algorithm-evidence-v1",
+  "style_decision": {
+    "aggressive_cost_bps": "6",
+    "expected_cost_bps": "0",
+    "passive_cost_bps": "0",
+    "reason_code": "AQ-EXEC-MAKER-LOWER-COST",
+    "style": "MAKER"
+  },
+  "time_bounded_passive": true,
+  "twap_slices": [
+    {
+      "expire_at": "2026-09-01T20:00:20Z",
+      "quantity": {
+        "amount": "0.3333333333333333333333333333",
+        "asset_id": "BTC"
+      },
+      "release_at": "2026-09-01T20:00:00Z",
+      "sequence": 0,
+      "style": "TIME_BOUNDED_PASSIVE"
+    },
+    {
+      "expire_at": "2026-09-01T20:00:50Z",
+      "quantity": {
+        "amount": "0.3333333333333333333333333333",
+        "asset_id": "BTC"
+      },
+      "release_at": "2026-09-01T20:00:30Z",
+      "sequence": 1,
+      "style": "TIME_BOUNDED_PASSIVE"
+    },
+    {
+      "expire_at": "2026-09-01T20:01:20Z",
+      "quantity": {
+        "amount": "0.3333333333333333333333333334",
+        "asset_id": "BTC"
+      },
+      "release_at": "2026-09-01T20:01:00Z",
+      "sequence": 2,
+      "style": "TIME_BOUNDED_PASSIVE"
+    }
+  ],
+  "twap_total_quantity": "1.000000000000000000000000000"
+}

@@ -1,0 +1,20 @@
+{
+  "capability": {
+    "credential_reference_name": null,
+    "credential_reference_state": "AWAITING_CREDENTIAL_REFERENCE",
+    "live_credentials_available": false,
+    "live_domain_available": false,
+    "network_requests_performed": 0,
+    "real_account_access_performed": false,
+    "state": "AWAITING_CREDENTIAL_REFERENCE",
+    "venue_id": "BINANCE-TESTNET",
+    "withdrawal_capability": false
+  },
+  "credential_reference_received": false,
+  "environment_variable_credential_read_present": false,
+  "live_trading_locked": true,
+  "plaintext_credential_requested": false,
+  "production_endpoint_literal_present": false,
+  "real_testnet_acceptance": "blocked_external_input",
+  "schema_version": "p12-testnet-capability-v1"
+}

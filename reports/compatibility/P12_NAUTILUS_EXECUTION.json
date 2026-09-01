@@ -1,0 +1,59 @@
+{
+  "contract": {
+    "config_class": "BinanceExecClientConfig",
+    "config_fields": [
+      "instrument_provider",
+      "routing",
+      "venue",
+      "api_key",
+      "api_secret",
+      "key_type",
+      "account_type",
+      "environment",
+      "base_url_http",
+      "base_url_ws",
+      "base_url_ws_stream",
+      "proxy_url",
+      "transport_backend",
+      "us",
+      "use_gtd",
+      "use_reduce_only",
+      "use_position_ids",
+      "use_trade_lite",
+      "treat_expired_as_canceled",
+      "recv_window_ms",
+      "max_retries",
+      "retry_delay_initial_ms",
+      "retry_delay_max_ms",
+      "futures_leverages",
+      "futures_margin_types",
+      "log_rejected_due_post_only_as_warning"
+    ],
+    "execution_methods": [
+      "cancel_order",
+      "connect",
+      "create",
+      "disconnect",
+      "generate_fill_reports",
+      "generate_order_status_report",
+      "modify_order",
+      "submit_order"
+    ],
+    "factory_class": "BinanceLiveExecClientFactory",
+    "instantiated": false,
+    "network_requests_performed": 0,
+    "package_version": "1.231.0",
+    "supported_environments": [
+      "LIVE",
+      "TESTNET",
+      "DEMO"
+    ]
+  },
+  "credential_access_performed": false,
+  "decision": "docs/adr/ADR-0017-p12-testnet-execution-recovery-policy.md",
+  "factory_instantiated": false,
+  "local_domain_adapter_selected": true,
+  "network_requests_performed": 0,
+  "reason": "installed transport contract does not own AegisQuant idempotency, recovery, account reconciliation, and atomic ledger semantics",
+  "schema_version": "p12-nautilus-execution-compatibility-v1"
+}

@@ -1,0 +1,32 @@
+{
+  "crash_recovery_test": "tests/execution/test_lifecycle.py",
+  "lifecycle": {
+    "quiesced": {
+      "new_submissions_allowed": false,
+      "reason_codes": [
+        "AQ-EXEC-QUIESCE-NO-NEW-SUBMISSIONS"
+      ],
+      "state": "QUIESCING",
+      "unresolved_client_order_ids": []
+    },
+    "started": {
+      "new_submissions_allowed": true,
+      "reason_codes": [
+        "AQ-EXEC-START-RECONCILED"
+      ],
+      "state": "RUNNING",
+      "unresolved_client_order_ids": []
+    },
+    "stopped": {
+      "new_submissions_allowed": false,
+      "reason_codes": [
+        "AQ-EXEC-STOPPED"
+      ],
+      "state": "STOPPED",
+      "unresolved_client_order_ids": []
+    }
+  },
+  "new_submit_during_quiesce": false,
+  "schema_version": "p12-lifecycle-evidence-v1",
+  "startup_reconciliation_required": true
+}

@@ -1,0 +1,38 @@
+{
+  "cross_venue_atomicity_assumed": false,
+  "decision": {
+    "action": "HEDGE",
+    "elapsed_seconds": 1,
+    "execution_group_id": "p12-evidence-group",
+    "naked_notional": "60",
+    "reason_code": "AQ-EXEC-GROUP-HEDGE-REQUIRED"
+  },
+  "group": {
+    "created_at": "2026-09-01T20:00:00Z",
+    "execution_group_id": "p12-evidence-group",
+    "legs": [
+      {
+        "filled_notional": "60",
+        "instrument_id": "BTC-USDT-PERP",
+        "leg_id": "long-btc",
+        "side": "BUY",
+        "target_notional": "100"
+      },
+      {
+        "filled_notional": "0",
+        "instrument_id": "ETH-USDT-PERP",
+        "leg_id": "short-eth",
+        "side": "SELL",
+        "target_notional": "100"
+      }
+    ],
+    "notional_asset_id": "USDT",
+    "policy": {
+      "halt_notional": "90",
+      "maximum_naked_notional": "50",
+      "maximum_naked_seconds": 10
+    }
+  },
+  "schema_version": "p12-group-evidence-v1",
+  "unbounded_naked_exposure_allowed": false
+}

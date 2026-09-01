@@ -1,0 +1,63 @@
+{
+  "frontend_connection_controls_execution": false,
+  "reconciliation": {
+    "applied": true,
+    "last_sequence": 3,
+    "reason_codes": [
+      "AQ-EXEC-ACCOUNT-SNAPSHOT-RECONCILED"
+    ],
+    "sequence_gap": false,
+    "state": "SYNCHRONIZED",
+    "unknown_local_fill_ids": [],
+    "unknown_local_order_ids": [],
+    "unknown_venue_fill_ids": [],
+    "unknown_venue_order_ids": []
+  },
+  "rest_snapshot_required_after_gap": true,
+  "schema_version": "p12-account-reconciliation-v1",
+  "snapshot": {
+    "balances": [
+      {
+        "asset_id": "USDT",
+        "available": "100000",
+        "total": "100000"
+      }
+    ],
+    "captured_at": "2026-09-01T20:00:03Z",
+    "open_orders": [],
+    "recent_fill_ids": [
+      "sim-fill-1-6a37be8dc6"
+    ],
+    "sequence": 3,
+    "snapshot_id": "sim-account-3",
+    "venue_id": "BINANCE-TESTNET"
+  },
+  "stream_results": [
+    {
+      "applied": true,
+      "last_sequence": 1,
+      "reason_codes": [
+        "AQ-EXEC-ACCOUNT-EVENT-APPLIED"
+      ],
+      "sequence_gap": false,
+      "state": "SYNCHRONIZED",
+      "unknown_local_fill_ids": [],
+      "unknown_local_order_ids": [],
+      "unknown_venue_fill_ids": [],
+      "unknown_venue_order_ids": []
+    },
+    {
+      "applied": true,
+      "last_sequence": 3,
+      "reason_codes": [
+        "AQ-EXEC-ACCOUNT-SEQUENCE-GAP"
+      ],
+      "sequence_gap": true,
+      "state": "RECONCILIATION_REQUIRED",
+      "unknown_local_fill_ids": [],
+      "unknown_local_order_ids": [],
+      "unknown_venue_fill_ids": [],
+      "unknown_venue_order_ids": []
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "blind_resend_allowed": false,
+  "duplicate_economic_orders": 0,
+  "query_order": [
+    "open_orders",
+    "recent_orders",
+    "recent_fills",
+    "health"
+  ],
+  "scenario": {
+    "cancel_disposition": "CANCELED",
+    "duplicate_economic_orders": 0,
+    "economic_order_count": 1,
+    "fill_count": 1,
+    "final_status": "CANCELED",
+    "network_requests_performed": 0,
+    "recovery_disposition": "FOUND_OPEN_ORDER",
+    "submit_disposition": "UNKNOWN"
+  },
+  "schema_version": "p12-recovery-evidence-v1",
+  "timeout_means_failure": false
+}

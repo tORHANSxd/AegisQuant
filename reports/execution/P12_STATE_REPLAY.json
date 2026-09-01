@@ -1,0 +1,180 @@
+{
+  "events": [
+    {
+      "available_at": "2026-09-01T20:00:01Z",
+      "client_order_id": "p12-evidence-order",
+      "event_id": "p12-evidence-1-RISK_APPROVED",
+      "event_type": "RISK_APPROVED",
+      "observed_at": "2026-09-01T20:00:01Z",
+      "reason_code": "AQ-EXEC-EVIDENCE-RISK_APPROVED",
+      "recovery_resolution": false,
+      "venue_cumulative_filled": {
+        "amount": "0",
+        "asset_id": "BTC"
+      },
+      "venue_order_id": null,
+      "venue_sequence": 1
+    },
+    {
+      "available_at": "2026-09-01T20:00:02Z",
+      "client_order_id": "p12-evidence-order",
+      "event_id": "p12-evidence-2-SUBMIT_STARTED",
+      "event_type": "SUBMIT_STARTED",
+      "observed_at": "2026-09-01T20:00:02Z",
+      "reason_code": "AQ-EXEC-EVIDENCE-SUBMIT_STARTED",
+      "recovery_resolution": false,
+      "venue_cumulative_filled": {
+        "amount": "0",
+        "asset_id": "BTC"
+      },
+      "venue_order_id": null,
+      "venue_sequence": 2
+    },
+    {
+      "available_at": "2026-09-01T20:00:03Z",
+      "client_order_id": "p12-evidence-order",
+      "event_id": "p12-evidence-3-SUBMIT_TIMEOUT",
+      "event_type": "SUBMIT_TIMEOUT",
+      "observed_at": "2026-09-01T20:00:03Z",
+      "reason_code": "AQ-EXEC-EVIDENCE-SUBMIT_TIMEOUT",
+      "recovery_resolution": false,
+      "venue_cumulative_filled": {
+        "amount": "0",
+        "asset_id": "BTC"
+      },
+      "venue_order_id": null,
+      "venue_sequence": 3
+    },
+    {
+      "available_at": "2026-09-01T20:00:04Z",
+      "client_order_id": "p12-evidence-order",
+      "event_id": "p12-evidence-4-VENUE_ACCEPTED",
+      "event_type": "VENUE_ACCEPTED",
+      "observed_at": "2026-09-01T20:00:04Z",
+      "reason_code": "AQ-EXEC-EVIDENCE-VENUE_ACCEPTED",
+      "recovery_resolution": false,
+      "venue_cumulative_filled": {
+        "amount": "0",
+        "asset_id": "BTC"
+      },
+      "venue_order_id": "p12-evidence-venue-order",
+      "venue_sequence": 4
+    },
+    {
+      "available_at": "2026-09-01T20:00:05Z",
+      "client_order_id": "p12-evidence-order",
+      "event_id": "p12-evidence-5-PARTIAL_FILL",
+      "event_type": "PARTIAL_FILL",
+      "observed_at": "2026-09-01T20:00:05Z",
+      "reason_code": "AQ-EXEC-EVIDENCE-PARTIAL_FILL",
+      "recovery_resolution": false,
+      "venue_cumulative_filled": {
+        "amount": "0.4",
+        "asset_id": "BTC"
+      },
+      "venue_order_id": "p12-evidence-venue-order",
+      "venue_sequence": 5
+    },
+    {
+      "available_at": "2026-09-01T20:00:06Z",
+      "client_order_id": "p12-evidence-order",
+      "event_id": "p12-evidence-6-CANCEL_REQUESTED",
+      "event_type": "CANCEL_REQUESTED",
+      "observed_at": "2026-09-01T20:00:06Z",
+      "reason_code": "AQ-EXEC-EVIDENCE-CANCEL_REQUESTED",
+      "recovery_resolution": false,
+      "venue_cumulative_filled": {
+        "amount": "0.4",
+        "asset_id": "BTC"
+      },
+      "venue_order_id": null,
+      "venue_sequence": 6
+    },
+    {
+      "available_at": "2026-09-01T20:00:07Z",
+      "client_order_id": "p12-evidence-order",
+      "event_id": "p12-evidence-7-CANCELED",
+      "event_type": "CANCELED",
+      "observed_at": "2026-09-01T20:00:07Z",
+      "reason_code": "AQ-EXEC-EVIDENCE-CANCELED",
+      "recovery_resolution": false,
+      "venue_cumulative_filled": {
+        "amount": "0.4",
+        "asset_id": "BTC"
+      },
+      "venue_order_id": "p12-evidence-venue-order",
+      "venue_sequence": 7
+    },
+    {
+      "available_at": "2026-09-01T20:00:08Z",
+      "client_order_id": "p12-evidence-order",
+      "event_id": "p12-evidence-8-RECONCILED",
+      "event_type": "RECONCILED",
+      "observed_at": "2026-09-01T20:00:08Z",
+      "reason_code": "AQ-EXEC-EVIDENCE-RECONCILED",
+      "recovery_resolution": true,
+      "venue_cumulative_filled": {
+        "amount": "0.4",
+        "asset_id": "BTC"
+      },
+      "venue_order_id": null,
+      "venue_sequence": 8
+    }
+  ],
+  "final_record": {
+    "client_order_id": "p12-evidence-order",
+    "cumulative_filled": {
+      "amount": "0.4",
+      "asset_id": "BTC"
+    },
+    "last_available_at": "2026-09-01T20:00:08Z",
+    "last_venue_sequence": 8,
+    "processed_event_ids": [
+      "p12-evidence-1-RISK_APPROVED",
+      "p12-evidence-2-SUBMIT_STARTED",
+      "p12-evidence-3-SUBMIT_TIMEOUT",
+      "p12-evidence-4-VENUE_ACCEPTED",
+      "p12-evidence-5-PARTIAL_FILL",
+      "p12-evidence-6-CANCEL_REQUESTED",
+      "p12-evidence-7-CANCELED",
+      "p12-evidence-8-RECONCILED"
+    ],
+    "reason_codes": [
+      "AQ-EXEC-ORDER-CREATED",
+      "AQ-EXEC-EVIDENCE-RISK_APPROVED",
+      "AQ-EXEC-EVIDENCE-SUBMIT_STARTED",
+      "AQ-EXEC-EVIDENCE-SUBMIT_TIMEOUT",
+      "AQ-EXEC-EVIDENCE-VENUE_ACCEPTED",
+      "AQ-EXEC-EVIDENCE-PARTIAL_FILL",
+      "AQ-EXEC-EVIDENCE-CANCEL_REQUESTED",
+      "AQ-EXEC-EVIDENCE-CANCELED",
+      "AQ-EXEC-EVIDENCE-RECONCILED"
+    ],
+    "state": "TERMINAL_RECONCILED",
+    "total_quantity": {
+      "amount": "1",
+      "asset_id": "BTC"
+    },
+    "venue_order_id": "p12-evidence-venue-order"
+  },
+  "late_event_can_rollback": false,
+  "overfill_allowed": false,
+  "schema_version": "p12-state-replay-v1",
+  "states": [
+    "CREATED",
+    "RISK_APPROVED",
+    "SUBMITTING",
+    "SUBMIT_UNKNOWN",
+    "VENUE_ACCEPTED",
+    "PARTIALLY_FILLED",
+    "FILLED",
+    "CANCEL_REQUESTED",
+    "CANCEL_UNKNOWN",
+    "CANCELED",
+    "REJECTED",
+    "EXPIRED",
+    "RECOVERY_REQUIRED",
+    "TERMINAL_RECONCILED"
+  ],
+  "terminal_reconciled": true
+}

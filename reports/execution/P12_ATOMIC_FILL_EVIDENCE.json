@@ -1,0 +1,13 @@
+{
+  "authoritative_memory_advances_before_commit": false,
+  "fault_injection_rolls_back_all_facts": true,
+  "idempotent_replay_duplicates_ledger": false,
+  "postgres_contract_test": "tests/integration/test_p12_atomic_fill.py",
+  "schema_version": "p12-atomic-fill-evidence-v1",
+  "transaction_unit": [
+    "fill",
+    "ledger",
+    "domain_event",
+    "outbox"
+  ]
+}

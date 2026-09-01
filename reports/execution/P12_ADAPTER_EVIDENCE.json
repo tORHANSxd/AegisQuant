@@ -1,0 +1,28 @@
+{
+  "allowed_environments": [
+    "SIMULATED",
+    "TESTNET"
+  ],
+  "constant_success_adapter_present": false,
+  "network_requests_performed": 0,
+  "primary_adapter": "SimulatedBinanceTestnetAdapter",
+  "protocol_methods": [
+    "instruments",
+    "account_snapshot",
+    "open_orders",
+    "recent_orders",
+    "recent_fills",
+    "submit",
+    "cancel",
+    "amend",
+    "stream_account",
+    "health"
+  ],
+  "schema_version": "p12-adapter-evidence-v1",
+  "secondary_send_enabled": false,
+  "secondary_venues": [
+    "OKX-TEST-CONTRACT",
+    "BYBIT-TEST-CONTRACT",
+    "DERIBIT-TEST-CONTRACT"
+  ]
+}

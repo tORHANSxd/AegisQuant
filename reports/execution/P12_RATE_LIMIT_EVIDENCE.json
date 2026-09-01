@@ -1,0 +1,12 @@
+{
+  "cancel_preempts_submit": true,
+  "dispatch_order": [
+    "cancel",
+    "reconcile",
+    "submit"
+  ],
+  "jitter_is_deterministic": true,
+  "queue_is_bounded": true,
+  "reconciliation_preempts_submit": true,
+  "schema_version": "p12-rate-limit-evidence-v1"
+}

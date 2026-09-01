@@ -1,0 +1,47 @@
+{
+  "illegal_precision_rejection": "AQ-EXEC-ILLEGAL-QUANTITY-PRECISION",
+  "quantized": {
+    "limit_price": {
+      "amount": "50000",
+      "base_asset_id": "BTC",
+      "quote_asset_id": "USDT"
+    },
+    "notional": "50000",
+    "quantity": {
+      "amount": "1",
+      "asset_id": "BTC"
+    },
+    "reference_price": {
+      "amount": "50000",
+      "base_asset_id": "BTC",
+      "quote_asset_id": "USDT"
+    },
+    "rule_version": "binance-test-rules-v1"
+  },
+  "rules": {
+    "available_at": "2026-09-01T20:00:00Z",
+    "instrument_id": "BTC-USDT-PERP",
+    "margin_mode": "CROSS",
+    "maximum_quantity": "100",
+    "minimum_notional": "10",
+    "minimum_quantity": "0.001",
+    "position_mode": "ONE_WAY",
+    "price_protection_bps": "100",
+    "price_tick": "0.10",
+    "quantity_step": "0.001",
+    "request_weight": 1,
+    "rule_version": "binance-test-rules-v1",
+    "self_trade_prevention_modes": [
+      "EXPIRE_MAKER"
+    ],
+    "supported_order_types": [
+      "MARKET",
+      "LIMIT"
+    ],
+    "trading_status": "TRADING",
+    "valid_until": "2026-09-01T21:00:00Z",
+    "venue_id": "BINANCE-TESTNET"
+  },
+  "schema_version": "p12-rule-evidence-v1",
+  "stale_rule_allowed": false
+}

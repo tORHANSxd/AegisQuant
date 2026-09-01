@@ -1,0 +1,60 @@
+{
+  "client_order_identity_fields": [
+    "strategy_id",
+    "release_id",
+    "order_intent_id",
+    "slice_sequence",
+    "retry_generation",
+    "economic_idempotency_key",
+    "checksum"
+  ],
+  "command": {
+    "command": {
+      "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+      "command_type": "PLACE",
+      "idempotency_key": "economic-intent-p12",
+      "issued_at": "2026-09-01T20:00:02Z",
+      "order_intent_id": "intent-p12",
+      "replaces_client_order_id": null,
+      "venue_id": "BINANCE-TESTNET"
+    },
+    "content_sha256": "6a37be8dc65f8f054eaadf2aca4bb74968165f09dbbeebd523cbbe9a90c4fa5b",
+    "environment": "SIMULATED",
+    "identity": {
+      "checksum": "cc1cc",
+      "client_order_id": "aq-64944f6257ef60828fb4453ba8-cc1cc",
+      "economic_idempotency_key": "economic-intent-p12",
+      "order_intent_id": "intent-p12",
+      "release_id": "release-p12-v1",
+      "retry_generation": 0,
+      "slice_sequence": 0,
+      "strategy_id": "strategy-p12"
+    },
+    "instrument_id": "BTC-USDT-PERP",
+    "limit_price": {
+      "amount": "50000",
+      "base_asset_id": "BTC",
+      "quote_asset_id": "USDT"
+    },
+    "notional": "50000",
+    "order_type": "LIMIT",
+    "quantity": {
+      "amount": "1",
+      "asset_id": "BTC"
+    },
+    "reduce_only": false,
+    "reference_price": {
+      "amount": "50000",
+      "base_asset_id": "BTC",
+      "quote_asset_id": "USDT"
+    },
+    "risk_decision_id": "risk-p12-approved",
+    "rule_version": "binance-test-rules-v1",
+    "side": "BUY",
+    "time_in_force": "GTC"
+  },
+  "content_addressed": true,
+  "risk_decision_bound": true,
+  "risk_rejection_adapter_bypass_available": false,
+  "schema_version": "p12-command-evidence-v1"
+}

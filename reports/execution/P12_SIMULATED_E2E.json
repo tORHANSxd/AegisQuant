@@ -1,0 +1,17 @@
+{
+  "final_status": "CANCELED",
+  "fixture_only": true,
+  "network_requests_performed": 0,
+  "real_account_access_performed": false,
+  "scenario": {
+    "cancel_disposition": "CANCELED",
+    "duplicate_economic_orders": 0,
+    "economic_order_count": 1,
+    "fill_count": 1,
+    "final_status": "CANCELED",
+    "network_requests_performed": 0,
+    "recovery_disposition": "FOUND_OPEN_ORDER",
+    "submit_disposition": "UNKNOWN"
+  },
+  "schema_version": "p12-simulated-e2e-v1"
+}
