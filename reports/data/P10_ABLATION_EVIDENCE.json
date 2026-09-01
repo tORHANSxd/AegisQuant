@@ -1,0 +1,149 @@
+{
+  "alpha_or_profit_claim": false,
+  "oos_fixture": true,
+  "positive_and_negative_results_preserved": true,
+  "predictions": [
+    {
+      "actual_return": "0.10",
+      "compute_budget_units": 1,
+      "dataset_manifest_hash": "29c48d339a36ee25a90240d9ec2630e59bcf99deec5758c9aca3b1d20dd419f1",
+      "feature_available_at": "2026-09-01T18:00:00Z",
+      "outcome_available_at": "2026-09-01T19:00:00Z",
+      "predicted_return": "0.08",
+      "prediction_time": "2026-09-01T18:00:00Z",
+      "sample_id": "sample-a",
+      "view": "MARKET_ONLY"
+    },
+    {
+      "actual_return": "-0.10",
+      "compute_budget_units": 1,
+      "dataset_manifest_hash": "29c48d339a36ee25a90240d9ec2630e59bcf99deec5758c9aca3b1d20dd419f1",
+      "feature_available_at": "2026-09-01T18:00:00Z",
+      "outcome_available_at": "2026-09-01T19:00:00Z",
+      "predicted_return": "-0.08",
+      "prediction_time": "2026-09-01T18:00:00Z",
+      "sample_id": "sample-b",
+      "view": "MARKET_ONLY"
+    },
+    {
+      "actual_return": "0.10",
+      "compute_budget_units": 1,
+      "dataset_manifest_hash": "29c48d339a36ee25a90240d9ec2630e59bcf99deec5758c9aca3b1d20dd419f1",
+      "feature_available_at": "2026-09-01T18:00:00Z",
+      "outcome_available_at": "2026-09-01T19:00:00Z",
+      "predicted_return": "0.10",
+      "prediction_time": "2026-09-01T18:00:00Z",
+      "sample_id": "sample-a",
+      "view": "EVENT_ONLY"
+    },
+    {
+      "actual_return": "-0.10",
+      "compute_budget_units": 1,
+      "dataset_manifest_hash": "29c48d339a36ee25a90240d9ec2630e59bcf99deec5758c9aca3b1d20dd419f1",
+      "feature_available_at": "2026-09-01T18:00:00Z",
+      "outcome_available_at": "2026-09-01T19:00:00Z",
+      "predicted_return": "0.10",
+      "prediction_time": "2026-09-01T18:00:00Z",
+      "sample_id": "sample-b",
+      "view": "EVENT_ONLY"
+    },
+    {
+      "actual_return": "0.10",
+      "compute_budget_units": 1,
+      "dataset_manifest_hash": "29c48d339a36ee25a90240d9ec2630e59bcf99deec5758c9aca3b1d20dd419f1",
+      "feature_available_at": "2026-09-01T18:00:00Z",
+      "outcome_available_at": "2026-09-01T19:00:00Z",
+      "predicted_return": "0.09",
+      "prediction_time": "2026-09-01T18:00:00Z",
+      "sample_id": "sample-a",
+      "view": "FUSED"
+    },
+    {
+      "actual_return": "-0.10",
+      "compute_budget_units": 1,
+      "dataset_manifest_hash": "29c48d339a36ee25a90240d9ec2630e59bcf99deec5758c9aca3b1d20dd419f1",
+      "feature_available_at": "2026-09-01T18:00:00Z",
+      "outcome_available_at": "2026-09-01T19:00:00Z",
+      "predicted_return": "-0.09",
+      "prediction_time": "2026-09-01T18:00:00Z",
+      "sample_id": "sample-b",
+      "view": "FUSED"
+    },
+    {
+      "actual_return": "0.10",
+      "compute_budget_units": 1,
+      "dataset_manifest_hash": "29c48d339a36ee25a90240d9ec2630e59bcf99deec5758c9aca3b1d20dd419f1",
+      "feature_available_at": "2026-09-01T18:00:00Z",
+      "outcome_available_at": "2026-09-01T19:00:00Z",
+      "predicted_return": "0",
+      "prediction_time": "2026-09-01T18:00:00Z",
+      "sample_id": "sample-a",
+      "view": "RISK_ONLY"
+    },
+    {
+      "actual_return": "-0.10",
+      "compute_budget_units": 1,
+      "dataset_manifest_hash": "29c48d339a36ee25a90240d9ec2630e59bcf99deec5758c9aca3b1d20dd419f1",
+      "feature_available_at": "2026-09-01T18:00:00Z",
+      "outcome_available_at": "2026-09-01T19:00:00Z",
+      "predicted_return": "0",
+      "prediction_time": "2026-09-01T18:00:00Z",
+      "sample_id": "sample-b",
+      "view": "RISK_ONLY"
+    }
+  ],
+  "report": {
+    "compute_budget_units": 2,
+    "dataset_manifest_hash": "29c48d339a36ee25a90240d9ec2630e59bcf99deec5758c9aca3b1d20dd419f1",
+    "sample_ids": [
+      "sample-a",
+      "sample-b"
+    ],
+    "scores": [
+      {
+        "compute_budget_units": 2,
+        "directional_accuracy": "1",
+        "incremental_mae_vs_market": "0.00",
+        "mean_absolute_error": "0.02",
+        "mean_signed_error": "0.00",
+        "result_sign": "NEUTRAL",
+        "sample_count": 2,
+        "view": "MARKET_ONLY"
+      },
+      {
+        "compute_budget_units": 2,
+        "directional_accuracy": "0.5",
+        "incremental_mae_vs_market": "-0.08",
+        "mean_absolute_error": "0.10",
+        "mean_signed_error": "0.10",
+        "result_sign": "NEGATIVE",
+        "sample_count": 2,
+        "view": "EVENT_ONLY"
+      },
+      {
+        "compute_budget_units": 2,
+        "directional_accuracy": "1",
+        "incremental_mae_vs_market": "0.01",
+        "mean_absolute_error": "0.01",
+        "mean_signed_error": "0.00",
+        "result_sign": "POSITIVE",
+        "sample_count": 2,
+        "view": "FUSED"
+      },
+      {
+        "compute_budget_units": 2,
+        "directional_accuracy": "0",
+        "incremental_mae_vs_market": "-0.08",
+        "mean_absolute_error": "0.10",
+        "mean_signed_error": "0.00",
+        "result_sign": "NEGATIVE",
+        "sample_count": 2,
+        "view": "RISK_ONLY"
+      }
+    ],
+    "selection_performed": false
+  },
+  "same_budget": true,
+  "schema_version": "p10-ablation-evidence-v1",
+  "winner_selected_post_hoc": false
+}

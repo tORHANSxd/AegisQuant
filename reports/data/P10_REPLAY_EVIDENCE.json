@@ -1,0 +1,190 @@
+{
+  "engagement_ledger": [
+    {
+      "available_at": "2026-09-01T16:31:00Z",
+      "content_id": "content-1",
+      "metrics": {
+        "likes": 10
+      },
+      "observed_at": "2026-09-01T16:30:00Z",
+      "snapshot_id": "engagement-1"
+    },
+    {
+      "available_at": "2026-09-01T18:31:00Z",
+      "content_id": "content-1",
+      "metrics": {
+        "likes": 1000
+      },
+      "observed_at": "2026-09-01T18:30:00Z",
+      "snapshot_id": "engagement-future"
+    }
+  ],
+  "first_revision_preserved": true,
+  "future_engagement_audit": {
+    "as_of_time": "2026-09-01T18:00:00Z",
+    "content_id": "content-1",
+    "excluded_future_snapshot_ids": [
+      "engagement-future"
+    ],
+    "passed": true,
+    "selected_available_at": "2026-09-01T16:31:00Z",
+    "selected_snapshot_id": "engagement-1"
+  },
+  "future_engagement_used": false,
+  "future_revision_used": false,
+  "latency_stress": {
+    "decision_time": "2026-09-01T18:00:00Z",
+    "scenarios": [
+      {
+        "delay_seconds": 5,
+        "directional_score": "0.0",
+        "eligible_evidence_ids": [
+          "early",
+          "late",
+          "repost"
+        ],
+        "excluded_evidence_ids": [],
+        "independent_family_count": 2
+      },
+      {
+        "delay_seconds": 30,
+        "directional_score": "0.5",
+        "eligible_evidence_ids": [
+          "early",
+          "repost"
+        ],
+        "excluded_evidence_ids": [
+          "late"
+        ],
+        "independent_family_count": 1
+      },
+      {
+        "delay_seconds": 120,
+        "directional_score": "0.5",
+        "eligible_evidence_ids": [
+          "early",
+          "repost"
+        ],
+        "excluded_evidence_ids": [
+          "late"
+        ],
+        "independent_family_count": 1
+      },
+      {
+        "delay_seconds": 600,
+        "directional_score": "0.5",
+        "eligible_evidence_ids": [
+          "early",
+          "repost"
+        ],
+        "excluded_evidence_ids": [
+          "late"
+        ],
+        "independent_family_count": 1
+      }
+    ]
+  },
+  "pretrend_placebo_negative_control": {
+    "passed": false,
+    "placebo_mean": "0.025",
+    "placebo_warning": true,
+    "post_event_mean": "0.015",
+    "pre_event_mean": "0.015",
+    "pretrend_detected": true
+  },
+  "pretrend_placebo_pass": {
+    "passed": true,
+    "placebo_mean": "0.0005",
+    "placebo_warning": false,
+    "post_event_mean": "0.015",
+    "pre_event_mean": "0.000",
+    "pretrend_detected": false
+  },
+  "revision_ledger": [
+    {
+      "available_at": "2026-09-01T15:00:00Z",
+      "body_sha256": "24280818cb04c43e3fb44e4f69386fb37c33b5b062d206f7e8474842dc13e458",
+      "canonical_url": "https://example.invalid/content-1",
+      "content_id": "content-1",
+      "deleted_at": null,
+      "modified_at": null,
+      "observed_at": "2026-09-01T15:00:00Z",
+      "original_language": "en",
+      "original_text": "Initial event report",
+      "policy_id": "p10_fixture_policy_v1",
+      "provider_id": "p10_fixture",
+      "published_at": "2026-09-01T15:00:00Z",
+      "revision": 1,
+      "source_family_id": "family-1",
+      "supersedes_revision": null
+    },
+    {
+      "available_at": "2026-09-01T16:00:00Z",
+      "body_sha256": "add6582c3032f66e6b1a71d408c6f9d4e081630835afe0de5ef376315fc9ca6a",
+      "canonical_url": "https://example.invalid/content-1",
+      "content_id": "content-1",
+      "deleted_at": null,
+      "modified_at": "2026-09-01T16:00:00Z",
+      "observed_at": "2026-09-01T16:00:00Z",
+      "original_language": "en",
+      "original_text": "Corrected event report",
+      "policy_id": "p10_fixture_policy_v1",
+      "provider_id": "p10_fixture",
+      "published_at": "2026-09-01T15:00:00Z",
+      "revision": 2,
+      "source_family_id": "family-1",
+      "supersedes_revision": 1
+    },
+    {
+      "available_at": "2026-09-01T19:00:00Z",
+      "body_sha256": "a758a0bc99536adec9878d3a86be711b853098483dc09ee81acf24933a8ec4a3",
+      "canonical_url": "https://example.invalid/content-1",
+      "content_id": "content-1",
+      "deleted_at": "2026-09-01T19:00:00Z",
+      "modified_at": null,
+      "observed_at": "2026-09-01T19:00:00Z",
+      "original_language": "en",
+      "original_text": null,
+      "policy_id": "p10_fixture_policy_v1",
+      "provider_id": "p10_fixture",
+      "published_at": "2026-09-01T15:00:00Z",
+      "revision": 3,
+      "source_family_id": "family-1",
+      "supersedes_revision": 2
+    }
+  ],
+  "schema_version": "p10-event-replay-evidence-v1",
+  "selection": {
+    "as_of_time": "2026-09-01T18:00:00Z",
+    "content_id": "content-1",
+    "deleted_as_of": false,
+    "engagement": {
+      "available_at": "2026-09-01T16:31:00Z",
+      "content_id": "content-1",
+      "metrics": {
+        "likes": 10
+      },
+      "observed_at": "2026-09-01T16:30:00Z",
+      "snapshot_id": "engagement-1"
+    },
+    "excluded_future_engagement_count": 1,
+    "excluded_future_revision_count": 1,
+    "revision": {
+      "available_at": "2026-09-01T16:00:00Z",
+      "body_sha256": "add6582c3032f66e6b1a71d408c6f9d4e081630835afe0de5ef376315fc9ca6a",
+      "canonical_url": "https://example.invalid/content-1",
+      "content_id": "content-1",
+      "deleted_at": null,
+      "modified_at": "2026-09-01T16:00:00Z",
+      "observed_at": "2026-09-01T16:00:00Z",
+      "original_language": "en",
+      "original_text": "Corrected event report",
+      "policy_id": "p10_fixture_policy_v1",
+      "provider_id": "p10_fixture",
+      "published_at": "2026-09-01T15:00:00Z",
+      "revision": 2,
+      "source_family_id": "family-1",
+      "supersedes_revision": 1
+    }
+  }
+}

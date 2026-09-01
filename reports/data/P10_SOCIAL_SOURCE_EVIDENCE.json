@@ -1,0 +1,155 @@
+{
+  "bluesky_v1_legacy_fallback": true,
+  "bluesky_v2_checkpoint": "seq",
+  "bluesky_v2_path": "/xrpc/network.bsky.jetstream.subscribeEvents",
+  "catalog": [
+    {
+      "approved_capabilities": [
+        "offline_contract"
+      ],
+      "authority_type": "social_platform",
+      "canonical_host": "api.x.com",
+      "credentials_required": true,
+      "jurisdiction": "GLOBAL",
+      "policy_id": "x_official_restricted_v1",
+      "runtime_state": "AWAITING_CREDENTIALS",
+      "secret_key_name": null,
+      "source": "x",
+      "source_id": "x_official",
+      "tier": "SOCIAL_OBSERVATION"
+    },
+    {
+      "approved_capabilities": [
+        "offline_contract"
+      ],
+      "authority_type": "approved_public_channel",
+      "canonical_host": "api.telegram.org",
+      "credentials_required": true,
+      "jurisdiction": "GLOBAL",
+      "policy_id": "telegram_bot_restricted_v1",
+      "runtime_state": "AWAITING_CREDENTIALS",
+      "secret_key_name": null,
+      "source": "telegram",
+      "source_id": "telegram_bot",
+      "tier": "SOCIAL_OBSERVATION"
+    },
+    {
+      "approved_capabilities": [
+        "public_post_metadata",
+        "revision",
+        "deletion"
+      ],
+      "authority_type": "public_social_stream",
+      "canonical_host": "jetstream2.us-east.bsky.network",
+      "credentials_required": false,
+      "jurisdiction": "GLOBAL",
+      "policy_id": "bluesky_jetstream_v2",
+      "runtime_state": "READY",
+      "secret_key_name": null,
+      "source": "bluesky",
+      "source_id": "bluesky_jetstream",
+      "tier": "SOCIAL_OBSERVATION"
+    },
+    {
+      "approved_capabilities": [
+        "offline_contract"
+      ],
+      "authority_type": "video_metadata",
+      "canonical_host": "www.googleapis.com",
+      "credentials_required": true,
+      "jurisdiction": "GLOBAL",
+      "policy_id": "youtube_official_restricted_v1",
+      "runtime_state": "AWAITING_CREDENTIALS",
+      "secret_key_name": null,
+      "source": "youtube",
+      "source_id": "youtube_official",
+      "tier": "SOCIAL_OBSERVATION"
+    },
+    {
+      "approved_capabilities": [
+        "public_releases"
+      ],
+      "authority_type": "project_release_metadata",
+      "canonical_host": "api.github.com",
+      "credentials_required": false,
+      "jurisdiction": "GLOBAL",
+      "policy_id": "github_public_v1",
+      "runtime_state": "READY",
+      "secret_key_name": null,
+      "source": "github",
+      "source_id": "github_public",
+      "tier": "STRUCTURED_PRIMARY"
+    },
+    {
+      "approved_capabilities": [],
+      "authority_type": "social_platform",
+      "canonical_host": "reddit.com",
+      "credentials_required": false,
+      "jurisdiction": "GLOBAL",
+      "policy_id": "unknown_rights_deny_v1",
+      "runtime_state": "DISABLED_BY_POLICY",
+      "secret_key_name": null,
+      "source": "reddit",
+      "source_id": "reddit_disabled",
+      "tier": "DISABLED"
+    },
+    {
+      "approved_capabilities": [],
+      "authority_type": "private_community",
+      "canonical_host": "discord.com",
+      "credentials_required": false,
+      "jurisdiction": "GLOBAL",
+      "policy_id": "unknown_rights_deny_v1",
+      "runtime_state": "DISABLED_BY_POLICY",
+      "secret_key_name": null,
+      "source": "discord",
+      "source_id": "discord_disabled",
+      "tier": "DISABLED"
+    }
+  ],
+  "credentials_requested_or_stored": false,
+  "cursor_gap": {
+    "action": "BACKFILL",
+    "detected_at": "2026-09-01T18:00:00Z",
+    "earliest_recoverable_at": "2026-09-01T17:00:00Z",
+    "expected_cursor": 10,
+    "missing_count": 5,
+    "observed_cursor": 15,
+    "recoverable": true,
+    "source": "bluesky"
+  },
+  "degradation": {
+    "action": "RESEARCH_PROPOSAL_ONLY",
+    "as_of_time": "2026-09-01T18:00:00Z",
+    "cache_available_at": "2026-09-01T17:00:00Z",
+    "can_emit_forecast": true,
+    "llm_available": false,
+    "mode": "LOCAL_RULES_ONLY",
+    "reason_codes": [
+      "LLM_UNAVAILABLE",
+      "SOURCE_AWAITING_CREDENTIALS",
+      "STALE_CACHE_DISCLOSED"
+    ],
+    "source": "x",
+    "source_state": "AWAITING_CREDENTIALS"
+  },
+  "gdelt_discoveries": [
+    {
+      "authoritative_evidence": false,
+      "discovered_at": "2026-09-01T18:00:00Z",
+      "discovery_id": "dc1708abb52e317bfa6938d3848986073f7322c8a8fdf296751f4196ba045dfb",
+      "discovery_source": "gdelt",
+      "original_host": "www.sec.gov",
+      "original_published_at": "2026-09-01T17:00:00Z",
+      "original_url": "https://www.sec.gov/news/example",
+      "title": "Official filing published"
+    }
+  ],
+  "gdelt_is_authoritative_evidence": false,
+  "github_api_version": "2026-03-10",
+  "network_requests_performed": 0,
+  "schema_version": "p10-social-source-evidence-v1",
+  "telegram_mtproto_or_user_session_used": false,
+  "x_zero_latency_assumed": false,
+  "youtube_unauthorized_transcript_collected": false
+}

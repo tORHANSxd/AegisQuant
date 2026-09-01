@@ -1,0 +1,10 @@
+[
+  {
+    "as_of_time": "2026-09-01T18:00:00Z",
+    "content_id": "content-1",
+    "deleted_as_of": false,
+    "excluded_future_items": 2,
+    "selected_engagement_snapshot_id": "engagement-1",
+    "selected_revision": 2
+  }
+]

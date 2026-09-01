@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P10",
+  "generated_at_utc": "2026-09-01T18:35:55.363984Z",
+  "implementation_commit": "1ee49a5a8a460b6152b86393d6284c3fea82010d",
+  "result": "pass",
+  "formal_acceptance_deferred": true,
+  "full_suite": {
+    "runtime": "Python 3.13.15",
+    "collected": 441,
+    "passed": 441,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 10,
+    "test_duration_seconds": 39.04,
+    "stage_duration_seconds": 41.986
+  },
+  "python_314_contract": {
+    "runtime": "Python 3.14.7 candidate",
+    "collected": 404,
+    "passed": 404,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 10,
+    "test_duration_seconds": 52.15,
+    "stage_duration_seconds": 74.133,
+    "status": "passed"
+  },
+  "machine_evidence": {
+    "data_json_artifacts": 12,
+    "intelligence_json_artifacts": 3,
+    "read_model_json_artifacts": 5,
+    "parquet_catalogs": 1,
+    "generation_status": "passed",
+    "verification_status": "passed"
+  },
+  "mutation": {
+    "mutants_total": 10,
+    "killed": 10,
+    "survived": 0,
+    "invalid": 0,
+    "score": 1.0,
+    "threshold": 0.9,
+    "status": "passed"
+  },
+  "ci": {
+    "stages": 33,
+    "passed": 33,
+    "failed": 0,
+    "duration_seconds": 392.893,
+    "status": "passed",
+    "pre_final_attempts": [
+      {
+        "scope": "python_314_contract",
+        "passed": 403,
+        "failed": 1,
+        "reason": "P10 final report files had not yet been generated",
+        "code_or_runtime_failure": false,
+        "resolution": "generated required reports and reran the complete candidate contract"
+      },
+      {
+        "scope": "complete_ci",
+        "passed_stages": 30,
+        "failed_stages": 3,
+        "reasons": [
+          "P04 Bluesky evidence still represented the legacy v1 contract",
+          "pytest and Python 3.14 ran before the first P10 CI_RESULTS.json existed"
+        ],
+        "resolution": "materialized the real failed CI report, refreshed explicit v1 legacy evidence, and reran all 33 stages"
+      }
+    ]
+  },
+  "security": {
+    "secret_findings": 0,
+    "python_dependency_audit": "passed",
+    "javascript_dependency_audit": "passed",
+    "python_unknown_licenses": 0,
+    "real_account_access_performed": false,
+    "secret_store_access_performed": false
+  },
+  "safety_gates": {
+    "network_requests_performed_by_p10_fixture_generation": 0,
+    "credentials_requested_or_stored": false,
+    "social_post_order_capability": false,
+    "llm_order_command_capability": false,
+    "future_revision_or_engagement_used": false,
+    "alpha_or_profit_claim": false
+  },
+  "final_holdout_state": "LOCKED",
+  "live_trading_locked": true,
+  "formal_acceptance_status": "deferred"
+}

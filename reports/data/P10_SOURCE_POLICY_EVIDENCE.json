@@ -1,0 +1,62 @@
+{
+  "awaiting_credentials": [
+    "fred_alfred",
+    "dune_official",
+    "x_official",
+    "telegram_bot",
+    "youtube_official"
+  ],
+  "disabled_by_policy": [
+    "reddit_disabled",
+    "discord_disabled"
+  ],
+  "enabled_public_providers": [
+    "coin_metrics_community",
+    "defillama_public",
+    "official_web_catalog"
+  ],
+  "foundation_model_training_allowed": false,
+  "live_trading_locked": true,
+  "plaintext_secrets_stored": false,
+  "policies": [
+    {
+      "approved_scopes": [
+        "public_metadata"
+      ],
+      "checked_at": "2026-09-01T18:00:00Z",
+      "cloud_inference": "PROHIBITED",
+      "deletion_sync_required": true,
+      "display": "ALLOWED",
+      "embedding": "LOCAL_ONLY",
+      "export": "PROHIBITED",
+      "fine_tuning": "PROHIBITED",
+      "policy_id": "official-public-v1",
+      "raw_local_storage": "LOCAL_ONLY",
+      "retention_days": 30,
+      "revision_sync_required": true,
+      "rights_state": "ALLOWED",
+      "source": "official",
+      "terms_hash": null,
+      "training": "PROHIBITED"
+    },
+    {
+      "approved_scopes": [],
+      "checked_at": "2026-09-01T18:00:00Z",
+      "cloud_inference": "PROHIBITED",
+      "deletion_sync_required": true,
+      "display": "PROHIBITED",
+      "embedding": "PROHIBITED",
+      "export": "PROHIBITED",
+      "fine_tuning": "PROHIBITED",
+      "policy_id": "unknown-deny-sensitive-v1",
+      "raw_local_storage": "PROHIBITED",
+      "retention_days": 0,
+      "revision_sync_required": true,
+      "rights_state": "UNKNOWN",
+      "source": "reddit",
+      "terms_hash": null,
+      "training": "PROHIBITED"
+    }
+  ],
+  "schema_version": "p10-source-policy-evidence-v1"
+}

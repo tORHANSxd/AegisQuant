@@ -1,0 +1,16 @@
+{
+  "query": {
+    "name": "stablecoin flow fixture",
+    "parameter_names": [
+      "chain"
+    ],
+    "query_id": 42,
+    "registered_at": "2026-09-01T18:00:00Z",
+    "sql": "SELECT day, flow FROM stablecoin_flow WHERE chain = {{chain}}",
+    "sql_sha256": "eaf3999c11f52686f0968dc9b64bc07ea2c1f70687f386fa80c323c4f3425b56",
+    "supersedes_version": null,
+    "version": 1
+  },
+  "schema_version": "p10-dune-registry-v1",
+  "write_sql_allowed": false
+}

@@ -1,0 +1,36 @@
+{
+  "hotness_used_as_independence": false,
+  "independent_summary": {
+    "high_manipulation_family_count": 0,
+    "independent_family_count": 2,
+    "mean_family_score": "0.7475625",
+    "official_family_count": 1,
+    "profile_count": 2
+  },
+  "profiles": [
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "correction_quality": "0.9",
+      "domain_accuracy": "0.95",
+      "evidence_count": 10,
+      "identity_confidence": "1",
+      "manipulation_risk": "0.05",
+      "officiality": "1",
+      "source_family_id": "official-family",
+      "source_identity_id": "sec"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "correction_quality": "0.8",
+      "domain_accuracy": "0.8",
+      "evidence_count": 5,
+      "identity_confidence": "0.9",
+      "manipulation_risk": "0.1",
+      "officiality": "0.2",
+      "source_family_id": "journal-family",
+      "source_identity_id": "independent-journal"
+    }
+  ],
+  "reposts_used_as_independence": false,
+  "schema_version": "p10-credibility-evidence-v1"
+}

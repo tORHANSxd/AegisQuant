@@ -1,9 +1,9 @@
 {
   "bluesky_transport": {
     "checkpoint_parameter": "cursor",
-    "fallback_used": false,
-    "mode": "JETSTREAM",
-    "reason_code": "AQ-BLUESKY-JETSTREAM-CONTRACT-COMPATIBLE",
+    "fallback_used": true,
+    "mode": "JETSTREAM_V1_LEGACY",
+    "reason_code": "AQ-BLUESKY-JETSTREAM-V1-LEGACY-FALLBACK",
     "url": "wss://jetstream2.us-east.bsky.network/subscribe"
   },
   "collection_enabled": false,
@@ -50,7 +50,7 @@
   "source_contracts": {
     "bluesky_jetstream": {
       "access_state": "ready",
-      "checkpoint_field": "time_us",
+      "checkpoint_field": "seq",
       "credentials_required": false,
       "deletions_supported": true,
       "provider_id": "bluesky_jetstream",

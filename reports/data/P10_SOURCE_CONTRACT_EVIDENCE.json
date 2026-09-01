@@ -1,0 +1,139 @@
+{
+  "alfred_after_revision": [
+    {
+      "available_at": "2026-09-01T18:00:00Z",
+      "is_missing": false,
+      "observation_date": "2026-06-01",
+      "realtime_end": "9999-12-31",
+      "realtime_start": "2026-09-01",
+      "series_id": "GDP",
+      "source_hash": "b0fbfc37516917bc17cf4cde9ea756cf7748f5e12d098c99dd21acb33a137ef7",
+      "value": "101.5"
+    }
+  ],
+  "alfred_before_revision": [
+    {
+      "available_at": "2026-08-01T16:00:00Z",
+      "is_missing": false,
+      "observation_date": "2026-06-01",
+      "realtime_end": "2026-08-31",
+      "realtime_start": "2026-08-01",
+      "series_id": "GDP",
+      "source_hash": "e4be116a4bb556de8ba70c0ff301116cbb7d3ff8793dc13a292e5b4efcedf268",
+      "value": "100.0"
+    }
+  ],
+  "alfred_observations": [
+    {
+      "available_at": "2026-08-01T16:00:00Z",
+      "is_missing": false,
+      "observation_date": "2026-06-01",
+      "realtime_end": "2026-08-31",
+      "realtime_start": "2026-08-01",
+      "series_id": "GDP",
+      "source_hash": "e4be116a4bb556de8ba70c0ff301116cbb7d3ff8793dc13a292e5b4efcedf268",
+      "value": "100.0"
+    },
+    {
+      "available_at": "2026-09-01T18:00:00Z",
+      "is_missing": false,
+      "observation_date": "2026-06-01",
+      "realtime_end": "9999-12-31",
+      "realtime_start": "2026-09-01",
+      "series_id": "GDP",
+      "source_hash": "b0fbfc37516917bc17cf4cde9ea756cf7748f5e12d098c99dd21acb33a137ef7",
+      "value": "101.5"
+    }
+  ],
+  "coin_metrics": [
+    {
+      "asset_or_protocol": "btc",
+      "available_at": "2026-09-01T18:00:00Z",
+      "event_time": "2026-09-01T17:00:00Z",
+      "metric": "CapMrktCurUSD",
+      "quality_status": "reviewed",
+      "source": "coin_metrics_community",
+      "source_hash": "f24d47fb64516dc065acd9c1c1e8b66e90a5aa8e83a8fb340fbbad6ebc352f7a",
+      "value": "123.45"
+    }
+  ],
+  "community_rate_limit": "10 requests per 6 seconds per IP; 10 parallel",
+  "credentials_requested_or_stored": false,
+  "defillama": [
+    {
+      "asset_or_protocol": "Ethereum",
+      "available_at": "2026-09-01T18:00:00Z",
+      "event_time": "2026-09-01T17:00:00Z",
+      "metric": "tvl_usd",
+      "quality_status": "unreviewed_public",
+      "source": "defillama",
+      "source_hash": "c999b46e719fa02d821a9f9461ce3b81ce4b1fb673ac09a0e7e8078a6e648bfd",
+      "value": "42"
+    }
+  ],
+  "fixture_only": true,
+  "free_and_pro_api_bases_mixed": false,
+  "future_revision_leakage": false,
+  "network_requests_performed": 0,
+  "requests": {
+    "coin_metrics": {
+      "base_url": "https://community-api.coinmetrics.io",
+      "capability": "asset_metrics",
+      "executable": true,
+      "headers": {},
+      "parameters": {
+        "assets": "btc",
+        "metrics": "CapMrktCurUSD"
+      },
+      "path_template": "/v4/timeseries/asset-metrics",
+      "quota_cost": 1,
+      "request_hash": "907f922f58669fc672238bef237a6c6fc9df9c4d424904f7bbc6de6593e6fdde",
+      "runtime_state": "READY",
+      "source": "coin_metrics_community"
+    },
+    "defillama": {
+      "base_url": "https://api.llama.fi",
+      "capability": "chains",
+      "executable": true,
+      "headers": {},
+      "parameters": {},
+      "path_template": "/v2/chains",
+      "quota_cost": 1,
+      "request_hash": "68125cb1812c24300b036d4c79d774c2525c3425e7b534853ee834f69da491da",
+      "runtime_state": "READY",
+      "source": "defillama"
+    },
+    "dune": {
+      "base_url": "https://api.dune.com",
+      "capability": "execute_saved_query",
+      "executable": false,
+      "headers": {},
+      "parameters": {
+        "query_id": 42,
+        "query_parameters": "registered-manifest"
+      },
+      "path_template": "/api/v1/query/{query_id}/execute",
+      "quota_cost": 1,
+      "request_hash": "c89c0e8a1eafae44335a9e1a8b8fac32e2ddcfef67dd891039e8a4f209ad3377",
+      "runtime_state": "AWAITING_CREDENTIALS",
+      "source": "dune"
+    },
+    "fred_alfred": {
+      "base_url": "https://api.stlouisfed.org",
+      "capability": "series_observations",
+      "executable": false,
+      "headers": {},
+      "parameters": {
+        "file_type": "json",
+        "output_type": 2,
+        "series_id": "GDP"
+      },
+      "path_template": "/fred/series/observations",
+      "quota_cost": 1,
+      "request_hash": "e75cd0457a6791609296b7b2e94e96350a5f710c87e7a3a685ce86102d439bf2",
+      "runtime_state": "AWAITING_CREDENTIALS",
+      "source": "fred_alfred"
+    }
+  },
+  "schema_version": "p10-source-contract-evidence-v1"
+}

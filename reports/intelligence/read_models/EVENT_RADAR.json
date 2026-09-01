@@ -1,0 +1,13 @@
+[
+  {
+    "as_of_time": "2026-09-01T18:00:00Z",
+    "confidence": "0.7",
+    "event_cluster_id": "event-cluster-1",
+    "evidence_ids": [
+      "evidence-1"
+    ],
+    "impact_score": "0.2",
+    "independent_family_count": 2,
+    "status": "CONFIRMED"
+  }
+]

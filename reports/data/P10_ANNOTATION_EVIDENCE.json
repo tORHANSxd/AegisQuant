@@ -1,0 +1,58 @@
+{
+  "active_learning_queue": [
+    {
+      "impact": "0.8",
+      "novelty": "0.7",
+      "policy_allowed": true,
+      "priority_score": "0.83",
+      "target_id": "high",
+      "uncertainty": "0.9"
+    },
+    {
+      "impact": "0.1",
+      "novelty": "0.1",
+      "policy_allowed": true,
+      "priority_score": "0.15",
+      "target_id": "low",
+      "uncertainty": "0.2"
+    },
+    {
+      "impact": "1",
+      "novelty": "1",
+      "policy_allowed": false,
+      "priority_score": "0",
+      "target_id": "denied",
+      "uncertainty": "1"
+    }
+  ],
+  "annotation": {
+    "annotation_id": "annotation-1",
+    "annotator_id": "reviewer-pseudonym-1",
+    "created_at": "2026-09-01T18:00:00Z",
+    "evidence_ids": [
+      "evidence-1",
+      "evidence-2"
+    ],
+    "label": "CONFIRMED",
+    "ontology_version": "1.0.0",
+    "rationale": "Two independent primary records agree.",
+    "target_id": "claim-1"
+  },
+  "ontology": {
+    "event_types": [
+      "REGULATORY_ACTION",
+      "SECURITY_INCIDENT",
+      "PROTOCOL_RELEASE"
+    ],
+    "ontology_id": "crypto-events",
+    "published_at": "2026-09-01T18:00:00Z",
+    "relation_types": [
+      "SUPPORTS",
+      "REFUTES"
+    ],
+    "supersedes_version": null,
+    "version": "1.0.0"
+  },
+  "policy_denied_candidate_priority": "0",
+  "schema_version": "p10-annotation-evidence-v1"
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "disposition": "RISK_ONLY",
+    "gap_count": 0,
+    "last_success_at": "2026-09-01T18:00:00Z",
+    "reason_codes": [
+      "NO_EVENT_INCREMENT",
+      "POSITIVE_RISK_INCREMENT"
+    ],
+    "runtime_state": "READY",
+    "source": "gdelt"
+  },
+  {
+    "disposition": "RETIRE",
+    "gap_count": 1,
+    "last_success_at": null,
+    "reason_codes": [
+      "LOW_COVERAGE_OR_RELIABILITY"
+    ],
+    "runtime_state": "AWAITING_CREDENTIALS",
+    "source": "x"
+  }
+]

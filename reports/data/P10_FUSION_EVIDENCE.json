@@ -1,0 +1,251 @@
+{
+  "asset_impacts": [
+    {
+      "abstain_reasons": [],
+      "action": "RESEARCH_PROPOSAL_ONLY",
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "asset_id": "BTC",
+      "event_cluster_id": "event-cluster-1",
+      "evidence_ids": [
+        "evidence-1"
+      ],
+      "feature_snapshot_hash": "84d1b8cb91a1f303e899cc3746bd429a750b4fec69ee03b88166e801c1ee1c37",
+      "forecast_id": "c4270b760588eb7fa8f57a34d0c9248d5f53e0244acbb766cf63e4fe8197d3e4",
+      "horizons": [
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00006270",
+          "horizon": "5m",
+          "tail_risk_delta": "0.00002",
+          "volatility_delta": "0.00008270"
+        },
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00015675",
+          "horizon": "30m",
+          "tail_risk_delta": "0.00005",
+          "volatility_delta": "0.00020675"
+        },
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00031350",
+          "horizon": "4h",
+          "tail_risk_delta": "0.00010",
+          "volatility_delta": "0.00041350"
+        },
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00047025",
+          "horizon": "1d",
+          "tail_risk_delta": "0.00015",
+          "volatility_delta": "0.00062025"
+        },
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00062700",
+          "horizon": "7d",
+          "tail_risk_delta": "0.00020",
+          "volatility_delta": "0.00082700"
+        }
+      ],
+      "manipulation_risk": "0.1",
+      "model_versions": [
+        "fusion-p10-v1"
+      ],
+      "should_abstain": false
+    },
+    {
+      "abstain_reasons": [],
+      "action": "RESEARCH_PROPOSAL_ONLY",
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "asset_id": "ETH",
+      "event_cluster_id": "event-cluster-1",
+      "evidence_ids": [
+        "evidence-1"
+      ],
+      "feature_snapshot_hash": "98d035dd5755e49fed832c42bce70d94c6f01b6acbe604ce7a49245db0e18bfd",
+      "forecast_id": "a433e7f7c1c0a371fc6d41dbdf3d569a65df697a7dd0c2c287870eb1c9b6a19e",
+      "horizons": [
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00006270",
+          "horizon": "5m",
+          "tail_risk_delta": "0.00002",
+          "volatility_delta": "0.00008270"
+        },
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00015675",
+          "horizon": "30m",
+          "tail_risk_delta": "0.00005",
+          "volatility_delta": "0.00020675"
+        },
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00031350",
+          "horizon": "4h",
+          "tail_risk_delta": "0.00010",
+          "volatility_delta": "0.00041350"
+        },
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00047025",
+          "horizon": "1d",
+          "tail_risk_delta": "0.00015",
+          "volatility_delta": "0.00062025"
+        },
+        {
+          "confidence": "0.72",
+          "expected_return": "0.00062700",
+          "horizon": "7d",
+          "tail_risk_delta": "0.00020",
+          "volatility_delta": "0.00082700"
+        }
+      ],
+      "manipulation_risk": "0.1",
+      "model_versions": [
+        "fusion-p10-v1"
+      ],
+      "should_abstain": false
+    }
+  ],
+  "assets": [
+    "BTC",
+    "ETH"
+  ],
+  "feature_snapshots": [
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "asset_id": "BTC",
+      "features": [
+        {
+          "asset_id": "BTC",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "basis",
+          "source_hash": "d8412a618ff600b9d0439ee322ecac56588260c9c54691a3464fc70cc1890fb5",
+          "source_id": "p10_fixture",
+          "value": "0.03"
+        },
+        {
+          "asset_id": "BTC",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "book_imbalance",
+          "source_hash": "378958e7f428cc50962b7458b5981132741df7adb77a3573f8fa47606709dead",
+          "source_id": "p10_fixture",
+          "value": "0.10"
+        },
+        {
+          "asset_id": "BTC",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "funding_rate",
+          "source_hash": "a3dbcc130ac7e17c8353893afb9650d758f36e21f36a8019b9b9a34146e47e11",
+          "source_id": "p10_fixture",
+          "value": "0.02"
+        },
+        {
+          "asset_id": "BTC",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "onchain_flow",
+          "source_hash": "bb59d9938ca774cd3dcbb131ae9bbea04229b69da55647a46f72a9b81efde5f6",
+          "source_id": "p10_fixture",
+          "value": "0.15"
+        },
+        {
+          "asset_id": "BTC",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "open_interest_delta",
+          "source_hash": "0d31179acc9ca85710f92be462841d3d8cedd39a8f1079ff2a408549fa6d4ec4",
+          "source_id": "p10_fixture",
+          "value": "0.05"
+        },
+        {
+          "asset_id": "BTC",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "price_return",
+          "source_hash": "391043789d7a8b8d320ebe9ab99cd1682fec320a98a898cca04644ee3a46f879",
+          "source_id": "p10_fixture",
+          "value": "0.20"
+        }
+      ],
+      "snapshot_hash": "84d1b8cb91a1f303e899cc3746bd429a750b4fec69ee03b88166e801c1ee1c37"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "asset_id": "ETH",
+      "features": [
+        {
+          "asset_id": "ETH",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "basis",
+          "source_hash": "347490589151329e780275fe4962fb5a2c9b1cb83d8f70e204a97d284c557997",
+          "source_id": "p10_fixture",
+          "value": "0.03"
+        },
+        {
+          "asset_id": "ETH",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "book_imbalance",
+          "source_hash": "5394c3be52312ebee96d09f90505c8f3dee886943ebf6b52e9c60a3cbd68716f",
+          "source_id": "p10_fixture",
+          "value": "0.10"
+        },
+        {
+          "asset_id": "ETH",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "funding_rate",
+          "source_hash": "afb2180bc1e33e3453ab37660a23a3789c6269fb1194547d3a4c32827d52503c",
+          "source_id": "p10_fixture",
+          "value": "0.02"
+        },
+        {
+          "asset_id": "ETH",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "onchain_flow",
+          "source_hash": "204693aa11b631de62570b129f7c948ea2851f7e28c0c06e764955ba3ad77430",
+          "source_id": "p10_fixture",
+          "value": "0.15"
+        },
+        {
+          "asset_id": "ETH",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "open_interest_delta",
+          "source_hash": "d62f986eab71116ff20c4d909d929709aa119f41c8b4895448f52a58519b0e24",
+          "source_id": "p10_fixture",
+          "value": "0.05"
+        },
+        {
+          "asset_id": "ETH",
+          "available_at": "2026-09-01T17:55:00Z",
+          "event_time": "2026-09-01T17:50:00Z",
+          "feature": "price_return",
+          "source_hash": "016f51a2bc54076a205eae265af4dde8ac5312926e66591e16180d0c99a305ca",
+          "source_id": "p10_fixture",
+          "value": "0.20"
+        }
+      ],
+      "snapshot_hash": "98d035dd5755e49fed832c42bce70d94c6f01b6acbe604ce7a49245db0e18bfd"
+    }
+  ],
+  "future_features_used": false,
+  "order_capability": false,
+  "required_features": [
+    "basis",
+    "book_imbalance",
+    "funding_rate",
+    "onchain_flow",
+    "open_interest_delta",
+    "price_return"
+  ],
+  "schema_version": "p10-fusion-evidence-v1"
+}

@@ -1,0 +1,42 @@
+{
+  "decisions": [
+    {
+      "disposition": "RISK_ONLY",
+      "evaluation_windows": 4,
+      "reason_codes": [
+        "NO_EVENT_INCREMENT",
+        "POSITIVE_RISK_INCREMENT"
+      ],
+      "source": "gdelt"
+    },
+    {
+      "disposition": "RETIRE",
+      "evaluation_windows": 4,
+      "reason_codes": [
+        "LOW_COVERAGE_OR_RELIABILITY"
+      ],
+      "source": "x"
+    }
+  ],
+  "metrics": [
+    {
+      "coverage": "0.8",
+      "evaluation_windows": 4,
+      "event_incremental_value": "0",
+      "reliability": "0.7",
+      "risk_incremental_value": "0.1",
+      "source": "gdelt"
+    },
+    {
+      "coverage": "0.1",
+      "evaluation_windows": 4,
+      "event_incremental_value": "0",
+      "reliability": "0.3",
+      "risk_incremental_value": "0",
+      "source": "x"
+    }
+  ],
+  "retirement_supported": true,
+  "risk_only_retention_supported": true,
+  "schema_version": "p10-source-monitor-evidence-v1"
+}

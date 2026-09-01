@@ -1,0 +1,472 @@
+{
+  "deep": {
+    "action": "RESEARCH_PROPOSAL_ONLY",
+    "committee": {
+      "arbiter": {
+        "abstain_reasons": [
+          "SOURCE_CONFLICT_REQUIRES_REVIEW",
+          "UNRESOLVED_CONFLICT"
+        ],
+        "accepted_claim_ids": [
+          "corroboration-claim",
+          "entity-claim",
+          "extractor-claim",
+          "impact-claim",
+          "market-claim",
+          "on_chain-claim",
+          "policy-claim",
+          "skeptic-claim",
+          "source-claim"
+        ],
+        "action": "RESEARCH_PROPOSAL_ONLY",
+        "conflicts": [
+          "claim-conflict"
+        ],
+        "directional_score": "0.2",
+        "evidence_coverage": "0.5",
+        "evidence_ids": [
+          "evidence-1"
+        ],
+        "factual_confidence": "0.7",
+        "impact_confidence": "0.6",
+        "semantic_confidence": "0.8",
+        "should_abstain": true
+      },
+      "findings": [
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "corroboration-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "CORROBORATION fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "CORROBORATION",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "entity-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "ENTITY fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "ENTITY",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "extractor-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "EXTRACTOR fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "EXTRACTOR",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "impact-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "IMPACT fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "IMPACT",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "market-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "MARKET fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "MARKET",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "on_chain-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "ON_CHAIN fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "ON_CHAIN",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "policy-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "POLICY fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "POLICY",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [
+            "SOURCE_CONFLICT_REQUIRES_REVIEW"
+          ],
+          "claims": [
+            {
+              "claim_id": "skeptic-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "SKEPTIC fixture finding"
+            }
+          ],
+          "conflicts": [
+            "claim-conflict"
+          ],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "SKEPTIC",
+          "semantic_confidence": "0.8",
+          "should_abstain": true
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "source-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "SOURCE fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "SOURCE",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        }
+      ]
+    },
+    "evidence_ids": [
+      "conflict-evidence",
+      "evidence-1"
+    ],
+    "max_context_items": 128,
+    "model_versions": [
+      "committee-p10-v1",
+      "skeptic-p10-v1"
+    ],
+    "path": "DEEP",
+    "policy_ids": [
+      "official_web_catalog_v1"
+    ],
+    "reasoning_passes": 3
+  },
+  "fast": {
+    "action": "RESEARCH_PROPOSAL_ONLY",
+    "committee": {
+      "arbiter": {
+        "abstain_reasons": [
+          "UNRESOLVED_CONFLICT"
+        ],
+        "accepted_claim_ids": [
+          "corroboration-claim",
+          "entity-claim",
+          "extractor-claim",
+          "impact-claim",
+          "market-claim",
+          "on_chain-claim",
+          "policy-claim",
+          "skeptic-claim",
+          "source-claim"
+        ],
+        "action": "RESEARCH_PROPOSAL_ONLY",
+        "conflicts": [
+          "claim-conflict"
+        ],
+        "directional_score": "0.2",
+        "evidence_coverage": "1",
+        "evidence_ids": [
+          "evidence-1"
+        ],
+        "factual_confidence": "0.7",
+        "impact_confidence": "0.6",
+        "semantic_confidence": "0.8",
+        "should_abstain": true
+      },
+      "findings": [
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "corroboration-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "CORROBORATION fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "CORROBORATION",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "entity-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "ENTITY fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "ENTITY",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "extractor-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "EXTRACTOR fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "EXTRACTOR",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "impact-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "IMPACT fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "IMPACT",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "market-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "MARKET fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "MARKET",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "on_chain-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "ON_CHAIN fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "ON_CHAIN",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "policy-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "POLICY fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "POLICY",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "skeptic-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "SKEPTIC fixture finding"
+            }
+          ],
+          "conflicts": [
+            "claim-conflict"
+          ],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "SKEPTIC",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        },
+        {
+          "abstain_reasons": [],
+          "claims": [
+            {
+              "claim_id": "source-claim",
+              "evidence_ids": [
+                "evidence-1"
+              ],
+              "supports": true,
+              "text": "SOURCE fixture finding"
+            }
+          ],
+          "conflicts": [],
+          "directional_score": "0.2",
+          "factual_confidence": "0.7",
+          "impact_confidence": "0.6",
+          "role": "SOURCE",
+          "semantic_confidence": "0.8",
+          "should_abstain": false
+        }
+      ]
+    },
+    "evidence_ids": [
+      "evidence-1"
+    ],
+    "max_context_items": 24,
+    "model_versions": [
+      "committee-p10-v1"
+    ],
+    "path": "FAST",
+    "policy_ids": [
+      "official_web_catalog_v1"
+    ],
+    "reasoning_passes": 1
+  },
+  "live_trading_locked": true,
+  "llm_order_command_capability": false,
+  "schema_version": "p10-committee-evidence-v1",
+  "single_post_order_capability": false,
+  "skeptic_required": true
+}

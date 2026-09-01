@@ -1,0 +1,12 @@
+[
+  {
+    "available_at": "2026-09-01T18:00:00Z",
+    "claim_id": "claim-1",
+    "event_cluster_id": "event-cluster-1",
+    "evidence_id": "evidence-1",
+    "model_version": "committee-p10-v1",
+    "policy_id": "official_web_catalog_v1",
+    "relation": "SUPPORTS",
+    "source_family_id": "official-family"
+  }
+]

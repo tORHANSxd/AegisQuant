@@ -1,0 +1,71 @@
+{
+  "event_radar": [
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "confidence": "0.7",
+      "event_cluster_id": "event-cluster-1",
+      "evidence_ids": [
+        "evidence-1"
+      ],
+      "impact_score": "0.2",
+      "independent_family_count": 2,
+      "status": "CONFIRMED"
+    }
+  ],
+  "event_replay": [
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "content_id": "content-1",
+      "deleted_as_of": false,
+      "excluded_future_items": 2,
+      "selected_engagement_snapshot_id": "engagement-1",
+      "selected_revision": 2
+    }
+  ],
+  "evidence_graph": [
+    {
+      "available_at": "2026-09-01T18:00:00Z",
+      "claim_id": "claim-1",
+      "event_cluster_id": "event-cluster-1",
+      "evidence_id": "evidence-1",
+      "model_version": "committee-p10-v1",
+      "policy_id": "official_web_catalog_v1",
+      "relation": "SUPPORTS",
+      "source_family_id": "official-family"
+    }
+  ],
+  "generated_as_of": "2026-09-01T18:00:00Z",
+  "narrative_monitor": [
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "coordination_risk": "0",
+      "independent_author_count": 2,
+      "narrative_id": "fdb66089d3a50f809211eacab2f0cda107599cf62ae2ce45907a64287fe07159",
+      "propagation_stage": "CROSS_PLATFORM",
+      "topic": "spot bitcoin ETF approval"
+    }
+  ],
+  "source_monitor": [
+    {
+      "disposition": "RISK_ONLY",
+      "gap_count": 0,
+      "last_success_at": "2026-09-01T18:00:00Z",
+      "reason_codes": [
+        "NO_EVENT_INCREMENT",
+        "POSITIVE_RISK_INCREMENT"
+      ],
+      "runtime_state": "READY",
+      "source": "gdelt"
+    },
+    {
+      "disposition": "RETIRE",
+      "gap_count": 1,
+      "last_success_at": null,
+      "reason_codes": [
+        "LOW_COVERAGE_OR_RELIABILITY"
+      ],
+      "runtime_state": "AWAITING_CREDENTIALS",
+      "source": "x"
+    }
+  ]
+}

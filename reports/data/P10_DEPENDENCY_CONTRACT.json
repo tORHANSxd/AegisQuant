@@ -1,0 +1,13 @@
+{
+  "external_network_used_for_evidence": false,
+  "live_trading_locked": true,
+  "new_runtime_dependencies_added": false,
+  "python_runtime": "3.13.15",
+  "schema_version": "p10-dependency-contract-v1",
+  "secrets_used": false,
+  "versions": {
+    "PyYAML": "6.0.3",
+    "polars": "1.44.1",
+    "pydantic": "2.13.5"
+  }
+}

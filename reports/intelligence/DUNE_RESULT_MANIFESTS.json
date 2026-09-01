@@ -1,0 +1,17 @@
+{
+  "manifests": [
+    {
+      "available_at": "2026-09-01T18:00:30Z",
+      "execution_id": "fixture-execution-1",
+      "parameters_sha256": "4a998c10ebf43f5d5b70346f8fbe3f2a3e06e60d7d7a2f92c7754a7c46a4092b",
+      "query_id": 42,
+      "query_version": 1,
+      "requested_at": "2026-09-01T18:00:00Z",
+      "result_sha256": "6d62c8f7ea531935a9134bb7b44e03b5fbbfd62c4dec79ef9233abdb3d5f916a",
+      "row_count": 1,
+      "sql_sha256": "eaf3999c11f52686f0968dc9b64bc07ea2c1f70687f386fa80c323c4f3425b56",
+      "state": "QUERY_STATE_COMPLETED"
+    }
+  ],
+  "schema_version": "p10-dune-result-manifests-v1"
+}
