@@ -1,21 +1,24 @@
 spec_version: "3.1.0"
 spec_sha256: "1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f"
-current_phase: "P05"
+current_phase: "P06"
 status: "in_progress"
-started_at_utc: "2026-09-01T07:00:30.0392916Z"
+started_at_utc: "2026-09-01T08:10:19.546643Z"
 accepted_at_utc: null
 commit_sha: null
 artifact_manifest_sha256: null
 live_trading_locked: true
-next_phase: "P06"
+next_phase: "P07"
 waivers: []
 previous_phase:
-  phase: "P04"
-  status: "accepted"
-  accepted_at_utc: "2026-09-01T06:43:45.9465320Z"
-  commit_sha: "2ad3f0ffdd76fba5e81ce9d12eb70bef31c2d84d"
-  evidence_commit_sha: "dbfbc7dff3443f16f79d4ffb46ea165900821abf"
-  artifact_manifest_sha256: "10547110551edb5fd0d5fd937656915cfa3b26801694752cb1d09e5b67a388fe"
+  phase: "P05"
+  status: "in_progress"
+  started_at_utc: "2026-09-01T07:00:30.0392916Z"
+  accepted_at_utc: null
+  commit_sha: null
+  implementation_commit_sha: "98e41d047d15b2f7063bdb234dde2991e3f3b4b8"
+  evidence_commit_sha: "f8aac139d455b30eb4ff2016911340179cb61b9b"
+  artifact_manifest_sha256: "c3c2f115569aa1010780efa03b83c2e1cae47cecc6dbdb4af5be4df35a13d17c"
+  formal_acceptance_deferred: true
   waivers: []
 phase_history:
   - phase: "P03"
@@ -38,3 +41,11 @@ phase_history:
     evidence_commit_sha: "dbfbc7dff3443f16f79d4ffb46ea165900821abf"
     artifact_manifest_sha256: "10547110551edb5fd0d5fd937656915cfa3b26801694752cb1d09e5b67a388fe"
     waivers: []
+deferred_acceptance_queue:
+  - phase: "P05"
+    status: "implementation_verified_acceptance_deferred"
+    implementation_commit_sha: "98e41d047d15b2f7063bdb234dde2991e3f3b4b8"
+    evidence_commit_sha: "f8aac139d455b30eb4ff2016911340179cb61b9b"
+    artifact_manifest_sha256: "c3c2f115569aa1010780efa03b83c2e1cae47cecc6dbdb4af5be4df35a13d17c"
+    accepted_at_utc: null
+    decision: "docs/adr/ADR-0010-deferred-acceptance-sequencing.md"

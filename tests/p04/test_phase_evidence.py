@@ -29,10 +29,20 @@ def load_state(project_root: Path) -> dict[str, object]:
     )
 
 
+def p04_record(state: dict[str, object]) -> dict[str, object]:
+    if state["current_phase"] == "P04":
+        return state
+    previous = cast(dict[str, object], state["previous_phase"])
+    if previous["phase"] == "P04":
+        return previous
+    history = cast(list[dict[str, object]], state.get("phase_history", []))
+    return next(item for item in history if item["phase"] == "P04")
+
+
 def test_p04_boundary_preserves_p03_waiver_and_live_lock(project_root: Path) -> None:
     state = load_state(project_root)
     previous = cast(dict[str, object], state["previous_phase"])
-    assert state["current_phase"] in {"P04", "P05"}
+    assert state["current_phase"] in {"P04", "P05", "P06"}
     assert state["status"] in {"in_progress", "accepted"}
     assert state["live_trading_locked"] is True
     history = cast(list[dict[str, object]], state.get("phase_history", []))
@@ -47,10 +57,15 @@ def test_p04_boundary_preserves_p03_waiver_and_live_lock(project_root: Path) -> 
         assert previous["phase"] == "P03"
         accounting_root = project_root / "src/aegisquant/accounting"
         assert not accounting_root.exists() or not any(accounting_root.rglob("*.py"))
-    else:
+    elif state["current_phase"] == "P05":
         assert state["next_phase"] == "P06"
         assert previous["phase"] == "P04"
         assert previous["status"] == "accepted"
+    else:
+        assert state["next_phase"] == "P07"
+        assert previous["phase"] == "P05"
+        assert previous["status"] == "in_progress"
+        assert p04_record(state)["status"] == "accepted"
 
 
 def test_p04_traceability_has_35_real_targets(project_root: Path) -> None:
@@ -115,10 +130,6 @@ def test_closed_p04_is_bound_to_reports_manifest_and_ci(project_root: Path) -> N
     manifest_raw = (report_dir / "ARTIFACT_MANIFEST.json").read_bytes()
     manifest = json.loads(manifest_raw)
     assert manifest["phase"] == "P04"
-    phase_state = (
-        state
-        if state["current_phase"] == "P04"
-        else cast(dict[str, object], state["previous_phase"])
-    )
+    phase_state = p04_record(state)
     assert phase_state["commit_sha"] == manifest["implementation_commit"]
     assert phase_state["artifact_manifest_sha256"] == hashlib.sha256(manifest_raw).hexdigest()

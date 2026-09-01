@@ -1,0 +1,213 @@
+{
+  "$defs": {
+    "MarginBracket": {
+      "additionalProperties": false,
+      "properties": {
+        "initial_margin_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Initial Margin Rate"
+        },
+        "maintenance_margin_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maintenance Margin Rate"
+        },
+        "maximum_leverage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Maximum Leverage"
+        },
+        "notional_cap": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "gt": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notional Cap"
+        },
+        "notional_floor": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Notional Floor"
+        }
+      },
+      "required": [
+        "notional_floor",
+        "maximum_leverage",
+        "initial_margin_rate",
+        "maintenance_margin_rate"
+      ],
+      "title": "MarginBracket",
+      "type": "object"
+    },
+    "MarginMode": {
+      "enum": [
+        "CROSS",
+        "ISOLATED"
+      ],
+      "title": "MarginMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.backtest-margin-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "brackets": {
+      "items": {
+        "$ref": "#/$defs/MarginBracket"
+      },
+      "title": "Brackets",
+      "type": "array"
+    },
+    "collateral_asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Collateral Asset Id",
+      "type": "string"
+    },
+    "conservative_buffer_rate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Conservative Buffer Rate"
+    },
+    "effective_from": {
+      "format": "date-time",
+      "title": "Effective From",
+      "type": "string"
+    },
+    "effective_to": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Effective To"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "liquidation_penalty_bps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Liquidation Penalty Bps"
+    },
+    "margin_policy_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Margin Policy Id",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/MarginMode"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    },
+    "venue_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Venue Id",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "margin_policy_id",
+    "version",
+    "venue_id",
+    "instrument_id",
+    "mode",
+    "effective_from",
+    "brackets",
+    "liquidation_penalty_bps",
+    "conservative_buffer_rate",
+    "collateral_asset_id",
+    "source"
+  ],
+  "title": "MarginPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.backtest-margin-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -19,7 +19,8 @@ DETECT_EXCLUDE = (
 )
 DETECT_LINE_EXCLUDE = (
     r"(?i)(?:.*(?:sha-?256|sha1|spec_sha256|artifact_manifest_sha256|expected_sha256|"
-    r"commit_sha|request_hash|evidence_commit|implementation_commit|pinned_commit|"
+    r"commit_sha|request_hash|economic_event_hash|event_hash|vector_hash|application_sha256|"
+    r"first_digest|second_digest|evidence_commit|implementation_commit|pinned_commit|"
     r"terms_version_hash|P00_EVIDENCE_COMMIT|"
     r"P00_IMPLEMENTATION_COMMIT).*|"
     r'.*"(?:ledger_snapshot_id|payload_hash|public_key_base64|signature_base64|'
@@ -53,7 +54,7 @@ def parsed_json(output: str) -> object:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("P03", "P04", "P05"), default="P05")
+    parser.add_argument("--phase", choices=("P03", "P04", "P05", "P06"), default="P06")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     report_dir = root / "reports/security"

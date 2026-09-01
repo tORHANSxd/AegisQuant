@@ -1,0 +1,395 @@
+{
+  "$defs": {
+    "CostBreakdown": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "borrow_interest": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Borrow Interest"
+        },
+        "fee": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Fee"
+        },
+        "funding": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Funding"
+        },
+        "gross_notional": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Gross Notional"
+        },
+        "impact": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Impact"
+        },
+        "settlement_fee": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Settlement Fee"
+        },
+        "slippage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Slippage"
+        },
+        "spread": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Spread"
+        }
+      },
+      "required": [
+        "asset_id",
+        "gross_notional",
+        "fee",
+        "spread",
+        "slippage",
+        "impact",
+        "funding",
+        "borrow_interest",
+        "settlement_fee"
+      ],
+      "title": "CostBreakdown",
+      "type": "object"
+    },
+    "FillPrecision": {
+      "enum": [
+        "BAR_CONSERVATIVE",
+        "TRADE_QUOTE",
+        "L2_DEPTH"
+      ],
+      "title": "FillPrecision",
+      "type": "string"
+    },
+    "LiquidityRole": {
+      "enum": [
+        "MAKER",
+        "TAKER"
+      ],
+      "title": "LiquidityRole",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "description": "Signed monetary amount denominated in one explicit asset.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "OrderSide": {
+      "enum": [
+        "BUY",
+        "SELL"
+      ],
+      "title": "OrderSide",
+      "type": "string"
+    },
+    "Price": {
+      "additionalProperties": false,
+      "description": "Positive quote-asset amount per one base-asset unit.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Amount"
+        },
+        "base_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Base Asset Id",
+          "type": "string"
+        },
+        "quote_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Quote Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "base_asset_id",
+        "quote_asset_id"
+      ],
+      "title": "Price",
+      "type": "object"
+    },
+    "Quantity": {
+      "additionalProperties": false,
+      "description": "Signed asset quantity, never an unlabelled scalar.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Quantity",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.backtest-fill/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_liquidity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Available Liquidity"
+    },
+    "available_time": {
+      "format": "date-time",
+      "title": "Available Time",
+      "type": "string"
+    },
+    "backtest_order_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Backtest Order Id",
+      "type": "string"
+    },
+    "client_order_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Client Order Id",
+      "type": "string"
+    },
+    "cost_breakdown": {
+      "$ref": "#/$defs/CostBreakdown"
+    },
+    "event_time": {
+      "format": "date-time",
+      "title": "Event Time",
+      "type": "string"
+    },
+    "execution_price": {
+      "$ref": "#/$defs/Price"
+    },
+    "fee": {
+      "$ref": "#/$defs/Money"
+    },
+    "fill_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Fill Id",
+      "type": "string"
+    },
+    "ingest_time": {
+      "format": "date-time",
+      "title": "Ingest Time",
+      "type": "string"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "latency_ns": {
+      "minimum": 0,
+      "title": "Latency Ns",
+      "type": "integer"
+    },
+    "liquidity_role": {
+      "$ref": "#/$defs/LiquidityRole"
+    },
+    "order_intent_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Order Intent Id",
+      "type": "string"
+    },
+    "precision": {
+      "$ref": "#/$defs/FillPrecision"
+    },
+    "quantity": {
+      "$ref": "#/$defs/Quantity"
+    },
+    "reference_price": {
+      "$ref": "#/$defs/Price"
+    },
+    "side": {
+      "$ref": "#/$defs/OrderSide"
+    },
+    "source_event_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Event Id",
+      "type": "string"
+    },
+    "venue_order_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Venue Order Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "fill_id",
+    "venue_order_id",
+    "backtest_order_id",
+    "client_order_id",
+    "order_intent_id",
+    "instrument_id",
+    "side",
+    "quantity",
+    "reference_price",
+    "execution_price",
+    "fee",
+    "cost_breakdown",
+    "precision",
+    "liquidity_role",
+    "source_event_id",
+    "available_liquidity",
+    "event_time",
+    "available_time",
+    "ingest_time",
+    "latency_ns"
+  ],
+  "title": "BacktestFill",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.backtest-fill",
+  "x-aegisquant-schema-version": "1.0.0"
+}

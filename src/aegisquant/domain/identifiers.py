@@ -241,3 +241,31 @@ class AccountSnapshotId(TypedId):
 
 class LedgerSnapshotId(TypedId):
     kind = "ledger-snapshot"
+
+
+class BacktestOrderId(TypedId):
+    kind = "backtest-order"
+
+
+class BacktestEventId(TypedId):
+    kind = "backtest-event"
+
+
+class CostScheduleId(TypedId):
+    kind = "cost-schedule"
+
+
+class InstrumentRuleId(TypedId):
+    kind = "instrument-rule"
+
+
+class MarginPolicyId(TypedId):
+    kind = "margin-policy"
+
+
+class MultiLegPlanId(TypedId):
+    kind = "multi-leg-plan"
+
+
+class StressScenarioId(TypedId):
+    kind = "stress-scenario"

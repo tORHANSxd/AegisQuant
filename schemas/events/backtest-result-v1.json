@@ -1,0 +1,2017 @@
+{
+  "$defs": {
+    "BacktestFill": {
+      "additionalProperties": false,
+      "properties": {
+        "available_liquidity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Available Liquidity"
+        },
+        "available_time": {
+          "format": "date-time",
+          "title": "Available Time",
+          "type": "string"
+        },
+        "backtest_order_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Backtest Order Id",
+          "type": "string"
+        },
+        "client_order_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "cost_breakdown": {
+          "$ref": "#/$defs/CostBreakdown"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "execution_price": {
+          "$ref": "#/$defs/Price"
+        },
+        "fee": {
+          "$ref": "#/$defs/Money"
+        },
+        "fill_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Fill Id",
+          "type": "string"
+        },
+        "ingest_time": {
+          "format": "date-time",
+          "title": "Ingest Time",
+          "type": "string"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "latency_ns": {
+          "minimum": 0,
+          "title": "Latency Ns",
+          "type": "integer"
+        },
+        "liquidity_role": {
+          "$ref": "#/$defs/LiquidityRole"
+        },
+        "order_intent_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Order Intent Id",
+          "type": "string"
+        },
+        "precision": {
+          "$ref": "#/$defs/FillPrecision"
+        },
+        "quantity": {
+          "$ref": "#/$defs/Quantity"
+        },
+        "reference_price": {
+          "$ref": "#/$defs/Price"
+        },
+        "side": {
+          "$ref": "#/$defs/OrderSide"
+        },
+        "source_event_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Source Event Id",
+          "type": "string"
+        },
+        "venue_order_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Venue Order Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fill_id",
+        "venue_order_id",
+        "backtest_order_id",
+        "client_order_id",
+        "order_intent_id",
+        "instrument_id",
+        "side",
+        "quantity",
+        "reference_price",
+        "execution_price",
+        "fee",
+        "cost_breakdown",
+        "precision",
+        "liquidity_role",
+        "source_event_id",
+        "available_liquidity",
+        "event_time",
+        "available_time",
+        "ingest_time",
+        "latency_ns"
+      ],
+      "title": "BacktestFill",
+      "type": "object"
+    },
+    "BacktestMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "annualized_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Annualized Return"
+        },
+        "annualized_volatility": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Annualized Volatility"
+        },
+        "average_latency_ns": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Average Latency Ns"
+        },
+        "average_slippage_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Average Slippage Bps"
+        },
+        "calmar": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Calmar"
+        },
+        "cancel_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Cancel Rate"
+        },
+        "excess_kurtosis": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Excess Kurtosis"
+        },
+        "expected_shortfall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Expected Shortfall"
+        },
+        "fill_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Fill Rate"
+        },
+        "hit_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Hit Rate"
+        },
+        "maker_ratio": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maker Ratio"
+        },
+        "maximum_drawdown": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum Drawdown"
+        },
+        "maximum_multi_leg_exposure": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Multi Leg Exposure"
+        },
+        "participation_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Participation Rate"
+        },
+        "payoff_ratio": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Payoff Ratio"
+        },
+        "sharpe": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sharpe"
+        },
+        "skewness": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Skewness"
+        },
+        "sortino": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sortino"
+        },
+        "total_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Total Return"
+        },
+        "turnover": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Turnover"
+        },
+        "underwater_seconds": {
+          "minimum": 0,
+          "title": "Underwater Seconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "total_return",
+        "annualized_return",
+        "annualized_volatility",
+        "sharpe",
+        "sortino",
+        "calmar",
+        "maximum_drawdown",
+        "expected_shortfall",
+        "skewness",
+        "excess_kurtosis",
+        "underwater_seconds",
+        "hit_rate",
+        "payoff_ratio",
+        "turnover",
+        "maker_ratio",
+        "fill_rate",
+        "average_slippage_bps",
+        "participation_rate",
+        "cancel_rate",
+        "average_latency_ns",
+        "maximum_multi_leg_exposure"
+      ],
+      "title": "BacktestMetrics",
+      "type": "object"
+    },
+    "BacktestOrder": {
+      "additionalProperties": false,
+      "properties": {
+        "backtest_order_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Backtest Order Id",
+          "type": "string"
+        },
+        "client_order_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Client Order Id",
+          "type": "string"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "leg_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Leg Index"
+        },
+        "limit_price": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Price"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "multi_leg_plan_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Multi Leg Plan Id"
+        },
+        "order_intent_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Order Intent Id",
+          "type": "string"
+        },
+        "order_type": {
+          "$ref": "#/$defs/OrderType"
+        },
+        "quantity": {
+          "$ref": "#/$defs/Quantity"
+        },
+        "reduce_only": {
+          "default": false,
+          "title": "Reduce Only",
+          "type": "boolean"
+        },
+        "side": {
+          "$ref": "#/$defs/OrderSide"
+        },
+        "submitted_at": {
+          "format": "date-time",
+          "title": "Submitted At",
+          "type": "string"
+        },
+        "time_in_force": {
+          "$ref": "#/$defs/TimeInForce"
+        },
+        "venue_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Venue Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "backtest_order_id",
+        "client_order_id",
+        "order_intent_id",
+        "instrument_id",
+        "venue_id",
+        "side",
+        "order_type",
+        "quantity",
+        "time_in_force",
+        "decision_time",
+        "submitted_at"
+      ],
+      "title": "BacktestOrder",
+      "type": "object"
+    },
+    "BacktestOrderResult": {
+      "additionalProperties": false,
+      "properties": {
+        "arrival_time": {
+          "format": "date-time",
+          "title": "Arrival Time",
+          "type": "string"
+        },
+        "average_fill_price": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "gt": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Average Fill Price"
+        },
+        "completed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completed At"
+        },
+        "cumulative_filled_quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Cumulative Filled Quantity"
+        },
+        "order": {
+          "$ref": "#/$defs/BacktestOrder"
+        },
+        "recovery_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Recovery Evidence",
+          "type": "array"
+        },
+        "rejection_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rejection Code"
+        },
+        "status": {
+          "$ref": "#/$defs/VenueOrderStatus"
+        },
+        "unknown_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unknown Reason"
+        },
+        "venue_order_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Venue Order Id"
+        }
+      },
+      "required": [
+        "order",
+        "status",
+        "venue_order_id",
+        "arrival_time",
+        "cumulative_filled_quantity"
+      ],
+      "title": "BacktestOrderResult",
+      "type": "object"
+    },
+    "BacktestRunSpec": {
+      "additionalProperties": false,
+      "description": "Content-addressed deterministic run declaration.",
+      "properties": {
+        "accounting_policy_version": {
+          "title": "Accounting Policy Version",
+          "type": "string"
+        },
+        "code_sha256": {
+          "title": "Code Sha256",
+          "type": "string"
+        },
+        "config_sha256": {
+          "title": "Config Sha256",
+          "type": "string"
+        },
+        "cost_policy_version": {
+          "title": "Cost Policy Version",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "dataset_sha256": {
+          "title": "Dataset Sha256",
+          "type": "string"
+        },
+        "end_time": {
+          "format": "date-time",
+          "title": "End Time",
+          "type": "string"
+        },
+        "engine_kind": {
+          "$ref": "#/$defs/EngineKind"
+        },
+        "initial_cash": {
+          "$ref": "#/$defs/Money"
+        },
+        "live_trading_locked": {
+          "const": true,
+          "default": true,
+          "title": "Live Trading Locked",
+          "type": "boolean"
+        },
+        "reporting_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Reporting Asset Id",
+          "type": "string"
+        },
+        "reproduction_command": {
+          "title": "Reproduction Command",
+          "type": "string"
+        },
+        "rule_policy_version": {
+          "title": "Rule Policy Version",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "seed": {
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "start_time": {
+          "format": "date-time",
+          "title": "Start Time",
+          "type": "string"
+        },
+        "strategy_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Strategy Id",
+          "type": "string"
+        },
+        "strategy_version_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Strategy Version Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "engine_kind",
+        "strategy_id",
+        "strategy_version_id",
+        "dataset_sha256",
+        "config_sha256",
+        "code_sha256",
+        "seed",
+        "reporting_asset_id",
+        "initial_cash",
+        "start_time",
+        "end_time",
+        "created_at",
+        "accounting_policy_version",
+        "cost_policy_version",
+        "rule_policy_version",
+        "reproduction_command"
+      ],
+      "title": "BacktestRunSpec",
+      "type": "object"
+    },
+    "ContractForm": {
+      "enum": [
+        "SPOT",
+        "LINEAR",
+        "INVERSE"
+      ],
+      "title": "ContractForm",
+      "type": "string"
+    },
+    "CostBreakdown": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "borrow_interest": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Borrow Interest"
+        },
+        "fee": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Fee"
+        },
+        "funding": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Funding"
+        },
+        "gross_notional": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Gross Notional"
+        },
+        "impact": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Impact"
+        },
+        "settlement_fee": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Settlement Fee"
+        },
+        "slippage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Slippage"
+        },
+        "spread": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Spread"
+        }
+      },
+      "required": [
+        "asset_id",
+        "gross_notional",
+        "fee",
+        "spread",
+        "slippage",
+        "impact",
+        "funding",
+        "borrow_interest",
+        "settlement_fee"
+      ],
+      "title": "CostBreakdown",
+      "type": "object"
+    },
+    "EngineKind": {
+      "enum": [
+        "VECTOR",
+        "EVENT"
+      ],
+      "title": "EngineKind",
+      "type": "string"
+    },
+    "EquityPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "cash": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Cash"
+        },
+        "equity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Equity"
+        },
+        "position_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Position Value"
+        },
+        "realized_pnl": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Realized Pnl"
+        },
+        "reporting_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Reporting Asset Id",
+          "type": "string"
+        },
+        "time": {
+          "format": "date-time",
+          "title": "Time",
+          "type": "string"
+        },
+        "unrealized_pnl": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Unrealized Pnl"
+        }
+      },
+      "required": [
+        "time",
+        "cash",
+        "position_value",
+        "realized_pnl",
+        "unrealized_pnl",
+        "equity",
+        "reporting_asset_id"
+      ],
+      "title": "EquityPoint",
+      "type": "object"
+    },
+    "FillPrecision": {
+      "enum": [
+        "BAR_CONSERVATIVE",
+        "TRADE_QUOTE",
+        "L2_DEPTH"
+      ],
+      "title": "FillPrecision",
+      "type": "string"
+    },
+    "JournalEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "journal_entry_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Journal Entry Id",
+          "type": "string"
+        },
+        "postings": {
+          "items": {
+            "$ref": "#/$defs/LedgerPosting"
+          },
+          "title": "Postings",
+          "type": "array"
+        },
+        "reconciliation_adjustment": {
+          "default": false,
+          "title": "Reconciliation Adjustment",
+          "type": "boolean"
+        },
+        "recorded_at": {
+          "format": "date-time",
+          "title": "Recorded At",
+          "type": "string"
+        },
+        "supersedes_entry_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes Entry Id"
+        }
+      },
+      "required": [
+        "journal_entry_id",
+        "event_time",
+        "recorded_at",
+        "description",
+        "postings"
+      ],
+      "title": "JournalEntry",
+      "type": "object"
+    },
+    "LedgerPosting": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "amount": {
+          "$ref": "#/$defs/Money"
+        },
+        "memo": {
+          "title": "Memo",
+          "type": "string"
+        },
+        "posting_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Posting Id",
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/$defs/PostingSide"
+        }
+      },
+      "required": [
+        "posting_id",
+        "account_id",
+        "side",
+        "amount",
+        "memo"
+      ],
+      "title": "LedgerPosting",
+      "type": "object"
+    },
+    "LedgerRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "chart_version": {
+          "title": "Chart Version",
+          "type": "string"
+        },
+        "command_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Command Hash",
+          "type": "string"
+        },
+        "entry_template_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Entry Template Id",
+          "type": "string"
+        },
+        "event_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Event Hash",
+          "type": "string"
+        },
+        "idempotency_key": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "journal_entry": {
+          "$ref": "#/$defs/JournalEntry"
+        },
+        "lot_changes": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/LotChange"
+          },
+          "title": "Lot Changes",
+          "type": "array"
+        },
+        "policy_version": {
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "previous_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Previous Hash",
+          "type": "string"
+        },
+        "source_fill_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Fill Id"
+        },
+        "source_order_intent_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Order Intent Id"
+        },
+        "template_version": {
+          "title": "Template Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "journal_entry",
+        "policy_version",
+        "chart_version",
+        "entry_template_id",
+        "template_version",
+        "idempotency_key",
+        "command_hash",
+        "previous_hash",
+        "event_hash"
+      ],
+      "title": "LedgerRecord",
+      "type": "object"
+    },
+    "LiquidityRole": {
+      "enum": [
+        "MAKER",
+        "TAKER"
+      ],
+      "title": "LiquidityRole",
+      "type": "string"
+    },
+    "LotAction": {
+      "enum": [
+        "OPEN",
+        "REDUCE",
+        "CLOSE"
+      ],
+      "title": "LotAction",
+      "type": "string"
+    },
+    "LotChange": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/LotAction"
+        },
+        "affected_quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Affected Quantity"
+        },
+        "lot_after": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PositionLotState"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "lot_before": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PositionLotState"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "realized_pnl": {
+          "$ref": "#/$defs/Money"
+        }
+      },
+      "required": [
+        "action",
+        "affected_quantity",
+        "realized_pnl"
+      ],
+      "title": "LotChange",
+      "type": "object"
+    },
+    "LotSide": {
+      "enum": [
+        "LONG",
+        "SHORT"
+      ],
+      "title": "LotSide",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "description": "Signed monetary amount denominated in one explicit asset.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "MultiLegExposure": {
+      "additionalProperties": false,
+      "properties": {
+        "exposed_notional": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Exposed Notional"
+        },
+        "exposure_duration_ns": {
+          "minimum": 0,
+          "title": "Exposure Duration Ns",
+          "type": "integer"
+        },
+        "failed_leg_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Failed Leg Index"
+        },
+        "failure_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Failure Reason"
+        },
+        "filled_legs": {
+          "minimum": 0,
+          "title": "Filled Legs",
+          "type": "integer"
+        },
+        "multi_leg_plan_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Multi Leg Plan Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "multi_leg_plan_id",
+        "filled_legs",
+        "failed_leg_index",
+        "exposed_notional",
+        "exposure_duration_ns",
+        "failure_reason"
+      ],
+      "title": "MultiLegExposure",
+      "type": "object"
+    },
+    "OrderSide": {
+      "enum": [
+        "BUY",
+        "SELL"
+      ],
+      "title": "OrderSide",
+      "type": "string"
+    },
+    "OrderType": {
+      "enum": [
+        "MARKET",
+        "LIMIT"
+      ],
+      "title": "OrderType",
+      "type": "string"
+    },
+    "PnLAttributionPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "borrow_interest": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Borrow Interest"
+        },
+        "funding": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Funding"
+        },
+        "gross_trading_pnl": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Gross Trading Pnl"
+        },
+        "impact_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Impact Cost"
+        },
+        "net_pnl": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Net Pnl"
+        },
+        "slippage_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Slippage Cost"
+        },
+        "spread_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Spread Cost"
+        },
+        "time": {
+          "format": "date-time",
+          "title": "Time",
+          "type": "string"
+        },
+        "trading_fees": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Trading Fees"
+        }
+      },
+      "required": [
+        "time",
+        "gross_trading_pnl",
+        "trading_fees",
+        "spread_cost",
+        "slippage_cost",
+        "impact_cost",
+        "funding",
+        "borrow_interest",
+        "net_pnl"
+      ],
+      "title": "PnLAttributionPoint",
+      "type": "object"
+    },
+    "PositionLotState": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "closed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Closed At"
+        },
+        "contract_form": {
+          "$ref": "#/$defs/ContractForm"
+        },
+        "contract_multiplier": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Contract Multiplier"
+        },
+        "entry_price": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Entry Price"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "opened_at": {
+          "format": "date-time",
+          "title": "Opened At",
+          "type": "string"
+        },
+        "opened_quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Opened Quantity"
+        },
+        "opening_fee": {
+          "$ref": "#/$defs/Money"
+        },
+        "position_lot_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Position Lot Id",
+          "type": "string"
+        },
+        "quantity_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Quantity Asset Id",
+          "type": "string"
+        },
+        "quantity_unit": {
+          "$ref": "#/$defs/QuantityUnit"
+        },
+        "remaining_quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Remaining Quantity"
+        },
+        "settlement_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Settlement Asset Id",
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/$defs/LotSide"
+        },
+        "source_fill_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Source Fill Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "position_lot_id",
+        "account_id",
+        "instrument_id",
+        "side",
+        "quantity_unit",
+        "quantity_asset_id",
+        "opened_quantity",
+        "remaining_quantity",
+        "entry_price",
+        "contract_form",
+        "contract_multiplier",
+        "settlement_asset_id",
+        "opening_fee",
+        "source_fill_id",
+        "opened_at"
+      ],
+      "title": "PositionLotState",
+      "type": "object"
+    },
+    "PositionPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "average_entry_price": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "gt": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Average Entry Price"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "mark_price": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Mark Price"
+        },
+        "quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Quantity"
+        },
+        "time": {
+          "format": "date-time",
+          "title": "Time",
+          "type": "string"
+        },
+        "unrealized_pnl": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Unrealized Pnl"
+        }
+      },
+      "required": [
+        "time",
+        "instrument_id",
+        "quantity",
+        "average_entry_price",
+        "mark_price",
+        "unrealized_pnl"
+      ],
+      "title": "PositionPoint",
+      "type": "object"
+    },
+    "PostingSide": {
+      "enum": [
+        "DEBIT",
+        "CREDIT"
+      ],
+      "title": "PostingSide",
+      "type": "string"
+    },
+    "Price": {
+      "additionalProperties": false,
+      "description": "Positive quote-asset amount per one base-asset unit.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Amount"
+        },
+        "base_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Base Asset Id",
+          "type": "string"
+        },
+        "quote_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Quote Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "base_asset_id",
+        "quote_asset_id"
+      ],
+      "title": "Price",
+      "type": "object"
+    },
+    "Quantity": {
+      "additionalProperties": false,
+      "description": "Signed asset quantity, never an unlabelled scalar.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Amount"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "asset_id"
+      ],
+      "title": "Quantity",
+      "type": "object"
+    },
+    "QuantityUnit": {
+      "enum": [
+        "BASE_ASSET",
+        "CONTRACT"
+      ],
+      "title": "QuantityUnit",
+      "type": "string"
+    },
+    "TimeInForce": {
+      "enum": [
+        "GTC",
+        "IOC",
+        "FOK"
+      ],
+      "title": "TimeInForce",
+      "type": "string"
+    },
+    "VenueOrderStatus": {
+      "enum": [
+        "UNKNOWN",
+        "PENDING_SUBMIT",
+        "SUBMITTED",
+        "ACCEPTED",
+        "PARTIALLY_FILLED",
+        "FILLED",
+        "CANCELED",
+        "REJECTED",
+        "EXPIRED"
+      ],
+      "title": "VenueOrderStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.backtest-result/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "economic_event_hash": {
+      "title": "Economic Event Hash",
+      "type": "string"
+    },
+    "engine_kind": {
+      "$ref": "#/$defs/EngineKind"
+    },
+    "equity_curve": {
+      "items": {
+        "$ref": "#/$defs/EquityPoint"
+      },
+      "title": "Equity Curve",
+      "type": "array"
+    },
+    "events_processed": {
+      "minimum": 0,
+      "title": "Events Processed",
+      "type": "integer"
+    },
+    "fills": {
+      "items": {
+        "$ref": "#/$defs/BacktestFill"
+      },
+      "title": "Fills",
+      "type": "array"
+    },
+    "ledger_records": {
+      "items": {
+        "$ref": "#/$defs/LedgerRecord"
+      },
+      "title": "Ledger Records",
+      "type": "array"
+    },
+    "metrics": {
+      "$ref": "#/$defs/BacktestMetrics"
+    },
+    "multi_leg_exposures": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/MultiLegExposure"
+      },
+      "title": "Multi Leg Exposures",
+      "type": "array"
+    },
+    "orders": {
+      "items": {
+        "$ref": "#/$defs/BacktestOrderResult"
+      },
+      "title": "Orders",
+      "type": "array"
+    },
+    "pnl_attribution": {
+      "items": {
+        "$ref": "#/$defs/PnLAttributionPoint"
+      },
+      "title": "Pnl Attribution",
+      "type": "array"
+    },
+    "positions": {
+      "items": {
+        "$ref": "#/$defs/PositionPoint"
+      },
+      "title": "Positions",
+      "type": "array"
+    },
+    "precision_levels": {
+      "items": {
+        "$ref": "#/$defs/FillPrecision"
+      },
+      "title": "Precision Levels",
+      "type": "array"
+    },
+    "spec": {
+      "$ref": "#/$defs/BacktestRunSpec"
+    },
+    "warnings": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "spec",
+    "engine_kind",
+    "orders",
+    "fills",
+    "ledger_records",
+    "positions",
+    "equity_curve",
+    "pnl_attribution",
+    "metrics",
+    "events_processed",
+    "economic_event_hash",
+    "precision_levels"
+  ],
+  "title": "BacktestResult",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.backtest-result",
+  "x-aegisquant-schema-version": "1.0.0"
+}

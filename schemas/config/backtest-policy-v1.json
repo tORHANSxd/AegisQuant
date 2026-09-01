@@ -1,0 +1,748 @@
+{
+  "$defs": {
+    "BenchmarkPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "event_count": {
+          "exclusiveMinimum": 0,
+          "title": "Event Count",
+          "type": "integer"
+        },
+        "maximum_event_seconds": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Event Seconds"
+        },
+        "maximum_peak_memory_mib": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Peak Memory Mib"
+        },
+        "maximum_vector_seconds": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Vector Seconds"
+        },
+        "stability_replays": {
+          "exclusiveMinimum": 1,
+          "title": "Stability Replays",
+          "type": "integer"
+        },
+        "vector_bars": {
+          "exclusiveMinimum": 0,
+          "title": "Vector Bars",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "vector_bars",
+        "event_count",
+        "maximum_vector_seconds",
+        "maximum_event_seconds",
+        "maximum_peak_memory_mib",
+        "stability_replays"
+      ],
+      "title": "BenchmarkPolicy",
+      "type": "object"
+    },
+    "CostSchedule": {
+      "additionalProperties": false,
+      "properties": {
+        "borrow_rate_annual": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Borrow Rate Annual"
+        },
+        "cost_schedule_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Cost Schedule Id",
+          "type": "string"
+        },
+        "effective_from": {
+          "format": "date-time",
+          "title": "Effective From",
+          "type": "string"
+        },
+        "effective_to": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective To"
+        },
+        "funding_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Funding Rate"
+        },
+        "half_spread_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Half Spread Bps"
+        },
+        "impact_coefficient_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Impact Coefficient Bps"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "maker_fee_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Maker Fee Bps"
+        },
+        "maximum_impact_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Impact Bps"
+        },
+        "participation_cap": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Participation Cap"
+        },
+        "settlement_fee_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Settlement Fee Bps"
+        },
+        "slippage_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Slippage Bps"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "taker_fee_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Taker Fee Bps"
+        },
+        "venue_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Venue Id",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cost_schedule_id",
+        "version",
+        "venue_id",
+        "instrument_id",
+        "effective_from",
+        "maker_fee_bps",
+        "taker_fee_bps",
+        "half_spread_bps",
+        "slippage_bps",
+        "impact_coefficient_bps",
+        "maximum_impact_bps",
+        "funding_rate",
+        "borrow_rate_annual",
+        "settlement_fee_bps",
+        "participation_cap",
+        "source"
+      ],
+      "title": "CostSchedule",
+      "type": "object"
+    },
+    "HistoricalInstrumentRule": {
+      "additionalProperties": false,
+      "properties": {
+        "approximation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approximation"
+        },
+        "effective_from": {
+          "format": "date-time",
+          "title": "Effective From",
+          "type": "string"
+        },
+        "effective_to": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective To"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "instrument_rule_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Rule Id",
+          "type": "string"
+        },
+        "maximum_quantity": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "gt": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum Quantity"
+        },
+        "minimum_notional": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Minimum Notional"
+        },
+        "minimum_quantity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Minimum Quantity"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "step_size": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Step Size"
+        },
+        "tick_size": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Tick Size"
+        },
+        "trading_enabled": {
+          "title": "Trading Enabled",
+          "type": "boolean"
+        },
+        "venue_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Venue Id",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "instrument_rule_id",
+        "version",
+        "instrument_id",
+        "venue_id",
+        "effective_from",
+        "tick_size",
+        "step_size",
+        "minimum_quantity",
+        "minimum_notional",
+        "trading_enabled",
+        "source"
+      ],
+      "title": "HistoricalInstrumentRule",
+      "type": "object"
+    },
+    "LatencyPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "acknowledgement_ns": {
+          "minimum": 0,
+          "title": "Acknowledgement Ns",
+          "type": "integer"
+        },
+        "cancel_ns": {
+          "minimum": 0,
+          "title": "Cancel Ns",
+          "type": "integer"
+        },
+        "network_ns": {
+          "minimum": 0,
+          "title": "Network Ns",
+          "type": "integer"
+        },
+        "risk_ns": {
+          "minimum": 0,
+          "title": "Risk Ns",
+          "type": "integer"
+        },
+        "signal_ns": {
+          "minimum": 0,
+          "title": "Signal Ns",
+          "type": "integer"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "signal_ns",
+        "risk_ns",
+        "network_ns",
+        "acknowledgement_ns",
+        "cancel_ns",
+        "source"
+      ],
+      "title": "LatencyPolicy",
+      "type": "object"
+    },
+    "MarginBracket": {
+      "additionalProperties": false,
+      "properties": {
+        "initial_margin_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Initial Margin Rate"
+        },
+        "maintenance_margin_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maintenance Margin Rate"
+        },
+        "maximum_leverage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Maximum Leverage"
+        },
+        "notional_cap": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "gt": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notional Cap"
+        },
+        "notional_floor": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Notional Floor"
+        }
+      },
+      "required": [
+        "notional_floor",
+        "maximum_leverage",
+        "initial_margin_rate",
+        "maintenance_margin_rate"
+      ],
+      "title": "MarginBracket",
+      "type": "object"
+    },
+    "MarginMode": {
+      "enum": [
+        "CROSS",
+        "ISOLATED"
+      ],
+      "title": "MarginMode",
+      "type": "string"
+    },
+    "MarginPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "brackets": {
+          "items": {
+            "$ref": "#/$defs/MarginBracket"
+          },
+          "title": "Brackets",
+          "type": "array"
+        },
+        "collateral_asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Collateral Asset Id",
+          "type": "string"
+        },
+        "conservative_buffer_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Conservative Buffer Rate"
+        },
+        "effective_from": {
+          "format": "date-time",
+          "title": "Effective From",
+          "type": "string"
+        },
+        "effective_to": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective To"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "liquidation_penalty_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Liquidation Penalty Bps"
+        },
+        "margin_policy_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Margin Policy Id",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/MarginMode"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "venue_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Venue Id",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "margin_policy_id",
+        "version",
+        "venue_id",
+        "instrument_id",
+        "mode",
+        "effective_from",
+        "brackets",
+        "liquidation_penalty_bps",
+        "conservative_buffer_rate",
+        "collateral_asset_id",
+        "source"
+      ],
+      "title": "MarginPolicy",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.backtest-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "benchmark": {
+      "$ref": "#/$defs/BenchmarkPolicy"
+    },
+    "cost_schedules": {
+      "items": {
+        "$ref": "#/$defs/CostSchedule"
+      },
+      "title": "Cost Schedules",
+      "type": "array"
+    },
+    "instrument_rules": {
+      "items": {
+        "$ref": "#/$defs/HistoricalInstrumentRule"
+      },
+      "title": "Instrument Rules",
+      "type": "array"
+    },
+    "latency_policy": {
+      "$ref": "#/$defs/LatencyPolicy"
+    },
+    "margin_policies": {
+      "items": {
+        "$ref": "#/$defs/MarginPolicy"
+      },
+      "title": "Margin Policies",
+      "type": "array"
+    },
+    "mutation_score_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Mutation Score Threshold"
+    },
+    "policy_version": {
+      "title": "Policy Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "policy_version",
+    "mutation_score_threshold",
+    "latency_policy",
+    "cost_schedules",
+    "instrument_rules",
+    "margin_policies",
+    "benchmark"
+  ],
+  "title": "BacktestPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.backtest-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

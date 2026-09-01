@@ -26,6 +26,17 @@ from aegisquant.accounting.models import (
     ValuationSnapshot,
     VenueAccountSnapshot,
 )
+from aegisquant.backtest.models import (
+    BacktestFill,
+    BacktestOrder,
+    BacktestResult,
+    BacktestRunSpec,
+    CostSchedule,
+    HistoricalInstrumentRule,
+    MarginPolicy,
+    StressScenario,
+)
+from aegisquant.backtest.policy import BacktestPolicy
 from aegisquant.config.models import AppConfig
 from aegisquant.data.archive import RevisionRecord, TombstoneRecord
 from aegisquant.data.catalog import CatalogEntry
@@ -261,10 +272,64 @@ EVENT_CONTRACTS: Final = (
         DailyLedgerSnapshot,
         Path("daily-ledger-snapshot-v1.json"),
     ),
+    Contract(
+        "aegisquant.backtest-run-spec",
+        "1.0.0",
+        BacktestRunSpec,
+        Path("backtest-run-spec-v1.json"),
+    ),
+    Contract(
+        "aegisquant.backtest-order",
+        "1.0.0",
+        BacktestOrder,
+        Path("backtest-order-v1.json"),
+    ),
+    Contract(
+        "aegisquant.backtest-fill",
+        "1.0.0",
+        BacktestFill,
+        Path("backtest-fill-v1.json"),
+    ),
+    Contract(
+        "aegisquant.backtest-result",
+        "1.0.0",
+        BacktestResult,
+        Path("backtest-result-v1.json"),
+    ),
+    Contract(
+        "aegisquant.backtest-cost-schedule",
+        "1.0.0",
+        CostSchedule,
+        Path("backtest-cost-schedule-v1.json"),
+    ),
+    Contract(
+        "aegisquant.backtest-instrument-rule",
+        "1.0.0",
+        HistoricalInstrumentRule,
+        Path("backtest-instrument-rule-v1.json"),
+    ),
+    Contract(
+        "aegisquant.backtest-margin-policy",
+        "1.0.0",
+        MarginPolicy,
+        Path("backtest-margin-policy-v1.json"),
+    ),
+    Contract(
+        "aegisquant.backtest-stress-scenario",
+        "1.0.0",
+        StressScenario,
+        Path("backtest-stress-scenario-v1.json"),
+    ),
 )
 
 CONFIG_CONTRACTS: Final = (
     Contract("aegisquant.app-config", "1.0.0", AppConfig, Path("app-config-v1.json")),
+    Contract(
+        "aegisquant.backtest-policy",
+        "1.0.0",
+        BacktestPolicy,
+        Path("backtest-policy-v1.json"),
+    ),
     Contract(
         "aegisquant.source-processing-policy",
         "1.0.0",

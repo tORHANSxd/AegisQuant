@@ -21,7 +21,15 @@ def test_phase_state_advances_one_accepted_phase_at_a_time(project_root: Path) -
     assert previous_number == current_number - 1
     assert payload["status"] in {"in_progress", *CLOSED_STATUSES}
     assert payload["live_trading_locked"] is True
-    assert payload["previous_phase"]["status"] in CLOSED_STATUSES
+    previous_status = payload["previous_phase"]["status"]
+    if previous_status not in CLOSED_STATUSES:
+        deferred = payload.get("deferred_acceptance_queue", [])
+        assert payload["status"] == "in_progress"
+        assert any(
+            item["phase"] == payload["previous_phase"]["phase"]
+            and item["status"] == "implementation_verified_acceptance_deferred"
+            for item in deferred
+        )
 
 
 def test_acceptance_state_has_evidence_when_closed(project_root: Path) -> None:

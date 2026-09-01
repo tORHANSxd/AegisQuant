@@ -290,11 +290,83 @@
     },
     {
       "compatibility": "BACKWARD",
+      "model": "aegisquant.backtest.models.BacktestRunSpec",
+      "path": "schemas/events/backtest-run-spec-v1.json",
+      "schema_name": "aegisquant.backtest-run-spec",
+      "schema_version": "1.0.0",
+      "sha256": "dfd05db21de55608077837940ab9f885a69f8b6972b9ea8f078cd7d2bd790777"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.backtest.models.BacktestOrder",
+      "path": "schemas/events/backtest-order-v1.json",
+      "schema_name": "aegisquant.backtest-order",
+      "schema_version": "1.0.0",
+      "sha256": "2619daa80319756fc0789a2f7bcc66f94ac16ab37eecbee54f7649b0ed759c7c"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.backtest.models.BacktestFill",
+      "path": "schemas/events/backtest-fill-v1.json",
+      "schema_name": "aegisquant.backtest-fill",
+      "schema_version": "1.0.0",
+      "sha256": "c785fc3871505fb056a9c546a7c64c8d64d9fa70610ec4dd2113a944f99113c6"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.backtest.models.BacktestResult",
+      "path": "schemas/events/backtest-result-v1.json",
+      "schema_name": "aegisquant.backtest-result",
+      "schema_version": "1.0.0",
+      "sha256": "63b60e779dc3509d35dd0637c00756b4ca9710bfdfab00bcc75aee1ac671879a"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.backtest.models.CostSchedule",
+      "path": "schemas/events/backtest-cost-schedule-v1.json",
+      "schema_name": "aegisquant.backtest-cost-schedule",
+      "schema_version": "1.0.0",
+      "sha256": "b99b42b1ad62d1e6c89ff40e7a5b1c7a5ba56ace75b261f34658ad760150f45e"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.backtest.models.HistoricalInstrumentRule",
+      "path": "schemas/events/backtest-instrument-rule-v1.json",
+      "schema_name": "aegisquant.backtest-instrument-rule",
+      "schema_version": "1.0.0",
+      "sha256": "9d4ed49bba12beb737a298eb408f09878e60b11e5348d99ec079a3cc67dbd6ce"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.backtest.models.MarginPolicy",
+      "path": "schemas/events/backtest-margin-policy-v1.json",
+      "schema_name": "aegisquant.backtest-margin-policy",
+      "schema_version": "1.0.0",
+      "sha256": "86bf394d46e1256641e84bb914b5bf5bb14150aa20a3328c2075bc097d06c440"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.backtest.models.StressScenario",
+      "path": "schemas/events/backtest-stress-scenario-v1.json",
+      "schema_name": "aegisquant.backtest-stress-scenario",
+      "schema_version": "1.0.0",
+      "sha256": "379ddd1cf1116b7fe9fe4bebb314f967689302d5f8a122bd3e3262c36db5d067"
+    },
+    {
+      "compatibility": "BACKWARD",
       "model": "aegisquant.config.models.AppConfig",
       "path": "schemas/config/app-config-v1.json",
       "schema_name": "aegisquant.app-config",
       "schema_version": "1.0.0",
       "sha256": "f6e38282e26ec047fafe22287ea82a5d481aa0c15585d99f813cf74c5f1e40dd"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.backtest.policy.BacktestPolicy",
+      "path": "schemas/config/backtest-policy-v1.json",
+      "schema_name": "aegisquant.backtest-policy",
+      "schema_version": "1.0.0",
+      "sha256": "64a815560b2281ee0a75dc297720896430c0c786026199e5dbc95ec64323c50c"
     },
     {
       "compatibility": "BACKWARD",

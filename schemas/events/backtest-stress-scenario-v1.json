@@ -1,0 +1,78 @@
+{
+  "$defs": {
+    "StressType": {
+      "enum": [
+        "COST_MULTIPLIER",
+        "LATENCY_MULTIPLIER",
+        "LIQUIDITY_FACTOR",
+        "CORRELATION_SHOCK",
+        "STABLECOIN_DEPEG",
+        "VENUE_HALT",
+        "PRICE_GAP",
+        "FUNDING_SHOCK",
+        "ORDER_BOOK_GAP",
+        "RATE_LIMIT_DISCONNECT",
+        "MODEL_UNAVAILABLE",
+        "DATA_LAG",
+        "STRATEGY_FAILURE",
+        "HISTORICAL_EVENT_REPLAY"
+      ],
+      "title": "StressType",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.backtest-stress-scenario/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "ends_at": {
+      "format": "date-time",
+      "title": "Ends At",
+      "type": "string"
+    },
+    "multiplier": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "gt": "0",
+      "title": "Multiplier"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    },
+    "starts_at": {
+      "format": "date-time",
+      "title": "Starts At",
+      "type": "string"
+    },
+    "stress_scenario_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Stress Scenario Id",
+      "type": "string"
+    },
+    "stress_type": {
+      "$ref": "#/$defs/StressType"
+    }
+  },
+  "required": [
+    "stress_scenario_id",
+    "stress_type",
+    "multiplier",
+    "starts_at",
+    "ends_at",
+    "source"
+  ],
+  "title": "StressScenario",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.backtest-stress-scenario",
+  "x-aegisquant-schema-version": "1.0.0"
+}
