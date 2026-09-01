@@ -1,0 +1,52 @@
+{
+  "allowed_stages": [
+    "PAPER"
+  ],
+  "fixture_only": true,
+  "live_trading_locked": true,
+  "private_key_persisted": false,
+  "public_key_hex": "7c4c0de684e7072df4b58ab7196c8bffcc9765c2cd445987a2800da6aa2c537f",
+  "schema_version": "p11-signed-risk-policy-evidence-v1",
+  "secret_store_access_performed": false,
+  "signature_verified": true,
+  "signed_policy": {
+    "policy": {
+      "allowed_stages": [
+        "PAPER"
+      ],
+      "automatic_recovery_enabled": false,
+      "caution_target_scale": "0.50",
+      "effective_at": "2026-08-31T18:00:00Z",
+      "example_values_only": true,
+      "expires_at": "2026-09-02T18:00:00Z",
+      "maximum_daily_loss_fraction": "0.05",
+      "maximum_drawdown_fraction": "0.10",
+      "maximum_margin_utilization": "0.80",
+      "maximum_rumor_reduction_fraction": "0.25",
+      "minimum_liquidity_score": "0.20",
+      "policy_id": "risk-policy-p11-fixture",
+      "pre_trade_limits": {
+        "maximum_account_gross_weight": "0.60",
+        "maximum_asset_gross_weight": "0.40",
+        "maximum_order_weight": "0.30",
+        "maximum_strategy_gross_weight": "0.60"
+      },
+      "recovery_conditions": [
+        "DATA_FRESH",
+        "MODEL_FRESH",
+        "LEDGER_RECONCILED",
+        "MARGIN_SAFE",
+        "LIQUIDITY_SAFE",
+        "VENUE_OPERATIONAL",
+        "SECURITY_CLEAR",
+        "MAJOR_EVENT_CLEAR"
+      ],
+      "schema_version": "p11-risk-policy-v1",
+      "snapshot_max_age_seconds": 30,
+      "version": "p11-risk-fixture-v1"
+    },
+    "policy_sha256": "53475d94967152656eff8a7a3a230bf1f89e6e8f3dd9ca614dedeca15b60da78",
+    "signature_hex": "ab1aa4ee53aa4b7b6651b9634008e6fa72d43e7b9a2f6614315bc945c0ae6911a5787e0321723fb40ecfd2e3524f209beb8d093c4913977ea7a968c7b55e3306",
+    "signer_key_id": "p11-fixture-signer"
+  }
+}

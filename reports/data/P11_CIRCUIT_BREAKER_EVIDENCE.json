@@ -1,0 +1,111 @@
+{
+  "all_breaker_types_covered": true,
+  "breaker_types": [
+    "DATA",
+    "MODEL",
+    "LOSS",
+    "MARGIN",
+    "LIQUIDITY",
+    "VENUE",
+    "SECURITY",
+    "MAJOR_EVENT"
+  ],
+  "outcome": {
+    "alerts": [
+      {
+        "alert_id": "loss:1788285602",
+        "breaker_type": "LOSS",
+        "created_at": "2026-09-01T18:00:02Z",
+        "evidence_ids": [
+          "AQ-RISK-LOSS-LIMIT"
+        ],
+        "reason_code": "AQ-RISK-LOSS-LIMIT",
+        "state": "REDUCE_ONLY"
+      },
+      {
+        "alert_id": "loss:1788285602",
+        "breaker_type": "LOSS",
+        "created_at": "2026-09-01T18:00:02Z",
+        "evidence_ids": [
+          "AQ-RISK-DRAWDOWN-LIMIT"
+        ],
+        "reason_code": "AQ-RISK-DRAWDOWN-LIMIT",
+        "state": "REDUCE_ONLY"
+      },
+      {
+        "alert_id": "margin:1788285602",
+        "breaker_type": "MARGIN",
+        "created_at": "2026-09-01T18:00:02Z",
+        "evidence_ids": [
+          "AQ-RISK-MARGIN-LIMIT"
+        ],
+        "reason_code": "AQ-RISK-MARGIN-LIMIT",
+        "state": "REDUCE_ONLY"
+      },
+      {
+        "alert_id": "liquidity:1788285602",
+        "breaker_type": "LIQUIDITY",
+        "created_at": "2026-09-01T18:00:02Z",
+        "evidence_ids": [
+          "AQ-RISK-LIQUIDITY-LIMIT"
+        ],
+        "reason_code": "AQ-RISK-LIQUIDITY-LIMIT",
+        "state": "REDUCE_ONLY"
+      },
+      {
+        "alert_id": "venue:1788285602",
+        "breaker_type": "VENUE",
+        "created_at": "2026-09-01T18:00:02Z",
+        "evidence_ids": [
+          "AQ-RISK-VENUE-HALTED"
+        ],
+        "reason_code": "AQ-RISK-VENUE-HALTED",
+        "state": "HALTED"
+      },
+      {
+        "alert_id": "security:1788285602",
+        "breaker_type": "SECURITY",
+        "created_at": "2026-09-01T18:00:02Z",
+        "evidence_ids": [
+          "AQ-RISK-SECURITY-HALTED"
+        ],
+        "reason_code": "AQ-RISK-SECURITY-HALTED",
+        "state": "HALTED"
+      },
+      {
+        "alert_id": "major_event:1788285602",
+        "breaker_type": "MAJOR_EVENT",
+        "created_at": "2026-09-01T18:00:02Z",
+        "evidence_ids": [
+          "AQ-RISK-MAJOR-EVENT-UNCLEARED"
+        ],
+        "reason_code": "AQ-RISK-MAJOR-EVENT-UNCLEARED",
+        "state": "REDUCE_ONLY"
+      },
+      {
+        "alert_id": "major_event:1788285602",
+        "breaker_type": "MAJOR_EVENT",
+        "created_at": "2026-09-01T18:00:02Z",
+        "evidence_ids": [
+          "AQ-RISK-PLAYBOOK-HALT"
+        ],
+        "reason_code": "AQ-RISK-PLAYBOOK-HALT",
+        "state": "HALTED"
+      }
+    ],
+    "new_risk_allowed": false,
+    "reason_codes": [
+      "AQ-RISK-LOSS-LIMIT",
+      "AQ-RISK-DRAWDOWN-LIMIT",
+      "AQ-RISK-MARGIN-LIMIT",
+      "AQ-RISK-LIQUIDITY-LIMIT",
+      "AQ-RISK-VENUE-HALTED",
+      "AQ-RISK-SECURITY-HALTED",
+      "AQ-RISK-MAJOR-EVENT-UNCLEARED",
+      "AQ-RISK-PLAYBOOK-HALT"
+    ],
+    "state": "HALTED",
+    "target_scale": "0"
+  },
+  "schema_version": "p11-circuit-breaker-evidence-v1"
+}

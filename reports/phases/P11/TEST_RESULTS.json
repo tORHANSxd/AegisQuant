@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P11",
+  "generated_at_utc": "2026-09-01T19:35:15.127295Z",
+  "implementation_commit": "7744354c993334a572a4e4e5a61e53eabc62453f",
+  "result": "pass",
+  "formal_acceptance_deferred": true,
+  "full_suite": {
+    "runtime": "Python 3.13.15",
+    "collected": 481,
+    "passed": 481,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 10,
+    "test_duration_seconds": 40.64,
+    "stage_duration_seconds": 43.648
+  },
+  "python_314_contract": {
+    "runtime": "Python 3.14.7 candidate",
+    "collected": 444,
+    "passed": 444,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 10,
+    "test_duration_seconds": 53.33,
+    "stage_duration_seconds": 76.395,
+    "status": "passed"
+  },
+  "machine_evidence": {
+    "data_json_artifacts": 9,
+    "risk_json_artifacts": 2,
+    "generation_status": "passed",
+    "verification_status": "passed"
+  },
+  "mutation": {
+    "mutants_total": 11,
+    "killed": 11,
+    "survived": 0,
+    "invalid": 0,
+    "score": 1.0,
+    "threshold": 0.9,
+    "status": "passed"
+  },
+  "ci": {
+    "stages": 35,
+    "passed": 35,
+    "failed": 0,
+    "duration_seconds": 400.169,
+    "status": "passed",
+    "pre_final_attempts": [
+      {
+        "scope": "security_scan",
+        "secret_findings": 1,
+        "reason": "deterministic idempotency content hash was classified as a high-entropy secret",
+        "real_secret": false,
+        "resolution": "added exact content-address field exclusions and reran the full scan with zero findings"
+      },
+      {
+        "scope": "complete_ci",
+        "passed_stages": 34,
+        "failed_stages": 1,
+        "reason": "Bandit B105 classified the false secret-store audit flag as a hardcoded password",
+        "real_credential": false,
+        "resolution": "represented the boolean audit value through a typed constant; standalone and complete CI reruns passed"
+      }
+    ]
+  },
+  "security": {
+    "bandit_findings": 0,
+    "secret_findings": 0,
+    "python_dependency_audit": "passed",
+    "javascript_dependency_audit": "passed",
+    "python_unknown_licenses": 0,
+    "real_account_access_performed": false,
+    "secret_store_access_performed": false
+  },
+  "safety_gates": {
+    "network_requests_performed_by_p11_fixture_generation": 0,
+    "private_key_persisted": false,
+    "order_command_created": false,
+    "external_side_effect_performed": false,
+    "risk_override_api_present": false,
+    "approved_target_amplified": false,
+    "automatic_less_safe_transition_allowed": false,
+    "rumor_full_liquidation_allowed": false
+  },
+  "final_holdout_state": "LOCKED",
+  "live_trading_locked": true,
+  "formal_acceptance_status": "deferred"
+}

@@ -1,0 +1,38 @@
+{
+  "confirmed_decision": {
+    "action": "HALT",
+    "confirmation": "CONFIRMED",
+    "event_id": "official-security-fixture",
+    "llm_full_liquidation_allowed": false,
+    "playbook_id": "official-security-halt",
+    "reason_codes": [
+      "AQ-RISK-OFFICIAL-SECURITY-HALT"
+    ],
+    "reduction_fraction": "0",
+    "target_state": "HALTED"
+  },
+  "llm_full_liquidation_allowed": false,
+  "playbook_types": [
+    "OFFICIAL_SECURITY_INCIDENT",
+    "WITHDRAWAL_SUSPENSION",
+    "STABLECOIN_DEPEG",
+    "MAJOR_REGULATORY",
+    "INFRASTRUCTURE_OUTAGE"
+  ],
+  "registry_sha256": "ed17f401f5b8f44a6f1a60edb081021da9a5d56ddae5683cef8f52bce950c0d2",
+  "rumor_decision": {
+    "action": "REDUCE",
+    "confirmation": "RUMOR",
+    "event_id": "rumor-depeg-fixture",
+    "llm_full_liquidation_allowed": false,
+    "playbook_id": null,
+    "reason_codes": [
+      "AQ-RISK-RUMOR-CONTAINED"
+    ],
+    "reduction_fraction": "0.20",
+    "target_state": "REDUCE_ONLY"
+  },
+  "rumor_full_liquidation_allowed": false,
+  "schema_version": "p11-playbook-evidence-v1",
+  "signature_verified": true
+}

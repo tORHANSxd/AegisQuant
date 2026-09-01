@@ -1,0 +1,8 @@
+{
+  "files_scanned": 59,
+  "research_can_create_order_intent": false,
+  "risk_bypass_api_present": false,
+  "risk_import_violations": [],
+  "risk_override_api_present": false,
+  "schema_version": "p11-architecture-evidence-v1"
+}

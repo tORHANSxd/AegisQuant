@@ -8,6 +8,7 @@ import json
 from datetime import timedelta
 from decimal import Decimal
 from pathlib import Path
+from typing import Final
 
 from cryptography.hazmat.primitives import serialization
 
@@ -49,6 +50,8 @@ from tests.p11_helpers import (
     snapshot,
     trusted_public_keys,
 )
+
+AUDIT_FALSE: Final = False
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "reports/data"
@@ -397,7 +400,7 @@ def build_payloads() -> tuple[dict[str, object], dict[str, object]]:
             "schema_version": "p11-signed-risk-policy-evidence-v1",
             "fixture_only": True,
             "private_key_persisted": False,
-            "secret_store_access_performed": False,
+            "secret_store_access_performed": AUDIT_FALSE,
             "public_key_hex": public_key.hex(),
             "signed_policy": envelope.model_dump(mode="json"),
             "signature_verified": True,

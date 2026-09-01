@@ -1,0 +1,47 @@
+{
+  "deployment_stage": "PAPER",
+  "external_side_effect_performed": false,
+  "order_command_created": false,
+  "order_intent": {
+    "created_at": "2026-09-01T18:00:03Z",
+    "idempotency_key": "17d78ff9fd7bed70f230de2285d6ee89538dc9e19ecf46b4b1f20cf53e2a0181",
+    "instrument_id": "BTC-USDT-PERP",
+    "limit_price": null,
+    "order_intent_id": "17d78ff9fd7bed70f230de2285d6ee89538dc9e19ecf46b4b1f20cf53e2a0181",
+    "order_type": "MARKET",
+    "quantity": {
+      "amount": "0.01",
+      "asset_id": "BTC"
+    },
+    "reduce_only": false,
+    "risk_decision_id": "2869a1298a188cb19ef7b761e36a22fc635e4a53563945aa1597d2150455fe76",
+    "side": "BUY",
+    "time_in_force": "IOC",
+    "valid_until": "2026-09-01T18:00:12Z"
+  },
+  "order_intent_requires_risk_decision": true,
+  "proposal_id": "proposal-p11-fixture",
+  "request": {
+    "account_id": "paper-account",
+    "asset_id": "BTC",
+    "created_at": "2026-09-01T18:00:03Z",
+    "instrument_id": "BTC-USDT-PERP",
+    "limit_price": null,
+    "order_type": "MARKET",
+    "proposal_id": "proposal-p11-fixture",
+    "quantity": {
+      "amount": "0.01",
+      "asset_id": "BTC"
+    },
+    "request_id": "p11-evidence-paper-request",
+    "requested_delta_weight": "0.1250000000000000000000000000",
+    "risk_decision_id": "2869a1298a188cb19ef7b761e36a22fc635e4a53563945aa1597d2150455fe76",
+    "side": "BUY",
+    "strategy_id": "strategy-core",
+    "time_in_force": "IOC",
+    "valid_until": "2026-09-01T18:00:12Z"
+  },
+  "risk_decision_id": "2869a1298a188cb19ef7b761e36a22fc635e4a53563945aa1597d2150455fe76",
+  "schema_version": "p11-pretrade-evidence-v1",
+  "strategy_can_amplify_approved_target": false
+}

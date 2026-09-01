@@ -1,0 +1,73 @@
+{
+  "actions_observed": [
+    "HALT",
+    "REDUCE"
+  ],
+  "fixture_only": true,
+  "live_calibration_claim": false,
+  "results": [
+    {
+      "action": "REDUCE",
+      "affected_venues": [],
+      "projected_loss_fraction": "0.1390923047195464869952104982",
+      "reason_codes": [
+        "AQ-RISK-STRESS-REDUCE-ONLY"
+      ],
+      "scenario_id": "p11-depeg-liquidity",
+      "state": "REDUCE_ONLY",
+      "stressed_liquidity_score": "0.0900",
+      "stressed_margin_utilization": "0.60",
+      "stressed_volatility": "0.1016060178329040988894171682"
+    },
+    {
+      "action": "HALT",
+      "affected_venues": [
+        "paper-venue"
+      ],
+      "projected_loss_fraction": "0.01808461495993521242788721404",
+      "reason_codes": [
+        "AQ-RISK-STRESS-KILL-SWITCH"
+      ],
+      "scenario_id": "p11-venue-halt",
+      "state": "HALTED",
+      "stressed_liquidity_score": "0.90",
+      "stressed_margin_utilization": "0.20",
+      "stressed_volatility": "0.08296096616224775603705136974"
+    }
+  ],
+  "scenarios": [
+    {
+      "asset_return_shocks": {
+        "BTC": "-0.30",
+        "ETH": "-0.25"
+      },
+      "correlation_multiplier": "1.50",
+      "liquidity_multiplier": "0.10",
+      "margin_multiplier": "3",
+      "scenario_id": "p11-depeg-liquidity",
+      "stablecoin_return_shocks": {
+        "USDT": "-0.10"
+      },
+      "unavailable_venues": []
+    },
+    {
+      "asset_return_shocks": {
+        "BTC": "-0.05",
+        "ETH": "-0.05"
+      },
+      "correlation_multiplier": "1",
+      "liquidity_multiplier": "1",
+      "margin_multiplier": "1",
+      "scenario_id": "p11-venue-halt",
+      "stablecoin_return_shocks": {},
+      "unavailable_venues": [
+        "paper-venue"
+      ]
+    }
+  ],
+  "schema_version": "p11-stress-results-v1",
+  "states_observed": [
+    "HALTED",
+    "REDUCE_ONLY"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "approved_decision": {
+    "approved_targets": [
+      {
+        "account_id": "paper-account",
+        "approved_delta_weight": "0.2500000000000000000000000000",
+        "approved_target_weight": "0.2500000000000000000000000000",
+        "asset_id": "BTC",
+        "current_weight": "0",
+        "instrument_id": "BTC-USDT-PERP",
+        "proposed_target_weight": "0.2500000000000000000000000000",
+        "strategy_id": "strategy-core"
+      },
+      {
+        "account_id": "paper-account",
+        "approved_delta_weight": "-0.1116922991987042485577442807",
+        "approved_target_weight": "-0.1116922991987042485577442807",
+        "asset_id": "ETH",
+        "current_weight": "0",
+        "instrument_id": "ETH-USDT-PERP",
+        "proposed_target_weight": "-0.1116922991987042485577442807",
+        "strategy_id": "strategy-core"
+      }
+    ],
+    "decided_at": "2026-09-01T18:00:02Z",
+    "new_risk_allowed": true,
+    "policy_sha256": "53475d94967152656eff8a7a3a230bf1f89e6e8f3dd9ca614dedeca15b60da78",
+    "policy_version": "p11-risk-fixture-v1",
+    "proposal_id": "proposal-p11-fixture",
+    "proposal_sha256": "e4c917055d1e494d97e3ea9aa35fc8514e1eda56e3e7f572b7150b6247380831",
+    "reason_codes": [
+      "AQ-RISK-NORMAL"
+    ],
+    "risk_decision_id": "2869a1298a188cb19ef7b761e36a22fc635e4a53563945aa1597d2150455fe76",
+    "snapshot_id": "snapshot-p11-fixture",
+    "snapshot_sha256": "7b7ad648a0fa6d197b1a0e13fe75cd51307b72a3dc89545e66c35e82160cb90b",
+    "state": "NORMAL",
+    "status": "APPROVED",
+    "valid_until": "2026-09-01T18:00:32Z"
+  },
+  "approved_target_amplified": false,
+  "independent_snapshot": true,
+  "schema_version": "p11-risk-decision-evidence-v1",
+  "snapshot": {
+    "as_of_time": "2026-09-01T18:00:00Z",
+    "available_at": "2026-09-01T18:00:01Z",
+    "daily_pnl_fraction": "0",
+    "data_last_available_at": "2026-09-01T18:00:00Z",
+    "drawdown_fraction": "0",
+    "ledger_reconciled": true,
+    "liquidity_score": "0.90",
+    "major_event_clear": true,
+    "margin_utilization": "0.20",
+    "model_last_available_at": "2026-09-01T18:00:00Z",
+    "portfolio_gross_weight": "0",
+    "positions": [
+      {
+        "account_id": "paper-account",
+        "asset_id": "BTC",
+        "instrument_id": "BTC-USDT-PERP",
+        "signed_weight": "0",
+        "strategy_id": "strategy-core"
+      },
+      {
+        "account_id": "paper-account",
+        "asset_id": "ETH",
+        "instrument_id": "ETH-USDT-PERP",
+        "signed_weight": "0",
+        "strategy_id": "strategy-core"
+      }
+    ],
+    "security_clear": true,
+    "snapshot_id": "snapshot-p11-fixture",
+    "snapshot_sha256": "7b7ad648a0fa6d197b1a0e13fe75cd51307b72a3dc89545e66c35e82160cb90b",
+    "venue_operational": true
+  },
+  "stale_data_allows_new_risk": false,
+  "stale_decision": {
+    "approved_targets": [],
+    "decided_at": "2026-09-01T18:00:02Z",
+    "new_risk_allowed": false,
+    "policy_sha256": "53475d94967152656eff8a7a3a230bf1f89e6e8f3dd9ca614dedeca15b60da78",
+    "policy_version": "p11-risk-fixture-v1",
+    "proposal_id": "proposal-p11-fixture",
+    "proposal_sha256": "e4c917055d1e494d97e3ea9aa35fc8514e1eda56e3e7f572b7150b6247380831",
+    "reason_codes": [
+      "AQ-RISK-DATA-STALE",
+      "AQ-RISK-MODEL-STALE"
+    ],
+    "risk_decision_id": "985d9ebe002c15e58e7d13cfd76c6a112388d3da6d7e6ddcfb825191f46187fc",
+    "snapshot_id": "snapshot-p11-fixture",
+    "snapshot_sha256": "fbff24321488e220dcc68448f5309605071b845f4ca1620edf65afcd9e0fba30",
+    "state": "CAUTION",
+    "status": "REJECTED",
+    "valid_until": "2026-09-01T18:00:32Z"
+  }
+}

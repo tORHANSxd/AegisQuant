@@ -1,0 +1,32 @@
+{
+  "estimate": {
+    "asset_ids": [
+      "BTC",
+      "ETH"
+    ],
+    "available_at": "2026-09-01T18:00:00Z",
+    "estimate_sha256": "93ce432adc77ba9cdc13585ae2ab9460902d2a6009f49b5466aea128b9c74017",
+    "factor_ids": [
+      "market"
+    ],
+    "matrix": [
+      [
+        "0.10",
+        "0.0300"
+      ],
+      [
+        "0.0300",
+        "0.1850"
+      ]
+    ],
+    "observed_at": "2026-09-01T17:59:59Z",
+    "regime": "STRESSED",
+    "regime_multiplier": "2",
+    "shrinkage": "0.50"
+  },
+  "factor_risk_applied": true,
+  "future_covariance_used": false,
+  "regime_risk_applied": true,
+  "schema_version": "p11-risk-estimation-evidence-v1",
+  "shrinkage_applied": true
+}

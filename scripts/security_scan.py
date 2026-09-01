@@ -24,7 +24,8 @@ DETECT_LINE_EXCLUDE = (
     r"first_digest|second_digest|evidence_commit|implementation_commit|pinned_commit|"
     r"terms_version_hash|P00_EVIDENCE_COMMIT|"
     r"P00_IMPLEMENTATION_COMMIT).*|"
-    r'.*"(?:ledger_snapshot_id|payload_hash|public_key_base64|signature_base64|'
+    r'.*"(?:ledger_snapshot_id|payload_hash|idempotency_key|order_intent_id|risk_decision_id|'
+    r"public_key_base64|signature_base64|"
     r"public_key_hex|signature_hex|"
     r'(?:source_|rebuilt_)?(?:last_event_hash|state_hash))"\s*:.*|'
     r'.*"revision"\s*:.*|.*revision\s*=.*|'

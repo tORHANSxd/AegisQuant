@@ -1,0 +1,23 @@
+{
+  "capacity_satisfied": true,
+  "constraint_reasons": [
+    "AQ-PORTFOLIO-ASSET-CONSTRAINT:BTC",
+    "AQ-PORTFOLIO-CONFIDENCE-DISCOUNT",
+    "AQ-PORTFOLIO-CONTRACT-CONSTRAINT:BTC-USDT-PERP"
+  ],
+  "dimensions": [
+    "ASSET",
+    "CONTRACT",
+    "STRATEGY",
+    "SLEEVE",
+    "VENUE",
+    "STABLECOIN",
+    "CORRELATION_CLUSTER"
+  ],
+  "expected_volatility": "0.08296096616224775603705136974",
+  "gross_weight": "0.3616922991987042485577442807",
+  "impact_satisfied": true,
+  "randomized_property_test": "tests/property/test_portfolio_risk_properties.py",
+  "schema_version": "p11-constraint-evidence-v1",
+  "turnover": "0.3616922991987042485577442807"
+}

@@ -1,0 +1,84 @@
+{
+  "automatic_less_safe_transition_allowed": false,
+  "automatic_recovery_allowed": false,
+  "kill_switch_replayed": true,
+  "reduce_only_replayed": true,
+  "replay": {
+    "final_state": "NORMAL",
+    "initial_state": "NORMAL",
+    "order": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "transitions": [
+      {
+        "actor": "independent-risk-engine",
+        "automatic": true,
+        "occurred_at": "2026-09-01T18:00:00Z",
+        "previous_state": "NORMAL",
+        "reason_code": "AQ-RISK-MARGIN-LIMIT",
+        "recovery_conditions": [],
+        "sequence": 1,
+        "target_state": "REDUCE_ONLY"
+      },
+      {
+        "actor": "independent-risk-engine",
+        "automatic": true,
+        "occurred_at": "2026-09-01T18:00:01Z",
+        "previous_state": "REDUCE_ONLY",
+        "reason_code": "AQ-RISK-SECURITY-HALTED",
+        "recovery_conditions": [],
+        "sequence": 2,
+        "target_state": "HALTED"
+      },
+      {
+        "actor": "human-operator",
+        "automatic": false,
+        "occurred_at": "2026-09-01T18:00:02Z",
+        "previous_state": "HALTED",
+        "reason_code": "human-recovery-start",
+        "recovery_conditions": [
+          "DATA_FRESH",
+          "LEDGER_RECONCILED",
+          "LIQUIDITY_SAFE",
+          "MAJOR_EVENT_CLEAR",
+          "MARGIN_SAFE",
+          "MODEL_FRESH",
+          "SECURITY_CLEAR",
+          "VENUE_OPERATIONAL"
+        ],
+        "sequence": 3,
+        "target_state": "RECOVERY"
+      },
+      {
+        "actor": "human-operator",
+        "automatic": false,
+        "occurred_at": "2026-09-01T18:00:03Z",
+        "previous_state": "RECOVERY",
+        "reason_code": "human-recovery-complete",
+        "recovery_conditions": [
+          "DATA_FRESH",
+          "LEDGER_RECONCILED",
+          "LIQUIDITY_SAFE",
+          "MAJOR_EVENT_CLEAR",
+          "MARGIN_SAFE",
+          "MODEL_FRESH",
+          "SECURITY_CLEAR",
+          "VENUE_OPERATIONAL"
+        ],
+        "sequence": 4,
+        "target_state": "NORMAL"
+      }
+    ]
+  },
+  "schema_version": "p11-state-replay-evidence-v1",
+  "states": [
+    "NORMAL",
+    "CAUTION",
+    "REDUCE_ONLY",
+    "HALTED",
+    "RECOVERY"
+  ]
+}
