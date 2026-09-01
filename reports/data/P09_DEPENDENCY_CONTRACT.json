@@ -1,0 +1,1 @@
+{"external_frameworks_installed_or_imported":false,"live_trading_locked":true,"new_runtime_dependencies_added":false,"python_runtime":"3.13.15","schema_version":"p09-dependency-contract-v1","versions":{"PyYAML":"6.0.3","polars":"1.44.1","pydantic":"2.13.5"}}

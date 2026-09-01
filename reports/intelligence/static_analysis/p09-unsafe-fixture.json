@@ -1,0 +1,98 @@
+{
+  "schema_version": "1",
+  "source_id": "p09-unsafe-fixture",
+  "artifact_id": "ef416a66d8f0bf5460e064aad930ae79cd26df1db709bd7148b9fa4c2487f0ed",
+  "artifact_sha256": "4b929b6f72162b911a0b67417af637a3c48d3d13fd95561c0645768fff4474cd",
+  "language": "python",
+  "syntax_valid": true,
+  "imports": [
+    "os",
+    "pickle",
+    "requests",
+    "subprocess"
+  ],
+  "platform_apis": [],
+  "parameters": [
+    "API_TOKEN_REFERENCE"
+  ],
+  "scheduled_callbacks": [],
+  "data_calls": [],
+  "trade_calls": [],
+  "risk_calls": [],
+  "findings": [
+    {
+      "finding_id": "5c938ff3b5b99502f6e9a1d3f5c286e45059cfcc599344240aa8bfd4ac94d9c9",
+      "category": "subprocess_import",
+      "severity": "HIGH",
+      "line": 3,
+      "symbol": "subprocess",
+      "message": "subprocess module imported"
+    },
+    {
+      "finding_id": "73a61aabb4086795ad5c68e32b06cee30c16aa244a8b591de691ae2d91e1438c",
+      "category": "network_import",
+      "severity": "HIGH",
+      "line": 5,
+      "symbol": "requests",
+      "message": "network-capable module imported"
+    },
+    {
+      "finding_id": "b71a72bf31f52bbe8f499a23293c6d71d159321d3c4448f280727ed9c156ea28",
+      "category": "embedded_credential",
+      "severity": "CRITICAL",
+      "line": 7,
+      "symbol": "API_TOKEN_REFERENCE",
+      "message": "secret-like global assignment detected; value intentionally not reported"
+    },
+    {
+      "finding_id": "ece715b5296cdb67ad716fde10cdd24475fe143fd5f91693da5b06caa8f07ca7",
+      "category": "file_write",
+      "severity": "HIGH",
+      "line": 9,
+      "symbol": "open",
+      "message": "filesystem write detected"
+    },
+    {
+      "finding_id": "9bb904980c1a1ac8e659d311555ee48f4984696989964f68296a7ac1addec7d4",
+      "category": "network_call",
+      "severity": "HIGH",
+      "line": 10,
+      "symbol": "requests.get",
+      "message": "network-capable call detected"
+    },
+    {
+      "finding_id": "594bfd38c8c37e25305dbd610119ab4bbc263fe056525e338609fa7a47d94dd7",
+      "category": "subprocess",
+      "severity": "CRITICAL",
+      "line": 11,
+      "symbol": "subprocess.run",
+      "message": "process execution detected"
+    },
+    {
+      "finding_id": "5cedd7b6dc7059c37ed72f5cebfa9df6e701e643bcd9fefeb29cb3077b4186db",
+      "category": "unsafe_deserialization",
+      "severity": "HIGH",
+      "line": 12,
+      "symbol": "pickle.loads",
+      "message": "unsafe or code-capable deserialization detected"
+    },
+    {
+      "finding_id": "39c5376a76f69d6b85fafbe13a6d8499cb40778e1544a51f63f62fa4c94839c7",
+      "category": "dynamic_execution",
+      "severity": "CRITICAL",
+      "line": 13,
+      "symbol": "eval",
+      "message": "dynamic code execution detected"
+    },
+    {
+      "finding_id": "236c387e96e66ac2ba4a502c5a0917a3f474b447913873047afda9d3eb3a43d7",
+      "category": "destructive_file_operation",
+      "severity": "CRITICAL",
+      "line": 14,
+      "symbol": "os.remove",
+      "message": "destructive file operation detected"
+    }
+  ],
+  "review_state": "QUARANTINED",
+  "executable_allowed": false
+}

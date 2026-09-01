@@ -1,0 +1,42 @@
+{
+  "schema_version": "1",
+  "source_id": "jq_synthetic_trend_20260902",
+  "artifact_id": "fa15bf6d3d606d2ee6b6baae1e8c14b6ffe9c137810a2e0602c8217a945f270a",
+  "artifact_sha256": "22eefb778df3088fd0ee0ed1b5685a886ddf02be2d621cc96f11686aff447afd",
+  "language": "python",
+  "syntax_valid": true,
+  "imports": [],
+  "platform_apis": [
+    "attribute_history",
+    "get_index_stocks",
+    "order_target_value",
+    "run_daily",
+    "set_benchmark",
+    "set_order_cost",
+    "set_slippage"
+  ],
+  "parameters": [
+    "FEE_BPS",
+    "LOOKBACK",
+    "MAX_EXPOSURE",
+    "SLIPPAGE_BPS",
+    "context"
+  ],
+  "scheduled_callbacks": [
+    "run_daily"
+  ],
+  "data_calls": [
+    "attribute_history",
+    "get_index_stocks"
+  ],
+  "trade_calls": [
+    "order_target_value"
+  ],
+  "risk_calls": [
+    "set_order_cost",
+    "set_slippage"
+  ],
+  "findings": [],
+  "review_state": "REVIEW_REQUIRED",
+  "executable_allowed": false
+}
