@@ -250,15 +250,46 @@ def test_official_web_change_is_hash_versioned_and_host_allowlisted() -> None:
 
 def test_bluesky_detects_contract_and_falls_back_to_firehose() -> None:
     compatible: BlueskyStreamSelection = select_bluesky_transport(
+        detected_event_fields=frozenset({"$type", "payload", "seq"}),
+        jetstream_available=True,
+    )
+    legacy = select_bluesky_transport(
         detected_event_fields=frozenset({"did", "time_us", "kind", "commit"}),
         jetstream_available=True,
     )
     fallback = select_bluesky_transport(
         detected_event_fields=frozenset({"did", "time_us"}), jetstream_available=True
     )
-    assert compatible.mode == "JETSTREAM" and compatible.fallback_used is False
+    assert compatible.mode == "JETSTREAM_V2" and compatible.fallback_used is False
+    assert legacy.mode == "JETSTREAM_V1_LEGACY" and legacy.fallback_used is True
     assert fallback.mode == "FIREHOSE" and fallback.fallback_used is True
     assert fallback.checkpoint_parameter == "cursor"
+
+
+def test_bluesky_v2_message_uses_seq_cursor_and_payload_contract() -> None:
+    parsed = parse_bluesky_jetstream(
+        {
+            "$type": "message",
+            "payload": {
+                "$type": "network.bsky.jetstream.subscribeEvents#commit",
+                "seq": 12345,
+                "did": "did:plc:fixture123",
+                "time": "2026-09-01T00:00:00.000000Z",
+                "operation": "create",
+                "collection": "app.bsky.feed.post",
+                "rkey": "3fixture",
+                "record": {
+                    "$type": "app.bsky.feed.post",
+                    "createdAt": "2026-09-01T00:00:00Z",
+                    "text": "Protocol upgrade",
+                    "langs": ["en"],
+                },
+            },
+        },
+        observed_time=NOW,
+    )
+    assert parsed[0].checkpoint == "12345"
+    assert parsed[0].text == "Protocol upgrade"
 
 
 def test_github_webhook_requires_verified_signature() -> None:

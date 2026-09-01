@@ -16,8 +16,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--phase",
-        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09"),
-        default="P09",
+        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10"),
+        default="P10",
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
@@ -36,18 +36,20 @@ def main() -> int:
         "tests/performance",
         "tests/security",
     ]
-    if args.phase in {"P04", "P05", "P06", "P07", "P08", "P09"}:
+    if args.phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10"}:
         test_targets.extend(("tests/replay/intelligence", "tests/p04"))
-    if args.phase in {"P05", "P06", "P07", "P08", "P09"}:
+    if args.phase in {"P05", "P06", "P07", "P08", "P09", "P10"}:
         test_targets.extend(("tests/p05", "tests/mutation"))
-    if args.phase in {"P06", "P07", "P08", "P09"}:
+    if args.phase in {"P06", "P07", "P08", "P09", "P10"}:
         test_targets.append("tests/p06")
-    if args.phase in {"P07", "P08", "P09"}:
+    if args.phase in {"P07", "P08", "P09", "P10"}:
         test_targets.extend(("tests/research", "tests/p07"))
-    if args.phase in {"P08", "P09"}:
+    if args.phase in {"P08", "P09", "P10"}:
         test_targets.append("tests/p08")
-    if args.phase == "P09":
+    if args.phase in {"P09", "P10"}:
         test_targets.extend(("tests/intelligence", "tests/p09"))
+    if args.phase == "P10":
+        test_targets.append("tests/p10")
     command = [
         uv,
         "run",

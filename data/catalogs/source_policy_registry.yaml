@@ -209,7 +209,7 @@ policies:
     pii_mode: "PROHIBITED"
     policy_checked_at: "2026-09-01T05:45:12Z"
     terms_version_hash: null
-  - source_policy_id: "bluesky_jetstream_v1"
+  - source_policy_id: "bluesky_jetstream_v2"
     provider_id: "bluesky_jetstream"
     policy_status: "APPROVED"
     access_method: "PUBLIC_FEED"
@@ -265,4 +265,137 @@ policies:
     retention_days: 0
     pii_mode: "PROHIBITED"
     policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "fred_alfred_restricted_v1"
+    provider_id: "fred_alfred"
+    policy_status: "RESTRICTED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "offline vintage fixture verification until a local API-key reference exists"
+    content_scope: "FRED and ALFRED series observations and vintage dates"
+    raw_storage: "PROHIBITED"
+    derived_storage: "PROHIBITED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "NONE"
+    deletion_sync_required: false
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 0
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-02T00:00:00Z"
+    terms_version_hash: null
+  - source_policy_id: "coin_metrics_community_v1"
+    provider_id: "coin_metrics_community"
+    policy_status: "APPROVED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "personal noncommercial on-chain metric research and replay"
+    content_scope: "Coin Metrics Community API v4 public catalog and asset metrics"
+    raw_storage: "PUBLIC_APPEND_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: false
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-02T00:00:00Z"
+    terms_version_hash: null
+  - source_policy_id: "dune_official_restricted_v1"
+    provider_id: "dune_official"
+    policy_status: "RESTRICTED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "offline saved-query contract verification until key and query approval"
+    content_scope: "versioned read-only SQL registry and result manifests"
+    raw_storage: "PROHIBITED"
+    derived_storage: "PROHIBITED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "NONE"
+    deletion_sync_required: false
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 0
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-02T00:00:00Z"
+    terms_version_hash: null
+  - source_policy_id: "defillama_public_v1"
+    provider_id: "defillama_public"
+    policy_status: "APPROVED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "public DeFi metric research and replay"
+    content_scope: "DeFiLlama free api.llama.fi protocol and chain metrics only"
+    raw_storage: "PUBLIC_APPEND_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: false
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-02T00:00:00Z"
+    terms_version_hash: null
+  - source_policy_id: "official_web_catalog_v1"
+    provider_id: "official_web_catalog"
+    policy_status: "APPROVED"
+    access_method: "PUBLIC_FEED"
+    approved_use_case: "allow-listed official announcement discovery and change replay"
+    content_scope: "official exchange project regulator court central-bank and ETF issuer hosts"
+    raw_storage: "METADATA_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-02T00:00:00Z"
+    terms_version_hash: null
+  - source_policy_id: "reddit_unknown_deny_v1"
+    provider_id: "reddit_disabled"
+    policy_status: "DENIED"
+    access_method: "NONE"
+    approved_use_case: "No use before explicit source-rights approval"
+    content_scope: "All Reddit content"
+    raw_storage: "PROHIBITED"
+    derived_storage: "PROHIBITED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "NONE"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 0
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-02T00:00:00Z"
+    terms_version_hash: null
+  - source_policy_id: "discord_unknown_deny_v1"
+    provider_id: "discord_disabled"
+    policy_status: "DENIED"
+    access_method: "NONE"
+    approved_use_case: "No use before explicit source-rights approval"
+    content_scope: "All Discord content"
+    raw_storage: "PROHIBITED"
+    derived_storage: "PROHIBITED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "NONE"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 0
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-02T00:00:00Z"
     terms_version_hash: null

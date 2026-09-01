@@ -20,6 +20,7 @@ DETECT_EXCLUDE = (
 DETECT_LINE_EXCLUDE = (
     r"(?i)(?:.*(?:sha-?256|sha1|spec_sha256|artifact_manifest_sha256|expected_sha256|"
     r"commit_sha|request_hash|economic_event_hash|event_hash|vector_hash|application_sha256|"
+    r"dataset_manifest_hash|feature_snapshot_hash|snapshot_hash|source_hash|"
     r"first_digest|second_digest|evidence_commit|implementation_commit|pinned_commit|"
     r"terms_version_hash|P00_EVIDENCE_COMMIT|"
     r"P00_IMPLEMENTATION_COMMIT).*|"
@@ -57,8 +58,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--phase",
-        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09"),
-        default="P09",
+        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10"),
+        default="P10",
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]

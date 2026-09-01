@@ -15,7 +15,7 @@ def _json(path: Path) -> dict[str, object]:
     return cast("dict[str, object]", json.loads(path.read_text(encoding="utf-8")))
 
 
-def test_p09_state_is_verified_acceptance_deferred_live_locked_and_stops_before_p10(
+def test_p09_state_is_verified_acceptance_deferred_and_preserved_after_p10_started(
     project_root: Path,
 ) -> None:
     state = cast(
@@ -26,17 +26,26 @@ def test_p09_state_is_verified_acceptance_deferred_live_locked_and_stops_before_
     )
     previous = cast("dict[str, object]", state["previous_phase"])
     deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
-    assert state["current_phase"] == "P09"
-    assert state["next_phase"] == "P10"
+    assert state["current_phase"] in {"P09", "P10"}
     assert state["status"] == "in_progress"
-    assert state["implementation_status"] == "verified_acceptance_deferred"
     assert state["accepted_at_utc"] is None
     assert state["formal_acceptance_deferred"] is True
     assert state["live_trading_locked"] is True
-    assert previous["phase"] == "P08"
-    assert {item["phase"] for item in deferred} >= {"P05", "P06", "P07", "P08"}
+    if state["current_phase"] == "P09":
+        assert state["next_phase"] == "P10"
+        assert state["implementation_status"] == "verified_acceptance_deferred"
+        assert previous["phase"] == "P08"
+        assert {item["phase"] for item in deferred} >= {"P05", "P06", "P07", "P08"}
+    else:
+        assert state["next_phase"] == "P11"
+        assert previous["phase"] == "P09"
+        p09 = next(item for item in deferred if item["phase"] == "P09")
+        assert p09["implementation_commit_sha"] == previous["implementation_commit_sha"]
+        assert p09["evidence_commit_sha"] == previous["evidence_commit_sha"]
+        assert {item["phase"] for item in deferred} >= {"P05", "P06", "P07", "P08", "P09"}
     assert not (project_root / "reports/phases/P09/ACCEPTANCE.md").exists()
-    assert not (project_root / "reports/phases/P10").exists()
+    if state["current_phase"] == "P10":
+        assert (project_root / "reports/phases/P10/PLAN.md").exists()
 
 
 def test_p09_traceability_has_verified_tasks_and_deferred_acceptance_rows(
@@ -157,9 +166,9 @@ def test_p09_reports_and_compliance_are_complete_without_formal_acceptance(
     security = _json(project_root / "reports/security/SECURITY_SCAN_RESULTS.json")
     mutation = _json(project_root / "reports/testing/P09_MUTATION_RESULTS.json")
     holdout = _json(project_root / "reports/data/P07_HOLDOUT_EVIDENCE.json")
-    assert compliance["phase"] == "P09"
+    assert compliance["phase"] in {"P09", "P10"}
     assert compliance["status"] == "passed"
-    assert security["phase"] == "P09"
+    assert security["phase"] in {"P09", "P10"}
     assert security["status"] == "passed"
     assert mutation["status"] == "passed"
     assert cast(float, mutation["score"]) >= cast(float, mutation["threshold"])

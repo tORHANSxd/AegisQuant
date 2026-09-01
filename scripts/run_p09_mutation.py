@@ -96,7 +96,7 @@ MUTATIONS: Final = (
 THRESHOLD: Final = 0.90
 
 
-def _run_test(
+def run_test(
     root: Path, *, target: str, python_path: Path | None, timeout: int
 ) -> tuple[int, str, float]:
     environment = os.environ.copy()
@@ -121,7 +121,7 @@ def _run_test(
     return result.returncode, output[-4000:], time.perf_counter() - started
 
 
-def _run_mutation(root: Path, mutation: Mutation, *, timeout: int) -> MutationResult:
+def run_mutation(root: Path, mutation: Mutation, *, timeout: int) -> MutationResult:
     runtime = root / ".runtime"
     runtime.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
@@ -147,7 +147,7 @@ def _run_mutation(root: Path, mutation: Mutation, *, timeout: int) -> MutationRe
             newline="\n",
         )
         try:
-            exit_code, output, elapsed = _run_test(
+            exit_code, output, elapsed = run_test(
                 root,
                 target=mutation.test_target,
                 python_path=mutated_src,
@@ -190,7 +190,7 @@ def main() -> int:
         return 0 if passed else 1
     baseline_targets = sorted({mutation.test_target for mutation in MUTATIONS})
     baseline_results = [
-        _run_test(root, target=target, python_path=None, timeout=arguments.timeout)
+        run_test(root, target=target, python_path=None, timeout=arguments.timeout)
         for target in baseline_targets
     ]
     baseline_code = max(result[0] for result in baseline_results)
@@ -199,7 +199,7 @@ def main() -> int:
     results: list[MutationResult] = []
     if baseline_code == 0:
         for mutation in MUTATIONS:
-            result = _run_mutation(root, mutation, timeout=arguments.timeout)
+            result = run_mutation(root, mutation, timeout=arguments.timeout)
             results.append(result)
             print(f"[{result.name}] {result.status}")
     killed = sum(result.status == "killed" for result in results)

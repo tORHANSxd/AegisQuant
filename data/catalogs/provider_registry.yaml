@@ -250,18 +250,18 @@ providers:
     authority_level: "secondary"
     license_status: "approved"
     credentials_required: false
-    regions_or_account_constraints: ["public_records_only", "protocol_version_detection_required"]
+    regions_or_account_constraints: ["public_records_only", "jetstream_v2_primary_v1_legacy_only"]
     rate_limits: {maximum_wanted_collections: 100}
     latency_expectation_ms: null
     revision_policy: "sync_create_update_delete_with_cursor"
-    supported_datasets: ["public_posts"]
+    supported_datasets: ["public_posts", "revision_markers", "deletion_markers", "snapshot_backfill"]
     time_semantics_documented: true
     retention_policy: "Metadata only for 30 days with deletion propagation"
     quality_score: null
     incremental_value_score: null
     status: "approved"
     owner: "user"
-    source_policy_id: "bluesky_jetstream_v1"
+    source_policy_id: "bluesky_jetstream_v2"
     access_state: "ready"
   - provider_id: "github_public"
     provider_name: "GitHub public Releases and Security Advisories"
@@ -303,3 +303,143 @@ providers:
     owner: "user"
     source_policy_id: "youtube_official_restricted_v1"
     access_state: "awaiting_credentials"
+  - provider_id: "fred_alfred"
+    provider_name: "Federal Reserve FRED and ALFRED API"
+    provider_type: "macro"
+    access_method: "rest"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: true
+    regions_or_account_constraints: ["read_only_api_key_required", "vintage_available_time_required"]
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "append_every_vintage_without_overwrite"
+    supported_datasets: ["series_observations", "series_vintage_dates"]
+    time_semantics_documented: true
+    retention_policy: "No production collection before local secret reference; fixtures contain no credential"
+    quality_score: null
+    incremental_value_score: null
+    status: "trial"
+    owner: "user"
+    source_policy_id: "fred_alfred_restricted_v1"
+    access_state: "awaiting_credentials"
+  - provider_id: "coin_metrics_community"
+    provider_name: "Coin Metrics Community API v4"
+    provider_type: "onchain"
+    access_method: "rest"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["community_noncommercial_research_only"]
+    rate_limits: {requests_per_six_seconds: 10, parallel_requests: 10}
+    latency_expectation_ms: null
+    revision_policy: "append_reviewed_and_revised_metric_observations"
+    supported_datasets: ["asset_metrics", "catalog_assets"]
+    time_semantics_documented: true
+    retention_policy: "Public Community API observations for personal research; no redistribution"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "coin_metrics_community_v1"
+    access_state: "ready"
+  - provider_id: "dune_official"
+    provider_name: "Dune official query API"
+    provider_type: "onchain"
+    access_method: "rest"
+    authority_level: "derived"
+    license_status: "restricted"
+    credentials_required: true
+    regions_or_account_constraints: ["approved_saved_queries_only", "read_only_sql_only"]
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "version_sql_parameters_execution_and_result_manifest"
+    supported_datasets: ["saved_query_results"]
+    time_semantics_documented: true
+    retention_policy: "No production query before local secret reference and query approval"
+    quality_score: null
+    incremental_value_score: null
+    status: "trial"
+    owner: "user"
+    source_policy_id: "dune_official_restricted_v1"
+    access_state: "awaiting_credentials"
+  - provider_id: "defillama_public"
+    provider_name: "DeFiLlama free public API"
+    provider_type: "onchain"
+    access_method: "rest"
+    authority_level: "secondary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["free_api_base_only", "pro_api_key_path_prohibited"]
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "append_public_metric_observations"
+    supported_datasets: ["protocols", "protocol_tvl", "chain_tvl", "chains"]
+    time_semantics_documented: true
+    retention_policy: "Public metric observations for 30 days; no redistribution"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "defillama_public_v1"
+    access_state: "ready"
+  - provider_id: "official_web_catalog"
+    provider_name: "Allow-listed official authority web catalog"
+    provider_type: "news"
+    access_method: "rest"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["allowlisted_hosts_only", "metadata_and_change_snapshot_only"]
+    rate_limits: {requests_per_minute: 20}
+    latency_expectation_ms: null
+    revision_policy: "append_content_hash_revision"
+    supported_datasets: ["central_bank", "regulator", "court", "exchange", "project", "etf_issuer"]
+    time_semantics_documented: true
+    retention_policy: "Public metadata and permitted content snapshots for 30 days"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "official_web_catalog_v1"
+    access_state: "ready"
+  - provider_id: "reddit_disabled"
+    provider_name: "Reddit disabled source"
+    provider_type: "community"
+    access_method: "rest"
+    authority_level: "secondary"
+    license_status: "unknown"
+    credentials_required: false
+    regions_or_account_constraints: ["disabled_until_explicit_policy_approval"]
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "none"
+    supported_datasets: []
+    time_semantics_documented: false
+    retention_policy: "No collection or retention"
+    quality_score: null
+    incremental_value_score: null
+    status: "candidate"
+    owner: "user"
+    source_policy_id: "reddit_unknown_deny_v1"
+    access_state: "disabled"
+  - provider_id: "discord_disabled"
+    provider_name: "Discord disabled source"
+    provider_type: "community"
+    access_method: "rest"
+    authority_level: "secondary"
+    license_status: "unknown"
+    credentials_required: false
+    regions_or_account_constraints: ["disabled_until_explicit_policy_approval"]
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "none"
+    supported_datasets: []
+    time_semantics_documented: false
+    retention_policy: "No collection or retention"
+    quality_score: null
+    incremental_value_score: null
+    status: "candidate"
+    owner: "user"
+    source_policy_id: "discord_unknown_deny_v1"
+    access_state: "disabled"

@@ -230,14 +230,20 @@ SOURCE_CONTRACTS: Final = MappingProxyType(
                     "stream": _source_endpoint(
                         "stream",
                         "wss://jetstream2.us-east.bsky.network",
+                        "/xrpc/network.bsky.jetstream.subscribeEvents",
+                        {"kinds", "dids", "collections", "cursor", "maxMessageSizeBytes"},
+                    ),
+                    "stream_v1_legacy": _source_endpoint(
+                        "stream_v1_legacy",
+                        "wss://jetstream2.us-east.bsky.network",
                         "/subscribe",
                         {"wantedCollections", "wantedDids", "cursor", "compress"},
-                    )
+                    ),
                 }
             ),
             credentials_required=False,
             access_state=ProviderAccessState.READY,
-            checkpoint_field="time_us",
+            checkpoint_field="seq",
             revisions_supported=True,
             deletions_supported=True,
         ),
@@ -780,19 +786,35 @@ def parse_bluesky_jetstream(
     payload: Mapping[str, object], *, observed_time: datetime
 ) -> tuple[CollectedContent, ...]:
     observed = ensure_utc(observed_time)
-    did = _text(payload.get("did"), "did")
-    time_us = _integer(payload.get("time_us"), "time_us")
-    commit = _mapping(payload.get("commit"), "commit")
-    collection = _text(commit.get("collection"), "collection")
+    if payload.get("$type") == "message":
+        event = _mapping(payload.get("payload"), "payload")
+        event_type = _text(event.get("$type"), "payload.$type")
+        if not event_type.endswith("#commit"):
+            return ()
+        did = _text(event.get("did"), "payload.did")
+        checkpoint = str(_integer(event.get("seq"), "payload.seq"))
+        collection = _text(event.get("collection"), "payload.collection")
+        operation = _text(event.get("operation"), "payload.operation").casefold()
+        rkey = _text(event.get("rkey"), "payload.rkey")
+        record = _mapping(event.get("record") or {}, "payload.record")
+        witnessed_time = _timestamp(event.get("time"), "payload.time")
+    else:
+        did = _text(payload.get("did"), "did")
+        time_us = _integer(payload.get("time_us"), "time_us")
+        commit = _mapping(payload.get("commit"), "commit")
+        collection = _text(commit.get("collection"), "collection")
+        operation = _text(commit.get("operation"), "operation").casefold()
+        rkey = _text(commit.get("rkey"), "rkey")
+        record = _mapping(commit.get("record") or {}, "record")
+        cursor = payload.get("cursor")
+        checkpoint = str(_integer(cursor, "cursor")) if cursor is not None else str(time_us)
+        witnessed_time = datetime.fromtimestamp(time_us / 1_000_000, tz=UTC)
     if collection != "app.bsky.feed.post":
         return ()
-    operation = _text(commit.get("operation"), "operation").casefold()
-    rkey = _text(commit.get("rkey"), "rkey")
-    record = _mapping(commit.get("record") or {}, "record")
     published = (
         _timestamp(record.get("createdAt"), "createdAt")
         if record.get("createdAt") is not None
-        else datetime.fromtimestamp(time_us / 1_000_000, tz=UTC)
+        else witnessed_time
     )
     text = _text(record.get("text") or "[deleted]", "text")
     uri = f"at://{did}/{collection}/{rkey}"
@@ -817,7 +839,7 @@ def parse_bluesky_jetstream(
             modified_time=observed if operation == "update" else None,
             deleted_time=observed if operation == "delete" else None,
             revision=2 if operation in {"update", "delete"} else 1,
-            checkpoint=str(time_us),
+            checkpoint=checkpoint,
         ),
     )
 
@@ -833,14 +855,25 @@ class BlueskyStreamSelection(DomainModel):
 def select_bluesky_transport(
     *, detected_event_fields: frozenset[str], jetstream_available: bool
 ) -> BlueskyStreamSelection:
-    required_jetstream_fields = frozenset({"did", "time_us", "kind", "commit"})
-    if jetstream_available and required_jetstream_fields <= detected_event_fields:
+    required_v2_fields = frozenset({"$type", "payload", "seq"})
+    required_v1_fields = frozenset({"did", "time_us", "kind", "commit"})
+    if jetstream_available and required_v2_fields <= detected_event_fields:
         return BlueskyStreamSelection(
-            mode="JETSTREAM",
-            url="wss://jetstream2.us-east.bsky.network/subscribe",
+            mode="JETSTREAM_V2",
+            url=(
+                "wss://jetstream2.us-east.bsky.network/xrpc/network.bsky.jetstream.subscribeEvents"
+            ),
             checkpoint_parameter="cursor",
             fallback_used=False,
-            reason_code="AQ-BLUESKY-JETSTREAM-CONTRACT-COMPATIBLE",
+            reason_code="AQ-BLUESKY-JETSTREAM-V2-CONTRACT-COMPATIBLE",
+        )
+    if jetstream_available and required_v1_fields <= detected_event_fields:
+        return BlueskyStreamSelection(
+            mode="JETSTREAM_V1_LEGACY",
+            url="wss://jetstream2.us-east.bsky.network/subscribe",
+            checkpoint_parameter="cursor",
+            fallback_used=True,
+            reason_code="AQ-BLUESKY-JETSTREAM-V1-LEGACY-FALLBACK",
         )
     return BlueskyStreamSelection(
         mode="FIREHOSE",
