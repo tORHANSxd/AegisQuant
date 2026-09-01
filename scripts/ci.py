@@ -54,7 +54,7 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
 
 
 def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
-    """Return the ordered P03-P12 pipeline without network soak execution."""
+    """Return the ordered P03-P13 pipeline without network soak execution."""
     pnpm = resolve_command("pnpm")
     phase_status = [
         "P00=verified",
@@ -62,38 +62,40 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
         "P02=verified",
         "P03=verified",
     ]
-    if phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
         phase_status.append("P04=verified")
-    if phase in {"P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
         phase_status.append("P05=planned")
-    if phase in {"P06", "P07", "P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
         phase_status.append("P06=planned")
-    if phase in {"P07", "P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
         phase_status.append("P07=planned")
-    if phase in {"P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P08", "P09", "P10", "P11", "P12", "P13"}:
         phase_status.append("P08=planned")
-    if phase in {"P09", "P10", "P11", "P12"}:
+    if phase in {"P09", "P10", "P11", "P12", "P13"}:
         phase_status.append("P09=planned")
-    if phase in {"P10", "P11", "P12"}:
+    if phase in {"P10", "P11", "P12", "P13"}:
         phase_status.append("P10=planned")
-    if phase in {"P11", "P12"}:
+    if phase in {"P11", "P12", "P13"}:
         phase_status.append("P11=planned")
-    if phase == "P12":
+    if phase in {"P12", "P13"}:
         phase_status.append("P12=planned")
+    if phase == "P13":
+        phase_status.append("P13=planned")
     evidence_stages: list[tuple[str, list[str]]] = [
         (
             "p03-binance-evidence",
             [sys.executable, "scripts/generate_p03_binance_evidence.py", "--check"],
         )
     ]
-    if phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
         evidence_stages.append(
             (
                 "p04-multivenue-event-evidence",
                 [sys.executable, "scripts/generate_p04_evidence.py", "--check"],
             )
         )
-    if phase in {"P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
         evidence_stages.extend(
             (
                 (
@@ -106,7 +108,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P06", "P07", "P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
         evidence_stages.extend(
             (
                 (
@@ -123,7 +125,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P07", "P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P07", "P08", "P09", "P10", "P11", "P12", "P13"}:
         evidence_stages.extend(
             (
                 (
@@ -136,7 +138,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P08", "P09", "P10", "P11", "P12"}:
+    if phase in {"P08", "P09", "P10", "P11", "P12", "P13"}:
         evidence_stages.extend(
             (
                 (
@@ -149,7 +151,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P09", "P10", "P11", "P12"}:
+    if phase in {"P09", "P10", "P11", "P12", "P13"}:
         evidence_stages.extend(
             (
                 (
@@ -162,7 +164,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P10", "P11", "P12"}:
+    if phase in {"P10", "P11", "P12", "P13"}:
         evidence_stages.extend(
             (
                 (
@@ -175,7 +177,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase in {"P11", "P12"}:
+    if phase in {"P11", "P12", "P13"}:
         evidence_stages.extend(
             (
                 (
@@ -188,7 +190,7 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
-    if phase == "P12":
+    if phase in {"P12", "P13"}:
         evidence_stages.extend(
             (
                 (
@@ -198,6 +200,19 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 (
                     "p12-mutation",
                     [sys.executable, "-m", "scripts.run_p12_mutation", "--check"],
+                ),
+            )
+        )
+    if phase == "P13":
+        evidence_stages.extend(
+            (
+                (
+                    "p13-paper-shadow-chaos-evidence",
+                    [sys.executable, "-m", "scripts.generate_p13_evidence", "--check"],
+                ),
+                (
+                    "p13-mutation",
+                    [sys.executable, "-m", "scripts.run_p13_mutation", "--check"],
                 ),
             )
         )
@@ -251,8 +266,20 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--phase",
-        choices=("P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12"),
-        default="P12",
+        choices=(
+            "P03",
+            "P04",
+            "P05",
+            "P06",
+            "P07",
+            "P08",
+            "P09",
+            "P10",
+            "P11",
+            "P12",
+            "P13",
+        ),
+        default="P13",
     )
     parser.add_argument(
         "--output",
