@@ -5,7 +5,12 @@ status: "in_progress"
 started_at_utc: "2026-09-01T08:10:19.546643Z"
 accepted_at_utc: null
 commit_sha: null
-artifact_manifest_sha256: null
+artifact_manifest_sha256: "85ca8a785bf56dd83b72a61f210c4ab8cca5e3a34a7419817e6d31789efe7321"
+implementation_status: "verified"
+implementation_verified_at_utc: "2026-09-01T09:14:48.500567Z"
+implementation_commit_sha: "f0733bc70e7210cc41e875a878debc0765c1874a"
+evidence_commit_sha: null
+formal_acceptance_deferred: true
 live_trading_locked: true
 next_phase: "P07"
 waivers: []
