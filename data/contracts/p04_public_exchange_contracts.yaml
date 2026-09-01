@@ -1,0 +1,41 @@
+schema_version: "1.0.0"
+public_only: true
+authentication_used: false
+order_submission_enabled: false
+venues:
+  OKX:
+    provider_id: "okx_public"
+    official_docs: "https://www.okx.com/docs-v5/en/"
+    rest_base: "https://www.okx.com"
+    public_ws: "wss://ws.okx.com:8443/ws/v5/public"
+    instrument_path: "/api/v5/public/instruments"
+    orderbook_path: "/api/v5/market/books"
+    orderbook_channel: "books"
+    sequence_rule: "snapshot seqId; update prevSeqId must equal current seqId"
+    status_page: "https://www.okx.com/status"
+    changelog: "https://www.okx.com/docs-v5/log_en/"
+    excluded_channels: ["books-l2-tbt", "books50-l2-tbt"]
+  BYBIT:
+    provider_id: "bybit_public"
+    official_docs: "https://bybit-exchange.github.io/docs/v5/intro"
+    rest_base: "https://api.bybit.com"
+    public_ws: "wss://stream.bybit.com/v5/public/{category}"
+    instrument_path: "/v5/market/instruments-info"
+    orderbook_path: "/v5/market/orderbook"
+    orderbook_channel: "orderbook.{depth}.{symbol}"
+    sequence_rule: "snapshot replaces the book; u=1 restarts; increasing u is enforced"
+    status_page: "https://status.bybit.com/"
+    changelog: "https://bybit-exchange.github.io/docs/changelog/v5"
+    pagination_rule: "cursor is mandatory when result exceeds the requested page"
+  DERIBIT:
+    provider_id: "deribit_public"
+    official_docs: "https://docs.deribit.com/"
+    rest_base: "https://www.deribit.com"
+    public_ws: "wss://www.deribit.com/ws/api/v2"
+    instrument_path: "/api/v2/public/get_instruments"
+    orderbook_path: "/api/v2/public/get_order_book"
+    orderbook_channel: "book.{instrument_name}.raw"
+    sequence_rule: "change prev_change_id must equal the previous change_id"
+    status_page: "https://status.deribit.com/"
+    changelog: "https://docs.deribit.com/"
+    unit_rule: "future and option amounts follow instrument contract_size and instrument_type"

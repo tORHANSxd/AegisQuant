@@ -27,10 +27,11 @@ def test_registry_keeps_all_trading_surfaces_empty(project_root: Path) -> None:
     assert registry["testnet_adapters"] == []
     assert registry["live_adapters"] == []
     public = registry["public_market_data_adapters"]
-    assert len(public) == 1
-    assert public[0]["credentials_required"] is False
-    assert public[0]["private_api_enabled"] is False
-    assert public[0]["order_submission_enabled"] is False
+    assert len(public) == 4
+    assert {item["venue"] for item in public} == {"BINANCE", "OKX", "BYBIT", "DERIBIT"}
+    assert all(item["credentials_required"] is False for item in public)
+    assert all(item["private_api_enabled"] is False for item in public)
+    assert all(item["order_submission_enabled"] is False for item in public)
 
 
 @pytest.mark.parametrize(

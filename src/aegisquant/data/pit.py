@@ -27,6 +27,7 @@ def point_in_time_join(
     available_time_column: str = "available_time",
     revision_time_column: str | None = "revision_time",
     engagement_snapshot_column: str | None = "engagement_snapshot_time",
+    deleted_time_column: str | None = "deleted_time",
 ) -> pa.Table:
     """Join each decision to the latest fact that was actually visible at that time."""
     for name in (*keys, decision_time_column, fact_event_time_column, available_time_column):
@@ -54,6 +55,12 @@ def point_in_time_join(
         optional_filters.append(
             f"(f.{_identifier(engagement_snapshot_column)} IS NULL OR "
             f"f.{_identifier(engagement_snapshot_column)} <= d.{_identifier(decision_time_column)})"
+        )
+    if deleted_time_column is not None and deleted_time_column in facts.column_names:
+        _identifier(deleted_time_column)
+        optional_filters.append(
+            f"(f.{_identifier(deleted_time_column)} IS NULL OR "
+            f"f.{_identifier(deleted_time_column)} > d.{_identifier(decision_time_column)})"
         )
     key_filters = [f"f.{_identifier(key)} = d.{_identifier(key)}" for key in keys]
     time_filters = [

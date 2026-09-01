@@ -1,0 +1,66 @@
+{
+  "$defs": {
+    "JsonValue": {},
+    "Venue": {
+      "enum": [
+        "BINANCE",
+        "OKX",
+        "BYBIT",
+        "DERIBIT"
+      ],
+      "title": "Venue",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.public-ws-subscription/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authentication_used": {
+      "default": false,
+      "title": "Authentication Used",
+      "type": "boolean"
+    },
+    "channel": {
+      "title": "Channel",
+      "type": "string"
+    },
+    "payload": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Payload",
+      "type": "object"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "snapshot_required": {
+      "default": true,
+      "title": "Snapshot Required",
+      "type": "boolean"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "venue": {
+      "$ref": "#/$defs/Venue"
+    }
+  },
+  "required": [
+    "provider_id",
+    "venue",
+    "url",
+    "channel",
+    "payload"
+  ],
+  "title": "WsSubscription",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.public-ws-subscription",
+  "x-aegisquant-schema-version": "1.0.0"
+}

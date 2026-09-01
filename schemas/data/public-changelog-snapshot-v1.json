@@ -1,0 +1,70 @@
+{
+  "$defs": {
+    "Venue": {
+      "enum": [
+        "BINANCE",
+        "OKX",
+        "BYBIT",
+        "DERIBIT"
+      ],
+      "title": "Venue",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.public-changelog-snapshot/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "changed": {
+      "title": "Changed",
+      "type": "boolean"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "content_bytes": {
+      "minimum": 1,
+      "title": "Content Bytes",
+      "type": "integer"
+    },
+    "content_sha256": {
+      "maxLength": 64,
+      "minLength": 64,
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "previous_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Sha256"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "venue": {
+      "$ref": "#/$defs/Venue"
+    }
+  },
+  "required": [
+    "venue",
+    "url",
+    "checked_at",
+    "content_sha256",
+    "content_bytes",
+    "changed"
+  ],
+  "title": "ChangelogSnapshot",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.public-changelog-snapshot",
+  "x-aegisquant-schema-version": "1.0.0"
+}

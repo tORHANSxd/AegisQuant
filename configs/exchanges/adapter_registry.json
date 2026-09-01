@@ -14,6 +14,39 @@
       "private_api_enabled": false,
       "order_submission_enabled": false,
       "contract_inventory": "data/contracts/binance_public_contracts.yaml"
+    },
+    {
+      "adapter_id": "okx-public-v1",
+      "provider_id": "okx_public",
+      "venue": "OKX",
+      "products": ["SPOT", "SWAP", "FUTURES", "OPTION"],
+      "transports": ["REST", "WEBSOCKET"],
+      "credentials_required": false,
+      "private_api_enabled": false,
+      "order_submission_enabled": false,
+      "contract_inventory": "data/contracts/p04_public_exchange_contracts.yaml"
+    },
+    {
+      "adapter_id": "bybit-public-v1",
+      "provider_id": "bybit_public",
+      "venue": "BYBIT",
+      "products": ["SPOT", "LINEAR", "INVERSE", "OPTION"],
+      "transports": ["REST", "WEBSOCKET"],
+      "credentials_required": false,
+      "private_api_enabled": false,
+      "order_submission_enabled": false,
+      "contract_inventory": "data/contracts/p04_public_exchange_contracts.yaml"
+    },
+    {
+      "adapter_id": "deribit-public-v1",
+      "provider_id": "deribit_public",
+      "venue": "DERIBIT",
+      "products": ["FUTURE", "OPTION"],
+      "transports": ["REST", "WEBSOCKET"],
+      "credentials_required": false,
+      "private_api_enabled": false,
+      "order_submission_enabled": false,
+      "contract_inventory": "data/contracts/p04_public_exchange_contracts.yaml"
     }
   ],
   "paper_adapters": [],

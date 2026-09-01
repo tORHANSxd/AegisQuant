@@ -1,0 +1,54 @@
+{
+  "clock_dataset_fields": [
+    "request_sent_time",
+    "server_time",
+    "response_received_time",
+    "round_trip_ms",
+    "offset_ms"
+  ],
+  "comparison_filters": [
+    "event_time",
+    "available_time",
+    "quote_asset",
+    "quality"
+  ],
+  "inverse_pnl_example": {
+    "amount": "0.001818181818181818181818181820",
+    "formula": "contracts * multiplier * (1 / entry - 1 / exit)",
+    "settlement_asset_id": "asset:24e9d8c1ff335c5c4493fba85d7846753db73b53d8ea8ce6df26faefdf54265f",
+    "unit": "base_asset"
+  },
+  "lead_lag_fields": [
+    "event_key",
+    "leader_provider_id",
+    "follower_provider_id",
+    "lag_ms"
+  ],
+  "normalized_instrument_counts": {
+    "BYBIT": 1,
+    "DERIBIT": 2,
+    "OKX": 2
+  },
+  "option_contracts": [
+    {
+      "expiry": "2026-09-25T00:00:00+00:00",
+      "iv_source": "VENUE_MARK_TICKER",
+      "option_type": "CALL",
+      "strike": "100000",
+      "symbol": "BTC-USD-260925-100000-C",
+      "venue": "OKX"
+    },
+    {
+      "expiry": "2026-09-25T00:00:00+00:00",
+      "iv_source": "VENUE_MARK_TICKER",
+      "option_type": "CALL",
+      "strike": "100000",
+      "symbol": "BTC-25SEP26-100000-C",
+      "venue": "DERIBIT"
+    }
+  ],
+  "phase": "P04",
+  "same_exposure_across_different_symbols": true,
+  "schema_version": "1.0.0",
+  "venue_instrument_ids_remain_distinct": true
+}

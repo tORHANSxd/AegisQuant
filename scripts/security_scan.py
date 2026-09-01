@@ -1,7 +1,8 @@
-"""Run P03 secret and dependency audits without accessing any account."""
+"""Run phase secret and dependency audits without accessing any account."""
 
 from __future__ import annotations
 
+import argparse
 import json
 import shutil
 import subprocess  # nosec B404
@@ -49,6 +50,9 @@ def parsed_json(output: str) -> object:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--phase", choices=("P03", "P04"), default="P04")
+    args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     report_dir = root / "reports/security"
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -120,7 +124,7 @@ def main() -> int:
     ]
     infrastructure = {
         "status": "not_applicable" if not container_files else "review_required",
-        "reason": "P03 contains no container image or infrastructure-as-code input",
+        "reason": f"{args.phase} contains no container image or infrastructure-as-code input",
         "scannable_files": container_files,
     }
     (report_dir / "container_iac_scan.json").write_text(
@@ -137,7 +141,7 @@ def main() -> int:
     }
     payload = {
         "schema_version": "1.0.0",
-        "phase": "P03",
+        "phase": args.phase,
         "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "status": "passed" if all(checks.values()) else "failed",
         "checks": checks,

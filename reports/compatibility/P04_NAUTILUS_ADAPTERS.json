@@ -1,0 +1,23 @@
+{
+  "adapters": {
+    "BYBIT": {
+      "available": true,
+      "module": "nautilus_trader.adapters.bybit",
+      "native_fallback": "aegisquant.data.providers.public.PublicExchangeAdapter"
+    },
+    "DERIBIT": {
+      "available": true,
+      "module": "nautilus_trader.adapters.deribit",
+      "native_fallback": "aegisquant.data.providers.public.PublicExchangeAdapter"
+    },
+    "OKX": {
+      "available": true,
+      "module": "nautilus_trader.adapters.okx",
+      "native_fallback": "aegisquant.data.providers.public.PublicExchangeAdapter"
+    }
+  },
+  "native_fallback_tested": true,
+  "phase": "P04",
+  "pinned_nautilus_version": "1.231.0",
+  "schema_version": "1.0.0"
+}

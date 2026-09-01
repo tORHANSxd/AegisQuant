@@ -76,3 +76,193 @@ policies:
     pii_mode: "PROHIBITED"
     policy_checked_at: "2026-08-31T14:05:22Z"
     terms_version_hash: "531657e941679bbeea45203d80e0246b1c71006c618a602dd758510e3989ce80"
+  - source_policy_id: "okx_public_v1"
+    provider_id: "okx_public"
+    policy_status: "APPROVED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "public market-data research ingestion and deterministic replay"
+    content_scope: "OKX public market and public instrument endpoints only"
+    raw_storage: "PUBLIC_APPEND_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: false
+    revision_sync_required: false
+    redistribution: "PROHIBITED"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "bybit_public_v1"
+    provider_id: "bybit_public"
+    policy_status: "APPROVED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "public market-data research ingestion and deterministic replay"
+    content_scope: "Bybit V5 public market and instrument endpoints only"
+    raw_storage: "PUBLIC_APPEND_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: false
+    revision_sync_required: false
+    redistribution: "PROHIBITED"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "deribit_public_v1"
+    provider_id: "deribit_public"
+    policy_status: "APPROVED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "public futures and options research ingestion and deterministic replay"
+    content_scope: "Deribit public market and instrument endpoints only"
+    raw_storage: "PUBLIC_APPEND_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: false
+    revision_sync_required: false
+    redistribution: "PROHIBITED"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "official_rss_atom_v1"
+    provider_id: "official_rss_atom"
+    policy_status: "APPROVED"
+    access_method: "PUBLIC_FEED"
+    approved_use_case: "allow-listed official announcement discovery and replay"
+    content_scope: "Federal Reserve ECB and SEC official feed entries"
+    raw_storage: "PUBLIC_APPEND_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "gdelt_public_v1"
+    provider_id: "gdelt_public"
+    policy_status: "APPROVED"
+    access_method: "PUBLIC_FEED"
+    approved_use_case: "article discovery metadata only"
+    content_scope: "GDELT DOC discovery result metadata; never authoritative evidence by itself"
+    raw_storage: "METADATA_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: true
+    revision_sync_required: false
+    redistribution: "IDS_ONLY"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "x_official_restricted_v1"
+    provider_id: "x_official"
+    policy_status: "RESTRICTED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "offline fixture contract verification only until credentials and terms are approved"
+    content_scope: "X post fixtures with edit deletion and engagement metadata"
+    raw_storage: "PROHIBITED"
+    derived_storage: "PROHIBITED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "NONE"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 0
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "telegram_bot_restricted_v1"
+    provider_id: "telegram_bot"
+    policy_status: "RESTRICTED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "offline Bot API fixture verification only until credentials and channels are approved"
+    content_scope: "allow-listed public channel post fixtures; private chats prohibited"
+    raw_storage: "PROHIBITED"
+    derived_storage: "PROHIBITED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "NONE"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 0
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "bluesky_jetstream_v1"
+    provider_id: "bluesky_jetstream"
+    policy_status: "APPROVED"
+    access_method: "PUBLIC_FEED"
+    approved_use_case: "public post metadata replay with revision and deletion propagation"
+    content_scope: "public app.bsky.feed.post records only"
+    raw_storage: "METADATA_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "IDS_ONLY"
+    retention_days: 30
+    pii_mode: "MINIMIZE_AND_PSEUDONYMIZE"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "github_public_v1"
+    provider_id: "github_public"
+    policy_status: "APPROVED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "public release and security advisory metadata replay"
+    content_scope: "public releases security advisories and approved webhook fixtures"
+    raw_storage: "METADATA_ONLY"
+    derived_storage: "ALLOWED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "DERIVED_ONLY"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "IDS_ONLY"
+    retention_days: 30
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null
+  - source_policy_id: "youtube_official_restricted_v1"
+    provider_id: "youtube_official"
+    policy_status: "RESTRICTED"
+    access_method: "OFFICIAL_API"
+    approved_use_case: "offline metadata fixture verification until credentials and quota are approved"
+    content_scope: "channel video metadata and explicitly authorized live chat fixtures"
+    raw_storage: "PROHIBITED"
+    derived_storage: "PROHIBITED"
+    cloud_inference: "PROHIBITED"
+    foundation_model_training: "PROHIBITED"
+    fine_tuning: "PROHIBITED"
+    display_mode: "NONE"
+    deletion_sync_required: true
+    revision_sync_required: true
+    redistribution: "PROHIBITED"
+    retention_days: 0
+    pii_mode: "PROHIBITED"
+    policy_checked_at: "2026-09-01T05:45:12Z"
+    terms_version_hash: null

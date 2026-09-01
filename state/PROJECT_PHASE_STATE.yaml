@@ -1,24 +1,25 @@
 spec_version: "3.1.0"
 spec_sha256: "1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f"
-current_phase: "P03"
-status: "accepted_with_waiver"
-started_at_utc: "2026-08-31T14:05:22.6917747Z"
-accepted_at_utc: "2026-09-01T03:18:27.452548Z"
-commit_sha: "8a2a8971c6ca8de40711bba392a37486b5e5799c"
-artifact_manifest_sha256: "62b3be95fec9cc36f0a7bd663db558e3e14610c9f1d76bef3881a37fee0163a8"
+current_phase: "P04"
+status: "in_progress"
+started_at_utc: "2026-09-01T05:45:12.3020589Z"
+accepted_at_utc: null
+commit_sha: null
+artifact_manifest_sha256: null
 live_trading_locked: true
-next_phase: "P04"
-waivers:
-  - waiver_id: "P03-WAIVER-001"
-    requirement_id: "P03-A01"
-    decision: "owner_approved"
-    approved_at_utc: "2026-09-01T03:07:59.4831618Z"
-    reason: "项目业主明确决定不执行 P03 的真实连续 24 小时公开流验收。"
-    evidence: "docs/adr/ADR-0007-p03-24h-soak-waiver.md"
+next_phase: "P05"
+waivers: []
 previous_phase:
-  phase: "P02"
-  status: "accepted"
-  accepted_at_utc: "2026-08-31T12:49:16.8333664Z"
-  commit_sha: "547bcee62734bc0896a7d51a1a52a0df209d3dc1"
-  evidence_commit_sha: "49f280f226db300b261253a24d3b3260b198ad6a"
-  artifact_manifest_sha256: "1fc4ff4c28787477d208afee8ba2bb27435e90a16f2a4732f03aa1282cd6d5ee"
+  phase: "P03"
+  status: "accepted_with_waiver"
+  accepted_at_utc: "2026-09-01T03:18:27.452548Z"
+  commit_sha: "8a2a8971c6ca8de40711bba392a37486b5e5799c"
+  evidence_commit_sha: "094645ac95715baebbab4be8a9713966a1a111c6"
+  artifact_manifest_sha256: "62b3be95fec9cc36f0a7bd663db558e3e14610c9f1d76bef3881a37fee0163a8"
+  waivers:
+    - waiver_id: "P03-WAIVER-001"
+      requirement_id: "P03-A01"
+      decision: "owner_approved"
+      approved_at_utc: "2026-09-01T03:07:59.4831618Z"
+      reason: "项目业主明确决定不执行 P03 的真实连续 24 小时公开流验收。"
+      evidence: "docs/adr/ADR-0007-p03-24h-soak-waiver.md"

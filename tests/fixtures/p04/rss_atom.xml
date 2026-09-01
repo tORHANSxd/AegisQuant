@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Federal Reserve Press Releases</title>
+  <entry>
+    <id>tag:federalreserve.gov,2026:release-001</id>
+    <title>Policy decision test fixture</title>
+    <summary>The Federal Reserve announces a policy decision for deterministic replay.</summary>
+    <link href="https://www.federalreserve.gov/newsevents/pressreleases/test.htm" />
+    <published>2026-08-30T18:00:00Z</published>
+    <updated>2026-08-30T18:05:00Z</updated>
+  </entry>
+</feed>

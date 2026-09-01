@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "Venue": {
+      "enum": [
+        "BINANCE",
+        "OKX",
+        "BYBIT",
+        "DERIBIT"
+      ],
+      "title": "Venue",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.public-exchange-request/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authentication_used": {
+      "default": false,
+      "title": "Authentication Used",
+      "type": "boolean"
+    },
+    "capability": {
+      "title": "Capability",
+      "type": "string"
+    },
+    "method": {
+      "default": "GET",
+      "title": "Method",
+      "type": "string"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "title": "Parameters",
+      "type": "object"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "request_hash": {
+      "title": "Request Hash",
+      "type": "string"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "venue": {
+      "$ref": "#/$defs/Venue"
+    }
+  },
+  "required": [
+    "provider_id",
+    "venue",
+    "capability",
+    "url",
+    "parameters",
+    "request_hash"
+  ],
+  "title": "PublicRequest",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.public-exchange-request",
+  "x-aegisquant-schema-version": "1.0.0"
+}

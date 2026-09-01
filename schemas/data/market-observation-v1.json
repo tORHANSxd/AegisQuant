@@ -1,0 +1,209 @@
+{
+  "$defs": {
+    "Venue": {
+      "enum": [
+        "BINANCE",
+        "OKX",
+        "BYBIT",
+        "DERIBIT"
+      ],
+      "title": "Venue",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.market-observation/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "ask": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Ask"
+    },
+    "available_time": {
+      "format": "date-time",
+      "title": "Available Time",
+      "type": "string"
+    },
+    "bid": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Bid"
+    },
+    "event_key": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Event Key"
+    },
+    "event_time": {
+      "format": "date-time",
+      "title": "Event Time",
+      "type": "string"
+    },
+    "exposure_id": {
+      "title": "Exposure Id",
+      "type": "string"
+    },
+    "funding_rate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Funding Rate"
+    },
+    "index": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Index"
+    },
+    "ingest_time": {
+      "format": "date-time",
+      "title": "Ingest Time",
+      "type": "string"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "liquidity_notional": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Liquidity Notional"
+    },
+    "mark": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mark"
+    },
+    "open_interest": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Open Interest"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "quality_score": {
+      "anyOf": [
+        {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Quality Score"
+    },
+    "quote_asset_id": {
+      "title": "Quote Asset Id",
+      "type": "string"
+    },
+    "venue": {
+      "$ref": "#/$defs/Venue"
+    }
+  },
+  "required": [
+    "provider_id",
+    "venue",
+    "instrument_id",
+    "exposure_id",
+    "quote_asset_id",
+    "event_time",
+    "available_time",
+    "ingest_time",
+    "bid",
+    "ask",
+    "liquidity_notional",
+    "quality_score"
+  ],
+  "title": "MarketObservation",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.market-observation",
+  "x-aegisquant-schema-version": "1.0.0"
+}

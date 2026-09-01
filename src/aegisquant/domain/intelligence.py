@@ -149,6 +149,34 @@ class SourceIdentity(DomainModel):
     independence_group: str
     verified: bool
     first_observed_time: UtcDateTime
+    version: int = 1
+    supersedes_source_identity_id: SourceIdentityId | None = None
+
+    @model_validator(mode="after")
+    def validate_identity_version(self) -> SourceIdentity:
+        if self.version < 1:
+            raise ValueError("source identity version starts at one")
+        if self.version == 1 and self.supersedes_source_identity_id is not None:
+            raise ValueError("first source identity version cannot supersede another version")
+        if self.version > 1 and self.supersedes_source_identity_id is None:
+            raise ValueError("later source identity versions require a predecessor")
+        return self
+
+
+class EngagementSnapshot(DomainModel):
+    engagement_snapshot_id: ArtifactId
+    content_id: ContentId
+    observed_time: UtcDateTime
+    available_time: UtcDateTime
+    metrics: dict[str, int]
+
+    @model_validator(mode="after")
+    def validate_snapshot(self) -> EngagementSnapshot:
+        if self.observed_time > self.available_time:
+            raise ValueError("engagement cannot be available before observation")
+        if not self.metrics or any(value < 0 for value in self.metrics.values()):
+            raise ValueError("engagement metrics must be present and non-negative")
+        return self
 
 
 class RawContentEnvelope(DomainModel):

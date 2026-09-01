@@ -52,6 +52,14 @@ class ProviderStatus(StrEnum):
     RETIRED = "retired"
 
 
+class ProviderAccessState(StrEnum):
+    READY = "ready"
+    AWAITING_CREDENTIALS = "awaiting_credentials"
+    AWAITING_USER_APPROVAL = "awaiting_user_approval"
+    DISABLED = "disabled"
+    DEGRADED = "degraded"
+
+
 class LakeLayer(StrEnum):
     RAW = "raw"
     BRONZE = "bronze"
@@ -92,6 +100,7 @@ class ProviderRegistryEntry(DomainModel):
     status: ProviderStatus
     owner: str
     source_policy_id: SourcePolicyId
+    access_state: ProviderAccessState = ProviderAccessState.READY
 
     @model_validator(mode="after")
     def validate_registry_entry(self) -> ProviderRegistryEntry:
@@ -108,6 +117,10 @@ class ProviderRegistryEntry(DomainModel):
             raise ValueError("approved provider requires approved license status")
         if self.status is ProviderStatus.APPROVED and not self.time_semantics_documented:
             raise ValueError("approved provider requires documented time semantics")
+        if self.credentials_required and self.access_state is ProviderAccessState.READY:
+            raise ValueError(
+                "credentialed provider cannot be ready without runtime credential proof"
+            )
         return self
 
 

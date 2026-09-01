@@ -1,0 +1,105 @@
+{
+  "fixture_version": "1.0.0",
+  "provenance": "Synthetic records shaped from official API contracts; no private or credentialed data.",
+  "gdelt": {
+    "articles": [
+      {
+        "url": "https://example.org/bitcoin-etf-update?utm_source=test",
+        "title": "Bitcoin ETF approval update",
+        "seendate": "20260830T180000Z",
+        "language": "English",
+        "domain": "example.org"
+      }
+    ]
+  },
+  "x": {
+    "data": [
+      {
+        "id": "1900000000000000001",
+        "author_id": "1001",
+        "text": "Bitcoin ETF approval update",
+        "created_at": "2026-08-30T18:00:00Z",
+        "lang": "en",
+        "edit_history_tweet_ids": ["1900000000000000000", "1900000000000000001"],
+        "public_metrics": {
+          "like_count": 10,
+          "reply_count": 2,
+          "retweet_count": 4,
+          "quote_count": 1
+        }
+      }
+    ],
+    "includes": {
+      "users": [
+        {"id": "1001", "username": "official_fixture", "name": "Official Fixture", "verified": true}
+      ]
+    }
+  },
+  "telegram": {
+    "ok": true,
+    "result": [
+      {
+        "update_id": 9001,
+        "edited_channel_post": {
+          "message_id": 7,
+          "date": 1788112800,
+          "edit_date": 1788113100,
+          "chat": {"id": -100123, "type": "channel", "title": "Fixture Channel", "username": "fixture_channel"},
+          "text": "Ethereum protocol release update"
+        }
+      }
+    ]
+  },
+  "bluesky_create": {
+    "did": "did:plc:fixture123",
+    "time_us": 1788112800000000,
+    "commit": {
+      "operation": "create",
+      "collection": "app.bsky.feed.post",
+      "rkey": "3fixture",
+      "record": {"text": "Bitcoin ETF approval update", "createdAt": "2026-08-30T18:00:00Z", "langs": ["en"]}
+    }
+  },
+  "github_release": {
+    "items": [
+      {
+        "id": 42,
+        "name": "v1.2.3",
+        "tag_name": "v1.2.3",
+        "body": "Security release for Ethereum tooling",
+        "published_at": "2026-08-30T18:00:00Z",
+        "updated_at": "2026-08-30T18:05:00Z",
+        "html_url": "https://github.com/example/protocol/releases/tag/v1.2.3",
+        "author": {"login": "example"}
+      }
+    ]
+  },
+  "github_advisory": {
+    "items": [
+      {
+        "ghsa_id": "GHSA-xxxx-yyyy-zzzz",
+        "cve_id": "CVE-2026-0001",
+        "summary": "Protocol vulnerability",
+        "description": "A vulnerability affects a protocol component.",
+        "published_at": "2026-08-30T18:00:00Z",
+        "updated_at": "2026-08-30T18:05:00Z",
+        "html_url": "https://github.com/advisories/GHSA-xxxx-yyyy-zzzz"
+      }
+    ]
+  },
+  "youtube": {
+    "items": [
+      {
+        "id": "video-fixture-1",
+        "snippet": {
+          "publishedAt": "2026-08-30T18:00:00Z",
+          "channelId": "channel-fixture-1",
+          "channelTitle": "Protocol Foundation",
+          "title": "Ethereum upgrade briefing",
+          "description": "Official protocol upgrade metadata fixture.",
+          "defaultLanguage": "en"
+        }
+      }
+    ]
+  }
+}

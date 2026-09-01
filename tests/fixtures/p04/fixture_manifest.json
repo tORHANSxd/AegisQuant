@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "contains_credentials": false,
+  "contains_private_account_data": false,
+  "claimed_live_capture": false,
+  "files": [
+    {"path": "tests/fixtures/p04/exchanges.json", "kind": "official-contract-derived"},
+    {"path": "tests/fixtures/p04/rss_atom.xml", "kind": "synthetic-public-feed"},
+    {"path": "tests/fixtures/p04/event_sources.json", "kind": "official-contract-derived"}
+  ],
+  "official_references": [
+    "https://www.okx.com/docs-v5/en/",
+    "https://bybit-exchange.github.io/docs/v5/intro",
+    "https://docs.deribit.com/",
+    "https://docs.x.com/x-api/posts/filtered-stream/introduction",
+    "https://core.telegram.org/bots/api",
+    "https://github.com/bluesky-social/jetstream",
+    "https://docs.github.com/en/rest/releases/releases",
+    "https://developers.google.com/youtube/v3/getting-started"
+  ]
+}

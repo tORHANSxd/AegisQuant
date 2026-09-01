@@ -13,6 +13,7 @@ import yaml
 from aegisquant.data.hashing import canonical_json_bytes, canonical_sha256
 from aegisquant.data.models import (
     LicenseStatus,
+    ProviderAccessState,
     ProviderRegistryDocument,
     ProviderRegistryEntry,
     ProviderStatus,
@@ -107,6 +108,12 @@ class ProviderRegistry:
     ) -> ProviderRegistryEntry:
         """Require registry approval, approved licensing, matching policy, and boundary access."""
         entry = self.get(provider_id)
+        if entry.access_state is not ProviderAccessState.READY:
+            raise DomainError(
+                f"AQ-PROVIDER-ACCESS-{entry.access_state.value.upper()}",
+                ErrorDisposition.NO_RETRY,
+                str(provider_id),
+            )
         if entry.status is not ProviderStatus.APPROVED:
             raise DomainError(
                 "AQ-PROVIDER-STATUS-NOT-APPROVED",

@@ -1,0 +1,28 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.canonical-pair/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "base_asset_id": {
+      "title": "Base Asset Id",
+      "type": "string"
+    },
+    "pair_id": {
+      "title": "Pair Id",
+      "type": "string"
+    },
+    "quote_asset_id": {
+      "title": "Quote Asset Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "pair_id",
+    "base_asset_id",
+    "quote_asset_id"
+  ],
+  "title": "CanonicalPair",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.canonical-pair",
+  "x-aegisquant-schema-version": "1.0.0"
+}

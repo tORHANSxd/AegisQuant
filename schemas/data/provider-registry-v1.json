@@ -30,11 +30,26 @@
       "title": "ProviderAccessMethod",
       "type": "string"
     },
+    "ProviderAccessState": {
+      "enum": [
+        "ready",
+        "awaiting_credentials",
+        "awaiting_user_approval",
+        "disabled",
+        "degraded"
+      ],
+      "title": "ProviderAccessState",
+      "type": "string"
+    },
     "ProviderRegistryEntry": {
       "additionalProperties": false,
       "properties": {
         "access_method": {
           "$ref": "#/$defs/ProviderAccessMethod"
+        },
+        "access_state": {
+          "$ref": "#/$defs/ProviderAccessState",
+          "default": "ready"
         },
         "authority_level": {
           "$ref": "#/$defs/AuthorityLevel"

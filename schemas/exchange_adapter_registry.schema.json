@@ -20,7 +20,8 @@
     "order_submission_enabled": { "const": false },
     "public_market_data_adapters": {
       "type": "array",
-      "maxItems": 1,
+      "minItems": 4,
+      "maxItems": 4,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -36,13 +37,20 @@
           "contract_inventory"
         ],
         "properties": {
-          "adapter_id": { "const": "binance-public-v1" },
-          "provider_id": { "const": "binance_public" },
-          "venue": { "const": "BINANCE" },
+          "adapter_id": {
+            "enum": ["binance-public-v1", "okx-public-v1", "bybit-public-v1", "deribit-public-v1"]
+          },
+          "provider_id": {
+            "enum": ["binance_public", "okx_public", "bybit_public", "deribit_public"]
+          },
+          "venue": { "enum": ["BINANCE", "OKX", "BYBIT", "DERIBIT"] },
           "products": {
             "type": "array",
-            "prefixItems": [{ "const": "SPOT" }, { "const": "USD_M" }],
-            "items": false
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "enum": ["SPOT", "USD_M", "SWAP", "FUTURES", "FUTURE", "OPTION", "LINEAR", "INVERSE"]
+            }
           },
           "transports": {
             "type": "array",
@@ -54,7 +62,10 @@
           "private_api_enabled": { "const": false },
           "order_submission_enabled": { "const": false },
           "contract_inventory": {
-            "const": "data/contracts/binance_public_contracts.yaml"
+            "enum": [
+              "data/contracts/binance_public_contracts.yaml",
+              "data/contracts/p04_public_exchange_contracts.yaml"
+            ]
           }
         }
       }

@@ -1,0 +1,59 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.official-web-change-snapshot/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonical_url": {
+      "title": "Canonical Url",
+      "type": "string"
+    },
+    "changed": {
+      "title": "Changed",
+      "type": "boolean"
+    },
+    "content_sha256": {
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "observed_time": {
+      "format": "date-time",
+      "title": "Observed Time",
+      "type": "string"
+    },
+    "previous_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Sha256"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "source_native_id": {
+      "title": "Source Native Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "provider_id",
+    "source_native_id",
+    "canonical_url",
+    "observed_time",
+    "content_sha256",
+    "changed"
+  ],
+  "title": "OfficialWebChangeSnapshot",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.official-web-change-snapshot",
+  "x-aegisquant-schema-version": "1.0.0"
+}

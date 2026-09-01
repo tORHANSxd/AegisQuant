@@ -1,0 +1,106 @@
+{
+  "$defs": {
+    "ContractForm": {
+      "enum": [
+        "SPOT",
+        "LINEAR",
+        "INVERSE"
+      ],
+      "title": "ContractForm",
+      "type": "string"
+    },
+    "InstrumentType": {
+      "enum": [
+        "SPOT",
+        "PERPETUAL",
+        "FUTURE",
+        "OPTION"
+      ],
+      "title": "InstrumentType",
+      "type": "string"
+    },
+    "OptionType": {
+      "enum": [
+        "CALL",
+        "PUT"
+      ],
+      "title": "OptionType",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.canonical-exposure/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_form": {
+      "$ref": "#/$defs/ContractForm"
+    },
+    "expiry": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expiry"
+    },
+    "exposure_id": {
+      "title": "Exposure Id",
+      "type": "string"
+    },
+    "instrument_type": {
+      "$ref": "#/$defs/InstrumentType"
+    },
+    "option_type": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/OptionType"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "pair_id": {
+      "title": "Pair Id",
+      "type": "string"
+    },
+    "settlement_asset_id": {
+      "title": "Settlement Asset Id",
+      "type": "string"
+    },
+    "strike": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Strike"
+    }
+  },
+  "required": [
+    "exposure_id",
+    "pair_id",
+    "settlement_asset_id",
+    "instrument_type",
+    "contract_form"
+  ],
+  "title": "CanonicalExposure",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.canonical-exposure",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -21,6 +21,7 @@ providers:
     status: "approved"
     owner: "user"
     source_policy_id: "synthetic_fixture_v1"
+    access_state: "ready"
   - provider_id: "apache_parquet_testing"
     provider_name: "Apache Parquet Testing compatibility files"
     provider_type: "vendor"
@@ -41,6 +42,7 @@ providers:
     status: "approved"
     owner: "user"
     source_policy_id: "apache_parquet_testing_v1"
+    access_state: "ready"
   - provider_id: "user_local_assets"
     provider_name: "User-authorized local assets"
     provider_type: "local"
@@ -61,6 +63,7 @@ providers:
     status: "candidate"
     owner: "user"
     source_policy_id: "user_local_assets_deny_v1"
+    access_state: "awaiting_user_approval"
   - provider_id: "binance_public"
     provider_name: "Binance official public market data"
     provider_type: "exchange"
@@ -99,3 +102,204 @@ providers:
     status: "approved"
     owner: "user"
     source_policy_id: "binance_public_v1"
+    access_state: "ready"
+  - provider_id: "okx_public"
+    provider_name: "OKX official public market data"
+    provider_type: "exchange"
+    access_method: "rest"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["public_market_data_only", "operator_must_obey_local_access_rules"]
+    rate_limits: {rest_requests_per_two_seconds: 20}
+    latency_expectation_ms: null
+    revision_policy: "append_observation_and_changelog_revision"
+    supported_datasets: ["instruments", "orderbook", "ticker", "funding", "open_interest", "clock"]
+    time_semantics_documented: true
+    retention_policy: "Append-only public observations for 30 days"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "okx_public_v1"
+    access_state: "ready"
+  - provider_id: "bybit_public"
+    provider_name: "Bybit official public market data"
+    provider_type: "exchange"
+    access_method: "rest"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["public_market_data_only", "operator_must_obey_local_access_rules"]
+    rate_limits: {default_http_requests_per_second: 10}
+    latency_expectation_ms: null
+    revision_policy: "append_observation_and_changelog_revision"
+    supported_datasets: ["instruments", "orderbook", "ticker", "funding", "open_interest", "clock"]
+    time_semantics_documented: true
+    retention_policy: "Append-only public observations for 30 days"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "bybit_public_v1"
+    access_state: "ready"
+  - provider_id: "deribit_public"
+    provider_name: "Deribit official public futures and options data"
+    provider_type: "exchange"
+    access_method: "rest"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["public_market_data_only", "operator_must_obey_local_access_rules"]
+    rate_limits: {default_credits_per_second: 20}
+    latency_expectation_ms: null
+    revision_policy: "append_observation_and_changelog_revision"
+    supported_datasets: ["instruments", "orderbook", "ticker", "funding", "open_interest", "clock", "option_iv"]
+    time_semantics_documented: true
+    retention_policy: "Append-only public observations for 30 days"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "deribit_public_v1"
+    access_state: "ready"
+  - provider_id: "official_rss_atom"
+    provider_name: "Allow-listed official RSS and Atom feeds"
+    provider_type: "news"
+    access_method: "rest"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["allowlisted_official_feeds_only"]
+    rate_limits: {requests_per_minute: 30}
+    latency_expectation_ms: null
+    revision_policy: "append_revision"
+    supported_datasets: ["official_announcements", "official_web_changes"]
+    time_semantics_documented: true
+    retention_policy: "Public metadata and permitted content for 30 days"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "official_rss_atom_v1"
+    access_state: "ready"
+  - provider_id: "gdelt_public"
+    provider_name: "GDELT DOC public discovery API"
+    provider_type: "news"
+    access_method: "rest"
+    authority_level: "secondary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["discovery_only_not_authoritative_evidence"]
+    rate_limits: {requests_per_minute: 20}
+    latency_expectation_ms: null
+    revision_policy: "append_discovery_observation"
+    supported_datasets: ["article_discovery_metadata"]
+    time_semantics_documented: true
+    retention_policy: "Metadata only for 30 days"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "gdelt_public_v1"
+    access_state: "ready"
+  - provider_id: "x_official"
+    provider_name: "X official API"
+    provider_type: "community"
+    access_method: "rest"
+    authority_level: "secondary"
+    license_status: "restricted"
+    credentials_required: true
+    regions_or_account_constraints: ["paid_access_and_user_approval_required"]
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "sync_edits_deletions_and_engagement_snapshots"
+    supported_datasets: ["filtered_stream", "recent_search", "full_archive_search"]
+    time_semantics_documented: true
+    retention_policy: "No collection or retention before credentials and policy approval"
+    quality_score: null
+    incremental_value_score: null
+    status: "trial"
+    owner: "user"
+    source_policy_id: "x_official_restricted_v1"
+    access_state: "awaiting_credentials"
+  - provider_id: "telegram_bot"
+    provider_name: "Telegram Bot API allow-listed channels"
+    provider_type: "community"
+    access_method: "rest"
+    authority_level: "secondary"
+    license_status: "restricted"
+    credentials_required: true
+    regions_or_account_constraints: ["explicit_channel_allowlist_required", "mtproto_disabled"]
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "sync_channel_post_edits"
+    supported_datasets: ["authorized_channel_posts"]
+    time_semantics_documented: true
+    retention_policy: "No collection or retention before credentials and channel approval"
+    quality_score: null
+    incremental_value_score: null
+    status: "trial"
+    owner: "user"
+    source_policy_id: "telegram_bot_restricted_v1"
+    access_state: "awaiting_credentials"
+  - provider_id: "bluesky_jetstream"
+    provider_name: "Bluesky public Jetstream"
+    provider_type: "community"
+    access_method: "websocket"
+    authority_level: "secondary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["public_records_only", "protocol_version_detection_required"]
+    rate_limits: {maximum_wanted_collections: 100}
+    latency_expectation_ms: null
+    revision_policy: "sync_create_update_delete_with_cursor"
+    supported_datasets: ["public_posts"]
+    time_semantics_documented: true
+    retention_policy: "Metadata only for 30 days with deletion propagation"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "bluesky_jetstream_v1"
+    access_state: "ready"
+  - provider_id: "github_public"
+    provider_name: "GitHub public Releases and Security Advisories"
+    provider_type: "vendor"
+    access_method: "rest"
+    authority_level: "primary"
+    license_status: "approved"
+    credentials_required: false
+    regions_or_account_constraints: ["public_repositories_and_advisories_only"]
+    rate_limits: {unauthenticated_requests_per_hour: 60}
+    latency_expectation_ms: null
+    revision_policy: "sync_updates_deletions_and_webhook_revisions"
+    supported_datasets: ["releases", "security_advisories", "webhooks"]
+    time_semantics_documented: true
+    retention_policy: "Metadata and permitted public release text for 30 days"
+    quality_score: null
+    incremental_value_score: null
+    status: "approved"
+    owner: "user"
+    source_policy_id: "github_public_v1"
+    access_state: "ready"
+  - provider_id: "youtube_official"
+    provider_name: "YouTube Data and authorized Live Streaming APIs"
+    provider_type: "community"
+    access_method: "rest"
+    authority_level: "secondary"
+    license_status: "restricted"
+    credentials_required: true
+    regions_or_account_constraints: ["project_api_enablement_and_user_approval_required"]
+    rate_limits: {}
+    latency_expectation_ms: null
+    revision_policy: "sync_metadata_deletions_and_engagement_snapshots"
+    supported_datasets: ["channel_metadata", "video_metadata", "authorized_live_chat"]
+    time_semantics_documented: true
+    retention_policy: "No collection before credentials; metadata only when approved"
+    quality_score: null
+    incremental_value_score: null
+    status: "trial"
+    owner: "user"
+    source_policy_id: "youtube_official_restricted_v1"
+    access_state: "awaiting_credentials"

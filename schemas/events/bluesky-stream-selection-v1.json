@@ -1,0 +1,38 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.bluesky-stream-selection/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checkpoint_parameter": {
+      "title": "Checkpoint Parameter",
+      "type": "string"
+    },
+    "fallback_used": {
+      "title": "Fallback Used",
+      "type": "boolean"
+    },
+    "mode": {
+      "title": "Mode",
+      "type": "string"
+    },
+    "reason_code": {
+      "title": "Reason Code",
+      "type": "string"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    }
+  },
+  "required": [
+    "mode",
+    "url",
+    "checkpoint_parameter",
+    "fallback_used",
+    "reason_code"
+  ],
+  "title": "BlueskyStreamSelection",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.bluesky-stream-selection",
+  "x-aegisquant-schema-version": "1.0.0"
+}

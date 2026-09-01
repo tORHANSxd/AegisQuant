@@ -26,6 +26,62 @@
     },
     {
       "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.SourceIdentity",
+      "path": "schemas/events/source-identity-v1.json",
+      "schema_name": "aegisquant.source-identity",
+      "schema_version": "1.0.0",
+      "sha256": "a04e1df84ed85822b2d4a2792779647497a62982fe80835e219091766580cbcf"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.domain.intelligence.EngagementSnapshot",
+      "path": "schemas/events/engagement-snapshot-v1.json",
+      "schema_name": "aegisquant.engagement-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "063d3ca0af0a9ffa3381835b42cf7a984e83a742b705c6bc7c206439ac926a3b"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.intelligence.collectors.CollectedContent",
+      "path": "schemas/events/collected-content-v1.json",
+      "schema_name": "aegisquant.collected-content",
+      "schema_version": "1.0.0",
+      "sha256": "92301db42d2ac9906c5d3e2a5e31c17d46b0267f7cba97ff55031354b8367ecd"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.intelligence.collectors.SourceBatch",
+      "path": "schemas/events/source-batch-v1.json",
+      "schema_name": "aegisquant.source-batch",
+      "schema_version": "1.0.0",
+      "sha256": "8dab0f93e39ef2f98cf63a19a570cafb9e038c296f5d7f578095d8a2001e22da"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.intelligence.collectors.SourceQuotaWindow",
+      "path": "schemas/events/source-quota-window-v1.json",
+      "schema_name": "aegisquant.source-quota-window",
+      "schema_version": "1.0.0",
+      "sha256": "5d6bb4ef6592f14a1933fc179c97d2d707118eb1bd5f67c0ec0acfd16550a25d"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.intelligence.collectors.OfficialWebChangeSnapshot",
+      "path": "schemas/events/official-web-change-snapshot-v1.json",
+      "schema_name": "aegisquant.official-web-change-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "29774f3d47b6917dc1aa5d52bf39e71c74136b65bf470fe624aa1bdc4c9c575f"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.intelligence.collectors.BlueskyStreamSelection",
+      "path": "schemas/events/bluesky-stream-selection-v1.json",
+      "schema_name": "aegisquant.bluesky-stream-selection",
+      "schema_version": "1.0.0",
+      "sha256": "708a99f7957e68535309e8febf93d78718fe721cca2dd79bbb1a1e55ec919038"
+    },
+    {
+      "compatibility": "BACKWARD",
       "model": "aegisquant.domain.intelligence.ClaimRecord",
       "path": "schemas/events/claim-record-v1.json",
       "schema_name": "aegisquant.claim-record",

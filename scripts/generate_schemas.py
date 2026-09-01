@@ -16,6 +16,16 @@ from aegisquant.data.archive import RevisionRecord, TombstoneRecord
 from aegisquant.data.catalog import CatalogEntry
 from aegisquant.data.checkpoint import IngestCheckpoint
 from aegisquant.data.lineage import TransformationLineage
+from aegisquant.data.market import (
+    CanonicalAsset,
+    CanonicalExposure,
+    CanonicalPair,
+    ClockObservation,
+    ComparisonResult,
+    LeadLagObservation,
+    MarketObservation,
+    UnifiedInstrument,
+)
 from aegisquant.data.models import (
     ContentTimeSemantics,
     DatasetManifest,
@@ -45,11 +55,20 @@ from aegisquant.data.providers.binance.models import (
     TradeRecord,
 )
 from aegisquant.data.providers.binance.replay import FixtureEnvelope, FixtureManifest
+from aegisquant.data.providers.public import (
+    BookUpdate,
+    PublicRequest,
+    WsSubscription,
+)
+from aegisquant.data.providers.public import (
+    ChangelogSnapshot as PublicChangelogSnapshot,
+)
 from aegisquant.domain.accounting import JournalEntry, PositionLot
 from aegisquant.domain.execution import Fill, OrderCommand, OrderIntent, VenueOrder
 from aegisquant.domain.intelligence import (
     AlphaSignal,
     ClaimRecord,
+    EngagementSnapshot,
     EventCluster,
     EventImpactForecast,
     ForecastBundle,
@@ -57,9 +76,18 @@ from aegisquant.domain.intelligence import (
     PortfolioProposal,
     RawContentEnvelope,
     RiskDecision,
+    SourceIdentity,
 )
 from aegisquant.domain.policy import SourceProcessingPolicy
 from aegisquant.domain.serialization import EventEnvelope
+from aegisquant.intelligence.collectors import (
+    BlueskyStreamSelection,
+    CollectedContent,
+    OfficialWebChangeSnapshot,
+    SourceBatch,
+    SourceQuotaWindow,
+    SourceRequest,
+)
 
 JSON_SCHEMA_DIALECT: Final = "https://json-schema.org/draft/2020-12/schema"
 
@@ -80,6 +108,40 @@ EVENT_CONTRACTS: Final = (
         "1.0.0",
         RawContentEnvelope,
         Path("raw-content-envelope-v1.json"),
+    ),
+    Contract(
+        "aegisquant.source-identity", "1.0.0", SourceIdentity, Path("source-identity-v1.json")
+    ),
+    Contract(
+        "aegisquant.engagement-snapshot",
+        "1.0.0",
+        EngagementSnapshot,
+        Path("engagement-snapshot-v1.json"),
+    ),
+    Contract(
+        "aegisquant.collected-content",
+        "1.0.0",
+        CollectedContent,
+        Path("collected-content-v1.json"),
+    ),
+    Contract("aegisquant.source-batch", "1.0.0", SourceBatch, Path("source-batch-v1.json")),
+    Contract(
+        "aegisquant.source-quota-window",
+        "1.0.0",
+        SourceQuotaWindow,
+        Path("source-quota-window-v1.json"),
+    ),
+    Contract(
+        "aegisquant.official-web-change-snapshot",
+        "1.0.0",
+        OfficialWebChangeSnapshot,
+        Path("official-web-change-snapshot-v1.json"),
+    ),
+    Contract(
+        "aegisquant.bluesky-stream-selection",
+        "1.0.0",
+        BlueskyStreamSelection,
+        Path("bluesky-stream-selection-v1.json"),
     ),
     Contract("aegisquant.claim-record", "1.0.0", ClaimRecord, Path("claim-record-v1.json")),
     Contract("aegisquant.event-cluster", "1.0.0", EventCluster, Path("event-cluster-v1.json")),
@@ -119,6 +181,84 @@ CONFIG_CONTRACTS: Final = (
 )
 
 DATA_CONTRACTS: Final = (
+    Contract(
+        "aegisquant.canonical-asset",
+        "1.0.0",
+        CanonicalAsset,
+        Path("canonical-asset-v1.json"),
+    ),
+    Contract(
+        "aegisquant.canonical-pair",
+        "1.0.0",
+        CanonicalPair,
+        Path("canonical-pair-v1.json"),
+    ),
+    Contract(
+        "aegisquant.canonical-exposure",
+        "1.0.0",
+        CanonicalExposure,
+        Path("canonical-exposure-v1.json"),
+    ),
+    Contract(
+        "aegisquant.unified-instrument",
+        "1.0.0",
+        UnifiedInstrument,
+        Path("unified-instrument-v1.json"),
+    ),
+    Contract(
+        "aegisquant.market-observation",
+        "1.0.0",
+        MarketObservation,
+        Path("market-observation-v1.json"),
+    ),
+    Contract(
+        "aegisquant.market-comparison",
+        "1.0.0",
+        ComparisonResult,
+        Path("market-comparison-v1.json"),
+    ),
+    Contract(
+        "aegisquant.clock-observation",
+        "1.0.0",
+        ClockObservation,
+        Path("clock-observation-v1.json"),
+    ),
+    Contract(
+        "aegisquant.lead-lag-observation",
+        "1.0.0",
+        LeadLagObservation,
+        Path("lead-lag-observation-v1.json"),
+    ),
+    Contract(
+        "aegisquant.public-exchange-request",
+        "1.0.0",
+        PublicRequest,
+        Path("public-exchange-request-v1.json"),
+    ),
+    Contract(
+        "aegisquant.public-ws-subscription",
+        "1.0.0",
+        WsSubscription,
+        Path("public-ws-subscription-v1.json"),
+    ),
+    Contract(
+        "aegisquant.public-book-update",
+        "1.0.0",
+        BookUpdate,
+        Path("public-book-update-v1.json"),
+    ),
+    Contract(
+        "aegisquant.public-changelog-snapshot",
+        "1.0.0",
+        PublicChangelogSnapshot,
+        Path("public-changelog-snapshot-v1.json"),
+    ),
+    Contract(
+        "aegisquant.source-request",
+        "1.0.0",
+        SourceRequest,
+        Path("source-request-v1.json"),
+    ),
     Contract(
         "aegisquant.provider-registry",
         "1.0.0",

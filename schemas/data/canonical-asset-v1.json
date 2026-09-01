@@ -1,0 +1,47 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.canonical-asset/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asset_id": {
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "contract_address": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Contract Address"
+    },
+    "network": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Network"
+    },
+    "symbol": {
+      "title": "Symbol",
+      "type": "string"
+    }
+  },
+  "required": [
+    "asset_id",
+    "symbol"
+  ],
+  "title": "CanonicalAsset",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.canonical-asset",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,196 @@
+{
+  "$defs": {
+    "ComparisonRow": {
+      "additionalProperties": false,
+      "properties": {
+        "basis_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Basis Bps"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "exposure_id": {
+          "title": "Exposure Id",
+          "type": "string"
+        },
+        "funding_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Funding Rate"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "liquidity_notional": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Liquidity Notional"
+        },
+        "midpoint": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Midpoint"
+        },
+        "open_interest": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Open Interest"
+        },
+        "provider_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "quality_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Quality Score"
+        },
+        "spread_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Spread Bps"
+        },
+        "venue": {
+          "$ref": "#/$defs/Venue"
+        }
+      },
+      "required": [
+        "provider_id",
+        "venue",
+        "instrument_id",
+        "exposure_id",
+        "event_time",
+        "midpoint",
+        "spread_bps",
+        "funding_rate",
+        "basis_bps",
+        "open_interest",
+        "liquidity_notional",
+        "quality_score"
+      ],
+      "title": "ComparisonRow",
+      "type": "object"
+    },
+    "Venue": {
+      "enum": [
+        "BINANCE",
+        "OKX",
+        "BYBIT",
+        "DERIBIT"
+      ],
+      "title": "Venue",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.market-comparison/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "filtered_observation_count": {
+      "minimum": 0,
+      "title": "Filtered Observation Count",
+      "type": "integer"
+    },
+    "rejected_provider_ids": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "title": "Rejected Provider Ids",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/ComparisonRow"
+      },
+      "title": "Rows",
+      "type": "array"
+    }
+  },
+  "required": [
+    "as_of_time",
+    "rows",
+    "rejected_provider_ids",
+    "filtered_observation_count"
+  ],
+  "title": "ComparisonResult",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.market-comparison",
+  "x-aegisquant-schema-version": "1.0.0"
+}

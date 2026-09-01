@@ -76,6 +76,26 @@ def test_pit_identifier_injection_is_rejected() -> None:
         )
 
 
+def test_point_in_time_join_excludes_content_deleted_by_decision_time() -> None:
+    decisions = pa.table(
+        {
+            "content_id": ["post-1", "post-1"],
+            "decision_time": [NOW + timedelta(minutes=30), NOW + timedelta(hours=2)],
+        }
+    )
+    facts = pa.table(
+        {
+            "content_id": ["post-1"],
+            "event_time": [NOW],
+            "available_time": [NOW + timedelta(minutes=1)],
+            "deleted_time": [NOW + timedelta(hours=1)],
+            "value": ["visible-before-delete"],
+        }
+    )
+    result = point_in_time_join(decisions=decisions, facts=facts, keys=("content_id",))
+    assert result.column("fact_value").to_pylist() == ["visible-before-delete", None]
+
+
 def test_query_layer_allows_only_local_parquet_and_counts_without_materializing(
     tmp_path: Path,
 ) -> None:

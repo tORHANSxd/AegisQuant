@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "ProviderAccessState": {
+      "enum": [
+        "ready",
+        "awaiting_credentials",
+        "awaiting_user_approval",
+        "disabled",
+        "degraded"
+      ],
+      "title": "ProviderAccessState",
+      "type": "string"
+    },
+    "SourceKind": {
+      "enum": [
+        "rss_atom",
+        "gdelt",
+        "x",
+        "telegram_bot",
+        "bluesky_jetstream",
+        "github",
+        "youtube"
+      ],
+      "title": "SourceKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.source-request/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "access_state": {
+      "$ref": "#/$defs/ProviderAccessState"
+    },
+    "base_url": {
+      "title": "Base Url",
+      "type": "string"
+    },
+    "capability": {
+      "title": "Capability",
+      "type": "string"
+    },
+    "executable": {
+      "title": "Executable",
+      "type": "boolean"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "title": "Parameters",
+      "type": "object"
+    },
+    "path_template": {
+      "title": "Path Template",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "request_hash": {
+      "title": "Request Hash",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceKind"
+    }
+  },
+  "required": [
+    "source",
+    "provider_id",
+    "capability",
+    "base_url",
+    "path_template",
+    "parameters",
+    "access_state",
+    "executable",
+    "request_hash"
+  ],
+  "title": "SourceRequest",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.source-request",
+  "x-aegisquant-schema-version": "1.0.0"
+}

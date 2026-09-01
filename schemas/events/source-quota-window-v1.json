@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "SourceKind": {
+      "enum": [
+        "rss_atom",
+        "gdelt",
+        "x",
+        "telegram_bot",
+        "bluesky_jetstream",
+        "github",
+        "youtube"
+      ],
+      "title": "SourceKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.source-quota-window/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "limit": {
+      "minimum": 0,
+      "title": "Limit",
+      "type": "integer"
+    },
+    "reset_time": {
+      "format": "date-time",
+      "title": "Reset Time",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceKind"
+    },
+    "unit": {
+      "title": "Unit",
+      "type": "string"
+    },
+    "used": {
+      "minimum": 0,
+      "title": "Used",
+      "type": "integer"
+    },
+    "window_start": {
+      "format": "date-time",
+      "title": "Window Start",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "window_start",
+    "reset_time",
+    "limit",
+    "used",
+    "unit"
+  ],
+  "title": "SourceQuotaWindow",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.source-quota-window",
+  "x-aegisquant-schema-version": "1.0.0"
+}

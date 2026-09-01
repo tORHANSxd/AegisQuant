@@ -2,11 +2,115 @@
   "data_contracts": [
     {
       "compatibility": "BACKWARD",
+      "model": "aegisquant.data.market.CanonicalAsset",
+      "path": "schemas/data/canonical-asset-v1.json",
+      "schema_name": "aegisquant.canonical-asset",
+      "schema_version": "1.0.0",
+      "sha256": "9f85d630187d4d7818be096ae61af9b50361ff2e4ede8c6bb3620cbdfea2e904"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.market.CanonicalPair",
+      "path": "schemas/data/canonical-pair-v1.json",
+      "schema_name": "aegisquant.canonical-pair",
+      "schema_version": "1.0.0",
+      "sha256": "e675616fd78fe933c15e7d41ef420d781a8388c17eee6bb3c74093e720d1f91b"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.market.CanonicalExposure",
+      "path": "schemas/data/canonical-exposure-v1.json",
+      "schema_name": "aegisquant.canonical-exposure",
+      "schema_version": "1.0.0",
+      "sha256": "8e4d34f5bcdb765be51b36a44ab3441261712669b1434df42b72eedb85ffd174"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.market.UnifiedInstrument",
+      "path": "schemas/data/unified-instrument-v1.json",
+      "schema_name": "aegisquant.unified-instrument",
+      "schema_version": "1.0.0",
+      "sha256": "261242dcb091c7eec56c68a0d23d0ce7e0e87f3f66e09451400bf94ac3035337"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.market.MarketObservation",
+      "path": "schemas/data/market-observation-v1.json",
+      "schema_name": "aegisquant.market-observation",
+      "schema_version": "1.0.0",
+      "sha256": "dc583a33342d0cbf2271c158645f6e801d4a0a903b7a422105d92a78c0ee1e7f"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.market.ComparisonResult",
+      "path": "schemas/data/market-comparison-v1.json",
+      "schema_name": "aegisquant.market-comparison",
+      "schema_version": "1.0.0",
+      "sha256": "d5256a7a89e78d18229836aecc03ab040c546363c6b6415fdccf080e55cb1f7b"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.market.ClockObservation",
+      "path": "schemas/data/clock-observation-v1.json",
+      "schema_name": "aegisquant.clock-observation",
+      "schema_version": "1.0.0",
+      "sha256": "7cddb09dab91b347e4d11a8ecd1dced12b2b19553e1eefd7e66dfa5bf5862da9"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.market.LeadLagObservation",
+      "path": "schemas/data/lead-lag-observation-v1.json",
+      "schema_name": "aegisquant.lead-lag-observation",
+      "schema_version": "1.0.0",
+      "sha256": "5a6cb48c995bda3ae0cc853c10310603ab7d5dc324d42421da44c9610272724f"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.public.PublicRequest",
+      "path": "schemas/data/public-exchange-request-v1.json",
+      "schema_name": "aegisquant.public-exchange-request",
+      "schema_version": "1.0.0",
+      "sha256": "653e50d3e1db38157dd6890a5bdff0cdd5aae4a26576377e88cf090f60ebe98c"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.public.WsSubscription",
+      "path": "schemas/data/public-ws-subscription-v1.json",
+      "schema_name": "aegisquant.public-ws-subscription",
+      "schema_version": "1.0.0",
+      "sha256": "6ad9a3839c2d3f840719b0c5179e400c133abe80e9e346a009ceb3507f4aa700"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.public.BookUpdate",
+      "path": "schemas/data/public-book-update-v1.json",
+      "schema_name": "aegisquant.public-book-update",
+      "schema_version": "1.0.0",
+      "sha256": "2ae6afd1916daa51af89fe7e347826e6525acb40f3629e8a888643174084ef29"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.data.providers.public.ChangelogSnapshot",
+      "path": "schemas/data/public-changelog-snapshot-v1.json",
+      "schema_name": "aegisquant.public-changelog-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "e855c5f171a44dec1fb3b7b33e336a9664b6ddd6f21858653a77b4a7f2d613ec"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.intelligence.collectors.SourceRequest",
+      "path": "schemas/data/source-request-v1.json",
+      "schema_name": "aegisquant.source-request",
+      "schema_version": "1.0.0",
+      "sha256": "7fb0523430a1e526d92bcbe7a10f812551b955ec7ca12bce365081c7aff9551f"
+    },
+    {
+      "compatibility": "BACKWARD",
       "model": "aegisquant.data.models.ProviderRegistryDocument",
       "path": "schemas/data/provider-registry-v1.json",
       "schema_name": "aegisquant.provider-registry",
       "schema_version": "1.0.0",
-      "sha256": "e834d96568b0e3b5ed6a3bf4f247697a28ac65b0daa8560b820dc7891a0dd773"
+      "sha256": "1907b0fb7f5340afd712f1fc6a340807f06658e2b3d241d258d924a370f66d58"
     },
     {
       "compatibility": "BACKWARD",

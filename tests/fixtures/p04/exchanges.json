@@ -1,0 +1,118 @@
+{
+  "fixture_version": "1.0.0",
+  "provenance": "Contract-derived examples based on official public API documentation; not claimed as live observations.",
+  "okx": {
+    "code": "0",
+    "data": [
+      {
+        "instType": "SWAP",
+        "instId": "BTC-USDT-SWAP",
+        "instFamily": "BTC-USDT",
+        "uly": "BTC-USDT",
+        "baseCcy": "BTC",
+        "quoteCcy": "USDT",
+        "settleCcy": "USDT",
+        "ctVal": "0.01",
+        "ctType": "linear",
+        "expTime": "",
+        "stk": "",
+        "optType": "",
+        "tickSz": "0.1",
+        "lotSz": "1",
+        "state": "live"
+      },
+      {
+        "instType": "OPTION",
+        "instId": "BTC-USD-260925-100000-C",
+        "instFamily": "BTC-USD",
+        "uly": "BTC-USD",
+        "baseCcy": "BTC",
+        "quoteCcy": "USD",
+        "settleCcy": "BTC",
+        "ctVal": "1",
+        "ctType": "inverse",
+        "expTime": "1790294400000",
+        "stk": "100000",
+        "optType": "C",
+        "tickSz": "0.0001",
+        "lotSz": "0.1",
+        "state": "live"
+      }
+    ]
+  },
+  "bybit_linear": {
+    "retCode": 0,
+    "result": {
+      "category": "linear",
+      "list": [
+        {
+          "symbol": "BTCUSDT",
+          "contractType": "LinearPerpetual",
+          "status": "Trading",
+          "baseCoin": "BTC",
+          "quoteCoin": "USDT",
+          "settleCoin": "USDT",
+          "deliveryTime": "0",
+          "contractSize": "0.01",
+          "priceFilter": {"tickSize": "0.1"},
+          "lotSizeFilter": {"qtyStep": "1"}
+        }
+      ]
+    }
+  },
+  "bybit_option": {
+    "retCode": 0,
+    "result": {
+      "category": "option",
+      "list": [
+        {
+          "symbol": "BTC-25SEP26-100000-C",
+          "contractType": "Option",
+          "optionsType": "Call",
+          "status": "Trading",
+          "baseCoin": "BTC",
+          "quoteCoin": "USD",
+          "settleCoin": "USDC",
+          "deliveryTime": "1790294400000",
+          "strike": "100000",
+          "contractSize": "1",
+          "priceFilter": {"tickSize": "0.0005"},
+          "lotSizeFilter": {"qtyStep": "0.01"}
+        }
+      ]
+    }
+  },
+  "deribit": {
+    "jsonrpc": "2.0",
+    "result": [
+      {
+        "instrument_name": "BTC-PERPETUAL",
+        "kind": "future",
+        "base_currency": "BTC",
+        "quote_currency": "USD",
+        "settlement_currency": "BTC",
+        "instrument_type": "reversed",
+        "contract_size": 10,
+        "expiration_timestamp": 32503708800000,
+        "tick_size": 0.5,
+        "min_trade_amount": 10,
+        "is_active": true
+      },
+      {
+        "instrument_name": "BTC-25SEP26-100000-C",
+        "kind": "option",
+        "base_currency": "BTC",
+        "quote_currency": "USD",
+        "settlement_currency": "BTC",
+        "instrument_type": "reversed",
+        "contract_size": 1,
+        "expiration_timestamp": 1790294400000,
+        "strike": 100000,
+        "option_type": "call",
+        "tick_size": 0.0001,
+        "min_trade_amount": 0.1,
+        "is_active": true
+      }
+    ]
+  }
+}

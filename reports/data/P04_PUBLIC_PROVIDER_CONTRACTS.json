@@ -1,0 +1,76 @@
+{
+  "account_access_performed": false,
+  "authentication_used": false,
+  "fixture_only": true,
+  "live_trading_locked": true,
+  "order_capability_present": false,
+  "phase": "P04",
+  "schema_version": "1.0.0",
+  "sequence_rules": {
+    "BYBIT": "snapshot replaces state; u=1 restarts; delta u increases",
+    "DERIBIT": "change prev_change_id equals watermark",
+    "OKX": "snapshot seqId; update prevSeqId equals watermark"
+  },
+  "venues": {
+    "BYBIT": {
+      "changelog_url": "https://bybit-exchange.github.io/docs/changelog/v5",
+      "provider_id": "bybit_public",
+      "rate_limits": {
+        "default_http_requests_per_second": 10
+      },
+      "rest_capabilities": {
+        "funding": "https://api.bybit.com/v5/market/funding/history",
+        "instruments": "https://api.bybit.com/v5/market/instruments-info",
+        "open_interest": "https://api.bybit.com/v5/market/open-interest",
+        "orderbook": "https://api.bybit.com/v5/market/orderbook",
+        "ticker": "https://api.bybit.com/v5/market/tickers",
+        "time": "https://api.bybit.com/v5/market/time"
+      },
+      "status_url": "https://status.bybit.com/",
+      "websocket_urls": {
+        "inverse": "wss://stream.bybit.com/v5/public/inverse",
+        "linear": "wss://stream.bybit.com/v5/public/linear",
+        "option": "wss://stream.bybit.com/v5/public/option",
+        "spot": "wss://stream.bybit.com/v5/public/spot"
+      }
+    },
+    "DERIBIT": {
+      "changelog_url": "https://docs.deribit.com/",
+      "provider_id": "deribit_public",
+      "rate_limits": {
+        "default_credits_per_second": 20
+      },
+      "rest_capabilities": {
+        "funding": "https://www.deribit.com/api/v2/public/get_funding_rate_history",
+        "instruments": "https://www.deribit.com/api/v2/public/get_instruments",
+        "open_interest": "https://www.deribit.com/api/v2/public/get_book_summary_by_instrument",
+        "orderbook": "https://www.deribit.com/api/v2/public/get_order_book",
+        "ticker": "https://www.deribit.com/api/v2/public/ticker",
+        "time": "https://www.deribit.com/api/v2/public/get_time"
+      },
+      "status_url": "https://status.deribit.com/",
+      "websocket_urls": {
+        "public": "wss://www.deribit.com/ws/api/v2"
+      }
+    },
+    "OKX": {
+      "changelog_url": "https://www.okx.com/docs-v5/log_en/",
+      "provider_id": "okx_public",
+      "rate_limits": {
+        "rest_requests_per_two_seconds": 20
+      },
+      "rest_capabilities": {
+        "funding": "https://www.okx.com/api/v5/public/funding-rate-history",
+        "instruments": "https://www.okx.com/api/v5/public/instruments",
+        "open_interest": "https://www.okx.com/api/v5/public/open-interest",
+        "orderbook": "https://www.okx.com/api/v5/market/books",
+        "ticker": "https://www.okx.com/api/v5/market/ticker",
+        "time": "https://www.okx.com/api/v5/public/time"
+      },
+      "status_url": "https://www.okx.com/status",
+      "websocket_urls": {
+        "public": "wss://ws.okx.com:8443/ws/v5/public"
+      }
+    }
+  }
+}

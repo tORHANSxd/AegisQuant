@@ -30,7 +30,7 @@ def test_provider_registry_is_fail_closed(project_root: Path) -> None:
     assert providers.content_hash() == providers.content_hash()
 
     denied = policies.get(SourcePolicyId("user_local_assets_deny_v1"))
-    with pytest.raises(DomainError, match="AQ-PROVIDER-STATUS-NOT-APPROVED"):
+    with pytest.raises(DomainError, match="AQ-PROVIDER-ACCESS-AWAITING_USER_APPROVAL"):
         providers.require_collection(denied.provider_id, denied)
     with pytest.raises(DomainError, match="AQ-PROVIDER-POLICY-NOT-REGISTERED"):
         policies.get(SourcePolicyId("unregistered-policy"))

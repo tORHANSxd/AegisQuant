@@ -26,7 +26,16 @@ from aegisquant.domain.values import Money
 def test_every_generated_contract_is_valid_and_registry_hash_is_exact() -> None:
     root = Path(__file__).resolve().parents[2]
     registry = json.loads((root / "schemas/events/registry.json").read_text(encoding="utf-8"))
-    assert len(registry["event_contracts"]) == 18
+    assert len(registry["event_contracts"]) >= 18
+    names = {entry["schema_name"] for entry in registry["event_contracts"]}
+    assert {
+        "aegisquant.source-identity",
+        "aegisquant.engagement-snapshot",
+        "aegisquant.collected-content",
+        "aegisquant.source-batch",
+        "aegisquant.official-web-change-snapshot",
+        "aegisquant.bluesky-stream-selection",
+    } <= names
     for entry in registry["event_contracts"]:
         path = root / entry["path"]
         raw = path.read_bytes()

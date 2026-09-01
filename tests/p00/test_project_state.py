@@ -21,7 +21,7 @@ def test_phase_state_advances_one_accepted_phase_at_a_time(project_root: Path) -
     assert previous_number == current_number - 1
     assert payload["status"] in {"in_progress", *CLOSED_STATUSES}
     assert payload["live_trading_locked"] is True
-    assert payload["previous_phase"]["status"] == "accepted"
+    assert payload["previous_phase"]["status"] in CLOSED_STATUSES
 
 
 def test_acceptance_state_has_evidence_when_closed(project_root: Path) -> None:

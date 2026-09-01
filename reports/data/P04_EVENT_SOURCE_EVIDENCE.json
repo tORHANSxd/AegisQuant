@@ -1,0 +1,108 @@
+{
+  "bluesky_transport": {
+    "checkpoint_parameter": "cursor",
+    "fallback_used": false,
+    "mode": "JETSTREAM",
+    "reason_code": "AQ-BLUESKY-JETSTREAM-CONTRACT-COMPATIBLE",
+    "url": "wss://jetstream2.us-east.bsky.network/subscribe"
+  },
+  "collection_enabled": false,
+  "credentials_requested_or_stored": false,
+  "disabled_sources": [
+    "reddit",
+    "discord",
+    "weibo",
+    "tiktok"
+  ],
+  "fixture_only_sources": [
+    "x",
+    "telegram_bot",
+    "youtube"
+  ],
+  "large_llm_auto_trading_used": false,
+  "mtproto_enabled": false,
+  "official_web_change_sha256": "7a4f46714231d7e61253fa34aab22a394a68b22d8b86c85f7c2b6f1ce35a8f2c",
+  "parsed_fixture_counts": {
+    "bluesky_jetstream": 1,
+    "gdelt": 1,
+    "github_advisories": 1,
+    "github_releases": 1,
+    "rss_atom": 1,
+    "telegram_bot": 1,
+    "x": 1,
+    "youtube": 1
+  },
+  "phase": "P04",
+  "prompt_injection": {
+    "config_mutation_allowed": false,
+    "external_content_is_data": true,
+    "flags": [
+      "IGNORE_INSTRUCTIONS",
+      "TOOL_INVOCATION",
+      "CONFIG_MUTATION",
+      "SECRET_EXTRACTION"
+    ],
+    "tool_calls_allowed": false
+  },
+  "repost_group_count": 1,
+  "repost_independent_source_count": 1,
+  "schema_version": "1.0.0",
+  "source_contracts": {
+    "bluesky_jetstream": {
+      "access_state": "ready",
+      "checkpoint_field": "time_us",
+      "credentials_required": false,
+      "deletions_supported": true,
+      "provider_id": "bluesky_jetstream",
+      "revisions_supported": true
+    },
+    "gdelt": {
+      "access_state": "ready",
+      "checkpoint_field": "seendate+url",
+      "credentials_required": false,
+      "deletions_supported": false,
+      "provider_id": "gdelt_public",
+      "revisions_supported": false
+    },
+    "github": {
+      "access_state": "ready",
+      "checkpoint_field": "updated_at+id",
+      "credentials_required": false,
+      "deletions_supported": true,
+      "provider_id": "github_public",
+      "revisions_supported": true
+    },
+    "rss_atom": {
+      "access_state": "ready",
+      "checkpoint_field": "published_time+native_id",
+      "credentials_required": false,
+      "deletions_supported": false,
+      "provider_id": "official_rss_atom",
+      "revisions_supported": true
+    },
+    "telegram_bot": {
+      "access_state": "awaiting_credentials",
+      "checkpoint_field": "update_id",
+      "credentials_required": true,
+      "deletions_supported": false,
+      "provider_id": "telegram_bot",
+      "revisions_supported": true
+    },
+    "x": {
+      "access_state": "awaiting_credentials",
+      "checkpoint_field": "newest_id+next_token",
+      "credentials_required": true,
+      "deletions_supported": true,
+      "provider_id": "x_official",
+      "revisions_supported": true
+    },
+    "youtube": {
+      "access_state": "awaiting_credentials",
+      "checkpoint_field": "nextPageToken+publishedAt",
+      "credentials_required": true,
+      "deletions_supported": true,
+      "provider_id": "youtube_official",
+      "revisions_supported": true
+    }
+  }
+}

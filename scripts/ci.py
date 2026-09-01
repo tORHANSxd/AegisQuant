@@ -1,4 +1,4 @@
-"""Run the complete P03 verification pipeline and emit machine-readable evidence."""
+"""Run a complete phase verification pipeline and emit machine-readable evidence."""
 
 from __future__ import annotations
 
@@ -53,9 +53,30 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
     return StageResult(name, command, result.returncode, duration, output[-12_000:])
 
 
-def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
-    """Return the ordered, complete P03 test pipeline."""
+def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
+    """Return the ordered P03/P04 pipeline without network soak execution."""
     pnpm = resolve_command("pnpm")
+    phase_status = [
+        "P00=verified",
+        "P01=verified",
+        "P02=verified",
+        "P03=verified",
+    ]
+    if phase == "P04":
+        phase_status.append("P04=verified")
+    evidence_stages: list[tuple[str, list[str]]] = [
+        (
+            "p03-binance-evidence",
+            [sys.executable, "scripts/generate_p03_binance_evidence.py", "--check"],
+        )
+    ]
+    if phase == "P04":
+        evidence_stages.append(
+            (
+                "p04-multivenue-event-evidence",
+                [sys.executable, "scripts/generate_p04_evidence.py", "--check"],
+            )
+        )
     return [
         ("postgres-runtime", [sys.executable, "scripts/setup_postgres.py"]),
         (
@@ -63,14 +84,7 @@ def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
             [
                 sys.executable,
                 "scripts/generate_traceability.py",
-                "--phase-status",
-                "P00=verified",
-                "--phase-status",
-                "P01=verified",
-                "--phase-status",
-                "P02=verified",
-                "--phase-status",
-                "P03=verified",
+                *[item for status in phase_status for item in ("--phase-status", status)],
                 "--check",
             ],
         ),
@@ -79,15 +93,15 @@ def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
             "p02-data-evidence",
             [sys.executable, "scripts/generate_p02_data_evidence.py", "--check"],
         ),
-        (
-            "p03-binance-evidence",
-            [sys.executable, "scripts/generate_p03_binance_evidence.py", "--check"],
-        ),
+        *evidence_stages,
         ("ruff-format", [sys.executable, "-m", "ruff", "format", "--check", "."]),
         ("ruff-lint", [sys.executable, "-m", "ruff", "check", "."]),
         ("pyright-strict", [sys.executable, "-m", "pyright", "--project", "pyproject.toml"]),
         ("pytest", [sys.executable, "-m", "pytest"]),
-        ("python-candidate", [sys.executable, "scripts/run_python_compatibility.py"]),
+        (
+            "python-candidate",
+            [sys.executable, "scripts/run_python_compatibility.py", "--phase", phase],
+        ),
         (
             "nautilus-compatibility",
             [sys.executable, "scripts/generate_nautilus_compatibility.py"],
@@ -96,7 +110,7 @@ def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
             "bandit",
             [sys.executable, "scripts/run_bandit.py"],
         ),
-        ("security", [sys.executable, "scripts/security_scan.py"]),
+        ("security", [sys.executable, "scripts/security_scan.py", "--phase", phase]),
         ("compliance-artifacts", [sys.executable, "scripts/generate_compliance_artifacts.py"]),
         ("web-lint", [pnpm, "lint"]),
         ("web-typecheck", [pnpm, "typecheck"]),
@@ -108,18 +122,18 @@ def stage_commands(root: Path) -> list[tuple[str, list[str]]]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--phase", choices=("P03", "P04"), default="P04")
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("reports/phases/P03/CI_RESULTS.json"),
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    results = [run_stage(name, command, root) for name, command in stage_commands(root)]
+    results = [run_stage(name, command, root) for name, command in stage_commands(root, args.phase)]
     passed = all(result.exit_code == 0 for result in results)
     payload = {
         "schema_version": "1.0.0",
-        "phase": "P03",
+        "phase": args.phase,
         "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "status": "passed" if passed else "failed",
         "stage_count": len(results),
@@ -127,14 +141,14 @@ def main() -> int:
         "failed_count": sum(result.exit_code != 0 for result in results),
         "results": [asdict(result) for result in results],
     }
-    output = root / args.output
+    output = root / (args.output or Path(f"reports/phases/{args.phase}/CI_RESULTS.json"))
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
         newline="\n",
     )
-    print(f"P03 verification status: {payload['status']}")
+    print(f"{args.phase} verification status: {payload['status']}")
     return 0 if passed else 1
 
 

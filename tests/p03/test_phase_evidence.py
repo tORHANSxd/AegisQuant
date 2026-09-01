@@ -28,12 +28,20 @@ def load_state(project_root: Path) -> dict[str, object]:
     )
 
 
+def p03_record(state: dict[str, object]) -> dict[str, object]:
+    if state["current_phase"] == "P03":
+        return state
+    previous = cast(dict[str, object], state["previous_phase"])
+    assert previous["phase"] == "P03"
+    return previous
+
+
 def test_p03_boundary_is_explicit_and_live_trading_remains_locked(
     project_root: Path,
 ) -> None:
     state = load_state(project_root)
-    assert state["current_phase"] == "P03"
-    assert state["next_phase"] == "P04"
+    assert state["current_phase"] in {"P03", "P04"}
+    assert state["next_phase"] in {"P04", "P05"}
     assert state["status"] in {"in_progress", "accepted", "accepted_with_waiver"}
     assert state["live_trading_locked"] is True
     assert not (project_root / "src/aegisquant/live").exists()
@@ -50,7 +58,7 @@ def test_p03_traceability_targets_are_real(project_root: Path) -> None:
         assert (project_root / row["implementation"]).exists(), row["requirement_id"]
         assert (project_root / row["test"]).exists(), row["requirement_id"]
 
-    state = load_state(project_root)
+    state = p03_record(load_state(project_root))
     statuses = {row["requirement_id"]: row["status"] for row in rows}
     if state["status"] == "in_progress":
         assert set(statuses.values()) == {"in_progress"}
@@ -66,7 +74,7 @@ def test_p03_traceability_targets_are_real(project_root: Path) -> None:
 def test_p03_acceptance_requires_qualifying_24_hour_evidence_or_explicit_waiver(
     project_root: Path,
 ) -> None:
-    state = load_state(project_root)
+    state = p03_record(load_state(project_root))
     if state["status"] == "in_progress":
         assert state["accepted_at_utc"] is None
         return

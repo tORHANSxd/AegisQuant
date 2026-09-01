@@ -1,0 +1,281 @@
+{
+  "$defs": {
+    "CanonicalAsset": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "contract_address": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Contract Address"
+        },
+        "network": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Network"
+        },
+        "symbol": {
+          "title": "Symbol",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "symbol"
+      ],
+      "title": "CanonicalAsset",
+      "type": "object"
+    },
+    "CanonicalExposure": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_form": {
+          "$ref": "#/$defs/ContractForm"
+        },
+        "expiry": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expiry"
+        },
+        "exposure_id": {
+          "title": "Exposure Id",
+          "type": "string"
+        },
+        "instrument_type": {
+          "$ref": "#/$defs/InstrumentType"
+        },
+        "option_type": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/OptionType"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "pair_id": {
+          "title": "Pair Id",
+          "type": "string"
+        },
+        "settlement_asset_id": {
+          "title": "Settlement Asset Id",
+          "type": "string"
+        },
+        "strike": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Strike"
+        }
+      },
+      "required": [
+        "exposure_id",
+        "pair_id",
+        "settlement_asset_id",
+        "instrument_type",
+        "contract_form"
+      ],
+      "title": "CanonicalExposure",
+      "type": "object"
+    },
+    "ContractForm": {
+      "enum": [
+        "SPOT",
+        "LINEAR",
+        "INVERSE"
+      ],
+      "title": "ContractForm",
+      "type": "string"
+    },
+    "ImpliedVolatilitySource": {
+      "enum": [
+        "NOT_APPLICABLE",
+        "VENUE_MARK_TICKER",
+        "VENUE_BID_ASK_TICKER"
+      ],
+      "title": "ImpliedVolatilitySource",
+      "type": "string"
+    },
+    "InstrumentType": {
+      "enum": [
+        "SPOT",
+        "PERPETUAL",
+        "FUTURE",
+        "OPTION"
+      ],
+      "title": "InstrumentType",
+      "type": "string"
+    },
+    "OptionType": {
+      "enum": [
+        "CALL",
+        "PUT"
+      ],
+      "title": "OptionType",
+      "type": "string"
+    },
+    "Venue": {
+      "enum": [
+        "BINANCE",
+        "OKX",
+        "BYBIT",
+        "DERIBIT"
+      ],
+      "title": "Venue",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.unified-instrument/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "active": {
+      "title": "Active",
+      "type": "boolean"
+    },
+    "available_time": {
+      "format": "date-time",
+      "title": "Available Time",
+      "type": "string"
+    },
+    "base_asset": {
+      "$ref": "#/$defs/CanonicalAsset"
+    },
+    "contract_multiplier": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Contract Multiplier"
+    },
+    "exposure": {
+      "$ref": "#/$defs/CanonicalExposure"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "iv_source": {
+      "$ref": "#/$defs/ImpliedVolatilitySource",
+      "default": "NOT_APPLICABLE"
+    },
+    "lot_size": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Lot Size"
+    },
+    "observed_time": {
+      "format": "date-time",
+      "title": "Observed Time",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "quote_asset": {
+      "$ref": "#/$defs/CanonicalAsset"
+    },
+    "settlement_asset": {
+      "$ref": "#/$defs/CanonicalAsset"
+    },
+    "tick_size": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Tick Size"
+    },
+    "venue": {
+      "$ref": "#/$defs/Venue"
+    },
+    "venue_symbol": {
+      "title": "Venue Symbol",
+      "type": "string"
+    }
+  },
+  "required": [
+    "instrument_id",
+    "provider_id",
+    "venue",
+    "venue_symbol",
+    "exposure",
+    "base_asset",
+    "quote_asset",
+    "settlement_asset",
+    "contract_multiplier",
+    "tick_size",
+    "lot_size",
+    "active",
+    "observed_time",
+    "available_time"
+  ],
+  "title": "UnifiedInstrument",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.unified-instrument",
+  "x-aegisquant-schema-version": "1.0.0"
+}
