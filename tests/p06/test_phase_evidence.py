@@ -16,6 +16,16 @@ def _json(path: Path) -> dict[str, object]:
     return cast(dict[str, object], json.loads(path.read_text(encoding="utf-8")))
 
 
+def _p06_record(state: dict[str, object]) -> dict[str, object]:
+    if state["current_phase"] == "P06":
+        return state
+    previous = cast(dict[str, object], state["previous_phase"])
+    if previous["phase"] == "P06":
+        return previous
+    history = cast(list[dict[str, object]], state.get("phase_history", []))
+    return next(item for item in history if item["phase"] == "P06")
+
+
 def test_p06_state_is_in_progress_with_live_lock_and_deferred_acceptance(
     project_root: Path,
 ) -> None:
@@ -28,15 +38,20 @@ def test_p06_state_is_in_progress_with_live_lock_and_deferred_acceptance(
     previous = cast(dict[str, object], state["previous_phase"])
     deferred = cast(list[dict[str, object]], state["deferred_acceptance_queue"])
 
-    assert state["current_phase"] == "P06"
-    assert state["next_phase"] == "P07"
+    assert state["current_phase"] in {"P06", "P07"}
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["live_trading_locked"] is True
-    assert previous["phase"] == "P05"
-    assert previous["status"] == "in_progress"
-    assert deferred[0]["phase"] == "P05"
-    assert deferred[0]["status"] == "implementation_verified_acceptance_deferred"
+    assert {item["phase"] for item in deferred} >= {"P05"}
+    assert all(item["status"] == "implementation_verified_acceptance_deferred" for item in deferred)
+    if state["current_phase"] == "P06":
+        assert state["next_phase"] == "P07"
+        assert previous["phase"] == "P05"
+    else:
+        assert state["next_phase"] == "P08"
+        assert previous["phase"] == "P06"
+        assert {item["phase"] for item in deferred} >= {"P05", "P06"}
+    assert _p06_record(state)["status"] == "in_progress"
     assert not (project_root / "reports/phases/P06/ACCEPTANCE.md").exists()
     assert not (project_root / "src/aegisquant/live").exists()
 

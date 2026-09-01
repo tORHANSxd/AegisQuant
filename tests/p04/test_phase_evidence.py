@@ -42,7 +42,7 @@ def p04_record(state: dict[str, object]) -> dict[str, object]:
 def test_p04_boundary_preserves_p03_waiver_and_live_lock(project_root: Path) -> None:
     state = load_state(project_root)
     previous = cast(dict[str, object], state["previous_phase"])
-    assert state["current_phase"] in {"P04", "P05", "P06"}
+    assert state["current_phase"] in {"P04", "P05", "P06", "P07"}
     assert state["status"] in {"in_progress", "accepted"}
     assert state["live_trading_locked"] is True
     history = cast(list[dict[str, object]], state.get("phase_history", []))
@@ -61,9 +61,14 @@ def test_p04_boundary_preserves_p03_waiver_and_live_lock(project_root: Path) -> 
         assert state["next_phase"] == "P06"
         assert previous["phase"] == "P04"
         assert previous["status"] == "accepted"
-    else:
+    elif state["current_phase"] == "P06":
         assert state["next_phase"] == "P07"
         assert previous["phase"] == "P05"
+        assert previous["status"] == "in_progress"
+        assert p04_record(state)["status"] == "accepted"
+    else:
+        assert state["next_phase"] == "P08"
+        assert previous["phase"] == "P06"
         assert previous["status"] == "in_progress"
         assert p04_record(state)["status"] == "accepted"
 

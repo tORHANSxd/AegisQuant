@@ -1,7 +1,8 @@
-"""Generate CycloneDX inventories and dependency license evidence for P03."""
+"""Generate phase-bound CycloneDX inventories and dependency license evidence."""
 
 from __future__ import annotations
 
+import argparse
 import importlib.metadata
 import json
 import shutil
@@ -127,6 +128,9 @@ def python_license_inventory(root: Path) -> list[dict[str, object]]:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--phase", choices=("P03", "P04", "P05", "P06", "P07"), default="P07")
+    arguments = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     pnpm = shutil.which("pnpm")
     if pnpm is None:
@@ -172,7 +176,7 @@ def main() -> int:
     )
     summary = {
         "schema_version": "1.0.0",
-        "phase": "P03",
+        "phase": arguments.phase,
         "status": "passed",
         "python_component_count": len(python_components),
         "javascript_component_count": len(javascript_components),

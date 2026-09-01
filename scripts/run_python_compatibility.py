@@ -14,7 +14,7 @@ from pathlib import Path
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("P03", "P04", "P05", "P06"), default="P06")
+    parser.add_argument("--phase", choices=("P03", "P04", "P05", "P06", "P07"), default="P07")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     local_uv = root / ".tools/uv-bootstrap/Scripts/uv.exe"
@@ -32,12 +32,14 @@ def main() -> int:
         "tests/performance",
         "tests/security",
     ]
-    if args.phase in {"P04", "P05", "P06"}:
+    if args.phase in {"P04", "P05", "P06", "P07"}:
         test_targets.extend(("tests/replay/intelligence", "tests/p04"))
-    if args.phase in {"P05", "P06"}:
+    if args.phase in {"P05", "P06", "P07"}:
         test_targets.extend(("tests/p05", "tests/mutation"))
-    if args.phase == "P06":
+    if args.phase in {"P06", "P07"}:
         test_targets.append("tests/p06")
+    if args.phase == "P07":
+        test_targets.extend(("tests/research", "tests/p07"))
     command = [
         uv,
         "run",

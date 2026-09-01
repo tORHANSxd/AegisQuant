@@ -1,0 +1,20 @@
+requirement_id,category,requirement,implementation,test,evidence,status
+P07-T01,task,"Feature Registry、不可变 Snapshot 和批/增量 parity",src/aegisquant/features/,tests/unit/features/,reports/data/P07_FEATURE_EVIDENCE.json,verified
+P07-T02,task,"收益、趋势、波动率、流动性、资金费率、基差和横截面特征",src/aegisquant/features/market.py,tests/unit/features/test_market_features.py,reports/data/P07_FEATURE_EVIDENCE.json,verified
+P07-T03,task,"官方性、独立来源、事件类型、novelty、stance、传播速度、市场反映度和质量事件特征",src/aegisquant/features/events.py,tests/unit/features/test_event_features.py,reports/data/P07_EVENT_FEATURE_EVIDENCE.json,verified
+P07-T04,task,"净收益、三分类、分位数、波动率、MAE/MFE、执行和事件影响标签",src/aegisquant/labels/,tests/unit/labels/,reports/data/P07_LABEL_EVIDENCE.json,verified
+P07-T05,task,"point-in-time Universe 和训练数据八类 Manifest",src/aegisquant/research/datasets/,tests/property/pit/,reports/data/P07_DATASET_EVIDENCE.json,verified
+P07-T06,task,"walk-forward、purge、embargo 和 CPCV/CSCV",src/aegisquant/research/validation/splits.py,tests/research/test_splits.py,reports/data/P07_VALIDATION_EVIDENCE.json,verified
+P07-T07,task,"PBO、PSR/DSR 和多重试验报告",src/aegisquant/research/validation/statistics.py,tests/research/test_statistics.py,reports/data/P07_VALIDATION_EVIDENCE.json,verified
+P07-T08,task,"现金、持有、趋势、横截面、carry/basis 和事件基线策略",src/aegisquant/research/baselines.py,tests/research/test_strategy_baselines.py,reports/data/P07_BASELINE_EVIDENCE.json,verified
+P07-T09,task,"线性、Logistic、Elastic Net、HAR-RV、状态模型及 Market/Event/Fused 公平基线",src/aegisquant/research/models/,tests/research/test_model_baselines.py,reports/data/P07_MODEL_EVIDENCE.json,verified
+P07-T10,task,"费用倍数、事件延迟、互动快照、参数扰动和状态切片",src/aegisquant/research/validation/stress.py,tests/research/test_stress.py,reports/data/P07_STRESS_EVIDENCE.json,verified
+P07-T11,task,"最终 holdout 访问锁和追加式审计",src/aegisquant/research/validation/holdout.py,tests/research/test_holdout.py,reports/data/P07_HOLDOUT_EVIDENCE.json,verified
+P07-T12,task,"追加式实验账本和包含事件增量与负结果的 BASELINE_SCOREBOARD",src/aegisquant/research/experiments/; src/aegisquant/research/reports/,tests/research/test_experiments_scoreboard.py,reports/research/P07/BASELINE_SCOREBOARD.md,verified
+P07-T13,task,"旧 R331 仅在用户提供时作为不可修改且口径独立的外部基准",src/aegisquant/research/datasets/external.py,tests/research/test_external_baseline.py,reports/data/P07_EXTERNAL_BASELINE_EVIDENCE.json,verified
+P07-A01,acceptance,"随机 shuffle 时间切分在代码层被阻止",src/aegisquant/research/validation/splits.py,tests/research/test_splits.py,reports/data/P07_VALIDATION_EVIDENCE.json,in_progress
+P07-A02,acceptance,"未来特征和标签泄漏测试捕获故意注入错误",src/aegisquant/research/validation/leakage.py,tests/property/pit/test_leakage.py,reports/data/P07_LEAKAGE_EVIDENCE.json,in_progress
+P07-A03,acceptance,"所有成功、失败和异常试验可查询",src/aegisquant/research/experiments/ledger.py,tests/research/test_experiments_scoreboard.py,reports/data/P07_EXPERIMENT_EVIDENCE.json,in_progress
+P07-A04,acceptance,"简单策略净收益与手算独立实现一致",src/aegisquant/research/baselines.py,tests/research/test_strategy_baselines.py,reports/data/P07_BASELINE_EVIDENCE.json,in_progress
+P07-A05,acceptance,"报告明确 gross 与 net 且不用单一 Sharpe 排名",src/aegisquant/research/reports/scoreboard.py,tests/research/test_experiments_scoreboard.py,reports/research/P07/BASELINE_SCOREBOARD.md,in_progress
+P07-A06,acceptance,"最终 holdout 在模型和参数冻结前不可读",src/aegisquant/research/validation/holdout.py,tests/research/test_holdout.py,reports/data/P07_HOLDOUT_EVIDENCE.json,in_progress

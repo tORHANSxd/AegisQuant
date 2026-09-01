@@ -54,7 +54,7 @@ def parsed_json(output: str) -> object:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("P03", "P04", "P05", "P06"), default="P06")
+    parser.add_argument("--phase", choices=("P03", "P04", "P05", "P06", "P07"), default="P07")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     report_dir = root / "reports/security"
