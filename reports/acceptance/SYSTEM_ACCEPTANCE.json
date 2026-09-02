@@ -1,0 +1,222 @@
+{
+  "schema_version": "system-acceptance-audit-v1",
+  "generated_at_utc": "2026-09-02T07:31:05.929920Z",
+  "scope": "P00-P18",
+  "decision": "BLOCKED_EXTERNAL_INPUT",
+  "first_blocking_phase": "P12",
+  "engineering_implementation_status": "COMPLETE",
+  "research_platform_status": "IMPLEMENTATION_COMPLETE_WITH_P03_SOAK_WAIVER",
+  "paper_shadow_formal_acceptance": "BLOCKED_EXTERNAL_INPUT",
+  "canary_readiness": "NO_GO",
+  "live_trading_locked": true,
+  "phase_acceptance_reports_issued": false,
+  "atomic_audit": true,
+  "prior_formal_acceptance": [
+    {
+      "phase": "P00",
+      "formal_status": "ACCEPTED",
+      "implementation_commit": "05af2c7b40cbd7bfdd0a21727113010b5ee3e01a",
+      "waived_requirement_id": null,
+      "acceptance_report": "reports/phases/P00/ACCEPTANCE.md"
+    },
+    {
+      "phase": "P01",
+      "formal_status": "ACCEPTED",
+      "implementation_commit": "581f39b52d90455346fb42e58a7dff133fb370a1",
+      "waived_requirement_id": null,
+      "acceptance_report": "reports/phases/P01/ACCEPTANCE.md"
+    },
+    {
+      "phase": "P02",
+      "formal_status": "ACCEPTED",
+      "implementation_commit": "547bcee62734bc0896a7d51a1a52a0df209d3dc1",
+      "waived_requirement_id": null,
+      "acceptance_report": "reports/phases/P02/ACCEPTANCE.md"
+    },
+    {
+      "phase": "P03",
+      "formal_status": "ACCEPTED_WITH_WAIVER",
+      "implementation_commit": "8a2a8971c6ca8de40711bba392a37486b5e5799c",
+      "waived_requirement_id": "P03-A01",
+      "acceptance_report": "reports/phases/P03/ACCEPTANCE.md"
+    },
+    {
+      "phase": "P04",
+      "formal_status": "ACCEPTED",
+      "implementation_commit": "2ad3f0ffdd76fba5e81ce9d12eb70bef31c2d84d",
+      "waived_requirement_id": null,
+      "acceptance_report": "reports/phases/P04/ACCEPTANCE.md"
+    }
+  ],
+  "deferred_phase_assessments": [
+    {
+      "phase": "P05",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "READY_NOT_ISSUED_ATOMIC_AUDIT",
+      "acceptance_requirement_count": 6,
+      "ci_stage_count": 22,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P06",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "READY_NOT_ISSUED_ATOMIC_AUDIT",
+      "acceptance_requirement_count": 6,
+      "ci_stage_count": 25,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P07",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "READY_NOT_ISSUED_ATOMIC_AUDIT",
+      "acceptance_requirement_count": 6,
+      "ci_stage_count": 27,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P08",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "READY_NOT_ISSUED_ATOMIC_AUDIT",
+      "acceptance_requirement_count": 7,
+      "ci_stage_count": 29,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P09",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "READY_NOT_ISSUED_ATOMIC_AUDIT",
+      "acceptance_requirement_count": 6,
+      "ci_stage_count": 31,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P10",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "READY_NOT_ISSUED_ATOMIC_AUDIT",
+      "acceptance_requirement_count": 10,
+      "ci_stage_count": 33,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P11",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "READY_NOT_ISSUED_ATOMIC_AUDIT",
+      "acceptance_requirement_count": 7,
+      "ci_stage_count": 35,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P12",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "BLOCKED_EXTERNAL_INPUT",
+      "formal_acceptance_status": "BLOCKED_EXTERNAL_INPUT",
+      "acceptance_requirement_count": 7,
+      "ci_stage_count": 37,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P13",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS_WITH_OWNER_WAIVER",
+      "formal_acceptance_status": "NOT_REACHED_DEPENDENCY_BLOCKED",
+      "acceptance_requirement_count": 6,
+      "ci_stage_count": 39,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P14",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "NOT_REACHED_DEPENDENCY_BLOCKED",
+      "acceptance_requirement_count": 6,
+      "ci_stage_count": 44,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P15",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "NOT_REACHED_DEPENDENCY_BLOCKED",
+      "acceptance_requirement_count": 7,
+      "ci_stage_count": 46,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P16",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "BLOCKED_EXTERNAL_INPUT",
+      "formal_acceptance_status": "NOT_REACHED_DEPENDENCY_BLOCKED",
+      "acceptance_requirement_count": 7,
+      "ci_stage_count": 51,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P17",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "NOT_REACHED_DEPENDENCY_BLOCKED",
+      "acceptance_requirement_count": 5,
+      "ci_stage_count": 53,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    },
+    {
+      "phase": "P18",
+      "implementation_status": "VERIFIED",
+      "intrinsic_acceptance_status": "PASS",
+      "formal_acceptance_status": "NOT_REACHED_DEPENDENCY_BLOCKED",
+      "acceptance_requirement_count": 7,
+      "ci_stage_count": 55,
+      "ci_failed_count": 0,
+      "acceptance_report_issued": false
+    }
+  ],
+  "acceptance_requirement_count": 93,
+  "intrinsic_pass_count": 90,
+  "blocked_requirement_ids": [
+    "P12-A01",
+    "P16-A03"
+  ],
+  "waived_requirement_ids": [
+    "P13-A01"
+  ],
+  "blocking_evidence": {
+    "P12-A01": "reports/execution/P12_TESTNET_CAPABILITY.json",
+    "P16-A03": "reports/observability/P16_ALERT_EVIDENCE.json"
+  },
+  "source_verification": {
+    "complete_ci_artifact": "reports/acceptance/CI_RESULTS.json",
+    "p18_ci_status": "passed",
+    "p18_ci_stage_count": 55,
+    "p18_ci_failed_count": 0,
+    "python_313_passed": 689,
+    "python_314_passed": 650,
+    "p18_readiness_decision": "NO_GO"
+  },
+  "safety": {
+    "wall_clock_12h_or_24h_executed": false,
+    "real_account_connections": 0,
+    "real_order_requests": 0,
+    "plaintext_secret_requested_or_written": false,
+    "live_authorization_issued": false
+  }
+}

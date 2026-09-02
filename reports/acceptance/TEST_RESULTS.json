@@ -1,0 +1,29 @@
+{
+  "schema_version": "system-acceptance-test-results-v1",
+  "generated_at_utc": "2026-09-02T07:31:05.929920Z",
+  "scope": "P00-P18",
+  "result": "blocked_external_input",
+  "audit": {
+    "phase_matrix_count": 14,
+    "acceptance_requirement_count": 93,
+    "missing_reference_count": 0,
+    "prior_acceptance_report_count": 5,
+    "blocked_requirement_count": 2,
+    "waived_requirement_count": 1
+  },
+  "inherited_complete_ci": {
+    "complete_ci_artifact": "reports/acceptance/CI_RESULTS.json",
+    "p18_ci_status": "passed",
+    "p18_ci_stage_count": 55,
+    "p18_ci_failed_count": 0,
+    "python_313_passed": 689,
+    "python_314_passed": 650,
+    "p18_readiness_decision": "NO_GO"
+  },
+  "wall_clock_12h_or_24h_executed": false,
+  "formal_acceptance_passed": false,
+  "live_trading_locked": true,
+  "real_account_connections": 0,
+  "real_order_requests": 0,
+  "plaintext_secret_requested_or_written": false
+}

@@ -1,0 +1,699 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P18",
+  "generated_at_utc": "2026-09-02T07:06:49.355726Z",
+  "status": "failed",
+  "stage_count": 55,
+  "passed_count": 51,
+  "failed_count": 4,
+  "results": [
+    {
+      "name": "postgres-runtime",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/setup_postgres.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.155,
+      "output_tail": "{\n  \"version\": \"18.6\",\n  \"archive_url\": \"https://get.enterprisedb.com/postgresql/postgresql-18.6-1-windows-x64-binaries.zip\",\n  \"archive_sha256\": \"fbe23da234ee31547bf8a36d29dfd81e82b849df2d2b78d2eecb43d360252f8c\",\n  \"bin_dir\": \"D:\\\\Personal\\\\Quantitative_Trading\\\\.tools\\\\postgresql-18.6\\\\pgsql\\\\bin\",\n  \"status\": \"ready\"\n}"
+    },
+    {
+      "name": "traceability",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_traceability.py",
+        "--phase-status",
+        "P00=verified",
+        "--phase-status",
+        "P01=verified",
+        "--phase-status",
+        "P02=verified",
+        "--phase-status",
+        "P03=verified",
+        "--phase-status",
+        "P04=verified",
+        "--phase-status",
+        "P05=verified",
+        "--phase-status",
+        "P06=verified",
+        "--phase-status",
+        "P07=verified",
+        "--phase-status",
+        "P08=verified",
+        "--phase-status",
+        "P09=verified",
+        "--phase-status",
+        "P10=verified",
+        "--phase-status",
+        "P11=verified",
+        "--phase-status",
+        "P12=verified",
+        "--phase-status",
+        "P13=verified",
+        "--phase-status",
+        "P14=verified",
+        "--phase-status",
+        "P15=verified",
+        "--phase-status",
+        "P16=verified",
+        "--phase-status",
+        "P17=verified",
+        "--phase-status",
+        "P18=verified",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.136,
+      "output_tail": "verified 466 requirements in state\\REQUIREMENTS_TRACEABILITY.csv"
+    },
+    {
+      "name": "schema-contracts",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.077,
+      "output_tail": "verified 95 generated schema artifacts"
+    },
+    {
+      "name": "p02-data-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p02_data_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.692,
+      "output_tail": "P02 data evidence contract: passed"
+    },
+    {
+      "name": "p03-binance-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p03_binance_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.06,
+      "output_tail": "verified 9 P03 Binance evidence artifacts"
+    },
+    {
+      "name": "p04-multivenue-event-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p04_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.563,
+      "output_tail": "verified 4 P04 evidence artifacts"
+    },
+    {
+      "name": "p05-accounting-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p05_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.422,
+      "output_tail": "verified 5 P05 evidence artifacts"
+    },
+    {
+      "name": "p05-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/run_p05_mutation.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 42.534,
+      "output_tail": "[short-side-sign] killed\n[inverse-pnl-operation] killed\n[fifo-close-quantity] killed\n[spot-inventory-gate] killed\n[idempotency-inserted-flag] killed\n[valuation-priority] killed\n[pnl-borrow-sign] killed\n[cashflow-interest-direction] killed\n[rounding-classification] killed\n[continuous-reconciliation-status] killed\n[snapshot-payload-hash] killed\n[journal-balance-comparison] killed\nP05 mutation score: 1.000 (threshold 0.900)"
+    },
+    {
+      "name": "p06-backtest-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p06_evidence"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.535,
+      "output_tail": ""
+    },
+    {
+      "name": "p06-benchmark",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p06_benchmark"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.963,
+      "output_tail": ""
+    },
+    {
+      "name": "p06-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p06_mutation"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 69.707,
+      "output_tail": "[sell-cost-direction] killed\n[impact-cap-minimum] killed\n[maker-taker-fee-selection] killed\n[funding-sign] killed\n[borrow-year-denominator] killed\n[trading-enabled-gate] killed\n[step-size-legality] killed\n[liquidity-cap] killed\n[equal-time-cancel-precedence] killed\n[request-timeout-ack-state] killed\n[liquidation-threshold] killed\n[vector-asof-direction] killed\nP06 mutation score: 1.000 (threshold 0.900)"
+    },
+    {
+      "name": "p07-research-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p07_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 4.152,
+      "output_tail": "P07 evidence verified: 13 JSON files"
+    },
+    {
+      "name": "p07-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p07_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.118,
+      "output_tail": "verified P07 mutation score: 1.000"
+    },
+    {
+      "name": "p08-research-intelligence-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p08_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 10.708,
+      "output_tail": "P08 evidence verified: 14 JSON files"
+    },
+    {
+      "name": "p08-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p08_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.116,
+      "output_tail": "verified P08 mutation score: 1.000"
+    },
+    {
+      "name": "p09-knowledge-intelligence-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p09_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.91,
+      "output_tail": "P09 evidence verified: 9 JSON, 7 Markdown, 4 static reports, 2 Parquet"
+    },
+    {
+      "name": "p09-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p09_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.119,
+      "output_tail": "verified P09 mutation score: 1.000"
+    },
+    {
+      "name": "p10-global-event-intelligence-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p10_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.859,
+      "output_tail": "P10 evidence verified: 12 data JSON, 3 intelligence JSON, 5 read models, 1 Parquet"
+    },
+    {
+      "name": "p10-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p10_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.116,
+      "output_tail": "verified P10 mutation score: 1.000"
+    },
+    {
+      "name": "p11-portfolio-risk-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p11_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.467,
+      "output_tail": "P11 evidence verified: 9 data JSON, 2 risk JSON"
+    },
+    {
+      "name": "p11-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p11_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.114,
+      "output_tail": "verified P11 mutation score: 1.000"
+    },
+    {
+      "name": "p12-testnet-execution-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p12_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.449,
+      "output_tail": "P12 evidence verified: 13 execution JSON, 1 compatibility JSON"
+    },
+    {
+      "name": "p12-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p12_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.127,
+      "output_tail": "verified P12 mutation score: 1.000"
+    },
+    {
+      "name": "p13-paper-shadow-chaos-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p13_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.51,
+      "output_tail": "P13 evidence check: passed"
+    },
+    {
+      "name": "p13-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p13_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.121,
+      "output_tail": "verified P13 mutation score: 1.000"
+    },
+    {
+      "name": "p14-typescript-client-drift",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.check_p14_client"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.89,
+      "output_tail": "verified 16 generated TypeScript client files"
+    },
+    {
+      "name": "p14-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p14_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.119,
+      "output_tail": "verified P14 mutation score: 1.000"
+    },
+    {
+      "name": "p15-workbench-contracts",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p15_contracts",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.635,
+      "output_tail": "verified 5 P15 contracts"
+    },
+    {
+      "name": "p15-workbench-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p15_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.672,
+      "output_tail": "verified 8 P15 evidence files"
+    },
+    {
+      "name": "p15-typescript-client-drift",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.check_p15_client"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.736,
+      "output_tail": "verified 16 generated TypeScript client files"
+    },
+    {
+      "name": "p15-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p15_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.128,
+      "output_tail": "verified P15 mutation score: 1.000"
+    },
+    {
+      "name": "p16-image-lock",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.resolve_image_digests",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.174,
+      "output_tail": "P16 image lock: passed"
+    },
+    {
+      "name": "p16-dashboards",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p16_dashboards",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.098,
+      "output_tail": "P16 dashboards: 6 verified"
+    },
+    {
+      "name": "p16-operational-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p16_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.636,
+      "output_tail": "verified 7 P16 evidence files"
+    },
+    {
+      "name": "p16-restore-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p16_restore_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.011,
+      "output_tail": "verified P16 restore drill evidence"
+    },
+    {
+      "name": "p16-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p16_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.123,
+      "output_tail": "verified P16 mutation score: 1.000"
+    },
+    {
+      "name": "p17-provider-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p17_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.376,
+      "output_tail": "verified 13 P17 evidence files"
+    },
+    {
+      "name": "p17-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p17_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.118,
+      "output_tail": "verified P17 mutation score: 1.000"
+    },
+    {
+      "name": "p18-live-readiness-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p18_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.366,
+      "output_tail": "verified 12 P18 evidence files"
+    },
+    {
+      "name": "p18-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p18_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.118,
+      "output_tail": "verified P18 mutation score: 1.000"
+    },
+    {
+      "name": "ruff-format",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.148,
+      "output_tail": "752 files already formatted"
+    },
+    {
+      "name": "ruff-lint",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.125,
+      "output_tail": "All checks passed!"
+    },
+    {
+      "name": "pyright-strict",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pyright",
+        "--project",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 24.474,
+      "output_tail": "0 errors, 0 warnings, 0 informations"
+    },
+    {
+      "name": "bandit",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/run_bandit.py"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 3.94,
+      "output_tail": "rate_p15_evidence.py:355\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:356\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:357\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:358\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:354\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:355\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:356\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:357\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:358\n[manager]\tWARNING\tTest in comment: audit is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: boolean is not a test name or id, ignoring\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:506\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:507\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:508\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:509\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:510\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:511\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:512\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:513\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:514\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:515\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:516\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:517\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:519\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:506\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:507\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:80\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:81\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:82\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:85\n[manager]\tWARNING\tTest in comment: bounded is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: input is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: rejects is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: DTD is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: entity is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: declarations is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: pinned is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: PostgreSQL is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: programs is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: no is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: shell is not a test name or id, ignoring\n[json]\tINFO\tJSON output written to file: D:\\Personal\\Quantitative_Trading\\reports\\security\\.bandit.raw.json\n\nBandit findings: 2"
+    },
+    {
+      "name": "security",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/security_scan.py",
+        "--phase",
+        "P18"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 149.167,
+      "output_tail": "{\"schema_version\": \"1.0.0\", \"phase\": \"P18\", \"generated_at_utc\": \"2026-09-02T07:01:46.553339Z\", \"status\": \"failed\", \"checks\": {\"detect_secrets\": false, \"python_dependency_audit\": true, \"javascript_dependency_audit\": true, \"container_iac_policy\": true}, \"secret_finding_count\": 1, \"real_account_access_performed\": false, \"secret_store_access_performed\": false}"
+    },
+    {
+      "name": "compliance-artifacts",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_compliance_artifacts.py",
+        "--phase",
+        "P18"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 5.785,
+      "output_tail": "{\"schema_version\": \"1.0.0\", \"phase\": \"P18\", \"status\": \"passed\", \"python_component_count\": 170, \"javascript_component_count\": 847, \"python_unknown_license_count\": 0, \"artifacts\": [\"reports/sbom/python.cdx.json\", \"reports/sbom/javascript.cdx.json\", \"reports/licenses/python.json\", \"reports/licenses/javascript.json\"]}"
+    },
+    {
+      "name": "pytest",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 79.646,
+      "output_tail": "    \"P13\",\n            \"P14\",\n            \"P15\",\n            \"P16\",\n            \"P17\",\n            \"P18\",\n        }\n>       assert security[\"status\"] == \"passed\"\nE       AssertionError: assert 'failed' == 'passed'\nE         \nE         - passed\nE         + failed\n\ntests\\p09\\test_phase_evidence.py:312: AssertionError\n__________ test_p10_phase_reports_and_security_evidence_are_complete __________\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p10_phase_reports_and_security_evidence_are_complete(project_root: Path) -> None:\n        phase = project_root / \"reports/phases/P10\"\n        required = {\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"ADR_REFERENCES.md\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n        }\n        assert required.issubset({path.name for path in phase.iterdir() if path.is_file()})\n        assert not (phase / \"ACCEPTANCE.md\").exists()\n        mutation = _json(project_root / \"reports/testing/P10_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        mutation_score = cast(\"float\", mutation[\"score\"])\n        mutation_threshold = cast(\"float\", mutation[\"threshold\"])\n        assert mutation[\"status\"] == \"passed\" and mutation_score >= mutation_threshold\n>       assert (\n            security[\"phase\"] in {\"P10\", \"P11\", \"P12\", \"P13\", \"P14\", \"P15\", \"P16\", \"P17\", \"P18\"}\n            and security[\"secret_finding_count\"] == 0\n        )\nE       AssertionError: assert ('P18' in {'P10', 'P11', 'P12', 'P13', 'P14', 'P15', ...} and 1 == 0)\n\ntests\\p10\\test_phase_evidence.py:300: AssertionError\n__________ test_p11_phase_reports_and_security_evidence_are_complete __________\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p11_phase_reports_and_security_evidence_are_complete(project_root: Path) -> None:\n        phase = project_root / \"reports/phases/P11\"\n        required = {\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"ADR_REFERENCES.md\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n        }\n        assert required.issubset({path.name for path in phase.iterdir() if path.is_file()})\n        assert not (phase / \"ACCEPTANCE.md\").exists()\n        mutation = _json(project_root / \"reports/testing/P11_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        assert mutation[\"status\"] == \"passed\"\n        assert cast(\"float\", mutation[\"score\"]) >= cast(\"float\", mutation[\"threshold\"])\n        assert mutation[\"survived\"] == 0 and mutation[\"invalid\"] == 0\n>       assert (\n            security[\"phase\"] in {\"P11\", \"P12\", \"P13\", \"P14\", \"P15\", \"P16\", \"P17\", \"P18\"}\n            and security[\"secret_finding_count\"] == 0\n        )\nE       AssertionError: assert ('P18' in {'P11', 'P12', 'P13', 'P14', 'P15', 'P16', ...} and 1 == 0)\n\ntests\\p11\\test_phase_evidence.py:243: AssertionError\n_____ test_p12_phase_reports_security_and_mutation_evidence_are_complete ______\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p12_phase_reports_security_and_mutation_evidence_are_complete(\n        project_root: Path,\n    ) -> None:\n        phase = project_root / \"reports/phases/P12\"\n        required = {\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"ADR_REFERENCES.md\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n        }\n        assert required.issubset({path.name for path in phase.iterdir() if path.is_file()})\n        assert not (phase / \"ACCEPTANCE.md\").exists()\n        mutation = _json(project_root / \"reports/testing/P12_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        assert mutation[\"status\"] == \"passed\"\n        assert mutation[\"killed\"] == mutation[\"mutants_total\"]\n        assert mutation[\"survived\"] == 0 and mutation[\"invalid\"] == 0\n>       assert (\n            security[\"phase\"] in {\"P12\", \"P13\", \"P14\", \"P15\", \"P16\", \"P17\", \"P18\"}\n            and security[\"secret_finding_count\"] == 0\n        )\nE       AssertionError: assert ('P18' in {'P12', 'P13', 'P14', 'P15', 'P16', 'P17', ...} and 1 == 0)\n\ntests\\p12\\test_phase_evidence.py:206: AssertionError\n_______ test_p13_reports_mutation_security_and_compliance_are_complete ________\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p13_reports_mutation_security_and_compliance_are_complete(project_root: Path) -> None:\n        phase = project_root / \"reports/phases/P13\"\n        required = {\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"ADR_REFERENCES.md\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n        }\n        assert required.issubset({path.name for path in phase.iterdir() if path.is_file()})\n        assert not (phase / \"ACCEPTANCE.md\").exists()\n        mutation = _json(project_root / \"reports/testing/P13_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        assert mutation[\"status\"] == \"passed\"\n        assert mutation[\"killed\"] == mutation[\"mutants_total\"]\n        assert mutation[\"survived\"] == 0 and mutation[\"invalid\"] == 0\n>       assert (\n            security[\"phase\"] in {\"P13\", \"P14\", \"P15\", \"P16\", \"P17\", \"P18\"}\n            and security[\"secret_finding_count\"] == 0\n        )\nE       AssertionError: assert ('P18' in {'P13', 'P14', 'P15', 'P16', 'P17', 'P18'} and 1 == 0)\n\ntests\\p13\\test_phase_evidence.py:175: AssertionError\n_____ test_p14_final_reports_manifest_and_quality_results_are_consistent ______\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p14_final_reports_manifest_and_quality_results_are_consistent(\n        project_root: Path,\n    ) -> None:\n        phase_dir = project_root / \"reports/phases/P14\"\n        required = (\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ADR_REFERENCES.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n        )\n        assert all((phase_dir / name).is_file() for name in required)\n        assert not (phase_dir / \"ACCEPTANCE.md\").exists()\n    \n        results = _json(phase_dir / \"TEST_RESULTS.json\")\n        ci = _json(phase_dir / \"CI_RESULTS.json\")\n        candidate = _json(phase_dir / \"PYTHON_314_CONTRACT.json\")\n        mutation = _json(project_root / \"reports/testing/P14_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        manifest = _json(phase_dir / \"ARTIFACT_MANIFEST.json\")\n    \n        assert results[\"status\"] == \"passed_implementation_acceptance_deferred\"\n        assert results[\"formal_acceptance\"] == \"deferred\"\n        assert ci[\"status\"] == \"passed\" and ci[\"passed_count\"] == ci[\"stage_count\"] == 44\n        assert candidate[\"status\"] == \"passed\"\n        assert mutation[\"status\"] == \"passed\" and mutation[\"survived\"] == 0\n>       assert security[\"status\"] == \"passed\" and security[\"secret_finding_count\"] == 0\nE       AssertionError: assert ('failed' == 'passed'\nE         \nE         - passed\nE         + failed)\n\ntests\\p14\\test_phase_evidence.py:164: AssertionError\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  D:\\Personal\\Quantitative_Trading\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n.venv\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:829\n  D:\\Personal\\Quantitative_Trading\\.venv\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:829: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    period: pd.Timedelta = pd.Timedelta(days=1),\n\n.venv\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:895\n  D:\\Personal\\Quantitative_Trading\\.venv\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:895: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    period: pd.Timedelta = pd.Timedelta(days=1),\n\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\n  D:\\Personal\\Quantitative_Trading\\.venv\\Lib\\site-packages\\pandas\\core\\tools\\timedeltas.py:233: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    result = Timedelta(r, unit)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED tests/p00/test_ci_security_artifacts.py::test_security_and_compliance_evidence_passed\nFAILED tests/p08/test_phase_evidence.py::test_p08_reports_and_compliance_are_complete_without_formal_acceptance\nFAILED tests/p09/test_phase_evidence.py::test_p09_reports_and_compliance_are_complete_without_formal_acceptance\nFAILED tests/p10/test_phase_evidence.py::test_p10_phase_reports_and_security_evidence_are_complete\nFAILED tests/p11/test_phase_evidence.py::test_p11_phase_reports_and_security_evidence_are_complete\nFAILED tests/p12/test_phase_evidence.py::test_p12_phase_reports_security_and_mutation_evidence_are_complete\nFAILED tests/p13/test_phase_evidence.py::test_p13_reports_mutation_security_and_compliance_are_complete\nFAILED tests/p14/test_phase_evidence.py::test_p14_final_reports_manifest_and_quality_results_are_consistent\n============ 8 failed, 681 passed, 11 warnings in 75.83s (0:01:15) ============"
+    },
+    {
+      "name": "python-candidate",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/run_python_compatibility.py",
+        "--phase",
+        "P18"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 129.448,
+      "output_tail": "' == 'passed'\nE         \nE         - passed\nE         + failed\n\ntests\\p09\\test_phase_evidence.py:312: AssertionError\n__________ test_p10_phase_reports_and_security_evidence_are_complete __________\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p10_phase_reports_and_security_evidence_are_complete(project_root: Path) -> None:\n        phase = project_root / \"reports/phases/P10\"\n        required = {\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"ADR_REFERENCES.md\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n        }\n        assert required.issubset({path.name for path in phase.iterdir() if path.is_file()})\n        assert not (phase / \"ACCEPTANCE.md\").exists()\n        mutation = _json(project_root / \"reports/testing/P10_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        mutation_score = cast(\"float\", mutation[\"score\"])\n        mutation_threshold = cast(\"float\", mutation[\"threshold\"])\n        assert mutation[\"status\"] == \"passed\" and mutation_score >= mutation_threshold\n>       assert (\n            security[\"phase\"] in {\"P10\", \"P11\", \"P12\", \"P13\", \"P14\", \"P15\", \"P16\", \"P17\", \"P18\"}\n            and security[\"secret_finding_count\"] == 0\n        )\nE       AssertionError: assert ('P18' in {'P10', 'P11', 'P12', 'P13', 'P14', 'P15', ...} and 1 == 0)\n\ntests\\p10\\test_phase_evidence.py:300: AssertionError\n__________ test_p11_phase_reports_and_security_evidence_are_complete __________\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p11_phase_reports_and_security_evidence_are_complete(project_root: Path) -> None:\n        phase = project_root / \"reports/phases/P11\"\n        required = {\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"ADR_REFERENCES.md\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n        }\n        assert required.issubset({path.name for path in phase.iterdir() if path.is_file()})\n        assert not (phase / \"ACCEPTANCE.md\").exists()\n        mutation = _json(project_root / \"reports/testing/P11_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        assert mutation[\"status\"] == \"passed\"\n        assert cast(\"float\", mutation[\"score\"]) >= cast(\"float\", mutation[\"threshold\"])\n        assert mutation[\"survived\"] == 0 and mutation[\"invalid\"] == 0\n>       assert (\n            security[\"phase\"] in {\"P11\", \"P12\", \"P13\", \"P14\", \"P15\", \"P16\", \"P17\", \"P18\"}\n            and security[\"secret_finding_count\"] == 0\n        )\nE       AssertionError: assert ('P18' in {'P11', 'P12', 'P13', 'P14', 'P15', 'P16', ...} and 1 == 0)\n\ntests\\p11\\test_phase_evidence.py:243: AssertionError\n_____ test_p12_phase_reports_security_and_mutation_evidence_are_complete ______\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p12_phase_reports_security_and_mutation_evidence_are_complete(\n        project_root: Path,\n    ) -> None:\n        phase = project_root / \"reports/phases/P12\"\n        required = {\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"ADR_REFERENCES.md\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n        }\n        assert required.issubset({path.name for path in phase.iterdir() if path.is_file()})\n        assert not (phase / \"ACCEPTANCE.md\").exists()\n        mutation = _json(project_root / \"reports/testing/P12_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        assert mutation[\"status\"] == \"passed\"\n        assert mutation[\"killed\"] == mutation[\"mutants_total\"]\n        assert mutation[\"survived\"] == 0 and mutation[\"invalid\"] == 0\n>       assert (\n            security[\"phase\"] in {\"P12\", \"P13\", \"P14\", \"P15\", \"P16\", \"P17\", \"P18\"}\n            and security[\"secret_finding_count\"] == 0\n        )\nE       AssertionError: assert ('P18' in {'P12', 'P13', 'P14', 'P15', 'P16', 'P17', ...} and 1 == 0)\n\ntests\\p12\\test_phase_evidence.py:206: AssertionError\n_______ test_p13_reports_mutation_security_and_compliance_are_complete ________\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p13_reports_mutation_security_and_compliance_are_complete(project_root: Path) -> None:\n        phase = project_root / \"reports/phases/P13\"\n        required = {\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"ADR_REFERENCES.md\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n        }\n        assert required.issubset({path.name for path in phase.iterdir() if path.is_file()})\n        assert not (phase / \"ACCEPTANCE.md\").exists()\n        mutation = _json(project_root / \"reports/testing/P13_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        assert mutation[\"status\"] == \"passed\"\n        assert mutation[\"killed\"] == mutation[\"mutants_total\"]\n        assert mutation[\"survived\"] == 0 and mutation[\"invalid\"] == 0\n>       assert (\n            security[\"phase\"] in {\"P13\", \"P14\", \"P15\", \"P16\", \"P17\", \"P18\"}\n            and security[\"secret_finding_count\"] == 0\n        )\nE       AssertionError: assert ('P18' in {'P13', 'P14', 'P15', 'P16', 'P17', 'P18'} and 1 == 0)\n\ntests\\p13\\test_phase_evidence.py:175: AssertionError\n_____ test_p14_final_reports_manifest_and_quality_results_are_consistent ______\n\nproject_root = WindowsPath('D:/Personal/Quantitative_Trading')\n\n    def test_p14_final_reports_manifest_and_quality_results_are_consistent(\n        project_root: Path,\n    ) -> None:\n        phase_dir = project_root / \"reports/phases/P14\"\n        required = (\n            \"PLAN.md\",\n            \"SUMMARY.md\",\n            \"TEST_RESULTS.json\",\n            \"RISKS.md\",\n            \"NEXT_ACTIONS.md\",\n            \"ADR_REFERENCES.md\",\n            \"ARTIFACT_MANIFEST.json\",\n            \"CI_RESULTS.json\",\n            \"PYTHON_314_CONTRACT.json\",\n            \"REQUIREMENTS_TRACEABILITY.csv\",\n        )\n        assert all((phase_dir / name).is_file() for name in required)\n        assert not (phase_dir / \"ACCEPTANCE.md\").exists()\n    \n        results = _json(phase_dir / \"TEST_RESULTS.json\")\n        ci = _json(phase_dir / \"CI_RESULTS.json\")\n        candidate = _json(phase_dir / \"PYTHON_314_CONTRACT.json\")\n        mutation = _json(project_root / \"reports/testing/P14_MUTATION_RESULTS.json\")\n        security = _json(project_root / \"reports/security/SECURITY_SCAN_RESULTS.json\")\n        compliance = _json(project_root / \"reports/licenses/COMPLIANCE_SUMMARY.json\")\n        manifest = _json(phase_dir / \"ARTIFACT_MANIFEST.json\")\n    \n        assert results[\"status\"] == \"passed_implementation_acceptance_deferred\"\n        assert results[\"formal_acceptance\"] == \"deferred\"\n        assert ci[\"status\"] == \"passed\" and ci[\"passed_count\"] == ci[\"stage_count\"] == 44\n        assert candidate[\"status\"] == \"passed\"\n        assert mutation[\"status\"] == \"passed\" and mutation[\"survived\"] == 0\n>       assert security[\"status\"] == \"passed\" and security[\"secret_finding_count\"] == 0\nE       AssertionError: assert ('failed' == 'passed'\nE         \nE         - passed\nE         + failed)\n\ntests\\p14\\test_phase_evidence.py:164: AssertionError\n============================== warnings summary ===============================\nC:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmp9B83w4\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmp9B83w4\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\nC:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmp9B83w4\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:829\n  C:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmp9B83w4\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:829: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    period: pd.Timedelta = pd.Timedelta(days=1),\n\nC:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmp9B83w4\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:895\n  C:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmp9B83w4\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:895: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    period: pd.Timedelta = pd.Timedelta(days=1),\n\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\n  C:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmp9B83w4\\Lib\\site-packages\\pandas\\core\\tools\\timedeltas.py:233: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    result = Timedelta(r, unit)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED tests/p08/test_phase_evidence.py::test_p08_reports_and_compliance_are_complete_without_formal_acceptance\nFAILED tests/p09/test_phase_evidence.py::test_p09_reports_and_compliance_are_complete_without_formal_acceptance\nFAILED tests/p10/test_phase_evidence.py::test_p10_phase_reports_and_security_evidence_are_complete\nFAILED tests/p11/test_phase_evidence.py::test_p11_phase_reports_and_security_evidence_are_complete\nFAILED tests/p12/test_phase_evidence.py::test_p12_phase_reports_security_and_mutation_evidence_are_complete\nFAILED tests/p13/test_phase_evidence.py::test_p13_reports_mutation_security_and_compliance_are_complete\nFAILED tests/p14/test_phase_evidence.py::test_p14_final_reports_manifest_and_quality_results_are_consistent\n============ 7 failed, 638 passed, 11 warnings in 95.65s (0:01:35) ============\n\nInstalled 170 packages in 18.23s\ncandidate Python contract: failed"
+    },
+    {
+      "name": "nautilus-compatibility",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_nautilus_compatibility.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.367,
+      "output_tail": "NautilusTrader compatibility: passed"
+    },
+    {
+      "name": "web-lint",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "lint"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 6.762,
+      "output_tail": "$ eslint . --max-warnings 0"
+    },
+    {
+      "name": "web-typecheck",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.002,
+      "output_tail": "Generating route types...\n✓ Types generated successfully\n\n$ next typegen && tsc --noEmit -p tsconfig.check.json"
+    },
+    {
+      "name": "web-unit",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "test"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 5.6,
+      "output_tail": "RUN  v4.1.11 D:/Personal/Quantitative_Trading/apps/web\n\n\n Test Files  7 passed (7)\n      Tests  19 passed (19)\n   Start at  15:05:35\n   Duration  4.52s (transform 871ms, setup 6.38s, import 988ms, tests 1.12s, environment 18.48s)\n\n\n$ vitest run"
+    },
+    {
+      "name": "web-storybook",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "build-storybook"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 17.672,
+      "output_tail": "T  Building storybook v10.5.10\n|\no  Cleaning outputDir: storybook-static\n|\no  Loading presets\n|\no  Building manager..\n|\n•  Building open services..\n|\n•  Building preview..\n|\n•  Addon-docs: using MDX3\n|\n•  Using implicit CSS loaders\n|\n•  Using default Webpack5 setup\n|\n!  asset size limit: The following asset(s) exceed the recommended size\n|  limit (244 KiB).\n|  This can impact web performance.\n|  Assets:\n|  996.adc500aa.iframe.bundle.js (380 KiB)\n|  804.9a0b0c8b.iframe.bundle.js (1.09 MiB)\n|  942.07906593.iframe.bundle.js (842 KiB)\n|  875.9d6ce432.iframe.bundle.js (1.87 MiB)\n|  121.0f5ecca6.iframe.bundle.js (617 KiB)\n|\n!  entrypoint size limit: The following entrypoint(s) combined asset size\n|  exceeds the recommended limit (244 KiB). This can impact web\n|  performance.\n|  Entrypoints:\n|  main (702 KiB)\n|  runtime~main.34c2d5e0.iframe.bundle.js\n|  121.0f5ecca6.iframe.bundle.js\n|  main.18777839.iframe.bundle.js\n\n|\no  Output directory:\n|  D:/Personal/Quantitative_Trading/apps/web/storybook-static\n|\n—  Storybook build completed successfully\n\n\n$ storybook build --quiet --disable-telemetry"
+    },
+    {
+      "name": "web-build",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "build"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 7.325,
+      "output_tail": "▲ Next.js 16.3.3 (Turbopack)\n✓ Running next.config.ts took 102ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 858ms\n  Running TypeScript ...\n  Finished TypeScript in 1668ms ...\n  Collecting page data using 11 workers ...\n  Generating static pages using 11 workers (0/4) ...\n  Generating static pages using 11 workers (1/4) \n  Generating static pages using 11 workers (2/4) \n  Generating static pages using 11 workers (3/4) \n✓ Generating static pages using 11 workers (4/4) in 215ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n├ ƒ /data\n├ ƒ /execution\n├ ƒ /execution/orders/[orderId]\n├ ƒ /incidents\n├ ƒ /intelligence\n├ ƒ /live\n├ ƒ /market\n├ ƒ /models\n├ ƒ /overview\n├ ƒ /performance\n├ ƒ /research\n├ ƒ /research/intelligence\n├ ƒ /risk\n├ ○ /settings\n├ ƒ /strategies\n└ ƒ /system\n\n\nƒ Proxy (Middleware)\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n\n\n$ next build"
+    },
+    {
+      "name": "web-e2e",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "e2e"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 44.177,
+      "output_tail": "xt build\n[WebServer] (node:14476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:14476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:1388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:3208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:23320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:33956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:12860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:30528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:9432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:25456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:22316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:3200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:17784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:32572) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] $ next start --hostname 127.0.0.1\n[WebServer] (node:1972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] ⚠ \"next start\" does not work with \"output: standalone\" configuration. Use \"node .next/standalone/server.js\" instead.\n(node:32240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:16900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:29920) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] INFO:     127.0.0.1:54402 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54403 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:49750 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:60844 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:60847 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:63040 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54146 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:50134 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:55011 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:60250 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:63410 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:63051 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54841 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:61937 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:52899 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54889 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:62480 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:49185 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:58394 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:62002 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:58786 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53297 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:60431 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:55946 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54000 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:51485 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:51486 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65284 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65285 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65291 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65309 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65312 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65325 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65326 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65096 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64870 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64871 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64874 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56506 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56511 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54894 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59790 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59801 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59802 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64565 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64569 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64576 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:62002 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:61590 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:61806 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54825 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:61796 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64897 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65284 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:61521 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59842 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:58353 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56555 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53369 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53370 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53383 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53384 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53387 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53396 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53435 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53464 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53468 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54666 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56994 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56995 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:55770 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:55783 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:52711 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:52722 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open"
+    }
+  ]
+}
