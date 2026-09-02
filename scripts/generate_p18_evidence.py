@@ -515,7 +515,7 @@ def build_payloads(implementation_commit: str) -> dict[str, object]:
         "plaintext_credentials_requested_or_written": False,
         "real_account_connections": context["real_account_connections"],
         "real_order_requests": context["real_order_requests"],
-        "research_or_ci_live_secret_access": False,
+        "research_or_ci_live_secret_access": False,  # nosec B105 -- audit boolean
         "live_trading_locked": True,
     }
     preproduction: dict[str, object] = {

@@ -129,7 +129,9 @@ def test_p18_manifest_signature_is_integrity_only_and_artifacts_are_frozen(
         "private_key_persisted",
         "authorization_capability",
     }
-    envelope = SignedManifestEnvelope.model_validate({key: payload[key] for key in envelope_keys})
+    envelope = SignedManifestEnvelope.model_validate_json(
+        json.dumps({key: payload[key] for key in envelope_keys})
+    )
     manifest = envelope.manifest
     assert verify_manifest(envelope) is True
     assert manifest.decision.value == "NO_GO"

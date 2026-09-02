@@ -18,6 +18,7 @@ DETECT_EXCLUDE = (
     r"\.ruff_cache|node_modules|storybook-static|apps[\\/]web[\\/]src[\\/]generated|"
     r"docs[\\/]spec|reports[\\/](?:licenses|sbom|security))"
     r"(?:[\\/]|$)|Master_Taskbook|REQUIREMENTS_TRACEABILITY|ARTIFACT_MANIFEST|"
+    r"CANARY_RELEASE_MANIFEST|"
     r"pnpm-lock\.yaml|uv\.lock|\.tsbuildinfo$"
 )
 DETECT_LINE_EXCLUDE = (

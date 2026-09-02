@@ -13,11 +13,13 @@ def test_phase_state_advances_one_accepted_phase_at_a_time(project_root: Path) -
     )
 
     current_number = int(payload["current_phase"][1:])
-    next_number = int(payload["next_phase"][1:])
     previous_number = int(payload["previous_phase"]["phase"][1:])
 
     assert current_number >= 1
-    assert next_number == current_number + 1
+    if current_number == 18:
+        assert payload["next_phase"] is None
+    else:
+        assert int(payload["next_phase"][1:]) == current_number + 1
     assert previous_number == current_number - 1
     assert payload["status"] in {"in_progress", *CLOSED_STATUSES}
     assert payload["live_trading_locked"] is True
