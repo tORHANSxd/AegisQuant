@@ -1,5 +1,22 @@
 {
-  "status": "not_applicable",
-  "reason": "P15 contains no container image or infrastructure-as-code input",
-  "scannable_files": []
+  "status": "passed",
+  "policy": "digest-pinned, loopback-only, least-privilege, no-Promtail",
+  "scannable_files": [
+    "infra/alertmanager/alertmanager.template.yml",
+    "infra/alloy/config.alloy",
+    "infra/backup/BACKUP_POLICY.yaml",
+    "infra/compose/compose.yaml",
+    "infra/docker/Dockerfile.api",
+    "infra/docker/Dockerfile.web",
+    "infra/loki/loki.yml",
+    "infra/prometheus/alerts.yml",
+    "infra/prometheus/prometheus.yml",
+    "infra/tempo/tempo.yml",
+    "infra/grafana/provisioning/dashboards/dashboards.yml",
+    "infra/grafana/provisioning/datasources/datasources.yml"
+  ],
+  "findings": [],
+  "runtime_image_scan": "requires_target_linux_evidence",
+  "docker_available": false,
+  "runtime_scan_claimed": false
 }

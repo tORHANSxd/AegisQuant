@@ -1,0 +1,22 @@
+{
+  "backup_format": "postgresql-custom-in-tar",
+  "cipher": "AES-256-GCM",
+  "database": "PostgreSQL 18.6",
+  "formal_acceptance_performed": false,
+  "key_delivery": "in-memory argument; never file or process argv",
+  "last_ledger_event_hash": "fd973628917d143a28dd133cf8497571fe1af9d5182576f378a142137d8419b2",
+  "ledger_balanced": true,
+  "ledger_chain_sha256": "02c02a813cd008ae220997721bd6826f163691fba73841221038db8ddf09c317",
+  "ledger_entry_count": 2,
+  "ledger_posting_count": 9,
+  "offsite_copy_contract": "ciphertext and manifest only; distinct filesystem required",
+  "read_model_record_count": 0,
+  "reconciliation_case_count": 1,
+  "reconciliation_valid": true,
+  "schema_revision": "20260902_0003",
+  "schema_version": "p16-restore-drill-v1",
+  "status": "passed",
+  "tampered_ciphertext_rejected": true,
+  "test": "tests/operations/test_backup_restore.py",
+  "verification_equal": true
+}

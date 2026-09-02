@@ -1,0 +1,67 @@
+{
+  "authentication": "nginx mTLS plus optional offline OIDC bearer verification",
+  "dashboard_count": 6,
+  "dashboards": [
+    {
+      "domain": "business",
+      "editable": false,
+      "high_cardinality_identifier_used": false,
+      "panel_count": 4,
+      "path": "infra/grafana/dashboards/business.json",
+      "sha256": "a7173175bf22a79e0c57095d0cb22d97c2655c92393ba037c0e4539c1ece268f"
+    },
+    {
+      "domain": "data",
+      "editable": false,
+      "high_cardinality_identifier_used": false,
+      "panel_count": 4,
+      "path": "infra/grafana/dashboards/data.json",
+      "sha256": "4e815f04b7f68570c553d25c69051f5d060239da969a7408092c64cce4082052"
+    },
+    {
+      "domain": "infrastructure",
+      "editable": false,
+      "high_cardinality_identifier_used": false,
+      "panel_count": 4,
+      "path": "infra/grafana/dashboards/infrastructure.json",
+      "sha256": "2d53a3fb229b62ecf3d4a235c574ade9aff182408ba0ab391fdb5af1ad550d30"
+    },
+    {
+      "domain": "model",
+      "editable": false,
+      "high_cardinality_identifier_used": false,
+      "panel_count": 4,
+      "path": "infra/grafana/dashboards/model.json",
+      "sha256": "81d9aa57e5de7c8ccccf1b75dec9264fcf046989c408dd9bfa61b2eab7d29d61"
+    },
+    {
+      "domain": "risk",
+      "editable": false,
+      "high_cardinality_identifier_used": false,
+      "panel_count": 4,
+      "path": "infra/grafana/dashboards/risk.json",
+      "sha256": "057be2eec9381d2edfe74c321af33ab5a4d3e0f502a16ec9021aec3c133b69de"
+    },
+    {
+      "domain": "trading",
+      "editable": false,
+      "high_cardinality_identifier_used": false,
+      "panel_count": 4,
+      "path": "infra/grafana/dashboards/trading.json",
+      "sha256": "b6ff74befe9ff1f3e710c52130f5bdb03b81c5beb68f9acc41b82b9ccbf8ea94"
+    }
+  ],
+  "domains": [
+    "business",
+    "data",
+    "infrastructure",
+    "model",
+    "risk",
+    "trading"
+  ],
+  "private_entrypoint": "https://127.0.0.1:8443",
+  "schema_version": "p16-dashboard-evidence-v1",
+  "tests": [
+    "tests/p16/test_infrastructure_contracts.py"
+  ]
+}

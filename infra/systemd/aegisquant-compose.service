@@ -1,0 +1,24 @@
+[Unit]
+Description=AegisQuant Paper/Testnet production Compose stack
+After=docker.service network-online.target time-sync.target
+Wants=network-online.target time-sync.target
+Requires=docker.service
+ConditionPathExists=/opt/aegisquant/infra/compose/compose.yaml
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/aegisquant/infra/compose
+EnvironmentFile=/etc/aegisquant/compose.env
+ExecStartPre=/usr/bin/docker compose --profile ${AEGISQUANT_PROFILE} config --quiet
+ExecStart=/usr/bin/docker compose --profile ${AEGISQUANT_PROFILE} up --detach --wait --no-build
+ExecStop=/usr/bin/docker compose --profile ${AEGISQUANT_PROFILE} stop --timeout 30
+TimeoutStartSec=10min
+TimeoutStopSec=2min
+NoNewPrivileges=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/aegisquant /var/log/aegisquant /run/docker.sock
+
+[Install]
+WantedBy=multi-user.target

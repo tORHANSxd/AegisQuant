@@ -210,6 +210,11 @@
       "vulns": []
     },
     {
+      "name": "googleapis-common-protos",
+      "version": "1.75.2",
+      "vulns": []
+    },
+    {
       "name": "graphviz",
       "version": "0.21",
       "vulns": []
@@ -400,6 +405,16 @@
       "vulns": []
     },
     {
+      "name": "opentelemetry-exporter-otlp-proto-common",
+      "version": "1.44.0",
+      "vulns": []
+    },
+    {
+      "name": "opentelemetry-exporter-otlp-proto-http",
+      "version": "1.44.0",
+      "vulns": []
+    },
+    {
       "name": "opentelemetry-proto",
       "version": "1.44.0",
       "vulns": []
@@ -505,6 +520,11 @@
       "vulns": []
     },
     {
+      "name": "prometheus-client",
+      "version": "0.26.0",
+      "vulns": []
+    },
+    {
       "name": "protobuf",
       "version": "6.33.6",
       "vulns": []
@@ -567,6 +587,11 @@
     {
       "name": "pygments",
       "version": "2.21.0",
+      "vulns": []
+    },
+    {
+      "name": "pyjwt",
+      "version": "2.13.0",
       "vulns": []
     },
     {

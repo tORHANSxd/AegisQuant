@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "phase": "P15",
-  "generated_at_utc": "2026-09-02T02:22:55.677800Z",
+  "phase": "P16",
+  "generated_at_utc": "2026-09-02T03:35:18.882903Z",
   "status": "passed",
   "checks": {
     "detect_secrets": true,
     "python_dependency_audit": true,
     "javascript_dependency_audit": true,
-    "container_iac": true
+    "container_iac_policy": true
   },
   "secret_finding_count": 0,
   "real_account_access_performed": false,

@@ -1,0 +1,32 @@
+[Unit]
+Description=AegisQuant encrypted PostgreSQL backup and offsite replication
+After=aegisquant-compose.service
+Requires=aegisquant-compose.service
+ConditionPathIsMountPoint=/mnt/aegisquant-offsite
+
+[Service]
+Type=oneshot
+User=aegisquant
+Group=aegisquant
+WorkingDirectory=/opt/aegisquant
+LoadCredentialEncrypted=database_dsn:/etc/aegisquant/credentials/database_dsn.cred
+LoadCredentialEncrypted=backup_key_base64:/etc/aegisquant/credentials/backup_key_base64.cred
+ExecStart=/opt/aegisquant/.venv/bin/python /opt/aegisquant/scripts/run_backup.py --postgres-bin /usr/lib/postgresql/18/bin --output-dir /var/lib/aegisquant/backups --offsite-dir /mnt/aegisquant-offsite
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectClock=yes
+ProtectControlGroups=yes
+ProtectHome=yes
+ProtectKernelLogs=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/aegisquant/backups /mnt/aegisquant-offsite
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictRealtime=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,252 @@
+name: aegisquant
+
+x-security: &security
+  cap_drop: ["ALL"]
+  read_only: true
+  security_opt: ["no-new-privileges:true"]
+  restart: unless-stopped
+  init: true
+
+services:
+  postgres:
+    image: postgres@sha256:1c59e2c3c818eaa0f0628f695b36e7c9e362d6b219b36a54a32df645cbd7e1af
+    profiles: ["paper", "testnet"]
+    environment:
+      POSTGRES_DB: aegisquant
+      POSTGRES_USER: aegisquant
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    secrets: ["postgres_password"]
+    ports: ["127.0.0.1:5432:5432"]
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks: ["data"]
+    tmpfs:
+      - /tmp:size=64m,mode=1770
+      - /run/postgresql:size=16m,mode=0770
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aegisquant -d aegisquant"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    mem_limit: 2g
+    cpus: 2.0
+    pids_limit: 256
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    restart: unless-stopped
+
+  api:
+    <<: *security
+    image: "${AEGISQUANT_API_IMAGE:-aegisquant-api}@${AEGISQUANT_API_DIGEST:?set AEGISQUANT_API_DIGEST}"
+    profiles: ["paper", "testnet"]
+    environment:
+      AEGISQUANT_ENVIRONMENT: "${AEGISQUANT_ENVIRONMENT:?set PAPER or TESTNET}"
+      AEGISQUANT_AUTH_MODE: mtls_proxy
+      AEGISQUANT_LOG_PATH: /var/log/aegisquant/api.jsonl
+      AEGISQUANT_OTLP_TRACES_ENDPOINT: http://alloy:4318/v1/traces
+    volumes:
+      - aegis_logs:/var/log/aegisquant
+    expose: ["8000"]
+    networks: ["app", "observability"]
+    tmpfs: ["/tmp:size=64m,mode=1770"]
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 128
+    depends_on:
+      alloy:
+        condition: service_started
+
+  web:
+    <<: *security
+    image: "${AEGISQUANT_WEB_IMAGE:-aegisquant-web}@${AEGISQUANT_WEB_DIGEST:?set AEGISQUANT_WEB_DIGEST}"
+    profiles: ["paper", "testnet"]
+    environment:
+      HOSTNAME: 0.0.0.0
+      PORT: "3000"
+      NEXT_TELEMETRY_DISABLED: "1"
+    expose: ["3000"]
+    networks: ["app"]
+    tmpfs: ["/tmp:size=64m,mode=1770"]
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 128
+
+  reverse-proxy:
+    <<: *security
+    image: nginx@sha256:42a516af16b852e33b7682d5ef8acbd5d13fe08fecadc7ed98605ba5e3b26ab8
+    user: "101:101"
+    profiles: ["paper", "testnet"]
+    ports: ["127.0.0.1:8443:8443"]
+    volumes:
+      - ../reverse_proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+    secrets: ["tls_certificate", "tls_private_key", "operator_client_ca"]
+    networks: ["app", "observability"]
+    tmpfs:
+      - /tmp:size=32m,mode=1770
+      - /var/cache/nginx:size=32m,mode=0770
+      - /var/run:size=8m,mode=0770
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 64
+    depends_on: ["api", "web", "grafana"]
+
+  prometheus:
+    <<: *security
+    image: prom/prometheus@sha256:5ce7540c3c00ef4ab0c9d2c995c6a5b9c421f44b4a115d97a2c7af3b1c21cbb0
+    profiles: ["observability", "paper", "testnet"]
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=30d
+      - --web.enable-lifecycle=false
+    volumes:
+      - ../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus_data:/prometheus
+    expose: ["9090"]
+    networks: ["observability"]
+    tmpfs: ["/tmp:size=32m,mode=1770"]
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 128
+
+  node-exporter:
+    <<: *security
+    image: prom/node-exporter@sha256:1b4e4438faca4dd7e001dd445d161a4a2091b0fededa84093b3a8dfeae1f1be0
+    user: "65534:65534"
+    profiles: ["observability", "paper", "testnet"]
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --path.rootfs=/host/root
+      - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|run)($$|/)
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/host/root:ro,rslave
+    expose: ["9100"]
+    networks: ["observability"]
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 64
+
+  alertmanager:
+    <<: *security
+    image: prom/alertmanager@sha256:690c7b525f4367aa91f73e2f91c632206d32e97c6384bdbf2fb7a861b420340d
+    profiles: ["observability", "paper", "testnet"]
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+      - --storage.path=/alertmanager
+    volumes:
+      - "${AEGISQUANT_ALERTMANAGER_CONFIG:?render Alertmanager config first}:/etc/alertmanager/alertmanager.yml:ro"
+      - alertmanager_data:/alertmanager
+    expose: ["9093"]
+    networks: ["observability"]
+    tmpfs: ["/tmp:size=32m,mode=1770"]
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 64
+
+  loki:
+    <<: *security
+    image: grafana/loki@sha256:d70e4659623f3e109af669cae76fe2a5dd5be54e2298fe8aed380d982fbc2500
+    profiles: ["observability", "paper", "testnet"]
+    command: ["-config.file=/etc/loki/loki.yml"]
+    volumes:
+      - ../loki/loki.yml:/etc/loki/loki.yml:ro
+      - loki_data:/loki
+    expose: ["3100"]
+    networks: ["observability"]
+    tmpfs: ["/tmp:size=32m,mode=1770"]
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 128
+
+  tempo:
+    <<: *security
+    image: grafana/tempo@sha256:ee21727732c7a7199cb71c3eee9153bbf23f9b0b87619f0555a0cf21a67f1a33
+    profiles: ["observability", "paper", "testnet"]
+    command: ["-config.file=/etc/tempo/tempo.yml"]
+    volumes:
+      - ../tempo/tempo.yml:/etc/tempo/tempo.yml:ro
+      - tempo_data:/var/tempo
+    expose: ["3200", "4318"]
+    networks: ["observability"]
+    tmpfs: ["/tmp:size=32m,mode=1770"]
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 128
+
+  alloy:
+    <<: *security
+    image: grafana/alloy@sha256:b8ec653c44235fbe910879145dac3597d66b0aaecf60bcbbe82580767771a839
+    profiles: ["observability", "paper", "testnet"]
+    command: ["run", "/etc/alloy/config.alloy", "--storage.path=/var/lib/alloy"]
+    volumes:
+      - ../alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - aegis_logs:/var/log/aegisquant:ro
+      - alloy_data:/var/lib/alloy
+    expose: ["12345", "4318"]
+    networks: ["observability"]
+    tmpfs: ["/tmp:size=32m,mode=1770"]
+    mem_limit: 512m
+    cpus: 0.75
+    pids_limit: 96
+    depends_on: ["loki", "tempo"]
+
+  grafana:
+    <<: *security
+    image: grafana/grafana@sha256:3fd54ae1214669f8355f065ec9f6445d5279a3d77095ab048ca045685272429b
+    profiles: ["observability", "paper", "testnet"]
+    environment:
+      GF_SERVER_ROOT_URL: https://localhost:8443/grafana/
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /run/secrets/grafana_admin_password
+      GF_SECURITY_COOKIE_SECURE: "true"
+      GF_SECURITY_COOKIE_SAMESITE: strict
+      GF_SECURITY_CONTENT_SECURITY_POLICY: "true"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_PLUGINS_PREINSTALL_DISABLED: "true"
+    secrets: ["grafana_admin_password"]
+    volumes:
+      - ../grafana/provisioning:/etc/grafana/provisioning:ro
+      - ../grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana_data:/var/lib/grafana
+    expose: ["3000"]
+    networks: ["observability"]
+    tmpfs: ["/tmp:size=64m,mode=1770"]
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 128
+    depends_on: ["prometheus", "loki", "tempo", "node-exporter"]
+
+networks:
+  app:
+    internal: true
+  data:
+    internal: true
+  observability:
+    internal: true
+
+volumes:
+  postgres_data:
+  prometheus_data:
+  alertmanager_data:
+  loki_data:
+  tempo_data:
+  alloy_data:
+  grafana_data:
+  aegis_logs:
+
+secrets:
+  postgres_password:
+    file: "${AEGISQUANT_SECRET_DIR:?set secret directory}/postgres_password"
+  grafana_admin_password:
+    file: "${AEGISQUANT_SECRET_DIR:?set secret directory}/grafana_admin_password"
+  tls_certificate:
+    file: "${AEGISQUANT_SECRET_DIR:?set secret directory}/tls_certificate.pem"
+  tls_private_key:
+    file: "${AEGISQUANT_SECRET_DIR:?set secret directory}/tls_private_key.pem"
+  operator_client_ca:
+    file: "${AEGISQUANT_SECRET_DIR:?set secret directory}/operator_client_ca.pem"

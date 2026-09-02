@@ -26,7 +26,16 @@ def test_p09_state_is_verified_acceptance_deferred_and_preserved_after_p10_start
     )
     previous = cast("dict[str, object]", state["previous_phase"])
     deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
-    assert state["current_phase"] in {"P09", "P10", "P11", "P12", "P13", "P14", "P15"}
+    assert state["current_phase"] in {
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+    }
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["formal_acceptance_deferred"] is True
@@ -101,7 +110,7 @@ def test_p09_state_is_verified_acceptance_deferred_and_preserved_after_p10_start
             "P12",
             "P13",
         }
-    else:
+    elif state["current_phase"] == "P15":
         assert state["next_phase"] == "P16"
         assert previous["phase"] == "P14"
         p09 = next(item for item in deferred if item["phase"] == "P09")
@@ -118,8 +127,26 @@ def test_p09_state_is_verified_acceptance_deferred_and_preserved_after_p10_start
             "P13",
             "P14",
         }
+    else:
+        assert state["next_phase"] == "P17"
+        assert previous["phase"] == "P15"
+        p09 = next(item for item in deferred if item["phase"] == "P09")
+        assert p09["status"] == "implementation_verified_acceptance_deferred"
+        assert {item["phase"] for item in deferred} >= {
+            "P05",
+            "P06",
+            "P07",
+            "P08",
+            "P09",
+            "P10",
+            "P11",
+            "P12",
+            "P13",
+            "P14",
+            "P15",
+        }
     assert not (project_root / "reports/phases/P09/ACCEPTANCE.md").exists()
-    if state["current_phase"] in {"P10", "P11", "P12", "P13", "P14", "P15"}:
+    if state["current_phase"] in {"P10", "P11", "P12", "P13", "P14", "P15", "P16"}:
         assert (project_root / "reports/phases/P10/PLAN.md").exists()
 
 
@@ -241,9 +268,27 @@ def test_p09_reports_and_compliance_are_complete_without_formal_acceptance(
     security = _json(project_root / "reports/security/SECURITY_SCAN_RESULTS.json")
     mutation = _json(project_root / "reports/testing/P09_MUTATION_RESULTS.json")
     holdout = _json(project_root / "reports/data/P07_HOLDOUT_EVIDENCE.json")
-    assert compliance["phase"] in {"P09", "P10", "P11", "P12", "P13", "P14", "P15"}
+    assert compliance["phase"] in {
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+    }
     assert compliance["status"] == "passed"
-    assert security["phase"] in {"P09", "P10", "P11", "P12", "P13", "P14", "P15"}
+    assert security["phase"] in {
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+    }
     assert security["status"] == "passed"
     assert mutation["status"] == "passed"
     assert cast(float, mutation["score"]) >= cast(float, mutation["threshold"])

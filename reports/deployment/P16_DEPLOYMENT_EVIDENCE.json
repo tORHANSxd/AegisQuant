@@ -1,0 +1,36 @@
+{
+  "all_networks_internal": true,
+  "all_static_images_digest_pinned": true,
+  "allowed_environments": [
+    "PAPER",
+    "TESTNET"
+  ],
+  "container_runtime_contract_executed": false,
+  "docker_cli_available": false,
+  "handbook": "docs/deployment/PAPER_TESTNET_DEPLOYMENT.md",
+  "live_profile_present": false,
+  "profiles": [
+    "observability",
+    "paper",
+    "testnet"
+  ],
+  "runtime_gap": "Docker CLI was unavailable on the P16 implementation host",
+  "schema_version": "p16-deployment-evidence-v1",
+  "service_count": 11,
+  "services": [
+    "alertmanager",
+    "alloy",
+    "api",
+    "grafana",
+    "loki",
+    "node-exporter",
+    "postgres",
+    "prometheus",
+    "reverse-proxy",
+    "tempo",
+    "web"
+  ],
+  "tests": [
+    "tests/p16/test_infrastructure_contracts.py"
+  ]
+}

@@ -27,25 +27,37 @@ def test_p15_state_is_non_live_and_acceptance_remains_deferred(project_root: Pat
     deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
     p14 = next(item for item in deferred if item["phase"] == "P14")
 
-    assert state["current_phase"] == "P15"
-    assert state["next_phase"] == "P16"
+    assert state["current_phase"] in {"P15", "P16"}
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["formal_acceptance_deferred"] is True
     assert state["live_trading_locked"] is True
-    assert previous["phase"] == "P14"
-    assert previous["evidence_commit_sha"] == p14["evidence_commit_sha"]
+    if state["current_phase"] == "P15":
+        assert state["next_phase"] == "P16"
+        assert previous["phase"] == "P14"
+        assert previous["evidence_commit_sha"] == p14["evidence_commit_sha"]
+    else:
+        p15 = next(item for item in deferred if item["phase"] == "P15")
+        assert state["next_phase"] == "P17"
+        assert previous["phase"] == "P15"
+        assert previous["evidence_commit_sha"] == p15["evidence_commit_sha"]
     assert not (project_root / "reports/phases/P15/ACCEPTANCE.md").exists()
     assert not (project_root / "src/aegisquant/live").exists()
 
-    finalized = (project_root / "reports/phases/P15/SUMMARY.md").is_file()
-    if finalized:
-        assert state["implementation_status"] == ("implementation_verified_acceptance_deferred")
-        assert len(cast("str", state["implementation_commit_sha"])) == 40
-        assert len(cast("str", state["artifact_manifest_sha256"])) == 64
+    if state["current_phase"] == "P15":
+        finalized = (project_root / "reports/phases/P15/SUMMARY.md").is_file()
+        if finalized:
+            assert state["implementation_status"] == ("implementation_verified_acceptance_deferred")
+            assert len(cast("str", state["implementation_commit_sha"])) == 40
+            assert len(cast("str", state["artifact_manifest_sha256"])) == 64
+        else:
+            assert state["implementation_status"] == "planned"
+            assert state["implementation_commit_sha"] is None
     else:
-        assert state["implementation_status"] == "planned"
-        assert state["implementation_commit_sha"] is None
+        p15 = next(item for item in deferred if item["phase"] == "P15")
+        assert p15["status"] == "implementation_verified_acceptance_deferred"
+        assert len(cast("str", p15["implementation_commit_sha"])) == 40
+        assert len(cast("str", p15["artifact_manifest_sha256"])) == 64
 
 
 def test_p15_ci_uses_the_repository_pinned_web_toolchain(project_root: Path) -> None:

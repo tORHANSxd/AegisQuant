@@ -1,0 +1,61 @@
+logging {
+  level  = "info"
+  format = "json"
+}
+
+loki.source.file "aegisquant" {
+  targets = [
+    { "__path__" = "/var/log/aegisquant/*.jsonl", "job" = "aegisquant" },
+  ]
+  forward_to = [loki.process.aegisquant.receiver]
+}
+
+loki.process "aegisquant" {
+  stage.json {
+    expressions = {
+      level          = "level",
+      service        = "service",
+      event_type     = "event_type",
+      correlation_id = "correlation_id",
+      trace_id       = "trace_id",
+    }
+  }
+  stage.labels {
+    values = {
+      level      = "level",
+      service    = "service",
+      event_type = "event_type",
+    }
+  }
+  forward_to = [loki.write.local.receiver]
+}
+
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
+
+otelcol.receiver.otlp "default" {
+  http {
+    endpoint = "0.0.0.0:4318"
+  }
+  output {
+    traces = [otelcol.processor.batch.default.input]
+  }
+}
+
+otelcol.processor.batch "default" {
+  output {
+    traces = [otelcol.exporter.otlphttp.tempo.input]
+  }
+}
+
+otelcol.exporter.otlphttp "tempo" {
+  client {
+    endpoint = "http://tempo:4318"
+    tls {
+      insecure = true
+    }
+  }
+}

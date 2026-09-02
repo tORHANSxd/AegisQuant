@@ -26,6 +26,7 @@ PHASE_CHOICES = (
     "P13",
     "P14",
     "P15",
+    "P16",
 )
 
 
@@ -72,7 +73,7 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
 
 
 def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
-    """Return the ordered P03-P15 pipeline without network soak execution."""
+    """Return the ordered P03-P16 pipeline without network soak execution."""
     pnpm = resolve_pnpm_command(root)
     included_phases = set(PHASE_CHOICES[: PHASE_CHOICES.index(phase) + 1])
     phase_status = [
@@ -262,6 +263,36 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
+    if "P16" in included_phases:
+        evidence_stages.extend(
+            (
+                (
+                    "p16-image-lock",
+                    [sys.executable, "-m", "scripts.resolve_image_digests", "--check"],
+                ),
+                (
+                    "p16-dashboards",
+                    [sys.executable, "-m", "scripts.generate_p16_dashboards", "--check"],
+                ),
+                (
+                    "p16-operational-evidence",
+                    [sys.executable, "-m", "scripts.generate_p16_evidence", "--check"],
+                ),
+                (
+                    "p16-restore-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_p16_restore_evidence",
+                        "--check",
+                    ],
+                ),
+                (
+                    "p16-mutation",
+                    [sys.executable, "-m", "scripts.run_p16_mutation", "--check"],
+                ),
+            )
+        )
     return [
         ("postgres-runtime", [sys.executable, "scripts/setup_postgres.py"]),
         (
@@ -323,7 +354,7 @@ def main() -> int:
     parser.add_argument(
         "--phase",
         choices=PHASE_CHOICES,
-        default="P15",
+        default="P16",
     )
     parser.add_argument(
         "--output",

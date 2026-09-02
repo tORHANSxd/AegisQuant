@@ -30,6 +30,12 @@
     "Version": "3.0.3"
   },
   {
+    "License": "MIT",
+    "Name": "PyJWT",
+    "URL": "https://github.com/jpadilla/pyjwt",
+    "Version": "2.13.0"
+  },
+  {
     "License": "MIT License",
     "Name": "PyYAML",
     "URL": "https://pyyaml.org/",
@@ -288,6 +294,12 @@
     "Version": "2.57.0"
   },
   {
+    "License": "Apache Software License",
+    "Name": "googleapis-common-protos",
+    "URL": "https://github.com/googleapis/google-cloud-python/tree/main/packages/googleapis-common-protos",
+    "Version": "1.75.2"
+  },
+  {
     "License": "MIT",
     "Name": "graphviz",
     "URL": "https://github.com/xflr6/graphviz",
@@ -499,6 +511,18 @@
   },
   {
     "License": "Apache-2.0",
+    "Name": "opentelemetry-exporter-otlp-proto-common",
+    "URL": "https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp-proto-common",
+    "Version": "1.44.0"
+  },
+  {
+    "License": "Apache-2.0",
+    "Name": "opentelemetry-exporter-otlp-proto-http",
+    "URL": "https://github.com/open-telemetry/opentelemetry-python/tree/main/exporter/opentelemetry-exporter-otlp-proto-http",
+    "Version": "1.44.0"
+  },
+  {
+    "License": "Apache-2.0",
     "Name": "opentelemetry-proto",
     "URL": "https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-proto",
     "Version": "1.44.0"
@@ -604,6 +628,12 @@
     "Name": "pre_commit",
     "URL": "https://github.com/pre-commit/pre-commit",
     "Version": "4.6.2"
+  },
+  {
+    "License": "Apache-2.0 AND BSD-2-Clause",
+    "Name": "prometheus_client",
+    "URL": "https://github.com/prometheus/client_python",
+    "Version": "0.26.0"
   },
   {
     "License": "3-Clause BSD License",

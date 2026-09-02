@@ -1,0 +1,35 @@
+server:
+  http_listen_address: 0.0.0.0
+  http_listen_port: 3200
+
+distributor:
+  receivers:
+    otlp:
+      protocols:
+        http:
+          endpoint: 0.0.0.0:4318
+
+ingester:
+  max_block_duration: 5m
+
+compactor:
+  compaction:
+    block_retention: 168h
+
+storage:
+  trace:
+    backend: local
+    wal:
+      path: /var/tempo/wal
+    local:
+      path: /var/tempo/blocks
+
+metrics_generator:
+  storage:
+    path: /var/tempo/generator/wal
+  processor:
+    service_graphs: {}
+    span_metrics: {}
+
+usage_report:
+  reporting_enabled: false

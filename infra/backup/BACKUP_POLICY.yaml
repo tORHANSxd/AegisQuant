@@ -1,0 +1,30 @@
+schema_version: aegisquant-backup-policy-v1
+scope: PAPER_AND_TESTNET_ONLY
+live_trading_enabled: false
+rpo:
+  target_hours: 24
+rto:
+  target_hours: 2
+schedule:
+  encrypted_database_backup: daily
+  restore_drill: monthly
+retention:
+  daily_days: 30
+  monthly_months: 12
+encryption:
+  algorithm: AES-256-GCM
+  key_source: systemd_encrypted_credential
+  plaintext_backup_retained: false
+offsite:
+  required: true
+  distinct_mounted_filesystem_required: true
+  ciphertext_only: true
+verification:
+  - encrypted_sha256
+  - decrypted_sha256
+  - alembic_revision
+  - ledger_hash_chain
+  - double_entry_balance
+  - reconciliation_payloads
+  - read_model_record_count
+failure_posture: HALTED

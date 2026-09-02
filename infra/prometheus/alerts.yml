@@ -1,0 +1,67 @@
+groups:
+  - name: aegisquant-safety
+    interval: 15s
+    rules:
+      - alert: RECONCILIATION_FAILURE
+        expr: max(aegisquant_reconciliation_mismatches) > 0
+        for: 30s
+        labels: {severity: SEV0, scope: accounting}
+        annotations:
+          summary: Authoritative reconciliation has unresolved differences
+          runbook: docs/runbooks/RECONCILIATION_FAILURE.md
+      - alert: LEDGER_IMBALANCE
+        expr: max(aegisquant_ledger_lag_seconds) > 30
+        for: 1m
+        labels: {severity: SEV0, scope: accounting}
+        annotations:
+          summary: Ledger ingestion is outside the safe lag budget
+          runbook: docs/runbooks/LEDGER_IMBALANCE.md
+      - alert: LIVE_KILL_SWITCH
+        expr: max(aegisquant_kill_switch_active) > 0
+        for: 0s
+        labels: {severity: SEV0, scope: risk}
+        annotations:
+          summary: Kill switch is active; new risk must remain blocked
+          runbook: docs/runbooks/LIVE_KILL_SWITCH.md
+      - alert: DATA_STALE
+        expr: max(aegisquant_provider_lag_seconds) > 60
+        for: 2m
+        labels: {severity: SEV1, scope: data}
+        annotations:
+          summary: A provider tier is outside its freshness budget
+          runbook: docs/runbooks/DATA_STALE.md
+      - alert: ORDER_UNKNOWN
+        expr: increase(aegisquant_events_total{event_type="execution",status="unknown"}[5m]) > 0
+        for: 0s
+        labels: {severity: SEV1, scope: execution}
+        annotations:
+          summary: Execution has entered an unknown state and requires reconciliation
+          runbook: docs/runbooks/ORDER_UNKNOWN.md
+      - alert: CLOCK_DRIFT
+        expr: max(abs(node_timex_offset_seconds)) > 0.5 or max(node_timex_sync_status) == 0
+        for: 1m
+        labels: {severity: SEV1, scope: infrastructure}
+        annotations:
+          summary: Host clock skew exceeds 500 milliseconds
+          runbook: docs/runbooks/CLOCK_DRIFT.md
+      - alert: DISK_FULL
+        expr: max(1 - node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"}) > 0.85
+        for: 5m
+        labels: {severity: SEV1, scope: infrastructure}
+        annotations:
+          summary: Disk utilization exceeds the operational threshold
+          runbook: docs/runbooks/DISK_FULL.md
+      - alert: API_ERROR_BUDGET
+        expr: sum(rate(aegisquant_api_requests_total{status_class=~"5.."}[5m])) > 0.05
+        for: 5m
+        labels: {severity: SEV2, scope: read-api}
+        annotations:
+          summary: Read API error rate exceeds budget
+          runbook: docs/runbooks/PROCESS_CRASH.md
+      - alert: RESOURCE_PRESSURE
+        expr: (1 - avg(rate(node_cpu_seconds_total{mode="idle"}[5m]))) > 0.90 or (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) > 0.90
+        for: 10m
+        labels: {severity: SEV2, scope: infrastructure}
+        annotations:
+          summary: Sustained resource pressure may degrade processing
+          runbook: docs/runbooks/PROCESS_CRASH.md

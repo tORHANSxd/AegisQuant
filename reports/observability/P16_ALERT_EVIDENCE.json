@@ -1,0 +1,24 @@
+{
+  "delivered_severities": [
+    "SEV0"
+  ],
+  "duplicate_outcome": "deduplicated",
+  "formal_acceptance_performed": false,
+  "incident_final_state": "CLOSED",
+  "incident_transition_count": 6,
+  "local_contract_delivery_verified": true,
+  "maintenance_sev2_outcome": "maintenance_suppressed",
+  "maintenance_suppressed_sev0": false,
+  "schema_version": "p16-alert-evidence-v1",
+  "sev0_delivery_outcome": "delivered",
+  "severities": [
+    "SEV0",
+    "SEV1",
+    "SEV2",
+    "SEV3"
+  ],
+  "tests": [
+    "tests/observability/test_alerts.py"
+  ],
+  "user_external_channel_delivery_verified": false
+}

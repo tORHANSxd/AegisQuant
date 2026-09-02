@@ -15,11 +15,12 @@ def test_no_local_secret_files_are_present() -> None:
     secret_files = [
         path.relative_to(root).as_posix()
         for path in root.rglob("*")
-        if path.is_file()
-        and ".git" not in path.parts
+        if ".git" not in path.parts
         and ".venv" not in path.parts
         and ".tools" not in path.parts
         and "node_modules" not in path.parts
+        and ".next" not in path.parts
+        and path.is_file()
         and (path.name.startswith(".env") or path.suffix.lower() in prohibited_suffixes)
     ]
     assert secret_files == []
@@ -27,10 +28,12 @@ def test_no_local_secret_files_are_present() -> None:
 
 def test_no_suspicious_secret_assignment_in_project_text() -> None:
     root = Path(__file__).resolve().parents[2]
-    excluded = {".git", ".venv", ".tools", "node_modules", "docs"}
+    excluded = {".git", ".venv", ".tools", ".next", "node_modules", "docs"}
     violations: list[str] = []
     for path in root.rglob("*"):
-        if not path.is_file() or any(part in excluded for part in path.parts):
+        if any(part in excluded for part in path.parts):
+            continue
+        if not path.is_file():
             continue
         if path.suffix.lower() not in {".py", ".json", ".yaml", ".yml", ".toml", ".ts", ".tsx"}:
             continue

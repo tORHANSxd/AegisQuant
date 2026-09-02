@@ -1,0 +1,18 @@
+{
+  "collector": "Alloy OTLP/HTTP",
+  "correlation_id": "corr-p16-evidence",
+  "formal_acceptance_performed": false,
+  "log_agent": "Grafana Alloy",
+  "log_correlation_matches": true,
+  "log_has_trace_id": true,
+  "metric_event_present": true,
+  "metric_excludes_correlation_id": true,
+  "metric_status_present": true,
+  "promtail_used": false,
+  "recursive_redaction_passed": true,
+  "schema_version": "p16-telemetry-evidence-v1",
+  "span_correlation_matches": true,
+  "tests": [
+    "tests/observability/test_correlation.py"
+  ]
+}

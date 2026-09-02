@@ -1,0 +1,80 @@
+{
+  "incident_template": "docs/incident_templates/INCIDENT_RECORD.md",
+  "lifecycle": [
+    "OPEN",
+    "ACKNOWLEDGED",
+    "MITIGATING",
+    "MONITORING",
+    "RESOLVED",
+    "POSTMORTEM_REQUIRED",
+    "CLOSED"
+  ],
+  "postmortem_template": "docs/incident_templates/POSTMORTEM.md",
+  "runbook_count": 12,
+  "runbooks": [
+    {
+      "name": "DATA_STALE",
+      "path": "docs/runbooks/DATA_STALE.md",
+      "sha256": "9835151f7b17ee15960c8316c6663bb1561b1bf95549d4d0758291202e7da0e8"
+    },
+    {
+      "name": "ORDER_UNKNOWN",
+      "path": "docs/runbooks/ORDER_UNKNOWN.md",
+      "sha256": "c8154d8ec59ad1e25d71714544f2633305bc5cd1504c64c40940601c158891ab"
+    },
+    {
+      "name": "RECONCILIATION_FAILURE",
+      "path": "docs/runbooks/RECONCILIATION_FAILURE.md",
+      "sha256": "aefc98cb69e2dddc31f73a2be23a830402d4c65ad2216b68dceb9a7ca6e97a4f"
+    },
+    {
+      "name": "LEDGER_IMBALANCE",
+      "path": "docs/runbooks/LEDGER_IMBALANCE.md",
+      "sha256": "c774ee0f5908ff26e708186dd69f316b3234521847754c3f36b18d8c6c6606b5"
+    },
+    {
+      "name": "VENUE_DISCONNECT",
+      "path": "docs/runbooks/VENUE_DISCONNECT.md",
+      "sha256": "5ec869ec414ab105ae3d5a2dbb4e916620b189e913da9478237414ce23d4233a"
+    },
+    {
+      "name": "MARGIN_RISK",
+      "path": "docs/runbooks/MARGIN_RISK.md",
+      "sha256": "cca1e3b2c02d580d1ed63c3179ce5de7d9406faa2952da917bafb5e75743aa12"
+    },
+    {
+      "name": "MODEL_DRIFT",
+      "path": "docs/runbooks/MODEL_DRIFT.md",
+      "sha256": "bd340f8820bf9200b1a7d2d0c9b2ff1236ec20572a4acd74ae55fa93b437e5b4"
+    },
+    {
+      "name": "DATABASE_FAILURE",
+      "path": "docs/runbooks/DATABASE_FAILURE.md",
+      "sha256": "7e3beae018b892e65826660c0550ef66e309c67951f4caffb0e58cae5df0211f"
+    },
+    {
+      "name": "DISK_FULL",
+      "path": "docs/runbooks/DISK_FULL.md",
+      "sha256": "5ba44734369125b50cf22f2dcc7ecf939f42148184e5ac5f4926f7c1cfe56684"
+    },
+    {
+      "name": "SECRET_LEAK",
+      "path": "docs/runbooks/SECRET_LEAK.md",
+      "sha256": "37d011940ac65389f99d256bdacf0a60f0db2daadc75d788ba77bb421b4c3b99"
+    },
+    {
+      "name": "LIVE_KILL_SWITCH",
+      "path": "docs/runbooks/LIVE_KILL_SWITCH.md",
+      "sha256": "bab9d0b46ce2d202cdeb18c35eb7cd4619bf4c8ff7b7f63b7de8f818b2c64f80"
+    },
+    {
+      "name": "RESTORE_FROM_BACKUP",
+      "path": "docs/runbooks/RESTORE_FROM_BACKUP.md",
+      "sha256": "ff1e60acabca2ccbd65cf1b051b122c5abe35b5ae90ca68d38f7218edfc29b11"
+    }
+  ],
+  "schema_version": "p16-runbook-evidence-v1",
+  "tests": [
+    "tests/p16/test_runbook_contracts.py"
+  ]
+}

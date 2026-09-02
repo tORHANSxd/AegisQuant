@@ -4,7 +4,7 @@
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-02T02:23:02.222936Z",
+    "timestamp": "2026-09-02T03:33:09.505798Z",
     "component": {
       "type": "application",
       "name": "aegisquant-python",
@@ -266,6 +266,12 @@
     },
     {
       "type": "library",
+      "name": "googleapis-common-protos",
+      "version": "1.75.2",
+      "purl": "pkg:pypi/googleapis-common-protos@1.75.2"
+    },
+    {
+      "type": "library",
       "name": "graphviz",
       "version": "0.21",
       "purl": "pkg:pypi/graphviz@0.21"
@@ -494,6 +500,18 @@
     },
     {
       "type": "library",
+      "name": "opentelemetry-exporter-otlp-proto-common",
+      "version": "1.44.0",
+      "purl": "pkg:pypi/opentelemetry-exporter-otlp-proto-common@1.44.0"
+    },
+    {
+      "type": "library",
+      "name": "opentelemetry-exporter-otlp-proto-http",
+      "version": "1.44.0",
+      "purl": "pkg:pypi/opentelemetry-exporter-otlp-proto-http@1.44.0"
+    },
+    {
+      "type": "library",
       "name": "opentelemetry-proto",
       "version": "1.44.0",
       "purl": "pkg:pypi/opentelemetry-proto@1.44.0"
@@ -620,6 +638,12 @@
     },
     {
       "type": "library",
+      "name": "prometheus_client",
+      "version": "0.26.0",
+      "purl": "pkg:pypi/prometheus_client@0.26.0"
+    },
+    {
+      "type": "library",
       "name": "protobuf",
       "version": "6.33.6",
       "purl": "pkg:pypi/protobuf@6.33.6"
@@ -695,6 +719,12 @@
       "name": "Pygments",
       "version": "2.21.0",
       "purl": "pkg:pypi/pygments@2.21.0"
+    },
+    {
+      "type": "library",
+      "name": "PyJWT",
+      "version": "2.13.0",
+      "purl": "pkg:pypi/pyjwt@2.13.0"
     },
     {
       "type": "library",

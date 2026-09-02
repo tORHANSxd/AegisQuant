@@ -1,0 +1,95 @@
+{
+  "schema_version": "aegisquant-image-lock-v1",
+  "generated_at_utc": "2026-09-02T02:58:19.537625Z",
+  "source": "Docker Hub registry v2 manifest API",
+  "images": [
+    {
+      "image": "prom/prometheus",
+      "tag": "v3.14.0",
+      "digest": "sha256:5ce7540c3c00ef4ab0c9d2c995c6a5b9c421f44b4a115d97a2c7af3b1c21cbb0",
+      "reference": "prom/prometheus@sha256:5ce7540c3c00ef4ab0c9d2c995c6a5b9c421f44b4a115d97a2c7af3b1c21cbb0",
+      "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "prom/alertmanager",
+      "tag": "v0.34.0",
+      "digest": "sha256:690c7b525f4367aa91f73e2f91c632206d32e97c6384bdbf2fb7a861b420340d",
+      "reference": "prom/alertmanager@sha256:690c7b525f4367aa91f73e2f91c632206d32e97c6384bdbf2fb7a861b420340d",
+      "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "prom/node-exporter",
+      "tag": "v1.12.1",
+      "digest": "sha256:1b4e4438faca4dd7e001dd445d161a4a2091b0fededa84093b3a8dfeae1f1be0",
+      "reference": "prom/node-exporter@sha256:1b4e4438faca4dd7e001dd445d161a4a2091b0fededa84093b3a8dfeae1f1be0",
+      "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "grafana/grafana",
+      "tag": "13.2.0",
+      "digest": "sha256:3fd54ae1214669f8355f065ec9f6445d5279a3d77095ab048ca045685272429b",
+      "reference": "grafana/grafana@sha256:3fd54ae1214669f8355f065ec9f6445d5279a3d77095ab048ca045685272429b",
+      "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "grafana/loki",
+      "tag": "3.7.7",
+      "digest": "sha256:d70e4659623f3e109af669cae76fe2a5dd5be54e2298fe8aed380d982fbc2500",
+      "reference": "grafana/loki@sha256:d70e4659623f3e109af669cae76fe2a5dd5be54e2298fe8aed380d982fbc2500",
+      "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "grafana/alloy",
+      "tag": "v1.19.2",
+      "digest": "sha256:b8ec653c44235fbe910879145dac3597d66b0aaecf60bcbbe82580767771a839",
+      "reference": "grafana/alloy@sha256:b8ec653c44235fbe910879145dac3597d66b0aaecf60bcbbe82580767771a839",
+      "media_type": "application/vnd.oci.image.index.v1+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "grafana/tempo",
+      "tag": "2.10.5",
+      "digest": "sha256:ee21727732c7a7199cb71c3eee9153bbf23f9b0b87619f0555a0cf21a67f1a33",
+      "reference": "grafana/tempo@sha256:ee21727732c7a7199cb71c3eee9153bbf23f9b0b87619f0555a0cf21a67f1a33",
+      "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "postgres",
+      "tag": "18.6-bookworm",
+      "digest": "sha256:1c59e2c3c818eaa0f0628f695b36e7c9e362d6b219b36a54a32df645cbd7e1af",
+      "reference": "postgres@sha256:1c59e2c3c818eaa0f0628f695b36e7c9e362d6b219b36a54a32df645cbd7e1af",
+      "media_type": "application/vnd.oci.image.index.v1+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "nginx",
+      "tag": "1.29.1-alpine",
+      "digest": "sha256:42a516af16b852e33b7682d5ef8acbd5d13fe08fecadc7ed98605ba5e3b26ab8",
+      "reference": "nginx@sha256:42a516af16b852e33b7682d5ef8acbd5d13fe08fecadc7ed98605ba5e3b26ab8",
+      "media_type": "application/vnd.oci.image.index.v1+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "python",
+      "tag": "3.13.15-slim-bookworm",
+      "digest": "sha256:ed86c82274b3c69b52fb5820f358f0bd7df0b603332063cb5c6e32bd220c3e6e",
+      "reference": "python@sha256:ed86c82274b3c69b52fb5820f358f0bd7df0b603332063cb5c6e32bd220c3e6e",
+      "media_type": "application/vnd.oci.image.index.v1+json",
+      "registry": "registry-1.docker.io"
+    },
+    {
+      "image": "node",
+      "tag": "24.20.0-bookworm-slim",
+      "digest": "sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e",
+      "reference": "node@sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e",
+      "media_type": "application/vnd.oci.image.index.v1+json",
+      "registry": "registry-1.docker.io"
+    }
+  ]
+}

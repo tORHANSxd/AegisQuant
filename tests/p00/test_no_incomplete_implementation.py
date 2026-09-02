@@ -23,11 +23,11 @@ def test_no_incomplete_markers_in_implementation(project_root: Path) -> None:
     }
     violations: list[str] = []
     for path in project_root.rglob("*"):
+        if any(part in excluded for part in path.parts):
+            continue
         if not path.is_file() or path.suffix not in TEXT_SUFFIXES:
             continue
         if path.name == "test_no_incomplete_implementation.py":
-            continue
-        if any(part in excluded for part in path.parts):
             continue
         text = path.read_text(encoding="utf-8")
         if FORBIDDEN.search(text):

@@ -25,6 +25,7 @@ PHASE_CHOICES = (
     "P13",
     "P14",
     "P15",
+    "P16",
 )
 
 
@@ -33,7 +34,7 @@ def main() -> int:
     parser.add_argument(
         "--phase",
         choices=PHASE_CHOICES,
-        default="P15",
+        default="P16",
     )
     args = parser.parse_args()
     included_phases = set(PHASE_CHOICES[: PHASE_CHOICES.index(args.phase) + 1])
@@ -100,6 +101,14 @@ def main() -> int:
             (
                 "tests/integration/test_p15_workbench.py",
                 "tests/p15",
+            )
+        )
+    if "P16" in included_phases:
+        test_targets.extend(
+            (
+                "tests/observability",
+                "tests/operations",
+                "tests/p16",
             )
         )
     command = [

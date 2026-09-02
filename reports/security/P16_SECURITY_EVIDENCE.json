@@ -1,0 +1,17 @@
+{
+  "csp_present": true,
+  "live_secret_denied_for_all_roles": true,
+  "live_trading_locked": true,
+  "mtls_required": true,
+  "plaintext_credentials_collected": false,
+  "public_bindings": [],
+  "real_account_connections": 0,
+  "research_testnet_secret_denied": true,
+  "schema_version": "p16-security-evidence-v1",
+  "tests": [
+    "tests/security/test_p16_operational_security.py",
+    "tests/chaos/test_p16_operational_failures.py"
+  ],
+  "threat_model": "reports/security/THREAT_MODEL.md",
+  "tls13_only": true
+}

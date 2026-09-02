@@ -11,6 +11,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import cast
 
+import yaml
+
 DETECT_EXCLUDE = (
     r"(?:^|[\\/])(?:\.git|\.venv|\.tools|\.next|\.pytest_cache|\.pytest_tmp|\.runtime|"
     r"\.ruff_cache|node_modules|storybook-static|apps[\\/]web[\\/]src[\\/]generated|"
@@ -50,6 +52,86 @@ def run(command: list[str], root: Path) -> subprocess.CompletedProcess[str]:
     )
 
 
+def resolve_pnpm_command(root: Path) -> list[str]:
+    """Use the repository-pinned Node and pnpm rather than the ambient host tools."""
+    node = root / ".tools/node-v24.20.0-win-x64/node.exe"
+    pnpm = root / ".tools/pnpm/node_modules/pnpm/bin/pnpm.cjs"
+    if not node.is_file() or not pnpm.is_file():
+        raise FileNotFoundError("repository-pinned Node/pnpm toolchain is unavailable")
+    return [str(node), str(pnpm)]
+
+
+def infrastructure_policy(root: Path) -> tuple[dict[str, object], bool]:
+    """Statically enforce the production container/IaC security boundary."""
+    infrastructure_root = root / "infra"
+    scannable = [
+        path
+        for path in infrastructure_root.rglob("*")
+        if path.is_file()
+        and (path.name.startswith("Dockerfile") or path.suffix in {".yml", ".yaml", ".alloy"})
+    ]
+    findings: list[str] = []
+    dockerfiles = [path for path in scannable if path.name.startswith("Dockerfile")]
+    for path in dockerfiles:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("FROM ") and "@sha256:" not in line:
+                findings.append(f"unpinned base image: {path.relative_to(root).as_posix()}")
+    compose_path = root / "infra/compose/compose.yaml"
+    if not compose_path.is_file():
+        findings.append("production compose file is missing")
+    else:
+        compose_text = compose_path.read_text(encoding="utf-8")
+        payload = cast("dict[str, object]", yaml.safe_load(compose_text))
+        services = payload.get("services")
+        if not isinstance(services, dict):
+            findings.append("compose services mapping is invalid")
+        else:
+            for name, raw in cast("dict[object, object]", services).items():
+                if not isinstance(raw, dict):
+                    findings.append(f"compose service is invalid: {name}")
+                    continue
+                service = cast("dict[str, object]", raw)
+                image = service.get("image")
+                if isinstance(image, str) and "@sha256:" not in image and "DIGEST" not in image:
+                    findings.append(f"service image is not digest-bound: {name}")
+                if service.get("privileged") is True or service.get("network_mode") == "host":
+                    findings.append(f"service has an unsafe privilege boundary: {name}")
+                volumes = service.get("volumes", [])
+                if isinstance(volumes, list) and any(
+                    "docker.sock" in str(item) for item in cast("list[object]", volumes)
+                ):
+                    findings.append(f"service mounts docker.sock: {name}")
+                ports = service.get("ports", [])
+                if isinstance(ports, list):
+                    for port in cast("list[object]", ports):
+                        if not str(port).startswith("127.0.0.1:"):
+                            findings.append(f"service publishes a non-loopback port: {name}")
+        if ":latest" in compose_text.casefold():
+            findings.append("compose contains a latest image tag")
+    infra_text = "\n".join(
+        path.read_text(encoding="utf-8", errors="replace")
+        for path in scannable
+        if path.stat().st_size <= 2_000_000
+    ).casefold()
+    if "promtail" in infra_text:
+        findings.append("Promtail is prohibited")
+    docker_available = shutil.which("docker") is not None
+    payload: dict[str, object] = {
+        "status": "passed" if not findings else "failed",
+        "policy": "digest-pinned, loopback-only, least-privilege, no-Promtail",
+        "scannable_files": [path.relative_to(root).as_posix() for path in scannable],
+        "findings": findings,
+        "runtime_image_scan": (
+            "requires_target_linux_evidence"
+            if not docker_available
+            else "available_not_invoked_by_static_scan"
+        ),
+        "docker_available": docker_available,
+        "runtime_scan_claimed": False,
+    }
+    return payload, not findings
+
+
 def parsed_json(output: str) -> object:
     """Parse command JSON, returning a bounded error record when malformed."""
     try:
@@ -76,16 +158,15 @@ def main() -> int:
             "P13",
             "P14",
             "P15",
+            "P16",
         ),
-        default="P15",
+        default="P16",
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     report_dir = root / "reports/security"
     report_dir.mkdir(parents=True, exist_ok=True)
-    pnpm = shutil.which("pnpm")
-    if pnpm is None:
-        raise SystemExit("pnpm is required for the JavaScript dependency audit")
+    pnpm = resolve_pnpm_command(root)
 
     detect_result = run(
         [
@@ -130,7 +211,7 @@ def main() -> int:
         newline="\n",
     )
 
-    javascript_result = run([pnpm, "audit", "--json", "--audit-level", "high"], root)
+    javascript_result = run([*pnpm, "audit", "--json", "--audit-level", "high"], root)
     javascript_payload = parsed_json(javascript_result.stdout)
     (report_dir / "javascript_dependency_audit.json").write_text(
         json.dumps(javascript_payload, ensure_ascii=False, indent=2) + "\n",
@@ -138,22 +219,7 @@ def main() -> int:
         newline="\n",
     )
 
-    container_files = [
-        path.relative_to(root).as_posix()
-        for path in root.rglob("*")
-        if path.is_file()
-        and (
-            path.name == "Dockerfile"
-            or path.name.startswith("docker-compose")
-            or path.suffix in {".tf", ".tfvars"}
-        )
-        and not any(part in {".git", ".venv", ".tools", "node_modules"} for part in path.parts)
-    ]
-    infrastructure = {
-        "status": "not_applicable" if not container_files else "review_required",
-        "reason": f"{args.phase} contains no container image or infrastructure-as-code input",
-        "scannable_files": container_files,
-    }
+    infrastructure, infrastructure_passed = infrastructure_policy(root)
     (report_dir / "container_iac_scan.json").write_text(
         json.dumps(infrastructure, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -164,7 +230,7 @@ def main() -> int:
         "detect_secrets": detect_result.returncode == 0 and secret_count == 0,
         "python_dependency_audit": python_result.returncode == 0,
         "javascript_dependency_audit": javascript_result.returncode == 0,
-        "container_iac": not container_files,
+        "container_iac_policy": infrastructure_passed,
     }
     payload = {
         "schema_version": "1.0.0",

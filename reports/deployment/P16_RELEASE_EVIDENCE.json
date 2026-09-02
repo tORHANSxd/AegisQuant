@@ -1,0 +1,15 @@
+{
+  "failed_manual_resume_required": true,
+  "failed_posture": "HALTED",
+  "healthy_posture": "PAPER_ACTIVE",
+  "independent_approval_verified_by_gate": true,
+  "live_release_supported": false,
+  "manifest_sha256": "ad38a762f73c4afceea07f20ac97b7d16747b55b46ff006980be6d6525a6b014",
+  "rollback_manual_resume_required": true,
+  "rollback_posture": "HALTED",
+  "schema_version": "p16-release-evidence-v1",
+  "signature_verified_by_gate": true,
+  "tests": [
+    "tests/operations/test_release.py"
+  ]
+}

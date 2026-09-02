@@ -5395,7 +5395,7 @@
     "license": {
       "name": "Private local project"
     },
-    "summary": "Loopback-only, read-only P15 workbench API",
+    "summary": "Loopback-only, read-only operational workbench API",
     "title": "AegisQuant Read API",
     "version": "3.1.0.dev0"
   },

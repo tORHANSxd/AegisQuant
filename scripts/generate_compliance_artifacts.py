@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import importlib.metadata
 import json
-import shutil
 import subprocess  # nosec B404
 import sys
 from datetime import UTC, datetime
@@ -145,14 +144,18 @@ def main() -> int:
             "P13",
             "P14",
             "P15",
+            "P16",
         ),
-        default="P15",
+        default="P16",
     )
     arguments = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    pnpm = shutil.which("pnpm")
-    if pnpm is None:
-        raise SystemExit("pnpm is required for compliance inventory")
+    node = root / ".tools/node-v24.20.0-win-x64/node.exe"
+    pnpm_entry = root / ".tools/pnpm/node_modules/pnpm/bin/pnpm.cjs"
+    if not node.is_file() or not pnpm_entry.is_file():
+        raise SystemExit("repository-pinned Node/pnpm toolchain is required")
+    pnpm = str(node)
+    pnpm_prefix = (str(pnpm_entry),)
     sbom_dir = root / "reports/sbom"
     license_dir = root / "reports/licenses"
     sbom_dir.mkdir(parents=True, exist_ok=True)
@@ -160,9 +163,11 @@ def main() -> int:
 
     python_components, _ = python_inventory()
     python_licenses = python_license_inventory(root)
-    javascript_tree = pnpm_json(pnpm, root, "list", "--json", "--depth", "Infinity")
+    javascript_tree = pnpm_json(pnpm, root, *pnpm_prefix, "list", "--json", "--depth", "Infinity")
     javascript_components = collect_javascript_components(javascript_tree)
-    javascript_licenses = pnpm_json(pnpm, root, "licenses", "list", "--json", "--long")
+    javascript_licenses = pnpm_json(
+        pnpm, root, *pnpm_prefix, "licenses", "list", "--json", "--long"
+    )
 
     python_bom = cyclonedx(
         {"type": "application", "name": "aegisquant-python", "version": "3.1.0.dev0"},
