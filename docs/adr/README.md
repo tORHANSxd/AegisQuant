@@ -26,3 +26,4 @@ ADR 一经接受不原地抹除；变化通过新 ADR supersede。每份记录�
 - ADR-0021：P16 可观测性、安全、部署与恢复边界
 - ADR-0022：P17 付费 Provider Bake-off 与零采购决策
 - ADR-0023：P18 Canary 硬门、零资本与非授权 Manifest
+- ADR-0024：统一验收的原子提交与外部硬门阻断
