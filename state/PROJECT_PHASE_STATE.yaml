@@ -5,10 +5,10 @@ status: "in_progress"
 started_at_utc: "2026-09-02T04:25:00Z"
 accepted_at_utc: null
 commit_sha: null
-artifact_manifest_sha256: null
-implementation_status: "planned"
-implementation_verified_at_utc: null
-implementation_commit_sha: null
+artifact_manifest_sha256: "b93049fedc7b5673342318adc52bd7d60359f1c25e5be6682c40178400363a4a"
+implementation_status: "implementation_verified_acceptance_deferred"
+implementation_verified_at_utc: "2026-09-02T05:20:00.625613Z"
+implementation_commit_sha: "6d91f4939e518214547ee36a0fbcae2e2cef9113"
 evidence_commit_sha: null
 formal_acceptance_deferred: true
 live_trading_locked: true
