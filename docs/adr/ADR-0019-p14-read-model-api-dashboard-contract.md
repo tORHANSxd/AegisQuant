@@ -28,11 +28,16 @@ Next.js 看板基础。任务书中的依赖版本已经随时间变化；同时
    Fetch 客户端；该版本明确支持 TypeScript 6，生成结果进入差异检查，
    避免维护重复手写 DTO。最初候选 `openapi-typescript 7.13.0` 的 peer contract 仅允许
    TypeScript 5，实际安装门禁拒绝后未继续绕过；已废弃的独立 `@hey-api/client-fetch` 包也未保留。
-7. Next.js 保留现有 16.3.3 App Router。Storybook 使用官方支持的 Next.js Webpack 框架
-   `10.5.10`；官方首选的 Vite 框架实际安装时经 `tsconfck 3.1.6` 暴露 TypeScript 5-only peer
-   contract，与项目锁定的 TypeScript 6.0.3 冲突，因此选择官方仍支持的 Webpack 5 路径并用
-   Storybook build 验证。Webpack 固定为已通过最小发布时间门禁的 `5.109.2`，不使用安装器曾建议
-   豁免的新发布 `5.110.3`。ECharts 使用 `6.1.0` 并在 Client Component 中延迟初始化，
+7. Next.js 保留现有 16.3.3 App Router。Storybook 使用官方 React Webpack 5 框架
+   `@storybook/react-webpack5 10.5.10`；组件状态画廊不依赖 Next.js 专用 Storybook 特性，而
+   `@storybook/nextjs 10.5.10` 会带入尚无修复版本的 `image-size 2.0.2` 高危开发依赖，因此不为
+   框架便利性压下安全告警。官方 Vite 框架实际安装时又经 `tsconfck 3.1.6` 暴露 TypeScript 5-only
+   peer contract，与项目锁定的 TypeScript 6.0.3 冲突，所以选择官方仍支持的 React/Webpack 5
+   路径，并按其手工安装契约使用官方推荐的 `@storybook/addon-webpack5-compiler-swc 4.0.3` 编译
+   TSX，再用 Storybook build 验证。Webpack 固定为已通过最小发布时间门禁的 `5.109.2`，不使用
+   安装器曾建议豁免的新发布 `5.110.3`。`@hey-api/openapi-ts` 间接依赖的 `js-yaml` 通过 pnpm
+   override 固定到已修复的 `4.3.2`，并由 `pnpm audit --audit-level high` 实证。ECharts 使用
+   `6.1.0` 并在 Client Component 中延迟初始化，
    Lightweight Charts 使用 `5.2.1` 且仅在 Client Component 初始化。实际版本由 npm registry 与
    官方文档核对；P15 若页面图表规模扩大，再以生产 bundle 证据决定是否切换到按图表注册的 core
    import，P14 不为推测性收益增加额外封装。
@@ -48,6 +53,9 @@ Next.js 看板基础。任务书中的依赖版本已经随时间变化；同时
 
 - FastAPI release notes（0.141.1）：<https://fastapi.tiangolo.com/release-notes/>
 - Storybook Next.js with Vite：<https://storybook.js.org/docs/get-started/frameworks/nextjs-vite/>
+- Storybook React with Webpack：<https://storybook.js.org/docs/get-started/frameworks/react-webpack5>
+- GitHub Advisory Database（js-yaml）：<https://github.com/advisories/GHSA-52cp-r559-cp3m>
+- GitHub Advisory Database（image-size）：<https://github.com/advisories/GHSA-w3rx-r6r6-pgpr>
 - Apache ECharts npm/tree-shaking：<https://echarts.apache.org/handbook/en/basics/import/>
 - Lightweight Charts 5.x：<https://tradingview.github.io/lightweight-charts/docs/5.0>
 - Next.js 16.3.3 本地随包文档：

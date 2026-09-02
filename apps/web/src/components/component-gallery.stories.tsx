@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/nextjs";
+import type { Meta, StoryObj } from "@storybook/react-webpack5";
 
 import { ComponentGallery } from "./component-gallery";
 

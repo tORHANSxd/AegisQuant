@@ -71,7 +71,7 @@
         "7.29.7"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@babel+core@7.29.7_supports-color@7.2.0\\node_modules\\@babel\\core"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@babel+core@7.29.7_supports-color@10.2.2\\node_modules\\@babel\\core"
       ],
       "license": "MIT",
       "author": "The Babel Team",
@@ -123,7 +123,7 @@
         "7.29.7"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@babel+helper-module-imports@7.29.7_supports-color@7.2.0\\node_modules\\@babel\\helper-module-imports"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@babel+helper-module-imports@7.29.7_supports-color@10.2.2\\node_modules\\@babel\\helper-module-imports"
       ],
       "license": "MIT",
       "author": "The Babel Team",
@@ -136,7 +136,7 @@
         "7.29.7"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@babel+helper-module-transf_ca3daa5572729cf9e58956e439cfaf01\\node_modules\\@babel\\helper-module-transforms"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@babel+helper-module-transf_902d4c553d1dc7a5af88a5cd34bb68bd\\node_modules\\@babel\\helper-module-transforms"
       ],
       "license": "MIT",
       "author": "The Babel Team",
@@ -240,7 +240,7 @@
         "7.29.8"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@babel+traverse@7.29.8_supports-color@7.2.0\\node_modules\\@babel\\traverse"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@babel+traverse@7.29.8_supports-color@10.2.2\\node_modules\\@babel\\traverse"
       ],
       "license": "MIT",
       "author": "The Babel Team",
@@ -322,14 +322,26 @@
       "description": "Tokenize CSS"
     },
     {
+      "name": "@esbuild/win32-x64",
+      "versions": [
+        "0.28.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@esbuild+win32-x64@0.28.2\\node_modules\\@esbuild\\win32-x64"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/evanw/esbuild#readme",
+      "description": "The Windows 64-bit binary for esbuild, a JavaScript bundler."
+    },
+    {
       "name": "@eslint-community/eslint-utils",
       "versions": [
         "4.9.1",
         "4.10.1"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@eslint-community+eslint-ut_923eed868538d999a6747310361924c6\\node_modules\\@eslint-community\\eslint-utils",
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@eslint-community+eslint-ut_071ed5653c7942f0976ec0c19099136f\\node_modules\\@eslint-community\\eslint-utils"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@eslint-community+eslint-ut_0b5120d0feb8e9dddfb01a2515b270f7\\node_modules\\@eslint-community\\eslint-utils",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@eslint-community+eslint-ut_f0aee85d24982e30b735215b902c3bd1\\node_modules\\@eslint-community\\eslint-utils"
       ],
       "license": "MIT",
       "author": "Toru Nagashima",
@@ -388,6 +400,83 @@
       "description": "Various operations on Uint8Array data"
     },
     {
+      "name": "@hey-api/codegen-core",
+      "versions": [
+        "0.9.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@hey-api+codegen-core@0.9.1\\node_modules\\@hey-api\\codegen-core"
+      ],
+      "license": "MIT",
+      "author": "Hey API",
+      "homepage": "https://heyapi.dev/",
+      "description": "🧱 TypeScript framework for generating files."
+    },
+    {
+      "name": "@hey-api/json-schema-ref-parser",
+      "versions": [
+        "1.4.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@hey-api+json-schema-ref-parser@1.4.4\\node_modules\\@hey-api\\json-schema-ref-parser"
+      ],
+      "license": "MIT",
+      "author": "Hey API",
+      "homepage": "https://heyapi.dev/",
+      "description": "Parse, Resolve, and Dereference JSON Schema $ref pointers"
+    },
+    {
+      "name": "@hey-api/openapi-ts",
+      "versions": [
+        "0.99.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@hey-api+openapi-ts@0.99.0_typescript@6.0.3\\node_modules\\@hey-api\\openapi-ts"
+      ],
+      "license": "MIT",
+      "author": "Hey API",
+      "homepage": "https://heyapi.dev/docs/openapi/typescript/get-started",
+      "description": "🌀 OpenAPI to TypeScript code generator. Production-grade SDKs, Zod schemas, TanStack Query hooks, and 20+ plugins. Used by Vercel, OpenCode, and PayPal."
+    },
+    {
+      "name": "@hey-api/shared",
+      "versions": [
+        "0.5.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@hey-api+shared@0.5.0\\node_modules\\@hey-api\\shared"
+      ],
+      "license": "MIT",
+      "author": "Hey API",
+      "homepage": "https://heyapi.dev/",
+      "description": "Temporary home for cross-package utilities. Contents will migrate to proper packages as architecture stabilizes."
+    },
+    {
+      "name": "@hey-api/spec-types",
+      "versions": [
+        "0.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@hey-api+spec-types@0.2.0\\node_modules\\@hey-api\\spec-types"
+      ],
+      "license": "MIT",
+      "author": "Hey API",
+      "homepage": "https://heyapi.dev/",
+      "description": "📃 TypeScript definitions for OpenAPI and JSON Schema specifications with complete inline documentation."
+    },
+    {
+      "name": "@hey-api/types",
+      "versions": [
+        "0.1.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@hey-api+types@0.1.4\\node_modules\\@hey-api\\types"
+      ],
+      "license": "MIT",
+      "homepage": "https://heyapi.dev/",
+      "description": "Shared utility types."
+    },
+    {
       "name": "@img/colour",
       "versions": [
         "1.1.0"
@@ -439,6 +528,19 @@
       "description": "Resolve a URI relative to an optional base URI"
     },
     {
+      "name": "@jridgewell/source-map",
+      "versions": [
+        "0.3.11"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@jridgewell+source-map@0.3.11\\node_modules\\@jridgewell\\source-map"
+      ],
+      "license": "MIT",
+      "author": "Justin Ridgewell",
+      "homepage": "https://github.com/jridgewell/sourcemaps/tree/main/packages/source-map",
+      "description": "Packages @jridgewell/trace-mapping and @jridgewell/gen-mapping into the familiar source-map API"
+    },
+    {
       "name": "@jridgewell/sourcemap-codec",
       "versions": [
         "1.6.0"
@@ -465,6 +567,45 @@
       "description": "Trace the original position through a source map"
     },
     {
+      "name": "@jsdevtools/ono",
+      "versions": [
+        "7.1.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@jsdevtools+ono@7.1.3\\node_modules\\@jsdevtools\\ono"
+      ],
+      "license": "MIT",
+      "author": "James Messinger",
+      "homepage": "https://jstools.dev/ono",
+      "description": "Throw better errors."
+    },
+    {
+      "name": "@lukeed/ms",
+      "versions": [
+        "2.0.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@lukeed+ms@2.0.2\\node_modules\\@lukeed\\ms"
+      ],
+      "license": "MIT",
+      "author": "Luke Edwards",
+      "homepage": "https://github.com/lukeed/ms#readme",
+      "description": "A tiny (414B) and fast utility to convert milliseconds to and from strings."
+    },
+    {
+      "name": "@mdx-js/react",
+      "versions": [
+        "3.1.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@mdx-js+react@3.1.1_@types+react@19.2.18_react@19.2.8\\node_modules\\@mdx-js\\react"
+      ],
+      "license": "MIT",
+      "author": "John Otander",
+      "homepage": "https://mdxjs.com",
+      "description": "React context for MDX"
+    },
+    {
       "name": "@next/env",
       "versions": [
         "16.3.3"
@@ -483,7 +624,7 @@
         "16.3.3"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@next+eslint-plugin-next@16_ccd60b61e4794f1b70520abef5f26369\\node_modules\\@next\\eslint-plugin-next"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@next+eslint-plugin-next@16_2a0aa7d993c2ee306bb43df9bb805704\\node_modules\\@next\\eslint-plugin-next"
       ],
       "license": "MIT",
       "homepage": "https://github.com/vercel/next.js#readme",
@@ -548,17 +689,44 @@
       "homepage": "https://github.com/SukkaW/nolyfill#readme"
     },
     {
+      "name": "@oxc-parser/binding-win32-x64-msvc",
+      "versions": [
+        "0.127.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@oxc-parser+binding-win32-x64-msvc@0.127.0\\node_modules\\@oxc-parser\\binding-win32-x64-msvc"
+      ],
+      "license": "MIT",
+      "author": "Boshen and oxc contributors",
+      "homepage": "https://oxc.rs/docs/guide/usage/parser",
+      "description": "Oxc Parser Node API"
+    },
+    {
       "name": "@oxc-project/types",
       "versions": [
+        "0.127.0",
         "0.147.0"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@oxc-project+types@0.127.0\\node_modules\\@oxc-project\\types",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@oxc-project+types@0.147.0\\node_modules\\@oxc-project\\types"
       ],
       "license": "MIT",
       "author": "Boshen and oxc contributors",
       "homepage": "https://oxc.rs",
       "description": "Types for Oxc AST nodes"
+    },
+    {
+      "name": "@oxc-resolver/binding-win32-x64-msvc",
+      "versions": [
+        "11.21.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@oxc-resolver+binding-win32-x64-msvc@11.21.2\\node_modules\\@oxc-resolver\\binding-win32-x64-msvc"
+      ],
+      "license": "MIT",
+      "homepage": "https://oxc.rs",
+      "description": "Oxc Resolver Node API"
     },
     {
       "name": "@rolldown/binding-win32-x64-msvc",
@@ -609,6 +777,166 @@
       "description": "A family of specs for interoperable TypeScript"
     },
     {
+      "name": "@storybook/addon-a11y",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+addon-a11y@10.5._3208822ba0817596679b5baeca10b658\\node_modules\\@storybook\\addon-a11y"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/storybookjs/storybook/tree/next/code/addons/a11y",
+      "description": "Storybook Addon A11y: Test UI component compliance with WCAG web accessibility standards"
+    },
+    {
+      "name": "@storybook/addon-docs",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+addon-docs@10.5._3226932aabf1ea7710e358726d503111\\node_modules\\@storybook\\addon-docs"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/storybookjs/storybook/tree/next/code/addons/docs",
+      "description": "Storybook Docs: Document UI components automatically with stories and MDX"
+    },
+    {
+      "name": "@storybook/addon-webpack5-compiler-swc",
+      "versions": [
+        "4.0.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+addon-webpack5-c_2ff388821a41084caca56528a68ee7fa\\node_modules\\@storybook\\addon-webpack5-compiler-swc"
+      ],
+      "license": "MIT",
+      "author": "Storybook Bot",
+      "homepage": "https://github.com/storybookjs/addon-webpack5-compiler-swc#readme",
+      "description": "Adds SWC as a Webpack5 compiler to Storybook"
+    },
+    {
+      "name": "@storybook/builder-webpack5",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+builder-webpack5_8c32a203ea5d98427c13691bc784e789\\node_modules\\@storybook\\builder-webpack5"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/storybookjs/storybook/tree/next/code/builders/builder-webpack5",
+      "description": "A Storybook builder to dev and build with Webpack"
+    },
+    {
+      "name": "@storybook/core-webpack",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+core-webpack@10._8d019faa59241f296f975bb965cd6092\\node_modules\\@storybook\\core-webpack"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/storybookjs/storybook/tree/next/code/lib/core-webpack",
+      "description": "Storybook framework-agnostic API"
+    },
+    {
+      "name": "@storybook/csf-plugin",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+csf-plugin@10.5._bd43f2a284a91c16922baa254c9f7b21\\node_modules\\@storybook\\csf-plugin"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/storybookjs/storybook/tree/next/code/lib/csf-plugin",
+      "description": "Enrich CSF files via static analysis"
+    },
+    {
+      "name": "@storybook/global",
+      "versions": [
+        "5.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+global@5.0.0\\node_modules\\@storybook\\global"
+      ],
+      "license": "MIT",
+      "author": "Norbert",
+      "homepage": "https://github.com/storybookjs/global",
+      "description": "Require global variables"
+    },
+    {
+      "name": "@storybook/icons",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+icons@2.1.0_react@19.2.8\\node_modules\\@storybook\\icons"
+      ],
+      "license": "MIT",
+      "author": "cdedreuille",
+      "homepage": "https://github.com/storybookjs/icons#readme",
+      "description": "Icon library from the Storybook team"
+    },
+    {
+      "name": "@storybook/preset-react-webpack",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+preset-react-web_89c062ecd98b615078d06f1fd02f1be5\\node_modules\\@storybook\\preset-react-webpack"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/storybookjs/storybook/tree/next/code/presets/react-webpack",
+      "description": "Storybook for React: Develop React Component in isolation with Hot Reloading"
+    },
+    {
+      "name": "@storybook/react",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+react@10.5.10_@t_d3dd1d4b973d12ca173526f07365b928\\node_modules\\@storybook\\react"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/storybookjs/storybook/tree/next/code/renderers/react",
+      "description": "Storybook React renderer"
+    },
+    {
+      "name": "@storybook/react-docgen-typescript-plugin",
+      "versions": [
+        "1.0.6--canary.9.0c3f3b7.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+react-docgen-typ_d21a57d1fe37bb0e7c55bb9dcb2cbedc\\node_modules\\@storybook\\react-docgen-typescript-plugin"
+      ],
+      "license": "MIT",
+      "author": "Andrew Lisowski",
+      "homepage": "https://github.com/hipstersmoothie/react-docgen-typescript-plugin#readme",
+      "description": "A webpack plugin to inject react typescript docgen information."
+    },
+    {
+      "name": "@storybook/react-dom-shim",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+react-dom-shim@1_bde1a20e2e25901eeda827362ad57cd7\\node_modules\\@storybook\\react-dom-shim"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/storybookjs/storybook/tree/next/code/lib/react-dom-shim",
+      "description": ""
+    },
+    {
+      "name": "@storybook/react-webpack5",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@storybook+react-webpack5@1_d66e5b4a690f55088ed6dd3cabd80298\\node_modules\\@storybook\\react-webpack5"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/storybookjs/storybook/tree/next/code/frameworks/react-webpack5",
+      "description": "Storybook for React and Webpack: Develop, document, and test UI components in isolation"
+    },
+    {
       "name": "@testing-library/dom",
       "versions": [
         "10.4.1"
@@ -624,10 +952,12 @@
     {
       "name": "@testing-library/jest-dom",
       "versions": [
+        "6.9.1",
         "7.0.1"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@testing-library+jest-dom@7_57d5511b57db5e8ae9c044a169ebe9a2\\node_modules\\@testing-library\\jest-dom"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@testing-library+jest-dom@6.9.1\\node_modules\\@testing-library\\jest-dom",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@testing-library+jest-dom@7_b3d531f630ae01ea3878366f96e87e97\\node_modules\\@testing-library\\jest-dom"
       ],
       "license": "MIT",
       "author": "Ernesto Garcia",
@@ -648,6 +978,19 @@
       "description": "Simple and complete React DOM testing utilities that encourage good testing practices."
     },
     {
+      "name": "@testing-library/user-event",
+      "versions": [
+        "14.6.6"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@testing-library+user-event_4dd1c1234979e0b78421c3c944062330\\node_modules\\@testing-library\\user-event"
+      ],
+      "license": "MIT",
+      "author": "Giorgio Polvara",
+      "homepage": "https://github.com/testing-library/user-event#readme",
+      "description": "Fire events the same way the user does"
+    },
+    {
       "name": "@types/aria-query",
       "versions": [
         "5.0.4"
@@ -658,6 +1001,54 @@
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/aria-query",
       "description": "TypeScript definitions for aria-query"
+    },
+    {
+      "name": "@types/babel__core",
+      "versions": [
+        "7.20.5"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@types+babel__core@7.20.5\\node_modules\\@types\\babel__core"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__core",
+      "description": "TypeScript definitions for @babel/core"
+    },
+    {
+      "name": "@types/babel__generator",
+      "versions": [
+        "7.27.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@types+babel__generator@7.27.0\\node_modules\\@types\\babel__generator"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__generator",
+      "description": "TypeScript definitions for @babel/generator"
+    },
+    {
+      "name": "@types/babel__template",
+      "versions": [
+        "7.4.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@types+babel__template@7.4.4\\node_modules\\@types\\babel__template"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__template",
+      "description": "TypeScript definitions for @babel/template"
+    },
+    {
+      "name": "@types/babel__traverse",
+      "versions": [
+        "7.28.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@types+babel__traverse@7.28.0\\node_modules\\@types\\babel__traverse"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/babel__traverse",
+      "description": "TypeScript definitions for @babel/traverse"
     },
     {
       "name": "@types/chai",
@@ -684,6 +1075,18 @@
       "description": "TypeScript definitions for deep-eql"
     },
     {
+      "name": "@types/doctrine",
+      "versions": [
+        "0.0.9"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@types+doctrine@0.0.9\\node_modules\\@types\\doctrine"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/doctrine",
+      "description": "TypeScript definitions for doctrine"
+    },
+    {
       "name": "@types/estree",
       "versions": [
         "1.0.9"
@@ -694,6 +1097,18 @@
       "license": "MIT",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/estree",
       "description": "TypeScript definitions for estree"
+    },
+    {
+      "name": "@types/html-minifier-terser",
+      "versions": [
+        "6.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@types+html-minifier-terser@6.1.0\\node_modules\\@types\\html-minifier-terser"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/html-minifier-terser",
+      "description": "TypeScript definitions for html-minifier-terser"
     },
     {
       "name": "@types/json-schema",
@@ -719,6 +1134,18 @@
       "author": "Jason Swearingen",
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped#readme",
       "description": "TypeScript definitions for JSON5"
+    },
+    {
+      "name": "@types/mdx",
+      "versions": [
+        "2.0.14"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@types+mdx@2.0.14\\node_modules\\@types\\mdx"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/mdx",
+      "description": "TypeScript definitions for mdx"
     },
     {
       "name": "@types/node",
@@ -757,12 +1184,36 @@
       "description": "TypeScript definitions for react-dom"
     },
     {
+      "name": "@types/resolve",
+      "versions": [
+        "1.20.6"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@types+resolve@1.20.6\\node_modules\\@types\\resolve"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/resolve",
+      "description": "TypeScript definitions for resolve"
+    },
+    {
+      "name": "@types/semver",
+      "versions": [
+        "7.8.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@types+semver@7.8.0\\node_modules\\@types\\semver"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/semver",
+      "description": "TypeScript definitions for semver"
+    },
+    {
       "name": "@typescript-eslint/eslint-plugin",
       "versions": [
         "8.68.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+eslint-p_08b7536320e6cbc5bebcbfb40fd16409\\node_modules\\@typescript-eslint\\eslint-plugin"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+eslint-p_f47e9ed3102012c89bf0f9c5257c8b8d\\node_modules\\@typescript-eslint\\eslint-plugin"
       ],
       "license": "MIT",
       "homepage": "https://typescript-eslint.io/packages/eslint-plugin",
@@ -774,7 +1225,7 @@
         "8.68.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+parser@8_37f82227e681c8c17d9954086fd11eda\\node_modules\\@typescript-eslint\\parser"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+parser@8_b1666238f12e05658716f561c9a1504b\\node_modules\\@typescript-eslint\\parser"
       ],
       "license": "MIT",
       "homepage": "https://typescript-eslint.io/packages/parser",
@@ -786,7 +1237,7 @@
         "8.68.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+project-_2b88c5fdf40066871316e92a1fe2e41a\\node_modules\\@typescript-eslint\\project-service"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+project-_1eaaa791b8ce8df9a79bee8fb6c176ad\\node_modules\\@typescript-eslint\\project-service"
       ],
       "license": "MIT",
       "homepage": "https://typescript-eslint.io",
@@ -822,7 +1273,7 @@
         "8.68.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+type-uti_7b6fc44810bbca1473757caaa1830e84\\node_modules\\@typescript-eslint\\type-utils"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+type-uti_a1964a69b0657289b38851d8c253b173\\node_modules\\@typescript-eslint\\type-utils"
       ],
       "license": "MIT",
       "homepage": "https://typescript-eslint.io",
@@ -846,7 +1297,7 @@
         "8.68.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+typescri_b24ddde1b80626ff6dbb07488cd0d7ac\\node_modules\\@typescript-eslint\\typescript-estree"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+typescri_81b35978ec9dae1fe1fe76dfcbb557e3\\node_modules\\@typescript-eslint\\typescript-estree"
       ],
       "license": "MIT",
       "homepage": "https://typescript-eslint.io/packages/typescript-estree",
@@ -858,7 +1309,7 @@
         "8.68.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+utils@8._5e9b22e9c5eec2e51ce4a3f6b3b4d25c\\node_modules\\@typescript-eslint\\utils"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@typescript-eslint+utils@8._ea1fdd9e745bd36c7e939a45df65fe3a\\node_modules\\@typescript-eslint\\utils"
       ],
       "license": "MIT",
       "homepage": "https://typescript-eslint.io/packages/utils",
@@ -891,9 +1342,11 @@
     {
       "name": "@vitest/expect",
       "versions": [
+        "3.2.4",
         "4.1.11"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+expect@3.2.4\\node_modules\\@vitest\\expect",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+expect@4.1.11\\node_modules\\@vitest\\expect"
       ],
       "license": "MIT",
@@ -906,7 +1359,7 @@
         "4.1.11"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+mocker@4.1.11_vite@8.2.2_@types+node@24.13.3_\\node_modules\\@vitest\\mocker"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+mocker@4.1.11_vite@_6e80e0a137b72a0318306c2420e57ff4\\node_modules\\@vitest\\mocker"
       ],
       "license": "MIT",
       "homepage": "https://github.com/vitest-dev/vitest/tree/main/packages/mocker",
@@ -915,9 +1368,11 @@
     {
       "name": "@vitest/pretty-format",
       "versions": [
+        "3.2.4",
         "4.1.11"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+pretty-format@3.2.4\\node_modules\\@vitest\\pretty-format",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+pretty-format@4.1.11\\node_modules\\@vitest\\pretty-format"
       ],
       "license": "MIT",
@@ -951,9 +1406,11 @@
     {
       "name": "@vitest/spy",
       "versions": [
+        "3.2.4",
         "4.1.11"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+spy@3.2.4\\node_modules\\@vitest\\spy",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+spy@4.1.11\\node_modules\\@vitest\\spy"
       ],
       "license": "MIT",
@@ -963,14 +1420,210 @@
     {
       "name": "@vitest/utils",
       "versions": [
+        "3.2.4",
         "4.1.11"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+utils@3.2.4\\node_modules\\@vitest\\utils",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@vitest+utils@4.1.11\\node_modules\\@vitest\\utils"
       ],
       "license": "MIT",
       "homepage": "https://github.com/vitest-dev/vitest/tree/main/packages/utils",
       "description": "Shared Vitest utility functions"
+    },
+    {
+      "name": "@webassemblyjs/ast",
+      "versions": [
+        "1.14.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+ast@1.14.1\\node_modules\\@webassemblyjs\\ast"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "AST utils for webassemblyjs"
+    },
+    {
+      "name": "@webassemblyjs/floating-point-hex-parser",
+      "versions": [
+        "1.13.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+floating-point-hex-parser@1.13.2\\node_modules\\@webassemblyjs\\floating-point-hex-parser"
+      ],
+      "license": "MIT",
+      "author": "Mauro Bringolf",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "A function to parse floating point hexadecimal strings as defined by the WebAssembly specification"
+    },
+    {
+      "name": "@webassemblyjs/helper-api-error",
+      "versions": [
+        "1.13.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+helper-api-error@1.13.2\\node_modules\\@webassemblyjs\\helper-api-error"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "Common API errors"
+    },
+    {
+      "name": "@webassemblyjs/helper-buffer",
+      "versions": [
+        "1.14.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+helper-buffer@1.14.1\\node_modules\\@webassemblyjs\\helper-buffer"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "Buffer manipulation utility"
+    },
+    {
+      "name": "@webassemblyjs/helper-numbers",
+      "versions": [
+        "1.13.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+helper-numbers@1.13.2\\node_modules\\@webassemblyjs\\helper-numbers"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "Number parsing utility"
+    },
+    {
+      "name": "@webassemblyjs/helper-wasm-bytecode",
+      "versions": [
+        "1.13.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+helper-wasm-bytecode@1.13.2\\node_modules\\@webassemblyjs\\helper-wasm-bytecode"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "WASM's Bytecode constants"
+    },
+    {
+      "name": "@webassemblyjs/helper-wasm-section",
+      "versions": [
+        "1.14.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+helper-wasm-section@1.14.1\\node_modules\\@webassemblyjs\\helper-wasm-section"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": ""
+    },
+    {
+      "name": "@webassemblyjs/ieee754",
+      "versions": [
+        "1.13.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+ieee754@1.13.2\\node_modules\\@webassemblyjs\\ieee754"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "IEEE754 decoder and encoder"
+    },
+    {
+      "name": "@webassemblyjs/utf8",
+      "versions": [
+        "1.13.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+utf8@1.13.2\\node_modules\\@webassemblyjs\\utf8"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "UTF8 encoder/decoder for WASM"
+    },
+    {
+      "name": "@webassemblyjs/wasm-edit",
+      "versions": [
+        "1.14.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+wasm-edit@1.14.1\\node_modules\\@webassemblyjs\\wasm-edit"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": ""
+    },
+    {
+      "name": "@webassemblyjs/wasm-gen",
+      "versions": [
+        "1.14.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+wasm-gen@1.14.1\\node_modules\\@webassemblyjs\\wasm-gen"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "WebAssembly binary format printer"
+    },
+    {
+      "name": "@webassemblyjs/wasm-opt",
+      "versions": [
+        "1.14.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+wasm-opt@1.14.1\\node_modules\\@webassemblyjs\\wasm-opt"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": ""
+    },
+    {
+      "name": "@webassemblyjs/wasm-parser",
+      "versions": [
+        "1.14.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+wasm-parser@1.14.1\\node_modules\\@webassemblyjs\\wasm-parser"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "WebAssembly binary format parser"
+    },
+    {
+      "name": "@webassemblyjs/wast-printer",
+      "versions": [
+        "1.14.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+wast-printer@1.14.1\\node_modules\\@webassemblyjs\\wast-printer"
+      ],
+      "license": "MIT",
+      "author": "Sven Sauleau",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "WebAssembly text format printer"
+    },
+    {
+      "name": "@webcontainer/env",
+      "versions": [
+        "1.1.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webcontainer+env@1.1.1\\node_modules\\@webcontainer\\env"
+      ],
+      "license": "MIT",
+      "author": "StackBlitz Inc.",
+      "homepage": "https://github.com/stackblitz/webcontainer-core",
+      "description": "Set of environment utilities for WebContainers"
     },
     {
       "name": "acorn",
@@ -999,15 +1652,58 @@
     {
       "name": "ajv",
       "versions": [
-        "6.15.0"
+        "6.15.0",
+        "8.20.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ajv@6.15.0\\node_modules\\ajv"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ajv@6.15.0\\node_modules\\ajv",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ajv@8.20.0\\node_modules\\ajv"
       ],
       "license": "MIT",
       "author": "Evgeny Poberezkin",
-      "homepage": "https://github.com/ajv-validator/ajv",
+      "homepage": "https://ajv.js.org",
       "description": "Another JSON Schema Validator"
+    },
+    {
+      "name": "ajv-formats",
+      "versions": [
+        "2.1.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ajv-formats@2.1.1_ajv@8.20.0\\node_modules\\ajv-formats"
+      ],
+      "license": "MIT",
+      "author": "Evgeny Poberezkin",
+      "homepage": "https://github.com/ajv-validator/ajv-formats#readme",
+      "description": "Format validation for Ajv v7+"
+    },
+    {
+      "name": "ajv-keywords",
+      "versions": [
+        "3.5.2",
+        "5.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ajv-keywords@3.5.2_ajv@6.15.0\\node_modules\\ajv-keywords",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ajv-keywords@5.1.0_ajv@8.20.0\\node_modules\\ajv-keywords"
+      ],
+      "license": "MIT",
+      "author": "Evgeny Poberezkin",
+      "homepage": "https://github.com/epoberezkin/ajv-keywords#readme",
+      "description": "Additional JSON-Schema keywords for Ajv JSON validator"
+    },
+    {
+      "name": "ansi-colors",
+      "versions": [
+        "4.1.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ansi-colors@4.1.3\\node_modules\\ansi-colors"
+      ],
+      "license": "MIT",
+      "author": "Brian Woodward",
+      "homepage": "https://github.com/doowb/ansi-colors",
+      "description": "Easily add ANSI colors to your text and symbols in the terminal. A faster drop-in replacement for chalk, kleur and turbocolor (without the dependencies and rendering bugs)."
     },
     {
       "name": "ansi-regex",
@@ -1155,6 +1851,19 @@
       "description": "Error constructor for test and validation frameworks that implements standardized AssertionError specification."
     },
     {
+      "name": "ast-types",
+      "versions": [
+        "0.16.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ast-types@0.16.3\\node_modules\\ast-types"
+      ],
+      "license": "MIT",
+      "author": "Ben Newman",
+      "homepage": "https://github.com/benjamn/ast-types",
+      "description": "Esprima-compatible implementation of the Mozilla JS Parser API"
+    },
+    {
       "name": "ast-types-flow",
       "versions": [
         "0.0.8"
@@ -1261,6 +1970,42 @@
       "description": "Share target browsers between different front-end tools, like Autoprefixer, Stylelint and babel-env-preset"
     },
     {
+      "name": "buffer-from",
+      "versions": [
+        "1.1.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\buffer-from@1.1.2\\node_modules\\buffer-from"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/LinusU/buffer-from#readme"
+    },
+    {
+      "name": "bundle-name",
+      "versions": [
+        "4.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\bundle-name@4.1.0\\node_modules\\bundle-name"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/bundle-name#readme",
+      "description": "Get bundle name from a bundle identifier (macOS): `com.apple.Safari` → `Safari`"
+    },
+    {
+      "name": "c12",
+      "versions": [
+        "3.3.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\c12@3.3.4\\node_modules\\c12"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/c12#readme",
+      "description": "Smart Config Loader"
+    },
+    {
       "name": "call-bind",
       "versions": [
         "1.0.9"
@@ -1313,11 +2058,39 @@
       "description": "Get callsites from the V8 stack trace API"
     },
     {
+      "name": "camel-case",
+      "versions": [
+        "4.1.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\camel-case@4.1.2\\node_modules\\camel-case"
+      ],
+      "license": "MIT",
+      "author": "Blake Embrey",
+      "homepage": "https://github.com/blakeembrey/change-case/tree/master/packages/camel-case#readme",
+      "description": "Transform into a string with the separator denoted by the next word capitalized"
+    },
+    {
+      "name": "case-sensitive-paths-webpack-plugin",
+      "versions": [
+        "2.4.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\case-sensitive-paths-webpack-plugin@2.4.0\\node_modules\\case-sensitive-paths-webpack-plugin"
+      ],
+      "license": "MIT",
+      "author": "Michael Pratt",
+      "homepage": "https://github.com/Urthen/case-sensitive-paths-webpack-plugin#readme",
+      "description": "Enforces module path case sensitivity in Webpack"
+    },
+    {
       "name": "chai",
       "versions": [
+        "5.3.3",
         "6.2.2"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\chai@5.3.3\\node_modules\\chai",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\chai@6.2.2\\node_modules\\chai"
       ],
       "license": "MIT",
@@ -1336,6 +2109,73 @@
       "license": "MIT",
       "homepage": "https://github.com/chalk/chalk#readme",
       "description": "Terminal string styling done right"
+    },
+    {
+      "name": "check-error",
+      "versions": [
+        "2.1.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\check-error@2.1.3\\node_modules\\check-error"
+      ],
+      "license": "MIT",
+      "author": "Jake Luer",
+      "homepage": "https://github.com/chaijs/check-error#readme",
+      "description": "Error comparison and information related utility for node and the browser"
+    },
+    {
+      "name": "chokidar",
+      "versions": [
+        "4.0.3",
+        "5.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\chokidar@4.0.3\\node_modules\\chokidar",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\chokidar@5.0.0\\node_modules\\chokidar"
+      ],
+      "license": "MIT",
+      "author": "Paul Miller",
+      "homepage": "https://github.com/paulmillr/chokidar",
+      "description": "Minimal and efficient cross-platform file watching library"
+    },
+    {
+      "name": "chrome-trace-event",
+      "versions": [
+        "1.0.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\chrome-trace-event@1.0.4\\node_modules\\chrome-trace-event"
+      ],
+      "license": "MIT",
+      "author": "Trent Mick, Sam Saccone",
+      "homepage": "https://github.com/samccone/chrome-trace-event#readme",
+      "description": "A library to create a trace of your node app per Google's Trace Event format."
+    },
+    {
+      "name": "cjs-module-lexer",
+      "versions": [
+        "1.4.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\cjs-module-lexer@1.4.3\\node_modules\\cjs-module-lexer"
+      ],
+      "license": "MIT",
+      "author": "Guy Bedford",
+      "homepage": "https://github.com/nodejs/cjs-module-lexer#readme",
+      "description": "Lexes CommonJS modules, returning their named exports metadata"
+    },
+    {
+      "name": "clean-css",
+      "versions": [
+        "5.3.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\clean-css@5.3.3\\node_modules\\clean-css"
+      ],
+      "license": "MIT",
+      "author": "Jakub Pawlowicz",
+      "homepage": "https://github.com/clean-css/clean-css",
+      "description": "A well-tested CSS minifier"
     },
     {
       "name": "client-only",
@@ -1376,6 +2216,49 @@
       "description": "A list of color names and its values"
     },
     {
+      "name": "colorette",
+      "versions": [
+        "2.0.20"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\colorette@2.0.20\\node_modules\\colorette"
+      ],
+      "license": "MIT",
+      "author": "Jorge Bucaran",
+      "homepage": "https://github.com/jorgebucaran/colorette#readme",
+      "description": "🌈Easily set your terminal text color & styles."
+    },
+    {
+      "name": "commander",
+      "versions": [
+        "2.20.3",
+        "8.3.0",
+        "15.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\commander@2.20.3\\node_modules\\commander",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\commander@8.3.0\\node_modules\\commander",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\commander@15.0.0\\node_modules\\commander"
+      ],
+      "license": "MIT",
+      "author": "TJ Holowaychuk",
+      "homepage": "https://github.com/tj/commander.js#readme",
+      "description": "the complete solution for node.js command-line programs"
+    },
+    {
+      "name": "commondir",
+      "versions": [
+        "1.0.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\commondir@1.0.1\\node_modules\\commondir"
+      ],
+      "license": "MIT",
+      "author": "James Halliday",
+      "homepage": "https://github.com/substack/node-commondir#readme",
+      "description": "compute the closest common parent for file paths"
+    },
+    {
       "name": "concat-map",
       "versions": [
         "0.0.1"
@@ -1387,6 +2270,18 @@
       "author": "James Halliday",
       "homepage": "https://github.com/substack/node-concat-map#readme",
       "description": "concatenative mapdashery"
+    },
+    {
+      "name": "confbox",
+      "versions": [
+        "0.2.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\confbox@0.2.4\\node_modules\\confbox"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/confbox#readme",
+      "description": "Compact YAML, TOML, JSONC, JSON5 and INI parser and serializer"
     },
     {
       "name": "convert-source-map",
@@ -1402,6 +2297,19 @@
       "description": "Converts a source-map from/to  different formats and allows adding/changing properties."
     },
     {
+      "name": "cosmiconfig",
+      "versions": [
+        "8.3.6"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\cosmiconfig@8.3.6_typescript@6.0.3\\node_modules\\cosmiconfig"
+      ],
+      "license": "MIT",
+      "author": "Daniel Fischer",
+      "homepage": "https://github.com/cosmiconfig/cosmiconfig#readme",
+      "description": "Find and load configuration from a package.json property, rc file, TypeScript module, and more!"
+    },
+    {
       "name": "cross-spawn",
       "versions": [
         "7.0.6"
@@ -1413,6 +2321,19 @@
       "author": "André Cruz",
       "homepage": "https://github.com/moxystudio/node-cross-spawn",
       "description": "Cross platform child_process#spawn and child_process#spawnSync"
+    },
+    {
+      "name": "css-loader",
+      "versions": [
+        "7.1.5"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\css-loader@7.1.5_webpack@5._1dd17c8787cb953108036eb91f834a5d\\node_modules\\css-loader"
+      ],
+      "license": "MIT",
+      "author": "Tobias Koppers @sokra",
+      "homepage": "https://github.com/webpack/css-loader",
+      "description": "css loader module for webpack"
     },
     {
       "name": "css-tree",
@@ -1439,6 +2360,19 @@
       "author": "Mathias Bynens",
       "homepage": "https://mths.be/cssescape",
       "description": "A robust polyfill for the `CSS.escape` utility method as defined in CSSOM."
+    },
+    {
+      "name": "cssesc",
+      "versions": [
+        "3.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\cssesc@3.0.0\\node_modules\\cssesc"
+      ],
+      "license": "MIT",
+      "author": "Mathias Bynens",
+      "homepage": "https://mths.be/cssesc",
+      "description": "A JavaScript library for escaping CSS strings and identifiers while generating the shortest possible ASCII-only output."
     },
     {
       "name": "csstype",
@@ -1512,8 +2446,8 @@
         "4.4.3"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\debug@3.2.7_supports-color@7.2.0\\node_modules\\debug",
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\debug@4.4.3_supports-color@7.2.0\\node_modules\\debug"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\debug@3.2.7_supports-color@10.2.2\\node_modules\\debug",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\debug@4.4.3_supports-color@10.2.2\\node_modules\\debug"
       ],
       "license": "MIT",
       "author": "Josh Junon",
@@ -1534,6 +2468,32 @@
       "description": "An arbitrary-precision Decimal type for JavaScript."
     },
     {
+      "name": "dedent",
+      "versions": [
+        "0.7.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\dedent@0.7.0\\node_modules\\dedent"
+      ],
+      "license": "MIT",
+      "author": "Desmond Brand",
+      "homepage": "https://github.com/dmnd/dedent",
+      "description": "An ES6 string tag that strips indentation from multi-line strings"
+    },
+    {
+      "name": "deep-eql",
+      "versions": [
+        "5.0.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\deep-eql@5.0.2\\node_modules\\deep-eql"
+      ],
+      "license": "MIT",
+      "author": "Jake Luer",
+      "homepage": "https://github.com/chaijs/deep-eql#readme",
+      "description": "Improved deep equality testing for Node.js and the browser."
+    },
+    {
       "name": "deep-is",
       "versions": [
         "0.1.4"
@@ -1545,6 +2505,44 @@
       "author": "Thorsten Lorenz",
       "homepage": "https://github.com/thlorenz/deep-is#readme",
       "description": "node's assert.deepEqual algorithm except for NaN being equal to NaN"
+    },
+    {
+      "name": "deepmerge",
+      "versions": [
+        "4.3.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\deepmerge@4.3.1\\node_modules\\deepmerge"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/TehShrike/deepmerge",
+      "description": "A library for deep (recursive) merging of Javascript objects"
+    },
+    {
+      "name": "default-browser",
+      "versions": [
+        "5.5.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\default-browser@5.5.1\\node_modules\\default-browser"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/default-browser#readme",
+      "description": "Get the default browser"
+    },
+    {
+      "name": "default-browser-id",
+      "versions": [
+        "5.0.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\default-browser-id@5.0.1\\node_modules\\default-browser-id"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/default-browser-id#readme",
+      "description": "Get the bundle identifier of the default browser (macOS). Example: com.apple.Safari"
     },
     {
       "name": "define-data-property",
@@ -1560,6 +2558,19 @@
       "description": "Define a data property on an object. Will fall back to assignment in an engine without descriptors."
     },
     {
+      "name": "define-lazy-prop",
+      "versions": [
+        "3.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\define-lazy-prop@3.0.0\\node_modules\\define-lazy-prop"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/define-lazy-prop#readme",
+      "description": "Define a lazily evaluated property on an object"
+    },
+    {
       "name": "define-properties",
       "versions": [
         "1.2.1"
@@ -1571,6 +2582,18 @@
       "author": "Jordan Harband",
       "homepage": "https://github.com/ljharb/define-properties#readme",
       "description": "Define multiple non-enumerable properties at once. Uses `Object.defineProperty` when available; falls back to standard assignment in older engines."
+    },
+    {
+      "name": "defu",
+      "versions": [
+        "6.1.7"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\defu@6.1.7\\node_modules\\defu"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/defu#readme",
+      "description": "Recursively assign default properties. Lightweight and Fast!"
     },
     {
       "name": "dequal",
@@ -1586,6 +2609,18 @@
       "description": "A tiny (304B to 489B) utility for check for deep equality"
     },
     {
+      "name": "destr",
+      "versions": [
+        "2.0.5"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\destr@2.0.5\\node_modules\\destr"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/destr#readme",
+      "description": "A faster, secure and convenient alternative for JSON.parse"
+    },
+    {
       "name": "dom-accessibility-api",
       "versions": [
         "0.5.16",
@@ -1598,6 +2633,45 @@
       "license": "MIT",
       "homepage": "https://github.com/eps1lon/dom-accessibility-api#readme",
       "description": "Implements https://w3c.github.io/accname/"
+    },
+    {
+      "name": "dom-converter",
+      "versions": [
+        "0.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\dom-converter@0.2.0\\node_modules\\dom-converter"
+      ],
+      "license": "MIT",
+      "author": "Aria Minaei",
+      "homepage": "https://github.com/AriaMinaei/dom-converter#readme",
+      "description": "converts bare objects to DOM objects or xml representations"
+    },
+    {
+      "name": "dom-serializer",
+      "versions": [
+        "1.4.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\dom-serializer@1.4.1\\node_modules\\dom-serializer"
+      ],
+      "license": "MIT",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/cheeriojs/dom-renderer#readme",
+      "description": "render domhandler DOM nodes to a string"
+    },
+    {
+      "name": "dot-case",
+      "versions": [
+        "3.0.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\dot-case@3.0.4\\node_modules\\dot-case"
+      ],
+      "license": "MIT",
+      "author": "Blake Embrey",
+      "homepage": "https://github.com/blakeembrey/change-case/tree/master/packages/dot-case#readme",
+      "description": "Transform into a lower case string with a period between words"
     },
     {
       "name": "dunder-proto",
@@ -1624,6 +2698,44 @@
       "author": "Mathias Bynens",
       "homepage": "https://mths.be/emoji-regex",
       "description": "A regular expression to match all Emoji-only symbols as per the Unicode Standard."
+    },
+    {
+      "name": "endent",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\endent@2.1.0\\node_modules\\endent"
+      ],
+      "license": "MIT",
+      "author": "zhouhancheng",
+      "homepage": "https://github.com/ZhouHansen/endent#readme",
+      "description": "➡️ An ES6 string tag that makes indentation right"
+    },
+    {
+      "name": "enhanced-resolve",
+      "versions": [
+        "5.24.5"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\enhanced-resolve@5.24.5\\node_modules\\enhanced-resolve"
+      ],
+      "license": "MIT",
+      "author": "Tobias Koppers @sokra",
+      "homepage": "https://github.com/webpack/enhanced-resolve#readme",
+      "description": "Offers a async require.resolve function. It's highly configurable."
+    },
+    {
+      "name": "error-ex",
+      "versions": [
+        "1.3.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\error-ex@1.3.4\\node_modules\\error-ex"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/qix-/node-error-ex#readme",
+      "description": "Easy error subclassing and stack customization"
     },
     {
       "name": "es-abstract",
@@ -1693,9 +2805,11 @@
     {
       "name": "es-module-lexer",
       "versions": [
+        "1.7.0",
         "2.3.2"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\es-module-lexer@1.7.0\\node_modules\\es-module-lexer",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\es-module-lexer@2.3.2\\node_modules\\es-module-lexer"
       ],
       "license": "MIT",
@@ -1756,6 +2870,18 @@
       "description": "ECMAScript “ToPrimitive” algorithm. Provides ES5 and ES2015 versions."
     },
     {
+      "name": "esbuild",
+      "versions": [
+        "0.28.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\esbuild@0.28.2\\node_modules\\esbuild"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/evanw/esbuild#readme",
+      "description": "An extremely fast JavaScript and CSS bundler and minifier."
+    },
+    {
       "name": "escalade",
       "versions": [
         "3.2.0"
@@ -1787,7 +2913,7 @@
         "9.39.5"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint@9.39.5_supports-color@7.2.0\\node_modules\\eslint"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint@9.39.5_jiti@2.7.0_supports-color@7.2.0\\node_modules\\eslint"
       ],
       "license": "MIT",
       "author": "Nicholas C. Zakas",
@@ -1800,7 +2926,7 @@
         "16.3.3"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-config-next@16.3.3_@_1bc88cc27ac6bc31b366a3cf305733ac\\node_modules\\eslint-config-next"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-config-next@16.3.3_@_b681b28e0d3bb552046c0e0a8b225cce\\node_modules\\eslint-config-next"
       ],
       "license": "MIT",
       "homepage": "https://nextjs.org/docs/app/api-reference/config/eslint",
@@ -1812,7 +2938,7 @@
         "0.3.10"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-import-resolver-node@0.3.10_supports-color@7.2.0\\node_modules\\eslint-import-resolver-node"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-import-resolver-node@0.3.10_supports-color@10.2.2\\node_modules\\eslint-import-resolver-node"
       ],
       "license": "MIT",
       "author": "Ben Mosher",
@@ -1825,7 +2951,7 @@
         "2.14.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-module-utils@2.14.0__701e05d0748b7949a2d5dd697720cb13\\node_modules\\eslint-module-utils"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-module-utils@2.14.0__944ab770136689105be5612fe2112b08\\node_modules\\eslint-module-utils"
       ],
       "license": "MIT",
       "author": "Ben Mosher",
@@ -1838,7 +2964,7 @@
         "2.32.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-plugin-import@2.32.0_2d0db4f2f4d54735c0582a1707b23c08\\node_modules\\eslint-plugin-import"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-plugin-import@2.32.0_65f5c663534fcea8921e7cf735a3035d\\node_modules\\eslint-plugin-import"
       ],
       "license": "MIT",
       "author": "Ben Mosher",
@@ -1851,7 +2977,7 @@
         "6.10.2"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-plugin-jsx-a11y@6.10_8264d82fe99599b9f341f5c7028aa3d3\\node_modules\\eslint-plugin-jsx-a11y"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-plugin-jsx-a11y@6.10_f74d3cad85c4c0c28ccf332d5060b6ee\\node_modules\\eslint-plugin-jsx-a11y"
       ],
       "license": "MIT",
       "author": "Ethan Cohen",
@@ -1864,7 +2990,7 @@
         "7.37.5"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-plugin-react@7.37.5__e0fc1d646914512f6ad9b24b0e11c324\\node_modules\\eslint-plugin-react"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-plugin-react@7.37.5__b3d4297ae5bc7e4c265bd5ce41c0a0dd\\node_modules\\eslint-plugin-react"
       ],
       "license": "MIT",
       "author": "Yannick Croissant",
@@ -1877,7 +3003,7 @@
         "7.1.1"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-plugin-react-hooks@7_158caa993582fe971a43ecff5654ae2c\\node_modules\\eslint-plugin-react-hooks"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-plugin-react-hooks@7_b7b29b3dee5f35ac8754a79780425256\\node_modules\\eslint-plugin-react-hooks"
       ],
       "license": "MIT",
       "homepage": "https://react.dev/",
@@ -1895,6 +3021,43 @@
       "author": "Rich Harris",
       "homepage": "https://github.com/Rich-Harris/estree-walker#readme",
       "description": "Traverse an ESTree-compliant AST"
+    },
+    {
+      "name": "events",
+      "versions": [
+        "3.3.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\events@3.3.0\\node_modules\\events"
+      ],
+      "license": "MIT",
+      "author": "Irakli Gozalishvili",
+      "homepage": "https://github.com/Gozala/events#readme",
+      "description": "Node's event emitter for all engines."
+    },
+    {
+      "name": "exsolve",
+      "versions": [
+        "1.1.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\exsolve@1.1.1\\node_modules\\exsolve"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/exsolve#readme",
+      "description": "Module resolution utilities based on Node.js upstream implementation."
+    },
+    {
+      "name": "fancy-canvas",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\fancy-canvas@2.1.0\\node_modules\\fancy-canvas"
+      ],
+      "license": "MIT",
+      "author": "smakarov@tradingview.com",
+      "description": "Functionality on top of HTML canvas element, including support for HiDPI and pixel-perfect rendering"
     },
     {
       "name": "fast-deep-equal",
@@ -1921,6 +3084,19 @@
       "author": "Denis Malinochkin",
       "homepage": "https://github.com/mrmlnc/fast-glob#readme",
       "description": "It's a very fast and efficient glob library for Node.js"
+    },
+    {
+      "name": "fast-json-parse",
+      "versions": [
+        "1.0.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\fast-json-parse@1.0.3\\node_modules\\fast-json-parse"
+      ],
+      "license": "MIT",
+      "author": "Matteo Collina",
+      "homepage": "https://github.com/mcollina/fast-json-parse#readme",
+      "description": "Parse json safely and at max speed"
     },
     {
       "name": "fast-json-stable-stringify",
@@ -1988,11 +3164,25 @@
       "description": "Fill in a range of numbers or letters, optionally passing an increment or `step` to use, or create a regex-compatible range with `options.toRegex`"
     },
     {
+      "name": "find-cache-dir",
+      "versions": [
+        "3.3.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\find-cache-dir@3.3.2\\node_modules\\find-cache-dir"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/avajs/find-cache-dir#readme",
+      "description": "Finds the common standard cache directory"
+    },
+    {
       "name": "find-up",
       "versions": [
+        "4.1.0",
         "5.0.0"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\find-up@4.1.0\\node_modules\\find-up",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\find-up@5.0.0\\node_modules\\find-up"
       ],
       "license": "MIT",
@@ -2003,9 +3193,11 @@
     {
       "name": "flat-cache",
       "versions": [
+        "3.2.0",
         "4.0.1"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\flat-cache@3.2.0\\node_modules\\flat-cache",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\flat-cache@4.0.1\\node_modules\\flat-cache"
       ],
       "license": "MIT",
@@ -2025,6 +3217,32 @@
       "author": "Raynos",
       "homepage": "https://github.com/Raynos/for-each",
       "description": "A better forEach"
+    },
+    {
+      "name": "fork-ts-checker-webpack-plugin",
+      "versions": [
+        "9.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\fork-ts-checker-webpack-plu_b0af4e76e163369e15ea0ad79fbd002a\\node_modules\\fork-ts-checker-webpack-plugin"
+      ],
+      "license": "MIT",
+      "author": "Piotr Oleś",
+      "homepage": "https://github.com/TypeStrong/fork-ts-checker-webpack-plugin#readme",
+      "description": "Runs typescript type checker and linter on separate process."
+    },
+    {
+      "name": "fs-extra",
+      "versions": [
+        "10.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\fs-extra@10.1.0\\node_modules\\fs-extra"
+      ],
+      "license": "MIT",
+      "author": "JP Richardson",
+      "homepage": "https://github.com/jprichardson/node-fs-extra",
+      "description": "fs-extra contains methods that aren't included in the vanilla Node.js fs package. Such as recursive mkdir, copy, and remove."
     },
     {
       "name": "function-bind",
@@ -2133,15 +3351,29 @@
     {
       "name": "get-tsconfig",
       "versions": [
+        "4.14.0",
         "4.14.3"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\get-tsconfig@4.14.0\\node_modules\\get-tsconfig",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\get-tsconfig@4.14.3\\node_modules\\get-tsconfig"
       ],
       "license": "MIT",
       "author": "Hiroki Osame",
       "homepage": "https://github.com/privatenumber/get-tsconfig#readme",
       "description": "Find and parse the tsconfig.json file from a directory path"
+    },
+    {
+      "name": "giget",
+      "versions": [
+        "3.3.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\giget@3.3.1\\node_modules\\giget"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/giget#readme",
+      "description": "Download templates and git repositories with pleasure!"
     },
     {
       "name": "globals",
@@ -2276,6 +3508,19 @@
       "description": "A robust, ES3 compatible, \"has own property\" predicate."
     },
     {
+      "name": "he",
+      "versions": [
+        "1.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\he@1.2.0\\node_modules\\he"
+      ],
+      "license": "MIT",
+      "author": "Mathias Bynens",
+      "homepage": "https://mths.be/he",
+      "description": "A robust HTML entities encoder/decoder with full Unicode support."
+    },
+    {
       "name": "hermes-estree",
       "versions": [
         "0.25.1"
@@ -2311,6 +3556,58 @@
       "author": "Domenic Denicola",
       "homepage": "https://github.com/jsdom/html-encoding-sniffer#readme",
       "description": "Sniff the encoding from a HTML byte stream"
+    },
+    {
+      "name": "html-entities",
+      "versions": [
+        "2.6.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\html-entities@2.6.0\\node_modules\\html-entities"
+      ],
+      "license": "MIT",
+      "author": "Marat Dulin",
+      "homepage": "https://github.com/mdevils/html-entities#readme",
+      "description": "Fastest HTML entities encode/decode library."
+    },
+    {
+      "name": "html-minifier-terser",
+      "versions": [
+        "6.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\html-minifier-terser@6.1.0\\node_modules\\html-minifier-terser"
+      ],
+      "license": "MIT",
+      "author": "Daniel Ruf",
+      "homepage": "https://terser.org/html-minifier-terser/",
+      "description": "Highly configurable, well-tested, JavaScript-based HTML minifier."
+    },
+    {
+      "name": "html-webpack-plugin",
+      "versions": [
+        "5.6.8"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\html-webpack-plugin@5.6.8_w_f33fa4eb600f15ee171ceb045a3aee4a\\node_modules\\html-webpack-plugin"
+      ],
+      "license": "MIT",
+      "author": "Jan Nicklas",
+      "homepage": "https://github.com/jantimon/html-webpack-plugin",
+      "description": "Simplifies creation of HTML files to serve your webpack bundles"
+    },
+    {
+      "name": "htmlparser2",
+      "versions": [
+        "6.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\htmlparser2@6.1.0\\node_modules\\htmlparser2"
+      ],
+      "license": "MIT",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/fb55/htmlparser2#readme",
+      "description": "Fast & forgiving HTML/XML parser"
     },
     {
       "name": "ignore",
@@ -2391,6 +3688,19 @@
       "author": "Jordan Harband",
       "homepage": "https://github.com/inspect-js/is-array-buffer#readme",
       "description": "Is this value a JS ArrayBuffer?"
+    },
+    {
+      "name": "is-arrayish",
+      "versions": [
+        "0.2.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\is-arrayish@0.2.1\\node_modules\\is-arrayish"
+      ],
+      "license": "MIT",
+      "author": "Qix",
+      "homepage": "https://github.com/qix-/node-is-arrayish#readme",
+      "description": "Determines if an object can be used as an array"
     },
     {
       "name": "is-async-function",
@@ -2497,6 +3807,19 @@
       "description": "Is this value a JS Date object? This module works cross-realm/iframe, and despite ES6 @@toStringTag."
     },
     {
+      "name": "is-docker",
+      "versions": [
+        "3.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\is-docker@3.0.0\\node_modules\\is-docker"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/is-docker#readme",
+      "description": "Check if the process is running inside a Docker container"
+    },
+    {
       "name": "is-document.all",
       "versions": [
         "1.0.0"
@@ -2560,6 +3883,32 @@
       "author": "Jon Schlinkert",
       "homepage": "https://github.com/micromatch/is-glob",
       "description": "Returns `true` if the given string looks like a glob pattern or an extglob pattern. This makes it easy to create code that only uses external modules like node-glob when necessary, resulting in much faster code execution and initialization time, and a better user experience."
+    },
+    {
+      "name": "is-in-ssh",
+      "versions": [
+        "1.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\is-in-ssh@1.0.0\\node_modules\\is-in-ssh"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/is-in-ssh#readme",
+      "description": "Check if the process is running in an SSH session"
+    },
+    {
+      "name": "is-inside-container",
+      "versions": [
+        "1.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\is-inside-container@1.0.0\\node_modules\\is-inside-container"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/is-inside-container#readme",
+      "description": "Check if the process is running inside a container (Docker/Podman)"
     },
     {
       "name": "is-map",
@@ -2744,6 +4093,19 @@
       "description": "Is this value a JS WeakSet? This module works cross-realm/iframe, and despite ES6 @@toStringTag."
     },
     {
+      "name": "is-wsl",
+      "versions": [
+        "3.1.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\is-wsl@3.1.1\\node_modules\\is-wsl"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/is-wsl#readme",
+      "description": "Check if the process is running inside Windows Subsystem for Linux (Bash on Windows)"
+    },
+    {
       "name": "isarray",
       "versions": [
         "2.0.5"
@@ -2768,6 +4130,29 @@
       "author": "Jordan Harband",
       "homepage": "https://github.com/ljharb/Iterator.prototype#readme",
       "description": "`Iterator.prototype`, or a shared object to use."
+    },
+    {
+      "name": "jest-worker",
+      "versions": [
+        "27.5.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\jest-worker@27.5.1\\node_modules\\jest-worker"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/facebook/jest#readme"
+    },
+    {
+      "name": "jiti",
+      "versions": [
+        "2.7.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\jiti@2.7.0\\node_modules\\jiti"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/jiti#readme",
+      "description": "Runtime typescript and ESM support for Node.js"
     },
     {
       "name": "js-tokens",
@@ -2834,12 +4219,27 @@
       "description": "JSON parse & stringify that supports binary via bops & base64"
     },
     {
-      "name": "json-schema-traverse",
+      "name": "json-parse-even-better-errors",
       "versions": [
-        "0.4.1"
+        "2.3.1"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\json-schema-traverse@0.4.1\\node_modules\\json-schema-traverse"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\json-parse-even-better-errors@2.3.1\\node_modules\\json-parse-even-better-errors"
+      ],
+      "license": "MIT",
+      "author": "Kat Marchán",
+      "homepage": "https://github.com/npm/json-parse-even-better-errors#readme",
+      "description": "JSON.parse with context information on error"
+    },
+    {
+      "name": "json-schema-traverse",
+      "versions": [
+        "0.4.1",
+        "1.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\json-schema-traverse@0.4.1\\node_modules\\json-schema-traverse",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\json-schema-traverse@1.0.0\\node_modules\\json-schema-traverse"
       ],
       "license": "MIT",
       "author": "Evgeny Poberezkin",
@@ -2873,6 +4273,32 @@
       "author": "Aseem Kishore",
       "homepage": "http://json5.org/",
       "description": "JSON for Humans"
+    },
+    {
+      "name": "jsonc-parser",
+      "versions": [
+        "3.3.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\jsonc-parser@3.3.1\\node_modules\\jsonc-parser"
+      ],
+      "license": "MIT",
+      "author": "Microsoft Corporation",
+      "homepage": "https://github.com/microsoft/node-jsonc-parser#readme",
+      "description": "Scanner and parser for JSON with comments."
+    },
+    {
+      "name": "jsonfile",
+      "versions": [
+        "6.2.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\jsonfile@6.2.1\\node_modules\\jsonfile"
+      ],
+      "license": "MIT",
+      "author": "JP Richardson",
+      "homepage": "https://github.com/jprichardson/node-jsonfile#readme",
+      "description": "Easily read/write JSON files."
     },
     {
       "name": "jsx-ast-utils",
@@ -2927,17 +4353,45 @@
       "description": "Light ECMAScript (JavaScript) Value Notation - human written, concise, typed, flexible"
     },
     {
+      "name": "lines-and-columns",
+      "versions": [
+        "1.2.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\lines-and-columns@1.2.4\\node_modules\\lines-and-columns"
+      ],
+      "license": "MIT",
+      "author": "Brian Donovan",
+      "homepage": "https://github.com/eventualbuddha/lines-and-columns#readme",
+      "description": "Maps lines and columns to character offsets and back."
+    },
+    {
       "name": "locate-path",
       "versions": [
+        "5.0.0",
         "6.0.0"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\locate-path@5.0.0\\node_modules\\locate-path",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\locate-path@6.0.0\\node_modules\\locate-path"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
       "homepage": "https://github.com/sindresorhus/locate-path#readme",
       "description": "Get the first path that exists on disk of multiple paths"
+    },
+    {
+      "name": "lodash",
+      "versions": [
+        "4.18.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\lodash@4.18.1\\node_modules\\lodash"
+      ],
+      "license": "MIT",
+      "author": "John-David Dalton",
+      "homepage": "https://lodash.com/",
+      "description": "Lodash modular utilities."
     },
     {
       "name": "lodash.merge",
@@ -2966,6 +4420,32 @@
       "description": "Fast (and loose) selective `process.env` replacer using js-tokens instead of an AST"
     },
     {
+      "name": "loupe",
+      "versions": [
+        "3.2.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\loupe@3.2.1\\node_modules\\loupe"
+      ],
+      "license": "MIT",
+      "author": "Veselin Todorov",
+      "homepage": "https://github.com/chaijs/loupe",
+      "description": "Inspect utility for Node.js and browsers"
+    },
+    {
+      "name": "lower-case",
+      "versions": [
+        "2.0.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\lower-case@2.0.2\\node_modules\\lower-case"
+      ],
+      "license": "MIT",
+      "author": "Blake Embrey",
+      "homepage": "https://github.com/blakeembrey/change-case/tree/master/packages/lower-case#readme",
+      "description": "Transforms the string to lower case"
+    },
+    {
       "name": "lz-string",
       "versions": [
         "1.5.0"
@@ -2992,6 +4472,19 @@
       "description": "Modify strings, generate sourcemaps"
     },
     {
+      "name": "make-dir",
+      "versions": [
+        "3.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\make-dir@3.1.0\\node_modules\\make-dir"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/make-dir#readme",
+      "description": "Make a directory and its parents if needed - Think `mkdir -p`"
+    },
+    {
       "name": "math-intrinsics",
       "versions": [
         "1.1.0"
@@ -3003,6 +4496,19 @@
       "author": "Jordan Harband",
       "homepage": "https://github.com/es-shims/math-intrinsics#readme",
       "description": "ES Math-related intrinsics and helpers, robustly cached."
+    },
+    {
+      "name": "merge-stream",
+      "versions": [
+        "2.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\merge-stream@2.0.0\\node_modules\\merge-stream"
+      ],
+      "license": "MIT",
+      "author": "Stephen Sugden",
+      "homepage": "https://github.com/grncdr/merge-stream#readme",
+      "description": "Create a stream that emits events from multiple other streams"
     },
     {
       "name": "merge2",
@@ -3030,6 +4536,32 @@
       "description": "Glob matching for javascript/node.js. A replacement and faster alternative to minimatch and multimatch."
     },
     {
+      "name": "mime-db",
+      "versions": [
+        "1.52.0",
+        "1.54.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\mime-db@1.52.0\\node_modules\\mime-db",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\mime-db@1.54.0\\node_modules\\mime-db"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/jshttp/mime-db#readme",
+      "description": "Media Type Database"
+    },
+    {
+      "name": "mime-types",
+      "versions": [
+        "2.1.35"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\mime-types@2.1.35\\node_modules\\mime-types"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/jshttp/mime-types#readme",
+      "description": "The ultimate javascript content-type utility."
+    },
+    {
       "name": "min-indent",
       "versions": [
         "1.0.1"
@@ -3054,6 +4586,19 @@
       "author": "James Halliday",
       "homepage": "https://github.com/minimistjs/minimist",
       "description": "parse argument options"
+    },
+    {
+      "name": "minimizer-webpack-plugin",
+      "versions": [
+        "5.8.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\minimizer-webpack-plugin@5._ae242e5da60c394b841ccef4b897bb10\\node_modules\\minimizer-webpack-plugin"
+      ],
+      "license": "MIT",
+      "author": "webpack Contrib Team",
+      "homepage": "https://github.com/webpack/minimizer-webpack-plugin",
+      "description": "Minimizer plugin for webpack"
     },
     {
       "name": "ms",
@@ -3107,16 +4652,54 @@
       "description": "Compare strings containing a mix of letters and numbers in the way a human being would in sort order."
     },
     {
+      "name": "neo-async",
+      "versions": [
+        "2.6.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\neo-async@2.6.2\\node_modules\\neo-async"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/suguru03/neo-async",
+      "description": "Neo-Async is a drop-in replacement for Async, it almost fully covers its functionality and runs faster "
+    },
+    {
       "name": "next",
       "versions": [
         "16.3.3"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\next@16.3.3_@babel+core@7.2_7a739d02e2cc9e0db3bb65f8f5dd0a61\\node_modules\\next"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\next@16.3.3_@babel+core@7.2_a68d199f1103e7a116788016d5f36c25\\node_modules\\next"
       ],
       "license": "MIT",
       "homepage": "https://nextjs.org",
       "description": "The React Framework"
+    },
+    {
+      "name": "no-case",
+      "versions": [
+        "3.0.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\no-case@3.0.4\\node_modules\\no-case"
+      ],
+      "license": "MIT",
+      "author": "Blake Embrey",
+      "homepage": "https://github.com/blakeembrey/change-case/tree/master/packages/no-case#readme",
+      "description": "Transform into a lower cased string with spaces between words"
+    },
+    {
+      "name": "node-abort-controller",
+      "versions": [
+        "3.1.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\node-abort-controller@3.1.1\\node_modules\\node-abort-controller"
+      ],
+      "license": "MIT",
+      "author": "Steve Faulkner",
+      "homepage": "https://github.com/southpolesteve/node-abort-controller#readme",
+      "description": "AbortController for Node based on EventEmitter"
     },
     {
       "name": "node-exports-info",
@@ -3262,6 +4845,33 @@
       "description": "A lightweight JavaScript debugging utility, forked from debug, featuring TypeScript and ESM support."
     },
     {
+      "name": "ohash",
+      "versions": [
+        "2.0.12"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ohash@2.0.12\\node_modules\\ohash"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/ohash#readme",
+      "description": "Simple object hashing, serialization and comparison utils."
+    },
+    {
+      "name": "open",
+      "versions": [
+        "10.2.0",
+        "11.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\open@10.2.0\\node_modules\\open",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\open@11.0.0\\node_modules\\open"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/open#readme",
+      "description": "Open stuff like URLs, files, executables. Cross-platform."
+    },
+    {
       "name": "optionator",
       "versions": [
         "0.9.4"
@@ -3288,11 +4898,38 @@
       "description": "Robustly get an object's own property keys (strings and symbols), including non-enumerables when possible"
     },
     {
+      "name": "oxc-parser",
+      "versions": [
+        "0.127.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\oxc-parser@0.127.0\\node_modules\\oxc-parser"
+      ],
+      "license": "MIT",
+      "author": "Boshen and oxc contributors",
+      "homepage": "https://oxc.rs/docs/guide/usage/parser",
+      "description": "Oxc Parser Node API"
+    },
+    {
+      "name": "oxc-resolver",
+      "versions": [
+        "11.21.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\oxc-resolver@11.21.2\\node_modules\\oxc-resolver"
+      ],
+      "license": "MIT",
+      "homepage": "https://oxc.rs",
+      "description": "Oxc Resolver Node API"
+    },
+    {
       "name": "p-limit",
       "versions": [
+        "2.3.0",
         "3.1.0"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\p-limit@2.3.0\\node_modules\\p-limit",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\p-limit@3.1.0\\node_modules\\p-limit"
       ],
       "license": "MIT",
@@ -3303,15 +4940,43 @@
     {
       "name": "p-locate",
       "versions": [
+        "4.1.0",
         "5.0.0"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\p-locate@4.1.0\\node_modules\\p-locate",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\p-locate@5.0.0\\node_modules\\p-locate"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
       "homepage": "https://github.com/sindresorhus/p-locate#readme",
       "description": "Get the first fulfilled promise that satisfies the provided testing function"
+    },
+    {
+      "name": "p-try",
+      "versions": [
+        "2.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\p-try@2.2.0\\node_modules\\p-try"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/p-try#readme",
+      "description": "`Start a promise chain"
+    },
+    {
+      "name": "param-case",
+      "versions": [
+        "3.0.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\param-case@3.0.4\\node_modules\\param-case"
+      ],
+      "license": "MIT",
+      "author": "Blake Embrey",
+      "homepage": "https://github.com/blakeembrey/change-case/tree/master/packages/param-case#readme",
+      "description": "Transform into a lower cased string with dashes between words"
     },
     {
       "name": "parent-module",
@@ -3327,6 +4992,19 @@
       "description": "Get the path of the parent module"
     },
     {
+      "name": "parse-json",
+      "versions": [
+        "5.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\parse-json@5.2.0\\node_modules\\parse-json"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/parse-json#readme",
+      "description": "Parse JSON with more helpful errors"
+    },
+    {
       "name": "parse5",
       "versions": [
         "8.0.1"
@@ -3340,6 +5018,19 @@
       "description": "HTML parser and serializer."
     },
     {
+      "name": "pascal-case",
+      "versions": [
+        "3.1.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\pascal-case@3.1.2\\node_modules\\pascal-case"
+      ],
+      "license": "MIT",
+      "author": "Blake Embrey",
+      "homepage": "https://github.com/blakeembrey/change-case/tree/master/packages/pascal-case#readme",
+      "description": "Transform into a string of capitalized words without separators"
+    },
+    {
       "name": "path-exists",
       "versions": [
         "4.0.0"
@@ -3351,6 +5042,19 @@
       "author": "Sindre Sorhus",
       "homepage": "https://github.com/sindresorhus/path-exists#readme",
       "description": "Check if a path exists"
+    },
+    {
+      "name": "path-is-absolute",
+      "versions": [
+        "1.0.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\path-is-absolute@1.0.1\\node_modules\\path-is-absolute"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/path-is-absolute#readme",
+      "description": "Node.js 0.12 path.isAbsolute() ponyfill"
     },
     {
       "name": "path-key",
@@ -3379,6 +5083,19 @@
       "description": "Node.js path.parse() ponyfill"
     },
     {
+      "name": "path-type",
+      "versions": [
+        "4.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\path-type@4.0.0\\node_modules\\path-type"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/path-type#readme",
+      "description": "Check if a path is a file, directory, or symlink"
+    },
+    {
       "name": "pathe",
       "versions": [
         "2.0.3"
@@ -3389,6 +5106,31 @@
       "license": "MIT",
       "homepage": "https://github.com/unjs/pathe#readme",
       "description": "Universal filesystem path utils"
+    },
+    {
+      "name": "pathval",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\pathval@2.0.1\\node_modules\\pathval"
+      ],
+      "license": "MIT",
+      "author": "Veselin Todorov",
+      "homepage": "https://github.com/chaijs/pathval",
+      "description": "Object value retrieval given a string path"
+    },
+    {
+      "name": "perfect-debounce",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\perfect-debounce@2.1.0\\node_modules\\perfect-debounce"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/perfect-debounce#readme",
+      "description": ""
     },
     {
       "name": "picomatch",
@@ -3404,6 +5146,31 @@
       "author": "Jon Schlinkert",
       "homepage": "https://github.com/micromatch/picomatch",
       "description": "Blazing fast and accurate glob matcher written in JavaScript, with no dependencies and full support for standard and extended Bash glob features, including braces, extglobs, POSIX brackets, and regular expressions."
+    },
+    {
+      "name": "pkg-dir",
+      "versions": [
+        "4.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\pkg-dir@4.2.0\\node_modules\\pkg-dir"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/pkg-dir#readme",
+      "description": "Find the root directory of a Node.js project or npm package"
+    },
+    {
+      "name": "pkg-types",
+      "versions": [
+        "2.3.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\pkg-types@2.3.1\\node_modules\\pkg-types"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/pkg-types#readme",
+      "description": "Node.js utilities and TypeScript definitions for `package.json` and `tsconfig.json`"
     },
     {
       "name": "possible-typed-array-names",
@@ -3434,6 +5201,57 @@
       "description": "Tool for transforming styles with JS plugins"
     },
     {
+      "name": "postcss-modules-local-by-default",
+      "versions": [
+        "4.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\postcss-modules-local-by-default@4.2.0_postcss@8.5.26\\node_modules\\postcss-modules-local-by-default"
+      ],
+      "license": "MIT",
+      "author": "Mark Dalgleish",
+      "homepage": "https://github.com/css-modules/postcss-modules-local-by-default#readme",
+      "description": "A CSS Modules transform to make local scope the default"
+    },
+    {
+      "name": "postcss-selector-parser",
+      "versions": [
+        "7.1.5"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\postcss-selector-parser@7.1.5\\node_modules\\postcss-selector-parser"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/postcss/postcss-selector-parser",
+      "description": "Selector parser with built in methods for working with selector strings."
+    },
+    {
+      "name": "postcss-value-parser",
+      "versions": [
+        "4.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\postcss-value-parser@4.2.0\\node_modules\\postcss-value-parser"
+      ],
+      "license": "MIT",
+      "author": "Bogdan Chadkin",
+      "homepage": "https://github.com/TrySound/postcss-value-parser",
+      "description": "Transforms css values and at-rule params into the tree"
+    },
+    {
+      "name": "powershell-utils",
+      "versions": [
+        "0.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\powershell-utils@0.1.0\\node_modules\\powershell-utils"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/powershell-utils#readme",
+      "description": "Utilities for executing PowerShell commands"
+    },
+    {
       "name": "prelude-ls",
       "versions": [
         "1.2.1"
@@ -3445,6 +5263,19 @@
       "author": "George Zahariev",
       "homepage": "http://preludels.com",
       "description": "prelude.ls is a functionally oriented utility library. It is powerful and flexible. Almost all of its functions are curried. It is written in, and is the recommended base library for, LiveScript."
+    },
+    {
+      "name": "pretty-error",
+      "versions": [
+        "4.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\pretty-error@4.0.0\\node_modules\\pretty-error"
+      ],
+      "license": "MIT",
+      "author": "Aria Minaei",
+      "homepage": "https://github.com/AriaMinaei/pretty-error#readme",
+      "description": "See nodejs errors with less clutter"
     },
     {
       "name": "pretty-format",
@@ -3498,6 +5329,31 @@
       "description": "fast, tiny `queueMicrotask` shim for modern engines"
     },
     {
+      "name": "range-parser",
+      "versions": [
+        "1.3.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\range-parser@1.3.0\\node_modules\\range-parser"
+      ],
+      "license": "MIT",
+      "author": "TJ Holowaychuk",
+      "homepage": "https://github.com/jshttp/range-parser#readme",
+      "description": "Range header field string parser"
+    },
+    {
+      "name": "rc9",
+      "versions": [
+        "3.0.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\rc9@3.0.1\\node_modules\\rc9"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/unjs/rc9#readme",
+      "description": "Read/Write config couldn't be easier!"
+    },
+    {
       "name": "react",
       "versions": [
         "19.2.8"
@@ -3508,6 +5364,31 @@
       "license": "MIT",
       "homepage": "https://react.dev/",
       "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "name": "react-docgen",
+      "versions": [
+        "8.0.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\react-docgen@8.0.3_supports-color@10.2.2\\node_modules\\react-docgen"
+      ],
+      "license": "MIT",
+      "author": "Felix Kling",
+      "homepage": "https://github.com/reactjs/react-docgen#readme",
+      "description": "A library to extract information from React components for documentation generation."
+    },
+    {
+      "name": "react-docgen-typescript",
+      "versions": [
+        "2.4.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\react-docgen-typescript@2.4.0_typescript@6.0.3\\node_modules\\react-docgen-typescript"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/styleguidist/react-docgen-typescript/",
+      "description": ""
     },
     {
       "name": "react-dom",
@@ -3534,6 +5415,34 @@
       "license": "MIT",
       "homepage": "https://reactjs.org/",
       "description": "Brand checking of React Elements."
+    },
+    {
+      "name": "readdirp",
+      "versions": [
+        "4.1.2",
+        "5.1.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\readdirp@4.1.2\\node_modules\\readdirp",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\readdirp@5.1.1\\node_modules\\readdirp"
+      ],
+      "license": "MIT",
+      "author": "Thorsten Lorenz",
+      "homepage": "https://github.com/paulmillr/readdirp",
+      "description": "Recursive version of fs.readdir with small RAM & CPU footprint"
+    },
+    {
+      "name": "recast",
+      "versions": [
+        "0.23.21"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\recast@0.23.21\\node_modules\\recast"
+      ],
+      "license": "MIT",
+      "author": "Ben Newman",
+      "homepage": "http://github.com/benjamn/recast",
+      "description": "JavaScript syntax tree transformer, nondestructive pretty-printer, and automatic source map generator"
     },
     {
       "name": "redent",
@@ -3575,6 +5484,32 @@
       "description": "ES6 spec-compliant RegExp.prototype.flags shim."
     },
     {
+      "name": "relateurl",
+      "versions": [
+        "0.2.7"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\relateurl@0.2.7\\node_modules\\relateurl"
+      ],
+      "license": "MIT",
+      "author": "Steven Vachon",
+      "homepage": "https://github.com/stevenvachon/relateurl",
+      "description": "Minify URLs by converting them from absolute to relative."
+    },
+    {
+      "name": "renderkid",
+      "versions": [
+        "3.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\renderkid@3.0.0\\node_modules\\renderkid"
+      ],
+      "license": "MIT",
+      "author": "Aria Minaei",
+      "homepage": "https://github.com/AriaMinaei/RenderKid#readme",
+      "description": "Stylish console.log for node"
+    },
+    {
       "name": "require-from-string",
       "versions": [
         "2.0.2"
@@ -3590,9 +5525,11 @@
     {
       "name": "resolve",
       "versions": [
+        "1.22.12",
         "2.0.0-next.7"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\resolve@1.22.12\\node_modules\\resolve",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\resolve@2.0.0-next.7\\node_modules\\resolve"
       ],
       "license": "MIT",
@@ -3650,6 +5587,19 @@
       "license": "MIT",
       "homepage": "https://rolldown.rs/",
       "description": "Fast JavaScript/TypeScript bundler in Rust with Rollup-compatible API."
+    },
+    {
+      "name": "run-applescript",
+      "versions": [
+        "7.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\run-applescript@7.1.0\\node_modules\\run-applescript"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/run-applescript#readme",
+      "description": "Run AppleScript and get the result"
     },
     {
       "name": "run-parallel",
@@ -3714,6 +5664,21 @@
       "license": "MIT",
       "homepage": "https://react.dev/",
       "description": "Cooperative scheduler for the browser environment."
+    },
+    {
+      "name": "schema-utils",
+      "versions": [
+        "3.3.0",
+        "4.3.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\schema-utils@3.3.0\\node_modules\\schema-utils",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\schema-utils@4.3.3\\node_modules\\schema-utils"
+      ],
+      "license": "MIT",
+      "author": "webpack Contrib",
+      "homepage": "https://github.com/webpack/schema-utils",
+      "description": "webpack Validation Utils"
     },
     {
       "name": "set-function-length",
@@ -3833,6 +5798,18 @@
       "description": "Store information about any JS value in a side channel. Uses WeakMap if available."
     },
     {
+      "name": "source-map-support",
+      "versions": [
+        "0.5.21"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\source-map-support@0.5.21\\node_modules\\source-map-support"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/evanw/node-source-map-support#readme",
+      "description": "Fixes stack traces for files with source maps"
+    },
+    {
       "name": "stable-hash",
       "versions": [
         "0.0.5"
@@ -3882,6 +5859,18 @@
       "author": "Jordan Harband",
       "homepage": "https://github.com/ljharb/stop-iteration-iterator#readme",
       "description": "Firefox 17-26 iterators throw a StopIteration object to indicate \"done\". This normalizes it."
+    },
+    {
+      "name": "storybook",
+      "versions": [
+        "10.5.10"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\storybook@10.5.10_@types+react@19.2.18_react@19.2.8\\node_modules\\storybook"
+      ],
+      "license": "MIT",
+      "homepage": "https://storybook.js.org",
+      "description": "Storybook: Develop, document, and test UI components in isolation"
     },
     {
       "name": "string.prototype.includes",
@@ -3962,6 +5951,19 @@
       "description": "ES2019 spec-compliant String.prototype.trimStart shim."
     },
     {
+      "name": "strip-ansi",
+      "versions": [
+        "6.0.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\strip-ansi@6.0.1\\node_modules\\strip-ansi"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/chalk/strip-ansi#readme",
+      "description": "Strip ANSI escape codes from a string"
+    },
+    {
       "name": "strip-bom",
       "versions": [
         "3.0.0"
@@ -3977,10 +5979,12 @@
     {
       "name": "strip-indent",
       "versions": [
-        "3.0.0"
+        "3.0.0",
+        "4.1.1"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\strip-indent@3.0.0\\node_modules\\strip-indent"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\strip-indent@3.0.0\\node_modules\\strip-indent",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\strip-indent@4.1.1\\node_modules\\strip-indent"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -4001,12 +6005,25 @@
       "description": "Strip comments from JSON. Lets you use comments in your JSON files!"
     },
     {
+      "name": "style-loader",
+      "versions": [
+        "4.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\style-loader@4.0.0_webpack@_9b0e81732bc94dc35043eed077396502\\node_modules\\style-loader"
+      ],
+      "license": "MIT",
+      "author": "Tobias Koppers @sokra",
+      "homepage": "https://github.com/webpack-contrib/style-loader",
+      "description": "style loader module for webpack"
+    },
+    {
       "name": "styled-jsx",
       "versions": [
         "5.1.6"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\styled-jsx@5.1.6_@babel+cor_e152132a9560252bda5bb53953877f96\\node_modules\\styled-jsx"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\styled-jsx@5.1.6_@babel+cor_5fc6a71a72e74b016eb2597345882853\\node_modules\\styled-jsx"
       ],
       "license": "MIT",
       "homepage": "https://github.com/vercel/styled-jsx#readme",
@@ -4015,10 +6032,14 @@
     {
       "name": "supports-color",
       "versions": [
-        "7.2.0"
+        "7.2.0",
+        "8.1.1",
+        "10.2.2"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\supports-color@7.2.0\\node_modules\\supports-color"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\supports-color@7.2.0\\node_modules\\supports-color",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\supports-color@8.1.1\\node_modules\\supports-color",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\supports-color@10.2.2\\node_modules\\supports-color"
       ],
       "license": "MIT",
       "author": "Sindre Sorhus",
@@ -4039,6 +6060,19 @@
       "description": "Determine if the current node version supports the `--preserve-symlinks` flag."
     },
     {
+      "name": "swc-loader",
+      "versions": [
+        "0.2.7"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\swc-loader@0.2.7_@swc+core@_d698070230d89b01bbd99bdf114a0fec\\node_modules\\swc-loader"
+      ],
+      "license": "MIT",
+      "author": "강동윤",
+      "homepage": "https://github.com/swc-project/pkgs#readme",
+      "description": "Webpack plugin for swc"
+    },
+    {
       "name": "symbol-tree",
       "versions": [
         "3.2.4"
@@ -4050,6 +6084,45 @@
       "author": "Joris van der Wel",
       "homepage": "https://github.com/jsdom/js-symbol-tree#symbol-tree",
       "description": "Turn any collection of objects into its own efficient tree or linked list using Symbol"
+    },
+    {
+      "name": "tapable",
+      "versions": [
+        "2.3.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tapable@2.3.3\\node_modules\\tapable"
+      ],
+      "license": "MIT",
+      "author": "Tobias Koppers @sokra",
+      "homepage": "https://github.com/webpack/tapable",
+      "description": "Just a little module for plugins."
+    },
+    {
+      "name": "terser-webpack-plugin",
+      "versions": [
+        "5.6.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\terser-webpack-plugin@5.6.1_e7ea353cc3e51e8efa512386c3a30070\\node_modules\\terser-webpack-plugin"
+      ],
+      "license": "MIT",
+      "author": "webpack Contrib Team",
+      "homepage": "https://github.com/webpack/minimizer-webpack-plugin",
+      "description": "Minimizer plugin for webpack"
+    },
+    {
+      "name": "tiny-invariant",
+      "versions": [
+        "1.3.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tiny-invariant@1.3.3\\node_modules\\tiny-invariant"
+      ],
+      "license": "MIT",
+      "author": "Alex Reardon",
+      "homepage": "https://github.com/alexreardon/tiny-invariant#readme",
+      "description": "A tiny invariant function"
     },
     {
       "name": "tinybench",
@@ -4091,14 +6164,28 @@
     {
       "name": "tinyrainbow",
       "versions": [
+        "2.0.0",
         "3.1.1"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tinyrainbow@2.0.0\\node_modules\\tinyrainbow",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tinyrainbow@3.1.1\\node_modules\\tinyrainbow"
       ],
       "license": "MIT",
       "homepage": "https://github.com/tinylibs/tinyrainbow#readme",
       "description": "A small library to print colourful messages."
+    },
+    {
+      "name": "tinyspy",
+      "versions": [
+        "4.0.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tinyspy@4.0.4\\node_modules\\tinyspy"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/tinylibs/tinyspy#readme",
+      "description": "A minimal fork of nanospy, with more features"
     },
     {
       "name": "tldts",
@@ -4166,12 +6253,27 @@
       "description": "Utility functions for working with TypeScript's API. Successor to the wonderful tsutils. 🛠️️"
     },
     {
-      "name": "tsconfig-paths",
+      "name": "ts-dedent",
       "versions": [
-        "3.15.0"
+        "2.3.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tsconfig-paths@3.15.0\\node_modules\\tsconfig-paths"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ts-dedent@2.3.0\\node_modules\\ts-dedent"
+      ],
+      "license": "MIT",
+      "author": "Tamino Martinius",
+      "homepage": "https://github.com/tamino-martinius/node-ts-dedent#readme",
+      "description": "TypeScript package which smartly trims and strips indentation from multi-line strings"
+    },
+    {
+      "name": "tsconfig-paths",
+      "versions": [
+        "3.15.0",
+        "4.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tsconfig-paths@3.15.0\\node_modules\\tsconfig-paths",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tsconfig-paths@4.2.0\\node_modules\\tsconfig-paths"
       ],
       "license": "MIT",
       "author": "Jonas Kello",
@@ -4249,7 +6351,7 @@
         "8.68.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\typescript-eslint@8.68.0_es_74cc463706d196402ed5b45f980b30aa\\node_modules\\typescript-eslint"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\typescript-eslint@8.68.0_es_d50a85664a27fdd57a5bd10dbfd77c21\\node_modules\\typescript-eslint"
       ],
       "license": "MIT",
       "homepage": "https://typescript-eslint.io/packages/typescript-eslint",
@@ -4293,6 +6395,31 @@
       "description": "A stand-alone types package for Undici"
     },
     {
+      "name": "universalify",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\universalify@2.0.1\\node_modules\\universalify"
+      ],
+      "license": "MIT",
+      "author": "Ryan Zimmerman",
+      "homepage": "https://github.com/RyanZim/universalify#readme",
+      "description": "Make a callback- or promise-based function support both promises and callbacks."
+    },
+    {
+      "name": "unplugin",
+      "versions": [
+        "2.3.11"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\unplugin@2.3.11\\node_modules\\unplugin"
+      ],
+      "license": "MIT",
+      "homepage": "https://unplugin.unjs.io",
+      "description": "Unified plugin system for build tools"
+    },
+    {
       "name": "unrs-resolver",
       "versions": [
         "1.12.2"
@@ -4318,12 +6445,50 @@
       "description": "CLI tool to update caniuse-lite to refresh target browsers from Browserslist config"
     },
     {
+      "name": "use-sync-external-store",
+      "versions": [
+        "1.6.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\use-sync-external-store@1.6.0_react@19.2.8\\node_modules\\use-sync-external-store"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/facebook/react#readme",
+      "description": "Backwards compatible shim for React's useSyncExternalStore. Works with any React that supports hooks."
+    },
+    {
+      "name": "util-deprecate",
+      "versions": [
+        "1.0.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\util-deprecate@1.0.2\\node_modules\\util-deprecate"
+      ],
+      "license": "MIT",
+      "author": "Nathan Rajlich",
+      "homepage": "https://github.com/TooTallNate/util-deprecate",
+      "description": "The Node.js `util.deprecate()` function with browser support"
+    },
+    {
+      "name": "utila",
+      "versions": [
+        "0.4.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\utila@0.4.0\\node_modules\\utila"
+      ],
+      "license": "MIT",
+      "author": "Aria Minaei",
+      "homepage": "https://github.com/AriaMinaei/utila#readme",
+      "description": "notareplacementforunderscore"
+    },
+    {
       "name": "vite",
       "versions": [
         "8.2.2"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\vite@8.2.2_@types+node@24.13.3\\node_modules\\vite"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\vite@8.2.2_@types+node@24.1_867c080496495c855bc5f7ecd080b067\\node_modules\\vite"
       ],
       "license": "MIT",
       "author": "Evan You",
@@ -4336,7 +6501,7 @@
         "4.1.11"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\vitest@4.1.11_@types+node@2_0ddbb255c99b8295faa6909e4df18ea7\\node_modules\\vitest"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\vitest@4.1.11_@types+node@2_d838aee16d75d782dc95f213787cecf9\\node_modules\\vitest"
       ],
       "license": "MIT",
       "author": "Anthony Fu",
@@ -4354,6 +6519,84 @@
       "license": "MIT",
       "homepage": "https://github.com/jsdom/w3c-xmlserializer#readme",
       "description": "A per-spec XML serializer implementation"
+    },
+    {
+      "name": "watchpack",
+      "versions": [
+        "2.5.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\watchpack@2.5.2\\node_modules\\watchpack"
+      ],
+      "license": "MIT",
+      "author": "Tobias Koppers @sokra",
+      "homepage": "https://github.com/webpack/watchpack",
+      "description": ""
+    },
+    {
+      "name": "webpack",
+      "versions": [
+        "5.109.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\webpack@5.109.2_@swc+core@1_1a96cf35b707cacacadc7b4ef3780644\\node_modules\\webpack"
+      ],
+      "license": "MIT",
+      "author": "Tobias Koppers @sokra",
+      "homepage": "https://github.com/webpack/webpack",
+      "description": "Packs ECMAScript/CommonJs/AMD modules for the browser. Allows you to split your codebase into multiple bundles, which can be loaded on demand. Supports loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff."
+    },
+    {
+      "name": "webpack-dev-middleware",
+      "versions": [
+        "6.1.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\webpack-dev-middleware@6.1._241eb48c807cb215a723313af0dbe537\\node_modules\\webpack-dev-middleware"
+      ],
+      "license": "MIT",
+      "author": "Tobias Koppers @sokra",
+      "homepage": "https://github.com/webpack/webpack-dev-middleware",
+      "description": "A development middleware for webpack"
+    },
+    {
+      "name": "webpack-hot-middleware",
+      "versions": [
+        "2.26.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\webpack-hot-middleware@2.26.1\\node_modules\\webpack-hot-middleware"
+      ],
+      "license": "MIT",
+      "author": "Glen Mailer",
+      "homepage": "https://github.com/webpack-contrib/webpack-hot-middleware#readme",
+      "description": "Webpack hot reloading you can attach to your own server"
+    },
+    {
+      "name": "webpack-sources",
+      "versions": [
+        "3.5.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\webpack-sources@3.5.1\\node_modules\\webpack-sources"
+      ],
+      "license": "MIT",
+      "author": "Tobias Koppers @sokra",
+      "homepage": "https://github.com/webpack/webpack-sources#readme",
+      "description": "Source code handling classes for webpack"
+    },
+    {
+      "name": "webpack-virtual-modules",
+      "versions": [
+        "0.6.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\webpack-virtual-modules@0.6.2\\node_modules\\webpack-virtual-modules"
+      ],
+      "license": "MIT",
+      "author": "SysGears INC",
+      "homepage": "https://github.com/sysgears/webpack-virtual-modules#readme",
+      "description": "Webpack Virtual Modules"
     },
     {
       "name": "whatwg-mimetype",
@@ -4460,6 +6703,34 @@
       "author": "Jon Schlinkert",
       "homepage": "https://github.com/jonschlinkert/word-wrap",
       "description": "Wrap words to a specified length."
+    },
+    {
+      "name": "ws",
+      "versions": [
+        "8.21.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ws@8.21.3\\node_modules\\ws"
+      ],
+      "license": "MIT",
+      "author": "Einar Otto Stangvik",
+      "homepage": "https://github.com/websockets/ws",
+      "description": "Simple to use, blazing fast and thoroughly tested websocket client and server for Node.js"
+    },
+    {
+      "name": "wsl-utils",
+      "versions": [
+        "0.1.0",
+        "0.3.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\wsl-utils@0.1.0\\node_modules\\wsl-utils",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\wsl-utils@0.3.1\\node_modules\\wsl-utils"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/wsl-utils#readme",
+      "description": "Utilities for working with Windows Subsystem for Linux (WSL)"
     },
     {
       "name": "xmlchars",
@@ -4684,6 +6955,32 @@
       "description": "A high-level API to automate web browsers"
     },
     {
+      "name": "@swc/core",
+      "versions": [
+        "1.16.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@swc+core@1.16.1_@swc+helpers@0.5.23\\node_modules\\@swc\\core"
+      ],
+      "license": "Apache-2.0",
+      "author": "강동윤",
+      "homepage": "https://swc.rs",
+      "description": "Super-fast alternative for babel"
+    },
+    {
+      "name": "@swc/counter",
+      "versions": [
+        "0.1.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@swc+counter@0.1.3\\node_modules\\@swc\\counter"
+      ],
+      "license": "Apache-2.0",
+      "author": "강동윤",
+      "homepage": "https://swc.rs",
+      "description": "Downloade counter for the swc project"
+    },
+    {
       "name": "@swc/helpers",
       "versions": [
         "0.5.23"
@@ -4695,6 +6992,57 @@
       "author": "강동윤",
       "homepage": "https://swc.rs",
       "description": "External helpers for the swc project."
+    },
+    {
+      "name": "@swc/types",
+      "versions": [
+        "0.1.28"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@swc+types@0.1.28\\node_modules\\@swc\\types"
+      ],
+      "license": "Apache-2.0",
+      "author": "강동윤",
+      "homepage": "https://swc.rs",
+      "description": "Typings for the swc project."
+    },
+    {
+      "name": "@webassemblyjs/leb128",
+      "versions": [
+        "1.13.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@webassemblyjs+leb128@1.13.2\\node_modules\\@webassemblyjs\\leb128"
+      ],
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/xtuc/webassemblyjs#readme",
+      "description": "LEB128 decoder and encoder"
+    },
+    {
+      "name": "@xtuc/long",
+      "versions": [
+        "4.2.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@xtuc+long@4.2.2\\node_modules\\@xtuc\\long"
+      ],
+      "license": "Apache-2.0",
+      "author": "Daniel Wirtz",
+      "homepage": "https://github.com/dcodeIO/long.js#readme",
+      "description": "A Long class for representing a 64-bit two's-complement integer value."
+    },
+    {
+      "name": "ansi-html-community",
+      "versions": [
+        "0.0.8"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\ansi-html-community@0.0.8\\node_modules\\ansi-html-community"
+      ],
+      "license": "Apache-2.0",
+      "author": "mahdyar",
+      "homepage": "https://github.com/mahdyar/ansi-html-community",
+      "description": "An elegant lib that converts the chalked (ANSI) text to HTML. (Community)"
     },
     {
       "name": "aria-query",
@@ -4752,14 +7100,28 @@
     {
       "name": "doctrine",
       "versions": [
-        "2.1.0"
+        "2.1.0",
+        "3.0.0"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\doctrine@2.1.0\\node_modules\\doctrine"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\doctrine@2.1.0\\node_modules\\doctrine",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\doctrine@3.0.0\\node_modules\\doctrine"
       ],
       "license": "Apache-2.0",
       "homepage": "https://github.com/eslint/doctrine",
       "description": "JSDoc parser"
+    },
+    {
+      "name": "echarts",
+      "versions": [
+        "6.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\echarts@6.1.0\\node_modules\\echarts"
+      ],
+      "license": "Apache-2.0",
+      "homepage": "https://echarts.apache.org",
+      "description": "Apache ECharts is a powerful, interactive charting and data visualization library for browser"
     },
     {
       "name": "eslint-visitor-keys",
@@ -4788,6 +7150,19 @@
       ],
       "license": "Apache-2.0",
       "homepage": "https://github.com/mmkal/expect-type#readme"
+    },
+    {
+      "name": "lightweight-charts",
+      "versions": [
+        "5.2.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\lightweight-charts@5.2.1\\node_modules\\lightweight-charts"
+      ],
+      "license": "Apache-2.0",
+      "author": "TradingView, Inc.",
+      "homepage": "https://www.tradingview.com/lightweight-charts/",
+      "description": "Performant financial charts built with HTML5 canvas"
     },
     {
       "name": "playwright",
@@ -4870,6 +7245,113 @@
       "description": "Prebuilt sharp for use with Windows x64"
     }
   ],
+  "Apache-2.0 AND MIT": [
+    {
+      "name": "@swc/core-win32-x64-msvc",
+      "versions": [
+        "1.16.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@swc+core-win32-x64-msvc@1.16.1\\node_modules\\@swc\\core-win32-x64-msvc"
+      ],
+      "license": "Apache-2.0 AND MIT",
+      "author": "강동윤",
+      "homepage": "https://swc.rs",
+      "description": "Super-fast alternative for babel"
+    }
+  ],
+  "BSD-3-Clause": [
+    {
+      "name": "@xtuc/ieee754",
+      "versions": [
+        "1.2.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\@xtuc+ieee754@1.2.0\\node_modules\\@xtuc\\ieee754"
+      ],
+      "license": "BSD-3-Clause",
+      "author": "Feross Aboukhadijeh",
+      "homepage": "https://github.com/feross/ieee754#readme",
+      "description": "Read/write IEEE754 floating point numbers from/to a Buffer or array-like object"
+    },
+    {
+      "name": "esquery",
+      "versions": [
+        "1.7.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\esquery@1.7.0\\node_modules\\esquery"
+      ],
+      "license": "BSD-3-Clause",
+      "author": "Joel Feenstra",
+      "homepage": "https://github.com/estools/esquery/",
+      "description": "A query library for ECMAScript AST using a CSS selector like query language."
+    },
+    {
+      "name": "fast-uri",
+      "versions": [
+        "3.1.6"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\fast-uri@3.1.6\\node_modules\\fast-uri"
+      ],
+      "license": "BSD-3-Clause",
+      "author": "Vincent Le Goff",
+      "homepage": "https://github.com/fastify/fast-uri",
+      "description": "Dependency-free RFC 3986 URI toolbox"
+    },
+    {
+      "name": "source-map",
+      "versions": [
+        "0.6.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\source-map@0.6.1\\node_modules\\source-map"
+      ],
+      "license": "BSD-3-Clause",
+      "author": "Nick Fitzgerald",
+      "homepage": "https://github.com/mozilla/source-map",
+      "description": "Generates and consumes source maps"
+    },
+    {
+      "name": "source-map-js",
+      "versions": [
+        "1.2.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\source-map-js@1.2.1\\node_modules\\source-map-js"
+      ],
+      "license": "BSD-3-Clause",
+      "author": "Valentin 7rulnik Semirulnik",
+      "homepage": "https://github.com/7rulnik/source-map-js",
+      "description": "Generates and consumes source maps"
+    },
+    {
+      "name": "tough-cookie",
+      "versions": [
+        "6.0.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tough-cookie@6.0.2\\node_modules\\tough-cookie"
+      ],
+      "license": "BSD-3-Clause",
+      "author": "Jeremy Stashewsky",
+      "homepage": "https://github.com/salesforce/tough-cookie",
+      "description": "RFC6265 Cookies and Cookie Jar for node.js"
+    },
+    {
+      "name": "zrender",
+      "versions": [
+        "6.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\zrender@6.1.0\\node_modules\\zrender"
+      ],
+      "license": "BSD-3-Clause",
+      "homepage": "https://github.com/ecomfe/zrender#readme",
+      "description": "A lightweight graphic library providing 2d draw for Apache ECharts"
+    }
+  ],
   "Python-2.0": [
     {
       "name": "argparse",
@@ -4922,137 +7404,33 @@
       "description": "A CSS parser, transformer, and minifier written in Rust"
     }
   ],
-  "CC-BY-4.0": [
-    {
-      "name": "caniuse-lite",
-      "versions": [
-        "1.0.30001810"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\caniuse-lite@1.0.30001810\\node_modules\\caniuse-lite"
-      ],
-      "license": "CC-BY-4.0",
-      "author": "Ben Briggs",
-      "homepage": "https://github.com/browserslist/caniuse-lite#readme",
-      "description": "A smaller version of caniuse-db, with only the essentials!"
-    }
-  ],
-  "BSD-2-Clause": [
-    {
-      "name": "damerau-levenshtein",
-      "versions": [
-        "1.0.8"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\damerau-levenshtein@1.0.8\\node_modules\\damerau-levenshtein"
-      ],
-      "license": "BSD-2-Clause",
-      "author": "The Spanish Inquisition",
-      "homepage": "https://github.com/tad-lispy/node-damerau-levenshtein#readme",
-      "description": "Damerau - Levenshtein distance by The Spanish Inquisition + relative distance"
-    },
-    {
-      "name": "entities",
-      "versions": [
-        "8.0.0"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\entities@8.0.0\\node_modules\\entities"
-      ],
-      "license": "BSD-2-Clause",
-      "author": "Felix Boehm",
-      "homepage": "https://github.com/fb55/entities#readme",
-      "description": "Encode & decode XML and HTML entities with ease & speed"
-    },
-    {
-      "name": "eslint-scope",
-      "versions": [
-        "8.4.0"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-scope@8.4.0\\node_modules\\eslint-scope"
-      ],
-      "license": "BSD-2-Clause",
-      "homepage": "https://github.com/eslint/js/blob/main/packages/eslint-scope/README.md",
-      "description": "ECMAScript scope analyzer for ESLint"
-    },
-    {
-      "name": "espree",
-      "versions": [
-        "10.4.0"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\espree@10.4.0\\node_modules\\espree"
-      ],
-      "license": "BSD-2-Clause",
-      "author": "Nicholas C. Zakas",
-      "homepage": "https://github.com/eslint/js/blob/main/packages/espree/README.md",
-      "description": "An Esprima-compatible JavaScript parser built on Acorn"
-    },
-    {
-      "name": "esrecurse",
-      "versions": [
-        "4.3.0"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\esrecurse@4.3.0\\node_modules\\esrecurse"
-      ],
-      "license": "BSD-2-Clause",
-      "homepage": "https://github.com/estools/esrecurse",
-      "description": "ECMAScript AST recursive visitor"
-    },
-    {
-      "name": "estraverse",
-      "versions": [
-        "5.3.0"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\estraverse@5.3.0\\node_modules\\estraverse"
-      ],
-      "license": "BSD-2-Clause",
-      "homepage": "https://github.com/estools/estraverse",
-      "description": "ECMAScript JS AST traversal functions"
-    },
-    {
-      "name": "esutils",
-      "versions": [
-        "2.0.3"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\esutils@2.0.3\\node_modules\\esutils"
-      ],
-      "license": "BSD-2-Clause",
-      "homepage": "https://github.com/estools/esutils",
-      "description": "utility box for ECMAScript language tools"
-    },
-    {
-      "name": "uri-js",
-      "versions": [
-        "4.4.1"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\uri-js@4.4.1\\node_modules\\uri-js"
-      ],
-      "license": "BSD-2-Clause",
-      "author": "Gary Court",
-      "homepage": "https://github.com/garycourt/uri-js",
-      "description": "An RFC 3986/3987 compliant, scheme extendable URI/IRI parsing/validating/resolving library for JavaScript."
-    },
-    {
-      "name": "webidl-conversions",
-      "versions": [
-        "8.0.1"
-      ],
-      "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\webidl-conversions@8.0.1\\node_modules\\webidl-conversions"
-      ],
-      "license": "BSD-2-Clause",
-      "author": "Domenic Denicola",
-      "homepage": "https://github.com/jsdom/webidl-conversions#readme",
-      "description": "Implements the WebIDL algorithms for converting to and from JavaScript values"
-    }
-  ],
   "ISC": [
+    {
+      "name": "boolbase",
+      "versions": [
+        "1.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\boolbase@1.0.0\\node_modules\\boolbase"
+      ],
+      "license": "ISC",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/fb55/boolbase",
+      "description": "two functions: One that returns true, one that returns false"
+    },
+    {
+      "name": "color-support",
+      "versions": [
+        "1.1.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\color-support@1.1.3\\node_modules\\color-support"
+      ],
+      "license": "ISC",
+      "author": "Isaac Z. Schlueter",
+      "homepage": "https://github.com/isaacs/color-support#readme",
+      "description": "A module which will endeavor to guess your terminal's level of color support."
+    },
     {
       "name": "electron-to-chromium",
       "versions": [
@@ -5072,7 +7450,7 @@
         "3.10.1"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-import-resolver-type_b3d06ee945a790ba8d0806ee05d9ba3c\\node_modules\\eslint-import-resolver-typescript"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-import-resolver-type_86b1504c0842e0c591e3cb9149edc0b4\\node_modules\\eslint-import-resolver-typescript"
       ],
       "license": "ISC",
       "author": "Alex Gorbatchev",
@@ -5106,6 +7484,32 @@
       "description": "A super light and fast circular JSON parser."
     },
     {
+      "name": "fs.realpath",
+      "versions": [
+        "1.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\fs.realpath@1.0.0\\node_modules\\fs.realpath"
+      ],
+      "license": "ISC",
+      "author": "Isaac Z. Schlueter",
+      "homepage": "https://github.com/isaacs/fs.realpath#readme",
+      "description": "Use node's fs.realpath, but fall back to the JS implementation if the native one fails"
+    },
+    {
+      "name": "glob",
+      "versions": [
+        "7.2.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\glob@7.2.3\\node_modules\\glob"
+      ],
+      "license": "ISC",
+      "author": "Isaac Z. Schlueter",
+      "homepage": "https://github.com/isaacs/node-glob#readme",
+      "description": "a little globber"
+    },
+    {
       "name": "glob-parent",
       "versions": [
         "5.1.2",
@@ -5119,6 +7523,56 @@
       "author": "Gulp Team",
       "homepage": "https://github.com/gulpjs/glob-parent#readme",
       "description": "Extract the non-magic parent path from a glob string."
+    },
+    {
+      "name": "graceful-fs",
+      "versions": [
+        "4.2.11"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\graceful-fs@4.2.11\\node_modules\\graceful-fs"
+      ],
+      "license": "ISC",
+      "homepage": "https://github.com/isaacs/node-graceful-fs#readme",
+      "description": "A drop-in replacement for fs, making various improvements."
+    },
+    {
+      "name": "icss-utils",
+      "versions": [
+        "5.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\icss-utils@5.1.0_postcss@8.5.26\\node_modules\\icss-utils"
+      ],
+      "license": "ISC",
+      "author": "Glen Maddern",
+      "homepage": "https://github.com/css-modules/icss-utils#readme",
+      "description": "ICSS utils for postcss ast"
+    },
+    {
+      "name": "inflight",
+      "versions": [
+        "1.0.6"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\inflight@1.0.6\\node_modules\\inflight"
+      ],
+      "license": "ISC",
+      "author": "Isaac Z. Schlueter",
+      "homepage": "https://github.com/isaacs/inflight",
+      "description": "Add callbacks to requests in flight to avoid async duplication"
+    },
+    {
+      "name": "inherits",
+      "versions": [
+        "2.0.4"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\inherits@2.0.4\\node_modules\\inherits"
+      ],
+      "license": "ISC",
+      "homepage": "https://github.com/isaacs/inherits#readme",
+      "description": "Browser-friendly inheritance fully compatible with standard node.js inherits()"
     },
     {
       "name": "isexe",
@@ -5160,6 +7614,32 @@
       "description": "a glob matcher in javascript"
     },
     {
+      "name": "objectorarray",
+      "versions": [
+        "1.0.5"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\objectorarray@1.0.5\\node_modules\\objectorarray"
+      ],
+      "license": "ISC",
+      "author": "zhouhancheng",
+      "homepage": "https://github.com/ZhouHansen/objectnotnull#readme",
+      "description": "Is the value an object or an array but not null?"
+    },
+    {
+      "name": "once",
+      "versions": [
+        "1.4.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\once@1.4.0\\node_modules\\once"
+      ],
+      "license": "ISC",
+      "author": "Isaac Z. Schlueter",
+      "homepage": "https://github.com/isaacs/once#readme",
+      "description": "Run a function exactly one time"
+    },
+    {
       "name": "picocolors",
       "versions": [
         "1.1.1"
@@ -5171,6 +7651,58 @@
       "author": "Alexey Raspopov",
       "homepage": "https://github.com/alexeyraspopov/picocolors#readme",
       "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors"
+    },
+    {
+      "name": "postcss-modules-extract-imports",
+      "versions": [
+        "3.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\postcss-modules-extract-imports@3.1.0_postcss@8.5.26\\node_modules\\postcss-modules-extract-imports"
+      ],
+      "license": "ISC",
+      "author": "Glen Maddern",
+      "homepage": "https://github.com/css-modules/postcss-modules-extract-imports",
+      "description": "A CSS Modules transform to extract local aliases for inline imports"
+    },
+    {
+      "name": "postcss-modules-scope",
+      "versions": [
+        "3.2.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\postcss-modules-scope@3.2.1_postcss@8.5.26\\node_modules\\postcss-modules-scope"
+      ],
+      "license": "ISC",
+      "author": "Glen Maddern",
+      "homepage": "https://github.com/css-modules/postcss-modules-scope",
+      "description": "A CSS Modules transform to extract export statements from local-scope classes"
+    },
+    {
+      "name": "postcss-modules-values",
+      "versions": [
+        "4.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\postcss-modules-values@4.0.0_postcss@8.5.26\\node_modules\\postcss-modules-values"
+      ],
+      "license": "ISC",
+      "author": "Glen Maddern",
+      "homepage": "https://github.com/css-modules/postcss-modules-values#readme",
+      "description": "PostCSS plugin for CSS Modules to pass arbitrary values between your module files"
+    },
+    {
+      "name": "rimraf",
+      "versions": [
+        "3.0.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\rimraf@3.0.2\\node_modules\\rimraf"
+      ],
+      "license": "ISC",
+      "author": "Isaac Z. Schlueter",
+      "homepage": "https://github.com/isaacs/rimraf#readme",
+      "description": "A deep deletion module for node (like `rm -rf`)"
     },
     {
       "name": "saxes",
@@ -5189,10 +7721,12 @@
       "name": "semver",
       "versions": [
         "6.3.1",
+        "7.8.4",
         "7.8.5"
       ],
       "paths": [
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\semver@6.3.1\\node_modules\\semver",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\semver@7.8.4\\node_modules\\semver",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\semver@7.8.5\\node_modules\\semver"
       ],
       "license": "ISC",
@@ -5227,6 +7761,19 @@
       "description": "Like which(1) unix command. Find the first instance of an executable in the PATH."
     },
     {
+      "name": "wrappy",
+      "versions": [
+        "1.0.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\wrappy@1.0.2\\node_modules\\wrappy"
+      ],
+      "license": "ISC",
+      "author": "Isaac Z. Schlueter",
+      "homepage": "https://github.com/npm/wrappy",
+      "description": "Callback wrapping utility"
+    },
+    {
       "name": "yallist",
       "versions": [
         "3.1.1"
@@ -5240,45 +7787,282 @@
       "description": "Yet Another Linked List"
     }
   ],
-  "BSD-3-Clause": [
+  "CC-BY-4.0": [
     {
-      "name": "esquery",
+      "name": "caniuse-lite",
       "versions": [
-        "1.7.0"
+        "1.0.30001810"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\esquery@1.7.0\\node_modules\\esquery"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\caniuse-lite@1.0.30001810\\node_modules\\caniuse-lite"
       ],
-      "license": "BSD-3-Clause",
-      "author": "Joel Feenstra",
-      "homepage": "https://github.com/estools/esquery/",
-      "description": "A query library for ECMAScript AST using a CSS selector like query language."
+      "license": "CC-BY-4.0",
+      "author": "Ben Briggs",
+      "homepage": "https://github.com/browserslist/caniuse-lite#readme",
+      "description": "A smaller version of caniuse-db, with only the essentials!"
+    }
+  ],
+  "BSD-2-Clause": [
+    {
+      "name": "css-select",
+      "versions": [
+        "4.3.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\css-select@4.3.0\\node_modules\\css-select"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/fb55/css-select#readme",
+      "description": "a CSS selector compiler/engine"
     },
     {
-      "name": "source-map-js",
+      "name": "css-what",
       "versions": [
-        "1.2.1"
+        "6.2.2"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\source-map-js@1.2.1\\node_modules\\source-map-js"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\css-what@6.2.2\\node_modules\\css-what"
       ],
-      "license": "BSD-3-Clause",
-      "author": "Valentin 7rulnik Semirulnik",
-      "homepage": "https://github.com/7rulnik/source-map-js",
-      "description": "Generates and consumes source maps"
+      "license": "BSD-2-Clause",
+      "author": "Felix Böhm",
+      "homepage": "https://github.com/fb55/css-what#readme",
+      "description": "a CSS selector parser"
     },
     {
-      "name": "tough-cookie",
+      "name": "damerau-levenshtein",
       "versions": [
-        "6.0.2"
+        "1.0.8"
       ],
       "paths": [
-        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tough-cookie@6.0.2\\node_modules\\tough-cookie"
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\damerau-levenshtein@1.0.8\\node_modules\\damerau-levenshtein"
       ],
-      "license": "BSD-3-Clause",
-      "author": "Jeremy Stashewsky",
-      "homepage": "https://github.com/salesforce/tough-cookie",
-      "description": "RFC6265 Cookies and Cookie Jar for node.js"
+      "license": "BSD-2-Clause",
+      "author": "The Spanish Inquisition",
+      "homepage": "https://github.com/tad-lispy/node-damerau-levenshtein#readme",
+      "description": "Damerau - Levenshtein distance by The Spanish Inquisition + relative distance"
+    },
+    {
+      "name": "domelementtype",
+      "versions": [
+        "2.3.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\domelementtype@2.3.0\\node_modules\\domelementtype"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/fb55/domelementtype#readme",
+      "description": "all the types of nodes in htmlparser2's dom"
+    },
+    {
+      "name": "domhandler",
+      "versions": [
+        "4.3.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\domhandler@4.3.1\\node_modules\\domhandler"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/fb55/domhandler#readme",
+      "description": "Handler for htmlparser2 that turns pages into a dom"
+    },
+    {
+      "name": "domutils",
+      "versions": [
+        "2.8.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\domutils@2.8.0\\node_modules\\domutils"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/fb55/domutils#readme",
+      "description": "Utilities for working with htmlparser2's dom"
+    },
+    {
+      "name": "dotenv",
+      "versions": [
+        "17.4.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\dotenv@17.4.2\\node_modules\\dotenv"
+      ],
+      "license": "BSD-2-Clause",
+      "homepage": "https://github.com/motdotla/dotenv#readme",
+      "description": "Loads environment variables from .env file"
+    },
+    {
+      "name": "entities",
+      "versions": [
+        "2.2.0",
+        "8.0.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\entities@2.2.0\\node_modules\\entities",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\entities@8.0.0\\node_modules\\entities"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/fb55/entities#readme",
+      "description": "Encode & decode XML and HTML entities with ease & speed"
+    },
+    {
+      "name": "eslint-scope",
+      "versions": [
+        "5.1.1",
+        "8.4.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-scope@5.1.1\\node_modules\\eslint-scope",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\eslint-scope@8.4.0\\node_modules\\eslint-scope"
+      ],
+      "license": "BSD-2-Clause",
+      "homepage": "https://github.com/eslint/js/blob/main/packages/eslint-scope/README.md",
+      "description": "ECMAScript scope analyzer for ESLint"
+    },
+    {
+      "name": "espree",
+      "versions": [
+        "10.4.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\espree@10.4.0\\node_modules\\espree"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Nicholas C. Zakas",
+      "homepage": "https://github.com/eslint/js/blob/main/packages/espree/README.md",
+      "description": "An Esprima-compatible JavaScript parser built on Acorn"
+    },
+    {
+      "name": "esprima",
+      "versions": [
+        "4.0.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\esprima@4.0.1\\node_modules\\esprima"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Ariya Hidayat",
+      "homepage": "http://esprima.org",
+      "description": "ECMAScript parsing infrastructure for multipurpose analysis"
+    },
+    {
+      "name": "esrecurse",
+      "versions": [
+        "4.3.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\esrecurse@4.3.0\\node_modules\\esrecurse"
+      ],
+      "license": "BSD-2-Clause",
+      "homepage": "https://github.com/estools/esrecurse",
+      "description": "ECMAScript AST recursive visitor"
+    },
+    {
+      "name": "estraverse",
+      "versions": [
+        "4.3.0",
+        "5.3.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\estraverse@4.3.0\\node_modules\\estraverse",
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\estraverse@5.3.0\\node_modules\\estraverse"
+      ],
+      "license": "BSD-2-Clause",
+      "homepage": "https://github.com/estools/estraverse",
+      "description": "ECMAScript JS AST traversal functions"
+    },
+    {
+      "name": "esutils",
+      "versions": [
+        "2.0.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\esutils@2.0.3\\node_modules\\esutils"
+      ],
+      "license": "BSD-2-Clause",
+      "homepage": "https://github.com/estools/esutils",
+      "description": "utility box for ECMAScript language tools"
+    },
+    {
+      "name": "nth-check",
+      "versions": [
+        "2.1.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\nth-check@2.1.1\\node_modules\\nth-check"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/fb55/nth-check",
+      "description": "Parses and compiles CSS nth-checks to highly optimized functions."
+    },
+    {
+      "name": "terser",
+      "versions": [
+        "5.51.2"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\terser@5.51.2\\node_modules\\terser"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Mihai Bazon",
+      "homepage": "https://terser.org",
+      "description": "JavaScript parser, mangler/compressor and beautifier toolkit for ES6+"
+    },
+    {
+      "name": "uri-js",
+      "versions": [
+        "4.4.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\uri-js@4.4.1\\node_modules\\uri-js"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Gary Court",
+      "homepage": "https://github.com/garycourt/uri-js",
+      "description": "An RFC 3986/3987 compliant, scheme extendable URI/IRI parsing/validating/resolving library for JavaScript."
+    },
+    {
+      "name": "webidl-conversions",
+      "versions": [
+        "8.0.1"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\webidl-conversions@8.0.1\\node_modules\\webidl-conversions"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Domenic Denicola",
+      "homepage": "https://github.com/jsdom/webidl-conversions#readme",
+      "description": "Implements the WebIDL algorithms for converting to and from JavaScript values"
+    }
+  ],
+  "Unlicense": [
+    {
+      "name": "fs-monkey",
+      "versions": [
+        "1.1.0"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\fs-monkey@1.1.0\\node_modules\\fs-monkey"
+      ],
+      "license": "Unlicense",
+      "homepage": "https://github.com/streamich/fs-monkey#readme",
+      "description": "Monkey patches for file system related things."
+    },
+    {
+      "name": "memfs",
+      "versions": [
+        "3.5.3"
+      ],
+      "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\memfs@3.5.3\\node_modules\\memfs"
+      ],
+      "license": "Unlicense",
+      "homepage": "https://github.com/streamich/memfs#readme",
+      "description": "In-memory file-system with Node's fs API."
     }
   ],
   "CC0-1.0": [
@@ -5340,9 +8124,11 @@
     {
       "name": "tslib",
       "versions": [
+        "2.3.0",
         "2.8.1"
       ],
       "paths": [
+        "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tslib@2.3.0\\node_modules\\tslib",
         "D:\\Personal\\Quantitative_Trading\\node_modules\\.pnpm\\tslib@2.8.1\\node_modules\\tslib"
       ],
       "license": "0BSD",

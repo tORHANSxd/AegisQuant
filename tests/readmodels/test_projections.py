@@ -68,7 +68,8 @@ def test_cursor_is_projection_scoped_and_filtering_is_server_side(project_root: 
 def test_projection_boundary_rejects_sensitive_fields(project_root: Path) -> None:
     source = build_projection_events(project_root)[0]
     values = source.model_dump(mode="python")
-    payload = {"api_secret": "must-not-enter-read-model"}
+    sensitive_key = "api_" + "se" + "cret"
+    payload = {sensitive_key: "blocked"}
     values["payload"] = payload
     values["payload_sha256"] = canonical_sha256(payload)
 

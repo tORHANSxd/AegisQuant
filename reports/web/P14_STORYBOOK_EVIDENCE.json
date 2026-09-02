@@ -1,5 +1,6 @@
 {
   "build_command": "pnpm --filter @aegisquant/web build-storybook",
+  "compiler": "@storybook/addon-webpack5-compiler-swc",
   "component_count": 24,
   "components": [
     "MetricTile",
@@ -27,8 +28,8 @@
     "ErrorBoundaryPanel",
     "ExportMenu"
   ],
-  "config_sha256": "913a39c80280fe46e6748f2fe5f96be14901e1ae4ab69f66e97508ab5f76e5d9",
-  "framework": "@storybook/nextjs",
+  "config_sha256": "f99f07eeb4ebacefc8249a6422748a62bff4c88477f7e7a9de0a94bafebe93a4",
+  "framework": "@storybook/react-webpack5",
   "missing_components": [],
   "missing_states": [],
   "schema_version": "p14-storybook-evidence-v1",

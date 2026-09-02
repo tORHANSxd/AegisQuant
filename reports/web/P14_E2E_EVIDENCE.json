@@ -1,7 +1,6 @@
 {
   "api_runtime": "FastAPI on loopback",
   "benchmark": "reports/performance/P14_OVERVIEW_BENCHMARK.json",
-  "benchmark_p75_ms": 88,
   "benchmark_status": "passed",
   "benchmark_target_p75_ms": 1500,
   "browser": "chromium",

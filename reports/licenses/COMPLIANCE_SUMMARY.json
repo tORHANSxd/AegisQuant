@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0.0",
-  "phase": "P13",
+  "phase": "P14",
   "status": "passed",
   "python_component_count": 165,
-  "javascript_component_count": 519,
+  "javascript_component_count": 847,
   "python_unknown_license_count": 0,
   "artifacts": [
     "reports/sbom/python.cdx.json",

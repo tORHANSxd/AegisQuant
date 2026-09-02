@@ -28,6 +28,8 @@ def test_p14_state_is_read_only_live_locked_and_acceptance_deferred(project_root
     assert state["next_phase"] == "P15"
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
+    assert state["implementation_status"] == "implementation_verified_acceptance_deferred"
+    assert state["implementation_commit_sha"] == "55f4d9ed837a7fd71dd94fe4469ff7728d6bf89d"
     assert state["formal_acceptance_deferred"] is True
     assert state["live_trading_locked"] is True
     assert previous["phase"] == "P13"
@@ -108,3 +110,42 @@ def test_p14_story_chart_state_e2e_and_performance_evidence_are_complete(
     assert benchmark["status"] == "passed"
     assert cast("int", benchmark["p75_ms"]) < cast("int", benchmark["target_p75_ms"])
     assert benchmark["qualifies_as_12h_or_24h_acceptance"] is False
+
+
+def test_p14_final_reports_manifest_and_quality_results_are_consistent(
+    project_root: Path,
+) -> None:
+    phase_dir = project_root / "reports/phases/P14"
+    required = (
+        "PLAN.md",
+        "SUMMARY.md",
+        "TEST_RESULTS.json",
+        "RISKS.md",
+        "NEXT_ACTIONS.md",
+        "ADR_REFERENCES.md",
+        "ARTIFACT_MANIFEST.json",
+        "CI_RESULTS.json",
+        "PYTHON_314_CONTRACT.json",
+        "REQUIREMENTS_TRACEABILITY.csv",
+    )
+    assert all((phase_dir / name).is_file() for name in required)
+    assert not (phase_dir / "ACCEPTANCE.md").exists()
+
+    results = _json(phase_dir / "TEST_RESULTS.json")
+    ci = _json(phase_dir / "CI_RESULTS.json")
+    candidate = _json(phase_dir / "PYTHON_314_CONTRACT.json")
+    mutation = _json(project_root / "reports/testing/P14_MUTATION_RESULTS.json")
+    security = _json(project_root / "reports/security/SECURITY_SCAN_RESULTS.json")
+    compliance = _json(project_root / "reports/licenses/COMPLIANCE_SUMMARY.json")
+    manifest = _json(phase_dir / "ARTIFACT_MANIFEST.json")
+
+    assert results["status"] == "passed_implementation_acceptance_deferred"
+    assert results["formal_acceptance"] == "deferred"
+    assert ci["status"] == "passed" and ci["passed_count"] == ci["stage_count"] == 44
+    assert candidate["status"] == "passed"
+    assert mutation["status"] == "passed" and mutation["survived"] == 0
+    assert security["status"] == "passed" and security["secret_finding_count"] == 0
+    assert compliance["status"] == "passed" and compliance["python_unknown_license_count"] == 0
+    assert manifest["phase"] == "P14"
+    assert manifest["implementation_commit"] == results["implementation_commit"]
+    assert cast("int", manifest["artifact_count"]) > 1000

@@ -4,7 +4,11 @@ packages:
 strictPeerDependencies: true
 saveExact: true
 
+overrides:
+  js-yaml: 4.3.2
+
 allowBuilds:
+  "@swc/core@1.16.1": true
   "core-js-pure@3.50.0": false
   "esbuild@0.28.2": true
   "unrs-resolver@1.12.2": true

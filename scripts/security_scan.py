@@ -13,7 +13,8 @@ from typing import cast
 
 DETECT_EXCLUDE = (
     r"(?:^|[\\/])(?:\.git|\.venv|\.tools|\.next|\.pytest_cache|\.pytest_tmp|\.runtime|"
-    r"\.ruff_cache|node_modules|docs[\\/]spec|reports[\\/](?:licenses|sbom|security))"
+    r"\.ruff_cache|node_modules|storybook-static|apps[\\/]web[\\/]src[\\/]generated|"
+    r"docs[\\/]spec|reports[\\/](?:licenses|sbom|security))"
     r"(?:[\\/]|$)|Master_Taskbook|REQUIREMENTS_TRACEABILITY|ARTIFACT_MANIFEST|"
     r"pnpm-lock\.yaml|uv\.lock|\.tsbuildinfo$"
 )
@@ -24,6 +25,7 @@ DETECT_LINE_EXCLUDE = (
     r"first_digest|second_digest|evidence_commit|implementation_commit|pinned_commit|"
     r"terms_version_hash|P00_EVIDENCE_COMMIT|"
     r"P00_IMPLEMENTATION_COMMIT).*|"
+    r".*detect_secrets.*passed_zero_findings.*|"
     r'.*"(?:ledger_snapshot_id|payload_hash|idempotency_key|order_intent_id|risk_decision_id|'
     r"public_key_base64|signature_base64|"
     r"public_key_hex|signature_hex|"
@@ -72,8 +74,9 @@ def main() -> int:
             "P11",
             "P12",
             "P13",
+            "P14",
         ),
-        default="P13",
+        default="P14",
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]

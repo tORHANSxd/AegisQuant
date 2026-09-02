@@ -16,24 +16,78 @@
   ],
   "schema_version": "p14-web-evidence-v1",
   "source_file_count": 18,
-  "source_files_sha256": {
-    "apps/web/app/intelligence/error.tsx": "ac3ac63de96a8b530c37c5a70ef7993332b94abe3623f8a922e6d961a74f74ae",
-    "apps/web/app/intelligence/loading.tsx": "7ce0a322c18bc6e9c45e56539e0191935029cf7ff82b959070f119e2f53d244f",
-    "apps/web/app/intelligence/page.tsx": "0b847ab1c62dee2c85492b22f7cf63101f023ba083deca16bdefff193b04b63e",
-    "apps/web/app/layout.tsx": "ffcbca9d0ca329cfd42b6fa0a46cdf82dfa201b72910bf829304b4b72f6ad34c",
-    "apps/web/app/overview/error.tsx": "8abbd7af187c3f7490f97ffbe924c990b97e8d429f0e83054a573b18dba2d6dd",
-    "apps/web/app/overview/loading.tsx": "9167b527f8c3eeacedb7d2a1a441db1e06b3765e69536cfac31dbe15ba01d11e",
-    "apps/web/app/overview/page.tsx": "c67d82bec4917a7ce1b65f6c3c0aa713c6be977f6d1d9badea995b8c6acd642b",
-    "apps/web/app/page.tsx": "e73b52f24e68d9ecfe88f6fec8db651a7e1a817412dc1fe6b3930735c68e362b",
-    "apps/web/src/components/app-shell.tsx": "f38109f6f62014a6f962fa21fde2218b4c6794ea5dcc69cd03eabc5aca2ff19f",
-    "apps/web/src/components/charts/chart-suite.tsx": "8f01aaf86eaca7fba8140d438538f3bda420b5a2a1c93c94868d2ccbfce4af12",
-    "apps/web/src/components/common.tsx": "7f969dbffcf5288b68e26c631ad4e5929329a30eaae79c4316d80288b486aa11",
-    "apps/web/src/components/component-gallery.stories.tsx": "ebddf9f96b17e68e7da81c4fd1fe8d681979ce2f73e27ec99700034c8993a8e0",
-    "apps/web/src/components/component-gallery.tsx": "50e5d0d0be19e3ec7652dc85cc94767ce714657cbed388836b0cd4fa91e9596f",
-    "apps/web/src/components/data-state.tsx": "259ba5e67672f236234abbc9f2b848932b53a09d898acf7acae1ab88b36b4718",
-    "apps/web/src/components/preferences.tsx": "4a152fb87572c379487cf0733ebfc97e06594c903113e3e3c8697b54b0538229",
-    "apps/web/src/components/realtime-status.tsx": "7ec619bae3b25e56c1ee12cac904f1511aee599467a9093d35919c5f51eb04a5",
-    "apps/web/src/lib/api.ts": "274d93ff53de29173becef27f516923adb783dff437daf98b0a0a327c3a1cc2f",
-    "apps/web/src/lib/realtime.ts": "8b433b1c70e381a2dfd189551792b29e7effc4a058c294fe2e8af92733737058"
-  }
+  "source_files": [
+    {
+      "path": "apps/web/app/intelligence/error.tsx",
+      "sha256": "ac3ac63de96a8b530c37c5a70ef7993332b94abe3623f8a922e6d961a74f74ae"
+    },
+    {
+      "path": "apps/web/app/intelligence/loading.tsx",
+      "sha256": "7ce0a322c18bc6e9c45e56539e0191935029cf7ff82b959070f119e2f53d244f"
+    },
+    {
+      "path": "apps/web/app/intelligence/page.tsx",
+      "sha256": "0b847ab1c62dee2c85492b22f7cf63101f023ba083deca16bdefff193b04b63e"
+    },
+    {
+      "path": "apps/web/app/layout.tsx",
+      "sha256": "ffcbca9d0ca329cfd42b6fa0a46cdf82dfa201b72910bf829304b4b72f6ad34c"
+    },
+    {
+      "path": "apps/web/app/overview/error.tsx",
+      "sha256": "8abbd7af187c3f7490f97ffbe924c990b97e8d429f0e83054a573b18dba2d6dd"
+    },
+    {
+      "path": "apps/web/app/overview/loading.tsx",
+      "sha256": "9167b527f8c3eeacedb7d2a1a441db1e06b3765e69536cfac31dbe15ba01d11e"
+    },
+    {
+      "path": "apps/web/app/overview/page.tsx",
+      "sha256": "c67d82bec4917a7ce1b65f6c3c0aa713c6be977f6d1d9badea995b8c6acd642b"
+    },
+    {
+      "path": "apps/web/app/page.tsx",
+      "sha256": "e73b52f24e68d9ecfe88f6fec8db651a7e1a817412dc1fe6b3930735c68e362b"
+    },
+    {
+      "path": "apps/web/src/components/app-shell.tsx",
+      "sha256": "f38109f6f62014a6f962fa21fde2218b4c6794ea5dcc69cd03eabc5aca2ff19f"
+    },
+    {
+      "path": "apps/web/src/components/charts/chart-suite.tsx",
+      "sha256": "8f01aaf86eaca7fba8140d438538f3bda420b5a2a1c93c94868d2ccbfce4af12"
+    },
+    {
+      "path": "apps/web/src/components/common.tsx",
+      "sha256": "7f969dbffcf5288b68e26c631ad4e5929329a30eaae79c4316d80288b486aa11"
+    },
+    {
+      "path": "apps/web/src/components/component-gallery.stories.tsx",
+      "sha256": "8a2030ec261149a1f7ab4c1ddeb6652c14a8b80a7daa23eb3c68e0d1e59f97b8"
+    },
+    {
+      "path": "apps/web/src/components/component-gallery.tsx",
+      "sha256": "50e5d0d0be19e3ec7652dc85cc94767ce714657cbed388836b0cd4fa91e9596f"
+    },
+    {
+      "path": "apps/web/src/components/data-state.tsx",
+      "sha256": "259ba5e67672f236234abbc9f2b848932b53a09d898acf7acae1ab88b36b4718"
+    },
+    {
+      "path": "apps/web/src/components/preferences.tsx",
+      "sha256": "4a152fb87572c379487cf0733ebfc97e06594c903113e3e3c8697b54b0538229"
+    },
+    {
+      "path": "apps/web/src/components/realtime-status.tsx",
+      "sha256": "7ec619bae3b25e56c1ee12cac904f1511aee599467a9093d35919c5f51eb04a5"
+    },
+    {
+      "path": "apps/web/src/lib/api.ts",
+      "sha256": "274d93ff53de29173becef27f516923adb783dff437daf98b0a0a327c3a1cc2f"
+    },
+    {
+      "path": "apps/web/src/lib/realtime.ts",
+      "sha256": "8b433b1c70e381a2dfd189551792b29e7effc4a058c294fe2e8af92733737058"
+    }
+  ]
 }

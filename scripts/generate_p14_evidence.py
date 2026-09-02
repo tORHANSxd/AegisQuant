@@ -291,7 +291,9 @@ def _web_payload() -> dict[str, object]:
         "csp_nonce_present": "nonce" in proxy.casefold(),
         "csp_frame_ancestors_none": "frame-ancestors 'none'" in proxy,
         "source_file_count": len(files),
-        "source_files_sha256": {path.relative_to(ROOT).as_posix(): _sha256(path) for path in files},
+        "source_files": [
+            {"path": path.relative_to(ROOT).as_posix(), "sha256": _sha256(path)} for path in files
+        ],
         "real_account_connected": False,
         "credential_inputs_present": False,
     }
@@ -304,7 +306,8 @@ def _storybook_payload() -> dict[str, object]:
     )
     return {
         "schema_version": "p14-storybook-evidence-v1",
-        "framework": "@storybook/nextjs",
+        "framework": "@storybook/react-webpack5",
+        "compiler": "@storybook/addon-webpack5-compiler-swc",
         "component_count": len(COMPONENTS),
         "components": list(COMPONENTS),
         "missing_components": [
@@ -396,7 +399,6 @@ def _e2e_payload() -> dict[str, object]:
         "responsive_viewport": {"width": 390, "height": 844},
         "benchmark": "reports/performance/P14_OVERVIEW_BENCHMARK.json",
         "benchmark_status": benchmark["status"],
-        "benchmark_p75_ms": benchmark["p75_ms"],
         "benchmark_target_p75_ms": benchmark["target_p75_ms"],
         "formal_acceptance_performed": False,
         "qualifies_as_12h_or_24h_acceptance": False,
@@ -426,6 +428,12 @@ def _validate(payloads: dict[str, object]) -> None:
     charts = cast("dict[str, object]", payloads["charts"])
     states = cast("dict[str, object]", payloads["states"])
     e2e = cast("dict[str, object]", payloads["e2e"])
+    benchmark = cast(
+        "dict[str, object]",
+        json.loads(
+            (ROOT / "reports/performance/P14_OVERVIEW_BENCHMARK.json").read_text(encoding="utf-8")
+        ),
+    )
     checks = {
         "projection deterministic": projection["deterministic_rebuild"] is True,
         "projection atomic": projection["failed_candidate_left_previous_snapshot_intact"] is True,
@@ -447,7 +455,8 @@ def _validate(payloads: dict[str, object]) -> None:
         "state coverage": states["missing_states"] == [],
         "e2e coverage": cast("int", e2e["test_count"]) >= 4,
         "performance": e2e["benchmark_status"] == "passed"
-        and cast("int", e2e["benchmark_p75_ms"]) < cast("int", e2e["benchmark_target_p75_ms"]),
+        and e2e["benchmark_target_p75_ms"] == benchmark["target_p75_ms"]
+        and cast("int", benchmark["p75_ms"]) < cast("int", benchmark["target_p75_ms"]),
         "acceptance remains deferred": e2e["formal_acceptance_performed"] is False,
     }
     failed = [name for name, passed in checks.items() if not passed]
