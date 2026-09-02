@@ -1,0 +1,372 @@
+{
+  "$defs": {
+    "CanaryScope": {
+      "additionalProperties": false,
+      "properties": {
+        "account_scope_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Account Scope Id"
+        },
+        "instrument_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Instrument Ids",
+          "type": "array"
+        },
+        "selection_status": {
+          "$ref": "#/$defs/SelectionStatus"
+        },
+        "strategy_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Strategy Id"
+        }
+      },
+      "required": [
+        "selection_status",
+        "strategy_id",
+        "account_scope_id",
+        "instrument_ids"
+      ],
+      "title": "CanaryScope",
+      "type": "object"
+    },
+    "CapitalLadder": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "tiers": {
+          "items": {
+            "$ref": "#/$defs/CapitalTier"
+          },
+          "title": "Tiers",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema_version",
+        "tiers"
+      ],
+      "title": "CapitalLadder",
+      "type": "object"
+    },
+    "CapitalLevel": {
+      "enum": [
+        "LOCKED",
+        "CANARY_L1",
+        "CANARY_L2"
+      ],
+      "title": "CapitalLevel",
+      "type": "string"
+    },
+    "CapitalTier": {
+      "additionalProperties": false,
+      "properties": {
+        "activated": {
+          "title": "Activated",
+          "type": "boolean"
+        },
+        "approval_reference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approval Reference"
+        },
+        "effective_capital_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Effective Capital Usd"
+        },
+        "evaluation_window_minutes": {
+          "maximum": 1440,
+          "minimum": 0,
+          "title": "Evaluation Window Minutes",
+          "type": "integer"
+        },
+        "hard_code_capital_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Hard Code Capital Usd"
+        },
+        "level": {
+          "$ref": "#/$defs/CapitalLevel"
+        },
+        "max_daily_loss_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Daily Loss Usd"
+        },
+        "max_duration_minutes": {
+          "maximum": 1440,
+          "minimum": 0,
+          "title": "Max Duration Minutes",
+          "type": "integer"
+        },
+        "max_equity_fraction": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Max Equity Fraction"
+        },
+        "max_gross_notional_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Gross Notional Usd"
+        },
+        "max_single_order_notional_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Single Order Notional Usd"
+        },
+        "separate_live_unlock_required": {
+          "title": "Separate Live Unlock Required",
+          "type": "boolean"
+        },
+        "user_approval_required": {
+          "title": "User Approval Required",
+          "type": "boolean"
+        },
+        "user_policy_capital_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "User Policy Capital Usd"
+        }
+      },
+      "required": [
+        "level",
+        "activated",
+        "hard_code_capital_usd",
+        "user_policy_capital_usd",
+        "effective_capital_usd",
+        "max_gross_notional_usd",
+        "max_single_order_notional_usd",
+        "max_daily_loss_usd",
+        "max_equity_fraction",
+        "max_duration_minutes",
+        "evaluation_window_minutes",
+        "user_approval_required",
+        "separate_live_unlock_required"
+      ],
+      "title": "CapitalTier",
+      "type": "object"
+    },
+    "OperatingCadence": {
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "frequency": {
+          "$ref": "#/$defs/OperatingFrequency"
+        }
+      },
+      "required": [
+        "frequency",
+        "checks"
+      ],
+      "title": "OperatingCadence",
+      "type": "object"
+    },
+    "OperatingFrequency": {
+      "enum": [
+        "DAILY",
+        "WEEKLY",
+        "MONTHLY",
+        "QUARTERLY"
+      ],
+      "title": "OperatingFrequency",
+      "type": "string"
+    },
+    "SelectionStatus": {
+      "enum": [
+        "SELECTED",
+        "NONE_NO_GO"
+      ],
+      "title": "SelectionStatus",
+      "type": "string"
+    },
+    "StopAction": {
+      "enum": [
+        "HALT_CANCEL_RECONCILE_MANUAL_RESUME"
+      ],
+      "title": "StopAction",
+      "type": "string"
+    },
+    "StopComparator": {
+      "enum": [
+        "GREATER_THAN",
+        "GREATER_THAN_OR_EQUAL",
+        "EQUAL",
+        "FALSE"
+      ],
+      "title": "StopComparator",
+      "type": "string"
+    },
+    "StopCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/StopAction"
+        },
+        "automatic": {
+          "title": "Automatic",
+          "type": "boolean"
+        },
+        "comparator": {
+          "$ref": "#/$defs/StopComparator"
+        },
+        "condition_id": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{2,95}$",
+          "title": "Condition Id",
+          "type": "string"
+        },
+        "manual_resume_required": {
+          "title": "Manual Resume Required",
+          "type": "boolean"
+        },
+        "metric": {
+          "title": "Metric",
+          "type": "string"
+        },
+        "threshold": {
+          "title": "Threshold",
+          "type": "string"
+        }
+      },
+      "required": [
+        "condition_id",
+        "metric",
+        "comparator",
+        "threshold",
+        "action",
+        "automatic",
+        "manual_resume_required"
+      ],
+      "title": "StopCondition",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.live-readiness-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "capital_ladder": {
+      "$ref": "#/$defs/CapitalLadder"
+    },
+    "operating_cadence": {
+      "items": {
+        "$ref": "#/$defs/OperatingCadence"
+      },
+      "title": "Operating Cadence",
+      "type": "array"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/CanaryScope"
+    },
+    "stop_conditions": {
+      "items": {
+        "$ref": "#/$defs/StopCondition"
+      },
+      "title": "Stop Conditions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "scope",
+    "capital_ladder",
+    "stop_conditions",
+    "operating_cadence"
+  ],
+  "title": "LiveReadinessPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.live-readiness-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

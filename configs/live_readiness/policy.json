@@ -1,0 +1,170 @@
+{
+  "schema_version": "p18-live-readiness-policy-v1",
+  "scope": {
+    "selection_status": "NONE_NO_GO",
+    "strategy_id": null,
+    "account_scope_id": null,
+    "instrument_ids": []
+  },
+  "capital_ladder": {
+    "schema_version": "p18-capital-ladder-v1",
+    "tiers": [
+      {
+        "level": "LOCKED",
+        "activated": true,
+        "hard_code_capital_usd": "0",
+        "user_policy_capital_usd": "0",
+        "effective_capital_usd": "0",
+        "max_gross_notional_usd": "0",
+        "max_single_order_notional_usd": "0",
+        "max_daily_loss_usd": "0",
+        "max_equity_fraction": "0",
+        "max_duration_minutes": 0,
+        "evaluation_window_minutes": 0,
+        "user_approval_required": true,
+        "separate_live_unlock_required": true,
+        "approval_reference": null
+      },
+      {
+        "level": "CANARY_L1",
+        "activated": false,
+        "hard_code_capital_usd": "100",
+        "user_policy_capital_usd": "0",
+        "effective_capital_usd": "0",
+        "max_gross_notional_usd": "0",
+        "max_single_order_notional_usd": "0",
+        "max_daily_loss_usd": "0",
+        "max_equity_fraction": "0",
+        "max_duration_minutes": 120,
+        "evaluation_window_minutes": 30,
+        "user_approval_required": true,
+        "separate_live_unlock_required": true,
+        "approval_reference": null
+      },
+      {
+        "level": "CANARY_L2",
+        "activated": false,
+        "hard_code_capital_usd": "250",
+        "user_policy_capital_usd": "0",
+        "effective_capital_usd": "0",
+        "max_gross_notional_usd": "0",
+        "max_single_order_notional_usd": "0",
+        "max_daily_loss_usd": "0",
+        "max_equity_fraction": "0",
+        "max_duration_minutes": 240,
+        "evaluation_window_minutes": 60,
+        "user_approval_required": true,
+        "separate_live_unlock_required": true,
+        "approval_reference": null
+      }
+    ]
+  },
+  "stop_conditions": [
+    {
+      "condition_id": "reconciliation_difference",
+      "metric": "unexplained_reconciliation_difference_count",
+      "comparator": "GREATER_THAN",
+      "threshold": "0",
+      "action": "HALT_CANCEL_RECONCILE_MANUAL_RESUME",
+      "automatic": true,
+      "manual_resume_required": true
+    },
+    {
+      "condition_id": "unknown_order_state",
+      "metric": "unknown_order_state_count",
+      "comparator": "GREATER_THAN",
+      "threshold": "0",
+      "action": "HALT_CANCEL_RECONCILE_MANUAL_RESUME",
+      "automatic": true,
+      "manual_resume_required": true
+    },
+    {
+      "condition_id": "daily_loss_limit",
+      "metric": "daily_net_loss_usd",
+      "comparator": "GREATER_THAN_OR_EQUAL",
+      "threshold": "active_tier.max_daily_loss_usd",
+      "action": "HALT_CANCEL_RECONCILE_MANUAL_RESUME",
+      "automatic": true,
+      "manual_resume_required": true
+    },
+    {
+      "condition_id": "market_data_stale",
+      "metric": "critical_market_data_fresh",
+      "comparator": "FALSE",
+      "threshold": "true",
+      "action": "HALT_CANCEL_RECONCILE_MANUAL_RESUME",
+      "automatic": true,
+      "manual_resume_required": true
+    },
+    {
+      "condition_id": "external_alert_delivery_lost",
+      "metric": "external_sev0_sev1_delivery_healthy",
+      "comparator": "FALSE",
+      "threshold": "true",
+      "action": "HALT_CANCEL_RECONCILE_MANUAL_RESUME",
+      "automatic": true,
+      "manual_resume_required": true
+    },
+    {
+      "condition_id": "permission_or_ip_drift",
+      "metric": "account_permissions_and_ip_allowlist_unchanged",
+      "comparator": "FALSE",
+      "threshold": "true",
+      "action": "HALT_CANCEL_RECONCILE_MANUAL_RESUME",
+      "automatic": true,
+      "manual_resume_required": true
+    }
+  ],
+  "operating_cadence": [
+    {
+      "frequency": "DAILY",
+      "checks": [
+        "数据质量与缺口",
+        "账户订单成交仓位与账本对账",
+        "PnL费用资金费率与滑点",
+        "风险状态与事故",
+        "模型新鲜度与漂移",
+        "交易所公告与规则变化",
+        "备份状态"
+      ]
+    },
+    {
+      "frequency": "WEEKLY",
+      "checks": [
+        "策略模型实际与预期偏差",
+        "执行质量",
+        "风险预算",
+        "数据源健康",
+        "失败实验与新假设",
+        "依赖与安全变更",
+        "容量与成本曲线"
+      ]
+    },
+    {
+      "frequency": "MONTHLY",
+      "checks": [
+        "组合归因",
+        "模型校准",
+        "策略相关与重复",
+        "参数与状态稳定",
+        "压力测试",
+        "事故复盘",
+        "数据与云成本",
+        "恢复演练抽查"
+      ]
+    },
+    {
+      "frequency": "QUARTERLY",
+      "checks": [
+        "全依赖升级评估",
+        "交易所 API 契约回归",
+        "权限与密钥轮换",
+        "Provider 采购复审",
+        "模型策略再验证",
+        "威胁模型更新",
+        "灾备恢复演练",
+        "Live 资本上限重新批准"
+      ]
+    }
+  ]
+}

@@ -23,3 +23,6 @@ ADR 一经接受不原地抹除；变化通过新 ADR supersede。每份记录�
 - ADR-0018：P13 Paper、Shadow、Chaos 与稳定性验证政策
 - ADR-0019：P14 Read Model、API、实时流与看板契约
 - ADR-0020：P15 完整工作台、跨域下钻与浏览器性能契约
+- ADR-0021：P16 可观测性、安全、部署与恢复边界
+- ADR-0022：P17 付费 Provider Bake-off 与零采购决策
+- ADR-0023：P18 Canary 硬门、零资本与非授权 Manifest

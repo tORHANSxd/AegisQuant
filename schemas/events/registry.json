@@ -391,6 +391,22 @@
       "schema_name": "aegisquant.provider-trial-plans",
       "schema_version": "1.0.0",
       "sha256": "f5b5a484ccb8beb75cb269c85627ea310e7cc42c4be7233f29c1233a519d0b9d"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.operations.live_readiness.models.LiveReadinessPolicy",
+      "path": "schemas/config/live-readiness-policy-v1.json",
+      "schema_name": "aegisquant.live-readiness-policy",
+      "schema_version": "1.0.0",
+      "sha256": "fa6fb3e9776fe0e58f497c1ddd6595410d6ca4f421387c63d3386c0c8ea5e526"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.operations.live_readiness.models.CanaryReleaseManifest",
+      "path": "schemas/config/canary-release-manifest-v1.json",
+      "schema_name": "aegisquant.canary-release-manifest",
+      "schema_version": "1.0.0",
+      "sha256": "de16efe691277c59dcc9c2397905686073a279ff4250692c0aee97ffc1fb487d"
     }
   ],
   "schema_version": "1.0.0"

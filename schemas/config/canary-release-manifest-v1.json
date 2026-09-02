@@ -1,0 +1,148 @@
+{
+  "$defs": {
+    "CanaryScope": {
+      "additionalProperties": false,
+      "properties": {
+        "account_scope_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Account Scope Id"
+        },
+        "instrument_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Instrument Ids",
+          "type": "array"
+        },
+        "selection_status": {
+          "$ref": "#/$defs/SelectionStatus"
+        },
+        "strategy_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Strategy Id"
+        }
+      },
+      "required": [
+        "selection_status",
+        "strategy_id",
+        "account_scope_id",
+        "instrument_ids"
+      ],
+      "title": "CanaryScope",
+      "type": "object"
+    },
+    "ReadinessDecision": {
+      "enum": [
+        "GO",
+        "NO_GO"
+      ],
+      "title": "ReadinessDecision",
+      "type": "string"
+    },
+    "SelectionStatus": {
+      "enum": [
+        "SELECTED",
+        "NONE_NO_GO"
+      ],
+      "title": "SelectionStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.canary-release-manifest/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "created_at_utc": {
+      "format": "date-time",
+      "title": "Created At Utc",
+      "type": "string"
+    },
+    "decision": {
+      "$ref": "#/$defs/ReadinessDecision"
+    },
+    "expires_at_utc": {
+      "format": "date-time",
+      "title": "Expires At Utc",
+      "type": "string"
+    },
+    "frozen_artifact_sha256": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Frozen Artifact Sha256",
+      "type": "object"
+    },
+    "frozen_versions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Frozen Versions",
+      "type": "object"
+    },
+    "live_trading_locked": {
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "manual_unlock_received": {
+      "title": "Manual Unlock Received",
+      "type": "boolean"
+    },
+    "release_id": {
+      "pattern": "^[a-z0-9][a-z0-9_-]{2,95}$",
+      "title": "Release Id",
+      "type": "string"
+    },
+    "releaseable": {
+      "title": "Releaseable",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/CanaryScope"
+    },
+    "source_commit": {
+      "title": "Source Commit",
+      "type": "string"
+    },
+    "user_approval_received": {
+      "title": "User Approval Received",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "release_id",
+    "source_commit",
+    "created_at_utc",
+    "expires_at_utc",
+    "decision",
+    "scope",
+    "frozen_versions",
+    "frozen_artifact_sha256",
+    "live_trading_locked",
+    "user_approval_received",
+    "manual_unlock_received",
+    "releaseable"
+  ],
+  "title": "CanaryReleaseManifest",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.canary-release-manifest",
+  "x-aegisquant-schema-version": "1.0.0"
+}

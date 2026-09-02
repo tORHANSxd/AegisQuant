@@ -27,6 +27,7 @@ PHASE_CHOICES = (
     "P15",
     "P16",
     "P17",
+    "P18",
 )
 
 
@@ -35,7 +36,7 @@ def main() -> int:
     parser.add_argument(
         "--phase",
         choices=PHASE_CHOICES,
-        default="P17",
+        default="P18",
     )
     args = parser.parse_args()
     included_phases = set(PHASE_CHOICES[: PHASE_CHOICES.index(args.phase) + 1])
@@ -114,6 +115,8 @@ def main() -> int:
         )
     if "P17" in included_phases:
         test_targets.append("tests/p17")
+    if "P18" in included_phases:
+        test_targets.append("tests/p18")
     command = [
         uv,
         "run",

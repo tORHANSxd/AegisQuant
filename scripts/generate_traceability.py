@@ -83,7 +83,7 @@ ARTIFACT_BY_PHASE: Final = {
     "P15": "src/aegisquant/readmodels/; src/aegisquant/api/; apps/web/",
     "P16": "src/aegisquant/observability/; infra/; reports/security/",
     "P17": "reports/data/provider_bakeoff/",
-    "P18": "reports/live_readiness/",
+    "P18": "src/aegisquant/operations/live_readiness/; reports/live_readiness/",
 }
 
 TEST_BY_PHASE: Final = {
@@ -106,7 +106,7 @@ TEST_BY_PHASE: Final = {
     "P15": "tests/p15/; tests/contract/api/; tests/integration/; apps/web/tests/; apps/web/e2e/",
     "P16": "tests/security/; tests/chaos/; tests/integration/",
     "P17": "tests/research/provider_bakeoff/",
-    "P18": "tests/e2e/live_readiness/; tests/chaos/",
+    "P18": "tests/operations/live_readiness/; tests/p18/; tests/chaos/",
 }
 
 REQUIREMENT_OVERRIDES: Final = {

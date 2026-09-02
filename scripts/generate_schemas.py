@@ -114,6 +114,10 @@ from aegisquant.intelligence.collectors import (
     SourceQuotaWindow,
     SourceRequest,
 )
+from aegisquant.operations.live_readiness.models import (
+    CanaryReleaseManifest,
+    LiveReadinessPolicy,
+)
 from aegisquant.research.provider_bakeoff.models import (
     ProviderCandidateCatalog,
     TrialPlanDocument,
@@ -351,6 +355,18 @@ CONFIG_CONTRACTS: Final = (
         "1.0.0",
         TrialPlanDocument,
         Path("provider-trial-plans-v1.json"),
+    ),
+    Contract(
+        "aegisquant.live-readiness-policy",
+        "1.0.0",
+        LiveReadinessPolicy,
+        Path("live-readiness-policy-v1.json"),
+    ),
+    Contract(
+        "aegisquant.canary-release-manifest",
+        "1.0.0",
+        CanaryReleaseManifest,
+        Path("canary-release-manifest-v1.json"),
     ),
 )
 
