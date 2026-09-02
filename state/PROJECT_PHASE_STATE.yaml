@@ -9,7 +9,7 @@ artifact_manifest_sha256: "1766f74982e566ae9a7c14112e0dd8dd47369be36f3921ce67f19
 implementation_status: "implementation_verified_acceptance_deferred"
 implementation_verified_at_utc: "2026-09-02T06:25:14.490484Z"
 implementation_commit_sha: "917eaa958375d042a4cf99e3f9d0efd65d3f1017"
-evidence_commit_sha: null
+evidence_commit_sha: "8fc4dfaeba4874e95e948b6b1908d275546df7dd"
 formal_acceptance_deferred: true
 live_trading_locked: true
 next_phase: null
