@@ -1,0 +1,187 @@
+{
+  "blocked_hard_gate_count": 6,
+  "blocking_reason_codes": [
+    "AQ-P18-ACCOUNT-CONTROLS-NOT-PROVIDED",
+    "AQ-P18-EXTERNAL-ALERT-ONCALL-NOT-VERIFIED",
+    "AQ-P18-NO-APPROVED-STRATEGY",
+    "AQ-P18-OFFSITE-BACKUP-NOT-VERIFIED",
+    "AQ-P18-REAL-TESTNET-NOT-ACCEPTED",
+    "AQ-P18-TARGET-LINUX-RUNTIME-NOT-VERIFIED",
+    "AQ-P18-WALL-CLOCK-ACCEPTANCE-DEFERRED"
+  ],
+  "decision": "NO_GO",
+  "failed_hard_gate_count": 1,
+  "gates": [
+    {
+      "description": "P00-P17 critical requirements are traceable to implementation and verification",
+      "evidence_paths": [
+        "state/REQUIREMENTS_TRACEABILITY.csv"
+      ],
+      "gate_id": "traceability-p00-p17",
+      "hard": true,
+      "reason_codes": [],
+      "status": "PASSED"
+    },
+    {
+      "description": "No unexplained ledger or reconciliation difference remains open",
+      "evidence_paths": [
+        "reports/runtime/P13_RECONCILIATION_EVIDENCE.json",
+        "reports/operations/P16_RESTORE_DRILL.json"
+      ],
+      "gate_id": "ledger-reconciliation-clear",
+      "hard": true,
+      "reason_codes": [],
+      "status": "PASSED"
+    },
+    {
+      "description": "No unhandled SEV0 or SEV1 incident is recorded",
+      "evidence_paths": [
+        "reports/observability/P16_ALERT_EVIDENCE.json",
+        "configs/live_readiness/context.json"
+      ],
+      "gate_id": "no-unhandled-sev0-sev1",
+      "hard": true,
+      "reason_codes": [],
+      "status": "PASSED"
+    },
+    {
+      "description": "Risk, execution mutation and chaos fail-safe behavior passes",
+      "evidence_paths": [
+        "reports/testing/P11_MUTATION_RESULTS.json",
+        "reports/testing/P12_MUTATION_RESULTS.json",
+        "reports/testing/P13_MUTATION_RESULTS.json",
+        "reports/runtime/P13_CHAOS_EVIDENCE.json"
+      ],
+      "gate_id": "risk-execution-mutation-chaos",
+      "hard": true,
+      "reason_codes": [],
+      "status": "PASSED"
+    },
+    {
+      "description": "Live secrets are absent from research and CI",
+      "evidence_paths": [
+        "reports/security/P16_SECURITY_EVIDENCE.json",
+        "reports/security/SECURITY_SCAN_RESULTS.json"
+      ],
+      "gate_id": "live-secret-isolation",
+      "hard": true,
+      "reason_codes": [],
+      "status": "PASSED"
+    },
+    {
+      "description": "Canary capital is bounded by the lower code and user policy caps",
+      "evidence_paths": [
+        "configs/live_readiness/policy.json"
+      ],
+      "gate_id": "capital-dual-hard-cap",
+      "hard": true,
+      "reason_codes": [],
+      "status": "PASSED"
+    },
+    {
+      "description": "No real order is possible without a separate manual unlock flow",
+      "evidence_paths": [
+        "configs/live_readiness/context.json",
+        "tests/p18/test_phase_evidence.py"
+      ],
+      "gate_id": "manual-unlock-no-real-orders",
+      "hard": true,
+      "reason_codes": [],
+      "status": "PASSED"
+    },
+    {
+      "description": "At most one fully evidenced strategy and bounded instrument scope is selected",
+      "evidence_paths": [
+        "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+        "reports/data/P07_HOLDOUT_EVIDENCE.json",
+        "configs/live_readiness/policy.json"
+      ],
+      "gate_id": "approved-strategy-scope",
+      "hard": true,
+      "reason_codes": [
+        "AQ-P18-NO-APPROVED-STRATEGY"
+      ],
+      "status": "FAILED"
+    },
+    {
+      "description": "Dedicated low-balance, no-withdrawal, IP allowlisted least-privilege account exists",
+      "evidence_paths": [
+        "configs/live_readiness/context.json"
+      ],
+      "gate_id": "dedicated-account-controls",
+      "hard": true,
+      "reason_codes": [
+        "AQ-P18-ACCOUNT-CONTROLS-NOT-PROVIDED"
+      ],
+      "status": "BLOCKED_EXTERNAL_INPUT"
+    },
+    {
+      "description": "Real Testnet duration, fills, reconciliation and fault evidence passes",
+      "evidence_paths": [
+        "reports/execution/P12_TESTNET_CAPABILITY.json",
+        "reports/runtime/P13_STABILITY_EVIDENCE.json"
+      ],
+      "gate_id": "real-testnet-duration-fills",
+      "hard": true,
+      "reason_codes": [
+        "AQ-P18-REAL-TESTNET-NOT-ACCEPTED"
+      ],
+      "status": "BLOCKED_EXTERNAL_INPUT"
+    },
+    {
+      "description": "External SEV0/SEV1 delivery and human on-call window are verified",
+      "evidence_paths": [
+        "reports/observability/P16_ALERT_EVIDENCE.json",
+        "configs/live_readiness/context.json"
+      ],
+      "gate_id": "external-alert-and-oncall",
+      "hard": true,
+      "reason_codes": [
+        "AQ-P18-EXTERNAL-ALERT-ONCALL-NOT-VERIFIED"
+      ],
+      "status": "BLOCKED_EXTERNAL_INPUT"
+    },
+    {
+      "description": "Target Linux container runtime and image behavior are verified",
+      "evidence_paths": [
+        "reports/deployment/P16_DEPLOYMENT_EVIDENCE.json"
+      ],
+      "gate_id": "target-linux-runtime",
+      "hard": true,
+      "reason_codes": [
+        "AQ-P18-TARGET-LINUX-RUNTIME-NOT-VERIFIED"
+      ],
+      "status": "BLOCKED_EXTERNAL_INPUT"
+    },
+    {
+      "description": "Encrypted backup exists on a distinct offsite device and restores successfully",
+      "evidence_paths": [
+        "reports/operations/P16_RESTORE_DRILL.json"
+      ],
+      "gate_id": "offsite-backup",
+      "hard": true,
+      "reason_codes": [
+        "AQ-P18-OFFSITE-BACKUP-NOT-VERIFIED"
+      ],
+      "status": "BLOCKED_EXTERNAL_INPUT"
+    },
+    {
+      "description": "Required wall-clock stability acceptance is complete",
+      "evidence_paths": [
+        "reports/runtime/P13_STABILITY_EVIDENCE.json"
+      ],
+      "gate_id": "wall-clock-stability",
+      "hard": true,
+      "reason_codes": [
+        "AQ-P18-WALL-CLOCK-ACCEPTANCE-DEFERRED"
+      ],
+      "status": "BLOCKED_EXTERNAL_INPUT"
+    }
+  ],
+  "hard_gate_count": 14,
+  "live_trading_locked": true,
+  "manual_unlock_received": false,
+  "passed_hard_gate_count": 7,
+  "real_order_capability": false,
+  "weighted_score_used": false
+}

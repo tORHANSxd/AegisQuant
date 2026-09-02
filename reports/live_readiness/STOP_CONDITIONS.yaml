@@ -1,0 +1,45 @@
+schema_version: p18-stop-conditions-v1
+live_trading_locked: true
+conditions:
+- condition_id: reconciliation_difference
+  metric: unexplained_reconciliation_difference_count
+  comparator: GREATER_THAN
+  threshold: '0'
+  action: HALT_CANCEL_RECONCILE_MANUAL_RESUME
+  automatic: true
+  manual_resume_required: true
+- condition_id: unknown_order_state
+  metric: unknown_order_state_count
+  comparator: GREATER_THAN
+  threshold: '0'
+  action: HALT_CANCEL_RECONCILE_MANUAL_RESUME
+  automatic: true
+  manual_resume_required: true
+- condition_id: daily_loss_limit
+  metric: daily_net_loss_usd
+  comparator: GREATER_THAN_OR_EQUAL
+  threshold: active_tier.max_daily_loss_usd
+  action: HALT_CANCEL_RECONCILE_MANUAL_RESUME
+  automatic: true
+  manual_resume_required: true
+- condition_id: market_data_stale
+  metric: critical_market_data_fresh
+  comparator: 'FALSE'
+  threshold: 'true'
+  action: HALT_CANCEL_RECONCILE_MANUAL_RESUME
+  automatic: true
+  manual_resume_required: true
+- condition_id: external_alert_delivery_lost
+  metric: external_sev0_sev1_delivery_healthy
+  comparator: 'FALSE'
+  threshold: 'true'
+  action: HALT_CANCEL_RECONCILE_MANUAL_RESUME
+  automatic: true
+  manual_resume_required: true
+- condition_id: permission_or_ip_drift
+  metric: account_permissions_and_ip_allowlist_unchanged
+  comparator: 'FALSE'
+  threshold: 'true'
+  action: HALT_CANCEL_RECONCILE_MANUAL_RESUME
+  automatic: true
+  manual_resume_required: true

@@ -1,0 +1,16 @@
+{
+  "credential_reference_present": false,
+  "credential_values_accessed": false,
+  "dedicated_subaccount_verified": false,
+  "ip_allowlist_verified": false,
+  "least_privilege_verified": false,
+  "live_trading_locked": true,
+  "low_balance_verified": false,
+  "plaintext_credentials_requested_or_written": false,
+  "real_account_connections": 0,
+  "real_order_requests": 0,
+  "research_or_ci_live_secret_access": false,
+  "schema_version": "p18-account-capability-evidence-v1",
+  "state": "AWAITING_GO_PREREQUISITES_AND_USER_CONFIGURATION",
+  "withdrawal_disabled_verified": false
+}

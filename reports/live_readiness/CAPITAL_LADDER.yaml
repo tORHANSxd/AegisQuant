@@ -1,0 +1,48 @@
+schema_version: p18-capital-ladder-evidence-v1
+decision: NO_GO
+active_level: LOCKED
+active_effective_capital_usd: '0'
+activation_requires_all_hard_gates: true
+tiers:
+- level: LOCKED
+  activated: true
+  hard_code_capital_usd: '0'
+  user_policy_capital_usd: '0'
+  effective_capital_usd: '0'
+  max_gross_notional_usd: '0'
+  max_single_order_notional_usd: '0'
+  max_daily_loss_usd: '0'
+  max_equity_fraction: '0'
+  max_duration_minutes: 0
+  evaluation_window_minutes: 0
+  user_approval_required: true
+  separate_live_unlock_required: true
+  approval_reference: null
+- level: CANARY_L1
+  activated: false
+  hard_code_capital_usd: '100'
+  user_policy_capital_usd: '0'
+  effective_capital_usd: '0'
+  max_gross_notional_usd: '0'
+  max_single_order_notional_usd: '0'
+  max_daily_loss_usd: '0'
+  max_equity_fraction: '0'
+  max_duration_minutes: 120
+  evaluation_window_minutes: 30
+  user_approval_required: true
+  separate_live_unlock_required: true
+  approval_reference: null
+- level: CANARY_L2
+  activated: false
+  hard_code_capital_usd: '250'
+  user_policy_capital_usd: '0'
+  effective_capital_usd: '0'
+  max_gross_notional_usd: '0'
+  max_single_order_notional_usd: '0'
+  max_daily_loss_usd: '0'
+  max_equity_fraction: '0'
+  max_duration_minutes: 240
+  evaluation_window_minutes: 60
+  user_approval_required: true
+  separate_live_unlock_required: true
+  approval_reference: null

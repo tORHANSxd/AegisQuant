@@ -1,0 +1,14 @@
+{
+  "historical_paper_shadow_semantics_equal": true,
+  "injected_reconciliation_difference_posture": "HALTED",
+  "paper_virtual_fill_count": 1,
+  "real_account_access_performed": false,
+  "real_canary_preproduction_run_performed": false,
+  "restore_status": "passed",
+  "restore_verification_equal": true,
+  "schema_version": "p18-preproduction-evidence-v1",
+  "shadow_write_capability": false,
+  "startup_reconciliation_status": "CLEAR",
+  "tampered_ciphertext_rejected": true,
+  "unexplained_reconciliation_difference_count": 0
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P18",
+  "generated_at_utc": "2026-09-02T06:25:14.490484Z",
+  "implementation_commit": "917eaa958375d042a4cf99e3f9d0efd65d3f1017",
+  "status": "passed_implementation_acceptance_deferred",
+  "readiness_decision": "NO_GO",
+  "ci": {
+    "status": "passed",
+    "stage_count": 55,
+    "passed_count": 55,
+    "failed_count": 0
+  },
+  "python_313": {
+    "runtime": "3.13.15",
+    "passed": 684,
+    "failed": 0,
+    "warnings": 11
+  },
+  "python_314_candidate": {
+    "runtime": "3.14.7",
+    "passed": 645,
+    "failed": 0,
+    "warnings": 11
+  },
+  "p18_targeted_tests": {
+    "passed": 17,
+    "failed": 0
+  },
+  "p18_mutation": {
+    "mutants_total": 6,
+    "killed": 6,
+    "survived": 0,
+    "invalid": 0,
+    "score": 1.0,
+    "threshold": 1.0
+  },
+  "traceability": {
+    "p00_p17_requirement_count": 384,
+    "p00_p17_traceable_count": 384,
+    "incomplete_requirement_count": 0,
+    "global_requirement_count": 466,
+    "p18_task_count": 14,
+    "p18_verified_task_count": 14,
+    "p18_acceptance_count": 7,
+    "p18_acceptance_status": "in_progress"
+  },
+  "readiness": {
+    "hard_gate_count": 14,
+    "passed_hard_gate_count": 7,
+    "failed_hard_gate_count": 1,
+    "blocked_hard_gate_count": 6,
+    "weighted_score_used": false,
+    "selected_strategy_count": 0,
+    "selected_account_scope_count": 0,
+    "selected_instrument_count": 0,
+    "active_effective_capital_usd": "0",
+    "real_order_capability": false,
+    "manual_unlock_received": false
+  },
+  "manifest": {
+    "source_commit": "917eaa958375d042a4cf99e3f9d0efd65d3f1017",
+    "expires_within_hours": 4,
+    "signature_verified": true,
+    "key_trust": "UNTRUSTED_TEST_EVIDENCE_KEY",
+    "authorization_capability": false,
+    "releaseable": false
+  },
+  "preproduction": {
+    "historical_paper_shadow_semantics_equal": true,
+    "startup_reconciliation_status": "CLEAR",
+    "injected_difference_posture": "HALTED",
+    "unexplained_reconciliation_difference_count": 0,
+    "chaos_drill_count": 6,
+    "real_testnet_acceptance": "blocked_external_input"
+  },
+  "security_and_compliance": {
+    "bandit_findings": 0,
+    "secret_findings": 0,
+    "python_dependency_audit": "passed",
+    "javascript_dependency_audit": "passed",
+    "container_iac_policy": "passed",
+    "python_component_count": 170,
+    "javascript_component_count": 847,
+    "python_unknown_license_count": 0,
+    "sbom_generation": "passed"
+  },
+  "quality_gates": {
+    "ruff_format": "passed",
+    "ruff_lint": "passed",
+    "pyright_strict": "passed",
+    "schema_contracts": "passed_95_artifacts",
+    "postgres_runtime": "passed",
+    "nautilus_compatibility": "passed",
+    "web_lint_typecheck_unit_storybook_build_e2e": "passed"
+  },
+  "formal_acceptance": "deferred",
+  "wall_clock_12h_or_24h_executed": false,
+  "formal_acceptance_performed": false,
+  "live_trading_locked": true,
+  "real_account_access_performed": false,
+  "real_account_connections": 0,
+  "real_order_requests": 0,
+  "venue_network_requests_performed": 0,
+  "plaintext_secret_requested_or_written": false
+}
