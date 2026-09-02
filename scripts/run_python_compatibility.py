@@ -11,28 +11,32 @@ import time
 from datetime import UTC, datetime
 from pathlib import Path
 
+PHASE_CHOICES = (
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+)
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--phase",
-        choices=(
-            "P03",
-            "P04",
-            "P05",
-            "P06",
-            "P07",
-            "P08",
-            "P09",
-            "P10",
-            "P11",
-            "P12",
-            "P13",
-            "P14",
-        ),
-        default="P14",
+        choices=PHASE_CHOICES,
+        default="P15",
     )
     args = parser.parse_args()
+    included_phases = set(PHASE_CHOICES[: PHASE_CHOICES.index(args.phase) + 1])
     root = Path(__file__).resolve().parents[1]
     local_uv = root / ".tools/uv-bootstrap/Scripts/uv.exe"
     uv = shutil.which("uv") or (str(local_uv) if local_uv.is_file() else None)
@@ -49,23 +53,23 @@ def main() -> int:
         "tests/performance",
         "tests/security",
     ]
-    if args.phase in {"P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
+    if "P04" in included_phases:
         test_targets.extend(("tests/replay/intelligence", "tests/p04"))
-    if args.phase in {"P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
+    if "P05" in included_phases:
         test_targets.extend(("tests/p05", "tests/mutation"))
-    if args.phase in {"P06", "P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
+    if "P06" in included_phases:
         test_targets.append("tests/p06")
-    if args.phase in {"P07", "P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
+    if "P07" in included_phases:
         test_targets.extend(("tests/research", "tests/p07"))
-    if args.phase in {"P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
+    if "P08" in included_phases:
         test_targets.append("tests/p08")
-    if args.phase in {"P09", "P10", "P11", "P12", "P13", "P14"}:
+    if "P09" in included_phases:
         test_targets.extend(("tests/intelligence", "tests/p09"))
-    if args.phase in {"P10", "P11", "P12", "P13", "P14"}:
+    if "P10" in included_phases:
         test_targets.append("tests/p10")
-    if args.phase in {"P11", "P12", "P13", "P14"}:
+    if "P11" in included_phases:
         test_targets.extend(("tests/portfolio", "tests/risk", "tests/p11"))
-    if args.phase in {"P12", "P13", "P14"}:
+    if "P12" in included_phases:
         test_targets.extend(
             (
                 "tests/execution",
@@ -73,7 +77,7 @@ def main() -> int:
                 "tests/p12",
             )
         )
-    if args.phase in {"P13", "P14"}:
+    if "P13" in included_phases:
         test_targets.extend(
             (
                 "tests/runtime",
@@ -82,13 +86,20 @@ def main() -> int:
                 "tests/p13",
             )
         )
-    if args.phase == "P14":
+    if "P14" in included_phases:
         test_targets.extend(
             (
                 "tests/readmodels",
                 "tests/integration/test_p14_dashboard_flow.py",
                 "tests/integration/test_p14_readmodels.py",
                 "tests/p14",
+            )
+        )
+    if "P15" in included_phases:
+        test_targets.extend(
+            (
+                "tests/integration/test_p15_workbench.py",
+                "tests/p15",
             )
         )
     command = [

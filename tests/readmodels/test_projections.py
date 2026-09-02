@@ -21,7 +21,20 @@ def test_rebuild_is_deterministic_and_every_record_has_provenance(project_root: 
     assert first.content_sha256 == second.content_sha256
     assert len(first.records) == 15
     assert len(first.checkpoints) == 12
-    assert {item.projection for item in first.records} == set(ProjectionKind)
+    assert {item.projection for item in first.records} == {
+        ProjectionKind.ACCOUNT_OVERVIEW,
+        ProjectionKind.DAILY_PNL,
+        ProjectionKind.POSITIONS_CURRENT,
+        ProjectionKind.RISK_SUMMARY,
+        ProjectionKind.STRATEGIES,
+        ProjectionKind.MODELS,
+        ProjectionKind.ORDERS,
+        ProjectionKind.DATA_HEALTH,
+        ProjectionKind.EVENT_CLUSTERS,
+        ProjectionKind.EVENT_CLAIMS,
+        ProjectionKind.NARRATIVE_STATES,
+        ProjectionKind.SOURCE_POLICY_STATUS,
+    }
     for record in first.records:
         assert record.as_of_time <= record.projected_at
         assert record.source_watermark

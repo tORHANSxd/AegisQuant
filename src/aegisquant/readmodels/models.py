@@ -1,4 +1,4 @@
-"""Strict P14 Read Model envelopes and projection payload schemas."""
+"""Strict P14/P15 Read Model envelopes and projection payload schemas."""
 
 from __future__ import annotations
 
@@ -48,6 +48,18 @@ class ProjectionKind(StrEnum):
     EVENT_CLAIMS = "rm_event_claims"
     NARRATIVE_STATES = "rm_narrative_states"
     SOURCE_POLICY_STATUS = "rm_source_policy_status"
+    PNL_ATTRIBUTION = "rm_pnl_attribution"
+    RISK_LIMITS = "rm_risk_limits"
+    MODEL_METRICS = "rm_model_metrics"
+    SIGNALS = "rm_signals"
+    FILLS = "rm_fills"
+    EXECUTION_QUALITY = "rm_execution_quality"
+    MARKET_STATE = "rm_market_state"
+    RESEARCH_RUNS = "rm_research_runs"
+    INCIDENTS = "rm_incidents"
+    SYSTEM_HEALTH = "rm_system_health"
+    RECONCILIATION_STATUS = "rm_reconciliation_status"
+    ORDER_TRACES = "rm_order_traces"
 
 
 class QualityState(StrEnum):
@@ -237,6 +249,295 @@ class SourcePolicyPayload(DomainModel):
     reason_codes: tuple[str, ...] = Field(min_length=1)
 
 
+class PnLAttributionPayload(DomainModel):
+    account_id: str = Field(min_length=1, max_length=128)
+    reporting_asset_id: str = Field(min_length=1, max_length=32)
+    gross_trading_pnl: FiniteDecimal
+    trading_fees: NonNegativeDecimal
+    spread_cost: NonNegativeDecimal
+    slippage_cost: NonNegativeDecimal
+    impact_cost: NonNegativeDecimal
+    funding: FiniteDecimal
+    borrow_interest: NonNegativeDecimal
+    net_pnl: FiniteDecimal
+    formula: Literal[
+        "gross_trading_pnl - trading_fees - spread_cost - slippage_cost - impact_cost "
+        "+ funding - borrow_interest"
+    ]
+    source_scope: str = Field(min_length=1, max_length=128)
+
+
+class RiskLimitPayload(DomainModel):
+    limit_id: str = Field(min_length=1, max_length=128)
+    policy_id: str = Field(min_length=1, max_length=128)
+    metric: str = Field(min_length=1, max_length=128)
+    current_value: FiniteDecimal
+    limit_value: NonNegativeDecimal
+    headroom: FiniteDecimal
+    unit: Literal["fraction", "score"]
+    breached: bool
+    example_values_only: Literal[True]
+    live_editable: Literal[False]
+
+
+class ModelMetricPayload(DomainModel):
+    model_id: str = Field(min_length=1, max_length=128)
+    family: str = Field(min_length=1, max_length=128)
+    modality: str = Field(min_length=1, max_length=64)
+    metric_name: str = Field(min_length=1, max_length=64)
+    metric_value: FiniteDecimal
+    evaluation_state: str = Field(min_length=1, max_length=64)
+    selected: bool
+    train_seconds: NonNegativeDecimal
+    peak_memory_mb: NonNegativeDecimal
+    abstain_or_failure_reason: str | None = Field(default=None, max_length=512)
+    final_holdout_opened: Literal[False]
+    alpha_claimed: Literal[False]
+
+
+class SignalPayload(DomainModel):
+    signal_id: str = Field(min_length=1, max_length=255)
+    proposal_id: str = Field(min_length=1, max_length=255)
+    strategy_id: str = Field(min_length=1, max_length=128)
+    instrument_id: str = Field(min_length=1, max_length=255)
+    normalized_signal: FiniteDecimal
+    current_weight: FiniteDecimal
+    target_weight: FiniteDecimal
+    delta_weight: FiniteDecimal
+    expected_return_contribution: FiniteDecimal
+    estimated_impact_bps: NonNegativeDecimal
+    valid_until: UtcDateTime
+    environment_stage: Literal["PAPER"]
+    order_capability: Literal[False]
+
+
+class FillPayload(DomainModel):
+    fill_id: str = Field(min_length=1, max_length=255)
+    order_id: str = Field(min_length=1, max_length=255)
+    order_intent_id: str = Field(min_length=1, max_length=255)
+    instrument_id: str = Field(min_length=1, max_length=255)
+    side: Literal["BUY", "SELL"]
+    quantity: NonNegativeDecimal
+    reference_price: FiniteDecimal
+    execution_price: FiniteDecimal
+    fee: NonNegativeDecimal
+    fee_asset_id: str = Field(min_length=1, max_length=32)
+    liquidity_role: str = Field(min_length=1, max_length=64)
+    event_time: UtcDateTime
+    available_at: UtcDateTime
+    ingest_time: UtcDateTime
+    latency_ns: int = Field(ge=0)
+    virtual: Literal[True]
+
+
+class ExecutionQualityPayload(DomainModel):
+    strategy_id: str = Field(min_length=1, max_length=128)
+    observation_count: int = Field(ge=0)
+    fill_rate: UnitInterval
+    mean_adverse_slippage_bps: FiniteDecimal
+    p95_adverse_slippage_bps: FiniteDecimal
+    reconciliation_difference_count: int = Field(ge=0)
+    rejection_count: int = Field(ge=0)
+    restart_count: int = Field(ge=0)
+    degraded_cycle_count: int = Field(ge=0)
+    production_capacity_claimed: Literal[False]
+    testnet_pnl_included: Literal[False]
+
+
+class CandlePoint(DomainModel):
+    time: UtcDateTime
+    open: FiniteDecimal
+    high: FiniteDecimal
+    low: FiniteDecimal
+    close: FiniteDecimal
+    volume: NonNegativeDecimal
+
+    @model_validator(mode="after")
+    def validate_prices(self) -> Self:
+        if self.high < max(self.open, self.close) or self.low > min(self.open, self.close):
+            raise ValueError("candle OHLC bounds are inconsistent")
+        if self.high < self.low:
+            raise ValueError("candle high cannot be below low")
+        return self
+
+
+class ReplayMarker(DomainModel):
+    time: UtcDateTime
+    marker_type: Literal["EVENT", "DECISION", "FILL", "EVALUATION"]
+    entity_id: str = Field(min_length=1, max_length=255)
+    label: str = Field(min_length=1, max_length=256)
+    price: FiniteDecimal
+    source_artifact: str
+    synthetic: Literal[False]
+
+    @model_validator(mode="after")
+    def validate_source(self) -> Self:
+        safe_relative_path(self.source_artifact)
+        return self
+
+
+class MarketStatePayload(DomainModel):
+    market_id: str = Field(min_length=1, max_length=255)
+    instrument_id: str = Field(min_length=1, max_length=255)
+    venue_id: str = Field(min_length=1, max_length=64)
+    data_kind: Literal["HISTORICAL_REPLAY", "NORMALIZED_QUOTE_REPLAY", "PUBLIC_FIXTURE"]
+    bar_semantics: Literal["OHLC", "QUOTE_ENVELOPE"]
+    mark_price: FiniteDecimal | None = None
+    index_price: FiniteDecimal | None = None
+    basis: FiniteDecimal | None = None
+    funding_rate: FiniteDecimal | None = None
+    open_interest: NonNegativeDecimal | None = None
+    candles: tuple[CandlePoint, ...]
+    replay_markers: tuple[ReplayMarker, ...]
+    recommendation_provided: Literal[False]
+
+
+class ResearchMetric(DomainModel):
+    name: str = Field(min_length=1, max_length=128)
+    value: FiniteDecimal
+
+
+class ResearchRunPayload(DomainModel):
+    run_id: str = Field(min_length=1, max_length=255)
+    model_id: str = Field(min_length=1, max_length=128)
+    status: Literal["SUCCEEDED", "FAILED", "ERROR", "PRUNED"]
+    started_at: UtcDateTime
+    finished_at: UtcDateTime
+    metrics: tuple[ResearchMetric, ...]
+    failure_reason: str | None = Field(default=None, max_length=512)
+    promotion_decision: str = Field(min_length=1, max_length=64)
+    code_commit: str = Field(min_length=40, max_length=64)
+    dataset_sha256: str
+    split_sha256: str
+    ai_proposed: bool
+    final_holdout_opened: Literal[False]
+
+    @model_validator(mode="after")
+    def validate_hashes(self) -> Self:
+        ensure_sha256(self.dataset_sha256, field_name="dataset_sha256")
+        ensure_sha256(self.split_sha256, field_name="split_sha256")
+        return self
+
+
+class IncidentTimelinePoint(DomainModel):
+    sequence: int = Field(ge=1)
+    occurred_at: UtcDateTime
+    event_type: str = Field(min_length=1, max_length=64)
+    state: str = Field(min_length=1, max_length=64)
+    evidence_ids: tuple[str, ...] = Field(min_length=1)
+    operator_action_required: bool
+
+
+class IncidentPayload(DomainModel):
+    incident_id: str = Field(min_length=1, max_length=255)
+    severity: Literal["SEV0", "SEV1", "SEV2", "SEV3"]
+    fault_kind: str = Field(min_length=1, max_length=64)
+    status: str = Field(min_length=1, max_length=64)
+    risk_state: str = Field(min_length=1, max_length=64)
+    reason_code: str = Field(min_length=1, max_length=128)
+    runbook_path: str
+    new_risk_allowed: Literal[False]
+    real_funds_impacted: Literal[False]
+    postmortem_required: bool
+    checkpoint_verified: bool
+    reconciliation_clear: bool
+    duplicate_fill_count: int = Field(ge=0)
+    duplicate_order_count: int = Field(ge=0)
+    timeline: tuple[IncidentTimelinePoint, ...] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def validate_runbook(self) -> Self:
+        safe_relative_path(self.runbook_path)
+        sequences = tuple(item.sequence for item in self.timeline)
+        if sequences != tuple(range(1, len(sequences) + 1)):
+            raise ValueError("incident timeline sequence must be contiguous")
+        return self
+
+
+class SystemHealthPayload(DomainModel):
+    service_id: str = Field(min_length=1, max_length=128)
+    status: Literal["READY", "DEGRADED", "ERROR"]
+    version: str = Field(min_length=1, max_length=64)
+    checked_at: UtcDateTime
+    check_name: str = Field(min_length=1, max_length=128)
+    detail: str = Field(min_length=1, max_length=512)
+    historical_check: Literal[True]
+    live_trading_locked: Literal[True]
+
+
+class ReconciliationPayload(DomainModel):
+    account_id: str = Field(min_length=1, max_length=128)
+    venue_id: str = Field(min_length=1, max_length=64)
+    state: str = Field(min_length=1, max_length=64)
+    applied: bool
+    last_sequence: int = Field(ge=0)
+    sequence_gap: bool
+    unknown_local_fill_count: int = Field(ge=0)
+    unknown_local_order_count: int = Field(ge=0)
+    unknown_venue_fill_count: int = Field(ge=0)
+    unknown_venue_order_count: int = Field(ge=0)
+    captured_at: UtcDateTime
+    reason_codes: tuple[str, ...] = Field(min_length=1)
+
+
+TraceStageName = Literal[
+    "SIGNAL",
+    "EVENT_EVIDENCE",
+    "MODEL",
+    "RISK",
+    "ORDER",
+    "FILL",
+    "LEDGER",
+]
+
+
+class OrderTraceStage(DomainModel):
+    sequence: int = Field(ge=1, le=7)
+    stage: TraceStageName
+    status: Literal["VERIFIED", "NOT_APPLICABLE", "NOT_AVAILABLE"]
+    entity_id: str | None = Field(default=None, max_length=255)
+    source_artifact: str
+    explanation: str = Field(min_length=1, max_length=512)
+
+    @model_validator(mode="after")
+    def validate_source(self) -> Self:
+        safe_relative_path(self.source_artifact)
+        if self.status == "VERIFIED" and self.entity_id is None:
+            raise ValueError("verified trace stage requires an entity id")
+        return self
+
+
+class OrderTracePayload(DomainModel):
+    order_id: str = Field(min_length=1, max_length=255)
+    account_id: str = Field(min_length=1, max_length=128)
+    strategy_id: str = Field(min_length=1, max_length=128)
+    instrument_id: str = Field(min_length=1, max_length=255)
+    decision_time: UtcDateTime
+    stages: tuple[OrderTraceStage, ...] = Field(min_length=7, max_length=7)
+    complete: bool
+    causal_link_overclaimed: Literal[False]
+
+    @model_validator(mode="after")
+    def validate_trace(self) -> Self:
+        expected = (
+            "SIGNAL",
+            "EVENT_EVIDENCE",
+            "MODEL",
+            "RISK",
+            "ORDER",
+            "FILL",
+            "LEDGER",
+        )
+        if tuple(item.stage for item in self.stages) != expected:
+            raise ValueError("order trace stages must use the canonical order")
+        if tuple(item.sequence for item in self.stages) != tuple(range(1, 8)):
+            raise ValueError("order trace sequence must be contiguous")
+        expected_complete = all(item.status != "NOT_AVAILABLE" for item in self.stages)
+        if self.complete != expected_complete:
+            raise ValueError("order trace completeness does not match stage availability")
+        return self
+
+
 PayloadModel = (
     AccountOverviewPayload
     | DailyPnLPayload
@@ -250,6 +551,18 @@ PayloadModel = (
     | ClaimEvidencePayload
     | NarrativePayload
     | SourcePolicyPayload
+    | PnLAttributionPayload
+    | RiskLimitPayload
+    | ModelMetricPayload
+    | SignalPayload
+    | FillPayload
+    | ExecutionQualityPayload
+    | MarketStatePayload
+    | ResearchRunPayload
+    | IncidentPayload
+    | SystemHealthPayload
+    | ReconciliationPayload
+    | OrderTracePayload
 )
 
 PAYLOAD_MODELS: Final[dict[ProjectionKind, type[DomainModel]]] = {
@@ -265,6 +578,18 @@ PAYLOAD_MODELS: Final[dict[ProjectionKind, type[DomainModel]]] = {
     ProjectionKind.EVENT_CLAIMS: ClaimEvidencePayload,
     ProjectionKind.NARRATIVE_STATES: NarrativePayload,
     ProjectionKind.SOURCE_POLICY_STATUS: SourcePolicyPayload,
+    ProjectionKind.PNL_ATTRIBUTION: PnLAttributionPayload,
+    ProjectionKind.RISK_LIMITS: RiskLimitPayload,
+    ProjectionKind.MODEL_METRICS: ModelMetricPayload,
+    ProjectionKind.SIGNALS: SignalPayload,
+    ProjectionKind.FILLS: FillPayload,
+    ProjectionKind.EXECUTION_QUALITY: ExecutionQualityPayload,
+    ProjectionKind.MARKET_STATE: MarketStatePayload,
+    ProjectionKind.RESEARCH_RUNS: ResearchRunPayload,
+    ProjectionKind.INCIDENTS: IncidentPayload,
+    ProjectionKind.SYSTEM_HEALTH: SystemHealthPayload,
+    ProjectionKind.RECONCILIATION_STATUS: ReconciliationPayload,
+    ProjectionKind.ORDER_TRACES: OrderTracePayload,
 }
 
 

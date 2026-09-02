@@ -1,0 +1,2196 @@
+{
+  "checkpoints": [
+    {
+      "last_sequence": 1,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_account_overview",
+      "record_count": 1,
+      "source_watermark": "1:a59931869a2973adc504ce57091f75eba020dda277eb1de79bdcd1c9bff528d9",
+      "state_sha256": "1e71573ee6ac0d8ca813ead67b7ad4f2a44e7ac43eaf8f00be89dd610e0b6a32"
+    },
+    {
+      "last_sequence": 2,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_daily_pnl",
+      "record_count": 1,
+      "source_watermark": "2:cc105b9f7d7ffdc4bd830358010fe7da06969391ad013b0cc25dc90380140ef5",
+      "state_sha256": "cb41b9bf52ad9dcf4bbc6b89f7662cc729df9b024cdb1f63b397d59285962ad2"
+    },
+    {
+      "last_sequence": 11,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_data_health",
+      "record_count": 2,
+      "source_watermark": "11:a5a600f560f43ce44accc8134191ec88a3d8ba5be7858847121f8365c333f725",
+      "state_sha256": "6410511116234ab3b90a26c1190ca4376f1823f23945c86e02695ee10997b6c5"
+    },
+    {
+      "last_sequence": 14,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_event_claims",
+      "record_count": 1,
+      "source_watermark": "14:ebcb77c55b8c8ba517dffce3030f6086025f8294009f88ce9daf7b9b16ad9934",
+      "state_sha256": "196db197326e9a08ba2434f9a1a31f647e86a2c7d121c673ddb6d84bc32fa9fb"
+    },
+    {
+      "last_sequence": 13,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_event_clusters",
+      "record_count": 1,
+      "source_watermark": "13:0ad182b5e1cd48c4e1baa39d4c87f98a1f4023e10406ffb6d5b2f41f4b0b3b54",
+      "state_sha256": "47786f3d51eb1ee19151bded775b352800c3a933c24fc2265c534893a358f7aa"
+    },
+    {
+      "last_sequence": 34,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_execution_quality",
+      "record_count": 1,
+      "source_watermark": "34:1e8598746157a3fbcf5156b5ff6bea4d92305021f9fec45e28b8b621f548bf98",
+      "state_sha256": "2147323495c6180a7b5ce86fae8669e145f608f001fffb6705fc908751615e77"
+    },
+    {
+      "last_sequence": 33,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_fills",
+      "record_count": 2,
+      "source_watermark": "33:230022c62c4c39513a942a89865dd4759b7cb77d5e9a9f0c425af80e26b23cbb",
+      "state_sha256": "c3114d0f503e691454aaddfa103d5cbb1dddc864dccf361df17ac876139b2d56"
+    },
+    {
+      "last_sequence": 46,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_incidents",
+      "record_count": 6,
+      "source_watermark": "46:ba3494bef858cca4c32487992ecaec1a2a9bc8019a742e52907331cb4b6ba7b0",
+      "state_sha256": "e0b4cf31b008e8e5602984078259cc96a59bc0deb6c7043cfec0678a6e36551c"
+    },
+    {
+      "last_sequence": 37,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_market_state",
+      "record_count": 3,
+      "source_watermark": "37:1bb6d107b36a82c98ec331442d186a119ff944d470a45e52f0d9004952f363ad",
+      "state_sha256": "6c5970d811ca8b97613be0924f793d5a42624410d1476c82a4768c418c4eff43"
+    },
+    {
+      "last_sequence": 29,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_model_metrics",
+      "record_count": 8,
+      "source_watermark": "29:0255f4ca91afb014ffd7f903fa6fe7ab40c03ac0a67a0a62d742862d4587101e",
+      "state_sha256": "0c402240661a3732d0e6dc38447ebd73fab3df936a617e3150ef9bb74bd66557"
+    },
+    {
+      "last_sequence": 6,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_models",
+      "record_count": 1,
+      "source_watermark": "6:e802667d576d6e9d2ad34aa7d6db82b11be62d28a8ef56b781f3c3fca744edeb",
+      "state_sha256": "ffbf4b8ee1a0c2acb8a84c13cab2ed7d03babc14c06a874a59480b4ec69d023d"
+    },
+    {
+      "last_sequence": 15,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_narrative_states",
+      "record_count": 1,
+      "source_watermark": "15:192752f402cd257626362798846c2179ef0adffc14c0e9c9d6de44bb31cbc074",
+      "state_sha256": "985d868341b57d479209ba176969baa96853c5728b3b0d258ab1f2ece1159cea"
+    },
+    {
+      "last_sequence": 52,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_order_traces",
+      "record_count": 2,
+      "source_watermark": "52:596f580b56c373ee9050da79903fbba2d6f0eb6b76b9b6500aac5cf568917354",
+      "state_sha256": "e1a943cc8dd290f18a5bc2fe444323d3382db138def51d7aabe98ed2bf7d3d2d"
+    },
+    {
+      "last_sequence": 8,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_orders",
+      "record_count": 2,
+      "source_watermark": "8:0298c7406d4f7c9dd9d4db306a9591b557f20f00bd226eaedd5170b5fea16f3d",
+      "state_sha256": "c78bc3c071a78f9c732cc20da46b0c7c550ea91ab42de918f2d846b1269e046c"
+    },
+    {
+      "last_sequence": 16,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_pnl_attribution",
+      "record_count": 1,
+      "source_watermark": "16:73c0d7f714700c1a811594714ef9864ad92e5f202e5093ef9b57cc23d30cba9a",
+      "state_sha256": "f2d8808171c3ca08dd900b8ec61782d89b887e96c146853fdfbb5e03f95c0812"
+    },
+    {
+      "last_sequence": 3,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_positions_current",
+      "record_count": 1,
+      "source_watermark": "3:7d21cf0ed0f785a027d9f500a1c246a06bdb1f6213e9abdda860f1b20dcf39b7",
+      "state_sha256": "e9950d2b5e11334a117b02c6487ae9c2de788f9b913824eace4f5bb2112e47c3"
+    },
+    {
+      "last_sequence": 50,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_reconciliation_status",
+      "record_count": 1,
+      "source_watermark": "50:199602752172463d246db20323cec42653e18e985cc8f5227cc43bf877f9883f",
+      "state_sha256": "c70f340e56b64a2044aa6023ee588ed59e698ecf466b18a8cc6f1f5d9a677095"
+    },
+    {
+      "last_sequence": 40,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_research_runs",
+      "record_count": 3,
+      "source_watermark": "40:dfa29e7542837996dce9ffc6fb41c7f49c3a0a1d4ecf290695f8b7d8e22a895d",
+      "state_sha256": "5a1a02e73e4b162dccc93585edff8cf3690671c07dbb99728020df7a13363394"
+    },
+    {
+      "last_sequence": 21,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_risk_limits",
+      "record_count": 5,
+      "source_watermark": "21:d6f85381aab1b8fb9af77bad3079c71ece3b3ab14a8e00d0245709c2b5876595",
+      "state_sha256": "812d60ac2a290330d0c9073b2e6ce60556187844d904316255946dcbc871f7d7"
+    },
+    {
+      "last_sequence": 4,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_risk_summary",
+      "record_count": 1,
+      "source_watermark": "4:b72413ef3eb971b3976552519cf78069c2e0a4ea54057ccbd8b5940dd1b2a74c",
+      "state_sha256": "4708f7bd5e325a07fdb076bded72c724c0a3ec961e75af504d37cb028e594986"
+    },
+    {
+      "last_sequence": 31,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_signals",
+      "record_count": 2,
+      "source_watermark": "31:a147185c04a2f6ceaf16ffa50bfe78cbcab3620adb27ac99778c6dba5a024f0e",
+      "state_sha256": "e2a284729f7e5206f0d0ead9fd582dc2842287cdc8c59f6f4b112525e6dfba35"
+    },
+    {
+      "last_sequence": 12,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_source_policy_status",
+      "record_count": 2,
+      "source_watermark": "12:154735497e189f47df74ee7ccdff40190ac8b8c322c34c84c1b7b1b60970922d",
+      "state_sha256": "5c06ce179ce509d3d33852a2200fbf183188c0c56a038d0211087d26cf7d7db8"
+    },
+    {
+      "last_sequence": 5,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_strategies",
+      "record_count": 1,
+      "source_watermark": "5:3c7b246ee2ec95a802804cddd9c1439a079a5bc1262db296b34405ca32c140d7",
+      "state_sha256": "72716dbf52733fde5f55606bc195d972fca7425ac010ef281d3c971a40da332e"
+    },
+    {
+      "last_sequence": 49,
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_system_health",
+      "record_count": 3,
+      "source_watermark": "49:2a173447791cf49579fd4b089921105d18606622225a47b3e0de97b5bf71d770",
+      "state_sha256": "b5e25ead6e403078d8f74cca0d48ca03304d2fbc6d89c97bc04a684197e0797c"
+    }
+  ],
+  "content_sha256": "5d470c9d4046544f9b8a009601b3c99898f89c5ab70fdf7296899e55d25c3af3",
+  "rebuild_id": "9d4aaf1133dcc955b06b5d93e03246bf2d198768db249ad0b0c2935f5a3209ae",
+  "rebuilt_at": "2026-09-02T00:15:41.360000Z",
+  "records": [
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "64c9a8b9f538362923f2b68fdb920bd748c5fa9440bcc72b133cd5edcb6fae3b",
+      "entity_id": "paper-account",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "cash": "10001.889840136",
+        "environment": "RESEARCH",
+        "equity": "10001.889840136",
+        "equity_curve": [
+          {
+            "time": "2026-09-01T08:00:00Z",
+            "value": "10000"
+          },
+          {
+            "time": "2026-09-01T08:00:01Z",
+            "value": "9999.945453132"
+          },
+          {
+            "time": "2026-09-01T08:00:03Z",
+            "value": "10001.889840136"
+          },
+          {
+            "time": "2026-09-01T08:00:05Z",
+            "value": "10001.889840136"
+          }
+        ],
+        "gross_exposure": "0",
+        "last_reconciliation_at": "2026-09-01T08:00:05Z",
+        "leverage": "0",
+        "live_trading_locked": true,
+        "margin_utilization": "0",
+        "net_exposure": "0",
+        "open_order_count": 0,
+        "reporting_asset_id": "USDT",
+        "source_scope": "P06 deterministic historical replay",
+        "unknown_order_count": 0
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_account_overview",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/equity_curve.parquet",
+      "source_sequence": 1,
+      "source_sha256": "364af555899cc7f8832065b1cf3e2d5b5580c4485468ae8f74f54b23944fa5da",
+      "source_watermark": "1:a59931869a2973adc504ce57091f75eba020dda277eb1de79bdcd1c9bff528d9"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "9e2edff4490f96da0b75b3eac72d7115960cf4e4ef1c6088db36a5bd128cad2c",
+      "entity_id": "paper-account:2026-09-01",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "business_date": "2026-09-01",
+        "fees": "0.040799864",
+        "funding": "0",
+        "net": "1.889840136",
+        "pnl_curve": [
+          {
+            "time": "2026-09-01T08:00:00Z",
+            "value": "0"
+          },
+          {
+            "time": "2026-09-01T08:00:01Z",
+            "value": "-0.054546868"
+          },
+          {
+            "time": "2026-09-01T08:00:03Z",
+            "value": "1.889840136"
+          },
+          {
+            "time": "2026-09-01T08:00:05Z",
+            "value": "1.889840136"
+          }
+        ],
+        "realized": "2.000000000",
+        "reporting_asset_id": "USDT",
+        "source_scope": "P06 deterministic historical replay",
+        "unrealized": "0"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_daily_pnl",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/pnl_attribution.parquet",
+      "source_sequence": 2,
+      "source_sha256": "409304a0ffbd595791be5e0717677082ac693d75088d4791e883829bbb478dca",
+      "source_watermark": "2:cc105b9f7d7ffdc4bd830358010fe7da06969391ad013b0cc25dc90380140ef5"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "d80514c83d7e82231f474c9df59097c220c8694220cf1cd8218610d663c33a3d",
+      "entity_id": "gdelt",
+      "estimated": false,
+      "payload": {
+        "gap_count": 0,
+        "last_success_at": "2026-09-01T18:00:00Z",
+        "latency_ms": null,
+        "policy_status": "RISK_ONLY",
+        "provider_id": "gdelt",
+        "reason_codes": [
+          "NO_EVENT_INCREMENT",
+          "POSITIVE_RISK_INCREMENT"
+        ],
+        "state": "STALE"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_data_health",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 9,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "9:2ab48eedb0e58ae9b6be904ed3b3fbd4beba3de34952ff80088ab5eaa51c7e4a"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "a442181a16a0891350bce67f0ee9de8a80f767b012f586a74f11c0829b858af4",
+      "entity_id": "x",
+      "estimated": false,
+      "payload": {
+        "gap_count": 1,
+        "last_success_at": null,
+        "latency_ms": null,
+        "policy_status": "RETIRE",
+        "provider_id": "x",
+        "reason_codes": [
+          "LOW_COVERAGE_OR_RELIABILITY"
+        ],
+        "state": "DEGRADED"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_data_health",
+      "quality_state": "DEGRADED",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 11,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "11:a5a600f560f43ce44accc8134191ec88a3d8ba5be7858847121f8365c333f725"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "a29ec68366a9ca6d4b69616f0e1ea9b249f7cebb9772fd9eaef3916bc8149a79",
+      "entity_id": "evidence-1",
+      "estimated": false,
+      "payload": {
+        "available_at": "2026-09-01T18:00:00Z",
+        "claim_id": "claim-1",
+        "event_cluster_id": "event-cluster-1",
+        "evidence_id": "evidence-1",
+        "lawful_excerpt_available": false,
+        "model_version": "committee-p10-v1",
+        "policy_id": "official_web_catalog_v1",
+        "relation": "SUPPORTS",
+        "source_family_id": "official-family"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_event_claims",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 14,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "14:ebcb77c55b8c8ba517dffce3030f6086025f8294009f88ce9daf7b9b16ad9934"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": false,
+      "content_sha256": "28c762b95eea7deaac0e29fb1830417ddedeb101deedd22e3f7a8be6af09b86e",
+      "entity_id": "event-cluster-1",
+      "estimated": true,
+      "payload": {
+        "affected_assets": [
+          "BTC",
+          "ETH"
+        ],
+        "confidence": "0.7",
+        "event_cluster_id": "event-cluster-1",
+        "evidence_ids": [
+          "evidence-1"
+        ],
+        "impact_1d": "0.00047025",
+        "impact_30m": "0.00015675",
+        "impact_4h": "0.00031350",
+        "impact_5m": "0.00006270",
+        "impact_7d": "0.00062700",
+        "impact_score": "0.2",
+        "independent_family_count": 2,
+        "price_led_event": true,
+        "risk_action": "CAUTION",
+        "status": "CONFIRMED"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_event_clusters",
+      "quality_state": "ESTIMATED",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P10_FUSION_EVIDENCE.json",
+      "source_sequence": 13,
+      "source_sha256": "b4578a59f3d1dba98850680c54b9b91a05ed86ac76503c8a223f53e7fbe6abd1",
+      "source_watermark": "13:0ad182b5e1cd48c4e1baa39d4c87f98a1f4023e10406ffb6d5b2f41f4b0b3b54"
+    },
+    {
+      "as_of_time": "2026-09-01T20:00:03Z",
+      "authoritative": true,
+      "content_sha256": "b2ff0426649c26feb1b6d3f056cf44ab1aae6d81556ada1936b3680184c73cdd",
+      "entity_id": "strategy-p12",
+      "estimated": false,
+      "payload": {
+        "degraded_cycle_count": 6,
+        "fill_rate": "0.6666666666666666666666666667",
+        "mean_adverse_slippage_bps": "2.0000",
+        "observation_count": 3,
+        "p95_adverse_slippage_bps": "2.0000",
+        "production_capacity_claimed": false,
+        "reconciliation_difference_count": 1,
+        "rejection_count": 0,
+        "restart_count": 1,
+        "strategy_id": "strategy-p12",
+        "testnet_pnl_included": false
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_execution_quality",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/runtime/P13_SCORECARD.json",
+      "source_sequence": 34,
+      "source_sha256": "2cd28bb3afce584a89d5f20b295794ac6815b88a25d0c6cd2dabe8944590e7af",
+      "source_watermark": "34:1e8598746157a3fbcf5156b5ff6bea4d92305021f9fec45e28b8b621f548bf98"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:01Z",
+      "authoritative": true,
+      "content_sha256": "3dd4e0abc9b89adc29d4b5610e53c853b8b310253a134cb6fe6fc68ccd6550d9",
+      "entity_id": "simfill:benchmark-1:1",
+      "estimated": false,
+      "payload": {
+        "available_at": "2026-09-01T08:00:01Z",
+        "event_time": "2026-09-01T08:00:01Z",
+        "execution_price": "101.03434",
+        "fee": "0.020206868",
+        "fee_asset_id": "USDT",
+        "fill_id": "simfill:benchmark-1:1",
+        "ingest_time": "2026-09-01T08:00:01.001000Z",
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "latency_ns": 1000000000,
+        "liquidity_role": "TAKER",
+        "order_id": "benchmark-1",
+        "order_intent_id": "benchmark-intent-1",
+        "quantity": "1",
+        "reference_price": "101",
+        "side": "BUY",
+        "virtual": true
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_fills",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/fills.parquet",
+      "source_sequence": 32,
+      "source_sha256": "f97aa4494f01c532d472a08f5ad891be85dee0cb3caca653ca7b47ecb1f9141c",
+      "source_watermark": "32:caadfe39fb8285131d0f2afbd29f0eef8bf177cddc5ac18d6403234e90367a75"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:03Z",
+      "authoritative": true,
+      "content_sha256": "b728beac7b5f85ae25f650e8900233ea424803218b9957fde14af7a3f4c56380",
+      "entity_id": "simfill:benchmark-2:1",
+      "estimated": false,
+      "payload": {
+        "available_at": "2026-09-01T08:00:03Z",
+        "event_time": "2026-09-01T08:00:03Z",
+        "execution_price": "102.96498",
+        "fee": "0.020592996",
+        "fee_asset_id": "USDT",
+        "fill_id": "simfill:benchmark-2:1",
+        "ingest_time": "2026-09-01T08:00:03.001000Z",
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "latency_ns": 1000000000,
+        "liquidity_role": "TAKER",
+        "order_id": "benchmark-2",
+        "order_intent_id": "benchmark-intent-2",
+        "quantity": "1",
+        "reference_price": "103",
+        "side": "SELL",
+        "virtual": true
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_fills",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/fills.parquet",
+      "source_sequence": 33,
+      "source_sha256": "f97aa4494f01c532d472a08f5ad891be85dee0cb3caca653ca7b47ecb1f9141c",
+      "source_watermark": "33:230022c62c4c39513a942a89865dd4759b7cb77d5e9a9f0c425af80e26b23cbb"
+    },
+    {
+      "as_of_time": "2026-09-01T20:00:01Z",
+      "authoritative": true,
+      "content_sha256": "fc7148bf0528050febd39cfc3a92995a2baf03196de1ce0f67192850e074adc9",
+      "entity_id": "P13-clock-drill",
+      "estimated": false,
+      "payload": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "fault_kind": "CLOCK",
+        "incident_id": "P13-clock-drill",
+        "new_risk_allowed": false,
+        "postmortem_required": true,
+        "real_funds_impacted": false,
+        "reason_code": "AQ-RUNTIME-CLOCK-FAULT",
+        "reconciliation_clear": true,
+        "risk_state": "HALTED",
+        "runbook_path": "docs/runbooks/CLOCK_DRIFT.md",
+        "severity": "SEV1",
+        "status": "RECOVERED",
+        "timeline": [
+          {
+            "event_type": "DETECTED",
+            "evidence_ids": [
+              "alert-P13-clock-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:01Z",
+            "operator_action_required": true,
+            "sequence": 1,
+            "state": "HALTED"
+          },
+          {
+            "event_type": "RECOVERED",
+            "evidence_ids": [
+              "recovery-P13-clock-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:02Z",
+            "operator_action_required": false,
+            "sequence": 2,
+            "state": "RUNNING"
+          }
+        ]
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_incidents",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/runtime/P13_INCIDENT_DRILLS.json",
+      "source_sequence": 45,
+      "source_sha256": "923b2dee3d57e6ae75dd80548ec13b03c149d71d5391c4bd0b87b051163b8861",
+      "source_watermark": "45:62a52a0a6de3eeadd0111e8c0df35f24f2628f0f35372f4f02167ad2c16771ec"
+    },
+    {
+      "as_of_time": "2026-09-01T20:00:01Z",
+      "authoritative": true,
+      "content_sha256": "a7bd360f670a783d22c5b11f3c9592f2b7d091dd3cca0296181055186168e0d4",
+      "entity_id": "P13-data_source-drill",
+      "estimated": false,
+      "payload": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "fault_kind": "DATA_SOURCE",
+        "incident_id": "P13-data_source-drill",
+        "new_risk_allowed": false,
+        "postmortem_required": true,
+        "real_funds_impacted": false,
+        "reason_code": "AQ-RUNTIME-DATA_SOURCE-FAULT",
+        "reconciliation_clear": true,
+        "risk_state": "DEGRADED",
+        "runbook_path": "docs/runbooks/DATA_STALE.md",
+        "severity": "SEV1",
+        "status": "RECOVERED",
+        "timeline": [
+          {
+            "event_type": "DETECTED",
+            "evidence_ids": [
+              "alert-P13-data_source-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:01Z",
+            "operator_action_required": true,
+            "sequence": 1,
+            "state": "DEGRADED"
+          },
+          {
+            "event_type": "RECOVERED",
+            "evidence_ids": [
+              "recovery-P13-data_source-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:02Z",
+            "operator_action_required": false,
+            "sequence": 2,
+            "state": "RUNNING"
+          }
+        ]
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_incidents",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/runtime/P13_INCIDENT_DRILLS.json",
+      "source_sequence": 44,
+      "source_sha256": "923b2dee3d57e6ae75dd80548ec13b03c149d71d5391c4bd0b87b051163b8861",
+      "source_watermark": "44:1879ca5e1d6782bd049720323a00044934fd2c2e705942ba1226f7a61c68fa22"
+    },
+    {
+      "as_of_time": "2026-09-01T20:00:01Z",
+      "authoritative": true,
+      "content_sha256": "a2110a8df446062c059ede5ed7e89ad271929cc2ddeda91b860b60318220a688",
+      "entity_id": "P13-database-drill",
+      "estimated": false,
+      "payload": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "fault_kind": "DATABASE",
+        "incident_id": "P13-database-drill",
+        "new_risk_allowed": false,
+        "postmortem_required": true,
+        "real_funds_impacted": false,
+        "reason_code": "AQ-RUNTIME-DATABASE-FAULT",
+        "reconciliation_clear": true,
+        "risk_state": "HALTED",
+        "runbook_path": "docs/runbooks/DATABASE_FAILURE.md",
+        "severity": "SEV0",
+        "status": "RECOVERED",
+        "timeline": [
+          {
+            "event_type": "DETECTED",
+            "evidence_ids": [
+              "alert-P13-database-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:01Z",
+            "operator_action_required": true,
+            "sequence": 1,
+            "state": "HALTED"
+          },
+          {
+            "event_type": "RECOVERED",
+            "evidence_ids": [
+              "recovery-P13-database-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:02Z",
+            "operator_action_required": false,
+            "sequence": 2,
+            "state": "RUNNING"
+          }
+        ]
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_incidents",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/runtime/P13_INCIDENT_DRILLS.json",
+      "source_sequence": 42,
+      "source_sha256": "923b2dee3d57e6ae75dd80548ec13b03c149d71d5391c4bd0b87b051163b8861",
+      "source_watermark": "42:ed88ab691df11cde29d91baa2ef53e5fc7664902cebf3cb8b51dec6d2f9ccc06"
+    },
+    {
+      "as_of_time": "2026-09-01T20:00:01Z",
+      "authoritative": true,
+      "content_sha256": "e76a186a654bc93661b69a8955b5d26fcb56863aa404b0ac8388ad0e60d22bb5",
+      "entity_id": "P13-model-drill",
+      "estimated": false,
+      "payload": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "fault_kind": "MODEL",
+        "incident_id": "P13-model-drill",
+        "new_risk_allowed": false,
+        "postmortem_required": true,
+        "real_funds_impacted": false,
+        "reason_code": "AQ-RUNTIME-MODEL-FAULT",
+        "reconciliation_clear": true,
+        "risk_state": "DEGRADED",
+        "runbook_path": "docs/runbooks/MODEL_DRIFT.md",
+        "severity": "SEV1",
+        "status": "RECOVERED",
+        "timeline": [
+          {
+            "event_type": "DETECTED",
+            "evidence_ids": [
+              "alert-P13-model-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:01Z",
+            "operator_action_required": true,
+            "sequence": 1,
+            "state": "DEGRADED"
+          },
+          {
+            "event_type": "RECOVERED",
+            "evidence_ids": [
+              "recovery-P13-model-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:02Z",
+            "operator_action_required": false,
+            "sequence": 2,
+            "state": "RUNNING"
+          }
+        ]
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_incidents",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/runtime/P13_INCIDENT_DRILLS.json",
+      "source_sequence": 43,
+      "source_sha256": "923b2dee3d57e6ae75dd80548ec13b03c149d71d5391c4bd0b87b051163b8861",
+      "source_watermark": "43:83113b62c6a7b196d953f0e685defc88f4427c735860e03ea918339f95b82429"
+    },
+    {
+      "as_of_time": "2026-09-01T20:00:01Z",
+      "authoritative": true,
+      "content_sha256": "608b610841ee17ea800dedfb54fed33031cf50d72e86045c146d697cd31a70e1",
+      "entity_id": "P13-network-drill",
+      "estimated": false,
+      "payload": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "fault_kind": "NETWORK",
+        "incident_id": "P13-network-drill",
+        "new_risk_allowed": false,
+        "postmortem_required": true,
+        "real_funds_impacted": false,
+        "reason_code": "AQ-RUNTIME-NETWORK-FAULT",
+        "reconciliation_clear": true,
+        "risk_state": "DEGRADED",
+        "runbook_path": "docs/runbooks/VENUE_DISCONNECT.md",
+        "severity": "SEV1",
+        "status": "RECOVERED",
+        "timeline": [
+          {
+            "event_type": "DETECTED",
+            "evidence_ids": [
+              "alert-P13-network-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:01Z",
+            "operator_action_required": true,
+            "sequence": 1,
+            "state": "DEGRADED"
+          },
+          {
+            "event_type": "RECOVERED",
+            "evidence_ids": [
+              "recovery-P13-network-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:02Z",
+            "operator_action_required": false,
+            "sequence": 2,
+            "state": "RUNNING"
+          }
+        ]
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_incidents",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/runtime/P13_INCIDENT_DRILLS.json",
+      "source_sequence": 41,
+      "source_sha256": "923b2dee3d57e6ae75dd80548ec13b03c149d71d5391c4bd0b87b051163b8861",
+      "source_watermark": "41:72be5a07c896055efda73aca74e18004b229d3fcee3f302b10545000d1d6da39"
+    },
+    {
+      "as_of_time": "2026-09-01T20:00:01Z",
+      "authoritative": true,
+      "content_sha256": "3d4e33ced7f066e1311561cee138c74bb28829d6592a54f5b50e7ee3627630e3",
+      "entity_id": "P13-process-drill",
+      "estimated": false,
+      "payload": {
+        "checkpoint_verified": true,
+        "duplicate_fill_count": 0,
+        "duplicate_order_count": 0,
+        "fault_kind": "PROCESS",
+        "incident_id": "P13-process-drill",
+        "new_risk_allowed": false,
+        "postmortem_required": true,
+        "real_funds_impacted": false,
+        "reason_code": "AQ-RUNTIME-PROCESS-FAULT",
+        "reconciliation_clear": true,
+        "risk_state": "RECOVERING",
+        "runbook_path": "docs/runbooks/PROCESS_CRASH.md",
+        "severity": "SEV0",
+        "status": "RECOVERED",
+        "timeline": [
+          {
+            "event_type": "DETECTED",
+            "evidence_ids": [
+              "alert-P13-process-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:01Z",
+            "operator_action_required": true,
+            "sequence": 1,
+            "state": "RECOVERING"
+          },
+          {
+            "event_type": "RECOVERED",
+            "evidence_ids": [
+              "recovery-P13-process-drill"
+            ],
+            "occurred_at": "2026-09-01T20:00:02Z",
+            "operator_action_required": false,
+            "sequence": 2,
+            "state": "RUNNING"
+          }
+        ]
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_incidents",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/runtime/P13_INCIDENT_DRILLS.json",
+      "source_sequence": 46,
+      "source_sha256": "923b2dee3d57e6ae75dd80548ec13b03c149d71d5391c4bd0b87b051163b8861",
+      "source_watermark": "46:ba3494bef858cca4c32487992ecaec1a2a9bc8019a742e52907331cb4b6ba7b0"
+    },
+    {
+      "as_of_time": "2024-01-31T19:10:00Z",
+      "authoritative": true,
+      "content_sha256": "5b0a8db58dac9bf62ea3989ab56740e34f05a07d6e43441e8ec857b006ac6cb7",
+      "entity_id": "BINANCE:BTCUSDT:1m:FOMC-2024-01-31",
+      "estimated": false,
+      "payload": {
+        "bar_semantics": "OHLC",
+        "basis": null,
+        "candles": [
+          {
+            "close": "43511.24000000",
+            "high": "43528.63000000",
+            "low": "43511.24000000",
+            "open": "43528.63000000",
+            "time": "2024-01-31T18:50:00Z",
+            "volume": "13.82184000"
+          },
+          {
+            "close": "43491.10000000",
+            "high": "43511.25000000",
+            "low": "43491.10000000",
+            "open": "43511.24000000",
+            "time": "2024-01-31T18:51:00Z",
+            "volume": "12.62558000"
+          },
+          {
+            "close": "43497.33000000",
+            "high": "43506.00000000",
+            "low": "43486.85000000",
+            "open": "43491.10000000",
+            "time": "2024-01-31T18:52:00Z",
+            "volume": "20.32500000"
+          },
+          {
+            "close": "43480.02000000",
+            "high": "43497.34000000",
+            "low": "43474.13000000",
+            "open": "43497.34000000",
+            "time": "2024-01-31T18:53:00Z",
+            "volume": "18.78567000"
+          },
+          {
+            "close": "43504.61000000",
+            "high": "43504.62000000",
+            "low": "43480.02000000",
+            "open": "43480.03000000",
+            "time": "2024-01-31T18:54:00Z",
+            "volume": "21.25893000"
+          },
+          {
+            "close": "43509.23000000",
+            "high": "43511.10000000",
+            "low": "43491.11000000",
+            "open": "43504.62000000",
+            "time": "2024-01-31T18:55:00Z",
+            "volume": "21.78942000"
+          },
+          {
+            "close": "43503.71000000",
+            "high": "43509.24000000",
+            "low": "43496.12000000",
+            "open": "43509.24000000",
+            "time": "2024-01-31T18:56:00Z",
+            "volume": "14.05337000"
+          },
+          {
+            "close": "43498.19000000",
+            "high": "43503.75000000",
+            "low": "43498.18000000",
+            "open": "43503.71000000",
+            "time": "2024-01-31T18:57:00Z",
+            "volume": "10.79884000"
+          },
+          {
+            "close": "43496.35000000",
+            "high": "43503.01000000",
+            "low": "43496.35000000",
+            "open": "43498.19000000",
+            "time": "2024-01-31T18:58:00Z",
+            "volume": "12.29213000"
+          },
+          {
+            "close": "43513.38000000",
+            "high": "43517.82000000",
+            "low": "43488.95000000",
+            "open": "43496.36000000",
+            "time": "2024-01-31T18:59:00Z",
+            "volume": "29.50420000"
+          },
+          {
+            "close": "43425.43000000",
+            "high": "43537.99000000",
+            "low": "43425.43000000",
+            "open": "43513.38000000",
+            "time": "2024-01-31T19:00:00Z",
+            "volume": "55.45217000"
+          },
+          {
+            "close": "43474.43000000",
+            "high": "43474.43000000",
+            "low": "43385.12000000",
+            "open": "43425.44000000",
+            "time": "2024-01-31T19:01:00Z",
+            "volume": "74.49651000"
+          },
+          {
+            "close": "43478.01000000",
+            "high": "43490.00000000",
+            "low": "43461.50000000",
+            "open": "43474.43000000",
+            "time": "2024-01-31T19:02:00Z",
+            "volume": "43.73681000"
+          },
+          {
+            "close": "43468.00000000",
+            "high": "43478.01000000",
+            "low": "43451.10000000",
+            "open": "43478.01000000",
+            "time": "2024-01-31T19:03:00Z",
+            "volume": "23.27234000"
+          },
+          {
+            "close": "43517.84000000",
+            "high": "43522.84000000",
+            "low": "43467.99000000",
+            "open": "43468.00000000",
+            "time": "2024-01-31T19:04:00Z",
+            "volume": "35.18327000"
+          },
+          {
+            "close": "43543.99000000",
+            "high": "43551.99000000",
+            "low": "43487.99000000",
+            "open": "43517.84000000",
+            "time": "2024-01-31T19:05:00Z",
+            "volume": "46.13987000"
+          },
+          {
+            "close": "43472.00000000",
+            "high": "43550.00000000",
+            "low": "43472.00000000",
+            "open": "43544.00000000",
+            "time": "2024-01-31T19:06:00Z",
+            "volume": "28.89808000"
+          },
+          {
+            "close": "43456.73000000",
+            "high": "43472.01000000",
+            "low": "43441.10000000",
+            "open": "43472.00000000",
+            "time": "2024-01-31T19:07:00Z",
+            "volume": "31.93711000"
+          },
+          {
+            "close": "43464.66000000",
+            "high": "43464.66000000",
+            "low": "43442.03000000",
+            "open": "43456.72000000",
+            "time": "2024-01-31T19:08:00Z",
+            "volume": "18.39236000"
+          },
+          {
+            "close": "43476.03000000",
+            "high": "43499.25000000",
+            "low": "43460.39000000",
+            "open": "43464.66000000",
+            "time": "2024-01-31T19:09:00Z",
+            "volume": "19.85139000"
+          },
+          {
+            "close": "43436.01000000",
+            "high": "43490.15000000",
+            "low": "43421.34000000",
+            "open": "43476.04000000",
+            "time": "2024-01-31T19:10:00Z",
+            "volume": "48.49309000"
+          }
+        ],
+        "data_kind": "HISTORICAL_REPLAY",
+        "funding_rate": null,
+        "index_price": null,
+        "instrument_id": "BTCUSDT",
+        "mark_price": "43436.01000000",
+        "market_id": "BINANCE:BTCUSDT:1m:FOMC-2024-01-31",
+        "open_interest": null,
+        "recommendation_provided": false,
+        "replay_markers": [],
+        "venue_id": "BINANCE-SPOT-PUBLIC-ARCHIVE"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_market_state",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "tests/fixtures/p08/BTCUSDT-1m-2024-01-31-1850-1910UTC.csv",
+      "source_sequence": 35,
+      "source_sha256": "aa393cb4afa53d77854f960f6bd887090d2dba86202edc933aa62f8b8a894ad3",
+      "source_watermark": "35:02172198d46be24d3838055afb61035b8a279f78f8b9e2856778b38bb7d2c16d"
+    },
+    {
+      "as_of_time": "2026-08-31T15:27:47.404930Z",
+      "authoritative": true,
+      "content_sha256": "fa83d5f4472a86a4a23bcb1e12f73b73009df29524e1b8d8e8580f08aa8c5ace",
+      "entity_id": "BINANCE:BTCUSDT:USD-M:PUBLIC-FRAME",
+      "estimated": false,
+      "payload": {
+        "bar_semantics": "QUOTE_ENVELOPE",
+        "basis": "-28.29978261",
+        "candles": [],
+        "data_kind": "PUBLIC_FIXTURE",
+        "funding_rate": "0.00010000",
+        "index_price": "78376.49978261",
+        "instrument_id": "BTCUSDT-PERP",
+        "mark_price": "78348.20000000",
+        "market_id": "BINANCE:BTCUSDT:USD-M:PUBLIC-FRAME",
+        "open_interest": null,
+        "recommendation_provided": false,
+        "replay_markers": [],
+        "venue_id": "BINANCE-USD-M-PUBLIC-FIXTURE"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_market_state",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "tests/fixtures/binance/recorded_public.jsonl",
+      "source_sequence": 36,
+      "source_sha256": "89b425fe15cc14cace5de272e2d22ce8b620e45bb1fb01ab0ee5e90be5af3a7d",
+      "source_watermark": "36:f04e36b4ec1c35c8281106fdb26683edcf3be622e47dd8416ea0427c1d9b0c81"
+    },
+    {
+      "as_of_time": "2026-09-01T20:03:02.800000Z",
+      "authoritative": false,
+      "content_sha256": "a2c6a87106caba10b3b84079aaf95ca8c70448dc6f3ef14926d0ea3284ed61e6",
+      "entity_id": "P13:BTC-USDT-PERP:NORMALIZED-QUOTE-REPLAY",
+      "estimated": false,
+      "payload": {
+        "bar_semantics": "QUOTE_ENVELOPE",
+        "basis": null,
+        "candles": [
+          {
+            "close": "49985",
+            "high": "49990",
+            "low": "49980",
+            "open": "49985",
+            "time": "2026-09-01T20:00:02.800000Z",
+            "volume": "4"
+          },
+          {
+            "close": "48510.445",
+            "high": "48540.290",
+            "low": "48480.60",
+            "open": "48510.445",
+            "time": "2026-09-01T20:01:02.800000Z",
+            "volume": "1.20"
+          },
+          {
+            "close": "46586.030",
+            "high": "46690.660",
+            "low": "46481.40",
+            "open": "46586.030",
+            "time": "2026-09-01T20:02:02.800000Z",
+            "volume": "0.48"
+          },
+          {
+            "close": "47535.740",
+            "high": "47590.480",
+            "low": "47481.00",
+            "open": "47535.740",
+            "time": "2026-09-01T20:03:02.800000Z",
+            "volume": "1.80"
+          }
+        ],
+        "data_kind": "NORMALIZED_QUOTE_REPLAY",
+        "funding_rate": null,
+        "index_price": null,
+        "instrument_id": "BTC-USDT-PERP",
+        "mark_price": "47535.740",
+        "market_id": "P13:BTC-USDT-PERP:NORMALIZED-QUOTE-REPLAY",
+        "open_interest": null,
+        "recommendation_provided": false,
+        "replay_markers": [
+          {
+            "entity_id": "paper-fill-9e256e988c0a4fc47fd416e7",
+            "label": "P13 Paper virtual fill",
+            "marker_type": "FILL",
+            "price": "49999.9980",
+            "source_artifact": "reports/runtime/P13_PAPER_EVIDENCE.json",
+            "synthetic": false,
+            "time": "2026-09-01T20:00:02.800000Z"
+          }
+        ],
+        "venue_id": "BINANCE-TESTNET"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_market_state",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/runtime/P13_HISTORICAL_REPLAY.json",
+      "source_sequence": 37,
+      "source_sha256": "19ef1c3787aac36a9744fd5677a760d9bf04de6a804455a6fa19ba6c555d8d91",
+      "source_watermark": "37:1bb6d107b36a82c98ec331442d186a119ff944d470a45e52f0d9004952f363ad"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "35851970a0be19711c97e695676f49d7a39cf2d68b42ed686aecd8212128a1d5",
+      "entity_id": "deep-patch_transformer",
+      "estimated": false,
+      "payload": {
+        "abstain_or_failure_reason": null,
+        "alpha_claimed": false,
+        "evaluation_state": "EVALUATED",
+        "family": "PATCH_TRANSFORMER",
+        "final_holdout_opened": false,
+        "metric_name": "primary_loss",
+        "metric_value": "0.006769243406507670553810965502",
+        "modality": "FUSED",
+        "model_id": "deep-patch_transformer",
+        "peak_memory_mb": "562.621094",
+        "selected": false,
+        "train_seconds": "0.011987"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_model_metrics",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+      "source_sequence": 29,
+      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
+      "source_watermark": "29:0255f4ca91afb014ffd7f903fa6fe7ab40c03ac0a67a0a62d742862d4587101e"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "5fdd77aab34c131a5ea311cf9f6168e372b32b67747cfde07521a0e85a7b31c7",
+      "entity_id": "deep-tcn",
+      "estimated": false,
+      "payload": {
+        "abstain_or_failure_reason": null,
+        "alpha_claimed": false,
+        "evaluation_state": "EVALUATED",
+        "family": "TCN",
+        "final_holdout_opened": false,
+        "metric_name": "primary_loss",
+        "metric_value": "0.802867533683865578913298346",
+        "modality": "FUSED",
+        "model_id": "deep-tcn",
+        "peak_memory_mb": "560.531250",
+        "selected": false,
+        "train_seconds": "0.015152"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_model_metrics",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+      "source_sequence": 28,
+      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
+      "source_watermark": "28:637e10a04b6c5344661863372c059846077d734816b68b34e54b0c469a6c6f9f"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "51e9104bbe37b3fde4343512a6f3ac1239d69978879a3da884b0072957756718",
+      "entity_id": "linear-event",
+      "estimated": false,
+      "payload": {
+        "abstain_or_failure_reason": null,
+        "alpha_claimed": false,
+        "evaluation_state": "EVALUATED",
+        "family": "LINEAR",
+        "final_holdout_opened": false,
+        "metric_name": "primary_loss",
+        "metric_value": "0.1768219928227334212651759858",
+        "modality": "EVENT_ONLY",
+        "model_id": "linear-event",
+        "peak_memory_mb": "542.492188",
+        "selected": false,
+        "train_seconds": "0.001467"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_model_metrics",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+      "source_sequence": 23,
+      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
+      "source_watermark": "23:d2c2ded7d3262bcf7a9e69490496b175d58769a8f2a7d079513906a671afab86"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "2dd92ef4a589ef4f1059eecb81237c4e23fcfda30c13cfbe2691ba26e4ba0d8b",
+      "entity_id": "linear-fused",
+      "estimated": false,
+      "payload": {
+        "abstain_or_failure_reason": null,
+        "alpha_claimed": false,
+        "evaluation_state": "EVALUATED",
+        "family": "LINEAR",
+        "final_holdout_opened": false,
+        "metric_name": "primary_loss",
+        "metric_value": "6.25E-31",
+        "modality": "FUSED",
+        "model_id": "linear-fused",
+        "peak_memory_mb": "542.503906",
+        "selected": true,
+        "train_seconds": "0.001221"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_model_metrics",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+      "source_sequence": 24,
+      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
+      "source_watermark": "24:7cbf7016b60fd34ff646e80da5544fb4a89226bc3b8fcdd5ca1c921bc3c43384"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "500aa661343cb53a752bdcc5903bb38d73c684fb09d9d569f4a9c892a9d2193a",
+      "entity_id": "linear-market",
+      "estimated": false,
+      "payload": {
+        "abstain_or_failure_reason": null,
+        "alpha_claimed": false,
+        "evaluation_state": "EVALUATED",
+        "family": "LINEAR",
+        "final_holdout_opened": false,
+        "metric_name": "primary_loss",
+        "metric_value": "0.0005794961529427887751597959224",
+        "modality": "MARKET_ONLY",
+        "model_id": "linear-market",
+        "peak_memory_mb": "542.492188",
+        "selected": false,
+        "train_seconds": "0.017799"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_model_metrics",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+      "source_sequence": 22,
+      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
+      "source_watermark": "22:acfb342621166052ea963ecc3c5bc0c64f9ebfdd41863b0d8b4d27de1c7bbd12"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "a7aeb4e985ee0eecfe7cc9152455ebef85f2f019069938fa17b7b8989b237ee5",
+      "entity_id": "tree-catboost",
+      "estimated": false,
+      "payload": {
+        "abstain_or_failure_reason": null,
+        "alpha_claimed": false,
+        "evaluation_state": "EVALUATED",
+        "family": "CATBOOST",
+        "final_holdout_opened": false,
+        "metric_name": "primary_loss",
+        "metric_value": "0.1200797307344435544182714389",
+        "modality": "FUSED",
+        "model_id": "tree-catboost",
+        "peak_memory_mb": "550.800781",
+        "selected": false,
+        "train_seconds": "0.079368"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_model_metrics",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+      "source_sequence": 26,
+      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
+      "source_watermark": "26:cd7fac16cd9e169a5dbb51758286c071191c12aa09fae6cb0d7328d5b17ed2be"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "61d147595ca54cfc684e2e83e9cb9545205a09c343e0c3991b6264177bafd0b0",
+      "entity_id": "tree-lightgbm",
+      "estimated": false,
+      "payload": {
+        "abstain_or_failure_reason": null,
+        "alpha_claimed": false,
+        "evaluation_state": "EVALUATED",
+        "family": "LIGHTGBM",
+        "final_holdout_opened": false,
+        "metric_name": "primary_loss",
+        "metric_value": "0.1750750973659817163736042775",
+        "modality": "FUSED",
+        "model_id": "tree-lightgbm",
+        "peak_memory_mb": "543.351562",
+        "selected": false,
+        "train_seconds": "0.003592"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_model_metrics",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+      "source_sequence": 25,
+      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
+      "source_watermark": "25:e5e12934aabce7d3178506c26650c07d9944d67b5dbfaaff938baef87eea55e2"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "f8ad57140f7ed82e7b05fe6d3953594c2a15b4707a4d0162b85f66714c56a51d",
+      "entity_id": "tree-xgboost",
+      "estimated": false,
+      "payload": {
+        "abstain_or_failure_reason": null,
+        "alpha_claimed": false,
+        "evaluation_state": "EVALUATED",
+        "family": "XGBOOST",
+        "final_holdout_opened": false,
+        "metric_name": "primary_loss",
+        "metric_value": "0.08348058391634556132363376559",
+        "modality": "FUSED",
+        "model_id": "tree-xgboost",
+        "peak_memory_mb": "553.589844",
+        "selected": false,
+        "train_seconds": "0.023228"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_model_metrics",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+      "source_sequence": 27,
+      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
+      "source_watermark": "27:64eda4c290ccdb6cba4baa84de8416203a15d4d46822d5a6d4e4384e8f16cec0"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "554d9fcf28c799076cdb970eed8e89dcb2f31abf618c92ecd7595fc67d39059d",
+      "entity_id": "linear-fair",
+      "estimated": false,
+      "payload": {
+        "family": "LINEAR",
+        "final_holdout_opened": false,
+        "live_calibration_claimed": false,
+        "metric_name": "mean_squared_error",
+        "metric_value": "0.571875",
+        "modality": "MARKET_ONLY",
+        "model_id": "linear-fair",
+        "observations": 4,
+        "status": "BASELINE",
+        "version": "p07-fair-v1"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_models",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P07_MODEL_EVIDENCE.json",
+      "source_sequence": 6,
+      "source_sha256": "f0d6daa5ff2947a22384f3c27bf5ab3ef2ccfe611ee44b40c18890b8b9e985aa",
+      "source_watermark": "6:e802667d576d6e9d2ad34aa7d6db82b11be62d28a8ef56b781f3c3fca744edeb"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": false,
+      "content_sha256": "d743529c0c583c6d66878e0de2e96288997dae34d00a4899ca05d5707ca31754",
+      "entity_id": "fdb66089d3a50f809211eacab2f0cda107599cf62ae2ce45907a64287fe07159",
+      "estimated": true,
+      "payload": {
+        "attention_half_life_minutes": null,
+        "coordination_risk": "0",
+        "independent_author_count": 2,
+        "narrative_id": "fdb66089d3a50f809211eacab2f0cda107599cf62ae2ce45907a64287fe07159",
+        "propagation_stage": "CROSS_PLATFORM",
+        "topic": "spot bitcoin ETF approval",
+        "velocity": null
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_narrative_states",
+      "quality_state": "ESTIMATED",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 15,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "15:192752f402cd257626362798846c2179ef0adffc14c0e9c9d6de44bb31cbc074"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:01Z",
+      "authoritative": true,
+      "content_sha256": "e0ec3a89886dfe66a17fe8b0b0df8a07a85aef96d759e5dee73bc738270b3d29",
+      "entity_id": "benchmark-1",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "causal_link_overclaimed": false,
+        "complete": true,
+        "decision_time": "2026-09-01T08:00:00.000001Z",
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "order_id": "benchmark-1",
+        "stages": [
+          {
+            "entity_id": null,
+            "explanation": "P06 buy-and-hold baseline was rule-driven and recorded no AlphaSignal.",
+            "sequence": 1,
+            "source_artifact": "reports/backtests/p06-golden/run_manifest.json",
+            "stage": "SIGNAL",
+            "status": "NOT_APPLICABLE"
+          },
+          {
+            "entity_id": null,
+            "explanation": "The P06 baseline did not consume event intelligence.",
+            "sequence": 2,
+            "source_artifact": "reports/backtests/p06-golden/run_manifest.json",
+            "stage": "EVENT_EVIDENCE",
+            "status": "NOT_APPLICABLE"
+          },
+          {
+            "entity_id": null,
+            "explanation": "The execution decision was not produced by a predictive model.",
+            "sequence": 3,
+            "source_artifact": "reports/backtests/p06-golden/run_manifest.json",
+            "stage": "MODEL",
+            "status": "NOT_APPLICABLE"
+          },
+          {
+            "entity_id": "p06-backtest-risk-policy",
+            "explanation": "The deterministic backtest risk report governed this order.",
+            "sequence": 4,
+            "source_artifact": "reports/backtests/p06-golden/risk_report.md",
+            "stage": "RISK",
+            "status": "VERIFIED"
+          },
+          {
+            "entity_id": "benchmark-1",
+            "explanation": "Order lifecycle is present in the canonical P06 order table.",
+            "sequence": 5,
+            "source_artifact": "reports/backtests/p06-golden/orders.parquet",
+            "stage": "ORDER",
+            "status": "VERIFIED"
+          },
+          {
+            "entity_id": "simfill:benchmark-1:1",
+            "explanation": "1 virtual fill record(s) link to this order.",
+            "sequence": 6,
+            "source_artifact": "reports/backtests/p06-golden/fills.parquet",
+            "stage": "FILL",
+            "status": "VERIFIED"
+          },
+          {
+            "entity_id": "72e0af0a0bb58a07d6464633d3c18f5990cbf9fb0044b00f331c21ec6919aa97",
+            "explanation": "1 balanced journal entry record(s) link by intent.",
+            "sequence": 7,
+            "source_artifact": "reports/backtests/p06-golden/ledger_entries.parquet",
+            "stage": "LEDGER",
+            "status": "VERIFIED"
+          }
+        ],
+        "strategy_id": "p06-buy-hold"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_order_traces",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/orders.parquet",
+      "source_sequence": 51,
+      "source_sha256": "601bcb84dc06d3c9d9bf334a2bae31f12c0719acc7ca28bfc2308c1fb01ce87d",
+      "source_watermark": "51:d590f6049858eaeebb2def8dbead296f39049b818d2444beec8ae5ddf2ea9313"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:03Z",
+      "authoritative": true,
+      "content_sha256": "cc8de965156025293108e4c12b7bc2d13e7d395cc81cd76cce8ec350dff130b0",
+      "entity_id": "benchmark-2",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "causal_link_overclaimed": false,
+        "complete": true,
+        "decision_time": "2026-09-01T08:00:02.000001Z",
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "order_id": "benchmark-2",
+        "stages": [
+          {
+            "entity_id": null,
+            "explanation": "P06 buy-and-hold baseline was rule-driven and recorded no AlphaSignal.",
+            "sequence": 1,
+            "source_artifact": "reports/backtests/p06-golden/run_manifest.json",
+            "stage": "SIGNAL",
+            "status": "NOT_APPLICABLE"
+          },
+          {
+            "entity_id": null,
+            "explanation": "The P06 baseline did not consume event intelligence.",
+            "sequence": 2,
+            "source_artifact": "reports/backtests/p06-golden/run_manifest.json",
+            "stage": "EVENT_EVIDENCE",
+            "status": "NOT_APPLICABLE"
+          },
+          {
+            "entity_id": null,
+            "explanation": "The execution decision was not produced by a predictive model.",
+            "sequence": 3,
+            "source_artifact": "reports/backtests/p06-golden/run_manifest.json",
+            "stage": "MODEL",
+            "status": "NOT_APPLICABLE"
+          },
+          {
+            "entity_id": "p06-backtest-risk-policy",
+            "explanation": "The deterministic backtest risk report governed this order.",
+            "sequence": 4,
+            "source_artifact": "reports/backtests/p06-golden/risk_report.md",
+            "stage": "RISK",
+            "status": "VERIFIED"
+          },
+          {
+            "entity_id": "benchmark-2",
+            "explanation": "Order lifecycle is present in the canonical P06 order table.",
+            "sequence": 5,
+            "source_artifact": "reports/backtests/p06-golden/orders.parquet",
+            "stage": "ORDER",
+            "status": "VERIFIED"
+          },
+          {
+            "entity_id": "simfill:benchmark-2:1",
+            "explanation": "1 virtual fill record(s) link to this order.",
+            "sequence": 6,
+            "source_artifact": "reports/backtests/p06-golden/fills.parquet",
+            "stage": "FILL",
+            "status": "VERIFIED"
+          },
+          {
+            "entity_id": "8b1a9d47751353d3f3d7e48777a7f60378aa3a1151a16e1a8ac871c9dd4b1f8f",
+            "explanation": "1 balanced journal entry record(s) link by intent.",
+            "sequence": 7,
+            "source_artifact": "reports/backtests/p06-golden/ledger_entries.parquet",
+            "stage": "LEDGER",
+            "status": "VERIFIED"
+          }
+        ],
+        "strategy_id": "p06-buy-hold"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_order_traces",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/orders.parquet",
+      "source_sequence": 52,
+      "source_sha256": "601bcb84dc06d3c9d9bf334a2bae31f12c0719acc7ca28bfc2308c1fb01ce87d",
+      "source_watermark": "52:596f580b56c373ee9050da79903fbba2d6f0eb6b76b9b6500aac5cf568917354"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:01Z",
+      "authoritative": true,
+      "content_sha256": "15013414318104af3abadc7b3643296d9f29076f025bb04cf9b830bbb3ed9a72",
+      "entity_id": "benchmark-1",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "average_fill_price": "101.03434",
+        "completed_at": "2026-09-01T08:00:01Z",
+        "filled_quantity": "1",
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "order_id": "benchmark-1",
+        "order_type": "MARKET",
+        "quantity": "1",
+        "side": "BUY",
+        "status": "FILLED",
+        "strategy_id": "p06-buy-hold",
+        "submitted_at": "2026-09-01T08:00:00.000001Z",
+        "venue_id": "SIM",
+        "virtual": true
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_orders",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/orders.parquet",
+      "source_sequence": 7,
+      "source_sha256": "601bcb84dc06d3c9d9bf334a2bae31f12c0719acc7ca28bfc2308c1fb01ce87d",
+      "source_watermark": "7:068a4abd2d5630ad8508d060b78897cabbef88a41186dbbd9c48ecd2ddf4c996"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:03Z",
+      "authoritative": true,
+      "content_sha256": "1147abd443e88af525fa871096d4784eddef29dd80d0c53b2ea927b592195f10",
+      "entity_id": "benchmark-2",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "average_fill_price": "102.96498",
+        "completed_at": "2026-09-01T08:00:03Z",
+        "filled_quantity": "1",
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "order_id": "benchmark-2",
+        "order_type": "MARKET",
+        "quantity": "1",
+        "side": "SELL",
+        "status": "FILLED",
+        "strategy_id": "p06-buy-hold",
+        "submitted_at": "2026-09-01T08:00:02.000001Z",
+        "venue_id": "SIM",
+        "virtual": true
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_orders",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/orders.parquet",
+      "source_sequence": 8,
+      "source_sha256": "601bcb84dc06d3c9d9bf334a2bae31f12c0719acc7ca28bfc2308c1fb01ce87d",
+      "source_watermark": "8:0298c7406d4f7c9dd9d4db306a9591b557f20f00bd226eaedd5170b5fea16f3d"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "75f528d4104f904fa3501a9fd15872da441b86cabce08f990582216cbabccaae",
+      "entity_id": "paper-account:aggregate",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "borrow_interest": "0",
+        "formula": "gross_trading_pnl - trading_fees - spread_cost - slippage_cost - impact_cost + funding - borrow_interest",
+        "funding": "0",
+        "gross_trading_pnl": "2.000000000",
+        "impact_cost": "0.00816",
+        "net_pnl": "1.889840136",
+        "reporting_asset_id": "USDT",
+        "slippage_cost": "0.0408",
+        "source_scope": "P06 deterministic historical replay",
+        "spread_cost": "0.0204",
+        "trading_fees": "0.040799864"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_pnl_attribution",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/pnl_attribution.parquet",
+      "source_sequence": 16,
+      "source_sha256": "409304a0ffbd595791be5e0717677082ac693d75088d4791e883829bbb478dca",
+      "source_watermark": "16:73c0d7f714700c1a811594714ef9864ad92e5f202e5093ef9b57cc23d30cba9a"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "86c58fe8c8bc71109f6f375ad495f9e13ae9453c37271290ba47006094bc5d8a",
+      "entity_id": "paper-account:SIM:SPOT:BTCUSDT",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "average_entry_price": null,
+        "instrument_id": "SIM:SPOT:BTCUSDT",
+        "mark_price": "103",
+        "position_id": "paper-account:SIM:SPOT:BTCUSDT",
+        "quantity": "0",
+        "reporting_asset_id": "USDT",
+        "source_scope": "P06 deterministic historical replay",
+        "strategy_id": "p06-buy-hold",
+        "unrealized_pnl": "0"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_positions_current",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/positions.parquet",
+      "source_sequence": 3,
+      "source_sha256": "2434ad2dd49dcdc2d52046c76069fac095da0358ea1a9bf9abd207b88e65cec0",
+      "source_watermark": "3:7d21cf0ed0f785a027d9f500a1c246a06bdb1f6213e9abdda860f1b20dcf39b7"
+    },
+    {
+      "as_of_time": "2026-09-01T20:00:03Z",
+      "authoritative": true,
+      "content_sha256": "3bcab03bfe1779eba09723c1a88a83f7bff5209c9705a0a2a8b279f26336d2da",
+      "entity_id": "paper-account:BINANCE-TESTNET",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "applied": true,
+        "captured_at": "2026-09-01T20:00:03Z",
+        "last_sequence": 3,
+        "reason_codes": [
+          "AQ-EXEC-ACCOUNT-SNAPSHOT-RECONCILED"
+        ],
+        "sequence_gap": false,
+        "state": "SYNCHRONIZED",
+        "unknown_local_fill_count": 0,
+        "unknown_local_order_count": 0,
+        "unknown_venue_fill_count": 0,
+        "unknown_venue_order_count": 0,
+        "venue_id": "BINANCE-TESTNET"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_reconciliation_status",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/execution/P12_ACCOUNT_RECONCILIATION.json",
+      "source_sequence": 50,
+      "source_sha256": "8f36f92a8a3b84da1ead35cac1d65adc04967f08d48d9d360cf6a40e3aabfd52",
+      "source_watermark": "50:199602752172463d246db20323cec42653e18e985cc8f5227cc43bf877f9883f"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:02Z",
+      "authoritative": true,
+      "content_sha256": "f9a6442e0c1a3053d2c3b1661c56cc31c142621b9ceb4c2e4bac219befcd8e90",
+      "entity_id": "error",
+      "estimated": false,
+      "payload": {
+        "ai_proposed": false,
+        "code_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dataset_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "failure_reason": "retained deterministic research failure",
+        "final_holdout_opened": false,
+        "finished_at": "2026-09-01T08:00:02Z",
+        "metrics": [],
+        "model_id": "linear-v1",
+        "promotion_decision": "REJECT",
+        "run_id": "error",
+        "split_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+        "started_at": "2026-09-01T08:00:00Z",
+        "status": "ERROR"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_research_runs",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/research/P07/EXPERIMENT_LEDGER.jsonl",
+      "source_sequence": 40,
+      "source_sha256": "0d2bb3ed9e2d835bd6ee5057da118758bc05b601beeb2c8900e4622d691b65a5",
+      "source_watermark": "40:dfa29e7542837996dce9ffc6fb41c7f49c3a0a1d4ecf290695f8b7d8e22a895d"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:02Z",
+      "authoritative": true,
+      "content_sha256": "d552f965d79040242c71339748783d8624c78f6e6d76c11aed26ec9687d7826d",
+      "entity_id": "failed",
+      "estimated": false,
+      "payload": {
+        "ai_proposed": false,
+        "code_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dataset_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "failure_reason": "retained deterministic research failure",
+        "final_holdout_opened": false,
+        "finished_at": "2026-09-01T08:00:02Z",
+        "metrics": [],
+        "model_id": "linear-v1",
+        "promotion_decision": "REJECT",
+        "run_id": "failed",
+        "split_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+        "started_at": "2026-09-01T08:00:00Z",
+        "status": "FAILED"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_research_runs",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/research/P07/EXPERIMENT_LEDGER.jsonl",
+      "source_sequence": 39,
+      "source_sha256": "0d2bb3ed9e2d835bd6ee5057da118758bc05b601beeb2c8900e4622d691b65a5",
+      "source_watermark": "39:fd9aceccd154b9dc896d583ac17a7b58fe9621377612cc5082c01df58e9dc0e0"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:02Z",
+      "authoritative": true,
+      "content_sha256": "8ccae912c91a91a4446b0abef5e9ce384b8f154b3043b5dd13ec3e5fe9979f0f",
+      "entity_id": "succeeded",
+      "estimated": false,
+      "payload": {
+        "ai_proposed": false,
+        "code_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dataset_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "failure_reason": null,
+        "final_holdout_opened": false,
+        "finished_at": "2026-09-01T08:00:02Z",
+        "metrics": [
+          {
+            "name": "net_return",
+            "value": "0.01"
+          }
+        ],
+        "model_id": "linear-v1",
+        "promotion_decision": "HOLD",
+        "run_id": "succeeded",
+        "split_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+        "started_at": "2026-09-01T08:00:00Z",
+        "status": "SUCCEEDED"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_research_runs",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/research/P07/EXPERIMENT_LEDGER.jsonl",
+      "source_sequence": 38,
+      "source_sha256": "0d2bb3ed9e2d835bd6ee5057da118758bc05b601beeb2c8900e4622d691b65a5",
+      "source_watermark": "38:86f95b50e8135ea546f3ca2d95e6d5b4ec8aaae8e4c03db36a03104a97aae75a"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "93477bf8ff31fdd6a1b9cf6635a2210bda9c8be6090e98a322f33eedde39be71",
+      "entity_id": "risk-policy-p11-fixture:daily-loss",
+      "estimated": false,
+      "payload": {
+        "breached": false,
+        "current_value": "0",
+        "example_values_only": true,
+        "headroom": "0.05",
+        "limit_id": "risk-policy-p11-fixture:daily-loss",
+        "limit_value": "0.05",
+        "live_editable": false,
+        "metric": "daily_pnl_fraction_abs",
+        "policy_id": "risk-policy-p11-fixture",
+        "unit": "fraction"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_risk_limits",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/risk/P11_SIGNED_RISK_POLICY.json",
+      "source_sequence": 17,
+      "source_sha256": "c69a806fba3880c3434a4292de7d97f2a06473487d9f79d43c30c2ad8ac15287",
+      "source_watermark": "17:115ead8871879302d024eba261a3cff8f0686501e30b3c590716ae2eeb432ff5"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "3b822a3a2f80af682936dc7431dc8ac7e642304ecf0f2cd43e5269fd27d25a10",
+      "entity_id": "risk-policy-p11-fixture:drawdown",
+      "estimated": false,
+      "payload": {
+        "breached": false,
+        "current_value": "0",
+        "example_values_only": true,
+        "headroom": "0.10",
+        "limit_id": "risk-policy-p11-fixture:drawdown",
+        "limit_value": "0.10",
+        "live_editable": false,
+        "metric": "drawdown_fraction",
+        "policy_id": "risk-policy-p11-fixture",
+        "unit": "fraction"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_risk_limits",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/risk/P11_SIGNED_RISK_POLICY.json",
+      "source_sequence": 18,
+      "source_sha256": "c69a806fba3880c3434a4292de7d97f2a06473487d9f79d43c30c2ad8ac15287",
+      "source_watermark": "18:421fccc777ee94e76501c6115b6a6ee6f57f52119e47c8e066b219060b0df41c"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "03929aae0e9ae6d69a46d07e24b57117eb4a9cca5f5afa7aac4049d19a47a9e9",
+      "entity_id": "risk-policy-p11-fixture:gross-weight",
+      "estimated": false,
+      "payload": {
+        "breached": false,
+        "current_value": "0",
+        "example_values_only": true,
+        "headroom": "0.60",
+        "limit_id": "risk-policy-p11-fixture:gross-weight",
+        "limit_value": "0.60",
+        "live_editable": false,
+        "metric": "portfolio_gross_weight",
+        "policy_id": "risk-policy-p11-fixture",
+        "unit": "fraction"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_risk_limits",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/risk/P11_SIGNED_RISK_POLICY.json",
+      "source_sequence": 20,
+      "source_sha256": "c69a806fba3880c3434a4292de7d97f2a06473487d9f79d43c30c2ad8ac15287",
+      "source_watermark": "20:5a76006b3383cfae4fe1101469b0564e32b05fc9a69b6b9d95cc52afff23b040"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "976b88c37cb38118319a6a1db127a69cba9027894f54775e2835bbf009bfafff",
+      "entity_id": "risk-policy-p11-fixture:liquidity",
+      "estimated": false,
+      "payload": {
+        "breached": false,
+        "current_value": "0.90",
+        "example_values_only": true,
+        "headroom": "0.70",
+        "limit_id": "risk-policy-p11-fixture:liquidity",
+        "limit_value": "0.20",
+        "live_editable": false,
+        "metric": "liquidity_score",
+        "policy_id": "risk-policy-p11-fixture",
+        "unit": "score"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_risk_limits",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/risk/P11_SIGNED_RISK_POLICY.json",
+      "source_sequence": 21,
+      "source_sha256": "c69a806fba3880c3434a4292de7d97f2a06473487d9f79d43c30c2ad8ac15287",
+      "source_watermark": "21:d6f85381aab1b8fb9af77bad3079c71ece3b3ab14a8e00d0245709c2b5876595"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "e695142c8b42799e5c96c21731b88e9536ae11fdf42c313648653b814dfa431b",
+      "entity_id": "risk-policy-p11-fixture:margin",
+      "estimated": false,
+      "payload": {
+        "breached": false,
+        "current_value": "0.20",
+        "example_values_only": true,
+        "headroom": "0.60",
+        "limit_id": "risk-policy-p11-fixture:margin",
+        "limit_value": "0.80",
+        "live_editable": false,
+        "metric": "margin_utilization",
+        "policy_id": "risk-policy-p11-fixture",
+        "unit": "fraction"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_risk_limits",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/risk/P11_SIGNED_RISK_POLICY.json",
+      "source_sequence": 19,
+      "source_sha256": "c69a806fba3880c3434a4292de7d97f2a06473487d9f79d43c30c2ad8ac15287",
+      "source_watermark": "19:23ad613a0ff33b2b90659dff05328962a51fc20540893317a45d824183f06b9f"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "dd9a85a7edaf6170ae496ca4193d6bb1b53ef13cb8a554905ddf898b51361840",
+      "entity_id": "paper-account",
+      "estimated": false,
+      "payload": {
+        "account_id": "paper-account",
+        "daily_pnl_fraction": "0",
+        "drawdown_fraction": "0",
+        "gross_weight": "0",
+        "ledger_reconciled": true,
+        "liquidity_score": "0.90",
+        "margin_utilization": "0.20",
+        "new_risk_allowed": true,
+        "reason_codes": [
+          "AQ-RISK-NORMAL"
+        ],
+        "source_snapshot_sha256": "7b7ad648a0fa6d197b1a0e13fe75cd51307b72a3dc89545e66c35e82160cb90b",
+        "state": "NORMAL"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_risk_summary",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P11_RISK_DECISION_EVIDENCE.json",
+      "source_sequence": 4,
+      "source_sha256": "0b0082ccf005d1b758836048fd0b559eafbe0474a177aa983af9b52f65ee9650",
+      "source_watermark": "4:b72413ef3eb971b3976552519cf78069c2e0a4ea54057ccbd8b5940dd1b2a74c"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "4d42bc7586636e2e078e32dffe76463b37178922748cc919dd3746c333f7a66e",
+      "entity_id": "signal-BTC-USDT-PERP",
+      "estimated": false,
+      "payload": {
+        "current_weight": "0",
+        "delta_weight": "0.2500000000000000000000000000",
+        "environment_stage": "PAPER",
+        "estimated_impact_bps": "1.581138830084189665999446772",
+        "expected_return_contribution": "0.002000000000000000000000000000",
+        "instrument_id": "BTC-USDT-PERP",
+        "normalized_signal": "0.5625000",
+        "order_capability": false,
+        "proposal_id": "proposal-p11-fixture",
+        "signal_id": "signal-BTC-USDT-PERP",
+        "strategy_id": "strategy-core",
+        "target_weight": "0.2500000000000000000000000000",
+        "valid_until": "2026-09-01T18:02:01Z"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_signals",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P11_PORTFOLIO_EVIDENCE.json",
+      "source_sequence": 30,
+      "source_sha256": "6b4edd52e3c503a9662b3ec8f5477303b9ce7d2b45d1b1e8d736e6842fb0a283",
+      "source_watermark": "30:2316d4b53687cd0fa4dd17e90740ab0c310ed038daf4ea15bd82f8456fb34b1d"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "812d555e57db7c2cfe659514d7f027540b2d13b16f0e1b0f76dd18356239ef8c",
+      "entity_id": "signal-ETH-USDT-PERP",
+      "estimated": false,
+      "payload": {
+        "current_weight": "0",
+        "delta_weight": "-0.1116922991987042485577442807",
+        "environment_stage": "PAPER",
+        "estimated_impact_bps": "1.056845774929834540225379439",
+        "expected_return_contribution": "0.0004467691967948169942309771228",
+        "instrument_id": "ETH-USDT-PERP",
+        "normalized_signal": "-0.17500",
+        "order_capability": false,
+        "proposal_id": "proposal-p11-fixture",
+        "signal_id": "signal-ETH-USDT-PERP",
+        "strategy_id": "strategy-core",
+        "target_weight": "-0.1116922991987042485577442807",
+        "valid_until": "2026-09-01T18:02:01Z"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_signals",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/data/P11_PORTFOLIO_EVIDENCE.json",
+      "source_sequence": 31,
+      "source_sha256": "6b4edd52e3c503a9662b3ec8f5477303b9ce7d2b45d1b1e8d736e6842fb0a283",
+      "source_watermark": "31:a147185c04a2f6ceaf16ffa50bfe78cbcab3620adb27ac99778c6dba5a024f0e"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "7dc68922a39b5c81b5fca2b41da4c2bada19dd671e02f8c316e075f2744e0222",
+      "entity_id": "gdelt",
+      "estimated": false,
+      "payload": {
+        "disposition": "RISK_ONLY",
+        "gap_count": 0,
+        "last_success_at": "2026-09-01T18:00:00Z",
+        "policy_status": "VERIFIED_FIXTURE_POLICY",
+        "reason_codes": [
+          "NO_EVENT_INCREMENT",
+          "POSITIVE_RISK_INCREMENT"
+        ],
+        "runtime_state": "READY",
+        "source_id": "gdelt"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_source_policy_status",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 10,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "10:144cc97e7aaf18b6eed8330ac797f338cc2e0717451daf765db3ba58e9ebd47a"
+    },
+    {
+      "as_of_time": "2026-09-01T18:00:00Z",
+      "authoritative": true,
+      "content_sha256": "30ad234ecbe1aafcee9f0ba324e6eb0b3d6f597d4e9d5f9f70f0f25a073c3a3e",
+      "entity_id": "x",
+      "estimated": false,
+      "payload": {
+        "disposition": "RETIRE",
+        "gap_count": 1,
+        "last_success_at": null,
+        "policy_status": "VERIFIED_FIXTURE_POLICY",
+        "reason_codes": [
+          "LOW_COVERAGE_OR_RELIABILITY"
+        ],
+        "runtime_state": "AWAITING_CREDENTIALS",
+        "source_id": "x"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_source_policy_status",
+      "quality_state": "DEGRADED",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/intelligence/P10_READ_MODELS.json",
+      "source_sequence": 12,
+      "source_sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "source_watermark": "12:154735497e189f47df74ee7ccdff40190ac8b8c322c34c84c1b7b1b60970922d"
+    },
+    {
+      "as_of_time": "2026-09-01T08:00:05Z",
+      "authoritative": true,
+      "content_sha256": "9060f1381a672fc74f8e4b40241d8e27db132ed301d3bca462380b6f78935f0a",
+      "entity_id": "p06-buy-hold",
+      "estimated": false,
+      "payload": {
+        "current_signal": "0",
+        "maximum_drawdown": "0.0000054546868",
+        "model_id": "linear-fair",
+        "net_pnl": "1.889840136",
+        "production_alpha_claimed": false,
+        "reporting_asset_id": "USDT",
+        "status": "RESEARCH",
+        "strategy_id": "p06-buy-hold",
+        "turnover": "0.02039803236520651240233229329",
+        "version": "p06-buy-hold-v1"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_strategies",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/backtests/p06-golden/run_manifest.json",
+      "source_sequence": 5,
+      "source_sha256": "cf101f5b42183d85a321edea12e9e07f8e354e3baae02e9264fae2609ae2f926",
+      "source_watermark": "5:3c7b246ee2ec95a802804cddd9c1439a079a5bc1262db296b34405ca32c140d7"
+    },
+    {
+      "as_of_time": "2026-09-02T00:01:36.843423Z",
+      "authoritative": true,
+      "content_sha256": "ae9ef1578c520aad0982da56a1e9a1b98ea3da1d7fe6a9f1974d21771c05d2ca",
+      "entity_id": "postgres-read-model",
+      "estimated": false,
+      "payload": {
+        "check_name": "postgres-runtime",
+        "checked_at": "2026-09-02T00:01:36.843423Z",
+        "detail": "P14 verified check exited 0; this is historical CI evidence, not a live service probe.",
+        "historical_check": true,
+        "live_trading_locked": true,
+        "service_id": "postgres-read-model",
+        "status": "READY",
+        "version": "3.1.0.dev0"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_system_health",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/phases/P14/CI_RESULTS.json",
+      "source_sequence": 49,
+      "source_sha256": "5506b8003f0a7b5b39fca249d7173198f66a2673a9c13ef1a4b6bb1cf04c8635",
+      "source_watermark": "49:2a173447791cf49579fd4b089921105d18606622225a47b3e0de97b5bf71d770"
+    },
+    {
+      "as_of_time": "2026-09-02T00:01:36.843423Z",
+      "authoritative": true,
+      "content_sha256": "41a6b101e11133473dd823e04dd1dec4764ceadc25970ad8b2f6ff69ffcdc294",
+      "entity_id": "read-api",
+      "estimated": false,
+      "payload": {
+        "check_name": "p14-read-api-web-contracts",
+        "checked_at": "2026-09-02T00:01:36.843423Z",
+        "detail": "P14 verified check exited 0; this is historical CI evidence, not a live service probe.",
+        "historical_check": true,
+        "live_trading_locked": true,
+        "service_id": "read-api",
+        "status": "READY",
+        "version": "3.1.0.dev0"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_system_health",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/phases/P14/CI_RESULTS.json",
+      "source_sequence": 47,
+      "source_sha256": "5506b8003f0a7b5b39fca249d7173198f66a2673a9c13ef1a4b6bb1cf04c8635",
+      "source_watermark": "47:6ba7f05778b1f6efe52160264127ab18fb92002117ec6b0cb8a0580f3003eac1"
+    },
+    {
+      "as_of_time": "2026-09-02T00:01:36.843423Z",
+      "authoritative": true,
+      "content_sha256": "6cf1acaec367b122983d228efd952057d15d3703c6985523e1637167dc02fe96",
+      "entity_id": "web-app",
+      "estimated": false,
+      "payload": {
+        "check_name": "web-build",
+        "checked_at": "2026-09-02T00:01:36.843423Z",
+        "detail": "P14 verified check exited 0; this is historical CI evidence, not a live service probe.",
+        "historical_check": true,
+        "live_trading_locked": true,
+        "service_id": "web-app",
+        "status": "READY",
+        "version": "3.1.0.dev0"
+      },
+      "projected_at": "2026-09-02T00:15:41.360000Z",
+      "projection": "rm_system_health",
+      "quality_state": "STALE",
+      "schema_version": "1.0.0",
+      "source_artifact": "reports/phases/P14/CI_RESULTS.json",
+      "source_sequence": 48,
+      "source_sha256": "5506b8003f0a7b5b39fca249d7173198f66a2673a9c13ef1a4b6bb1cf04c8635",
+      "source_watermark": "48:14442ed0477cc15c58d1a3ae7b99776b2c953e3ecefa1534758d8c311141090d"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_event_count": 52
+}

@@ -1,4 +1,4 @@
-"""Read-only P14 REST and WebSocket routes over one immutable snapshot."""
+"""Read-only P14/P15 REST and WebSocket routes over one immutable snapshot."""
 # pyright: reportUnusedFunction=false
 
 from __future__ import annotations
@@ -8,34 +8,57 @@ from typing import Annotated, Final, cast
 
 from fastapi import APIRouter, Query, WebSocket
 
+from aegisquant.api.downsampling import downsample_candles, downsample_time_values
 from aegisquant.api.models import (
     AccountPage,
     AccountRecord,
+    CandleSeriesResponse,
     ClaimRecord,
     DataHealthPage,
     DataHealthRecord,
     EventPage,
     EventRecord,
+    ExecutionQualityRecord,
+    FillPage,
+    FillRecord,
     HealthResponse,
+    IncidentPage,
+    IncidentRecord,
     IntelligenceResponse,
+    MarketStatePage,
+    MarketStateRecord,
+    ModelMetricRecord,
     ModelPage,
     ModelRecord,
     NarrativePage,
     NarrativeRecord,
     OrderPage,
     OrderRecord,
+    OrderTraceRecord,
     OverviewResponse,
     PageMeta,
+    PnLAttributionRecord,
     PnLRecord,
     PositionPage,
     PositionRecord,
+    ReconciliationRecord,
     RecordMetadata,
+    ResearchRunPage,
+    ResearchRunRecord,
+    RiskLimitRecord,
     RiskRecord,
+    SignalPage,
+    SignalRecord,
     SourcePage,
     SourceRecord,
     StrategyPage,
     StrategyRecord,
     StreamSnapshotResponse,
+    SystemHealthPage,
+    SystemHealthRecord,
+    TimeSeriesResponse,
+    WorkbenchCapabilities,
+    WorkbenchResponse,
 )
 from aegisquant.api.stream import TOPIC_PROJECTIONS, SequencedStream, websocket_session
 from aegisquant.readmodels.engine import ReadModelQuery
@@ -97,6 +120,14 @@ def _page(
             code = "AQ-API-INVALID-QUERY"
         raise APIContractError(400, code, "The pagination or filter query is invalid.") from error
     return records, PageMeta(limit=limit, total=total, next_cursor=next_cursor)
+
+
+def _all_records(
+    query: ReadModelQuery,
+    projection: ProjectionKind,
+    model: type[RecordMetadata],
+) -> tuple[RecordMetadata, ...]:
+    return tuple(_as_record(item, model) for item in query.page(projection, limit=100)[0])
 
 
 def create_router(query: ReadModelQuery, stream: SequencedStream) -> APIRouter:
@@ -162,6 +193,116 @@ def create_router(query: ReadModelQuery, stream: SequencedStream) -> APIRouter:
             live_trading_locked=True,
         )
 
+    @router.get("/workbench", response_model=WorkbenchResponse, tags=["dashboard"])
+    async def workbench() -> WorkbenchResponse:
+        """Return one internally consistent snapshot for cross-page drilldown."""
+        return WorkbenchResponse(
+            account=cast(
+                "AccountRecord",
+                _as_record(_first(query, ProjectionKind.ACCOUNT_OVERVIEW), AccountRecord),
+            ),
+            pnl=cast("PnLRecord", _as_record(_first(query, ProjectionKind.DAILY_PNL), PnLRecord)),
+            pnl_attribution=cast(
+                "PnLAttributionRecord",
+                _as_record(_first(query, ProjectionKind.PNL_ATTRIBUTION), PnLAttributionRecord),
+            ),
+            positions=cast(
+                "tuple[PositionRecord, ...]",
+                _all_records(query, ProjectionKind.POSITIONS_CURRENT, PositionRecord),
+            ),
+            risk=cast(
+                "RiskRecord", _as_record(_first(query, ProjectionKind.RISK_SUMMARY), RiskRecord)
+            ),
+            risk_limits=cast(
+                "tuple[RiskLimitRecord, ...]",
+                _all_records(query, ProjectionKind.RISK_LIMITS, RiskLimitRecord),
+            ),
+            strategies=cast(
+                "tuple[StrategyRecord, ...]",
+                _all_records(query, ProjectionKind.STRATEGIES, StrategyRecord),
+            ),
+            models=cast(
+                "tuple[ModelRecord, ...]",
+                _all_records(query, ProjectionKind.MODELS, ModelRecord),
+            ),
+            model_metrics=cast(
+                "tuple[ModelMetricRecord, ...]",
+                _all_records(query, ProjectionKind.MODEL_METRICS, ModelMetricRecord),
+            ),
+            signals=cast(
+                "tuple[SignalRecord, ...]",
+                _all_records(query, ProjectionKind.SIGNALS, SignalRecord),
+            ),
+            orders=cast(
+                "tuple[OrderRecord, ...]",
+                _all_records(query, ProjectionKind.ORDERS, OrderRecord),
+            ),
+            fills=cast(
+                "tuple[FillRecord, ...]",
+                _all_records(query, ProjectionKind.FILLS, FillRecord),
+            ),
+            execution_quality=cast(
+                "tuple[ExecutionQualityRecord, ...]",
+                _all_records(query, ProjectionKind.EXECUTION_QUALITY, ExecutionQualityRecord),
+            ),
+            market=cast(
+                "tuple[MarketStateRecord, ...]",
+                _all_records(query, ProjectionKind.MARKET_STATE, MarketStateRecord),
+            ),
+            events=cast(
+                "tuple[EventRecord, ...]",
+                _all_records(query, ProjectionKind.EVENT_CLUSTERS, EventRecord),
+            ),
+            claims=cast(
+                "tuple[ClaimRecord, ...]",
+                _all_records(query, ProjectionKind.EVENT_CLAIMS, ClaimRecord),
+            ),
+            narratives=cast(
+                "tuple[NarrativeRecord, ...]",
+                _all_records(query, ProjectionKind.NARRATIVE_STATES, NarrativeRecord),
+            ),
+            sources=cast(
+                "tuple[SourceRecord, ...]",
+                _all_records(query, ProjectionKind.SOURCE_POLICY_STATUS, SourceRecord),
+            ),
+            data_health=cast(
+                "tuple[DataHealthRecord, ...]",
+                _all_records(query, ProjectionKind.DATA_HEALTH, DataHealthRecord),
+            ),
+            research_runs=cast(
+                "tuple[ResearchRunRecord, ...]",
+                _all_records(query, ProjectionKind.RESEARCH_RUNS, ResearchRunRecord),
+            ),
+            incidents=cast(
+                "tuple[IncidentRecord, ...]",
+                _all_records(query, ProjectionKind.INCIDENTS, IncidentRecord),
+            ),
+            system_health=cast(
+                "tuple[SystemHealthRecord, ...]",
+                _all_records(query, ProjectionKind.SYSTEM_HEALTH, SystemHealthRecord),
+            ),
+            reconciliation=cast(
+                "ReconciliationRecord",
+                _as_record(
+                    _first(query, ProjectionKind.RECONCILIATION_STATUS), ReconciliationRecord
+                ),
+            ),
+            order_traces=cast(
+                "tuple[OrderTraceRecord, ...]",
+                _all_records(query, ProjectionKind.ORDER_TRACES, OrderTraceRecord),
+            ),
+            snapshot_sha256=query.snapshot.content_sha256,
+            capabilities=WorkbenchCapabilities(
+                read_only=True,
+                trading_write=False,
+                real_account_connection=False,
+                risk_limit_edit=False,
+                model_publish=False,
+                live_unlock=False,
+            ),
+            live_trading_locked=True,
+        )
+
     @router.get("/accounts", response_model=AccountPage, tags=["account"])
     async def accounts(
         limit: Annotated[int, Query(ge=1, le=100)] = 50,
@@ -197,6 +338,50 @@ def create_router(query: ReadModelQuery, stream: SequencedStream) -> APIRouter:
         if not records:
             raise APIContractError(404, "AQ-API-NOT-FOUND", "Account PnL was not found.")
         return cast("PnLRecord", _as_record(records[-1], PnLRecord))
+
+    @router.get(
+        "/accounts/{account_id}/pnl/attribution",
+        response_model=PnLAttributionRecord,
+        tags=["account"],
+    )
+    async def account_pnl_attribution(account_id: str) -> PnLAttributionRecord:
+        records, _, _ = query.page(
+            ProjectionKind.PNL_ATTRIBUTION,
+            limit=100,
+            filters={"account_id": account_id},
+        )
+        if not records:
+            raise APIContractError(404, "AQ-API-NOT-FOUND", "Account attribution was not found.")
+        return cast("PnLAttributionRecord", _as_record(records[-1], PnLAttributionRecord))
+
+    @router.get(
+        "/accounts/{account_id}/equity",
+        response_model=TimeSeriesResponse,
+        tags=["account"],
+    )
+    async def account_equity(
+        account_id: str,
+        max_points: Annotated[int, Query(ge=4, le=5000)] = 500,
+    ) -> TimeSeriesResponse:
+        record = cast(
+            "AccountRecord",
+            _as_record(
+                _required(query, ProjectionKind.ACCOUNT_OVERVIEW, account_id), AccountRecord
+            ),
+        )
+        original = record.payload.equity_curve
+        points = downsample_time_values(original, max_points=max_points)
+        downsampled = len(points) < len(original)
+        return TimeSeriesResponse(
+            series_id=f"{account_id}:equity",
+            unit=record.payload.reporting_asset_id,
+            original_count=len(original),
+            returned_count=len(points),
+            downsampled=downsampled,
+            algorithm="min-max-bucket-v1" if downsampled else "none",
+            points=points,
+            source_sha256=record.source_sha256,
+        )
 
     @router.get("/positions", response_model=PositionPage, tags=["portfolio"])
     async def positions(
@@ -239,6 +424,13 @@ def create_router(query: ReadModelQuery, stream: SequencedStream) -> APIRouter:
             else _first(query, ProjectionKind.RISK_SUMMARY)
         )
         return cast("RiskRecord", _as_record(record, RiskRecord))
+
+    @router.get("/risk/limits", response_model=tuple[RiskLimitRecord, ...], tags=["risk"])
+    async def risk_limits() -> tuple[RiskLimitRecord, ...]:
+        return cast(
+            "tuple[RiskLimitRecord, ...]",
+            _all_records(query, ProjectionKind.RISK_LIMITS, RiskLimitRecord),
+        )
 
     @router.get("/strategies", response_model=StrategyPage, tags=["research"])
     async def strategies(
@@ -284,6 +476,32 @@ def create_router(query: ReadModelQuery, stream: SequencedStream) -> APIRouter:
             page=page,
         )
 
+    @router.get("/models/metrics", response_model=tuple[ModelMetricRecord, ...], tags=["research"])
+    async def model_metrics() -> tuple[ModelMetricRecord, ...]:
+        return cast(
+            "tuple[ModelMetricRecord, ...]",
+            _all_records(query, ProjectionKind.MODEL_METRICS, ModelMetricRecord),
+        )
+
+    @router.get("/signals", response_model=SignalPage, tags=["portfolio"])
+    async def signals(
+        limit: Annotated[int, Query(ge=1, le=100)] = 50,
+        cursor: str | None = None,
+        strategy_id: str | None = None,
+    ) -> SignalPage:
+        filters = {"strategy_id": strategy_id} if strategy_id is not None else None
+        records, page = _page(
+            query,
+            ProjectionKind.SIGNALS,
+            limit=limit,
+            cursor=cursor,
+            filters=filters,
+        )
+        return SignalPage(
+            items=tuple(cast("SignalRecord", _as_record(item, SignalRecord)) for item in records),
+            page=page,
+        )
+
     @router.get("/orders", response_model=OrderPage, tags=["execution"])
     async def orders(
         limit: Annotated[int, Query(ge=1, le=100)] = 50,
@@ -315,6 +533,84 @@ def create_router(query: ReadModelQuery, stream: SequencedStream) -> APIRouter:
             page=page,
         )
 
+    @router.get("/orders/{order_id}/trace", response_model=OrderTraceRecord, tags=["execution"])
+    async def order_trace(order_id: str) -> OrderTraceRecord:
+        if query.get(ProjectionKind.ORDERS, order_id) is None:
+            raise APIContractError(404, "AQ-API-NOT-FOUND", "Order was not found.")
+        return cast(
+            "OrderTraceRecord",
+            _as_record(_required(query, ProjectionKind.ORDER_TRACES, order_id), OrderTraceRecord),
+        )
+
+    @router.get("/fills", response_model=FillPage, tags=["execution"])
+    async def fills(
+        limit: Annotated[int, Query(ge=1, le=100)] = 50,
+        cursor: str | None = None,
+        order_id: str | None = None,
+    ) -> FillPage:
+        filters = {"order_id": order_id} if order_id is not None else None
+        records, page = _page(
+            query,
+            ProjectionKind.FILLS,
+            limit=limit,
+            cursor=cursor,
+            filters=filters,
+        )
+        return FillPage(
+            items=tuple(cast("FillRecord", _as_record(item, FillRecord)) for item in records),
+            page=page,
+        )
+
+    @router.get(
+        "/execution/quality",
+        response_model=tuple[ExecutionQualityRecord, ...],
+        tags=["execution"],
+    )
+    async def execution_quality() -> tuple[ExecutionQualityRecord, ...]:
+        return cast(
+            "tuple[ExecutionQualityRecord, ...]",
+            _all_records(query, ProjectionKind.EXECUTION_QUALITY, ExecutionQualityRecord),
+        )
+
+    @router.get("/market/state", response_model=MarketStatePage, tags=["market"])
+    async def market_state(
+        limit: Annotated[int, Query(ge=1, le=100)] = 50,
+        cursor: str | None = None,
+    ) -> MarketStatePage:
+        records, page = _page(query, ProjectionKind.MARKET_STATE, limit=limit, cursor=cursor)
+        return MarketStatePage(
+            items=tuple(
+                cast("MarketStateRecord", _as_record(item, MarketStateRecord)) for item in records
+            ),
+            page=page,
+        )
+
+    @router.get(
+        "/market/state/{market_id}/candles",
+        response_model=CandleSeriesResponse,
+        tags=["market"],
+    )
+    async def market_candles(
+        market_id: str,
+        max_points: Annotated[int, Query(ge=4, le=5000)] = 500,
+    ) -> CandleSeriesResponse:
+        record = cast(
+            "MarketStateRecord",
+            _as_record(_required(query, ProjectionKind.MARKET_STATE, market_id), MarketStateRecord),
+        )
+        original = record.payload.candles
+        candles = downsample_candles(original, max_points=max_points)
+        downsampled = len(candles) < len(original)
+        return CandleSeriesResponse(
+            market_id=market_id,
+            original_count=len(original),
+            returned_count=len(candles),
+            downsampled=downsampled,
+            algorithm="min-max-bucket-v1" if downsampled else "none",
+            candles=candles,
+            source_sha256=record.source_sha256,
+        )
+
     @router.get("/data/health", response_model=DataHealthPage, tags=["data"])
     async def data_health(
         limit: Annotated[int, Query(ge=1, le=100)] = 50,
@@ -336,6 +632,68 @@ def create_router(query: ReadModelQuery, stream: SequencedStream) -> APIRouter:
                 cast("DataHealthRecord", _as_record(item, DataHealthRecord)) for item in records
             ),
             page=page,
+        )
+
+    @router.get("/research/runs", response_model=ResearchRunPage, tags=["research"])
+    async def research_runs(
+        limit: Annotated[int, Query(ge=1, le=100)] = 50,
+        cursor: str | None = None,
+        status: str | None = None,
+    ) -> ResearchRunPage:
+        filters = {"status": status} if status is not None else None
+        records, page = _page(
+            query,
+            ProjectionKind.RESEARCH_RUNS,
+            limit=limit,
+            cursor=cursor,
+            filters=filters,
+        )
+        return ResearchRunPage(
+            items=tuple(
+                cast("ResearchRunRecord", _as_record(item, ResearchRunRecord)) for item in records
+            ),
+            page=page,
+        )
+
+    @router.get("/incidents", response_model=IncidentPage, tags=["operations"])
+    async def incidents(
+        limit: Annotated[int, Query(ge=1, le=100)] = 50,
+        cursor: str | None = None,
+        severity: str | None = None,
+    ) -> IncidentPage:
+        filters = {"severity": severity} if severity is not None else None
+        records, page = _page(
+            query,
+            ProjectionKind.INCIDENTS,
+            limit=limit,
+            cursor=cursor,
+            filters=filters,
+        )
+        return IncidentPage(
+            items=tuple(
+                cast("IncidentRecord", _as_record(item, IncidentRecord)) for item in records
+            ),
+            page=page,
+        )
+
+    @router.get("/system/health", response_model=SystemHealthPage, tags=["system"])
+    async def system_health(
+        limit: Annotated[int, Query(ge=1, le=100)] = 50,
+        cursor: str | None = None,
+    ) -> SystemHealthPage:
+        records, page = _page(query, ProjectionKind.SYSTEM_HEALTH, limit=limit, cursor=cursor)
+        return SystemHealthPage(
+            items=tuple(
+                cast("SystemHealthRecord", _as_record(item, SystemHealthRecord)) for item in records
+            ),
+            page=page,
+        )
+
+    @router.get("/reconciliation/status", response_model=ReconciliationRecord, tags=["account"])
+    async def reconciliation_status() -> ReconciliationRecord:
+        return cast(
+            "ReconciliationRecord",
+            _as_record(_first(query, ProjectionKind.RECONCILIATION_STATUS), ReconciliationRecord),
         )
 
     @router.get(

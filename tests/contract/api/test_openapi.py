@@ -9,15 +9,15 @@ from typing import cast
 from pydantic import JsonValue
 
 from aegisquant.api import create_app
-from aegisquant.readmodels.bootstrap import build_snapshot
+from aegisquant.readmodels.p15_bootstrap import build_p15_snapshot
 
 
 def test_checked_in_openapi_matches_runtime(project_root: Path) -> None:
     checked_in = cast(
         "dict[str, JsonValue]",
-        json.loads((project_root / "reports/api/P14_OPENAPI.json").read_text(encoding="utf-8")),
+        json.loads((project_root / "reports/api/P15_OPENAPI.json").read_text(encoding="utf-8")),
     )
-    generated = cast("dict[str, JsonValue]", create_app(build_snapshot(project_root)).openapi())
+    generated = cast("dict[str, JsonValue]", create_app(build_p15_snapshot(project_root)).openapi())
     assert checked_in == generated
 
 
@@ -29,13 +29,16 @@ def test_generated_types_expose_required_read_models(project_root: Path) -> None
         "StreamSnapshotResponse",
         "QualityState",
         "overviewApiV1OverviewGet",
+        "WorkbenchResponse",
+        "workbenchApiV1WorkbenchGet",
+        "orderTraceApiV1OrdersOrderIdTraceGet",
     ):
         assert contract in index
 
     websocket = cast(
         "dict[str, JsonValue]",
         json.loads(
-            (project_root / "reports/api/P14_WEBSOCKET_SCHEMA.json").read_text(encoding="utf-8")
+            (project_root / "reports/api/P15_WEBSOCKET_SCHEMA.json").read_text(encoding="utf-8")
         ),
     )
     assert websocket["recovery_endpoint"] == "/api/v1/stream/snapshot"

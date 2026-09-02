@@ -48,6 +48,7 @@ def test_p06_state_is_in_progress_with_live_lock_and_deferred_acceptance(
         "P12",
         "P13",
         "P14",
+        "P15",
     }
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
@@ -109,7 +110,7 @@ def test_p06_state_is_in_progress_with_live_lock_and_deferred_acceptance(
             "P11",
             "P12",
         }
-    else:
+    elif state["current_phase"] == "P14":
         assert state["next_phase"] == "P15"
         assert previous["phase"] == "P13"
         assert {item["phase"] for item in deferred} >= {
@@ -123,7 +124,31 @@ def test_p06_state_is_in_progress_with_live_lock_and_deferred_acceptance(
             "P12",
             "P13",
         }
-    if state["current_phase"] in {"P08", "P09", "P10", "P11", "P12", "P13", "P14"}:
+    else:
+        assert state["next_phase"] == "P16"
+        assert previous["phase"] == "P14"
+        assert {item["phase"] for item in deferred} >= {
+            "P05",
+            "P06",
+            "P07",
+            "P08",
+            "P09",
+            "P10",
+            "P11",
+            "P12",
+            "P13",
+            "P14",
+        }
+    if state["current_phase"] in {
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+    }:
         p06 = next(item for item in deferred if item["phase"] == "P06")
         assert p06["status"] == "implementation_verified_acceptance_deferred"
     else:

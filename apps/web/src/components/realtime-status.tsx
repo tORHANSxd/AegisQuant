@@ -11,8 +11,19 @@ import {
 } from "../lib/realtime";
 
 const topics = ["account.summary", "risk.state", "intelligence.events"] as const;
-const wsUrl = "ws://127.0.0.1:8000/ws/v1/stream";
-const recoveryUrl = `http://127.0.0.1:8000/api/v1/stream/snapshot?topics=${topics.join(",")}`;
+
+function readApiBaseUrl(): string {
+  const configured = process.env.NEXT_PUBLIC_AEGISQUANT_API_URL ?? "http://127.0.0.1:8000";
+  const parsed = new URL(configured);
+  if (parsed.protocol !== "http:" || (parsed.hostname !== "127.0.0.1" && parsed.hostname !== "localhost")) {
+    return "http://127.0.0.1:8000";
+  }
+  return parsed.origin;
+}
+
+const apiBaseUrl = readApiBaseUrl();
+const wsUrl = `${apiBaseUrl.replace(/^http:/, "ws:")}/ws/v1/stream`;
+const recoveryUrl = `${apiBaseUrl}/api/v1/stream/snapshot?topics=${topics.join(",")}`;
 
 function isStreamEvent(value: unknown): value is StreamEvent {
   if (!value || typeof value !== "object") return false;

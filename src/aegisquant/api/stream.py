@@ -22,10 +22,17 @@ TOPIC_PROJECTIONS: Final[dict[str, tuple[ProjectionKind, ...]]] = {
     "positions.live": (ProjectionKind.POSITIONS_CURRENT,),
     "risk.state": (ProjectionKind.RISK_SUMMARY,),
     "orders.live": (ProjectionKind.ORDERS,),
+    "fills.live": (ProjectionKind.FILLS,),
+    "signals.live": (ProjectionKind.SIGNALS,),
+    "market.state": (ProjectionKind.MARKET_STATE,),
+    "models.health": (ProjectionKind.MODELS, ProjectionKind.MODEL_METRICS),
     "intelligence.events": (ProjectionKind.EVENT_CLUSTERS, ProjectionKind.EVENT_CLAIMS),
     "intelligence.narratives": (ProjectionKind.NARRATIVE_STATES,),
     "intelligence.sources": (ProjectionKind.SOURCE_POLICY_STATUS,),
     "data.health": (ProjectionKind.DATA_HEALTH,),
+    "incidents.live": (ProjectionKind.INCIDENTS,),
+    "system.health": (ProjectionKind.SYSTEM_HEALTH,),
+    "reconciliation.status": (ProjectionKind.RECONCILIATION_STATUS,),
 }
 ALLOWED_ORIGINS: Final = {
     "http://127.0.0.1:3000",

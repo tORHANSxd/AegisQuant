@@ -1,0 +1,27 @@
+{
+  "automated_scope": "semantic, keyboard, motion, text-alternative, and token contrast contracts",
+  "contrast_ratios": {
+    "dark_green_on_surface": 9.261,
+    "dark_muted_on_surface": 7.001,
+    "dark_red_on_surface": 6.73,
+    "dark_text_on_background": 17.49,
+    "light_muted_on_surface": 5.473,
+    "light_text_on_surface": 16.075
+  },
+  "formal_acceptance_performed": false,
+  "minimum_normal_text_ratio": 5.473,
+  "minimum_required_ratio": 4.5,
+  "schema_version": "p15-accessibility-evidence-v1",
+  "structural_checks": {
+    "chart_text_alternative": true,
+    "color_has_text_encoding": true,
+    "document_language": true,
+    "focus_visible": true,
+    "keyboard_command": true,
+    "reduced_motion": true,
+    "screen_reader_utility": true,
+    "skip_link": true
+  },
+  "target": "WCAG 2.2 AA",
+  "test": "apps/web/e2e/dashboard.spec.ts; apps/web/tests/"
+}

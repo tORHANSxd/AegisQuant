@@ -24,16 +24,24 @@ def test_p14_state_is_read_only_live_locked_and_acceptance_deferred(project_root
     previous = cast("dict[str, object]", state["previous_phase"])
     deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
     p13 = next(item for item in deferred if item["phase"] == "P13")
-    assert state["current_phase"] == "P14"
-    assert state["next_phase"] == "P15"
+    assert state["current_phase"] in {"P14", "P15"}
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
-    assert state["implementation_status"] == "implementation_verified_acceptance_deferred"
-    assert state["implementation_commit_sha"] == "55f4d9ed837a7fd71dd94fe4469ff7728d6bf89d"
     assert state["formal_acceptance_deferred"] is True
     assert state["live_trading_locked"] is True
-    assert previous["phase"] == "P13"
-    assert previous["evidence_commit_sha"] == p13["evidence_commit_sha"]
+    if state["current_phase"] == "P14":
+        assert state["next_phase"] == "P15"
+        assert state["implementation_status"] == "implementation_verified_acceptance_deferred"
+        assert state["implementation_commit_sha"] == "55f4d9ed837a7fd71dd94fe4469ff7728d6bf89d"
+        assert previous["phase"] == "P13"
+        assert previous["evidence_commit_sha"] == p13["evidence_commit_sha"]
+    else:
+        p14 = next(item for item in deferred if item["phase"] == "P14")
+        assert state["next_phase"] == "P16"
+        assert previous["phase"] == "P14"
+        assert previous["implementation_commit_sha"] == "55f4d9ed837a7fd71dd94fe4469ff7728d6bf89d"
+        assert previous["evidence_commit_sha"] == p14["evidence_commit_sha"]
+        assert p14["status"] == "implementation_verified_acceptance_deferred"
     assert not (project_root / "reports/phases/P14/ACCEPTANCE.md").exists()
     assert not (project_root / "src/aegisquant/live").exists()
 

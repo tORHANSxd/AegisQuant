@@ -1,0 +1,19 @@
+{
+  "benchmark": "reports/performance/P15_WORKBENCH_BENCHMARK.json",
+  "benchmark_p75_ms": 181,
+  "benchmark_status": "passed",
+  "benchmark_target_p75_ms": 1500,
+  "etag_revalidation": true,
+  "first_preserved": true,
+  "global_max_preserved": true,
+  "global_min_preserved": true,
+  "input_points": 100000,
+  "last_preserved": true,
+  "max_points": 200,
+  "protected_event_preserved": true,
+  "qualifies_as_12h_or_24h_acceptance": false,
+  "returned_points": 200,
+  "schema_version": "p15-performance-evidence-v1",
+  "test": "tests/p15/test_downsampling.py; apps/web/e2e/dashboard.spec.ts",
+  "virtual_table_windowing": true
+}

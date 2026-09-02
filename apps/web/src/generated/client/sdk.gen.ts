@@ -2,7 +2,7 @@
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { AccountApiV1AccountsAccountIdGetData, AccountApiV1AccountsAccountIdGetErrors, AccountApiV1AccountsAccountIdGetResponses, AccountPnlApiV1AccountsAccountIdPnlGetData, AccountPnlApiV1AccountsAccountIdPnlGetErrors, AccountPnlApiV1AccountsAccountIdPnlGetResponses, AccountsApiV1AccountsGetData, AccountsApiV1AccountsGetErrors, AccountsApiV1AccountsGetResponses, DataHealthApiV1DataHealthGetData, DataHealthApiV1DataHealthGetErrors, DataHealthApiV1DataHealthGetResponses, EventApiV1IntelligenceEventsEventClusterIdGetData, EventApiV1IntelligenceEventsEventClusterIdGetErrors, EventApiV1IntelligenceEventsEventClusterIdGetResponses, EventEvidenceApiV1IntelligenceEventsEventClusterIdEvidenceGetData, EventEvidenceApiV1IntelligenceEventsEventClusterIdEvidenceGetErrors, EventEvidenceApiV1IntelligenceEventsEventClusterIdEvidenceGetResponses, EventsApiV1IntelligenceEventsGetData, EventsApiV1IntelligenceEventsGetErrors, EventsApiV1IntelligenceEventsGetResponses, HealthApiV1HealthGetData, HealthApiV1HealthGetResponses, IntelligenceOverviewApiV1IntelligenceOverviewGetData, IntelligenceOverviewApiV1IntelligenceOverviewGetResponses, ModelsApiV1ModelsGetData, ModelsApiV1ModelsGetErrors, ModelsApiV1ModelsGetResponses, NarrativesApiV1IntelligenceNarrativesGetData, NarrativesApiV1IntelligenceNarrativesGetErrors, NarrativesApiV1IntelligenceNarrativesGetResponses, OrdersApiV1OrdersGetData, OrdersApiV1OrdersGetErrors, OrdersApiV1OrdersGetResponses, OverviewApiV1OverviewGetData, OverviewApiV1OverviewGetResponses, PositionsApiV1PositionsGetData, PositionsApiV1PositionsGetErrors, PositionsApiV1PositionsGetResponses, RiskSummaryApiV1RiskSummaryGetData, RiskSummaryApiV1RiskSummaryGetErrors, RiskSummaryApiV1RiskSummaryGetResponses, SourcesApiV1IntelligenceSourcesGetData, SourcesApiV1IntelligenceSourcesGetErrors, SourcesApiV1IntelligenceSourcesGetResponses, StrategiesApiV1StrategiesGetData, StrategiesApiV1StrategiesGetErrors, StrategiesApiV1StrategiesGetResponses, StreamSnapshotApiV1StreamSnapshotGetData, StreamSnapshotApiV1StreamSnapshotGetErrors, StreamSnapshotApiV1StreamSnapshotGetResponses } from './types.gen';
+import type { AccountApiV1AccountsAccountIdGetData, AccountApiV1AccountsAccountIdGetErrors, AccountApiV1AccountsAccountIdGetResponses, AccountEquityApiV1AccountsAccountIdEquityGetData, AccountEquityApiV1AccountsAccountIdEquityGetErrors, AccountEquityApiV1AccountsAccountIdEquityGetResponses, AccountPnlApiV1AccountsAccountIdPnlGetData, AccountPnlApiV1AccountsAccountIdPnlGetErrors, AccountPnlApiV1AccountsAccountIdPnlGetResponses, AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetData, AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetErrors, AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetResponses, AccountsApiV1AccountsGetData, AccountsApiV1AccountsGetErrors, AccountsApiV1AccountsGetResponses, DataHealthApiV1DataHealthGetData, DataHealthApiV1DataHealthGetErrors, DataHealthApiV1DataHealthGetResponses, EventApiV1IntelligenceEventsEventClusterIdGetData, EventApiV1IntelligenceEventsEventClusterIdGetErrors, EventApiV1IntelligenceEventsEventClusterIdGetResponses, EventEvidenceApiV1IntelligenceEventsEventClusterIdEvidenceGetData, EventEvidenceApiV1IntelligenceEventsEventClusterIdEvidenceGetErrors, EventEvidenceApiV1IntelligenceEventsEventClusterIdEvidenceGetResponses, EventsApiV1IntelligenceEventsGetData, EventsApiV1IntelligenceEventsGetErrors, EventsApiV1IntelligenceEventsGetResponses, ExecutionQualityApiV1ExecutionQualityGetData, ExecutionQualityApiV1ExecutionQualityGetResponses, FillsApiV1FillsGetData, FillsApiV1FillsGetErrors, FillsApiV1FillsGetResponses, HealthApiV1HealthGetData, HealthApiV1HealthGetResponses, IncidentsApiV1IncidentsGetData, IncidentsApiV1IncidentsGetErrors, IncidentsApiV1IncidentsGetResponses, IntelligenceOverviewApiV1IntelligenceOverviewGetData, IntelligenceOverviewApiV1IntelligenceOverviewGetResponses, MarketCandlesApiV1MarketStateMarketIdCandlesGetData, MarketCandlesApiV1MarketStateMarketIdCandlesGetErrors, MarketCandlesApiV1MarketStateMarketIdCandlesGetResponses, MarketStateApiV1MarketStateGetData, MarketStateApiV1MarketStateGetErrors, MarketStateApiV1MarketStateGetResponses, ModelMetricsApiV1ModelsMetricsGetData, ModelMetricsApiV1ModelsMetricsGetResponses, ModelsApiV1ModelsGetData, ModelsApiV1ModelsGetErrors, ModelsApiV1ModelsGetResponses, NarrativesApiV1IntelligenceNarrativesGetData, NarrativesApiV1IntelligenceNarrativesGetErrors, NarrativesApiV1IntelligenceNarrativesGetResponses, OrdersApiV1OrdersGetData, OrdersApiV1OrdersGetErrors, OrdersApiV1OrdersGetResponses, OrderTraceApiV1OrdersOrderIdTraceGetData, OrderTraceApiV1OrdersOrderIdTraceGetErrors, OrderTraceApiV1OrdersOrderIdTraceGetResponses, OverviewApiV1OverviewGetData, OverviewApiV1OverviewGetResponses, PositionsApiV1PositionsGetData, PositionsApiV1PositionsGetErrors, PositionsApiV1PositionsGetResponses, ReconciliationStatusApiV1ReconciliationStatusGetData, ReconciliationStatusApiV1ReconciliationStatusGetResponses, ResearchRunsApiV1ResearchRunsGetData, ResearchRunsApiV1ResearchRunsGetErrors, ResearchRunsApiV1ResearchRunsGetResponses, RiskLimitsApiV1RiskLimitsGetData, RiskLimitsApiV1RiskLimitsGetResponses, RiskSummaryApiV1RiskSummaryGetData, RiskSummaryApiV1RiskSummaryGetErrors, RiskSummaryApiV1RiskSummaryGetResponses, SignalsApiV1SignalsGetData, SignalsApiV1SignalsGetErrors, SignalsApiV1SignalsGetResponses, SourcesApiV1IntelligenceSourcesGetData, SourcesApiV1IntelligenceSourcesGetErrors, SourcesApiV1IntelligenceSourcesGetResponses, StrategiesApiV1StrategiesGetData, StrategiesApiV1StrategiesGetErrors, StrategiesApiV1StrategiesGetResponses, StreamSnapshotApiV1StreamSnapshotGetData, StreamSnapshotApiV1StreamSnapshotGetErrors, StreamSnapshotApiV1StreamSnapshotGetResponses, SystemHealthApiV1SystemHealthGetData, SystemHealthApiV1SystemHealthGetErrors, SystemHealthApiV1SystemHealthGetResponses, WorkbenchApiV1WorkbenchGetData, WorkbenchApiV1WorkbenchGetResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -29,9 +29,19 @@ export const accountsApiV1AccountsGet = <ThrowOnError extends boolean = false>(o
 export const accountApiV1AccountsAccountIdGet = <ThrowOnError extends boolean = false>(options: Options<AccountApiV1AccountsAccountIdGetData, ThrowOnError>): RequestResult<AccountApiV1AccountsAccountIdGetResponses, AccountApiV1AccountsAccountIdGetErrors, ThrowOnError> => (options.client ?? client).get<AccountApiV1AccountsAccountIdGetResponses, AccountApiV1AccountsAccountIdGetErrors, ThrowOnError>({ url: '/api/v1/accounts/{account_id}', ...options });
 
 /**
+ * Account Equity
+ */
+export const accountEquityApiV1AccountsAccountIdEquityGet = <ThrowOnError extends boolean = false>(options: Options<AccountEquityApiV1AccountsAccountIdEquityGetData, ThrowOnError>): RequestResult<AccountEquityApiV1AccountsAccountIdEquityGetResponses, AccountEquityApiV1AccountsAccountIdEquityGetErrors, ThrowOnError> => (options.client ?? client).get<AccountEquityApiV1AccountsAccountIdEquityGetResponses, AccountEquityApiV1AccountsAccountIdEquityGetErrors, ThrowOnError>({ url: '/api/v1/accounts/{account_id}/equity', ...options });
+
+/**
  * Account Pnl
  */
 export const accountPnlApiV1AccountsAccountIdPnlGet = <ThrowOnError extends boolean = false>(options: Options<AccountPnlApiV1AccountsAccountIdPnlGetData, ThrowOnError>): RequestResult<AccountPnlApiV1AccountsAccountIdPnlGetResponses, AccountPnlApiV1AccountsAccountIdPnlGetErrors, ThrowOnError> => (options.client ?? client).get<AccountPnlApiV1AccountsAccountIdPnlGetResponses, AccountPnlApiV1AccountsAccountIdPnlGetErrors, ThrowOnError>({ url: '/api/v1/accounts/{account_id}/pnl', ...options });
+
+/**
+ * Account Pnl Attribution
+ */
+export const accountPnlAttributionApiV1AccountsAccountIdPnlAttributionGet = <ThrowOnError extends boolean = false>(options: Options<AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetData, ThrowOnError>): RequestResult<AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetResponses, AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetErrors, ThrowOnError> => (options.client ?? client).get<AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetResponses, AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetErrors, ThrowOnError>({ url: '/api/v1/accounts/{account_id}/pnl/attribution', ...options });
 
 /**
  * Data Health
@@ -39,9 +49,24 @@ export const accountPnlApiV1AccountsAccountIdPnlGet = <ThrowOnError extends bool
 export const dataHealthApiV1DataHealthGet = <ThrowOnError extends boolean = false>(options?: Options<DataHealthApiV1DataHealthGetData, ThrowOnError>): RequestResult<DataHealthApiV1DataHealthGetResponses, DataHealthApiV1DataHealthGetErrors, ThrowOnError> => (options?.client ?? client).get<DataHealthApiV1DataHealthGetResponses, DataHealthApiV1DataHealthGetErrors, ThrowOnError>({ url: '/api/v1/data/health', ...options });
 
 /**
+ * Execution Quality
+ */
+export const executionQualityApiV1ExecutionQualityGet = <ThrowOnError extends boolean = false>(options?: Options<ExecutionQualityApiV1ExecutionQualityGetData, ThrowOnError>): RequestResult<ExecutionQualityApiV1ExecutionQualityGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<ExecutionQualityApiV1ExecutionQualityGetResponses, unknown, ThrowOnError>({ url: '/api/v1/execution/quality', ...options });
+
+/**
+ * Fills
+ */
+export const fillsApiV1FillsGet = <ThrowOnError extends boolean = false>(options?: Options<FillsApiV1FillsGetData, ThrowOnError>): RequestResult<FillsApiV1FillsGetResponses, FillsApiV1FillsGetErrors, ThrowOnError> => (options?.client ?? client).get<FillsApiV1FillsGetResponses, FillsApiV1FillsGetErrors, ThrowOnError>({ url: '/api/v1/fills', ...options });
+
+/**
  * Health
  */
 export const healthApiV1HealthGet = <ThrowOnError extends boolean = false>(options?: Options<HealthApiV1HealthGetData, ThrowOnError>): RequestResult<HealthApiV1HealthGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<HealthApiV1HealthGetResponses, unknown, ThrowOnError>({ url: '/api/v1/health', ...options });
+
+/**
+ * Incidents
+ */
+export const incidentsApiV1IncidentsGet = <ThrowOnError extends boolean = false>(options?: Options<IncidentsApiV1IncidentsGetData, ThrowOnError>): RequestResult<IncidentsApiV1IncidentsGetResponses, IncidentsApiV1IncidentsGetErrors, ThrowOnError> => (options?.client ?? client).get<IncidentsApiV1IncidentsGetResponses, IncidentsApiV1IncidentsGetErrors, ThrowOnError>({ url: '/api/v1/incidents', ...options });
 
 /**
  * Events
@@ -74,14 +99,34 @@ export const intelligenceOverviewApiV1IntelligenceOverviewGet = <ThrowOnError ex
 export const sourcesApiV1IntelligenceSourcesGet = <ThrowOnError extends boolean = false>(options?: Options<SourcesApiV1IntelligenceSourcesGetData, ThrowOnError>): RequestResult<SourcesApiV1IntelligenceSourcesGetResponses, SourcesApiV1IntelligenceSourcesGetErrors, ThrowOnError> => (options?.client ?? client).get<SourcesApiV1IntelligenceSourcesGetResponses, SourcesApiV1IntelligenceSourcesGetErrors, ThrowOnError>({ url: '/api/v1/intelligence/sources', ...options });
 
 /**
+ * Market State
+ */
+export const marketStateApiV1MarketStateGet = <ThrowOnError extends boolean = false>(options?: Options<MarketStateApiV1MarketStateGetData, ThrowOnError>): RequestResult<MarketStateApiV1MarketStateGetResponses, MarketStateApiV1MarketStateGetErrors, ThrowOnError> => (options?.client ?? client).get<MarketStateApiV1MarketStateGetResponses, MarketStateApiV1MarketStateGetErrors, ThrowOnError>({ url: '/api/v1/market/state', ...options });
+
+/**
+ * Market Candles
+ */
+export const marketCandlesApiV1MarketStateMarketIdCandlesGet = <ThrowOnError extends boolean = false>(options: Options<MarketCandlesApiV1MarketStateMarketIdCandlesGetData, ThrowOnError>): RequestResult<MarketCandlesApiV1MarketStateMarketIdCandlesGetResponses, MarketCandlesApiV1MarketStateMarketIdCandlesGetErrors, ThrowOnError> => (options.client ?? client).get<MarketCandlesApiV1MarketStateMarketIdCandlesGetResponses, MarketCandlesApiV1MarketStateMarketIdCandlesGetErrors, ThrowOnError>({ url: '/api/v1/market/state/{market_id}/candles', ...options });
+
+/**
  * Models
  */
 export const modelsApiV1ModelsGet = <ThrowOnError extends boolean = false>(options?: Options<ModelsApiV1ModelsGetData, ThrowOnError>): RequestResult<ModelsApiV1ModelsGetResponses, ModelsApiV1ModelsGetErrors, ThrowOnError> => (options?.client ?? client).get<ModelsApiV1ModelsGetResponses, ModelsApiV1ModelsGetErrors, ThrowOnError>({ url: '/api/v1/models', ...options });
 
 /**
+ * Model Metrics
+ */
+export const modelMetricsApiV1ModelsMetricsGet = <ThrowOnError extends boolean = false>(options?: Options<ModelMetricsApiV1ModelsMetricsGetData, ThrowOnError>): RequestResult<ModelMetricsApiV1ModelsMetricsGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<ModelMetricsApiV1ModelsMetricsGetResponses, unknown, ThrowOnError>({ url: '/api/v1/models/metrics', ...options });
+
+/**
  * Orders
  */
 export const ordersApiV1OrdersGet = <ThrowOnError extends boolean = false>(options?: Options<OrdersApiV1OrdersGetData, ThrowOnError>): RequestResult<OrdersApiV1OrdersGetResponses, OrdersApiV1OrdersGetErrors, ThrowOnError> => (options?.client ?? client).get<OrdersApiV1OrdersGetResponses, OrdersApiV1OrdersGetErrors, ThrowOnError>({ url: '/api/v1/orders', ...options });
+
+/**
+ * Order Trace
+ */
+export const orderTraceApiV1OrdersOrderIdTraceGet = <ThrowOnError extends boolean = false>(options: Options<OrderTraceApiV1OrdersOrderIdTraceGetData, ThrowOnError>): RequestResult<OrderTraceApiV1OrdersOrderIdTraceGetResponses, OrderTraceApiV1OrdersOrderIdTraceGetErrors, ThrowOnError> => (options.client ?? client).get<OrderTraceApiV1OrdersOrderIdTraceGetResponses, OrderTraceApiV1OrdersOrderIdTraceGetErrors, ThrowOnError>({ url: '/api/v1/orders/{order_id}/trace', ...options });
 
 /**
  * Overview
@@ -94,9 +139,29 @@ export const overviewApiV1OverviewGet = <ThrowOnError extends boolean = false>(o
 export const positionsApiV1PositionsGet = <ThrowOnError extends boolean = false>(options?: Options<PositionsApiV1PositionsGetData, ThrowOnError>): RequestResult<PositionsApiV1PositionsGetResponses, PositionsApiV1PositionsGetErrors, ThrowOnError> => (options?.client ?? client).get<PositionsApiV1PositionsGetResponses, PositionsApiV1PositionsGetErrors, ThrowOnError>({ url: '/api/v1/positions', ...options });
 
 /**
+ * Reconciliation Status
+ */
+export const reconciliationStatusApiV1ReconciliationStatusGet = <ThrowOnError extends boolean = false>(options?: Options<ReconciliationStatusApiV1ReconciliationStatusGetData, ThrowOnError>): RequestResult<ReconciliationStatusApiV1ReconciliationStatusGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<ReconciliationStatusApiV1ReconciliationStatusGetResponses, unknown, ThrowOnError>({ url: '/api/v1/reconciliation/status', ...options });
+
+/**
+ * Research Runs
+ */
+export const researchRunsApiV1ResearchRunsGet = <ThrowOnError extends boolean = false>(options?: Options<ResearchRunsApiV1ResearchRunsGetData, ThrowOnError>): RequestResult<ResearchRunsApiV1ResearchRunsGetResponses, ResearchRunsApiV1ResearchRunsGetErrors, ThrowOnError> => (options?.client ?? client).get<ResearchRunsApiV1ResearchRunsGetResponses, ResearchRunsApiV1ResearchRunsGetErrors, ThrowOnError>({ url: '/api/v1/research/runs', ...options });
+
+/**
+ * Risk Limits
+ */
+export const riskLimitsApiV1RiskLimitsGet = <ThrowOnError extends boolean = false>(options?: Options<RiskLimitsApiV1RiskLimitsGetData, ThrowOnError>): RequestResult<RiskLimitsApiV1RiskLimitsGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<RiskLimitsApiV1RiskLimitsGetResponses, unknown, ThrowOnError>({ url: '/api/v1/risk/limits', ...options });
+
+/**
  * Risk Summary
  */
 export const riskSummaryApiV1RiskSummaryGet = <ThrowOnError extends boolean = false>(options?: Options<RiskSummaryApiV1RiskSummaryGetData, ThrowOnError>): RequestResult<RiskSummaryApiV1RiskSummaryGetResponses, RiskSummaryApiV1RiskSummaryGetErrors, ThrowOnError> => (options?.client ?? client).get<RiskSummaryApiV1RiskSummaryGetResponses, RiskSummaryApiV1RiskSummaryGetErrors, ThrowOnError>({ url: '/api/v1/risk/summary', ...options });
+
+/**
+ * Signals
+ */
+export const signalsApiV1SignalsGet = <ThrowOnError extends boolean = false>(options?: Options<SignalsApiV1SignalsGetData, ThrowOnError>): RequestResult<SignalsApiV1SignalsGetResponses, SignalsApiV1SignalsGetErrors, ThrowOnError> => (options?.client ?? client).get<SignalsApiV1SignalsGetResponses, SignalsApiV1SignalsGetErrors, ThrowOnError>({ url: '/api/v1/signals', ...options });
 
 /**
  * Strategies
@@ -107,3 +172,15 @@ export const strategiesApiV1StrategiesGet = <ThrowOnError extends boolean = fals
  * Stream Snapshot
  */
 export const streamSnapshotApiV1StreamSnapshotGet = <ThrowOnError extends boolean = false>(options?: Options<StreamSnapshotApiV1StreamSnapshotGetData, ThrowOnError>): RequestResult<StreamSnapshotApiV1StreamSnapshotGetResponses, StreamSnapshotApiV1StreamSnapshotGetErrors, ThrowOnError> => (options?.client ?? client).get<StreamSnapshotApiV1StreamSnapshotGetResponses, StreamSnapshotApiV1StreamSnapshotGetErrors, ThrowOnError>({ url: '/api/v1/stream/snapshot', ...options });
+
+/**
+ * System Health
+ */
+export const systemHealthApiV1SystemHealthGet = <ThrowOnError extends boolean = false>(options?: Options<SystemHealthApiV1SystemHealthGetData, ThrowOnError>): RequestResult<SystemHealthApiV1SystemHealthGetResponses, SystemHealthApiV1SystemHealthGetErrors, ThrowOnError> => (options?.client ?? client).get<SystemHealthApiV1SystemHealthGetResponses, SystemHealthApiV1SystemHealthGetErrors, ThrowOnError>({ url: '/api/v1/system/health', ...options });
+
+/**
+ * Workbench
+ *
+ * Return one internally consistent snapshot for cross-page drilldown.
+ */
+export const workbenchApiV1WorkbenchGet = <ThrowOnError extends boolean = false>(options?: Options<WorkbenchApiV1WorkbenchGetData, ThrowOnError>): RequestResult<WorkbenchApiV1WorkbenchGetResponses, unknown, ThrowOnError> => (options?.client ?? client).get<WorkbenchApiV1WorkbenchGetResponses, unknown, ThrowOnError>({ url: '/api/v1/workbench', ...options });

@@ -1,4 +1,4 @@
-"""FastAPI application factory for the loopback-only P14 read service."""
+"""FastAPI application factory for the loopback-only P15 read service."""
 # pyright: reportUnusedFunction=false
 
 from __future__ import annotations
@@ -20,12 +20,13 @@ from starlette.responses import Response
 from aegisquant.api.models import ErrorBody, ErrorResponse
 from aegisquant.api.routes import APIContractError, create_router, create_websocket_router
 from aegisquant.api.stream import SequencedStream
-from aegisquant.readmodels.bootstrap import build_snapshot
+from aegisquant.data.hashing import canonical_sha256
 from aegisquant.readmodels.engine import ReadModelQuery
 from aegisquant.readmodels.models import ProjectionSnapshot
+from aegisquant.readmodels.p15_bootstrap import build_p15_snapshot
 
 PROJECT_ROOT: Final = Path(__file__).resolve().parents[3]
-SNAPSHOT_PATH: Final = PROJECT_ROOT / "reports/read_models/P14_SNAPSHOT.json"
+SNAPSHOT_PATH: Final = PROJECT_ROOT / "reports/read_models/P15_SNAPSHOT.json"
 CORRELATION_PATTERN: Final = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 LOOPBACK_ORIGINS: Final = ("http://127.0.0.1:3000", "http://localhost:3000")
 
@@ -34,7 +35,7 @@ def load_snapshot(path: Path = SNAPSHOT_PATH) -> ProjectionSnapshot:
     """Load the immutable artifact, or deterministically rebuild it from audited inputs."""
     if path.is_file():
         return ProjectionSnapshot.model_validate_json(path.read_text(encoding="utf-8"))
-    return build_snapshot(PROJECT_ROOT)
+    return build_p15_snapshot(PROJECT_ROOT)
 
 
 def _correlation_id(request: Request) -> str:
@@ -56,7 +57,7 @@ def create_app(snapshot: ProjectionSnapshot | None = None) -> FastAPI:
     stream = SequencedStream(query)
     app = FastAPI(
         title="AegisQuant Read API",
-        summary="Loopback-only, read-only P14 dashboard API",
+        summary="Loopback-only, read-only P15 workbench API",
         description=(
             "Versioned Read Model API. It exposes no trading writes, no credential input, "
             "and no LIVE_TRADING unlock capability."
@@ -92,9 +93,34 @@ def create_app(snapshot: ProjectionSnapshot | None = None) -> FastAPI:
         request.state.correlation_id = (
             supplied if CORRELATION_PATTERN.fullmatch(supplied) else uuid4().hex
         )
-        response = await call_next(request)
+        cacheable = (
+            request.method == "GET"
+            and request.url.path
+            not in {"/api/v1/health", "/api/v1/stream/snapshot", "/api/v1/openapi.json"}
+            and not request.url.path.startswith("/api/v1/docs")
+        )
+        etag = (
+            '"'
+            + canonical_sha256(
+                {
+                    "snapshot": selected.content_sha256,
+                    "path": request.url.path,
+                    "query": request.url.query,
+                }
+            )
+            + '"'
+        )
+        if cacheable and request.headers.get("if-none-match") == etag:
+            response = Response(status_code=304)
+        else:
+            response = await call_next(request)
         response.headers["X-Correlation-ID"] = request.state.correlation_id
-        response.headers["Cache-Control"] = "no-store"
+        if cacheable and response.status_code < 400:
+            response.headers["Cache-Control"] = "private, max-age=0, must-revalidate"
+            response.headers["ETag"] = etag
+            response.headers["Vary"] = "If-None-Match"
+        else:
+            response.headers["Cache-Control"] = "no-store"
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "no-referrer"
         response.headers["X-Frame-Options"] = "DENY"

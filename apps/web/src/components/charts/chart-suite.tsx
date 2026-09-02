@@ -1,7 +1,7 @@
 "use client";
 
 import type { EChartsOption } from "echarts";
-import type { CandlestickData, Time } from "lightweight-charts";
+import type { CandlestickData, SeriesMarker, Time } from "lightweight-charts";
 import { useEffect, useRef } from "react";
 
 interface SeriesPoint {
@@ -119,18 +119,31 @@ export function ModelCalibrationChart({ points }: Readonly<{ points: SeriesPoint
 
 export function CandlestickTradeChart({
   data,
-}: Readonly<{ data: Array<CandlestickData<Time>> }>) {
+  markers = [],
+}: Readonly<{
+  data: Array<CandlestickData<Time>>;
+  markers?: Array<{ time: Time; label: string; price: number; kind: string }>;
+}>) {
   const container = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const node = container.current;
     if (!node) return;
     let disposed = false;
     let cleanup: () => void = () => undefined;
-    void import("lightweight-charts").then(({ CandlestickSeries, createChart }) => {
+    void import("lightweight-charts").then(({ CandlestickSeries, createChart, createSeriesMarkers }) => {
       if (disposed) return;
       const chart = createChart(node, { autoSize: true, layout: { background: { color: "transparent" }, textColor: "#91a8ae" }, grid: { vertLines: { color: "#213641" }, horzLines: { color: "#213641" } } });
       const series = chart.addSeries(CandlestickSeries, { upColor: "#5ad29c", downColor: "#ff7768", borderVisible: false, wickUpColor: "#5ad29c", wickDownColor: "#ff7768" });
       series.setData(data);
+      const renderedMarkers: Array<SeriesMarker<Time>> = markers.map((marker) => ({
+        time: marker.time,
+        position: "atPriceTop",
+        shape: marker.kind === "FILL" ? "arrowUp" : "circle",
+        color: marker.kind === "FILL" ? "#f4bd62" : "#4ed2c5",
+        price: marker.price,
+        text: marker.label,
+      }));
+      createSeriesMarkers(series, renderedMarkers);
       chart.timeScale().fitContent();
       cleanup = () => chart.remove();
     });
@@ -138,12 +151,13 @@ export function CandlestickTradeChart({
       disposed = true;
       cleanup();
     };
-  }, [data]);
+  }, [data, markers]);
   const points = data.map((item) => ({ label: String(item.time), value: item.close }));
   return (
     <figure className="chart-surface" aria-label="K 线与交易">
       <figcaption><strong>K 线与交易</strong><span>价格图仅用于上下文，不构成买卖建议。</span></figcaption>
       <div ref={container} className="chart-canvas" role="img" aria-label="历史 K 线" />
+      {markers.length ? <ol className="chart-markers" aria-label="回放标记">{markers.map((marker) => <li key={`${String(marker.time)}:${marker.label}`}><time>{String(marker.time)}</time><strong>{marker.kind}</strong><span>{marker.label} · {marker.price}</span></li>)}</ol> : null}
       <ChartTable title="K 线收盘价" points={points} />
     </figure>
   );

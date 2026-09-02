@@ -1,0 +1,89 @@
+{
+  "all_stage_orders_canonical": true,
+  "all_traces_complete": true,
+  "all_visible_orders_traceable": true,
+  "canonical_stages": [
+    "SIGNAL",
+    "EVENT_EVIDENCE",
+    "MODEL",
+    "RISK",
+    "ORDER",
+    "FILL",
+    "LEDGER"
+  ],
+  "causal_overclaim_count": 0,
+  "detail_route": "/execution/orders/[orderId]",
+  "not_available_stage_count": 0,
+  "orders": [
+    {
+      "causal_link_overclaimed": false,
+      "complete": true,
+      "order_id": "benchmark-1",
+      "sources": [
+        "reports/backtests/p06-golden/run_manifest.json",
+        "reports/backtests/p06-golden/run_manifest.json",
+        "reports/backtests/p06-golden/run_manifest.json",
+        "reports/backtests/p06-golden/risk_report.md",
+        "reports/backtests/p06-golden/orders.parquet",
+        "reports/backtests/p06-golden/fills.parquet",
+        "reports/backtests/p06-golden/ledger_entries.parquet"
+      ],
+      "stages": [
+        "SIGNAL",
+        "EVENT_EVIDENCE",
+        "MODEL",
+        "RISK",
+        "ORDER",
+        "FILL",
+        "LEDGER"
+      ],
+      "statuses": [
+        "NOT_APPLICABLE",
+        "NOT_APPLICABLE",
+        "NOT_APPLICABLE",
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED"
+      ],
+      "trace_present": true
+    },
+    {
+      "causal_link_overclaimed": false,
+      "complete": true,
+      "order_id": "benchmark-2",
+      "sources": [
+        "reports/backtests/p06-golden/run_manifest.json",
+        "reports/backtests/p06-golden/run_manifest.json",
+        "reports/backtests/p06-golden/run_manifest.json",
+        "reports/backtests/p06-golden/risk_report.md",
+        "reports/backtests/p06-golden/orders.parquet",
+        "reports/backtests/p06-golden/fills.parquet",
+        "reports/backtests/p06-golden/ledger_entries.parquet"
+      ],
+      "stages": [
+        "SIGNAL",
+        "EVENT_EVIDENCE",
+        "MODEL",
+        "RISK",
+        "ORDER",
+        "FILL",
+        "LEDGER"
+      ],
+      "statuses": [
+        "NOT_APPLICABLE",
+        "NOT_APPLICABLE",
+        "NOT_APPLICABLE",
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED"
+      ],
+      "trace_present": true
+    }
+  ],
+  "schema_version": "p15-trace-evidence-v1",
+  "test": "apps/web/e2e/dashboard.spec.ts; tests/integration/test_p15_workbench.py",
+  "trace_count": 2,
+  "visible_order_count": 2
+}

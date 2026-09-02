@@ -1,0 +1,24 @@
+{
+  "actions": {
+    "command_palette": true,
+    "display_preferences": true,
+    "global_filters": true,
+    "safe_layout": true,
+    "text_export": true
+  },
+  "credential_fields": 0,
+  "preference_storage_key": "aegisquant-ui-preferences-v1",
+  "safe_query_keys": [
+    "account",
+    "currency",
+    "range",
+    "strategy",
+    "timezone",
+    "venue"
+  ],
+  "saved_layout_storage_key": "aegisquant-safe-layout-v1",
+  "schema_version": "p15-interaction-evidence-v1",
+  "server_writes": 0,
+  "test": "apps/web/e2e/dashboard.spec.ts; apps/web/tests/locked-page.test.tsx",
+  "trading_controls": 0
+}

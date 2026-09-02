@@ -1,0 +1,21 @@
+{
+  "all_core_labels_present": true,
+  "five_second_core_labels": [
+    "账户权益",
+    "当日净损益",
+    "风险状态",
+    "对账状态"
+  ],
+  "formal_acceptance_performed": false,
+  "historical_state_disclosure": true,
+  "non_advice_disclosure": false,
+  "pnl_as_of_present": true,
+  "pnl_formula_present": true,
+  "pnl_source_present": true,
+  "schema_version": "p15-usability-evidence-v1",
+  "test": "apps/web/e2e/dashboard.spec.ts",
+  "timezone_options": [
+    "Asia/Shanghai",
+    "UTC"
+  ]
+}

@@ -1,7 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("next/navigation", () => ({ usePathname: () => "/overview" }));
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/overview",
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  useSearchParams: () => new URLSearchParams(),
+}));
 vi.mock("../src/components/realtime-status", () => ({
   RealtimeStatus: () => <span>STREAM DISCONNECTED</span>,
 }));
@@ -11,7 +15,7 @@ vi.mock("../src/components/preferences", () => ({
 
 import { AppShell } from "../src/components/app-shell";
 
-describe("P14 read-only app shell", () => {
+describe("P15 read-only app shell", () => {
   it("shows environment, permission, and immutable Live lock", () => {
     render(<AppShell><p>内容</p></AppShell>);
 

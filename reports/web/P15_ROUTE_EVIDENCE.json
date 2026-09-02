@@ -1,0 +1,303 @@
+{
+  "api_routes": [
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/accounts"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/accounts/{account_id}"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/accounts/{account_id}/equity"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/accounts/{account_id}/pnl"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/accounts/{account_id}/pnl/attribution"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/data/health"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/execution/quality"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/fills"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/health"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/incidents"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intelligence/events"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intelligence/events/{event_cluster_id}"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intelligence/events/{event_cluster_id}/evidence"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intelligence/narratives"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intelligence/overview"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intelligence/sources"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/market/state"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/market/state/{market_id}/candles"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/models"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/models/metrics"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/orders"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/orders/{order_id}/trace"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/overview"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/positions"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/reconciliation/status"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/research/runs"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/risk/limits"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/risk/summary"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/signals"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/strategies"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/stream/snapshot"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/system/health"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/workbench"
+    }
+  ],
+  "failure_scope": "current Next.js route segment; trading services are not invoked",
+  "formal_acceptance_performed": false,
+  "missing_routes": [],
+  "not_found_boundary": "apps/web/app/not-found.tsx",
+  "route_count": 15,
+  "routes": [
+    {
+      "heading": "账户与风险总览",
+      "path": "/overview",
+      "source": "apps/web/app/overview/page.tsx",
+      "source_sha256": "b462ac9adf675c4219e8a1fb799c9f0596389a67beae573a49d6363d41d0bf6d"
+    },
+    {
+      "heading": "实时台与状态回放",
+      "path": "/live",
+      "source": "apps/web/app/live/page.tsx",
+      "source_sha256": "98e050bef80fbefb055a9be6081c78fca29bc5f454fb114196f9b524363063b4"
+    },
+    {
+      "heading": "绩效、成本与归因",
+      "path": "/performance",
+      "source": "apps/web/app/performance/page.tsx",
+      "source_sha256": "a3e9326f4042f77abf3ad26610cfd2bff9ddb6f72aeda38d16aae8f00e212a77"
+    },
+    {
+      "heading": "执行质量与订单追溯",
+      "path": "/execution",
+      "source": "apps/web/app/execution/page.tsx",
+      "source_sha256": "1daa8626db32a2396f45fd17ac0d4b2e4a8183653492643df43d6c4bc67bfcb5"
+    },
+    {
+      "heading": "策略目录与信号",
+      "path": "/strategies",
+      "source": "apps/web/app/strategies/page.tsx",
+      "source_sha256": "3ab69a1c7b992f89676e68af77c24354b4b81ca61b2384293c4426144b8d2f66"
+    },
+    {
+      "heading": "模型评估与治理",
+      "path": "/models",
+      "source": "apps/web/app/models/page.tsx",
+      "source_sha256": "fb7361e42baa4f532b8b1528b38742024a733f2417c3bfeb5f6cb73014732d30"
+    },
+    {
+      "heading": "市场状态与历史回放",
+      "path": "/market",
+      "source": "apps/web/app/market/page.tsx",
+      "source_sha256": "6854f003122becf1b171509f5bee8564dc83985899d6ba972cdf807bdf198bd5"
+    },
+    {
+      "heading": "全球事件与叙事情报",
+      "path": "/intelligence",
+      "source": "apps/web/app/intelligence/page.tsx",
+      "source_sha256": "c61bd20cce9b78da37dc74804e26ff4b9fd0fac1a6f38894346a0b3c39f074ae"
+    },
+    {
+      "heading": "风险限额与熔断姿态",
+      "path": "/risk",
+      "source": "apps/web/app/risk/page.tsx",
+      "source_sha256": "3d6b4a4e37bf86136ea4fac37d525e51a82dbeaf81ef8a79ddbdbe9578a9389f"
+    },
+    {
+      "heading": "研究运行与负结果",
+      "path": "/research",
+      "source": "apps/web/app/research/page.tsx",
+      "source_sha256": "2760ff18a1b0463dd1a5e523437b9dc5c38512dc4dda860e0ca67edaeebc779d"
+    },
+    {
+      "heading": "外部知识与情报研究",
+      "path": "/research/intelligence",
+      "source": "apps/web/app/research/intelligence/page.tsx",
+      "source_sha256": "75c610c3a29bc8ebc4d32f43068e4b67ef1eb5e365dd55fd0ff9d39e2af4f4a8"
+    },
+    {
+      "heading": "数据质量、来源与血缘",
+      "path": "/data",
+      "source": "apps/web/app/data/page.tsx",
+      "source_sha256": "2320cbf46eaf1a68585e4d85e4d2fceae0acaf9cb338f6eaeedbe5337be400e2"
+    },
+    {
+      "heading": "事故时间线与恢复证据",
+      "path": "/incidents",
+      "source": "apps/web/app/incidents/page.tsx",
+      "source_sha256": "b4be66757138f1601a60f21a79e19e429bb0c58a62d12e40b76c06244cdfb87a"
+    },
+    {
+      "heading": "系统健康与契约状态",
+      "path": "/system",
+      "source": "apps/web/app/system/page.tsx",
+      "source_sha256": "496a490b6803fd8337283b668145d70948ba485a6ed46b69434d3481f5f6ff41"
+    },
+    {
+      "heading": "安全设置",
+      "path": "/settings",
+      "source": "apps/web/app/settings/page.tsx",
+      "source_sha256": "ab34a8659840a172f9acd0e3fca4b8086615f12e150d16a7c08edc155f3e2d81"
+    }
+  ],
+  "schema_version": "p15-route-evidence-v1",
+  "shared_error_boundary": "apps/web/app/error.tsx",
+  "shared_loading_boundary": "apps/web/app/loading.tsx",
+  "unsafe_api_methods": []
+}

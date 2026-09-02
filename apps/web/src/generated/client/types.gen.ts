@@ -135,6 +135,70 @@ export type AccountRecord = {
 };
 
 /**
+ * CandlePoint
+ */
+export type CandlePoint = {
+    /**
+     * Close
+     */
+    close: string;
+    /**
+     * High
+     */
+    high: string;
+    /**
+     * Low
+     */
+    low: string;
+    /**
+     * Open
+     */
+    open: string;
+    /**
+     * Time
+     */
+    time: string;
+    /**
+     * Volume
+     */
+    volume: string;
+};
+
+/**
+ * CandleSeriesResponse
+ */
+export type CandleSeriesResponse = {
+    /**
+     * Algorithm
+     */
+    algorithm: 'none' | 'min-max-bucket-v1';
+    /**
+     * Candles
+     */
+    candles: Array<CandlePoint>;
+    /**
+     * Downsampled
+     */
+    downsampled: boolean;
+    /**
+     * Market Id
+     */
+    market_id: string;
+    /**
+     * Original Count
+     */
+    original_count: number;
+    /**
+     * Returned Count
+     */
+    returned_count: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+};
+
+/**
  * ClaimEvidencePayload
  */
 export type ClaimEvidencePayload = {
@@ -500,6 +564,243 @@ export type EventRecord = {
 };
 
 /**
+ * ExecutionQualityPayload
+ */
+export type ExecutionQualityPayload = {
+    /**
+     * Degraded Cycle Count
+     */
+    degraded_cycle_count: number;
+    /**
+     * Fill Rate
+     */
+    fill_rate: string;
+    /**
+     * Mean Adverse Slippage Bps
+     */
+    mean_adverse_slippage_bps: string;
+    /**
+     * Observation Count
+     */
+    observation_count: number;
+    /**
+     * P95 Adverse Slippage Bps
+     */
+    p95_adverse_slippage_bps: string;
+    /**
+     * Production Capacity Claimed
+     */
+    production_capacity_claimed: false;
+    /**
+     * Reconciliation Difference Count
+     */
+    reconciliation_difference_count: number;
+    /**
+     * Rejection Count
+     */
+    rejection_count: number;
+    /**
+     * Restart Count
+     */
+    restart_count: number;
+    /**
+     * Strategy Id
+     */
+    strategy_id: string;
+    /**
+     * Testnet Pnl Included
+     */
+    testnet_pnl_included: false;
+};
+
+/**
+ * ExecutionQualityRecord
+ */
+export type ExecutionQualityRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: ExecutionQualityPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
+
+/**
+ * FillPage
+ */
+export type FillPage = {
+    /**
+     * Items
+     */
+    items: Array<FillRecord>;
+    page: PageMeta;
+};
+
+/**
+ * FillPayload
+ */
+export type FillPayload = {
+    /**
+     * Available At
+     */
+    available_at: string;
+    /**
+     * Event Time
+     */
+    event_time: string;
+    /**
+     * Execution Price
+     */
+    execution_price: string;
+    /**
+     * Fee
+     */
+    fee: string;
+    /**
+     * Fee Asset Id
+     */
+    fee_asset_id: string;
+    /**
+     * Fill Id
+     */
+    fill_id: string;
+    /**
+     * Ingest Time
+     */
+    ingest_time: string;
+    /**
+     * Instrument Id
+     */
+    instrument_id: string;
+    /**
+     * Latency Ns
+     */
+    latency_ns: number;
+    /**
+     * Liquidity Role
+     */
+    liquidity_role: string;
+    /**
+     * Order Id
+     */
+    order_id: string;
+    /**
+     * Order Intent Id
+     */
+    order_intent_id: string;
+    /**
+     * Quantity
+     */
+    quantity: string;
+    /**
+     * Reference Price
+     */
+    reference_price: string;
+    /**
+     * Side
+     */
+    side: 'BUY' | 'SELL';
+    /**
+     * Virtual
+     */
+    virtual: true;
+};
+
+/**
+ * FillRecord
+ */
+export type FillRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: FillPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
+
+/**
  * HTTPValidationError
  */
 export type HttpValidationError = {
@@ -548,6 +849,166 @@ export type HealthResponse = {
 };
 
 /**
+ * IncidentPage
+ */
+export type IncidentPage = {
+    /**
+     * Items
+     */
+    items: Array<IncidentRecord>;
+    page: PageMeta;
+};
+
+/**
+ * IncidentPayload
+ */
+export type IncidentPayload = {
+    /**
+     * Checkpoint Verified
+     */
+    checkpoint_verified: boolean;
+    /**
+     * Duplicate Fill Count
+     */
+    duplicate_fill_count: number;
+    /**
+     * Duplicate Order Count
+     */
+    duplicate_order_count: number;
+    /**
+     * Fault Kind
+     */
+    fault_kind: string;
+    /**
+     * Incident Id
+     */
+    incident_id: string;
+    /**
+     * New Risk Allowed
+     */
+    new_risk_allowed: false;
+    /**
+     * Postmortem Required
+     */
+    postmortem_required: boolean;
+    /**
+     * Real Funds Impacted
+     */
+    real_funds_impacted: false;
+    /**
+     * Reason Code
+     */
+    reason_code: string;
+    /**
+     * Reconciliation Clear
+     */
+    reconciliation_clear: boolean;
+    /**
+     * Risk State
+     */
+    risk_state: string;
+    /**
+     * Runbook Path
+     */
+    runbook_path: string;
+    /**
+     * Severity
+     */
+    severity: 'SEV0' | 'SEV1' | 'SEV2' | 'SEV3';
+    /**
+     * Status
+     */
+    status: string;
+    /**
+     * Timeline
+     */
+    timeline: Array<IncidentTimelinePoint>;
+};
+
+/**
+ * IncidentRecord
+ */
+export type IncidentRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: IncidentPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
+
+/**
+ * IncidentTimelinePoint
+ */
+export type IncidentTimelinePoint = {
+    /**
+     * Event Type
+     */
+    event_type: string;
+    /**
+     * Evidence Ids
+     */
+    evidence_ids: Array<string>;
+    /**
+     * Occurred At
+     */
+    occurred_at: string;
+    /**
+     * Operator Action Required
+     */
+    operator_action_required: boolean;
+    /**
+     * Sequence
+     */
+    sequence: number;
+    /**
+     * State
+     */
+    state: string;
+};
+
+/**
  * IntelligenceResponse
  */
 export type IntelligenceResponse = {
@@ -578,6 +1039,235 @@ export type IntelligenceResponse = {
 };
 
 export type JsonValue = unknown;
+
+/**
+ * MarketStatePage
+ */
+export type MarketStatePage = {
+    /**
+     * Items
+     */
+    items: Array<MarketStateRecord>;
+    page: PageMeta;
+};
+
+/**
+ * MarketStatePayload
+ */
+export type MarketStatePayload = {
+    /**
+     * Bar Semantics
+     */
+    bar_semantics: 'OHLC' | 'QUOTE_ENVELOPE';
+    /**
+     * Basis
+     */
+    basis?: string | null;
+    /**
+     * Candles
+     */
+    candles: Array<CandlePoint>;
+    /**
+     * Data Kind
+     */
+    data_kind: 'HISTORICAL_REPLAY' | 'NORMALIZED_QUOTE_REPLAY' | 'PUBLIC_FIXTURE';
+    /**
+     * Funding Rate
+     */
+    funding_rate?: string | null;
+    /**
+     * Index Price
+     */
+    index_price?: string | null;
+    /**
+     * Instrument Id
+     */
+    instrument_id: string;
+    /**
+     * Mark Price
+     */
+    mark_price?: string | null;
+    /**
+     * Market Id
+     */
+    market_id: string;
+    /**
+     * Open Interest
+     */
+    open_interest?: string | null;
+    /**
+     * Recommendation Provided
+     */
+    recommendation_provided: false;
+    /**
+     * Replay Markers
+     */
+    replay_markers: Array<ReplayMarker>;
+    /**
+     * Venue Id
+     */
+    venue_id: string;
+};
+
+/**
+ * MarketStateRecord
+ */
+export type MarketStateRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: MarketStatePayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
+
+/**
+ * ModelMetricPayload
+ */
+export type ModelMetricPayload = {
+    /**
+     * Abstain Or Failure Reason
+     */
+    abstain_or_failure_reason?: string | null;
+    /**
+     * Alpha Claimed
+     */
+    alpha_claimed: false;
+    /**
+     * Evaluation State
+     */
+    evaluation_state: string;
+    /**
+     * Family
+     */
+    family: string;
+    /**
+     * Final Holdout Opened
+     */
+    final_holdout_opened: false;
+    /**
+     * Metric Name
+     */
+    metric_name: string;
+    /**
+     * Metric Value
+     */
+    metric_value: string;
+    /**
+     * Modality
+     */
+    modality: string;
+    /**
+     * Model Id
+     */
+    model_id: string;
+    /**
+     * Peak Memory Mb
+     */
+    peak_memory_mb: string;
+    /**
+     * Selected
+     */
+    selected: boolean;
+    /**
+     * Train Seconds
+     */
+    train_seconds: string;
+};
+
+/**
+ * ModelMetricRecord
+ */
+export type ModelMetricRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: ModelMetricPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
 
 /**
  * ModelPage
@@ -914,6 +1604,135 @@ export type OrderRecord = {
 };
 
 /**
+ * OrderTracePayload
+ */
+export type OrderTracePayload = {
+    /**
+     * Account Id
+     */
+    account_id: string;
+    /**
+     * Causal Link Overclaimed
+     */
+    causal_link_overclaimed: false;
+    /**
+     * Complete
+     */
+    complete: boolean;
+    /**
+     * Decision Time
+     */
+    decision_time: string;
+    /**
+     * Instrument Id
+     */
+    instrument_id: string;
+    /**
+     * Order Id
+     */
+    order_id: string;
+    /**
+     * Stages
+     */
+    stages: [
+        OrderTraceStage,
+        OrderTraceStage,
+        OrderTraceStage,
+        OrderTraceStage,
+        OrderTraceStage,
+        OrderTraceStage,
+        OrderTraceStage
+    ];
+    /**
+     * Strategy Id
+     */
+    strategy_id: string;
+};
+
+/**
+ * OrderTraceRecord
+ */
+export type OrderTraceRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: OrderTracePayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
+
+/**
+ * OrderTraceStage
+ */
+export type OrderTraceStage = {
+    /**
+     * Entity Id
+     */
+    entity_id?: string | null;
+    /**
+     * Explanation
+     */
+    explanation: string;
+    /**
+     * Sequence
+     */
+    sequence: number;
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Stage
+     */
+    stage: 'SIGNAL' | 'EVENT_EVIDENCE' | 'MODEL' | 'RISK' | 'ORDER' | 'FILL' | 'LEDGER';
+    /**
+     * Status
+     */
+    status: 'VERIFIED' | 'NOT_APPLICABLE' | 'NOT_AVAILABLE';
+};
+
+/**
  * OverviewResponse
  */
 export type OverviewResponse = {
@@ -966,6 +1785,113 @@ export type PageMeta = {
      * Total
      */
     total: number;
+};
+
+/**
+ * PnLAttributionPayload
+ */
+export type PnLAttributionPayload = {
+    /**
+     * Account Id
+     */
+    account_id: string;
+    /**
+     * Borrow Interest
+     */
+    borrow_interest: string;
+    /**
+     * Formula
+     */
+    formula: 'gross_trading_pnl - trading_fees - spread_cost - slippage_cost - impact_cost + funding - borrow_interest';
+    /**
+     * Funding
+     */
+    funding: string;
+    /**
+     * Gross Trading Pnl
+     */
+    gross_trading_pnl: string;
+    /**
+     * Impact Cost
+     */
+    impact_cost: string;
+    /**
+     * Net Pnl
+     */
+    net_pnl: string;
+    /**
+     * Reporting Asset Id
+     */
+    reporting_asset_id: string;
+    /**
+     * Slippage Cost
+     */
+    slippage_cost: string;
+    /**
+     * Source Scope
+     */
+    source_scope: string;
+    /**
+     * Spread Cost
+     */
+    spread_cost: string;
+    /**
+     * Trading Fees
+     */
+    trading_fees: string;
+};
+
+/**
+ * PnLAttributionRecord
+ */
+export type PnLAttributionRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: PnLAttributionPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
 };
 
 /**
@@ -1134,12 +2060,388 @@ export type PositionRecord = {
 /**
  * ProjectionKind
  */
-export type ProjectionKind = 'rm_account_overview' | 'rm_daily_pnl' | 'rm_positions_current' | 'rm_risk_summary' | 'rm_strategies' | 'rm_models' | 'rm_orders' | 'rm_data_health' | 'rm_event_clusters' | 'rm_event_claims' | 'rm_narrative_states' | 'rm_source_policy_status';
+export type ProjectionKind = 'rm_account_overview' | 'rm_daily_pnl' | 'rm_positions_current' | 'rm_risk_summary' | 'rm_strategies' | 'rm_models' | 'rm_orders' | 'rm_data_health' | 'rm_event_clusters' | 'rm_event_claims' | 'rm_narrative_states' | 'rm_source_policy_status' | 'rm_pnl_attribution' | 'rm_risk_limits' | 'rm_model_metrics' | 'rm_signals' | 'rm_fills' | 'rm_execution_quality' | 'rm_market_state' | 'rm_research_runs' | 'rm_incidents' | 'rm_system_health' | 'rm_reconciliation_status' | 'rm_order_traces';
 
 /**
  * QualityState
  */
 export type QualityState = 'LIVE' | 'STALE' | 'DEGRADED' | 'DISCONNECTED' | 'ERROR' | 'ESTIMATED';
+
+/**
+ * ReconciliationPayload
+ */
+export type ReconciliationPayload = {
+    /**
+     * Account Id
+     */
+    account_id: string;
+    /**
+     * Applied
+     */
+    applied: boolean;
+    /**
+     * Captured At
+     */
+    captured_at: string;
+    /**
+     * Last Sequence
+     */
+    last_sequence: number;
+    /**
+     * Reason Codes
+     */
+    reason_codes: Array<string>;
+    /**
+     * Sequence Gap
+     */
+    sequence_gap: boolean;
+    /**
+     * State
+     */
+    state: string;
+    /**
+     * Unknown Local Fill Count
+     */
+    unknown_local_fill_count: number;
+    /**
+     * Unknown Local Order Count
+     */
+    unknown_local_order_count: number;
+    /**
+     * Unknown Venue Fill Count
+     */
+    unknown_venue_fill_count: number;
+    /**
+     * Unknown Venue Order Count
+     */
+    unknown_venue_order_count: number;
+    /**
+     * Venue Id
+     */
+    venue_id: string;
+};
+
+/**
+ * ReconciliationRecord
+ */
+export type ReconciliationRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: ReconciliationPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
+
+/**
+ * ReplayMarker
+ */
+export type ReplayMarker = {
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Label
+     */
+    label: string;
+    /**
+     * Marker Type
+     */
+    marker_type: 'EVENT' | 'DECISION' | 'FILL' | 'EVALUATION';
+    /**
+     * Price
+     */
+    price: string;
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Synthetic
+     */
+    synthetic: false;
+    /**
+     * Time
+     */
+    time: string;
+};
+
+/**
+ * ResearchMetric
+ */
+export type ResearchMetric = {
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Value
+     */
+    value: string;
+};
+
+/**
+ * ResearchRunPage
+ */
+export type ResearchRunPage = {
+    /**
+     * Items
+     */
+    items: Array<ResearchRunRecord>;
+    page: PageMeta;
+};
+
+/**
+ * ResearchRunPayload
+ */
+export type ResearchRunPayload = {
+    /**
+     * Ai Proposed
+     */
+    ai_proposed: boolean;
+    /**
+     * Code Commit
+     */
+    code_commit: string;
+    /**
+     * Dataset Sha256
+     */
+    dataset_sha256: string;
+    /**
+     * Failure Reason
+     */
+    failure_reason?: string | null;
+    /**
+     * Final Holdout Opened
+     */
+    final_holdout_opened: false;
+    /**
+     * Finished At
+     */
+    finished_at: string;
+    /**
+     * Metrics
+     */
+    metrics: Array<ResearchMetric>;
+    /**
+     * Model Id
+     */
+    model_id: string;
+    /**
+     * Promotion Decision
+     */
+    promotion_decision: string;
+    /**
+     * Run Id
+     */
+    run_id: string;
+    /**
+     * Split Sha256
+     */
+    split_sha256: string;
+    /**
+     * Started At
+     */
+    started_at: string;
+    /**
+     * Status
+     */
+    status: 'SUCCEEDED' | 'FAILED' | 'ERROR' | 'PRUNED';
+};
+
+/**
+ * ResearchRunRecord
+ */
+export type ResearchRunRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: ResearchRunPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
+
+/**
+ * RiskLimitPayload
+ */
+export type RiskLimitPayload = {
+    /**
+     * Breached
+     */
+    breached: boolean;
+    /**
+     * Current Value
+     */
+    current_value: string;
+    /**
+     * Example Values Only
+     */
+    example_values_only: true;
+    /**
+     * Headroom
+     */
+    headroom: string;
+    /**
+     * Limit Id
+     */
+    limit_id: string;
+    /**
+     * Limit Value
+     */
+    limit_value: string;
+    /**
+     * Live Editable
+     */
+    live_editable: false;
+    /**
+     * Metric
+     */
+    metric: string;
+    /**
+     * Policy Id
+     */
+    policy_id: string;
+    /**
+     * Unit
+     */
+    unit: 'fraction' | 'score';
+};
+
+/**
+ * RiskLimitRecord
+ */
+export type RiskLimitRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: RiskLimitPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
 
 /**
  * RiskRecord
@@ -1242,6 +2544,128 @@ export type RiskSummaryPayload = {
      * State
      */
     state: 'NORMAL' | 'CAUTION' | 'REDUCE_ONLY' | 'HALTED';
+};
+
+/**
+ * SignalPage
+ */
+export type SignalPage = {
+    /**
+     * Items
+     */
+    items: Array<SignalRecord>;
+    page: PageMeta;
+};
+
+/**
+ * SignalPayload
+ */
+export type SignalPayload = {
+    /**
+     * Current Weight
+     */
+    current_weight: string;
+    /**
+     * Delta Weight
+     */
+    delta_weight: string;
+    /**
+     * Environment Stage
+     */
+    environment_stage: 'PAPER';
+    /**
+     * Estimated Impact Bps
+     */
+    estimated_impact_bps: string;
+    /**
+     * Expected Return Contribution
+     */
+    expected_return_contribution: string;
+    /**
+     * Instrument Id
+     */
+    instrument_id: string;
+    /**
+     * Normalized Signal
+     */
+    normalized_signal: string;
+    /**
+     * Order Capability
+     */
+    order_capability: false;
+    /**
+     * Proposal Id
+     */
+    proposal_id: string;
+    /**
+     * Signal Id
+     */
+    signal_id: string;
+    /**
+     * Strategy Id
+     */
+    strategy_id: string;
+    /**
+     * Target Weight
+     */
+    target_weight: string;
+    /**
+     * Valid Until
+     */
+    valid_until: string;
+};
+
+/**
+ * SignalRecord
+ */
+export type SignalRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: SignalPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
 };
 
 /**
@@ -1511,6 +2935,146 @@ export type StreamSnapshotResponse = {
 };
 
 /**
+ * SystemHealthPage
+ */
+export type SystemHealthPage = {
+    /**
+     * Items
+     */
+    items: Array<SystemHealthRecord>;
+    page: PageMeta;
+};
+
+/**
+ * SystemHealthPayload
+ */
+export type SystemHealthPayload = {
+    /**
+     * Check Name
+     */
+    check_name: string;
+    /**
+     * Checked At
+     */
+    checked_at: string;
+    /**
+     * Detail
+     */
+    detail: string;
+    /**
+     * Historical Check
+     */
+    historical_check: true;
+    /**
+     * Live Trading Locked
+     */
+    live_trading_locked: true;
+    /**
+     * Service Id
+     */
+    service_id: string;
+    /**
+     * Status
+     */
+    status: 'READY' | 'DEGRADED' | 'ERROR';
+    /**
+     * Version
+     */
+    version: string;
+};
+
+/**
+ * SystemHealthRecord
+ */
+export type SystemHealthRecord = {
+    /**
+     * As Of Time
+     */
+    as_of_time: string;
+    /**
+     * Authoritative
+     */
+    authoritative: boolean;
+    /**
+     * Content Sha256
+     */
+    content_sha256: string;
+    /**
+     * Entity Id
+     */
+    entity_id: string;
+    /**
+     * Estimated
+     */
+    estimated: boolean;
+    payload: SystemHealthPayload;
+    /**
+     * Projected At
+     */
+    projected_at: string;
+    projection: ProjectionKind;
+    quality_state: QualityState;
+    /**
+     * Schema Version
+     */
+    schema_version: '1.0.0';
+    /**
+     * Source Artifact
+     */
+    source_artifact: string;
+    /**
+     * Source Sequence
+     */
+    source_sequence: number;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Source Watermark
+     */
+    source_watermark: string;
+};
+
+/**
+ * TimeSeriesResponse
+ */
+export type TimeSeriesResponse = {
+    /**
+     * Algorithm
+     */
+    algorithm: 'none' | 'min-max-bucket-v1';
+    /**
+     * Downsampled
+     */
+    downsampled: boolean;
+    /**
+     * Original Count
+     */
+    original_count: number;
+    /**
+     * Points
+     */
+    points: Array<TimeValuePoint>;
+    /**
+     * Returned Count
+     */
+    returned_count: number;
+    /**
+     * Series Id
+     */
+    series_id: string;
+    /**
+     * Source Sha256
+     */
+    source_sha256: string;
+    /**
+     * Unit
+     */
+    unit: string;
+};
+
+/**
  * TimeValuePoint
  */
 export type TimeValuePoint = {
@@ -1550,6 +3114,132 @@ export type ValidationError = {
      * Error Type
      */
     type: string;
+};
+
+/**
+ * WorkbenchCapabilities
+ */
+export type WorkbenchCapabilities = {
+    /**
+     * Live Unlock
+     */
+    live_unlock: false;
+    /**
+     * Model Publish
+     */
+    model_publish: false;
+    /**
+     * Read Only
+     */
+    read_only: true;
+    /**
+     * Real Account Connection
+     */
+    real_account_connection: false;
+    /**
+     * Risk Limit Edit
+     */
+    risk_limit_edit: false;
+    /**
+     * Trading Write
+     */
+    trading_write: false;
+};
+
+/**
+ * WorkbenchResponse
+ */
+export type WorkbenchResponse = {
+    account: AccountRecord;
+    capabilities: WorkbenchCapabilities;
+    /**
+     * Claims
+     */
+    claims: Array<ClaimRecord>;
+    /**
+     * Data Health
+     */
+    data_health: Array<DataHealthRecord>;
+    /**
+     * Events
+     */
+    events: Array<EventRecord>;
+    /**
+     * Execution Quality
+     */
+    execution_quality: Array<ExecutionQualityRecord>;
+    /**
+     * Fills
+     */
+    fills: Array<FillRecord>;
+    /**
+     * Incidents
+     */
+    incidents: Array<IncidentRecord>;
+    /**
+     * Live Trading Locked
+     */
+    live_trading_locked: true;
+    /**
+     * Market
+     */
+    market: Array<MarketStateRecord>;
+    /**
+     * Model Metrics
+     */
+    model_metrics: Array<ModelMetricRecord>;
+    /**
+     * Models
+     */
+    models: Array<ModelRecord>;
+    /**
+     * Narratives
+     */
+    narratives: Array<NarrativeRecord>;
+    /**
+     * Order Traces
+     */
+    order_traces: Array<OrderTraceRecord>;
+    /**
+     * Orders
+     */
+    orders: Array<OrderRecord>;
+    pnl: PnLRecord;
+    pnl_attribution: PnLAttributionRecord;
+    /**
+     * Positions
+     */
+    positions: Array<PositionRecord>;
+    reconciliation: ReconciliationRecord;
+    /**
+     * Research Runs
+     */
+    research_runs: Array<ResearchRunRecord>;
+    risk: RiskRecord;
+    /**
+     * Risk Limits
+     */
+    risk_limits: Array<RiskLimitRecord>;
+    /**
+     * Signals
+     */
+    signals: Array<SignalRecord>;
+    /**
+     * Snapshot Sha256
+     */
+    snapshot_sha256: string;
+    /**
+     * Sources
+     */
+    sources: Array<SourceRecord>;
+    /**
+     * Strategies
+     */
+    strategies: Array<StrategyRecord>;
+    /**
+     * System Health
+     */
+    system_health: Array<SystemHealthRecord>;
 };
 
 export type AccountsApiV1AccountsGetData = {
@@ -1620,6 +3310,41 @@ export type AccountApiV1AccountsAccountIdGetResponses = {
 
 export type AccountApiV1AccountsAccountIdGetResponse = AccountApiV1AccountsAccountIdGetResponses[keyof AccountApiV1AccountsAccountIdGetResponses];
 
+export type AccountEquityApiV1AccountsAccountIdEquityGetData = {
+    body?: never;
+    path: {
+        /**
+         * Account Id
+         */
+        account_id: string;
+    };
+    query?: {
+        /**
+         * Max Points
+         */
+        max_points?: number;
+    };
+    url: '/api/v1/accounts/{account_id}/equity';
+};
+
+export type AccountEquityApiV1AccountsAccountIdEquityGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type AccountEquityApiV1AccountsAccountIdEquityGetError = AccountEquityApiV1AccountsAccountIdEquityGetErrors[keyof AccountEquityApiV1AccountsAccountIdEquityGetErrors];
+
+export type AccountEquityApiV1AccountsAccountIdEquityGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: TimeSeriesResponse;
+};
+
+export type AccountEquityApiV1AccountsAccountIdEquityGetResponse = AccountEquityApiV1AccountsAccountIdEquityGetResponses[keyof AccountEquityApiV1AccountsAccountIdEquityGetResponses];
+
 export type AccountPnlApiV1AccountsAccountIdPnlGetData = {
     body?: never;
     path: {
@@ -1649,6 +3374,36 @@ export type AccountPnlApiV1AccountsAccountIdPnlGetResponses = {
 };
 
 export type AccountPnlApiV1AccountsAccountIdPnlGetResponse = AccountPnlApiV1AccountsAccountIdPnlGetResponses[keyof AccountPnlApiV1AccountsAccountIdPnlGetResponses];
+
+export type AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetData = {
+    body?: never;
+    path: {
+        /**
+         * Account Id
+         */
+        account_id: string;
+    };
+    query?: never;
+    url: '/api/v1/accounts/{account_id}/pnl/attribution';
+};
+
+export type AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetError = AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetErrors[keyof AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetErrors];
+
+export type AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: PnLAttributionRecord;
+};
+
+export type AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetResponse = AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetResponses[keyof AccountPnlAttributionApiV1AccountsAccountIdPnlAttributionGetResponses];
 
 export type DataHealthApiV1DataHealthGetData = {
     body?: never;
@@ -1692,6 +3447,62 @@ export type DataHealthApiV1DataHealthGetResponses = {
 
 export type DataHealthApiV1DataHealthGetResponse = DataHealthApiV1DataHealthGetResponses[keyof DataHealthApiV1DataHealthGetResponses];
 
+export type ExecutionQualityApiV1ExecutionQualityGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/execution/quality';
+};
+
+export type ExecutionQualityApiV1ExecutionQualityGetResponses = {
+    /**
+     * Response Execution Quality Api V1 Execution Quality Get
+     *
+     * Successful Response
+     */
+    200: Array<ExecutionQualityRecord>;
+};
+
+export type ExecutionQualityApiV1ExecutionQualityGetResponse = ExecutionQualityApiV1ExecutionQualityGetResponses[keyof ExecutionQualityApiV1ExecutionQualityGetResponses];
+
+export type FillsApiV1FillsGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Cursor
+         */
+        cursor?: string | null;
+        /**
+         * Order Id
+         */
+        order_id?: string | null;
+    };
+    url: '/api/v1/fills';
+};
+
+export type FillsApiV1FillsGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type FillsApiV1FillsGetError = FillsApiV1FillsGetErrors[keyof FillsApiV1FillsGetErrors];
+
+export type FillsApiV1FillsGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: FillPage;
+};
+
+export type FillsApiV1FillsGetResponse = FillsApiV1FillsGetResponses[keyof FillsApiV1FillsGetResponses];
+
 export type HealthApiV1HealthGetData = {
     body?: never;
     path?: never;
@@ -1707,6 +3518,44 @@ export type HealthApiV1HealthGetResponses = {
 };
 
 export type HealthApiV1HealthGetResponse = HealthApiV1HealthGetResponses[keyof HealthApiV1HealthGetResponses];
+
+export type IncidentsApiV1IncidentsGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Cursor
+         */
+        cursor?: string | null;
+        /**
+         * Severity
+         */
+        severity?: string | null;
+    };
+    url: '/api/v1/incidents';
+};
+
+export type IncidentsApiV1IncidentsGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type IncidentsApiV1IncidentsGetError = IncidentsApiV1IncidentsGetErrors[keyof IncidentsApiV1IncidentsGetErrors];
+
+export type IncidentsApiV1IncidentsGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: IncidentPage;
+};
+
+export type IncidentsApiV1IncidentsGetResponse = IncidentsApiV1IncidentsGetResponses[keyof IncidentsApiV1IncidentsGetResponses];
 
 export type EventsApiV1IntelligenceEventsGetData = {
     body?: never;
@@ -1904,6 +3753,75 @@ export type SourcesApiV1IntelligenceSourcesGetResponses = {
 
 export type SourcesApiV1IntelligenceSourcesGetResponse = SourcesApiV1IntelligenceSourcesGetResponses[keyof SourcesApiV1IntelligenceSourcesGetResponses];
 
+export type MarketStateApiV1MarketStateGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Cursor
+         */
+        cursor?: string | null;
+    };
+    url: '/api/v1/market/state';
+};
+
+export type MarketStateApiV1MarketStateGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type MarketStateApiV1MarketStateGetError = MarketStateApiV1MarketStateGetErrors[keyof MarketStateApiV1MarketStateGetErrors];
+
+export type MarketStateApiV1MarketStateGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: MarketStatePage;
+};
+
+export type MarketStateApiV1MarketStateGetResponse = MarketStateApiV1MarketStateGetResponses[keyof MarketStateApiV1MarketStateGetResponses];
+
+export type MarketCandlesApiV1MarketStateMarketIdCandlesGetData = {
+    body?: never;
+    path: {
+        /**
+         * Market Id
+         */
+        market_id: string;
+    };
+    query?: {
+        /**
+         * Max Points
+         */
+        max_points?: number;
+    };
+    url: '/api/v1/market/state/{market_id}/candles';
+};
+
+export type MarketCandlesApiV1MarketStateMarketIdCandlesGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type MarketCandlesApiV1MarketStateMarketIdCandlesGetError = MarketCandlesApiV1MarketStateMarketIdCandlesGetErrors[keyof MarketCandlesApiV1MarketStateMarketIdCandlesGetErrors];
+
+export type MarketCandlesApiV1MarketStateMarketIdCandlesGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: CandleSeriesResponse;
+};
+
+export type MarketCandlesApiV1MarketStateMarketIdCandlesGetResponse = MarketCandlesApiV1MarketStateMarketIdCandlesGetResponses[keyof MarketCandlesApiV1MarketStateMarketIdCandlesGetResponses];
+
 export type ModelsApiV1ModelsGetData = {
     body?: never;
     path?: never;
@@ -1945,6 +3863,24 @@ export type ModelsApiV1ModelsGetResponses = {
 };
 
 export type ModelsApiV1ModelsGetResponse = ModelsApiV1ModelsGetResponses[keyof ModelsApiV1ModelsGetResponses];
+
+export type ModelMetricsApiV1ModelsMetricsGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/models/metrics';
+};
+
+export type ModelMetricsApiV1ModelsMetricsGetResponses = {
+    /**
+     * Response Model Metrics Api V1 Models Metrics Get
+     *
+     * Successful Response
+     */
+    200: Array<ModelMetricRecord>;
+};
+
+export type ModelMetricsApiV1ModelsMetricsGetResponse = ModelMetricsApiV1ModelsMetricsGetResponses[keyof ModelMetricsApiV1ModelsMetricsGetResponses];
 
 export type OrdersApiV1OrdersGetData = {
     body?: never;
@@ -1995,6 +3931,36 @@ export type OrdersApiV1OrdersGetResponses = {
 };
 
 export type OrdersApiV1OrdersGetResponse = OrdersApiV1OrdersGetResponses[keyof OrdersApiV1OrdersGetResponses];
+
+export type OrderTraceApiV1OrdersOrderIdTraceGetData = {
+    body?: never;
+    path: {
+        /**
+         * Order Id
+         */
+        order_id: string;
+    };
+    query?: never;
+    url: '/api/v1/orders/{order_id}/trace';
+};
+
+export type OrderTraceApiV1OrdersOrderIdTraceGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type OrderTraceApiV1OrdersOrderIdTraceGetError = OrderTraceApiV1OrdersOrderIdTraceGetErrors[keyof OrderTraceApiV1OrdersOrderIdTraceGetErrors];
+
+export type OrderTraceApiV1OrdersOrderIdTraceGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: OrderTraceRecord;
+};
+
+export type OrderTraceApiV1OrdersOrderIdTraceGetResponse = OrderTraceApiV1OrdersOrderIdTraceGetResponses[keyof OrderTraceApiV1OrdersOrderIdTraceGetResponses];
 
 export type OverviewApiV1OverviewGetData = {
     body?: never;
@@ -2062,6 +4028,78 @@ export type PositionsApiV1PositionsGetResponses = {
 
 export type PositionsApiV1PositionsGetResponse = PositionsApiV1PositionsGetResponses[keyof PositionsApiV1PositionsGetResponses];
 
+export type ReconciliationStatusApiV1ReconciliationStatusGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/reconciliation/status';
+};
+
+export type ReconciliationStatusApiV1ReconciliationStatusGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: ReconciliationRecord;
+};
+
+export type ReconciliationStatusApiV1ReconciliationStatusGetResponse = ReconciliationStatusApiV1ReconciliationStatusGetResponses[keyof ReconciliationStatusApiV1ReconciliationStatusGetResponses];
+
+export type ResearchRunsApiV1ResearchRunsGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Cursor
+         */
+        cursor?: string | null;
+        /**
+         * Status
+         */
+        status?: string | null;
+    };
+    url: '/api/v1/research/runs';
+};
+
+export type ResearchRunsApiV1ResearchRunsGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type ResearchRunsApiV1ResearchRunsGetError = ResearchRunsApiV1ResearchRunsGetErrors[keyof ResearchRunsApiV1ResearchRunsGetErrors];
+
+export type ResearchRunsApiV1ResearchRunsGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: ResearchRunPage;
+};
+
+export type ResearchRunsApiV1ResearchRunsGetResponse = ResearchRunsApiV1ResearchRunsGetResponses[keyof ResearchRunsApiV1ResearchRunsGetResponses];
+
+export type RiskLimitsApiV1RiskLimitsGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/risk/limits';
+};
+
+export type RiskLimitsApiV1RiskLimitsGetResponses = {
+    /**
+     * Response Risk Limits Api V1 Risk Limits Get
+     *
+     * Successful Response
+     */
+    200: Array<RiskLimitRecord>;
+};
+
+export type RiskLimitsApiV1RiskLimitsGetResponse = RiskLimitsApiV1RiskLimitsGetResponses[keyof RiskLimitsApiV1RiskLimitsGetResponses];
+
 export type RiskSummaryApiV1RiskSummaryGetData = {
     body?: never;
     path?: never;
@@ -2091,6 +4129,44 @@ export type RiskSummaryApiV1RiskSummaryGetResponses = {
 };
 
 export type RiskSummaryApiV1RiskSummaryGetResponse = RiskSummaryApiV1RiskSummaryGetResponses[keyof RiskSummaryApiV1RiskSummaryGetResponses];
+
+export type SignalsApiV1SignalsGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Cursor
+         */
+        cursor?: string | null;
+        /**
+         * Strategy Id
+         */
+        strategy_id?: string | null;
+    };
+    url: '/api/v1/signals';
+};
+
+export type SignalsApiV1SignalsGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type SignalsApiV1SignalsGetError = SignalsApiV1SignalsGetErrors[keyof SignalsApiV1SignalsGetErrors];
+
+export type SignalsApiV1SignalsGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: SignalPage;
+};
+
+export type SignalsApiV1SignalsGetResponse = SignalsApiV1SignalsGetResponses[keyof SignalsApiV1SignalsGetResponses];
 
 export type StrategiesApiV1StrategiesGetData = {
     body?: never;
@@ -2165,3 +4241,53 @@ export type StreamSnapshotApiV1StreamSnapshotGetResponses = {
 };
 
 export type StreamSnapshotApiV1StreamSnapshotGetResponse = StreamSnapshotApiV1StreamSnapshotGetResponses[keyof StreamSnapshotApiV1StreamSnapshotGetResponses];
+
+export type SystemHealthApiV1SystemHealthGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Cursor
+         */
+        cursor?: string | null;
+    };
+    url: '/api/v1/system/health';
+};
+
+export type SystemHealthApiV1SystemHealthGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type SystemHealthApiV1SystemHealthGetError = SystemHealthApiV1SystemHealthGetErrors[keyof SystemHealthApiV1SystemHealthGetErrors];
+
+export type SystemHealthApiV1SystemHealthGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: SystemHealthPage;
+};
+
+export type SystemHealthApiV1SystemHealthGetResponse = SystemHealthApiV1SystemHealthGetResponses[keyof SystemHealthApiV1SystemHealthGetResponses];
+
+export type WorkbenchApiV1WorkbenchGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/workbench';
+};
+
+export type WorkbenchApiV1WorkbenchGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: WorkbenchResponse;
+};
+
+export type WorkbenchApiV1WorkbenchGetResponse = WorkbenchApiV1WorkbenchGetResponses[keyof WorkbenchApiV1WorkbenchGetResponses];

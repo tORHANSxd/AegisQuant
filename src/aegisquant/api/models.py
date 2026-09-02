@@ -1,4 +1,4 @@
-"""Versioned P14 HTTP response contracts generated into the web client."""
+"""Versioned P14/P15 HTTP response contracts generated into the web client."""
 
 from __future__ import annotations
 
@@ -10,19 +10,33 @@ from aegisquant.domain.base import DomainModel
 from aegisquant.domain.time import UtcDateTime
 from aegisquant.readmodels.models import (
     AccountOverviewPayload,
+    CandlePoint,
     ClaimEvidencePayload,
     DailyPnLPayload,
     DataHealthPayload,
     EventImpactPayload,
+    ExecutionQualityPayload,
+    FillPayload,
+    IncidentPayload,
+    MarketStatePayload,
+    ModelMetricPayload,
     ModelPayload,
     NarrativePayload,
     OrderPayload,
+    OrderTracePayload,
+    PnLAttributionPayload,
     PositionPayload,
     ProjectionKind,
     QualityState,
+    ReconciliationPayload,
+    ResearchRunPayload,
+    RiskLimitPayload,
     RiskSummaryPayload,
+    SignalPayload,
     SourcePolicyPayload,
     StrategyPayload,
+    SystemHealthPayload,
+    TimeValuePoint,
 )
 
 
@@ -106,6 +120,54 @@ class SourceRecord(RecordMetadata):
     payload: SourcePolicyPayload
 
 
+class PnLAttributionRecord(RecordMetadata):
+    payload: PnLAttributionPayload
+
+
+class RiskLimitRecord(RecordMetadata):
+    payload: RiskLimitPayload
+
+
+class ModelMetricRecord(RecordMetadata):
+    payload: ModelMetricPayload
+
+
+class SignalRecord(RecordMetadata):
+    payload: SignalPayload
+
+
+class FillRecord(RecordMetadata):
+    payload: FillPayload
+
+
+class ExecutionQualityRecord(RecordMetadata):
+    payload: ExecutionQualityPayload
+
+
+class MarketStateRecord(RecordMetadata):
+    payload: MarketStatePayload
+
+
+class ResearchRunRecord(RecordMetadata):
+    payload: ResearchRunPayload
+
+
+class IncidentRecord(RecordMetadata):
+    payload: IncidentPayload
+
+
+class SystemHealthRecord(RecordMetadata):
+    payload: SystemHealthPayload
+
+
+class ReconciliationRecord(RecordMetadata):
+    payload: ReconciliationPayload
+
+
+class OrderTraceRecord(RecordMetadata):
+    payload: OrderTracePayload
+
+
 class AccountPage(DomainModel):
     items: tuple[AccountRecord, ...]
     page: PageMeta
@@ -149,6 +211,96 @@ class NarrativePage(DomainModel):
 class SourcePage(DomainModel):
     items: tuple[SourceRecord, ...]
     page: PageMeta
+
+
+class SignalPage(DomainModel):
+    items: tuple[SignalRecord, ...]
+    page: PageMeta
+
+
+class FillPage(DomainModel):
+    items: tuple[FillRecord, ...]
+    page: PageMeta
+
+
+class MarketStatePage(DomainModel):
+    items: tuple[MarketStateRecord, ...]
+    page: PageMeta
+
+
+class ResearchRunPage(DomainModel):
+    items: tuple[ResearchRunRecord, ...]
+    page: PageMeta
+
+
+class IncidentPage(DomainModel):
+    items: tuple[IncidentRecord, ...]
+    page: PageMeta
+
+
+class SystemHealthPage(DomainModel):
+    items: tuple[SystemHealthRecord, ...]
+    page: PageMeta
+
+
+class WorkbenchCapabilities(DomainModel):
+    read_only: Literal[True]
+    trading_write: Literal[False]
+    real_account_connection: Literal[False]
+    risk_limit_edit: Literal[False]
+    model_publish: Literal[False]
+    live_unlock: Literal[False]
+
+
+class WorkbenchResponse(DomainModel):
+    account: AccountRecord
+    pnl: PnLRecord
+    pnl_attribution: PnLAttributionRecord
+    positions: tuple[PositionRecord, ...]
+    risk: RiskRecord
+    risk_limits: tuple[RiskLimitRecord, ...]
+    strategies: tuple[StrategyRecord, ...]
+    models: tuple[ModelRecord, ...]
+    model_metrics: tuple[ModelMetricRecord, ...]
+    signals: tuple[SignalRecord, ...]
+    orders: tuple[OrderRecord, ...]
+    fills: tuple[FillRecord, ...]
+    execution_quality: tuple[ExecutionQualityRecord, ...]
+    market: tuple[MarketStateRecord, ...]
+    events: tuple[EventRecord, ...]
+    claims: tuple[ClaimRecord, ...]
+    narratives: tuple[NarrativeRecord, ...]
+    sources: tuple[SourceRecord, ...]
+    data_health: tuple[DataHealthRecord, ...]
+    research_runs: tuple[ResearchRunRecord, ...]
+    incidents: tuple[IncidentRecord, ...]
+    system_health: tuple[SystemHealthRecord, ...]
+    reconciliation: ReconciliationRecord
+    order_traces: tuple[OrderTraceRecord, ...]
+    snapshot_sha256: str
+    capabilities: WorkbenchCapabilities
+    live_trading_locked: Literal[True]
+
+
+class TimeSeriesResponse(DomainModel):
+    series_id: str = Field(min_length=1, max_length=255)
+    unit: str = Field(min_length=1, max_length=64)
+    original_count: int = Field(ge=0)
+    returned_count: int = Field(ge=0)
+    downsampled: bool
+    algorithm: Literal["none", "min-max-bucket-v1"]
+    points: tuple[TimeValuePoint, ...]
+    source_sha256: str
+
+
+class CandleSeriesResponse(DomainModel):
+    market_id: str = Field(min_length=1, max_length=255)
+    original_count: int = Field(ge=0)
+    returned_count: int = Field(ge=0)
+    downsampled: bool
+    algorithm: Literal["none", "min-max-bucket-v1"]
+    candles: tuple[CandlePoint, ...]
+    source_sha256: str
 
 
 class OverviewResponse(DomainModel):

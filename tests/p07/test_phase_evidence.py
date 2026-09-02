@@ -32,6 +32,7 @@ def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) ->
         "P12",
         "P13",
         "P14",
+        "P15",
     }
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
@@ -89,7 +90,7 @@ def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) ->
             "P11",
             "P12",
         }
-    else:
+    elif state["current_phase"] == "P14":
         assert state["next_phase"] == "P15"
         assert previous["phase"] == "P13"
         assert {item["phase"] for item in deferred} >= {
@@ -102,6 +103,21 @@ def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) ->
             "P11",
             "P12",
             "P13",
+        }
+    else:
+        assert state["next_phase"] == "P16"
+        assert previous["phase"] == "P14"
+        assert {item["phase"] for item in deferred} >= {
+            "P05",
+            "P06",
+            "P07",
+            "P08",
+            "P09",
+            "P10",
+            "P11",
+            "P12",
+            "P13",
+            "P14",
         }
     assert previous["status"] == "in_progress"
     assert not (project_root / "reports/phases/P07/ACCEPTANCE.md").exists()
@@ -187,6 +203,7 @@ def test_p07_scoreboard_and_dependency_contract_are_explicit(project_root: Path)
         "P12",
         "P13",
         "P14",
+        "P15",
     }
     assert compliance["status"] == "passed"
     assert compliance["python_unknown_license_count"] == 0

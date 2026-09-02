@@ -1,4 +1,4 @@
-name: P14 verification
+name: P15 verification
 
 on:
   push:
@@ -32,6 +32,6 @@ jobs:
           corepack enable
           corepack prepare pnpm@11.24.0 --activate
           pnpm install --frozen-lockfile
-          pnpm exec playwright install chromium
-      - name: Run complete P14 verification
-        run: uv run --frozen python scripts/ci.py --phase P14
+          pnpm exec playwright install chromium firefox webkit
+      - name: Run complete P15 verification
+        run: uv run --frozen python scripts/ci.py --phase P15

@@ -75,8 +75,9 @@ def main() -> int:
             "P12",
             "P13",
             "P14",
+            "P15",
         ),
-        default="P14",
+        default="P15",
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
