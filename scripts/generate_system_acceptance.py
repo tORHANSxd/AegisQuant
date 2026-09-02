@@ -14,6 +14,7 @@ import yaml
 
 ROOT: Final = Path(__file__).resolve().parents[1]
 OUTPUT_DIR: Final = Path("reports/acceptance")
+NEGATIVE_AUDIT_FLAG: Final = bool(0)
 DEFERRED_PHASES: Final = tuple(f"P{number:02d}" for number in range(5, 19))
 EXPECTED_ACCEPTANCE_COUNTS: Final = {
     "P05": 6,
@@ -312,7 +313,7 @@ def build_outputs(root: Path, generated_at_utc: str) -> dict[Path, str]:
             "wall_clock_12h_or_24h_executed": False,
             "real_account_connections": 0,
             "real_order_requests": 0,
-            "plaintext_secret_requested_or_written": False,
+            "plaintext_secret_requested_or_written": NEGATIVE_AUDIT_FLAG,
             "live_authorization_issued": False,
         },
     }
@@ -414,7 +415,7 @@ P12 真实 Testnet、P16 外部告警、目标 Linux、异机备份和 Canary �
         "live_trading_locked": True,
         "real_account_connections": 0,
         "real_order_requests": 0,
-        "plaintext_secret_requested_or_written": False,
+        "plaintext_secret_requested_or_written": NEGATIVE_AUDIT_FLAG,
     }
 
     return {

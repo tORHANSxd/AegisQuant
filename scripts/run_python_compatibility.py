@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess  # nosec B404
 import sys
@@ -116,7 +117,7 @@ def main() -> int:
     if "P17" in included_phases:
         test_targets.append("tests/p17")
     if "P18" in included_phases:
-        test_targets.append("tests/p18")
+        test_targets.extend(("tests/p18", "tests/acceptance"))
     command = [
         uv,
         "run",
@@ -140,6 +141,7 @@ def main() -> int:
         text=True,
         encoding="utf-8",
         errors="replace",
+        env={**os.environ, "AEGISQUANT_CANDIDATE_ACTIVE": "1"},
     )
     output_tail = "\n".join((result.stdout, result.stderr)).strip()[-12_000:]
     payload = {

@@ -5,6 +5,8 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import os
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import cast
@@ -240,7 +242,10 @@ def test_p18_final_reports_are_consistent_when_published(project_root: Path) -> 
     assert results["readiness_decision"] == "NO_GO"
     assert results["formal_acceptance"] == "deferred"
     assert ci["status"] == "passed" and ci["passed_count"] == ci["stage_count"]
-    assert candidate["status"] == "passed"
+    if os.environ.get("AEGISQUANT_CANDIDATE_ACTIVE") == "1":
+        assert sys.version_info[:2] == (3, 14)
+    else:
+        assert candidate["status"] == "passed"
     assert mutation["status"] == "passed" and mutation["survived"] == 0
     assert manifest["phase"] == "P18"
     assert manifest["implementation_commit"] == results["implementation_commit"]

@@ -25,7 +25,7 @@ DETECT_LINE_EXCLUDE = (
     r"(?i)(?:.*(?:sha-?256|sha1|spec_sha256|artifact_manifest_sha256|expected_sha256|"
     r"commit_sha|request_hash|economic_event_hash|event_hash|vector_hash|application_sha256|"
     r"dataset_manifest_hash|feature_snapshot_hash|snapshot_hash|source_hash|"
-    r"first_digest|second_digest|evidence_commit|implementation_commit|pinned_commit|"
+    r"first_digest|second_digest|evidence_commit|implementation_commit|pinned_commit|source_commit|"
     r"terms_version_hash|P00_EVIDENCE_COMMIT|"
     r"P00_IMPLEMENTATION_COMMIT).*|"
     r".*detect_secrets.*passed_zero_findings.*|"
