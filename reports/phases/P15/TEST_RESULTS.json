@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P15",
+  "implementation_commit": "94f125e576b043b082e9d81ee204afe7307e9917",
+  "status": "passed_implementation_acceptance_deferred",
+  "toolchain": {
+    "node": "24.20.0",
+    "pnpm": "11.24.0",
+    "postgresql": "18.6",
+    "web_ci_entrypoint": "repository_pinned_direct",
+    "host_node_drift_in_final_ci": false
+  },
+  "ci": {
+    "status": "passed",
+    "stage_count": 46,
+    "passed_count": 46,
+    "failed_count": 0
+  },
+  "python_313": {
+    "passed": 620,
+    "failed": 0,
+    "warnings": 11
+  },
+  "python_314_candidate": {
+    "runtime": "3.14.7",
+    "passed": 581,
+    "failed": 0,
+    "warnings": 11
+  },
+  "p15_targeted_tests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "p15_mutation": {
+    "mutants_total": 7,
+    "killed": 7,
+    "survived": 0,
+    "invalid": 0,
+    "score": 1.0,
+    "threshold": 1.0
+  },
+  "read_models": {
+    "projection_count": 24,
+    "record_count": 52,
+    "source_event_count": 52,
+    "deterministic_rebuild": true,
+    "api_read_routes": 33,
+    "api_write_routes": 0
+  },
+  "order_trace": {
+    "visible_order_count": 2,
+    "trace_count": 2,
+    "canonical_stage_count": 7,
+    "all_visible_orders_traceable": true,
+    "all_traces_complete": true,
+    "causal_overclaim_count": 0
+  },
+  "web": {
+    "route_count": 15,
+    "unit_passed": 19,
+    "e2e_passed": 19,
+    "e2e_skipped": 2,
+    "browsers": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "visual_baselines": 6,
+    "storybook_build": "passed",
+    "production_build": "passed",
+    "generated_client_drift": "passed",
+    "workbench_p75_ms": 181,
+    "workbench_target_p75_ms": 1500
+  },
+  "quality_gates": {
+    "ruff_format": "passed",
+    "ruff_lint": "passed",
+    "pyright_strict": "passed",
+    "postgres_runtime": "passed",
+    "nautilus_compatibility": "passed",
+    "bandit": "passed_zero_findings",
+    "detect_secrets": "passed_zero_findings",
+    "python_dependency_audit": "passed_zero_known_vulnerabilities",
+    "javascript_dependency_audit": "passed_zero_known_vulnerabilities",
+    "license_compliance": "passed_zero_unknown_licenses",
+    "openapi_websocket_contracts": "passed",
+    "read_only_api_and_ui": "passed",
+    "accessibility_contracts": "passed",
+    "web_lint_typecheck_unit_storybook_build_e2e": "passed",
+    "pinned_node_pnpm_execution": "passed"
+  },
+  "formal_acceptance": "deferred",
+  "wall_clock_12h_or_24h_executed": false,
+  "formal_acceptance_performed": false,
+  "public_deployment_performed": false,
+  "live_trading_locked": true,
+  "real_account_access_performed": false,
+  "testnet_network_requests_performed": 0,
+  "venue_network_requests_performed": 0,
+  "plaintext_secret_requested_or_written": false
+}
