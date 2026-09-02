@@ -1,0 +1,265 @@
+{
+  "dimensions": [
+    "license",
+    "historical_coverage",
+    "first_publish_latency",
+    "revisions_and_deletions",
+    "gaps_and_completeness",
+    "languages",
+    "price",
+    "operations",
+    "oos_net_increment"
+  ],
+  "feature_importance_used_as_procurement_evidence": false,
+  "numeric_scores_assigned_without_trial": 0,
+  "schema_version": "p17-provider-scorecard-v1",
+  "scorecards": [
+    {
+      "aggregate_score": null,
+      "comparison_group": "market_tick",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 2,
+      "provider_id": "tardis"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "market_tick",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 2,
+      "provider_id": "kaiko"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "derivatives_aggregate",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 3,
+      "provider_id": "coinglass"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "onchain_metrics",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 4,
+      "provider_id": "cryptoquant"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "onchain_metrics",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 3,
+      "provider_id": "glassnode"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "cross_asset_cme",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 3,
+      "provider_id": "databento"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "news_personal",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 2,
+      "provider_id": "benzinga"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "news_personal",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 2,
+      "provider_id": "event_registry"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "news_personal",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 2,
+      "provider_id": "cryptopanic"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "news_institutional",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 1,
+      "provider_id": "ravenpack"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "news_institutional",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 3,
+      "provider_id": "bigdata_com"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "news_institutional",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 2,
+      "provider_id": "lseg_mrn"
+    },
+    {
+      "aggregate_score": null,
+      "comparison_group": "x_social",
+      "dimensions": {
+        "first_publish_latency": null,
+        "gaps_and_completeness": null,
+        "historical_coverage": null,
+        "languages": null,
+        "license": null,
+        "oos_net_increment": null,
+        "operations": null,
+        "price": null,
+        "revisions_and_deletions": null
+      },
+      "marketing_claims_scored": false,
+      "measurement_status": "NOT_TESTED",
+      "official_source_count": 4,
+      "provider_id": "x_api"
+    }
+  ]
+}

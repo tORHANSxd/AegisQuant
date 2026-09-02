@@ -375,6 +375,22 @@
       "schema_name": "aegisquant.source-processing-policy",
       "schema_version": "1.0.0",
       "sha256": "aca1118ae51b0c7543aa5e29b4900e0a7ce243c1fc6810e9b5c734e3f46dbfcb"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.research.provider_bakeoff.models.ProviderCandidateCatalog",
+      "path": "schemas/config/provider-candidate-catalog-v1.json",
+      "schema_name": "aegisquant.provider-candidate-catalog",
+      "schema_version": "1.0.0",
+      "sha256": "07c2032ddaba32d7a69e5673871036cd1759619d9097f87a253b204f97391a43"
+    },
+    {
+      "compatibility": "BACKWARD",
+      "model": "aegisquant.research.provider_bakeoff.models.TrialPlanDocument",
+      "path": "schemas/config/provider-trial-plans-v1.json",
+      "schema_name": "aegisquant.provider-trial-plans",
+      "schema_version": "1.0.0",
+      "sha256": "f5b5a484ccb8beb75cb269c85627ea310e7cc42c4be7233f29c1233a519d0b9d"
     }
   ],
   "schema_version": "1.0.0"

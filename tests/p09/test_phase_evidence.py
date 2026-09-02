@@ -35,6 +35,8 @@ def test_p09_state_is_verified_acceptance_deferred_and_preserved_after_p10_start
         "P14",
         "P15",
         "P16",
+        "P17",
+        "P18",
     }
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
@@ -127,7 +129,7 @@ def test_p09_state_is_verified_acceptance_deferred_and_preserved_after_p10_start
             "P13",
             "P14",
         }
-    else:
+    elif state["current_phase"] == "P16":
         assert state["next_phase"] == "P17"
         assert previous["phase"] == "P15"
         p09 = next(item for item in deferred if item["phase"] == "P09")
@@ -145,8 +147,22 @@ def test_p09_state_is_verified_acceptance_deferred_and_preserved_after_p10_start
             "P14",
             "P15",
         }
+    else:
+        p09 = next(item for item in deferred if item["phase"] == "P09")
+        assert previous["phase"] in {"P16", "P17"}
+        assert p09["status"] == "implementation_verified_acceptance_deferred"
     assert not (project_root / "reports/phases/P09/ACCEPTANCE.md").exists()
-    if state["current_phase"] in {"P10", "P11", "P12", "P13", "P14", "P15", "P16"}:
+    if state["current_phase"] in {
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+    }:
         assert (project_root / "reports/phases/P10/PLAN.md").exists()
 
 
@@ -277,6 +293,8 @@ def test_p09_reports_and_compliance_are_complete_without_formal_acceptance(
         "P14",
         "P15",
         "P16",
+        "P17",
+        "P18",
     }
     assert compliance["status"] == "passed"
     assert security["phase"] in {
@@ -288,6 +306,8 @@ def test_p09_reports_and_compliance_are_complete_without_formal_acceptance(
         "P14",
         "P15",
         "P16",
+        "P17",
+        "P18",
     }
     assert security["status"] == "passed"
     assert mutation["status"] == "passed"

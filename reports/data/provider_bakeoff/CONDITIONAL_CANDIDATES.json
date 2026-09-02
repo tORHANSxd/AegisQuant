@@ -1,0 +1,9 @@
+{
+  "approved_cross_asset_or_cme_hypothesis_ids": [],
+  "condition": "存在经批准的跨资产或 CME OOS 研究假设",
+  "condition_satisfied": false,
+  "decision": "NOT_APPLICABLE",
+  "network_requests_performed": 0,
+  "provider_id": "databento",
+  "schema_version": "p17-conditional-candidates-v1"
+}

@@ -27,6 +27,7 @@ PHASE_CHOICES = (
     "P14",
     "P15",
     "P16",
+    "P17",
 )
 
 
@@ -73,7 +74,7 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
 
 
 def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
-    """Return the ordered P03-P16 pipeline without network soak execution."""
+    """Return the ordered P03-P17 pipeline without network soak execution."""
     pnpm = resolve_pnpm_command(root)
     included_phases = set(PHASE_CHOICES[: PHASE_CHOICES.index(phase) + 1])
     phase_status = [
@@ -293,6 +294,19 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
                 ),
             )
         )
+    if "P17" in included_phases:
+        evidence_stages.extend(
+            (
+                (
+                    "p17-provider-evidence",
+                    [sys.executable, "-m", "scripts.generate_p17_evidence", "--check"],
+                ),
+                (
+                    "p17-mutation",
+                    [sys.executable, "-m", "scripts.run_p17_mutation", "--check"],
+                ),
+            )
+        )
     return [
         ("postgres-runtime", [sys.executable, "scripts/setup_postgres.py"]),
         (
@@ -354,7 +368,7 @@ def main() -> int:
     parser.add_argument(
         "--phase",
         choices=PHASE_CHOICES,
-        default="P16",
+        default="P17",
     )
     parser.add_argument(
         "--output",

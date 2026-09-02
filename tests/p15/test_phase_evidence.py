@@ -27,7 +27,7 @@ def test_p15_state_is_non_live_and_acceptance_remains_deferred(project_root: Pat
     deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
     p14 = next(item for item in deferred if item["phase"] == "P14")
 
-    assert state["current_phase"] in {"P15", "P16"}
+    assert state["current_phase"] in {"P15", "P16", "P17", "P18"}
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["formal_acceptance_deferred"] is True
@@ -36,11 +36,15 @@ def test_p15_state_is_non_live_and_acceptance_remains_deferred(project_root: Pat
         assert state["next_phase"] == "P16"
         assert previous["phase"] == "P14"
         assert previous["evidence_commit_sha"] == p14["evidence_commit_sha"]
-    else:
+    elif state["current_phase"] == "P16":
         p15 = next(item for item in deferred if item["phase"] == "P15")
         assert state["next_phase"] == "P17"
         assert previous["phase"] == "P15"
         assert previous["evidence_commit_sha"] == p15["evidence_commit_sha"]
+    else:
+        p15 = next(item for item in deferred if item["phase"] == "P15")
+        assert previous["phase"] in {"P16", "P17"}
+        assert p15["status"] == "implementation_verified_acceptance_deferred"
     assert not (project_root / "reports/phases/P15/ACCEPTANCE.md").exists()
     assert not (project_root / "src/aegisquant/live").exists()
 

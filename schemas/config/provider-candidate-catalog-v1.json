@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "EvidenceState": {
+      "enum": [
+        "desk_review_only",
+        "not_tested",
+        "trial_complete"
+      ],
+      "title": "EvidenceState",
+      "type": "string"
+    },
+    "PriceDisclosure": {
+      "enum": [
+        "public",
+        "order_form",
+        "developer_console",
+        "contact_sales"
+      ],
+      "title": "PriceDisclosure",
+      "type": "string"
+    },
+    "ProviderCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "comparison_group": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$",
+          "title": "Comparison Group",
+          "type": "string"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Condition"
+        },
+        "credentials_required": {
+          "title": "Credentials Required",
+          "type": "boolean"
+        },
+        "desk_review_facts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Desk Review Facts",
+          "type": "array"
+        },
+        "evidence_state": {
+          "$ref": "#/$defs/EvidenceState"
+        },
+        "license_review_complete": {
+          "title": "License Review Complete",
+          "type": "boolean"
+        },
+        "official_fact_authority": {
+          "title": "Official Fact Authority",
+          "type": "boolean"
+        },
+        "official_sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Official Sources",
+          "type": "array"
+        },
+        "price_disclosure": {
+          "$ref": "#/$defs/PriceDisclosure"
+        },
+        "provider_class": {
+          "$ref": "#/$defs/ProviderClass"
+        },
+        "provider_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "provider_name": {
+          "title": "Provider Name",
+          "type": "string"
+        },
+        "public_monthly_price_usd": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Public Monthly Price Usd"
+        },
+        "runtime_dependency": {
+          "title": "Runtime Dependency",
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/$defs/ProviderStatus"
+        },
+        "unresolved_questions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unresolved Questions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "provider_id",
+        "provider_name",
+        "provider_class",
+        "comparison_group",
+        "official_sources",
+        "credentials_required",
+        "price_disclosure",
+        "license_review_complete",
+        "evidence_state",
+        "status",
+        "runtime_dependency",
+        "official_fact_authority",
+        "desk_review_facts",
+        "unresolved_questions"
+      ],
+      "title": "ProviderCandidate",
+      "type": "object"
+    },
+    "ProviderClass": {
+      "enum": [
+        "market_history",
+        "derivatives_aggregate",
+        "onchain",
+        "cross_asset",
+        "news_personal",
+        "news_institutional",
+        "social"
+      ],
+      "title": "ProviderClass",
+      "type": "string"
+    },
+    "ProviderStatus": {
+      "enum": [
+        "candidate",
+        "trial",
+        "approved",
+        "degraded",
+        "retired"
+      ],
+      "title": "ProviderStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.provider-candidate-catalog/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/ProviderCandidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "reviewed_at_utc": {
+      "format": "date-time",
+      "title": "Reviewed At Utc",
+      "type": "string"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "reviewed_at_utc",
+    "candidates"
+  ],
+  "title": "ProviderCandidateCatalog",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.provider-candidate-catalog",
+  "x-aegisquant-schema-version": "1.0.0"
+}

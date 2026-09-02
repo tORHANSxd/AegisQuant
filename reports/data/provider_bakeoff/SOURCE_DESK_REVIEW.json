@@ -1,0 +1,304 @@
+{
+  "candidate_config_sha256": "0c4957543401c3e8fef769ba3ccbad79891beda5b0da2023e84704f5e2ec37ab",
+  "candidate_count": 13,
+  "candidates": [
+    {
+      "comparison_group": "market_tick",
+      "desk_review_facts": [
+        "官方文档列出 Spot、Perpetuals、Derivatives 与 All Exchanges 订阅范围",
+        "Pro/Business 才包含 raw replay API，历史窗口取决于订阅周期"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://docs.tardis.dev/faq/billing-and-subscriptions",
+        "https://docs.tardis.dev/api/http-api-reference"
+      ],
+      "price_disclosure": "order_form",
+      "provider_class": "market_history",
+      "provider_id": "tardis",
+      "provider_name": "Tardis.dev",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "个人研究用途的最终报价与税费",
+        "试用可覆盖的交易所、日期和原始修订语义"
+      ]
+    },
+    {
+      "comparison_group": "market_tick",
+      "desk_review_facts": [
+        "官方数据字典列出交易、订单簿、衍生品与多种交付通道",
+        "官方文档要求固定 dataset version，latest 可能移动"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://docs.kaiko.com/explore-our-data/data-dictionary",
+        "https://docs.kaiko.com/rest-api/general/getting-started/data-versioning"
+      ],
+      "price_disclosure": "contact_sales",
+      "provider_class": "market_history",
+      "provider_id": "kaiko",
+      "provider_name": "Kaiko",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "个人研究许可和最小合同金额",
+        "同预算试用的历史深度、修订通知和导出权"
+      ]
+    },
+    {
+      "comparison_group": "derivatives_aggregate",
+      "desk_review_facts": [
+        "官方 V4 文档覆盖期货、现货、期权、ETF、链上和指数端点",
+        "公开 Hobbyist 起价为每月 29 美元且历史细粒度窗口受计划限制"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://docs.coinglass.com/reference/getting-started-with-your-api",
+        "https://docs.coinglass.com/reference/endpoint-overview",
+        "https://www.coinglass.com/pricing"
+      ],
+      "price_disclosure": "public",
+      "provider_class": "derivatives_aggregate",
+      "provider_id": "coinglass",
+      "provider_name": "CoinGlass API V4",
+      "public_monthly_price_usd": "29",
+      "unresolved_questions": [
+        "聚合口径、交易所缺口与修订传播延迟",
+        "清算、持仓量和资金费率相对官方接口的可核验误差"
+      ]
+    },
+    {
+      "comparison_group": "onchain_metrics",
+      "desk_review_facts": [
+        "Professional 公开月价 99 美元并列出市场与链上 API 权限",
+        "零售计划许可限制、历史窗口和 API credits 随计划变化"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://userguide.cryptoquant.com/api/introduction",
+        "https://userguide.cryptoquant.com/api/available-endpoints",
+        "https://cryptoquant.com/en/pricing",
+        "https://cryptoquant.com/terms-of-service"
+      ],
+      "price_disclosure": "public",
+      "provider_class": "onchain",
+      "provider_id": "cryptoquant",
+      "provider_name": "CryptoQuant",
+      "public_monthly_price_usd": "99",
+      "unresolved_questions": [
+        "实体标签修订历史和 point-in-time 可重放性",
+        "个人研究衍生输出的保存与展示边界"
+      ]
+    },
+    {
+      "comparison_group": "onchain_metrics",
+      "desk_review_facts": [
+        "API 仅作为 Professional 计划的额外付费 add-on",
+        "标准调用通常消耗一个 credit，bulk 按参数组合计费"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://docs.glassnode.com/basic-api/api",
+        "https://docs.glassnode.com/basic-api/api-key",
+        "https://docs.glassnode.com/basic-api/api-credits"
+      ],
+      "price_disclosure": "contact_sales",
+      "provider_class": "onchain",
+      "provider_id": "glassnode",
+      "provider_name": "Glassnode",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "API add-on 的个人报价、最小期限和 credits",
+        "地址标签、指标方法和历史修订的可复现实务"
+      ]
+    },
+    {
+      "comparison_group": "cross_asset_cme",
+      "desk_review_facts": [
+        "历史数据支持按用量计费，Standard 公开月价 199 美元",
+        "CME 数据涉及额外交易所许可且历史按未压缩 DBN 字节计费"
+      ],
+      "evidence_state": "not_tested",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://databento.com/docs",
+        "https://databento.com/pricing",
+        "https://databento.com/docs/getting-started/build-first-app"
+      ],
+      "price_disclosure": "public",
+      "provider_class": "cross_asset",
+      "provider_id": "databento",
+      "provider_name": "Databento",
+      "public_monthly_price_usd": "199",
+      "unresolved_questions": [
+        "当前项目没有跨资产或 CME 研究假设",
+        "若出现假设需单独确认 CME 非展示研究许可"
+      ]
+    },
+    {
+      "comparison_group": "news_personal",
+      "desk_review_facts": [
+        "官方支持 REST pull 与 TCP push 新闻交付",
+        "认证 token 出现在查询参数的旧式契约需要额外日志脱敏"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://docs.benzinga.com/introduction/introduction",
+        "https://www.benzinga.com/apis/"
+      ],
+      "price_disclosure": "contact_sales",
+      "provider_class": "news_personal",
+      "provider_id": "benzinga",
+      "provider_name": "Benzinga News API",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "加密资产新闻覆盖、个人试用报价与历史范围",
+        "正文保存、衍生信号和展示许可"
+      ]
+    },
+    {
+      "comparison_group": "news_personal",
+      "desk_review_facts": [
+        "官方计划按 token 计量且历史检索消耗更高",
+        "近期文章、事件聚类和多语言字段可通过 API 获取"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://eventregistry.org/",
+        "https://beta.eventregistry.org/plans"
+      ],
+      "price_disclosure": "contact_sales",
+      "provider_class": "news_personal",
+      "provider_id": "event_registry",
+      "provider_name": "Event Registry",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "当前计划价格页面的最终商业报价",
+        "原始文章权利、删除同步和转载重复率"
+      ]
+    },
+    {
+      "comparison_group": "news_personal",
+      "desk_review_facts": [
+        "官方提供免费与付费 JSON API，服务端缓存使 30 秒内重复请求无益",
+        "官方条款说明请求被记录且访问可被撤销"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://cryptopanic.com/developers/api/",
+        "https://cryptopanic.com/guides/how-to-integrate-the-cryptopanic-api"
+      ],
+      "price_disclosure": "order_form",
+      "provider_class": "news_personal",
+      "provider_id": "cryptopanic",
+      "provider_name": "CryptoPanic API",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "历史覆盖、事件首发时间和转载去重表现",
+        "个人研究保存、展示和衍生信号许可"
+      ]
+    },
+    {
+      "comparison_group": "news_institutional",
+      "desk_review_facts": [
+        "官方提供 Dataset Builder、Web API 或 Snowflake 交付",
+        "官方页面声明 point-in-time 数据和多语言事件分类"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://www.ravenpack.com/products/edge"
+      ],
+      "price_disclosure": "contact_sales",
+      "provider_class": "news_institutional",
+      "provider_id": "ravenpack",
+      "provider_name": "RavenPack Edge",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "个人项目是否具备试用资格与预算可行性",
+        "精确内容权利、历史样本和退出导出条款"
+      ]
+    },
+    {
+      "comparison_group": "news_institutional",
+      "desk_review_facts": [
+        "官方提供 Search、Research Agent、Workflows 与 premium content 检索",
+        "官方声明企业安全控制和不使用客户数据训练模型"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://docs.bigdata.com/",
+        "https://bigdata.com/",
+        "https://bigdata.com/pricing"
+      ],
+      "price_disclosure": "contact_sales",
+      "provider_class": "news_institutional",
+      "provider_id": "bigdata_com",
+      "provider_name": "Bigdata.com",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "个人级可用产品、精确 token 单价和内容包",
+        "检索结果保存、回测、派生信号与模型输入许可"
+      ]
+    },
+    {
+      "comparison_group": "news_institutional",
+      "desk_review_facts": [
+        "官方提供实时流、历史新闻和机器可读新闻分析",
+        "产品面向机构且价格与许可需销售确认"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://www.lseg.com/en/data-analytics/financial-news-service/text-analytics",
+        "https://developers.lseg.com/en/use-cases-catalog/text-structuring-analytics-sentiment"
+      ],
+      "price_disclosure": "contact_sales",
+      "provider_class": "news_institutional",
+      "provider_id": "lseg_mrn",
+      "provider_name": "LSEG Machine Readable News",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "个人项目试用资格和最小合同规模",
+        "Reuters 正文、历史回测及衍生结果的使用许可"
+      ]
+    },
+    {
+      "comparison_group": "x_social",
+      "desk_review_facts": [
+        "API v2 按实际用量预付 credits，限流与计费为两套独立约束",
+        "官方规则要求删除同步、限制再分发并禁止用 X 数据训练 AI/ML"
+      ],
+      "evidence_state": "desk_review_only",
+      "license_review_complete": false,
+      "official_sources": [
+        "https://docs.x.com/x-api/fundamentals/rate-limits",
+        "https://docs.x.com/x-api/fundamentals/post-cap",
+        "https://docs.x.com/developer-terms/agreement",
+        "https://docs.x.com/developer-guidelines"
+      ],
+      "price_disclosure": "developer_console",
+      "provider_class": "social",
+      "provider_id": "x_api",
+      "provider_name": "X API v2",
+      "public_monthly_price_usd": null,
+      "unresolved_questions": [
+        "Developer Console 中当前查询、流式和 full-archive 精确单价",
+        "本项目个人研究 use case 的书面许可与月度硬上限"
+      ]
+    }
+  ],
+  "external_code_executed": false,
+  "marketing_material_is_purchase_evidence": false,
+  "official_source_count": 33,
+  "reviewed_at_utc": "2026-09-02T04:30:00Z",
+  "schema_version": "p17-source-desk-review-v1"
+}

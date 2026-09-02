@@ -1,0 +1,417 @@
+{
+  "activated_trial_count": 0,
+  "approved_max_cost_usd": "0",
+  "credentials_requested_or_received": false,
+  "plaintext_secrets_written": false,
+  "plans": [
+    {
+      "activated": false,
+      "asset_scope": [
+        "BTC-USDT spot",
+        "BTC-USDT perpetual",
+        "ETH-USDT spot",
+        "ETH-USDT perpetual"
+      ],
+      "budget": {
+        "approval_reference": null,
+        "approved_max_cost_usd": "0",
+        "automatic_renewal_allowed": false,
+        "max_calls": 25000,
+        "max_duration_days": 7,
+        "max_storage_gb": "25",
+        "overage_allowed": false,
+        "proposed_max_cost_usd": "150",
+        "user_budget_approved": false
+      },
+      "condition": null,
+      "criteria": {
+        "max_adjusted_p_value": "0.05",
+        "max_gap_rate": "0.005",
+        "max_news_duplicate_rate": null,
+        "max_news_false_alert_rate": null,
+        "max_operations_minutes_per_day": "15",
+        "max_p95_latency_ms": "5000",
+        "min_completeness_rate": "0.995",
+        "min_net_incremental_bps": "2",
+        "min_news_recall": null,
+        "min_news_risk_coverage_rate": null,
+        "min_official_match_rate": "0.995",
+        "min_oos_observations": 10000
+      },
+      "datasets": [
+        "trades",
+        "l2_book_updates",
+        "quotes",
+        "funding",
+        "liquidations"
+      ],
+      "equal_research_budget": true,
+      "hypothesis": "付费逐笔与 L2 数据在相同研究预算下能改善 BTC/ETH 执行成本估计和 OOS 净结果",
+      "official_crosscheck_sources": [
+        "binance_public",
+        "okx_public",
+        "bybit_public",
+        "deribit_public"
+      ],
+      "provider_ids": [
+        "tardis",
+        "kaiko"
+      ],
+      "stop_conditions": [
+        "达到批准成本或调用上限",
+        "条款不允许所需历史回测或衍生结果",
+        "官方交叉核验错误率超过 0.5%",
+        "发现 API Secret、账户或 Live 交易边界风险"
+      ],
+      "trial_id": "market_tick_tardis_vs_kaiko"
+    },
+    {
+      "activated": false,
+      "asset_scope": [
+        "BTC",
+        "ETH",
+        "Binance",
+        "OKX",
+        "Bybit",
+        "Deribit"
+      ],
+      "budget": {
+        "approval_reference": null,
+        "approved_max_cost_usd": "0",
+        "automatic_renewal_allowed": false,
+        "max_calls": 20000,
+        "max_duration_days": 14,
+        "max_storage_gb": "2",
+        "overage_allowed": false,
+        "proposed_max_cost_usd": "35",
+        "user_budget_approved": false
+      },
+      "condition": null,
+      "criteria": {
+        "max_adjusted_p_value": "0.05",
+        "max_gap_rate": "0.01",
+        "max_news_duplicate_rate": null,
+        "max_news_false_alert_rate": null,
+        "max_operations_minutes_per_day": "10",
+        "max_p95_latency_ms": "90000",
+        "min_completeness_rate": "0.99",
+        "min_net_incremental_bps": "2",
+        "min_news_recall": null,
+        "min_news_risk_coverage_rate": null,
+        "min_official_match_rate": "0.99",
+        "min_oos_observations": 5000
+      },
+      "datasets": [
+        "open_interest",
+        "funding",
+        "liquidations",
+        "long_short_ratio"
+      ],
+      "equal_research_budget": true,
+      "hypothesis": "聚合持仓量、资金费率和清算事件能在官方多交易所基线之上提供可交易的 OOS 风险增量",
+      "official_crosscheck_sources": [
+        "binance_public",
+        "okx_public",
+        "bybit_public",
+        "deribit_public"
+      ],
+      "provider_ids": [
+        "coinglass"
+      ],
+      "stop_conditions": [
+        "达到批准成本、调用或存储上限",
+        "聚合口径无法与官方接口解释一致",
+        "细粒度历史不足以构造 OOS 窗口"
+      ],
+      "trial_id": "derivatives_aggregate_coinglass"
+    },
+    {
+      "activated": false,
+      "asset_scope": [
+        "BTC",
+        "ETH",
+        "365-day historical",
+        "14-day forward observation"
+      ],
+      "budget": {
+        "approval_reference": null,
+        "approved_max_cost_usd": "0",
+        "automatic_renewal_allowed": false,
+        "max_calls": 10000,
+        "max_duration_days": 14,
+        "max_storage_gb": "2",
+        "overage_allowed": false,
+        "proposed_max_cost_usd": "120",
+        "user_budget_approved": false
+      },
+      "condition": null,
+      "criteria": {
+        "max_adjusted_p_value": "0.05",
+        "max_gap_rate": "0.01",
+        "max_news_duplicate_rate": null,
+        "max_news_false_alert_rate": null,
+        "max_operations_minutes_per_day": "10",
+        "max_p95_latency_ms": "900000",
+        "min_completeness_rate": "0.99",
+        "min_net_incremental_bps": "3",
+        "min_news_recall": null,
+        "min_news_risk_coverage_rate": null,
+        "min_official_match_rate": "0.98",
+        "min_oos_observations": 1000
+      },
+      "datasets": [
+        "exchange_flows",
+        "reserves",
+        "entity_metrics",
+        "network_metrics"
+      ],
+      "equal_research_budget": true,
+      "hypothesis": "point-in-time 链上交易所流量与实体指标能在免费链上基线之上产生经成本扣除的 OOS 增量",
+      "official_crosscheck_sources": [
+        "coin_metrics_community",
+        "official_web_catalog"
+      ],
+      "provider_ids": [
+        "cryptoquant",
+        "glassnode"
+      ],
+      "stop_conditions": [
+        "实体标签无法按 available_time 重建",
+        "历史修订会造成未来信息泄漏",
+        "达到批准成本或 credits 上限"
+      ],
+      "trial_id": "onchain_cryptoquant_vs_glassnode"
+    },
+    {
+      "activated": false,
+      "asset_scope": [
+        "仅限未来明确批准的 CME 合约与假设"
+      ],
+      "budget": {
+        "approval_reference": null,
+        "approved_max_cost_usd": "0",
+        "automatic_renewal_allowed": false,
+        "max_calls": 0,
+        "max_duration_days": 7,
+        "max_storage_gb": "5",
+        "overage_allowed": false,
+        "proposed_max_cost_usd": "125",
+        "user_budget_approved": false
+      },
+      "condition": "存在经批准的跨资产或 CME OOS 研究假设",
+      "criteria": {
+        "max_adjusted_p_value": "0.05",
+        "max_gap_rate": "0.001",
+        "max_news_duplicate_rate": null,
+        "max_news_false_alert_rate": null,
+        "max_operations_minutes_per_day": "15",
+        "max_p95_latency_ms": "5000",
+        "min_completeness_rate": "0.999",
+        "min_net_incremental_bps": "2",
+        "min_news_recall": null,
+        "min_news_risk_coverage_rate": null,
+        "min_official_match_rate": "0.999",
+        "min_oos_observations": 10000
+      },
+      "datasets": [
+        "CME trades",
+        "CME MBP-1",
+        "CME definitions"
+      ],
+      "equal_research_budget": true,
+      "hypothesis": "经批准的 CME 跨资产假设需要可重放的期货逐笔或订单簿数据",
+      "official_crosscheck_sources": [
+        "CME official contract specifications"
+      ],
+      "provider_ids": [
+        "databento"
+      ],
+      "stop_conditions": [
+        "不存在已批准跨资产或 CME 假设",
+        "CME 许可费用或使用权未书面确认",
+        "任何请求超出预估字节和成本"
+      ],
+      "trial_id": "conditional_databento_cme"
+    },
+    {
+      "activated": false,
+      "asset_scope": [
+        "BTC",
+        "ETH",
+        "major exchange and regulator events",
+        "14-day live window"
+      ],
+      "budget": {
+        "approval_reference": null,
+        "approved_max_cost_usd": "0",
+        "automatic_renewal_allowed": false,
+        "max_calls": 10000,
+        "max_duration_days": 14,
+        "max_storage_gb": "1",
+        "overage_allowed": false,
+        "proposed_max_cost_usd": "100",
+        "user_budget_approved": false
+      },
+      "condition": null,
+      "criteria": {
+        "max_adjusted_p_value": "0.05",
+        "max_gap_rate": "0.05",
+        "max_news_duplicate_rate": "0.25",
+        "max_news_false_alert_rate": "0.15",
+        "max_operations_minutes_per_day": "15",
+        "max_p95_latency_ms": "120000",
+        "min_completeness_rate": "0.95",
+        "min_net_incremental_bps": "2",
+        "min_news_recall": "0.8",
+        "min_news_risk_coverage_rate": "0.9",
+        "min_official_match_rate": "0.9",
+        "min_oos_observations": 200
+      },
+      "datasets": [
+        "headlines",
+        "event_clusters",
+        "publication_updates",
+        "deletions"
+      ],
+      "equal_research_budget": true,
+      "hypothesis": "个人级新闻源能提高经官方确认事件的召回与 lead time，同时控制误报和转载重复",
+      "official_crosscheck_sources": [
+        "official_rss_atom",
+        "official_web_catalog",
+        "github_public"
+      ],
+      "provider_ids": [
+        "benzinga",
+        "event_registry",
+        "cryptopanic"
+      ],
+      "stop_conditions": [
+        "正文、删除同步或衍生信号权利不明确",
+        "误报率超过 15% 或官方核验失败",
+        "达到批准 token、调用或成本上限"
+      ],
+      "trial_id": "personal_news_bakeoff"
+    },
+    {
+      "activated": false,
+      "asset_scope": [
+        "crypto",
+        "macro",
+        "regulatory",
+        "exchange and issuer risk"
+      ],
+      "budget": {
+        "approval_reference": null,
+        "approved_max_cost_usd": "0",
+        "automatic_renewal_allowed": false,
+        "max_calls": 5000,
+        "max_duration_days": 14,
+        "max_storage_gb": "2",
+        "overage_allowed": false,
+        "proposed_max_cost_usd": "500",
+        "user_budget_approved": false
+      },
+      "condition": null,
+      "criteria": {
+        "max_adjusted_p_value": "0.05",
+        "max_gap_rate": "0.01",
+        "max_news_duplicate_rate": "0.15",
+        "max_news_false_alert_rate": "0.1",
+        "max_operations_minutes_per_day": "10",
+        "max_p95_latency_ms": "60000",
+        "min_completeness_rate": "0.99",
+        "min_net_incremental_bps": "5",
+        "min_news_recall": "0.9",
+        "min_news_risk_coverage_rate": "0.95",
+        "min_official_match_rate": "0.95",
+        "min_oos_observations": 500
+      },
+      "datasets": [
+        "machine_readable_news",
+        "event_analytics",
+        "sentiment",
+        "historical_archive"
+      ],
+      "equal_research_budget": true,
+      "hypothesis": "机构级新闻与事件分析相对个人级和免费基线产生足以覆盖高成本的 OOS 风险增量",
+      "official_crosscheck_sources": [
+        "official_rss_atom",
+        "official_web_catalog",
+        "gdelt_public"
+      ],
+      "provider_ids": [
+        "ravenpack",
+        "bigdata_com",
+        "lseg_mrn"
+      ],
+      "stop_conditions": [
+        "报价超过用户批准预算",
+        "无法提供 point-in-time 历史样本或内容权利",
+        "相对个人级和免费基线净增量不足 5bps"
+      ],
+      "trial_id": "institutional_news_bakeoff"
+    },
+    {
+      "activated": false,
+      "asset_scope": [
+        "approved official and expert account allowlist",
+        "BTC",
+        "ETH",
+        "major venues"
+      ],
+      "budget": {
+        "approval_reference": null,
+        "approved_max_cost_usd": "0",
+        "automatic_renewal_allowed": false,
+        "max_calls": 5000,
+        "max_duration_days": 14,
+        "max_storage_gb": "0.5",
+        "overage_allowed": false,
+        "proposed_max_cost_usd": "50",
+        "user_budget_approved": false
+      },
+      "condition": null,
+      "criteria": {
+        "max_adjusted_p_value": "0.05",
+        "max_gap_rate": "0.05",
+        "max_news_duplicate_rate": "0.3",
+        "max_news_false_alert_rate": "0.2",
+        "max_operations_minutes_per_day": "15",
+        "max_p95_latency_ms": "30000",
+        "min_completeness_rate": "0.95",
+        "min_net_incremental_bps": "3",
+        "min_news_recall": "0.75",
+        "min_news_risk_coverage_rate": "0.85",
+        "min_official_match_rate": "0.9",
+        "min_oos_observations": 500
+      },
+      "datasets": [
+        "recent_search",
+        "filtered_stream",
+        "full_archive_sample",
+        "edits",
+        "deletions"
+      ],
+      "equal_research_budget": true,
+      "hypothesis": "受控账号 allowlist 和关键词查询能为官方事件提供额外 lead time 而不形成不可控成本或许可风险",
+      "official_crosscheck_sources": [
+        "official_rss_atom",
+        "official_web_catalog"
+      ],
+      "provider_ids": [
+        "x_api"
+      ],
+      "stop_conditions": [
+        "Developer Console 报价或用量无法设硬上限",
+        "use case、删除同步或 AI/ML 限制不满足",
+        "达到批准 credits、调用、Post reads 或成本上限"
+      ],
+      "trial_id": "x_api_usage_bakeoff"
+    }
+  ],
+  "proposed_max_cost_usd": "1080",
+  "real_provider_network_requests_performed": 0,
+  "schema_version": "p17-trial-requests-v1",
+  "trial_count": 7,
+  "trial_plan_config_sha256": "241a8ff6b4bbcec0698e62d333a9c4398c1715650b7e3cb9328f26082af2bcfe"
+}

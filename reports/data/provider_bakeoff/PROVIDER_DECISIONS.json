@@ -1,0 +1,178 @@
+{
+  "approved_by_group": {},
+  "approved_provider_count": 0,
+  "decisions": [
+    {
+      "comparison_group": "market_tick",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "tardis",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "market_tick",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "kaiko",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "derivatives_aggregate",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "coinglass",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "onchain_metrics",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "cryptoquant",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "onchain_metrics",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "glassnode",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "cross_asset_cme",
+      "decision": "NOT_APPLICABLE",
+      "evidence_state": "not_tested",
+      "net_incremental_bps": null,
+      "provider_id": "databento",
+      "reason_codes": [
+        "AQ-P17-CONDITION-NOT-SATISFIED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "news_personal",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "benzinga",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "news_personal",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "event_registry",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "news_personal",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "cryptopanic",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "news_institutional",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "ravenpack",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "news_institutional",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "bigdata_com",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "news_institutional",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "lseg_mrn",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    },
+    {
+      "comparison_group": "x_social",
+      "decision": "DEFER",
+      "evidence_state": "desk_review_only",
+      "net_incremental_bps": null,
+      "provider_id": "x_api",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ],
+      "selected_as_primary": false
+    }
+  ],
+  "procurement_decision": "NO_PURCHASE",
+  "real_trial_evidence_count": 0,
+  "same_class_primary_limit": 1,
+  "schema_version": "p17-provider-decisions-v1",
+  "sunk_cost_used_as_reason": false
+}

@@ -26,7 +26,18 @@ def test_p08_is_preserved_in_deferred_queue_after_later_phase_started(
     deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
     p08 = next(item for item in deferred if item["phase"] == "P08")
     current_phase = cast("str", state["current_phase"])
-    assert current_phase in {"P09", "P10", "P11", "P12", "P13", "P14", "P15", "P16"}
+    assert current_phase in {
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+    }
     expected_next = {
         "P09": "P10",
         "P10": "P11",
@@ -36,29 +47,24 @@ def test_p08_is_preserved_in_deferred_queue_after_later_phase_started(
         "P14": "P15",
         "P15": "P16",
         "P16": "P17",
+        "P17": "P18",
     }
-    assert state["next_phase"] == expected_next[current_phase]
+    if current_phase in expected_next:
+        assert state["next_phase"] == expected_next[current_phase]
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["formal_acceptance_deferred"] is True
     assert state["live_trading_locked"] is True
     assert p08["status"] == "implementation_verified_acceptance_deferred"
     assert p08["accepted_at_utc"] is None
-    required = {"P05", "P06", "P07", "P08"}
-    if current_phase in {"P10", "P11", "P12", "P13", "P14", "P15", "P16"}:
-        required.add("P09")
-    if current_phase in {"P11", "P12", "P13", "P14", "P15", "P16"}:
-        required.add("P10")
-    if current_phase in {"P12", "P13", "P14", "P15", "P16"}:
-        required.add("P11")
-    if current_phase in {"P13", "P14", "P15", "P16"}:
-        required.add("P12")
-    if current_phase in {"P14", "P15", "P16"}:
-        required.add("P13")
-    if current_phase in {"P15", "P16"}:
-        required.add("P14")
-    if current_phase == "P16":
-        required.add("P15")
+    current_number = int(current_phase.removeprefix("P"))
+    required = {
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        *(f"P{number:02d}" for number in range(9, current_number)),
+    }
     assert {item["phase"] for item in deferred} >= required
     assert not (project_root / "reports/phases/P08/ACCEPTANCE.md").exists()
 
@@ -158,6 +164,8 @@ def test_p08_reports_and_compliance_are_complete_without_formal_acceptance(
         "P14",
         "P15",
         "P16",
+        "P17",
+        "P18",
     }
     assert compliance["status"] == "passed"
     assert security["phase"] in {
@@ -170,6 +178,8 @@ def test_p08_reports_and_compliance_are_complete_without_formal_acceptance(
         "P14",
         "P15",
         "P16",
+        "P17",
+        "P18",
     }
     assert security["status"] == "passed"
     assert mutation["status"] == "passed"

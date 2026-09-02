@@ -1,0 +1,31 @@
+{
+  "equal_research_budget": true,
+  "feature_importance_used": false,
+  "fixture_only": true,
+  "negative_gate": {
+    "comparison_group": "fixture_market",
+    "decision": "REJECT",
+    "evidence_state": "trial_complete",
+    "net_incremental_bps": "-1",
+    "provider_id": "fixture_negative",
+    "reason_codes": [
+      "AQ-P17-NET-INCREMENT-FAILED",
+      "AQ-P17-MULTIPLE-TESTING-FAILED"
+    ],
+    "selected_as_primary": false
+  },
+  "passing_gate": {
+    "comparison_group": "fixture_market",
+    "decision": "APPROVE",
+    "evidence_state": "trial_complete",
+    "net_incremental_bps": "5",
+    "provider_id": "fixture_passing",
+    "reason_codes": [
+      "AQ-P17-ALL-GATES-PASSED"
+    ],
+    "selected_as_primary": true
+  },
+  "real_provider_incremental_value_claims": [],
+  "real_provider_trial_count": 0,
+  "schema_version": "p17-ablation-evidence-v1"
+}

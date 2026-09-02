@@ -1,0 +1,416 @@
+{
+  "$defs": {
+    "TrialBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_reference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approval Reference"
+        },
+        "approved_max_cost_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Approved Max Cost Usd"
+        },
+        "automatic_renewal_allowed": {
+          "default": false,
+          "title": "Automatic Renewal Allowed",
+          "type": "boolean"
+        },
+        "max_calls": {
+          "minimum": 0,
+          "title": "Max Calls",
+          "type": "integer"
+        },
+        "max_duration_days": {
+          "maximum": 30,
+          "minimum": 1,
+          "title": "Max Duration Days",
+          "type": "integer"
+        },
+        "max_storage_gb": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Storage Gb"
+        },
+        "overage_allowed": {
+          "default": false,
+          "title": "Overage Allowed",
+          "type": "boolean"
+        },
+        "proposed_max_cost_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Proposed Max Cost Usd"
+        },
+        "user_budget_approved": {
+          "title": "User Budget Approved",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "proposed_max_cost_usd",
+        "approved_max_cost_usd",
+        "user_budget_approved",
+        "max_calls",
+        "max_storage_gb",
+        "max_duration_days"
+      ],
+      "title": "TrialBudget",
+      "type": "object"
+    },
+    "TrialCriteria": {
+      "additionalProperties": false,
+      "properties": {
+        "max_adjusted_p_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Max Adjusted P Value"
+        },
+        "max_gap_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Max Gap Rate"
+        },
+        "max_news_duplicate_rate": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max News Duplicate Rate"
+        },
+        "max_news_false_alert_rate": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max News False Alert Rate"
+        },
+        "max_operations_minutes_per_day": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Operations Minutes Per Day"
+        },
+        "max_p95_latency_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max P95 Latency Ms"
+        },
+        "min_completeness_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Min Completeness Rate"
+        },
+        "min_net_incremental_bps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Min Net Incremental Bps"
+        },
+        "min_news_recall": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min News Recall"
+        },
+        "min_news_risk_coverage_rate": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min News Risk Coverage Rate"
+        },
+        "min_official_match_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Min Official Match Rate"
+        },
+        "min_oos_observations": {
+          "minimum": 1,
+          "title": "Min Oos Observations",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "min_oos_observations",
+        "min_official_match_rate",
+        "min_completeness_rate",
+        "max_gap_rate",
+        "max_p95_latency_ms",
+        "min_net_incremental_bps",
+        "max_adjusted_p_value",
+        "max_operations_minutes_per_day"
+      ],
+      "title": "TrialCriteria",
+      "type": "object"
+    },
+    "TrialPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "activated": {
+          "title": "Activated",
+          "type": "boolean"
+        },
+        "asset_scope": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Asset Scope",
+          "type": "array"
+        },
+        "budget": {
+          "$ref": "#/$defs/TrialBudget"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Condition"
+        },
+        "criteria": {
+          "$ref": "#/$defs/TrialCriteria"
+        },
+        "datasets": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Datasets",
+          "type": "array"
+        },
+        "equal_research_budget": {
+          "title": "Equal Research Budget",
+          "type": "boolean"
+        },
+        "hypothesis": {
+          "title": "Hypothesis",
+          "type": "string"
+        },
+        "official_crosscheck_sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Official Crosscheck Sources",
+          "type": "array"
+        },
+        "provider_ids": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "type": "string"
+          },
+          "title": "Provider Ids",
+          "type": "array"
+        },
+        "stop_conditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Stop Conditions",
+          "type": "array"
+        },
+        "trial_id": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{2,95}$",
+          "title": "Trial Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trial_id",
+        "provider_ids",
+        "hypothesis",
+        "datasets",
+        "asset_scope",
+        "equal_research_budget",
+        "official_crosscheck_sources",
+        "budget",
+        "criteria",
+        "activated",
+        "stop_conditions"
+      ],
+      "title": "TrialPlan",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.provider-trial-plans/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "plans": {
+      "items": {
+        "$ref": "#/$defs/TrialPlan"
+      },
+      "title": "Plans",
+      "type": "array"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "plans"
+  ],
+  "title": "TrialPlanDocument",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.provider-trial-plans",
+  "x-aegisquant-schema-version": "1.0.0"
+}

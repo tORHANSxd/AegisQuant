@@ -1,0 +1,22 @@
+{
+  "fixture_only": true,
+  "metrics": {
+    "detection_count": 4,
+    "duplicate_rate": "0.25",
+    "false_alert_rate": "0.25",
+    "matched_event_count": 2,
+    "mean_lead_time_seconds": "15.0",
+    "recall": "0.5",
+    "reference_event_count": 4,
+    "risk_coverage_rate": "0.5"
+  },
+  "real_provider_comparison_performed": false,
+  "required_metrics": [
+    "recall",
+    "false_alert_rate",
+    "mean_lead_time_seconds",
+    "duplicate_rate",
+    "risk_coverage_rate"
+  ],
+  "schema_version": "p17-news-bakeoff-evidence-v1"
+}

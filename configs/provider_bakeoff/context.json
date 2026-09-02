@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "as_of_utc": "2026-09-02T04:30:00Z",
+  "approved_cross_asset_or_cme_hypothesis_ids": [],
+  "user_budget_approval_references": [],
+  "trial_credential_references_present": [],
+  "real_provider_trial_artifacts": [],
+  "real_provider_network_requests_performed": 0,
+  "paid_provider_purchases_performed": 0,
+  "procurement_default": "NO_PURCHASE",
+  "live_trading_locked": true
+}

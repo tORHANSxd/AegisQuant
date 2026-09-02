@@ -1,0 +1,32 @@
+{
+  "free_baseline_record_ids": [
+    "official-binance",
+    "official-okx",
+    "official-bybit"
+  ],
+  "free_baseline_survives_provider_loss": true,
+  "provider_outage": {
+    "baseline_preserved": true,
+    "candidate_records_used": false,
+    "mode": "BASELINE_ONLY",
+    "runtime_hard_dependency": false,
+    "selected_record_ids": [
+      "official-binance",
+      "official-okx",
+      "official-bybit"
+    ]
+  },
+  "schema_version": "p17-degradation-evidence-v1",
+  "unapproved_provider": {
+    "baseline_preserved": true,
+    "candidate_records_used": false,
+    "mode": "BASELINE_ONLY",
+    "runtime_hard_dependency": false,
+    "selected_record_ids": [
+      "official-binance",
+      "official-okx",
+      "official-bybit"
+    ]
+  },
+  "unpaid_provider_runtime_hard_dependency": false
+}

@@ -1,0 +1,10 @@
+{
+  "approved_paid_count": 0,
+  "gate_status": "passed_no_paid_provider_approved",
+  "license_approved_paid_count": 0,
+  "paid_candidate_count": 13,
+  "paid_candidates_approved_at_runtime": [],
+  "paid_candidates_registered_at_runtime": [],
+  "real_trial_evidence_count": 0,
+  "schema_version": "p17-registry-gate-evidence-v1"
+}

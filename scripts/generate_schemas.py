@@ -114,6 +114,10 @@ from aegisquant.intelligence.collectors import (
     SourceQuotaWindow,
     SourceRequest,
 )
+from aegisquant.research.provider_bakeoff.models import (
+    ProviderCandidateCatalog,
+    TrialPlanDocument,
+)
 
 JSON_SCHEMA_DIALECT: Final = "https://json-schema.org/draft/2020-12/schema"
 
@@ -335,6 +339,18 @@ CONFIG_CONTRACTS: Final = (
         "1.0.0",
         SourceProcessingPolicy,
         Path("source-processing-policy-domain-v1.json"),
+    ),
+    Contract(
+        "aegisquant.provider-candidate-catalog",
+        "1.0.0",
+        ProviderCandidateCatalog,
+        Path("provider-candidate-catalog-v1.json"),
+    ),
+    Contract(
+        "aegisquant.provider-trial-plans",
+        "1.0.0",
+        TrialPlanDocument,
+        Path("provider-trial-plans-v1.json"),
     ),
 )
 

@@ -56,6 +56,8 @@ def test_p04_boundary_preserves_p03_waiver_and_live_lock(project_root: Path) -> 
         "P14",
         "P15",
         "P16",
+        "P17",
+        "P18",
     }
     assert state["status"] in {"in_progress", "accepted"}
     assert state["live_trading_locked"] is True
@@ -125,9 +127,13 @@ def test_p04_boundary_preserves_p03_waiver_and_live_lock(project_root: Path) -> 
         assert previous["phase"] == "P14"
         assert previous["status"] == "in_progress"
         assert p04_record(state)["status"] == "accepted"
-    else:
+    elif state["current_phase"] == "P16":
         assert state["next_phase"] == "P17"
         assert previous["phase"] == "P15"
+        assert previous["status"] == "in_progress"
+        assert p04_record(state)["status"] == "accepted"
+    else:
+        assert previous["phase"] in {"P16", "P17"}
         assert previous["status"] == "in_progress"
         assert p04_record(state)["status"] == "accepted"
 

@@ -1,0 +1,135 @@
+{
+  "deleted_negative_result_count": 0,
+  "fixture_negative_result": {
+    "comparison_group": "fixture_market",
+    "decision": "REJECT",
+    "evidence_state": "trial_complete",
+    "net_incremental_bps": "-1",
+    "provider_id": "fixture_negative",
+    "reason_codes": [
+      "AQ-P17-NET-INCREMENT-FAILED",
+      "AQ-P17-MULTIPLE-TESTING-FAILED"
+    ],
+    "selected_as_primary": false
+  },
+  "real_provider_results": [
+    {
+      "decision": "DEFER",
+      "provider_id": "tardis",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "kaiko",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "coinglass",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "cryptoquant",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "glassnode",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "NOT_APPLICABLE",
+      "provider_id": "databento",
+      "reason_codes": [
+        "AQ-P17-CONDITION-NOT-SATISFIED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "benzinga",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "event_registry",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "cryptopanic",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "ravenpack",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "bigdata_com",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "lseg_mrn",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    },
+    {
+      "decision": "DEFER",
+      "provider_id": "x_api",
+      "reason_codes": [
+        "AQ-P17-TRIAL-NOT-COMPLETED",
+        "AQ-P17-BUDGET-NOT-APPROVED",
+        "AQ-P17-LICENSE-NOT-APPROVED"
+      ]
+    }
+  ],
+  "result_count": 14,
+  "retention_policy": "append_only_no_cherry_picking",
+  "schema_version": "p17-negative-results-v1"
+}

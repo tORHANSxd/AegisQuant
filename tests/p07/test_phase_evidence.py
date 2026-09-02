@@ -34,6 +34,8 @@ def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) ->
         "P14",
         "P15",
         "P16",
+        "P17",
+        "P18",
     }
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
@@ -120,7 +122,7 @@ def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) ->
             "P13",
             "P14",
         }
-    else:
+    elif state["current_phase"] == "P16":
         assert state["next_phase"] == "P17"
         assert previous["phase"] == "P15"
         assert {item["phase"] for item in deferred} >= {
@@ -136,6 +138,10 @@ def test_p07_state_is_deferred_or_current_and_live_locked(project_root: Path) ->
             "P14",
             "P15",
         }
+    else:
+        p07 = next(item for item in deferred if item["phase"] == "P07")
+        assert previous["phase"] in {"P16", "P17"}
+        assert p07["status"] == "implementation_verified_acceptance_deferred"
     assert previous["status"] == "in_progress"
     assert not (project_root / "reports/phases/P07/ACCEPTANCE.md").exists()
     assert not (project_root / "src/aegisquant/live").exists()
@@ -222,6 +228,8 @@ def test_p07_scoreboard_and_dependency_contract_are_explicit(project_root: Path)
         "P14",
         "P15",
         "P16",
+        "P17",
+        "P18",
     }
     assert compliance["status"] == "passed"
     assert compliance["python_unknown_license_count"] == 0

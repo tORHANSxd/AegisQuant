@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "P17",
+  "generated_at_utc": "2026-09-02T04:46:57.027087Z",
+  "status": "passed",
+  "baseline_exit_code": 0,
+  "baseline_duration_seconds": 1.69,
+  "baseline_output_tail": "....                                                                     [100%]\n4 passed in 0.34s\n\n...                                                                      [100%]\n3 passed in 0.32s\n",
+  "mutants_total": 6,
+  "killed": 6,
+  "survived": 0,
+  "invalid": 0,
+  "score": 1.0,
+  "threshold": 1.0,
+  "results": [
+    {
+      "name": "net-increment-after-all-costs",
+      "source": "src/aegisquant/research/provider_bakeoff/evaluation.py",
+      "status": "killed",
+      "exit_code": 1,
+      "duration_seconds": 0.934,
+      "output_tail": "F...                                                                     [100%]\n================================== FAILURES ===================================\n_____ test_complete_trial_can_approve_only_after_net_costs_and_oos_gates ______\n\n    def test_complete_trial_can_approve_only_after_net_costs_and_oos_gates() -> None:\n        item = candidate()\n        result = evaluate_candidate(\n            candidate=item,\n            plan=plan(str(item.provider_id)),\n            measurement=measurement(),\n        )\n>       assert result.decision is ProcurementDecision.APPROVE\nE       AssertionError: assert <ProcurementDecision.REJECT: 'REJECT'> is <ProcurementDecision.APPROVE: 'APPROVE'>\nE        +  where <ProcurementDecision.REJECT: 'REJECT'> = ProviderDecisionRecord(provider_id=ProviderId(value='fixture_alpha'), comparison_group='fixture_market', decision=<Pro...complete'>, reason_codes=('AQ-P17-NET-INCREMENT-FAILED',), net_incremental_bps=Decimal('5'), selected_as_primary=False).decision\nE        +  and   <ProcurementDecision.APPROVE: 'APPROVE'> = ProcurementDecision.APPROVE\n\ntests\\research\\provider_bakeoff\\test_decisions.py:108: AssertionError\n=========================== short test summary info ===========================\nFAILED tests/research/provider_bakeoff/test_decisions.py::test_complete_trial_can_approve_only_after_net_costs_and_oos_gates\n1 failed, 3 passed in 0.42s\n"
+    },
+    {
+      "name": "unapproved-budget-reason",
+      "source": "src/aegisquant/research/provider_bakeoff/evaluation.py",
+      "status": "killed",
+      "exit_code": 1,
+      "duration_seconds": 0.917,
+      "output_tail": "..F.                                                                     [100%]\n================================== FAILURES ===================================\n____________ test_unactivated_or_conditional_trial_never_approves _____________\n\n    def test_unactivated_or_conditional_trial_never_approves() -> None:\n        item = candidate()\n        inactive = plan(str(item.provider_id)).model_copy(\n            update={\n                \"activated\": False,\n                \"budget\": TrialBudget(\n                    proposed_max_cost_usd=Decimal(\"10\"),\n                    approved_max_cost_usd=Decimal(\"0\"),\n                    user_budget_approved=False,\n                    max_calls=100,\n                    max_storage_gb=Decimal(\"1\"),\n                    max_duration_days=2,\n                ),\n            }\n        )\n        deferred = evaluate_candidate(candidate=item, plan=inactive, measurement=None)\n        conditional = evaluate_candidate(\n            candidate=item,\n            plan=inactive,\n            measurement=None,\n            condition_satisfied=False,\n        )\n        assert deferred.decision is ProcurementDecision.DEFER\n>       assert \"AQ-P17-BUDGET-NOT-APPROVED\" in deferred.reason_codes\nE       AssertionError: assert 'AQ-P17-BUDGET-NOT-APPROVED' in ('AQ-P17-TRIAL-NOT-COMPLETED',)\nE        +  where ('AQ-P17-TRIAL-NOT-COMPLETED',) = ProviderDecisionRecord(provider_id=ProviderId(value='fixture_alpha'), comparison_group='fixture_market', decision=<Pro...: 'trial_complete'>, reason_codes=('AQ-P17-TRIAL-NOT-COMPLETED',), net_incremental_bps=None, selected_as_primary=False).reason_codes\n\ntests\\research\\provider_bakeoff\\test_decisions.py:158: AssertionError\n=========================== short test summary info ===========================\nFAILED tests/research/provider_bakeoff/test_decisions.py::test_unactivated_or_conditional_trial_never_approves\n1 failed, 3 passed in 0.40s\n"
+    },
+    {
+      "name": "one-primary-per-group",
+      "source": "src/aegisquant/research/provider_bakeoff/evaluation.py",
+      "status": "killed",
+      "exit_code": 1,
+      "duration_seconds": 0.933,
+      "output_tail": "...F                                                                     [100%]\n================================== FAILURES ===================================\n____________ test_comparison_group_cannot_have_two_primary_sources ____________\n\n    def test_comparison_group_cannot_have_two_primary_sources() -> None:\n        records = tuple(\n            ProviderDecisionRecord(\n                provider_id=ProviderId(provider_id),\n                comparison_group=\"same_group\",\n                decision=ProcurementDecision.APPROVE,\n                evidence_state=EvidenceState.TRIAL_COMPLETE,\n                reason_codes=(\"AQ-P17-ALL-GATES-PASSED\",),\n                net_incremental_bps=Decimal(\"5\"),\n                selected_as_primary=True,\n            )\n            for provider_id in (\"fixture_alpha\", \"fixture_beta\")\n        )\n>       with pytest.raises(ValueError, match=\"multiple primary providers\"):\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       Failed: DID NOT RAISE ValueError\n\ntests\\research\\provider_bakeoff\\test_decisions.py:175: Failed\n=========================== short test summary info ===========================\nFAILED tests/research/provider_bakeoff/test_decisions.py::test_comparison_group_cannot_have_two_primary_sources\n1 failed, 3 passed in 0.42s\n"
+    },
+    {
+      "name": "provider-outage-free-baseline",
+      "source": "src/aegisquant/research/provider_bakeoff/evaluation.py",
+      "status": "killed",
+      "exit_code": 1,
+      "duration_seconds": 0.917,
+      "output_tail": ".F.                                                                      [100%]\n================================== FAILURES ===================================\n__ test_provider_outage_returns_exact_free_baseline_without_hard_dependency ___\n\n    def test_provider_outage_returns_exact_free_baseline_without_hard_dependency() -> None:\n        result = fallback_to_free_baseline(\n            baseline_record_ids=(\"official-1\", \"official-2\"),\n            candidate_record_ids=(\"paid-1\",),\n            candidate_approved=True,\n            provider_available=False,\n        )\n>       assert result.mode is DegradationMode.BASELINE_ONLY\nE       AssertionError: assert <DegradationMode.BASELINE_PLUS_APPROVED_SOURCE: 'BASELINE_PLUS_APPROVED_SOURCE'> is <DegradationMode.BASELINE_ONLY: 'BASELINE_ONLY'>\nE        +  where <DegradationMode.BASELINE_PLUS_APPROVED_SOURCE: 'BASELINE_PLUS_APPROVED_SOURCE'> = DegradationSelection(mode=<DegradationMode.BASELINE_PLUS_APPROVED_SOURCE: 'BASELINE_PLUS_APPROVED_SOURCE'>, selected_r...icial-1', 'official-2', 'paid-1'), baseline_preserved=True, candidate_records_used=True, runtime_hard_dependency=False).mode\nE        +  and   <DegradationMode.BASELINE_ONLY: 'BASELINE_ONLY'> = DegradationMode.BASELINE_ONLY\n\ntests\\research\\provider_bakeoff\\test_news_authority_degradation.py:74: AssertionError\n=========================== short test summary info ===========================\nFAILED tests/research/provider_bakeoff/test_news_authority_degradation.py::test_provider_outage_returns_exact_free_baseline_without_hard_dependency\n1 failed, 2 passed in 0.40s\n"
+    },
+    {
+      "name": "official-trading-fact-authority",
+      "source": "src/aegisquant/research/provider_bakeoff/evaluation.py",
+      "status": "killed",
+      "exit_code": 1,
+      "duration_seconds": 0.914,
+      "output_tail": "..F                                                                      [100%]\n================================== FAILURES ===================================\n______ test_third_party_aggregator_cannot_become_trading_fact_authority _______\n\n    def test_third_party_aggregator_cannot_become_trading_fact_authority() -> None:\n        aggregated = TradingFactRecord(\n            fact_id=\"fact-aggregated\",\n            fact_type=\"fill\",\n            source_authority=SourceAuthority.THIRD_PARTY_AGGREGATOR,\n            source_id=\"paid-provider\",\n        )\n        official = TradingFactRecord(\n            fact_id=\"fact-official\",\n            fact_type=\"fill\",\n            source_authority=SourceAuthority.OFFICIAL_EXCHANGE,\n            source_id=\"binance_public\",\n        )\n>       with pytest.raises(PermissionError, match=\"THIRD-PARTY-NOT-TRADING-FACT-AUTHORITY\"):\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       Failed: DID NOT RAISE PermissionError\n\ntests\\research\\provider_bakeoff\\test_news_authority_degradation.py:94: Failed\n=========================== short test summary info ===========================\nFAILED tests/research/provider_bakeoff/test_news_authority_degradation.py::test_third_party_aggregator_cannot_become_trading_fact_authority\n1 failed, 2 passed in 0.39s\n"
+    },
+    {
+      "name": "news-matched-event-count",
+      "source": "src/aegisquant/research/provider_bakeoff/evaluation.py",
+      "status": "killed",
+      "exit_code": 1,
+      "duration_seconds": 0.934,
+      "output_tail": "F..                                                                      [100%]\n================================== FAILURES ===================================\n_ test_news_metrics_use_official_events_and_count_false_alerts_and_duplicates _\n\n    def test_news_metrics_use_official_events_and_count_false_alerts_and_duplicates() -> None:\n        start = datetime(2026, 9, 2, tzinfo=UTC)\n        references = tuple(\n            NewsReferenceEvent(\n                event_id=f\"event-{index}\",\n                official_available_time=start + timedelta(minutes=index * 10),\n                risk_relevant=index in {1, 3},\n            )\n            for index in range(1, 5)\n        )\n        detections = (\n            NewsDetection(\n                detection_id=\"d1\",\n                matched_official_event_id=\"event-1\",\n                available_time=references[0].official_available_time - timedelta(seconds=60),\n                story_fingerprint=\"story-a\",\n            ),\n            NewsDetection(\n                detection_id=\"d2\",\n                matched_official_event_id=\"event-2\",\n                available_time=references[1].official_available_time + timedelta(seconds=30),\n                story_fingerprint=\"story-b\",\n            ),\n            NewsDetection(\n                detection_id=\"d3\",\n                matched_official_event_id=\"event-2\",\n                available_time=references[1].official_available_time + timedelta(seconds=45),\n                story_fingerprint=\"story-b\",\n            ),\n            NewsDetection(\n                detection_id=\"d4\",\n                matched_official_event_id=None,\n                available_time=start,\n                story_fingerprint=\"story-c\",\n            ),\n        )\n        metrics = calculate_news_metrics(references=references, detections=detections)\n>       assert metrics.matched_event_count == 2\nE       AssertionError: assert 4 == 2\nE        +  where 4 = NewsBakeoffMetrics(reference_event_count=4, detection_count=4, matched_event_count=4, recall=Decimal('0.5'), false_ale...mal('0.25'), duplicate_rate=Decimal('0.25'), mean_lead_time_seconds=Decimal('15.0'), risk_coverage_rate=Decimal('0.5')).matched_event_count\n\ntests\\research\\provider_bakeoff\\test_news_authority_degradation.py:59: AssertionError\n=========================== short test summary info ===========================\nFAILED tests/research/provider_bakeoff/test_news_authority_degradation.py::test_news_metrics_use_official_events_and_count_false_alerts_and_duplicates\n1 failed, 2 passed in 0.40s\n"
+    }
+  ]
+}

@@ -26,7 +26,17 @@ def test_p10_state_is_current_deferred_live_locked_and_p09_is_preserved(
     )
     previous = cast("dict[str, object]", state["previous_phase"])
     deferred = cast("list[dict[str, object]]", state["deferred_acceptance_queue"])
-    assert state["current_phase"] in {"P10", "P11", "P12", "P13", "P14", "P15", "P16"}
+    assert state["current_phase"] in {
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+    }
     assert state["status"] == "in_progress"
     assert state["accepted_at_utc"] is None
     assert state["formal_acceptance_deferred"] is True
@@ -88,7 +98,7 @@ def test_p10_state_is_current_deferred_live_locked_and_p09_is_preserved(
             "P13",
             "P14",
         }
-    else:
+    elif state["current_phase"] == "P16":
         p10 = next(item for item in deferred if item["phase"] == "P10")
         assert state["next_phase"] == "P17"
         assert previous["phase"] == "P15"
@@ -105,6 +115,19 @@ def test_p10_state_is_current_deferred_live_locked_and_p09_is_preserved(
             "P13",
             "P14",
             "P15",
+        }
+    else:
+        p10 = next(item for item in deferred if item["phase"] == "P10")
+        assert previous["phase"] in {"P16", "P17"}
+        assert p10["status"] == "implementation_verified_acceptance_deferred"
+        current_number = int(cast("str", state["current_phase"]).removeprefix("P"))
+        required = {
+            "P05",
+            "P06",
+            "P07",
+            "P08",
+            "P09",
+            *(f"P{number:02d}" for number in range(10, current_number)),
         }
     assert {item["phase"] for item in deferred} >= required
     assert not (project_root / "reports/phases/P10/ACCEPTANCE.md").exists()
@@ -275,8 +298,18 @@ def test_p10_phase_reports_and_security_evidence_are_complete(project_root: Path
     mutation_threshold = cast("float", mutation["threshold"])
     assert mutation["status"] == "passed" and mutation_score >= mutation_threshold
     assert (
-        security["phase"] in {"P10", "P11", "P12", "P13", "P14", "P15", "P16"}
+        security["phase"] in {"P10", "P11", "P12", "P13", "P14", "P15", "P16", "P17", "P18"}
         and security["secret_finding_count"] == 0
     )
-    assert compliance["phase"] in {"P10", "P11", "P12", "P13", "P14", "P15", "P16"}
+    assert compliance["phase"] in {
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+    }
     assert compliance["python_unknown_license_count"] == 0
