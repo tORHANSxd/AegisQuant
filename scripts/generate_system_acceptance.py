@@ -6,6 +6,7 @@ import argparse
 import csv
 import io
 import json
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Final, cast
@@ -55,6 +56,7 @@ PRIOR_ACCEPTANCE: Final = (
     ("P03", "ACCEPTED_WITH_WAIVER", "P03-A01"),
     ("P04", "ACCEPTED", None),
 )
+PASSED_COUNT_RE: Final = re.compile(r"(?P<count>[0-9]+) passed")
 
 
 def _json(path: Path) -> dict[str, object]:
@@ -83,6 +85,18 @@ def _result_passed(payload: dict[str, object]) -> bool:
         "passed",
         "passed_implementation_acceptance_deferred",
     }
+
+
+def _stage_passed_count(ci: dict[str, object], stage_name: str) -> int:
+    results = cast("list[dict[str, object]]", ci["results"])
+    stage = next(item for item in results if item.get("name") == stage_name)
+    tail = stage.get("output_tail")
+    if not isinstance(tail, str):
+        raise ValueError(f"{stage_name} output tail is unavailable")
+    matches = list(PASSED_COUNT_RE.finditer(tail))
+    if not matches:
+        raise ValueError(f"{stage_name} passed count is unavailable")
+    return int(matches[-1].group("count"))
 
 
 def _verify_prior_acceptance(root: Path) -> list[dict[str, object]]:
@@ -265,8 +279,13 @@ def build_outputs(root: Path, generated_at_utc: str) -> dict[Path, str]:
     if len(audit_rows) != 93:
         raise ValueError(f"consolidated acceptance row count is {len(audit_rows)}, expected 93")
 
-    p18_results = _json(root / "reports/phases/P18/TEST_RESULTS.json")
-    p18_ci = _json(root / "reports/phases/P18/CI_RESULTS.json")
+    acceptance_ci_path = root / OUTPUT_DIR / "CI_RESULTS.json"
+    complete_ci_path = (
+        acceptance_ci_path
+        if acceptance_ci_path.is_file()
+        else root / "reports/phases/P18/CI_RESULTS.json"
+    )
+    p18_ci = _json(complete_ci_path)
     readiness = _json(root / "reports/live_readiness/READINESS_EVIDENCE.json")
     review = cast("dict[str, object]", readiness["review"])
     if p18_ci.get("status") != "passed" or review.get("decision") != "NO_GO":
@@ -300,13 +319,12 @@ def build_outputs(root: Path, generated_at_utc: str) -> dict[Path, str]:
             "P16-A03": "reports/observability/P16_ALERT_EVIDENCE.json",
         },
         "source_verification": {
+            "complete_ci_artifact": complete_ci_path.relative_to(root).as_posix(),
             "p18_ci_status": p18_ci.get("status"),
             "p18_ci_stage_count": p18_ci.get("stage_count"),
             "p18_ci_failed_count": p18_ci.get("failed_count"),
-            "python_313_passed": cast("dict[str, object]", p18_results["python_313"])["passed"],
-            "python_314_passed": cast("dict[str, object]", p18_results["python_314_candidate"])[
-                "passed"
-            ],
+            "python_313_passed": _stage_passed_count(p18_ci, "pytest"),
+            "python_314_passed": _stage_passed_count(p18_ci, "python-candidate"),
             "p18_readiness_decision": review.get("decision"),
         },
         "safety": {
