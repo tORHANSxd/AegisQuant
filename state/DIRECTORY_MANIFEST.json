@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "source": "AegisQuant Master Taskbook v3.1 section 4",
+  "source": "AegisQuant v5.0 sections 0.1 and 53; legacy v3.1 layout retained",
   "directories": [
     ".github/workflows",
     "apps/web/app",
@@ -27,6 +27,7 @@
     "data/raw",
     "data/silver",
     "docs/adr",
+    "docs/archive/plans",
     "docs/governance",
     "docs/spec",
     "experiments",
@@ -58,6 +59,11 @@
     "reports/phases/P00",
     "reports/sbom",
     "reports/security",
+    "reports/v5/P00",
+    "reports/v5/P01",
+    "reports/v5/P02",
+    "reports/v5/P03",
+    "reports/v5/P04",
     "schemas",
     "scripts",
     "services/api",
@@ -139,6 +145,7 @@
     "src/aegisquant/strategies/registry",
     "src/aegisquant/strategies/sleeves",
     "src/aegisquant/strategies/specs",
+    "src/aegisquant/truth",
     "src/aegisquant/workers",
     "state",
     "tests/accounting",
@@ -153,6 +160,10 @@
     "tests/replay",
     "tests/risk",
     "tests/security",
-    "tests/unit"
+    "tests/unit",
+    "tests/v5_p01",
+    "tests/v5_p02",
+    "tests/v5_p03",
+    "tests/v5_p04"
   ]
 }

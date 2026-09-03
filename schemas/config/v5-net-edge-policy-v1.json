@@ -1,0 +1,307 @@
+{
+  "$defs": {
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "NetEdgeThresholdSource": {
+      "enum": [
+        "BOOTSTRAP",
+        "OOS"
+      ],
+      "title": "NetEdgeThresholdSource",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-net-edge-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alpha_truth_claimed": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Truth Claimed",
+      "type": "boolean"
+    },
+    "asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "confidence_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Confidence Level"
+    },
+    "economic_floor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Economic Floor"
+    },
+    "final_holdout_opened": {
+      "const": false,
+      "default": false,
+      "title": "Final Holdout Opened",
+      "type": "boolean"
+    },
+    "horizon": {
+      "$ref": "#/$defs/CouncilHorizon"
+    },
+    "maximum_contradiction_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Contradiction Probability"
+    },
+    "maximum_forecast_range": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Forecast Range"
+    },
+    "maximum_manipulation_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Manipulation Probability"
+    },
+    "maximum_market_reflection": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Market Reflection"
+    },
+    "maximum_ood_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Ood Score"
+    },
+    "minimum_cost_confidence": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Cost Confidence"
+    },
+    "minimum_data_quality": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Data Quality"
+    },
+    "minimum_event_increment_magnitude": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Minimum Event Increment Magnitude"
+    },
+    "minimum_net_edge_cost_ratio": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Minimum Net Edge Cost Ratio"
+    },
+    "minimum_novelty": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Novelty"
+    },
+    "minimum_probability_positive": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Probability Positive"
+    },
+    "minimum_truth_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Truth Probability"
+    },
+    "oos_evidence_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Oos Evidence Sha256"
+    },
+    "policy_sha256": {
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "sleeve_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Sleeve Id",
+      "type": "string"
+    },
+    "threshold_source": {
+      "$ref": "#/$defs/NetEdgeThresholdSource"
+    },
+    "version": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "asset_id",
+    "horizon",
+    "sleeve_id",
+    "threshold_source",
+    "minimum_probability_positive",
+    "confidence_level",
+    "economic_floor",
+    "minimum_net_edge_cost_ratio",
+    "minimum_truth_probability",
+    "maximum_contradiction_probability",
+    "maximum_manipulation_probability",
+    "minimum_novelty",
+    "maximum_market_reflection",
+    "maximum_forecast_range",
+    "maximum_ood_score",
+    "minimum_data_quality",
+    "minimum_event_increment_magnitude",
+    "minimum_cost_confidence",
+    "policy_sha256"
+  ],
+  "title": "NetEdgePolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-net-edge-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

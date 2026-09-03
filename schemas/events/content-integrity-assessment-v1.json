@@ -1,0 +1,103 @@
+{
+  "$defs": {
+    "ContentIntegrityState": {
+      "enum": [
+        "VERIFIED_TRUSTED",
+        "VERIFIED_UNTRUSTED",
+        "INVALID",
+        "NO_CREDENTIALS",
+        "UNSUPPORTED",
+        "ERROR"
+      ],
+      "title": "ContentIntegrityState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.content-integrity-assessment/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assessed_at": {
+      "format": "date-time",
+      "title": "Assessed At",
+      "type": "string"
+    },
+    "assessment_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Assessment Id",
+      "type": "string"
+    },
+    "asset_sha256": {
+      "title": "Asset Sha256",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "c2pa_verification_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "C2Pa Verification Id",
+      "type": "string"
+    },
+    "credentials_present": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Credentials Present"
+    },
+    "implies_claim_truth": {
+      "const": false,
+      "default": false,
+      "title": "Implies Claim Truth",
+      "type": "boolean"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "state": {
+      "$ref": "#/$defs/ContentIntegrityState"
+    },
+    "tamper_detected": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Tamper Detected"
+    }
+  },
+  "required": [
+    "assessment_id",
+    "asset_sha256",
+    "c2pa_verification_id",
+    "state",
+    "credentials_present",
+    "tamper_detected",
+    "reason_codes",
+    "assessed_at",
+    "available_at"
+  ],
+  "title": "ContentIntegrityAssessment",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.content-integrity-assessment",
+  "x-aegisquant-schema-version": "1.0.0"
+}

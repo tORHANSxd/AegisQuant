@@ -27,7 +27,7 @@ from aegisquant.domain.identifiers import (
     SourceDocumentId,
     SourcePolicyId,
 )
-from aegisquant.domain.intelligence import EventCluster, EventClusterStatus
+from aegisquant.domain.intelligence import EventCluster, EventClusterStatus, ForecastHorizon
 from aegisquant.domain.policy import (
     AccessMethod,
     CloudInferenceMode,
@@ -115,6 +115,13 @@ RUNTIME: Final = ROOT / ".runtime/p08"
 NOW: Final = datetime(2026, 9, 1, 14, 5, tzinfo=UTC)
 EVENT_TIME: Final = datetime(2024, 1, 31, 19, 0, tzinfo=UTC)
 SEED: Final = 7
+LEGACY_FIXTURE_HORIZON_COEFFICIENTS: Final = {
+    ForecastHorizon.FIVE_MINUTES: Decimal("0.0002"),
+    ForecastHorizon.THIRTY_MINUTES: Decimal("0.0005"),
+    ForecastHorizon.FOUR_HOURS: Decimal("0.0010"),
+    ForecastHorizon.ONE_DAY: Decimal("0.0015"),
+    ForecastHorizon.SEVEN_DAYS: Decimal("0.0020"),
+}
 EXPECTED_FILES: Final = (
     "P08_HYPOTHESIS_EVIDENCE.json",
     "P08_RESOURCE_EVIDENCE.json",
@@ -789,12 +796,16 @@ def _intelligence_payloads() -> tuple[
     }
     nodes = (
         EvidenceGraphNode(
-            node_id="fomc-official", node_type=GraphNodeType.EVIDENCE, available_at_utc=EVENT_TIME
+            node_id="fomc-official",
+            node_type=GraphNodeType.EVIDENCE,
+            available_at_utc=EVENT_TIME,
+            independence_group="official-fomc",
         ),
         EvidenceGraphNode(
             node_id="btc-market",
             node_type=GraphNodeType.EVIDENCE,
             available_at_utc=EVENT_TIME - timedelta(milliseconds=1),
+            independence_group="btc-market",
         ),
         *tuple(
             EvidenceGraphNode(
@@ -819,6 +830,7 @@ def _intelligence_payloads() -> tuple[
             source_node_id=evidence_id,
             target_node_id=claim.claim_id,
             edge_type=GraphEdgeType.SUPPORTS,
+            available_at_utc=EVENT_TIME,
         )
         for finding in findings
         for claim in finding.claims
@@ -848,6 +860,7 @@ def _intelligence_payloads() -> tuple[
         uncertainty=Decimal("0.2"),
     )
     impact = build_event_impact_forecast(
+        horizon_coefficients=LEGACY_FIXTURE_HORIZON_COEFFICIENTS,
         cluster=cluster,
         committee=committee,
         as_of_time=EVENT_TIME,

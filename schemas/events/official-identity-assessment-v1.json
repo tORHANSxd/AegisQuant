@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "IdentityFactor": {
+      "enum": [
+        "DOMAIN",
+        "SOCIAL_ACCOUNT",
+        "API_ENDPOINT",
+        "DETACHED_SIGNATURE"
+      ],
+      "title": "IdentityFactor",
+      "type": "string"
+    },
+    "OfficialIdentityState": {
+      "enum": [
+        "AUTHENTIC",
+        "REJECTED",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "title": "OfficialIdentityState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.official-identity-assessment/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assessment_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Assessment Id",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "matched_factors": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/IdentityFactor"
+      },
+      "title": "Matched Factors",
+      "type": "array"
+    },
+    "mismatched_factors": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/IdentityFactor"
+      },
+      "title": "Mismatched Factors",
+      "type": "array"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "registry_entry_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Registry Entry Id",
+      "type": "string"
+    },
+    "source_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_identity_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Identity Id",
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/OfficialIdentityState"
+    },
+    "tier_is_prior_only": {
+      "const": true,
+      "default": true,
+      "title": "Tier Is Prior Only",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "assessment_id",
+    "source_id",
+    "source_identity_id",
+    "registry_entry_id",
+    "state",
+    "reason_codes",
+    "observed_at",
+    "available_at"
+  ],
+  "title": "OfficialIdentityAssessment",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.official-identity-assessment",
+  "x-aegisquant-schema-version": "1.0.0"
+}

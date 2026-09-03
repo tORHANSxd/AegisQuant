@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "EventAblationArm": {
+      "enum": [
+        "MARKET_ONLY",
+        "EVENT_ONLY",
+        "MARKET_EVENT",
+        "RISK_ONLY",
+        "TRUTH_PERMUTED",
+        "EVENT_PERMUTED",
+        "TEXT_PERMUTED",
+        "TIMESTAMP_PLACEBO",
+        "ASSET_PLACEBO"
+      ],
+      "title": "EventAblationArm",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-event-ablation-spec/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "evaluation_cutoff": {
+      "format": "date-time",
+      "title": "Evaluation Cutoff",
+      "type": "string"
+    },
+    "expected_fold_count": {
+      "minimum": 2,
+      "title": "Expected Fold Count",
+      "type": "integer"
+    },
+    "final_holdout_opened": {
+      "const": false,
+      "default": false,
+      "title": "Final Holdout Opened",
+      "type": "boolean"
+    },
+    "fixed_horizon_scale_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Fixed Horizon Scale Allowed",
+      "type": "boolean"
+    },
+    "minimum_market_event_loss_improvement": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Minimum Market Event Loss Improvement"
+    },
+    "minimum_permutation_loss_degradation": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Minimum Permutation Loss Degradation"
+    },
+    "required_arms": {
+      "default": [
+        "MARKET_ONLY",
+        "EVENT_ONLY",
+        "MARKET_EVENT",
+        "RISK_ONLY",
+        "TRUTH_PERMUTED",
+        "EVENT_PERMUTED",
+        "TEXT_PERMUTED",
+        "TIMESTAMP_PLACEBO",
+        "ASSET_PLACEBO"
+      ],
+      "items": {
+        "$ref": "#/$defs/EventAblationArm"
+      },
+      "title": "Required Arms",
+      "type": "array"
+    }
+  },
+  "required": [
+    "expected_fold_count",
+    "minimum_market_event_loss_improvement",
+    "minimum_permutation_loss_degradation",
+    "evaluation_cutoff"
+  ],
+  "title": "EventAblationSpec",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-event-ablation-spec",
+  "x-aegisquant-schema-version": "1.0.0"
+}

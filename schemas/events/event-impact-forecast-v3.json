@@ -1,0 +1,379 @@
+{
+  "$defs": {
+    "ForecastDistribution": {
+      "additionalProperties": false,
+      "properties": {
+        "mean": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean"
+        },
+        "q05": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q05"
+        },
+        "q50": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q50"
+        },
+        "q95": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q95"
+        },
+        "std": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Std"
+        }
+      },
+      "required": [
+        "mean",
+        "std",
+        "q05",
+        "q50",
+        "q95"
+      ],
+      "title": "ForecastDistribution",
+      "type": "object"
+    },
+    "ForecastHorizon": {
+      "enum": [
+        "5m",
+        "30m",
+        "1h",
+        "4h",
+        "1d",
+        "7d"
+      ],
+      "title": "ForecastHorizon",
+      "type": "string"
+    },
+    "HorizonImpact": {
+      "additionalProperties": false,
+      "properties": {
+        "liquidity_delta": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Liquidity Delta"
+        },
+        "return_distribution": {
+          "$ref": "#/$defs/ForecastDistribution"
+        },
+        "tail_risk_delta": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Tail Risk Delta"
+        },
+        "volatility_delta": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Volatility Delta"
+        }
+      },
+      "required": [
+        "return_distribution",
+        "volatility_delta",
+        "liquidity_delta",
+        "tail_risk_delta"
+      ],
+      "title": "HorizonImpact",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.event-impact-forecast/3.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "abstain_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Abstain Reasons",
+      "type": "array"
+    },
+    "action": {
+      "default": "RESEARCH_PROPOSAL_ONLY",
+      "title": "Action",
+      "type": "string"
+    },
+    "affected_exposure_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Exposure Ids",
+      "type": "array"
+    },
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "corroboration_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Corroboration Score"
+    },
+    "directional_candidate_allowed": {
+      "title": "Directional Candidate Allowed",
+      "type": "boolean"
+    },
+    "directional_gate_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Directional Gate Id"
+    },
+    "event_cluster_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Cluster Id",
+      "type": "string"
+    },
+    "event_revision_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Event Revision Id"
+    },
+    "evidence_ids": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "horizon_coefficients_sha256": {
+      "title": "Horizon Coefficients Sha256",
+      "type": "string"
+    },
+    "horizons": {
+      "additionalProperties": {
+        "$ref": "#/$defs/HorizonImpact"
+      },
+      "propertyNames": {
+        "$ref": "#/$defs/ForecastHorizon"
+      },
+      "title": "Horizons",
+      "type": "object"
+    },
+    "impact_forecast_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Impact Forecast Id",
+      "type": "string"
+    },
+    "manipulation_risk": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Manipulation Risk"
+    },
+    "market_already_moved_score": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Market Already Moved Score"
+    },
+    "model_disagreement": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Model Disagreement"
+    },
+    "model_versions": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "title": "Model Versions",
+      "type": "array"
+    },
+    "novelty_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Novelty Score"
+    },
+    "should_abstain": {
+      "title": "Should Abstain",
+      "type": "boolean"
+    },
+    "source_quality_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Source Quality Score"
+    },
+    "transmission_channels": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Transmission Channels",
+      "type": "array"
+    }
+  },
+  "required": [
+    "impact_forecast_id",
+    "event_cluster_id",
+    "as_of_time",
+    "affected_exposure_ids",
+    "horizons",
+    "horizon_coefficients_sha256",
+    "transmission_channels",
+    "market_already_moved_score",
+    "corroboration_score",
+    "source_quality_score",
+    "novelty_score",
+    "manipulation_risk",
+    "model_disagreement",
+    "evidence_ids",
+    "model_versions",
+    "directional_candidate_allowed",
+    "should_abstain",
+    "abstain_reasons"
+  ],
+  "title": "EventImpactForecast",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.event-impact-forecast",
+  "x-aegisquant-schema-version": "3.0.0"
+}

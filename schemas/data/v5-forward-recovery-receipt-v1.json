@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "ForwardMode": {
+      "enum": [
+        "PAPER",
+        "SHADOW"
+      ],
+      "title": "ForwardMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-forward-recovery-receipt/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checkpoint_recorded_at": {
+      "format": "date-time",
+      "title": "Checkpoint Recorded At",
+      "type": "string"
+    },
+    "checkpoint_sha256": {
+      "title": "Checkpoint Sha256",
+      "type": "string"
+    },
+    "duplicate_count": {
+      "minimum": 0,
+      "title": "Duplicate Count",
+      "type": "integer"
+    },
+    "gap_count": {
+      "minimum": 0,
+      "title": "Gap Count",
+      "type": "integer"
+    },
+    "incident_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Incident Id",
+      "type": "string"
+    },
+    "last_durable_sequence": {
+      "minimum": 0,
+      "title": "Last Durable Sequence",
+      "type": "integer"
+    },
+    "mode": {
+      "$ref": "#/$defs/ForwardMode"
+    },
+    "planned_drill": {
+      "title": "Planned Drill",
+      "type": "boolean"
+    },
+    "pre_restart_chain_head_sha256": {
+      "title": "Pre Restart Chain Head Sha256",
+      "type": "string"
+    },
+    "receipt_sha256": {
+      "title": "Receipt Sha256",
+      "type": "string"
+    },
+    "restored_chain_head_sha256": {
+      "title": "Restored Chain Head Sha256",
+      "type": "string"
+    },
+    "restored_without_loss": {
+      "title": "Restored Without Loss",
+      "type": "boolean"
+    },
+    "resumed_at": {
+      "format": "date-time",
+      "title": "Resumed At",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "mode",
+    "incident_id",
+    "checkpoint_sha256",
+    "pre_restart_chain_head_sha256",
+    "restored_chain_head_sha256",
+    "checkpoint_recorded_at",
+    "resumed_at",
+    "last_durable_sequence",
+    "gap_count",
+    "duplicate_count",
+    "restored_without_loss",
+    "planned_drill",
+    "receipt_sha256"
+  ],
+  "title": "ForwardRecoveryReceipt",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-forward-recovery-receipt",
+  "x-aegisquant-schema-version": "1.0.0"
+}

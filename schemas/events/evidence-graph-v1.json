@@ -1,0 +1,242 @@
+{
+  "$defs": {
+    "EvidenceGraphEdge": {
+      "additionalProperties": false,
+      "properties": {
+        "available_at_utc": {
+          "format": "date-time",
+          "title": "Available At Utc",
+          "type": "string"
+        },
+        "edge_type": {
+          "$ref": "#/$defs/GraphEdgeType"
+        },
+        "source_node_id": {
+          "minLength": 1,
+          "title": "Source Node Id",
+          "type": "string"
+        },
+        "target_node_id": {
+          "minLength": 1,
+          "title": "Target Node Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_node_id",
+        "target_node_id",
+        "edge_type",
+        "available_at_utc"
+      ],
+      "title": "EvidenceGraphEdge",
+      "type": "object"
+    },
+    "EvidenceGraphNode": {
+      "additionalProperties": false,
+      "properties": {
+        "available_at_utc": {
+          "format": "date-time",
+          "title": "Available At Utc",
+          "type": "string"
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "independence_group": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Independence Group"
+        },
+        "node_id": {
+          "minLength": 1,
+          "title": "Node Id",
+          "type": "string"
+        },
+        "node_type": {
+          "$ref": "#/$defs/GraphNodeType"
+        },
+        "origin_fingerprint_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Origin Fingerprint Sha256"
+        },
+        "revision_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revision Id"
+        },
+        "source_identity_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Identity Id"
+        }
+      },
+      "required": [
+        "node_id",
+        "node_type",
+        "available_at_utc"
+      ],
+      "title": "EvidenceGraphNode",
+      "type": "object"
+    },
+    "GraphEdgeType": {
+      "enum": [
+        "SUPPORTS",
+        "REFUTES",
+        "MENTIONS",
+        "CLUSTERS_IN",
+        "PUBLISHED_BY",
+        "QUOTES",
+        "COPIES",
+        "CITES",
+        "DERIVED_FROM",
+        "REPOSTS",
+        "SAME_ORIGIN",
+        "CONTRADICTS",
+        "REVISES",
+        "DELETES"
+      ],
+      "title": "GraphEdgeType",
+      "type": "string"
+    },
+    "GraphNodeType": {
+      "enum": [
+        "EVIDENCE",
+        "CLAIM",
+        "EVENT",
+        "ENTITY",
+        "SOURCE",
+        "DOCUMENT",
+        "AUTHOR",
+        "ACCOUNT",
+        "ORGANIZATION",
+        "QUOTE",
+        "ATTACHMENT",
+        "MEDIA_ASSET"
+      ],
+      "title": "GraphNodeType",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.evidence-graph/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "conflicting_claim_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Conflicting Claim Ids",
+      "type": "array"
+    },
+    "edges": {
+      "items": {
+        "$ref": "#/$defs/EvidenceGraphEdge"
+      },
+      "title": "Edges",
+      "type": "array"
+    },
+    "evidence_coverage": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Evidence Coverage"
+    },
+    "evidence_dependency_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Evidence Dependency Score"
+    },
+    "independent_evidence_count": {
+      "minimum": 0,
+      "title": "Independent Evidence Count",
+      "type": "integer"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/EvidenceGraphNode"
+      },
+      "minItems": 1,
+      "title": "Nodes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "as_of_time",
+    "nodes",
+    "edges",
+    "evidence_coverage",
+    "independent_evidence_count",
+    "evidence_dependency_score",
+    "conflicting_claim_ids"
+  ],
+  "title": "EvidenceGraph",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.evidence-graph",
+  "x-aegisquant-schema-version": "1.0.0"
+}

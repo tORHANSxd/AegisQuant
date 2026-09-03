@@ -17,7 +17,12 @@ import polars as pl
 from aegisquant.data.hashing import canonical_sha256
 from aegisquant.data.provider_registry import ProviderRegistry, SourcePolicyRegistry
 from aegisquant.domain.identifiers import ProviderId, SourcePolicyId
-from aegisquant.domain.intelligence import EventClusterStatus, NarrativeState, RightsState
+from aegisquant.domain.intelligence import (
+    EventClusterStatus,
+    ForecastHorizon,
+    NarrativeState,
+    RightsState,
+)
 from aegisquant.intelligence.committee import EvidenceClaim, ExpertFinding, ExpertRole
 from aegisquant.intelligence.world.events import (
     CommitteePath,
@@ -93,6 +98,13 @@ DATA: Final = ROOT / "reports/data"
 INTELLIGENCE: Final = ROOT / "reports/intelligence"
 READ_MODELS: Final = INTELLIGENCE / "read_models"
 OBSERVED_AT: Final = datetime(2026, 9, 1, 18, tzinfo=UTC)
+LEGACY_FIXTURE_HORIZON_COEFFICIENTS: Final = {
+    ForecastHorizon.FIVE_MINUTES: Decimal("0.0002"),
+    ForecastHorizon.THIRTY_MINUTES: Decimal("0.0005"),
+    ForecastHorizon.FOUR_HOURS: Decimal("0.0010"),
+    ForecastHorizon.ONE_DAY: Decimal("0.0015"),
+    ForecastHorizon.SEVEN_DAYS: Decimal("0.0020"),
+}
 JSON_OUTPUTS: Final = (
     "P10_SOURCE_CONTRACT_EVIDENCE.json",
     "P10_SOCIAL_SOURCE_EVIDENCE.json",
@@ -472,6 +484,7 @@ def _build_fusion_and_ablation() -> tuple[dict[str, object], dict[str, object]]:
         for asset_id in ("BTC", "ETH")
     )
     impacts = fuse_event_market_impact(
+        horizon_coefficients=LEGACY_FIXTURE_HORIZON_COEFFICIENTS,
         event_cluster_id="event-cluster-1",
         event_directional_score=Decimal("0.4"),
         event_confidence=Decimal("0.8"),

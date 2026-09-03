@@ -1,0 +1,317 @@
+{
+  "$defs": {
+    "ClaimType": {
+      "description": "Semantic class assigned before truth adjudication.",
+      "enum": [
+        "FACT",
+        "FORWARD_FACT",
+        "INTERPRETATION",
+        "OPINION",
+        "PREDICTION",
+        "QUOTE",
+        "RUMOR"
+      ],
+      "title": "ClaimType",
+      "type": "string"
+    },
+    "TruthCalibrationKey": {
+      "additionalProperties": false,
+      "description": "The mandatory source/event/language/claim calibration stratum.",
+      "properties": {
+        "claim_type": {
+          "$ref": "#/$defs/ClaimType"
+        },
+        "event_type": {
+          "minLength": 1,
+          "title": "Event Type",
+          "type": "string"
+        },
+        "language": {
+          "maxLength": 35,
+          "minLength": 2,
+          "title": "Language",
+          "type": "string"
+        },
+        "source_class": {
+          "minLength": 1,
+          "title": "Source Class",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_class",
+        "event_type",
+        "language",
+        "claim_type"
+      ],
+      "title": "TruthCalibrationKey",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.evidence-feature-vector/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One PIT feature row; LLM confidence is retained for audit, not model input.",
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "calibration_key": {
+      "$ref": "#/$defs/TruthCalibrationKey"
+    },
+    "claim_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "contradiction_count": {
+      "minimum": 0,
+      "title": "Contradiction Count",
+      "type": "integer"
+    },
+    "dependency_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Dependency Score"
+    },
+    "entity_consistency": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Entity Consistency"
+    },
+    "evidence_graph_sha256": {
+      "title": "Evidence Graph Sha256",
+      "type": "string"
+    },
+    "extracted_at": {
+      "format": "date-time",
+      "title": "Extracted At",
+      "type": "string"
+    },
+    "feature_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Feature Id",
+      "type": "string"
+    },
+    "feature_version": {
+      "minLength": 1,
+      "title": "Feature Version",
+      "type": "string"
+    },
+    "independent_source_count": {
+      "minimum": 0,
+      "title": "Independent Source Count",
+      "type": "integer"
+    },
+    "input_snapshot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Input Snapshot Id",
+      "type": "string"
+    },
+    "input_snapshot_sha256": {
+      "title": "Input Snapshot Sha256",
+      "type": "string"
+    },
+    "language_translation_confidence": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Language Translation Confidence"
+    },
+    "llm_confidence_audit_only": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Llm Confidence Audit Only"
+    },
+    "manipulation_signals": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Manipulation Signals"
+    },
+    "media_provenance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Media Provenance"
+    },
+    "official_denial_present": {
+      "title": "Official Denial Present",
+      "type": "boolean"
+    },
+    "official_signature_valid": {
+      "title": "Official Signature Valid",
+      "type": "boolean"
+    },
+    "primary_source_present": {
+      "title": "Primary Source Present",
+      "type": "boolean"
+    },
+    "quote_consistency": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Quote Consistency"
+    },
+    "retraction_history": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Retraction History"
+    },
+    "revision_count": {
+      "minimum": 1,
+      "title": "Revision Count",
+      "type": "integer"
+    },
+    "source_reliability_prior": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Source Reliability Prior"
+    },
+    "source_revision_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Revision Id",
+      "type": "string"
+    },
+    "temporal_consistency": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Temporal Consistency"
+    }
+  },
+  "required": [
+    "feature_id",
+    "claim_id",
+    "source_revision_id",
+    "input_snapshot_id",
+    "input_snapshot_sha256",
+    "calibration_key",
+    "primary_source_present",
+    "official_signature_valid",
+    "source_reliability_prior",
+    "independent_source_count",
+    "dependency_score",
+    "contradiction_count",
+    "official_denial_present",
+    "temporal_consistency",
+    "entity_consistency",
+    "quote_consistency",
+    "media_provenance",
+    "revision_count",
+    "retraction_history",
+    "language_translation_confidence",
+    "manipulation_signals",
+    "evidence_graph_sha256",
+    "feature_version",
+    "extracted_at",
+    "available_at"
+  ],
+  "title": "EvidenceFeatureVector",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.evidence-feature-vector",
+  "x-aegisquant-schema-version": "1.0.0"
+}

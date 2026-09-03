@@ -321,7 +321,7 @@ def _browser_payload() -> dict[str, object]:
 
 def _usability_payload() -> dict[str, object]:
     workspace = _source("apps/web/src/components/workspace-page.tsx")
-    required_labels = ("账户权益", "当日净损益", "风险状态", "对账状态")
+    required_labels = ("Fixture 权益", "Fixture 净损益", "风险状态", "对账状态")
     return {
         "schema_version": "p15-usability-evidence-v1",
         "five_second_core_labels": list(required_labels),
@@ -331,6 +331,8 @@ def _usability_payload() -> dict[str, object]:
         "pnl_as_of_present": "as_of_time" in workspace,
         "timezone_options": ["Asia/Shanghai", "UTC"],
         "historical_state_disclosure": "历史开发" in workspace,
+        "evidence_tier_disclosure": "证据等级" in workspace,
+        "alpha_promotion_disclosure": "alpha_promotion_eligible" in workspace,
         "non_advice_disclosure": "不构成买卖建议" in workspace,
         "formal_acceptance_performed": False,
         "test": "apps/web/e2e/dashboard.spec.ts",
@@ -430,7 +432,9 @@ def _validate(payloads: dict[str, object]) -> None:
         "usability": usability["all_core_labels_present"] is True
         and usability["pnl_formula_present"] is True
         and usability["pnl_source_present"] is True
-        and usability["pnl_as_of_present"] is True,
+        and usability["pnl_as_of_present"] is True
+        and usability["evidence_tier_disclosure"] is True
+        and usability["alpha_promotion_disclosure"] is True,
         "security": security["live_trading_locked"] is True
         and security["viewer_read_only"] is True
         and security["unsafe_control_matches"] == []

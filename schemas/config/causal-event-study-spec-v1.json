@@ -1,0 +1,18 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.causal-event-study-spec/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "spec_id": {
+      "title": "Spec Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "spec_id"
+  ],
+  "title": "EventStudySpec",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.causal-event-study-spec",
+  "x-aegisquant-schema-version": "1.0.0"
+}

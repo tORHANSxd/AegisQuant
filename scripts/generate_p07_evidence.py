@@ -183,7 +183,10 @@ def _event_vector() -> FeatureVector:
         first_observed_time=NOW,
         last_updated_time=NOW + timedelta(seconds=20),
         claim_ids=(claim.claim_id,),
-        supporting_evidence_ids=(SourceDocumentId("p07-doc-1"),),
+        supporting_evidence_ids=(
+            SourceDocumentId("p07-doc-1"),
+            SourceDocumentId("p07-official-1"),
+        ),
         contradicting_evidence_ids=(),
         independent_source_count=2,
         official_confirmation_ids=(SourceDocumentId("p07-official-1"),),

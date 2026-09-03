@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "SurpriseDirection": {
+      "enum": [
+        "MORE_POSITIVE_THAN_EXPECTED",
+        "AS_EXPECTED",
+        "MORE_NEGATIVE_THAN_EXPECTED"
+      ],
+      "title": "SurpriseDirection",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.event-surprise/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actual_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Actual Value"
+    },
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "direction": {
+      "$ref": "#/$defs/SurpriseDirection"
+    },
+    "event_cluster_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Cluster Id",
+      "type": "string"
+    },
+    "expected_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Expected Value"
+    },
+    "materiality_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Materiality Threshold"
+    },
+    "surprise_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Surprise Id",
+      "type": "string"
+    },
+    "surprise_sha256": {
+      "title": "Surprise Sha256",
+      "type": "string"
+    },
+    "surprise_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Surprise Value"
+    },
+    "value_snapshot_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Value Snapshot Id",
+      "type": "string"
+    },
+    "value_snapshot_sha256": {
+      "title": "Value Snapshot Sha256",
+      "type": "string"
+    },
+    "value_unit": {
+      "minLength": 1,
+      "title": "Value Unit",
+      "type": "string"
+    },
+    "whisper_surprise_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Whisper Surprise Value"
+    },
+    "whisper_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Whisper Value"
+    }
+  },
+  "required": [
+    "surprise_id",
+    "event_cluster_id",
+    "value_snapshot_id",
+    "value_snapshot_sha256",
+    "as_of_time",
+    "actual_value",
+    "expected_value",
+    "surprise_value",
+    "materiality_threshold",
+    "value_unit",
+    "direction",
+    "surprise_sha256"
+  ],
+  "title": "EventSurprise",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.event-surprise",
+  "x-aegisquant-schema-version": "1.0.0"
+}

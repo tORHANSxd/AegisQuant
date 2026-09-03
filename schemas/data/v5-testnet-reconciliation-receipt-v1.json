@@ -1,0 +1,120 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-testnet-reconciliation-receipt/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_scope_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Account Scope Id",
+      "type": "string"
+    },
+    "authoritative_facts_mutated": {
+      "const": false,
+      "default": false,
+      "title": "Authoritative Facts Mutated",
+      "type": "boolean"
+    },
+    "balance_difference_count": {
+      "minimum": 0,
+      "title": "Balance Difference Count",
+      "type": "integer"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "internal_order_count": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Internal Order Count",
+      "type": "integer"
+    },
+    "ledger_fill_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Ledger Fill Count",
+      "type": "integer"
+    },
+    "read_model_fill_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Read Model Fill Count",
+      "type": "integer"
+    },
+    "receipt_sha256": {
+      "title": "Receipt Sha256",
+      "type": "string"
+    },
+    "reconciled": {
+      "title": "Reconciled",
+      "type": "boolean"
+    },
+    "run_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "sequence_gap_count": {
+      "minimum": 0,
+      "title": "Sequence Gap Count",
+      "type": "integer"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "unmatched_fill_count": {
+      "minimum": 0,
+      "title": "Unmatched Fill Count",
+      "type": "integer"
+    },
+    "unmatched_order_count": {
+      "minimum": 0,
+      "title": "Unmatched Order Count",
+      "type": "integer"
+    },
+    "unresolved_unknown_order_count": {
+      "minimum": 0,
+      "title": "Unresolved Unknown Order Count",
+      "type": "integer"
+    },
+    "venue_fill_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Venue Fill Count",
+      "type": "integer"
+    },
+    "venue_order_count": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Venue Order Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "run_id",
+    "account_scope_id",
+    "started_at",
+    "completed_at",
+    "venue_order_count",
+    "internal_order_count",
+    "venue_fill_count",
+    "ledger_fill_count",
+    "read_model_fill_count",
+    "unmatched_order_count",
+    "unmatched_fill_count",
+    "balance_difference_count",
+    "sequence_gap_count",
+    "unresolved_unknown_order_count",
+    "reconciled",
+    "receipt_sha256"
+  ],
+  "title": "TestnetReconciliationReceipt",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-testnet-reconciliation-receipt",
+  "x-aegisquant-schema-version": "1.0.0"
+}

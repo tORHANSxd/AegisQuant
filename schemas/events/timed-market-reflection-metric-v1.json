@@ -1,0 +1,90 @@
+{
+  "$defs": {
+    "MarketReflectionMetric": {
+      "enum": [
+        "PRE_CONFIRMATION_PRICE_MOVE",
+        "ABNORMAL_RETURN",
+        "VOLUME_SPIKE",
+        "OPEN_INTEREST_CHANGE",
+        "FUNDING_CHANGE",
+        "BASIS_CHANGE",
+        "OPTIONS_IV_SKEW",
+        "CROSS_ASSET_RESPONSE",
+        "NARRATIVE_DIFFUSION",
+        "LIQUIDATION_FLOW",
+        "MARKET_DEPTH_CHANGE"
+      ],
+      "title": "MarketReflectionMetric",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.timed-market-reflection-metric/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "event_cluster_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Cluster Id",
+      "type": "string"
+    },
+    "metric": {
+      "$ref": "#/$defs/MarketReflectionMetric"
+    },
+    "metric_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Metric Id",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "reflection_strength": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Reflection Strength"
+    },
+    "source_id": {
+      "minLength": 1,
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "metric_id",
+    "event_cluster_id",
+    "metric",
+    "reflection_strength",
+    "observed_at",
+    "available_at",
+    "source_id",
+    "source_sha256"
+  ],
+  "title": "TimedMarketReflectionMetric",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.timed-market-reflection-metric",
+  "x-aegisquant-schema-version": "1.0.0"
+}

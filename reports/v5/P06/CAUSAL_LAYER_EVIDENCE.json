@@ -1,0 +1,1459 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "V5-P06",
+  "evidence_tier": "DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "real_world_forecast_accuracy_claimed": false,
+  "causal_claim_allowed": false,
+  "live_trading_locked": true,
+  "order_submission_enabled": false,
+  "dataset": {
+    "dataset_id": "p06-event-response-development",
+    "dataset_sha256": "a9bf2bf7385272647cdb8a55c1110c92832800644037054467017308d3157e1f",
+    "row_count": 4,
+    "row_hashes": [
+      {
+        "row_sha256": "969684b98c05fe721dd21292e367c62d72ed431859475ed6c6a6470118ac01ad"
+      },
+      {
+        "row_sha256": "17e34c64049799b0a91c691745e644f9a302fb1d03d12da0e939c5bd831ffda2"
+      },
+      {
+        "row_sha256": "395456acd1108829c639783c74a4ced4d0d54bff9684411a9a8879d15284c30a"
+      },
+      {
+        "row_sha256": "5fecfa5e52aae131a25a587336c3f52fd317b15cc426250653cc87ad840f4497"
+      }
+    ],
+    "as_of_time": "2026-02-01T00:01:00Z",
+    "source_dataset_ids": [
+      "official-events",
+      "public-market"
+    ]
+  },
+  "matching": {
+    "treated_state_sha256": "31f107e35823d2d93f33b2491efb60ffcb2330540ac566e76bb6e6b65612aae2",
+    "matching_spec_sha256": "ec6078fc72c331de0555b65e7786ca4221aad4ee2c0061bddf7c032d178ed48c",
+    "candidate_count": 3,
+    "matched_controls": [
+      {
+        "state_id": "control-a",
+        "state_sha256": "59d75459f5087c2a04fef07194db670fd1d294d8a736bfc83a8e7b105c7a6e24",
+        "distance": "0",
+        "weight": "0.3333333333333333333333333333"
+      },
+      {
+        "state_id": "control-b",
+        "state_sha256": "fbd1cc1b9adc2bbe05a0b1cd8e11b7a63e230d9d95930083f663b423dde16aa2",
+        "distance": "1.22474487139159",
+        "weight": "0.3333333333333333333333333333"
+      },
+      {
+        "state_id": "control-c",
+        "state_sha256": "de19f1dafaf099eb2068dfade7e025f72f23aa2386112344416f675bd4e758b9",
+        "distance": "1.22474487139159",
+        "weight": "0.3333333333333333333333333334"
+      }
+    ],
+    "as_of_time": "2026-01-11T01:00:00Z"
+  },
+  "matched_event_study": {
+    "method": "MATCHED_EVENT_STUDY",
+    "estimand": "ATT",
+    "effect": "1.500000000000000000000000000",
+    "standard_error": null,
+    "confidence_lower": null,
+    "confidence_upper": null,
+    "treated_count": 1,
+    "control_count": 3,
+    "estimator_spec_sha256": "3cb090af2e3051ea02ec8bdaa80baa8d3a62182b6d7e392ddd83e81549929716"
+  },
+  "synthetic_control": {
+    "point_estimate": {
+      "method": "SYNTHETIC_CONTROL",
+      "estimand": "ATT",
+      "effect": "1.000000004450128",
+      "standard_error": null,
+      "confidence_lower": null,
+      "confidence_upper": null,
+      "treated_count": 1,
+      "control_count": 2,
+      "estimator_spec_sha256": "fcf9324d5ee3706654dc6756d4fab893af992391e7fa99aa03700e1f91f54a99"
+    },
+    "donor_weights": [
+      {
+        "state_id": "donor-a",
+        "state_sha256": "5c6df8b5528d91699b9919060639fdf4610f5eb54190445c61007ff2b63104ac",
+        "weight": "0.749999998887468"
+      },
+      {
+        "state_id": "donor-b",
+        "state_sha256": "42dc3af5e946ebc413d17ea6c8a1bcfb6ec65f520af8085a9897c1a570b5c50c",
+        "weight": "0.250000001112532"
+      }
+    ],
+    "counterfactual_outcome": "2.999999995549872",
+    "pre_treatment_fit": {
+      "treated_path": [
+        "1.5",
+        "2",
+        "2.5"
+      ],
+      "counterfactual_path": [
+        "1.500000002225064",
+        "2.000000000000000",
+        "2.499999997774936"
+      ],
+      "root_mean_squared_error": "1.816757148345369797295747231E-9",
+      "outcome_scale": "2.0",
+      "normalized_root_mean_squared_error": "9.083785741726848986478736155E-10",
+      "maximum_normalized_error": "0.25",
+      "passed": true
+    },
+    "converged": true,
+    "iterations": 110
+  },
+  "doubly_robust_aipw": {
+    "method": "DOUBLY_ROBUST_AIPW",
+    "estimand": "ATE",
+    "effect": "1",
+    "standard_error": "0",
+    "confidence_lower": "1.00000000000000",
+    "confidence_upper": "1.00000000000000",
+    "treated_count": 2,
+    "control_count": 2,
+    "estimator_spec_sha256": "50a9ad62e632cfd38eae7b15230bccd5c565349d3aea469aa4abc8decad9616a"
+  },
+  "diagnostic_policy": {
+    "policy_id": "v5-p06-development-v1",
+    "maximum_pre_treatment_nrmse": "0.25",
+    "maximum_pretrend_slope_gap": "0.05",
+    "maximum_absolute_smd": "0.25",
+    "propensity_lower_bound": "0.05",
+    "propensity_upper_bound": "0.95",
+    "maximum_placebo_p_value": "0.10",
+    "minimum_placebo_draws": 19,
+    "minimum_controls": 3,
+    "required_placebo_kinds": [
+      "EVENT_TIMESTAMP",
+      "ASSET",
+      "TREATMENT_PERMUTATION"
+    ]
+  },
+  "diagnostics": {
+    "policy": {
+      "policy_id": "v5-p06-development-v1",
+      "maximum_pre_treatment_nrmse": "0.25",
+      "maximum_pretrend_slope_gap": "0.05",
+      "maximum_absolute_smd": "0.25",
+      "propensity_lower_bound": "0.05",
+      "propensity_upper_bound": "0.95",
+      "maximum_placebo_p_value": "0.10",
+      "minimum_placebo_draws": 19,
+      "minimum_controls": 3,
+      "required_placebo_kinds": [
+        "EVENT_TIMESTAMP",
+        "ASSET",
+        "TREATMENT_PERMUTATION"
+      ]
+    },
+    "pre_treatment_fit": {
+      "treated_path": [
+        "0",
+        "0.1",
+        "0.2"
+      ],
+      "counterfactual_path": [
+        "0",
+        "0.1",
+        "0.2"
+      ],
+      "root_mean_squared_error": "0",
+      "outcome_scale": "0.1",
+      "normalized_root_mean_squared_error": "0E+1",
+      "maximum_normalized_error": "0.25",
+      "passed": true
+    },
+    "pretrend": {
+      "treated_path": [
+        "0",
+        "0.1",
+        "0.2"
+      ],
+      "counterfactual_path": [
+        "0",
+        "0.1",
+        "0.2"
+      ],
+      "treated_slope": "0.1",
+      "counterfactual_slope": "0.1",
+      "absolute_slope_gap": "0.0",
+      "maximum_absolute_slope_gap": "0.05",
+      "passed": true
+    },
+    "covariate_balance": {
+      "covariate_names": [
+        "pre_return",
+        "pre_vol"
+      ],
+      "treated_covariates": [
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "candidate_covariates": [
+        [
+          "-1",
+          "-1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ]
+      ],
+      "matched_covariates": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "before_standardized_mean_difference": [
+        "-0.7559289460184544544290330726",
+        "-0.7559289460184544544290330726"
+      ],
+      "after_standardized_mean_difference": [
+        "0E+12",
+        "0E+12"
+      ],
+      "maximum_absolute_after": "0E+12",
+      "maximum_allowed": "0.25",
+      "passed": true
+    },
+    "propensity_overlap": {
+      "propensity_scores": [
+        "0.4",
+        "0.45",
+        "0.55",
+        "0.6"
+      ],
+      "treatments": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "minimum_propensity": "0.4",
+      "maximum_propensity": "0.6",
+      "lower_bound": "0.05",
+      "upper_bound": "0.95",
+      "passed": true
+    },
+    "placebo_tests": [
+      {
+        "kind": "EVENT_TIMESTAMP",
+        "observed_effect": "1.500000000000000000000000000",
+        "placebo_effects": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "empirical_p_value": "0.05",
+        "maximum_p_value": "0.10",
+        "minimum_draws": 19,
+        "passed": true
+      },
+      {
+        "kind": "ASSET",
+        "observed_effect": "1.500000000000000000000000000",
+        "placebo_effects": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "empirical_p_value": "0.05",
+        "maximum_p_value": "0.10",
+        "minimum_draws": 19,
+        "passed": true
+      },
+      {
+        "kind": "TREATMENT_PERMUTATION",
+        "observed_effect": "1",
+        "placebo_effects": [
+          "-0.2",
+          "-0.2",
+          "0",
+          "0",
+          "0.4",
+          "-0.2",
+          "-0.2",
+          "-0.2",
+          "-0.2",
+          "0.2",
+          "0.2",
+          "-0.2",
+          "0",
+          "0",
+          "0.2",
+          "-0.2",
+          "-0.2",
+          "0.2",
+          "-0.2",
+          "0",
+          "0",
+          "0.2",
+          "0.2",
+          "0",
+          "0.6",
+          "0",
+          "-0.2",
+          "-0.2",
+          "0.2",
+          "0.2",
+          "0.2",
+          "0",
+          "0.4",
+          "0.2",
+          "-0.2",
+          "-0.2",
+          "-0.2",
+          "0",
+          "0.2",
+          "-0.2",
+          "0.2",
+          "0",
+          "0",
+          "0.4",
+          "0.2",
+          "-0.2",
+          "0",
+          "0.2",
+          "0.4",
+          "0",
+          "-0.2",
+          "0.2",
+          "0.2",
+          "0.4",
+          "0.4",
+          "-0.2",
+          "-0.2",
+          "-0.4",
+          "-0.2",
+          "-0.2",
+          "0.2",
+          "0.4",
+          "0.4",
+          "0",
+          "-0.4",
+          "0",
+          "-0.2",
+          "0.2",
+          "0.2",
+          "0.2",
+          "0.4",
+          "0",
+          "0",
+          "0.2",
+          "0.2",
+          "-0.2",
+          "0",
+          "-0.2",
+          "-0.2",
+          "0",
+          "0",
+          "-0.2",
+          "0",
+          "-0.2",
+          "0.2",
+          "0",
+          "0",
+          "0.2",
+          "-0.2",
+          "0",
+          "0",
+          "0.2",
+          "-0.2",
+          "0",
+          "0",
+          "0",
+          "-0.4",
+          "-0.4",
+          "-0.2"
+        ],
+        "empirical_p_value": "0.01",
+        "maximum_p_value": "0.10",
+        "minimum_draws": 19,
+        "passed": true
+      }
+    ],
+    "control_count": 3,
+    "minimum_controls": 3,
+    "required_placebo_kinds": [
+      "EVENT_TIMESTAMP",
+      "ASSET",
+      "TREATMENT_PERMUTATION"
+    ],
+    "unresolved_assumptions": [],
+    "passed": true,
+    "reason_codes": []
+  },
+  "causal_effect_gate": {
+    "estimate_id": "ae6f8460034c94f6d9a884f8b7aab76a134392f785f6a8797a948deae8d4dba6",
+    "estimate_sha256": "ae6f8460034c94f6d9a884f8b7aab76a134392f785f6a8797a948deae8d4dba6",
+    "event_id": "event:p06:0",
+    "asset": "asset:BTC",
+    "instrument_id": "BINANCE:SPOT:BTCUSDT",
+    "horizon_seconds": 14400,
+    "point_estimate": {
+      "method": "MATCHED_EVENT_STUDY",
+      "estimand": "ATT",
+      "effect": "1.500000000000000000000000000",
+      "standard_error": null,
+      "confidence_lower": null,
+      "confidence_upper": null,
+      "treated_count": 1,
+      "control_count": 3,
+      "estimator_spec_sha256": "3cb090af2e3051ea02ec8bdaa80baa8d3a62182b6d7e392ddd83e81549929716"
+    },
+    "input_dataset_sha256": "a9bf2bf7385272647cdb8a55c1110c92832800644037054467017308d3157e1f",
+    "diagnostics": {
+      "policy": {
+        "policy_id": "v5-p06-development-v1",
+        "maximum_pre_treatment_nrmse": "0.25",
+        "maximum_pretrend_slope_gap": "0.05",
+        "maximum_absolute_smd": "0.25",
+        "propensity_lower_bound": "0.05",
+        "propensity_upper_bound": "0.95",
+        "maximum_placebo_p_value": "0.10",
+        "minimum_placebo_draws": 19,
+        "minimum_controls": 3,
+        "required_placebo_kinds": [
+          "EVENT_TIMESTAMP",
+          "ASSET",
+          "TREATMENT_PERMUTATION"
+        ]
+      },
+      "pre_treatment_fit": {
+        "treated_path": [
+          "0",
+          "0.1",
+          "0.2"
+        ],
+        "counterfactual_path": [
+          "0",
+          "0.1",
+          "0.2"
+        ],
+        "root_mean_squared_error": "0",
+        "outcome_scale": "0.1",
+        "normalized_root_mean_squared_error": "0E+1",
+        "maximum_normalized_error": "0.25",
+        "passed": true
+      },
+      "pretrend": {
+        "treated_path": [
+          "0",
+          "0.1",
+          "0.2"
+        ],
+        "counterfactual_path": [
+          "0",
+          "0.1",
+          "0.2"
+        ],
+        "treated_slope": "0.1",
+        "counterfactual_slope": "0.1",
+        "absolute_slope_gap": "0.0",
+        "maximum_absolute_slope_gap": "0.05",
+        "passed": true
+      },
+      "covariate_balance": {
+        "covariate_names": [
+          "pre_return",
+          "pre_vol"
+        ],
+        "treated_covariates": [
+          [
+            "0",
+            "0"
+          ]
+        ],
+        "candidate_covariates": [
+          [
+            "-1",
+            "-1"
+          ],
+          [
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "2"
+          ]
+        ],
+        "matched_covariates": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ],
+        "before_standardized_mean_difference": [
+          "-0.7559289460184544544290330726",
+          "-0.7559289460184544544290330726"
+        ],
+        "after_standardized_mean_difference": [
+          "0E+12",
+          "0E+12"
+        ],
+        "maximum_absolute_after": "0E+12",
+        "maximum_allowed": "0.25",
+        "passed": true
+      },
+      "propensity_overlap": {
+        "propensity_scores": [
+          "0.4",
+          "0.45",
+          "0.55",
+          "0.6"
+        ],
+        "treatments": [
+          false,
+          false,
+          true,
+          true
+        ],
+        "minimum_propensity": "0.4",
+        "maximum_propensity": "0.6",
+        "lower_bound": "0.05",
+        "upper_bound": "0.95",
+        "passed": true
+      },
+      "placebo_tests": [
+        {
+          "kind": "EVENT_TIMESTAMP",
+          "observed_effect": "1.500000000000000000000000000",
+          "placebo_effects": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "empirical_p_value": "0.05",
+          "maximum_p_value": "0.10",
+          "minimum_draws": 19,
+          "passed": true
+        },
+        {
+          "kind": "ASSET",
+          "observed_effect": "1.500000000000000000000000000",
+          "placebo_effects": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "empirical_p_value": "0.05",
+          "maximum_p_value": "0.10",
+          "minimum_draws": 19,
+          "passed": true
+        },
+        {
+          "kind": "TREATMENT_PERMUTATION",
+          "observed_effect": "1",
+          "placebo_effects": [
+            "-0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0.4",
+            "-0.2",
+            "-0.2",
+            "-0.2",
+            "-0.2",
+            "0.2",
+            "0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0.2",
+            "-0.2",
+            "-0.2",
+            "0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0.2",
+            "0.2",
+            "0",
+            "0.6",
+            "0",
+            "-0.2",
+            "-0.2",
+            "0.2",
+            "0.2",
+            "0.2",
+            "0",
+            "0.4",
+            "0.2",
+            "-0.2",
+            "-0.2",
+            "-0.2",
+            "0",
+            "0.2",
+            "-0.2",
+            "0.2",
+            "0",
+            "0",
+            "0.4",
+            "0.2",
+            "-0.2",
+            "0",
+            "0.2",
+            "0.4",
+            "0",
+            "-0.2",
+            "0.2",
+            "0.2",
+            "0.4",
+            "0.4",
+            "-0.2",
+            "-0.2",
+            "-0.4",
+            "-0.2",
+            "-0.2",
+            "0.2",
+            "0.4",
+            "0.4",
+            "0",
+            "-0.4",
+            "0",
+            "-0.2",
+            "0.2",
+            "0.2",
+            "0.2",
+            "0.4",
+            "0",
+            "0",
+            "0.2",
+            "0.2",
+            "-0.2",
+            "0",
+            "-0.2",
+            "-0.2",
+            "0",
+            "0",
+            "-0.2",
+            "0",
+            "-0.2",
+            "0.2",
+            "0",
+            "0",
+            "0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0",
+            "-0.4",
+            "-0.4",
+            "-0.2"
+          ],
+          "empirical_p_value": "0.01",
+          "maximum_p_value": "0.10",
+          "minimum_draws": 19,
+          "passed": true
+        }
+      ],
+      "control_count": 3,
+      "minimum_controls": 3,
+      "required_placebo_kinds": [
+        "EVENT_TIMESTAMP",
+        "ASSET",
+        "TREATMENT_PERMUTATION"
+      ],
+      "unresolved_assumptions": [],
+      "passed": true,
+      "reason_codes": []
+    },
+    "evidence_tier": "DEVELOPMENT",
+    "identification_status": "DEVELOPMENT_ONLY",
+    "causal_claim_allowed": false,
+    "alpha_promotion_eligible": false,
+    "order_submission_enabled": false,
+    "live_trading_locked": true,
+    "reason_codes": [
+      "EVIDENCE_TIER_NOT_CAUSAL"
+    ],
+    "available_at": "2026-02-01T00:01:00Z"
+  },
+  "negative_control": {
+    "diagnostics": {
+      "policy": {
+        "policy_id": "v5-p06-development-v1",
+        "maximum_pre_treatment_nrmse": "0.25",
+        "maximum_pretrend_slope_gap": "0.05",
+        "maximum_absolute_smd": "0.25",
+        "propensity_lower_bound": "0.05",
+        "propensity_upper_bound": "0.95",
+        "maximum_placebo_p_value": "0.10",
+        "minimum_placebo_draws": 19,
+        "minimum_controls": 3,
+        "required_placebo_kinds": [
+          "EVENT_TIMESTAMP",
+          "ASSET",
+          "TREATMENT_PERMUTATION"
+        ]
+      },
+      "pre_treatment_fit": {
+        "treated_path": [
+          "0",
+          "0.1",
+          "0.2"
+        ],
+        "counterfactual_path": [
+          "0",
+          "0.1",
+          "0.2"
+        ],
+        "root_mean_squared_error": "0",
+        "outcome_scale": "0.1",
+        "normalized_root_mean_squared_error": "0E+1",
+        "maximum_normalized_error": "0.25",
+        "passed": true
+      },
+      "pretrend": {
+        "treated_path": [
+          "0",
+          "1",
+          "2"
+        ],
+        "counterfactual_path": [
+          "0",
+          "0",
+          "0"
+        ],
+        "treated_slope": "1",
+        "counterfactual_slope": "0",
+        "absolute_slope_gap": "1",
+        "maximum_absolute_slope_gap": "0.05",
+        "passed": false
+      },
+      "covariate_balance": {
+        "covariate_names": [
+          "pre_return",
+          "pre_vol"
+        ],
+        "treated_covariates": [
+          [
+            "0",
+            "0"
+          ]
+        ],
+        "candidate_covariates": [
+          [
+            "-1",
+            "-1"
+          ],
+          [
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "2"
+          ]
+        ],
+        "matched_covariates": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ],
+        "before_standardized_mean_difference": [
+          "-0.7559289460184544544290330726",
+          "-0.7559289460184544544290330726"
+        ],
+        "after_standardized_mean_difference": [
+          "0E+12",
+          "0E+12"
+        ],
+        "maximum_absolute_after": "0E+12",
+        "maximum_allowed": "0.25",
+        "passed": true
+      },
+      "propensity_overlap": {
+        "propensity_scores": [
+          "0.4",
+          "0.45",
+          "0.55",
+          "0.6"
+        ],
+        "treatments": [
+          false,
+          false,
+          true,
+          true
+        ],
+        "minimum_propensity": "0.4",
+        "maximum_propensity": "0.6",
+        "lower_bound": "0.05",
+        "upper_bound": "0.95",
+        "passed": true
+      },
+      "placebo_tests": [
+        {
+          "kind": "EVENT_TIMESTAMP",
+          "observed_effect": "1.500000000000000000000000000",
+          "placebo_effects": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "empirical_p_value": "0.05",
+          "maximum_p_value": "0.10",
+          "minimum_draws": 19,
+          "passed": true
+        },
+        {
+          "kind": "ASSET",
+          "observed_effect": "1.500000000000000000000000000",
+          "placebo_effects": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "empirical_p_value": "0.05",
+          "maximum_p_value": "0.10",
+          "minimum_draws": 19,
+          "passed": true
+        },
+        {
+          "kind": "TREATMENT_PERMUTATION",
+          "observed_effect": "1",
+          "placebo_effects": [
+            "-0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0.4",
+            "-0.2",
+            "-0.2",
+            "-0.2",
+            "-0.2",
+            "0.2",
+            "0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0.2",
+            "-0.2",
+            "-0.2",
+            "0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0.2",
+            "0.2",
+            "0",
+            "0.6",
+            "0",
+            "-0.2",
+            "-0.2",
+            "0.2",
+            "0.2",
+            "0.2",
+            "0",
+            "0.4",
+            "0.2",
+            "-0.2",
+            "-0.2",
+            "-0.2",
+            "0",
+            "0.2",
+            "-0.2",
+            "0.2",
+            "0",
+            "0",
+            "0.4",
+            "0.2",
+            "-0.2",
+            "0",
+            "0.2",
+            "0.4",
+            "0",
+            "-0.2",
+            "0.2",
+            "0.2",
+            "0.4",
+            "0.4",
+            "-0.2",
+            "-0.2",
+            "-0.4",
+            "-0.2",
+            "-0.2",
+            "0.2",
+            "0.4",
+            "0.4",
+            "0",
+            "-0.4",
+            "0",
+            "-0.2",
+            "0.2",
+            "0.2",
+            "0.2",
+            "0.4",
+            "0",
+            "0",
+            "0.2",
+            "0.2",
+            "-0.2",
+            "0",
+            "-0.2",
+            "-0.2",
+            "0",
+            "0",
+            "-0.2",
+            "0",
+            "-0.2",
+            "0.2",
+            "0",
+            "0",
+            "0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0.2",
+            "-0.2",
+            "0",
+            "0",
+            "0",
+            "-0.4",
+            "-0.4",
+            "-0.2"
+          ],
+          "empirical_p_value": "0.01",
+          "maximum_p_value": "0.10",
+          "minimum_draws": 19,
+          "passed": true
+        }
+      ],
+      "control_count": 3,
+      "minimum_controls": 3,
+      "required_placebo_kinds": [
+        "EVENT_TIMESTAMP",
+        "ASSET",
+        "TREATMENT_PERMUTATION"
+      ],
+      "unresolved_assumptions": [],
+      "passed": false,
+      "reason_codes": [
+        "PRE_TREND_FAILED"
+      ]
+    },
+    "effect_gate": {
+      "estimate_id": "97ce220f225f77ea07fee276bdbf2181abd065fbaa7f8df53907cfb2305be170",
+      "estimate_sha256": "97ce220f225f77ea07fee276bdbf2181abd065fbaa7f8df53907cfb2305be170",
+      "event_id": "event:p06:0",
+      "asset": "asset:BTC",
+      "instrument_id": "BINANCE:SPOT:BTCUSDT",
+      "horizon_seconds": 14400,
+      "point_estimate": {
+        "method": "MATCHED_EVENT_STUDY",
+        "estimand": "ATT",
+        "effect": "1.500000000000000000000000000",
+        "standard_error": null,
+        "confidence_lower": null,
+        "confidence_upper": null,
+        "treated_count": 1,
+        "control_count": 3,
+        "estimator_spec_sha256": "3cb090af2e3051ea02ec8bdaa80baa8d3a62182b6d7e392ddd83e81549929716"
+      },
+      "input_dataset_sha256": "a9bf2bf7385272647cdb8a55c1110c92832800644037054467017308d3157e1f",
+      "diagnostics": {
+        "policy": {
+          "policy_id": "v5-p06-development-v1",
+          "maximum_pre_treatment_nrmse": "0.25",
+          "maximum_pretrend_slope_gap": "0.05",
+          "maximum_absolute_smd": "0.25",
+          "propensity_lower_bound": "0.05",
+          "propensity_upper_bound": "0.95",
+          "maximum_placebo_p_value": "0.10",
+          "minimum_placebo_draws": 19,
+          "minimum_controls": 3,
+          "required_placebo_kinds": [
+            "EVENT_TIMESTAMP",
+            "ASSET",
+            "TREATMENT_PERMUTATION"
+          ]
+        },
+        "pre_treatment_fit": {
+          "treated_path": [
+            "0",
+            "0.1",
+            "0.2"
+          ],
+          "counterfactual_path": [
+            "0",
+            "0.1",
+            "0.2"
+          ],
+          "root_mean_squared_error": "0",
+          "outcome_scale": "0.1",
+          "normalized_root_mean_squared_error": "0E+1",
+          "maximum_normalized_error": "0.25",
+          "passed": true
+        },
+        "pretrend": {
+          "treated_path": [
+            "0",
+            "1",
+            "2"
+          ],
+          "counterfactual_path": [
+            "0",
+            "0",
+            "0"
+          ],
+          "treated_slope": "1",
+          "counterfactual_slope": "0",
+          "absolute_slope_gap": "1",
+          "maximum_absolute_slope_gap": "0.05",
+          "passed": false
+        },
+        "covariate_balance": {
+          "covariate_names": [
+            "pre_return",
+            "pre_vol"
+          ],
+          "treated_covariates": [
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "candidate_covariates": [
+            [
+              "-1",
+              "-1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "2",
+              "2"
+            ]
+          ],
+          "matched_covariates": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "before_standardized_mean_difference": [
+            "-0.7559289460184544544290330726",
+            "-0.7559289460184544544290330726"
+          ],
+          "after_standardized_mean_difference": [
+            "0E+12",
+            "0E+12"
+          ],
+          "maximum_absolute_after": "0E+12",
+          "maximum_allowed": "0.25",
+          "passed": true
+        },
+        "propensity_overlap": {
+          "propensity_scores": [
+            "0.4",
+            "0.45",
+            "0.55",
+            "0.6"
+          ],
+          "treatments": [
+            false,
+            false,
+            true,
+            true
+          ],
+          "minimum_propensity": "0.4",
+          "maximum_propensity": "0.6",
+          "lower_bound": "0.05",
+          "upper_bound": "0.95",
+          "passed": true
+        },
+        "placebo_tests": [
+          {
+            "kind": "EVENT_TIMESTAMP",
+            "observed_effect": "1.500000000000000000000000000",
+            "placebo_effects": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "empirical_p_value": "0.05",
+            "maximum_p_value": "0.10",
+            "minimum_draws": 19,
+            "passed": true
+          },
+          {
+            "kind": "ASSET",
+            "observed_effect": "1.500000000000000000000000000",
+            "placebo_effects": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "empirical_p_value": "0.05",
+            "maximum_p_value": "0.10",
+            "minimum_draws": 19,
+            "passed": true
+          },
+          {
+            "kind": "TREATMENT_PERMUTATION",
+            "observed_effect": "1",
+            "placebo_effects": [
+              "-0.2",
+              "-0.2",
+              "0",
+              "0",
+              "0.4",
+              "-0.2",
+              "-0.2",
+              "-0.2",
+              "-0.2",
+              "0.2",
+              "0.2",
+              "-0.2",
+              "0",
+              "0",
+              "0.2",
+              "-0.2",
+              "-0.2",
+              "0.2",
+              "-0.2",
+              "0",
+              "0",
+              "0.2",
+              "0.2",
+              "0",
+              "0.6",
+              "0",
+              "-0.2",
+              "-0.2",
+              "0.2",
+              "0.2",
+              "0.2",
+              "0",
+              "0.4",
+              "0.2",
+              "-0.2",
+              "-0.2",
+              "-0.2",
+              "0",
+              "0.2",
+              "-0.2",
+              "0.2",
+              "0",
+              "0",
+              "0.4",
+              "0.2",
+              "-0.2",
+              "0",
+              "0.2",
+              "0.4",
+              "0",
+              "-0.2",
+              "0.2",
+              "0.2",
+              "0.4",
+              "0.4",
+              "-0.2",
+              "-0.2",
+              "-0.4",
+              "-0.2",
+              "-0.2",
+              "0.2",
+              "0.4",
+              "0.4",
+              "0",
+              "-0.4",
+              "0",
+              "-0.2",
+              "0.2",
+              "0.2",
+              "0.2",
+              "0.4",
+              "0",
+              "0",
+              "0.2",
+              "0.2",
+              "-0.2",
+              "0",
+              "-0.2",
+              "-0.2",
+              "0",
+              "0",
+              "-0.2",
+              "0",
+              "-0.2",
+              "0.2",
+              "0",
+              "0",
+              "0.2",
+              "-0.2",
+              "0",
+              "0",
+              "0.2",
+              "-0.2",
+              "0",
+              "0",
+              "0",
+              "-0.4",
+              "-0.4",
+              "-0.2"
+            ],
+            "empirical_p_value": "0.01",
+            "maximum_p_value": "0.10",
+            "minimum_draws": 19,
+            "passed": true
+          }
+        ],
+        "control_count": 3,
+        "minimum_controls": 3,
+        "required_placebo_kinds": [
+          "EVENT_TIMESTAMP",
+          "ASSET",
+          "TREATMENT_PERMUTATION"
+        ],
+        "unresolved_assumptions": [],
+        "passed": false,
+        "reason_codes": [
+          "PRE_TREND_FAILED"
+        ]
+      },
+      "evidence_tier": "FINAL_HOLDOUT",
+      "identification_status": "INSUFFICIENT_IDENTIFICATION",
+      "causal_claim_allowed": false,
+      "alpha_promotion_eligible": false,
+      "order_submission_enabled": false,
+      "live_trading_locked": true,
+      "reason_codes": [
+        "CAUSAL_DIAGNOSTICS_FAILED"
+      ],
+      "available_at": "2026-02-01T00:01:00Z"
+    }
+  },
+  "claim_boundaries": {
+    "correlation": "DESCRIPTIVE_ONLY_NOT_CAUSAL",
+    "predictive_increment": "NOT_EVALUATED_IN_P06",
+    "causal_effect": "DEVELOPMENT_ONLY_NO_REAL_WORLD_CLAIM"
+  },
+  "checks": {
+    "event_response_dataset_is_pit_revision_aware_and_content_addressed": true,
+    "matched_controls_are_historical_deterministic_and_normalized": true,
+    "synthetic_control_converges_with_passing_pre_treatment_fit": true,
+    "aipw_uses_pit_nuisance_predictions": true,
+    "all_required_causal_diagnostics_pass": true,
+    "development_evidence_never_claims_causality": true,
+    "bad_pretrend_blocks_even_final_holdout_claim": true,
+    "all_outputs_remain_non_trading": true
+  },
+  "acceptance_traceability": {
+    "pre_treatment_fit_report": [
+      "tests/v5_p06/test_causal_estimators.py::test_synthetic_control_recovers_known_counterfactual",
+      "tests/v5_p06/test_causal_diagnostics.py::test_pre_treatment_metrics_cannot_be_detached_from_raw_paths"
+    ],
+    "event_timestamp_placebo": [
+      "tests/v5_p06/test_causal_diagnostics.py::test_all_required_diagnostics_pass_but_development_cannot_claim_causality"
+    ],
+    "asset_placebo": [
+      "tests/v5_p06/test_causal_diagnostics.py::test_missing_placebo_kind_is_rejected"
+    ],
+    "permutation_tests": [
+      "tests/v5_p06/test_causal_diagnostics.py::test_bad_pretrend_and_placebo_fail_closed"
+    ],
+    "causal_claim_only_when_diagnostics_pass": [
+      "tests/v5_p06/test_causal_diagnostics.py::test_unresolved_assumption_fails_diagnostics_and_causal_gate",
+      "tests/v5_p06/test_causal_diagnostics.py::test_causal_diagnostic_policy_cannot_be_relaxed_in_payload"
+    ],
+    "canonical_event_and_pit_binding": [
+      "tests/v5_p06/test_event_response_dataset.py::test_event_response_row_factory_binds_one_canonical_revision",
+      "tests/v5_p06/test_event_response_dataset.py::test_dataset_rejects_one_revision_id_bound_to_different_events"
+    ]
+  },
+  "limitations": [
+    "All estimates are deterministic DEVELOPMENT fixtures, not real public market evidence.",
+    "Matching, synthetic control, and AIPW identify effects only under untestable design assumptions.",
+    "A passing diagnostic bundle does not promote DEVELOPMENT evidence into a causal claim.",
+    "Predictive increment, economic value after costs, and real-world forecast accuracy remain untested.",
+    "No trading, order submission, account connection, or alpha promotion path is enabled."
+  ],
+  "result": "PASS"
+}

@@ -1,0 +1,654 @@
+{
+  "$defs": {
+    "EventResponseRow": {
+      "additionalProperties": false,
+      "description": "One revision-aware event anchor with covariates at t and outcomes after t.",
+      "properties": {
+        "actual": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Actual"
+        },
+        "asset": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset",
+          "type": "string"
+        },
+        "basis": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Basis"
+        },
+        "canonical_event_sha256": {
+          "title": "Canonical Event Sha256",
+          "type": "string"
+        },
+        "cross_asset_state": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Cross Asset State",
+          "type": "array"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "depth": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Depth"
+        },
+        "event_available_at": {
+          "format": "date-time",
+          "title": "Event Available At",
+          "type": "string"
+        },
+        "event_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_revision_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Revision Id",
+          "type": "string"
+        },
+        "event_type": {
+          "title": "Event Type",
+          "type": "string"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expected"
+        },
+        "feature_available_at": {
+          "format": "date-time",
+          "title": "Feature Available At",
+          "type": "string"
+        },
+        "feature_snapshot_sha256": {
+          "title": "Feature Snapshot Sha256",
+          "type": "string"
+        },
+        "funding": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Funding"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "label_end_time": {
+          "format": "date-time",
+          "title": "Label End Time",
+          "type": "string"
+        },
+        "label_sha256": {
+          "title": "Label Sha256",
+          "type": "string"
+        },
+        "label_start_time": {
+          "format": "date-time",
+          "title": "Label Start Time",
+          "type": "string"
+        },
+        "liquidations": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Liquidations"
+        },
+        "liquidity_delta": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Liquidity Delta"
+        },
+        "market_reflection_at_t": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Market Reflection At T"
+        },
+        "maximum_adverse_excursion": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Maximum Adverse Excursion"
+        },
+        "maximum_favorable_excursion": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Favorable Excursion"
+        },
+        "missing_feature_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Feature Codes",
+          "type": "array"
+        },
+        "narrative_state": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Narrative State",
+          "type": "array"
+        },
+        "novelty_at_t": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Novelty At T"
+        },
+        "open_interest": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Open Interest"
+        },
+        "outcome_available_at": {
+          "format": "date-time",
+          "title": "Outcome Available At",
+          "type": "string"
+        },
+        "pre_event_returns": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 3,
+          "title": "Pre Event Returns",
+          "type": "array"
+        },
+        "pre_event_vol": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Pre Event Vol"
+        },
+        "regime": {
+          "title": "Regime",
+          "type": "string"
+        },
+        "return_1d": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Return 1D"
+        },
+        "return_30m": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Return 30M"
+        },
+        "return_4h": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Return 4H"
+        },
+        "return_5m": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Return 5M"
+        },
+        "return_7d": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Return 7D"
+        },
+        "source_dataset_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Dataset Ids",
+          "type": "array"
+        },
+        "source_quality_at_t": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Source Quality At T"
+        },
+        "spread": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Spread"
+        },
+        "surprise": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Surprise"
+        },
+        "tail_event": {
+          "title": "Tail Event",
+          "type": "boolean"
+        },
+        "truth_probability_at_t": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Truth Probability At T"
+        },
+        "universe_snapshot_sha256": {
+          "title": "Universe Snapshot Sha256",
+          "type": "string"
+        },
+        "vol_delta": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Vol Delta"
+        }
+      },
+      "required": [
+        "event_id",
+        "event_revision_id",
+        "canonical_event_sha256",
+        "event_type",
+        "asset",
+        "instrument_id",
+        "decision_time",
+        "event_available_at",
+        "feature_available_at",
+        "label_start_time",
+        "label_end_time",
+        "outcome_available_at",
+        "truth_probability_at_t",
+        "source_quality_at_t",
+        "novelty_at_t",
+        "market_reflection_at_t",
+        "actual",
+        "expected",
+        "surprise",
+        "regime",
+        "pre_event_returns",
+        "pre_event_vol",
+        "spread",
+        "depth",
+        "funding",
+        "basis",
+        "open_interest",
+        "liquidations",
+        "cross_asset_state",
+        "narrative_state",
+        "return_5m",
+        "return_30m",
+        "return_4h",
+        "return_1d",
+        "return_7d",
+        "vol_delta",
+        "liquidity_delta",
+        "tail_event",
+        "maximum_favorable_excursion",
+        "maximum_adverse_excursion",
+        "source_dataset_ids",
+        "feature_snapshot_sha256",
+        "label_sha256",
+        "universe_snapshot_sha256"
+      ],
+      "title": "EventResponseRow",
+      "type": "object"
+    },
+    "EvidenceTier": {
+      "description": "Mutually exclusive evidence maturity levels from the v5 SSOT.",
+      "enum": [
+        "FIXTURE",
+        "SYNTHETIC",
+        "DEVELOPMENT",
+        "OOS_DEVELOPMENT",
+        "FINAL_HOLDOUT",
+        "PAPER_FORWARD",
+        "SHADOW_FORWARD",
+        "TESTNET_FORWARD",
+        "CANARY_LIVE",
+        "LIVE"
+      ],
+      "title": "EvidenceTier",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.event-response-dataset/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Content-addressed, revision-aware causal response dataset.",
+  "properties": {
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "cost_policy_sha256": {
+      "title": "Cost Policy Sha256",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "dataset_id": {
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dataset_sha256": {
+      "title": "Dataset Sha256",
+      "type": "string"
+    },
+    "evidence_tier": {
+      "$ref": "#/$defs/EvidenceTier"
+    },
+    "feature_definition_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Feature Definition Hashes",
+      "type": "array"
+    },
+    "feature_snapshot_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Feature Snapshot Hashes",
+      "type": "array"
+    },
+    "label_definition_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Label Definition Hashes",
+      "type": "array"
+    },
+    "label_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Label Hashes",
+      "type": "array"
+    },
+    "point_in_time": {
+      "const": true,
+      "default": true,
+      "title": "Point In Time",
+      "type": "boolean"
+    },
+    "revision_aware": {
+      "const": true,
+      "default": true,
+      "title": "Revision Aware",
+      "type": "boolean"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/EventResponseRow"
+      },
+      "minItems": 4,
+      "title": "Rows",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shuffle": {
+      "const": false,
+      "default": false,
+      "title": "Shuffle",
+      "type": "boolean"
+    },
+    "source_dataset_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Dataset Ids",
+      "type": "array"
+    },
+    "universe_snapshot_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Universe Snapshot Hashes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "dataset_sha256",
+    "evidence_tier",
+    "as_of_time",
+    "created_at",
+    "rows",
+    "source_dataset_ids",
+    "feature_snapshot_hashes",
+    "label_hashes",
+    "universe_snapshot_hashes",
+    "feature_definition_hashes",
+    "label_definition_hashes",
+    "cost_policy_sha256"
+  ],
+  "title": "EventResponseDataset",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.event-response-dataset",
+  "x-aegisquant-schema-version": "1.0.0"
+}

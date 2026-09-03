@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "EventValueKind": {
+      "enum": [
+        "ACTUAL",
+        "CONSENSUS",
+        "WHISPER",
+        "PRIOR_PROBABILITY"
+      ],
+      "title": "EventValueKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.timed-event-value/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "event_cluster_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Cluster Id",
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/EventValueKind"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "source_artifact_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Artifact Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "unit": {
+      "minLength": 1,
+      "title": "Unit",
+      "type": "string"
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Value"
+    },
+    "value_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Value Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "value_id",
+    "event_cluster_id",
+    "kind",
+    "value",
+    "unit",
+    "observed_at",
+    "available_at",
+    "source_artifact_id",
+    "source_sha256"
+  ],
+  "title": "TimedEventValue",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.timed-event-value",
+  "x-aegisquant-schema-version": "1.0.0"
+}

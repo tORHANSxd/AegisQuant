@@ -1,0 +1,309 @@
+{
+  "$defs": {
+    "ReliabilityBin": {
+      "additionalProperties": false,
+      "properties": {
+        "bin_index": {
+          "minimum": 0,
+          "title": "Bin Index",
+          "type": "integer"
+        },
+        "lower_bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Lower Bound"
+        },
+        "mean_probability": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean Probability"
+        },
+        "observed_frequency": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observed Frequency"
+        },
+        "sample_count": {
+          "minimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "upper_bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Upper Bound"
+        }
+      },
+      "required": [
+        "bin_index",
+        "lower_bound",
+        "upper_bound",
+        "sample_count",
+        "mean_probability",
+        "observed_frequency"
+      ],
+      "title": "ReliabilityBin",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.truth-calibration-metrics/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "brier_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Brier Score"
+    },
+    "calibration_intercept": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Calibration Intercept"
+    },
+    "calibration_slope": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Calibration Slope"
+    },
+    "expected_calibration_error": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Expected Calibration Error"
+    },
+    "f1": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "F1"
+    },
+    "high_confidence_accuracy": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "High Confidence Accuracy"
+    },
+    "high_confidence_sample_count": {
+      "minimum": 0,
+      "title": "High Confidence Sample Count",
+      "type": "integer"
+    },
+    "log_loss": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Log Loss"
+    },
+    "maximum_calibration_error": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Calibration Error"
+    },
+    "pr_auc": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Pr Auc"
+    },
+    "precision": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Precision"
+    },
+    "recall": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Recall"
+    },
+    "reliability_diagram": {
+      "items": {
+        "$ref": "#/$defs/ReliabilityBin"
+      },
+      "minItems": 2,
+      "title": "Reliability Diagram",
+      "type": "array"
+    },
+    "sample_count": {
+      "exclusiveMinimum": 0,
+      "title": "Sample Count",
+      "type": "integer"
+    },
+    "specificity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Specificity"
+    }
+  },
+  "required": [
+    "sample_count",
+    "brier_score",
+    "log_loss",
+    "expected_calibration_error",
+    "maximum_calibration_error",
+    "calibration_slope",
+    "calibration_intercept",
+    "precision",
+    "recall",
+    "specificity",
+    "f1",
+    "pr_auc",
+    "high_confidence_sample_count",
+    "high_confidence_accuracy",
+    "reliability_diagram"
+  ],
+  "title": "TruthCalibrationMetrics",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.truth-calibration-metrics",
+  "x-aegisquant-schema-version": "1.0.0"
+}

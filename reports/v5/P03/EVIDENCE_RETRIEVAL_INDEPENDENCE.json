@@ -1,0 +1,96 @@
+{
+  "schema_version": "v5-p03-evidence-retrieval-independence-v1",
+  "phase": "V5-P03",
+  "generated_from_fixed_clock": "2026-09-03T08:00:00+00:00",
+  "decision_time": "2026-09-03T08:10:00+00:00",
+  "evidence_tier": "DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "calibrated_truth_model_present": false,
+  "live_trading_locked": true,
+  "search_plan": {
+    "query_lane_count": 6,
+    "query_count_by_lane": {
+      "SUPPORT": 1,
+      "CONTRADICTION": 1,
+      "PRIMARY_SOURCE": 1,
+      "OFFICIAL_DENIAL": 1,
+      "REVISION": 1,
+      "TIMELINE": 1
+    },
+    "probability_aggregation": "CALIBRATED_MODEL_NOT_AGENT_VOTE"
+  },
+  "pit_retrieval": {
+    "input_hit_count": 7,
+    "selected_hit_ids": [
+      "hit:official-denial",
+      "hit:primary:2"
+    ],
+    "selected_revision_ids": [
+      "revision:official-denial:1",
+      "revision:primary:2"
+    ],
+    "future_hit_excluded": true,
+    "deleted_hit_excluded": true,
+    "prohibited_hit_excluded": true,
+    "unknown_rights_hit_excluded": true
+  },
+  "independence": {
+    "model_version": "v5-p03-deterministic-v1",
+    "article_count": 10,
+    "independent_evidence_count": 1,
+    "evidence_dependency_score": "0.9",
+    "component_count": 1,
+    "component_members": [
+      [
+        "article-0",
+        "article-1",
+        "article-2",
+        "article-3",
+        "article-4",
+        "article-5",
+        "article-6",
+        "article-7",
+        "article-8",
+        "article-9"
+      ]
+    ],
+    "graph_sha256": "f15840d48525c1b1a75e139db42270ca9e7b0d57b337326d7c3e10807c92f476"
+  },
+  "checks": {
+    "six_query_lanes_are_nonempty": true,
+    "support_and_contradiction_queries_are_distinct": true,
+    "agent_vote_probability_is_forbidden": true,
+    "latest_visible_revision_is_selected": true,
+    "future_evidence_is_excluded": true,
+    "deleted_and_nonusable_rights_evidence_are_excluded": true,
+    "official_denial_is_identity_bound": true,
+    "required_provenance_vocabulary_is_present": true,
+    "actual_provenance_edges_drive_the_fixture": true,
+    "ten_articles_are_observed": true,
+    "one_rumor_is_one_independent_component": true,
+    "dependency_score_is_nine_tenths": true,
+    "high_dependency_does_not_become_multi_source_confirmation": true
+  },
+  "acceptance_traceability": {
+    "six_query_lanes_are_nonempty": "tests/v5_p03/test_evidence_retrieval.py::test_search_plan_requires_six_bounded_non_vote_query_lanes",
+    "support_and_contradiction_queries_are_distinct": "tests/v5_p03/test_evidence_retrieval.py::test_search_plan_requires_six_bounded_non_vote_query_lanes",
+    "agent_vote_probability_is_forbidden": "tests/v5_p03/test_evidence_retrieval.py::test_search_plan_requires_six_bounded_non_vote_query_lanes",
+    "latest_visible_revision_is_selected": "tests/v5_p03/test_evidence_retrieval.py::test_selection_uses_latest_visible_revision_and_filters_future_deleted_and_prohibited",
+    "future_evidence_is_excluded": "tests/v5_p03/test_evidence_retrieval.py::test_selection_uses_latest_visible_revision_and_filters_future_deleted_and_prohibited",
+    "deleted_and_nonusable_rights_evidence_are_excluded": "tests/v5_p03/test_evidence_retrieval.py::test_selection_uses_latest_visible_revision_and_filters_future_deleted_and_prohibited",
+    "official_denial_is_identity_bound": "tests/v5_p03/test_evidence_retrieval.py::test_official_denial_requires_verified_official_identity_and_negation",
+    "required_provenance_vocabulary_is_present": "tests/v5_p03/test_independence_graph.py::test_required_provenance_vocabulary_is_present",
+    "actual_provenance_edges_drive_the_fixture": "tests/v5_p03/test_independence_graph.py::test_ten_machine_rewrites_from_one_rumor_count_as_one_independent_source",
+    "ten_articles_are_observed": "tests/v5_p03/test_independence_graph.py::test_ten_machine_rewrites_from_one_rumor_count_as_one_independent_source",
+    "one_rumor_is_one_independent_component": "tests/v5_p03/test_independence_graph.py::test_ten_machine_rewrites_from_one_rumor_count_as_one_independent_source",
+    "dependency_score_is_nine_tenths": "tests/v5_p03/test_independence_graph.py::test_ten_machine_rewrites_from_one_rumor_count_as_one_independent_source",
+    "high_dependency_does_not_become_multi_source_confirmation": "tests/v5_p03/test_independence_graph.py::test_ten_machine_rewrites_from_one_rumor_count_as_one_independent_source"
+  },
+  "limitations": [
+    "Evidence is deterministic DEVELOPMENT data, not a real-world retrieval benchmark.",
+    "Origin fingerprints and provenance edges must be produced by governed upstream collectors.",
+    "No semantic similarity model or calibrated truth probability is implemented in P03.",
+    "No causal effect, forecast accuracy, backtest, or trading Alpha is claimed."
+  ],
+  "result": "PASS"
+}

@@ -21,17 +21,29 @@ from aegisquant.intelligence.graph import (
     transition_event_state,
 )
 from aegisquant.intelligence.impact import build_event_impact_forecast
-from tests.p08_helpers import NOW
+from tests.p08_helpers import NOW, fitted_horizon_coefficients
 from tests.p08_intelligence_helpers import committee_findings
 
 
 def test_graph_reports_coverage_conflict_and_rejects_future_nodes() -> None:
     nodes = (
         EvidenceGraphNode(
-            node_id="evidence-1", node_type=GraphNodeType.EVIDENCE, available_at_utc=NOW
+            node_id="evidence-1",
+            node_type=GraphNodeType.EVIDENCE,
+            available_at_utc=NOW,
+            independence_group="primary",
         ),
         EvidenceGraphNode(
-            node_id="evidence-2", node_type=GraphNodeType.EVIDENCE, available_at_utc=NOW
+            node_id="evidence-2",
+            node_type=GraphNodeType.EVIDENCE,
+            available_at_utc=NOW,
+            independence_group="independent-wire",
+        ),
+        EvidenceGraphNode(
+            node_id="irrelevant-evidence",
+            node_type=GraphNodeType.DOCUMENT,
+            available_at_utc=NOW,
+            independence_group="must-not-inflate-count",
         ),
         EvidenceGraphNode(node_id="claim-1", node_type=GraphNodeType.CLAIM, available_at_utc=NOW),
     )
@@ -40,16 +52,28 @@ def test_graph_reports_coverage_conflict_and_rejects_future_nodes() -> None:
             source_node_id="evidence-1",
             target_node_id="claim-1",
             edge_type=GraphEdgeType.SUPPORTS,
+            available_at_utc=NOW,
         ),
         EvidenceGraphEdge(
             source_node_id="evidence-2",
             target_node_id="claim-1",
             edge_type=GraphEdgeType.REFUTES,
+            available_at_utc=NOW,
         ),
     )
     graph = build_evidence_graph(as_of_time=NOW, nodes=nodes, edges=edges)
     assert graph.evidence_coverage == 1
+    assert graph.independent_evidence_count == 2
+    assert graph.evidence_dependency_score == 0
     assert graph.conflicting_claim_ids == ("claim-1",)
+    assert graph.content_sha256() == graph.model_copy().content_sha256()
+    reordered = build_evidence_graph(
+        as_of_time=NOW,
+        nodes=tuple(reversed(nodes)),
+        edges=tuple(reversed(edges)),
+    )
+    assert reordered == graph
+    assert reordered.content_sha256() == graph.content_sha256()
     with pytest.raises(ValueError, match="future"):
         build_evidence_graph(
             as_of_time=NOW,
@@ -78,7 +102,7 @@ def test_event_state_and_multihorizon_impact_are_evidence_bound() -> None:
     cluster = EventCluster(
         event_cluster_id=EventClusterId("event-p08-1"),
         event_type="MACRO_RELEASE",
-        status=EventClusterStatus.CORROBORATED,
+        status=EventClusterStatus.CONFIRMED,
         entity_ids=("asset:BTC",),
         first_observed_time=NOW,
         last_updated_time=NOW,
@@ -99,6 +123,7 @@ def test_event_state_and_multihorizon_impact_are_evidence_bound() -> None:
         allowed_evidence_ids=frozenset({"evidence-1", "evidence-2"}),
     )
     forecast = build_event_impact_forecast(
+        horizon_coefficients=fitted_horizon_coefficients(),
         cluster=cluster,
         committee=committee,
         as_of_time=NOW,
@@ -113,3 +138,27 @@ def test_event_state_and_multihorizon_impact_are_evidence_bound() -> None:
         ForecastHorizon.SEVEN_DAYS,
     }
     assert {str(value) for value in forecast.evidence_ids} == {"evidence-1", "evidence-2"}
+
+    changed_coefficients = fitted_horizon_coefficients()
+    changed_coefficients[ForecastHorizon.FOUR_HOURS] = Decimal("0.004")
+    changed = build_event_impact_forecast(
+        horizon_coefficients=changed_coefficients,
+        cluster=cluster,
+        committee=committee,
+        as_of_time=NOW,
+        affected_exposure_ids=("asset:BTC",),
+        market_already_moved_score=Decimal("0.2"),
+    )
+    assert changed.horizon_coefficients_sha256 != forecast.horizon_coefficients_sha256
+    assert changed.impact_forecast_id != forecast.impact_forecast_id
+
+    incomplete_coefficients = fitted_horizon_coefficients()
+    incomplete_coefficients.pop(ForecastHorizon.FOUR_HOURS)
+    with pytest.raises(ValueError, match="one fitted coefficient per horizon"):
+        build_event_impact_forecast(
+            horizon_coefficients=incomplete_coefficients,
+            cluster=cluster,
+            committee=committee,
+            as_of_time=NOW,
+            affected_exposure_ids=("asset:BTC",),
+        )

@@ -27,3 +27,14 @@ ADR 一经接受不原地抹除；变化通过新 ADR supersede。每份记录�
 - ADR-0022：P17 付费 Provider Bake-off 与零采购决策
 - ADR-0023：P18 Canary 硬门、零资本与非授权 Manifest
 - ADR-0024：统一验收的原子提交与外部硬门阻断
+- ADR-0025：V5-P02 来源真实性、C2PA 与声明真值边界
+- ADR-0026：V5-P03 证据检索、PIT 选择与独立性计算边界
+- ADR-0027：V5-P04 Truth Council、概率校准、状态回放与可靠度生命周期
+- ADR-0028：V5-P05 事件标准化、Surprise、Narrative Diffusion 与 Price-In 门禁
+- ADR-0029：V5-P06 事件响应数据集、反事实估计与因果诊断门禁
+- ADR-0030：V5-P07 Forecast Council 2.0、候选门禁与等折 OOS 竞技场
+- ADR-0031：V5-P08 Truth-aware 事件反事实、逐周期增量与置换门禁
+- ADR-0032：V5-P09 Forecast Governance、独立 Skeptic、动态 Stacking 与自适应校准
+- ADR-0033：V5-P10 成本后净边、组合与独立风险无旁路决策链
+- ADR-0034：V5-P11 Paper / Shadow Forward Proof
+- ADR-0035：V5-P12 Testnet / Canary Readiness

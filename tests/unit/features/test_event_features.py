@@ -55,7 +55,10 @@ def cluster() -> EventCluster:
         first_observed_time=NOW,
         last_updated_time=NOW + timedelta(seconds=20),
         claim_ids=(ClaimId("claim-1"),),
-        supporting_evidence_ids=(SourceDocumentId("doc-1"),),
+        supporting_evidence_ids=(
+            SourceDocumentId("doc-1"),
+            SourceDocumentId("official-1"),
+        ),
         contradicting_evidence_ids=(),
         independent_source_count=2,
         official_confirmation_ids=(SourceDocumentId("official-1"),),

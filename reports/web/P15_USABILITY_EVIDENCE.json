@@ -1,8 +1,10 @@
 {
   "all_core_labels_present": true,
+  "alpha_promotion_disclosure": true,
+  "evidence_tier_disclosure": true,
   "five_second_core_labels": [
-    "账户权益",
-    "当日净损益",
+    "Fixture 权益",
+    "Fixture 净损益",
     "风险状态",
     "对账状态"
   ],

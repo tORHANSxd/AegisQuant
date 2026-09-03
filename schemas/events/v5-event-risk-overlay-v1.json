@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "RiskOverlayAction": {
+      "enum": [
+        "REDUCE_EXPOSURE",
+        "REDUCE_LEVERAGE",
+        "PAUSE_NEW_RISK",
+        "CANCEL_MAKER_ORDERS",
+        "RAISE_LIQUIDITY_BUFFER"
+      ],
+      "title": "RiskOverlayAction",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-event-risk-overlay/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actions": {
+      "default": [
+        "REDUCE_EXPOSURE",
+        "REDUCE_LEVERAGE",
+        "PAUSE_NEW_RISK",
+        "CANCEL_MAKER_ORDERS",
+        "RAISE_LIQUIDITY_BUFFER"
+      ],
+      "items": {
+        "$ref": "#/$defs/RiskOverlayAction"
+      },
+      "title": "Actions",
+      "type": "array"
+    },
+    "directional_alpha_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Directional Alpha Allowed",
+      "type": "boolean"
+    },
+    "event_condition_sha256": {
+      "title": "Event Condition Sha256",
+      "type": "string"
+    },
+    "live_trading_locked": {
+      "const": true,
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "overlay_sha256": {
+      "title": "Overlay Sha256",
+      "type": "string"
+    },
+    "policy_sha256": {
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "portfolio_proposal_sha256": {
+      "title": "Portfolio Proposal Sha256",
+      "type": "string"
+    },
+    "risk_decision_sha256": {
+      "title": "Risk Decision Sha256",
+      "type": "string"
+    },
+    "target_exposure_scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Target Exposure Scale"
+    }
+  },
+  "required": [
+    "event_condition_sha256",
+    "policy_sha256",
+    "portfolio_proposal_sha256",
+    "risk_decision_sha256",
+    "target_exposure_scale",
+    "overlay_sha256"
+  ],
+  "title": "EventRiskOverlay",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-event-risk-overlay",
+  "x-aegisquant-schema-version": "1.0.0"
+}

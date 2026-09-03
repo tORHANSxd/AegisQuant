@@ -1,0 +1,373 @@
+{
+  "$defs": {
+    "NarrativeDiffusionObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "event_cluster_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Cluster Id",
+          "type": "string"
+        },
+        "independence_group": {
+          "minLength": 1,
+          "title": "Independence Group",
+          "type": "string"
+        },
+        "kol_source": {
+          "default": false,
+          "title": "Kol Source",
+          "type": "boolean"
+        },
+        "language": {
+          "maxLength": 35,
+          "minLength": 2,
+          "title": "Language",
+          "type": "string"
+        },
+        "news_wire_source": {
+          "default": false,
+          "title": "News Wire Source",
+          "type": "boolean"
+        },
+        "observation_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "platform": {
+          "minLength": 1,
+          "title": "Platform",
+          "type": "string"
+        },
+        "source_id": {
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "verified_source": {
+          "title": "Verified Source",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "observation_id",
+        "event_cluster_id",
+        "source_id",
+        "independence_group",
+        "platform",
+        "language",
+        "verified_source",
+        "observed_at",
+        "available_at",
+        "source_sha256"
+      ],
+      "title": "NarrativeDiffusionObservation",
+      "type": "object"
+    },
+    "NarrativePropagationStage": {
+      "enum": [
+        "EMERGING",
+        "CROSS_PLATFORM",
+        "BROAD"
+      ],
+      "title": "NarrativePropagationStage",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.narrative-diffusion-snapshot/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "diffusion_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Diffusion Id",
+      "type": "string"
+    },
+    "diffusion_sha256": {
+      "title": "Diffusion Sha256",
+      "type": "string"
+    },
+    "event_cluster_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Cluster Id",
+      "type": "string"
+    },
+    "first_observed_at": {
+      "format": "date-time",
+      "title": "First Observed At",
+      "type": "string"
+    },
+    "first_source_id": {
+      "minLength": 1,
+      "title": "First Source Id",
+      "type": "string"
+    },
+    "first_verified_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Verified At"
+    },
+    "first_verified_source_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Verified Source Id"
+    },
+    "independent_source_count": {
+      "minimum": 1,
+      "title": "Independent Source Count",
+      "type": "integer"
+    },
+    "independent_source_velocity_per_hour": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Independent Source Velocity Per Hour"
+    },
+    "kol_count": {
+      "minimum": 0,
+      "title": "Kol Count",
+      "type": "integer"
+    },
+    "language_count": {
+      "minimum": 1,
+      "title": "Language Count",
+      "type": "integer"
+    },
+    "news_wire_count": {
+      "minimum": 0,
+      "title": "News Wire Count",
+      "type": "integer"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/NarrativeDiffusionObservation"
+      },
+      "minItems": 1,
+      "title": "Observations",
+      "type": "array"
+    },
+    "platform_count": {
+      "minimum": 1,
+      "title": "Platform Count",
+      "type": "integer"
+    },
+    "price_response_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Price Response At"
+    },
+    "price_response_available_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Price Response Available At"
+    },
+    "price_response_lag_seconds": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Price Response Lag Seconds"
+    },
+    "price_response_source_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Price Response Source Sha256"
+    },
+    "propagation_stage": {
+      "$ref": "#/$defs/NarrativePropagationStage"
+    },
+    "source_velocity_per_hour": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Source Velocity Per Hour"
+    },
+    "volume_response_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume Response At"
+    },
+    "volume_response_available_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume Response Available At"
+    },
+    "volume_response_lag_seconds": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume Response Lag Seconds"
+    },
+    "volume_response_source_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume Response Source Sha256"
+    },
+    "window_hours": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Window Hours"
+    }
+  },
+  "required": [
+    "diffusion_id",
+    "event_cluster_id",
+    "as_of_time",
+    "window_hours",
+    "observations",
+    "first_source_id",
+    "first_observed_at",
+    "independent_source_count",
+    "platform_count",
+    "language_count",
+    "kol_count",
+    "news_wire_count",
+    "source_velocity_per_hour",
+    "independent_source_velocity_per_hour",
+    "propagation_stage",
+    "diffusion_sha256"
+  ],
+  "title": "NarrativeDiffusionSnapshot",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.narrative-diffusion-snapshot",
+  "x-aegisquant-schema-version": "1.0.0"
+}

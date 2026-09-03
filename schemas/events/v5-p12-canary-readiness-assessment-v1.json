@@ -1,0 +1,2620 @@
+{
+  "$defs": {
+    "AlertDestinationKind": {
+      "enum": [
+        "LOOPBACK_CONTRACT_RECEIVER",
+        "EXTERNAL_NON_LOOPBACK"
+      ],
+      "title": "AlertDestinationKind",
+      "type": "string"
+    },
+    "AttestedEvidenceKind": {
+      "enum": [
+        "BINANCE_TESTNET_RUN",
+        "EXTERNAL_ALERT_DELIVERY",
+        "TESTNET_RISK_AUTHORIZATION"
+      ],
+      "title": "AttestedEvidenceKind",
+      "type": "string"
+    },
+    "BinanceTestnetRunEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_order_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Accepted Order Count",
+          "type": "integer"
+        },
+        "account_scope_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Account Scope Id",
+          "type": "string"
+        },
+        "candidate_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "credential_reference_id": {
+          "anyOf": [
+            {
+              "maxLength": 240,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Credential Reference Id"
+        },
+        "ended_at": {
+          "format": "date-time",
+          "title": "Ended At",
+          "type": "string"
+        },
+        "environment": {
+          "const": "TESTNET",
+          "default": "TESTNET",
+          "title": "Environment",
+          "type": "string"
+        },
+        "evidence_sha256": {
+          "title": "Evidence Sha256",
+          "type": "string"
+        },
+        "evidence_tier": {
+          "$ref": "#/$defs/EvidenceTier"
+        },
+        "fill_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Fill Count",
+          "type": "integer"
+        },
+        "forward_pair_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Forward Pair Id",
+          "type": "string"
+        },
+        "forward_proof_sha256": {
+          "title": "Forward Proof Sha256",
+          "type": "string"
+        },
+        "live_account_connected": {
+          "const": false,
+          "default": false,
+          "title": "Live Account Connected",
+          "type": "boolean"
+        },
+        "live_domain_used": {
+          "const": false,
+          "default": false,
+          "title": "Live Domain Used",
+          "type": "boolean"
+        },
+        "network_request_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Network Request Count",
+          "type": "integer"
+        },
+        "origin": {
+          "$ref": "#/$defs/TestnetEvidenceOrigin"
+        },
+        "private_api_authenticated": {
+          "title": "Private Api Authenticated",
+          "type": "boolean"
+        },
+        "raw_credential_included": {
+          "const": false,
+          "default": false,
+          "title": "Raw Credential Included",
+          "type": "boolean"
+        },
+        "reconciliation": {
+          "$ref": "#/$defs/TestnetReconciliationReceipt"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "simulator_used": {
+          "title": "Simulator Used",
+          "type": "boolean"
+        },
+        "source_request_sha256": {
+          "title": "Source Request Sha256",
+          "type": "string"
+        },
+        "source_response_sha256": {
+          "title": "Source Response Sha256",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "strategy_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Strategy Id",
+          "type": "string"
+        },
+        "terminal_order_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Terminal Order Count",
+          "type": "integer"
+        },
+        "testnet_account_verified": {
+          "title": "Testnet Account Verified",
+          "type": "boolean"
+        },
+        "time_compressed": {
+          "title": "Time Compressed",
+          "type": "boolean"
+        },
+        "unresolved_unknown_order_count": {
+          "minimum": 0,
+          "title": "Unresolved Unknown Order Count",
+          "type": "integer"
+        },
+        "venue_id": {
+          "const": "BINANCE-TESTNET",
+          "default": "BINANCE-TESTNET",
+          "title": "Venue Id",
+          "type": "string"
+        },
+        "withdrawals_enabled": {
+          "const": false,
+          "default": false,
+          "title": "Withdrawals Enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "evidence_tier",
+        "origin",
+        "candidate_id",
+        "strategy_id",
+        "forward_pair_id",
+        "forward_proof_sha256",
+        "run_id",
+        "account_scope_id",
+        "started_at",
+        "ended_at",
+        "time_compressed",
+        "simulator_used",
+        "network_request_count",
+        "private_api_authenticated",
+        "testnet_account_verified",
+        "accepted_order_count",
+        "terminal_order_count",
+        "fill_count",
+        "unresolved_unknown_order_count",
+        "source_request_sha256",
+        "source_response_sha256",
+        "reconciliation",
+        "evidence_sha256"
+      ],
+      "title": "BinanceTestnetRunEvidence",
+      "type": "object"
+    },
+    "CanaryReadinessDecision": {
+      "enum": [
+        "CANARY_REVIEW_READY",
+        "NO_PROMOTION"
+      ],
+      "title": "CanaryReadinessDecision",
+      "type": "string"
+    },
+    "CostCalibrationMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "mean_absolute_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Mean Absolute Error"
+        },
+        "mean_bias": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean Bias"
+        },
+        "mean_predicted_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Mean Predicted Cost"
+        },
+        "mean_realized_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Mean Realized Cost"
+        },
+        "sample_count": {
+          "exclusiveMinimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "underprediction_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Underprediction Rate"
+        }
+      },
+      "required": [
+        "sample_count",
+        "mean_predicted_cost",
+        "mean_realized_cost",
+        "mean_bias",
+        "mean_absolute_error",
+        "underprediction_rate"
+      ],
+      "title": "CostCalibrationMetrics",
+      "type": "object"
+    },
+    "EventIncrementAttributionMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "direction_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Direction Accuracy"
+        },
+        "independent_event_count": {
+          "exclusiveMinimum": 0,
+          "title": "Independent Event Count",
+          "type": "integer"
+        },
+        "mean_absolute_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Mean Absolute Error"
+        },
+        "mean_predicted_increment": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean Predicted Increment"
+        },
+        "mean_realized_increment": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean Realized Increment"
+        },
+        "sample_count": {
+          "exclusiveMinimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sample_count",
+        "independent_event_count",
+        "mean_predicted_increment",
+        "mean_realized_increment",
+        "mean_absolute_error",
+        "direction_accuracy"
+      ],
+      "title": "EventIncrementAttributionMetrics",
+      "type": "object"
+    },
+    "EvidenceTier": {
+      "description": "Mutually exclusive evidence maturity levels from the v5 SSOT.",
+      "enum": [
+        "FIXTURE",
+        "SYNTHETIC",
+        "DEVELOPMENT",
+        "OOS_DEVELOPMENT",
+        "FINAL_HOLDOUT",
+        "PAPER_FORWARD",
+        "SHADOW_FORWARD",
+        "TESTNET_FORWARD",
+        "CANARY_LIVE",
+        "LIVE"
+      ],
+      "title": "EvidenceTier",
+      "type": "string"
+    },
+    "ExternalAlertDeliveryReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "account_scope_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Account Scope Id",
+          "type": "string"
+        },
+        "acknowledged_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledged At"
+        },
+        "acknowledgment_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Acknowledgment Sha256"
+        },
+        "alert_event_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Alert Event Id",
+          "type": "string"
+        },
+        "attempted_at": {
+          "format": "date-time",
+          "title": "Attempted At",
+          "type": "string"
+        },
+        "attempted_channel_count": {
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Attempted Channel Count",
+          "type": "integer"
+        },
+        "candidate_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "correlation_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Correlation Id",
+          "type": "string"
+        },
+        "delivered_channel_count": {
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Delivered Channel Count",
+          "type": "integer"
+        },
+        "destination_id": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Destination Id",
+          "type": "string"
+        },
+        "destination_kind": {
+          "$ref": "#/$defs/AlertDestinationKind"
+        },
+        "durable_receipt_persisted": {
+          "title": "Durable Receipt Persisted",
+          "type": "boolean"
+        },
+        "evidence_tier": {
+          "$ref": "#/$defs/EvidenceTier"
+        },
+        "http_status_code": {
+          "anyOf": [
+            {
+              "maximum": 599,
+              "minimum": 100,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Http Status Code"
+        },
+        "https_transport": {
+          "title": "Https Transport",
+          "type": "boolean"
+        },
+        "immutable_audit_anchor_present": {
+          "title": "Immutable Audit Anchor Present",
+          "type": "boolean"
+        },
+        "loopback_destination": {
+          "title": "Loopback Destination",
+          "type": "boolean"
+        },
+        "payload_sha256": {
+          "title": "Payload Sha256",
+          "type": "string"
+        },
+        "receipt_sha256": {
+          "title": "Receipt Sha256",
+          "type": "string"
+        },
+        "remote_acknowledged": {
+          "title": "Remote Acknowledged",
+          "type": "boolean"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "strategy_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Strategy Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_tier",
+        "destination_kind",
+        "candidate_id",
+        "strategy_id",
+        "run_id",
+        "account_scope_id",
+        "alert_event_id",
+        "correlation_id",
+        "destination_id",
+        "attempted_at",
+        "acknowledged_at",
+        "attempted_channel_count",
+        "delivered_channel_count",
+        "https_transport",
+        "loopback_destination",
+        "payload_sha256",
+        "acknowledgment_sha256",
+        "remote_acknowledged",
+        "durable_receipt_persisted",
+        "immutable_audit_anchor_present",
+        "receipt_sha256"
+      ],
+      "title": "ExternalAlertDeliveryReceipt",
+      "type": "object"
+    },
+    "ForecastCalibrationMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "direction_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Direction Accuracy"
+        },
+        "mean_absolute_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Mean Absolute Error"
+        },
+        "mean_bias": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean Bias"
+        },
+        "mean_predicted_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean Predicted Return"
+        },
+        "mean_realized_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean Realized Return"
+        },
+        "sample_count": {
+          "exclusiveMinimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sample_count",
+        "mean_predicted_return",
+        "mean_realized_return",
+        "mean_bias",
+        "mean_absolute_error",
+        "direction_accuracy"
+      ],
+      "title": "ForecastCalibrationMetrics",
+      "type": "object"
+    },
+    "ForwardHeartbeat": {
+      "additionalProperties": false,
+      "properties": {
+        "heartbeat_sha256": {
+          "title": "Heartbeat Sha256",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "previous_heartbeat_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Previous Heartbeat Sha256"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "source_available_at": {
+          "format": "date-time",
+          "title": "Source Available At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "sequence",
+        "observed_at",
+        "source_available_at",
+        "heartbeat_sha256"
+      ],
+      "title": "ForwardHeartbeat",
+      "type": "object"
+    },
+    "ForwardIncident": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "data_loss_detected": {
+          "title": "Data Loss Detected",
+          "type": "boolean"
+        },
+        "detected_at": {
+          "format": "date-time",
+          "title": "Detected At",
+          "type": "string"
+        },
+        "future_correction_attempted": {
+          "title": "Future Correction Attempted",
+          "type": "boolean"
+        },
+        "incident_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Incident Id",
+          "type": "string"
+        },
+        "incident_sha256": {
+          "title": "Incident Sha256",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "recorded_at": {
+          "format": "date-time",
+          "title": "Recorded At",
+          "type": "string"
+        },
+        "requires_restart": {
+          "title": "Requires Restart",
+          "type": "boolean"
+        },
+        "resolved_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Resolved At"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/ForwardIncidentSeverity"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "incident_id",
+        "severity",
+        "category",
+        "detected_at",
+        "recorded_at",
+        "resolved_at",
+        "requires_restart",
+        "data_loss_detected",
+        "future_correction_attempted",
+        "incident_sha256"
+      ],
+      "title": "ForwardIncident",
+      "type": "object"
+    },
+    "ForwardIncidentLog": {
+      "additionalProperties": false,
+      "properties": {
+        "coverage_ended_at": {
+          "format": "date-time",
+          "title": "Coverage Ended At",
+          "type": "string"
+        },
+        "coverage_started_at": {
+          "format": "date-time",
+          "title": "Coverage Started At",
+          "type": "string"
+        },
+        "incidents": {
+          "items": {
+            "$ref": "#/$defs/ForwardIncident"
+          },
+          "maxItems": 1000,
+          "title": "Incidents",
+          "type": "array"
+        },
+        "log_complete": {
+          "title": "Log Complete",
+          "type": "boolean"
+        },
+        "log_sha256": {
+          "title": "Log Sha256",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "coverage_started_at",
+        "coverage_ended_at",
+        "incidents",
+        "log_complete",
+        "log_sha256"
+      ],
+      "title": "ForwardIncidentLog",
+      "type": "object"
+    },
+    "ForwardIncidentSeverity": {
+      "enum": [
+        "INFO",
+        "WARNING",
+        "HIGH",
+        "CRITICAL"
+      ],
+      "title": "ForwardIncidentSeverity",
+      "type": "string"
+    },
+    "ForwardMode": {
+      "enum": [
+        "PAPER",
+        "SHADOW"
+      ],
+      "title": "ForwardMode",
+      "type": "string"
+    },
+    "ForwardModeProofReport": {
+      "additionalProperties": false,
+      "properties": {
+        "alpha_promotion_eligible": {
+          "const": false,
+          "default": false,
+          "title": "Alpha Promotion Eligible",
+          "type": "boolean"
+        },
+        "backtest_substitution_rejected": {
+          "const": true,
+          "default": true,
+          "title": "Backtest Substitution Rejected",
+          "type": "boolean"
+        },
+        "continuous_forward_data_pass": {
+          "title": "Continuous Forward Data Pass",
+          "type": "boolean"
+        },
+        "cost_calibration": {
+          "$ref": "#/$defs/CostCalibrationMetrics"
+        },
+        "cost_calibration_pass": {
+          "title": "Cost Calibration Pass",
+          "type": "boolean"
+        },
+        "elapsed_calendar_days": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Elapsed Calendar Days"
+        },
+        "event_increment_attribution": {
+          "$ref": "#/$defs/EventIncrementAttributionMetrics"
+        },
+        "event_increment_attribution_pass": {
+          "title": "Event Increment Attribution Pass",
+          "type": "boolean"
+        },
+        "forecast_calibration": {
+          "$ref": "#/$defs/ForecastCalibrationMetrics"
+        },
+        "forecast_calibration_pass": {
+          "title": "Forecast Calibration Pass",
+          "type": "boolean"
+        },
+        "incident_log_pass": {
+          "title": "Incident Log Pass",
+          "type": "boolean"
+        },
+        "live_trading_locked": {
+          "const": true,
+          "default": true,
+          "title": "Live Trading Locked",
+          "type": "boolean"
+        },
+        "maximum_heartbeat_gap_seconds": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Heartbeat Gap Seconds"
+        },
+        "no_future_corrections_pass": {
+          "title": "No Future Corrections Pass",
+          "type": "boolean"
+        },
+        "order_submission_enabled": {
+          "const": false,
+          "default": false,
+          "title": "Order Submission Enabled",
+          "type": "boolean"
+        },
+        "policy": {
+          "$ref": "#/$defs/ForwardProofPolicy"
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "report_sha256": {
+          "title": "Report Sha256",
+          "type": "string"
+        },
+        "restart_recovery_pass": {
+          "title": "Restart Recovery Pass",
+          "type": "boolean"
+        },
+        "session": {
+          "$ref": "#/$defs/ForwardSession"
+        },
+        "status": {
+          "$ref": "#/$defs/ForwardProofStatus"
+        },
+        "truth_calibration": {
+          "$ref": "#/$defs/TruthCalibrationMetrics"
+        },
+        "truth_calibration_pass": {
+          "title": "Truth Calibration Pass",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "session",
+        "policy",
+        "elapsed_calendar_days",
+        "maximum_heartbeat_gap_seconds",
+        "continuous_forward_data_pass",
+        "no_future_corrections_pass",
+        "truth_calibration",
+        "truth_calibration_pass",
+        "forecast_calibration",
+        "forecast_calibration_pass",
+        "cost_calibration",
+        "cost_calibration_pass",
+        "event_increment_attribution",
+        "event_increment_attribution_pass",
+        "incident_log_pass",
+        "restart_recovery_pass",
+        "status",
+        "reason_codes",
+        "report_sha256"
+      ],
+      "title": "ForwardModeProofReport",
+      "type": "object"
+    },
+    "ForwardNextAction": {
+      "enum": [
+        "PROCEED_TO_TESTNET_READINESS",
+        "EXTEND_PAPER"
+      ],
+      "title": "ForwardNextAction",
+      "type": "string"
+    },
+    "ForwardProofDecision": {
+      "enum": [
+        "P11_FORWARD_PASS",
+        "NO_PROMOTION"
+      ],
+      "title": "ForwardProofDecision",
+      "type": "string"
+    },
+    "ForwardProofPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "approved_at": {
+          "format": "date-time",
+          "title": "Approved At",
+          "type": "string"
+        },
+        "effective_from": {
+          "format": "date-time",
+          "title": "Effective From",
+          "type": "string"
+        },
+        "final_holdout_opened": {
+          "const": false,
+          "default": false,
+          "title": "Final Holdout Opened",
+          "type": "boolean"
+        },
+        "independent_event_threshold_rationale": {
+          "maxLength": 1000,
+          "minLength": 20,
+          "title": "Independent Event Threshold Rationale",
+          "type": "string"
+        },
+        "maximum_cost_mae": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Cost Mae"
+        },
+        "maximum_cost_underprediction_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum Cost Underprediction Rate"
+        },
+        "maximum_event_increment_mae": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Event Increment Mae"
+        },
+        "maximum_forecast_mae": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Forecast Mae"
+        },
+        "maximum_heartbeat_gap_seconds": {
+          "maximum": 3600,
+          "minimum": 1,
+          "title": "Maximum Heartbeat Gap Seconds",
+          "type": "integer"
+        },
+        "maximum_truth_brier_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum Truth Brier Score"
+        },
+        "maximum_truth_calibration_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum Truth Calibration Error"
+        },
+        "minimum_calendar_days": {
+          "minimum": 30,
+          "title": "Minimum Calendar Days",
+          "type": "integer"
+        },
+        "minimum_event_direction_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Minimum Event Direction Accuracy"
+        },
+        "minimum_forecast_direction_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Minimum Forecast Direction Accuracy"
+        },
+        "minimum_independent_event_count": {
+          "minimum": 2,
+          "title": "Minimum Independent Event Count",
+          "type": "integer"
+        },
+        "policy_sha256": {
+          "title": "Policy Sha256",
+          "type": "string"
+        },
+        "threshold_locked_before_run": {
+          "const": true,
+          "default": true,
+          "title": "Threshold Locked Before Run",
+          "type": "boolean"
+        },
+        "version": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "approved_at",
+        "effective_from",
+        "minimum_calendar_days",
+        "minimum_independent_event_count",
+        "independent_event_threshold_rationale",
+        "maximum_heartbeat_gap_seconds",
+        "maximum_truth_brier_score",
+        "maximum_truth_calibration_error",
+        "maximum_forecast_mae",
+        "minimum_forecast_direction_accuracy",
+        "maximum_cost_mae",
+        "maximum_cost_underprediction_rate",
+        "maximum_event_increment_mae",
+        "minimum_event_direction_accuracy",
+        "policy_sha256"
+      ],
+      "title": "ForwardProofPolicy",
+      "type": "object"
+    },
+    "ForwardProofStatus": {
+      "enum": [
+        "PASS",
+        "EXTEND_PAPER",
+        "FAIL_CLOSED"
+      ],
+      "title": "ForwardProofStatus",
+      "type": "string"
+    },
+    "ForwardRecoveryReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "checkpoint_recorded_at": {
+          "format": "date-time",
+          "title": "Checkpoint Recorded At",
+          "type": "string"
+        },
+        "checkpoint_sha256": {
+          "title": "Checkpoint Sha256",
+          "type": "string"
+        },
+        "duplicate_count": {
+          "minimum": 0,
+          "title": "Duplicate Count",
+          "type": "integer"
+        },
+        "gap_count": {
+          "minimum": 0,
+          "title": "Gap Count",
+          "type": "integer"
+        },
+        "incident_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Incident Id",
+          "type": "string"
+        },
+        "last_durable_sequence": {
+          "minimum": 0,
+          "title": "Last Durable Sequence",
+          "type": "integer"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "planned_drill": {
+          "title": "Planned Drill",
+          "type": "boolean"
+        },
+        "pre_restart_chain_head_sha256": {
+          "title": "Pre Restart Chain Head Sha256",
+          "type": "string"
+        },
+        "receipt_sha256": {
+          "title": "Receipt Sha256",
+          "type": "string"
+        },
+        "restored_chain_head_sha256": {
+          "title": "Restored Chain Head Sha256",
+          "type": "string"
+        },
+        "restored_without_loss": {
+          "title": "Restored Without Loss",
+          "type": "boolean"
+        },
+        "resumed_at": {
+          "format": "date-time",
+          "title": "Resumed At",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "incident_id",
+        "checkpoint_sha256",
+        "pre_restart_chain_head_sha256",
+        "restored_chain_head_sha256",
+        "checkpoint_recorded_at",
+        "resumed_at",
+        "last_durable_sequence",
+        "gap_count",
+        "duplicate_count",
+        "restored_without_loss",
+        "planned_drill",
+        "receipt_sha256"
+      ],
+      "title": "ForwardRecoveryReceipt",
+      "type": "object"
+    },
+    "ForwardRunKind": {
+      "enum": [
+        "WALL_CLOCK_FORWARD",
+        "DEVELOPMENT_FIXTURE"
+      ],
+      "title": "ForwardRunKind",
+      "type": "string"
+    },
+    "ForwardSample": {
+      "additionalProperties": false,
+      "properties": {
+        "correction_of_sha256": {
+          "default": null,
+          "title": "Correction Of Sha256",
+          "type": "null"
+        },
+        "decision_report_sha256": {
+          "title": "Decision Report Sha256",
+          "type": "string"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "event_independence_key": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Event Independence Key",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "outcome_available_at": {
+          "format": "date-time",
+          "title": "Outcome Available At",
+          "type": "string"
+        },
+        "predicted_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Predicted Cost"
+        },
+        "predicted_event_increment": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Event Increment"
+        },
+        "predicted_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Return"
+        },
+        "predicted_truth_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Predicted Truth Probability"
+        },
+        "prediction_input_sha256": {
+          "title": "Prediction Input Sha256",
+          "type": "string"
+        },
+        "prediction_recorded_at": {
+          "format": "date-time",
+          "title": "Prediction Recorded At",
+          "type": "string"
+        },
+        "prediction_revision": {
+          "const": 0,
+          "default": 0,
+          "title": "Prediction Revision",
+          "type": "integer"
+        },
+        "prediction_sha256": {
+          "title": "Prediction Sha256",
+          "type": "string"
+        },
+        "realization_recorded_at": {
+          "format": "date-time",
+          "title": "Realization Recorded At",
+          "type": "string"
+        },
+        "realized_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Realized Cost"
+        },
+        "realized_event_increment": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Realized Event Increment"
+        },
+        "realized_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Realized Return"
+        },
+        "realized_truth": {
+          "title": "Realized Truth",
+          "type": "boolean"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "sample_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Sample Id",
+          "type": "string"
+        },
+        "sample_sha256": {
+          "title": "Sample Sha256",
+          "type": "string"
+        },
+        "source_available_at": {
+          "format": "date-time",
+          "title": "Source Available At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "sample_id",
+        "event_independence_key",
+        "decision_report_sha256",
+        "prediction_input_sha256",
+        "source_available_at",
+        "decision_time",
+        "prediction_recorded_at",
+        "outcome_available_at",
+        "realization_recorded_at",
+        "predicted_truth_probability",
+        "realized_truth",
+        "predicted_return",
+        "realized_return",
+        "predicted_cost",
+        "realized_cost",
+        "predicted_event_increment",
+        "realized_event_increment",
+        "prediction_sha256",
+        "sample_sha256"
+      ],
+      "title": "ForwardSample",
+      "type": "object"
+    },
+    "ForwardSession": {
+      "additionalProperties": false,
+      "properties": {
+        "alpha_promotion_eligible": {
+          "const": false,
+          "default": false,
+          "title": "Alpha Promotion Eligible",
+          "type": "boolean"
+        },
+        "backtest_substitution": {
+          "const": false,
+          "default": false,
+          "title": "Backtest Substitution",
+          "type": "boolean"
+        },
+        "ended_at": {
+          "format": "date-time",
+          "title": "Ended At",
+          "type": "string"
+        },
+        "evidence_tier": {
+          "$ref": "#/$defs/EvidenceTier"
+        },
+        "final_holdout_opened": {
+          "const": false,
+          "default": false,
+          "title": "Final Holdout Opened",
+          "type": "boolean"
+        },
+        "heartbeats": {
+          "items": {
+            "$ref": "#/$defs/ForwardHeartbeat"
+          },
+          "maxItems": 50000,
+          "minItems": 2,
+          "title": "Heartbeats",
+          "type": "array"
+        },
+        "incident_log": {
+          "$ref": "#/$defs/ForwardIncidentLog"
+        },
+        "live_trading_locked": {
+          "const": true,
+          "default": true,
+          "title": "Live Trading Locked",
+          "type": "boolean"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "order_submission_enabled": {
+          "const": false,
+          "default": false,
+          "title": "Order Submission Enabled",
+          "type": "boolean"
+        },
+        "pair_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Pair Id",
+          "type": "string"
+        },
+        "recovery_receipts": {
+          "items": {
+            "$ref": "#/$defs/ForwardRecoveryReceipt"
+          },
+          "maxItems": 1000,
+          "minItems": 1,
+          "title": "Recovery Receipts",
+          "type": "array"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "run_kind": {
+          "$ref": "#/$defs/ForwardRunKind"
+        },
+        "samples": {
+          "items": {
+            "$ref": "#/$defs/ForwardSample"
+          },
+          "maxItems": 10000,
+          "minItems": 1,
+          "title": "Samples",
+          "type": "array"
+        },
+        "session_sha256": {
+          "title": "Session Sha256",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "time_compressed": {
+          "title": "Time Compressed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "pair_id",
+        "run_id",
+        "mode",
+        "run_kind",
+        "evidence_tier",
+        "started_at",
+        "ended_at",
+        "heartbeats",
+        "samples",
+        "incident_log",
+        "recovery_receipts",
+        "time_compressed",
+        "session_sha256"
+      ],
+      "title": "ForwardSession",
+      "type": "object"
+    },
+    "P12EvidenceAttestation": {
+      "additionalProperties": false,
+      "properties": {
+        "attestation_sha256": {
+          "title": "Attestation Sha256",
+          "type": "string"
+        },
+        "attestor_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Attestor Id",
+          "type": "string"
+        },
+        "evidence_kind": {
+          "$ref": "#/$defs/AttestedEvidenceKind"
+        },
+        "evidence_sha256": {
+          "title": "Evidence Sha256",
+          "type": "string"
+        },
+        "key_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "live_authorization_capability": {
+          "const": false,
+          "default": false,
+          "title": "Live Authorization Capability",
+          "type": "boolean"
+        },
+        "private_key_persisted": {
+          "const": false,
+          "default": false,
+          "title": "Private Key Persisted",
+          "type": "boolean"
+        },
+        "protected_timestamp": {
+          "$ref": "#/$defs/ProtectedTimestampReceipt"
+        },
+        "signature_base64": {
+          "title": "Signature Base64",
+          "type": "string"
+        },
+        "signature_purpose": {
+          "const": "EVIDENCE_INTEGRITY_ONLY",
+          "default": "EVIDENCE_INTEGRITY_ONLY",
+          "title": "Signature Purpose",
+          "type": "string"
+        },
+        "signed_at": {
+          "format": "date-time",
+          "title": "Signed At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_kind",
+        "evidence_sha256",
+        "attestor_id",
+        "key_id",
+        "signed_at",
+        "protected_timestamp",
+        "signature_base64",
+        "attestation_sha256"
+      ],
+      "title": "P12EvidenceAttestation",
+      "type": "object"
+    },
+    "P12EvidenceBundle": {
+      "additionalProperties": false,
+      "properties": {
+        "bundle_sha256": {
+          "title": "Bundle Sha256",
+          "type": "string"
+        },
+        "external_alert": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExternalAlertDeliveryReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "external_alert_attestation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/P12EvidenceAttestation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "forward_proof": {
+          "$ref": "#/$defs/PaperShadowForwardProof"
+        },
+        "risk_attestation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/P12EvidenceAttestation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "risk_authorization": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TestnetRiskAuthorizationReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "source_artifact_sha256": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxProperties": 64,
+          "minProperties": 1,
+          "title": "Source Artifact Sha256",
+          "type": "object"
+        },
+        "testnet": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BinanceTestnetRunEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "testnet_attestation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/P12EvidenceAttestation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "forward_proof",
+        "source_artifact_sha256",
+        "bundle_sha256"
+      ],
+      "title": "P12EvidenceBundle",
+      "type": "object"
+    },
+    "P12GateName": {
+      "enum": [
+        "TRUTH_CALIBRATION",
+        "FORECAST_CALIBRATION",
+        "COST_CALIBRATION",
+        "PAPER",
+        "SHADOW",
+        "TESTNET",
+        "RISK"
+      ],
+      "title": "P12GateName",
+      "type": "string"
+    },
+    "P12GateResult": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_sha256": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "title": "Evidence Sha256",
+          "type": "array"
+        },
+        "gate": {
+          "$ref": "#/$defs/P12GateName"
+        },
+        "reason_codes": {
+          "items": {
+            "maxLength": 160,
+            "minLength": 1,
+            "pattern": "^[A-Z0-9][A-Z0-9_-]*$",
+            "type": "string"
+          },
+          "maxItems": 32,
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/P12GateStatus"
+        }
+      },
+      "required": [
+        "gate",
+        "status",
+        "evidence_sha256",
+        "reason_codes"
+      ],
+      "title": "P12GateResult",
+      "type": "object"
+    },
+    "P12GateStatus": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "BLOCKED_EXTERNAL_INPUT"
+      ],
+      "title": "P12GateStatus",
+      "type": "string"
+    },
+    "P12NextAction": {
+      "enum": [
+        "REQUEST_MANUAL_CANARY_REVIEW",
+        "EXTEND_PAPER",
+        "PROVIDE_EXTERNAL_EVIDENCE",
+        "REMEDIATE_AND_RETEST"
+      ],
+      "title": "P12NextAction",
+      "type": "string"
+    },
+    "P12ReadinessPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "approved_at": {
+          "format": "date-time",
+          "title": "Approved At",
+          "type": "string"
+        },
+        "automatic_live_unlock_allowed": {
+          "const": false,
+          "default": false,
+          "title": "Automatic Live Unlock Allowed",
+          "type": "boolean"
+        },
+        "candidate_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "effective_from": {
+          "format": "date-time",
+          "title": "Effective From",
+          "type": "string"
+        },
+        "final_holdout_opened": {
+          "const": false,
+          "default": false,
+          "title": "Final Holdout Opened",
+          "type": "boolean"
+        },
+        "forward_proof_policy_sha256": {
+          "title": "Forward Proof Policy Sha256",
+          "type": "string"
+        },
+        "integrated_decision_sha256": {
+          "title": "Integrated Decision Sha256",
+          "type": "string"
+        },
+        "minimum_accepted_order_count": {
+          "maximum": 1000000,
+          "minimum": 1,
+          "title": "Minimum Accepted Order Count",
+          "type": "integer"
+        },
+        "minimum_fill_count": {
+          "maximum": 10000000,
+          "minimum": 1,
+          "title": "Minimum Fill Count",
+          "type": "integer"
+        },
+        "minimum_terminal_order_count": {
+          "maximum": 1000000,
+          "minimum": 1,
+          "title": "Minimum Terminal Order Count",
+          "type": "integer"
+        },
+        "minimum_testnet_soak_seconds": {
+          "maximum": 604800,
+          "minimum": 3600,
+          "title": "Minimum Testnet Soak Seconds",
+          "type": "integer"
+        },
+        "policy_sha256": {
+          "title": "Policy Sha256",
+          "type": "string"
+        },
+        "risk_policy_sha256": {
+          "title": "Risk Policy Sha256",
+          "type": "string"
+        },
+        "strategy_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Strategy Id",
+          "type": "string"
+        },
+        "thresholds_locked_before_run": {
+          "const": true,
+          "default": true,
+          "title": "Thresholds Locked Before Run",
+          "type": "boolean"
+        },
+        "trusted_attestor_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Trusted Attestor Id",
+          "type": "string"
+        },
+        "trusted_attestor_key_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Trusted Attestor Key Id",
+          "type": "string"
+        },
+        "trusted_attestor_public_key_base64": {
+          "title": "Trusted Attestor Public Key Base64",
+          "type": "string"
+        },
+        "trusted_timestamp_authority_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Trusted Timestamp Authority Id",
+          "type": "string"
+        },
+        "trusted_timestamp_key_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Trusted Timestamp Key Id",
+          "type": "string"
+        },
+        "trusted_timestamp_public_key_base64": {
+          "title": "Trusted Timestamp Public Key Base64",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        },
+        "weighted_score_allowed": {
+          "const": false,
+          "default": false,
+          "title": "Weighted Score Allowed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "version",
+        "candidate_id",
+        "strategy_id",
+        "forward_proof_policy_sha256",
+        "integrated_decision_sha256",
+        "risk_policy_sha256",
+        "approved_at",
+        "effective_from",
+        "minimum_testnet_soak_seconds",
+        "minimum_accepted_order_count",
+        "minimum_terminal_order_count",
+        "minimum_fill_count",
+        "trusted_attestor_id",
+        "trusted_attestor_key_id",
+        "trusted_attestor_public_key_base64",
+        "trusted_timestamp_authority_id",
+        "trusted_timestamp_key_id",
+        "trusted_timestamp_public_key_base64",
+        "policy_sha256"
+      ],
+      "title": "P12ReadinessPolicy",
+      "type": "object"
+    },
+    "PaperShadowForwardProof": {
+      "additionalProperties": false,
+      "properties": {
+        "alpha_promotion_eligible": {
+          "const": false,
+          "default": false,
+          "title": "Alpha Promotion Eligible",
+          "type": "boolean"
+        },
+        "canary_review_ready": {
+          "const": false,
+          "default": false,
+          "title": "Canary Review Ready",
+          "type": "boolean"
+        },
+        "cost_calibration_pass": {
+          "title": "Cost Calibration Pass",
+          "type": "boolean"
+        },
+        "decision": {
+          "$ref": "#/$defs/ForwardProofDecision"
+        },
+        "final_holdout_opened": {
+          "const": false,
+          "default": false,
+          "title": "Final Holdout Opened",
+          "type": "boolean"
+        },
+        "forecast_calibration_pass": {
+          "title": "Forecast Calibration Pass",
+          "type": "boolean"
+        },
+        "live_trading_locked": {
+          "const": true,
+          "default": true,
+          "title": "Live Trading Locked",
+          "type": "boolean"
+        },
+        "next_action": {
+          "$ref": "#/$defs/ForwardNextAction"
+        },
+        "order_submission_enabled": {
+          "const": false,
+          "default": false,
+          "title": "Order Submission Enabled",
+          "type": "boolean"
+        },
+        "paper": {
+          "$ref": "#/$defs/ForwardModeProofReport"
+        },
+        "paper_pass": {
+          "title": "Paper Pass",
+          "type": "boolean"
+        },
+        "proof_sha256": {
+          "title": "Proof Sha256",
+          "type": "string"
+        },
+        "shadow": {
+          "$ref": "#/$defs/ForwardModeProofReport"
+        },
+        "shadow_pass": {
+          "title": "Shadow Pass",
+          "type": "boolean"
+        },
+        "truth_calibration_pass": {
+          "title": "Truth Calibration Pass",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "paper",
+        "shadow",
+        "decision",
+        "next_action",
+        "truth_calibration_pass",
+        "forecast_calibration_pass",
+        "cost_calibration_pass",
+        "paper_pass",
+        "shadow_pass",
+        "proof_sha256"
+      ],
+      "title": "PaperShadowForwardProof",
+      "type": "object"
+    },
+    "ProtectedTimestampReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "evidence_sha256": {
+          "title": "Evidence Sha256",
+          "type": "string"
+        },
+        "key_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "nonce_sha256": {
+          "title": "Nonce Sha256",
+          "type": "string"
+        },
+        "receipt_sha256": {
+          "title": "Receipt Sha256",
+          "type": "string"
+        },
+        "signature_base64": {
+          "title": "Signature Base64",
+          "type": "string"
+        },
+        "timestamped_at": {
+          "format": "date-time",
+          "title": "Timestamped At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_sha256",
+        "authority_id",
+        "key_id",
+        "timestamped_at",
+        "nonce_sha256",
+        "signature_base64",
+        "receipt_sha256"
+      ],
+      "title": "ProtectedTimestampReceipt",
+      "type": "object"
+    },
+    "TestnetEvidenceOrigin": {
+      "enum": [
+        "DEVELOPMENT_SIMULATOR",
+        "REAL_BINANCE_TESTNET"
+      ],
+      "title": "TestnetEvidenceOrigin",
+      "type": "string"
+    },
+    "TestnetReconciliationReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "account_scope_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Account Scope Id",
+          "type": "string"
+        },
+        "authoritative_facts_mutated": {
+          "const": false,
+          "default": false,
+          "title": "Authoritative Facts Mutated",
+          "type": "boolean"
+        },
+        "balance_difference_count": {
+          "minimum": 0,
+          "title": "Balance Difference Count",
+          "type": "integer"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "internal_order_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Internal Order Count",
+          "type": "integer"
+        },
+        "ledger_fill_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Ledger Fill Count",
+          "type": "integer"
+        },
+        "read_model_fill_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Read Model Fill Count",
+          "type": "integer"
+        },
+        "receipt_sha256": {
+          "title": "Receipt Sha256",
+          "type": "string"
+        },
+        "reconciled": {
+          "title": "Reconciled",
+          "type": "boolean"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "sequence_gap_count": {
+          "minimum": 0,
+          "title": "Sequence Gap Count",
+          "type": "integer"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "unmatched_fill_count": {
+          "minimum": 0,
+          "title": "Unmatched Fill Count",
+          "type": "integer"
+        },
+        "unmatched_order_count": {
+          "minimum": 0,
+          "title": "Unmatched Order Count",
+          "type": "integer"
+        },
+        "unresolved_unknown_order_count": {
+          "minimum": 0,
+          "title": "Unresolved Unknown Order Count",
+          "type": "integer"
+        },
+        "venue_fill_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Venue Fill Count",
+          "type": "integer"
+        },
+        "venue_order_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Venue Order Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "run_id",
+        "account_scope_id",
+        "started_at",
+        "completed_at",
+        "venue_order_count",
+        "internal_order_count",
+        "venue_fill_count",
+        "ledger_fill_count",
+        "read_model_fill_count",
+        "unmatched_order_count",
+        "unmatched_fill_count",
+        "balance_difference_count",
+        "sequence_gap_count",
+        "unresolved_unknown_order_count",
+        "reconciled",
+        "receipt_sha256"
+      ],
+      "title": "TestnetReconciliationReceipt",
+      "type": "object"
+    },
+    "TestnetRiskAuthorizationReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "account_scope_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Account Scope Id",
+          "type": "string"
+        },
+        "authorization_scope": {
+          "const": "TESTNET_ONLY",
+          "default": "TESTNET_ONLY",
+          "title": "Authorization Scope",
+          "type": "string"
+        },
+        "candidate_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "drawdown_pass": {
+          "title": "Drawdown Pass",
+          "type": "boolean"
+        },
+        "event_risk_pass": {
+          "title": "Event Risk Pass",
+          "type": "boolean"
+        },
+        "evidence_tier": {
+          "$ref": "#/$defs/EvidenceTier"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "external_alert_receipt_sha256": {
+          "title": "External Alert Receipt Sha256",
+          "type": "string"
+        },
+        "integrated_decision_sha256": {
+          "title": "Integrated Decision Sha256",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "liquidity_pass": {
+          "title": "Liquidity Pass",
+          "type": "boolean"
+        },
+        "live_order_authorized": {
+          "const": false,
+          "default": false,
+          "title": "Live Order Authorized",
+          "type": "boolean"
+        },
+        "manual_live_unlock_received": {
+          "const": false,
+          "default": false,
+          "title": "Manual Live Unlock Received",
+          "type": "boolean"
+        },
+        "margin_pass": {
+          "title": "Margin Pass",
+          "type": "boolean"
+        },
+        "readiness_policy_sha256": {
+          "title": "Readiness Policy Sha256",
+          "type": "string"
+        },
+        "receipt_sha256": {
+          "title": "Receipt Sha256",
+          "type": "string"
+        },
+        "reconciliation_pass": {
+          "title": "Reconciliation Pass",
+          "type": "boolean"
+        },
+        "reconciliation_receipt_sha256": {
+          "title": "Reconciliation Receipt Sha256",
+          "type": "string"
+        },
+        "risk_policy_sha256": {
+          "title": "Risk Policy Sha256",
+          "type": "string"
+        },
+        "risk_snapshot_sha256": {
+          "title": "Risk Snapshot Sha256",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "security_pass": {
+          "title": "Security Pass",
+          "type": "boolean"
+        },
+        "strategy_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Strategy Id",
+          "type": "string"
+        },
+        "testnet_evidence_sha256": {
+          "title": "Testnet Evidence Sha256",
+          "type": "string"
+        },
+        "testnet_order_authorized": {
+          "title": "Testnet Order Authorized",
+          "type": "boolean"
+        },
+        "venue_pass": {
+          "title": "Venue Pass",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "evidence_tier",
+        "candidate_id",
+        "strategy_id",
+        "run_id",
+        "account_scope_id",
+        "issued_at",
+        "expires_at",
+        "readiness_policy_sha256",
+        "integrated_decision_sha256",
+        "risk_policy_sha256",
+        "risk_snapshot_sha256",
+        "testnet_evidence_sha256",
+        "reconciliation_receipt_sha256",
+        "external_alert_receipt_sha256",
+        "drawdown_pass",
+        "margin_pass",
+        "liquidity_pass",
+        "venue_pass",
+        "security_pass",
+        "event_risk_pass",
+        "reconciliation_pass",
+        "testnet_order_authorized",
+        "receipt_sha256"
+      ],
+      "title": "TestnetRiskAuthorizationReceipt",
+      "type": "object"
+    },
+    "TruthCalibrationMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "brier_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Brier Score"
+        },
+        "expected_calibration_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Expected Calibration Error"
+        },
+        "mean_predicted_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Mean Predicted Probability"
+        },
+        "realized_positive_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Realized Positive Rate"
+        },
+        "sample_count": {
+          "exclusiveMinimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sample_count",
+        "mean_predicted_probability",
+        "realized_positive_rate",
+        "brier_score",
+        "expected_calibration_error"
+      ],
+      "title": "TruthCalibrationMetrics",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-p12-canary-readiness-assessment/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assessed_at": {
+      "format": "date-time",
+      "title": "Assessed At",
+      "type": "string"
+    },
+    "assessment_sha256": {
+      "title": "Assessment Sha256",
+      "type": "string"
+    },
+    "blocked_gate_count": {
+      "maximum": 7,
+      "minimum": 0,
+      "title": "Blocked Gate Count",
+      "type": "integer"
+    },
+    "blocking_reason_codes": {
+      "items": {
+        "maxLength": 160,
+        "minLength": 1,
+        "pattern": "^[A-Z0-9][A-Z0-9_-]*$",
+        "type": "string"
+      },
+      "maxItems": 128,
+      "title": "Blocking Reason Codes",
+      "type": "array"
+    },
+    "canary_capital_authorized": {
+      "const": false,
+      "default": false,
+      "title": "Canary Capital Authorized",
+      "type": "boolean"
+    },
+    "canary_review_ready": {
+      "title": "Canary Review Ready",
+      "type": "boolean"
+    },
+    "decision": {
+      "$ref": "#/$defs/CanaryReadinessDecision"
+    },
+    "evidence_bundle": {
+      "$ref": "#/$defs/P12EvidenceBundle"
+    },
+    "failed_gate_count": {
+      "maximum": 7,
+      "minimum": 0,
+      "title": "Failed Gate Count",
+      "type": "integer"
+    },
+    "final_holdout_opened": {
+      "const": false,
+      "default": false,
+      "title": "Final Holdout Opened",
+      "type": "boolean"
+    },
+    "gate_count": {
+      "const": 7,
+      "default": 7,
+      "title": "Gate Count",
+      "type": "integer"
+    },
+    "gates": {
+      "items": {
+        "$ref": "#/$defs/P12GateResult"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "title": "Gates",
+      "type": "array"
+    },
+    "live_order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Live Order Submission Enabled",
+      "type": "boolean"
+    },
+    "live_trading_locked": {
+      "const": true,
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "manual_live_unlock_received": {
+      "const": false,
+      "default": false,
+      "title": "Manual Live Unlock Received",
+      "type": "boolean"
+    },
+    "next_action": {
+      "$ref": "#/$defs/P12NextAction"
+    },
+    "passed_gate_count": {
+      "maximum": 7,
+      "minimum": 0,
+      "title": "Passed Gate Count",
+      "type": "integer"
+    },
+    "policy": {
+      "$ref": "#/$defs/P12ReadinessPolicy"
+    },
+    "user_approval_received": {
+      "const": false,
+      "default": false,
+      "title": "User Approval Received",
+      "type": "boolean"
+    },
+    "weighted_score_used": {
+      "const": false,
+      "default": false,
+      "title": "Weighted Score Used",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "assessed_at",
+    "policy",
+    "evidence_bundle",
+    "gates",
+    "passed_gate_count",
+    "failed_gate_count",
+    "blocked_gate_count",
+    "decision",
+    "next_action",
+    "blocking_reason_codes",
+    "canary_review_ready",
+    "assessment_sha256"
+  ],
+  "title": "P12CanaryReadinessAssessment",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-p12-canary-readiness-assessment",
+  "x-aegisquant-schema-version": "1.0.0"
+}

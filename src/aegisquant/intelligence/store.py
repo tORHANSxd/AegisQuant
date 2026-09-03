@@ -100,6 +100,8 @@ class ContentProjectionStore:
     def apply_identity(self, identity: SourceIdentity) -> None:
         key = (str(identity.provider_id), str(identity.provider_native_id))
         history = self._identities[key]
+        if history and identity == history[-1]:
+            return
         expected_version = len(history) + 1
         if identity.version != expected_version:
             raise ValueError("AQ-INTELLIGENCE-IDENTITY-VERSION-GAP")
@@ -107,6 +109,8 @@ class ContentProjectionStore:
             raise ValueError("AQ-INTELLIGENCE-IDENTITY-PREDECESSOR-MISMATCH")
         if any(item.source_identity_id == identity.source_identity_id for item in history):
             raise ValueError("AQ-INTELLIGENCE-IDENTITY-DUPLICATE")
+        if history and identity.available_time < history[-1].available_time:
+            raise ValueError("AQ-INTELLIGENCE-IDENTITY-TIME-REGRESSION")
         history.append(identity)
 
     def apply_revision(
@@ -175,6 +179,23 @@ class ContentProjectionStore:
         self, *, provider_id: object, provider_native_id: object
     ) -> tuple[SourceIdentity, ...]:
         return tuple(self._identities.get((str(provider_id), str(provider_native_id)), ()))
+
+    def identity_as_of(
+        self,
+        *,
+        provider_id: object,
+        provider_native_id: object,
+        decision_time: datetime,
+    ) -> SourceIdentity | None:
+        decision = ensure_utc(decision_time)
+        visible = [
+            item
+            for item in self._identities.get((str(provider_id), str(provider_native_id)), ())
+            if item.first_observed_time <= decision and item.available_time <= decision
+        ]
+        return (
+            max(visible, key=lambda item: (item.available_time, item.version)) if visible else None
+        )
 
     def as_of(self, content_id: ContentId, *, decision_time: datetime) -> RawContentEnvelope | None:
         decision = ensure_utc(decision_time)

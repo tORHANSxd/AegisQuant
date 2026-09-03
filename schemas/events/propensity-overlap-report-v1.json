@@ -1,0 +1,104 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.propensity-overlap-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "lower_bound": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Lower Bound"
+    },
+    "maximum_propensity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Propensity"
+    },
+    "minimum_propensity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Propensity"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "propensity_scores": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 1,
+      "title": "Propensity Scores",
+      "type": "array"
+    },
+    "treatments": {
+      "items": {
+        "type": "boolean"
+      },
+      "minItems": 4,
+      "title": "Treatments",
+      "type": "array"
+    },
+    "upper_bound": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Upper Bound"
+    }
+  },
+  "required": [
+    "propensity_scores",
+    "treatments",
+    "minimum_propensity",
+    "maximum_propensity",
+    "lower_bound",
+    "upper_bound",
+    "passed"
+  ],
+  "title": "PropensityOverlapReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.propensity-overlap-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

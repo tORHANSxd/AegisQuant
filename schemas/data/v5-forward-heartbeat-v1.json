@@ -1,0 +1,69 @@
+{
+  "$defs": {
+    "ForwardMode": {
+      "enum": [
+        "PAPER",
+        "SHADOW"
+      ],
+      "title": "ForwardMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-forward-heartbeat/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "heartbeat_sha256": {
+      "title": "Heartbeat Sha256",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/ForwardMode"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "previous_heartbeat_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Heartbeat Sha256"
+    },
+    "run_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "sequence": {
+      "minimum": 0,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "source_available_at": {
+      "format": "date-time",
+      "title": "Source Available At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "mode",
+    "sequence",
+    "observed_at",
+    "source_available_at",
+    "heartbeat_sha256"
+  ],
+  "title": "ForwardHeartbeat",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-forward-heartbeat",
+  "x-aegisquant-schema-version": "1.0.0"
+}

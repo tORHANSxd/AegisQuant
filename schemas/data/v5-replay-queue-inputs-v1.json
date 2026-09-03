@@ -1,0 +1,43 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-replay-queue-inputs/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cancel_replace_sha256": {
+      "title": "Cancel Replace Sha256",
+      "type": "string"
+    },
+    "l2_deltas_sha256": {
+      "title": "L2 Deltas Sha256",
+      "type": "string"
+    },
+    "l2_snapshots_sha256": {
+      "title": "L2 Snapshots Sha256",
+      "type": "string"
+    },
+    "order_arrival_sha256": {
+      "title": "Order Arrival Sha256",
+      "type": "string"
+    },
+    "queue_ahead_sha256": {
+      "title": "Queue Ahead Sha256",
+      "type": "string"
+    },
+    "trades_sha256": {
+      "title": "Trades Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "l2_snapshots_sha256",
+    "l2_deltas_sha256",
+    "trades_sha256",
+    "order_arrival_sha256",
+    "cancel_replace_sha256",
+    "queue_ahead_sha256"
+  ],
+  "title": "ReplayQueueInputs",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-replay-queue-inputs",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,70 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-risk-overlay-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "minimum_severity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Severity"
+    },
+    "minimum_truth_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Truth Probability"
+    },
+    "policy_sha256": {
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "target_exposure_scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Target Exposure Scale"
+    },
+    "version": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "minimum_truth_probability",
+    "minimum_severity",
+    "target_exposure_scale",
+    "policy_sha256"
+  ],
+  "title": "RiskOverlayPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-risk-overlay-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

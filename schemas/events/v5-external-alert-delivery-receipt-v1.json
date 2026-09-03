@@ -1,0 +1,191 @@
+{
+  "$defs": {
+    "AlertDestinationKind": {
+      "enum": [
+        "LOOPBACK_CONTRACT_RECEIVER",
+        "EXTERNAL_NON_LOOPBACK"
+      ],
+      "title": "AlertDestinationKind",
+      "type": "string"
+    },
+    "EvidenceTier": {
+      "description": "Mutually exclusive evidence maturity levels from the v5 SSOT.",
+      "enum": [
+        "FIXTURE",
+        "SYNTHETIC",
+        "DEVELOPMENT",
+        "OOS_DEVELOPMENT",
+        "FINAL_HOLDOUT",
+        "PAPER_FORWARD",
+        "SHADOW_FORWARD",
+        "TESTNET_FORWARD",
+        "CANARY_LIVE",
+        "LIVE"
+      ],
+      "title": "EvidenceTier",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-external-alert-delivery-receipt/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_scope_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Account Scope Id",
+      "type": "string"
+    },
+    "acknowledged_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Acknowledged At"
+    },
+    "acknowledgment_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Acknowledgment Sha256"
+    },
+    "alert_event_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Alert Event Id",
+      "type": "string"
+    },
+    "attempted_at": {
+      "format": "date-time",
+      "title": "Attempted At",
+      "type": "string"
+    },
+    "attempted_channel_count": {
+      "maximum": 1000,
+      "minimum": 1,
+      "title": "Attempted Channel Count",
+      "type": "integer"
+    },
+    "candidate_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "correlation_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "delivered_channel_count": {
+      "maximum": 1000,
+      "minimum": 0,
+      "title": "Delivered Channel Count",
+      "type": "integer"
+    },
+    "destination_id": {
+      "maxLength": 240,
+      "minLength": 1,
+      "title": "Destination Id",
+      "type": "string"
+    },
+    "destination_kind": {
+      "$ref": "#/$defs/AlertDestinationKind"
+    },
+    "durable_receipt_persisted": {
+      "title": "Durable Receipt Persisted",
+      "type": "boolean"
+    },
+    "evidence_tier": {
+      "$ref": "#/$defs/EvidenceTier"
+    },
+    "http_status_code": {
+      "anyOf": [
+        {
+          "maximum": 599,
+          "minimum": 100,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Http Status Code"
+    },
+    "https_transport": {
+      "title": "Https Transport",
+      "type": "boolean"
+    },
+    "immutable_audit_anchor_present": {
+      "title": "Immutable Audit Anchor Present",
+      "type": "boolean"
+    },
+    "loopback_destination": {
+      "title": "Loopback Destination",
+      "type": "boolean"
+    },
+    "payload_sha256": {
+      "title": "Payload Sha256",
+      "type": "string"
+    },
+    "receipt_sha256": {
+      "title": "Receipt Sha256",
+      "type": "string"
+    },
+    "remote_acknowledged": {
+      "title": "Remote Acknowledged",
+      "type": "boolean"
+    },
+    "run_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "strategy_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Strategy Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_tier",
+    "destination_kind",
+    "candidate_id",
+    "strategy_id",
+    "run_id",
+    "account_scope_id",
+    "alert_event_id",
+    "correlation_id",
+    "destination_id",
+    "attempted_at",
+    "acknowledged_at",
+    "attempted_channel_count",
+    "delivered_channel_count",
+    "https_transport",
+    "loopback_destination",
+    "payload_sha256",
+    "acknowledgment_sha256",
+    "remote_acknowledged",
+    "durable_receipt_persisted",
+    "immutable_audit_anchor_present",
+    "receipt_sha256"
+  ],
+  "title": "ExternalAlertDeliveryReceipt",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-external-alert-delivery-receipt",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,414 @@
+{
+  "$defs": {
+    "OfficialPublicKey": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "$ref": "#/$defs/PublicKeyAlgorithm"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "fingerprint_sha256": {
+          "title": "Fingerprint Sha256",
+          "type": "string"
+        },
+        "key_id": {
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "public_key_pem": {
+          "minLength": 1,
+          "title": "Public Key Pem",
+          "type": "string"
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revoked At"
+        },
+        "valid_from": {
+          "format": "date-time",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid To"
+        }
+      },
+      "required": [
+        "key_id",
+        "algorithm",
+        "public_key_pem",
+        "fingerprint_sha256",
+        "valid_from",
+        "available_at"
+      ],
+      "title": "OfficialPublicKey",
+      "type": "object"
+    },
+    "OfficialSocialAccount": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "minLength": 1,
+          "title": "Account Id",
+          "type": "string"
+        },
+        "canonical_url": {
+          "title": "Canonical Url",
+          "type": "string"
+        },
+        "platform": {
+          "minLength": 1,
+          "title": "Platform",
+          "type": "string"
+        }
+      },
+      "required": [
+        "platform",
+        "account_id",
+        "canonical_url"
+      ],
+      "title": "OfficialSocialAccount",
+      "type": "object"
+    },
+    "PublicKeyAlgorithm": {
+      "enum": [
+        "ED25519"
+      ],
+      "title": "PublicKeyAlgorithm",
+      "type": "string"
+    },
+    "SourceRegistryEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "canonical_name": {
+          "minLength": 1,
+          "title": "Canonical Name",
+          "type": "string"
+        },
+        "compromise_incident_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "type": "string"
+          },
+          "title": "Compromise Incident Ids",
+          "type": "array"
+        },
+        "evidence_references": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence References",
+          "type": "array"
+        },
+        "first_report_latency_seconds": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Report Latency Seconds"
+        },
+        "historical_accuracy": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Historical Accuracy"
+        },
+        "historical_correction_rate": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Historical Correction Rate"
+        },
+        "historical_retraction_rate": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Historical Retraction Rate"
+        },
+        "jurisdiction": {
+          "minLength": 1,
+          "title": "Jurisdiction",
+          "type": "string"
+        },
+        "known_api_endpoints": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Known Api Endpoints",
+          "type": "array"
+        },
+        "license_policy": {
+          "minLength": 1,
+          "title": "License Policy",
+          "type": "string"
+        },
+        "official_domains": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Official Domains",
+          "type": "array"
+        },
+        "official_social_accounts": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/OfficialSocialAccount"
+          },
+          "title": "Official Social Accounts",
+          "type": "array"
+        },
+        "public_keys": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/OfficialPublicKey"
+          },
+          "title": "Public Keys",
+          "type": "array"
+        },
+        "registry_entry_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Registry Entry Id",
+          "type": "string"
+        },
+        "source_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_tier": {
+          "$ref": "#/$defs/SourceTier"
+        },
+        "source_type": {
+          "$ref": "#/$defs/SourceType"
+        },
+        "supersedes_registry_entry_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes Registry Entry Id"
+        },
+        "topic_domains": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Topic Domains",
+          "type": "array"
+        },
+        "valid_from": {
+          "format": "date-time",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid To"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "registry_entry_id",
+        "source_id",
+        "version",
+        "canonical_name",
+        "source_type",
+        "source_tier",
+        "jurisdiction",
+        "topic_domains",
+        "license_policy",
+        "evidence_references",
+        "valid_from",
+        "available_at"
+      ],
+      "title": "SourceRegistryEntry",
+      "type": "object"
+    },
+    "SourceTier": {
+      "enum": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "title": "SourceTier",
+      "type": "string"
+    },
+    "SourceType": {
+      "enum": [
+        "REGULATOR",
+        "COURT",
+        "CENTRAL_BANK",
+        "EXCHANGE",
+        "PROJECT_OFFICIAL",
+        "WIRE_SERVICE",
+        "NEWS_OUTLET",
+        "SOCIAL_ACCOUNT",
+        "INDIVIDUAL",
+        "ANONYMOUS"
+      ],
+      "title": "SourceType",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.source-registry/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/SourceRegistryEntry"
+      },
+      "minItems": 1,
+      "title": "Entries",
+      "type": "array"
+    },
+    "published_at": {
+      "format": "date-time",
+      "title": "Published At",
+      "type": "string"
+    },
+    "registry_version": {
+      "minimum": 1,
+      "title": "Registry Version",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "registry_version",
+    "published_at",
+    "available_at",
+    "entries"
+  ],
+  "title": "SourceRegistryDocument",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.source-registry",
+  "x-aegisquant-schema-version": "1.0.0"
+}

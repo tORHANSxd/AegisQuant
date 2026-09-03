@@ -1,0 +1,129 @@
+{
+  "$defs": {
+    "TruthState": {
+      "enum": [
+        "UNVERIFIED",
+        "RUMOR",
+        "PARTIALLY_CORROBORATED",
+        "VERIFIED_PRIMARY",
+        "VERIFIED_MULTI_SOURCE",
+        "CONTRADICTED",
+        "RETRACTED",
+        "STALE",
+        "UNKNOWN"
+      ],
+      "title": "TruthState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.truth-state-transition/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One evidence-bound state revision in a hash-linked claim history.",
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "claim_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "effective_at": {
+      "format": "date-time",
+      "title": "Effective At",
+      "type": "string"
+    },
+    "evidence_revision_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Evidence Revision Id",
+      "type": "string"
+    },
+    "from_state": {
+      "$ref": "#/$defs/TruthState"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "previous_transition_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Transition Id"
+    },
+    "previous_transition_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Transition Sha256"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "to_state": {
+      "$ref": "#/$defs/TruthState"
+    },
+    "transition_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Transition Id",
+      "type": "string"
+    },
+    "version": {
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "transition_id",
+    "claim_id",
+    "from_state",
+    "to_state",
+    "evidence_revision_id",
+    "reason_codes",
+    "effective_at",
+    "observed_at",
+    "available_at",
+    "created_at",
+    "version"
+  ],
+  "title": "TruthStateTransition",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.truth-state-transition",
+  "x-aegisquant-schema-version": "1.0.0"
+}

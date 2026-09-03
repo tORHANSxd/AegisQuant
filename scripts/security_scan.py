@@ -16,6 +16,8 @@ import yaml
 DETECT_EXCLUDE = (
     r"(?:^|[\\/])(?:\.git|\.venv|\.tools|\.next|\.pytest_cache|\.pytest_tmp|\.runtime|"
     r"\.ruff_cache|node_modules|storybook-static|apps[\\/]web[\\/]src[\\/]generated|"
+    r"data[\\/](?:raw|bronze|silver|gold|quarantine)|"
+    r"knowledge[\\/](?:news_archive|social_archive)|"
     r"docs[\\/]spec|reports[\\/](?:licenses|sbom|security))"
     r"(?:[\\/]|$)|Master_Taskbook|REQUIREMENTS_TRACEABILITY|ARTIFACT_MANIFEST|"
     r"CANARY_RELEASE_MANIFEST|"
@@ -28,6 +30,9 @@ DETECT_LINE_EXCLUDE = (
     r"first_digest|second_digest|evidence_commit|implementation_commit|pinned_commit|source_commit|"
     r"terms_version_hash|P00_EVIDENCE_COMMIT|"
     r"P00_IMPLEMENTATION_COMMIT).*|"
+    r'.*"model_revision"\s*:\s*"[0-9a-f]{40,64}".*|'
+    r'.*"(?:5s|15s|30s|1m|5m|15m|30m|1h|4h|12h|1d|3d|7d)"'
+    r'\s*:\s*"[0-9a-f]{64}".*|'
     r".*detect_secrets.*passed_zero_findings.*|"
     r'.*"(?:ledger_snapshot_id|payload_hash|idempotency_key|order_intent_id|risk_decision_id|'
     r"public_key_base64|signature_base64|"

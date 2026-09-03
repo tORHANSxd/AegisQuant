@@ -1,0 +1,192 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-forward-proof-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approved_at": {
+      "format": "date-time",
+      "title": "Approved At",
+      "type": "string"
+    },
+    "effective_from": {
+      "format": "date-time",
+      "title": "Effective From",
+      "type": "string"
+    },
+    "final_holdout_opened": {
+      "const": false,
+      "default": false,
+      "title": "Final Holdout Opened",
+      "type": "boolean"
+    },
+    "independent_event_threshold_rationale": {
+      "maxLength": 1000,
+      "minLength": 20,
+      "title": "Independent Event Threshold Rationale",
+      "type": "string"
+    },
+    "maximum_cost_mae": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Cost Mae"
+    },
+    "maximum_cost_underprediction_rate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Cost Underprediction Rate"
+    },
+    "maximum_event_increment_mae": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Event Increment Mae"
+    },
+    "maximum_forecast_mae": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Forecast Mae"
+    },
+    "maximum_heartbeat_gap_seconds": {
+      "maximum": 3600,
+      "minimum": 1,
+      "title": "Maximum Heartbeat Gap Seconds",
+      "type": "integer"
+    },
+    "maximum_truth_brier_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Truth Brier Score"
+    },
+    "maximum_truth_calibration_error": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Truth Calibration Error"
+    },
+    "minimum_calendar_days": {
+      "minimum": 30,
+      "title": "Minimum Calendar Days",
+      "type": "integer"
+    },
+    "minimum_event_direction_accuracy": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Event Direction Accuracy"
+    },
+    "minimum_forecast_direction_accuracy": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Forecast Direction Accuracy"
+    },
+    "minimum_independent_event_count": {
+      "minimum": 2,
+      "title": "Minimum Independent Event Count",
+      "type": "integer"
+    },
+    "policy_sha256": {
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "threshold_locked_before_run": {
+      "const": true,
+      "default": true,
+      "title": "Threshold Locked Before Run",
+      "type": "boolean"
+    },
+    "version": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "approved_at",
+    "effective_from",
+    "minimum_calendar_days",
+    "minimum_independent_event_count",
+    "independent_event_threshold_rationale",
+    "maximum_heartbeat_gap_seconds",
+    "maximum_truth_brier_score",
+    "maximum_truth_calibration_error",
+    "maximum_forecast_mae",
+    "minimum_forecast_direction_accuracy",
+    "maximum_cost_mae",
+    "maximum_cost_underprediction_rate",
+    "maximum_event_increment_mae",
+    "minimum_event_direction_accuracy",
+    "policy_sha256"
+  ],
+  "title": "ForwardProofPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-forward-proof-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

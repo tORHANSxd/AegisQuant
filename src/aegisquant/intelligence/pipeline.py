@@ -1,12 +1,14 @@
-"""Rule-only P04 language, deduplication, entity, claim, event, and prompt-safety pipeline."""
+"""Rule-only PIT language, deduplication, claim, event, and prompt-safety pipeline."""
 
 from __future__ import annotations
 
 import re
 import unicodedata
 from collections import defaultdict
+from collections.abc import Mapping
 from datetime import datetime
 from decimal import Decimal
+from itertools import pairwise
 from typing import Final
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
@@ -248,11 +250,49 @@ def deduplicate(contents: tuple[CollectedContent, ...]) -> tuple[EvidenceGroup, 
     return tuple(groups)
 
 
+def point_in_time_contents(
+    contents: tuple[CollectedContent, ...], *, as_of_time: datetime
+) -> tuple[CollectedContent, ...]:
+    """Select the latest content revision that was actually observed by ``as_of_time``."""
+
+    as_of = ensure_utc(as_of_time)
+    grouped: dict[ContentId, list[CollectedContent]] = defaultdict(list)
+    for item in contents:
+        if item.observed_time <= as_of:
+            grouped[content_id(item)].append(item)
+    selected: list[CollectedContent] = []
+    for stable_id, revisions in sorted(grouped.items(), key=lambda item: str(item[0])):
+        by_revision: dict[int, CollectedContent] = {}
+        for item in revisions:
+            if item.revision in by_revision:
+                raise ValueError(f"AQ-INTELLIGENCE-DUPLICATE-CONTENT-REVISION:{stable_id}")
+            by_revision[item.revision] = item
+        ordered = tuple(by_revision[number] for number in sorted(by_revision))
+        for earlier, later in pairwise(ordered):
+            if later.observed_time <= earlier.observed_time:
+                raise ValueError(f"AQ-INTELLIGENCE-CONTENT-REVISION-TIME-REGRESSION:{stable_id}")
+            if later.published_time != earlier.published_time:
+                raise ValueError(f"AQ-INTELLIGENCE-CONTENT-PUBLICATION-TIME-CHANGED:{stable_id}")
+            if earlier.modified_time is not None and (
+                later.modified_time is None or later.modified_time < earlier.modified_time
+            ):
+                raise ValueError(
+                    f"AQ-INTELLIGENCE-CONTENT-MODIFICATION-STATE-REGRESSION:{stable_id}"
+                )
+            if earlier.deleted_time is not None and (
+                later.deleted_time is None or later.deleted_time < earlier.deleted_time
+            ):
+                raise ValueError(f"AQ-INTELLIGENCE-CONTENT-DELETION-STATE-REGRESSION:{stable_id}")
+        selected.append(ordered[-1])
+    return tuple(selected)
+
+
 def cluster_claims(
     claims: tuple[ClaimRecord, ...],
     *,
     as_of_time: datetime,
     verified_content_ids: frozenset[ContentId],
+    content_observed_times: Mapping[ContentId, datetime],
 ) -> tuple[EventCluster, ...]:
     as_of = ensure_utc(as_of_time)
     grouped: dict[tuple[str, tuple[str, ...], str], list[ClaimRecord]] = defaultdict(list)
@@ -263,17 +303,32 @@ def cluster_claims(
     for key, group in sorted(grouped.items(), key=lambda item: item[0]):
         event_type, entities, predicate = key
         independent = len({claim.source_independence_group for claim in group})
+        positive = tuple(claim for claim in group if claim.polarity is not Polarity.NEGATE)
+        negative = tuple(claim for claim in group if claim.polarity is Polarity.NEGATE)
         official_ids = tuple(
             SourceDocumentId(str(claim.content_id))
             for claim in group
             if claim.content_id in verified_content_ids
+            and claim.assertion_mode is AssertionMode.FACT
+            and claim.polarity is Polarity.AFFIRM
         )
-        if official_ids:
+        official_denial = any(
+            claim.content_id in verified_content_ids and claim.polarity is Polarity.NEGATE
+            for claim in group
+        )
+        if official_denial:
+            status = EventClusterStatus.DENIED
+        elif official_ids:
             status = EventClusterStatus.CONFIRMED
+        elif all(claim.assertion_mode is AssertionMode.RUMOR for claim in group):
+            status = EventClusterStatus.RUMOR
         elif independent >= 2:
             status = EventClusterStatus.CORROBORATED
         else:
             status = EventClusterStatus.EMERGING
+        observed_times = tuple(content_observed_times[claim.content_id] for claim in group)
+        if any(value > as_of for value in observed_times):
+            raise ValueError("AQ-INTELLIGENCE-EVENT-CLUSTER-LOOKAHEAD")
         cluster_identity = {
             "event_type": event_type,
             "entities": entities,
@@ -286,13 +341,15 @@ def cluster_claims(
                 event_type=event_type,
                 status=status,
                 entity_ids=entities,
-                first_observed_time=as_of,
-                last_updated_time=as_of,
+                first_observed_time=min(observed_times),
+                last_updated_time=max(observed_times),
                 claim_ids=tuple(sorted((claim.claim_id for claim in group), key=str)),
                 supporting_evidence_ids=tuple(
-                    sorted((SourceDocumentId(str(claim.content_id)) for claim in group), key=str)
+                    sorted((SourceDocumentId(str(claim.content_id)) for claim in positive), key=str)
                 ),
-                contradicting_evidence_ids=(),
+                contradicting_evidence_ids=tuple(
+                    sorted((SourceDocumentId(str(claim.content_id)) for claim in negative), key=str)
+                ),
                 independent_source_count=independent,
                 official_confirmation_ids=official_ids,
                 credibility_score=Decimal("0.8") if official_ids else Decimal("0.5"),
@@ -304,21 +361,29 @@ def cluster_claims(
 
 
 def run_pipeline(contents: tuple[CollectedContent, ...], *, as_of_time: datetime) -> PipelineResult:
-    groups = deduplicate(contents)
+    as_of = ensure_utc(as_of_time)
+    visible = point_in_time_contents(contents, as_of_time=as_of)
+    groups = deduplicate(visible)
     group_by_content = {
         content: group.fingerprint for group in groups for content in group.content_ids
     }
-    safety = {content_id(item): prompt_safety(item.text) for item in contents}
+    safety = {content_id(item): prompt_safety(item.text) for item in visible}
     claims = tuple(
         _claim(
             item,
             fingerprint=group_by_content[content_id(item)],
             safety=safety[content_id(item)],
         )
-        for item in contents
+        for item in visible
     )
-    verified = frozenset(content_id(item) for item in contents if item.verified_source)
-    clusters = cluster_claims(claims, as_of_time=as_of_time, verified_content_ids=verified)
+    verified = frozenset(content_id(item) for item in visible if item.verified_source)
+    observed_times = {content_id(item): item.observed_time for item in visible}
+    clusters = cluster_claims(
+        claims,
+        as_of_time=as_of,
+        verified_content_ids=verified,
+        content_observed_times=observed_times,
+    )
     return PipelineResult(
         evidence_groups=groups,
         claims=claims,

@@ -15,33 +15,33 @@
   "visual_baselines": [
     {
       "path": "apps/web/e2e/dashboard.spec.ts-snapshots/p15-execution-chromium-win32.png",
-      "sha256": "cf7f90087c9a9f1e8b4f59cf4a05c5875465f8c31bc0afafb1a8a68c83c2fcc0",
-      "size_bytes": 373189
+      "sha256": "c3d087341b4247db096a66d615d1ced83dd507e4b85e49813936410f89c238c5",
+      "size_bytes": 385681
     },
     {
       "path": "apps/web/e2e/dashboard.spec.ts-snapshots/p15-execution-firefox-win32.png",
-      "sha256": "e170bb652b8248043347864af753fb1a4922b9abdef02f44c9761ba4270c1277",
-      "size_bytes": 175454
+      "sha256": "9248a7c81f99a1e99f6ec2ae0245ddbe077f497993470790e6e41b3356d2058e",
+      "size_bytes": 186897
     },
     {
       "path": "apps/web/e2e/dashboard.spec.ts-snapshots/p15-execution-webkit-win32.png",
-      "sha256": "a6d19acf7daecf43ec56b056867712bbd94f49cd56ea8972607807a795fbf412",
-      "size_bytes": 193550
+      "sha256": "70545e4f9c60f503f28993a0a84529b64e72e68817dba8e2a7246462f99fb082",
+      "size_bytes": 208283
     },
     {
       "path": "apps/web/e2e/dashboard.spec.ts-snapshots/p15-overview-chromium-win32.png",
-      "sha256": "d888ed9379507c49e0039c8dd1bdd8c422d9d1c0f7061055b011cb7f677fe6d1",
-      "size_bytes": 392743
+      "sha256": "7120f716cb14e967c3c73e0460b401ff1e22ca88804cc8e233be20ec0a805599",
+      "size_bytes": 409919
     },
     {
       "path": "apps/web/e2e/dashboard.spec.ts-snapshots/p15-overview-firefox-win32.png",
-      "sha256": "6e27059f3219a308ad16f8a4645f6de2ecfd6c2ac36514aa09d8d1871800f41b",
-      "size_bytes": 203370
+      "sha256": "75b524b95a5d6d4d894a55b8516cbe23029eeaa9d46dbc38755bff7472ff13f3",
+      "size_bytes": 219294
     },
     {
       "path": "apps/web/e2e/dashboard.spec.ts-snapshots/p15-overview-webkit-win32.png",
-      "sha256": "a761b7d98398f07a1185b57fb06e415f382e971b6994541a80b6be321ddd1955",
-      "size_bytes": 218139
+      "sha256": "427aa44888c330e2d8c2763c030df8fbb7914cfacd7988673c23bb13520e2045",
+      "size_bytes": 238431
     }
   ]
 }

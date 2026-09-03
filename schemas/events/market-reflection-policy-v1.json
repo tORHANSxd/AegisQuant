@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "MarketReflectionMetric": {
+      "enum": [
+        "PRE_CONFIRMATION_PRICE_MOVE",
+        "ABNORMAL_RETURN",
+        "VOLUME_SPIKE",
+        "OPEN_INTEREST_CHANGE",
+        "FUNDING_CHANGE",
+        "BASIS_CHANGE",
+        "OPTIONS_IV_SKEW",
+        "CROSS_ASSET_RESPONSE",
+        "NARRATIVE_DIFFUSION",
+        "LIQUIDATION_FLOW",
+        "MARKET_DEPTH_CHANGE"
+      ],
+      "title": "MarketReflectionMetric",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.market-reflection-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "high_price_in_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "High Price In Threshold"
+    },
+    "max_metric_age_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Max Metric Age Seconds",
+      "type": "integer"
+    },
+    "metric_weights": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ],
+        "ge": "0",
+        "le": "1"
+      },
+      "propertyNames": {
+        "$ref": "#/$defs/MarketReflectionMetric"
+      },
+      "title": "Metric Weights",
+      "type": "object"
+    },
+    "policy_version": {
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "required_metrics": {
+      "items": {
+        "$ref": "#/$defs/MarketReflectionMetric"
+      },
+      "minItems": 1,
+      "title": "Required Metrics",
+      "type": "array"
+    }
+  },
+  "required": [
+    "policy_version",
+    "required_metrics",
+    "metric_weights",
+    "high_price_in_threshold",
+    "max_metric_age_seconds"
+  ],
+  "title": "MarketReflectionPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.market-reflection-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,306 @@
+{
+  "$defs": {
+    "ClaimType": {
+      "description": "Semantic class assigned before truth adjudication.",
+      "enum": [
+        "FACT",
+        "FORWARD_FACT",
+        "INTERPRETATION",
+        "OPINION",
+        "PREDICTION",
+        "QUOTE",
+        "RUMOR"
+      ],
+      "title": "ClaimType",
+      "type": "string"
+    },
+    "TruthAssessmentScope": {
+      "enum": [
+        "CLAIM_TRUTH",
+        "FORWARD_FACT_STATUS",
+        "QUOTE_AUTHENTICITY"
+      ],
+      "title": "TruthAssessmentScope",
+      "type": "string"
+    },
+    "TruthState": {
+      "enum": [
+        "UNVERIFIED",
+        "RUMOR",
+        "PARTIALLY_CORROBORATED",
+        "VERIFIED_PRIMARY",
+        "VERIFIED_MULTI_SOURCE",
+        "CONTRADICTED",
+        "RETRACTED",
+        "STALE",
+        "UNKNOWN"
+      ],
+      "title": "TruthState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.truth-assessment/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Calibratable truth output that never accepts opinion-like claim classes.",
+  "properties": {
+    "assessed_at": {
+      "format": "date-time",
+      "title": "Assessed At",
+      "type": "string"
+    },
+    "assessment_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Assessment Id",
+      "type": "string"
+    },
+    "assessment_scope": {
+      "$ref": "#/$defs/TruthAssessmentScope"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "calibration_bucket": {
+      "minLength": 1,
+      "title": "Calibration Bucket",
+      "type": "string"
+    },
+    "claim_current_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Claim Current Probability"
+    },
+    "claim_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "claim_truth_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Claim Truth Probability"
+    },
+    "claim_type": {
+      "$ref": "#/$defs/ClaimType"
+    },
+    "content_integrity_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Content Integrity Probability"
+    },
+    "contradiction_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Contradiction Probability"
+    },
+    "evidence_dependency_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Evidence Dependency Score"
+    },
+    "evidence_graph_hash": {
+      "title": "Evidence Graph Hash",
+      "type": "string"
+    },
+    "evidence_independence_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Evidence Independence Probability"
+    },
+    "independent_evidence_count": {
+      "minimum": 0,
+      "title": "Independent Evidence Count",
+      "type": "integer"
+    },
+    "manipulation_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Manipulation Probability"
+    },
+    "model_version": {
+      "minLength": 1,
+      "title": "Model Version",
+      "type": "string"
+    },
+    "policy_version": {
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "revision_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Revision Probability"
+    },
+    "source_compromised_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Source Compromised Probability"
+    },
+    "source_document_ids": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Document Ids",
+      "type": "array"
+    },
+    "source_identity_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Source Identity Probability"
+    },
+    "source_revision_ids": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Revision Ids",
+      "type": "array"
+    },
+    "truth_state": {
+      "$ref": "#/$defs/TruthState"
+    }
+  },
+  "required": [
+    "assessment_id",
+    "claim_id",
+    "claim_type",
+    "assessment_scope",
+    "source_document_ids",
+    "source_revision_ids",
+    "source_identity_probability",
+    "content_integrity_probability",
+    "claim_truth_probability",
+    "claim_current_probability",
+    "evidence_independence_probability",
+    "manipulation_probability",
+    "revision_probability",
+    "source_compromised_probability",
+    "independent_evidence_count",
+    "evidence_dependency_score",
+    "contradiction_probability",
+    "calibration_bucket",
+    "truth_state",
+    "reason_codes",
+    "evidence_graph_hash",
+    "model_version",
+    "policy_version",
+    "assessed_at",
+    "available_at"
+  ],
+  "title": "TruthAssessment",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.truth-assessment",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "MatchedControl": {
+      "additionalProperties": false,
+      "properties": {
+        "distance": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Distance"
+        },
+        "state_id": {
+          "title": "State Id",
+          "type": "string"
+        },
+        "state_sha256": {
+          "title": "State Sha256",
+          "type": "string"
+        },
+        "weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Weight"
+        }
+      },
+      "required": [
+        "state_id",
+        "state_sha256",
+        "distance",
+        "weight"
+      ],
+      "title": "MatchedControl",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.matched-state-set/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "candidate_count": {
+      "exclusiveMinimum": 0,
+      "title": "Candidate Count",
+      "type": "integer"
+    },
+    "matched_controls": {
+      "items": {
+        "$ref": "#/$defs/MatchedControl"
+      },
+      "minItems": 2,
+      "title": "Matched Controls",
+      "type": "array"
+    },
+    "matching_spec_sha256": {
+      "title": "Matching Spec Sha256",
+      "type": "string"
+    },
+    "treated_state_sha256": {
+      "title": "Treated State Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "treated_state_sha256",
+    "matching_spec_sha256",
+    "candidate_count",
+    "matched_controls",
+    "as_of_time"
+  ],
+  "title": "MatchedStateSet",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.matched-state-set",
+  "x-aegisquant-schema-version": "1.0.0"
+}

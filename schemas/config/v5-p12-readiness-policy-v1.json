@@ -1,0 +1,156 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-p12-readiness-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approved_at": {
+      "format": "date-time",
+      "title": "Approved At",
+      "type": "string"
+    },
+    "automatic_live_unlock_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Live Unlock Allowed",
+      "type": "boolean"
+    },
+    "candidate_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "effective_from": {
+      "format": "date-time",
+      "title": "Effective From",
+      "type": "string"
+    },
+    "final_holdout_opened": {
+      "const": false,
+      "default": false,
+      "title": "Final Holdout Opened",
+      "type": "boolean"
+    },
+    "forward_proof_policy_sha256": {
+      "title": "Forward Proof Policy Sha256",
+      "type": "string"
+    },
+    "integrated_decision_sha256": {
+      "title": "Integrated Decision Sha256",
+      "type": "string"
+    },
+    "minimum_accepted_order_count": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Minimum Accepted Order Count",
+      "type": "integer"
+    },
+    "minimum_fill_count": {
+      "maximum": 10000000,
+      "minimum": 1,
+      "title": "Minimum Fill Count",
+      "type": "integer"
+    },
+    "minimum_terminal_order_count": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Minimum Terminal Order Count",
+      "type": "integer"
+    },
+    "minimum_testnet_soak_seconds": {
+      "maximum": 604800,
+      "minimum": 3600,
+      "title": "Minimum Testnet Soak Seconds",
+      "type": "integer"
+    },
+    "policy_sha256": {
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "risk_policy_sha256": {
+      "title": "Risk Policy Sha256",
+      "type": "string"
+    },
+    "strategy_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Strategy Id",
+      "type": "string"
+    },
+    "thresholds_locked_before_run": {
+      "const": true,
+      "default": true,
+      "title": "Thresholds Locked Before Run",
+      "type": "boolean"
+    },
+    "trusted_attestor_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Trusted Attestor Id",
+      "type": "string"
+    },
+    "trusted_attestor_key_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Trusted Attestor Key Id",
+      "type": "string"
+    },
+    "trusted_attestor_public_key_base64": {
+      "title": "Trusted Attestor Public Key Base64",
+      "type": "string"
+    },
+    "trusted_timestamp_authority_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Trusted Timestamp Authority Id",
+      "type": "string"
+    },
+    "trusted_timestamp_key_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Trusted Timestamp Key Id",
+      "type": "string"
+    },
+    "trusted_timestamp_public_key_base64": {
+      "title": "Trusted Timestamp Public Key Base64",
+      "type": "string"
+    },
+    "version": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    },
+    "weighted_score_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Weighted Score Allowed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "version",
+    "candidate_id",
+    "strategy_id",
+    "forward_proof_policy_sha256",
+    "integrated_decision_sha256",
+    "risk_policy_sha256",
+    "approved_at",
+    "effective_from",
+    "minimum_testnet_soak_seconds",
+    "minimum_accepted_order_count",
+    "minimum_terminal_order_count",
+    "minimum_fill_count",
+    "trusted_attestor_id",
+    "trusted_attestor_key_id",
+    "trusted_attestor_public_key_base64",
+    "trusted_timestamp_authority_id",
+    "trusted_timestamp_key_id",
+    "trusted_timestamp_public_key_base64",
+    "policy_sha256"
+  ],
+  "title": "P12ReadinessPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-p12-readiness-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

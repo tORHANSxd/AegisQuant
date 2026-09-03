@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "ForwardIncidentSeverity": {
+      "enum": [
+        "INFO",
+        "WARNING",
+        "HIGH",
+        "CRITICAL"
+      ],
+      "title": "ForwardIncidentSeverity",
+      "type": "string"
+    },
+    "ForwardMode": {
+      "enum": [
+        "PAPER",
+        "SHADOW"
+      ],
+      "title": "ForwardMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-forward-incident/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "category": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Category",
+      "type": "string"
+    },
+    "data_loss_detected": {
+      "title": "Data Loss Detected",
+      "type": "boolean"
+    },
+    "detected_at": {
+      "format": "date-time",
+      "title": "Detected At",
+      "type": "string"
+    },
+    "future_correction_attempted": {
+      "title": "Future Correction Attempted",
+      "type": "boolean"
+    },
+    "incident_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Incident Id",
+      "type": "string"
+    },
+    "incident_sha256": {
+      "title": "Incident Sha256",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/ForwardMode"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "requires_restart": {
+      "title": "Requires Restart",
+      "type": "boolean"
+    },
+    "resolved_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Resolved At"
+    },
+    "run_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "severity": {
+      "$ref": "#/$defs/ForwardIncidentSeverity"
+    }
+  },
+  "required": [
+    "run_id",
+    "mode",
+    "incident_id",
+    "severity",
+    "category",
+    "detected_at",
+    "recorded_at",
+    "resolved_at",
+    "requires_restart",
+    "data_loss_detected",
+    "future_correction_attempted",
+    "incident_sha256"
+  ],
+  "title": "ForwardIncident",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-forward-incident",
+  "x-aegisquant-schema-version": "1.0.0"
+}

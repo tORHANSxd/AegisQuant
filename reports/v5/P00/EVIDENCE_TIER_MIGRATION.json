@@ -1,0 +1,4865 @@
+{
+  "schema_version": "v5-p00-evidence-tier-migration-v1",
+  "phase": "V5-P00",
+  "spec_sha256": "aee366d5fa1a8ebd7449c597e6f822535546633efc335c1ab0053333d160a255",
+  "evidence_tier": "DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "live_trading_locked": true,
+  "scope": "reports/** excluding reports/v5/**",
+  "default_tier": "DEVELOPMENT",
+  "default_policy": "fail closed until a later v5 phase supplies qualifying evidence",
+  "artifact_count": 482,
+  "tier_counts": {
+    "DEVELOPMENT": 463,
+    "FIXTURE": 16,
+    "SYNTHETIC": 3
+  },
+  "promotion_eligible_count": 0,
+  "all_historical_reports_classified": true,
+  "artifacts": [
+    {
+      "path": "reports/acceptance/ACCEPTANCE.md",
+      "sha256": "28b1fb18221b374b661a2791f9afe803637b6e96698c9b4c944d136e12cc876d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/ADR_REFERENCES.md",
+      "sha256": "f2b6e98b298adb3506d1d9d4ef86016cce0e4b115bf10810b08c232d8cfb0b8a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/ARTIFACT_MANIFEST.json",
+      "sha256": "c3af879b26dc11cf4853ac6ff409c3718a8579ce031059f706ccaca3ba7ffcd7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/CI_RESULTS.json",
+      "sha256": "c68f4e2877cda8ccc86fc74383d98672cec0687f0e2b16cd4b7ad22fc598e670",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/CI_RESULTS_FAILED_ATTEMPT_001.json",
+      "sha256": "eca18f51f1a598a0f1ba4ef3e833bd963bbcc7cde0e76ce569323af2c8cfba7e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/NEXT_ACTIONS.md",
+      "sha256": "2f8fc93939db6364122947378fa2be00f1ee821acbfcb4311dd51311b05a1d22",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/PLAN.md",
+      "sha256": "e435b9aa17347da98b9bd494732c624a08ce9d0475d6a804799ada01db250914",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "49faf1c1a327a158b7f9f6c0d6474a52ee55a5166f0f5afee881f263b26cb6cd",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/RISKS.md",
+      "sha256": "3e00afd73de18505bcf49e14f82ad9392edcab97c5e6bcb8e58b2265603807be",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/SUMMARY.md",
+      "sha256": "6ce525ea88292bc7c5d9f1790435ce2739ccdcdd95b556ce6dc3534d01552e3d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/SYSTEM_ACCEPTANCE.json",
+      "sha256": "6a0c978741cdeab83dc8be65d3c5a16ccb43a625b42f72047a8ac4cfe4e7fd0e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/TEST_RESULTS.json",
+      "sha256": "2c9b701dc6a9e7c72de8780b0130ffa1d07800754f147be82e726b9427775f4e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/acceptance/WAIVERS.md",
+      "sha256": "c696cfea36b5fe1f476b61629d91a95d58ab8bb3584d49bea0891b9fa8c55232",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/access/LOCAL_PATH_REQUESTS.md",
+      "sha256": "8980a0c00c9634908af4abdf5f500d41ca48d8e77718b3c74ac9300cf57c8037",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/access/NEWS_SOCIAL_ACCESS_MATRIX.md",
+      "sha256": "3abce3133c83b7f16da5215622e98362cd59d8b11990db4a2d7330e14c120fe1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/access/OFFICIAL_SOURCE_ALLOWLIST_TEMPLATE.yaml",
+      "sha256": "5f59ce842e5f6196ec613e7ab7274c61a3cdec38ff282ab058fbe9709e95e19d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/access/P04_PROVIDER_ACCESS_MATRIX.md",
+      "sha256": "fff2ea36e8d88ab283c4f0db1e1681f0d74781a1d8f47d0e6f7a6274c0f694f1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/access/SECRET_SETUP_GUIDE.md",
+      "sha256": "81a9944a9da69b952d964779987ebf0126e4a8ecf4dcc4d3520b48f5f6999aeb",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/access/SOURCE_ACCESS_REQUESTS.md",
+      "sha256": "d2dde28915d57ad459436dd7e3b8aaa9185f3cc21ddcdef23221cb7c6ace9fc8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/access/SOURCE_ACCESS_REQUESTS.yaml",
+      "sha256": "f4902b5c763c48a2c9274bd73e7c64170892d6e0366965a5b75bcf856329821f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/api/P14_CLIENT_CONTRACT.json",
+      "sha256": "b96d162162bdb078c14e2ed960e885acf360983420b61c7bd04e1f372bc87bd0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/api/P14_OPENAPI.json",
+      "sha256": "82d4c955cc158af08a80bd348ddbeb0b78781e409d670b9414b0790d47562f87",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/api/P14_WEBSOCKET_EVIDENCE.json",
+      "sha256": "f134f05e4bcc1325f0c9d83c034709b80a0596215eb6299aa12b23c91a90e3e5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/api/P14_WEBSOCKET_SCHEMA.json",
+      "sha256": "4a513f594f962bef707fc3e83725d556685c6ea9227c0eb50a816a1f51e10339",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/api/P15_OPENAPI.json",
+      "sha256": "94a090dc1d5ac78b9ea8066af5776d07cd84e524c5c72da72a2033999488dc76",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/api/P15_WEBSOCKET_SCHEMA.json",
+      "sha256": "6138b390c10d13e5d8ea4ca7b914c4a0481aa65f2713d1512c1cdb82e44b1b6a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/cost_report.md",
+      "sha256": "9f92160bd74d97b55cf223319636b4d742590efdca9e20c2f9a63c604472e60a",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/equity_curve.parquet",
+      "sha256": "364af555899cc7f8832065b1cf3e2d5b5580c4485468ae8f74f54b23944fa5da",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/fills.parquet",
+      "sha256": "f97aa4494f01c532d472a08f5ad891be85dee0cb3caca653ca7b47ecb1f9141c",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/ledger_entries.parquet",
+      "sha256": "f051174df7303c10c822d2f92a9b2877ed4aeb3c7915dd195764d87bb08c131f",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/metrics.json",
+      "sha256": "c78e089fe6c84da001035a3cc79e3d24bd313992601ea588ac01bd64dd8755f6",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/orders.parquet",
+      "sha256": "601bcb84dc06d3c9d9bf334a2bae31f12c0719acc7ca28bfc2308c1fb01ce87d",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/pnl_attribution.parquet",
+      "sha256": "409304a0ffbd595791be5e0717677082ac693d75088d4791e883829bbb478dca",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/positions.parquet",
+      "sha256": "2434ad2dd49dcdc2d52046c76069fac095da0358ea1a9bf9abd207b88e65cec0",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/reproduction_command.txt",
+      "sha256": "da022883ef6faaf7a45a83e194764a2fd3ba9ef03491126f1dc02b9bf8a27caa",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/risk_report.md",
+      "sha256": "4cc6b7f05c42a75ce47e63fdee66b26dc4fa0e9194671767944fddfbec46863d",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/run_manifest.json",
+      "sha256": "cf101f5b42183d85a321edea12e9e07f8e354e3baae02e9264fae2609ae2f926",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/backtests/p06-golden/validation_report.md",
+      "sha256": "247a4214d7e454917a9469c65578a60e2a5d48763c42864b3a6a3e70d0235319",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION",
+        "UPSTREAM_PLACEHOLDER_HASHES",
+        "EXTREME_SHORT_WINDOW"
+      ]
+    },
+    {
+      "path": "reports/compatibility/BINANCE_NAUTILUS_SEMANTICS.json",
+      "sha256": "4f64a844dd0da457bc57873f116088b54030678ad30e66018b505d41c8155f1d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/compatibility/BINANCE_NAUTILUS_SEMANTICS.md",
+      "sha256": "92b002ab5f8c850d937b7e5783de788042f05ece740acff89a9f7aba9a80069e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/compatibility/NAUTILUS_COMPATIBILITY.json",
+      "sha256": "07ae3c56dfc461ee4e3492da5e912aab81c5d0e19b0f1ca56700d1c317fb9616",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/compatibility/P04_NAUTILUS_ADAPTERS.json",
+      "sha256": "12464672a88572096449c7a31a97e0774ac9c5f7667fb4fbb777279b8988dfe1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/compatibility/P12_NAUTILUS_EXECUTION.json",
+      "sha256": "e154c6e1ea3bb84b7fe68f75338e33f6e3473feef1e6f89fc2d1f038eb035c27",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/BINANCE_CHANGELOG_WATCH.json",
+      "sha256": "5aa5a5491c41f8910f4b09a663fdbc56cfa16b36462ca19d1c4ba9a16afec03a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/BINANCE_CONSISTENCY_CHECKS.json",
+      "sha256": "5fdba9d23d5be18bbf16020fdf2c6005cf4036fff99c2e975b5d6a3c5244b7c5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/BINANCE_CONSISTENCY_CHECKS.md",
+      "sha256": "cbd87f4586e35e25f82a19d3a2c298afa320048d4305a561a1962345c3389d0c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/BINANCE_LIVE_SAMPLE.json",
+      "sha256": "c25eb0fe5f14e5468cd901bb235c9041ca1e4a7c0ca40658324da3f3faf2897e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/BINANCE_ORDERBOOK_RECOVERY.json",
+      "sha256": "c83d140ab7ad71b351595aa2b246a34e605a450c47efbd65cdd906d206513a50",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/BINANCE_ORDERBOOK_RECOVERY.md",
+      "sha256": "210369803d23f65ee2c13e60a4b465c65d71fc5b67532de89e83e47ee0b88867",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/BINANCE_PUBLIC_CONTRACTS.md",
+      "sha256": "5a9edc9ec9776e5fcb65a7bf93b22b90797ae8958585d8dc2b9f166dc9cd71dd",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/BINANCE_SOAK_ATTEMPT_SUMMARY.json",
+      "sha256": "8aeccc8a5c9d25b9257356feadbcf9b0d3ac9178a7c7ef513d6ba336b9251b2c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/DATA_LAKE_BENCHMARK.md",
+      "sha256": "3ee0c693ce3eb16d05e43f31005c9a97102947d1dfa5c6d5e02e1871bb31add0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/LOCAL_ASSET_IMPORT_PROPOSALS.jsonl",
+      "sha256": "4d6244b33932763981b19a0768867ebbb249ee01f5911fed2b46674d5def7ec3",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/LOCAL_ASSET_INVENTORY.md",
+      "sha256": "d106b1ca6de65977589a857040c0ef017ff90a61f8bb86d8aeaaf026d49c7b5a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/LOCAL_ASSET_INVENTORY.parquet",
+      "sha256": "24eeb718775abfe3796669e2850cef42d83b6a9a63e9b5f589e5dcc1ef06757c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P02_DATA_EVIDENCE.json",
+      "sha256": "8f98fb36825413cb0dd8faf177186afa12c67963a4767ad03c39364c488dcd07",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P04_EVENT_SOURCE_EVIDENCE.json",
+      "sha256": "c48c8d687f509255314b2aab3d9acdd291e54ba29b262653d683cc4233989d1c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P04_MARKET_EVIDENCE.json",
+      "sha256": "af767abca8f993789dd74c913b47e5653823cd0638af7b9b00a288bea08662f1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P04_PUBLIC_PROVIDER_CONTRACTS.json",
+      "sha256": "2855f67f81100fbff715b4c1be31e906e5d0dd698dfd39f81e83aa23e43bf214",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P05_ACCOUNTING_EVIDENCE.json",
+      "sha256": "9611312ec7c8fb5854416a360d0a2d0c36dd177663afdd20eeea477af4a2933d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P05_GOLDEN_RESULTS.json",
+      "sha256": "006606dea7b785120d6f4a041a830d045dc9566f7069f4e7526d964589e31352",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P05_RECONCILIATION_EVIDENCE.json",
+      "sha256": "f805e6066782057802e295cbb83649644c2231d59fe0a38442eb5198b660014c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P05_REPLAY_EVIDENCE.json",
+      "sha256": "70771ffebab6cfdb4297c1b80b1c325b8f479c790b4fd7111deb87b2e69b6553",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P05_SNAPSHOT_EVIDENCE.json",
+      "sha256": "6dca25509d56a7a7d41ab87ffd781d1ea75ad54877a9df5fe86b307c0db3e513",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P06_BACKTEST_EVIDENCE.json",
+      "sha256": "cc2a5f645ebb8701b606106ee9098842a97e4441676d253f1aecc54e0f67eeda",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P06_CONSISTENCY_EVIDENCE.json",
+      "sha256": "9b53919acbd0a5e541d0e8ac5d15b620de7ceb8d74b8b1d820f0bdf0c909b94d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P06_FAILURE_EVIDENCE.json",
+      "sha256": "24b963ca5e8d52f74554bbf8a0bdbaa23ecc31f99ec24f087ba8348788ae616f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P06_GOLDEN_RESULTS.json",
+      "sha256": "e0bfe22b2504aed44d84fffd05da44028e3a3445f260c9d5e522ed3490cfb687",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P06_NAUTILUS_CONTRACT.json",
+      "sha256": "1f122da77aa3b3d2ecb0f14de6c92463b8bccf37d31ed195175bf05ec6d2ddd2",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P06_REPLAY_EVIDENCE.json",
+      "sha256": "8e58bbdd65ee5ea04d04f2980a6646db5cf9c7a4732347b396c00aec73524798",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P06_RULES_EVIDENCE.json",
+      "sha256": "c31ead5a173265cae23ff1167cb9036271f79addbbd5203f5f8f504bb9d89af9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P06_STRESS_EVIDENCE.json",
+      "sha256": "bd181efbff4ed698161198b3316b25153ef4232ba9e88f38cceedfdd348e14f5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_BASELINE_EVIDENCE.json",
+      "sha256": "730e64c49e716f61a7a5b375ff34293e329a1ddf9720dd155ae257c3ccc690ee",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_DATASET_EVIDENCE.json",
+      "sha256": "6dbfce0cbca2d3db3bbaa9ba3b87244e7c62b0813b8c3158a56f4b94c81d2fd8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_DEPENDENCY_CONTRACT.json",
+      "sha256": "356389c10536b1ce9bf89b73dc715eeeede23f0913ccd49f951b413636e0a123",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_EVENT_FEATURE_EVIDENCE.json",
+      "sha256": "fbdf9793875e5e66ccb958ba94afb2ff62a1e7fd795280366a000076fc2a514c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_EXPERIMENT_EVIDENCE.json",
+      "sha256": "51495acf9b6ebcf04c499aed445ad864bad8a325879ea2d77cef395b305df296",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_EXTERNAL_BASELINE_EVIDENCE.json",
+      "sha256": "2d5d9e523d7dc435ac1ea2eab1acb71c23e189c09ecbeda25564509a8b5709d2",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_FEATURE_EVIDENCE.json",
+      "sha256": "385c83532d879f15828c4f2ea62aa0503443e68829e5a30e8f8a96e931514d37",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_HOLDOUT_EVIDENCE.json",
+      "sha256": "544d783e9009b4e77802ad9827f18c97147b0170ef3750829e5d804e91ec027e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_LABEL_EVIDENCE.json",
+      "sha256": "e6d51afe2d072df998730aeb25e916b95f6068795330c61d70ff3c17edd53f76",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_LEAKAGE_EVIDENCE.json",
+      "sha256": "ec76255c4c9d5ca62a20fbaef22d09a64e60a2ff1b1e5cf8e43b3c329ca1f663",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_MODEL_EVIDENCE.json",
+      "sha256": "f0d6daa5ff2947a22384f3c27bf5ab3ef2ccfe611ee44b40c18890b8b9e985aa",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_STRESS_EVIDENCE.json",
+      "sha256": "e2b794b98503ec2c3927644a75c6bfe46af6ee14388b543640c7e3f5c20ef1a8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P07_VALIDATION_EVIDENCE.json",
+      "sha256": "5705f1380af4a4951c071c8876003ba14f38eedd9556754fb54009922ece4189",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_DEPENDENCY_CONTRACT.json",
+      "sha256": "87113f5dd134ed62f9a7452fad1f5d6d4e4ac9fbc17fef62dd16d38d93dc04f4",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_DRIFT_EVIDENCE.json",
+      "sha256": "0bd93b44041c93ccf102b9a55e4cdf61f53b60daa9f07d919521d7c6612595d2",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_ENSEMBLE_EVIDENCE.json",
+      "sha256": "6eaa42631a7e34cd6604b255cfbf0d9ca9156e29fcf79b942d7b2b793cc50761",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_EVENT_COMMITTEE_EVIDENCE.json",
+      "sha256": "97fce5ea23b7c7f6bde1d3d26583e5b02b8c783134f0fc97b086546ac48e501d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_EVENT_GRAPH_EVIDENCE.json",
+      "sha256": "0079d6a4e43355f3a20536b3fab20458b39949f2be2b8af00b764674fead52e3",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_EVENT_REPLAY_EVIDENCE.json",
+      "sha256": "b047ec12f46ba82723f91684daf2c412791ea9c8300eee72733f08624d4d4721",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_EXPERIMENT_EVIDENCE.json",
+      "sha256": "300b33d0d13d122dd99d989018b4f32408686c2ea317da6b3b38317c4bc40da8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_FOUNDATION_MODEL_EVIDENCE.json",
+      "sha256": "51e64e21c9a1e80d9b249cd29061ac99aab2968f58888c815d0a1db1f0645156",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_HYPOTHESIS_EVIDENCE.json",
+      "sha256": "404689cab5626e2c0ce5023d31c936c2a5435e0117e968a5743988f354e03b74",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
+      "sha256": "ba328e70cdb8c41680f0338a802422a11be8167d9055964f6976ac06be317adb",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_PROMPT_SAFETY_EVIDENCE.json",
+      "sha256": "bf8c665f3817968391cb8e03be17e6c913d31f640ec95cceb8fd39d356ebe82f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_REGISTRY_EVIDENCE.json",
+      "sha256": "5519a41bb4a18317a5bf90c53c3dba772ef87c0dc7d4580d484cada46fff2c00",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_RESOURCE_EVIDENCE.json",
+      "sha256": "13a728c01ab34465a6465a0decace9b3b510f6def28c5ef0a5e1a1bbffd9ead7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P08_UNCERTAINTY_EVIDENCE.json",
+      "sha256": "4f270e85a1b2a8dcdca9e0181ca044fcf5ab44dc0b9e2577a586f54c830436a1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P09_DEDUPE_EVIDENCE.json",
+      "sha256": "7e80a1bb1fea378e8a889b9b4e6c6122bf870a08bda7bf05b2f1b130d1d2baae",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P09_DEPENDENCY_CONTRACT.json",
+      "sha256": "79c77453ad809ae0ae0650c1a49005b95b1b4f90587ce8dd101ed65159d188b1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P09_DISCOVERY_EVIDENCE.json",
+      "sha256": "098918ec51f07c58cfe0bd17da192e85c7770057b91177c3e8cf8571913de8a1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P09_FRAMEWORK_REVIEW_EVIDENCE.json",
+      "sha256": "be5e14b8a9047dcf9488ed3fd0364b90cd3861efdb11ceac12eb8a2f86ada089",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P09_IMPORT_EVIDENCE.json",
+      "sha256": "4b2e3f1779a889fcd9281357a1403548e8e90773b1402c18499f00afb4798306",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P09_RIGHTS_EVIDENCE.json",
+      "sha256": "60226618c7bcd184d4770feee73000368d5b0c1ac1f6ec29c17806d330842947",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P09_STATIC_ANALYSIS_EVIDENCE.json",
+      "sha256": "42ffdc22e32aea39523684cb3af42833c44b65cee22fba503da0ba5a314ac608",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P09_STRATEGY_IR_EVIDENCE.json",
+      "sha256": "1eb99ca729501f1e24679505887e4bd867eb5094ff3fc415b09504183876b429",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P09_TRANSLATION_EVIDENCE.json",
+      "sha256": "81c14a597ffb92cd6721debbb5d0f1565c32ba88a9bb559e7a84387a3ca057d6",
+      "evidence_tier": "SYNTHETIC",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "EXPLICIT_SYNTHETIC_EVIDENCE",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_ABLATION_EVIDENCE.json",
+      "sha256": "53d02e54cbf7d676d53e783e3d1cc813480cd4a1cbfa10c227d3739ff958aef1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_ANNOTATION_EVIDENCE.json",
+      "sha256": "5f4601b2a1239543d85eafa386a1fbae1136ac8bad485e479fb1370f0f1e18e2",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_COMMITTEE_EVIDENCE.json",
+      "sha256": "4e71de4c6008b6768ff691ba73fec88753837ca295663eca05e92baba48ff4a9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_CREDIBILITY_EVIDENCE.json",
+      "sha256": "4006ec17f140ea845427c937cf5cec4491825c482d922db0f55ba2d359b30933",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_DEPENDENCY_CONTRACT.json",
+      "sha256": "87bbde1feec734047722ea84dd310b7da4a05842eb0454676011f2e3c4341a9a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_EVENT_GRAPH_EVIDENCE.json",
+      "sha256": "a76be32511a58398643058b067e639afc792ce8c9f845c795a82af9a217a85ac",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_FUSION_EVIDENCE.json",
+      "sha256": "9066d2b1661990ac643cb379e51af607360e82f059bd31294b93401504db2455",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_REPLAY_EVIDENCE.json",
+      "sha256": "135ca3be2b4b893b99dfddc6bffe35be8288c701e9547ff4af74d3a50f631fdc",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_SOCIAL_SOURCE_EVIDENCE.json",
+      "sha256": "0d7f6ecc13b388a155e4bab1c1a161ac013df85dcac732786707f9f4df4535ac",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_SOURCE_CONTRACT_EVIDENCE.json",
+      "sha256": "df7e3a4f2a22d0a069975777ce0889243db992e97be0de2ae36b7e36555dfaae",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_SOURCE_MONITOR_EVIDENCE.json",
+      "sha256": "2c12896e907044eb89c200f387c16eff737cd8d85582d84ccce2eacfce320c23",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P10_SOURCE_POLICY_EVIDENCE.json",
+      "sha256": "79c68ed6533f58e85741dcd9116f00af507eddc6a89e36f493a5c1529c9bbf19",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P11_ARCHITECTURE_EVIDENCE.json",
+      "sha256": "d8ba7ef3f74d4ac1459136ee4da0ae7b3ce3ec1706f8b7dd1b0836602783301d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P11_CIRCUIT_BREAKER_EVIDENCE.json",
+      "sha256": "126e208d868034121a5539551a498a8e7ab37d19e4c562d5ab4006c9c13b9169",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P11_CONSTRAINT_EVIDENCE.json",
+      "sha256": "2d1f86b7c63a2829a577ee15d949eab6f326d0742b4173f342c034b6ec90e064",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P11_PLAYBOOK_EVIDENCE.json",
+      "sha256": "27885955b58cdcf5ddfb124f79c8f6db74a531c2cb2743a582fd770920ff5773",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P11_PORTFOLIO_EVIDENCE.json",
+      "sha256": "6b4edd52e3c503a9662b3ec8f5477303b9ce7d2b45d1b1e8d736e6842fb0a283",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P11_PRETRADE_EVIDENCE.json",
+      "sha256": "b4cd8998b6af1501ad6585f7715fb40563314e6be9b4a2a9a30e47a996108c6f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P11_RISK_DECISION_EVIDENCE.json",
+      "sha256": "0b0082ccf005d1b758836048fd0b559eafbe0474a177aa983af9b52f65ee9650",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P11_RISK_ESTIMATION_EVIDENCE.json",
+      "sha256": "71f53c4f2f69386f7a6dba5339b0d7694b5308cf7eb1c2755ced4d7962cd83f7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/P11_STATE_REPLAY_EVIDENCE.json",
+      "sha256": "a24295e0024214ed6cf14f97a59d0de403323769aa01f58894a1f056d8a61aaf",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/PIT_LEAKAGE_TESTS.md",
+      "sha256": "05b32299912999b71e32aeccfb23c2cd7bf7181c352c0c63fd8aae882475fba9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/PUBLIC_PARQUET_SAMPLE.json",
+      "sha256": "f0aff65380dcf6d70a5c49338107cf62f251574addad30b5e1606cbe746da19e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/PUBLIC_PARQUET_SAMPLE.md",
+      "sha256": "5ad3a7946ce28e0f15a7850f792c366d49ea4b9cbe2160c9c1f91c81a6818f42",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/ABLATION_EVIDENCE.json",
+      "sha256": "d6532338082d973459ed75e31ac669a9fd0a6e131c51abbb5ba49429d7584afb",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/AI_TRADER_REFERENCE_REVIEW.md",
+      "sha256": "b0a1c6def1de8eb474a26af027902e0601691e0db9830def6956418d23ca7bff",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/CONDITIONAL_CANDIDATES.json",
+      "sha256": "72fbbdcd93bcd59eef7c560eb281d8d6fdf46a25bf0f79b44d0f9995840e1d2f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/DEGRADATION_EVIDENCE.json",
+      "sha256": "edae25d98a875c53c62a7f6faeece1ee6c50d7e60dc8d2125a8f131a60c8a209",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/NEGATIVE_RESULTS.json",
+      "sha256": "32836894e66859d7db636f7f2468ea91e06a16f54762c247ea1415e9f7b1e5d9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/NEWS_BAKEOFF_EVIDENCE.json",
+      "sha256": "7f567d2b27cb7dc24d6677c52049bfc2a9d304e5aa858ac10896cc31e0c76d2e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/OFFICIAL_CROSSCHECK.json",
+      "sha256": "f8853faf712ff6b781b2a317c94cd6e182e0a999acb250d5edeaac39cd3f49d4",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/PROCUREMENT_RECOMMENDATION.md",
+      "sha256": "b1ccce9e72092b75b2e97750b750cac9bb9645dac4cefdbb8c07e8f3d2360c24",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/PROVIDER_DECISIONS.json",
+      "sha256": "b76a1edf4a7e9b6de8ce021cf77f3884d39df031140545716982866747044269",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/PROVIDER_SCORECARD.json",
+      "sha256": "6d203d59b3e67333e68b75582a1a1395d05ec3940819550ab4e9cda0f0c507c3",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/REGISTRY_GATE_EVIDENCE.json",
+      "sha256": "eb7d65c6a0f2e53d4b26f1d3ea4192214c5afdc2129c85c4513a450055855a9f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/SOURCE_DESK_REVIEW.json",
+      "sha256": "0cb6d446ff0bdc3d1c7f8b42e0f1ada5176ef6e1fed7b567b68f5e31d06e41ca",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/data/provider_bakeoff/TRIAL_REQUESTS.json",
+      "sha256": "64d98f34850173a93cce9640274d1e307fcf28de7835c0ccae5faf5c6a269920",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/deployment/P16_DEPLOYMENT_EVIDENCE.json",
+      "sha256": "8b520f4c15e6bfe2b0111182ef927ab9deec0d9739f4ac51856e2968755ff588",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/deployment/P16_RELEASE_EVIDENCE.json",
+      "sha256": "d6d9e6bcc412643417aba9007c2e546def8148eac0682f50c4012294c0eefe69",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_ACCOUNT_RECONCILIATION.json",
+      "sha256": "8f36f92a8a3b84da1ead35cac1d65adc04967f08d48d9d360cf6a40e3aabfd52",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_ADAPTER_EVIDENCE.json",
+      "sha256": "50f6791ccc42bc44ad43a756b220c6d25592f15c9548b727e6dde720b687a0c5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_ALGORITHM_EVIDENCE.json",
+      "sha256": "38cb9e27b99ffa444c30e913135bb7e4ca408006419f6a1e8db854f9e9467123",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_ATOMIC_FILL_EVIDENCE.json",
+      "sha256": "870748a3a7893be7aba414e316bbbb3da46c1d6414a3591fa473fb9eb418983d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_COMMAND_EVIDENCE.json",
+      "sha256": "70423bed5cffaa22c23370d144d54d82586b47b42d08e06e3edaa75b5b057e44",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_GROUP_EVIDENCE.json",
+      "sha256": "200a9e0ec02da1bca48e1094d3f9e1772953a89d9d827e63e179b0a5daef0be0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_LIFECYCLE_EVIDENCE.json",
+      "sha256": "ace00143b668e147108e32eaa1592bab43e3fe2801748b5c7a199ba42ae8bd28",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_RATE_LIMIT_EVIDENCE.json",
+      "sha256": "aad734ffca64713063631e3b3bd39a5b3f729dc6def60272bf701766aa6fc6a7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_RECOVERY_EVIDENCE.json",
+      "sha256": "a7b62fd349a41b24a34cedc62e9befc5a6a41228663e68f9badc7888d2324c79",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_RULE_EVIDENCE.json",
+      "sha256": "a24d2da4bd1818edb0c930b526138cc078d850b53b08f12d7d7f3208a197ef02",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_SIMULATED_E2E.json",
+      "sha256": "f78d127b626a4c2c916e1d828fd9564814dca272d244971e9a1ea3353240abda",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_STATE_REPLAY.json",
+      "sha256": "109df74f7cc92f9fc31ec8947ec99910e4a4b514eb7642123ec3256d87c3d576",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/execution/P12_TESTNET_CAPABILITY.json",
+      "sha256": "0741997a3951dea49389ce8bcaf699c7b85fb73c35321986ce30a8bf39f93042",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-clock-drill/FOLLOW_UPS.md",
+      "sha256": "9a6710fb83fded5882f712a2c7c5fbfb0d7b5b4056790d4e901028e9604e20b6",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-clock-drill/POSTMORTEM.md",
+      "sha256": "a2e53f469bcd62435ec1db23b00cf67ce90e1314557830ddcfa978378fc968f1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-clock-drill/RECOVERY_EVIDENCE.json",
+      "sha256": "f3c92c3171d458a3592714ee50688fb37e852780ca0af17b03e37d6bb1636e03",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-clock-drill/TIMELINE.json",
+      "sha256": "b48a0cffb04adc1d0eb3fed3e5996cca64aa763416eb5cde446de1485e7ebb69",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-data_source-drill/FOLLOW_UPS.md",
+      "sha256": "63db67252c06d2b2f250c40a27a51bea09b4e2cd7adb8205a190f8fa9ab8c2b1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-data_source-drill/POSTMORTEM.md",
+      "sha256": "fd3f46cb6667c3ddc22bdfbe460a98fcb40e373da17c9327ea6654ee3cac70d7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-data_source-drill/RECOVERY_EVIDENCE.json",
+      "sha256": "5def3f04e51862ad776064e3df5d22a47bf0f2b6f31811ef039a27a5efce7f56",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-data_source-drill/TIMELINE.json",
+      "sha256": "1361635285fe9b17ee20dc2862eab6b261b4a106d695337841699086952bdbfc",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-database-drill/FOLLOW_UPS.md",
+      "sha256": "75744c8d7323aea8c6b94c76604b9dc1e16b7300ce242de1baf60bf209a01fed",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-database-drill/POSTMORTEM.md",
+      "sha256": "da5f392e70891de59853c37325b02622ca8bff2839952c3e3c4c82984d0ef3c9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-database-drill/RECOVERY_EVIDENCE.json",
+      "sha256": "8b983d13964b623e2ea0b00c022ac1115461fe0906bc0916aa0a92b3752c43be",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-database-drill/TIMELINE.json",
+      "sha256": "8ee7d43a037541126ef70d09a619b51aa771ad6970a3e4a4b641d751803bc804",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-model-drill/FOLLOW_UPS.md",
+      "sha256": "59396666bffdaef1d7e1339b282d7d9e1fdfc0d08c1e037cf523e0f078c5dfc0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-model-drill/POSTMORTEM.md",
+      "sha256": "0af991c95b47129ca0ff15c813195c0e4d4240eac945c76b7bbb96635a8b8f17",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-model-drill/RECOVERY_EVIDENCE.json",
+      "sha256": "7a9518ee997347d9c560813af21bcd405eee346f31b304a650c1a7002ebfbc6d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-model-drill/TIMELINE.json",
+      "sha256": "601bbcc2a6c91bb87f9f11019d0c24922671d43526d74d2f1067c34bd1d3919b",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-network-drill/FOLLOW_UPS.md",
+      "sha256": "d1dd5773be2c4ed8943661919de5beed81f7099d3a4531e794fe48e7feeadca7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-network-drill/POSTMORTEM.md",
+      "sha256": "364d4416636f8d5d49f9402e296d48810438b04093399de26a162643f0bd53f1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-network-drill/RECOVERY_EVIDENCE.json",
+      "sha256": "57cf7a4fd7efb492d8fcd79ed7c15e07b23e82cdc033ccdd5ca87daec5810ea7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-network-drill/TIMELINE.json",
+      "sha256": "56fb28a82c9282f0c488951037b263e314b201242744ef929c3a034de70c1a90",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-process-drill/FOLLOW_UPS.md",
+      "sha256": "5c9a2ac57f742c71a6ecbbe075249e701e89bf6aa3c35d8f5b3d1f55e127782d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-process-drill/POSTMORTEM.md",
+      "sha256": "22845c953622e777a82fc59869b7c5d278a4acd7cc539ea8f03437e7190e72f7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-process-drill/RECOVERY_EVIDENCE.json",
+      "sha256": "19780218b1a27e7f727f833db7d3d1df9c56eac433d157006beba0ef2c754229",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/incidents/P13-process-drill/TIMELINE.json",
+      "sha256": "c6a3525afb32007bddbec750815fd8318daa4ed0d8cd071e491c1090efacfca0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/ALPHA_PRIMITIVE_CATALOG.md",
+      "sha256": "7df004003f1cbb292e5d395bb87704f40917d918f3a8e4970c329102949265a9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/CRYPTO_TRANSLATION_QUEUE.md",
+      "sha256": "514916d2a55f81608f44648c9c552e82ad6c1acbce302b3856130968a7cba2d9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/DUNE_QUERY_REGISTRY.json",
+      "sha256": "e1deedd66842bd7762066856c92d30b22b0b4067fe3ed0b5c46507c2762be9f8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/DUNE_RESULT_MANIFESTS.json",
+      "sha256": "3cbbed5919937d3b9f0fc79b7519eea2cd76e53f37bf7a2f484795eb80f7a095",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/DUPLICATE_CLUSTERS.md",
+      "sha256": "23e5c9b93927294e6f4ee17eef5469cb7143d545c4eaee78939bb5546d1c7ad8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/FAILURE_TAXONOMY.md",
+      "sha256": "141df524a1589bf42d240f08b7d76a42f4b7c7e0c546e68611886b9a39063e2b",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/FRAMEWORK_REVIEW.md",
+      "sha256": "deac1b7923161877a5d716fbe928dd50149464e0e7c161da1dcf2729b3d91d62",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/OFFICIAL_SOURCE_CATALOG.parquet",
+      "sha256": "87c91771a862305061d97400270d851c71e6586cc18616b28f7bbed57a528e38",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/P10_READ_MODELS.json",
+      "sha256": "073b26e618c6ad8fd9bdad252443df78913e74a9940e6db836002f36483d9856",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/REPRODUCTION_SCOREBOARD.md",
+      "sha256": "2bf92ab520f0420b2d63acd060d9d4d523497d07aac0a1e45c5c3e8762aa97b6",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/SOURCE_CATALOG.parquet",
+      "sha256": "17a06de9eb3727f2bdee585ba29a0b7e96aeceaf80bd271bd3f81bbdb298a085",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/SOURCE_REQUEST_QUEUE.md",
+      "sha256": "ba71f621fb6091df0f02bddb595f3a6698ab3ea44dd3e8978245adb8426c6520",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/STRATEGY_CATALOG.parquet",
+      "sha256": "2079fa60c369cd7eee2e7284019033915e8fc04474bf206820cbd8417fc6901c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/read_models/EVENT_RADAR.json",
+      "sha256": "7e9952c9767340a21ec8da8429b50ea5cdeeeedca25859759e1f6f98ba1678fe",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/read_models/EVENT_REPLAY.json",
+      "sha256": "4d0b486ba564d77c8871023ba5d6e17ec75902450fc3c3a169f5ab6a4d0570fc",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/read_models/EVIDENCE_GRAPH.json",
+      "sha256": "51a24c4327583e1445dab0ab2161fd11c2f74e84db7734fa2b14c8376291ec9f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/read_models/NARRATIVE_MONITOR.json",
+      "sha256": "f9f0488d2a3e573fdb9c56eec193009c3e8acf09d9abf3a2c23a8dd64368d6fa",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/read_models/SOURCE_MONITOR.json",
+      "sha256": "0e5d5d18e20e531a05e41d0fd08c965e1c07f36e72a622d360c3b57933045113",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/static_analysis/jq_synthetic_trend_20260902.json",
+      "sha256": "cb4a2ba6e48f6969c7f4f66294d62e66a6051dbc825e72b348e2bcff5dff8018",
+      "evidence_tier": "SYNTHETIC",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "EXPLICIT_SYNTHETIC_EVIDENCE",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/static_analysis/jq_synthetic_trend_20260902.md",
+      "sha256": "2796c49ca88e2261a099a1d9d4620adb3480d9e42c1e4fc59650a023296d0890",
+      "evidence_tier": "SYNTHETIC",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "EXPLICIT_SYNTHETIC_EVIDENCE",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/static_analysis/p09-unsafe-fixture.json",
+      "sha256": "d6d5a277ce6d196c17b73e1febe6ecf33db2801a5ffb77c68a82486976b6bdff",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/intelligence/static_analysis/p09-unsafe-fixture.md",
+      "sha256": "f2d5ad9b75e7bdb5ccaa3f7c2fe273b926ec7f723f92f1780defe89f4fd31926",
+      "evidence_tier": "FIXTURE",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "FIXTURE_OR_GOLDEN_ARTIFACT",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/licenses/COMPLIANCE_SUMMARY.json",
+      "sha256": "185d32014d78d027edefdbeea1ae75e909a8e7fd9ca0a316dd9349f8a4eec9d9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/licenses/javascript.json",
+      "sha256": "cc73e5a3bf8055283976f0c5dd01b32fbd20c553980852add5c7d394293be185",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/licenses/python.json",
+      "sha256": "79688865866d6f1776f1f09595a5b3699fa270d2de903acd63d0b5de42ce9d9b",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/ACCOUNT_CAPABILITY_EVIDENCE.json",
+      "sha256": "74c4a6a91ceddb209ef48a132fa468a2e06388e1532bdeee56b37ecd59104c58",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/CANARY_RELEASE_MANIFEST.json",
+      "sha256": "873cdaaea8cfce6c68a1458b890440a01c9de3acdff462deffcc1be88725d4e0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/CAPITAL_LADDER.yaml",
+      "sha256": "08e30d7c00d2220093fe4a26bbadaac2a790f551cac4f80fb902a6ba747345a4",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/CONTINUOUS_OPERATIONS.yaml",
+      "sha256": "03ac8709d1df6ba1135577973701c524288734604f2a5ba85724f192312e550f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/GO_NO_GO.md",
+      "sha256": "4c34a1238db92db30e6a0724747f177c5d6ad2e32ddcbb17568a6a2937af6a57",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/OPEN_RISKS.md",
+      "sha256": "6e409808e5874df69df7c6acb9fb6121266b3f98d069e1ca81a0828ef11732c7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/PREPRODUCTION_EVIDENCE.json",
+      "sha256": "e64ac9ca016a0a60f87829b201fb2a704b77518d90b62230bc533c3b8f9399a6",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/READINESS_DECISION.json",
+      "sha256": "d2da96db4587aa4607a95c0029bb241235e26cf7279abfc7ad4020e7d89454fe",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/READINESS_EVIDENCE.json",
+      "sha256": "bd5c22f437a867d5a332685d13da8f5bb61f90b3a346cf5cf3a49030b4626721",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/ROLLBACK_PLAN.md",
+      "sha256": "a96e0603755443596bda781a21e624ad73c6e9dc2df983e202e02ce600430345",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/STOP_CONDITIONS.yaml",
+      "sha256": "bb2d31be5b0e413fc2fcfdd0bf5f5e72e87168fd42dd5070b3dd04577a2a4470",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/live_readiness/USER_APPROVAL_CHECKLIST.md",
+      "sha256": "9808e955cec83a10a00702ee8e8bc619308db1cad6fdd6f980d8ed2e2f2a01aa",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/observability/P16_ALERT_EVIDENCE.json",
+      "sha256": "c5b48f60d90968ae92a76f70c6d077e7daf5a3ca57f463501b72b9347966ed68",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/observability/P16_DASHBOARD_EVIDENCE.json",
+      "sha256": "6ed3e979458be018aab0488b2759f8d3a572a98b5888ecef7d84d494cf6527e8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/observability/P16_TELEMETRY_EVIDENCE.json",
+      "sha256": "87a06a327a9213e7d789f34541073092156af49aa01c7ae8972545b759425d8d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/operations/P16_RESTORE_DRILL.json",
+      "sha256": "3c86091ede67347a29b7ba38dea03245f3a14874cbd2a9914682dd49107f75db",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/operations/P16_RUNBOOK_EVIDENCE.json",
+      "sha256": "9de61c3933c9fe3f03f4186c1ebb4ae529570ebba9e6a270d3b4604c8e4992b9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/performance/P06_BACKTEST_BENCHMARK.json",
+      "sha256": "fc283dac0dda09b245d583156fd68d50e87ad437bed27ee206423e958021515e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/performance/P14_OVERVIEW_BENCHMARK.json",
+      "sha256": "b7df68e2340b1142ee06540523f3c890a07100108ff0dee42511da963ce17bd6",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/performance/P15_PERFORMANCE_EVIDENCE.json",
+      "sha256": "4c6ea4eccb6b1829d82962e92803d0c89e64698de749e6c60dadb8812ee5378d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/performance/P15_WORKBENCH_BENCHMARK.json",
+      "sha256": "5d18c54a4b1501abac98ebb596448833fafaa1462e40c06bd7c20407007a7e81",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/ACCEPTANCE.md",
+      "sha256": "24fe637a69ebcca58473e021e242fab1279053d11e0f1841ec814465bbfaf7b6",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/ADR_REFERENCES.md",
+      "sha256": "d26b5ecddb84e3b28b864aec762250e8b0fc1e7c2d14a89798fc1dafddfa61f9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/ARTIFACT_MANIFEST.json",
+      "sha256": "bf2ed78cc3566d70fb4973b4097414f77da242bc2e78753d4f4fe097452d7497",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/CI_RESULTS.json",
+      "sha256": "d6a8654933279cfde98be52fed61acc9e8798d7c078dc0399e695861431d6feb",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/NEXT_ACTIONS.md",
+      "sha256": "11cc25c6b78caf810b8f37652426b14f68e8bd09af8dbcbaf7bff840ac1a01c5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/PLAN.md",
+      "sha256": "76f6a08d9a134714be24d86f251ef10d3ec94373ec22104bfea252d6f7f4876c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/PYTHON_314_CONTRACT.json",
+      "sha256": "071d53b9686ca97afca2e36046728c41270b2fda6c864171bc1cf4551a807485",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/RISKS.md",
+      "sha256": "7598babacfb4784a9ba64fa9821bf2975bca4f7d7fca0408be1efa685d8a6f0a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/SUMMARY.md",
+      "sha256": "80091c77998655210d15ce620275eecfa8e932e70a18867cc08b67fb2eb94c2c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P00/TEST_RESULTS.json",
+      "sha256": "aed6a941012665d1a357c7b5bdcb7f5d2c2574ae2b7c942c3d48719e2636b2ff",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/ACCEPTANCE.md",
+      "sha256": "531a94a87adb11435b95f0df367bb44382561684ed70a3b6658b4c7ece86e585",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/ADR_REFERENCES.md",
+      "sha256": "ab72435c8b15a476aece0ba6fb5b4429e8ed452b65a4b1face81cb809890c4c4",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/ARTIFACT_MANIFEST.json",
+      "sha256": "032c694c5e3e7e4a8c3e17e0735cfa0a93e129cf10e74006d8c0a11c0a5c4762",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/CI_RESULTS.json",
+      "sha256": "2a8ae483a7a562825d4a44332e359a338c24246bb0cbf4e8a4ce539466b9f2e9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/NEXT_ACTIONS.md",
+      "sha256": "dae714d6515c6192dfba7be5447aeab9d586faa7dde4fc14de0d17287b21ce50",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/PLAN.md",
+      "sha256": "ba2d8f3e90795fd102586d9ab41cb8a5fb48a52df443d8617d56fd9a234dfd64",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/PYTHON_314_CONTRACT.json",
+      "sha256": "c15cb1c889d6a7a02f24a03d9ab96aa89e6dcec73d0f343dd20f929d54c73d1f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/RISKS.md",
+      "sha256": "96b469372dc9ffa1774260b4358516b1c464bdf022ad24ac1b11d21706dfe687",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/SUMMARY.md",
+      "sha256": "4d7a15760b7e9ba574d62536a8c1fe5621507ce9e87112f975977455706368a9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P01/TEST_RESULTS.json",
+      "sha256": "0960e67b82fc8de4ac91beab9f37bad219229fd3e82c0f75a3fc8697ed21d4db",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/ACCEPTANCE.md",
+      "sha256": "7356e36b35f65181b430356ba252a0a7ac27be9ba55d117303cfa1bbf4c84150",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/ADR_REFERENCES.md",
+      "sha256": "7c487fae0dcf95cfa5a7c1db85ee62e9f48c6b1bdd1cd308e2a54ab69768e17a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/ARTIFACT_MANIFEST.json",
+      "sha256": "1fc4ff4c28787477d208afee8ba2bb27435e90a16f2a4732f03aa1282cd6d5ee",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/CI_RESULTS.json",
+      "sha256": "f6d2eebc46c6cdbf087a1d8fbf057e45971c73aafea4bfa7ec4e2e167fe8162a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/NEXT_ACTIONS.md",
+      "sha256": "d9d6a6478a999de201b0e4591a26411054f99f50ba8c7be0bbb67bae7ab4378e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/PLAN.md",
+      "sha256": "1fbf00c2cbd3a0dddfd4ccb68799b8d1cbcfec02da1cb59e97b57b0fbe069251",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/PYTHON_314_CONTRACT.json",
+      "sha256": "4bb7ab3e2a4c31161fbe549c8f0056b8a3d9a0dc6982961554e630126b96992e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/RISKS.md",
+      "sha256": "f34a1393c2bf7b253d7427eb3dcb47160efe568cfb4618818cc9e90a0c8d1896",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/SUMMARY.md",
+      "sha256": "2a3e75595c30897756d5bcb376544174b9d16b0fc96240844104cfe4388f49d8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P02/TEST_RESULTS.json",
+      "sha256": "5dfbf1c71c31f2526105f77b7a293ab417b29a6a9079390d4a91c844037d251b",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/ACCEPTANCE.md",
+      "sha256": "fff5bc509c60d5377d952986c6d65ef7d5090f5dee6a5d4b1cd5556e5746619f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/ADR_REFERENCES.md",
+      "sha256": "48f1f487fc96097d6aae6005e65409d8c30d28e02c0be70f68f4e99c94b487b0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/ARTIFACT_MANIFEST.json",
+      "sha256": "62b3be95fec9cc36f0a7bd663db558e3e14610c9f1d76bef3881a37fee0163a8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/CI_RESULTS.json",
+      "sha256": "21ea24c98a8fdd2422db5b930f1e916627e27ba2a524852e136f06789c7f27ac",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/NEXT_ACTIONS.md",
+      "sha256": "4deba28bd4de7c2e92b64c0aa01127187e5d1b1151214827bfbb481d93ed004b",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/PLAN.md",
+      "sha256": "1719b5f4eafd7727026d98aca1b5a81e5f6f7f1672b4a3a0475a182b9a74f830",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/PYTHON_314_CONTRACT.json",
+      "sha256": "8033d22e5b7ad4833a902884c6daf93ba770771020ded24121ae06370b2bb7f1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "51c3113929b250ac1cd4016bbe0ab1f23467a26f4bfed2808a26a303fc593c7a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/RISKS.md",
+      "sha256": "0bf175718e9c91a6a1efb830d61ddd7fdea8c542cf8733826f1b0ebe0d7bada5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/SUMMARY.md",
+      "sha256": "ba5f655480c17c57cdb2a9970ce3311520e12f483c1704bbda653844ade1da03",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P03/TEST_RESULTS.json",
+      "sha256": "e1d34389ad8a019d10b6d94516f274c0946ffe1fb3167b52758e99d55cd8d64d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/ACCEPTANCE.md",
+      "sha256": "0259ccaa7f57dd7c67e1bfcdfc0b32d6e5337451b9dd678d749c4de3205c631a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/ADR_REFERENCES.md",
+      "sha256": "db4f6a9389bff96ce5c65f9289c2cebf6696ccca10c92766ba8890d3c4618f7c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/ARTIFACT_MANIFEST.json",
+      "sha256": "10547110551edb5fd0d5fd937656915cfa3b26801694752cb1d09e5b67a388fe",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/CI_RESULTS.json",
+      "sha256": "73ae3d76dda49090ef89815db4049e9b8ece43eb0c7a75c7cbd1c369473980ca",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/NEXT_ACTIONS.md",
+      "sha256": "4e4886230c5044e7be88f0f2e2b71359e565b2362a3a9ff2585cd08b42a3137f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/PLAN.md",
+      "sha256": "cc80231dc3aa19d40a09a0c93c034d1b1a601a467d3f79861b74524ce186a03d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/PYTHON_314_CONTRACT.json",
+      "sha256": "ab566d55ccee7874fedfc82317801a0d61c8e3a0593369b11263a5f77897a841",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "129f6e8c04ac5cee8dfec03248ac1b9c01edc44e1faeec8b1686731cdaff07fa",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/RISKS.md",
+      "sha256": "e5959bd955733250d8f829bba234d74acefa8adf8f47e914a4b7eca199296070",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/SUMMARY.md",
+      "sha256": "e4f1fb3c4a15838dfc175fd8360d1e760879c8de88f562d0d6279b5f9a6b260a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P04/TEST_RESULTS.json",
+      "sha256": "efe6ca344ffe9b5e77c590626bc79d6e6d69a7b9a5d2d3330ac61591dd2d1d8a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/ADR_REFERENCES.md",
+      "sha256": "fe34c7c4fff95f39c1946db24d21a1fcd2fa066a82042e8f029857be1882a363",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/ARTIFACT_MANIFEST.json",
+      "sha256": "c3c2f115569aa1010780efa03b83c2e1cae47cecc6dbdb4af5be4df35a13d17c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/CI_RESULTS.json",
+      "sha256": "cd9c99a5f6f338285d32c924984a51f7f2077628396b952154cab28b64df2f6e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/NEXT_ACTIONS.md",
+      "sha256": "6c66820853b4e7f517b7a78b7c3330c173d007b730994675c9ae174d8a7f5d91",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/PLAN.md",
+      "sha256": "82c87209b3a01086aadfcfaa692c5b3dc2b41d540394556ea1425070c2444ed6",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/PYTHON_314_CONTRACT.json",
+      "sha256": "bd7cab05525c15601f9ada4e92c8a26969737f8795be20c9acf20c29df29b358",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "e6afa4f746149f7e8e98cfa415e827c181c64cefeffe252b84fd80f8e03e2da0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/RISKS.md",
+      "sha256": "ee6514a5bb9e990446df9e8714d69fb7cb98bf725a39e65c1fbdecf29a0858b1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/SUMMARY.md",
+      "sha256": "0e452c589c9c477ab32c0eb0146a564aee5585a1ad8ed444ab1a1b6b7f106de8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P05/TEST_RESULTS.json",
+      "sha256": "f8753f0468842160f8d5ba6b9dee3be7907764bf2077059154b83f3d0694c063",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/ADR_REFERENCES.md",
+      "sha256": "3e39df59247b8073c61fddf9f243e3b2cf7cec673defee815b0b71b83e76f73d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/ARTIFACT_MANIFEST.json",
+      "sha256": "85ca8a785bf56dd83b72a61f210c4ab8cca5e3a34a7419817e6d31789efe7321",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/CI_RESULTS.json",
+      "sha256": "97d77b8625b63c911381bf77dbceb40426df61d89c3a9623909c7292182aff55",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/NEXT_ACTIONS.md",
+      "sha256": "06d6565baa967b1b54c6ad604123200a916717e030ae1027c14a372e9f9668be",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/PLAN.md",
+      "sha256": "3114f4fdce80871105223bf14f481d28b5f497d831fa12e0a6b4707c8b4e5a82",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/PYTHON_314_CONTRACT.json",
+      "sha256": "6e9db3ab059deb6eca2fbd95f2f0eaad00b25a0b57aeb1f7286691f1ddc7f895",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "db150ed7afb014164d8b08e0e56b57a728afe8cc075daa65e6c0cffeb49dffbc",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/RISKS.md",
+      "sha256": "88e8c80bb84947b9046ad3796b1a34d7fe03c02df33d8622b6ceec705649da7c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/SUMMARY.md",
+      "sha256": "293dc76d8360c50ed43ca65d20120844bc456d608a173a813711ac86d13d619b",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P06/TEST_RESULTS.json",
+      "sha256": "08d3ed1b4a519d4241ecf98f0ba11988f8d9bd408c45e200e4e007e233c94b73",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/ADR_REFERENCES.md",
+      "sha256": "0fc86174a90fbf50dca61401c026bd766b90385f5fa54880060889bad577392a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/ARTIFACT_MANIFEST.json",
+      "sha256": "3f4cd4863c66066cedeb7c00b38fb160253b88f2da8bca15cead179a4f146f46",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/CI_RESULTS.json",
+      "sha256": "e10329c30b224b4e1e8a554d193c8ce3447a008d2eb3a800e26e65d0aee8d869",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/NEXT_ACTIONS.md",
+      "sha256": "b6cc842173a86ad576f381ed356db1a2ae938cb4a555e3df3dcbc7cd6cafb96e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/PLAN.md",
+      "sha256": "5ea4829063095d3292141fbf8ecd1ad19fcf50bd756c2b323dfeba63ff8cc473",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/PYTHON_314_CONTRACT.json",
+      "sha256": "c533dadeb193e353ac48f640130fa5227b6bd26a90fb6a4aef51bead1e767788",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "cbda0fd0a5d0318cf096b70754bb95821cf5e987d618b97f8fde784e06a317a8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/RISKS.md",
+      "sha256": "144012f647154ec392bd3a1b23256e73d1a4a30cfca653dfcb50f17e01951be0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/SUMMARY.md",
+      "sha256": "dea9c569cac1a1426e9daa43a12e821aba22416f2648c04b522691a037f78b8f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P07/TEST_RESULTS.json",
+      "sha256": "cbf751778e4aff772c1a5ffcce1bafe34463c0ae70edab8c81d92c332d39d8b6",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/ADR_REFERENCES.md",
+      "sha256": "44ca17e1db07ee4781cc109a19473aa76dd48728ac1bebacc753ecd2a200cfa8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/ARTIFACT_MANIFEST.json",
+      "sha256": "4a0bfdb4b88c2878ebc28ef2c81f0bc3d482e29de744a9334f680bf4e13c5ef9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/CI_RESULTS.json",
+      "sha256": "d9f9af719b2ea6b65b68f8d3973a56c356bc3843e204c4dd16ff1f5bbd9d5578",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/NEXT_ACTIONS.md",
+      "sha256": "a0502c599d062b9d9251e152c0963c1528922d9b748e8121b0c789c31bfe12aa",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/PLAN.md",
+      "sha256": "e13b9def88c8f89f95c1b5408b8ef90934a105c6a7c035d3ffd5cc21053062d4",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/PYTHON_314_CONTRACT.json",
+      "sha256": "6754c9a9739ff66564590e3eb7dab2f387861bd010737700f81d5451898771d9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "f0974ab211042b51bbf487e3fd895b63c1d077cc74cd278d27fd96e7a867c887",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/RISKS.md",
+      "sha256": "59ed853eed7b688b2cd033b594a49b958ed9ae9f9d6baea240197f87bd3e1130",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/SUMMARY.md",
+      "sha256": "c2901a015736f90d13524cea845f37e316126c66122959efcb208d95a8695638",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P08/TEST_RESULTS.json",
+      "sha256": "3e0cf22c5187e27923c43cc0bc9e0526e68c0c8d12c1f5ad67eace3864f7427d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/ADR_REFERENCES.md",
+      "sha256": "464756433d989ca31553ac40971bdaeae29df03a42f6f3f8f6aaa1b741c9ec0d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/ARTIFACT_MANIFEST.json",
+      "sha256": "6382b8fe8ff71d90b5b795d1364eb25c5b9399546707f4d193d67b8e9cd724b9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/CI_RESULTS.json",
+      "sha256": "fe21b097bae564b6214f6b3938adae69e0f499aa3a535f29924a6e1bd274eac3",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/NEXT_ACTIONS.md",
+      "sha256": "2421ffedbf0ccf8941b05e2e6f116526c748cc757b9b8f2e848e31e464285278",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/PLAN.md",
+      "sha256": "254c3d4a5f71f147ef0e87164a04b2811c992d2ca61a7dd752a6238d6fe22892",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/PYTHON_314_CONTRACT.json",
+      "sha256": "1b16333f2d81d45620e5ad5c6dbb831f3e12fc8bd122c83faff21ad67407d149",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "d97a762f7c6889af0b14fd403bd10a22b5096ef17049fc44381c76fc11b00e24",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/RISKS.md",
+      "sha256": "466a9227202ab9d8cbb612e89c2fe550bf283ff67bd67192d05b37e22edd939c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/SUMMARY.md",
+      "sha256": "ea8294af58cdb180070b02d6620a42d3f7030aa5f60faaa1d100d47aab56c044",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P09/TEST_RESULTS.json",
+      "sha256": "18c41d264ee9defa85e527beb8d7490ef81aca0251b7ba804c35301d8ada1661",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/ADR_REFERENCES.md",
+      "sha256": "8032d5db0e544a081e98dd4ebe85a1cf4570c8daa46fcb03b8eda16e1b7180b9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/ARTIFACT_MANIFEST.json",
+      "sha256": "1278c1585b8460f801c62831df42de773e99d56f047d15ea77884fb1cb5c9518",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/CI_RESULTS.json",
+      "sha256": "ce423e46f01a8ea9d8d9dfa35005a8b7d4c15d7c7f49245a091c695a9f536463",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/NEXT_ACTIONS.md",
+      "sha256": "37900e17be95fe5d7269d61686f12c248abb403a92fe9e915229b6ddee52b074",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/PLAN.md",
+      "sha256": "15c29893908dadb5a6ca1d31b1b9f4c0ab7d57d570f289fb09902e39accbaaab",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/PYTHON_314_CONTRACT.json",
+      "sha256": "2ddbe8ce3d02ca2bb29dc269ba33240ebdb6db4068bed752d9bf7f9211f412b8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "235369a6a85cd5f6eb0269bb4e57c7770a5c613902d2d38871a4ff1c453a7703",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/RISKS.md",
+      "sha256": "172add19bb7324da8cae63abd225f0aac5473e6309c05c6aeada6bc9ee34cf60",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/SUMMARY.md",
+      "sha256": "9bd0d8a3bcd63bdc2a4056a7338f032ce00d591fff1bbf82c000d3bbf1bdb64d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P10/TEST_RESULTS.json",
+      "sha256": "3249123aee5f7a38e7737b98032fa05c36269b3aa50c44da122d3c732bfe7f7e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/ADR_REFERENCES.md",
+      "sha256": "bbcf10aae67be334ef3131ae86890a4e9fb31bb31ea15a852f1c0099579616e1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/ARTIFACT_MANIFEST.json",
+      "sha256": "bbe63e32f5d12281be24300cbda286b83d3a18cc22f0fd55cf0817fb0868bb8e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/CI_RESULTS.json",
+      "sha256": "8e9b27d82ef7135a067ef832924abc6bded21e1755d9911d89212ba905b32d83",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/NEXT_ACTIONS.md",
+      "sha256": "623f1e1f0383bab9a6ab9fffecebc692a224b4f71c7ffcd23b7784e6beb2744e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/PLAN.md",
+      "sha256": "48846d3ec6f104a507d29e2c7ec8cc77792e16d835a58bcb389ee0dac4111cee",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/PYTHON_314_CONTRACT.json",
+      "sha256": "34dd3a299ef44646ae77e0620decd5a347f6cbc2a42eda3ce66f5e1fb061d59f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "77f182f21528cd7ececc2432d0fd57f900b51f30d382be963c25bf6fdf1a64f1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/RISKS.md",
+      "sha256": "fc970d42957776226615aeb1205fe024500f024ed557d734cc0f9e77f0000604",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/SUMMARY.md",
+      "sha256": "db879581da63d4d65284fd23b6d44ac8b4893a3bff6c817fc86733b271b1e911",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P11/TEST_RESULTS.json",
+      "sha256": "44ad534a878b5ff6fe2086ac841935bc03184df6de95974effb0823450083f79",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/ADR_REFERENCES.md",
+      "sha256": "8fe10fd00ed49925812388222366ba8681709421b8568bd4ef29762124471c92",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/ARTIFACT_MANIFEST.json",
+      "sha256": "86e194727c602fa7fd059e24a5c8ccb146f870c278ddc52aee7808bee9e9c575",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/CI_RESULTS.json",
+      "sha256": "3be612759d8a1ad1a8721f3eda9855d592d4c75f5f0a3c964d4c0330abc06237",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/NEXT_ACTIONS.md",
+      "sha256": "ddf279282d8b7ee2b974ee1fd018f6bab2f63edff9bbdab7c356a65c57bb0bd1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/PLAN.md",
+      "sha256": "78050d46b4ac17ed138bb3ef71987c2719689eb305e1513f84252cba1650fd83",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/PYTHON_314_CONTRACT.json",
+      "sha256": "8ce4b0271d4b171662a92afcfe462153415dcc1b24aa5f37c53036a23d4190cf",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "11ae48f524453c996c633befb135dc08e4daa2e8a7dde309571e93034db6ac62",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/RISKS.md",
+      "sha256": "1f39a17da65faf52a703e45b330fda1372243f581188b286f29225f0008cfb8f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/SUMMARY.md",
+      "sha256": "1de5db440e01fa752fe3320d2178c780119507b9b6672106f24ed39a3ebdf37a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P12/TEST_RESULTS.json",
+      "sha256": "74cdf1d9750e473b9addebf5e0833a2241f74b1a98c84b63cd6f392c2ee3ffeb",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/ADR_REFERENCES.md",
+      "sha256": "081353883b052207a84031374df2375dfec44a88aa8fb88fe29ae31adf6f3502",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/ARTIFACT_MANIFEST.json",
+      "sha256": "20b5bcfce0319b1f23bfe5fb747ba72f847cfc13955988cdbea352c425cecd90",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/CI_RESULTS.json",
+      "sha256": "37d58dc884dff2f17a5ab1dffecbae245bc2ab9b8b0561b26197ddb3b99b16a5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/NEXT_ACTIONS.md",
+      "sha256": "16657763a1bec04b7c81c25c741f8b4490d86dab6ba1d381b2d1fdbaad2909eb",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/PLAN.md",
+      "sha256": "7bfd7b0fe0bdae011ad38a7c73a32e78c68b2d6d6230a4142bc694e1ae5f93c4",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/PYTHON_314_CONTRACT.json",
+      "sha256": "2d63f4dcf57488cfff2db3058e3b9e6538b3fd9f6726f83be424355e938e7d14",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "b415bb44a7a3feb177cbddc7312cd9ab86fdec68fc4965fea4b9086fb7a1853a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/RISKS.md",
+      "sha256": "ff88c53b733a583f5ec24c49e0d72fca78d19da43888e184152c5674239e02c0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/SUMMARY.md",
+      "sha256": "a3f0d9e585238f9dcdd07e345d40783b41bffcc2aa428388906b0967a9b7f62e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P13/TEST_RESULTS.json",
+      "sha256": "23cc792a587b57989d47a94e7f7bc2b6b510415517a6bdb44238a3244f7606fe",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/ADR_REFERENCES.md",
+      "sha256": "ee39773cefb0e71a4a86fa6d1c7c52683189b85be631484a63c7cc7add766c1b",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/ARTIFACT_MANIFEST.json",
+      "sha256": "80cb901d8dabf658e3299fe97bc474359d287458851524353fa1a8b99daded3c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/CI_RESULTS.json",
+      "sha256": "5506b8003f0a7b5b39fca249d7173198f66a2673a9c13ef1a4b6bb1cf04c8635",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/NEXT_ACTIONS.md",
+      "sha256": "b1cbd9988feddec056f371f3585c6960d28177e5becf6471503dbc2234ab2b0c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/PLAN.md",
+      "sha256": "61c227f47e6df5c68825ac85b69b94652cdccb29cf8da5db0303104d9a9ed5e8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/PYTHON_314_CONTRACT.json",
+      "sha256": "5cb6fc16654a915c8ab1dd569cfac7ddc1efab3fe764aad45e172afacf4e6dcd",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "02ca2a50678e3c50c1b20717bc0e6d62c6eb7e6fc1cf7f300d019ffd6ab8a1bf",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/RISKS.md",
+      "sha256": "98ca9839a728d5380449f742ba93b0ca82b398379ffd898fbfc96252de64efe5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/SUMMARY.md",
+      "sha256": "31d019920827722f774b58d6ca8546d8ea5c8b1a01aefdd618eb9b6a7e9586cc",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P14/TEST_RESULTS.json",
+      "sha256": "5407efc223f9fcfd4438926f59d44e38af06ceb00831316d9f69dc7bea1b07b0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/ADR_REFERENCES.md",
+      "sha256": "270482860dbb4b2d81856d0f785aab8b9fa3cd57af0b492567cb64e5696bb281",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/ARTIFACT_MANIFEST.json",
+      "sha256": "96158052a55c57471502c9e061f086d8bbba82827efa09b69e9fc3451a388c02",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/CI_RESULTS.json",
+      "sha256": "1ba7e24640484818f3e1e1b0fd7a39ce19d2124f3b13e1b70dd899dd5b07691f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/NEXT_ACTIONS.md",
+      "sha256": "c404bbef95c9b2042a4c36ee695012e7da9cb51b70c1076b95828eba75cbfd5d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/PLAN.md",
+      "sha256": "5d16ac884f294c1123f554c91fba92f0c8e25bf78fb877f3ccf0dc26aa17a8c2",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/PYTHON_314_CONTRACT.json",
+      "sha256": "1dfd2da9eaa21cfb8eb614b35b63ae24483d73ff4cb8858f6cffb3c2e99a2ed8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "5d9fa5f865e4b0e1c85cf686cc1c889606adb72bf04bcb70af1005ed1fc72b6b",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/RISKS.md",
+      "sha256": "a8c9ef04deaeed1fa63807b7f9902e145eaf99c297d64083fbea849702887df0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/SUMMARY.md",
+      "sha256": "2657e9f8ada9514b1edd8f3926467f671c81c93fdc76f8c7b75bc7589e5fce87",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P15/TEST_RESULTS.json",
+      "sha256": "d2c21cbb1b618a05a2c4a9dd4de264669162054c80a2585f375a1aea8039b317",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/ADR_REFERENCES.md",
+      "sha256": "dde3e611b69b8964c48566b5869e57aab65febedfb326546482629360d448900",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/ARTIFACT_MANIFEST.json",
+      "sha256": "2619b5156a109fad9992040185373efc2efbe095ea58ca7b3c89c56e389ce127",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/CI_RESULTS.json",
+      "sha256": "3711bac1a0bf7c7e9b939583a3fabfb846d817487c5f26f82e4a532861a80e7d",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/NEXT_ACTIONS.md",
+      "sha256": "5cd993ed53cb2f6cfe4fbe298fab70937f656f81114fa7fdfc844880cb52dec0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/PLAN.md",
+      "sha256": "94b8612a8f3065d3d519efd3e0069dad02c0a3e8f40e73cb0b5dc4c079d4e9f4",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/PYTHON_314_CONTRACT.json",
+      "sha256": "abedb9217c2ad08c6f7146665a7fe885a8c27248c0a41d988472b222dd8343ed",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "ca75d44389ac1121fe24751a33f2857f91c312900b729ab6195f39e033b60f6f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/RISKS.md",
+      "sha256": "44f008ce943b8b39b4cea51b439070120e7301d92daa89f34205f6991456c067",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/SUMMARY.md",
+      "sha256": "616d5362a755560ed2451484779b790157d36a69ccd5323a9834e783ec965347",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P16/TEST_RESULTS.json",
+      "sha256": "4003ff6798677e2cb036c359c33f113bb7609f0907caa7ab01b0627897b5b12c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/ADR_REFERENCES.md",
+      "sha256": "34d698305091a75b51411ddfb13e27d3c07e9a3cc71d080cc60da13c69073b92",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/ARTIFACT_MANIFEST.json",
+      "sha256": "b93049fedc7b5673342318adc52bd7d60359f1c25e5be6682c40178400363a4a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/CI_RESULTS.json",
+      "sha256": "9d803b2529ad97c40ac40d3568bc11960900099357a20f32c531a3615db00988",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/NEXT_ACTIONS.md",
+      "sha256": "50a180e8db8e64e1928b934a17030fec35743f7a5b79ea24f37c793edb01db09",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/PLAN.md",
+      "sha256": "6e4db328a42cd9d4d61e59986501d7ec95c2d6cba580636fc3acb88d26f5efda",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/PYTHON_314_CONTRACT.json",
+      "sha256": "d41fc21f2e4ebcbc5de683c27a60397951d08024bdebe95f02e1987d3b03bb32",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "1a82c86479553945c762cbf4285f008795fb3f9cda5281a8bba10c266b67aa4e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/RISKS.md",
+      "sha256": "ea179a9be975bdd27ee71a664ae19c0f186b1aa76b8913206e2ecfc9d625ad98",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/SUMMARY.md",
+      "sha256": "451e0f86a069dc120d7fbf068437d3995cc37708d24a53e00e9f861e002054b1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P17/TEST_RESULTS.json",
+      "sha256": "40e07f50b95e62c1fa0ff592749a0c742b48f91dada10006b38a7775d696b7a0",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/ADR_REFERENCES.md",
+      "sha256": "86d59c8576a59e3ccbdedf42be5e0d45f7bb6ae60f818517c75d058316decd88",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/ARTIFACT_MANIFEST.json",
+      "sha256": "1766f74982e566ae9a7c14112e0dd8dd47369be36f3921ce67f1949bc1393a7e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/CI_RESULTS.json",
+      "sha256": "97484c4cf8de8e54c31c66b1f1504a358c42fe4a8ec9d262d96860f0cd94c381",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/NEXT_ACTIONS.md",
+      "sha256": "2959c09bcc78a48dff997bc1138673059ee3c88a0a32b1404fa39c81acf9d8c7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/PLAN.md",
+      "sha256": "2e7a093895de59a96eae160c7f398ac4c13f51a4d019ebbc773a5462f16000c1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/PYTHON_314_CONTRACT.json",
+      "sha256": "f52ddb8463436c8d0ae24aa507e90bb6f0df5ddb891785d98fb0176c655468c9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/REQUIREMENTS_TRACEABILITY.csv",
+      "sha256": "814074abfb8dd1d1a2eeae64820bb1f34cae223520d924362d3ea2bb793d233e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/RISKS.md",
+      "sha256": "7c38670695b08e9cb674ae63ef16aab9da7ace6bca6165bc8a3232ab5695ae2c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/SUMMARY.md",
+      "sha256": "fcae3356a52ae86ca92cb45daf1678f0bbf207c355069141bd57bcee163e0c37",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/phases/P18/TEST_RESULTS.json",
+      "sha256": "a349856468764713700642af6a580810eb04a4cbd610d92eccce00e230c4f46a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/read_models/P14_POSTGRES_EVIDENCE.json",
+      "sha256": "1f2ff6be528924dc68c01c19452d5ba7b918790b9bf3cc4f0028f5559b9be9e8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/read_models/P14_PROJECTION_EVIDENCE.json",
+      "sha256": "2ec84cac956f7978025de8abb0f4a873340ebed1c2fd288fa80ca9d0d1fb9127",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/read_models/P14_SNAPSHOT.json",
+      "sha256": "5700964be1994941c28190ab02090960078d90c2fb4c55cdae5830cf4b645d19",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/read_models/P15_SNAPSHOT.json",
+      "sha256": "b1240d754668e01cc352c0889a40760ecdf62094c1befe99a1f47efdd9752074",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/research/P07/BASELINE_SCOREBOARD.md",
+      "sha256": "3c914b09d86694b12196081df329cd8a523632aa1a7e40b1ead487a071c3e36e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/research/P07/EXPERIMENT_LEDGER.jsonl",
+      "sha256": "0d2bb3ed9e2d835bd6ee5057da118758bc05b601beeb2c8900e4622d691b65a5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/research/P08/MODEL_COUNCIL.md",
+      "sha256": "724f182f5ea24b78af5f3402128bd9a10637830f3104d096acf331adec2c9755",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/risk/P11_SIGNED_RISK_POLICY.json",
+      "sha256": "c69a806fba3880c3434a4292de7d97f2a06473487d9f79d43c30c2ad8ac15287",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/risk/P11_STRESS_RESULTS.json",
+      "sha256": "d94e844ec7c1b3b81da057af81cb8832203379d832bd6e3f953dd72e18f7b083",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_CHAOS_EVIDENCE.json",
+      "sha256": "eadee765759c710bb70c4511c3aef695371daa802e2c11a725cf98c4e391bb92",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_EXECUTION_ERROR_ANALYSIS.json",
+      "sha256": "c26d44ce2480c7233aff6d0216767a8131c1b49001a73bc31c26510cd1073fb4",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_HISTORICAL_REPLAY.json",
+      "sha256": "19ef1c3787aac36a9744fd5677a760d9bf04de6a804455a6fa19ba6c555d8d91",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_INCIDENT_DRILLS.json",
+      "sha256": "923b2dee3d57e6ae75dd80548ec13b03c149d71d5391c4bd0b87b051163b8861",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_MARKET_MODE_LIMITATIONS.json",
+      "sha256": "c1b87e4869b6171c68a931fdce3fa5d0b6e4ea97b3fab34df62d7162bfb312e2",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_PAPER_EVIDENCE.json",
+      "sha256": "661460e17e5694d880ec66be249d8b31b5a7efe2c7a02333434e00ed873f5934",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_RECONCILIATION_EVIDENCE.json",
+      "sha256": "a715193ca43c96a92e4769ed42b91c37079709e1188e462b49715f24de6b5972",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_RECOVERY_EVIDENCE.json",
+      "sha256": "afb0b7f9ad0c98ce13515ef9c8795b37034deb50a2d3e76e02da8e2f2a3dc43f",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_SCORECARD.json",
+      "sha256": "2cd28bb3afce584a89d5f20b295794ac6815b88a25d0c6cd2dabe8944590e7af",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_SEMANTIC_COMPARISON.json",
+      "sha256": "0da76db19b16b55b8c750dd36d93f129b2eb8be9dede72b3ea38eed152862401",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_SHADOW_EVIDENCE.json",
+      "sha256": "41d38d79492ca7dd02366980852e64acdd7e39d9ff46e5ad7438c5b0ac6901e7",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/runtime/P13_STABILITY_EVIDENCE.json",
+      "sha256": "b8c6ac8e0c0adecfac3878bcb41925465ebb2d2c609cd67e62cd89e5e521a4df",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/sbom/javascript.cdx.json",
+      "sha256": "72b22759fd41b0f1a56ebdeffb672a4420fec077135f697456e0d57d2d203582",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/sbom/python.cdx.json",
+      "sha256": "55135192480cdd39ff5708cdf4ad43b19fd0c97cac98bf88d3455a54aafb86a6",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/BANDIT_TRIAGE.md",
+      "sha256": "e5228d9fb011335c109246b81d23acc8b3e70424e2b6405c41b76a048bbae22b",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/P04_MTPROTO_REVIEW.md",
+      "sha256": "6be271af0be1ce00b0de60eccdbfe76939c3a4924e325c57985912edad81f03c",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/P15_WEB_SAFETY_EVIDENCE.json",
+      "sha256": "56ed8143c4a4764a26fee711f56c29a321b8be4a938bc5de7545b15d26b4f7b4",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/P16_SECURITY_EVIDENCE.json",
+      "sha256": "69438c6754cc6afdc96982a0a29155c3789909d07d77ff4bda3c5c4af760daec",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/SECURITY_SCAN_RESULTS.json",
+      "sha256": "ac50b23f582459de17f62c5765ffbf814b72d76a2e563c0548c3a109f52bb792",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/THREAT_MODEL.md",
+      "sha256": "f313923ce68b316141cb2a972a9516e956365eda0098f882e7b65cc47001115a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/THREAT_MODEL_DRAFT.md",
+      "sha256": "f646baabe1cae264cd646d9abf8ebbd84846539421e760bb712cea49621d985e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/bandit.json",
+      "sha256": "0c0e49eb88ffffb51036a395efc8110f6336bc6353ec8bbaf79c61e1775f1d35",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/container_iac_scan.json",
+      "sha256": "e5f154238b7890d8969dfa7723de53eab76ac50961b62dd017b3d569b902e408",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/detect_secrets.json",
+      "sha256": "45143ca8675474560226f80f5d3cb9f572ed303f6d00b18280d310626b8acda5",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/javascript_dependency_audit.json",
+      "sha256": "57e7d5d1ce9e8b79a693287a207ac2f333519342544864299bc83093e07a7d2e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/security/python_dependency_audit.json",
+      "sha256": "d69ab76b212cf03701f211be6d38cae663e921dfa7d6e3b53edbbf49e77ed4cd",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P05_MUTATION_RESULTS.json",
+      "sha256": "5cf836c1a51d3816785dd7d39d8195c5204151bebb4e0e3d20636021f2b2b3e9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P06_MUTATION_RESULTS.json",
+      "sha256": "e46935a693189d42bac2a6d7bb3650880bc3bb2f05d05174b2dba27fee44e6b8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P07_MUTATION_RESULTS.json",
+      "sha256": "af0279e7dda7305d0a295ee61b3711064bef634e5426bd7967546ef239aaf1aa",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P08_MUTATION_RESULTS.json",
+      "sha256": "e75be2cdca73847e3dce6d680177b0eb868d8bbbc5dd8acb472ba35939b90707",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P09_MUTATION_RESULTS.json",
+      "sha256": "f61e8593bc4dfb46a066975d708c3f976f2173da5fc3da8c9ebaa69795bb2aaa",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P10_MUTATION_RESULTS.json",
+      "sha256": "f1bcb903cf906a4d97ae85172fda6e4fd9513701cb5bc0a99166c41a4cdba8fa",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P11_MUTATION_RESULTS.json",
+      "sha256": "606822e36d8baa6d88984616aff8824f9fbe18d07f373c4ffaf9d4df448da2d9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P12_MUTATION_RESULTS.json",
+      "sha256": "b67f9c0c5f2e8ccaeb17099f2462273cbe6650b10ec25807c47c24cb6d863009",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P13_MUTATION_RESULTS.json",
+      "sha256": "a3c7ae5a13ce40e8f7d6cace66a10517f256daa3fc964461e541e730feed8139",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P14_MUTATION_RESULTS.json",
+      "sha256": "41776e086c83bb614e3748d4ef9119dd9fe2cd055ac25881ad5cf0d6134c6ca1",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P15_MUTATION_RESULTS.json",
+      "sha256": "cbb3f44349356b46c2ca39f5d7a7209efe088ad50c9c62b85b8ebb9c42f62ddf",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P16_MUTATION_RESULTS.json",
+      "sha256": "8182792753def92ce33ffb95595b40a981e2ac37c5c0c45f810f823b680aa7eb",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P17_MUTATION_RESULTS.json",
+      "sha256": "a57af09fc4571faca4bb66bd6438883c0334e2549d598b3dd79950660342bf81",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/testing/P18_MUTATION_RESULTS.json",
+      "sha256": "7403798f62fe77e8aea6b5332b075358e272133d217dfd6da4b4a8c3b3d3dbaf",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P14_CHART_EVIDENCE.json",
+      "sha256": "0b6b03ac881f36127f660b0dd950c019ab2cbce1d3c9ef52a749700c9c27466a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P14_E2E_EVIDENCE.json",
+      "sha256": "9230bb1bdf108e0700324904c0de05972c4a94e93f45e660fe920b350103a1b8",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P14_STATE_EVIDENCE.json",
+      "sha256": "40d8470399298cdc6315c1839707e8045fb6dfc9cd679ade1624990dc543bef6",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P14_STORYBOOK_EVIDENCE.json",
+      "sha256": "3b317aa405059554fc97ea928a59188c2f20aec64c078accc88cfe5cde5513db",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P14_WEB_EVIDENCE.json",
+      "sha256": "9e19df5f088246c5aa982df5ae00484f3a6e628a833e37bdacefdc035b8a26cc",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P15_ACCESSIBILITY_EVIDENCE.json",
+      "sha256": "7ee9bac8e5af436f6b963c76393833fddf7ac6c1ddc2f317f221a9e9165d055a",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P15_BROWSER_EVIDENCE.json",
+      "sha256": "93e6c8788c73ae298d80ce911c9d5879e29fdf63c0a0e9a9ccf26fc21d8f05d2",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P15_INTERACTION_EVIDENCE.json",
+      "sha256": "bbe44d19fb872039e6a82b806cc203008cd3247b769e0f127e91141d8a7438be",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P15_ROUTE_EVIDENCE.json",
+      "sha256": "d6d9d41a8d973f0f267c665388dbf939c7be1ffc66ad0c0be65e2e941091ef11",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P15_TRACE_EVIDENCE.json",
+      "sha256": "6356733f6058c440c0c38d190c03f14e2ff82cc9e2ebd1d6498cececa3fd69c9",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    },
+    {
+      "path": "reports/web/P15_USABILITY_EVIDENCE.json",
+      "sha256": "3a6dd6200da3ca5556615640fe886fd06ed750414524e0b1fdcee307ae756a6e",
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "reason_codes": [
+        "LEGACY_EVIDENCE_NOT_REQUALIFIED_BY_V5",
+        "NO_ALPHA_PROMOTION"
+      ]
+    }
+  ]
+}

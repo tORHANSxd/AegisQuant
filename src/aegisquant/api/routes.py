@@ -61,6 +61,7 @@ from aegisquant.api.models import (
     WorkbenchResponse,
 )
 from aegisquant.api.stream import TOPIC_PROJECTIONS, SequencedStream, websocket_session
+from aegisquant.domain.evidence import EvidenceDisclosure, EvidenceTier
 from aegisquant.readmodels.engine import ReadModelQuery
 from aegisquant.readmodels.models import ProjectionKind, QualityState, ReadModelRecord
 
@@ -290,6 +291,21 @@ def create_router(query: ReadModelQuery, stream: SequencedStream) -> APIRouter:
             order_traces=cast(
                 "tuple[OrderTraceRecord, ...]",
                 _all_records(query, ProjectionKind.ORDER_TRACES, OrderTraceRecord),
+            ),
+            evidence=EvidenceDisclosure(
+                evidence_tier=EvidenceTier.FIXTURE,
+                alpha_promotion_eligible=False,
+                source_artifacts=(
+                    "reports/backtests/p06-golden/run_manifest.json",
+                    "reports/backtests/p06-golden/equity_curve.parquet",
+                    "reports/backtests/p06-golden/pnl_attribution.parquet",
+                ),
+                reason_codes=(
+                    "GOLDEN_TEST_FIXTURE",
+                    "PLACEHOLDER_HASHES",
+                    "EXTREME_SHORT_WINDOW",
+                    "NO_ALPHA_PROMOTION",
+                ),
             ),
             snapshot_sha256=query.snapshot.content_sha256,
             capabilities=WorkbenchCapabilities(

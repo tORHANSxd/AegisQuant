@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "AttestedEvidenceKind": {
+      "enum": [
+        "BINANCE_TESTNET_RUN",
+        "EXTERNAL_ALERT_DELIVERY",
+        "TESTNET_RISK_AUTHORIZATION"
+      ],
+      "title": "AttestedEvidenceKind",
+      "type": "string"
+    },
+    "ProtectedTimestampReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "evidence_sha256": {
+          "title": "Evidence Sha256",
+          "type": "string"
+        },
+        "key_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Key Id",
+          "type": "string"
+        },
+        "nonce_sha256": {
+          "title": "Nonce Sha256",
+          "type": "string"
+        },
+        "receipt_sha256": {
+          "title": "Receipt Sha256",
+          "type": "string"
+        },
+        "signature_base64": {
+          "title": "Signature Base64",
+          "type": "string"
+        },
+        "timestamped_at": {
+          "format": "date-time",
+          "title": "Timestamped At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_sha256",
+        "authority_id",
+        "key_id",
+        "timestamped_at",
+        "nonce_sha256",
+        "signature_base64",
+        "receipt_sha256"
+      ],
+      "title": "ProtectedTimestampReceipt",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-p12-evidence-attestation/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attestation_sha256": {
+      "title": "Attestation Sha256",
+      "type": "string"
+    },
+    "attestor_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Attestor Id",
+      "type": "string"
+    },
+    "evidence_kind": {
+      "$ref": "#/$defs/AttestedEvidenceKind"
+    },
+    "evidence_sha256": {
+      "title": "Evidence Sha256",
+      "type": "string"
+    },
+    "key_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Key Id",
+      "type": "string"
+    },
+    "live_authorization_capability": {
+      "const": false,
+      "default": false,
+      "title": "Live Authorization Capability",
+      "type": "boolean"
+    },
+    "private_key_persisted": {
+      "const": false,
+      "default": false,
+      "title": "Private Key Persisted",
+      "type": "boolean"
+    },
+    "protected_timestamp": {
+      "$ref": "#/$defs/ProtectedTimestampReceipt"
+    },
+    "signature_base64": {
+      "title": "Signature Base64",
+      "type": "string"
+    },
+    "signature_purpose": {
+      "const": "EVIDENCE_INTEGRITY_ONLY",
+      "default": "EVIDENCE_INTEGRITY_ONLY",
+      "title": "Signature Purpose",
+      "type": "string"
+    },
+    "signed_at": {
+      "format": "date-time",
+      "title": "Signed At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_kind",
+    "evidence_sha256",
+    "attestor_id",
+    "key_id",
+    "signed_at",
+    "protected_timestamp",
+    "signature_base64",
+    "attestation_sha256"
+  ],
+  "title": "P12EvidenceAttestation",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-p12-evidence-attestation",
+  "x-aegisquant-schema-version": "1.0.0"
+}

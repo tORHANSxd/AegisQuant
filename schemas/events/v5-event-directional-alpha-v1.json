@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "PositionDirection": {
+      "enum": [
+        "LONG",
+        "SHORT"
+      ],
+      "title": "PositionDirection",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-event-directional-alpha/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "const": "RESEARCH_PROPOSAL_ONLY",
+      "default": "RESEARCH_PROPOSAL_ONLY",
+      "title": "Action",
+      "type": "string"
+    },
+    "alpha_promotion_eligible": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Promotion Eligible",
+      "type": "boolean"
+    },
+    "alpha_sha256": {
+      "title": "Alpha Sha256",
+      "type": "string"
+    },
+    "approved_delta_weight": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Approved Delta Weight"
+    },
+    "direction": {
+      "$ref": "#/$defs/PositionDirection"
+    },
+    "forecast_distribution_sha256": {
+      "title": "Forecast Distribution Sha256",
+      "type": "string"
+    },
+    "live_trading_locked": {
+      "const": true,
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "net_edge_distribution_sha256": {
+      "title": "Net Edge Distribution Sha256",
+      "type": "string"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "portfolio_proposal_sha256": {
+      "title": "Portfolio Proposal Sha256",
+      "type": "string"
+    },
+    "risk_decision_sha256": {
+      "title": "Risk Decision Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "forecast_distribution_sha256",
+    "net_edge_distribution_sha256",
+    "portfolio_proposal_sha256",
+    "risk_decision_sha256",
+    "direction",
+    "approved_delta_weight",
+    "alpha_sha256"
+  ],
+  "title": "EventDirectionalAlpha",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-event-directional-alpha",
+  "x-aegisquant-schema-version": "1.0.0"
+}

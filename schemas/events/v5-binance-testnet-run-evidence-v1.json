@@ -1,0 +1,338 @@
+{
+  "$defs": {
+    "EvidenceTier": {
+      "description": "Mutually exclusive evidence maturity levels from the v5 SSOT.",
+      "enum": [
+        "FIXTURE",
+        "SYNTHETIC",
+        "DEVELOPMENT",
+        "OOS_DEVELOPMENT",
+        "FINAL_HOLDOUT",
+        "PAPER_FORWARD",
+        "SHADOW_FORWARD",
+        "TESTNET_FORWARD",
+        "CANARY_LIVE",
+        "LIVE"
+      ],
+      "title": "EvidenceTier",
+      "type": "string"
+    },
+    "TestnetEvidenceOrigin": {
+      "enum": [
+        "DEVELOPMENT_SIMULATOR",
+        "REAL_BINANCE_TESTNET"
+      ],
+      "title": "TestnetEvidenceOrigin",
+      "type": "string"
+    },
+    "TestnetReconciliationReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "account_scope_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Account Scope Id",
+          "type": "string"
+        },
+        "authoritative_facts_mutated": {
+          "const": false,
+          "default": false,
+          "title": "Authoritative Facts Mutated",
+          "type": "boolean"
+        },
+        "balance_difference_count": {
+          "minimum": 0,
+          "title": "Balance Difference Count",
+          "type": "integer"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "internal_order_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Internal Order Count",
+          "type": "integer"
+        },
+        "ledger_fill_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Ledger Fill Count",
+          "type": "integer"
+        },
+        "read_model_fill_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Read Model Fill Count",
+          "type": "integer"
+        },
+        "receipt_sha256": {
+          "title": "Receipt Sha256",
+          "type": "string"
+        },
+        "reconciled": {
+          "title": "Reconciled",
+          "type": "boolean"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "sequence_gap_count": {
+          "minimum": 0,
+          "title": "Sequence Gap Count",
+          "type": "integer"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "unmatched_fill_count": {
+          "minimum": 0,
+          "title": "Unmatched Fill Count",
+          "type": "integer"
+        },
+        "unmatched_order_count": {
+          "minimum": 0,
+          "title": "Unmatched Order Count",
+          "type": "integer"
+        },
+        "unresolved_unknown_order_count": {
+          "minimum": 0,
+          "title": "Unresolved Unknown Order Count",
+          "type": "integer"
+        },
+        "venue_fill_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Venue Fill Count",
+          "type": "integer"
+        },
+        "venue_order_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Venue Order Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "run_id",
+        "account_scope_id",
+        "started_at",
+        "completed_at",
+        "venue_order_count",
+        "internal_order_count",
+        "venue_fill_count",
+        "ledger_fill_count",
+        "read_model_fill_count",
+        "unmatched_order_count",
+        "unmatched_fill_count",
+        "balance_difference_count",
+        "sequence_gap_count",
+        "unresolved_unknown_order_count",
+        "reconciled",
+        "receipt_sha256"
+      ],
+      "title": "TestnetReconciliationReceipt",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-binance-testnet-run-evidence/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_order_count": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Accepted Order Count",
+      "type": "integer"
+    },
+    "account_scope_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Account Scope Id",
+      "type": "string"
+    },
+    "candidate_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "credential_reference_id": {
+      "anyOf": [
+        {
+          "maxLength": 240,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Credential Reference Id"
+    },
+    "ended_at": {
+      "format": "date-time",
+      "title": "Ended At",
+      "type": "string"
+    },
+    "environment": {
+      "const": "TESTNET",
+      "default": "TESTNET",
+      "title": "Environment",
+      "type": "string"
+    },
+    "evidence_sha256": {
+      "title": "Evidence Sha256",
+      "type": "string"
+    },
+    "evidence_tier": {
+      "$ref": "#/$defs/EvidenceTier"
+    },
+    "fill_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Fill Count",
+      "type": "integer"
+    },
+    "forward_pair_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Forward Pair Id",
+      "type": "string"
+    },
+    "forward_proof_sha256": {
+      "title": "Forward Proof Sha256",
+      "type": "string"
+    },
+    "live_account_connected": {
+      "const": false,
+      "default": false,
+      "title": "Live Account Connected",
+      "type": "boolean"
+    },
+    "live_domain_used": {
+      "const": false,
+      "default": false,
+      "title": "Live Domain Used",
+      "type": "boolean"
+    },
+    "network_request_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Network Request Count",
+      "type": "integer"
+    },
+    "origin": {
+      "$ref": "#/$defs/TestnetEvidenceOrigin"
+    },
+    "private_api_authenticated": {
+      "title": "Private Api Authenticated",
+      "type": "boolean"
+    },
+    "raw_credential_included": {
+      "const": false,
+      "default": false,
+      "title": "Raw Credential Included",
+      "type": "boolean"
+    },
+    "reconciliation": {
+      "$ref": "#/$defs/TestnetReconciliationReceipt"
+    },
+    "run_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "simulator_used": {
+      "title": "Simulator Used",
+      "type": "boolean"
+    },
+    "source_request_sha256": {
+      "title": "Source Request Sha256",
+      "type": "string"
+    },
+    "source_response_sha256": {
+      "title": "Source Response Sha256",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "strategy_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Strategy Id",
+      "type": "string"
+    },
+    "terminal_order_count": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Terminal Order Count",
+      "type": "integer"
+    },
+    "testnet_account_verified": {
+      "title": "Testnet Account Verified",
+      "type": "boolean"
+    },
+    "time_compressed": {
+      "title": "Time Compressed",
+      "type": "boolean"
+    },
+    "unresolved_unknown_order_count": {
+      "minimum": 0,
+      "title": "Unresolved Unknown Order Count",
+      "type": "integer"
+    },
+    "venue_id": {
+      "const": "BINANCE-TESTNET",
+      "default": "BINANCE-TESTNET",
+      "title": "Venue Id",
+      "type": "string"
+    },
+    "withdrawals_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Withdrawals Enabled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "evidence_tier",
+    "origin",
+    "candidate_id",
+    "strategy_id",
+    "forward_pair_id",
+    "forward_proof_sha256",
+    "run_id",
+    "account_scope_id",
+    "started_at",
+    "ended_at",
+    "time_compressed",
+    "simulator_used",
+    "network_request_count",
+    "private_api_authenticated",
+    "testnet_account_verified",
+    "accepted_order_count",
+    "terminal_order_count",
+    "fill_count",
+    "unresolved_unknown_order_count",
+    "source_request_sha256",
+    "source_response_sha256",
+    "reconciliation",
+    "evidence_sha256"
+  ],
+  "title": "BinanceTestnetRunEvidence",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-binance-testnet-run-evidence",
+  "x-aegisquant-schema-version": "1.0.0"
+}

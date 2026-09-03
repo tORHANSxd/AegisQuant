@@ -1,52 +1,56 @@
-# AegisQuant v3.1 规格索引
+# AegisQuant v5.0 规格索引
 
-- 规格文件：`AegisQuant_v3.1_Multimodal_Event_Intelligence_Codex_Master_Taskbook.md`
-- 版本：`3.1.0`
-- SHA-256：`1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f`
-- 总行数：7,023
+- 当前 SSOT：`AegisQuant_v5.0_Truth_Causal_AI_Forecast_Codex_Master_Plan.md`
+- 规格版本：`5.0`
+- 规格日期：`2026-09-02`
+- SHA-256：`aee366d5fa1a8ebd7449c597e6f822535546633efc335c1ab0053333d160a255`
+- 总行数：2,799
 
-## 全局规范
+## 全局主题
 
-| 范围 | 起始行 | 主题 |
-|---|---:|---|
-| 0 | 28 | 最高优先级执行契约、阶段产物、质量、安全和失败处理 |
-| 1 | 146 | 项目使命、成功标准与边界 |
-| 2 | 235 | 六个逻辑平面、权威来源与运行模式 |
-| 3 | 396 | 技术栈与版本策略 |
-| 4 | 577 | 推荐仓库结构 |
-| 5 | 769 | 统一领域模型与不变量 |
-| 6 | 1223 | 数据系统与固定接入 |
-| 7 | 1673 | 外部知识与策略情报工程 |
-| 8 / 8A | 1993 | PIT 特征标签与多模态事件联合判断 |
-| 9-16 | 2675 | 研究、策略、组合、回测、账本、风险、执行与晋升 |
-| 17-22 | 4266 | Web、可观测性、安全、部署、接口与质量验收 |
-| 23 | 5850 | P00-P18 阶段路线图 |
-| 24-29 | 6664 | 持续运营、用户协助、完成定义、参考与最终硬约束 |
+| 起始行 | 主题 |
+|---:|---|
+| 15 | 执行契约、SSOT 与禁止事项 |
+| 108 | 当前必须修复的问题与 EvidenceTier |
+| 197 | Truth Engine、证据图、时间语义与校准 |
+| 724 | 事件理解、price-in 与反事实影响 |
+| 1094 | Forecast Council、概率校准与可靠度衰减 |
+| 1450 | Net Edge、风险、执行与研究协议 |
+| 1872 | 数据库、API 与 Dashboard 契约 |
+| 2008 | V5-P00 至 V5-P12 阶段计划 |
+| 2313 | Promotion Gate、失败注入与最终成功标准 |
 
 ## 阶段索引
 
 | 阶段 | 起始行 | 责任域 |
 |---|---:|---|
-| P00 | 5898 | 项目启动、规格固化与安全基线 |
-| P01 | 5961 | 领域内核、事件契约与持久化 |
-| P02 | 6006 | 数据底座与本地资产清点 |
-| P03 | 6056 | Binance 官方公共数据 |
-| P04 | 6090 | 多交易所与首批事件/社交情报 |
-| P05 | 6145 | 双重记账、PnL 与对账 |
-| P06 | 6177 | 双回测、成本与保证金 |
-| P07 | 6210 | 特征、标签、基线与严格验证 |
-| P08 | 6243 | 研究工厂、Model Council 与 AI 代理 |
-| P09 | 6281 | 外部知识与聚宽情报工程 |
-| P10 | 6320 | 全球事件智能、宏观、链上与融合 |
-| P11 | 6362 | 组合与独立风险引擎 |
-| P12 | 6399 | 执行、账户流与 Testnet |
-| P13 | 6439 | Paper、Shadow、回放与 Chaos |
-| P14 | 6471 | Read Model、API 与设计系统 |
-| P15 | 6504 | 完整 Web 看板 |
-| P16 | 6546 | 可观测性、安全、部署与灾备 |
-| P17 | 6579 | 付费数据 Bake-off |
-| P18 | 6617 | Canary 就绪审查与持续运营 |
+| V5-P00 | 2012 | Evidence Reset 与 SSOT Migration |
+| V5-P01 | 2039 | Truth contracts 与 temporal semantics |
+| V5-P02 | 2058 | Source Registry、identity 与 C2PA |
+| V5-P03 | 2078 | Evidence retrieval 与 independence graph |
+| V5-P04 | 2105 | Truth Council 与 calibration |
+| V5-P05 | 2125 | Event canonicalization、surprise 与 price-in |
+| V5-P06 | 2143 | Event response dataset 与 causal layer |
+| V5-P07 | 2163 | Forecast Council 2.0 |
+| V5-P08 | 2186 | Truth-aware event counterfactual forecast |
+| V5-P09 | 2206 | Meta-reasoner、skeptic、ensemble 与 conformal |
+| V5-P10 | 2226 | Net Edge、portfolio 与 risk integration |
+| V5-P11 | 2249 | Paper / Shadow forward proof |
+| V5-P12 | 2282 | Testnet / Canary readiness |
 
-## 本轮边界
+## 历史实现基线
 
-当前仅允许 P00。P01 及后续阶段内容只能进入需求追踪矩阵的未来责任映射，不得形成实现或被标记为已验证。
+`AegisQuant_v3.1_Multimodal_Event_Intelligence_Codex_Master_Taskbook.md`、
+`docs/spec/AegisQuant_Master_Taskbook_v3_1.md`、`state/PROJECT_PHASE_STATE.yaml` 和
+`reports/phases/` 保留为 v3.1 历史实现及证据，不是当前 SSOT，也不自动具备 v5
+Promotion 资格。
+
+- 历史规格 SHA-256：`1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f`
+- 历史规格总行数：7,023
+- 历史阶段范围：P00-P18
+
+## 当前边界
+
+`V5-P00` 至 `V5-P06` 已验收；`V5-P07` 正在实施，其后阶段仍未授权。P07 建立 Forecast Council
+2.0 的统一张量、完整输出、能力矩阵、候选门禁与等折 OOS 竞技场。开发 fixture 上的 Truth、
+Causal 与 Forecast 指标不得包装成真实世界准确率、因果效应或交易 Alpha。

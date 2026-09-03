@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "EvidenceTier": {
+      "description": "Mutually exclusive evidence maturity levels from the v5 SSOT.",
+      "enum": [
+        "FIXTURE",
+        "SYNTHETIC",
+        "DEVELOPMENT",
+        "OOS_DEVELOPMENT",
+        "FINAL_HOLDOUT",
+        "PAPER_FORWARD",
+        "SHADOW_FORWARD",
+        "TESTNET_FORWARD",
+        "CANARY_LIVE",
+        "LIVE"
+      ],
+      "title": "EvidenceTier",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-testnet-risk-authorization-receipt/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_scope_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Account Scope Id",
+      "type": "string"
+    },
+    "authorization_scope": {
+      "const": "TESTNET_ONLY",
+      "default": "TESTNET_ONLY",
+      "title": "Authorization Scope",
+      "type": "string"
+    },
+    "candidate_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "drawdown_pass": {
+      "title": "Drawdown Pass",
+      "type": "boolean"
+    },
+    "event_risk_pass": {
+      "title": "Event Risk Pass",
+      "type": "boolean"
+    },
+    "evidence_tier": {
+      "$ref": "#/$defs/EvidenceTier"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "external_alert_receipt_sha256": {
+      "title": "External Alert Receipt Sha256",
+      "type": "string"
+    },
+    "integrated_decision_sha256": {
+      "title": "Integrated Decision Sha256",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "liquidity_pass": {
+      "title": "Liquidity Pass",
+      "type": "boolean"
+    },
+    "live_order_authorized": {
+      "const": false,
+      "default": false,
+      "title": "Live Order Authorized",
+      "type": "boolean"
+    },
+    "manual_live_unlock_received": {
+      "const": false,
+      "default": false,
+      "title": "Manual Live Unlock Received",
+      "type": "boolean"
+    },
+    "margin_pass": {
+      "title": "Margin Pass",
+      "type": "boolean"
+    },
+    "readiness_policy_sha256": {
+      "title": "Readiness Policy Sha256",
+      "type": "string"
+    },
+    "receipt_sha256": {
+      "title": "Receipt Sha256",
+      "type": "string"
+    },
+    "reconciliation_pass": {
+      "title": "Reconciliation Pass",
+      "type": "boolean"
+    },
+    "reconciliation_receipt_sha256": {
+      "title": "Reconciliation Receipt Sha256",
+      "type": "string"
+    },
+    "risk_policy_sha256": {
+      "title": "Risk Policy Sha256",
+      "type": "string"
+    },
+    "risk_snapshot_sha256": {
+      "title": "Risk Snapshot Sha256",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "security_pass": {
+      "title": "Security Pass",
+      "type": "boolean"
+    },
+    "strategy_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Strategy Id",
+      "type": "string"
+    },
+    "testnet_evidence_sha256": {
+      "title": "Testnet Evidence Sha256",
+      "type": "string"
+    },
+    "testnet_order_authorized": {
+      "title": "Testnet Order Authorized",
+      "type": "boolean"
+    },
+    "venue_pass": {
+      "title": "Venue Pass",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "evidence_tier",
+    "candidate_id",
+    "strategy_id",
+    "run_id",
+    "account_scope_id",
+    "issued_at",
+    "expires_at",
+    "readiness_policy_sha256",
+    "integrated_decision_sha256",
+    "risk_policy_sha256",
+    "risk_snapshot_sha256",
+    "testnet_evidence_sha256",
+    "reconciliation_receipt_sha256",
+    "external_alert_receipt_sha256",
+    "drawdown_pass",
+    "margin_pass",
+    "liquidity_pass",
+    "venue_pass",
+    "security_pass",
+    "event_risk_pass",
+    "reconciliation_pass",
+    "testnet_order_authorized",
+    "receipt_sha256"
+  ],
+  "title": "TestnetRiskAuthorizationReceipt",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-testnet-risk-authorization-receipt",
+  "x-aegisquant-schema-version": "1.0.0"
+}

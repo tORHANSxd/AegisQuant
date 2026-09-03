@@ -12,7 +12,7 @@ from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
-PHASE_CHOICES = (
+LEGACY_PHASE_CHOICES = (
     "P03",
     "P04",
     "P05",
@@ -30,6 +30,22 @@ PHASE_CHOICES = (
     "P17",
     "P18",
 )
+V5_PHASE_CHOICES = (
+    "V5-P00",
+    "V5-P01",
+    "V5-P02",
+    "V5-P03",
+    "V5-P04",
+    "V5-P05",
+    "V5-P06",
+    "V5-P07",
+    "V5-P08",
+    "V5-P09",
+    "V5-P10",
+    "V5-P11",
+    "V5-P12",
+)
+PHASE_CHOICES = (*LEGACY_PHASE_CHOICES, *V5_PHASE_CHOICES)
 
 
 @dataclass(frozen=True, slots=True)
@@ -54,10 +70,15 @@ def resolve_pnpm_command(root: Path) -> list[str]:
     return [str(node), str(pnpm)]
 
 
-def run_stage(name: str, command: list[str], root: Path) -> StageResult:
+def run_stage(
+    name: str, command: list[str], root: Path, *, phase_under_verification: str
+) -> StageResult:
     """Run one stage to completion and retain a bounded output tail."""
     started = time.perf_counter()
     # The executable and arguments are explicit and no shell is used.
+    environment = os.environ.copy()
+    if name == "pytest":
+        environment["AEGISQUANT_CI_BUILDING_TEST_RESULTS"] = phase_under_verification
     result = subprocess.run(  # noqa: S603  # nosec B603
         command,
         cwd=root,
@@ -66,7 +87,7 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
         text=True,
         encoding="utf-8",
         errors="replace",
-        env=os.environ.copy(),
+        env=environment,
     )
     duration = round(time.perf_counter() - started, 3)
     output = "\n".join(part for part in (result.stdout, result.stderr) if part).strip()
@@ -77,13 +98,29 @@ def run_stage(name: str, command: list[str], root: Path) -> StageResult:
 def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
     """Return the ordered P03-P18 pipeline without network soak execution."""
     pnpm = resolve_pnpm_command(root)
-    included_phases = set(PHASE_CHOICES[: PHASE_CHOICES.index(phase) + 1])
+    legacy_phase = "P18" if phase in V5_PHASE_CHOICES else phase
+    included_phases = set(LEGACY_PHASE_CHOICES[: LEGACY_PHASE_CHOICES.index(legacy_phase) + 1])
     phase_status = [
         "P00=verified",
         "P01=verified",
         "P02=verified",
-        *(f"{item}=verified" for item in PHASE_CHOICES if item in included_phases),
+        *(f"{item}=verified" for item in LEGACY_PHASE_CHOICES if item in included_phases),
     ]
+    frozen_v5_manifest_stages: list[tuple[str, list[str]]] = []
+    if phase in V5_PHASE_CHOICES:
+        for historical_phase in V5_PHASE_CHOICES[: V5_PHASE_CHOICES.index(phase)]:
+            frozen_v5_manifest_stages.append(
+                (
+                    f"{historical_phase.lower()}-frozen-manifest-self-consistency",
+                    [
+                        sys.executable,
+                        "scripts/generate_artifact_manifest.py",
+                        "--phase",
+                        historical_phase,
+                        "--check-frozen",
+                    ],
+                )
+            )
     evidence_stages: list[tuple[str, list[str]]] = [
         (
             "p03-binance-evidence",
@@ -333,6 +370,177 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
             ],
         ),
         ("schema-contracts", [sys.executable, "scripts/generate_schemas.py", "--check"]),
+        *(
+            [
+                (
+                    "v5-p01-truth-contract-evidence",
+                    [sys.executable, "-m", "scripts.generate_v5_p01_evidence", "--check"],
+                )
+            ]
+            if phase in {"V5-P01", "V5-P02"}
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p02-source-provenance-evidence",
+                    [sys.executable, "-m", "scripts.generate_v5_p02_evidence", "--check"],
+                )
+            ]
+            if phase == "V5-P02"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p03-retrieval-independence-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p03_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P03"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p04-truth-council-calibration-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p04_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P04"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p05-event-canonicalization-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p05_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P05"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p06-causal-layer-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p06_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P06"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p07-forecast-council-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p07_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P07"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p08-event-forecast-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p08_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P08"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p09-forecast-governance-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p09_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P09"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p10-decision-integration-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p10_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P10"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p11-forward-proof-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p11_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P11"
+            else []
+        ),
+        *(
+            [
+                (
+                    "v5-p12-canary-readiness-evidence",
+                    [
+                        sys.executable,
+                        "-m",
+                        "scripts.generate_v5_p12_evidence",
+                        "--check",
+                    ],
+                )
+            ]
+            if phase == "V5-P12"
+            else []
+        ),
+        *frozen_v5_manifest_stages,
         (
             "p02-data-evidence",
             [sys.executable, "scripts/generate_p02_data_evidence.py", "--check"],
@@ -345,16 +553,26 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
             "bandit",
             [sys.executable, "scripts/run_bandit.py"],
         ),
-        ("security", [sys.executable, "scripts/security_scan.py", "--phase", phase]),
+        ("security", [sys.executable, "scripts/security_scan.py", "--phase", legacy_phase]),
         (
             "compliance-artifacts",
-            [sys.executable, "scripts/generate_compliance_artifacts.py", "--phase", phase],
+            [sys.executable, "scripts/generate_compliance_artifacts.py", "--phase", legacy_phase],
         ),
-        ("pytest", [sys.executable, "-m", "pytest"]),
         (
             "python-candidate",
-            [sys.executable, "scripts/run_python_compatibility.py", "--phase", phase],
+            [sys.executable, "scripts/run_python_compatibility.py", "--phase", legacy_phase],
         ),
+        *(
+            [
+                (
+                    "v5-p00-evidence-reset-before-tests",
+                    [sys.executable, "-m", "scripts.generate_v5_p00_evidence"],
+                )
+            ]
+            if phase in V5_PHASE_CHOICES
+            else []
+        ),
+        ("pytest", [sys.executable, "-m", "pytest"]),
         (
             "nautilus-compatibility",
             [sys.executable, "scripts/generate_nautilus_compatibility.py"],
@@ -374,6 +592,20 @@ def stage_commands(root: Path, phase: str) -> list[tuple[str, list[str]]]:
         ),
         ("web-build", [*pnpm, "--filter", "@aegisquant/web", "build"]),
         ("web-e2e", [*pnpm, "--filter", "@aegisquant/web", "e2e"]),
+        *(
+            [
+                (
+                    "v5-p00-evidence-reset-final",
+                    [sys.executable, "-m", "scripts.generate_v5_p00_evidence"],
+                ),
+                (
+                    "v5-p00-evidence-check",
+                    [sys.executable, "-m", "scripts.generate_v5_p00_evidence", "--check"],
+                ),
+            ]
+            if phase in V5_PHASE_CHOICES
+            else []
+        ),
     ]
 
 
@@ -382,7 +614,7 @@ def main() -> int:
     parser.add_argument(
         "--phase",
         choices=PHASE_CHOICES,
-        default="P18",
+        default="V5-P12",
     )
     parser.add_argument(
         "--output",
@@ -390,11 +622,19 @@ def main() -> int:
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    results = [run_stage(name, command, root) for name, command in stage_commands(root, args.phase)]
+    results = [
+        run_stage(name, command, root, phase_under_verification=args.phase)
+        for name, command in stage_commands(root, args.phase)
+    ]
     passed = all(result.exit_code == 0 for result in results)
     payload = {
         "schema_version": "1.0.0",
         "phase": args.phase,
+        "verification_scope": {
+            "legacy_regression_through": "P18" if args.phase in V5_PHASE_CHOICES else args.phase,
+            "future_v5_phase_authorization": False,
+            "meaning": "legacy regression coverage is not V5 phase acceptance",
+        },
         "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "status": "passed" if passed else "failed",
         "stage_count": len(results),
@@ -402,7 +642,12 @@ def main() -> int:
         "failed_count": sum(result.exit_code != 0 for result in results),
         "results": [asdict(result) for result in results],
     }
-    output = root / (args.output or Path(f"reports/phases/{args.phase}/CI_RESULTS.json"))
+    default_output = (
+        Path(f"reports/v5/{args.phase.removeprefix('V5-')}/TEST_RESULTS.json")
+        if args.phase in V5_PHASE_CHOICES
+        else Path(f"reports/phases/{args.phase}/CI_RESULTS.json")
+    )
+    output = root / (args.output or default_output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",

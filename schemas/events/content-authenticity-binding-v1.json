@@ -1,0 +1,147 @@
+{
+  "$defs": {
+    "ContentIntegrityState": {
+      "enum": [
+        "VERIFIED_TRUSTED",
+        "VERIFIED_UNTRUSTED",
+        "INVALID",
+        "NO_CREDENTIALS",
+        "UNSUPPORTED",
+        "ERROR"
+      ],
+      "title": "ContentIntegrityState",
+      "type": "string"
+    },
+    "OfficialIdentityState": {
+      "enum": [
+        "AUTHENTIC",
+        "REJECTED",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "title": "OfficialIdentityState",
+      "type": "string"
+    },
+    "SourceCompromiseStatus": {
+      "enum": [
+        "UNKNOWN",
+        "NORMAL",
+        "SUSPECTED",
+        "COMPROMISED",
+        "RECOVERED"
+      ],
+      "title": "SourceCompromiseStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.content-authenticity-binding/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asset_sha256": {
+      "title": "Asset Sha256",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "binding_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Binding Id",
+      "type": "string"
+    },
+    "claim_truth_implied": {
+      "const": false,
+      "default": false,
+      "title": "Claim Truth Implied",
+      "type": "boolean"
+    },
+    "content_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Content Id",
+      "type": "string"
+    },
+    "content_integrity_assessment_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Content Integrity Assessment Id",
+      "type": "string"
+    },
+    "identity_state": {
+      "$ref": "#/$defs/OfficialIdentityState"
+    },
+    "integrity_state": {
+      "$ref": "#/$defs/ContentIntegrityState"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "source_compromise_event_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Compromise Event Id"
+    },
+    "source_compromise_status": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SourceCompromiseStatus"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "source_identity_assessment_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Identity Assessment Id",
+      "type": "string"
+    },
+    "source_identity_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Identity Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "binding_id",
+    "content_id",
+    "source_identity_id",
+    "source_identity_assessment_id",
+    "content_integrity_assessment_id",
+    "asset_sha256",
+    "identity_state",
+    "integrity_state",
+    "reason_codes",
+    "available_at"
+  ],
+  "title": "ContentAuthenticityBinding",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.content-authenticity-binding",
+  "x-aegisquant-schema-version": "1.0.0"
+}

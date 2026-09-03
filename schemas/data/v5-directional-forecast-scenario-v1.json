@@ -1,0 +1,48 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-directional-forecast-scenario/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "gross_edge": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Gross Edge"
+    },
+    "probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Probability"
+    },
+    "scenario_id": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Scenario Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scenario_id",
+    "probability",
+    "gross_edge"
+  ],
+  "title": "DirectionalForecastScenario",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-directional-forecast-scenario",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,1739 @@
+{
+  "$defs": {
+    "ClaimType": {
+      "description": "Semantic class assigned before truth adjudication.",
+      "enum": [
+        "FACT",
+        "FORWARD_FACT",
+        "INTERPRETATION",
+        "OPINION",
+        "PREDICTION",
+        "QUOTE",
+        "RUMOR"
+      ],
+      "title": "ClaimType",
+      "type": "string"
+    },
+    "EventCluster": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_ids": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "type": "string"
+          },
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "claimed_event_time": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Claimed Event Time"
+        },
+        "contradicting_evidence_ids": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "type": "string"
+          },
+          "title": "Contradicting Evidence Ids",
+          "type": "array"
+        },
+        "credibility_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Credibility Score"
+        },
+        "entity_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Entity Ids",
+          "type": "array"
+        },
+        "event_cluster_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Cluster Id",
+          "type": "string"
+        },
+        "event_type": {
+          "title": "Event Type",
+          "type": "string"
+        },
+        "first_observed_time": {
+          "format": "date-time",
+          "title": "First Observed Time",
+          "type": "string"
+        },
+        "independent_source_count": {
+          "title": "Independent Source Count",
+          "type": "integer"
+        },
+        "last_updated_time": {
+          "format": "date-time",
+          "title": "Last Updated Time",
+          "type": "string"
+        },
+        "manipulation_risk": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Manipulation Risk"
+        },
+        "official_confirmation_ids": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "type": "string"
+          },
+          "title": "Official Confirmation Ids",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/EventClusterStatus"
+        },
+        "supersedes_event_cluster_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes Event Cluster Id"
+        },
+        "supporting_evidence_ids": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "type": "string"
+          },
+          "title": "Supporting Evidence Ids",
+          "type": "array"
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Uncertainty"
+        }
+      },
+      "required": [
+        "event_cluster_id",
+        "event_type",
+        "status",
+        "entity_ids",
+        "first_observed_time",
+        "last_updated_time",
+        "claim_ids",
+        "supporting_evidence_ids",
+        "contradicting_evidence_ids",
+        "independent_source_count",
+        "official_confirmation_ids",
+        "credibility_score",
+        "manipulation_risk",
+        "uncertainty"
+      ],
+      "title": "EventCluster",
+      "type": "object"
+    },
+    "EventClusterStatus": {
+      "enum": [
+        "RUMOR",
+        "EMERGING",
+        "CORROBORATED",
+        "CONFIRMED",
+        "DENIED",
+        "RESOLVED"
+      ],
+      "title": "EventClusterStatus",
+      "type": "string"
+    },
+    "EventSurprise": {
+      "additionalProperties": false,
+      "properties": {
+        "actual_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Actual Value"
+        },
+        "as_of_time": {
+          "format": "date-time",
+          "title": "As Of Time",
+          "type": "string"
+        },
+        "direction": {
+          "$ref": "#/$defs/SurpriseDirection"
+        },
+        "event_cluster_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Cluster Id",
+          "type": "string"
+        },
+        "expected_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Expected Value"
+        },
+        "materiality_threshold": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Materiality Threshold"
+        },
+        "surprise_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Surprise Id",
+          "type": "string"
+        },
+        "surprise_sha256": {
+          "title": "Surprise Sha256",
+          "type": "string"
+        },
+        "surprise_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Surprise Value"
+        },
+        "value_snapshot_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Value Snapshot Id",
+          "type": "string"
+        },
+        "value_snapshot_sha256": {
+          "title": "Value Snapshot Sha256",
+          "type": "string"
+        },
+        "value_unit": {
+          "minLength": 1,
+          "title": "Value Unit",
+          "type": "string"
+        },
+        "whisper_surprise_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Whisper Surprise Value"
+        },
+        "whisper_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Whisper Value"
+        }
+      },
+      "required": [
+        "surprise_id",
+        "event_cluster_id",
+        "value_snapshot_id",
+        "value_snapshot_sha256",
+        "as_of_time",
+        "actual_value",
+        "expected_value",
+        "surprise_value",
+        "materiality_threshold",
+        "value_unit",
+        "direction",
+        "surprise_sha256"
+      ],
+      "title": "EventSurprise",
+      "type": "object"
+    },
+    "EventValueKind": {
+      "enum": [
+        "ACTUAL",
+        "CONSENSUS",
+        "WHISPER",
+        "PRIOR_PROBABILITY"
+      ],
+      "title": "EventValueKind",
+      "type": "string"
+    },
+    "EventValueSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "as_of_time": {
+          "format": "date-time",
+          "title": "As Of Time",
+          "type": "string"
+        },
+        "event_cluster_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Cluster Id",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "snapshot_sha256": {
+          "title": "Snapshot Sha256",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/$defs/TimedEventValue"
+          },
+          "minItems": 1,
+          "title": "Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "snapshot_id",
+        "event_cluster_id",
+        "as_of_time",
+        "values",
+        "snapshot_sha256"
+      ],
+      "title": "EventValueSnapshot",
+      "type": "object"
+    },
+    "MarketReflectionMetric": {
+      "enum": [
+        "PRE_CONFIRMATION_PRICE_MOVE",
+        "ABNORMAL_RETURN",
+        "VOLUME_SPIKE",
+        "OPEN_INTEREST_CHANGE",
+        "FUNDING_CHANGE",
+        "BASIS_CHANGE",
+        "OPTIONS_IV_SKEW",
+        "CROSS_ASSET_RESPONSE",
+        "NARRATIVE_DIFFUSION",
+        "LIQUIDATION_FLOW",
+        "MARKET_DEPTH_CHANGE"
+      ],
+      "title": "MarketReflectionMetric",
+      "type": "string"
+    },
+    "MarketReflectionPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "high_price_in_threshold": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "High Price In Threshold"
+        },
+        "max_metric_age_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Max Metric Age Seconds",
+          "type": "integer"
+        },
+        "metric_weights": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ],
+            "ge": "0",
+            "le": "1"
+          },
+          "propertyNames": {
+            "$ref": "#/$defs/MarketReflectionMetric"
+          },
+          "title": "Metric Weights",
+          "type": "object"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "required_metrics": {
+          "items": {
+            "$ref": "#/$defs/MarketReflectionMetric"
+          },
+          "minItems": 1,
+          "title": "Required Metrics",
+          "type": "array"
+        }
+      },
+      "required": [
+        "policy_version",
+        "required_metrics",
+        "metric_weights",
+        "high_price_in_threshold",
+        "max_metric_age_seconds"
+      ],
+      "title": "MarketReflectionPolicy",
+      "type": "object"
+    },
+    "MarketReflectionScore": {
+      "additionalProperties": false,
+      "properties": {
+        "already_priced_probability": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Already Priced Probability"
+        },
+        "as_of_time": {
+          "format": "date-time",
+          "title": "As Of Time",
+          "type": "string"
+        },
+        "event_cluster_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Cluster Id",
+          "type": "string"
+        },
+        "high_price_in": {
+          "title": "High Price In",
+          "type": "boolean"
+        },
+        "market_reflection_score": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Market Reflection Score"
+        },
+        "method": {
+          "const": "DEVELOPMENT_WEIGHTED_SCORE_V1",
+          "default": "DEVELOPMENT_WEIGHTED_SCORE_V1",
+          "title": "Method",
+          "type": "string"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/$defs/TimedMarketReflectionMetric"
+          },
+          "title": "Metrics",
+          "type": "array"
+        },
+        "missing_metrics": {
+          "items": {
+            "$ref": "#/$defs/MarketReflectionMetric"
+          },
+          "title": "Missing Metrics",
+          "type": "array"
+        },
+        "policy": {
+          "$ref": "#/$defs/MarketReflectionPolicy"
+        },
+        "promotion_eligible": {
+          "const": false,
+          "default": false,
+          "title": "Promotion Eligible",
+          "type": "boolean"
+        },
+        "quality_state": {
+          "$ref": "#/$defs/QualityState"
+        },
+        "reflection_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Reflection Id",
+          "type": "string"
+        },
+        "reflection_sha256": {
+          "title": "Reflection Sha256",
+          "type": "string"
+        },
+        "stale_metric_ids": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "type": "string"
+          },
+          "title": "Stale Metric Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "reflection_id",
+        "event_cluster_id",
+        "as_of_time",
+        "policy",
+        "metrics",
+        "missing_metrics",
+        "stale_metric_ids",
+        "high_price_in",
+        "quality_state",
+        "reflection_sha256"
+      ],
+      "title": "MarketReflectionScore",
+      "type": "object"
+    },
+    "NarrativeDiffusionObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "event_cluster_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Cluster Id",
+          "type": "string"
+        },
+        "independence_group": {
+          "minLength": 1,
+          "title": "Independence Group",
+          "type": "string"
+        },
+        "kol_source": {
+          "default": false,
+          "title": "Kol Source",
+          "type": "boolean"
+        },
+        "language": {
+          "maxLength": 35,
+          "minLength": 2,
+          "title": "Language",
+          "type": "string"
+        },
+        "news_wire_source": {
+          "default": false,
+          "title": "News Wire Source",
+          "type": "boolean"
+        },
+        "observation_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "platform": {
+          "minLength": 1,
+          "title": "Platform",
+          "type": "string"
+        },
+        "source_id": {
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "verified_source": {
+          "title": "Verified Source",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "observation_id",
+        "event_cluster_id",
+        "source_id",
+        "independence_group",
+        "platform",
+        "language",
+        "verified_source",
+        "observed_at",
+        "available_at",
+        "source_sha256"
+      ],
+      "title": "NarrativeDiffusionObservation",
+      "type": "object"
+    },
+    "NarrativeDiffusionSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "as_of_time": {
+          "format": "date-time",
+          "title": "As Of Time",
+          "type": "string"
+        },
+        "diffusion_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Diffusion Id",
+          "type": "string"
+        },
+        "diffusion_sha256": {
+          "title": "Diffusion Sha256",
+          "type": "string"
+        },
+        "event_cluster_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Cluster Id",
+          "type": "string"
+        },
+        "first_observed_at": {
+          "format": "date-time",
+          "title": "First Observed At",
+          "type": "string"
+        },
+        "first_source_id": {
+          "minLength": 1,
+          "title": "First Source Id",
+          "type": "string"
+        },
+        "first_verified_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Verified At"
+        },
+        "first_verified_source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Verified Source Id"
+        },
+        "independent_source_count": {
+          "minimum": 1,
+          "title": "Independent Source Count",
+          "type": "integer"
+        },
+        "independent_source_velocity_per_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Independent Source Velocity Per Hour"
+        },
+        "kol_count": {
+          "minimum": 0,
+          "title": "Kol Count",
+          "type": "integer"
+        },
+        "language_count": {
+          "minimum": 1,
+          "title": "Language Count",
+          "type": "integer"
+        },
+        "news_wire_count": {
+          "minimum": 0,
+          "title": "News Wire Count",
+          "type": "integer"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/NarrativeDiffusionObservation"
+          },
+          "minItems": 1,
+          "title": "Observations",
+          "type": "array"
+        },
+        "platform_count": {
+          "minimum": 1,
+          "title": "Platform Count",
+          "type": "integer"
+        },
+        "price_response_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Response At"
+        },
+        "price_response_available_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Response Available At"
+        },
+        "price_response_lag_seconds": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Response Lag Seconds"
+        },
+        "price_response_source_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Response Source Sha256"
+        },
+        "propagation_stage": {
+          "$ref": "#/$defs/NarrativePropagationStage"
+        },
+        "source_velocity_per_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Source Velocity Per Hour"
+        },
+        "volume_response_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Volume Response At"
+        },
+        "volume_response_available_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Volume Response Available At"
+        },
+        "volume_response_lag_seconds": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Volume Response Lag Seconds"
+        },
+        "volume_response_source_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Volume Response Source Sha256"
+        },
+        "window_hours": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Window Hours"
+        }
+      },
+      "required": [
+        "diffusion_id",
+        "event_cluster_id",
+        "as_of_time",
+        "window_hours",
+        "observations",
+        "first_source_id",
+        "first_observed_at",
+        "independent_source_count",
+        "platform_count",
+        "language_count",
+        "kol_count",
+        "news_wire_count",
+        "source_velocity_per_hour",
+        "independent_source_velocity_per_hour",
+        "propagation_stage",
+        "diffusion_sha256"
+      ],
+      "title": "NarrativeDiffusionSnapshot",
+      "type": "object"
+    },
+    "NarrativePropagationStage": {
+      "enum": [
+        "EMERGING",
+        "CROSS_PLATFORM",
+        "BROAD"
+      ],
+      "title": "NarrativePropagationStage",
+      "type": "string"
+    },
+    "QualityState": {
+      "enum": [
+        "GOOD",
+        "DEGRADED",
+        "STALE",
+        "INVALID"
+      ],
+      "title": "QualityState",
+      "type": "string"
+    },
+    "SurpriseDirection": {
+      "enum": [
+        "MORE_POSITIVE_THAN_EXPECTED",
+        "AS_EXPECTED",
+        "MORE_NEGATIVE_THAN_EXPECTED"
+      ],
+      "title": "SurpriseDirection",
+      "type": "string"
+    },
+    "TimedEventValue": {
+      "additionalProperties": false,
+      "properties": {
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "event_cluster_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Cluster Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/EventValueKind"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "source_artifact_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Source Artifact Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "unit": {
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        },
+        "value_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Value Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value_id",
+        "event_cluster_id",
+        "kind",
+        "value",
+        "unit",
+        "observed_at",
+        "available_at",
+        "source_artifact_id",
+        "source_sha256"
+      ],
+      "title": "TimedEventValue",
+      "type": "object"
+    },
+    "TimedMarketReflectionMetric": {
+      "additionalProperties": false,
+      "properties": {
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "event_cluster_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Event Cluster Id",
+          "type": "string"
+        },
+        "metric": {
+          "$ref": "#/$defs/MarketReflectionMetric"
+        },
+        "metric_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Metric Id",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "reflection_strength": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Reflection Strength"
+        },
+        "source_id": {
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "metric_id",
+        "event_cluster_id",
+        "metric",
+        "reflection_strength",
+        "observed_at",
+        "available_at",
+        "source_id",
+        "source_sha256"
+      ],
+      "title": "TimedMarketReflectionMetric",
+      "type": "object"
+    },
+    "TruthAssessment": {
+      "additionalProperties": false,
+      "description": "Calibratable truth output that never accepts opinion-like claim classes.",
+      "properties": {
+        "assessed_at": {
+          "format": "date-time",
+          "title": "Assessed At",
+          "type": "string"
+        },
+        "assessment_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Assessment Id",
+          "type": "string"
+        },
+        "assessment_scope": {
+          "$ref": "#/$defs/TruthAssessmentScope"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "calibration_bucket": {
+          "minLength": 1,
+          "title": "Calibration Bucket",
+          "type": "string"
+        },
+        "claim_current_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Claim Current Probability"
+        },
+        "claim_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "claim_truth_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Claim Truth Probability"
+        },
+        "claim_type": {
+          "$ref": "#/$defs/ClaimType"
+        },
+        "content_integrity_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Content Integrity Probability"
+        },
+        "contradiction_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Contradiction Probability"
+        },
+        "evidence_dependency_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Evidence Dependency Score"
+        },
+        "evidence_graph_hash": {
+          "title": "Evidence Graph Hash",
+          "type": "string"
+        },
+        "evidence_independence_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Evidence Independence Probability"
+        },
+        "independent_evidence_count": {
+          "minimum": 0,
+          "title": "Independent Evidence Count",
+          "type": "integer"
+        },
+        "manipulation_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Manipulation Probability"
+        },
+        "model_version": {
+          "minLength": 1,
+          "title": "Model Version",
+          "type": "string"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "revision_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Revision Probability"
+        },
+        "source_compromised_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Source Compromised Probability"
+        },
+        "source_document_ids": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Document Ids",
+          "type": "array"
+        },
+        "source_identity_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Source Identity Probability"
+        },
+        "source_revision_ids": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Revision Ids",
+          "type": "array"
+        },
+        "truth_state": {
+          "$ref": "#/$defs/TruthState"
+        }
+      },
+      "required": [
+        "assessment_id",
+        "claim_id",
+        "claim_type",
+        "assessment_scope",
+        "source_document_ids",
+        "source_revision_ids",
+        "source_identity_probability",
+        "content_integrity_probability",
+        "claim_truth_probability",
+        "claim_current_probability",
+        "evidence_independence_probability",
+        "manipulation_probability",
+        "revision_probability",
+        "source_compromised_probability",
+        "independent_evidence_count",
+        "evidence_dependency_score",
+        "contradiction_probability",
+        "calibration_bucket",
+        "truth_state",
+        "reason_codes",
+        "evidence_graph_hash",
+        "model_version",
+        "policy_version",
+        "assessed_at",
+        "available_at"
+      ],
+      "title": "TruthAssessment",
+      "type": "object"
+    },
+    "TruthAssessmentScope": {
+      "enum": [
+        "CLAIM_TRUTH",
+        "FORWARD_FACT_STATUS",
+        "QUOTE_AUTHENTICITY"
+      ],
+      "title": "TruthAssessmentScope",
+      "type": "string"
+    },
+    "TruthState": {
+      "enum": [
+        "UNVERIFIED",
+        "RUMOR",
+        "PARTIALLY_CORROBORATED",
+        "VERIFIED_PRIMARY",
+        "VERIFIED_MULTI_SOURCE",
+        "CONTRADICTED",
+        "RETRACTED",
+        "STALE",
+        "UNKNOWN"
+      ],
+      "title": "TruthState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.canonical-event/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actual_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Actual Value"
+    },
+    "affected_assets": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Affected Assets",
+      "type": "array"
+    },
+    "assets": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Assets",
+      "type": "array"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "canonical_sha256": {
+      "title": "Canonical Sha256",
+      "type": "string"
+    },
+    "confirmed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confirmed At"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "entities": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Entities",
+      "type": "array"
+    },
+    "event_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_stage": {
+      "$ref": "#/$defs/EventClusterStatus"
+    },
+    "event_surprise": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EventSurprise"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "event_type": {
+      "minLength": 1,
+      "title": "Event Type",
+      "type": "string"
+    },
+    "event_value_snapshot": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EventValueSnapshot"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "expected_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Value"
+    },
+    "first_seen_at": {
+      "format": "date-time",
+      "title": "First Seen At",
+      "type": "string"
+    },
+    "jurisdiction": {
+      "minLength": 1,
+      "title": "Jurisdiction",
+      "type": "string"
+    },
+    "market_reflection": {
+      "$ref": "#/$defs/MarketReflectionScore"
+    },
+    "narrative_diffusion": {
+      "$ref": "#/$defs/NarrativeDiffusionSnapshot"
+    },
+    "novelty": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Novelty"
+    },
+    "persistence": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Persistence"
+    },
+    "previous_revision_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Revision Id"
+    },
+    "revision_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Revision Id",
+      "type": "string"
+    },
+    "revision_number": {
+      "minimum": 1,
+      "title": "Revision Number",
+      "type": "integer"
+    },
+    "severity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Severity"
+    },
+    "source_cluster": {
+      "$ref": "#/$defs/EventCluster"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Ids",
+      "type": "array"
+    },
+    "surprise_direction": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SurpriseDirection"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "surprise_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surprise Value"
+    },
+    "transmission_channels": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Transmission Channels",
+      "type": "array"
+    },
+    "truth_assessment": {
+      "$ref": "#/$defs/TruthAssessment"
+    },
+    "value_unit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Unit"
+    },
+    "whisper_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Whisper Value"
+    }
+  },
+  "required": [
+    "event_id",
+    "revision_id",
+    "revision_number",
+    "source_cluster",
+    "event_type",
+    "event_stage",
+    "entities",
+    "assets",
+    "jurisdiction",
+    "truth_assessment",
+    "novelty",
+    "severity",
+    "persistence",
+    "transmission_channels",
+    "affected_assets",
+    "source_ids",
+    "narrative_diffusion",
+    "market_reflection",
+    "first_seen_at",
+    "available_at",
+    "created_at",
+    "canonical_sha256"
+  ],
+  "title": "CanonicalEvent",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.canonical-event",
+  "x-aegisquant-schema-version": "1.0.0"
+}

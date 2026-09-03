@@ -1,0 +1,62 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.doubly-robust-spec/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "confidence_z": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "1.95996398454005",
+      "gt": "0",
+      "title": "Confidence Z"
+    },
+    "propensity_lower_bound": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "0.05",
+      "ge": "0",
+      "le": "1",
+      "title": "Propensity Lower Bound"
+    },
+    "propensity_upper_bound": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "0.95",
+      "ge": "0",
+      "le": "1",
+      "title": "Propensity Upper Bound"
+    },
+    "spec_id": {
+      "title": "Spec Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "spec_id"
+  ],
+  "title": "DoublyRobustSpec",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.doubly-robust-spec",
+  "x-aegisquant-schema-version": "1.0.0"
+}

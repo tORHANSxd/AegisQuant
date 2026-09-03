@@ -1,0 +1,1376 @@
+{
+  "$defs": {
+    "AdaptiveConformalPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "critical_shortfall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Critical Shortfall"
+        },
+        "maximum_adjustment_step": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Maximum Adjustment Step"
+        },
+        "maximum_window_age_seconds": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Maximum Window Age Seconds"
+        },
+        "method": {
+          "$ref": "#/$defs/CalibrationMethod"
+        },
+        "minimum_sample_count": {
+          "minimum": 2,
+          "title": "Minimum Sample Count",
+          "type": "integer"
+        },
+        "target_coverage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Target Coverage"
+        },
+        "warning_shortfall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Warning Shortfall"
+        }
+      },
+      "required": [
+        "method",
+        "target_coverage",
+        "warning_shortfall",
+        "critical_shortfall",
+        "minimum_sample_count",
+        "maximum_window_age_seconds",
+        "maximum_adjustment_step"
+      ],
+      "title": "AdaptiveConformalPolicy",
+      "type": "object"
+    },
+    "AdaptiveConformalReport": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/CalibrationDriftAction"
+        },
+        "calibration_drift": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Calibration Drift"
+        },
+        "coverage_shortfall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Coverage Shortfall"
+        },
+        "distribution_scale_normalized": {
+          "title": "Distribution Scale Normalized",
+          "type": "boolean"
+        },
+        "exchangeability_assumed": {
+          "const": false,
+          "default": false,
+          "title": "Exchangeability Assumed",
+          "type": "boolean"
+        },
+        "observed_coverage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Observed Coverage"
+        },
+        "policy": {
+          "$ref": "#/$defs/AdaptiveConformalPolicy"
+        },
+        "real_world_coverage_claimed": {
+          "const": false,
+          "default": false,
+          "title": "Real World Coverage Claimed",
+          "type": "boolean"
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "recommended_residual_quantile": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Recommended Residual Quantile"
+        },
+        "recommended_scale_multiplier": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Recommended Scale Multiplier"
+        },
+        "report_sha256": {
+          "title": "Report Sha256",
+          "type": "string"
+        },
+        "window": {
+          "$ref": "#/$defs/IntervalCoverageWindow"
+        }
+      },
+      "required": [
+        "window",
+        "policy",
+        "observed_coverage",
+        "coverage_shortfall",
+        "calibration_drift",
+        "recommended_residual_quantile",
+        "recommended_scale_multiplier",
+        "distribution_scale_normalized",
+        "action",
+        "reason_codes",
+        "report_sha256"
+      ],
+      "title": "AdaptiveConformalReport",
+      "type": "object"
+    },
+    "CalibrationDriftAction": {
+      "enum": [
+        "NONE",
+        "RECALIBRATE",
+        "DEGRADE",
+        "ABSTAIN"
+      ],
+      "title": "CalibrationDriftAction",
+      "type": "string"
+    },
+    "CalibrationMethod": {
+      "enum": [
+        "PLATT_LOGISTIC",
+        "ISOTONIC",
+        "TEMPERATURE",
+        "BETA",
+        "ADAPTIVE_CONFORMAL",
+        "DISTRIBUTION_AWARE_CONFORMAL",
+        "ROLLING_QUANTILE"
+      ],
+      "title": "CalibrationMethod",
+      "type": "string"
+    },
+    "CouncilDisagreementPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "abstain_on_direction_conflict": {
+          "const": true,
+          "default": true,
+          "title": "Abstain On Direction Conflict",
+          "type": "boolean"
+        },
+        "maximum_expected_return_range": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Expected Return Range"
+        }
+      },
+      "required": [
+        "maximum_expected_return_range"
+      ],
+      "title": "CouncilDisagreementPolicy",
+      "type": "object"
+    },
+    "CouncilDisagreementReport": {
+      "additionalProperties": false,
+      "properties": {
+        "direction_conflict": {
+          "title": "Direction Conflict",
+          "type": "boolean"
+        },
+        "expected_return_range": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Expected Return Range"
+        },
+        "policy": {
+          "$ref": "#/$defs/CouncilDisagreementPolicy"
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "report_sha256": {
+          "title": "Report Sha256",
+          "type": "string"
+        },
+        "should_abstain": {
+          "title": "Should Abstain",
+          "type": "boolean"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/CouncilSignalSnapshot"
+        }
+      },
+      "required": [
+        "snapshot",
+        "policy",
+        "expected_return_range",
+        "direction_conflict",
+        "should_abstain",
+        "reason_codes",
+        "report_sha256"
+      ],
+      "title": "CouncilDisagreementReport",
+      "type": "object"
+    },
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "CouncilMemberSignal": {
+      "additionalProperties": false,
+      "properties": {
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "candidate_id": {
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "expected_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Expected Return"
+        },
+        "forecast_sha256": {
+          "title": "Forecast Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "forecast_sha256",
+        "expected_return",
+        "available_at"
+      ],
+      "title": "CouncilMemberSignal",
+      "type": "object"
+    },
+    "CouncilSignalSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "signals": {
+          "items": {
+            "$ref": "#/$defs/CouncilMemberSignal"
+          },
+          "minItems": 2,
+          "title": "Signals",
+          "type": "array"
+        },
+        "snapshot_sha256": {
+          "title": "Snapshot Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "horizon",
+        "regime",
+        "decision_time",
+        "signals",
+        "snapshot_sha256"
+      ],
+      "title": "CouncilSignalSnapshot",
+      "type": "object"
+    },
+    "DynamicStackingPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum_ood_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Ood Score"
+        },
+        "maximum_single_model_weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum Single Model Weight"
+        },
+        "maximum_weight_step": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum Weight Step"
+        },
+        "minimum_data_quality": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Minimum Data Quality"
+        },
+        "minimum_model_reliability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Minimum Model Reliability"
+        }
+      },
+      "required": [
+        "maximum_single_model_weight",
+        "maximum_weight_step",
+        "maximum_ood_score",
+        "minimum_data_quality",
+        "minimum_model_reliability"
+      ],
+      "title": "DynamicStackingPolicy",
+      "type": "object"
+    },
+    "IndependentSkepticAssessment": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "const": "RESEARCH_RECOMMENDATION_ONLY",
+          "default": "RESEARCH_RECOMMENDATION_ONLY",
+          "title": "Action",
+          "type": "string"
+        },
+        "assessment_sha256": {
+          "title": "Assessment Sha256",
+          "type": "string"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "context_sha256": {
+          "title": "Context Sha256",
+          "type": "string"
+        },
+        "findings": {
+          "items": {
+            "$ref": "#/$defs/SkepticFinding"
+          },
+          "minItems": 1,
+          "title": "Findings",
+          "type": "array"
+        },
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "model_revision_sha256": {
+          "title": "Model Revision Sha256",
+          "type": "string"
+        },
+        "order_submission_enabled": {
+          "const": false,
+          "default": false,
+          "title": "Order Submission Enabled",
+          "type": "boolean"
+        },
+        "prompt_sha256": {
+          "title": "Prompt Sha256",
+          "type": "string"
+        },
+        "shared_final_prompt": {
+          "const": false,
+          "default": false,
+          "title": "Shared Final Prompt",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "context_sha256",
+        "prompt_sha256",
+        "model_revision_sha256",
+        "generated_at",
+        "available_at",
+        "findings",
+        "assessment_sha256"
+      ],
+      "title": "IndependentSkepticAssessment",
+      "type": "object"
+    },
+    "IntervalCoverageObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "outcome_available_at": {
+          "format": "date-time",
+          "title": "Outcome Available At",
+          "type": "string"
+        },
+        "predicted_at": {
+          "format": "date-time",
+          "title": "Predicted At",
+          "type": "string"
+        },
+        "predicted_lower": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Lower"
+        },
+        "predicted_median": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Median"
+        },
+        "predicted_upper": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Upper"
+        },
+        "realized_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Realized Value"
+        },
+        "sample_id": {
+          "minLength": 1,
+          "title": "Sample Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sample_id",
+        "predicted_lower",
+        "predicted_median",
+        "predicted_upper",
+        "realized_value",
+        "predicted_at",
+        "outcome_available_at"
+      ],
+      "title": "IntervalCoverageObservation",
+      "type": "object"
+    },
+    "IntervalCoverageWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "calibration_artifact_sha256": {
+          "title": "Calibration Artifact Sha256",
+          "type": "string"
+        },
+        "dataset_manifest_sha256": {
+          "title": "Dataset Manifest Sha256",
+          "type": "string"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "model_revision_sha256": {
+          "title": "Model Revision Sha256",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/IntervalCoverageObservation"
+          },
+          "minItems": 2,
+          "title": "Observations",
+          "type": "array"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "window_end": {
+          "format": "date-time",
+          "title": "Window End",
+          "type": "string"
+        },
+        "window_sha256": {
+          "title": "Window Sha256",
+          "type": "string"
+        },
+        "window_start": {
+          "format": "date-time",
+          "title": "Window Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "horizon",
+        "regime",
+        "model_revision_sha256",
+        "dataset_manifest_sha256",
+        "calibration_artifact_sha256",
+        "window_start",
+        "window_end",
+        "decision_time",
+        "observations",
+        "window_sha256"
+      ],
+      "title": "IntervalCoverageWindow",
+      "type": "object"
+    },
+    "MarketRegime": {
+      "enum": [
+        "TREND",
+        "MEAN_REVERSION",
+        "LOW_VOL_COMPRESSION",
+        "VOL_EXPANSION",
+        "LIQUIDITY_CRISIS",
+        "NEWS_SHOCK",
+        "LIQUIDATION_CASCADE",
+        "FUNDING_DISLOCATION",
+        "CORRELATION_BREAKDOWN",
+        "RISK_ON",
+        "RISK_OFF",
+        "UNKNOWN",
+        "OOD"
+      ],
+      "title": "MarketRegime",
+      "type": "string"
+    },
+    "MetaReasonerRecommendation": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "const": "RESEARCH_RECOMMENDATION_ONLY",
+          "default": "RESEARCH_RECOMMENDATION_ONLY",
+          "title": "Action",
+          "type": "string"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "conflict_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Conflict Codes",
+          "type": "array"
+        },
+        "context_sha256": {
+          "title": "Context Sha256",
+          "type": "string"
+        },
+        "explanation": {
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "model_revision_sha256": {
+          "title": "Model Revision Sha256",
+          "type": "string"
+        },
+        "order_submission_enabled": {
+          "const": false,
+          "default": false,
+          "title": "Order Submission Enabled",
+          "type": "boolean"
+        },
+        "prompt_sha256": {
+          "title": "Prompt Sha256",
+          "type": "string"
+        },
+        "recommend_abstain": {
+          "title": "Recommend Abstain",
+          "type": "boolean"
+        },
+        "recommendation_sha256": {
+          "title": "Recommendation Sha256",
+          "type": "string"
+        },
+        "recommended_model_weight_cap": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Recommended Model Weight Cap"
+        },
+        "skeptic_questions": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Skeptic Questions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "context_sha256",
+        "prompt_sha256",
+        "model_revision_sha256",
+        "generated_at",
+        "available_at",
+        "conflict_codes",
+        "skeptic_questions",
+        "recommended_model_weight_cap",
+        "recommend_abstain",
+        "explanation",
+        "recommendation_sha256"
+      ],
+      "title": "MetaReasonerRecommendation",
+      "type": "object"
+    },
+    "ReasoningContext": {
+      "additionalProperties": false,
+      "properties": {
+        "context_sha256": {
+          "title": "Context Sha256",
+          "type": "string"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "input_artifacts": {
+          "items": {
+            "$ref": "#/$defs/ReasoningInputBinding"
+          },
+          "minItems": 1,
+          "title": "Input Artifacts",
+          "type": "array"
+        },
+        "meta_reasoner_model_revision_sha256": {
+          "title": "Meta Reasoner Model Revision Sha256",
+          "type": "string"
+        },
+        "meta_reasoner_prompt_sha256": {
+          "title": "Meta Reasoner Prompt Sha256",
+          "type": "string"
+        },
+        "skeptic_model_revision_sha256": {
+          "title": "Skeptic Model Revision Sha256",
+          "type": "string"
+        },
+        "skeptic_prompt_sha256": {
+          "title": "Skeptic Prompt Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "decision_time",
+        "input_artifacts",
+        "meta_reasoner_prompt_sha256",
+        "meta_reasoner_model_revision_sha256",
+        "skeptic_prompt_sha256",
+        "skeptic_model_revision_sha256",
+        "context_sha256"
+      ],
+      "title": "ReasoningContext",
+      "type": "object"
+    },
+    "ReasoningInputBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_sha256": {
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ReasoningInputKind"
+        }
+      },
+      "required": [
+        "kind",
+        "artifact_sha256"
+      ],
+      "title": "ReasoningInputBinding",
+      "type": "object"
+    },
+    "ReasoningInputKind": {
+      "enum": [
+        "TRUTH_ASSESSMENTS",
+        "EVIDENCE_GRAPH",
+        "EVENT_STRUCTURE",
+        "MODEL_FORECASTS",
+        "MARKET_REGIME",
+        "MODEL_RELIABILITY",
+        "CALIBRATION",
+        "OOD",
+        "MARKET_REFLECTION",
+        "COST_FORECAST",
+        "PORTFOLIO_STATE",
+        "RISK_STATE"
+      ],
+      "title": "ReasoningInputKind",
+      "type": "string"
+    },
+    "RegimeRoutingDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "decision_sha256": {
+          "title": "Decision Sha256",
+          "type": "string"
+        },
+        "policy": {
+          "$ref": "#/$defs/DynamicStackingPolicy"
+        },
+        "proposal": {
+          "$ref": "#/$defs/StatisticalWeightProposal"
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "selected_weights": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StackingWeights"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "should_abstain": {
+          "title": "Should Abstain",
+          "type": "boolean"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/RegimeRoutingSnapshot"
+        }
+      },
+      "required": [
+        "snapshot",
+        "proposal",
+        "policy",
+        "selected_weights",
+        "should_abstain",
+        "reason_codes",
+        "decision_sha256"
+      ],
+      "title": "RegimeRoutingDecision",
+      "type": "object"
+    },
+    "RegimeRoutingSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "data_quality": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Data Quality"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "model_reliability_by_id": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ],
+            "ge": "0",
+            "le": "1"
+          },
+          "title": "Model Reliability By Id",
+          "type": "object"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "ood_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Ood Score"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "snapshot_sha256": {
+          "title": "Snapshot Sha256",
+          "type": "string"
+        },
+        "truth_state": {
+          "$ref": "#/$defs/TruthState"
+        }
+      },
+      "required": [
+        "asset_id",
+        "horizon",
+        "regime",
+        "observed_at",
+        "available_at",
+        "decision_time",
+        "data_quality",
+        "truth_state",
+        "ood_score",
+        "model_reliability_by_id",
+        "snapshot_sha256"
+      ],
+      "title": "RegimeRoutingSnapshot",
+      "type": "object"
+    },
+    "SkepticFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "blocks_new_risk": {
+          "title": "Blocks New Risk",
+          "type": "boolean"
+        },
+        "code": {
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "explanation": {
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/SkepticSeverity"
+        }
+      },
+      "required": [
+        "code",
+        "severity",
+        "blocks_new_risk",
+        "explanation"
+      ],
+      "title": "SkepticFinding",
+      "type": "object"
+    },
+    "SkepticSeverity": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ],
+      "title": "SkepticSeverity",
+      "type": "string"
+    },
+    "StackingWeights": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum_weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum Weight"
+        },
+        "weights": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ],
+            "ge": "0",
+            "le": "1"
+          },
+          "title": "Weights",
+          "type": "object"
+        }
+      },
+      "required": [
+        "weights",
+        "maximum_weight"
+      ],
+      "title": "StackingWeights",
+      "type": "object"
+    },
+    "StatisticalWeightProposal": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "evidence_bindings": {
+          "items": {
+            "$ref": "#/$defs/WeightEvidenceBinding"
+          },
+          "minItems": 1,
+          "title": "Evidence Bindings",
+          "type": "array"
+        },
+        "final_holdout_used": {
+          "const": false,
+          "default": false,
+          "title": "Final Holdout Used",
+          "type": "boolean"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "previous_weights": {
+          "$ref": "#/$defs/StackingWeights"
+        },
+        "proposal_sha256": {
+          "title": "Proposal Sha256",
+          "type": "string"
+        },
+        "proposed_weights": {
+          "$ref": "#/$defs/StackingWeights"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "split_sha256": {
+          "title": "Split Sha256",
+          "type": "string"
+        },
+        "training_cutoff": {
+          "format": "date-time",
+          "title": "Training Cutoff",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "horizon",
+        "regime",
+        "training_cutoff",
+        "available_at",
+        "previous_weights",
+        "proposed_weights",
+        "evidence_bindings",
+        "split_sha256",
+        "proposal_sha256"
+      ],
+      "title": "StatisticalWeightProposal",
+      "type": "object"
+    },
+    "TruthState": {
+      "enum": [
+        "UNVERIFIED",
+        "RUMOR",
+        "PARTIALLY_CORROBORATED",
+        "VERIFIED_PRIMARY",
+        "VERIFIED_MULTI_SOURCE",
+        "CONTRADICTED",
+        "RETRACTED",
+        "STALE",
+        "UNKNOWN"
+      ],
+      "title": "TruthState",
+      "type": "string"
+    },
+    "WeightEvidenceBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_sha256": {
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/WeightEvidenceSource"
+        }
+      },
+      "required": [
+        "source",
+        "artifact_sha256"
+      ],
+      "title": "WeightEvidenceBinding",
+      "type": "object"
+    },
+    "WeightEvidenceSource": {
+      "enum": [
+        "VALIDATION",
+        "CALIBRATION",
+        "FORWARD"
+      ],
+      "title": "WeightEvidenceSource",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-forecast-governance-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alpha_promotion_eligible": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Promotion Eligible",
+      "type": "boolean"
+    },
+    "calibration": {
+      "$ref": "#/$defs/AdaptiveConformalReport"
+    },
+    "context": {
+      "$ref": "#/$defs/ReasoningContext"
+    },
+    "disagreement": {
+      "$ref": "#/$defs/CouncilDisagreementReport"
+    },
+    "evidence_tier": {
+      "const": "DEVELOPMENT",
+      "default": "DEVELOPMENT",
+      "title": "Evidence Tier",
+      "type": "string"
+    },
+    "final_holdout_opened": {
+      "const": false,
+      "default": false,
+      "title": "Final Holdout Opened",
+      "type": "boolean"
+    },
+    "live_trading_locked": {
+      "const": true,
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "llm_can_order": {
+      "const": false,
+      "default": false,
+      "title": "Llm Can Order",
+      "type": "boolean"
+    },
+    "meta_reasoner": {
+      "$ref": "#/$defs/MetaReasonerRecommendation"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "regime_route": {
+      "$ref": "#/$defs/RegimeRoutingDecision"
+    },
+    "report_sha256": {
+      "title": "Report Sha256",
+      "type": "string"
+    },
+    "should_abstain": {
+      "title": "Should Abstain",
+      "type": "boolean"
+    },
+    "skeptic": {
+      "$ref": "#/$defs/IndependentSkepticAssessment"
+    },
+    "statistically_learned_ensemble_controls_weights": {
+      "const": true,
+      "default": true,
+      "title": "Statistically Learned Ensemble Controls Weights",
+      "type": "boolean"
+    },
+    "structured_recommendation_only": {
+      "const": true,
+      "default": true,
+      "title": "Structured Recommendation Only",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "context",
+    "meta_reasoner",
+    "skeptic",
+    "disagreement",
+    "regime_route",
+    "calibration",
+    "should_abstain",
+    "reason_codes",
+    "report_sha256"
+  ],
+  "title": "ForecastGovernanceReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-forecast-governance-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -19,6 +19,7 @@ ERROR_PREFIXES: Final = frozenset(
     {
         "AQ-DATA",
         "AQ-TIME",
+        "AQ-TRUTH",
         "AQ-MODEL",
         "AQ-STRATEGY",
         "AQ-RISK",

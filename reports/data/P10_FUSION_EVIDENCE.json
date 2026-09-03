@@ -1,112 +1,126 @@
 {
   "asset_impacts": [
     {
-      "abstain_reasons": [],
+      "abstain_reasons": [
+        "CANONICAL_EVENT_GATE_REQUIRED",
+        "EVENT_DIRECTIONAL_PATH_DENIED"
+      ],
       "action": "RESEARCH_PROPOSAL_ONLY",
       "as_of_time": "2026-09-01T18:00:00Z",
       "asset_id": "BTC",
+      "directional_candidate_allowed": false,
+      "directional_gate_id": null,
       "event_cluster_id": "event-cluster-1",
+      "event_revision_id": null,
       "evidence_ids": [
         "evidence-1"
       ],
       "feature_snapshot_hash": "84d1b8cb91a1f303e899cc3746bd429a750b4fec69ee03b88166e801c1ee1c37",
-      "forecast_id": "c4270b760588eb7fa8f57a34d0c9248d5f53e0244acbb766cf63e4fe8197d3e4",
+      "forecast_id": "aa4d4154bd588095edc98bcd212ebfd62215393a7e1085d8457812ac7cd1fbb4",
+      "horizon_coefficients_sha256": "de0198dd9b362b4d2003c63c4c815c011862dcbffa114413851aff9737d56aba",
       "horizons": [
         {
           "confidence": "0.72",
-          "expected_return": "0.00006270",
+          "expected_return": "0.0000",
           "horizon": "5m",
           "tail_risk_delta": "0.00002",
-          "volatility_delta": "0.00008270"
+          "volatility_delta": "0.00002"
         },
         {
           "confidence": "0.72",
-          "expected_return": "0.00015675",
+          "expected_return": "0.0000",
           "horizon": "30m",
           "tail_risk_delta": "0.00005",
-          "volatility_delta": "0.00020675"
+          "volatility_delta": "0.00005"
         },
         {
           "confidence": "0.72",
-          "expected_return": "0.00031350",
+          "expected_return": "0.0000",
           "horizon": "4h",
           "tail_risk_delta": "0.00010",
-          "volatility_delta": "0.00041350"
+          "volatility_delta": "0.00010"
         },
         {
           "confidence": "0.72",
-          "expected_return": "0.00047025",
+          "expected_return": "0.0000",
           "horizon": "1d",
           "tail_risk_delta": "0.00015",
-          "volatility_delta": "0.00062025"
+          "volatility_delta": "0.00015"
         },
         {
           "confidence": "0.72",
-          "expected_return": "0.00062700",
+          "expected_return": "0.0000",
           "horizon": "7d",
           "tail_risk_delta": "0.00020",
-          "volatility_delta": "0.00082700"
+          "volatility_delta": "0.00020"
         }
       ],
       "manipulation_risk": "0.1",
       "model_versions": [
         "fusion-p10-v1"
       ],
-      "should_abstain": false
+      "should_abstain": true
     },
     {
-      "abstain_reasons": [],
+      "abstain_reasons": [
+        "CANONICAL_EVENT_GATE_REQUIRED",
+        "EVENT_DIRECTIONAL_PATH_DENIED"
+      ],
       "action": "RESEARCH_PROPOSAL_ONLY",
       "as_of_time": "2026-09-01T18:00:00Z",
       "asset_id": "ETH",
+      "directional_candidate_allowed": false,
+      "directional_gate_id": null,
       "event_cluster_id": "event-cluster-1",
+      "event_revision_id": null,
       "evidence_ids": [
         "evidence-1"
       ],
       "feature_snapshot_hash": "98d035dd5755e49fed832c42bce70d94c6f01b6acbe604ce7a49245db0e18bfd",
-      "forecast_id": "a433e7f7c1c0a371fc6d41dbdf3d569a65df697a7dd0c2c287870eb1c9b6a19e",
+      "forecast_id": "f3ed7a6670d80c21579c6e5aa751d434ec3f17982a73dc94e1cabdffdae22ab7",
+      "horizon_coefficients_sha256": "de0198dd9b362b4d2003c63c4c815c011862dcbffa114413851aff9737d56aba",
       "horizons": [
         {
           "confidence": "0.72",
-          "expected_return": "0.00006270",
+          "expected_return": "0.0000",
           "horizon": "5m",
           "tail_risk_delta": "0.00002",
-          "volatility_delta": "0.00008270"
+          "volatility_delta": "0.00002"
         },
         {
           "confidence": "0.72",
-          "expected_return": "0.00015675",
+          "expected_return": "0.0000",
           "horizon": "30m",
           "tail_risk_delta": "0.00005",
-          "volatility_delta": "0.00020675"
+          "volatility_delta": "0.00005"
         },
         {
           "confidence": "0.72",
-          "expected_return": "0.00031350",
+          "expected_return": "0.0000",
           "horizon": "4h",
           "tail_risk_delta": "0.00010",
-          "volatility_delta": "0.00041350"
+          "volatility_delta": "0.00010"
         },
         {
           "confidence": "0.72",
-          "expected_return": "0.00047025",
+          "expected_return": "0.0000",
           "horizon": "1d",
           "tail_risk_delta": "0.00015",
-          "volatility_delta": "0.00062025"
+          "volatility_delta": "0.00015"
         },
         {
           "confidence": "0.72",
-          "expected_return": "0.00062700",
+          "expected_return": "0.0000",
           "horizon": "7d",
           "tail_risk_delta": "0.00020",
-          "volatility_delta": "0.00082700"
+          "volatility_delta": "0.00020"
         }
       ],
       "manipulation_risk": "0.1",
       "model_versions": [
         "fusion-p10-v1"
       ],
-      "should_abstain": false
+      "should_abstain": true
     }
   ],
   "assets": [

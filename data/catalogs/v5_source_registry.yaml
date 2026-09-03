@@ -1,0 +1,105 @@
+schema_version: "1.0.0"
+registry_version: 1
+published_at: "2026-09-02T00:00:00Z"
+available_at: "2026-09-02T00:00:00Z"
+entries:
+  - registry_entry_id: "source-registry:federal-reserve-board:v1"
+    source_id: "federal-reserve-board"
+    version: 1
+    supersedes_registry_entry_id: null
+    canonical_name: "Board of Governors of the Federal Reserve System"
+    source_type: "CENTRAL_BANK"
+    source_tier: "S"
+    official_domains: ["federalreserve.gov"]
+    official_social_accounts: []
+    public_keys: []
+    known_api_endpoints:
+      - "https://www.federalreserve.gov/feeds/press_all.xml"
+    jurisdiction: "US"
+    topic_domains: ["monetary-policy", "financial-stability", "banking-supervision"]
+    license_policy: "Public official feed; retain provenance and follow site terms"
+    historical_accuracy: null
+    historical_correction_rate: null
+    historical_retraction_rate: null
+    first_report_latency_seconds: null
+    compromise_incident_ids: []
+    evidence_references:
+      - "https://www.federalreserve.gov/feeds/feeds.htm"
+    valid_from: "2026-09-02T00:00:00Z"
+    valid_to: null
+    available_at: "2026-09-02T00:00:00Z"
+  - registry_entry_id: "source-registry:ecb:v1"
+    source_id: "european-central-bank"
+    version: 1
+    supersedes_registry_entry_id: null
+    canonical_name: "European Central Bank"
+    source_type: "CENTRAL_BANK"
+    source_tier: "S"
+    official_domains: ["ecb.europa.eu"]
+    official_social_accounts: []
+    public_keys: []
+    known_api_endpoints:
+      - "https://www.ecb.europa.eu/rss/press.html"
+    jurisdiction: "EU"
+    topic_domains: ["monetary-policy", "financial-stability", "banking-supervision"]
+    license_policy: "Public official feed; retain provenance and follow site terms"
+    historical_accuracy: null
+    historical_correction_rate: null
+    historical_retraction_rate: null
+    first_report_latency_seconds: null
+    compromise_incident_ids: []
+    evidence_references:
+      - "https://www.ecb.europa.eu/services/rss/html/index.en.html"
+    valid_from: "2026-09-02T00:00:00Z"
+    valid_to: null
+    available_at: "2026-09-02T00:00:00Z"
+  - registry_entry_id: "source-registry:us-sec:v1"
+    source_id: "us-sec"
+    version: 1
+    supersedes_registry_entry_id: null
+    canonical_name: "U.S. Securities and Exchange Commission"
+    source_type: "REGULATOR"
+    source_tier: "S"
+    official_domains: ["sec.gov"]
+    official_social_accounts: []
+    public_keys: []
+    known_api_endpoints:
+      - "https://www.sec.gov/news/pressreleases.rss"
+    jurisdiction: "US"
+    topic_domains: ["securities", "enforcement", "filings"]
+    license_policy: "Public official feed; respect SEC automated access policy"
+    historical_accuracy: null
+    historical_correction_rate: null
+    historical_retraction_rate: null
+    first_report_latency_seconds: null
+    compromise_incident_ids: []
+    evidence_references:
+      - "https://www.sec.gov/newsroom/press-releases"
+    valid_from: "2026-09-02T00:00:00Z"
+    valid_to: null
+    available_at: "2026-09-02T00:00:00Z"
+  - registry_entry_id: "source-registry:binance:v1"
+    source_id: "binance-exchange"
+    version: 1
+    supersedes_registry_entry_id: null
+    canonical_name: "Binance"
+    source_type: "EXCHANGE"
+    source_tier: "S"
+    official_domains: ["binance.com"]
+    official_social_accounts: []
+    public_keys: []
+    known_api_endpoints:
+      - "https://api.binance.com"
+    jurisdiction: "MULTI"
+    topic_domains: ["exchange-status", "listings", "market-data"]
+    license_policy: "Public API metadata only; operator must obey local access rules"
+    historical_accuracy: null
+    historical_correction_rate: null
+    historical_retraction_rate: null
+    first_report_latency_seconds: null
+    compromise_incident_ids: []
+    evidence_references:
+      - "https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-api-information"
+    valid_from: "2026-09-02T00:00:00Z"
+    valid_to: null
+    available_at: "2026-09-02T00:00:00Z"

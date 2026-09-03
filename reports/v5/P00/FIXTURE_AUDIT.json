@@ -1,0 +1,63 @@
+{
+  "schema_version": "v5-p00-fixture-audit-v1",
+  "phase": "V5-P00",
+  "spec_sha256": "aee366d5fa1a8ebd7449c597e6f822535546633efc335c1ab0053333d160a255",
+  "evidence_tier": "DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "live_trading_locked": true,
+  "scope": "reports/** excluding reports/v5/**",
+  "historical_report_count": 482,
+  "fixture_or_synthetic_count": 19,
+  "placeholder_hash_finding_count": 4,
+  "short_window_finding_count": 1,
+  "placeholder_hash_findings": [
+    {
+      "path": "reports/backtests/p06-golden/run_manifest.json",
+      "placeholder_hashes": [
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "2222222222222222222222222222222222222222222222222222222222222222",
+        "3333333333333333333333333333333333333333333333333333333333333333"
+      ],
+      "disposition": "QUARANTINED_NO_ALPHA_PROMOTION"
+    },
+    {
+      "path": "reports/data/P07_HOLDOUT_EVIDENCE.json",
+      "placeholder_hashes": [
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "disposition": "QUARANTINED_NO_ALPHA_PROMOTION"
+    },
+    {
+      "path": "reports/read_models/P15_SNAPSHOT.json",
+      "placeholder_hashes": [
+        "2222222222222222222222222222222222222222222222222222222222222222",
+        "6666666666666666666666666666666666666666666666666666666666666666"
+      ],
+      "disposition": "QUARANTINED_NO_ALPHA_PROMOTION"
+    },
+    {
+      "path": "reports/research/P07/EXPERIMENT_LEDGER.jsonl",
+      "placeholder_hashes": [
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "2222222222222222222222222222222222222222222222222222222222222222",
+        "3333333333333333333333333333333333333333333333333333333333333333",
+        "4444444444444444444444444444444444444444444444444444444444444444",
+        "5555555555555555555555555555555555555555555555555555555555555555",
+        "6666666666666666666666666666666666666666666666666666666666666666",
+        "7777777777777777777777777777777777777777777777777777777777777777",
+        "8888888888888888888888888888888888888888888888888888888888888888"
+      ],
+      "disposition": "QUARANTINED_NO_ALPHA_PROMOTION"
+    }
+  ],
+  "short_window_findings": [
+    {
+      "path": "reports/backtests/p06-golden/run_manifest.json",
+      "duration_seconds": 5.0,
+      "disposition": "FIXTURE_ONLY_NO_ALPHA_PROMOTION"
+    }
+  ],
+  "dashboard_disposition": "P06_GOLDEN_FIXTURE_DISCLOSED_AND_NOT_PROMOTABLE",
+  "hard_isolation_status": "ENFORCED_BY_TIER_AND_ALPHA_PROMOTION_FLAG"
+}

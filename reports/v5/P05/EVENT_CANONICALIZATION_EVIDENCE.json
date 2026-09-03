@@ -1,0 +1,1088 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "V5-P05",
+  "evidence_tier": "DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "real_world_forecast_accuracy_claimed": false,
+  "live_trading_locked": true,
+  "order_submission_enabled": false,
+  "as_of_time": "2026-09-02T12:30:00Z",
+  "market_reflection_policy": {
+    "policy_version": "v5-p05-market-reflection-v1",
+    "required_metrics": [
+      "PRE_CONFIRMATION_PRICE_MOVE",
+      "ABNORMAL_RETURN",
+      "VOLUME_SPIKE",
+      "OPEN_INTEREST_CHANGE",
+      "FUNDING_CHANGE",
+      "BASIS_CHANGE",
+      "CROSS_ASSET_RESPONSE",
+      "NARRATIVE_DIFFUSION",
+      "LIQUIDATION_FLOW",
+      "MARKET_DEPTH_CHANGE"
+    ],
+    "metric_weights": {
+      "PRE_CONFIRMATION_PRICE_MOVE": "0.18",
+      "ABNORMAL_RETURN": "0.16",
+      "VOLUME_SPIKE": "0.12",
+      "OPEN_INTEREST_CHANGE": "0.10",
+      "FUNDING_CHANGE": "0.08",
+      "BASIS_CHANGE": "0.08",
+      "CROSS_ASSET_RESPONSE": "0.08",
+      "NARRATIVE_DIFFUSION": "0.08",
+      "LIQUIDATION_FLOW": "0.06",
+      "MARKET_DEPTH_CHANGE": "0.06"
+    },
+    "high_price_in_threshold": "0.80",
+    "max_metric_age_seconds": 86400
+  },
+  "canonical_event": {
+    "event_id": "79065c53488d2928de866dc5bb9647fc759ebb727b9ad1c1557e1e0a13fab0f6",
+    "revision_id": "0e2dc2c15b4a356d41997c5ac43b2bcc792edcbd1fa42a1cc30292d8b7434563",
+    "previous_revision_id": null,
+    "revision_number": 1,
+    "source_cluster": {
+      "event_cluster_id": "event:p05:macro-release",
+      "event_type": "MACRO_RELEASE",
+      "status": "CONFIRMED",
+      "entity_ids": [
+        "asset:BTC",
+        "regulator:US_FED"
+      ],
+      "claimed_event_time": "2026-09-02T12:00:00Z",
+      "first_observed_time": "2026-09-02T12:00:00Z",
+      "last_updated_time": "2026-09-02T12:10:00Z",
+      "claim_ids": [
+        "claim:p05:macro-release"
+      ],
+      "supporting_evidence_ids": [
+        "document:p05:official",
+        "document:p05:wire"
+      ],
+      "contradicting_evidence_ids": [],
+      "independent_source_count": 2,
+      "official_confirmation_ids": [
+        "document:p05:official"
+      ],
+      "credibility_score": "0.95",
+      "manipulation_risk": "0.02",
+      "uncertainty": "0.10",
+      "supersedes_event_cluster_id": null
+    },
+    "event_type": "MACRO_RELEASE",
+    "event_stage": "CONFIRMED",
+    "entities": [
+      "asset:BTC",
+      "regulator:US_FED"
+    ],
+    "assets": [
+      "asset:BTC"
+    ],
+    "jurisdiction": "US",
+    "actual_value": "3.5",
+    "expected_value": "3.0",
+    "whisper_value": "3.2",
+    "surprise_value": "0.5",
+    "surprise_direction": "MORE_POSITIVE_THAN_EXPECTED",
+    "value_unit": "percent",
+    "event_value_snapshot": {
+      "snapshot_id": "dcd45463ccee4ab907dde4c225fb0ccb4e4ee6b2532662524e3f0798ec9f98b8",
+      "event_cluster_id": "event:p05:macro-release",
+      "as_of_time": "2026-09-02T12:20:00Z",
+      "values": [
+        {
+          "value_id": "da45d089c53b9f457fbdfc94a06270245af6c8a0ac9edda3c65b60f15aac1e43",
+          "event_cluster_id": "event:p05:macro-release",
+          "kind": "ACTUAL",
+          "value": "3.5",
+          "unit": "percent",
+          "observed_at": "2026-09-02T12:05:00Z",
+          "available_at": "2026-09-02T12:06:00Z",
+          "source_artifact_id": "value-source:p05:actual",
+          "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        {
+          "value_id": "cc06d0e0abff251532598f5e133546843f5c42cbc6db9a0998f5596a7038d684",
+          "event_cluster_id": "event:p05:macro-release",
+          "kind": "CONSENSUS",
+          "value": "3.0",
+          "unit": "percent",
+          "observed_at": "2026-09-02T12:06:00Z",
+          "available_at": "2026-09-02T12:07:00Z",
+          "source_artifact_id": "value-source:p05:consensus",
+          "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        {
+          "value_id": "52974442d1a06bcd502d747c9ab9657a09a423416b54faf65266bbd343f33d78",
+          "event_cluster_id": "event:p05:macro-release",
+          "kind": "WHISPER",
+          "value": "3.2",
+          "unit": "percent",
+          "observed_at": "2026-09-02T12:07:00Z",
+          "available_at": "2026-09-02T12:08:00Z",
+          "source_artifact_id": "value-source:p05:whisper",
+          "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "snapshot_sha256": "dcd45463ccee4ab907dde4c225fb0ccb4e4ee6b2532662524e3f0798ec9f98b8"
+    },
+    "event_surprise": {
+      "surprise_id": "670efd7f05da48ad03c1a71b7fb95732c44c19c7c03f60a52a5300230b235d5b",
+      "event_cluster_id": "event:p05:macro-release",
+      "value_snapshot_id": "dcd45463ccee4ab907dde4c225fb0ccb4e4ee6b2532662524e3f0798ec9f98b8",
+      "value_snapshot_sha256": "dcd45463ccee4ab907dde4c225fb0ccb4e4ee6b2532662524e3f0798ec9f98b8",
+      "as_of_time": "2026-09-02T12:20:00Z",
+      "actual_value": "3.5",
+      "expected_value": "3.0",
+      "whisper_value": "3.2",
+      "surprise_value": "0.5",
+      "whisper_surprise_value": "0.3",
+      "materiality_threshold": "0.1",
+      "value_unit": "percent",
+      "direction": "MORE_POSITIVE_THAN_EXPECTED",
+      "surprise_sha256": "670efd7f05da48ad03c1a71b7fb95732c44c19c7c03f60a52a5300230b235d5b"
+    },
+    "truth_assessment": {
+      "assessment_id": "truth:p05:verified_primary",
+      "claim_id": "claim:p05:macro-release",
+      "claim_type": "FACT",
+      "assessment_scope": "CLAIM_TRUTH",
+      "source_document_ids": [
+        "document:p05:official",
+        "document:p05:wire"
+      ],
+      "source_revision_ids": [
+        "revision:p05:official:1",
+        "revision:p05:wire:1"
+      ],
+      "source_identity_probability": "0.99",
+      "content_integrity_probability": "0.99",
+      "claim_truth_probability": "0.97",
+      "claim_current_probability": "0.98",
+      "evidence_independence_probability": "0.95",
+      "manipulation_probability": "0.02",
+      "revision_probability": "0.03",
+      "source_compromised_probability": "0.01",
+      "independent_evidence_count": 2,
+      "evidence_dependency_score": "0.05",
+      "contradiction_probability": "0.02",
+      "calibration_bucket": "DEVELOPMENT_P05",
+      "truth_state": "VERIFIED_PRIMARY",
+      "reason_codes": [
+        "AQ-P05-DEVELOPMENT-TRUTH"
+      ],
+      "evidence_graph_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "model_version": "truth-p04-development-v1",
+      "policy_version": "v5-p04",
+      "assessed_at": "2026-09-02T12:10:00Z",
+      "available_at": "2026-09-02T12:10:00Z"
+    },
+    "novelty": "0.8",
+    "severity": "0.6",
+    "persistence": "0.5",
+    "transmission_channels": [
+      "liquidity",
+      "rates"
+    ],
+    "affected_assets": [
+      "asset:BTC"
+    ],
+    "source_ids": [
+      "document:p05:official",
+      "document:p05:wire"
+    ],
+    "narrative_diffusion": {
+      "diffusion_id": "5db3a73a124a67d5fb13783805a2521589bfca102a57d57a543d1e674ba38a50",
+      "event_cluster_id": "event:p05:macro-release",
+      "as_of_time": "2026-09-02T12:30:00Z",
+      "window_hours": "0.5",
+      "observations": [
+        {
+          "observation_id": "b601827669025ad5721cf635956ffdeb55c64708dd0da18f5d594ff4f95ded6d",
+          "event_cluster_id": "event:p05:macro-release",
+          "source_id": "source:p05:rumor",
+          "independence_group": "origin:p05:rumor",
+          "platform": "social",
+          "language": "en",
+          "verified_source": false,
+          "kol_source": true,
+          "news_wire_source": false,
+          "observed_at": "2026-09-02T12:00:00Z",
+          "available_at": "2026-09-02T12:01:00Z",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "observation_id": "7aca230a28fc936de0c06f822f434a6f6b4e0f00e767a77c5e8e586a7c17a75e",
+          "event_cluster_id": "event:p05:macro-release",
+          "source_id": "source:p05:official",
+          "independence_group": "origin:p05:official",
+          "platform": "official-web",
+          "language": "zh",
+          "verified_source": true,
+          "kol_source": false,
+          "news_wire_source": true,
+          "observed_at": "2026-09-02T12:05:00Z",
+          "available_at": "2026-09-02T12:06:00Z",
+          "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "first_source_id": "source:p05:rumor",
+      "first_verified_source_id": "source:p05:official",
+      "first_observed_at": "2026-09-02T12:00:00Z",
+      "first_verified_at": "2026-09-02T12:05:00Z",
+      "independent_source_count": 2,
+      "platform_count": 2,
+      "language_count": 2,
+      "kol_count": 1,
+      "news_wire_count": 1,
+      "source_velocity_per_hour": "4",
+      "independent_source_velocity_per_hour": "4",
+      "propagation_stage": "CROSS_PLATFORM",
+      "price_response_at": "2026-09-02T12:08:00Z",
+      "price_response_available_at": "2026-09-02T12:09:00Z",
+      "price_response_source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "volume_response_at": "2026-09-02T12:09:00Z",
+      "volume_response_available_at": "2026-09-02T12:10:00Z",
+      "volume_response_source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "price_response_lag_seconds": "480.0",
+      "volume_response_lag_seconds": "540.0",
+      "diffusion_sha256": "5db3a73a124a67d5fb13783805a2521589bfca102a57d57a543d1e674ba38a50"
+    },
+    "market_reflection": {
+      "reflection_id": "378ae777a308d47d08dd88b9fc5c8ffed2a91c6d6500ce7e70bb01e0d05f2052",
+      "event_cluster_id": "event:p05:macro-release",
+      "as_of_time": "2026-09-02T12:30:00Z",
+      "policy": {
+        "policy_version": "v5-p05-market-reflection-v1",
+        "required_metrics": [
+          "PRE_CONFIRMATION_PRICE_MOVE",
+          "ABNORMAL_RETURN",
+          "VOLUME_SPIKE",
+          "OPEN_INTEREST_CHANGE",
+          "FUNDING_CHANGE",
+          "BASIS_CHANGE",
+          "CROSS_ASSET_RESPONSE",
+          "NARRATIVE_DIFFUSION",
+          "LIQUIDATION_FLOW",
+          "MARKET_DEPTH_CHANGE"
+        ],
+        "metric_weights": {
+          "PRE_CONFIRMATION_PRICE_MOVE": "0.18",
+          "ABNORMAL_RETURN": "0.16",
+          "VOLUME_SPIKE": "0.12",
+          "OPEN_INTEREST_CHANGE": "0.10",
+          "FUNDING_CHANGE": "0.08",
+          "BASIS_CHANGE": "0.08",
+          "CROSS_ASSET_RESPONSE": "0.08",
+          "NARRATIVE_DIFFUSION": "0.08",
+          "LIQUIDATION_FLOW": "0.06",
+          "MARKET_DEPTH_CHANGE": "0.06"
+        },
+        "high_price_in_threshold": "0.80",
+        "max_metric_age_seconds": 86400
+      },
+      "metrics": [
+        {
+          "metric_id": "55c22f809ef152598b29666cf9b89257561ea0f0240779bbce1b7fe0e067a38d",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "ABNORMAL_RETURN",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:abnormal_return",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "8d75830e5c6ed05ec7f923802f39caf4a217dc04cf97ce7f2453939ff00c2637",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "BASIS_CHANGE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:basis_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "fc601ddecfcc25f7767fc530f88fbd6658132f07f170c6d5c1c5f136e5bfba41",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "CROSS_ASSET_RESPONSE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:cross_asset_response",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "d3128c8fbe65310ae8762f4e4a6171be5a0ee3c2c219c02ae86051d89a0c9110",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "FUNDING_CHANGE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:funding_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "2029876b89f6cc7777d383bfffa9a668fef7e233d1296162a1da4544d6ccea28",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "LIQUIDATION_FLOW",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:liquidation_flow",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "4f855284f54798eac60bc299f98c3b5bcc2db51076d5a941c83c5caec4af2d3e",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "MARKET_DEPTH_CHANGE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:market_depth_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "b72bacc26c4b60321a712874d4841ea69a2f53e38470ca7fd0614e835486bf5c",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "NARRATIVE_DIFFUSION",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:narrative_diffusion",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "03b5561b5cf88ef48e7dae356e4be11c5ab67afd0c3bd8afd63cbcfaa4a13100",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "OPEN_INTEREST_CHANGE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:open_interest_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "963868da21349cf4152fbbcfd48aa6133835f7eee3cb89e7a5990ab11f64a3e4",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "PRE_CONFIRMATION_PRICE_MOVE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:pre_confirmation_price_move",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "20dd550ecf04787f18801270daa914c62964b06dcaa9535b5aae36a2ce930023",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "VOLUME_SPIKE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:volume_spike",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "missing_metrics": [],
+      "stale_metric_ids": [],
+      "market_reflection_score": "0.4000",
+      "already_priced_probability": "0.4000",
+      "high_price_in": false,
+      "quality_state": "GOOD",
+      "method": "DEVELOPMENT_WEIGHTED_SCORE_V1",
+      "promotion_eligible": false,
+      "reflection_sha256": "378ae777a308d47d08dd88b9fc5c8ffed2a91c6d6500ce7e70bb01e0d05f2052"
+    },
+    "first_seen_at": "2026-09-02T12:00:00Z",
+    "confirmed_at": "2026-09-02T12:10:00Z",
+    "available_at": "2026-09-02T12:30:00Z",
+    "created_at": "2026-09-02T12:30:00Z",
+    "canonical_sha256": "0e2dc2c15b4a356d41997c5ac43b2bcc792edcbd1fa42a1cc30292d8b7434563"
+  },
+  "event_value_snapshot": {
+    "snapshot_id": "dcd45463ccee4ab907dde4c225fb0ccb4e4ee6b2532662524e3f0798ec9f98b8",
+    "event_cluster_id": "event:p05:macro-release",
+    "as_of_time": "2026-09-02T12:20:00Z",
+    "values": [
+      {
+        "value_id": "da45d089c53b9f457fbdfc94a06270245af6c8a0ac9edda3c65b60f15aac1e43",
+        "event_cluster_id": "event:p05:macro-release",
+        "kind": "ACTUAL",
+        "value": "3.5",
+        "unit": "percent",
+        "observed_at": "2026-09-02T12:05:00Z",
+        "available_at": "2026-09-02T12:06:00Z",
+        "source_artifact_id": "value-source:p05:actual",
+        "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      {
+        "value_id": "cc06d0e0abff251532598f5e133546843f5c42cbc6db9a0998f5596a7038d684",
+        "event_cluster_id": "event:p05:macro-release",
+        "kind": "CONSENSUS",
+        "value": "3.0",
+        "unit": "percent",
+        "observed_at": "2026-09-02T12:06:00Z",
+        "available_at": "2026-09-02T12:07:00Z",
+        "source_artifact_id": "value-source:p05:consensus",
+        "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      {
+        "value_id": "52974442d1a06bcd502d747c9ab9657a09a423416b54faf65266bbd343f33d78",
+        "event_cluster_id": "event:p05:macro-release",
+        "kind": "WHISPER",
+        "value": "3.2",
+        "unit": "percent",
+        "observed_at": "2026-09-02T12:07:00Z",
+        "available_at": "2026-09-02T12:08:00Z",
+        "source_artifact_id": "value-source:p05:whisper",
+        "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    ],
+    "snapshot_sha256": "dcd45463ccee4ab907dde4c225fb0ccb4e4ee6b2532662524e3f0798ec9f98b8"
+  },
+  "event_surprise": {
+    "surprise_id": "670efd7f05da48ad03c1a71b7fb95732c44c19c7c03f60a52a5300230b235d5b",
+    "event_cluster_id": "event:p05:macro-release",
+    "value_snapshot_id": "dcd45463ccee4ab907dde4c225fb0ccb4e4ee6b2532662524e3f0798ec9f98b8",
+    "value_snapshot_sha256": "dcd45463ccee4ab907dde4c225fb0ccb4e4ee6b2532662524e3f0798ec9f98b8",
+    "as_of_time": "2026-09-02T12:20:00Z",
+    "actual_value": "3.5",
+    "expected_value": "3.0",
+    "whisper_value": "3.2",
+    "surprise_value": "0.5",
+    "whisper_surprise_value": "0.3",
+    "materiality_threshold": "0.1",
+    "value_unit": "percent",
+    "direction": "MORE_POSITIVE_THAN_EXPECTED",
+    "surprise_sha256": "670efd7f05da48ad03c1a71b7fb95732c44c19c7c03f60a52a5300230b235d5b"
+  },
+  "narrative_diffusion": {
+    "diffusion_id": "5db3a73a124a67d5fb13783805a2521589bfca102a57d57a543d1e674ba38a50",
+    "event_cluster_id": "event:p05:macro-release",
+    "as_of_time": "2026-09-02T12:30:00Z",
+    "window_hours": "0.5",
+    "observations": [
+      {
+        "observation_id": "b601827669025ad5721cf635956ffdeb55c64708dd0da18f5d594ff4f95ded6d",
+        "event_cluster_id": "event:p05:macro-release",
+        "source_id": "source:p05:rumor",
+        "independence_group": "origin:p05:rumor",
+        "platform": "social",
+        "language": "en",
+        "verified_source": false,
+        "kol_source": true,
+        "news_wire_source": false,
+        "observed_at": "2026-09-02T12:00:00Z",
+        "available_at": "2026-09-02T12:01:00Z",
+        "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "observation_id": "7aca230a28fc936de0c06f822f434a6f6b4e0f00e767a77c5e8e586a7c17a75e",
+        "event_cluster_id": "event:p05:macro-release",
+        "source_id": "source:p05:official",
+        "independence_group": "origin:p05:official",
+        "platform": "official-web",
+        "language": "zh",
+        "verified_source": true,
+        "kol_source": false,
+        "news_wire_source": true,
+        "observed_at": "2026-09-02T12:05:00Z",
+        "available_at": "2026-09-02T12:06:00Z",
+        "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    ],
+    "first_source_id": "source:p05:rumor",
+    "first_verified_source_id": "source:p05:official",
+    "first_observed_at": "2026-09-02T12:00:00Z",
+    "first_verified_at": "2026-09-02T12:05:00Z",
+    "independent_source_count": 2,
+    "platform_count": 2,
+    "language_count": 2,
+    "kol_count": 1,
+    "news_wire_count": 1,
+    "source_velocity_per_hour": "4",
+    "independent_source_velocity_per_hour": "4",
+    "propagation_stage": "CROSS_PLATFORM",
+    "price_response_at": "2026-09-02T12:08:00Z",
+    "price_response_available_at": "2026-09-02T12:09:00Z",
+    "price_response_source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "volume_response_at": "2026-09-02T12:09:00Z",
+    "volume_response_available_at": "2026-09-02T12:10:00Z",
+    "volume_response_source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "price_response_lag_seconds": "480.0",
+    "volume_response_lag_seconds": "540.0",
+    "diffusion_sha256": "5db3a73a124a67d5fb13783805a2521589bfca102a57d57a543d1e674ba38a50"
+  },
+  "market_reflection_scenarios": {
+    "low": {
+      "reflection_id": "378ae777a308d47d08dd88b9fc5c8ffed2a91c6d6500ce7e70bb01e0d05f2052",
+      "event_cluster_id": "event:p05:macro-release",
+      "as_of_time": "2026-09-02T12:30:00Z",
+      "policy": {
+        "policy_version": "v5-p05-market-reflection-v1",
+        "required_metrics": [
+          "PRE_CONFIRMATION_PRICE_MOVE",
+          "ABNORMAL_RETURN",
+          "VOLUME_SPIKE",
+          "OPEN_INTEREST_CHANGE",
+          "FUNDING_CHANGE",
+          "BASIS_CHANGE",
+          "CROSS_ASSET_RESPONSE",
+          "NARRATIVE_DIFFUSION",
+          "LIQUIDATION_FLOW",
+          "MARKET_DEPTH_CHANGE"
+        ],
+        "metric_weights": {
+          "PRE_CONFIRMATION_PRICE_MOVE": "0.18",
+          "ABNORMAL_RETURN": "0.16",
+          "VOLUME_SPIKE": "0.12",
+          "OPEN_INTEREST_CHANGE": "0.10",
+          "FUNDING_CHANGE": "0.08",
+          "BASIS_CHANGE": "0.08",
+          "CROSS_ASSET_RESPONSE": "0.08",
+          "NARRATIVE_DIFFUSION": "0.08",
+          "LIQUIDATION_FLOW": "0.06",
+          "MARKET_DEPTH_CHANGE": "0.06"
+        },
+        "high_price_in_threshold": "0.80",
+        "max_metric_age_seconds": 86400
+      },
+      "metrics": [
+        {
+          "metric_id": "55c22f809ef152598b29666cf9b89257561ea0f0240779bbce1b7fe0e067a38d",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "ABNORMAL_RETURN",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:abnormal_return",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "8d75830e5c6ed05ec7f923802f39caf4a217dc04cf97ce7f2453939ff00c2637",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "BASIS_CHANGE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:basis_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "fc601ddecfcc25f7767fc530f88fbd6658132f07f170c6d5c1c5f136e5bfba41",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "CROSS_ASSET_RESPONSE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:cross_asset_response",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "d3128c8fbe65310ae8762f4e4a6171be5a0ee3c2c219c02ae86051d89a0c9110",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "FUNDING_CHANGE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:funding_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "2029876b89f6cc7777d383bfffa9a668fef7e233d1296162a1da4544d6ccea28",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "LIQUIDATION_FLOW",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:liquidation_flow",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "4f855284f54798eac60bc299f98c3b5bcc2db51076d5a941c83c5caec4af2d3e",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "MARKET_DEPTH_CHANGE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:market_depth_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "b72bacc26c4b60321a712874d4841ea69a2f53e38470ca7fd0614e835486bf5c",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "NARRATIVE_DIFFUSION",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:narrative_diffusion",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "03b5561b5cf88ef48e7dae356e4be11c5ab67afd0c3bd8afd63cbcfaa4a13100",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "OPEN_INTEREST_CHANGE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:open_interest_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "963868da21349cf4152fbbcfd48aa6133835f7eee3cb89e7a5990ab11f64a3e4",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "PRE_CONFIRMATION_PRICE_MOVE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:pre_confirmation_price_move",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "20dd550ecf04787f18801270daa914c62964b06dcaa9535b5aae36a2ce930023",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "VOLUME_SPIKE",
+          "reflection_strength": "0.40",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:volume_spike",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "missing_metrics": [],
+      "stale_metric_ids": [],
+      "market_reflection_score": "0.4000",
+      "already_priced_probability": "0.4000",
+      "high_price_in": false,
+      "quality_state": "GOOD",
+      "method": "DEVELOPMENT_WEIGHTED_SCORE_V1",
+      "promotion_eligible": false,
+      "reflection_sha256": "378ae777a308d47d08dd88b9fc5c8ffed2a91c6d6500ce7e70bb01e0d05f2052"
+    },
+    "high": {
+      "reflection_id": "c724dc8a815396655a5c906086eb7bc47837b00d1e84a20c7bf05dc097dddfd2",
+      "event_cluster_id": "event:p05:macro-release",
+      "as_of_time": "2026-09-02T12:30:00Z",
+      "policy": {
+        "policy_version": "v5-p05-market-reflection-v1",
+        "required_metrics": [
+          "PRE_CONFIRMATION_PRICE_MOVE",
+          "ABNORMAL_RETURN",
+          "VOLUME_SPIKE",
+          "OPEN_INTEREST_CHANGE",
+          "FUNDING_CHANGE",
+          "BASIS_CHANGE",
+          "CROSS_ASSET_RESPONSE",
+          "NARRATIVE_DIFFUSION",
+          "LIQUIDATION_FLOW",
+          "MARKET_DEPTH_CHANGE"
+        ],
+        "metric_weights": {
+          "PRE_CONFIRMATION_PRICE_MOVE": "0.18",
+          "ABNORMAL_RETURN": "0.16",
+          "VOLUME_SPIKE": "0.12",
+          "OPEN_INTEREST_CHANGE": "0.10",
+          "FUNDING_CHANGE": "0.08",
+          "BASIS_CHANGE": "0.08",
+          "CROSS_ASSET_RESPONSE": "0.08",
+          "NARRATIVE_DIFFUSION": "0.08",
+          "LIQUIDATION_FLOW": "0.06",
+          "MARKET_DEPTH_CHANGE": "0.06"
+        },
+        "high_price_in_threshold": "0.80",
+        "max_metric_age_seconds": 86400
+      },
+      "metrics": [
+        {
+          "metric_id": "ca47b463824d26de3b8ad6b44916309947fa19aaa8e8ce07154732f96f03e2af",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "ABNORMAL_RETURN",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:abnormal_return",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "4a7baa8bdff474ed0d168822f3a981ff883ed0011c8564e8b3127bc5d5ad92ac",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "BASIS_CHANGE",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:basis_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "cc00d6126a34d119ede1e4effc0be70366ac3f286febe7f6f1460b770209358f",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "CROSS_ASSET_RESPONSE",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:cross_asset_response",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "ed715435aa13281889205876e473f127126a141d82f8b7ed75d8ad19c052667d",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "FUNDING_CHANGE",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:funding_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "e447789c7b559d646474947c8c8bfedc6aac734b3f0d1eb8e6022982ca31c0c3",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "LIQUIDATION_FLOW",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:liquidation_flow",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "ca9fe4d2025b375591c7e74a13fd1c014a2bc00c0187d2ec855ac5a68578d5de",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "MARKET_DEPTH_CHANGE",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:market_depth_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "9e58c9c310ce9ba6e2c566fdd912e5afa07e83f78f3ff130f9544c6d91cff4d2",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "NARRATIVE_DIFFUSION",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:narrative_diffusion",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "e369f04b79bfc7ac619a46f3a6548725a2b5fcdbeb4990cdd1e6ee0ff03e9335",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "OPEN_INTEREST_CHANGE",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:open_interest_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "99f07954c489c88d9b240f1e05f1f38d5521c198ee44104e1bdc2f4c23e9e0fd",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "PRE_CONFIRMATION_PRICE_MOVE",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:pre_confirmation_price_move",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "57f5019c2c10ec235a81ec906f5301fb7629105cd165ac7bbf49e84d96633687",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "VOLUME_SPIKE",
+          "reflection_strength": "0.90",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:volume_spike",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "missing_metrics": [],
+      "stale_metric_ids": [],
+      "market_reflection_score": "0.9000",
+      "already_priced_probability": "0.9000",
+      "high_price_in": true,
+      "quality_state": "GOOD",
+      "method": "DEVELOPMENT_WEIGHTED_SCORE_V1",
+      "promotion_eligible": false,
+      "reflection_sha256": "c724dc8a815396655a5c906086eb7bc47837b00d1e84a20c7bf05dc097dddfd2"
+    },
+    "incomplete": {
+      "reflection_id": "537c5f212fbdfc6511fb8be97a550ff72185a7c3cc0498cb4b00b4f57a362623",
+      "event_cluster_id": "event:p05:macro-release",
+      "as_of_time": "2026-09-02T12:30:00Z",
+      "policy": {
+        "policy_version": "v5-p05-market-reflection-v1",
+        "required_metrics": [
+          "PRE_CONFIRMATION_PRICE_MOVE",
+          "ABNORMAL_RETURN",
+          "VOLUME_SPIKE",
+          "OPEN_INTEREST_CHANGE",
+          "FUNDING_CHANGE",
+          "BASIS_CHANGE",
+          "CROSS_ASSET_RESPONSE",
+          "NARRATIVE_DIFFUSION",
+          "LIQUIDATION_FLOW",
+          "MARKET_DEPTH_CHANGE"
+        ],
+        "metric_weights": {
+          "PRE_CONFIRMATION_PRICE_MOVE": "0.18",
+          "ABNORMAL_RETURN": "0.16",
+          "VOLUME_SPIKE": "0.12",
+          "OPEN_INTEREST_CHANGE": "0.10",
+          "FUNDING_CHANGE": "0.08",
+          "BASIS_CHANGE": "0.08",
+          "CROSS_ASSET_RESPONSE": "0.08",
+          "NARRATIVE_DIFFUSION": "0.08",
+          "LIQUIDATION_FLOW": "0.06",
+          "MARKET_DEPTH_CHANGE": "0.06"
+        },
+        "high_price_in_threshold": "0.80",
+        "max_metric_age_seconds": 86400
+      },
+      "metrics": [
+        {
+          "metric_id": "9696476ce75268d9f5207bb5d4b1f7ac80f86345f69d6a81637f37dacf98a0aa",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "ABNORMAL_RETURN",
+          "reflection_strength": "0.10",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:abnormal_return",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "ed52ca99f03b19dfb5dedcbc3225a1804880dedaf1a31e7d8d0ad0f6c0b632e7",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "BASIS_CHANGE",
+          "reflection_strength": "0.10",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:basis_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "84cc2002e12513067d012015a81a7c89b9008de64b275e95071b19b2482ad861",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "CROSS_ASSET_RESPONSE",
+          "reflection_strength": "0.10",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:cross_asset_response",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "51d76db1c2f78c2e785706cf234b93125201418210a00adea5bf05d8a0e8de74",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "FUNDING_CHANGE",
+          "reflection_strength": "0.10",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:funding_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "1c6516ad42e2853302b94ca90ec92c9b2e290a3d0234ad4761f42fa884824fb2",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "LIQUIDATION_FLOW",
+          "reflection_strength": "0.10",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:liquidation_flow",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "6a3a8f1d6bfec0d2118b73bdad5b6f2216b5fc53787c291f36cbc2b04009fe25",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "NARRATIVE_DIFFUSION",
+          "reflection_strength": "0.10",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:narrative_diffusion",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "3e6cae07cce0f885379c64cd66db32241eccf95f7dc5684c8d31f08f8c76ea7d",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "OPEN_INTEREST_CHANGE",
+          "reflection_strength": "0.10",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:open_interest_change",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "72ace21cdc1770231ea4d4948744f14318fef2c1b93395793a556e47702b6dae",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "PRE_CONFIRMATION_PRICE_MOVE",
+          "reflection_strength": "0.10",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:pre_confirmation_price_move",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "metric_id": "3148440c86c565d91d6470a731f7526186f4590cf0a8b7445ce21091330d6c77",
+          "event_cluster_id": "event:p05:macro-release",
+          "metric": "VOLUME_SPIKE",
+          "reflection_strength": "0.10",
+          "observed_at": "2026-09-02T12:08:00Z",
+          "available_at": "2026-09-02T12:09:00Z",
+          "source_id": "market:p05:volume_spike",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "missing_metrics": [
+        "MARKET_DEPTH_CHANGE"
+      ],
+      "stale_metric_ids": [],
+      "market_reflection_score": null,
+      "already_priced_probability": null,
+      "high_price_in": false,
+      "quality_state": "DEGRADED",
+      "method": "DEVELOPMENT_WEIGHTED_SCORE_V1",
+      "promotion_eligible": false,
+      "reflection_sha256": "537c5f212fbdfc6511fb8be97a550ff72185a7c3cc0498cb4b00b4f57a362623"
+    }
+  },
+  "directional_gates": {
+    "low": {
+      "gate_id": "dafda9bf85cfd727912153c4410dfc7440c2d8a04eabad75a9936a09e6ac6176",
+      "event_id": "79065c53488d2928de866dc5bb9647fc759ebb727b9ad1c1557e1e0a13fab0f6",
+      "event_revision_id": "0e2dc2c15b4a356d41997c5ac43b2bcc792edcbd1fa42a1cc30292d8b7434563",
+      "event_cluster_id": "event:p05:macro-release",
+      "market_reflection_id": "378ae777a308d47d08dd88b9fc5c8ffed2a91c6d6500ce7e70bb01e0d05f2052",
+      "as_of_time": "2026-09-02T12:30:00Z",
+      "event_stage": "CONFIRMED",
+      "market_reflection_score": "0.4000",
+      "high_price_in_threshold": "0.80",
+      "market_reflection_quality": "GOOD",
+      "directional_candidate_allowed": true,
+      "risk_overlay_allowed": true,
+      "reason_codes": [
+        "P05_DIRECTIONAL_RESEARCH_CANDIDATE"
+      ],
+      "policy_version": "v5-p05-market-reflection-v1",
+      "action": "RESEARCH_PROPOSAL_ONLY",
+      "order_submission_allowed": false,
+      "gate_sha256": "dafda9bf85cfd727912153c4410dfc7440c2d8a04eabad75a9936a09e6ac6176"
+    },
+    "high": {
+      "gate_id": "163e13b8e664795bb636e16c9f4eceea0e2f95ba54318045fcc0655accd39b91",
+      "event_id": "79065c53488d2928de866dc5bb9647fc759ebb727b9ad1c1557e1e0a13fab0f6",
+      "event_revision_id": "ebc7fe65ca5c4b1b21b3a376cd0ddfd79b8f13aa35f467f6c80990696426447d",
+      "event_cluster_id": "event:p05:macro-release",
+      "market_reflection_id": "c724dc8a815396655a5c906086eb7bc47837b00d1e84a20c7bf05dc097dddfd2",
+      "as_of_time": "2026-09-02T12:30:00Z",
+      "event_stage": "CONFIRMED",
+      "market_reflection_score": "0.9000",
+      "high_price_in_threshold": "0.80",
+      "market_reflection_quality": "GOOD",
+      "directional_candidate_allowed": false,
+      "risk_overlay_allowed": true,
+      "reason_codes": [
+        "EVENT_ALREADY_PRICED"
+      ],
+      "policy_version": "v5-p05-market-reflection-v1",
+      "action": "RESEARCH_PROPOSAL_ONLY",
+      "order_submission_allowed": false,
+      "gate_sha256": "163e13b8e664795bb636e16c9f4eceea0e2f95ba54318045fcc0655accd39b91"
+    },
+    "incomplete": {
+      "gate_id": "ea25ad14db2b27a8583924d53e9154d3d88ce8eb07a79fde31b16564d1df4006",
+      "event_id": "79065c53488d2928de866dc5bb9647fc759ebb727b9ad1c1557e1e0a13fab0f6",
+      "event_revision_id": "d1779edd90e7b2bdef6a3898dd72a7d9b6c3c3d42694c50dcf6fb46a070c76f0",
+      "event_cluster_id": "event:p05:macro-release",
+      "market_reflection_id": "537c5f212fbdfc6511fb8be97a550ff72185a7c3cc0498cb4b00b4f57a362623",
+      "as_of_time": "2026-09-02T12:30:00Z",
+      "event_stage": "CONFIRMED",
+      "market_reflection_score": null,
+      "high_price_in_threshold": "0.80",
+      "market_reflection_quality": "DEGRADED",
+      "directional_candidate_allowed": false,
+      "risk_overlay_allowed": true,
+      "reason_codes": [
+        "MARKET_REFLECTION_INSUFFICIENT"
+      ],
+      "policy_version": "v5-p05-market-reflection-v1",
+      "action": "RESEARCH_PROPOSAL_ONLY",
+      "order_submission_allowed": false,
+      "gate_sha256": "ea25ad14db2b27a8583924d53e9154d3d88ce8eb07a79fde31b16564d1df4006"
+    },
+    "rumor": {
+      "gate_id": "c8b3b32123516b1095bbf744b2a90b564eac2f54bab6bb5c11520556bf2f0f6a",
+      "event_id": "79065c53488d2928de866dc5bb9647fc759ebb727b9ad1c1557e1e0a13fab0f6",
+      "event_revision_id": "efa840aac72d82d46cdaf1a6c55aeada5cc0a0b6687db19560afb1efd3458b40",
+      "event_cluster_id": "event:p05:macro-release",
+      "market_reflection_id": "1eccc375fc57cc068bd4b0e14e2ba2a8aecd9c83137c44f9b7e2d5b9955a4b97",
+      "as_of_time": "2026-09-02T12:30:00Z",
+      "event_stage": "RUMOR",
+      "market_reflection_score": "0.1000",
+      "high_price_in_threshold": "0.80",
+      "market_reflection_quality": "GOOD",
+      "directional_candidate_allowed": false,
+      "risk_overlay_allowed": true,
+      "reason_codes": [
+        "EVENT_NOT_CONFIRMED"
+      ],
+      "policy_version": "v5-p05-market-reflection-v1",
+      "action": "RESEARCH_PROPOSAL_ONLY",
+      "order_submission_allowed": false,
+      "gate_sha256": "c8b3b32123516b1095bbf744b2a90b564eac2f54bab6bb5c11520556bf2f0f6a"
+    }
+  },
+  "pipeline_pit": {
+    "decision_time": "2026-09-02T12:20:00Z",
+    "input_observed_times": {
+      "rumor": "2026-09-02T12:01:00Z",
+      "future_confirmation": "2026-09-02T12:40:00Z"
+    },
+    "visible_claim_count": 1,
+    "cluster": {
+      "event_type": "PROTOCOL_RELEASE",
+      "status": "RUMOR",
+      "first_observed_time": "2026-09-02T12:01:00Z",
+      "last_updated_time": "2026-09-02T12:01:00Z",
+      "official_confirmation_count": 0
+    }
+  },
+  "checks": {
+    "actual_consensus_whisper_are_pit_bound": true,
+    "surprise_is_recomputed_from_actual_minus_consensus": true,
+    "narrative_diffusion_preserves_first_and_first_verified_sources": true,
+    "low_price_in_is_research_candidate_only": true,
+    "high_price_in_blocks_directional_candidate": true,
+    "missing_reflection_metric_fails_closed": true,
+    "rumor_is_separate_and_directionally_blocked": true,
+    "future_official_confirmation_is_not_visible_in_past": true,
+    "all_outputs_remain_development_and_non_trading": true
+  },
+  "acceptance_traceability": {
+    "high_price_in_confirmed_event_is_not_directional_by_default": [
+      "tests/v5_p05/test_canonical_events.py::test_market_reflection_is_fail_closed_when_incomplete_or_high",
+      "tests/v5_p05/test_canonical_events.py::test_high_price_in_and_legacy_paths_cannot_emit_directional_impact",
+      "tests/v5_p05/test_canonical_events.py::test_fusion_honors_the_same_directional_gate",
+      "tests/v5_p05/test_canonical_events.py::test_self_consistent_forged_gate_cannot_override_event_reflection_policy",
+      "tests/v5_p05/test_canonical_events.py::test_fusion_rejects_gate_timestamp_before_canonical_event_availability"
+    ],
+    "rumor_and_confirmed_are_separate": [
+      "tests/v5_p05/test_canonical_events.py::test_rumor_never_becomes_directional_candidate",
+      "tests/v5_p05/test_pipeline_pit.py::test_future_official_content_cannot_confirm_past_rumor"
+    ],
+    "all_fields_are_point_in_time": [
+      "tests/v5_p05/test_canonical_events.py::test_actual_expected_whisper_surprise_is_bound_and_recomputed",
+      "tests/v5_p05/test_canonical_events.py::test_future_surprise_timestamp_cannot_enter_canonical_event",
+      "tests/v5_p05/test_canonical_events.py::test_narrative_diffusion_is_pit_and_tracks_first_verified_source",
+      "tests/v5_p05/test_pipeline_pit.py::test_pipeline_selects_latest_revision_visible_at_decision_time",
+      "tests/v5_p05/test_pipeline_pit.py::test_duplicate_or_time_regressing_revisions_fail_closed",
+      "tests/v5_p05/test_pipeline_pit.py::test_collected_content_rejects_future_modification_knowledge",
+      "tests/v5_p05/test_pipeline_pit.py::test_revision_history_rejects_publication_and_lifecycle_regressions"
+    ]
+  },
+  "limitations": [
+    "All values, truth assessments, and market observations are deterministic DEVELOPMENT fixtures.",
+    "The weighted MarketReflectionScore is a versioned bootstrap heuristic, not a calibrated probability.",
+    "A low-reflection confirmed event is only a research candidate; no order path is enabled.",
+    "No causal effect, market forecast accuracy, backtest return, or trading edge is claimed.",
+    "Real PIT public event and market data validation remains required in later phases.",
+    "Provider revision numbers may be sparse when local collection begins after earlier edits; observed histories still enforce monotonic time and lifecycle state."
+  ],
+  "result": "PASS"
+}

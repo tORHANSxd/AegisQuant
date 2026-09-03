@@ -1,0 +1,148 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.covariate-balance-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "after_standardized_mean_difference": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 1,
+      "title": "After Standardized Mean Difference",
+      "type": "array"
+    },
+    "before_standardized_mean_difference": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 1,
+      "title": "Before Standardized Mean Difference",
+      "type": "array"
+    },
+    "candidate_covariates": {
+      "items": {
+        "items": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ]
+        },
+        "minItems": 1,
+        "type": "array"
+      },
+      "title": "Candidate Covariates",
+      "type": "array"
+    },
+    "covariate_names": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Covariate Names",
+      "type": "array"
+    },
+    "matched_covariates": {
+      "items": {
+        "items": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ]
+        },
+        "minItems": 1,
+        "type": "array"
+      },
+      "title": "Matched Covariates",
+      "type": "array"
+    },
+    "maximum_absolute_after": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Absolute After"
+    },
+    "maximum_allowed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Allowed"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "treated_covariates": {
+      "items": {
+        "items": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ]
+        },
+        "minItems": 1,
+        "type": "array"
+      },
+      "title": "Treated Covariates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "covariate_names",
+    "treated_covariates",
+    "candidate_covariates",
+    "matched_covariates",
+    "before_standardized_mean_difference",
+    "after_standardized_mean_difference",
+    "maximum_absolute_after",
+    "maximum_allowed",
+    "passed"
+  ],
+  "title": "CovariateBalanceReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.covariate-balance-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

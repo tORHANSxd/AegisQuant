@@ -1,0 +1,1005 @@
+{
+  "$defs": {
+    "CausalDiagnosticPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum_absolute_smd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0.25",
+          "ge": "0",
+          "title": "Maximum Absolute Smd"
+        },
+        "maximum_placebo_p_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0.10",
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum Placebo P Value"
+        },
+        "maximum_pre_treatment_nrmse": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0.25",
+          "ge": "0",
+          "title": "Maximum Pre Treatment Nrmse"
+        },
+        "maximum_pretrend_slope_gap": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0.05",
+          "ge": "0",
+          "title": "Maximum Pretrend Slope Gap"
+        },
+        "minimum_controls": {
+          "default": 3,
+          "minimum": 2,
+          "title": "Minimum Controls",
+          "type": "integer"
+        },
+        "minimum_placebo_draws": {
+          "default": 19,
+          "minimum": 9,
+          "title": "Minimum Placebo Draws",
+          "type": "integer"
+        },
+        "policy_id": {
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "propensity_lower_bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0.05",
+          "ge": "0",
+          "le": "1",
+          "title": "Propensity Lower Bound"
+        },
+        "propensity_upper_bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0.95",
+          "ge": "0",
+          "le": "1",
+          "title": "Propensity Upper Bound"
+        },
+        "required_placebo_kinds": {
+          "default": [
+            "EVENT_TIMESTAMP",
+            "ASSET",
+            "TREATMENT_PERMUTATION"
+          ],
+          "items": {
+            "$ref": "#/$defs/PlaceboKind"
+          },
+          "title": "Required Placebo Kinds",
+          "type": "array"
+        }
+      },
+      "required": [
+        "policy_id"
+      ],
+      "title": "CausalDiagnosticPolicy",
+      "type": "object"
+    },
+    "CausalDiagnostics": {
+      "additionalProperties": false,
+      "properties": {
+        "control_count": {
+          "exclusiveMinimum": 0,
+          "title": "Control Count",
+          "type": "integer"
+        },
+        "covariate_balance": {
+          "$ref": "#/$defs/CovariateBalanceReport"
+        },
+        "minimum_controls": {
+          "minimum": 2,
+          "title": "Minimum Controls",
+          "type": "integer"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "placebo_tests": {
+          "items": {
+            "$ref": "#/$defs/PlaceboTestResult"
+          },
+          "title": "Placebo Tests",
+          "type": "array"
+        },
+        "policy": {
+          "$ref": "#/$defs/CausalDiagnosticPolicy"
+        },
+        "pre_treatment_fit": {
+          "$ref": "#/$defs/PreTreatmentFitReport"
+        },
+        "pretrend": {
+          "$ref": "#/$defs/PreTrendReport"
+        },
+        "propensity_overlap": {
+          "$ref": "#/$defs/PropensityOverlapReport"
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "required_placebo_kinds": {
+          "items": {
+            "$ref": "#/$defs/PlaceboKind"
+          },
+          "title": "Required Placebo Kinds",
+          "type": "array"
+        },
+        "unresolved_assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unresolved Assumptions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "policy",
+        "pre_treatment_fit",
+        "pretrend",
+        "covariate_balance",
+        "propensity_overlap",
+        "placebo_tests",
+        "control_count",
+        "minimum_controls",
+        "required_placebo_kinds",
+        "unresolved_assumptions",
+        "passed",
+        "reason_codes"
+      ],
+      "title": "CausalDiagnostics",
+      "type": "object"
+    },
+    "CausalEstimand": {
+      "enum": [
+        "ATT",
+        "ATE"
+      ],
+      "title": "CausalEstimand",
+      "type": "string"
+    },
+    "CausalMethod": {
+      "enum": [
+        "MATCHED_EVENT_STUDY",
+        "SYNTHETIC_CONTROL",
+        "DOUBLY_ROBUST_AIPW"
+      ],
+      "title": "CausalMethod",
+      "type": "string"
+    },
+    "CausalPointEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence_lower": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confidence Lower"
+        },
+        "confidence_upper": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confidence Upper"
+        },
+        "control_count": {
+          "exclusiveMinimum": 0,
+          "title": "Control Count",
+          "type": "integer"
+        },
+        "effect": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Effect"
+        },
+        "estimand": {
+          "$ref": "#/$defs/CausalEstimand"
+        },
+        "estimator_spec_sha256": {
+          "title": "Estimator Spec Sha256",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/$defs/CausalMethod"
+        },
+        "standard_error": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Standard Error"
+        },
+        "treated_count": {
+          "exclusiveMinimum": 0,
+          "title": "Treated Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "method",
+        "estimand",
+        "effect",
+        "standard_error",
+        "confidence_lower",
+        "confidence_upper",
+        "treated_count",
+        "control_count",
+        "estimator_spec_sha256"
+      ],
+      "title": "CausalPointEstimate",
+      "type": "object"
+    },
+    "CovariateBalanceReport": {
+      "additionalProperties": false,
+      "properties": {
+        "after_standardized_mean_difference": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "After Standardized Mean Difference",
+          "type": "array"
+        },
+        "before_standardized_mean_difference": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Before Standardized Mean Difference",
+          "type": "array"
+        },
+        "candidate_covariates": {
+          "items": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "title": "Candidate Covariates",
+          "type": "array"
+        },
+        "covariate_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Covariate Names",
+          "type": "array"
+        },
+        "matched_covariates": {
+          "items": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "title": "Matched Covariates",
+          "type": "array"
+        },
+        "maximum_absolute_after": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Absolute After"
+        },
+        "maximum_allowed": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Allowed"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "treated_covariates": {
+          "items": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ]
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "title": "Treated Covariates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "covariate_names",
+        "treated_covariates",
+        "candidate_covariates",
+        "matched_covariates",
+        "before_standardized_mean_difference",
+        "after_standardized_mean_difference",
+        "maximum_absolute_after",
+        "maximum_allowed",
+        "passed"
+      ],
+      "title": "CovariateBalanceReport",
+      "type": "object"
+    },
+    "EvidenceTier": {
+      "description": "Mutually exclusive evidence maturity levels from the v5 SSOT.",
+      "enum": [
+        "FIXTURE",
+        "SYNTHETIC",
+        "DEVELOPMENT",
+        "OOS_DEVELOPMENT",
+        "FINAL_HOLDOUT",
+        "PAPER_FORWARD",
+        "SHADOW_FORWARD",
+        "TESTNET_FORWARD",
+        "CANARY_LIVE",
+        "LIVE"
+      ],
+      "title": "EvidenceTier",
+      "type": "string"
+    },
+    "IdentificationStatus": {
+      "enum": [
+        "IDENTIFIED",
+        "DEVELOPMENT_ONLY",
+        "INSUFFICIENT_IDENTIFICATION"
+      ],
+      "title": "IdentificationStatus",
+      "type": "string"
+    },
+    "PlaceboKind": {
+      "enum": [
+        "EVENT_TIMESTAMP",
+        "ASSET",
+        "TREATMENT_PERMUTATION"
+      ],
+      "title": "PlaceboKind",
+      "type": "string"
+    },
+    "PlaceboTestResult": {
+      "additionalProperties": false,
+      "properties": {
+        "empirical_p_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Empirical P Value"
+        },
+        "kind": {
+          "$ref": "#/$defs/PlaceboKind"
+        },
+        "maximum_p_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum P Value"
+        },
+        "minimum_draws": {
+          "minimum": 9,
+          "title": "Minimum Draws",
+          "type": "integer"
+        },
+        "observed_effect": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Observed Effect"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "placebo_effects": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Placebo Effects",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "observed_effect",
+        "placebo_effects",
+        "empirical_p_value",
+        "maximum_p_value",
+        "minimum_draws",
+        "passed"
+      ],
+      "title": "PlaceboTestResult",
+      "type": "object"
+    },
+    "PreTreatmentFitReport": {
+      "additionalProperties": false,
+      "properties": {
+        "counterfactual_path": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 3,
+          "title": "Counterfactual Path",
+          "type": "array"
+        },
+        "maximum_normalized_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Normalized Error"
+        },
+        "normalized_root_mean_squared_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Normalized Root Mean Squared Error"
+        },
+        "outcome_scale": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Outcome Scale"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "root_mean_squared_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Root Mean Squared Error"
+        },
+        "treated_path": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 3,
+          "title": "Treated Path",
+          "type": "array"
+        }
+      },
+      "required": [
+        "treated_path",
+        "counterfactual_path",
+        "root_mean_squared_error",
+        "outcome_scale",
+        "normalized_root_mean_squared_error",
+        "maximum_normalized_error",
+        "passed"
+      ],
+      "title": "PreTreatmentFitReport",
+      "type": "object"
+    },
+    "PreTrendReport": {
+      "additionalProperties": false,
+      "properties": {
+        "absolute_slope_gap": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Absolute Slope Gap"
+        },
+        "counterfactual_path": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 3,
+          "title": "Counterfactual Path",
+          "type": "array"
+        },
+        "counterfactual_slope": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Counterfactual Slope"
+        },
+        "maximum_absolute_slope_gap": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Absolute Slope Gap"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "treated_path": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 3,
+          "title": "Treated Path",
+          "type": "array"
+        },
+        "treated_slope": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Treated Slope"
+        }
+      },
+      "required": [
+        "treated_path",
+        "counterfactual_path",
+        "treated_slope",
+        "counterfactual_slope",
+        "absolute_slope_gap",
+        "maximum_absolute_slope_gap",
+        "passed"
+      ],
+      "title": "PreTrendReport",
+      "type": "object"
+    },
+    "PropensityOverlapReport": {
+      "additionalProperties": false,
+      "properties": {
+        "lower_bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Lower Bound"
+        },
+        "maximum_propensity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Maximum Propensity"
+        },
+        "minimum_propensity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Minimum Propensity"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "propensity_scores": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Propensity Scores",
+          "type": "array"
+        },
+        "treatments": {
+          "items": {
+            "type": "boolean"
+          },
+          "minItems": 4,
+          "title": "Treatments",
+          "type": "array"
+        },
+        "upper_bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Upper Bound"
+        }
+      },
+      "required": [
+        "propensity_scores",
+        "treatments",
+        "minimum_propensity",
+        "maximum_propensity",
+        "lower_bound",
+        "upper_bound",
+        "passed"
+      ],
+      "title": "PropensityOverlapReport",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.causal-effect-estimate/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alpha_promotion_eligible": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Promotion Eligible",
+      "type": "boolean"
+    },
+    "asset": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Asset",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "causal_claim_allowed": {
+      "title": "Causal Claim Allowed",
+      "type": "boolean"
+    },
+    "diagnostics": {
+      "$ref": "#/$defs/CausalDiagnostics"
+    },
+    "estimate_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Estimate Id",
+      "type": "string"
+    },
+    "estimate_sha256": {
+      "title": "Estimate Sha256",
+      "type": "string"
+    },
+    "event_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "evidence_tier": {
+      "$ref": "#/$defs/EvidenceTier"
+    },
+    "horizon_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Horizon Seconds",
+      "type": "integer"
+    },
+    "identification_status": {
+      "$ref": "#/$defs/IdentificationStatus"
+    },
+    "input_dataset_sha256": {
+      "title": "Input Dataset Sha256",
+      "type": "string"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "live_trading_locked": {
+      "const": true,
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "point_estimate": {
+      "$ref": "#/$defs/CausalPointEstimate"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "estimate_id",
+    "estimate_sha256",
+    "event_id",
+    "asset",
+    "instrument_id",
+    "horizon_seconds",
+    "point_estimate",
+    "input_dataset_sha256",
+    "diagnostics",
+    "evidence_tier",
+    "identification_status",
+    "causal_claim_allowed",
+    "reason_codes",
+    "available_at"
+  ],
+  "title": "CausalEffectEstimate",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.causal-effect-estimate",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "PlaceboKind": {
+      "enum": [
+        "EVENT_TIMESTAMP",
+        "ASSET",
+        "TREATMENT_PERMUTATION"
+      ],
+      "title": "PlaceboKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.placebo-test-result/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "empirical_p_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Empirical P Value"
+    },
+    "kind": {
+      "$ref": "#/$defs/PlaceboKind"
+    },
+    "maximum_p_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum P Value"
+    },
+    "minimum_draws": {
+      "minimum": 9,
+      "title": "Minimum Draws",
+      "type": "integer"
+    },
+    "observed_effect": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Observed Effect"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "placebo_effects": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 1,
+      "title": "Placebo Effects",
+      "type": "array"
+    }
+  },
+  "required": [
+    "kind",
+    "observed_effect",
+    "placebo_effects",
+    "empirical_p_value",
+    "maximum_p_value",
+    "minimum_draws",
+    "passed"
+  ],
+  "title": "PlaceboTestResult",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.placebo-test-result",
+  "x-aegisquant-schema-version": "1.0.0"
+}

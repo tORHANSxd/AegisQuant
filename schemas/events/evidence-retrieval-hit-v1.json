@@ -1,0 +1,222 @@
+{
+  "$defs": {
+    "EvidenceQueryKind": {
+      "description": "Why a query exists; retrieval intent is not evidence polarity.",
+      "enum": [
+        "SUPPORT",
+        "CONTRADICTION",
+        "PRIMARY_SOURCE",
+        "OFFICIAL_DENIAL",
+        "REVISION",
+        "TIMELINE"
+      ],
+      "title": "EvidenceQueryKind",
+      "type": "string"
+    },
+    "Polarity": {
+      "enum": [
+        "AFFIRM",
+        "NEGATE",
+        "UNCERTAIN"
+      ],
+      "title": "Polarity",
+      "type": "string"
+    },
+    "RightsState": {
+      "enum": [
+        "ALLOWED",
+        "LIMITED",
+        "UNKNOWN",
+        "PROHIBITED"
+      ],
+      "title": "RightsState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.evidence-retrieval-hit/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One immutable, rights-labelled search hit bound to a source revision.",
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "canonical_url": {
+      "title": "Canonical Url",
+      "type": "string"
+    },
+    "claim_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "content_sha256": {
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "deleted_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deleted Time"
+    },
+    "evidence_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "is_official_source": {
+      "title": "Is Official Source",
+      "type": "boolean"
+    },
+    "lineage_node_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Lineage Node Ids",
+      "type": "array"
+    },
+    "observed_time": {
+      "format": "date-time",
+      "title": "Observed Time",
+      "type": "string"
+    },
+    "official_identity_assessment_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Official Identity Assessment Id"
+    },
+    "official_identity_verified": {
+      "title": "Official Identity Verified",
+      "type": "boolean"
+    },
+    "polarity": {
+      "$ref": "#/$defs/Polarity"
+    },
+    "previous_revision_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Revision Id"
+    },
+    "published_time": {
+      "format": "date-time",
+      "title": "Published Time",
+      "type": "string"
+    },
+    "query_fingerprint_sha256": {
+      "title": "Query Fingerprint Sha256",
+      "type": "string"
+    },
+    "query_kind": {
+      "$ref": "#/$defs/EvidenceQueryKind"
+    },
+    "retrieved_at": {
+      "format": "date-time",
+      "title": "Retrieved At",
+      "type": "string"
+    },
+    "revision_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Revision Id",
+      "type": "string"
+    },
+    "revision_number": {
+      "minimum": 1,
+      "title": "Revision Number",
+      "type": "integer"
+    },
+    "rights_state": {
+      "$ref": "#/$defs/RightsState"
+    },
+    "search_plan_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Search Plan Id",
+      "type": "string"
+    },
+    "source_document_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Document Id",
+      "type": "string"
+    },
+    "source_identity_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Identity Id",
+      "type": "string"
+    },
+    "source_policy_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Policy Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "search_plan_id",
+    "claim_id",
+    "query_kind",
+    "query_fingerprint_sha256",
+    "source_document_id",
+    "source_identity_id",
+    "source_policy_id",
+    "revision_id",
+    "revision_number",
+    "canonical_url",
+    "content_sha256",
+    "polarity",
+    "published_time",
+    "observed_time",
+    "available_at",
+    "retrieved_at",
+    "rights_state",
+    "is_official_source",
+    "official_identity_verified"
+  ],
+  "title": "EvidenceRetrievalHit",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.evidence-retrieval-hit",
+  "x-aegisquant-schema-version": "1.0.0"
+}

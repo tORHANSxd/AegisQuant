@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "CausalEstimand": {
+      "enum": [
+        "ATT",
+        "ATE"
+      ],
+      "title": "CausalEstimand",
+      "type": "string"
+    },
+    "CausalMethod": {
+      "enum": [
+        "MATCHED_EVENT_STUDY",
+        "SYNTHETIC_CONTROL",
+        "DOUBLY_ROBUST_AIPW"
+      ],
+      "title": "CausalMethod",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.causal-point-estimate/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "confidence_lower": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Confidence Lower"
+    },
+    "confidence_upper": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Confidence Upper"
+    },
+    "control_count": {
+      "exclusiveMinimum": 0,
+      "title": "Control Count",
+      "type": "integer"
+    },
+    "effect": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Effect"
+    },
+    "estimand": {
+      "$ref": "#/$defs/CausalEstimand"
+    },
+    "estimator_spec_sha256": {
+      "title": "Estimator Spec Sha256",
+      "type": "string"
+    },
+    "method": {
+      "$ref": "#/$defs/CausalMethod"
+    },
+    "standard_error": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Standard Error"
+    },
+    "treated_count": {
+      "exclusiveMinimum": 0,
+      "title": "Treated Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "method",
+    "estimand",
+    "effect",
+    "standard_error",
+    "confidence_lower",
+    "confidence_upper",
+    "treated_count",
+    "control_count",
+    "estimator_spec_sha256"
+  ],
+  "title": "CausalPointEstimate",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.causal-point-estimate",
+  "x-aegisquant-schema-version": "1.0.0"
+}

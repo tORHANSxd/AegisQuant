@@ -932,6 +932,60 @@
         "title": "EventRecord",
         "type": "object"
       },
+      "EvidenceDisclosure": {
+        "additionalProperties": false,
+        "description": "Machine-readable disclosure attached to evidence-backed user views.",
+        "properties": {
+          "alpha_promotion_eligible": {
+            "title": "Alpha Promotion Eligible",
+            "type": "boolean"
+          },
+          "evidence_tier": {
+            "$ref": "#/components/schemas/EvidenceTier"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Reason Codes",
+            "type": "array"
+          },
+          "source_artifacts": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Source Artifacts",
+            "type": "array"
+          }
+        },
+        "required": [
+          "evidence_tier",
+          "alpha_promotion_eligible",
+          "source_artifacts",
+          "reason_codes"
+        ],
+        "title": "EvidenceDisclosure",
+        "type": "object"
+      },
+      "EvidenceTier": {
+        "description": "Mutually exclusive evidence maturity levels from the v5 SSOT.",
+        "enum": [
+          "FIXTURE",
+          "SYNTHETIC",
+          "DEVELOPMENT",
+          "OOS_DEVELOPMENT",
+          "FINAL_HOLDOUT",
+          "PAPER_FORWARD",
+          "SHADOW_FORWARD",
+          "TESTNET_FORWARD",
+          "CANARY_LIVE",
+          "LIVE"
+        ],
+        "title": "EvidenceTier",
+        "type": "string"
+      },
       "ExecutionQualityPayload": {
         "additionalProperties": false,
         "properties": {
@@ -5219,6 +5273,9 @@
             "title": "Events",
             "type": "array"
           },
+          "evidence": {
+            "$ref": "#/components/schemas/EvidenceDisclosure"
+          },
           "execution_quality": {
             "items": {
               "$ref": "#/components/schemas/ExecutionQualityRecord"
@@ -5378,6 +5435,7 @@
           "system_health",
           "reconciliation",
           "order_traces",
+          "evidence",
           "snapshot_sha256",
           "capabilities",
           "live_trading_locked"

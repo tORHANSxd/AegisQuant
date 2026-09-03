@@ -3,11 +3,24 @@ from __future__ import annotations
 from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 
+from aegisquant.domain.intelligence import ForecastHorizon
 from aegisquant.research.budgets import ResourceBudget, ResourceRequest
 from aegisquant.research.models.baselines import BaselineDataset
 from aegisquant.research.proposals import ApprovalState, ExperimentProposal
 
 NOW = datetime(2026, 9, 1, tzinfo=UTC)
+
+
+def fitted_horizon_coefficients() -> dict[ForecastHorizon, Decimal]:
+    """Synthetic fitted coefficients used only by deterministic legacy fixtures."""
+
+    return {
+        ForecastHorizon.FIVE_MINUTES: Decimal("0.0002"),
+        ForecastHorizon.THIRTY_MINUTES: Decimal("0.0005"),
+        ForecastHorizon.FOUR_HOURS: Decimal("0.0010"),
+        ForecastHorizon.ONE_DAY: Decimal("0.0015"),
+        ForecastHorizon.SEVEN_DAYS: Decimal("0.0020"),
+    }
 
 
 def model_dataset(*, start: int, count: int) -> BaselineDataset:

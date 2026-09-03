@@ -1,0 +1,641 @@
+{
+  "$defs": {
+    "EvidenceTier": {
+      "description": "Mutually exclusive evidence maturity levels from the v5 SSOT.",
+      "enum": [
+        "FIXTURE",
+        "SYNTHETIC",
+        "DEVELOPMENT",
+        "OOS_DEVELOPMENT",
+        "FINAL_HOLDOUT",
+        "PAPER_FORWARD",
+        "SHADOW_FORWARD",
+        "TESTNET_FORWARD",
+        "CANARY_LIVE",
+        "LIVE"
+      ],
+      "title": "EvidenceTier",
+      "type": "string"
+    },
+    "ForwardHeartbeat": {
+      "additionalProperties": false,
+      "properties": {
+        "heartbeat_sha256": {
+          "title": "Heartbeat Sha256",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "previous_heartbeat_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Previous Heartbeat Sha256"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "source_available_at": {
+          "format": "date-time",
+          "title": "Source Available At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "sequence",
+        "observed_at",
+        "source_available_at",
+        "heartbeat_sha256"
+      ],
+      "title": "ForwardHeartbeat",
+      "type": "object"
+    },
+    "ForwardIncident": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "data_loss_detected": {
+          "title": "Data Loss Detected",
+          "type": "boolean"
+        },
+        "detected_at": {
+          "format": "date-time",
+          "title": "Detected At",
+          "type": "string"
+        },
+        "future_correction_attempted": {
+          "title": "Future Correction Attempted",
+          "type": "boolean"
+        },
+        "incident_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Incident Id",
+          "type": "string"
+        },
+        "incident_sha256": {
+          "title": "Incident Sha256",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "recorded_at": {
+          "format": "date-time",
+          "title": "Recorded At",
+          "type": "string"
+        },
+        "requires_restart": {
+          "title": "Requires Restart",
+          "type": "boolean"
+        },
+        "resolved_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Resolved At"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/ForwardIncidentSeverity"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "incident_id",
+        "severity",
+        "category",
+        "detected_at",
+        "recorded_at",
+        "resolved_at",
+        "requires_restart",
+        "data_loss_detected",
+        "future_correction_attempted",
+        "incident_sha256"
+      ],
+      "title": "ForwardIncident",
+      "type": "object"
+    },
+    "ForwardIncidentLog": {
+      "additionalProperties": false,
+      "properties": {
+        "coverage_ended_at": {
+          "format": "date-time",
+          "title": "Coverage Ended At",
+          "type": "string"
+        },
+        "coverage_started_at": {
+          "format": "date-time",
+          "title": "Coverage Started At",
+          "type": "string"
+        },
+        "incidents": {
+          "items": {
+            "$ref": "#/$defs/ForwardIncident"
+          },
+          "maxItems": 1000,
+          "title": "Incidents",
+          "type": "array"
+        },
+        "log_complete": {
+          "title": "Log Complete",
+          "type": "boolean"
+        },
+        "log_sha256": {
+          "title": "Log Sha256",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "coverage_started_at",
+        "coverage_ended_at",
+        "incidents",
+        "log_complete",
+        "log_sha256"
+      ],
+      "title": "ForwardIncidentLog",
+      "type": "object"
+    },
+    "ForwardIncidentSeverity": {
+      "enum": [
+        "INFO",
+        "WARNING",
+        "HIGH",
+        "CRITICAL"
+      ],
+      "title": "ForwardIncidentSeverity",
+      "type": "string"
+    },
+    "ForwardMode": {
+      "enum": [
+        "PAPER",
+        "SHADOW"
+      ],
+      "title": "ForwardMode",
+      "type": "string"
+    },
+    "ForwardRecoveryReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "checkpoint_recorded_at": {
+          "format": "date-time",
+          "title": "Checkpoint Recorded At",
+          "type": "string"
+        },
+        "checkpoint_sha256": {
+          "title": "Checkpoint Sha256",
+          "type": "string"
+        },
+        "duplicate_count": {
+          "minimum": 0,
+          "title": "Duplicate Count",
+          "type": "integer"
+        },
+        "gap_count": {
+          "minimum": 0,
+          "title": "Gap Count",
+          "type": "integer"
+        },
+        "incident_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Incident Id",
+          "type": "string"
+        },
+        "last_durable_sequence": {
+          "minimum": 0,
+          "title": "Last Durable Sequence",
+          "type": "integer"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "planned_drill": {
+          "title": "Planned Drill",
+          "type": "boolean"
+        },
+        "pre_restart_chain_head_sha256": {
+          "title": "Pre Restart Chain Head Sha256",
+          "type": "string"
+        },
+        "receipt_sha256": {
+          "title": "Receipt Sha256",
+          "type": "string"
+        },
+        "restored_chain_head_sha256": {
+          "title": "Restored Chain Head Sha256",
+          "type": "string"
+        },
+        "restored_without_loss": {
+          "title": "Restored Without Loss",
+          "type": "boolean"
+        },
+        "resumed_at": {
+          "format": "date-time",
+          "title": "Resumed At",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "incident_id",
+        "checkpoint_sha256",
+        "pre_restart_chain_head_sha256",
+        "restored_chain_head_sha256",
+        "checkpoint_recorded_at",
+        "resumed_at",
+        "last_durable_sequence",
+        "gap_count",
+        "duplicate_count",
+        "restored_without_loss",
+        "planned_drill",
+        "receipt_sha256"
+      ],
+      "title": "ForwardRecoveryReceipt",
+      "type": "object"
+    },
+    "ForwardRunKind": {
+      "enum": [
+        "WALL_CLOCK_FORWARD",
+        "DEVELOPMENT_FIXTURE"
+      ],
+      "title": "ForwardRunKind",
+      "type": "string"
+    },
+    "ForwardSample": {
+      "additionalProperties": false,
+      "properties": {
+        "correction_of_sha256": {
+          "default": null,
+          "title": "Correction Of Sha256",
+          "type": "null"
+        },
+        "decision_report_sha256": {
+          "title": "Decision Report Sha256",
+          "type": "string"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "event_independence_key": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Event Independence Key",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ForwardMode"
+        },
+        "outcome_available_at": {
+          "format": "date-time",
+          "title": "Outcome Available At",
+          "type": "string"
+        },
+        "predicted_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Predicted Cost"
+        },
+        "predicted_event_increment": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Event Increment"
+        },
+        "predicted_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Return"
+        },
+        "predicted_truth_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Predicted Truth Probability"
+        },
+        "prediction_input_sha256": {
+          "title": "Prediction Input Sha256",
+          "type": "string"
+        },
+        "prediction_recorded_at": {
+          "format": "date-time",
+          "title": "Prediction Recorded At",
+          "type": "string"
+        },
+        "prediction_revision": {
+          "const": 0,
+          "default": 0,
+          "title": "Prediction Revision",
+          "type": "integer"
+        },
+        "prediction_sha256": {
+          "title": "Prediction Sha256",
+          "type": "string"
+        },
+        "realization_recorded_at": {
+          "format": "date-time",
+          "title": "Realization Recorded At",
+          "type": "string"
+        },
+        "realized_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Realized Cost"
+        },
+        "realized_event_increment": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Realized Event Increment"
+        },
+        "realized_return": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Realized Return"
+        },
+        "realized_truth": {
+          "title": "Realized Truth",
+          "type": "boolean"
+        },
+        "run_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "sample_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Sample Id",
+          "type": "string"
+        },
+        "sample_sha256": {
+          "title": "Sample Sha256",
+          "type": "string"
+        },
+        "source_available_at": {
+          "format": "date-time",
+          "title": "Source Available At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "sample_id",
+        "event_independence_key",
+        "decision_report_sha256",
+        "prediction_input_sha256",
+        "source_available_at",
+        "decision_time",
+        "prediction_recorded_at",
+        "outcome_available_at",
+        "realization_recorded_at",
+        "predicted_truth_probability",
+        "realized_truth",
+        "predicted_return",
+        "realized_return",
+        "predicted_cost",
+        "realized_cost",
+        "predicted_event_increment",
+        "realized_event_increment",
+        "prediction_sha256",
+        "sample_sha256"
+      ],
+      "title": "ForwardSample",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-forward-session/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alpha_promotion_eligible": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Promotion Eligible",
+      "type": "boolean"
+    },
+    "backtest_substitution": {
+      "const": false,
+      "default": false,
+      "title": "Backtest Substitution",
+      "type": "boolean"
+    },
+    "ended_at": {
+      "format": "date-time",
+      "title": "Ended At",
+      "type": "string"
+    },
+    "evidence_tier": {
+      "$ref": "#/$defs/EvidenceTier"
+    },
+    "final_holdout_opened": {
+      "const": false,
+      "default": false,
+      "title": "Final Holdout Opened",
+      "type": "boolean"
+    },
+    "heartbeats": {
+      "items": {
+        "$ref": "#/$defs/ForwardHeartbeat"
+      },
+      "maxItems": 50000,
+      "minItems": 2,
+      "title": "Heartbeats",
+      "type": "array"
+    },
+    "incident_log": {
+      "$ref": "#/$defs/ForwardIncidentLog"
+    },
+    "live_trading_locked": {
+      "const": true,
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "mode": {
+      "$ref": "#/$defs/ForwardMode"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "pair_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Pair Id",
+      "type": "string"
+    },
+    "recovery_receipts": {
+      "items": {
+        "$ref": "#/$defs/ForwardRecoveryReceipt"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Recovery Receipts",
+      "type": "array"
+    },
+    "run_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "run_kind": {
+      "$ref": "#/$defs/ForwardRunKind"
+    },
+    "samples": {
+      "items": {
+        "$ref": "#/$defs/ForwardSample"
+      },
+      "maxItems": 10000,
+      "minItems": 1,
+      "title": "Samples",
+      "type": "array"
+    },
+    "session_sha256": {
+      "title": "Session Sha256",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "time_compressed": {
+      "title": "Time Compressed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "pair_id",
+    "run_id",
+    "mode",
+    "run_kind",
+    "evidence_tier",
+    "started_at",
+    "ended_at",
+    "heartbeats",
+    "samples",
+    "incident_log",
+    "recovery_receipts",
+    "time_compressed",
+    "session_sha256"
+  ],
+  "title": "ForwardSession",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-forward-session",
+  "x-aegisquant-schema-version": "1.0.0"
+}

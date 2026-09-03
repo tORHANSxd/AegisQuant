@@ -12,6 +12,7 @@ license = { text = "Proprietary" }
 authors = [{ name = "AegisQuant" }]
 dependencies = [
   "alembic==1.19.1",
+  "c2pa-python==0.37.8",
   "cryptography==50.0.1",
   "duckdb==1.5.5",
   "fastapi==0.141.1",

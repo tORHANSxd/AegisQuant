@@ -196,15 +196,28 @@ function Surface({
 
 function FormulaNote({ data }: Readonly<{ data: WorkbenchResponse }>) {
   const attribution = data.pnl_attribution.payload;
+  const evidence = data.evidence;
   return (
     <details className="formula-note" open>
       <summary>净损益口径与来源</summary>
       <code>{attribution.formula}</code>
       <p>
         来源 <strong>{data.pnl_attribution.source_artifact}</strong> · 截至 {data.pnl_attribution.as_of_time} ·
-        计价 {attribution.reporting_asset_id} · {attribution.source_scope}
+        计价 {attribution.reporting_asset_id} · {attribution.source_scope} · 证据等级 {evidence.evidence_tier} ·
+        Alpha 晋升资格 {evidence.alpha_promotion_eligible ? "允许进入后续 Gate" : "禁止"}
       </p>
     </details>
+  );
+}
+
+function EvidenceNotice({ data }: Readonly<{ data: WorkbenchResponse }>) {
+  const evidence = data.evidence;
+  return (
+    <section className="risk-banner risk-caution" role="status" aria-label="证据等级声明">
+      <StatusBadge label={`证据等级 ${evidence.evidence_tier}`} tone="warning" />
+      <strong>{evidence.alpha_promotion_eligible ? "仍须通过后续晋升门" : "不可作为真实收益或 Alpha 晋升证据"}</strong>
+      <span>{evidence.reason_codes.join(" · ")}</span>
+    </section>
   );
 }
 
@@ -220,15 +233,15 @@ function LiveView({ data, filters }: Readonly<{ data: WorkbenchResponse; filters
     && (filters.venue === "all" || item.payload.venue_id === filters.venue));
   return <>
     <MetricGrid>
-      <MetricTile label="账户权益" value={money.format(Number(account.equity))} unit={account.reporting_asset_id} detail="历史开发快照" />
-      <MetricTile label="当日净损益" value={money.format(Number(pnl.net))} unit={pnl.reporting_asset_id} detail="含费用与资金费" />
+      <MetricTile label="Fixture 权益" value={money.format(Number(account.equity))} unit={account.reporting_asset_id} detail="5 秒 golden 回放，非真实账户" />
+      <MetricTile label="Fixture 净损益" value={money.format(Number(pnl.net))} unit={pnl.reporting_asset_id} detail="仅验证费用与资金费计算" />
       <MetricTile label="风险状态" value={risk.state} detail={risk.reason_codes.join(" · ")} />
       <MetricTile label="对账状态" value={data.reconciliation.payload.state} detail={`序列 ${data.reconciliation.payload.last_sequence}`} />
     </MetricGrid>
     <RiskStateBanner state={risk.state} reasons={[...risk.reason_codes]} />
     <section className="dashboard-grid">
-      <Surface kicker="EQUITY REPLAY" title={`权益轨迹 · ${filters.range}`} wide><EquityChart points={points} /></Surface>
-      <Surface kicker="POINT-IN-TIME" title="账户事实">
+      <Surface kicker="FIXTURE EQUITY REPLAY" title={`非真实权益轨迹 · ${filters.range}`} wide><EquityChart points={points} /></Surface>
+      <Surface kicker="POINT-IN-TIME FIXTURE" title="回放账户事实">
         <dl className="fact-list">
           <div><dt>现金</dt><dd>{money.format(Number(account.cash))} {account.reporting_asset_id}</dd></div>
           <div><dt>持仓</dt><dd>{data.positions.length}</dd></div>
@@ -279,17 +292,17 @@ function PerformanceView({ data, filters }: Readonly<{ data: WorkbenchResponse; 
   ];
   return <>
     <MetricGrid>
-      <MetricTile label="交易毛损益" value={money.format(Number(item.gross_trading_pnl))} unit={item.reporting_asset_id} detail="服务端归因" />
-      <MetricTile label="净损益" value={money.format(Number(item.net_pnl))} unit={item.reporting_asset_id} detail="按下方公式" />
-      <MetricTile label="最大回撤" value={strategy ? percent.format(Number(strategy.maximum_drawdown)) : "不可用"} detail="P06 回测口径" />
-      <MetricTile label="换手" value={strategy ? decimal.format(Number(strategy.turnover)) : "不可用"} detail="未声称生产容量" />
+      <MetricTile label="Fixture 毛损益" value={money.format(Number(item.gross_trading_pnl))} unit={item.reporting_asset_id} detail="非真实收益" />
+      <MetricTile label="Fixture 净损益" value={money.format(Number(item.net_pnl))} unit={item.reporting_asset_id} detail="不可用于 Alpha 晋升" />
+      <MetricTile label="Fixture 最大回撤" value={strategy ? percent.format(Number(strategy.maximum_drawdown)) : "不可用"} detail="5 秒 P06 回放口径" />
+      <MetricTile label="Fixture 换手" value={strategy ? decimal.format(Number(strategy.turnover)) : "不可用"} detail="未证明生产容量" />
     </MetricGrid>
     <FormulaNote data={data} />
     <section className="dashboard-grid">
-      <Surface kicker="EQUITY" title="权益曲线"><EquityChart points={equity} /></Surface>
-      <Surface kicker="GROSS TO NET" title="毛到净归因"><AttributionWaterfall points={contributions} /></Surface>
+      <Surface kicker="FIXTURE EQUITY" title="非真实权益曲线"><EquityChart points={equity} /></Surface>
+      <Surface kicker="FIXTURE GROSS TO NET" title="Fixture 毛到净归因"><AttributionWaterfall points={contributions} /></Surface>
     </section>
-    <Surface kicker="P&L DISTRIBUTION" title="损益时序"><PnLHeatmap points={pnl} /></Surface>
+    <Surface kicker="FIXTURE P&L" title="非真实损益时序"><PnLHeatmap points={pnl} /></Surface>
   </>;
 }
 
@@ -582,6 +595,7 @@ export function WorkspacePage({
             <small>{filters.account} · {filters.currency} · 快照 {data.snapshot_sha256.slice(0, 12)}… · {filters.range}</small>
           </div>
         </header>
+        <EvidenceNotice data={data} />
         {pageContent(page, data, filters)}
       </div>
     </DataState>

@@ -26,6 +26,10 @@ test("all P15 routes remain read-only and expose their core state", async ({ pag
     await page.goto(route, { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: heading })).toBeVisible();
     await expect(page.getByText("LIVE TRADING LOCKED")).toBeVisible();
+    if (route !== "/settings") {
+      await expect(page.getByText("证据等级 FIXTURE", { exact: true })).toBeVisible();
+      await expect(page.getByText("不可作为真实收益或 Alpha 晋升证据")).toBeVisible();
+    }
     await expect(page.locator("input[type=password]")).toHaveCount(0);
     await expect(page.getByRole("button", { name: /提交订单|解锁实盘|发布模型|修改限额/i })).toHaveCount(0);
   }
@@ -37,6 +41,7 @@ test("overview exposes PnL formula, provenance, reconciliation, and stable visua
   await expect(page.getByText("SYNCHRONIZED")).toBeVisible();
   await expect(page.getByText(/gross_trading_pnl - trading_fees/)).toBeVisible();
   await expect(page.getByText(/来源 reports\/backtests\/p06-golden\/pnl_attribution/)).toBeVisible();
+  await expect(page.getByText(/Alpha 晋升资格 禁止/)).toBeVisible();
   await expect(page.getByText(/数据截至/)).toBeVisible();
   await expect(page.locator(".chart-canvas canvas").first()).toBeVisible();
   const response = await page.request.get("/overview");
@@ -48,21 +53,19 @@ test("every visible order opens a complete seven-stage trace", async ({ page }) 
   await page.goto("/execution");
   const links = page.getByRole("link", { name: "查看完整链" });
   await expect(links.first()).toBeVisible();
-  const orderCount = await links.count();
-  expect(orderCount).toBeGreaterThan(0);
+  const orderHrefs = await links.evaluateAll((items) => items.map((item) => item.getAttribute("href")));
+  expect(orderHrefs.length).toBeGreaterThan(0);
 
-  for (let index = 0; index < orderCount; index += 1) {
-    const href = await links.nth(index).getAttribute("href");
+  for (const href of orderHrefs) {
     expect(href).toBeTruthy();
-    const detail = await page.context().newPage();
-    await detail.goto(href!);
-    await expect(detail.getByRole("heading", { name: "订单完整决策链" })).toBeVisible();
-    await expect(detail.locator(".trace-stage-list > li")).toHaveCount(7);
-    await expect(detail.getByText("COMPLETE")).toBeVisible();
-    await expect(detail.getByText("schema 强制 false")).toBeVisible();
-    await detail.close();
+    await page.goto(href!);
+    await expect(page.getByRole("heading", { name: "订单完整决策链" })).toBeVisible();
+    await expect(page.locator(".trace-stage-list > li")).toHaveCount(7);
+    await expect(page.getByText("COMPLETE")).toBeVisible();
+    await expect(page.getByText("schema 强制 false")).toBeVisible();
   }
 
+  await page.goto("/execution");
   await expect(page.locator(".chart-canvas canvas").first()).toBeVisible();
   await expect(page).toHaveScreenshot("p15-execution.png", { fullPage: true, animations: "disabled" });
 });

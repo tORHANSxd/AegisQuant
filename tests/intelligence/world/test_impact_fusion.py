@@ -17,6 +17,7 @@ from aegisquant.intelligence.world.fusion import (
     run_same_budget_ablation,
 )
 from tests.intelligence.world.helpers import NOW, fusion_features
+from tests.p08_helpers import fitted_horizon_coefficients
 
 
 def test_fusion_requires_point_in_time_price_book_oi_funding_basis_and_onchain() -> None:
@@ -37,6 +38,7 @@ def test_fused_forecast_is_multi_asset_multi_horizon_and_proposal_only() -> None
         for asset in ("BTC", "ETH")
     )
     impacts = fuse_event_market_impact(
+        horizon_coefficients=fitted_horizon_coefficients(),
         event_cluster_id="event-1",
         event_directional_score=Decimal("0.4"),
         event_confidence=Decimal("0.8"),

@@ -13,7 +13,7 @@
       "reports/execution/P12_RULE_EVIDENCE.json": "a24d2da4bd1818edb0c930b526138cc078d850b53b08f12d7d7f3208a197ef02",
       "reports/risk/P11_SIGNED_RISK_POLICY.json": "c69a806fba3880c3434a4292de7d97f2a06473487d9f79d43c30c2ad8ac15287",
       "reports/runtime/P13_SEMANTIC_COMPARISON.json": "0da76db19b16b55b8c750dd36d93f129b2eb8be9dede72b3ea38eed152862401",
-      "uv.lock": "060e17ad9dcf16847970e6c53006c78d7a4a8fee4fc0112d04a7c028634c8536"
+      "uv.lock": "233d25bf48c18cbd0316c4b72d28c094618e3b07e5968d453f5d054c765864c7"
     },
     "frozen_versions": {
       "final_holdout_state": "LOCKED",
@@ -39,11 +39,11 @@
     "source_commit": "917eaa958375d042a4cf99e3f9d0efd65d3f1017",
     "user_approval_received": false
   },
-  "manifest_sha256": "38302dc5bb77cedbbca77049da51103f08303292905914565a6fa2be974e5cc4",
+  "manifest_sha256": "5ee8e42be561eaa4d49e78cf8fc57cd3fad5eee876e79cc1fd512ac101a4702f",
   "p16_non_live_release_signature_verified": true,
   "private_key_persisted": false,
   "public_key_base64": "oPLojRFF5+PQZii/wp/JiVQiKXGtuxKifENdCrPIdL8=",
-  "signature_base64": "sdI55DRzsg52hxvEy/DrXeoUSLeX8TlNEtJ7H6PtmNgcobd/jSyKEKbFV0EwJ54Gj0bBA4M+f79BI+9yRSrKDg==",
+  "signature_base64": "aMbX8oKtKt0sjiCUCcegqi9EcD/hLwew4d9WiOTHphHUSNAIF54avBPUbjZusODNybgdzfzMNEG3wgPXuIduAw==",
   "signature_purpose": "EVIDENCE_INTEGRITY_ONLY",
   "signature_verified": true,
   "target_linux_runtime_executed": false

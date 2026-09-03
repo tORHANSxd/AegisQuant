@@ -1,0 +1,60 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-no-trade-decision/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "const": "NO_TRADE",
+      "default": "NO_TRADE",
+      "title": "Action",
+      "type": "string"
+    },
+    "cost_distribution_sha256": {
+      "title": "Cost Distribution Sha256",
+      "type": "string"
+    },
+    "decision_sha256": {
+      "title": "Decision Sha256",
+      "type": "string"
+    },
+    "forecast_distribution_sha256": {
+      "title": "Forecast Distribution Sha256",
+      "type": "string"
+    },
+    "live_trading_locked": {
+      "const": true,
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "net_edge_distribution_sha256": {
+      "title": "Net Edge Distribution Sha256",
+      "type": "string"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "forecast_distribution_sha256",
+    "cost_distribution_sha256",
+    "net_edge_distribution_sha256",
+    "reason_codes",
+    "decision_sha256"
+  ],
+  "title": "NoTradeDecision",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-no-trade-decision",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,274 @@
+{
+  "$defs": {
+    "ResourceBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "max_cloud_cost_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Cloud Cost Usd"
+        },
+        "max_gpu_memory_mb": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Gpu Memory Mb"
+        },
+        "max_inference_latency_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Inference Latency Ms"
+        },
+        "max_news_calls": {
+          "minimum": 0,
+          "title": "Max News Calls",
+          "type": "integer"
+        },
+        "max_ram_mb": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Ram Mb"
+        },
+        "max_train_seconds": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Max Train Seconds"
+        },
+        "max_trials": {
+          "minimum": 1,
+          "title": "Max Trials",
+          "type": "integer"
+        },
+        "max_x_calls": {
+          "minimum": 0,
+          "title": "Max X Calls",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max_trials",
+        "max_train_seconds",
+        "max_inference_latency_ms",
+        "max_ram_mb",
+        "max_gpu_memory_mb",
+        "max_x_calls",
+        "max_news_calls",
+        "max_cloud_cost_usd"
+      ],
+      "title": "ResourceBudget",
+      "type": "object"
+    },
+    "ResourceRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "cloud_cost_usd": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "ge": "0",
+          "title": "Cloud Cost Usd"
+        },
+        "gpu_memory_mb": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "ge": "0",
+          "title": "Gpu Memory Mb"
+        },
+        "inference_latency_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "ge": "0",
+          "title": "Inference Latency Ms"
+        },
+        "news_calls": {
+          "default": 0,
+          "minimum": 0,
+          "title": "News Calls",
+          "type": "integer"
+        },
+        "ram_mb": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "ge": "0",
+          "title": "Ram Mb"
+        },
+        "train_seconds": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "default": "0",
+          "ge": "0",
+          "title": "Train Seconds"
+        },
+        "trials": {
+          "minimum": 0,
+          "title": "Trials",
+          "type": "integer"
+        },
+        "x_calls": {
+          "default": 0,
+          "minimum": 0,
+          "title": "X Calls",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "trials"
+      ],
+      "title": "ResourceRequest",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.forecast-candidate-gate-decision/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_to_evaluate": {
+      "title": "Allowed To Evaluate",
+      "type": "boolean"
+    },
+    "alpha_promotion_eligible": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Promotion Eligible",
+      "type": "boolean"
+    },
+    "block_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Block Reasons",
+      "type": "array"
+    },
+    "budget": {
+      "$ref": "#/$defs/ResourceBudget"
+    },
+    "budget_sha256": {
+      "title": "Budget Sha256",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "capability_sha256": {
+      "title": "Capability Sha256",
+      "type": "string"
+    },
+    "dependency_available": {
+      "title": "Dependency Available",
+      "type": "boolean"
+    },
+    "request": {
+      "$ref": "#/$defs/ResourceRequest"
+    },
+    "request_sha256": {
+      "title": "Request Sha256",
+      "type": "string"
+    },
+    "restriction_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Restriction Codes",
+      "type": "array"
+    },
+    "weights_verified": {
+      "title": "Weights Verified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "capability_sha256",
+    "budget_sha256",
+    "request_sha256",
+    "budget",
+    "request",
+    "dependency_available",
+    "weights_verified",
+    "allowed_to_evaluate",
+    "block_reasons",
+    "restriction_codes"
+  ],
+  "title": "CandidateGateDecision",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.forecast-candidate-gate-decision",
+  "x-aegisquant-schema-version": "1.0.0"
+}

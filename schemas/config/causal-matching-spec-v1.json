@@ -1,0 +1,53 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.causal-matching-spec/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "caliper": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "3",
+      "gt": "0",
+      "title": "Caliper"
+    },
+    "historical_outcomes_known_at_treatment": {
+      "default": true,
+      "title": "Historical Outcomes Known At Treatment",
+      "type": "boolean"
+    },
+    "matched_count": {
+      "default": 3,
+      "minimum": 2,
+      "title": "Matched Count",
+      "type": "integer"
+    },
+    "require_same_asset": {
+      "default": true,
+      "title": "Require Same Asset",
+      "type": "boolean"
+    },
+    "require_same_regime": {
+      "default": true,
+      "title": "Require Same Regime",
+      "type": "boolean"
+    },
+    "spec_id": {
+      "title": "Spec Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "spec_id"
+  ],
+  "title": "MatchingSpec",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.causal-matching-spec",
+  "x-aegisquant-schema-version": "1.0.0"
+}

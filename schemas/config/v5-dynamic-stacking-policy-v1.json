@@ -1,0 +1,87 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-dynamic-stacking-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "maximum_ood_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Ood Score"
+    },
+    "maximum_single_model_weight": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Single Model Weight"
+    },
+    "maximum_weight_step": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Weight Step"
+    },
+    "minimum_data_quality": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Data Quality"
+    },
+    "minimum_model_reliability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Minimum Model Reliability"
+    }
+  },
+  "required": [
+    "maximum_single_model_weight",
+    "maximum_weight_step",
+    "maximum_ood_score",
+    "minimum_data_quality",
+    "minimum_model_reliability"
+  ],
+  "title": "DynamicStackingPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-dynamic-stacking-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

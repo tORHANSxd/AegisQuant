@@ -1,0 +1,86 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.narrative-diffusion-observation/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "event_cluster_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Cluster Id",
+      "type": "string"
+    },
+    "independence_group": {
+      "minLength": 1,
+      "title": "Independence Group",
+      "type": "string"
+    },
+    "kol_source": {
+      "default": false,
+      "title": "Kol Source",
+      "type": "boolean"
+    },
+    "language": {
+      "maxLength": 35,
+      "minLength": 2,
+      "title": "Language",
+      "type": "string"
+    },
+    "news_wire_source": {
+      "default": false,
+      "title": "News Wire Source",
+      "type": "boolean"
+    },
+    "observation_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Observation Id",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "platform": {
+      "minLength": 1,
+      "title": "Platform",
+      "type": "string"
+    },
+    "source_id": {
+      "minLength": 1,
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "verified_source": {
+      "title": "Verified Source",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "observation_id",
+    "event_cluster_id",
+    "source_id",
+    "independence_group",
+    "platform",
+    "language",
+    "verified_source",
+    "observed_at",
+    "available_at",
+    "source_sha256"
+  ],
+  "title": "NarrativeDiffusionObservation",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.narrative-diffusion-observation",
+  "x-aegisquant-schema-version": "1.0.0"
+}

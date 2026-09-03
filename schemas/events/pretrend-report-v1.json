@@ -1,0 +1,106 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.pretrend-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "absolute_slope_gap": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Absolute Slope Gap"
+    },
+    "counterfactual_path": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 3,
+      "title": "Counterfactual Path",
+      "type": "array"
+    },
+    "counterfactual_slope": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Counterfactual Slope"
+    },
+    "maximum_absolute_slope_gap": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Absolute Slope Gap"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "treated_path": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 3,
+      "title": "Treated Path",
+      "type": "array"
+    },
+    "treated_slope": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Treated Slope"
+    }
+  },
+  "required": [
+    "treated_path",
+    "counterfactual_path",
+    "treated_slope",
+    "counterfactual_slope",
+    "absolute_slope_gap",
+    "maximum_absolute_slope_gap",
+    "passed"
+  ],
+  "title": "PreTrendReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.pretrend-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

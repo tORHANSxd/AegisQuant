@@ -1,0 +1,150 @@
+{
+  "$defs": {
+    "RevisionDelta": {
+      "additionalProperties": false,
+      "description": "Hash-only revision delta; raw source material stays in the governed archive.",
+      "properties": {
+        "current_value_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Current Value Sha256"
+        },
+        "field_path": {
+          "minLength": 1,
+          "title": "Field Path",
+          "type": "string"
+        },
+        "previous_value_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Previous Value Sha256"
+        }
+      },
+      "required": [
+        "field_path"
+      ],
+      "title": "RevisionDelta",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.temporal-revision/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One immutable source-document revision and when it became knowable.",
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "content_hash": {
+      "title": "Content Hash",
+      "type": "string"
+    },
+    "deleted_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deleted Time"
+    },
+    "diff": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RevisionDelta"
+      },
+      "title": "Diff",
+      "type": "array"
+    },
+    "effective_at": {
+      "format": "date-time",
+      "title": "Effective At",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "previous_revision_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Revision Id"
+    },
+    "revision_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Revision Id",
+      "type": "string"
+    },
+    "revision_number": {
+      "minimum": 1,
+      "title": "Revision Number",
+      "type": "integer"
+    },
+    "source_document_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Document Id",
+      "type": "string"
+    },
+    "updated_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated Time"
+    }
+  },
+  "required": [
+    "source_document_id",
+    "revision_id",
+    "revision_number",
+    "content_hash",
+    "observed_at",
+    "effective_at",
+    "available_at"
+  ],
+  "title": "TemporalRevision",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.temporal-revision",
+  "x-aegisquant-schema-version": "1.0.0"
+}

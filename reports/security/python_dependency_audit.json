@@ -50,6 +50,11 @@
       "vulns": []
     },
     {
+      "name": "c2pa-python",
+      "version": "0.37.8",
+      "vulns": []
+    },
+    {
       "name": "cachecontrol",
       "version": "0.14.4",
       "vulns": []
@@ -760,6 +765,11 @@
       "vulns": []
     },
     {
+      "name": "toml",
+      "version": "0.10.2",
+      "vulns": []
+    },
+    {
       "name": "tomli",
       "version": "2.4.1",
       "vulns": []
@@ -815,6 +825,11 @@
       "vulns": []
     },
     {
+      "name": "uv",
+      "version": "0.12.9",
+      "vulns": []
+    },
+    {
       "name": "uvicorn",
       "version": "0.52.4",
       "vulns": []
@@ -837,6 +852,11 @@
     {
       "name": "websockets",
       "version": "17.1",
+      "vulns": []
+    },
+    {
+      "name": "wheel",
+      "version": "0.48.0",
       "vulns": []
     },
     {

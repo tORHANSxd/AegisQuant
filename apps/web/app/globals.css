@@ -166,6 +166,7 @@ html[data-theme="light"] .state-warning { background: #fff5dd; }
 .freshness-degraded .freshness-dot, .realtime-error > span { background: var(--red); }
 .realtime-connecting > span { background: var(--muted); }
 .risk-banner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.8rem 1rem; border: 1px solid var(--line-strong); border-left: 4px solid var(--green); border-radius: 10px; background: var(--surface); }
+.risk-banner > * { min-width: 0; overflow-wrap: anywhere; }
 .risk-caution { border-left-color: var(--amber); }
 .risk-reduce_only, .risk-halted { border-left-color: var(--red); }
 .timeline, .decision-trace { display: grid; gap: 0.65rem; margin: 0; padding: 0; list-style: none; }
@@ -232,6 +233,7 @@ html[data-theme="light"] .state-warning { background: #fff5dd; }
 .story-narrow .gallery-grid { grid-template-columns: 1fr; }
 
 @media (max-width: 48rem) {
+  .risk-banner { align-items: flex-start; flex-direction: column; }
   .topbar-status { justify-content: flex-end; }
   .realtime-status { width: 100%; justify-content: flex-end; }
   .state-warning { align-items: flex-start; flex-direction: column; }

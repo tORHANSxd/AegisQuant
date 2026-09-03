@@ -13,6 +13,7 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 
 from aegisquant.domain.identifiers import AssetId, EventId
+from aegisquant.domain.intelligence import SourceIdentity, migrate_source_identity_v1_to_v2
 from aegisquant.domain.serialization import (
     EventEnvelope,
     SchemaMigrationRegistry,
@@ -35,7 +36,21 @@ def test_every_generated_contract_is_valid_and_registry_hash_is_exact() -> None:
         "aegisquant.source-batch",
         "aegisquant.official-web-change-snapshot",
         "aegisquant.bluesky-stream-selection",
+        "aegisquant.atomic-claim",
+        "aegisquant.truth-assessment",
+        "aegisquant.evidence-graph",
+        "aegisquant.source-registry",
+        "aegisquant.official-identity-observation",
+        "aegisquant.official-identity-assessment",
+        "aegisquant.detached-signature-verification",
+        "aegisquant.c2pa-verification",
+        "aegisquant.content-integrity-assessment",
+        "aegisquant.content-authenticity-binding",
+        "aegisquant.source-compromise-event",
     } <= names
+    entries = {entry["schema_name"]: entry for entry in registry["event_contracts"]}
+    assert entries["aegisquant.source-identity"]["schema_version"] == "2.0.0"
+    assert entries["aegisquant.source-identity"]["compatibility"] == "MIGRATION_REQUIRED"
     for entry in registry["event_contracts"]:
         path = root / entry["path"]
         raw = path.read_bytes()
@@ -100,3 +115,24 @@ def test_explicit_schema_migration_is_deterministic_and_compatible() -> None:
         migrations=registry,
     )
     assert migrated == Money(amount=Decimal("123.45"), asset_id=AssetId("USDT"))
+
+
+def test_source_identity_v1_migration_uses_first_observation_as_safe_availability() -> None:
+    legacy = {
+        "source_identity_id": "identity-v1",
+        "provider_id": "provider-1",
+        "provider_native_id": "native-1",
+        "display_name": "Historical source",
+        "ownership_group": "owner-1",
+        "independence_group": "owner-1",
+        "verified": False,
+        "first_observed_time": "2026-08-31T08:00:00Z",
+        "version": 1,
+        "supersedes_source_identity_id": None,
+    }
+    original = legacy.copy()
+    migrated = migrate_source_identity_v1_to_v2(legacy)
+    identity = SourceIdentity.model_validate_json(canonical_json(migrated))
+
+    assert legacy == original
+    assert identity.available_time == identity.first_observed_time

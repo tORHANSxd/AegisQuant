@@ -1,4 +1,4 @@
-name: P16 verification
+name: V5-P12 verification
 
 on:
   push:
@@ -33,5 +33,5 @@ jobs:
           corepack prepare pnpm@11.24.0 --activate
           pnpm install --frozen-lockfile
           pnpm exec playwright install chromium firefox webkit
-      - name: Run complete P16 verification
-        run: uv run --frozen python scripts/ci.py --phase P16
+      - name: Run complete V5-P12 verification
+        run: uv run --frozen python scripts/ci.py --phase V5-P12

@@ -1,0 +1,126 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.market-state-tensor/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One content-addressed market window containing only decision-time data.",
+  "properties": {
+    "asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "available_at": {
+      "items": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "minItems": 3,
+      "title": "Available At",
+      "type": "array"
+    },
+    "dataset_manifest_sha256": {
+      "title": "Dataset Manifest Sha256",
+      "type": "string"
+    },
+    "decision_time": {
+      "format": "date-time",
+      "title": "Decision Time",
+      "type": "string"
+    },
+    "feature_names": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Feature Names",
+      "type": "array"
+    },
+    "feature_snapshot_sha256": {
+      "title": "Feature Snapshot Sha256",
+      "type": "string"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "observed_at": {
+      "items": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "minItems": 3,
+      "title": "Observed At",
+      "type": "array"
+    },
+    "source_dataset_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Dataset Ids",
+      "type": "array"
+    },
+    "tensor_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Tensor Id",
+      "type": "string"
+    },
+    "tensor_sha256": {
+      "title": "Tensor Sha256",
+      "type": "string"
+    },
+    "values": {
+      "items": {
+        "items": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "type": "array"
+      },
+      "minItems": 3,
+      "title": "Values",
+      "type": "array"
+    },
+    "window_start": {
+      "format": "date-time",
+      "title": "Window Start",
+      "type": "string"
+    }
+  },
+  "required": [
+    "tensor_id",
+    "instrument_id",
+    "asset_id",
+    "window_start",
+    "decision_time",
+    "observed_at",
+    "available_at",
+    "feature_names",
+    "values",
+    "source_dataset_ids",
+    "dataset_manifest_sha256",
+    "feature_snapshot_sha256",
+    "tensor_sha256"
+  ],
+  "title": "MarketStateTensor",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.market-state-tensor",
+  "x-aegisquant-schema-version": "1.0.0"
+}

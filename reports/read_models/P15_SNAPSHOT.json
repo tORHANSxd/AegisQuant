@@ -37,8 +37,8 @@
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_event_clusters",
       "record_count": 1,
-      "source_watermark": "13:0ad182b5e1cd48c4e1baa39d4c87f98a1f4023e10406ffb6d5b2f41f4b0b3b54",
-      "state_sha256": "47786f3d51eb1ee19151bded775b352800c3a933c24fc2265c534893a358f7aa"
+      "source_watermark": "13:21b4741a38cb94607fe2548b17581a25ae916942281481aa5e81d2c0d90ee2be",
+      "state_sha256": "9ba2ad6ccf77579e646f25a87879097075af3e68111e2a803eadfec926d5818b"
     },
     {
       "last_sequence": 34,
@@ -77,8 +77,8 @@
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_model_metrics",
       "record_count": 8,
-      "source_watermark": "29:0255f4ca91afb014ffd7f903fa6fe7ab40c03ac0a67a0a62d742862d4587101e",
-      "state_sha256": "0c402240661a3732d0e6dc38447ebd73fab3df936a617e3150ef9bb74bd66557"
+      "source_watermark": "29:07397293f3682c2d306b1bf871c161da2b3d4bf153d5a798d7fc7159dfa5b7cd",
+      "state_sha256": "1e715088ef2efc369b3b39397cc5495b7ea8613241469e11a81669e07ff29712"
     },
     {
       "last_sequence": 6,
@@ -193,8 +193,8 @@
       "state_sha256": "b5e25ead6e403078d8f74cca0d48ca03304d2fbc6d89c97bc04a684197e0797c"
     }
   ],
-  "content_sha256": "5d470c9d4046544f9b8a009601b3c99898f89c5ab70fdf7296899e55d25c3af3",
-  "rebuild_id": "9d4aaf1133dcc955b06b5d93e03246bf2d198768db249ad0b0c2935f5a3209ae",
+  "content_sha256": "e40a3ed03c8472ed38d9e92a8040c5e57e1ffe42808bdeabaefb8eba9b1d917c",
+  "rebuild_id": "d0311235c13fd7ea6f831b0be05781c16d4fa06d72a7ddcd40dc37eea6857bfe",
   "rebuilt_at": "2026-09-02T00:15:41.360000Z",
   "records": [
     {
@@ -372,7 +372,7 @@
     {
       "as_of_time": "2026-09-01T18:00:00Z",
       "authoritative": false,
-      "content_sha256": "28c762b95eea7deaac0e29fb1830417ddedeb101deedd22e3f7a8be6af09b86e",
+      "content_sha256": "2d3200fdccfda130e8d4e5b9235aa80cfaa8a356255233d2966d9f7bf607a2f6",
       "entity_id": "event-cluster-1",
       "estimated": true,
       "payload": {
@@ -385,11 +385,11 @@
         "evidence_ids": [
           "evidence-1"
         ],
-        "impact_1d": "0.00047025",
-        "impact_30m": "0.00015675",
-        "impact_4h": "0.00031350",
-        "impact_5m": "0.00006270",
-        "impact_7d": "0.00062700",
+        "impact_1d": "0.0000",
+        "impact_30m": "0.0000",
+        "impact_4h": "0.0000",
+        "impact_5m": "0.0000",
+        "impact_7d": "0.0000",
         "impact_score": "0.2",
         "independent_family_count": 2,
         "price_led_event": true,
@@ -402,8 +402,8 @@
       "schema_version": "1.0.0",
       "source_artifact": "reports/data/P10_FUSION_EVIDENCE.json",
       "source_sequence": 13,
-      "source_sha256": "b4578a59f3d1dba98850680c54b9b91a05ed86ac76503c8a223f53e7fbe6abd1",
-      "source_watermark": "13:0ad182b5e1cd48c4e1baa39d4c87f98a1f4023e10406ffb6d5b2f41f4b0b3b54"
+      "source_sha256": "9066d2b1661990ac643cb379e51af607360e82f059bd31294b93401504db2455",
+      "source_watermark": "13:21b4741a38cb94607fe2548b17581a25ae916942281481aa5e81d2c0d90ee2be"
     },
     {
       "as_of_time": "2026-09-01T20:00:03Z",
@@ -1122,7 +1122,7 @@
     {
       "as_of_time": "2026-09-01T18:00:00Z",
       "authoritative": true,
-      "content_sha256": "35851970a0be19711c97e695676f49d7a39cf2d68b42ed686aecd8212128a1d5",
+      "content_sha256": "f6d2ca0368bc3776ded032d6d60be8d445e46986279aa22b4063ecc846fc7bdc",
       "entity_id": "deep-patch_transformer",
       "estimated": false,
       "payload": {
@@ -1135,9 +1135,9 @@
         "metric_value": "0.006769243406507670553810965502",
         "modality": "FUSED",
         "model_id": "deep-patch_transformer",
-        "peak_memory_mb": "562.621094",
+        "peak_memory_mb": "560.273438",
         "selected": false,
-        "train_seconds": "0.011987"
+        "train_seconds": "0.012887"
       },
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_model_metrics",
@@ -1145,13 +1145,13 @@
       "schema_version": "1.0.0",
       "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
       "source_sequence": 29,
-      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
-      "source_watermark": "29:0255f4ca91afb014ffd7f903fa6fe7ab40c03ac0a67a0a62d742862d4587101e"
+      "source_sha256": "ba328e70cdb8c41680f0338a802422a11be8167d9055964f6976ac06be317adb",
+      "source_watermark": "29:07397293f3682c2d306b1bf871c161da2b3d4bf153d5a798d7fc7159dfa5b7cd"
     },
     {
       "as_of_time": "2026-09-01T18:00:00Z",
       "authoritative": true,
-      "content_sha256": "5fdd77aab34c131a5ea311cf9f6168e372b32b67747cfde07521a0e85a7b31c7",
+      "content_sha256": "bd59a228ec359db63f4a11f9e33303ec6cd474ea1005bde9f637dfebd5a4f872",
       "entity_id": "deep-tcn",
       "estimated": false,
       "payload": {
@@ -1164,9 +1164,9 @@
         "metric_value": "0.802867533683865578913298346",
         "modality": "FUSED",
         "model_id": "deep-tcn",
-        "peak_memory_mb": "560.531250",
+        "peak_memory_mb": "558.160156",
         "selected": false,
-        "train_seconds": "0.015152"
+        "train_seconds": "0.017281"
       },
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_model_metrics",
@@ -1174,13 +1174,13 @@
       "schema_version": "1.0.0",
       "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
       "source_sequence": 28,
-      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
-      "source_watermark": "28:637e10a04b6c5344661863372c059846077d734816b68b34e54b0c469a6c6f9f"
+      "source_sha256": "ba328e70cdb8c41680f0338a802422a11be8167d9055964f6976ac06be317adb",
+      "source_watermark": "28:66a4c01114906fc37ec87cb5fc920fe1fb60e4f6ac79dc8a619e2b5542e11b89"
     },
     {
       "as_of_time": "2026-09-01T18:00:00Z",
       "authoritative": true,
-      "content_sha256": "51e9104bbe37b3fde4343512a6f3ac1239d69978879a3da884b0072957756718",
+      "content_sha256": "e306def720704672b1f844ab91c6ad38bb02b0a1523d8b2ff701d3a7af90baba",
       "entity_id": "linear-event",
       "estimated": false,
       "payload": {
@@ -1193,9 +1193,9 @@
         "metric_value": "0.1768219928227334212651759858",
         "modality": "EVENT_ONLY",
         "model_id": "linear-event",
-        "peak_memory_mb": "542.492188",
+        "peak_memory_mb": "540.750000",
         "selected": false,
-        "train_seconds": "0.001467"
+        "train_seconds": "0.001679"
       },
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_model_metrics",
@@ -1203,13 +1203,13 @@
       "schema_version": "1.0.0",
       "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
       "source_sequence": 23,
-      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
-      "source_watermark": "23:d2c2ded7d3262bcf7a9e69490496b175d58769a8f2a7d079513906a671afab86"
+      "source_sha256": "ba328e70cdb8c41680f0338a802422a11be8167d9055964f6976ac06be317adb",
+      "source_watermark": "23:e41ebf275edd511842b0b6d59440cb1798e55059f2ee739542ee8d3a3e086c24"
     },
     {
       "as_of_time": "2026-09-01T18:00:00Z",
       "authoritative": true,
-      "content_sha256": "2dd92ef4a589ef4f1059eecb81237c4e23fcfda30c13cfbe2691ba26e4ba0d8b",
+      "content_sha256": "a8d94bf9737b3ef38901d61584d24bee98bc344c7244c7f383b66a9f1d0fa99e",
       "entity_id": "linear-fused",
       "estimated": false,
       "payload": {
@@ -1222,9 +1222,9 @@
         "metric_value": "6.25E-31",
         "modality": "FUSED",
         "model_id": "linear-fused",
-        "peak_memory_mb": "542.503906",
+        "peak_memory_mb": "540.761719",
         "selected": true,
-        "train_seconds": "0.001221"
+        "train_seconds": "0.001965"
       },
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_model_metrics",
@@ -1232,13 +1232,13 @@
       "schema_version": "1.0.0",
       "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
       "source_sequence": 24,
-      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
-      "source_watermark": "24:7cbf7016b60fd34ff646e80da5544fb4a89226bc3b8fcdd5ca1c921bc3c43384"
+      "source_sha256": "ba328e70cdb8c41680f0338a802422a11be8167d9055964f6976ac06be317adb",
+      "source_watermark": "24:a74f0e8dd0531eab2e0ccf5edd161e46fe35d3d87be3e85b06d8ec09ae4eccc7"
     },
     {
       "as_of_time": "2026-09-01T18:00:00Z",
       "authoritative": true,
-      "content_sha256": "500aa661343cb53a752bdcc5903bb38d73c684fb09d9d569f4a9c892a9d2193a",
+      "content_sha256": "76ba3cbc1b85161544079e3d9214f66390c1832d394434a0b07026938a0afcc0",
       "entity_id": "linear-market",
       "estimated": false,
       "payload": {
@@ -1251,9 +1251,9 @@
         "metric_value": "0.0005794961529427887751597959224",
         "modality": "MARKET_ONLY",
         "model_id": "linear-market",
-        "peak_memory_mb": "542.492188",
+        "peak_memory_mb": "540.750000",
         "selected": false,
-        "train_seconds": "0.017799"
+        "train_seconds": "0.023354"
       },
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_model_metrics",
@@ -1261,13 +1261,13 @@
       "schema_version": "1.0.0",
       "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
       "source_sequence": 22,
-      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
-      "source_watermark": "22:acfb342621166052ea963ecc3c5bc0c64f9ebfdd41863b0d8b4d27de1c7bbd12"
+      "source_sha256": "ba328e70cdb8c41680f0338a802422a11be8167d9055964f6976ac06be317adb",
+      "source_watermark": "22:ef83008730a2f5acbe5a13a1adfa836e37e92c44ca14f4aaaab1f04139540af3"
     },
     {
       "as_of_time": "2026-09-01T18:00:00Z",
       "authoritative": true,
-      "content_sha256": "a7aeb4e985ee0eecfe7cc9152455ebef85f2f019069938fa17b7b8989b237ee5",
+      "content_sha256": "4c5dad73a368ada1613f38e17115b48361b75b9fe22a64b21cb15a98f8c0c29c",
       "entity_id": "tree-catboost",
       "estimated": false,
       "payload": {
@@ -1280,9 +1280,9 @@
         "metric_value": "0.1200797307344435544182714389",
         "modality": "FUSED",
         "model_id": "tree-catboost",
-        "peak_memory_mb": "550.800781",
+        "peak_memory_mb": "548.523438",
         "selected": false,
-        "train_seconds": "0.079368"
+        "train_seconds": "0.088434"
       },
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_model_metrics",
@@ -1290,13 +1290,13 @@
       "schema_version": "1.0.0",
       "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
       "source_sequence": 26,
-      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
-      "source_watermark": "26:cd7fac16cd9e169a5dbb51758286c071191c12aa09fae6cb0d7328d5b17ed2be"
+      "source_sha256": "ba328e70cdb8c41680f0338a802422a11be8167d9055964f6976ac06be317adb",
+      "source_watermark": "26:20af93bc24b60e995a07fa9b6edc82b2bb507827d7419ae408426d7fd9ef4615"
     },
     {
       "as_of_time": "2026-09-01T18:00:00Z",
       "authoritative": true,
-      "content_sha256": "61d147595ca54cfc684e2e83e9cb9545205a09c343e0c3991b6264177bafd0b0",
+      "content_sha256": "d13713eb14b23ac4c67f92d4abe0d5efe3f8493aefa26db8d042356eb149ee8d",
       "entity_id": "tree-lightgbm",
       "estimated": false,
       "payload": {
@@ -1309,9 +1309,9 @@
         "metric_value": "0.1750750973659817163736042775",
         "modality": "FUSED",
         "model_id": "tree-lightgbm",
-        "peak_memory_mb": "543.351562",
+        "peak_memory_mb": "541.605469",
         "selected": false,
-        "train_seconds": "0.003592"
+        "train_seconds": "0.004531"
       },
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_model_metrics",
@@ -1319,13 +1319,13 @@
       "schema_version": "1.0.0",
       "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
       "source_sequence": 25,
-      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
-      "source_watermark": "25:e5e12934aabce7d3178506c26650c07d9944d67b5dbfaaff938baef87eea55e2"
+      "source_sha256": "ba328e70cdb8c41680f0338a802422a11be8167d9055964f6976ac06be317adb",
+      "source_watermark": "25:ee24228378518196c15f8d2f2c317360de9d8c488235710dbdf60abf05694d1f"
     },
     {
       "as_of_time": "2026-09-01T18:00:00Z",
       "authoritative": true,
-      "content_sha256": "f8ad57140f7ed82e7b05fe6d3953594c2a15b4707a4d0162b85f66714c56a51d",
+      "content_sha256": "a6f55b888a3bbbd1f7d96d943049676b9a69c8dae24a03bab7e29938d6a5c207",
       "entity_id": "tree-xgboost",
       "estimated": false,
       "payload": {
@@ -1338,9 +1338,9 @@
         "metric_value": "0.08348058391634556132363376559",
         "modality": "FUSED",
         "model_id": "tree-xgboost",
-        "peak_memory_mb": "553.589844",
+        "peak_memory_mb": "550.742188",
         "selected": false,
-        "train_seconds": "0.023228"
+        "train_seconds": "0.023655"
       },
       "projected_at": "2026-09-02T00:15:41.360000Z",
       "projection": "rm_model_metrics",
@@ -1348,8 +1348,8 @@
       "schema_version": "1.0.0",
       "source_artifact": "reports/data/P08_MODEL_COUNCIL_EVIDENCE.json",
       "source_sequence": 27,
-      "source_sha256": "f4e11a8d75644289599c3976bf84c3b9dbb1b6af58f878a0ad628452716c0ffd",
-      "source_watermark": "27:64eda4c290ccdb6cba4baa84de8416203a15d4d46822d5a6d4e4384e8f16cec0"
+      "source_sha256": "ba328e70cdb8c41680f0338a802422a11be8167d9055964f6976ac06be317adb",
+      "source_watermark": "27:92b99bebd6736cf1b9ef6787f3d19b8d97e7c2e0f0bae00fce6e28c1a61d370b"
     },
     {
       "as_of_time": "2026-09-01T08:00:05Z",

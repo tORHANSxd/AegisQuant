@@ -1,0 +1,155 @@
+{
+  "$defs": {
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "ForecastModality": {
+      "enum": [
+        "NUMERIC_ONLY",
+        "VISION_ONLY",
+        "NUMERIC_VISION"
+      ],
+      "title": "ForecastModality",
+      "type": "string"
+    },
+    "MarketRegime": {
+      "enum": [
+        "TREND",
+        "MEAN_REVERSION",
+        "LOW_VOL_COMPRESSION",
+        "VOL_EXPANSION",
+        "LIQUIDITY_CRISIS",
+        "NEWS_SHOCK",
+        "LIQUIDATION_CASCADE",
+        "FUNDING_DISLOCATION",
+        "CORRELATION_BREAKDOWN",
+        "RISK_ON",
+        "RISK_OFF",
+        "UNKNOWN",
+        "OOD"
+      ],
+      "title": "MarketRegime",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.forecast-vision-ablation-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alpha_promotion_eligible": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Promotion Eligible",
+      "type": "boolean"
+    },
+    "asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "horizon": {
+      "$ref": "#/$defs/CouncilHorizon"
+    },
+    "minimum_absolute_improvement": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Minimum Absolute Improvement"
+    },
+    "numeric_only_loss": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Numeric Only Loss"
+    },
+    "numeric_vision_loss": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Numeric Vision Loss"
+    },
+    "reason_code": {
+      "title": "Reason Code",
+      "type": "string"
+    },
+    "regime": {
+      "$ref": "#/$defs/MarketRegime"
+    },
+    "retain_vision": {
+      "title": "Retain Vision",
+      "type": "boolean"
+    },
+    "selected_modality": {
+      "$ref": "#/$defs/ForecastModality"
+    },
+    "vision_only_loss": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Vision Only Loss"
+    }
+  },
+  "required": [
+    "asset_id",
+    "horizon",
+    "regime",
+    "numeric_only_loss",
+    "vision_only_loss",
+    "numeric_vision_loss",
+    "minimum_absolute_improvement",
+    "retain_vision",
+    "selected_modality",
+    "reason_code"
+  ],
+  "title": "VisionAblationReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.forecast-vision-ablation-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

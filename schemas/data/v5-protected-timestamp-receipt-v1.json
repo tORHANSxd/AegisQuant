@@ -1,0 +1,53 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-protected-timestamp-receipt/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "evidence_sha256": {
+      "title": "Evidence Sha256",
+      "type": "string"
+    },
+    "key_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Key Id",
+      "type": "string"
+    },
+    "nonce_sha256": {
+      "title": "Nonce Sha256",
+      "type": "string"
+    },
+    "receipt_sha256": {
+      "title": "Receipt Sha256",
+      "type": "string"
+    },
+    "signature_base64": {
+      "title": "Signature Base64",
+      "type": "string"
+    },
+    "timestamped_at": {
+      "format": "date-time",
+      "title": "Timestamped At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_sha256",
+    "authority_id",
+    "key_id",
+    "timestamped_at",
+    "nonce_sha256",
+    "signature_base64",
+    "receipt_sha256"
+  ],
+  "title": "ProtectedTimestampReceipt",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-protected-timestamp-receipt",
+  "x-aegisquant-schema-version": "1.0.0"
+}

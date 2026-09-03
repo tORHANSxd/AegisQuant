@@ -1,0 +1,133 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.historical-causal-state/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A market state whose features are known at decision time and outcome later.",
+  "properties": {
+    "asset": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Asset",
+      "type": "string"
+    },
+    "covariate_names": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Covariate Names",
+      "type": "array"
+    },
+    "covariates": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 1,
+      "title": "Covariates",
+      "type": "array"
+    },
+    "decision_time": {
+      "format": "date-time",
+      "title": "Decision Time",
+      "type": "string"
+    },
+    "event_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Event Id"
+    },
+    "feature_available_at": {
+      "format": "date-time",
+      "title": "Feature Available At",
+      "type": "string"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "outcome": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Outcome"
+    },
+    "outcome_available_at": {
+      "format": "date-time",
+      "title": "Outcome Available At",
+      "type": "string"
+    },
+    "pre_treatment_outcomes": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 3,
+      "title": "Pre Treatment Outcomes",
+      "type": "array"
+    },
+    "regime": {
+      "title": "Regime",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "state_id": {
+      "title": "State Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "state_id",
+    "asset",
+    "instrument_id",
+    "regime",
+    "decision_time",
+    "feature_available_at",
+    "outcome_available_at",
+    "covariate_names",
+    "covariates",
+    "pre_treatment_outcomes",
+    "outcome",
+    "source_sha256"
+  ],
+  "title": "HistoricalState",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.historical-causal-state",
+  "x-aegisquant-schema-version": "1.0.0"
+}

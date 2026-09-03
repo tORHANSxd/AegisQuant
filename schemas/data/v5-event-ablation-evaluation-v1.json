@@ -1,0 +1,445 @@
+{
+  "$defs": {
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "EventAblationArm": {
+      "enum": [
+        "MARKET_ONLY",
+        "EVENT_ONLY",
+        "MARKET_EVENT",
+        "RISK_ONLY",
+        "TRUTH_PERMUTED",
+        "EVENT_PERMUTED",
+        "TEXT_PERMUTED",
+        "TIMESTAMP_PLACEBO",
+        "ASSET_PLACEBO"
+      ],
+      "title": "EventAblationArm",
+      "type": "string"
+    },
+    "EventForecastComparisonLineage": {
+      "additionalProperties": false,
+      "description": "Exact OOS sample, split, and budget identity shared by every ablation arm.",
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "calibration_end": {
+          "format": "date-time",
+          "title": "Calibration End",
+          "type": "string"
+        },
+        "calibration_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Calibration Sample Ids",
+          "type": "array"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "embargo_seconds": {
+          "minimum": 1,
+          "title": "Embargo Seconds",
+          "type": "integer"
+        },
+        "evaluation_available_at": {
+          "format": "date-time",
+          "title": "Evaluation Available At",
+          "type": "string"
+        },
+        "final_holdout_opened": {
+          "const": false,
+          "default": false,
+          "title": "Final Holdout Opened",
+          "type": "boolean"
+        },
+        "fold_id": {
+          "minLength": 1,
+          "title": "Fold Id",
+          "type": "string"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "label_dataset_manifest_sha256": {
+          "title": "Label Dataset Manifest Sha256",
+          "type": "string"
+        },
+        "lineage_sha256": {
+          "title": "Lineage Sha256",
+          "type": "string"
+        },
+        "purge_seconds": {
+          "minimum": 1,
+          "title": "Purge Seconds",
+          "type": "integer"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "resource_budget_sha256": {
+          "title": "Resource Budget Sha256",
+          "type": "string"
+        },
+        "split_sha256": {
+          "title": "Split Sha256",
+          "type": "string"
+        },
+        "test_end": {
+          "format": "date-time",
+          "title": "Test End",
+          "type": "string"
+        },
+        "test_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Test Sample Ids",
+          "type": "array"
+        },
+        "test_start": {
+          "format": "date-time",
+          "title": "Test Start",
+          "type": "string"
+        },
+        "training_end": {
+          "format": "date-time",
+          "title": "Training End",
+          "type": "string"
+        },
+        "training_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Training Sample Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "asset_id",
+        "instrument_id",
+        "horizon",
+        "regime",
+        "fold_id",
+        "split_sha256",
+        "label_dataset_manifest_sha256",
+        "resource_budget_sha256",
+        "decision_time",
+        "training_end",
+        "calibration_end",
+        "test_start",
+        "test_end",
+        "evaluation_available_at",
+        "purge_seconds",
+        "embargo_seconds",
+        "training_sample_ids",
+        "calibration_sample_ids",
+        "test_sample_ids",
+        "lineage_sha256"
+      ],
+      "title": "EventForecastComparisonLineage",
+      "type": "object"
+    },
+    "FoldEvaluationState": {
+      "enum": [
+        "EVALUATED",
+        "ABSTAINED",
+        "FAILED"
+      ],
+      "title": "FoldEvaluationState",
+      "type": "string"
+    },
+    "ForecastMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "brier_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Brier Score"
+        },
+        "crps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Crps"
+        },
+        "direction_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Direction Accuracy"
+        },
+        "interval_coverage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Interval Coverage"
+        },
+        "mean_absolute_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Mean Absolute Error"
+        },
+        "net_return_after_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Net Return After Cost"
+        },
+        "pinball_loss": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Pinball Loss"
+        },
+        "primary_loss": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Primary Loss"
+        },
+        "root_mean_squared_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Root Mean Squared Error"
+        },
+        "tail_recall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Tail Recall"
+        }
+      },
+      "required": [
+        "primary_loss",
+        "direction_accuracy",
+        "mean_absolute_error",
+        "root_mean_squared_error",
+        "crps",
+        "pinball_loss",
+        "brier_score",
+        "interval_coverage",
+        "tail_recall",
+        "net_return_after_cost"
+      ],
+      "title": "ForecastMetrics",
+      "type": "object"
+    },
+    "MarketRegime": {
+      "enum": [
+        "TREND",
+        "MEAN_REVERSION",
+        "LOW_VOL_COMPRESSION",
+        "VOL_EXPANSION",
+        "LIQUIDITY_CRISIS",
+        "NEWS_SHOCK",
+        "LIQUIDATION_CASCADE",
+        "FUNDING_DISLOCATION",
+        "CORRELATION_BREAKDOWN",
+        "RISK_ON",
+        "RISK_OFF",
+        "UNKNOWN",
+        "OOD"
+      ],
+      "title": "MarketRegime",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-event-ablation-evaluation/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "abstain_or_failure_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Abstain Or Failure Reason"
+    },
+    "arm": {
+      "$ref": "#/$defs/EventAblationArm"
+    },
+    "evaluation_sha256": {
+      "title": "Evaluation Sha256",
+      "type": "string"
+    },
+    "event_condition_snapshot_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Event Condition Snapshot Sha256"
+    },
+    "final_holdout_opened": {
+      "const": false,
+      "default": false,
+      "title": "Final Holdout Opened",
+      "type": "boolean"
+    },
+    "lineage": {
+      "$ref": "#/$defs/EventForecastComparisonLineage"
+    },
+    "metrics": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ForecastMetrics"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "permutation_plan_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Permutation Plan Sha256"
+    },
+    "prediction_artifact_sha256": {
+      "title": "Prediction Artifact Sha256",
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/FoldEvaluationState"
+    }
+  },
+  "required": [
+    "arm",
+    "lineage",
+    "event_condition_snapshot_sha256",
+    "permutation_plan_sha256",
+    "prediction_artifact_sha256",
+    "state",
+    "evaluation_sha256"
+  ],
+  "title": "EventAblationEvaluation",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-event-ablation-evaluation",
+  "x-aegisquant-schema-version": "1.0.0"
+}

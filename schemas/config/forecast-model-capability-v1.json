@@ -1,0 +1,236 @@
+{
+  "$defs": {
+    "CapabilityStatus": {
+      "enum": [
+        "RUNNABLE_LOCAL",
+        "ADAPTER_ONLY",
+        "DEPENDENCY_BLOCKED",
+        "LICENSE_BLOCKED",
+        "OPTIONAL"
+      ],
+      "title": "CapabilityStatus",
+      "type": "string"
+    },
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "ForecastModality": {
+      "enum": [
+        "NUMERIC_ONLY",
+        "VISION_ONLY",
+        "NUMERIC_VISION"
+      ],
+      "title": "ForecastModality",
+      "type": "string"
+    },
+    "ForecastModelClass": {
+      "enum": [
+        "BASELINE",
+        "FOUNDATION",
+        "SUPERVISED",
+        "MICROSTRUCTURE",
+        "VISION"
+      ],
+      "title": "ForecastModelClass",
+      "type": "string"
+    },
+    "LicenseStatus": {
+      "enum": [
+        "PROJECT_OWNED",
+        "VERIFIED_PERMISSIVE",
+        "RESEARCH_ONLY",
+        "UNVERIFIED",
+        "PROHIBITED"
+      ],
+      "title": "LicenseStatus",
+      "type": "string"
+    },
+    "MarketRegime": {
+      "enum": [
+        "TREND",
+        "MEAN_REVERSION",
+        "LOW_VOL_COMPRESSION",
+        "VOL_EXPANSION",
+        "LIQUIDITY_CRISIS",
+        "NEWS_SHOCK",
+        "LIQUIDATION_CASCADE",
+        "FUNDING_DISLOCATION",
+        "CORRELATION_BREAKDOWN",
+        "RISK_ON",
+        "RISK_OFF",
+        "UNKNOWN",
+        "OOD"
+      ],
+      "title": "MarketRegime",
+      "type": "string"
+    },
+    "PredictionMode": {
+      "enum": [
+        "BASELINE",
+        "TRAINED",
+        "ZERO_SHOT"
+      ],
+      "title": "PredictionMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.forecast-model-capability/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "adapter_name": {
+      "title": "Adapter Name",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "code_license": {
+      "title": "Code License",
+      "type": "string"
+    },
+    "family": {
+      "title": "Family",
+      "type": "string"
+    },
+    "license_status": {
+      "$ref": "#/$defs/LicenseStatus"
+    },
+    "modality": {
+      "$ref": "#/$defs/ForecastModality"
+    },
+    "model_class": {
+      "$ref": "#/$defs/ForecastModelClass"
+    },
+    "model_revision": {
+      "title": "Model Revision",
+      "type": "string"
+    },
+    "prediction_modes": {
+      "items": {
+        "$ref": "#/$defs/PredictionMode"
+      },
+      "minItems": 1,
+      "title": "Prediction Modes",
+      "type": "array"
+    },
+    "production_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Production Allowed",
+      "type": "boolean"
+    },
+    "status": {
+      "$ref": "#/$defs/CapabilityStatus"
+    },
+    "supported_horizons": {
+      "items": {
+        "$ref": "#/$defs/CouncilHorizon"
+      },
+      "minItems": 1,
+      "title": "Supported Horizons",
+      "type": "array"
+    },
+    "supported_regimes": {
+      "items": {
+        "$ref": "#/$defs/MarketRegime"
+      },
+      "minItems": 1,
+      "title": "Supported Regimes",
+      "type": "array"
+    },
+    "supports_barrier_and_tail": {
+      "title": "Supports Barrier And Tail",
+      "type": "boolean"
+    },
+    "supports_direction_probabilities": {
+      "title": "Supports Direction Probabilities",
+      "type": "boolean"
+    },
+    "supports_liquidity_spread_slippage": {
+      "title": "Supports Liquidity Spread Slippage",
+      "type": "boolean"
+    },
+    "supports_range_and_excursions": {
+      "title": "Supports Range And Excursions",
+      "type": "boolean"
+    },
+    "supports_return_distribution": {
+      "title": "Supports Return Distribution",
+      "type": "boolean"
+    },
+    "supports_uncertainty_and_abstain": {
+      "title": "Supports Uncertainty And Abstain",
+      "type": "boolean"
+    },
+    "supports_volatility_distribution": {
+      "title": "Supports Volatility Distribution",
+      "type": "boolean"
+    },
+    "weight_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Weight Sha256"
+    },
+    "weights_license": {
+      "title": "Weights License",
+      "type": "string"
+    },
+    "weights_required": {
+      "title": "Weights Required",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "family",
+    "model_class",
+    "modality",
+    "prediction_modes",
+    "supported_horizons",
+    "supported_regimes",
+    "supports_return_distribution",
+    "supports_direction_probabilities",
+    "supports_volatility_distribution",
+    "supports_range_and_excursions",
+    "supports_barrier_and_tail",
+    "supports_liquidity_spread_slippage",
+    "supports_uncertainty_and_abstain",
+    "status",
+    "adapter_name",
+    "model_revision",
+    "code_license",
+    "weights_license",
+    "license_status",
+    "weights_required"
+  ],
+  "title": "ModelCapability",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.forecast-model-capability",
+  "x-aegisquant-schema-version": "1.0.0"
+}

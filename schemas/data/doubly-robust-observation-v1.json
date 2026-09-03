@@ -1,0 +1,111 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.doubly-robust-observation/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "decision_time": {
+      "format": "date-time",
+      "title": "Decision Time",
+      "type": "string"
+    },
+    "feature_snapshot_sha256": {
+      "title": "Feature Snapshot Sha256",
+      "type": "string"
+    },
+    "nuisance_available_at": {
+      "format": "date-time",
+      "title": "Nuisance Available At",
+      "type": "string"
+    },
+    "nuisance_model_sha256": {
+      "title": "Nuisance Model Sha256",
+      "type": "string"
+    },
+    "nuisance_training_cutoff": {
+      "format": "date-time",
+      "title": "Nuisance Training Cutoff",
+      "type": "string"
+    },
+    "outcome": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Outcome"
+    },
+    "outcome_available_at": {
+      "format": "date-time",
+      "title": "Outcome Available At",
+      "type": "string"
+    },
+    "predicted_outcome_if_control": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Predicted Outcome If Control"
+    },
+    "predicted_outcome_if_treated": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Predicted Outcome If Treated"
+    },
+    "propensity_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Propensity Score"
+    },
+    "sample_id": {
+      "title": "Sample Id",
+      "type": "string"
+    },
+    "treated": {
+      "title": "Treated",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "sample_id",
+    "decision_time",
+    "nuisance_available_at",
+    "nuisance_training_cutoff",
+    "outcome_available_at",
+    "treated",
+    "outcome",
+    "propensity_score",
+    "predicted_outcome_if_control",
+    "predicted_outcome_if_treated",
+    "nuisance_model_sha256",
+    "feature_snapshot_sha256"
+  ],
+  "title": "DoublyRobustObservation",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.doubly-robust-observation",
+  "x-aegisquant-schema-version": "1.0.0"
+}

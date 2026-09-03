@@ -51,8 +51,22 @@ def test_p18_state_is_final_non_live_and_acceptance_remains_deferred(
 
 
 def test_p18_ci_has_readiness_evidence_and_mutation_gates(project_root: Path) -> None:
-    commands = dict(stage_commands(project_root, "P18"))
+    stages = stage_commands(project_root, "P18")
+    commands = dict(stages)
     assert {"p18-live-readiness-evidence", "p18-mutation"} <= set(commands)
+    stage_names = [name for name, _command in stage_commands(project_root, "V5-P04")]
+    assert "v5-p04-truth-council-calibration-evidence" in stage_names
+    assert {
+        "v5-p00-frozen-manifest-self-consistency",
+        "v5-p01-frozen-manifest-self-consistency",
+        "v5-p02-frozen-manifest-self-consistency",
+        "v5-p03-frozen-manifest-self-consistency",
+    } <= set(stage_names)
+    assert (
+        stage_names.index("python-candidate")
+        < stage_names.index("v5-p00-evidence-reset-before-tests")
+        < stage_names.index("pytest")
+    )
 
 
 def test_p18_traceability_has_verified_tasks_and_deferred_acceptance(

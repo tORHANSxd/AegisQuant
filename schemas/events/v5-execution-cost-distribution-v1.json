@@ -1,0 +1,502 @@
+{
+  "$defs": {
+    "CostCalibrationState": {
+      "enum": [
+        "UNVERIFIED",
+        "WITHIN_TOLERANCE",
+        "MISCALIBRATED"
+      ],
+      "title": "CostCalibrationState",
+      "type": "string"
+    },
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "ExecutionCostComponent": {
+      "enum": [
+        "fee",
+        "spread",
+        "slippage",
+        "market_impact",
+        "queue_probability",
+        "maker_adverse_selection",
+        "latency_cost",
+        "funding",
+        "borrow",
+        "settlement",
+        "liquidation_risk"
+      ],
+      "title": "ExecutionCostComponent",
+      "type": "string"
+    },
+    "ExecutionCostModelV2": {
+      "additionalProperties": false,
+      "properties": {
+        "calibration_state": {
+          "$ref": "#/$defs/CostCalibrationState"
+        },
+        "components": {
+          "default": [
+            "fee",
+            "spread",
+            "slippage",
+            "market_impact",
+            "queue_probability",
+            "maker_adverse_selection",
+            "latency_cost",
+            "funding",
+            "borrow",
+            "settlement",
+            "liquidation_risk"
+          ],
+          "items": {
+            "$ref": "#/$defs/ExecutionCostComponent"
+          },
+          "title": "Components",
+          "type": "array"
+        },
+        "cost_confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Cost Confidence"
+        },
+        "environments": {
+          "default": [
+            "BACKTEST",
+            "PAPER",
+            "LIVE"
+          ],
+          "items": {
+            "enum": [
+              "BACKTEST",
+              "PAPER",
+              "LIVE"
+            ],
+            "type": "string"
+          },
+          "title": "Environments",
+          "type": "array"
+        },
+        "model_sha256": {
+          "title": "Model Sha256",
+          "type": "string"
+        },
+        "queue_mode": {
+          "$ref": "#/$defs/MakerQueueMode"
+        },
+        "real_world_tca_claimed": {
+          "const": false,
+          "default": false,
+          "title": "Real World Tca Claimed",
+          "type": "boolean"
+        },
+        "replay_inputs": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReplayQueueInputs"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tca_artifact_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tca Artifact Sha256"
+        },
+        "tca_sample_count": {
+          "minimum": 0,
+          "title": "Tca Sample Count",
+          "type": "integer"
+        },
+        "version": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "queue_mode",
+        "calibration_state",
+        "tca_sample_count",
+        "cost_confidence",
+        "model_sha256"
+      ],
+      "title": "ExecutionCostModelV2",
+      "type": "object"
+    },
+    "ExecutionCostScenario": {
+      "additionalProperties": false,
+      "properties": {
+        "borrow": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Borrow"
+        },
+        "fee": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Fee"
+        },
+        "funding": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Funding"
+        },
+        "latency_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Latency Cost"
+        },
+        "liquidation_risk": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Liquidation Risk"
+        },
+        "maker_adverse_selection": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maker Adverse Selection"
+        },
+        "market_impact": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Market Impact"
+        },
+        "probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Probability"
+        },
+        "queue_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Queue Probability"
+        },
+        "scenario_id": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Scenario Id",
+          "type": "string"
+        },
+        "settlement": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Settlement"
+        },
+        "slippage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Slippage"
+        },
+        "spread": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Spread"
+        },
+        "total_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Total Cost"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "probability",
+        "fee",
+        "spread",
+        "slippage",
+        "market_impact",
+        "queue_probability",
+        "maker_adverse_selection",
+        "latency_cost",
+        "funding",
+        "borrow",
+        "settlement",
+        "liquidation_risk",
+        "total_cost"
+      ],
+      "title": "ExecutionCostScenario",
+      "type": "object"
+    },
+    "MakerQueueMode": {
+      "enum": [
+        "CONSERVATIVE_QUEUE",
+        "REPLAY_QUEUE"
+      ],
+      "title": "MakerQueueMode",
+      "type": "string"
+    },
+    "ReplayQueueInputs": {
+      "additionalProperties": false,
+      "properties": {
+        "cancel_replace_sha256": {
+          "title": "Cancel Replace Sha256",
+          "type": "string"
+        },
+        "l2_deltas_sha256": {
+          "title": "L2 Deltas Sha256",
+          "type": "string"
+        },
+        "l2_snapshots_sha256": {
+          "title": "L2 Snapshots Sha256",
+          "type": "string"
+        },
+        "order_arrival_sha256": {
+          "title": "Order Arrival Sha256",
+          "type": "string"
+        },
+        "queue_ahead_sha256": {
+          "title": "Queue Ahead Sha256",
+          "type": "string"
+        },
+        "trades_sha256": {
+          "title": "Trades Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "l2_snapshots_sha256",
+        "l2_deltas_sha256",
+        "trades_sha256",
+        "order_arrival_sha256",
+        "cancel_replace_sha256",
+        "queue_ahead_sha256"
+      ],
+      "title": "ReplayQueueInputs",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-execution-cost-distribution/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "decision_time": {
+      "format": "date-time",
+      "title": "Decision Time",
+      "type": "string"
+    },
+    "distribution_sha256": {
+      "title": "Distribution Sha256",
+      "type": "string"
+    },
+    "evidence_tier": {
+      "const": "DEVELOPMENT",
+      "default": "DEVELOPMENT",
+      "title": "Evidence Tier",
+      "type": "string"
+    },
+    "expected_cost": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "gt": "0",
+      "title": "Expected Cost"
+    },
+    "horizon": {
+      "$ref": "#/$defs/CouncilHorizon"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "model": {
+      "$ref": "#/$defs/ExecutionCostModelV2"
+    },
+    "scenarios": {
+      "items": {
+        "$ref": "#/$defs/ExecutionCostScenario"
+      },
+      "maxItems": 4096,
+      "minItems": 3,
+      "title": "Scenarios",
+      "type": "array"
+    },
+    "sleeve_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Sleeve Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "model",
+    "asset_id",
+    "instrument_id",
+    "horizon",
+    "sleeve_id",
+    "decision_time",
+    "available_at",
+    "scenarios",
+    "expected_cost",
+    "distribution_sha256"
+  ],
+  "title": "ExecutionCostDistribution",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-execution-cost-distribution",
+  "x-aegisquant-schema-version": "1.0.0"
+}

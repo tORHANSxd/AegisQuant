@@ -1,0 +1,745 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "V5-P01",
+  "generated_at_utc": "2026-09-02T16:03:09.920999Z",
+  "status": "passed",
+  "stage_count": 59,
+  "passed_count": 59,
+  "failed_count": 0,
+  "results": [
+    {
+      "name": "postgres-runtime",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/setup_postgres.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.155,
+      "output_tail": "{\n  \"version\": \"18.6\",\n  \"archive_url\": \"https://get.enterprisedb.com/postgresql/postgresql-18.6-1-windows-x64-binaries.zip\",\n  \"archive_sha256\": \"fbe23da234ee31547bf8a36d29dfd81e82b849df2d2b78d2eecb43d360252f8c\",\n  \"bin_dir\": \"D:\\\\Personal\\\\Quantitative_Trading\\\\.tools\\\\postgresql-18.6\\\\pgsql\\\\bin\",\n  \"status\": \"ready\"\n}"
+    },
+    {
+      "name": "traceability",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_traceability.py",
+        "--phase-status",
+        "P00=verified",
+        "--phase-status",
+        "P01=verified",
+        "--phase-status",
+        "P02=verified",
+        "--phase-status",
+        "P03=verified",
+        "--phase-status",
+        "P04=verified",
+        "--phase-status",
+        "P05=verified",
+        "--phase-status",
+        "P06=verified",
+        "--phase-status",
+        "P07=verified",
+        "--phase-status",
+        "P08=verified",
+        "--phase-status",
+        "P09=verified",
+        "--phase-status",
+        "P10=verified",
+        "--phase-status",
+        "P11=verified",
+        "--phase-status",
+        "P12=verified",
+        "--phase-status",
+        "P13=verified",
+        "--phase-status",
+        "P14=verified",
+        "--phase-status",
+        "P15=verified",
+        "--phase-status",
+        "P16=verified",
+        "--phase-status",
+        "P17=verified",
+        "--phase-status",
+        "P18=verified",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.128,
+      "output_tail": "verified 466 requirements in state\\REQUIREMENTS_TRACEABILITY.csv"
+    },
+    {
+      "name": "schema-contracts",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_schemas.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.942,
+      "output_tail": "verified 99 generated schema artifacts"
+    },
+    {
+      "name": "v5-p01-truth-contract-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_v5_p01_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.31,
+      "output_tail": "verified deterministic V5-P01 truth-contract evidence"
+    },
+    {
+      "name": "p02-data-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p02_data_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.679,
+      "output_tail": "P02 data evidence contract: passed"
+    },
+    {
+      "name": "p03-binance-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p03_binance_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.929,
+      "output_tail": "verified 9 P03 Binance evidence artifacts"
+    },
+    {
+      "name": "p04-multivenue-event-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p04_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.533,
+      "output_tail": "verified 4 P04 evidence artifacts"
+    },
+    {
+      "name": "p05-accounting-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_p05_evidence.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.402,
+      "output_tail": "verified 5 P05 evidence artifacts"
+    },
+    {
+      "name": "p05-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/run_p05_mutation.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 45.578,
+      "output_tail": "[short-side-sign] killed\n[inverse-pnl-operation] killed\n[fifo-close-quantity] killed\n[spot-inventory-gate] killed\n[idempotency-inserted-flag] killed\n[valuation-priority] killed\n[pnl-borrow-sign] killed\n[cashflow-interest-direction] killed\n[rounding-classification] killed\n[continuous-reconciliation-status] killed\n[snapshot-payload-hash] killed\n[journal-balance-comparison] killed\nP05 mutation score: 1.000 (threshold 0.900)"
+    },
+    {
+      "name": "p06-backtest-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p06_evidence"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.519,
+      "output_tail": ""
+    },
+    {
+      "name": "p06-benchmark",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p06_benchmark"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.073,
+      "output_tail": ""
+    },
+    {
+      "name": "p06-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p06_mutation"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 71.243,
+      "output_tail": "[sell-cost-direction] killed\n[impact-cap-minimum] killed\n[maker-taker-fee-selection] killed\n[funding-sign] killed\n[borrow-year-denominator] killed\n[trading-enabled-gate] killed\n[step-size-legality] killed\n[liquidity-cap] killed\n[equal-time-cancel-precedence] killed\n[request-timeout-ack-state] killed\n[liquidation-threshold] killed\n[vector-asof-direction] killed\nP06 mutation score: 1.000 (threshold 0.900)"
+    },
+    {
+      "name": "p07-research-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p07_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 4.134,
+      "output_tail": "P07 evidence verified: 13 JSON files"
+    },
+    {
+      "name": "p07-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p07_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.114,
+      "output_tail": "verified P07 mutation score: 1.000"
+    },
+    {
+      "name": "p08-research-intelligence-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p08_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 10.17,
+      "output_tail": "P08 evidence verified: 14 JSON files"
+    },
+    {
+      "name": "p08-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p08_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.114,
+      "output_tail": "verified P08 mutation score: 1.000"
+    },
+    {
+      "name": "p09-knowledge-intelligence-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p09_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.84,
+      "output_tail": "P09 evidence verified: 9 JSON, 7 Markdown, 4 static reports, 2 Parquet"
+    },
+    {
+      "name": "p09-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p09_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.118,
+      "output_tail": "verified P09 mutation score: 1.000"
+    },
+    {
+      "name": "p10-global-event-intelligence-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p10_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.836,
+      "output_tail": "P10 evidence verified: 12 data JSON, 3 intelligence JSON, 5 read models, 1 Parquet"
+    },
+    {
+      "name": "p10-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p10_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.115,
+      "output_tail": "verified P10 mutation score: 1.000"
+    },
+    {
+      "name": "p11-portfolio-risk-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p11_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.48,
+      "output_tail": "P11 evidence verified: 9 data JSON, 2 risk JSON"
+    },
+    {
+      "name": "p11-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p11_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.113,
+      "output_tail": "verified P11 mutation score: 1.000"
+    },
+    {
+      "name": "p12-testnet-execution-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p12_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.384,
+      "output_tail": "P12 evidence verified: 13 execution JSON, 1 compatibility JSON"
+    },
+    {
+      "name": "p12-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p12_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.116,
+      "output_tail": "verified P12 mutation score: 1.000"
+    },
+    {
+      "name": "p13-paper-shadow-chaos-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p13_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.482,
+      "output_tail": "P13 evidence check: passed"
+    },
+    {
+      "name": "p13-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p13_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.109,
+      "output_tail": "verified P13 mutation score: 1.000"
+    },
+    {
+      "name": "p14-typescript-client-drift",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.check_p14_client"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.709,
+      "output_tail": "verified 16 generated TypeScript client files"
+    },
+    {
+      "name": "p14-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p14_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.124,
+      "output_tail": "verified P14 mutation score: 1.000"
+    },
+    {
+      "name": "p15-workbench-contracts",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p15_contracts",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.803,
+      "output_tail": "verified 5 P15 contracts"
+    },
+    {
+      "name": "p15-workbench-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p15_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.519,
+      "output_tail": "verified 8 P15 evidence files"
+    },
+    {
+      "name": "p15-typescript-client-drift",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.check_p15_client"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.686,
+      "output_tail": "verified 16 generated TypeScript client files"
+    },
+    {
+      "name": "p15-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p15_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.122,
+      "output_tail": "verified P15 mutation score: 1.000"
+    },
+    {
+      "name": "p16-image-lock",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.resolve_image_digests",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.147,
+      "output_tail": "P16 image lock: passed"
+    },
+    {
+      "name": "p16-dashboards",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p16_dashboards",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.094,
+      "output_tail": "P16 dashboards: 6 verified"
+    },
+    {
+      "name": "p16-operational-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p16_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.658,
+      "output_tail": "verified 7 P16 evidence files"
+    },
+    {
+      "name": "p16-restore-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p16_restore_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.011,
+      "output_tail": "verified P16 restore drill evidence"
+    },
+    {
+      "name": "p16-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p16_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.112,
+      "output_tail": "verified P16 mutation score: 1.000"
+    },
+    {
+      "name": "p17-provider-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p17_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.335,
+      "output_tail": "verified 13 P17 evidence files"
+    },
+    {
+      "name": "p17-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p17_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.118,
+      "output_tail": "verified P17 mutation score: 1.000"
+    },
+    {
+      "name": "p18-live-readiness-evidence",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_p18_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.366,
+      "output_tail": "verified 12 P18 evidence files"
+    },
+    {
+      "name": "p18-mutation",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.run_p18_mutation",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.112,
+      "output_tail": "verified P18 mutation score: 1.000"
+    },
+    {
+      "name": "ruff-format",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.169,
+      "output_tail": "777 files already formatted"
+    },
+    {
+      "name": "ruff-lint",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.116,
+      "output_tail": "All checks passed!"
+    },
+    {
+      "name": "pyright-strict",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pyright",
+        "--project",
+        "pyproject.toml"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 24.712,
+      "output_tail": "0 errors, 0 warnings, 0 informations"
+    },
+    {
+      "name": "bandit",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/run_bandit.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.946,
+      "output_tail": "rate_p15_evidence.py:357\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:358\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:359\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:360\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:356\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:357\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:358\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:359\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p15_evidence.py:360\n[manager]\tWARNING\tTest in comment: audit is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: boolean is not a test name or id, ignoring\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:506\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:507\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:508\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:509\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:510\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:511\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:512\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:513\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:514\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:515\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:516\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:517\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:519\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:506\n[tester]\tWARNING\tnosec encountered (B105), but no failed test on file scripts\\generate_p18_evidence.py:507\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:80\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:81\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:82\n[tester]\tWARNING\tnosec encountered (B608), but no failed test on file src\\aegisquant\\data\\pit.py:85\n[manager]\tWARNING\tTest in comment: bounded is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: input is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: rejects is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: DTD is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: entity is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: declarations is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: pinned is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: PostgreSQL is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: programs is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: no is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: shell is not a test name or id, ignoring\n[json]\tINFO\tJSON output written to file: D:\\Personal\\Quantitative_Trading\\reports\\security\\.bandit.raw.json\n\nBandit findings: 0"
+    },
+    {
+      "name": "security",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/security_scan.py",
+        "--phase",
+        "P18"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 133.294,
+      "output_tail": "{\"schema_version\": \"1.0.0\", \"phase\": \"P18\", \"generated_at_utc\": \"2026-09-02T15:58:58.199188Z\", \"status\": \"passed\", \"checks\": {\"detect_secrets\": true, \"python_dependency_audit\": true, \"javascript_dependency_audit\": true, \"container_iac_policy\": true}, \"secret_finding_count\": 0, \"real_account_access_performed\": false, \"secret_store_access_performed\": false}"
+    },
+    {
+      "name": "compliance-artifacts",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_compliance_artifacts.py",
+        "--phase",
+        "P18"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 5.559,
+      "output_tail": "{\"schema_version\": \"1.0.0\", \"phase\": \"P18\", \"status\": \"passed\", \"python_component_count\": 170, \"javascript_component_count\": 847, \"python_unknown_license_count\": 0, \"artifacts\": [\"reports/sbom/python.cdx.json\", \"reports/sbom/javascript.cdx.json\", \"reports/licenses/python.json\", \"reports/licenses/javascript.json\"]}"
+    },
+    {
+      "name": "v5-p00-evidence-reset-before-tests",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_v5_p00_evidence"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.935,
+      "output_tail": "wrote V5-P00 evidence reset for 482 historical reports"
+    },
+    {
+      "name": "pytest",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 62.126,
+      "output_tail": "orderbook.py ...                                          [ 44%]\ntests\\p03\\test_phase_evidence.py ...                                     [ 44%]\ntests\\p03\\test_quality_replay_changelog.py ....                          [ 45%]\ntests\\p03\\test_rest.py .....                                             [ 46%]\ntests\\p03\\test_soak_state.py ..                                          [ 46%]\ntests\\p03\\test_websocket_lifecycle.py ....                               [ 47%]\ntests\\p04\\test_phase_evidence.py ....                                    [ 47%]\ntests\\p05\\test_ledger_core.py .........                                  [ 48%]\ntests\\p05\\test_snapshots.py ..                                           [ 49%]\ntests\\p05\\test_valuation_reconciliation.py ....                          [ 49%]\ntests\\p06\\test_artifacts.py .                                            [ 49%]\ntests\\p06\\test_costs_margin.py .......                                   [ 50%]\ntests\\p06\\test_fills_failures.py .....                                   [ 51%]\ntests\\p06\\test_phase_evidence.py ....                                    [ 52%]\ntests\\p06\\test_rules_stress.py ................                          [ 54%]\ntests\\p06\\test_vector_event_consistency.py ..                            [ 54%]\ntests\\p07\\test_phase_evidence.py ....                                    [ 55%]\ntests\\p08\\test_phase_evidence.py ....                                    [ 55%]\ntests\\p09\\test_phase_evidence.py .....                                   [ 56%]\ntests\\p10\\test_phase_evidence.py .........                               [ 57%]\ntests\\p11\\test_phase_evidence.py ........                                [ 58%]\ntests\\p12\\test_phase_evidence.py .......                                 [ 59%]\ntests\\p13\\test_phase_evidence.py ......                                  [ 60%]\ntests\\p14\\test_phase_evidence.py ......                                  [ 61%]\ntests\\p15\\test_downsampling.py ...                                       [ 62%]\ntests\\p15\\test_phase_evidence.py .....                                   [ 62%]\ntests\\p15\\test_readmodels.py ...                                         [ 63%]\ntests\\p16\\test_infrastructure_contracts.py .....                         [ 63%]\ntests\\p16\\test_phase_evidence.py .....                                   [ 64%]\ntests\\p16\\test_runbook_contracts.py ..                                   [ 64%]\ntests\\p17\\test_phase_evidence.py ......                                  [ 65%]\ntests\\p18\\test_phase_evidence.py .........                               [ 67%]\ntests\\performance\\test_accounting_performance.py .                       [ 67%]\ntests\\performance\\test_backtest_performance.py .                         [ 67%]\ntests\\performance\\test_data_foundation_evidence.py ..                    [ 67%]\ntests\\performance\\test_p13_stability.py ..                               [ 67%]\ntests\\portfolio\\test_constraints.py ...                                  [ 68%]\ntests\\portfolio\\test_risk_estimation.py ..                               [ 68%]\ntests\\portfolio\\test_signals_optimizer.py ...                            [ 69%]\ntests\\property\\pit\\test_leakage.py ..                                    [ 69%]\ntests\\property\\pit\\test_universe.py ..                                   [ 69%]\ntests\\property\\test_accounting_properties.py .                           [ 69%]\ntests\\property\\test_backtest_properties.py .                             [ 69%]\ntests\\property\\test_data_properties.py ..                                [ 70%]\ntests\\property\\test_domain_properties.py .....                           [ 70%]\ntests\\property\\test_p12_execution_properties.py ...                      [ 71%]\ntests\\property\\test_p13_runtime_properties.py ..                         [ 71%]\ntests\\property\\test_portfolio_risk_properties.py ...                     [ 72%]\ntests\\property\\test_v5_truth_properties.py ..                            [ 72%]\ntests\\readmodels\\test_projections.py ....                                [ 72%]\ntests\\replay\\intelligence\\test_p08_historical_event_replay.py .          [ 73%]\ntests\\replay\\intelligence\\test_pipeline.py ....                          [ 73%]\ntests\\replay\\intelligence\\test_store.py ....                             [ 74%]\ntests\\replay\\test_p13_historical_runtime.py ..                           [ 74%]\ntests\\research\\provider_bakeoff\\test_catalog_plans.py ...                [ 74%]\ntests\\research\\provider_bakeoff\\test_decisions.py ....                   [ 75%]\ntests\\research\\provider_bakeoff\\test_news_authority_degradation.py ...   [ 75%]\ntests\\research\\provider_bakeoff\\test_runtime_registry.py .               [ 76%]\ntests\\research\\test_drift_ood.py .                                       [ 76%]\ntests\\research\\test_experiment_factory.py ...                            [ 76%]\ntests\\research\\test_experiments_scoreboard.py ..                         [ 76%]\ntests\\research\\test_external_baseline.py ..                              [ 77%]\ntests\\research\\test_foundation_plugins.py ..                             [ 77%]\ntests\\research\\test_holdout.py .                                         [ 77%]\ntests\\research\\test_hypothesis_queue.py ..                               [ 77%]\ntests\\research\\test_model_baselines.py ......                            [ 78%]\ntests\\research\\test_model_council.py .                                   [ 78%]\ntests\\research\\test_model_factory.py .....                               [ 79%]\ntests\\research\\test_model_registry.py .                                  [ 79%]\ntests\\research\\test_oof_stacking.py .                                    [ 79%]\ntests\\research\\test_resource_budgets.py ..                               [ 80%]\ntests\\research\\test_splits.py ....                                       [ 80%]\ntests\\research\\test_statistics.py ....                                   [ 81%]\ntests\\research\\test_strategy_baselines.py ...                            [ 81%]\ntests\\research\\test_stress.py ...                                        [ 82%]\ntests\\research\\test_training_manifests.py ..                             [ 82%]\ntests\\research\\test_uncertainty.py .                                     [ 82%]\ntests\\risk\\test_circuit_breakers.py ..                                   [ 82%]\ntests\\risk\\test_decision_engine.py ...                                   [ 83%]\ntests\\risk\\test_playbooks.py ..                                          [ 83%]\ntests\\risk\\test_policy_signature.py ...                                  [ 84%]\ntests\\risk\\test_pretrade.py .....                                        [ 84%]\ntests\\risk\\test_state_machine.py ...                                     [ 85%]\ntests\\risk\\test_stress.py .                                              [ 85%]\ntests\\runtime\\test_comparison.py ....                                    [ 85%]\ntests\\runtime\\test_incidents.py ..                                       [ 86%]\ntests\\runtime\\test_paper.py .....                                        [ 86%]\ntests\\runtime\\test_shadow.py ...                                         [ 87%]\ntests\\runtime\\test_supervisor.py ....                                    [ 87%]\ntests\\security\\prompt_safety\\test_prompt_firewall.py .                   [ 88%]\ntests\\security\\prompt_safety\\test_proposal_boundaries.py ..              [ 88%]\ntests\\security\\static_analysis\\test_python_scanner.py ...                [ 88%]\ntests\\security\\test_binance_public_only.py ......                        [ 89%]\ntests\\security\\test_data_foundation_security.py ..                       [ 89%]\ntests\\security\\test_import_side_effects.py .                             [ 90%]\ntests\\security\\test_live_lock.py ......                                  [ 90%]\ntests\\security\\test_p04_source_boundaries.py .....                       [ 91%]\ntests\\security\\test_p12_testnet_only.py .....                            [ 92%]\ntests\\security\\test_p13_shadow_read_only.py ..                           [ 92%]\ntests\\security\\test_p14_web_read_only.py ..                              [ 92%]\ntests\\security\\test_p15_workbench_read_only.py ..                        [ 93%]\ntests\\security\\test_p16_operational_security.py ...                      [ 93%]\ntests\\security\\test_secret_boundaries.py ..                              [ 93%]\ntests\\unit\\domain\\test_accounting.py ..                                  [ 94%]\ntests\\unit\\domain\\test_entities.py ....                                  [ 94%]\ntests\\unit\\domain\\test_errors.py ..                                      [ 95%]\ntests\\unit\\domain\\test_execution.py ..                                   [ 95%]\ntests\\unit\\domain\\test_identifiers_time_values.py .....                  [ 96%]\ntests\\unit\\domain\\test_intelligence.py ...                               [ 96%]\ntests\\unit\\domain\\test_policy.py ..                                      [ 96%]\ntests\\unit\\features\\test_event_features.py ...                           [ 97%]\ntests\\unit\\features\\test_market_features.py ...                          [ 97%]\ntests\\unit\\features\\test_registry.py ...                                 [ 98%]\ntests\\unit\\intelligence\\test_committee.py ..                             [ 98%]\ntests\\unit\\intelligence\\test_event_graph.py ..                           [ 98%]\ntests\\unit\\labels\\test_labels.py ....                                    [ 99%]\ntests\\v5_p01\\test_truth_contracts.py ...                                 [ 99%]\ntests\\v5_p01\\test_v5_p01_phase_evidence.py ...                           [100%]\n\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  D:\\Personal\\Quantitative_Trading\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n.venv\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:829\n  D:\\Personal\\Quantitative_Trading\\.venv\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:829: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    period: pd.Timedelta = pd.Timedelta(days=1),\n\n.venv\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:895\n  D:\\Personal\\Quantitative_Trading\\.venv\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:895: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    period: pd.Timedelta = pd.Timedelta(days=1),\n\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\n  D:\\Personal\\Quantitative_Trading\\.venv\\Lib\\site-packages\\pandas\\core\\tools\\timedeltas.py:233: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    result = Timedelta(r, unit)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n====================== 702 passed, 11 warnings in 58.29s ======================"
+    },
+    {
+      "name": "python-candidate",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/run_python_compatibility.py",
+        "--phase",
+        "P18"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 102.936,
+      "output_tail": "     [ 40%]\ntests\\p04\\test_phase_evidence.py ....                                    [ 41%]\ntests\\p05\\test_ledger_core.py .........                                  [ 42%]\ntests\\p05\\test_snapshots.py ..                                           [ 42%]\ntests\\p05\\test_valuation_reconciliation.py ....                          [ 43%]\ntests\\mutation\\test_p05_mutation_gate.py .                               [ 43%]\ntests\\mutation\\test_p06_mutation_gate.py .                               [ 43%]\ntests\\mutation\\test_p08_mutation_gate.py .                               [ 43%]\ntests\\mutation\\test_p09_mutation_gate.py .                               [ 43%]\ntests\\mutation\\test_p10_mutation_gate.py .                               [ 44%]\ntests\\mutation\\test_p11_mutation_gate.py .                               [ 44%]\ntests\\mutation\\test_p12_mutation_gate.py .                               [ 44%]\ntests\\mutation\\test_p13_mutation_gate.py .                               [ 44%]\ntests\\mutation\\test_p14_mutation_gate.py .                               [ 44%]\ntests\\mutation\\test_p15_mutation_gate.py .                               [ 44%]\ntests\\mutation\\test_p16_mutation_gate.py .                               [ 45%]\ntests\\p06\\test_artifacts.py .                                            [ 45%]\ntests\\p06\\test_costs_margin.py .......                                   [ 46%]\ntests\\p06\\test_fills_failures.py .....                                   [ 47%]\ntests\\p06\\test_phase_evidence.py ....                                    [ 47%]\ntests\\p06\\test_rules_stress.py ................                          [ 50%]\ntests\\p06\\test_vector_event_consistency.py ..                            [ 50%]\ntests\\research\\provider_bakeoff\\test_catalog_plans.py ...                [ 50%]\ntests\\research\\provider_bakeoff\\test_decisions.py ....                   [ 51%]\ntests\\research\\provider_bakeoff\\test_news_authority_degradation.py ...   [ 51%]\ntests\\research\\provider_bakeoff\\test_runtime_registry.py .               [ 52%]\ntests\\research\\test_drift_ood.py .                                       [ 52%]\ntests\\research\\test_experiment_factory.py ...                            [ 52%]\ntests\\research\\test_experiments_scoreboard.py ..                         [ 52%]\ntests\\research\\test_external_baseline.py ..                              [ 53%]\ntests\\research\\test_foundation_plugins.py ..                             [ 53%]\ntests\\research\\test_holdout.py .                                         [ 53%]\ntests\\research\\test_hypothesis_queue.py ..                               [ 54%]\ntests\\research\\test_model_baselines.py ......                            [ 54%]\ntests\\research\\test_model_council.py .                                   [ 55%]\ntests\\research\\test_model_factory.py .....                               [ 55%]\ntests\\research\\test_model_registry.py .                                  [ 56%]\ntests\\research\\test_oof_stacking.py .                                    [ 56%]\ntests\\research\\test_resource_budgets.py ..                               [ 56%]\ntests\\research\\test_splits.py ....                                       [ 57%]\ntests\\research\\test_statistics.py ....                                   [ 57%]\ntests\\research\\test_strategy_baselines.py ...                            [ 58%]\ntests\\research\\test_stress.py ...                                        [ 58%]\ntests\\research\\test_training_manifests.py ..                             [ 58%]\ntests\\research\\test_uncertainty.py .                                     [ 59%]\ntests\\p07\\test_phase_evidence.py ....                                    [ 59%]\ntests\\p08\\test_phase_evidence.py ....                                    [ 60%]\ntests\\intelligence\\test_dedupe.py .                                      [ 60%]\ntests\\intelligence\\test_discovery.py ..                                  [ 60%]\ntests\\intelligence\\test_knowledge_models.py ..                           [ 61%]\ntests\\intelligence\\test_safe_importer.py .....                           [ 61%]\ntests\\intelligence\\test_strategy_audit.py ..                             [ 62%]\ntests\\intelligence\\test_strategy_ir.py ...                               [ 62%]\ntests\\intelligence\\test_translation.py ..                                [ 62%]\ntests\\intelligence\\world\\test_annotation.py ..                           [ 63%]\ntests\\intelligence\\world\\test_committee_paths.py .....                   [ 64%]\ntests\\intelligence\\world\\test_credibility.py .                           [ 64%]\ntests\\intelligence\\world\\test_event_graph.py ......                      [ 65%]\ntests\\intelligence\\world\\test_event_replay.py .........                  [ 66%]\ntests\\intelligence\\world\\test_impact_fusion.py ....                      [ 67%]\ntests\\intelligence\\world\\test_macro_onchain_sources.py .....             [ 67%]\ntests\\intelligence\\world\\test_read_models.py ..                          [ 68%]\ntests\\intelligence\\world\\test_social_source_contracts.py .....           [ 68%]\ntests\\intelligence\\world\\test_source_policy.py .....                     [ 69%]\ntests\\p09\\test_phase_evidence.py .....                                   [ 70%]\ntests\\p10\\test_phase_evidence.py .........                               [ 71%]\ntests\\portfolio\\test_constraints.py ...                                  [ 72%]\ntests\\portfolio\\test_risk_estimation.py ..                               [ 72%]\ntests\\portfolio\\test_signals_optimizer.py ...                            [ 73%]\ntests\\risk\\test_circuit_breakers.py ..                                   [ 73%]\ntests\\risk\\test_decision_engine.py ...                                   [ 73%]\ntests\\risk\\test_playbooks.py ..                                          [ 74%]\ntests\\risk\\test_policy_signature.py ...                                  [ 74%]\ntests\\risk\\test_pretrade.py .....                                        [ 75%]\ntests\\risk\\test_state_machine.py ...                                     [ 75%]\ntests\\risk\\test_stress.py .                                              [ 75%]\ntests\\p11\\test_phase_evidence.py ........                                [ 77%]\ntests\\execution\\test_accounts.py ...                                     [ 77%]\ntests\\execution\\test_adapter_recovery.py ........                        [ 78%]\ntests\\execution\\test_algorithms.py ...                                   [ 79%]\ntests\\execution\\test_commands.py ....                                    [ 79%]\ntests\\execution\\test_groups.py ...                                       [ 80%]\ntests\\execution\\test_lifecycle.py ....                                   [ 81%]\ntests\\execution\\test_rate_limit.py ...                                   [ 81%]\ntests\\execution\\test_rules.py ...                                        [ 81%]\ntests\\execution\\test_state_machine.py ....                               [ 82%]\ntests\\integration\\test_p12_execution_e2e.py .                            [ 82%]\ntests\\p12\\test_phase_evidence.py .......                                 [ 83%]\ntests\\runtime\\test_comparison.py ....                                    [ 84%]\ntests\\runtime\\test_incidents.py ..                                       [ 84%]\ntests\\runtime\\test_paper.py .....                                        [ 85%]\ntests\\runtime\\test_shadow.py ...                                         [ 85%]\ntests\\runtime\\test_supervisor.py ....                                    [ 86%]\ntests\\replay\\test_p13_historical_runtime.py ..                           [ 86%]\ntests\\integration\\test_p13_runtime_e2e.py ..                             [ 87%]\ntests\\p13\\test_phase_evidence.py ......                                  [ 88%]\ntests\\readmodels\\test_projections.py ....                                [ 88%]\ntests\\integration\\test_p14_dashboard_flow.py .                           [ 88%]\ntests\\integration\\test_p14_readmodels.py .                               [ 88%]\ntests\\p14\\test_phase_evidence.py ......                                  [ 89%]\ntests\\integration\\test_p15_workbench.py ...                              [ 90%]\ntests\\p15\\test_downsampling.py ...                                       [ 90%]\ntests\\p15\\test_phase_evidence.py .....                                   [ 91%]\ntests\\p15\\test_readmodels.py ...                                         [ 92%]\ntests\\observability\\test_alerts.py ....                                  [ 92%]\ntests\\observability\\test_correlation.py ....                             [ 93%]\ntests\\operations\\live_readiness\\test_evaluation.py ........              [ 94%]\ntests\\operations\\test_backup_restore.py .                                [ 94%]\ntests\\operations\\test_release.py ...                                     [ 95%]\ntests\\p16\\test_infrastructure_contracts.py .....                         [ 95%]\ntests\\p16\\test_phase_evidence.py .....                                   [ 96%]\ntests\\p16\\test_runbook_contracts.py ..                                   [ 96%]\ntests\\p17\\test_phase_evidence.py ......                                  [ 97%]\ntests\\p18\\test_phase_evidence.py .........                               [ 99%]\ntests\\acceptance\\test_system_acceptance.py .....                         [100%]\n\n============================== warnings summary ===============================\nC:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmpGQB1NB\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmpGQB1NB\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\nC:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmpGQB1NB\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:829\n  C:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmpGQB1NB\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:829: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    period: pd.Timedelta = pd.Timedelta(days=1),\n\nC:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmpGQB1NB\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:895\n  C:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmpGQB1NB\\Lib\\site-packages\\nautilus_trader\\persistence\\catalog\\parquet.py:895: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    period: pd.Timedelta = pd.Timedelta(days=1),\n\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\ntests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only\n  C:\\Users\\SXD\\AppData\\Local\\uv\\cache\\builds-v0\\.tmpGQB1NB\\Lib\\site-packages\\pandas\\core\\tools\\timedeltas.py:233: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.\n    result = Timedelta(r, unit)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n================= 653 passed, 11 warnings in 76.38s (0:01:16) =================\n\nInstalled 170 packages in 13.68s\ncandidate Python contract: passed"
+    },
+    {
+      "name": "nautilus-compatibility",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "scripts/generate_nautilus_compatibility.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.314,
+      "output_tail": "NautilusTrader compatibility: passed"
+    },
+    {
+      "name": "web-lint",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "lint"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 5.621,
+      "output_tail": "$ eslint . --max-warnings 0"
+    },
+    {
+      "name": "web-typecheck",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 2.303,
+      "output_tail": "Generating route types...\n✓ Types generated successfully\n\n$ next typegen && tsc --noEmit -p tsconfig.check.json"
+    },
+    {
+      "name": "web-unit",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "test"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 4.826,
+      "output_tail": "RUN  v4.1.11 D:/Personal/Quantitative_Trading/apps/web\n\n\n Test Files  7 passed (7)\n      Tests  19 passed (19)\n   Start at  00:02:01\n   Duration  3.74s (transform 583ms, setup 4.35s, import 752ms, tests 814ms, environment 16.55s)\n\n\n$ vitest run"
+    },
+    {
+      "name": "web-storybook",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "build-storybook"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 15.36,
+      "output_tail": "T  Building storybook v10.5.10\n|\no  Cleaning outputDir: storybook-static\n|\no  Loading presets\n|\no  Building manager..\n|\n•  Building open services..\n|\n•  Building preview..\n|\n•  Addon-docs: using MDX3\n|\n•  Using implicit CSS loaders\n|\n•  Using default Webpack5 setup\n|\n!  asset size limit: The following asset(s) exceed the recommended size\n|  limit (244 KiB).\n|  This can impact web performance.\n|  Assets:\n|  996.adc500aa.iframe.bundle.js (380 KiB)\n|  804.9a0b0c8b.iframe.bundle.js (1.09 MiB)\n|  942.07906593.iframe.bundle.js (842 KiB)\n|  875.9d6ce432.iframe.bundle.js (1.87 MiB)\n|  121.0f5ecca6.iframe.bundle.js (617 KiB)\n|\n!  entrypoint size limit: The following entrypoint(s) combined asset size\n|  exceeds the recommended limit (244 KiB). This can impact web\n|  performance.\n|  Entrypoints:\n|  main (702 KiB)\n|  runtime~main.ff2b0cc8.iframe.bundle.js\n|  121.0f5ecca6.iframe.bundle.js\n|  main.1c9d4847.iframe.bundle.js\n\n|\no  Output directory:\n|  D:/Personal/Quantitative_Trading/apps/web/storybook-static\n|\n—  Storybook build completed successfully\n\n\n$ storybook build --quiet --disable-telemetry"
+    },
+    {
+      "name": "web-build",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "build"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 7.666,
+      "output_tail": "▲ Next.js 16.3.3 (Turbopack)\n✓ Running next.config.ts took 32ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 859ms\n  Running TypeScript ...\n  Finished TypeScript in 1882ms ...\n  Collecting page data using 11 workers ...\n  Generating static pages using 11 workers (0/4) ...\n  Generating static pages using 11 workers (1/4) \n  Generating static pages using 11 workers (2/4) \n  Generating static pages using 11 workers (3/4) \n✓ Generating static pages using 11 workers (4/4) in 200ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n├ ƒ /data\n├ ƒ /execution\n├ ƒ /execution/orders/[orderId]\n├ ƒ /incidents\n├ ƒ /intelligence\n├ ƒ /live\n├ ƒ /market\n├ ƒ /models\n├ ƒ /overview\n├ ƒ /performance\n├ ƒ /research\n├ ƒ /research/intelligence\n├ ƒ /risk\n├ ○ /settings\n├ ƒ /strategies\n└ ƒ /system\n\n\nƒ Proxy (Middleware)\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n\n\n$ next build"
+    },
+    {
+      "name": "web-e2e",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.tools\\node-v24.20.0-win-x64\\node.exe",
+        "D:\\Personal\\Quantitative_Trading\\.tools\\pnpm\\node_modules\\pnpm\\bin\\pnpm.cjs",
+        "--filter",
+        "@aegisquant/web",
+        "e2e"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 39.864,
+      "output_tail": "erver] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:22300) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:15480) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:19080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] $ next start --hostname 127.0.0.1\n[WebServer] (node:31228) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] ⚠ \"next start\" does not work with \"output: standalone\" configuration. Use \"node .next/standalone/server.js\" instead.\n(node:17092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:26500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:30368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] INFO:     127.0.0.1:65329 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65330 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:52042 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54759 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:57982 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54112 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:52729 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:60172 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:63786 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:51558 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:52393 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:51541 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:63671 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:63672 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:62305 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:62482 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:62307 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54125 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56884 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56885 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:51697 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:51698 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] Exception in callback _ProactorBasePipeTransport._call_connection_lost()\n[WebServer] handle: <Handle _ProactorBasePipeTransport._call_connection_lost()>\n[WebServer] Traceback (most recent call last):\n[WebServer]   File \"C:\\Users\\SXD\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-x86_64-none\\Lib\\asyncio\\events.py\", line 89, in _run\n[WebServer]     self._context.run(self._callback, *self._args)\n[WebServer]     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[WebServer]   File \"C:\\Users\\SXD\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-x86_64-none\\Lib\\asyncio\\proactor_events.py\", line 166, in _call_connection_lost\n[WebServer]     self._sock.shutdown(socket.SHUT_RDWR)\n[WebServer]     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\n[WebServer] ConnectionResetError: [WinError 10054] Զ������ǿ�ȹر���һ�����е����ӡ�\n[WebServer] INFO:     127.0.0.1:63503 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:63575 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56072 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56073 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56075 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56077 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] Exception in callback _ProactorBasePipeTransport._call_connection_lost()\n[WebServer] handle: <Handle _ProactorBasePipeTransport._call_connection_lost()>\n[WebServer] Traceback (most recent call last):\n[WebServer]   File \"C:\\Users\\SXD\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-x86_64-none\\Lib\\asyncio\\events.py\", line 89, in _run\n[WebServer]     self._context.run(self._callback, *self._args)\n[WebServer]     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[WebServer]   File \"C:\\Users\\SXD\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-x86_64-none\\Lib\\asyncio\\proactor_events.py\", line 166, in _call_connection_lost\n[WebServer]     self._sock.shutdown(socket.SHUT_RDWR)\n[WebServer]     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\n[WebServer] ConnectionResetError: [WinError 10054] Զ������ǿ�ȹر���һ�����е����ӡ�\n[WebServer] INFO:     127.0.0.1:58129 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64393 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64397 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64398 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:57918 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:64408 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:62097 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:61342 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:51708 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:51710 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:51717 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:62974 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54463 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54464 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54466 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:54470 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:61221 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:61226 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:53049 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:58098 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:56591 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:61788 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65341 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:63184 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:55194 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:55191 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:55192 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:65341 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:52164 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:57703 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59280 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59284 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59288 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59297 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59298 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59300 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59301 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59303 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59312 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59319 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59326 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59327 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59328 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59335 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59340 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59347 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59349 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59366 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open\n[WebServer] INFO:     127.0.0.1:59371 - \"WebSocket /ws/v1/stream\" [accepted]\n[WebServer] INFO:     connection open"
+    },
+    {
+      "name": "v5-p00-evidence-reset-final",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_v5_p00_evidence"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.267,
+      "output_tail": "wrote V5-P00 evidence reset for 482 historical reports"
+    },
+    {
+      "name": "v5-p00-evidence-check",
+      "command": [
+        "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.generate_v5_p00_evidence",
+        "--check"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.932,
+      "output_tail": "verified V5-P00 evidence reset for 482 historical reports"
+    }
+  ]
+}

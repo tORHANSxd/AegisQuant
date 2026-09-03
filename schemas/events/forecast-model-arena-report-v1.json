@@ -1,0 +1,454 @@
+{
+  "$defs": {
+    "ArenaCandidateSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "alpha_promotion_eligible": {
+          "const": false,
+          "default": false,
+          "title": "Alpha Promotion Eligible",
+          "type": "boolean"
+        },
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "eligible_for_selection": {
+          "title": "Eligible For Selection",
+          "type": "boolean"
+        },
+        "exclusion_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Exclusion Reasons",
+          "type": "array"
+        },
+        "fold_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fold Ids",
+          "type": "array"
+        },
+        "mean_brier_score": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean Brier Score"
+        },
+        "mean_crps": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean Crps"
+        },
+        "mean_direction_accuracy": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean Direction Accuracy"
+        },
+        "mean_interval_coverage": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean Interval Coverage"
+        },
+        "mean_net_return_after_cost": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean Net Return After Cost"
+        },
+        "mean_primary_loss": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean Primary Loss"
+        },
+        "mean_tail_recall": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean Tail Recall"
+        },
+        "model_class": {
+          "$ref": "#/$defs/ForecastModelClass"
+        },
+        "prediction_mode": {
+          "$ref": "#/$defs/PredictionMode"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "model_class",
+        "prediction_mode",
+        "fold_ids",
+        "mean_primary_loss",
+        "mean_direction_accuracy",
+        "mean_crps",
+        "mean_brier_score",
+        "mean_interval_coverage",
+        "mean_tail_recall",
+        "mean_net_return_after_cost",
+        "eligible_for_selection",
+        "exclusion_reasons"
+      ],
+      "title": "ArenaCandidateSummary",
+      "type": "object"
+    },
+    "ArenaCellResult": {
+      "additionalProperties": false,
+      "properties": {
+        "alpha_promotion_eligible": {
+          "const": false,
+          "default": false,
+          "title": "Alpha Promotion Eligible",
+          "type": "boolean"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "baseline_candidate_id": {
+          "title": "Baseline Candidate Id",
+          "type": "string"
+        },
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/ArenaCandidateSummary"
+          },
+          "minItems": 2,
+          "title": "Candidates",
+          "type": "array"
+        },
+        "equal_oos_folds": {
+          "const": true,
+          "default": true,
+          "title": "Equal Oos Folds",
+          "type": "boolean"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "research_champion_candidate_id": {
+          "title": "Research Champion Candidate Id",
+          "type": "string"
+        },
+        "selection_scope": {
+          "const": "asset_x_horizon_x_regime",
+          "default": "asset_x_horizon_x_regime",
+          "title": "Selection Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "horizon",
+        "regime",
+        "baseline_candidate_id",
+        "research_champion_candidate_id",
+        "candidates"
+      ],
+      "title": "ArenaCellResult",
+      "type": "object"
+    },
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "ForecastModelClass": {
+      "enum": [
+        "BASELINE",
+        "FOUNDATION",
+        "SUPERVISED",
+        "MICROSTRUCTURE",
+        "VISION"
+      ],
+      "title": "ForecastModelClass",
+      "type": "string"
+    },
+    "MarketRegime": {
+      "enum": [
+        "TREND",
+        "MEAN_REVERSION",
+        "LOW_VOL_COMPRESSION",
+        "VOL_EXPANSION",
+        "LIQUIDITY_CRISIS",
+        "NEWS_SHOCK",
+        "LIQUIDATION_CASCADE",
+        "FUNDING_DISLOCATION",
+        "CORRELATION_BREAKDOWN",
+        "RISK_ON",
+        "RISK_OFF",
+        "UNKNOWN",
+        "OOD"
+      ],
+      "title": "MarketRegime",
+      "type": "string"
+    },
+    "ModelArenaSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "baseline_candidate_id": {
+          "title": "Baseline Candidate Id",
+          "type": "string"
+        },
+        "evaluation_cutoff": {
+          "format": "date-time",
+          "title": "Evaluation Cutoff",
+          "type": "string"
+        },
+        "expected_fold_count": {
+          "minimum": 2,
+          "title": "Expected Fold Count",
+          "type": "integer"
+        },
+        "final_holdout_opened": {
+          "const": false,
+          "default": false,
+          "title": "Final Holdout Opened",
+          "type": "boolean"
+        },
+        "minimum_absolute_improvement": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Minimum Absolute Improvement"
+        },
+        "universal_model_assumption": {
+          "const": false,
+          "default": false,
+          "title": "Universal Model Assumption",
+          "type": "boolean"
+        },
+        "zero_shot_promotion_allowed": {
+          "const": false,
+          "default": false,
+          "title": "Zero Shot Promotion Allowed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "baseline_candidate_id",
+        "expected_fold_count",
+        "minimum_absolute_improvement",
+        "evaluation_cutoff"
+      ],
+      "title": "ModelArenaSpec",
+      "type": "object"
+    },
+    "PredictionMode": {
+      "enum": [
+        "BASELINE",
+        "TRAINED",
+        "ZERO_SHOT"
+      ],
+      "title": "PredictionMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.forecast-model-arena-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alpha_promotion_eligible": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Promotion Eligible",
+      "type": "boolean"
+    },
+    "capability_matrix_sha256": {
+      "title": "Capability Matrix Sha256",
+      "type": "string"
+    },
+    "cells": {
+      "items": {
+        "$ref": "#/$defs/ArenaCellResult"
+      },
+      "minItems": 1,
+      "title": "Cells",
+      "type": "array"
+    },
+    "evidence_tier": {
+      "const": "DEVELOPMENT",
+      "default": "DEVELOPMENT",
+      "title": "Evidence Tier",
+      "type": "string"
+    },
+    "failures_preserved": {
+      "const": true,
+      "default": true,
+      "title": "Failures Preserved",
+      "type": "boolean"
+    },
+    "fair_comparison": {
+      "const": true,
+      "default": true,
+      "title": "Fair Comparison",
+      "type": "boolean"
+    },
+    "live_trading_locked": {
+      "const": true,
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "no_single_universal_model_assumption": {
+      "const": true,
+      "default": true,
+      "title": "No Single Universal Model Assumption",
+      "type": "boolean"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "spec": {
+      "$ref": "#/$defs/ModelArenaSpec"
+    },
+    "zero_shot_is_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Zero Shot Is Promotion",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "capability_matrix_sha256",
+    "spec",
+    "cells"
+  ],
+  "title": "ModelArenaReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.forecast-model-arena-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

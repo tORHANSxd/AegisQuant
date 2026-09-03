@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "DetachedSignatureState": {
+      "enum": [
+        "VALID",
+        "INVALID",
+        "KEY_NOT_FOUND",
+        "KEY_NOT_ACTIVE",
+        "UNSUPPORTED_ALGORITHM",
+        "ERROR"
+      ],
+      "title": "DetachedSignatureState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.detached-signature-verification/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "key_fingerprint_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Key Fingerprint Sha256"
+    },
+    "key_id": {
+      "minLength": 1,
+      "title": "Key Id",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "payload_sha256": {
+      "title": "Payload Sha256",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "signature_sha256": {
+      "title": "Signature Sha256",
+      "type": "string"
+    },
+    "source_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_identity_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Source Identity Id",
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/DetachedSignatureState"
+    },
+    "verification_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Verification Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "verification_id",
+    "source_id",
+    "source_identity_id",
+    "key_id",
+    "payload_sha256",
+    "signature_sha256",
+    "state",
+    "reason_codes",
+    "observed_at",
+    "available_at"
+  ],
+  "title": "DetachedSignatureVerification",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.detached-signature-verification",
+  "x-aegisquant-schema-version": "1.0.0"
+}

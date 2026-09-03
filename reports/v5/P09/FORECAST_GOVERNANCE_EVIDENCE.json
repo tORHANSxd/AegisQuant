@@ -1,0 +1,1814 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "V5-P09",
+  "evidence_tier": "DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "real_world_forecast_accuracy_claimed": false,
+  "real_world_interval_coverage_claimed": false,
+  "forward_evidence_present": false,
+  "final_holdout_opened": false,
+  "order_submission_enabled": false,
+  "live_trading_locked": true,
+  "checks": {
+    "meta_reasoner_and_skeptic_are_advisory_only": true,
+    "skeptic_uses_independent_prompt_and_model_revision": true,
+    "dynamic_stacking_uses_only_statistical_evidence_and_smoothing": true,
+    "regime_router_is_pit_and_ood_abstains": true,
+    "disagreement_is_recomputed_and_abstains": true,
+    "adaptive_distribution_aware_coverage_is_monitored": true,
+    "calibration_drift_has_fail_closed_action": true,
+    "all_rejection_paths_propagate_to_governance": true,
+    "development_evidence_cannot_promote_or_order": true
+  },
+  "negative_controls": {
+    "llm_order_action_rejected": true,
+    "skeptic_shared_identity_rejected": true,
+    "unbound_reviewer_revision_rejected": true,
+    "future_weight_proposal_rejected": true,
+    "final_holdout_weight_training_rejected": true,
+    "self_reported_coverage_recalculation_rejected": true,
+    "forecast_context_splice_rejected": true,
+    "caller_abstain_override_rejected": true
+  },
+  "healthy_governance": {
+    "context": {
+      "decision_time": "2026-01-15T12:00:00Z",
+      "input_artifacts": [
+        {
+          "kind": "CALIBRATION",
+          "artifact_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+        },
+        {
+          "kind": "COST_FORECAST",
+          "artifact_sha256": "0d7368b4a4c3f477b1262e724d53409af7257da6ecf9a70f7a8f791a7e9d19dd"
+        },
+        {
+          "kind": "EVENT_STRUCTURE",
+          "artifact_sha256": "22c6ce0aa603515d57432f3a051314c425dcb9effc9d951ad54140f0d4a6009f"
+        },
+        {
+          "kind": "EVIDENCE_GRAPH",
+          "artifact_sha256": "7654a140db8fc4932893cce017d6d1b100377030d1eb43c852aff332deca74a8"
+        },
+        {
+          "kind": "MARKET_REFLECTION",
+          "artifact_sha256": "19436ad05d95be4b73c22b4a7a92300ad4efb5d102fb99511306714cd172e284"
+        },
+        {
+          "kind": "MARKET_REGIME",
+          "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+        },
+        {
+          "kind": "MODEL_FORECASTS",
+          "artifact_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+        },
+        {
+          "kind": "MODEL_RELIABILITY",
+          "artifact_sha256": "5fd4ea0e0453bbfa669a53f6cadd1d3fe6882d1be4da320474fd66b9b42c25ac"
+        },
+        {
+          "kind": "OOD",
+          "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+        },
+        {
+          "kind": "PORTFOLIO_STATE",
+          "artifact_sha256": "7b9b1b5c8b1a041f1a4bb582786eec644a5cde1ef1a9bc669cdeca0faa40e70f"
+        },
+        {
+          "kind": "RISK_STATE",
+          "artifact_sha256": "df46d9d2ff56544538acd1fc0eb6b66050f88f41b9777c8ea14c5cbf413f8446"
+        },
+        {
+          "kind": "TRUTH_ASSESSMENTS",
+          "artifact_sha256": "4a57676035091f3d40e2e9f8ca295368ec772d3f24919c4bea9770f7455b6624"
+        }
+      ],
+      "meta_reasoner_prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+      "meta_reasoner_model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+      "skeptic_prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+      "skeptic_model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+      "context_sha256": "0ebda32ec820fb4a1ca15e97283238fd0122f8ac79d26741d6debe642008611f"
+    },
+    "meta_reasoner": {
+      "context_sha256": "0ebda32ec820fb4a1ca15e97283238fd0122f8ac79d26741d6debe642008611f",
+      "prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+      "model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+      "generated_at": "2026-01-15T11:59:50Z",
+      "available_at": "2026-01-15T11:59:55Z",
+      "conflict_codes": [],
+      "skeptic_questions": [
+        "Could this be beta rather than event alpha?"
+      ],
+      "recommended_model_weight_cap": "0.70",
+      "recommend_abstain": false,
+      "explanation": "Structured advisory output only.",
+      "action": "RESEARCH_RECOMMENDATION_ONLY",
+      "order_submission_enabled": false,
+      "recommendation_sha256": "ee8177eee9880bceef07d020a7728568646645332261e762f518a27dc86e8f93"
+    },
+    "skeptic": {
+      "context_sha256": "0ebda32ec820fb4a1ca15e97283238fd0122f8ac79d26741d6debe642008611f",
+      "prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+      "model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+      "generated_at": "2026-01-15T11:59:51Z",
+      "available_at": "2026-01-15T11:59:56Z",
+      "findings": [
+        {
+          "code": "BETA_CONFOUNDING_CHECKED",
+          "severity": "LOW",
+          "blocks_new_risk": false,
+          "explanation": "Independent path checked beta confounding."
+        }
+      ],
+      "shared_final_prompt": false,
+      "action": "RESEARCH_RECOMMENDATION_ONLY",
+      "order_submission_enabled": false,
+      "assessment_sha256": "7f597774152f8a17abeb55fcbbeed5ef8a76e1f567859769316e703432edae0d"
+    },
+    "disagreement": {
+      "snapshot": {
+        "asset_id": "BTC",
+        "horizon": "5m",
+        "regime": "TREND",
+        "decision_time": "2026-01-15T12:00:00Z",
+        "signals": [
+          {
+            "candidate_id": "baseline",
+            "forecast_sha256": "1a74d9d2531b57504a7f810d89ae3f040c7d7ce15ad23c23d6cfd3adfd703f7c",
+            "expected_return": "0.010",
+            "available_at": "2026-01-15T11:59:40Z"
+          },
+          {
+            "candidate_id": "supervised",
+            "forecast_sha256": "86c17e07f1537d151b50a5c1da7f93412ac687c94a2fe0f12a3171e776c01cea",
+            "expected_return": "0.012",
+            "available_at": "2026-01-15T11:59:40Z"
+          }
+        ],
+        "snapshot_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+      },
+      "policy": {
+        "maximum_expected_return_range": "0.02",
+        "abstain_on_direction_conflict": true
+      },
+      "expected_return_range": "0.002",
+      "direction_conflict": false,
+      "should_abstain": false,
+      "reason_codes": [],
+      "report_sha256": "7d3a468c2c37ae0eb68172e79d9c7ffb2797189c14d9ca3b1781910c2da1272d"
+    },
+    "regime_route": {
+      "snapshot": {
+        "asset_id": "BTC",
+        "horizon": "5m",
+        "regime": "TREND",
+        "observed_at": "2026-01-15T11:59:40Z",
+        "available_at": "2026-01-15T11:59:45Z",
+        "decision_time": "2026-01-15T12:00:00Z",
+        "data_quality": "0.95",
+        "truth_state": "VERIFIED_MULTI_SOURCE",
+        "ood_score": "0.1",
+        "model_reliability_by_id": {
+          "baseline": "0.90",
+          "supervised": "0.85"
+        },
+        "snapshot_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+      },
+      "proposal": {
+        "asset_id": "BTC",
+        "horizon": "5m",
+        "regime": "TREND",
+        "training_cutoff": "2026-01-14T12:00:00Z",
+        "available_at": "2026-01-15T11:59:30Z",
+        "previous_weights": {
+          "weights": {
+            "baseline": "0.50",
+            "supervised": "0.50"
+          },
+          "maximum_weight": "0.70"
+        },
+        "proposed_weights": {
+          "weights": {
+            "baseline": "0.40",
+            "supervised": "0.60"
+          },
+          "maximum_weight": "0.70"
+        },
+        "evidence_bindings": [
+          {
+            "source": "CALIBRATION",
+            "artifact_sha256": "7da9cb6b94baae0e56781a208034051139f63931b7bf09234832e00210593004"
+          },
+          {
+            "source": "VALIDATION",
+            "artifact_sha256": "757fc88b19e843f7978ebcf5d361eb5d046b908b1264bb1fa8f03faa5110118c"
+          }
+        ],
+        "split_sha256": "9ee061f3c6dac598cd26ae2fd46adaeb0ff2fb09fe68db03bdb28af1bfcf5785",
+        "final_holdout_used": false,
+        "proposal_sha256": "873f161b5b99b16a15c3935d17c5cf4c82d9be6952f155b2756aa03300fa98c4"
+      },
+      "policy": {
+        "maximum_single_model_weight": "0.70",
+        "maximum_weight_step": "0.05",
+        "maximum_ood_score": "1",
+        "minimum_data_quality": "0.70",
+        "minimum_model_reliability": "0.60"
+      },
+      "selected_weights": {
+        "weights": {
+          "baseline": "0.450",
+          "supervised": "0.550"
+        },
+        "maximum_weight": "0.70"
+      },
+      "should_abstain": false,
+      "reason_codes": [],
+      "decision_sha256": "d28be4cc1bef651ffa256e50c3e065d56ab7f02b5c1883631aef8159bb4c302e"
+    },
+    "calibration": {
+      "window": {
+        "asset_id": "BTC",
+        "horizon": "5m",
+        "regime": "TREND",
+        "model_revision_sha256": "f8d615a86cbe22d09541d6ebcd7ee5b394698afaffce6e95cb9bb316905c0491",
+        "dataset_manifest_sha256": "cd6b8a0bb7868556085d94fa33fa22e6ca80e968aeee2d586a268ceaaa3c0230",
+        "calibration_artifact_sha256": "cc1b4de035ca035d146b04797a83f2da79569c61537b3b206d02849a0ce0f39c",
+        "window_start": "2026-01-15T11:48:00Z",
+        "window_end": "2026-01-15T11:59:00Z",
+        "decision_time": "2026-01-15T12:00:00Z",
+        "observations": [
+          {
+            "sample_id": "coverage-0",
+            "predicted_lower": "-0.10",
+            "predicted_median": "0",
+            "predicted_upper": "0.10",
+            "realized_value": "0",
+            "predicted_at": "2026-01-15T11:50:00Z",
+            "outcome_available_at": "2026-01-15T11:51:00Z"
+          },
+          {
+            "sample_id": "coverage-1",
+            "predicted_lower": "-0.10",
+            "predicted_median": "0",
+            "predicted_upper": "0.10",
+            "realized_value": "0.05",
+            "predicted_at": "2026-01-15T11:51:00Z",
+            "outcome_available_at": "2026-01-15T11:52:00Z"
+          },
+          {
+            "sample_id": "coverage-2",
+            "predicted_lower": "-0.10",
+            "predicted_median": "0",
+            "predicted_upper": "0.10",
+            "realized_value": "-0.05",
+            "predicted_at": "2026-01-15T11:52:00Z",
+            "outcome_available_at": "2026-01-15T11:53:00Z"
+          },
+          {
+            "sample_id": "coverage-3",
+            "predicted_lower": "-0.10",
+            "predicted_median": "0",
+            "predicted_upper": "0.10",
+            "realized_value": "0.09",
+            "predicted_at": "2026-01-15T11:53:00Z",
+            "outcome_available_at": "2026-01-15T11:54:00Z"
+          },
+          {
+            "sample_id": "coverage-4",
+            "predicted_lower": "-0.10",
+            "predicted_median": "0",
+            "predicted_upper": "0.10",
+            "realized_value": "0.20",
+            "predicted_at": "2026-01-15T11:54:00Z",
+            "outcome_available_at": "2026-01-15T11:55:00Z"
+          }
+        ],
+        "window_sha256": "1d79aa0c15bbcf0263e54784f46c9166994da5a45bae24b6140ca5df2a487eb4"
+      },
+      "policy": {
+        "method": "DISTRIBUTION_AWARE_CONFORMAL",
+        "target_coverage": "0.80",
+        "warning_shortfall": "0.10",
+        "critical_shortfall": "0.20",
+        "minimum_sample_count": 5,
+        "maximum_window_age_seconds": "120",
+        "maximum_adjustment_step": "0.05"
+      },
+      "observed_coverage": "0.8",
+      "coverage_shortfall": "0.00",
+      "calibration_drift": "0.00",
+      "recommended_residual_quantile": "0.15",
+      "recommended_scale_multiplier": "1.5",
+      "distribution_scale_normalized": true,
+      "action": "NONE",
+      "reason_codes": [],
+      "exchangeability_assumed": false,
+      "real_world_coverage_claimed": false,
+      "report_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+    },
+    "should_abstain": false,
+    "reason_codes": [],
+    "structured_recommendation_only": true,
+    "statistically_learned_ensemble_controls_weights": true,
+    "llm_can_order": false,
+    "evidence_tier": "DEVELOPMENT",
+    "alpha_promotion_eligible": false,
+    "final_holdout_opened": false,
+    "order_submission_enabled": false,
+    "live_trading_locked": true,
+    "report_sha256": "1bdfecb02ae79bffd551bee8b8929b5b0c355bee9ced1981c1e48b18750ec716"
+  },
+  "abstention_examples": {
+    "disagreement": {
+      "context": {
+        "decision_time": "2026-01-15T12:00:00Z",
+        "input_artifacts": [
+          {
+            "kind": "CALIBRATION",
+            "artifact_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+          },
+          {
+            "kind": "COST_FORECAST",
+            "artifact_sha256": "0d7368b4a4c3f477b1262e724d53409af7257da6ecf9a70f7a8f791a7e9d19dd"
+          },
+          {
+            "kind": "EVENT_STRUCTURE",
+            "artifact_sha256": "22c6ce0aa603515d57432f3a051314c425dcb9effc9d951ad54140f0d4a6009f"
+          },
+          {
+            "kind": "EVIDENCE_GRAPH",
+            "artifact_sha256": "7654a140db8fc4932893cce017d6d1b100377030d1eb43c852aff332deca74a8"
+          },
+          {
+            "kind": "MARKET_REFLECTION",
+            "artifact_sha256": "19436ad05d95be4b73c22b4a7a92300ad4efb5d102fb99511306714cd172e284"
+          },
+          {
+            "kind": "MARKET_REGIME",
+            "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+          },
+          {
+            "kind": "MODEL_FORECASTS",
+            "artifact_sha256": "bc360429d18870fa2e4667d6fffd7966989b80cdfe08647929deb4c96aea1bd6"
+          },
+          {
+            "kind": "MODEL_RELIABILITY",
+            "artifact_sha256": "5fd4ea0e0453bbfa669a53f6cadd1d3fe6882d1be4da320474fd66b9b42c25ac"
+          },
+          {
+            "kind": "OOD",
+            "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+          },
+          {
+            "kind": "PORTFOLIO_STATE",
+            "artifact_sha256": "7b9b1b5c8b1a041f1a4bb582786eec644a5cde1ef1a9bc669cdeca0faa40e70f"
+          },
+          {
+            "kind": "RISK_STATE",
+            "artifact_sha256": "df46d9d2ff56544538acd1fc0eb6b66050f88f41b9777c8ea14c5cbf413f8446"
+          },
+          {
+            "kind": "TRUTH_ASSESSMENTS",
+            "artifact_sha256": "4a57676035091f3d40e2e9f8ca295368ec772d3f24919c4bea9770f7455b6624"
+          }
+        ],
+        "meta_reasoner_prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "meta_reasoner_model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "skeptic_prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "skeptic_model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "context_sha256": "0d05f8a8762d4e2f574d0e056561863855ffca19cbae2fa6360f50b2880a51c8"
+      },
+      "meta_reasoner": {
+        "context_sha256": "0d05f8a8762d4e2f574d0e056561863855ffca19cbae2fa6360f50b2880a51c8",
+        "prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "generated_at": "2026-01-15T11:59:50Z",
+        "available_at": "2026-01-15T11:59:55Z",
+        "conflict_codes": [],
+        "skeptic_questions": [
+          "Could this be beta rather than event alpha?"
+        ],
+        "recommended_model_weight_cap": "0.70",
+        "recommend_abstain": false,
+        "explanation": "Structured advisory output only.",
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "recommendation_sha256": "ead6947e4ff39403d379531b1e77a9237bfc44d42c31f635b18bb1fe6ce325a1"
+      },
+      "skeptic": {
+        "context_sha256": "0d05f8a8762d4e2f574d0e056561863855ffca19cbae2fa6360f50b2880a51c8",
+        "prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "generated_at": "2026-01-15T11:59:51Z",
+        "available_at": "2026-01-15T11:59:56Z",
+        "findings": [
+          {
+            "code": "BETA_CONFOUNDING_CHECKED",
+            "severity": "LOW",
+            "blocks_new_risk": false,
+            "explanation": "Independent path checked beta confounding."
+          }
+        ],
+        "shared_final_prompt": false,
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "assessment_sha256": "14d8a8d3c045e1586de0549eb78528e450b4c3483bd49c8152943e1eed2d8c65"
+      },
+      "disagreement": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "signals": [
+            {
+              "candidate_id": "baseline",
+              "forecast_sha256": "1a74d9d2531b57504a7f810d89ae3f040c7d7ce15ad23c23d6cfd3adfd703f7c",
+              "expected_return": "-0.04",
+              "available_at": "2026-01-15T11:59:40Z"
+            },
+            {
+              "candidate_id": "supervised",
+              "forecast_sha256": "86c17e07f1537d151b50a5c1da7f93412ac687c94a2fe0f12a3171e776c01cea",
+              "expected_return": "0.05",
+              "available_at": "2026-01-15T11:59:40Z"
+            }
+          ],
+          "snapshot_sha256": "bc360429d18870fa2e4667d6fffd7966989b80cdfe08647929deb4c96aea1bd6"
+        },
+        "policy": {
+          "maximum_expected_return_range": "0.02",
+          "abstain_on_direction_conflict": true
+        },
+        "expected_return_range": "0.09",
+        "direction_conflict": true,
+        "should_abstain": true,
+        "reason_codes": [
+          "MODEL_DIRECTION_CONFLICT",
+          "MODEL_DISAGREEMENT_RANGE_EXCEEDED"
+        ],
+        "report_sha256": "33a36908b13b0628e1676c05b3a83aee3bf85f1a905835f1111ad8a9577d7a75"
+      },
+      "regime_route": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "observed_at": "2026-01-15T11:59:40Z",
+          "available_at": "2026-01-15T11:59:45Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "data_quality": "0.95",
+          "truth_state": "VERIFIED_MULTI_SOURCE",
+          "ood_score": "0.1",
+          "model_reliability_by_id": {
+            "baseline": "0.90",
+            "supervised": "0.85"
+          },
+          "snapshot_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+        },
+        "proposal": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "training_cutoff": "2026-01-14T12:00:00Z",
+          "available_at": "2026-01-15T11:59:30Z",
+          "previous_weights": {
+            "weights": {
+              "baseline": "0.50",
+              "supervised": "0.50"
+            },
+            "maximum_weight": "0.70"
+          },
+          "proposed_weights": {
+            "weights": {
+              "baseline": "0.40",
+              "supervised": "0.60"
+            },
+            "maximum_weight": "0.70"
+          },
+          "evidence_bindings": [
+            {
+              "source": "CALIBRATION",
+              "artifact_sha256": "7da9cb6b94baae0e56781a208034051139f63931b7bf09234832e00210593004"
+            },
+            {
+              "source": "VALIDATION",
+              "artifact_sha256": "757fc88b19e843f7978ebcf5d361eb5d046b908b1264bb1fa8f03faa5110118c"
+            }
+          ],
+          "split_sha256": "9ee061f3c6dac598cd26ae2fd46adaeb0ff2fb09fe68db03bdb28af1bfcf5785",
+          "final_holdout_used": false,
+          "proposal_sha256": "873f161b5b99b16a15c3935d17c5cf4c82d9be6952f155b2756aa03300fa98c4"
+        },
+        "policy": {
+          "maximum_single_model_weight": "0.70",
+          "maximum_weight_step": "0.05",
+          "maximum_ood_score": "1",
+          "minimum_data_quality": "0.70",
+          "minimum_model_reliability": "0.60"
+        },
+        "selected_weights": {
+          "weights": {
+            "baseline": "0.450",
+            "supervised": "0.550"
+          },
+          "maximum_weight": "0.70"
+        },
+        "should_abstain": false,
+        "reason_codes": [],
+        "decision_sha256": "d28be4cc1bef651ffa256e50c3e065d56ab7f02b5c1883631aef8159bb4c302e"
+      },
+      "calibration": {
+        "window": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "model_revision_sha256": "f8d615a86cbe22d09541d6ebcd7ee5b394698afaffce6e95cb9bb316905c0491",
+          "dataset_manifest_sha256": "cd6b8a0bb7868556085d94fa33fa22e6ca80e968aeee2d586a268ceaaa3c0230",
+          "calibration_artifact_sha256": "cc1b4de035ca035d146b04797a83f2da79569c61537b3b206d02849a0ce0f39c",
+          "window_start": "2026-01-15T11:48:00Z",
+          "window_end": "2026-01-15T11:59:00Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "observations": [
+            {
+              "sample_id": "coverage-0",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0",
+              "predicted_at": "2026-01-15T11:50:00Z",
+              "outcome_available_at": "2026-01-15T11:51:00Z"
+            },
+            {
+              "sample_id": "coverage-1",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.05",
+              "predicted_at": "2026-01-15T11:51:00Z",
+              "outcome_available_at": "2026-01-15T11:52:00Z"
+            },
+            {
+              "sample_id": "coverage-2",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "-0.05",
+              "predicted_at": "2026-01-15T11:52:00Z",
+              "outcome_available_at": "2026-01-15T11:53:00Z"
+            },
+            {
+              "sample_id": "coverage-3",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.09",
+              "predicted_at": "2026-01-15T11:53:00Z",
+              "outcome_available_at": "2026-01-15T11:54:00Z"
+            },
+            {
+              "sample_id": "coverage-4",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.20",
+              "predicted_at": "2026-01-15T11:54:00Z",
+              "outcome_available_at": "2026-01-15T11:55:00Z"
+            }
+          ],
+          "window_sha256": "1d79aa0c15bbcf0263e54784f46c9166994da5a45bae24b6140ca5df2a487eb4"
+        },
+        "policy": {
+          "method": "DISTRIBUTION_AWARE_CONFORMAL",
+          "target_coverage": "0.80",
+          "warning_shortfall": "0.10",
+          "critical_shortfall": "0.20",
+          "minimum_sample_count": 5,
+          "maximum_window_age_seconds": "120",
+          "maximum_adjustment_step": "0.05"
+        },
+        "observed_coverage": "0.8",
+        "coverage_shortfall": "0.00",
+        "calibration_drift": "0.00",
+        "recommended_residual_quantile": "0.15",
+        "recommended_scale_multiplier": "1.5",
+        "distribution_scale_normalized": true,
+        "action": "NONE",
+        "reason_codes": [],
+        "exchangeability_assumed": false,
+        "real_world_coverage_claimed": false,
+        "report_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+      },
+      "should_abstain": true,
+      "reason_codes": [
+        "MODEL_DIRECTION_CONFLICT",
+        "MODEL_DISAGREEMENT_RANGE_EXCEEDED"
+      ],
+      "structured_recommendation_only": true,
+      "statistically_learned_ensemble_controls_weights": true,
+      "llm_can_order": false,
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "final_holdout_opened": false,
+      "order_submission_enabled": false,
+      "live_trading_locked": true,
+      "report_sha256": "6b6ff510631fc8dc723476d7bb5dd841469bcd1f7db9cb4a6d6cade672ab7252"
+    },
+    "ood": {
+      "context": {
+        "decision_time": "2026-01-15T12:00:00Z",
+        "input_artifacts": [
+          {
+            "kind": "CALIBRATION",
+            "artifact_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+          },
+          {
+            "kind": "COST_FORECAST",
+            "artifact_sha256": "0d7368b4a4c3f477b1262e724d53409af7257da6ecf9a70f7a8f791a7e9d19dd"
+          },
+          {
+            "kind": "EVENT_STRUCTURE",
+            "artifact_sha256": "22c6ce0aa603515d57432f3a051314c425dcb9effc9d951ad54140f0d4a6009f"
+          },
+          {
+            "kind": "EVIDENCE_GRAPH",
+            "artifact_sha256": "7654a140db8fc4932893cce017d6d1b100377030d1eb43c852aff332deca74a8"
+          },
+          {
+            "kind": "MARKET_REFLECTION",
+            "artifact_sha256": "19436ad05d95be4b73c22b4a7a92300ad4efb5d102fb99511306714cd172e284"
+          },
+          {
+            "kind": "MARKET_REGIME",
+            "artifact_sha256": "8bab0dce39fc43ade9446daad946d8b19011f7be6efe6431bd00a8165ed2d96e"
+          },
+          {
+            "kind": "MODEL_FORECASTS",
+            "artifact_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+          },
+          {
+            "kind": "MODEL_RELIABILITY",
+            "artifact_sha256": "5fd4ea0e0453bbfa669a53f6cadd1d3fe6882d1be4da320474fd66b9b42c25ac"
+          },
+          {
+            "kind": "OOD",
+            "artifact_sha256": "8bab0dce39fc43ade9446daad946d8b19011f7be6efe6431bd00a8165ed2d96e"
+          },
+          {
+            "kind": "PORTFOLIO_STATE",
+            "artifact_sha256": "7b9b1b5c8b1a041f1a4bb582786eec644a5cde1ef1a9bc669cdeca0faa40e70f"
+          },
+          {
+            "kind": "RISK_STATE",
+            "artifact_sha256": "df46d9d2ff56544538acd1fc0eb6b66050f88f41b9777c8ea14c5cbf413f8446"
+          },
+          {
+            "kind": "TRUTH_ASSESSMENTS",
+            "artifact_sha256": "4a57676035091f3d40e2e9f8ca295368ec772d3f24919c4bea9770f7455b6624"
+          }
+        ],
+        "meta_reasoner_prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "meta_reasoner_model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "skeptic_prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "skeptic_model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "context_sha256": "3f3572e4080f247443c811463dd3a2d9068923f0471a0be6eb0af0f2b2b2b305"
+      },
+      "meta_reasoner": {
+        "context_sha256": "3f3572e4080f247443c811463dd3a2d9068923f0471a0be6eb0af0f2b2b2b305",
+        "prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "generated_at": "2026-01-15T11:59:50Z",
+        "available_at": "2026-01-15T11:59:55Z",
+        "conflict_codes": [],
+        "skeptic_questions": [
+          "Could this be beta rather than event alpha?"
+        ],
+        "recommended_model_weight_cap": "0.70",
+        "recommend_abstain": false,
+        "explanation": "Structured advisory output only.",
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "recommendation_sha256": "5c726cada9678e3a367ee2aef79f202e68c582b15c6e8dcac34a11e82ba94e3a"
+      },
+      "skeptic": {
+        "context_sha256": "3f3572e4080f247443c811463dd3a2d9068923f0471a0be6eb0af0f2b2b2b305",
+        "prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "generated_at": "2026-01-15T11:59:51Z",
+        "available_at": "2026-01-15T11:59:56Z",
+        "findings": [
+          {
+            "code": "BETA_CONFOUNDING_CHECKED",
+            "severity": "LOW",
+            "blocks_new_risk": false,
+            "explanation": "Independent path checked beta confounding."
+          }
+        ],
+        "shared_final_prompt": false,
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "assessment_sha256": "f55ac299f0f4f4c94351086b68f9180bda398511232bf19a273656d76a613747"
+      },
+      "disagreement": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "signals": [
+            {
+              "candidate_id": "baseline",
+              "forecast_sha256": "1a74d9d2531b57504a7f810d89ae3f040c7d7ce15ad23c23d6cfd3adfd703f7c",
+              "expected_return": "0.010",
+              "available_at": "2026-01-15T11:59:40Z"
+            },
+            {
+              "candidate_id": "supervised",
+              "forecast_sha256": "86c17e07f1537d151b50a5c1da7f93412ac687c94a2fe0f12a3171e776c01cea",
+              "expected_return": "0.012",
+              "available_at": "2026-01-15T11:59:40Z"
+            }
+          ],
+          "snapshot_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+        },
+        "policy": {
+          "maximum_expected_return_range": "0.02",
+          "abstain_on_direction_conflict": true
+        },
+        "expected_return_range": "0.002",
+        "direction_conflict": false,
+        "should_abstain": false,
+        "reason_codes": [],
+        "report_sha256": "7d3a468c2c37ae0eb68172e79d9c7ffb2797189c14d9ca3b1781910c2da1272d"
+      },
+      "regime_route": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "observed_at": "2026-01-15T11:59:40Z",
+          "available_at": "2026-01-15T11:59:45Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "data_quality": "0.95",
+          "truth_state": "VERIFIED_MULTI_SOURCE",
+          "ood_score": "5",
+          "model_reliability_by_id": {
+            "baseline": "0.90",
+            "supervised": "0.85"
+          },
+          "snapshot_sha256": "8bab0dce39fc43ade9446daad946d8b19011f7be6efe6431bd00a8165ed2d96e"
+        },
+        "proposal": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "training_cutoff": "2026-01-14T12:00:00Z",
+          "available_at": "2026-01-15T11:59:30Z",
+          "previous_weights": {
+            "weights": {
+              "baseline": "0.50",
+              "supervised": "0.50"
+            },
+            "maximum_weight": "0.70"
+          },
+          "proposed_weights": {
+            "weights": {
+              "baseline": "0.40",
+              "supervised": "0.60"
+            },
+            "maximum_weight": "0.70"
+          },
+          "evidence_bindings": [
+            {
+              "source": "CALIBRATION",
+              "artifact_sha256": "7da9cb6b94baae0e56781a208034051139f63931b7bf09234832e00210593004"
+            },
+            {
+              "source": "VALIDATION",
+              "artifact_sha256": "757fc88b19e843f7978ebcf5d361eb5d046b908b1264bb1fa8f03faa5110118c"
+            }
+          ],
+          "split_sha256": "9ee061f3c6dac598cd26ae2fd46adaeb0ff2fb09fe68db03bdb28af1bfcf5785",
+          "final_holdout_used": false,
+          "proposal_sha256": "873f161b5b99b16a15c3935d17c5cf4c82d9be6952f155b2756aa03300fa98c4"
+        },
+        "policy": {
+          "maximum_single_model_weight": "0.70",
+          "maximum_weight_step": "0.05",
+          "maximum_ood_score": "1",
+          "minimum_data_quality": "0.70",
+          "minimum_model_reliability": "0.60"
+        },
+        "selected_weights": null,
+        "should_abstain": true,
+        "reason_codes": [
+          "OUT_OF_DISTRIBUTION"
+        ],
+        "decision_sha256": "327226c85a5a581f019c95224123f4f17bf2adf79add88ec3b47188eed6977a9"
+      },
+      "calibration": {
+        "window": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "model_revision_sha256": "f8d615a86cbe22d09541d6ebcd7ee5b394698afaffce6e95cb9bb316905c0491",
+          "dataset_manifest_sha256": "cd6b8a0bb7868556085d94fa33fa22e6ca80e968aeee2d586a268ceaaa3c0230",
+          "calibration_artifact_sha256": "cc1b4de035ca035d146b04797a83f2da79569c61537b3b206d02849a0ce0f39c",
+          "window_start": "2026-01-15T11:48:00Z",
+          "window_end": "2026-01-15T11:59:00Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "observations": [
+            {
+              "sample_id": "coverage-0",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0",
+              "predicted_at": "2026-01-15T11:50:00Z",
+              "outcome_available_at": "2026-01-15T11:51:00Z"
+            },
+            {
+              "sample_id": "coverage-1",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.05",
+              "predicted_at": "2026-01-15T11:51:00Z",
+              "outcome_available_at": "2026-01-15T11:52:00Z"
+            },
+            {
+              "sample_id": "coverage-2",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "-0.05",
+              "predicted_at": "2026-01-15T11:52:00Z",
+              "outcome_available_at": "2026-01-15T11:53:00Z"
+            },
+            {
+              "sample_id": "coverage-3",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.09",
+              "predicted_at": "2026-01-15T11:53:00Z",
+              "outcome_available_at": "2026-01-15T11:54:00Z"
+            },
+            {
+              "sample_id": "coverage-4",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.20",
+              "predicted_at": "2026-01-15T11:54:00Z",
+              "outcome_available_at": "2026-01-15T11:55:00Z"
+            }
+          ],
+          "window_sha256": "1d79aa0c15bbcf0263e54784f46c9166994da5a45bae24b6140ca5df2a487eb4"
+        },
+        "policy": {
+          "method": "DISTRIBUTION_AWARE_CONFORMAL",
+          "target_coverage": "0.80",
+          "warning_shortfall": "0.10",
+          "critical_shortfall": "0.20",
+          "minimum_sample_count": 5,
+          "maximum_window_age_seconds": "120",
+          "maximum_adjustment_step": "0.05"
+        },
+        "observed_coverage": "0.8",
+        "coverage_shortfall": "0.00",
+        "calibration_drift": "0.00",
+        "recommended_residual_quantile": "0.15",
+        "recommended_scale_multiplier": "1.5",
+        "distribution_scale_normalized": true,
+        "action": "NONE",
+        "reason_codes": [],
+        "exchangeability_assumed": false,
+        "real_world_coverage_claimed": false,
+        "report_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+      },
+      "should_abstain": true,
+      "reason_codes": [
+        "OUT_OF_DISTRIBUTION"
+      ],
+      "structured_recommendation_only": true,
+      "statistically_learned_ensemble_controls_weights": true,
+      "llm_can_order": false,
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "final_holdout_opened": false,
+      "order_submission_enabled": false,
+      "live_trading_locked": true,
+      "report_sha256": "67043044944421bac29d2cae180e615b2562e0f4cb95dbaca25599c4d8d70022"
+    },
+    "calibration_drift": {
+      "context": {
+        "decision_time": "2026-01-15T12:00:00Z",
+        "input_artifacts": [
+          {
+            "kind": "CALIBRATION",
+            "artifact_sha256": "61fb6c9799f5d2cccd800db800cb6aac21912cbafa4e9b04f5efa73e2ebe09e9"
+          },
+          {
+            "kind": "COST_FORECAST",
+            "artifact_sha256": "0d7368b4a4c3f477b1262e724d53409af7257da6ecf9a70f7a8f791a7e9d19dd"
+          },
+          {
+            "kind": "EVENT_STRUCTURE",
+            "artifact_sha256": "22c6ce0aa603515d57432f3a051314c425dcb9effc9d951ad54140f0d4a6009f"
+          },
+          {
+            "kind": "EVIDENCE_GRAPH",
+            "artifact_sha256": "7654a140db8fc4932893cce017d6d1b100377030d1eb43c852aff332deca74a8"
+          },
+          {
+            "kind": "MARKET_REFLECTION",
+            "artifact_sha256": "19436ad05d95be4b73c22b4a7a92300ad4efb5d102fb99511306714cd172e284"
+          },
+          {
+            "kind": "MARKET_REGIME",
+            "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+          },
+          {
+            "kind": "MODEL_FORECASTS",
+            "artifact_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+          },
+          {
+            "kind": "MODEL_RELIABILITY",
+            "artifact_sha256": "5fd4ea0e0453bbfa669a53f6cadd1d3fe6882d1be4da320474fd66b9b42c25ac"
+          },
+          {
+            "kind": "OOD",
+            "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+          },
+          {
+            "kind": "PORTFOLIO_STATE",
+            "artifact_sha256": "7b9b1b5c8b1a041f1a4bb582786eec644a5cde1ef1a9bc669cdeca0faa40e70f"
+          },
+          {
+            "kind": "RISK_STATE",
+            "artifact_sha256": "df46d9d2ff56544538acd1fc0eb6b66050f88f41b9777c8ea14c5cbf413f8446"
+          },
+          {
+            "kind": "TRUTH_ASSESSMENTS",
+            "artifact_sha256": "4a57676035091f3d40e2e9f8ca295368ec772d3f24919c4bea9770f7455b6624"
+          }
+        ],
+        "meta_reasoner_prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "meta_reasoner_model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "skeptic_prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "skeptic_model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "context_sha256": "6324f935e0c7b46a124ecca1b87677b9e801c17c592a736baf2ba7177505a169"
+      },
+      "meta_reasoner": {
+        "context_sha256": "6324f935e0c7b46a124ecca1b87677b9e801c17c592a736baf2ba7177505a169",
+        "prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "generated_at": "2026-01-15T11:59:50Z",
+        "available_at": "2026-01-15T11:59:55Z",
+        "conflict_codes": [],
+        "skeptic_questions": [
+          "Could this be beta rather than event alpha?"
+        ],
+        "recommended_model_weight_cap": "0.70",
+        "recommend_abstain": false,
+        "explanation": "Structured advisory output only.",
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "recommendation_sha256": "706c2a4f0d2543694f2be8fc7bab5aa0bba24281206650a3d6a513eec58d97f4"
+      },
+      "skeptic": {
+        "context_sha256": "6324f935e0c7b46a124ecca1b87677b9e801c17c592a736baf2ba7177505a169",
+        "prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "generated_at": "2026-01-15T11:59:51Z",
+        "available_at": "2026-01-15T11:59:56Z",
+        "findings": [
+          {
+            "code": "BETA_CONFOUNDING_CHECKED",
+            "severity": "LOW",
+            "blocks_new_risk": false,
+            "explanation": "Independent path checked beta confounding."
+          }
+        ],
+        "shared_final_prompt": false,
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "assessment_sha256": "1ed85c5e509a372d25c8f6a0f18336b83bc800870d9dab9c74b8b31836c1961d"
+      },
+      "disagreement": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "signals": [
+            {
+              "candidate_id": "baseline",
+              "forecast_sha256": "1a74d9d2531b57504a7f810d89ae3f040c7d7ce15ad23c23d6cfd3adfd703f7c",
+              "expected_return": "0.010",
+              "available_at": "2026-01-15T11:59:40Z"
+            },
+            {
+              "candidate_id": "supervised",
+              "forecast_sha256": "86c17e07f1537d151b50a5c1da7f93412ac687c94a2fe0f12a3171e776c01cea",
+              "expected_return": "0.012",
+              "available_at": "2026-01-15T11:59:40Z"
+            }
+          ],
+          "snapshot_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+        },
+        "policy": {
+          "maximum_expected_return_range": "0.02",
+          "abstain_on_direction_conflict": true
+        },
+        "expected_return_range": "0.002",
+        "direction_conflict": false,
+        "should_abstain": false,
+        "reason_codes": [],
+        "report_sha256": "7d3a468c2c37ae0eb68172e79d9c7ffb2797189c14d9ca3b1781910c2da1272d"
+      },
+      "regime_route": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "observed_at": "2026-01-15T11:59:40Z",
+          "available_at": "2026-01-15T11:59:45Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "data_quality": "0.95",
+          "truth_state": "VERIFIED_MULTI_SOURCE",
+          "ood_score": "0.1",
+          "model_reliability_by_id": {
+            "baseline": "0.90",
+            "supervised": "0.85"
+          },
+          "snapshot_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+        },
+        "proposal": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "training_cutoff": "2026-01-14T12:00:00Z",
+          "available_at": "2026-01-15T11:59:30Z",
+          "previous_weights": {
+            "weights": {
+              "baseline": "0.50",
+              "supervised": "0.50"
+            },
+            "maximum_weight": "0.70"
+          },
+          "proposed_weights": {
+            "weights": {
+              "baseline": "0.40",
+              "supervised": "0.60"
+            },
+            "maximum_weight": "0.70"
+          },
+          "evidence_bindings": [
+            {
+              "source": "CALIBRATION",
+              "artifact_sha256": "7da9cb6b94baae0e56781a208034051139f63931b7bf09234832e00210593004"
+            },
+            {
+              "source": "VALIDATION",
+              "artifact_sha256": "757fc88b19e843f7978ebcf5d361eb5d046b908b1264bb1fa8f03faa5110118c"
+            }
+          ],
+          "split_sha256": "9ee061f3c6dac598cd26ae2fd46adaeb0ff2fb09fe68db03bdb28af1bfcf5785",
+          "final_holdout_used": false,
+          "proposal_sha256": "873f161b5b99b16a15c3935d17c5cf4c82d9be6952f155b2756aa03300fa98c4"
+        },
+        "policy": {
+          "maximum_single_model_weight": "0.70",
+          "maximum_weight_step": "0.05",
+          "maximum_ood_score": "1",
+          "minimum_data_quality": "0.70",
+          "minimum_model_reliability": "0.60"
+        },
+        "selected_weights": {
+          "weights": {
+            "baseline": "0.450",
+            "supervised": "0.550"
+          },
+          "maximum_weight": "0.70"
+        },
+        "should_abstain": false,
+        "reason_codes": [],
+        "decision_sha256": "d28be4cc1bef651ffa256e50c3e065d56ab7f02b5c1883631aef8159bb4c302e"
+      },
+      "calibration": {
+        "window": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "model_revision_sha256": "f8d615a86cbe22d09541d6ebcd7ee5b394698afaffce6e95cb9bb316905c0491",
+          "dataset_manifest_sha256": "cd6b8a0bb7868556085d94fa33fa22e6ca80e968aeee2d586a268ceaaa3c0230",
+          "calibration_artifact_sha256": "cc1b4de035ca035d146b04797a83f2da79569c61537b3b206d02849a0ce0f39c",
+          "window_start": "2026-01-15T11:48:00Z",
+          "window_end": "2026-01-15T11:59:00Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "observations": [
+            {
+              "sample_id": "coverage-0",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "1",
+              "predicted_at": "2026-01-15T11:50:00Z",
+              "outcome_available_at": "2026-01-15T11:51:00Z"
+            },
+            {
+              "sample_id": "coverage-1",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "1",
+              "predicted_at": "2026-01-15T11:51:00Z",
+              "outcome_available_at": "2026-01-15T11:52:00Z"
+            },
+            {
+              "sample_id": "coverage-2",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "1",
+              "predicted_at": "2026-01-15T11:52:00Z",
+              "outcome_available_at": "2026-01-15T11:53:00Z"
+            },
+            {
+              "sample_id": "coverage-3",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "1",
+              "predicted_at": "2026-01-15T11:53:00Z",
+              "outcome_available_at": "2026-01-15T11:54:00Z"
+            },
+            {
+              "sample_id": "coverage-4",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "1",
+              "predicted_at": "2026-01-15T11:54:00Z",
+              "outcome_available_at": "2026-01-15T11:55:00Z"
+            }
+          ],
+          "window_sha256": "8973daad0b903ead62b1bbd58d15d7dbfaed84b1513399432af344795f1deb7a"
+        },
+        "policy": {
+          "method": "DISTRIBUTION_AWARE_CONFORMAL",
+          "target_coverage": "0.80",
+          "warning_shortfall": "0.10",
+          "critical_shortfall": "0.20",
+          "minimum_sample_count": 5,
+          "maximum_window_age_seconds": "120",
+          "maximum_adjustment_step": "0.05"
+        },
+        "observed_coverage": "0",
+        "coverage_shortfall": "0.80",
+        "calibration_drift": "0.80",
+        "recommended_residual_quantile": "0.15",
+        "recommended_scale_multiplier": "1.5",
+        "distribution_scale_normalized": true,
+        "action": "ABSTAIN",
+        "reason_codes": [
+          "INTERVAL_UNDERCOVERAGE_CRITICAL"
+        ],
+        "exchangeability_assumed": false,
+        "real_world_coverage_claimed": false,
+        "report_sha256": "61fb6c9799f5d2cccd800db800cb6aac21912cbafa4e9b04f5efa73e2ebe09e9"
+      },
+      "should_abstain": true,
+      "reason_codes": [
+        "CALIBRATION_ABSTAIN",
+        "INTERVAL_UNDERCOVERAGE_CRITICAL"
+      ],
+      "structured_recommendation_only": true,
+      "statistically_learned_ensemble_controls_weights": true,
+      "llm_can_order": false,
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "final_holdout_opened": false,
+      "order_submission_enabled": false,
+      "live_trading_locked": true,
+      "report_sha256": "238029eb6377670b47b3ba298849e160b4594190263a28af1be5ae5a0885b94f"
+    },
+    "skeptic_block": {
+      "context": {
+        "decision_time": "2026-01-15T12:00:00Z",
+        "input_artifacts": [
+          {
+            "kind": "CALIBRATION",
+            "artifact_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+          },
+          {
+            "kind": "COST_FORECAST",
+            "artifact_sha256": "0d7368b4a4c3f477b1262e724d53409af7257da6ecf9a70f7a8f791a7e9d19dd"
+          },
+          {
+            "kind": "EVENT_STRUCTURE",
+            "artifact_sha256": "22c6ce0aa603515d57432f3a051314c425dcb9effc9d951ad54140f0d4a6009f"
+          },
+          {
+            "kind": "EVIDENCE_GRAPH",
+            "artifact_sha256": "7654a140db8fc4932893cce017d6d1b100377030d1eb43c852aff332deca74a8"
+          },
+          {
+            "kind": "MARKET_REFLECTION",
+            "artifact_sha256": "19436ad05d95be4b73c22b4a7a92300ad4efb5d102fb99511306714cd172e284"
+          },
+          {
+            "kind": "MARKET_REGIME",
+            "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+          },
+          {
+            "kind": "MODEL_FORECASTS",
+            "artifact_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+          },
+          {
+            "kind": "MODEL_RELIABILITY",
+            "artifact_sha256": "5fd4ea0e0453bbfa669a53f6cadd1d3fe6882d1be4da320474fd66b9b42c25ac"
+          },
+          {
+            "kind": "OOD",
+            "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+          },
+          {
+            "kind": "PORTFOLIO_STATE",
+            "artifact_sha256": "7b9b1b5c8b1a041f1a4bb582786eec644a5cde1ef1a9bc669cdeca0faa40e70f"
+          },
+          {
+            "kind": "RISK_STATE",
+            "artifact_sha256": "df46d9d2ff56544538acd1fc0eb6b66050f88f41b9777c8ea14c5cbf413f8446"
+          },
+          {
+            "kind": "TRUTH_ASSESSMENTS",
+            "artifact_sha256": "4a57676035091f3d40e2e9f8ca295368ec772d3f24919c4bea9770f7455b6624"
+          }
+        ],
+        "meta_reasoner_prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "meta_reasoner_model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "skeptic_prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "skeptic_model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "context_sha256": "0ebda32ec820fb4a1ca15e97283238fd0122f8ac79d26741d6debe642008611f"
+      },
+      "meta_reasoner": {
+        "context_sha256": "0ebda32ec820fb4a1ca15e97283238fd0122f8ac79d26741d6debe642008611f",
+        "prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "generated_at": "2026-01-15T11:59:50Z",
+        "available_at": "2026-01-15T11:59:55Z",
+        "conflict_codes": [],
+        "skeptic_questions": [
+          "Could this be beta rather than event alpha?"
+        ],
+        "recommended_model_weight_cap": "0.70",
+        "recommend_abstain": false,
+        "explanation": "Structured advisory output only.",
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "recommendation_sha256": "ee8177eee9880bceef07d020a7728568646645332261e762f518a27dc86e8f93"
+      },
+      "skeptic": {
+        "context_sha256": "0ebda32ec820fb4a1ca15e97283238fd0122f8ac79d26741d6debe642008611f",
+        "prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "generated_at": "2026-01-15T11:59:51Z",
+        "available_at": "2026-01-15T11:59:56Z",
+        "findings": [
+          {
+            "code": "BETA_CONFOUNDING_CHECKED",
+            "severity": "LOW",
+            "blocks_new_risk": true,
+            "explanation": "Independent path checked beta confounding."
+          }
+        ],
+        "shared_final_prompt": false,
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "assessment_sha256": "874bd95e259b139add5f06b127f1ebb598f3fa90a29e422763fb392d56f45b7d"
+      },
+      "disagreement": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "signals": [
+            {
+              "candidate_id": "baseline",
+              "forecast_sha256": "1a74d9d2531b57504a7f810d89ae3f040c7d7ce15ad23c23d6cfd3adfd703f7c",
+              "expected_return": "0.010",
+              "available_at": "2026-01-15T11:59:40Z"
+            },
+            {
+              "candidate_id": "supervised",
+              "forecast_sha256": "86c17e07f1537d151b50a5c1da7f93412ac687c94a2fe0f12a3171e776c01cea",
+              "expected_return": "0.012",
+              "available_at": "2026-01-15T11:59:40Z"
+            }
+          ],
+          "snapshot_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+        },
+        "policy": {
+          "maximum_expected_return_range": "0.02",
+          "abstain_on_direction_conflict": true
+        },
+        "expected_return_range": "0.002",
+        "direction_conflict": false,
+        "should_abstain": false,
+        "reason_codes": [],
+        "report_sha256": "7d3a468c2c37ae0eb68172e79d9c7ffb2797189c14d9ca3b1781910c2da1272d"
+      },
+      "regime_route": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "observed_at": "2026-01-15T11:59:40Z",
+          "available_at": "2026-01-15T11:59:45Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "data_quality": "0.95",
+          "truth_state": "VERIFIED_MULTI_SOURCE",
+          "ood_score": "0.1",
+          "model_reliability_by_id": {
+            "baseline": "0.90",
+            "supervised": "0.85"
+          },
+          "snapshot_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+        },
+        "proposal": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "training_cutoff": "2026-01-14T12:00:00Z",
+          "available_at": "2026-01-15T11:59:30Z",
+          "previous_weights": {
+            "weights": {
+              "baseline": "0.50",
+              "supervised": "0.50"
+            },
+            "maximum_weight": "0.70"
+          },
+          "proposed_weights": {
+            "weights": {
+              "baseline": "0.40",
+              "supervised": "0.60"
+            },
+            "maximum_weight": "0.70"
+          },
+          "evidence_bindings": [
+            {
+              "source": "CALIBRATION",
+              "artifact_sha256": "7da9cb6b94baae0e56781a208034051139f63931b7bf09234832e00210593004"
+            },
+            {
+              "source": "VALIDATION",
+              "artifact_sha256": "757fc88b19e843f7978ebcf5d361eb5d046b908b1264bb1fa8f03faa5110118c"
+            }
+          ],
+          "split_sha256": "9ee061f3c6dac598cd26ae2fd46adaeb0ff2fb09fe68db03bdb28af1bfcf5785",
+          "final_holdout_used": false,
+          "proposal_sha256": "873f161b5b99b16a15c3935d17c5cf4c82d9be6952f155b2756aa03300fa98c4"
+        },
+        "policy": {
+          "maximum_single_model_weight": "0.70",
+          "maximum_weight_step": "0.05",
+          "maximum_ood_score": "1",
+          "minimum_data_quality": "0.70",
+          "minimum_model_reliability": "0.60"
+        },
+        "selected_weights": {
+          "weights": {
+            "baseline": "0.450",
+            "supervised": "0.550"
+          },
+          "maximum_weight": "0.70"
+        },
+        "should_abstain": false,
+        "reason_codes": [],
+        "decision_sha256": "d28be4cc1bef651ffa256e50c3e065d56ab7f02b5c1883631aef8159bb4c302e"
+      },
+      "calibration": {
+        "window": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "model_revision_sha256": "f8d615a86cbe22d09541d6ebcd7ee5b394698afaffce6e95cb9bb316905c0491",
+          "dataset_manifest_sha256": "cd6b8a0bb7868556085d94fa33fa22e6ca80e968aeee2d586a268ceaaa3c0230",
+          "calibration_artifact_sha256": "cc1b4de035ca035d146b04797a83f2da79569c61537b3b206d02849a0ce0f39c",
+          "window_start": "2026-01-15T11:48:00Z",
+          "window_end": "2026-01-15T11:59:00Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "observations": [
+            {
+              "sample_id": "coverage-0",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0",
+              "predicted_at": "2026-01-15T11:50:00Z",
+              "outcome_available_at": "2026-01-15T11:51:00Z"
+            },
+            {
+              "sample_id": "coverage-1",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.05",
+              "predicted_at": "2026-01-15T11:51:00Z",
+              "outcome_available_at": "2026-01-15T11:52:00Z"
+            },
+            {
+              "sample_id": "coverage-2",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "-0.05",
+              "predicted_at": "2026-01-15T11:52:00Z",
+              "outcome_available_at": "2026-01-15T11:53:00Z"
+            },
+            {
+              "sample_id": "coverage-3",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.09",
+              "predicted_at": "2026-01-15T11:53:00Z",
+              "outcome_available_at": "2026-01-15T11:54:00Z"
+            },
+            {
+              "sample_id": "coverage-4",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.20",
+              "predicted_at": "2026-01-15T11:54:00Z",
+              "outcome_available_at": "2026-01-15T11:55:00Z"
+            }
+          ],
+          "window_sha256": "1d79aa0c15bbcf0263e54784f46c9166994da5a45bae24b6140ca5df2a487eb4"
+        },
+        "policy": {
+          "method": "DISTRIBUTION_AWARE_CONFORMAL",
+          "target_coverage": "0.80",
+          "warning_shortfall": "0.10",
+          "critical_shortfall": "0.20",
+          "minimum_sample_count": 5,
+          "maximum_window_age_seconds": "120",
+          "maximum_adjustment_step": "0.05"
+        },
+        "observed_coverage": "0.8",
+        "coverage_shortfall": "0.00",
+        "calibration_drift": "0.00",
+        "recommended_residual_quantile": "0.15",
+        "recommended_scale_multiplier": "1.5",
+        "distribution_scale_normalized": true,
+        "action": "NONE",
+        "reason_codes": [],
+        "exchangeability_assumed": false,
+        "real_world_coverage_claimed": false,
+        "report_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+      },
+      "should_abstain": true,
+      "reason_codes": [
+        "SKEPTIC_BETA_CONFOUNDING_CHECKED"
+      ],
+      "structured_recommendation_only": true,
+      "statistically_learned_ensemble_controls_weights": true,
+      "llm_can_order": false,
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "final_holdout_opened": false,
+      "order_submission_enabled": false,
+      "live_trading_locked": true,
+      "report_sha256": "29101d4bf4940fb3c1ee8b2523254e8a0c5fb92d677bb11cc88c241e60e9430d"
+    },
+    "meta_abstain": {
+      "context": {
+        "decision_time": "2026-01-15T12:00:00Z",
+        "input_artifacts": [
+          {
+            "kind": "CALIBRATION",
+            "artifact_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+          },
+          {
+            "kind": "COST_FORECAST",
+            "artifact_sha256": "0d7368b4a4c3f477b1262e724d53409af7257da6ecf9a70f7a8f791a7e9d19dd"
+          },
+          {
+            "kind": "EVENT_STRUCTURE",
+            "artifact_sha256": "22c6ce0aa603515d57432f3a051314c425dcb9effc9d951ad54140f0d4a6009f"
+          },
+          {
+            "kind": "EVIDENCE_GRAPH",
+            "artifact_sha256": "7654a140db8fc4932893cce017d6d1b100377030d1eb43c852aff332deca74a8"
+          },
+          {
+            "kind": "MARKET_REFLECTION",
+            "artifact_sha256": "19436ad05d95be4b73c22b4a7a92300ad4efb5d102fb99511306714cd172e284"
+          },
+          {
+            "kind": "MARKET_REGIME",
+            "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+          },
+          {
+            "kind": "MODEL_FORECASTS",
+            "artifact_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+          },
+          {
+            "kind": "MODEL_RELIABILITY",
+            "artifact_sha256": "5fd4ea0e0453bbfa669a53f6cadd1d3fe6882d1be4da320474fd66b9b42c25ac"
+          },
+          {
+            "kind": "OOD",
+            "artifact_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+          },
+          {
+            "kind": "PORTFOLIO_STATE",
+            "artifact_sha256": "7b9b1b5c8b1a041f1a4bb582786eec644a5cde1ef1a9bc669cdeca0faa40e70f"
+          },
+          {
+            "kind": "RISK_STATE",
+            "artifact_sha256": "df46d9d2ff56544538acd1fc0eb6b66050f88f41b9777c8ea14c5cbf413f8446"
+          },
+          {
+            "kind": "TRUTH_ASSESSMENTS",
+            "artifact_sha256": "4a57676035091f3d40e2e9f8ca295368ec772d3f24919c4bea9770f7455b6624"
+          }
+        ],
+        "meta_reasoner_prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "meta_reasoner_model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "skeptic_prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "skeptic_model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "context_sha256": "0ebda32ec820fb4a1ca15e97283238fd0122f8ac79d26741d6debe642008611f"
+      },
+      "meta_reasoner": {
+        "context_sha256": "0ebda32ec820fb4a1ca15e97283238fd0122f8ac79d26741d6debe642008611f",
+        "prompt_sha256": "01ed98ccedb79ddd7be82af7f2ee5981a52ce875f98b4456beb0a67ba33d17aa",
+        "model_revision_sha256": "27c0ba2c701ae49821c2f00e8f4725a1e874fa4813ac7cf0a0d6ed2d2bb5c1ee",
+        "generated_at": "2026-01-15T11:59:50Z",
+        "available_at": "2026-01-15T11:59:55Z",
+        "conflict_codes": [],
+        "skeptic_questions": [
+          "Could this be beta rather than event alpha?"
+        ],
+        "recommended_model_weight_cap": "0.70",
+        "recommend_abstain": true,
+        "explanation": "Structured advisory output only.",
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "recommendation_sha256": "2c6dafa37f09e4fea79638443c4316ecbffe652353e19a5eb216a4fe8ad502e8"
+      },
+      "skeptic": {
+        "context_sha256": "0ebda32ec820fb4a1ca15e97283238fd0122f8ac79d26741d6debe642008611f",
+        "prompt_sha256": "6d701a3738e92b1c8730d686c77879e3b424fc9c5d20e2ffc4befe1e08d57914",
+        "model_revision_sha256": "ded3f92a5cf526797f7d52664a4045e3c3d96e385dd3203cd21d61854977ecd3",
+        "generated_at": "2026-01-15T11:59:51Z",
+        "available_at": "2026-01-15T11:59:56Z",
+        "findings": [
+          {
+            "code": "BETA_CONFOUNDING_CHECKED",
+            "severity": "LOW",
+            "blocks_new_risk": false,
+            "explanation": "Independent path checked beta confounding."
+          }
+        ],
+        "shared_final_prompt": false,
+        "action": "RESEARCH_RECOMMENDATION_ONLY",
+        "order_submission_enabled": false,
+        "assessment_sha256": "7f597774152f8a17abeb55fcbbeed5ef8a76e1f567859769316e703432edae0d"
+      },
+      "disagreement": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "signals": [
+            {
+              "candidate_id": "baseline",
+              "forecast_sha256": "1a74d9d2531b57504a7f810d89ae3f040c7d7ce15ad23c23d6cfd3adfd703f7c",
+              "expected_return": "0.010",
+              "available_at": "2026-01-15T11:59:40Z"
+            },
+            {
+              "candidate_id": "supervised",
+              "forecast_sha256": "86c17e07f1537d151b50a5c1da7f93412ac687c94a2fe0f12a3171e776c01cea",
+              "expected_return": "0.012",
+              "available_at": "2026-01-15T11:59:40Z"
+            }
+          ],
+          "snapshot_sha256": "9e2bb35074a11bbd6a3c92b74eb91d269b5af6fa091824dc615265908462174a"
+        },
+        "policy": {
+          "maximum_expected_return_range": "0.02",
+          "abstain_on_direction_conflict": true
+        },
+        "expected_return_range": "0.002",
+        "direction_conflict": false,
+        "should_abstain": false,
+        "reason_codes": [],
+        "report_sha256": "7d3a468c2c37ae0eb68172e79d9c7ffb2797189c14d9ca3b1781910c2da1272d"
+      },
+      "regime_route": {
+        "snapshot": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "observed_at": "2026-01-15T11:59:40Z",
+          "available_at": "2026-01-15T11:59:45Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "data_quality": "0.95",
+          "truth_state": "VERIFIED_MULTI_SOURCE",
+          "ood_score": "0.1",
+          "model_reliability_by_id": {
+            "baseline": "0.90",
+            "supervised": "0.85"
+          },
+          "snapshot_sha256": "1a2dc21c02271db6071b17052791f5625c08f7fee84da97e3814dba10630248e"
+        },
+        "proposal": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "training_cutoff": "2026-01-14T12:00:00Z",
+          "available_at": "2026-01-15T11:59:30Z",
+          "previous_weights": {
+            "weights": {
+              "baseline": "0.50",
+              "supervised": "0.50"
+            },
+            "maximum_weight": "0.70"
+          },
+          "proposed_weights": {
+            "weights": {
+              "baseline": "0.40",
+              "supervised": "0.60"
+            },
+            "maximum_weight": "0.70"
+          },
+          "evidence_bindings": [
+            {
+              "source": "CALIBRATION",
+              "artifact_sha256": "7da9cb6b94baae0e56781a208034051139f63931b7bf09234832e00210593004"
+            },
+            {
+              "source": "VALIDATION",
+              "artifact_sha256": "757fc88b19e843f7978ebcf5d361eb5d046b908b1264bb1fa8f03faa5110118c"
+            }
+          ],
+          "split_sha256": "9ee061f3c6dac598cd26ae2fd46adaeb0ff2fb09fe68db03bdb28af1bfcf5785",
+          "final_holdout_used": false,
+          "proposal_sha256": "873f161b5b99b16a15c3935d17c5cf4c82d9be6952f155b2756aa03300fa98c4"
+        },
+        "policy": {
+          "maximum_single_model_weight": "0.70",
+          "maximum_weight_step": "0.05",
+          "maximum_ood_score": "1",
+          "minimum_data_quality": "0.70",
+          "minimum_model_reliability": "0.60"
+        },
+        "selected_weights": {
+          "weights": {
+            "baseline": "0.450",
+            "supervised": "0.550"
+          },
+          "maximum_weight": "0.70"
+        },
+        "should_abstain": false,
+        "reason_codes": [],
+        "decision_sha256": "d28be4cc1bef651ffa256e50c3e065d56ab7f02b5c1883631aef8159bb4c302e"
+      },
+      "calibration": {
+        "window": {
+          "asset_id": "BTC",
+          "horizon": "5m",
+          "regime": "TREND",
+          "model_revision_sha256": "f8d615a86cbe22d09541d6ebcd7ee5b394698afaffce6e95cb9bb316905c0491",
+          "dataset_manifest_sha256": "cd6b8a0bb7868556085d94fa33fa22e6ca80e968aeee2d586a268ceaaa3c0230",
+          "calibration_artifact_sha256": "cc1b4de035ca035d146b04797a83f2da79569c61537b3b206d02849a0ce0f39c",
+          "window_start": "2026-01-15T11:48:00Z",
+          "window_end": "2026-01-15T11:59:00Z",
+          "decision_time": "2026-01-15T12:00:00Z",
+          "observations": [
+            {
+              "sample_id": "coverage-0",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0",
+              "predicted_at": "2026-01-15T11:50:00Z",
+              "outcome_available_at": "2026-01-15T11:51:00Z"
+            },
+            {
+              "sample_id": "coverage-1",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.05",
+              "predicted_at": "2026-01-15T11:51:00Z",
+              "outcome_available_at": "2026-01-15T11:52:00Z"
+            },
+            {
+              "sample_id": "coverage-2",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "-0.05",
+              "predicted_at": "2026-01-15T11:52:00Z",
+              "outcome_available_at": "2026-01-15T11:53:00Z"
+            },
+            {
+              "sample_id": "coverage-3",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.09",
+              "predicted_at": "2026-01-15T11:53:00Z",
+              "outcome_available_at": "2026-01-15T11:54:00Z"
+            },
+            {
+              "sample_id": "coverage-4",
+              "predicted_lower": "-0.10",
+              "predicted_median": "0",
+              "predicted_upper": "0.10",
+              "realized_value": "0.20",
+              "predicted_at": "2026-01-15T11:54:00Z",
+              "outcome_available_at": "2026-01-15T11:55:00Z"
+            }
+          ],
+          "window_sha256": "1d79aa0c15bbcf0263e54784f46c9166994da5a45bae24b6140ca5df2a487eb4"
+        },
+        "policy": {
+          "method": "DISTRIBUTION_AWARE_CONFORMAL",
+          "target_coverage": "0.80",
+          "warning_shortfall": "0.10",
+          "critical_shortfall": "0.20",
+          "minimum_sample_count": 5,
+          "maximum_window_age_seconds": "120",
+          "maximum_adjustment_step": "0.05"
+        },
+        "observed_coverage": "0.8",
+        "coverage_shortfall": "0.00",
+        "calibration_drift": "0.00",
+        "recommended_residual_quantile": "0.15",
+        "recommended_scale_multiplier": "1.5",
+        "distribution_scale_normalized": true,
+        "action": "NONE",
+        "reason_codes": [],
+        "exchangeability_assumed": false,
+        "real_world_coverage_claimed": false,
+        "report_sha256": "f3048be42faa584762efd39daf7b62e7f70d0291ca6ba7aad3eccbb5a7048425"
+      },
+      "should_abstain": true,
+      "reason_codes": [
+        "META_REASONER_RECOMMENDS_ABSTAIN"
+      ],
+      "structured_recommendation_only": true,
+      "statistically_learned_ensemble_controls_weights": true,
+      "llm_can_order": false,
+      "evidence_tier": "DEVELOPMENT",
+      "alpha_promotion_eligible": false,
+      "final_holdout_opened": false,
+      "order_submission_enabled": false,
+      "live_trading_locked": true,
+      "report_sha256": "fb19238ae93877df66b2f9f47c22ae3a9fff0f8188ddbfb4f058509ea67cd77a"
+    }
+  },
+  "acceptance_traceability": {
+    "llm_cannot_order": [
+      "tests/v5_p09/test_meta_reasoner_skeptic.py::test_meta_reasoner_is_structured_advice_and_cannot_order",
+      "tests/v5_p09/test_meta_reasoner_skeptic.py::test_boundary_revalidates_a_model_construct_order_capability_forgery"
+    ],
+    "independent_skeptic": [
+      "tests/v5_p09/test_meta_reasoner_skeptic.py::test_reasoning_context_requires_distinct_reviewer_prompt_and_model_paths",
+      "tests/v5_p09/test_meta_reasoner_skeptic.py::test_reasoning_context_binds_exact_reviewer_prompt_and_model_revisions"
+    ],
+    "disagreement_handling": [
+      "tests/v5_p09/test_dynamic_stacking.py::test_disagreement_is_recomputed_and_direction_conflict_abstains"
+    ],
+    "ood_abstention": [
+      "tests/v5_p09/test_dynamic_stacking.py::test_regime_router_abstains_on_unsafe_context"
+    ],
+    "calibration_drift_action": [
+      "tests/v5_p09/test_adaptive_conformal.py::test_critical_undercoverage_forces_abstention"
+    ],
+    "interval_coverage_monitoring": [
+      "tests/v5_p09/test_adaptive_conformal.py::test_distribution_aware_coverage_is_monitored_per_cell",
+      "tests/v5_p09/test_adaptive_conformal.py::test_distribution_aware_interval_scales_with_forecast_uncertainty",
+      "tests/v5_p09/test_adaptive_conformal.py::test_coverage_metrics_are_recomputed_instead_of_trusting_callers"
+    ]
+  },
+  "limitations": [
+    "All P09 forecasts, weights, coverage windows, and actions are deterministic DEVELOPMENT fixtures.",
+    "No real public data, Final Holdout, Paper, Shadow, Testnet, or forward accuracy evidence is present.",
+    "Content hashes prove payload integrity and cross-binding, not external dataset or prediction authenticity.",
+    "P09 governance is not yet an execution authorization input; P10 must bind forecast, cost, portfolio, and independent risk without a bypass.",
+    "A healthy fixture may avoid abstention but still cannot promote Alpha or submit an order."
+  ],
+  "result": "PASS_WITH_RECORDED_NEGATIVE_RESULTS"
+}

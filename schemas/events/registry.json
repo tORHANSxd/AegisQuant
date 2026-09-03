@@ -25,12 +25,84 @@
       "sha256": "14adc55d1d53381caac31c7267a113cd738bae42aeb811a42187f296b94357e4"
     },
     {
-      "compatibility": "BACKWARD",
+      "compatibility": "MIGRATION_REQUIRED",
       "model": "aegisquant.domain.intelligence.SourceIdentity",
-      "path": "schemas/events/source-identity-v1.json",
+      "path": "schemas/events/source-identity-v2.json",
       "schema_name": "aegisquant.source-identity",
+      "schema_version": "2.0.0",
+      "sha256": "fa82824836fb5252c873695125126ead85a11cbe1b598d78e73f5d8267713da2"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.contracts.OfficialIdentityObservation",
+      "path": "schemas/events/official-identity-observation-v1.json",
+      "schema_name": "aegisquant.official-identity-observation",
       "schema_version": "1.0.0",
-      "sha256": "a04e1df84ed85822b2d4a2792779647497a62982fe80835e219091766580cbcf"
+      "sha256": "761cdb504107d577a41fc2f2ae2cd2dff16b12f3eb0557c344ddba3d5369b3d6"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.contracts.OfficialIdentityAssessment",
+      "path": "schemas/events/official-identity-assessment-v1.json",
+      "schema_name": "aegisquant.official-identity-assessment",
+      "schema_version": "1.0.0",
+      "sha256": "85d4c19e06981a67ef58d221d8af7c1b9d7316d50e804cb717a6f45d6500986b"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.contracts.DetachedSignatureVerification",
+      "path": "schemas/events/detached-signature-verification-v1.json",
+      "schema_name": "aegisquant.detached-signature-verification",
+      "schema_version": "1.0.0",
+      "sha256": "bf7d6b0c90f4a685bb11faf7c685e978130ac8d7ef8341ecc47adc1916f92701"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.contracts.C2paVerificationResult",
+      "path": "schemas/events/c2pa-verification-v1.json",
+      "schema_name": "aegisquant.c2pa-verification",
+      "schema_version": "1.0.0",
+      "sha256": "6265bd56cac01bbd476f4b122e8ade539553563066dbf89f81e3f985649104f6"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.contracts.ContentIntegrityAssessment",
+      "path": "schemas/events/content-integrity-assessment-v1.json",
+      "schema_name": "aegisquant.content-integrity-assessment",
+      "schema_version": "1.0.0",
+      "sha256": "b492641cf843f4f7b09325138c6f69b65f6594ef22a2217d3decccccc7058a24"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.contracts.ContentAuthenticityBinding",
+      "path": "schemas/events/content-authenticity-binding-v1.json",
+      "schema_name": "aegisquant.content-authenticity-binding",
+      "schema_version": "1.0.0",
+      "sha256": "c7316004d8661975047b3e2b887f00209c6358c49bf6c830086cdd07f716c66c"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.contracts.SourceCompromiseEvent",
+      "path": "schemas/events/source-compromise-event-v1.json",
+      "schema_name": "aegisquant.source-compromise-event",
+      "schema_version": "1.0.0",
+      "sha256": "90d9f63b7166bf12444a4f84c6f6255e196927148e593c7f3ceb6cb27c50aa7f"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.domain.truth.EvidenceSearchPlan",
+      "path": "schemas/events/evidence-search-plan-v1.json",
+      "schema_name": "aegisquant.evidence-search-plan",
+      "schema_version": "1.0.0",
+      "sha256": "47029c00e86dac4c19055ccb303324c5d44c7ff8fc6c94eaeb8bac9582dae2e8"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.domain.truth.EvidenceRetrievalHit",
+      "path": "schemas/events/evidence-retrieval-hit-v1.json",
+      "schema_name": "aegisquant.evidence-retrieval-hit",
+      "schema_version": "1.0.0",
+      "sha256": "57c9b1423e2cd9ad3ad158fa5f898fd0de7f317bdcfb3e6b71e908e4660f7db6"
     },
     {
       "compatibility": "BACKWARD",
@@ -89,6 +161,78 @@
       "sha256": "51918c635c33de8d94ab96937b6aa2c7cea9e12dd705c2beb9e61511049b331c"
     },
     {
+      "compatibility": "NONE",
+      "model": "aegisquant.domain.truth.AtomicClaim",
+      "path": "schemas/events/atomic-claim-v1.json",
+      "schema_name": "aegisquant.atomic-claim",
+      "schema_version": "1.0.0",
+      "sha256": "2dbabc9562db2cf40760cf02ad9da18220af5caea0da72592cb659840f8ffcf1"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.domain.truth.TruthAssessment",
+      "path": "schemas/events/truth-assessment-v1.json",
+      "schema_name": "aegisquant.truth-assessment",
+      "schema_version": "1.0.0",
+      "sha256": "793de2fd2053e8b2434a207d36fc2e3eda30cc7da3657e661653757393b24366"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.features.EvidenceFeatureVector",
+      "path": "schemas/events/evidence-feature-vector-v1.json",
+      "schema_name": "aegisquant.evidence-feature-vector",
+      "schema_version": "1.0.0",
+      "sha256": "162b0dc31e8957462ea1351c540b794fae9e0ba3e94f7c05dd6850c5b31d8a51"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.calibration.TruthCalibrationMetrics",
+      "path": "schemas/events/truth-calibration-metrics-v1.json",
+      "schema_name": "aegisquant.truth-calibration-metrics",
+      "schema_version": "1.0.0",
+      "sha256": "9ac0e0089f501fcd3f17254609e54e5f750d3de28a4b02fe6f1d7e1b4c96404c"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.calibration.TruthCouncilReport",
+      "path": "schemas/events/truth-council-report-v1.json",
+      "schema_name": "aegisquant.truth-council-report",
+      "schema_version": "1.0.0",
+      "sha256": "3cb3489a1eb917594e99051ecde84d4f0d53fac02f3337baee86af92accb8884"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.lifecycle.TruthStateTransition",
+      "path": "schemas/events/truth-state-transition-v1.json",
+      "schema_name": "aegisquant.truth-state-transition",
+      "schema_version": "1.0.0",
+      "sha256": "e346f91499addc021f9ca1031f5aaf9f9d536815e3a0ead74975879de9246ae9"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.lifecycle.SourceReliabilitySnapshot",
+      "path": "schemas/events/source-reliability-snapshot-v1.json",
+      "schema_name": "aegisquant.source-reliability-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "8a2939f7319f3582c3591698fd16379591d2ae6a2b7d4278f50bfc18c5e478d5"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.lifecycle.TruthModelReliabilitySnapshot",
+      "path": "schemas/events/truth-model-reliability-snapshot-v1.json",
+      "schema_name": "aegisquant.truth-model-reliability-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "d2daf503fae409dba592587874aebd32234251fe45a5832b62539fbcb5da128c"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.graph.EvidenceGraph",
+      "path": "schemas/events/evidence-graph-v1.json",
+      "schema_name": "aegisquant.evidence-graph",
+      "schema_version": "1.0.0",
+      "sha256": "761235fad417855d71c3c2d41375502e797fade8cb0d49d2a0a940b58ae58787"
+    },
+    {
       "compatibility": "BACKWARD",
       "model": "aegisquant.domain.intelligence.EventCluster",
       "path": "schemas/events/event-cluster-v1.json",
@@ -97,12 +241,412 @@
       "sha256": "ac663946f8a6f874311627f85e0633bd438a9bcc1264f13c9f8821f810f4180d"
     },
     {
-      "compatibility": "BACKWARD",
-      "model": "aegisquant.domain.intelligence.EventImpactForecast",
-      "path": "schemas/events/event-impact-forecast-v1.json",
-      "schema_name": "aegisquant.event-impact-forecast",
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.TimedEventValue",
+      "path": "schemas/events/timed-event-value-v1.json",
+      "schema_name": "aegisquant.timed-event-value",
       "schema_version": "1.0.0",
-      "sha256": "86cea39d9c5988acbb993ee82108d94349f7b357ddf0d35948f4fb14ccd3e24b"
+      "sha256": "d62809e6324e2fd6421d1e7ae0c481cb393f9c29bd48144058f421b4780281df"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.EventValueSnapshot",
+      "path": "schemas/events/event-value-snapshot-v1.json",
+      "schema_name": "aegisquant.event-value-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "78dd5a7b4d5e666a9c77357019eacb72de874a93dd1b8a0742d1f6068613e9c4"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.EventSurprise",
+      "path": "schemas/events/event-surprise-v1.json",
+      "schema_name": "aegisquant.event-surprise",
+      "schema_version": "1.0.0",
+      "sha256": "3305869565c60deb57dbc32a58255d3144617b10ae32289aa518eb97a3e9e26b"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.NarrativeDiffusionObservation",
+      "path": "schemas/events/narrative-diffusion-observation-v1.json",
+      "schema_name": "aegisquant.narrative-diffusion-observation",
+      "schema_version": "1.0.0",
+      "sha256": "b03092dbb3b7c7162f97b685f89a7c7ee17230da559dc8ec225c82404462a078"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.NarrativeDiffusionSnapshot",
+      "path": "schemas/events/narrative-diffusion-snapshot-v1.json",
+      "schema_name": "aegisquant.narrative-diffusion-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "a68c20c4beb94b2faefb7df6138e351a1e89692e9d7c03498c1bb79e914991c5"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.TimedMarketReflectionMetric",
+      "path": "schemas/events/timed-market-reflection-metric-v1.json",
+      "schema_name": "aegisquant.timed-market-reflection-metric",
+      "schema_version": "1.0.0",
+      "sha256": "21bd3bf17f6a8a6b6bd1e639d58cb4f0fe2dab3713fb0ce8499f5d865a08b1d8"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.MarketReflectionPolicy",
+      "path": "schemas/events/market-reflection-policy-v1.json",
+      "schema_name": "aegisquant.market-reflection-policy",
+      "schema_version": "1.0.0",
+      "sha256": "ed7e7ede257301e6b0749af05be6bcd2ac8038113bdd6cb71982b5b786280471"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.MarketReflectionScore",
+      "path": "schemas/events/market-reflection-score-v1.json",
+      "schema_name": "aegisquant.market-reflection-score",
+      "schema_version": "1.0.0",
+      "sha256": "dec3e83751eabec7249f638aa8ae3cb559e759e4298523f733ab76d17414da40"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.CanonicalEvent",
+      "path": "schemas/events/canonical-event-v1.json",
+      "schema_name": "aegisquant.canonical-event",
+      "schema_version": "1.0.0",
+      "sha256": "9db3b47f9b7374b5d9a1aa269b6f972188f8a1b92bf8b4eacb017cbc7041bf1b"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.intelligence.canonical_events.EventDirectionalGate",
+      "path": "schemas/events/event-directional-gate-v1.json",
+      "schema_name": "aegisquant.event-directional-gate",
+      "schema_version": "1.0.0",
+      "sha256": "f65c73df949b7bd0f388d3bf4e2f8f4c218dc20dd6bcd3ff165c2e7ee11563f7"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.CausalPointEstimate",
+      "path": "schemas/events/causal-point-estimate-v1.json",
+      "schema_name": "aegisquant.causal-point-estimate",
+      "schema_version": "1.0.0",
+      "sha256": "11099ac4f341d913fa01aba7c38c00846bd9e0b3845ee815256737afb4f6f912"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.MatchedStateSet",
+      "path": "schemas/events/matched-state-set-v1.json",
+      "schema_name": "aegisquant.matched-state-set",
+      "schema_version": "1.0.0",
+      "sha256": "faf1a18e90ff27a300101771d3e53855c17dbfffeef423d32637879f8e1baa83"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.PreTreatmentFitReport",
+      "path": "schemas/events/pre-treatment-fit-report-v1.json",
+      "schema_name": "aegisquant.pre-treatment-fit-report",
+      "schema_version": "1.0.0",
+      "sha256": "f15e2c8a4363eeb523448891d6baf7e2c5700cc223a1fd86afe0e8df34b83e5e"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.PreTrendReport",
+      "path": "schemas/events/pretrend-report-v1.json",
+      "schema_name": "aegisquant.pretrend-report",
+      "schema_version": "1.0.0",
+      "sha256": "79a23112bd465c460b0206977108e7d9bc8e5e5ab16ccee5dfedf1a82ccd2a0d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.CovariateBalanceReport",
+      "path": "schemas/events/covariate-balance-report-v1.json",
+      "schema_name": "aegisquant.covariate-balance-report",
+      "schema_version": "1.0.0",
+      "sha256": "0a708ca900c3a338da0f7328fc8c7d99e319fd6b2733d77963eaccbabf40eb6a"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.PropensityOverlapReport",
+      "path": "schemas/events/propensity-overlap-report-v1.json",
+      "schema_name": "aegisquant.propensity-overlap-report",
+      "schema_version": "1.0.0",
+      "sha256": "0f6090c45bbf0b650f0ff2679d8453387870d38ea8b1140fc3e1d995d82ed078"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.PlaceboTestResult",
+      "path": "schemas/events/placebo-test-result-v1.json",
+      "schema_name": "aegisquant.placebo-test-result",
+      "schema_version": "1.0.0",
+      "sha256": "5b33378bb625c6b6de68f5c5b1710375d28f5eb0fe4557554c3f26de86de90c7"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.CausalDiagnostics",
+      "path": "schemas/events/causal-diagnostics-v1.json",
+      "schema_name": "aegisquant.causal-diagnostics",
+      "schema_version": "1.0.0",
+      "sha256": "947353948268ddb25f6de7c3c58ca54f3b81ce4d79b733b9e000243df9a76491"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.SyntheticControlResult",
+      "path": "schemas/events/synthetic-control-result-v1.json",
+      "schema_name": "aegisquant.synthetic-control-result",
+      "schema_version": "1.0.0",
+      "sha256": "2921fa732263465c1080c48e841de86965a084c25ce7ad7ada78b7ccec743368"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.CausalEffectEstimate",
+      "path": "schemas/events/causal-effect-estimate-v1.json",
+      "schema_name": "aegisquant.causal-effect-estimate",
+      "schema_version": "1.0.0",
+      "sha256": "3dea5e72542e390f3fcb1000eba37939bc90fbdedf7b7f7c5ee848649dad2dc2"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.contracts.CalibrationArtifact",
+      "path": "schemas/events/forecast-calibration-artifact-v1.json",
+      "schema_name": "aegisquant.forecast-calibration-artifact",
+      "schema_version": "1.0.0",
+      "sha256": "c6a085329d4ed92ee3971aad342c069bd462ca25f0712f51087ae7c1446e9134"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.contracts.ForecastEnvelope",
+      "path": "schemas/events/forecast-council-envelope-v1.json",
+      "schema_name": "aegisquant.forecast-council-envelope",
+      "schema_version": "1.0.0",
+      "sha256": "8c78ee7ed68b5789c0adbf315253a4f1ed13ac0453ed08dec5099965e64d8b6d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.contracts.CandidateGateDecision",
+      "path": "schemas/events/forecast-candidate-gate-decision-v1.json",
+      "schema_name": "aegisquant.forecast-candidate-gate-decision",
+      "schema_version": "1.0.0",
+      "sha256": "4c79e56ed7bd823447d0ad75e3f4cdd4c9d0640000770861e0149ae2ac407ba5"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.contracts.ModelArenaReport",
+      "path": "schemas/events/forecast-model-arena-report-v1.json",
+      "schema_name": "aegisquant.forecast-model-arena-report",
+      "schema_version": "1.0.0",
+      "sha256": "56d15eb686888d6abe805999fc64a113b73470b77ee5bf6b40b92c7804f9c1ca"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.contracts.VisionAblationReport",
+      "path": "schemas/events/forecast-vision-ablation-report-v1.json",
+      "schema_name": "aegisquant.forecast-vision-ablation-report",
+      "schema_version": "1.0.0",
+      "sha256": "cd786a08ba9e50a4e06a50b400101ec281fe89b302be7006c4436de5eeb7af37"
+    },
+    {
+      "compatibility": "MIGRATION_REQUIRED",
+      "model": "aegisquant.domain.intelligence.EventImpactForecast",
+      "path": "schemas/events/event-impact-forecast-v3.json",
+      "schema_name": "aegisquant.event-impact-forecast",
+      "schema_version": "3.0.0",
+      "sha256": "b838659f264bc42c59735322c562c3fbbf725da6d65fd5430079f1955d82ee2d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.event.EventConditionSnapshot",
+      "path": "schemas/events/v5-event-condition-snapshot-v1.json",
+      "schema_name": "aegisquant.v5-event-condition-snapshot",
+      "schema_version": "1.0.0",
+      "sha256": "98c826265e0fa306fa1efd6f2c5b5c142c8745fa7c710fd99519f9d0ddf251ed"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.event.MarketOnlyForecast",
+      "path": "schemas/events/v5-market-only-forecast-v1.json",
+      "schema_name": "aegisquant.v5-market-only-forecast",
+      "schema_version": "1.0.0",
+      "sha256": "e5a119e37da12a59ce9e41ce0a679a7abea96954904107f66db0097b937182e3"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.event.EventConditionedForecast",
+      "path": "schemas/events/v5-event-conditioned-forecast-v1.json",
+      "schema_name": "aegisquant.v5-event-conditioned-forecast",
+      "schema_version": "1.0.0",
+      "sha256": "f26890ec442a5ace32c21c6a885aa7a36be0162e6a78776b389cbf73ba7ad516"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.event.EventIncrement",
+      "path": "schemas/events/v5-event-increment-v1.json",
+      "schema_name": "aegisquant.v5-event-increment",
+      "schema_version": "1.0.0",
+      "sha256": "8f477aa46a102f0f3f316f5ef061f3ba363cb77a09834390424661eb9d730c3d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.event.EventForecastAblationReport",
+      "path": "schemas/events/v5-event-forecast-ablation-report-v1.json",
+      "schema_name": "aegisquant.v5-event-forecast-ablation-report",
+      "schema_version": "1.0.0",
+      "sha256": "5a7fa130a48d04380e2ef77ccd217d3e925787e35299c40ef9e6332a260507f3"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.governance.MetaReasonerRecommendation",
+      "path": "schemas/events/v5-meta-reasoner-recommendation-v1.json",
+      "schema_name": "aegisquant.v5-meta-reasoner-recommendation",
+      "schema_version": "1.0.0",
+      "sha256": "9e044c377a0e32580f3b9c0388110601415dc2ad1c571b5ac70a025f88cbdb0d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.governance.IndependentSkepticAssessment",
+      "path": "schemas/events/v5-independent-skeptic-assessment-v1.json",
+      "schema_name": "aegisquant.v5-independent-skeptic-assessment",
+      "schema_version": "1.0.0",
+      "sha256": "3084c1cede6316eb0f62936e5bba28a1b655ade95a34dca1516646278db08ae7"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.governance.RegimeRoutingDecision",
+      "path": "schemas/events/v5-regime-routing-decision-v1.json",
+      "schema_name": "aegisquant.v5-regime-routing-decision",
+      "schema_version": "1.0.0",
+      "sha256": "c55ca559fccc94f0050ebd94c78634470cf38010fd052f5c27622c8988e8a7af"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.governance.AdaptiveConformalReport",
+      "path": "schemas/events/v5-adaptive-conformal-report-v1.json",
+      "schema_name": "aegisquant.v5-adaptive-conformal-report",
+      "schema_version": "1.0.0",
+      "sha256": "9762a8708a50cf67d32e25764688899f0c333c27f91a3c578381d79b60feb2d2"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.governance.ForecastGovernanceReport",
+      "path": "schemas/events/v5-forecast-governance-report-v1.json",
+      "schema_name": "aegisquant.v5-forecast-governance-report",
+      "schema_version": "1.0.0",
+      "sha256": "b452012b4f5493e17a17ff92bd0de77a84c1cf89996a69e9a5b5ae618aa05a5d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.ExecutionCostDistribution",
+      "path": "schemas/events/v5-execution-cost-distribution-v1.json",
+      "schema_name": "aegisquant.v5-execution-cost-distribution",
+      "schema_version": "1.0.0",
+      "sha256": "5e799068ae99141754f5ce40eeae72e35a42a4de539d384dfd2a6dd12ac7ad6d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.DirectionalForecastDistribution",
+      "path": "schemas/events/v5-directional-forecast-distribution-v1.json",
+      "schema_name": "aegisquant.v5-directional-forecast-distribution",
+      "schema_version": "1.0.0",
+      "sha256": "8d5ddcca453b9a9ca079fc76159addff25d6f2bc49d4987a112cddb6da5792d5"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.NetEdgeDistribution",
+      "path": "schemas/events/v5-net-edge-distribution-v1.json",
+      "schema_name": "aegisquant.v5-net-edge-distribution",
+      "schema_version": "1.0.0",
+      "sha256": "2dc093b5ff10299a478fe882cbc65634ffa04be98c416ff8efc1c1d90781dd84"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.EventDirectionalAlpha",
+      "path": "schemas/events/v5-event-directional-alpha-v1.json",
+      "schema_name": "aegisquant.v5-event-directional-alpha",
+      "schema_version": "1.0.0",
+      "sha256": "eb1c704a601979905029b9f18100ffa672fbb6b312cdc84e93608ca1a222c6cd"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.EventRiskOverlay",
+      "path": "schemas/events/v5-event-risk-overlay-v1.json",
+      "schema_name": "aegisquant.v5-event-risk-overlay",
+      "schema_version": "1.0.0",
+      "sha256": "700dc0097ac29666a4c4daa13ea9cbd46ab71f31ac0f495a7517bed5f08511c6"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.NoTradeDecision",
+      "path": "schemas/events/v5-no-trade-decision-v1.json",
+      "schema_name": "aegisquant.v5-no-trade-decision",
+      "schema_version": "1.0.0",
+      "sha256": "278cc0aee280964bcaabc9ab03864f228f2aee069a0d2de2aa2876eaa1069e23"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.IntegratedDecisionReport",
+      "path": "schemas/events/v5-integrated-decision-report-v1.json",
+      "schema_name": "aegisquant.v5-integrated-decision-report",
+      "schema_version": "1.0.0",
+      "sha256": "d97877aeb65bc5625cd5b7d8f6567146585cfc04546ae0c59b3c7868d412e274"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.forward.ForwardSession",
+      "path": "schemas/events/v5-forward-session-v1.json",
+      "schema_name": "aegisquant.v5-forward-session",
+      "schema_version": "1.0.0",
+      "sha256": "487b988ecb3ae7c946606204a0c8a3a2ad806a44a3e73558d9f8e58c5f25629d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.forward.ForwardModeProofReport",
+      "path": "schemas/events/v5-forward-mode-proof-report-v1.json",
+      "schema_name": "aegisquant.v5-forward-mode-proof-report",
+      "schema_version": "1.0.0",
+      "sha256": "37977f97250736749e9a25468c3fc33ef839e29697bf18851908e4e4ef2a5849"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.forward.PaperShadowForwardProof",
+      "path": "schemas/events/v5-paper-shadow-forward-proof-v1.json",
+      "schema_name": "aegisquant.v5-paper-shadow-forward-proof",
+      "schema_version": "1.0.0",
+      "sha256": "e28ba476bb42575fa4be73f47f1f85896cbe0355b44ed45caa8ea95f498933b8"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.canary_readiness.BinanceTestnetRunEvidence",
+      "path": "schemas/events/v5-binance-testnet-run-evidence-v1.json",
+      "schema_name": "aegisquant.v5-binance-testnet-run-evidence",
+      "schema_version": "1.0.0",
+      "sha256": "8212c5acd230673db0a46aae27adf7243c65413cf6273867aef8959d1c96459d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.canary_readiness.ExternalAlertDeliveryReceipt",
+      "path": "schemas/events/v5-external-alert-delivery-receipt-v1.json",
+      "schema_name": "aegisquant.v5-external-alert-delivery-receipt",
+      "schema_version": "1.0.0",
+      "sha256": "04d26112b36d8f0a39aa9348d91aae340d76de5bebcafefad8e3508483906b0d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.canary_readiness.TestnetRiskAuthorizationReceipt",
+      "path": "schemas/events/v5-testnet-risk-authorization-receipt-v1.json",
+      "schema_name": "aegisquant.v5-testnet-risk-authorization-receipt",
+      "schema_version": "1.0.0",
+      "sha256": "39d7863ca5a9e64072cf5a09cf4507e2e7750798b4d8a2103302634db4a82c7a"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.canary_readiness.P12EvidenceBundle",
+      "path": "schemas/events/v5-p12-evidence-bundle-v1.json",
+      "schema_name": "aegisquant.v5-p12-evidence-bundle",
+      "schema_version": "1.0.0",
+      "sha256": "c12a501a06b055bd9c480da3fb2dc09ac62224f6166d85a413fbbbd4bbd76339"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.canary_readiness.P12CanaryReadinessAssessment",
+      "path": "schemas/events/v5-p12-canary-readiness-assessment-v1.json",
+      "schema_name": "aegisquant.v5-p12-canary-readiness-assessment",
+      "schema_version": "1.0.0",
+      "sha256": "c1eb46e1e746141312b5834e6425343e741869b8eaf2a4ddee7b16ada9f86db9"
     },
     {
       "compatibility": "BACKWARD",
@@ -353,6 +897,62 @@
       "sha256": "379ddd1cf1116b7fe9fe4bebb314f967689302d5f8a122bd3e3262c36db5d067"
     },
     {
+      "compatibility": "NONE",
+      "model": "aegisquant.canary_readiness.P12ReadinessPolicy",
+      "path": "schemas/config/v5-p12-readiness-policy-v1.json",
+      "schema_name": "aegisquant.v5-p12-readiness-policy",
+      "schema_version": "1.0.0",
+      "sha256": "da4b30a5984e26d938e98dfcebf4dfeac25057b8d4bce43af82865a28c79828f"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.forward.ForwardProofPolicy",
+      "path": "schemas/config/v5-forward-proof-policy-v1.json",
+      "schema_name": "aegisquant.v5-forward-proof-policy",
+      "schema_version": "1.0.0",
+      "sha256": "3aaa6ffcde15ff3863c5bdd5106a1e95ebec81949f40a24172b0e66af8c620ad"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.ExecutionCostModelV2",
+      "path": "schemas/config/v5-execution-cost-model-v2-v1.json",
+      "schema_name": "aegisquant.v5-execution-cost-model-v2",
+      "schema_version": "1.0.0",
+      "sha256": "49cabced1cfeb533ee72c53e4b3111afb4a1b5e95b38adc2dc51e8bd4773dea5"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.NetEdgePolicy",
+      "path": "schemas/config/v5-net-edge-policy-v1.json",
+      "schema_name": "aegisquant.v5-net-edge-policy",
+      "schema_version": "1.0.0",
+      "sha256": "1d9143dbaac44aebf99060625d4493d9665f9a9625e6cdd5a56893231cce7b79"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.decision.RiskOverlayPolicy",
+      "path": "schemas/config/v5-risk-overlay-policy-v1.json",
+      "schema_name": "aegisquant.v5-risk-overlay-policy",
+      "schema_version": "1.0.0",
+      "sha256": "3fb8ea3c60cf3e24dffa72a385c0b005dedfa6b9931af61ffff339f7ac703cc5"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.governance.DynamicStackingPolicy",
+      "path": "schemas/config/v5-dynamic-stacking-policy-v1.json",
+      "schema_name": "aegisquant.v5-dynamic-stacking-policy",
+      "schema_version": "1.0.0",
+      "sha256": "c2d50da4a09d6fbc341552a3198a3f6860e99497926b26853ddc3540f78cc6c8"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.governance.AdaptiveConformalPolicy",
+      "path": "schemas/config/v5-adaptive-conformal-policy-v1.json",
+      "schema_name": "aegisquant.v5-adaptive-conformal-policy",
+      "schema_version": "1.0.0",
+      "sha256": "b4500bdb5d260bd3d1bd36ebb5e084c2c1f589c3d58702c59a163390a5ea94c5"
+    },
+    {
       "compatibility": "BACKWARD",
       "model": "aegisquant.config.models.AppConfig",
       "path": "schemas/config/app-config-v1.json",
@@ -361,12 +961,60 @@
       "sha256": "f6e38282e26ec047fafe22287ea82a5d481aa0c15585d99f813cf74c5f1e40dd"
     },
     {
+      "compatibility": "NONE",
+      "model": "aegisquant.truth.contracts.SourceRegistryDocument",
+      "path": "schemas/config/source-registry-v1.json",
+      "schema_name": "aegisquant.source-registry",
+      "schema_version": "1.0.0",
+      "sha256": "126c4c6d350b417619fc8befa35f5a359700db8cbcd8932d8bf67136e6d92ae3"
+    },
+    {
       "compatibility": "BACKWARD",
       "model": "aegisquant.backtest.policy.BacktestPolicy",
       "path": "schemas/config/backtest-policy-v1.json",
       "schema_name": "aegisquant.backtest-policy",
       "schema_version": "1.0.0",
       "sha256": "64a815560b2281ee0a75dc297720896430c0c786026199e5dbc95ec64323c50c"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.MatchingSpec",
+      "path": "schemas/config/causal-matching-spec-v1.json",
+      "schema_name": "aegisquant.causal-matching-spec",
+      "schema_version": "1.0.0",
+      "sha256": "4190426d9b277ddbbef1aa86ab18256fe9dfb0bd2bbe82371e8c99baff660bac"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.EventStudySpec",
+      "path": "schemas/config/causal-event-study-spec-v1.json",
+      "schema_name": "aegisquant.causal-event-study-spec",
+      "schema_version": "1.0.0",
+      "sha256": "a9601e687a6857406457e6458bc694cc2f5125a79347ce53ccf6e15d45e3a3cc"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.SyntheticControlSpec",
+      "path": "schemas/config/synthetic-control-spec-v1.json",
+      "schema_name": "aegisquant.synthetic-control-spec",
+      "schema_version": "1.0.0",
+      "sha256": "d87c2c7155b5e52a0edb1885241b7df2f91adb67bc122a38600505d956d4a2d8"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.DoublyRobustSpec",
+      "path": "schemas/config/doubly-robust-spec-v1.json",
+      "schema_name": "aegisquant.doubly-robust-spec",
+      "schema_version": "1.0.0",
+      "sha256": "c830187a365ba31ef8480e7b8211d5e12c88686ff10905d63d2cda652fc56ae9"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.causal.contracts.CausalDiagnosticPolicy",
+      "path": "schemas/config/causal-diagnostic-policy-v1.json",
+      "schema_name": "aegisquant.causal-diagnostic-policy",
+      "schema_version": "1.0.0",
+      "sha256": "0d5de1a85c59e2d932a7645d4db6ae0b756a85a571b65a60be087563edc9c14a"
     },
     {
       "compatibility": "BACKWARD",
@@ -407,6 +1055,30 @@
       "schema_name": "aegisquant.canary-release-manifest",
       "schema_version": "1.0.0",
       "sha256": "de16efe691277c59dcc9c2397905686073a279ff4250692c0aee97ffc1fb487d"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.contracts.ModelCapability",
+      "path": "schemas/config/forecast-model-capability-v1.json",
+      "schema_name": "aegisquant.forecast-model-capability",
+      "schema_version": "1.0.0",
+      "sha256": "1174b8a6c48cbb9d7311e8f7cb7e1fc8e8e740690fb99562ce2da245a9636055"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.contracts.CapabilityMatrix",
+      "path": "schemas/config/forecast-capability-matrix-v1.json",
+      "schema_name": "aegisquant.forecast-capability-matrix",
+      "schema_version": "1.0.0",
+      "sha256": "18321b8d728f004049b90a52e7748724a77247fd6c5ed0f78dfd7d93761f30c6"
+    },
+    {
+      "compatibility": "NONE",
+      "model": "aegisquant.research.forecasting.contracts.ModelArenaSpec",
+      "path": "schemas/config/forecast-model-arena-spec-v1.json",
+      "schema_name": "aegisquant.forecast-model-arena-spec",
+      "schema_version": "1.0.0",
+      "sha256": "cdee970b3e1d47064204d9a304d8fa6ca9cbd5f6efea4ae042d5c72e7119deff"
     }
   ],
   "schema_version": "1.0.0"

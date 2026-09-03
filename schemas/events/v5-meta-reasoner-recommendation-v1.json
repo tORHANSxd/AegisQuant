@@ -1,0 +1,100 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-meta-reasoner-recommendation/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "const": "RESEARCH_RECOMMENDATION_ONLY",
+      "default": "RESEARCH_RECOMMENDATION_ONLY",
+      "title": "Action",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "conflict_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Conflict Codes",
+      "type": "array"
+    },
+    "context_sha256": {
+      "title": "Context Sha256",
+      "type": "string"
+    },
+    "explanation": {
+      "minLength": 1,
+      "title": "Explanation",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "model_revision_sha256": {
+      "title": "Model Revision Sha256",
+      "type": "string"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "prompt_sha256": {
+      "title": "Prompt Sha256",
+      "type": "string"
+    },
+    "recommend_abstain": {
+      "title": "Recommend Abstain",
+      "type": "boolean"
+    },
+    "recommendation_sha256": {
+      "title": "Recommendation Sha256",
+      "type": "string"
+    },
+    "recommended_model_weight_cap": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Recommended Model Weight Cap"
+    },
+    "skeptic_questions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Skeptic Questions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "context_sha256",
+    "prompt_sha256",
+    "model_revision_sha256",
+    "generated_at",
+    "available_at",
+    "conflict_codes",
+    "skeptic_questions",
+    "recommended_model_weight_cap",
+    "recommend_abstain",
+    "explanation",
+    "recommendation_sha256"
+  ],
+  "title": "MetaReasonerRecommendation",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-meta-reasoner-recommendation",
+  "x-aegisquant-schema-version": "1.0.0"
+}

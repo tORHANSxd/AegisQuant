@@ -1,0 +1,209 @@
+{
+  "$defs": {
+    "ForwardMode": {
+      "enum": [
+        "PAPER",
+        "SHADOW"
+      ],
+      "title": "ForwardMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-forward-sample/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "correction_of_sha256": {
+      "default": null,
+      "title": "Correction Of Sha256",
+      "type": "null"
+    },
+    "decision_report_sha256": {
+      "title": "Decision Report Sha256",
+      "type": "string"
+    },
+    "decision_time": {
+      "format": "date-time",
+      "title": "Decision Time",
+      "type": "string"
+    },
+    "event_independence_key": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Event Independence Key",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/ForwardMode"
+    },
+    "outcome_available_at": {
+      "format": "date-time",
+      "title": "Outcome Available At",
+      "type": "string"
+    },
+    "predicted_cost": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Predicted Cost"
+    },
+    "predicted_event_increment": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Predicted Event Increment"
+    },
+    "predicted_return": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Predicted Return"
+    },
+    "predicted_truth_probability": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Predicted Truth Probability"
+    },
+    "prediction_input_sha256": {
+      "title": "Prediction Input Sha256",
+      "type": "string"
+    },
+    "prediction_recorded_at": {
+      "format": "date-time",
+      "title": "Prediction Recorded At",
+      "type": "string"
+    },
+    "prediction_revision": {
+      "const": 0,
+      "default": 0,
+      "title": "Prediction Revision",
+      "type": "integer"
+    },
+    "prediction_sha256": {
+      "title": "Prediction Sha256",
+      "type": "string"
+    },
+    "realization_recorded_at": {
+      "format": "date-time",
+      "title": "Realization Recorded At",
+      "type": "string"
+    },
+    "realized_cost": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Realized Cost"
+    },
+    "realized_event_increment": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Realized Event Increment"
+    },
+    "realized_return": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Realized Return"
+    },
+    "realized_truth": {
+      "title": "Realized Truth",
+      "type": "boolean"
+    },
+    "run_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "sample_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Sample Id",
+      "type": "string"
+    },
+    "sample_sha256": {
+      "title": "Sample Sha256",
+      "type": "string"
+    },
+    "source_available_at": {
+      "format": "date-time",
+      "title": "Source Available At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "mode",
+    "sample_id",
+    "event_independence_key",
+    "decision_report_sha256",
+    "prediction_input_sha256",
+    "source_available_at",
+    "decision_time",
+    "prediction_recorded_at",
+    "outcome_available_at",
+    "realization_recorded_at",
+    "predicted_truth_probability",
+    "realized_truth",
+    "predicted_return",
+    "realized_return",
+    "predicted_cost",
+    "realized_cost",
+    "predicted_event_increment",
+    "realized_event_increment",
+    "prediction_sha256",
+    "sample_sha256"
+  ],
+  "title": "ForwardSample",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-forward-sample",
+  "x-aegisquant-schema-version": "1.0.0"
+}

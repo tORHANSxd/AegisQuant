@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from decimal import Decimal
 from enum import StrEnum
 
@@ -97,6 +98,15 @@ class ForecastHorizon(StrEnum):
     SEVEN_DAYS = "7d"
 
 
+EVENT_IMPACT_HORIZONS = (
+    ForecastHorizon.FIVE_MINUTES,
+    ForecastHorizon.THIRTY_MINUTES,
+    ForecastHorizon.FOUR_HOURS,
+    ForecastHorizon.ONE_DAY,
+    ForecastHorizon.SEVEN_DAYS,
+)
+
+
 class ForecastTarget(StrEnum):
     NET_RETURN = "net_return"
     VOLATILITY = "volatility"
@@ -149,11 +159,14 @@ class SourceIdentity(DomainModel):
     independence_group: str
     verified: bool
     first_observed_time: UtcDateTime
+    available_time: UtcDateTime
     version: int = 1
     supersedes_source_identity_id: SourceIdentityId | None = None
 
     @model_validator(mode="after")
     def validate_identity_version(self) -> SourceIdentity:
+        if self.first_observed_time > self.available_time:
+            raise ValueError("source identity cannot be available before first observation")
         if self.version < 1:
             raise ValueError("source identity version starts at one")
         if self.version == 1 and self.supersedes_source_identity_id is not None:
@@ -161,6 +174,21 @@ class SourceIdentity(DomainModel):
         if self.version > 1 and self.supersedes_source_identity_id is None:
             raise ValueError("later source identity versions require a predecessor")
         return self
+
+
+def migrate_source_identity_v1_to_v2(
+    payload: Mapping[str, JsonValue],
+) -> dict[str, JsonValue]:
+    """Add the earliest defensible PIT availability to an immutable v1 identity."""
+
+    migrated: dict[str, JsonValue] = dict(payload.items())
+    if "available_time" in migrated:
+        raise ValueError("AQ-TRUTH-SOURCE-IDENTITY-V1-ALREADY-HAS-AVAILABLE-TIME")
+    first_observed = migrated.get("first_observed_time")
+    if not isinstance(first_observed, str):
+        raise ValueError("AQ-TRUTH-SOURCE-IDENTITY-V1-MISSING-FIRST-OBSERVED-TIME")
+    migrated["available_time"] = first_observed
+    return migrated
 
 
 class EngagementSnapshot(DomainModel):
@@ -257,6 +285,33 @@ class EventCluster(DomainModel):
             raise ValueError("cluster update cannot precede first observation")
         if self.independent_source_count < 0:
             raise ValueError("independent source count cannot be negative")
+        for name, values in (
+            ("claim", self.claim_ids),
+            ("supporting evidence", self.supporting_evidence_ids),
+            ("contradicting evidence", self.contradicting_evidence_ids),
+            ("official confirmation", self.official_confirmation_ids),
+        ):
+            if len(values) != len(set(values)):
+                raise ValueError(f"event cluster contains duplicate {name}")
+        supporting = set(self.supporting_evidence_ids)
+        contradicting = set(self.contradicting_evidence_ids)
+        official = set(self.official_confirmation_ids)
+        if supporting & contradicting:
+            raise ValueError("event evidence cannot both support and contradict")
+        if not official <= supporting:
+            raise ValueError("official confirmation must be supporting evidence")
+        if self.independent_source_count > len(supporting | contradicting):
+            raise ValueError("independent source count cannot exceed event evidence")
+        if self.status is EventClusterStatus.CONFIRMED and not official:
+            raise ValueError("confirmed event requires official confirmation evidence")
+        if official and self.status in {
+            EventClusterStatus.RUMOR,
+            EventClusterStatus.EMERGING,
+            EventClusterStatus.CORROBORATED,
+        }:
+            raise ValueError("official confirmation requires confirmed-or-later event status")
+        if self.supersedes_event_cluster_id == self.event_cluster_id:
+            raise ValueError("event cluster cannot supersede itself")
         return self
 
 
@@ -321,11 +376,14 @@ class HorizonImpact(DomainModel):
 class EventImpactForecast(DomainModel):
     impact_forecast_id: ImpactForecastId
     event_cluster_id: EventClusterId
+    event_revision_id: ArtifactId | None = None
+    directional_gate_id: ArtifactId | None = None
     as_of_time: UtcDateTime
     affected_exposure_ids: tuple[str, ...]
     horizons: dict[ForecastHorizon, HorizonImpact]
+    horizon_coefficients_sha256: str
     transmission_channels: tuple[str, ...]
-    market_already_moved_score: UnitInterval
+    market_already_moved_score: UnitInterval | None
     corroboration_score: UnitInterval
     source_quality_score: UnitInterval
     novelty_score: UnitInterval
@@ -333,22 +391,36 @@ class EventImpactForecast(DomainModel):
     model_disagreement: NonNegativeDecimal
     evidence_ids: tuple[SourceDocumentId, ...]
     model_versions: tuple[ModelVersionId, ...]
+    directional_candidate_allowed: bool
     should_abstain: bool
     abstain_reasons: tuple[str, ...]
+    action: str = "RESEARCH_PROPOSAL_ONLY"
 
     @model_validator(mode="after")
     def validate_impact_forecast(self) -> EventImpactForecast:
-        required = {
-            ForecastHorizon.FIVE_MINUTES,
-            ForecastHorizon.THIRTY_MINUTES,
-            ForecastHorizon.FOUR_HOURS,
-            ForecastHorizon.ONE_DAY,
-            ForecastHorizon.SEVEN_DAYS,
-        }
+        required = set(EVENT_IMPACT_HORIZONS)
         if set(self.horizons) != required:
             raise ValueError("event impact forecast requires 5m, 30m, 4h, 1d, and 7d")
+        if len(self.horizon_coefficients_sha256) != 64 or any(
+            character not in "0123456789abcdef" for character in self.horizon_coefficients_sha256
+        ):
+            raise ValueError("event impact coefficient hash must be lower-case SHA-256")
         if self.should_abstain != bool(self.abstain_reasons):
             raise ValueError("impact abstention flag and reasons must agree")
+        if self.action != "RESEARCH_PROPOSAL_ONLY":
+            raise ValueError("event impact forecast cannot construct or submit orders")
+        if not self.directional_candidate_allowed:
+            if (
+                not self.should_abstain
+                or "EVENT_DIRECTIONAL_PATH_DENIED" not in self.abstain_reasons
+            ):
+                raise ValueError("denied event direction must abstain with an explicit reason")
+            if any(item.return_distribution.mean != 0 for item in self.horizons.values()):
+                raise ValueError("denied event direction must have zero expected return")
+        elif self.event_revision_id is None or self.directional_gate_id is None:
+            raise ValueError("allowed event direction requires canonical event and gate binding")
+        if (self.event_revision_id is None) != (self.directional_gate_id is None):
+            raise ValueError("canonical event revision and directional gate must be bound together")
         return self
 
 

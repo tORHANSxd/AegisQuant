@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "phase": "P18",
   "status": "passed",
-  "python_component_count": 170,
+  "python_component_count": 174,
   "javascript_component_count": 847,
   "python_unknown_license_count": 0,
   "artifacts": [

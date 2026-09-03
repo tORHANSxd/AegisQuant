@@ -1,0 +1,52 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.synthetic-control-spec/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "convergence_tolerance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "1E-10",
+      "gt": "0",
+      "title": "Convergence Tolerance"
+    },
+    "maximum_iterations": {
+      "default": 10000,
+      "minimum": 100,
+      "title": "Maximum Iterations",
+      "type": "integer"
+    },
+    "ridge_penalty": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "1E-8",
+      "ge": "0",
+      "title": "Ridge Penalty"
+    },
+    "spec_id": {
+      "title": "Spec Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "spec_id"
+  ],
+  "title": "SyntheticControlSpec",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.synthetic-control-spec",
+  "x-aegisquant-schema-version": "1.0.0"
+}

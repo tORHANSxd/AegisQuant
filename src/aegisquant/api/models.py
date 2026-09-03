@@ -7,6 +7,7 @@ from typing import Literal
 from pydantic import Field, JsonValue
 
 from aegisquant.domain.base import DomainModel
+from aegisquant.domain.evidence import EvidenceDisclosure
 from aegisquant.domain.time import UtcDateTime
 from aegisquant.readmodels.models import (
     AccountOverviewPayload,
@@ -277,6 +278,7 @@ class WorkbenchResponse(DomainModel):
     system_health: tuple[SystemHealthRecord, ...]
     reconciliation: ReconciliationRecord
     order_traces: tuple[OrderTraceRecord, ...]
+    evidence: EvidenceDisclosure
     snapshot_sha256: str
     capabilities: WorkbenchCapabilities
     live_trading_locked: Literal[True]

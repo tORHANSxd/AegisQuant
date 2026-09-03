@@ -4,7 +4,7 @@
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-02T07:38:14.893309Z",
+    "timestamp": "2026-09-03T09:48:18.832891Z",
     "component": {
       "type": "application",
       "name": "aegisquant-python",
@@ -71,6 +71,12 @@
       "name": "boolean.py",
       "version": "5.0",
       "purl": "pkg:pypi/boolean.py@5.0"
+    },
+    {
+      "type": "library",
+      "name": "c2pa-python",
+      "version": "0.37.8",
+      "purl": "pkg:pypi/c2pa-python@0.37.8"
     },
     {
       "type": "library",
@@ -926,6 +932,12 @@
     },
     {
       "type": "library",
+      "name": "toml",
+      "version": "0.10.2",
+      "purl": "pkg:pypi/toml@0.10.2"
+    },
+    {
+      "type": "library",
       "name": "tomli",
       "version": "2.4.1",
       "purl": "pkg:pypi/tomli@2.4.1"
@@ -992,6 +1004,12 @@
     },
     {
       "type": "library",
+      "name": "uv",
+      "version": "0.12.9",
+      "purl": "pkg:pypi/uv@0.12.9"
+    },
+    {
+      "type": "library",
       "name": "uvicorn",
       "version": "0.52.4",
       "purl": "pkg:pypi/uvicorn@0.52.4"
@@ -1019,6 +1037,12 @@
       "name": "websockets",
       "version": "17.1",
       "purl": "pkg:pypi/websockets@17.1"
+    },
+    {
+      "type": "library",
+      "name": "wheel",
+      "version": "0.48.0",
+      "purl": "pkg:pypi/wheel@0.48.0"
     },
     {
       "type": "library",

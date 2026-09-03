@@ -1,0 +1,114 @@
+{
+  "$defs": {
+    "SkepticFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "blocks_new_risk": {
+          "title": "Blocks New Risk",
+          "type": "boolean"
+        },
+        "code": {
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "explanation": {
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/SkepticSeverity"
+        }
+      },
+      "required": [
+        "code",
+        "severity",
+        "blocks_new_risk",
+        "explanation"
+      ],
+      "title": "SkepticFinding",
+      "type": "object"
+    },
+    "SkepticSeverity": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ],
+      "title": "SkepticSeverity",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-independent-skeptic-assessment/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "const": "RESEARCH_RECOMMENDATION_ONLY",
+      "default": "RESEARCH_RECOMMENDATION_ONLY",
+      "title": "Action",
+      "type": "string"
+    },
+    "assessment_sha256": {
+      "title": "Assessment Sha256",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "context_sha256": {
+      "title": "Context Sha256",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/SkepticFinding"
+      },
+      "minItems": 1,
+      "title": "Findings",
+      "type": "array"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "model_revision_sha256": {
+      "title": "Model Revision Sha256",
+      "type": "string"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "prompt_sha256": {
+      "title": "Prompt Sha256",
+      "type": "string"
+    },
+    "shared_final_prompt": {
+      "const": false,
+      "default": false,
+      "title": "Shared Final Prompt",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "context_sha256",
+    "prompt_sha256",
+    "model_revision_sha256",
+    "generated_at",
+    "available_at",
+    "findings",
+    "assessment_sha256"
+  ],
+  "title": "IndependentSkepticAssessment",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-independent-skeptic-assessment",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -24,7 +24,7 @@ def test_manifest_is_complete_and_materialized(project_root: Path) -> None:
     )
     directories = payload["directories"]
 
-    assert len(directories) == len(set(directories)) == 152
+    assert len(directories) == len(set(directories)) == 163
     assert directories == sorted(directories)
     assert all((project_root / directory).is_dir() for directory in directories)
 

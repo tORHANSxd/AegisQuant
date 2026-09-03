@@ -1,0 +1,1279 @@
+{
+  "$defs": {
+    "BarrierHitProbabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "downside": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Downside"
+        },
+        "upside": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Upside"
+        }
+      },
+      "required": [
+        "upside",
+        "downside"
+      ],
+      "title": "BarrierHitProbabilities",
+      "type": "object"
+    },
+    "CalibrationArtifact": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_sha256": {
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "calibration_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Calibration Id",
+          "type": "string"
+        },
+        "calibration_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Calibration Sample Ids",
+          "type": "array"
+        },
+        "fitted_at": {
+          "format": "date-time",
+          "title": "Fitted At",
+          "type": "string"
+        },
+        "forbidden_test_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Forbidden Test Sample Ids",
+          "type": "array"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "method": {
+          "$ref": "#/$defs/CalibrationMethod"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "split_sha256": {
+          "title": "Split Sha256",
+          "type": "string"
+        },
+        "training_cutoff": {
+          "format": "date-time",
+          "title": "Training Cutoff",
+          "type": "string"
+        }
+      },
+      "required": [
+        "calibration_id",
+        "method",
+        "asset_id",
+        "horizon",
+        "regime",
+        "training_cutoff",
+        "fitted_at",
+        "available_at",
+        "calibration_sample_ids",
+        "forbidden_test_sample_ids",
+        "split_sha256",
+        "artifact_sha256"
+      ],
+      "title": "CalibrationArtifact",
+      "type": "object"
+    },
+    "CalibrationMethod": {
+      "enum": [
+        "PLATT_LOGISTIC",
+        "ISOTONIC",
+        "TEMPERATURE",
+        "BETA",
+        "ADAPTIVE_CONFORMAL",
+        "DISTRIBUTION_AWARE_CONFORMAL",
+        "ROLLING_QUANTILE"
+      ],
+      "title": "CalibrationMethod",
+      "type": "string"
+    },
+    "CapabilityStatus": {
+      "enum": [
+        "RUNNABLE_LOCAL",
+        "ADAPTER_ONLY",
+        "DEPENDENCY_BLOCKED",
+        "LICENSE_BLOCKED",
+        "OPTIONAL"
+      ],
+      "title": "CapabilityStatus",
+      "type": "string"
+    },
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "DirectionProbabilitiesV2": {
+      "additionalProperties": false,
+      "properties": {
+        "down": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Down"
+        },
+        "flat": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Flat"
+        },
+        "up": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Up"
+        }
+      },
+      "required": [
+        "up",
+        "flat",
+        "down"
+      ],
+      "title": "DirectionProbabilitiesV2",
+      "type": "object"
+    },
+    "EventForecastComparisonLineage": {
+      "additionalProperties": false,
+      "description": "Exact OOS sample, split, and budget identity shared by every ablation arm.",
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "calibration_end": {
+          "format": "date-time",
+          "title": "Calibration End",
+          "type": "string"
+        },
+        "calibration_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Calibration Sample Ids",
+          "type": "array"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "embargo_seconds": {
+          "minimum": 1,
+          "title": "Embargo Seconds",
+          "type": "integer"
+        },
+        "evaluation_available_at": {
+          "format": "date-time",
+          "title": "Evaluation Available At",
+          "type": "string"
+        },
+        "final_holdout_opened": {
+          "const": false,
+          "default": false,
+          "title": "Final Holdout Opened",
+          "type": "boolean"
+        },
+        "fold_id": {
+          "minLength": 1,
+          "title": "Fold Id",
+          "type": "string"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "label_dataset_manifest_sha256": {
+          "title": "Label Dataset Manifest Sha256",
+          "type": "string"
+        },
+        "lineage_sha256": {
+          "title": "Lineage Sha256",
+          "type": "string"
+        },
+        "purge_seconds": {
+          "minimum": 1,
+          "title": "Purge Seconds",
+          "type": "integer"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "resource_budget_sha256": {
+          "title": "Resource Budget Sha256",
+          "type": "string"
+        },
+        "split_sha256": {
+          "title": "Split Sha256",
+          "type": "string"
+        },
+        "test_end": {
+          "format": "date-time",
+          "title": "Test End",
+          "type": "string"
+        },
+        "test_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Test Sample Ids",
+          "type": "array"
+        },
+        "test_start": {
+          "format": "date-time",
+          "title": "Test Start",
+          "type": "string"
+        },
+        "training_end": {
+          "format": "date-time",
+          "title": "Training End",
+          "type": "string"
+        },
+        "training_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Training Sample Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "asset_id",
+        "instrument_id",
+        "horizon",
+        "regime",
+        "fold_id",
+        "split_sha256",
+        "label_dataset_manifest_sha256",
+        "resource_budget_sha256",
+        "decision_time",
+        "training_end",
+        "calibration_end",
+        "test_start",
+        "test_end",
+        "evaluation_available_at",
+        "purge_seconds",
+        "embargo_seconds",
+        "training_sample_ids",
+        "calibration_sample_ids",
+        "test_sample_ids",
+        "lineage_sha256"
+      ],
+      "title": "EventForecastComparisonLineage",
+      "type": "object"
+    },
+    "ForecastDistributionV2": {
+      "additionalProperties": false,
+      "properties": {
+        "mean": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean"
+        },
+        "quantiles": {
+          "$ref": "#/$defs/ForecastQuantiles"
+        },
+        "standard_deviation": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Standard Deviation"
+        }
+      },
+      "required": [
+        "mean",
+        "standard_deviation",
+        "quantiles"
+      ],
+      "title": "ForecastDistributionV2",
+      "type": "object"
+    },
+    "ForecastEnvelope": {
+      "additionalProperties": false,
+      "properties": {
+        "abstain_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Abstain Reasons",
+          "type": "array"
+        },
+        "action": {
+          "const": "RESEARCH_PROPOSAL_ONLY",
+          "default": "RESEARCH_PROPOSAL_ONLY",
+          "title": "Action",
+          "type": "string"
+        },
+        "alpha_promotion_eligible": {
+          "const": false,
+          "default": false,
+          "title": "Alpha Promotion Eligible",
+          "type": "boolean"
+        },
+        "as_of_time": {
+          "format": "date-time",
+          "title": "As Of Time",
+          "type": "string"
+        },
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "calibration_artifact_sha256_by_horizon": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "propertyNames": {
+            "$ref": "#/$defs/CouncilHorizon"
+          },
+          "title": "Calibration Artifact Sha256 By Horizon",
+          "type": "object"
+        },
+        "dataset_manifest_sha256": {
+          "title": "Dataset Manifest Sha256",
+          "type": "string"
+        },
+        "evidence_tier": {
+          "const": "DEVELOPMENT",
+          "default": "DEVELOPMENT",
+          "title": "Evidence Tier",
+          "type": "string"
+        },
+        "forecast_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Forecast Id",
+          "type": "string"
+        },
+        "forecast_sha256": {
+          "title": "Forecast Sha256",
+          "type": "string"
+        },
+        "horizons": {
+          "items": {
+            "$ref": "#/$defs/HorizonForecast"
+          },
+          "minItems": 1,
+          "title": "Horizons",
+          "type": "array"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "live_trading_locked": {
+          "const": true,
+          "default": true,
+          "title": "Live Trading Locked",
+          "type": "boolean"
+        },
+        "market_state_tensor_sha256": {
+          "title": "Market State Tensor Sha256",
+          "type": "string"
+        },
+        "model_capability_sha256": {
+          "title": "Model Capability Sha256",
+          "type": "string"
+        },
+        "model_id": {
+          "title": "Model Id",
+          "type": "string"
+        },
+        "model_revision": {
+          "title": "Model Revision",
+          "type": "string"
+        },
+        "order_submission_enabled": {
+          "const": false,
+          "default": false,
+          "title": "Order Submission Enabled",
+          "type": "boolean"
+        },
+        "prediction_mode": {
+          "$ref": "#/$defs/PredictionMode"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "should_abstain": {
+          "title": "Should Abstain",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "forecast_id",
+        "model_id",
+        "model_revision",
+        "model_capability_sha256",
+        "market_state_tensor_sha256",
+        "dataset_manifest_sha256",
+        "calibration_artifact_sha256_by_horizon",
+        "instrument_id",
+        "asset_id",
+        "as_of_time",
+        "regime",
+        "prediction_mode",
+        "horizons",
+        "should_abstain",
+        "abstain_reasons",
+        "forecast_sha256"
+      ],
+      "title": "ForecastEnvelope",
+      "type": "object"
+    },
+    "ForecastInputBinding": {
+      "additionalProperties": false,
+      "description": "A self-validating P07 forecast with all referenced input objects.",
+      "properties": {
+        "binding_sha256": {
+          "title": "Binding Sha256",
+          "type": "string"
+        },
+        "calibrations": {
+          "items": {
+            "$ref": "#/$defs/CalibrationArtifact"
+          },
+          "minItems": 1,
+          "title": "Calibrations",
+          "type": "array"
+        },
+        "capability": {
+          "$ref": "#/$defs/ModelCapability"
+        },
+        "forecast": {
+          "$ref": "#/$defs/ForecastEnvelope"
+        },
+        "market_state_tensor": {
+          "$ref": "#/$defs/MarketStateTensor"
+        }
+      },
+      "required": [
+        "forecast",
+        "market_state_tensor",
+        "calibrations",
+        "capability",
+        "binding_sha256"
+      ],
+      "title": "ForecastInputBinding",
+      "type": "object"
+    },
+    "ForecastModality": {
+      "enum": [
+        "NUMERIC_ONLY",
+        "VISION_ONLY",
+        "NUMERIC_VISION"
+      ],
+      "title": "ForecastModality",
+      "type": "string"
+    },
+    "ForecastModelClass": {
+      "enum": [
+        "BASELINE",
+        "FOUNDATION",
+        "SUPERVISED",
+        "MICROSTRUCTURE",
+        "VISION"
+      ],
+      "title": "ForecastModelClass",
+      "type": "string"
+    },
+    "ForecastQuantiles": {
+      "additionalProperties": false,
+      "properties": {
+        "q01": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q01"
+        },
+        "q05": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q05"
+        },
+        "q10": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q10"
+        },
+        "q25": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q25"
+        },
+        "q50": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q50"
+        },
+        "q75": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q75"
+        },
+        "q90": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q90"
+        },
+        "q95": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q95"
+        },
+        "q99": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q99"
+        }
+      },
+      "required": [
+        "q01",
+        "q05",
+        "q10",
+        "q25",
+        "q50",
+        "q75",
+        "q90",
+        "q95",
+        "q99"
+      ],
+      "title": "ForecastQuantiles",
+      "type": "object"
+    },
+    "ForecastUncertaintyV2": {
+      "additionalProperties": false,
+      "properties": {
+        "aleatoric": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Aleatoric"
+        },
+        "ensemble_disagreement": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Ensemble Disagreement"
+        },
+        "epistemic": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Epistemic"
+        }
+      },
+      "required": [
+        "epistemic",
+        "aleatoric",
+        "ensemble_disagreement"
+      ],
+      "title": "ForecastUncertaintyV2",
+      "type": "object"
+    },
+    "HorizonForecast": {
+      "additionalProperties": false,
+      "properties": {
+        "abstain_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Abstain Probability"
+        },
+        "barrier_hit_probabilities": {
+          "$ref": "#/$defs/BarrierHitProbabilities"
+        },
+        "direction_probabilities": {
+          "$ref": "#/$defs/DirectionProbabilitiesV2"
+        },
+        "future_high_low_range": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Future High Low Range"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "liquidity_forecast": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Liquidity Forecast"
+        },
+        "maximum_adverse_excursion": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Maximum Adverse Excursion"
+        },
+        "maximum_favorable_excursion": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Favorable Excursion"
+        },
+        "realized_volatility_distribution": {
+          "$ref": "#/$defs/ForecastDistributionV2"
+        },
+        "return_distribution": {
+          "$ref": "#/$defs/ForecastDistributionV2"
+        },
+        "slippage_forecast": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Slippage Forecast"
+        },
+        "spread_forecast": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Spread Forecast"
+        },
+        "tail_risk_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Tail Risk Probability"
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/ForecastUncertaintyV2"
+        }
+      },
+      "required": [
+        "horizon",
+        "return_distribution",
+        "direction_probabilities",
+        "realized_volatility_distribution",
+        "future_high_low_range",
+        "maximum_favorable_excursion",
+        "maximum_adverse_excursion",
+        "barrier_hit_probabilities",
+        "tail_risk_probability",
+        "liquidity_forecast",
+        "spread_forecast",
+        "slippage_forecast",
+        "uncertainty",
+        "abstain_probability"
+      ],
+      "title": "HorizonForecast",
+      "type": "object"
+    },
+    "LicenseStatus": {
+      "enum": [
+        "PROJECT_OWNED",
+        "VERIFIED_PERMISSIVE",
+        "RESEARCH_ONLY",
+        "UNVERIFIED",
+        "PROHIBITED"
+      ],
+      "title": "LicenseStatus",
+      "type": "string"
+    },
+    "MarketRegime": {
+      "enum": [
+        "TREND",
+        "MEAN_REVERSION",
+        "LOW_VOL_COMPRESSION",
+        "VOL_EXPANSION",
+        "LIQUIDITY_CRISIS",
+        "NEWS_SHOCK",
+        "LIQUIDATION_CASCADE",
+        "FUNDING_DISLOCATION",
+        "CORRELATION_BREAKDOWN",
+        "RISK_ON",
+        "RISK_OFF",
+        "UNKNOWN",
+        "OOD"
+      ],
+      "title": "MarketRegime",
+      "type": "string"
+    },
+    "MarketStateTensor": {
+      "additionalProperties": false,
+      "description": "One content-addressed market window containing only decision-time data.",
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "available_at": {
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "minItems": 3,
+          "title": "Available At",
+          "type": "array"
+        },
+        "dataset_manifest_sha256": {
+          "title": "Dataset Manifest Sha256",
+          "type": "string"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "feature_names": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Feature Names",
+          "type": "array"
+        },
+        "feature_snapshot_sha256": {
+          "title": "Feature Snapshot Sha256",
+          "type": "string"
+        },
+        "instrument_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Instrument Id",
+          "type": "string"
+        },
+        "observed_at": {
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "minItems": 3,
+          "title": "Observed At",
+          "type": "array"
+        },
+        "source_dataset_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Dataset Ids",
+          "type": "array"
+        },
+        "tensor_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Tensor Id",
+          "type": "string"
+        },
+        "tensor_sha256": {
+          "title": "Tensor Sha256",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "minItems": 3,
+          "title": "Values",
+          "type": "array"
+        },
+        "window_start": {
+          "format": "date-time",
+          "title": "Window Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tensor_id",
+        "instrument_id",
+        "asset_id",
+        "window_start",
+        "decision_time",
+        "observed_at",
+        "available_at",
+        "feature_names",
+        "values",
+        "source_dataset_ids",
+        "dataset_manifest_sha256",
+        "feature_snapshot_sha256",
+        "tensor_sha256"
+      ],
+      "title": "MarketStateTensor",
+      "type": "object"
+    },
+    "ModelCapability": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_name": {
+          "title": "Adapter Name",
+          "type": "string"
+        },
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "code_license": {
+          "title": "Code License",
+          "type": "string"
+        },
+        "family": {
+          "title": "Family",
+          "type": "string"
+        },
+        "license_status": {
+          "$ref": "#/$defs/LicenseStatus"
+        },
+        "modality": {
+          "$ref": "#/$defs/ForecastModality"
+        },
+        "model_class": {
+          "$ref": "#/$defs/ForecastModelClass"
+        },
+        "model_revision": {
+          "title": "Model Revision",
+          "type": "string"
+        },
+        "prediction_modes": {
+          "items": {
+            "$ref": "#/$defs/PredictionMode"
+          },
+          "minItems": 1,
+          "title": "Prediction Modes",
+          "type": "array"
+        },
+        "production_allowed": {
+          "const": false,
+          "default": false,
+          "title": "Production Allowed",
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/$defs/CapabilityStatus"
+        },
+        "supported_horizons": {
+          "items": {
+            "$ref": "#/$defs/CouncilHorizon"
+          },
+          "minItems": 1,
+          "title": "Supported Horizons",
+          "type": "array"
+        },
+        "supported_regimes": {
+          "items": {
+            "$ref": "#/$defs/MarketRegime"
+          },
+          "minItems": 1,
+          "title": "Supported Regimes",
+          "type": "array"
+        },
+        "supports_barrier_and_tail": {
+          "title": "Supports Barrier And Tail",
+          "type": "boolean"
+        },
+        "supports_direction_probabilities": {
+          "title": "Supports Direction Probabilities",
+          "type": "boolean"
+        },
+        "supports_liquidity_spread_slippage": {
+          "title": "Supports Liquidity Spread Slippage",
+          "type": "boolean"
+        },
+        "supports_range_and_excursions": {
+          "title": "Supports Range And Excursions",
+          "type": "boolean"
+        },
+        "supports_return_distribution": {
+          "title": "Supports Return Distribution",
+          "type": "boolean"
+        },
+        "supports_uncertainty_and_abstain": {
+          "title": "Supports Uncertainty And Abstain",
+          "type": "boolean"
+        },
+        "supports_volatility_distribution": {
+          "title": "Supports Volatility Distribution",
+          "type": "boolean"
+        },
+        "weight_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Weight Sha256"
+        },
+        "weights_license": {
+          "title": "Weights License",
+          "type": "string"
+        },
+        "weights_required": {
+          "title": "Weights Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "family",
+        "model_class",
+        "modality",
+        "prediction_modes",
+        "supported_horizons",
+        "supported_regimes",
+        "supports_return_distribution",
+        "supports_direction_probabilities",
+        "supports_volatility_distribution",
+        "supports_range_and_excursions",
+        "supports_barrier_and_tail",
+        "supports_liquidity_spread_slippage",
+        "supports_uncertainty_and_abstain",
+        "status",
+        "adapter_name",
+        "model_revision",
+        "code_license",
+        "weights_license",
+        "license_status",
+        "weights_required"
+      ],
+      "title": "ModelCapability",
+      "type": "object"
+    },
+    "PredictionMode": {
+      "enum": [
+        "BASELINE",
+        "TRAINED",
+        "ZERO_SHOT"
+      ],
+      "title": "PredictionMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-market-only-forecast/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alpha_promotion_eligible": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Promotion Eligible",
+      "type": "boolean"
+    },
+    "artifact_sha256": {
+      "title": "Artifact Sha256",
+      "type": "string"
+    },
+    "conditioning": {
+      "const": "MARKET_ONLY",
+      "default": "MARKET_ONLY",
+      "title": "Conditioning",
+      "type": "string"
+    },
+    "event_features_used": {
+      "const": false,
+      "default": false,
+      "title": "Event Features Used",
+      "type": "boolean"
+    },
+    "evidence_tier": {
+      "const": "DEVELOPMENT",
+      "default": "DEVELOPMENT",
+      "title": "Evidence Tier",
+      "type": "string"
+    },
+    "fixed_horizon_scale_used": {
+      "const": false,
+      "default": false,
+      "title": "Fixed Horizon Scale Used",
+      "type": "boolean"
+    },
+    "inputs": {
+      "$ref": "#/$defs/ForecastInputBinding"
+    },
+    "lineage": {
+      "$ref": "#/$defs/EventForecastComparisonLineage"
+    }
+  },
+  "required": [
+    "inputs",
+    "lineage",
+    "artifact_sha256"
+  ],
+  "title": "MarketOnlyForecast",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-market-only-forecast",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -145,7 +145,12 @@ export function CandlestickTradeChart({
       }));
       createSeriesMarkers(series, renderedMarkers);
       chart.timeScale().fitContent();
-      cleanup = () => chart.remove();
+      const observer = new ResizeObserver(() => chart.timeScale().fitContent());
+      observer.observe(node);
+      cleanup = () => {
+        observer.disconnect();
+        chart.remove();
+      };
     });
     return () => {
       disposed = true;

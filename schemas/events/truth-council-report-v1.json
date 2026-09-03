@@ -1,0 +1,805 @@
+{
+  "$defs": {
+    "CalibrationEvaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_sha256": {
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "evaluation_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evaluation Sample Ids",
+          "type": "array"
+        },
+        "fit_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Fit Sample Ids",
+          "type": "array"
+        },
+        "method": {
+          "$ref": "#/$defs/ProbabilityCalibrationMethod"
+        },
+        "metrics": {
+          "$ref": "#/$defs/TruthCalibrationMetrics"
+        },
+        "probabilities": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ],
+            "ge": "0",
+            "le": "1"
+          },
+          "minItems": 1,
+          "title": "Probabilities",
+          "type": "array"
+        }
+      },
+      "required": [
+        "method",
+        "artifact_sha256",
+        "fit_sample_ids",
+        "evaluation_sample_ids",
+        "probabilities",
+        "metrics"
+      ],
+      "title": "CalibrationEvaluation",
+      "type": "object"
+    },
+    "ClaimType": {
+      "description": "Semantic class assigned before truth adjudication.",
+      "enum": [
+        "FACT",
+        "FORWARD_FACT",
+        "INTERPRETATION",
+        "OPINION",
+        "PREDICTION",
+        "QUOTE",
+        "RUMOR"
+      ],
+      "title": "ClaimType",
+      "type": "string"
+    },
+    "ProbabilityCalibrationMethod": {
+      "enum": [
+        "PLATT_LOGISTIC",
+        "ISOTONIC",
+        "TEMPERATURE_SCALING",
+        "BETA_CALIBRATION"
+      ],
+      "title": "ProbabilityCalibrationMethod",
+      "type": "string"
+    },
+    "ReliabilityBin": {
+      "additionalProperties": false,
+      "properties": {
+        "bin_index": {
+          "minimum": 0,
+          "title": "Bin Index",
+          "type": "integer"
+        },
+        "lower_bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Lower Bound"
+        },
+        "mean_probability": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean Probability"
+        },
+        "observed_frequency": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0",
+              "le": "1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observed Frequency"
+        },
+        "sample_count": {
+          "minimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "upper_bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Upper Bound"
+        }
+      },
+      "required": [
+        "bin_index",
+        "lower_bound",
+        "upper_bound",
+        "sample_count",
+        "mean_probability",
+        "observed_frequency"
+      ],
+      "title": "ReliabilityBin",
+      "type": "object"
+    },
+    "TemporalFold": {
+      "additionalProperties": false,
+      "properties": {
+        "calibration_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Calibration Ids",
+          "type": "array"
+        },
+        "fold_id": {
+          "title": "Fold Id",
+          "type": "string"
+        },
+        "purged_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Purged Ids",
+          "type": "array"
+        },
+        "test_ends_at": {
+          "format": "date-time",
+          "title": "Test Ends At",
+          "type": "string"
+        },
+        "test_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Test Ids",
+          "type": "array"
+        },
+        "train_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Train Ids",
+          "type": "array"
+        },
+        "validation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Validation Ids",
+          "type": "array"
+        },
+        "validation_starts_at": {
+          "format": "date-time",
+          "title": "Validation Starts At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fold_id",
+        "train_ids",
+        "validation_ids",
+        "calibration_ids",
+        "test_ids",
+        "purged_ids",
+        "validation_starts_at",
+        "test_ends_at"
+      ],
+      "title": "TemporalFold",
+      "type": "object"
+    },
+    "TemporalSplitPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "calibration_groups": {
+          "minimum": 1,
+          "title": "Calibration Groups",
+          "type": "integer"
+        },
+        "embargo_groups": {
+          "minimum": 0,
+          "title": "Embargo Groups",
+          "type": "integer"
+        },
+        "minimum_folds": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Minimum Folds",
+          "type": "integer"
+        },
+        "mode": {
+          "$ref": "#/$defs/WalkForwardMode"
+        },
+        "policy_id": {
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "purge_groups": {
+          "minimum": 0,
+          "title": "Purge Groups",
+          "type": "integer"
+        },
+        "shuffle": {
+          "default": false,
+          "title": "Shuffle",
+          "type": "boolean"
+        },
+        "step_groups": {
+          "minimum": 1,
+          "title": "Step Groups",
+          "type": "integer"
+        },
+        "test_groups": {
+          "minimum": 1,
+          "title": "Test Groups",
+          "type": "integer"
+        },
+        "train_groups": {
+          "minimum": 2,
+          "title": "Train Groups",
+          "type": "integer"
+        },
+        "validation_groups": {
+          "minimum": 1,
+          "title": "Validation Groups",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "policy_id",
+        "mode",
+        "train_groups",
+        "validation_groups",
+        "calibration_groups",
+        "test_groups",
+        "purge_groups",
+        "embargo_groups",
+        "step_groups"
+      ],
+      "title": "TemporalSplitPolicy",
+      "type": "object"
+    },
+    "TruthCalibrationKey": {
+      "additionalProperties": false,
+      "description": "The mandatory source/event/language/claim calibration stratum.",
+      "properties": {
+        "claim_type": {
+          "$ref": "#/$defs/ClaimType"
+        },
+        "event_type": {
+          "minLength": 1,
+          "title": "Event Type",
+          "type": "string"
+        },
+        "language": {
+          "maxLength": 35,
+          "minLength": 2,
+          "title": "Language",
+          "type": "string"
+        },
+        "source_class": {
+          "minLength": 1,
+          "title": "Source Class",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_class",
+        "event_type",
+        "language",
+        "claim_type"
+      ],
+      "title": "TruthCalibrationKey",
+      "type": "object"
+    },
+    "TruthCalibrationMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "brier_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Brier Score"
+        },
+        "calibration_intercept": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Calibration Intercept"
+        },
+        "calibration_slope": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Calibration Slope"
+        },
+        "expected_calibration_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Expected Calibration Error"
+        },
+        "f1": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "F1"
+        },
+        "high_confidence_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "High Confidence Accuracy"
+        },
+        "high_confidence_sample_count": {
+          "minimum": 0,
+          "title": "High Confidence Sample Count",
+          "type": "integer"
+        },
+        "log_loss": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Log Loss"
+        },
+        "maximum_calibration_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Calibration Error"
+        },
+        "pr_auc": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Pr Auc"
+        },
+        "precision": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Precision"
+        },
+        "recall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Recall"
+        },
+        "reliability_diagram": {
+          "items": {
+            "$ref": "#/$defs/ReliabilityBin"
+          },
+          "minItems": 2,
+          "title": "Reliability Diagram",
+          "type": "array"
+        },
+        "sample_count": {
+          "exclusiveMinimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "specificity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Specificity"
+        }
+      },
+      "required": [
+        "sample_count",
+        "brier_score",
+        "log_loss",
+        "expected_calibration_error",
+        "maximum_calibration_error",
+        "calibration_slope",
+        "calibration_intercept",
+        "precision",
+        "recall",
+        "specificity",
+        "f1",
+        "pr_auc",
+        "high_confidence_sample_count",
+        "high_confidence_accuracy",
+        "reliability_diagram"
+      ],
+      "title": "TruthCalibrationMetrics",
+      "type": "object"
+    },
+    "TruthCalibrationSlice": {
+      "additionalProperties": false,
+      "properties": {
+        "calibration_key": {
+          "$ref": "#/$defs/TruthCalibrationKey"
+        },
+        "evaluation_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evaluation Sample Ids",
+          "type": "array"
+        },
+        "metrics": {
+          "$ref": "#/$defs/TruthCalibrationMetrics"
+        },
+        "status": {
+          "enum": [
+            "EVALUATED",
+            "INSUFFICIENT_CLASS_VARIATION"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "calibration_key",
+        "evaluation_sample_ids",
+        "status",
+        "metrics"
+      ],
+      "title": "TruthCalibrationSlice",
+      "type": "object"
+    },
+    "TruthCandidateEvaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "family": {
+          "$ref": "#/$defs/TruthModelFamily"
+        },
+        "fit_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Fit Sample Ids",
+          "type": "array"
+        },
+        "model_id": {
+          "minLength": 1,
+          "title": "Model Id",
+          "type": "string"
+        },
+        "model_spec_sha256": {
+          "title": "Model Spec Sha256",
+          "type": "string"
+        },
+        "validation_metrics": {
+          "$ref": "#/$defs/TruthCalibrationMetrics"
+        },
+        "validation_prediction_sha256": {
+          "title": "Validation Prediction Sha256",
+          "type": "string"
+        },
+        "validation_sample_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Validation Sample Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "model_id",
+        "family",
+        "model_spec_sha256",
+        "fit_sample_ids",
+        "validation_sample_ids",
+        "validation_prediction_sha256",
+        "validation_metrics"
+      ],
+      "title": "TruthCandidateEvaluation",
+      "type": "object"
+    },
+    "TruthModelFamily": {
+      "enum": [
+        "LOGISTIC_BASELINE",
+        "GRADIENT_BOOSTING",
+        "BAYESIAN_HIERARCHICAL"
+      ],
+      "title": "TruthModelFamily",
+      "type": "string"
+    },
+    "WalkForwardMode": {
+      "enum": [
+        "EXPANDING",
+        "ROLLING",
+        "RECENT_STATE"
+      ],
+      "title": "WalkForwardMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.truth-council-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "baseline_model_id": {
+      "minLength": 1,
+      "title": "Baseline Model Id",
+      "type": "string"
+    },
+    "calibration_comparisons": {
+      "items": {
+        "$ref": "#/$defs/CalibrationEvaluation"
+      },
+      "title": "Calibration Comparisons",
+      "type": "array"
+    },
+    "calibration_slices": {
+      "items": {
+        "$ref": "#/$defs/TruthCalibrationSlice"
+      },
+      "minItems": 1,
+      "title": "Calibration Slices",
+      "type": "array"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/TruthCandidateEvaluation"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "dataset_sha256": {
+      "title": "Dataset Sha256",
+      "type": "string"
+    },
+    "feature_names": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Feature Names",
+      "type": "array"
+    },
+    "fold": {
+      "$ref": "#/$defs/TemporalFold"
+    },
+    "llm_confidence_used_as_model_input": {
+      "const": false,
+      "default": false,
+      "title": "Llm Confidence Used As Model Input",
+      "type": "boolean"
+    },
+    "minimum_incremental_improvement": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Minimum Incremental Improvement"
+    },
+    "probability_aggregation": {
+      "const": "CALIBRATED_MODEL_NOT_AGENT_VOTE",
+      "default": "CALIBRATED_MODEL_NOT_AGENT_VOTE",
+      "title": "Probability Aggregation",
+      "type": "string"
+    },
+    "rejected_model_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Model Ids",
+      "type": "array"
+    },
+    "report_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "selected_calibration_method": {
+      "const": "PLATT_LOGISTIC",
+      "default": "PLATT_LOGISTIC",
+      "title": "Selected Calibration Method",
+      "type": "string"
+    },
+    "selected_model_id": {
+      "minLength": 1,
+      "title": "Selected Model Id",
+      "type": "string"
+    },
+    "selection_metric": {
+      "const": "VALIDATION_BRIER",
+      "default": "VALIDATION_BRIER",
+      "title": "Selection Metric",
+      "type": "string"
+    },
+    "split_policy": {
+      "$ref": "#/$defs/TemporalSplitPolicy"
+    },
+    "test_labels_used_for_model_selection": {
+      "const": false,
+      "default": false,
+      "title": "Test Labels Used For Model Selection",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "dataset_sha256",
+    "split_policy",
+    "fold",
+    "feature_names",
+    "candidates",
+    "baseline_model_id",
+    "selected_model_id",
+    "rejected_model_ids",
+    "minimum_incremental_improvement",
+    "calibration_comparisons",
+    "calibration_slices",
+    "created_at",
+    "available_at"
+  ],
+  "title": "TruthCouncilReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.truth-council-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

@@ -1,0 +1,165 @@
+{
+  "schema_version": "v5-p01-truth-contract-evidence-v1",
+  "phase": "V5-P01",
+  "generated_from_fixed_clock": "2026-09-02T08:00:00+00:00",
+  "evidence_tier": "DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "calibrated_truth_model_present": false,
+  "live_trading_locked": true,
+  "contract_surface": {
+    "claim_types": [
+      "FACT",
+      "FORWARD_FACT",
+      "INTERPRETATION",
+      "OPINION",
+      "PREDICTION",
+      "QUOTE",
+      "RUMOR"
+    ],
+    "truth_adjudicable_claim_types": [
+      "FACT",
+      "FORWARD_FACT",
+      "QUOTE"
+    ],
+    "impact_only_claim_types": [
+      "INTERPRETATION",
+      "OPINION",
+      "PREDICTION",
+      "RUMOR"
+    ],
+    "truth_states": [
+      "UNVERIFIED",
+      "RUMOR",
+      "PARTIALLY_CORROBORATED",
+      "VERIFIED_PRIMARY",
+      "VERIFIED_MULTI_SOURCE",
+      "CONTRADICTED",
+      "RETRACTED",
+      "STALE",
+      "UNKNOWN"
+    ],
+    "graph_node_types": [
+      "EVIDENCE",
+      "CLAIM",
+      "EVENT",
+      "ENTITY",
+      "SOURCE",
+      "DOCUMENT",
+      "AUTHOR",
+      "ACCOUNT",
+      "ORGANIZATION",
+      "QUOTE",
+      "ATTACHMENT",
+      "MEDIA_ASSET"
+    ],
+    "graph_edge_types": [
+      "SUPPORTS",
+      "REFUTES",
+      "MENTIONS",
+      "CLUSTERS_IN",
+      "PUBLISHED_BY",
+      "QUOTES",
+      "COPIES",
+      "CITES",
+      "DERIVED_FROM",
+      "REPOSTS",
+      "SAME_ORIGIN",
+      "CONTRADICTS",
+      "REVISES",
+      "DELETES"
+    ],
+    "truth_assessment_fields": [
+      "assessed_at",
+      "assessment_id",
+      "assessment_scope",
+      "available_at",
+      "calibration_bucket",
+      "claim_current_probability",
+      "claim_id",
+      "claim_truth_probability",
+      "claim_type",
+      "content_integrity_probability",
+      "contradiction_probability",
+      "evidence_dependency_score",
+      "evidence_graph_hash",
+      "evidence_independence_probability",
+      "independent_evidence_count",
+      "manipulation_probability",
+      "model_version",
+      "policy_version",
+      "reason_codes",
+      "revision_probability",
+      "source_compromised_probability",
+      "source_document_ids",
+      "source_identity_probability",
+      "source_revision_ids",
+      "truth_state"
+    ]
+  },
+  "temporal_snapshots": [
+    {
+      "decision_time": "2026-09-02T08:00:10+00:00",
+      "selected_revision_ids": [
+        "v5-p01-revision-1"
+      ],
+      "truth_claim_ids": [
+        "v5-p01-fact-v1"
+      ],
+      "impact_claim_ids": [],
+      "tombstoned_document_ids": []
+    },
+    {
+      "decision_time": "2026-09-02T08:00:30+00:00",
+      "selected_revision_ids": [
+        "v5-p01-revision-2"
+      ],
+      "truth_claim_ids": [
+        "v5-p01-fact-v2"
+      ],
+      "impact_claim_ids": [
+        "v5-p01-opinion-v2"
+      ],
+      "tombstoned_document_ids": []
+    },
+    {
+      "decision_time": "2026-09-02T08:00:50+00:00",
+      "selected_revision_ids": [
+        "v5-p01-revision-3"
+      ],
+      "truth_claim_ids": [],
+      "impact_claim_ids": [],
+      "tombstoned_document_ids": [
+        "v5-p01-document"
+      ]
+    }
+  ],
+  "dependency_result": {
+    "document_count": 2,
+    "independent_evidence_count": 1,
+    "evidence_dependency_score": "0.5"
+  },
+  "hash_reproducibility": {
+    "evidence_graph_sha256": "c50d706f3c395ba099777ede7cd362bdc64236ed05aee6892ebd4af5ce62666a",
+    "truth_assessment_sha256": "0709d70184dc290d53ef20a413117def3127f1232ab44c422c80c9c37198507c"
+  },
+  "negative_control": {
+    "attempted_claim_type": "OPINION",
+    "rejection_code": "AQ-TRUTH-NON-ADJUDICABLE-CLAIM-TYPE"
+  },
+  "checks": {
+    "future_revision_excluded_before_availability": true,
+    "correction_selected_only_after_availability": true,
+    "deletion_not_backfilled_and_later_tombstones": true,
+    "opinion_routed_to_impact_lane": true,
+    "opinion_rejected_by_truth_assessment": true,
+    "syndicated_copy_not_counted_independent": true,
+    "isolated_evidence_does_not_inflate_independent_count": true,
+    "graph_hash_reproducible": true,
+    "graph_hash_and_model_are_input_order_independent": true,
+    "assessment_hash_reproducible": true,
+    "assessment_revision_bound": true,
+    "conflicting_assessment_id_fails_closed": true,
+    "selection_input_order_independent": true
+  },
+  "result": "PASS"
+}

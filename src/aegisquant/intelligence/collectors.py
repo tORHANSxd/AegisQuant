@@ -478,10 +478,16 @@ class CollectedContent(DomainModel):
     def validate_content(self) -> CollectedContent:
         if not self.native_id or not self.source_native_id or not self.text:
             raise ValueError("collected content identity and text are required")
+        if self.published_time > self.observed_time:
+            raise ValueError("content cannot be observed before publication")
         if self.modified_time is not None and self.modified_time < self.published_time:
             raise ValueError("content modification cannot precede publication")
+        if self.modified_time is not None and self.modified_time > self.observed_time:
+            raise ValueError("content modification cannot be known before observation")
         if self.deleted_time is not None and self.deleted_time < self.published_time:
             raise ValueError("content deletion cannot precede publication")
+        if self.deleted_time is not None and self.deleted_time > self.observed_time:
+            raise ValueError("content deletion cannot be known before observation")
         if any(value < 0 for value in self.engagement.values()):
             raise ValueError("engagement counts cannot be negative")
         return self
@@ -1048,31 +1054,58 @@ def content_contracts(
     ingest_time: datetime,
     source_policy_id: SourcePolicyId,
     rights_state: RightsState,
+    previous_identity: SourceIdentity | None = None,
 ) -> tuple[SourceIdentity, RawContentEnvelope, EngagementSnapshot | None]:
     available = ensure_utc(available_time)
     ingested = ensure_utc(ingest_time)
     stable_content_id = ContentId(
         canonical_sha256({"provider": str(item.provider_id), "native_id": item.native_id})
     )
-    identity_id = SourceIdentityId(
-        canonical_sha256(
-            {
-                "provider": str(item.provider_id),
-                "native_id": item.source_native_id,
-                "version": 1,
-            }
+    provider_native_id = ProviderNativeId(item.source_native_id)
+    if previous_identity is not None:
+        if (
+            previous_identity.provider_id != item.provider_id
+            or previous_identity.provider_native_id != provider_native_id
+        ):
+            raise ValueError("AQ-INTELLIGENCE-IDENTITY-PREDECESSOR-SOURCE-MISMATCH")
+        if available < previous_identity.available_time:
+            raise ValueError("AQ-INTELLIGENCE-IDENTITY-TIME-REGRESSION")
+    identity_changed = previous_identity is None or any(
+        (
+            item.display_name != previous_identity.display_name,
+            item.ownership_group != previous_identity.ownership_group,
+            item.independence_group != previous_identity.independence_group,
+            item.verified_source != previous_identity.verified,
         )
     )
-    identity = SourceIdentity(
-        source_identity_id=identity_id,
-        provider_id=item.provider_id,
-        provider_native_id=ProviderNativeId(item.source_native_id),
-        display_name=item.display_name,
-        ownership_group=item.ownership_group,
-        independence_group=item.independence_group,
-        verified=item.verified_source,
-        first_observed_time=item.observed_time,
-    )
+    identity_version = previous_identity.version + 1 if previous_identity else 1
+    if previous_identity is not None and not identity_changed:
+        identity = previous_identity
+    else:
+        identity_id = SourceIdentityId(
+            canonical_sha256(
+                {
+                    "provider": str(item.provider_id),
+                    "native_id": item.source_native_id,
+                    "version": identity_version,
+                }
+            )
+        )
+        identity = SourceIdentity(
+            source_identity_id=identity_id,
+            provider_id=item.provider_id,
+            provider_native_id=provider_native_id,
+            display_name=item.display_name,
+            ownership_group=item.ownership_group,
+            independence_group=item.independence_group,
+            verified=item.verified_source,
+            first_observed_time=item.observed_time,
+            available_time=available,
+            version=identity_version,
+            supersedes_source_identity_id=(
+                previous_identity.source_identity_id if previous_identity else None
+            ),
+        )
     raw_hash = hashlib.sha256(item.text.encode("utf-8")).hexdigest()
     snapshot = None
     if item.engagement:
@@ -1096,7 +1129,7 @@ def content_contracts(
         content_id=stable_content_id,
         provider_id=item.provider_id,
         provider_native_id=ProviderNativeId(item.native_id),
-        source_identity_id=identity_id,
+        source_identity_id=identity.source_identity_id,
         content_type=item.content_type,
         canonical_url=item.canonical_url,
         author_time=item.published_time,

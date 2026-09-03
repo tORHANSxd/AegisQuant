@@ -1,6 +1,7 @@
 """Repository governance baseline tests."""
 
 import subprocess
+import tomllib
 from pathlib import Path
 
 REQUIRED_FILES = {
@@ -27,7 +28,8 @@ def test_required_repository_files_exist(project_root: Path) -> None:
     assert missing == []
 
 
-def test_source_repository_uses_main_without_remote(project_root: Path) -> None:
+def test_source_repository_matches_local_git_policy(project_root: Path) -> None:
+    policy = tomllib.loads((project_root / ".codex-git.toml").read_text(encoding="utf-8"))
     branch = subprocess.run(
         ["git", "branch", "--show-current"],
         cwd=project_root,
@@ -43,5 +45,5 @@ def test_source_repository_uses_main_without_remote(project_root: Path) -> None:
         text=True,
     ).stdout.splitlines()
 
-    assert branch == "main"
-    assert remotes == []
+    assert branch == policy["branch"]
+    assert remotes == [policy["remote"]]

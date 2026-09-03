@@ -1,0 +1,275 @@
+{
+  "$defs": {
+    "C2paSpecCompatibility": {
+      "enum": [
+        "PREFERRED_2_3",
+        "COMPATIBLE_2_X",
+        "LEGACY",
+        "FUTURE_UNSUPPORTED",
+        "UNKNOWN"
+      ],
+      "title": "C2paSpecCompatibility",
+      "type": "string"
+    },
+    "C2paValidationState": {
+      "enum": [
+        "ABSENT",
+        "INVALID",
+        "VALID",
+        "TRUSTED",
+        "UNSUPPORTED",
+        "SDK_UNAVAILABLE",
+        "ERROR"
+      ],
+      "title": "C2paValidationState",
+      "type": "string"
+    },
+    "CertificateState": {
+      "enum": [
+        "TRUSTED",
+        "VALID_UNTRUSTED",
+        "EXPIRED",
+        "REVOKED",
+        "INVALID",
+        "UNKNOWN",
+        "NOT_PRESENT"
+      ],
+      "title": "CertificateState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.c2pa-verification/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "ai_assertions": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Ai Assertions",
+      "type": "array"
+    },
+    "asset_sha256": {
+      "title": "Asset Sha256",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "certificate_state": {
+      "$ref": "#/$defs/CertificateState"
+    },
+    "claim_truth_implied": {
+      "const": false,
+      "default": false,
+      "title": "Claim Truth Implied",
+      "type": "boolean"
+    },
+    "content_binding_valid": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Content Binding Valid"
+    },
+    "generator_information": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Generator Information",
+      "type": "array"
+    },
+    "ingredient_chain_valid": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Ingredient Chain Valid"
+    },
+    "manifest_present": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Manifest Present"
+    },
+    "manifest_store_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manifest Store Sha256"
+    },
+    "media_type": {
+      "minLength": 1,
+      "title": "Media Type",
+      "type": "string"
+    },
+    "ocsp_fetch_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Ocsp Fetch Enabled",
+      "type": "boolean"
+    },
+    "package_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Package Version"
+    },
+    "remote_manifest_fetch_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Remote Manifest Fetch Enabled",
+      "type": "boolean"
+    },
+    "sdk_name": {
+      "const": "c2pa-python",
+      "default": "c2pa-python",
+      "title": "Sdk Name",
+      "type": "string"
+    },
+    "sdk_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sdk Version"
+    },
+    "signature_valid": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Signature Valid"
+    },
+    "spec_compatibility": {
+      "$ref": "#/$defs/C2paSpecCompatibility"
+    },
+    "specification_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Specification Version"
+    },
+    "tamper_detected": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Tamper Detected"
+    },
+    "timestamp_valid": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Timestamp Valid"
+    },
+    "trust_list_valid": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Trust List Valid"
+    },
+    "validation_codes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Validation Codes",
+      "type": "array"
+    },
+    "validation_state": {
+      "$ref": "#/$defs/C2paValidationState"
+    },
+    "verification_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Verification Id",
+      "type": "string"
+    },
+    "verified_at": {
+      "format": "date-time",
+      "title": "Verified At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "verification_id",
+    "asset_sha256",
+    "media_type",
+    "spec_compatibility",
+    "validation_state",
+    "manifest_present",
+    "signature_valid",
+    "trust_list_valid",
+    "timestamp_valid",
+    "ingredient_chain_valid",
+    "content_binding_valid",
+    "certificate_state",
+    "tamper_detected",
+    "verified_at",
+    "available_at"
+  ],
+  "title": "C2paVerificationResult",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.c2pa-verification",
+  "x-aegisquant-schema-version": "1.0.0"
+}

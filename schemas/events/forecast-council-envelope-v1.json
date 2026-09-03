@@ -1,0 +1,650 @@
+{
+  "$defs": {
+    "BarrierHitProbabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "downside": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Downside"
+        },
+        "upside": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Upside"
+        }
+      },
+      "required": [
+        "upside",
+        "downside"
+      ],
+      "title": "BarrierHitProbabilities",
+      "type": "object"
+    },
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "DirectionProbabilitiesV2": {
+      "additionalProperties": false,
+      "properties": {
+        "down": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Down"
+        },
+        "flat": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Flat"
+        },
+        "up": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Up"
+        }
+      },
+      "required": [
+        "up",
+        "flat",
+        "down"
+      ],
+      "title": "DirectionProbabilitiesV2",
+      "type": "object"
+    },
+    "ForecastDistributionV2": {
+      "additionalProperties": false,
+      "properties": {
+        "mean": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Mean"
+        },
+        "quantiles": {
+          "$ref": "#/$defs/ForecastQuantiles"
+        },
+        "standard_deviation": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Standard Deviation"
+        }
+      },
+      "required": [
+        "mean",
+        "standard_deviation",
+        "quantiles"
+      ],
+      "title": "ForecastDistributionV2",
+      "type": "object"
+    },
+    "ForecastQuantiles": {
+      "additionalProperties": false,
+      "properties": {
+        "q01": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q01"
+        },
+        "q05": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q05"
+        },
+        "q10": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q10"
+        },
+        "q25": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q25"
+        },
+        "q50": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q50"
+        },
+        "q75": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q75"
+        },
+        "q90": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q90"
+        },
+        "q95": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q95"
+        },
+        "q99": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Q99"
+        }
+      },
+      "required": [
+        "q01",
+        "q05",
+        "q10",
+        "q25",
+        "q50",
+        "q75",
+        "q90",
+        "q95",
+        "q99"
+      ],
+      "title": "ForecastQuantiles",
+      "type": "object"
+    },
+    "ForecastUncertaintyV2": {
+      "additionalProperties": false,
+      "properties": {
+        "aleatoric": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Aleatoric"
+        },
+        "ensemble_disagreement": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Ensemble Disagreement"
+        },
+        "epistemic": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Epistemic"
+        }
+      },
+      "required": [
+        "epistemic",
+        "aleatoric",
+        "ensemble_disagreement"
+      ],
+      "title": "ForecastUncertaintyV2",
+      "type": "object"
+    },
+    "HorizonForecast": {
+      "additionalProperties": false,
+      "properties": {
+        "abstain_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Abstain Probability"
+        },
+        "barrier_hit_probabilities": {
+          "$ref": "#/$defs/BarrierHitProbabilities"
+        },
+        "direction_probabilities": {
+          "$ref": "#/$defs/DirectionProbabilitiesV2"
+        },
+        "future_high_low_range": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Future High Low Range"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "liquidity_forecast": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Liquidity Forecast"
+        },
+        "maximum_adverse_excursion": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Maximum Adverse Excursion"
+        },
+        "maximum_favorable_excursion": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Favorable Excursion"
+        },
+        "realized_volatility_distribution": {
+          "$ref": "#/$defs/ForecastDistributionV2"
+        },
+        "return_distribution": {
+          "$ref": "#/$defs/ForecastDistributionV2"
+        },
+        "slippage_forecast": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Slippage Forecast"
+        },
+        "spread_forecast": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Spread Forecast"
+        },
+        "tail_risk_probability": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Tail Risk Probability"
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/ForecastUncertaintyV2"
+        }
+      },
+      "required": [
+        "horizon",
+        "return_distribution",
+        "direction_probabilities",
+        "realized_volatility_distribution",
+        "future_high_low_range",
+        "maximum_favorable_excursion",
+        "maximum_adverse_excursion",
+        "barrier_hit_probabilities",
+        "tail_risk_probability",
+        "liquidity_forecast",
+        "spread_forecast",
+        "slippage_forecast",
+        "uncertainty",
+        "abstain_probability"
+      ],
+      "title": "HorizonForecast",
+      "type": "object"
+    },
+    "MarketRegime": {
+      "enum": [
+        "TREND",
+        "MEAN_REVERSION",
+        "LOW_VOL_COMPRESSION",
+        "VOL_EXPANSION",
+        "LIQUIDITY_CRISIS",
+        "NEWS_SHOCK",
+        "LIQUIDATION_CASCADE",
+        "FUNDING_DISLOCATION",
+        "CORRELATION_BREAKDOWN",
+        "RISK_ON",
+        "RISK_OFF",
+        "UNKNOWN",
+        "OOD"
+      ],
+      "title": "MarketRegime",
+      "type": "string"
+    },
+    "PredictionMode": {
+      "enum": [
+        "BASELINE",
+        "TRAINED",
+        "ZERO_SHOT"
+      ],
+      "title": "PredictionMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.forecast-council-envelope/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "abstain_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Abstain Reasons",
+      "type": "array"
+    },
+    "action": {
+      "const": "RESEARCH_PROPOSAL_ONLY",
+      "default": "RESEARCH_PROPOSAL_ONLY",
+      "title": "Action",
+      "type": "string"
+    },
+    "alpha_promotion_eligible": {
+      "const": false,
+      "default": false,
+      "title": "Alpha Promotion Eligible",
+      "type": "boolean"
+    },
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "calibration_artifact_sha256_by_horizon": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "propertyNames": {
+        "$ref": "#/$defs/CouncilHorizon"
+      },
+      "title": "Calibration Artifact Sha256 By Horizon",
+      "type": "object"
+    },
+    "dataset_manifest_sha256": {
+      "title": "Dataset Manifest Sha256",
+      "type": "string"
+    },
+    "evidence_tier": {
+      "const": "DEVELOPMENT",
+      "default": "DEVELOPMENT",
+      "title": "Evidence Tier",
+      "type": "string"
+    },
+    "forecast_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Forecast Id",
+      "type": "string"
+    },
+    "forecast_sha256": {
+      "title": "Forecast Sha256",
+      "type": "string"
+    },
+    "horizons": {
+      "items": {
+        "$ref": "#/$defs/HorizonForecast"
+      },
+      "minItems": 1,
+      "title": "Horizons",
+      "type": "array"
+    },
+    "instrument_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "live_trading_locked": {
+      "const": true,
+      "default": true,
+      "title": "Live Trading Locked",
+      "type": "boolean"
+    },
+    "market_state_tensor_sha256": {
+      "title": "Market State Tensor Sha256",
+      "type": "string"
+    },
+    "model_capability_sha256": {
+      "title": "Model Capability Sha256",
+      "type": "string"
+    },
+    "model_id": {
+      "title": "Model Id",
+      "type": "string"
+    },
+    "model_revision": {
+      "title": "Model Revision",
+      "type": "string"
+    },
+    "order_submission_enabled": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Enabled",
+      "type": "boolean"
+    },
+    "prediction_mode": {
+      "$ref": "#/$defs/PredictionMode"
+    },
+    "regime": {
+      "$ref": "#/$defs/MarketRegime"
+    },
+    "should_abstain": {
+      "title": "Should Abstain",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "forecast_id",
+    "model_id",
+    "model_revision",
+    "model_capability_sha256",
+    "market_state_tensor_sha256",
+    "dataset_manifest_sha256",
+    "calibration_artifact_sha256_by_horizon",
+    "instrument_id",
+    "asset_id",
+    "as_of_time",
+    "regime",
+    "prediction_mode",
+    "horizons",
+    "should_abstain",
+    "abstain_reasons",
+    "forecast_sha256"
+  ],
+  "title": "ForecastEnvelope",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.forecast-council-envelope",
+  "x-aegisquant-schema-version": "1.0.0"
+}

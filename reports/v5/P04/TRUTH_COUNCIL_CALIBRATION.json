@@ -1,0 +1,1899 @@
+{
+  "schema_version": "v5-p04-truth-council-calibration-v1",
+  "phase": "V5-P04",
+  "generated_from_fixed_clock": "2025-01-01T00:00:00+00:00",
+  "evidence_tier": "DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "real_world_truth_accuracy_claimed": false,
+  "live_trading_locked": true,
+  "feature_extraction": {
+    "feature_id": "feature:p04-extraction",
+    "claim_id": "claim:p04-extraction",
+    "source_revision_id": "revision:p04-extraction:1",
+    "input_snapshot_id": "feature-inputs:p04-extraction",
+    "input_snapshot_sha256": "2b8302a7c568d512648aca5e043073b9670dc8720f5a084219f8bda41a9a89cc",
+    "calibration_key": {
+      "source_class": "OFFICIAL",
+      "event_type": "EARNINGS",
+      "language": "en",
+      "claim_type": "FACT"
+    },
+    "primary_source_present": true,
+    "official_signature_valid": true,
+    "source_reliability_prior": "0.85",
+    "independent_source_count": 1,
+    "dependency_score": "0",
+    "contradiction_count": 0,
+    "official_denial_present": false,
+    "temporal_consistency": "1",
+    "entity_consistency": "1",
+    "quote_consistency": "1",
+    "media_provenance": "0.9",
+    "revision_count": 1,
+    "retraction_history": "0",
+    "language_translation_confidence": "1",
+    "manipulation_signals": "0.05",
+    "llm_confidence_audit_only": "0.99",
+    "evidence_graph_sha256": "71799765bd8abc60d735e3a9e8e5035e9c56f4d4d23a1ea45814d375be75a3f2",
+    "feature_version": "v5-p04-evidence-features-v1",
+    "extracted_at": "2025-01-01T00:00:00Z",
+    "available_at": "2025-01-01T00:00:00Z"
+  },
+  "dataset": {
+    "sample_count": 58,
+    "truth_label_positive_count": 34,
+    "truth_label_negative_count": 24,
+    "synthetic_development_fixture": true
+  },
+  "truth_council": {
+    "report_id": "truth-council:5480f456e88e16ef4b02c630fb20d2341a0b38d4bb5c99ef3358ca5e71557e9a",
+    "dataset_sha256": "8774679763e3764267cef5809ee045d783db545b54ac2f60af3c50ddc5d3c100",
+    "split_policy": {
+      "policy_id": "v5-p04-temporal-split-v1",
+      "mode": "EXPANDING",
+      "train_groups": 28,
+      "validation_groups": 8,
+      "calibration_groups": 8,
+      "test_groups": 12,
+      "purge_groups": 1,
+      "embargo_groups": 1,
+      "step_groups": 58,
+      "minimum_folds": 1,
+      "shuffle": false
+    },
+    "fold": {
+      "fold_id": "5480f456e88e16ef4b02c630fb20d2341a0b38d4bb5c99ef3358ca5e71557e9a",
+      "train_ids": [
+        "sample:p04:000",
+        "sample:p04:001",
+        "sample:p04:002",
+        "sample:p04:003",
+        "sample:p04:004",
+        "sample:p04:005",
+        "sample:p04:006",
+        "sample:p04:007",
+        "sample:p04:008",
+        "sample:p04:009",
+        "sample:p04:010",
+        "sample:p04:011",
+        "sample:p04:012",
+        "sample:p04:013",
+        "sample:p04:014",
+        "sample:p04:015",
+        "sample:p04:016",
+        "sample:p04:017",
+        "sample:p04:018",
+        "sample:p04:019",
+        "sample:p04:020",
+        "sample:p04:021",
+        "sample:p04:022",
+        "sample:p04:023",
+        "sample:p04:024",
+        "sample:p04:025",
+        "sample:p04:026",
+        "sample:p04:027"
+      ],
+      "validation_ids": [
+        "sample:p04:029",
+        "sample:p04:030",
+        "sample:p04:031",
+        "sample:p04:032",
+        "sample:p04:033",
+        "sample:p04:034",
+        "sample:p04:035",
+        "sample:p04:036"
+      ],
+      "calibration_ids": [
+        "sample:p04:037",
+        "sample:p04:038",
+        "sample:p04:039",
+        "sample:p04:040",
+        "sample:p04:041",
+        "sample:p04:042",
+        "sample:p04:043",
+        "sample:p04:044"
+      ],
+      "test_ids": [
+        "sample:p04:046",
+        "sample:p04:047",
+        "sample:p04:048",
+        "sample:p04:049",
+        "sample:p04:050",
+        "sample:p04:051",
+        "sample:p04:052",
+        "sample:p04:053",
+        "sample:p04:054",
+        "sample:p04:055",
+        "sample:p04:056",
+        "sample:p04:057"
+      ],
+      "purged_ids": [
+        "sample:p04:028",
+        "sample:p04:045"
+      ],
+      "validation_starts_at": "2025-01-30T00:00:00Z",
+      "test_ends_at": "2025-02-27T00:00:00Z"
+    },
+    "feature_names": [
+      "primary_source_present",
+      "official_signature_valid",
+      "source_reliability_prior",
+      "independent_source_count",
+      "dependency_score",
+      "contradiction_count",
+      "official_denial_present",
+      "temporal_consistency",
+      "entity_consistency",
+      "quote_consistency",
+      "media_provenance",
+      "revision_count",
+      "retraction_history",
+      "language_translation_confidence",
+      "manipulation_signals"
+    ],
+    "candidates": [
+      {
+        "model_id": "truth-logistic-baseline-v1",
+        "family": "LOGISTIC_BASELINE",
+        "model_spec_sha256": "8df19a79477c4435722d9cbeaaa46e640320d3bfc2d8886b809ad265b89d6cf3",
+        "fit_sample_ids": [
+          "sample:p04:000",
+          "sample:p04:001",
+          "sample:p04:002",
+          "sample:p04:003",
+          "sample:p04:004",
+          "sample:p04:005",
+          "sample:p04:006",
+          "sample:p04:007",
+          "sample:p04:008",
+          "sample:p04:009",
+          "sample:p04:010",
+          "sample:p04:011",
+          "sample:p04:012",
+          "sample:p04:013",
+          "sample:p04:014",
+          "sample:p04:015",
+          "sample:p04:016",
+          "sample:p04:017",
+          "sample:p04:018",
+          "sample:p04:019",
+          "sample:p04:020",
+          "sample:p04:021",
+          "sample:p04:022",
+          "sample:p04:023",
+          "sample:p04:024",
+          "sample:p04:025",
+          "sample:p04:026",
+          "sample:p04:027"
+        ],
+        "validation_sample_ids": [
+          "sample:p04:029",
+          "sample:p04:030",
+          "sample:p04:031",
+          "sample:p04:032",
+          "sample:p04:033",
+          "sample:p04:034",
+          "sample:p04:035",
+          "sample:p04:036"
+        ],
+        "validation_prediction_sha256": "603bb01a3dae45da9926118a136668d5bb7f6fa212ef409dc8f231f6928d391b",
+        "validation_metrics": {
+          "sample_count": 8,
+          "brier_score": "0.131525858041367",
+          "log_loss": "0.402048556138298",
+          "expected_calibration_error": "0.191963806661466",
+          "maximum_calibration_error": "0.453503330254613",
+          "calibration_slope": "413.893938321479",
+          "calibration_intercept": "-84.5398962457075",
+          "precision": "0.75",
+          "recall": "1",
+          "specificity": "0.8",
+          "f1": "0.857142857142857",
+          "pr_auc": "1",
+          "high_confidence_sample_count": 3,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 1,
+              "mean_probability": "0.118007277088319",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 1,
+              "mean_probability": "0.348480352435946",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 2,
+              "mean_probability": "0.453503330254613",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 2,
+              "mean_probability": "0.550877518826332",
+              "observed_frequency": "0.5"
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 2,
+              "mean_probability": "0.969769437197213",
+              "observed_frequency": "1"
+            }
+          ]
+        }
+      },
+      {
+        "model_id": "truth-gradient-boosting-v1",
+        "family": "GRADIENT_BOOSTING",
+        "model_spec_sha256": "24b26ba7e64f0f2fc43245d2f05f0a6f39ecb3879a099966bd6cc14834049c2d",
+        "fit_sample_ids": [
+          "sample:p04:000",
+          "sample:p04:001",
+          "sample:p04:002",
+          "sample:p04:003",
+          "sample:p04:004",
+          "sample:p04:005",
+          "sample:p04:006",
+          "sample:p04:007",
+          "sample:p04:008",
+          "sample:p04:009",
+          "sample:p04:010",
+          "sample:p04:011",
+          "sample:p04:012",
+          "sample:p04:013",
+          "sample:p04:014",
+          "sample:p04:015",
+          "sample:p04:016",
+          "sample:p04:017",
+          "sample:p04:018",
+          "sample:p04:019",
+          "sample:p04:020",
+          "sample:p04:021",
+          "sample:p04:022",
+          "sample:p04:023",
+          "sample:p04:024",
+          "sample:p04:025",
+          "sample:p04:026",
+          "sample:p04:027"
+        ],
+        "validation_sample_ids": [
+          "sample:p04:029",
+          "sample:p04:030",
+          "sample:p04:031",
+          "sample:p04:032",
+          "sample:p04:033",
+          "sample:p04:034",
+          "sample:p04:035",
+          "sample:p04:036"
+        ],
+        "validation_prediction_sha256": "318dd5ef0122505b057b722658da9f5e15459b019d165f866952e0e791b512c5",
+        "validation_metrics": {
+          "sample_count": 8,
+          "brier_score": "0.0558175135004412",
+          "log_loss": "0.216829075578289",
+          "expected_calibration_error": "0.179067230329148",
+          "maximum_calibration_error": "0.414054181993106",
+          "calibration_slope": "5.13642522923428",
+          "calibration_intercept": "-6.57545070797267",
+          "precision": "1",
+          "recall": "1",
+          "specificity": "1",
+          "f1": "1",
+          "pr_auc": "1",
+          "high_confidence_sample_count": 5,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 2,
+              "mean_probability": "0.120769766131673",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 1,
+              "mean_probability": "0.267284286609372",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 2,
+              "mean_probability": "0.414054181993106",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 3,
+              "mean_probability": "0.968131446741915",
+              "observed_frequency": "1"
+            }
+          ]
+        }
+      },
+      {
+        "model_id": "truth-bayesian-hierarchical-v1",
+        "family": "BAYESIAN_HIERARCHICAL",
+        "model_spec_sha256": "d48d31c7cc80c9267dbfe605e339d541873bed3428171c20d460f5b0b25d356e",
+        "fit_sample_ids": [
+          "sample:p04:000",
+          "sample:p04:001",
+          "sample:p04:002",
+          "sample:p04:003",
+          "sample:p04:004",
+          "sample:p04:005",
+          "sample:p04:006",
+          "sample:p04:007",
+          "sample:p04:008",
+          "sample:p04:009",
+          "sample:p04:010",
+          "sample:p04:011",
+          "sample:p04:012",
+          "sample:p04:013",
+          "sample:p04:014",
+          "sample:p04:015",
+          "sample:p04:016",
+          "sample:p04:017",
+          "sample:p04:018",
+          "sample:p04:019",
+          "sample:p04:020",
+          "sample:p04:021",
+          "sample:p04:022",
+          "sample:p04:023",
+          "sample:p04:024",
+          "sample:p04:025",
+          "sample:p04:026",
+          "sample:p04:027"
+        ],
+        "validation_sample_ids": [
+          "sample:p04:029",
+          "sample:p04:030",
+          "sample:p04:031",
+          "sample:p04:032",
+          "sample:p04:033",
+          "sample:p04:034",
+          "sample:p04:035",
+          "sample:p04:036"
+        ],
+        "validation_prediction_sha256": "e9be691234ecf71d10e17e6b60e3da5c6521101e990821afd4e47fda52b3c7ac",
+        "validation_metrics": {
+          "sample_count": 8,
+          "brier_score": "0.336652892561984",
+          "log_loss": "0.887283144162426",
+          "expected_calibration_error": "0.234090909090909",
+          "maximum_calibration_error": "0.763636363636364",
+          "calibration_slope": "-2.73130371617483",
+          "calibration_intercept": "0.487018409795891",
+          "precision": "0.333333333333333",
+          "recall": "0.666666666666667",
+          "specificity": "0.2",
+          "f1": "0.444444444444444",
+          "pr_auc": "0.347222222222222",
+          "high_confidence_sample_count": 0,
+          "high_confidence_accuracy": "0",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 2,
+              "mean_probability": "0.490909090909091",
+              "observed_frequency": "0.5"
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 4,
+              "mean_probability": "0.581818181818182",
+              "observed_frequency": "0.5"
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 2,
+              "mean_probability": "0.763636363636364",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            }
+          ]
+        }
+      }
+    ],
+    "baseline_model_id": "truth-logistic-baseline-v1",
+    "selected_model_id": "truth-gradient-boosting-v1",
+    "rejected_model_ids": [
+      "truth-logistic-baseline-v1",
+      "truth-bayesian-hierarchical-v1"
+    ],
+    "minimum_incremental_improvement": "0.005",
+    "selection_metric": "VALIDATION_BRIER",
+    "calibration_comparisons": [
+      {
+        "method": "PLATT_LOGISTIC",
+        "artifact_sha256": "74ecca89c5e28cd4b18c488f0e1f04cc66487a8070e0d3aa0486eead86becc43",
+        "fit_sample_ids": [
+          "sample:p04:037",
+          "sample:p04:038",
+          "sample:p04:039",
+          "sample:p04:040",
+          "sample:p04:041",
+          "sample:p04:042",
+          "sample:p04:043",
+          "sample:p04:044"
+        ],
+        "evaluation_sample_ids": [
+          "sample:p04:046",
+          "sample:p04:047",
+          "sample:p04:048",
+          "sample:p04:049",
+          "sample:p04:050",
+          "sample:p04:051",
+          "sample:p04:052",
+          "sample:p04:053",
+          "sample:p04:054",
+          "sample:p04:055",
+          "sample:p04:056",
+          "sample:p04:057"
+        ],
+        "probabilities": [
+          "0.427003932212036",
+          "0.898794701333493",
+          "0.898794701333493",
+          "0.301241841622794",
+          "0.427003932212036",
+          "0.898794701333493",
+          "0.301241841622794",
+          "0.51909767414337",
+          "0.898794701333493",
+          "0.898794701333493",
+          "0.51909767414337",
+          "0.898794701333493"
+        ],
+        "metrics": {
+          "sample_count": 12,
+          "brier_score": "0.128671182730271",
+          "log_loss": "0.398035941417063",
+          "expected_calibration_error": "0.241412610122022",
+          "maximum_calibration_error": "0.51909767414337",
+          "calibration_slope": "1.75033252147169",
+          "calibration_intercept": "-0.808727792649513",
+          "precision": "0.75",
+          "recall": "0.857142857142857",
+          "specificity": "0.6",
+          "f1": "0.8",
+          "pr_auc": "0.94047619047619",
+          "high_confidence_sample_count": 6,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 2,
+              "mean_probability": "0.301241841622794",
+              "observed_frequency": "0.5"
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 2,
+              "mean_probability": "0.427003932212036",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 2,
+              "mean_probability": "0.51909767414337",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 6,
+              "mean_probability": "0.898794701333493",
+              "observed_frequency": "1"
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            }
+          ]
+        }
+      },
+      {
+        "method": "ISOTONIC",
+        "artifact_sha256": "bca29e1e87b12dbdc00def60c4e3bbafa14727b638cf608118d61ff8c570797e",
+        "fit_sample_ids": [
+          "sample:p04:037",
+          "sample:p04:038",
+          "sample:p04:039",
+          "sample:p04:040",
+          "sample:p04:041",
+          "sample:p04:042",
+          "sample:p04:043",
+          "sample:p04:044"
+        ],
+        "evaluation_sample_ids": [
+          "sample:p04:046",
+          "sample:p04:047",
+          "sample:p04:048",
+          "sample:p04:049",
+          "sample:p04:050",
+          "sample:p04:051",
+          "sample:p04:052",
+          "sample:p04:053",
+          "sample:p04:054",
+          "sample:p04:055",
+          "sample:p04:056",
+          "sample:p04:057"
+        ],
+        "probabilities": [
+          "0.25",
+          "0.999999999",
+          "0.999999999",
+          "0.25",
+          "0.25",
+          "0.999999999",
+          "0.25",
+          "0.25",
+          "0.999999999",
+          "0.999999999",
+          "0.25",
+          "0.999999999"
+        ],
+        "metrics": {
+          "sample_count": 12,
+          "brier_score": "0.0729166666666667",
+          "log_loss": "0.235392060781566",
+          "expected_calibration_error": "0.0416666671666667",
+          "maximum_calibration_error": "0.0833333333333333",
+          "calibration_slope": "1.2617844605095",
+          "calibration_intercept": "-0.223077543450416",
+          "precision": "1",
+          "recall": "0.857142857142857",
+          "specificity": "1",
+          "f1": "0.923076923076923",
+          "pr_auc": "0.94047619047619",
+          "high_confidence_sample_count": 6,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 6,
+              "mean_probability": "0.25",
+              "observed_frequency": "0.166666666666667"
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 6,
+              "mean_probability": "0.999999999",
+              "observed_frequency": "1"
+            }
+          ]
+        }
+      },
+      {
+        "method": "TEMPERATURE_SCALING",
+        "artifact_sha256": "d5c4192551a013b07403984de6cb434164e230d563698a91a84ee6243129d9b4",
+        "fit_sample_ids": [
+          "sample:p04:037",
+          "sample:p04:038",
+          "sample:p04:039",
+          "sample:p04:040",
+          "sample:p04:041",
+          "sample:p04:042",
+          "sample:p04:043",
+          "sample:p04:044"
+        ],
+        "evaluation_sample_ids": [
+          "sample:p04:046",
+          "sample:p04:047",
+          "sample:p04:048",
+          "sample:p04:049",
+          "sample:p04:050",
+          "sample:p04:051",
+          "sample:p04:052",
+          "sample:p04:053",
+          "sample:p04:054",
+          "sample:p04:055",
+          "sample:p04:056",
+          "sample:p04:057"
+        ],
+        "probabilities": [
+          "0.342852168192028",
+          "0.900466451780779",
+          "0.900466451780779",
+          "0.21742276882058",
+          "0.342852168192028",
+          "0.900466451780779",
+          "0.21742276882058",
+          "0.444228129955579",
+          "0.900466451780779",
+          "0.900466451780779",
+          "0.444228129955579",
+          "0.900466451780779"
+        ],
+        "metrics": {
+          "sample_count": 12,
+          "brier_score": "0.112409485653693",
+          "log_loss": "0.367884646826204",
+          "expected_calibration_error": "0.228043028997448",
+          "maximum_calibration_error": "0.444228129955579",
+          "calibration_slope": "1.5203662900698",
+          "calibration_intercept": "-0.334397296391701",
+          "precision": "1",
+          "recall": "0.857142857142857",
+          "specificity": "1",
+          "f1": "0.923076923076923",
+          "pr_auc": "0.94047619047619",
+          "high_confidence_sample_count": 6,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 2,
+              "mean_probability": "0.21742276882058",
+              "observed_frequency": "0.5"
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 2,
+              "mean_probability": "0.342852168192028",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 2,
+              "mean_probability": "0.444228129955579",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 6,
+              "mean_probability": "0.900466451780779",
+              "observed_frequency": "1"
+            }
+          ]
+        }
+      },
+      {
+        "method": "BETA_CALIBRATION",
+        "artifact_sha256": "9310a00eeb73e36ad59da9f1a09e3d01e3f107e8484eb326194482258b59b7d4",
+        "fit_sample_ids": [
+          "sample:p04:037",
+          "sample:p04:038",
+          "sample:p04:039",
+          "sample:p04:040",
+          "sample:p04:041",
+          "sample:p04:042",
+          "sample:p04:043",
+          "sample:p04:044"
+        ],
+        "evaluation_sample_ids": [
+          "sample:p04:046",
+          "sample:p04:047",
+          "sample:p04:048",
+          "sample:p04:049",
+          "sample:p04:050",
+          "sample:p04:051",
+          "sample:p04:052",
+          "sample:p04:053",
+          "sample:p04:054",
+          "sample:p04:055",
+          "sample:p04:056",
+          "sample:p04:057"
+        ],
+        "probabilities": [
+          "0.337359163050486",
+          "0.906753079028059",
+          "0.906753079028059",
+          "0.324028692836552",
+          "0.337359163050486",
+          "0.906753079028059",
+          "0.324028692836552",
+          "0.37325765609601",
+          "0.906753079028059",
+          "0.906753079028059",
+          "0.37325765609601",
+          "0.906753079028059"
+        ],
+        "metrics": {
+          "sample_count": 12,
+          "brier_score": "0.0933638914142444",
+          "log_loss": "0.321943526929605",
+          "expected_calibration_error": "0.135731045816478",
+          "maximum_calibration_error": "0.178215170661016",
+          "calibration_slope": "2.2793186115488",
+          "calibration_intercept": "-0.114289390076797",
+          "precision": "1",
+          "recall": "0.857142857142857",
+          "specificity": "1",
+          "f1": "0.923076923076923",
+          "pr_auc": "0.94047619047619",
+          "high_confidence_sample_count": 6,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 6,
+              "mean_probability": "0.344881837327683",
+              "observed_frequency": "0.166666666666667"
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 6,
+              "mean_probability": "0.906753079028059",
+              "observed_frequency": "1"
+            }
+          ]
+        }
+      }
+    ],
+    "selected_calibration_method": "PLATT_LOGISTIC",
+    "calibration_slices": [
+      {
+        "calibration_key": {
+          "source_class": "MEDIA",
+          "event_type": "GEOPOLITICAL",
+          "language": "zh",
+          "claim_type": "QUOTE"
+        },
+        "evaluation_sample_ids": [
+          "sample:p04:047",
+          "sample:p04:051",
+          "sample:p04:055"
+        ],
+        "status": "INSUFFICIENT_CLASS_VARIATION",
+        "metrics": {
+          "sample_count": 3,
+          "brier_score": "0.0102425124781769",
+          "log_loss": "0.106700633955927",
+          "expected_calibration_error": "0.101205298666507",
+          "maximum_calibration_error": "0.101205298666507",
+          "calibration_slope": null,
+          "calibration_intercept": null,
+          "precision": "1",
+          "recall": "1",
+          "specificity": "0",
+          "f1": "1",
+          "pr_auc": "1",
+          "high_confidence_sample_count": 3,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 3,
+              "mean_probability": "0.898794701333493",
+              "observed_frequency": "1"
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            }
+          ]
+        }
+      },
+      {
+        "calibration_key": {
+          "source_class": "OFFICIAL",
+          "event_type": "CORPORATE_ACTION",
+          "language": "en",
+          "claim_type": "FACT"
+        },
+        "evaluation_sample_ids": [
+          "sample:p04:048",
+          "sample:p04:052",
+          "sample:p04:056"
+        ],
+        "status": "EVALUATED",
+        "metrics": {
+          "sample_count": 3,
+          "brier_score": "0.255989290559313",
+          "log_loss": "0.679544534831307",
+          "expected_calibration_error": "0.439687043729028",
+          "maximum_calibration_error": "0.698758158377206",
+          "calibration_slope": "0.398838165589531",
+          "calibration_intercept": "0.549812148770019",
+          "precision": "0.5",
+          "recall": "0.5",
+          "specificity": "0",
+          "f1": "0.5",
+          "pr_auc": "0.833333333333333",
+          "high_confidence_sample_count": 1,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 1,
+              "mean_probability": "0.301241841622794",
+              "observed_frequency": "1"
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 1,
+              "mean_probability": "0.51909767414337",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 1,
+              "mean_probability": "0.898794701333493",
+              "observed_frequency": "1"
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            }
+          ]
+        }
+      },
+      {
+        "calibration_key": {
+          "source_class": "NEWSWIRE",
+          "event_type": "MACRO",
+          "language": "en",
+          "claim_type": "QUOTE"
+        },
+        "evaluation_sample_ids": [
+          "sample:p04:049",
+          "sample:p04:053",
+          "sample:p04:057"
+        ],
+        "status": "EVALUATED",
+        "metrics": {
+          "sample_count": 3,
+          "brier_score": "0.123483851641175",
+          "log_loss": "0.399080769035621",
+          "expected_calibration_error": "0.30718160481089",
+          "maximum_calibration_error": "0.51909767414337",
+          "calibration_slope": "8.02773697231209",
+          "calibration_intercept": "-8.51229622780864",
+          "precision": "0.5",
+          "recall": "1",
+          "specificity": "0.5",
+          "f1": "0.666666666666667",
+          "pr_auc": "1",
+          "high_confidence_sample_count": 1,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 1,
+              "mean_probability": "0.301241841622794",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 1,
+              "mean_probability": "0.51909767414337",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 1,
+              "mean_probability": "0.898794701333493",
+              "observed_frequency": "1"
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            }
+          ]
+        }
+      },
+      {
+        "calibration_key": {
+          "source_class": "REGULATOR",
+          "event_type": "POLICY",
+          "language": "zh",
+          "claim_type": "FACT"
+        },
+        "evaluation_sample_ids": [
+          "sample:p04:046",
+          "sample:p04:050",
+          "sample:p04:054"
+        ],
+        "status": "EVALUATED",
+        "metrics": {
+          "sample_count": 3,
+          "brier_score": "0.12496907624242",
+          "log_loss": "0.406817827845399",
+          "expected_calibration_error": "0.31840438769686",
+          "maximum_calibration_error": "0.427003932212036",
+          "calibration_slope": "7.50558578672577",
+          "calibration_intercept": "-6.81796209097675",
+          "precision": "1",
+          "recall": "1",
+          "specificity": "1",
+          "f1": "1",
+          "pr_auc": "1",
+          "high_confidence_sample_count": 1,
+          "high_confidence_accuracy": "1",
+          "reliability_diagram": [
+            {
+              "bin_index": 0,
+              "lower_bound": "0",
+              "upper_bound": "0.1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 1,
+              "lower_bound": "0.1",
+              "upper_bound": "0.2",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 2,
+              "lower_bound": "0.2",
+              "upper_bound": "0.3",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 3,
+              "lower_bound": "0.3",
+              "upper_bound": "0.4",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 4,
+              "lower_bound": "0.4",
+              "upper_bound": "0.5",
+              "sample_count": 2,
+              "mean_probability": "0.427003932212036",
+              "observed_frequency": "0"
+            },
+            {
+              "bin_index": 5,
+              "lower_bound": "0.5",
+              "upper_bound": "0.6",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 6,
+              "lower_bound": "0.6",
+              "upper_bound": "0.7",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 7,
+              "lower_bound": "0.7",
+              "upper_bound": "0.8",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            },
+            {
+              "bin_index": 8,
+              "lower_bound": "0.8",
+              "upper_bound": "0.9",
+              "sample_count": 1,
+              "mean_probability": "0.898794701333493",
+              "observed_frequency": "1"
+            },
+            {
+              "bin_index": 9,
+              "lower_bound": "0.9",
+              "upper_bound": "1",
+              "sample_count": 0,
+              "mean_probability": null,
+              "observed_frequency": null
+            }
+          ]
+        }
+      }
+    ],
+    "probability_aggregation": "CALIBRATED_MODEL_NOT_AGENT_VOTE",
+    "llm_confidence_used_as_model_input": false,
+    "test_labels_used_for_model_selection": false,
+    "created_at": "2025-02-27T03:00:00Z",
+    "available_at": "2025-02-27T03:00:00Z"
+  },
+  "truth_state_replay": {
+    "transitions": [
+      {
+        "transition_id": "transition:p04:1",
+        "claim_id": "claim:p04-replay",
+        "from_state": "UNVERIFIED",
+        "to_state": "RUMOR",
+        "evidence_revision_id": "revision:p04-replay:1",
+        "reason_codes": [
+          "REVISION_1"
+        ],
+        "previous_transition_id": null,
+        "previous_transition_sha256": null,
+        "effective_at": "2025-01-01T01:00:00Z",
+        "observed_at": "2025-01-01T01:00:00Z",
+        "available_at": "2025-01-01T01:00:00Z",
+        "created_at": "2025-01-01T01:00:00Z",
+        "version": "truth-state-v1"
+      },
+      {
+        "transition_id": "transition:p04:2",
+        "claim_id": "claim:p04-replay",
+        "from_state": "RUMOR",
+        "to_state": "VERIFIED_PRIMARY",
+        "evidence_revision_id": "revision:p04-replay:2",
+        "reason_codes": [
+          "REVISION_2"
+        ],
+        "previous_transition_id": "transition:p04:1",
+        "previous_transition_sha256": "dae2bea375b5023b036ad076847670933326c45a1f7146488c513e867520d2bf",
+        "effective_at": "2025-01-01T02:00:00Z",
+        "observed_at": "2025-01-01T02:00:00Z",
+        "available_at": "2025-01-01T02:00:00Z",
+        "created_at": "2025-01-01T02:00:00Z",
+        "version": "truth-state-v1"
+      },
+      {
+        "transition_id": "transition:p04:3",
+        "claim_id": "claim:p04-replay",
+        "from_state": "VERIFIED_PRIMARY",
+        "to_state": "RETRACTED",
+        "evidence_revision_id": "revision:p04-replay:3",
+        "reason_codes": [
+          "REVISION_3"
+        ],
+        "previous_transition_id": "transition:p04:2",
+        "previous_transition_sha256": "82c09017b44d4e8449fc23e206724afedb46a04f8846a0c7695fb2f40125cc10",
+        "effective_at": "2025-01-01T03:00:00Z",
+        "observed_at": "2025-01-01T03:00:00Z",
+        "available_at": "2025-01-01T03:00:00Z",
+        "created_at": "2025-01-01T03:00:00Z",
+        "version": "truth-state-v1"
+      }
+    ],
+    "snapshots": [
+      {
+        "claim_id": "claim:p04-replay",
+        "as_of_time": "2025-01-01T01:30:00Z",
+        "state": "RUMOR",
+        "visible_transition_count": 1,
+        "latest_transition_id": "transition:p04:1",
+        "latest_transition_sha256": "dae2bea375b5023b036ad076847670933326c45a1f7146488c513e867520d2bf",
+        "visible_history_sha256": "dee1308b8ed7938f966268c4e33fb94b1c31408a2cd8e2a4199336259165f59a"
+      },
+      {
+        "claim_id": "claim:p04-replay",
+        "as_of_time": "2025-01-01T02:30:00Z",
+        "state": "VERIFIED_PRIMARY",
+        "visible_transition_count": 2,
+        "latest_transition_id": "transition:p04:2",
+        "latest_transition_sha256": "82c09017b44d4e8449fc23e206724afedb46a04f8846a0c7695fb2f40125cc10",
+        "visible_history_sha256": "0ec3cedf212ab878425bbd40ab2b46722a101524641cfceabfc96df0c41a1b76"
+      },
+      {
+        "claim_id": "claim:p04-replay",
+        "as_of_time": "2025-01-01T03:30:00Z",
+        "state": "RETRACTED",
+        "visible_transition_count": 3,
+        "latest_transition_id": "transition:p04:3",
+        "latest_transition_sha256": "0698b2747c60b4ba57f4501383e94f8bdf54456040fb731ae0a2fda0a1dccf59",
+        "visible_history_sha256": "602b9b30149202a26d59eeb7f4cdfea2c26e213af6939f6a9314e028e0111287"
+      }
+    ],
+    "state_sequence": [
+      "RUMOR",
+      "VERIFIED_PRIMARY",
+      "RETRACTED"
+    ]
+  },
+  "source_reliability": {
+    "policy": {
+      "policy_version": "source-reliability-policy-v1",
+      "correction_weight": "0.2",
+      "retraction_weight": "0.3",
+      "false_claim_weight": "0.5",
+      "minimum_reliability": "0.1"
+    },
+    "snapshots": [
+      {
+        "snapshot_id": "source-reliability:p04:1",
+        "source_identity_id": "source:p04-reliability",
+        "reliability_score": "0.9",
+        "rates": {
+          "correction_rate": "0.05",
+          "retraction_rate": "0.01",
+          "false_claim_rate": "0.02"
+        },
+        "observation_count": 100,
+        "policy_version": "source-reliability-policy-v1",
+        "reason_codes": [
+          "SOURCE_REGISTRY_PRIOR"
+        ],
+        "previous_snapshot_id": null,
+        "previous_snapshot_sha256": null,
+        "created_at": "2025-01-01T00:00:00Z",
+        "available_at": "2025-01-01T00:00:00Z",
+        "version": "source-reliability-v1"
+      },
+      {
+        "snapshot_id": "source-reliability:p04:2",
+        "source_identity_id": "source:p04-reliability",
+        "reliability_score": "0.8235",
+        "rates": {
+          "correction_rate": "0.15",
+          "retraction_rate": "0.06",
+          "false_claim_rate": "0.12"
+        },
+        "observation_count": 200,
+        "policy_version": "source-reliability-policy-v1",
+        "reason_codes": [
+          "CORRECTION_RATE_INCREASED",
+          "RETRACTION_RATE_INCREASED",
+          "FALSE_CLAIM_RATE_INCREASED"
+        ],
+        "previous_snapshot_id": "source-reliability:p04:1",
+        "previous_snapshot_sha256": "8e81811252df1096bb055cd1f38305b29550595e694d9c466721a8ed2e636d01",
+        "created_at": "2025-01-02T00:00:00Z",
+        "available_at": "2025-01-02T00:00:00Z",
+        "version": "source-reliability-v1"
+      }
+    ],
+    "initial_score": "0.9",
+    "degraded_score": "0.8235",
+    "pit_selected_snapshot_id": "source-reliability:p04:1",
+    "decayed": true
+  },
+  "truth_model_reliability": {
+    "policy": {
+      "policy_version": "truth-model-reliability-policy-v1",
+      "minimum_high_confidence_samples": 20,
+      "degraded_gap": "0.05",
+      "restricted_gap": "0.10",
+      "retired_gap": "0.20"
+    },
+    "snapshots": [
+      {
+        "snapshot_id": "model-reliability:p04:1",
+        "model_id": "truth-logistic-baseline-v1",
+        "state": "NORMAL",
+        "predicted_high_confidence_mean": "0.90",
+        "actual_confirmed_rate": "0.88",
+        "high_confidence_sample_count": 30,
+        "calibration_gap": "0.02",
+        "policy_version": "truth-model-reliability-policy-v1",
+        "reason_codes": [
+          "HIGH_CONFIDENCE_CALIBRATION_WITHIN_POLICY"
+        ],
+        "previous_snapshot_id": null,
+        "previous_snapshot_sha256": null,
+        "outcomes_available_at": "2025-01-01T23:00:00Z",
+        "created_at": "2025-01-02T00:00:00Z",
+        "available_at": "2025-01-02T00:00:00Z",
+        "version": "truth-model-reliability-v1"
+      },
+      {
+        "snapshot_id": "model-reliability:p04:2",
+        "model_id": "truth-logistic-baseline-v1",
+        "state": "DEGRADED",
+        "predicted_high_confidence_mean": "0.90",
+        "actual_confirmed_rate": "0.82",
+        "high_confidence_sample_count": 40,
+        "calibration_gap": "0.08",
+        "policy_version": "truth-model-reliability-policy-v1",
+        "reason_codes": [
+          "HIGH_CONFIDENCE_CALIBRATION_GAP_DEGRADED"
+        ],
+        "previous_snapshot_id": "model-reliability:p04:1",
+        "previous_snapshot_sha256": "cadbbc234be793dd628ea837c90caa8e54d8d060dd33dac569f67895d44c4b83",
+        "outcomes_available_at": "2025-01-02T23:00:00Z",
+        "created_at": "2025-01-03T00:00:00Z",
+        "available_at": "2025-01-03T00:00:00Z",
+        "version": "truth-model-reliability-v1"
+      },
+      {
+        "snapshot_id": "model-reliability:p04:3",
+        "model_id": "truth-logistic-baseline-v1",
+        "state": "RESTRICTED",
+        "predicted_high_confidence_mean": "0.90",
+        "actual_confirmed_rate": "0.75",
+        "high_confidence_sample_count": 50,
+        "calibration_gap": "0.15",
+        "policy_version": "truth-model-reliability-policy-v1",
+        "reason_codes": [
+          "HIGH_CONFIDENCE_CALIBRATION_GAP_RESTRICTED"
+        ],
+        "previous_snapshot_id": "model-reliability:p04:2",
+        "previous_snapshot_sha256": "83527d0c28943a8e43062a80b2aac477bc1c125eb9336be75ca771cf2eb26f40",
+        "outcomes_available_at": "2025-01-03T23:00:00Z",
+        "created_at": "2025-01-04T00:00:00Z",
+        "available_at": "2025-01-04T00:00:00Z",
+        "version": "truth-model-reliability-v1"
+      },
+      {
+        "snapshot_id": "model-reliability:p04:4",
+        "model_id": "truth-logistic-baseline-v1",
+        "state": "RETIRED",
+        "predicted_high_confidence_mean": "0.90",
+        "actual_confirmed_rate": "0.65",
+        "high_confidence_sample_count": 60,
+        "calibration_gap": "0.25",
+        "policy_version": "truth-model-reliability-policy-v1",
+        "reason_codes": [
+          "HIGH_CONFIDENCE_CALIBRATION_GAP_RETIRED"
+        ],
+        "previous_snapshot_id": "model-reliability:p04:3",
+        "previous_snapshot_sha256": "87180f36f74e6bee5b02961a8bd9e2e6bd035bfbf91ebe59c0fb52657a7f19f6",
+        "outcomes_available_at": "2025-01-04T23:00:00Z",
+        "created_at": "2025-01-05T00:00:00Z",
+        "available_at": "2025-01-05T00:00:00Z",
+        "version": "truth-model-reliability-v1"
+      }
+    ],
+    "state_sequence": [
+      "NORMAL",
+      "DEGRADED",
+      "RESTRICTED",
+      "RETIRED"
+    ],
+    "outcome_availability_bound": true
+  },
+  "checks": {
+    "evidence_features_are_extracted_from_pit_graph": true,
+    "external_feature_inputs_are_pit_lineage_bound": true,
+    "all_mandatory_model_features_are_present": true,
+    "llm_confidence_is_not_a_model_input_or_final_probability": true,
+    "temporal_train_validation_calibration_test_are_disjoint": true,
+    "calibration_split_is_chronologically_independent": true,
+    "fold_policy_is_recomputed_and_claims_are_unique": true,
+    "baseline_boosting_and_bayesian_candidates_are_compared": true,
+    "four_probability_calibrators_are_compared": true,
+    "brier_logloss_and_reliability_diagram_are_reported": true,
+    "calibration_is_maintained_by_required_strata": true,
+    "historical_revision_replay_supports_retraction": true,
+    "worsening_source_history_decays_reliability": true,
+    "truth_model_reliability_reaches_retired": true,
+    "test_labels_do_not_select_model_or_calibrator": true,
+    "development_evidence_cannot_promote_alpha": true
+  },
+  "acceptance_traceability": {
+    "evidence_features_are_extracted_from_pit_graph": "tests/v5_p04/test_truth_features_and_calibration.py::test_feature_extraction_uses_pit_independence_and_keeps_llm_confidence_audit_only",
+    "external_feature_inputs_are_pit_lineage_bound": "tests/v5_p04/test_truth_features_and_calibration.py::test_feature_extraction_uses_pit_independence_and_keeps_llm_confidence_audit_only",
+    "all_mandatory_model_features_are_present": "tests/v5_p04/test_truth_features_and_calibration.py::test_feature_extraction_uses_pit_independence_and_keeps_llm_confidence_audit_only",
+    "llm_confidence_is_not_a_model_input_or_final_probability": "tests/v5_p04/test_truth_features_and_calibration.py::test_truth_council_has_disjoint_temporal_calibration_and_no_llm_probability_path",
+    "temporal_train_validation_calibration_test_are_disjoint": "tests/v5_p04/test_truth_features_and_calibration.py::test_truth_council_has_disjoint_temporal_calibration_and_no_llm_probability_path",
+    "calibration_split_is_chronologically_independent": "tests/v5_p04/test_truth_features_and_calibration.py::test_truth_council_has_disjoint_temporal_calibration_and_no_llm_probability_path",
+    "fold_policy_is_recomputed_and_claims_are_unique": "tests/v5_p04/test_truth_features_and_calibration.py::test_truth_council_rejects_forged_temporal_fold_and_misbound_feature",
+    "baseline_boosting_and_bayesian_candidates_are_compared": "tests/v5_p04/test_truth_features_and_calibration.py::test_truth_council_has_disjoint_temporal_calibration_and_no_llm_probability_path",
+    "four_probability_calibrators_are_compared": "tests/v5_p04/test_truth_features_and_calibration.py::test_truth_council_has_disjoint_temporal_calibration_and_no_llm_probability_path",
+    "brier_logloss_and_reliability_diagram_are_reported": "tests/v5_p04/test_truth_features_and_calibration.py::test_calibration_metrics_include_brier_logloss_and_reliability_diagram",
+    "calibration_is_maintained_by_required_strata": "tests/v5_p04/test_truth_features_and_calibration.py::test_truth_council_has_disjoint_temporal_calibration_and_no_llm_probability_path",
+    "historical_revision_replay_supports_retraction": "tests/v5_p04/test_truth_lifecycle.py::test_historical_revision_replay_supports_verified_to_retracted_without_lookahead",
+    "worsening_source_history_decays_reliability": "tests/v5_p04/test_truth_lifecycle.py::test_source_reliability_decays_on_worsening_rates_and_future_snapshot_is_hidden",
+    "truth_model_reliability_reaches_retired": "tests/v5_p04/test_truth_lifecycle.py::test_truth_model_reliability_progresses_to_retired_and_never_auto_recovers",
+    "test_labels_do_not_select_model_or_calibrator": "tests/v5_p04/test_truth_features_and_calibration.py::test_truth_council_has_disjoint_temporal_calibration_and_no_llm_probability_path",
+    "development_evidence_cannot_promote_alpha": "tests/v5_p04/test_v5_p04_phase_evidence.py::test_v5_p04_evidence_is_complete_traceable_and_non_promotable"
+  },
+  "limitations": [
+    "All labels and features are deterministic DEVELOPMENT fixtures, not real-world claims.",
+    "Reported Brier, LogLoss, ECE, classification metrics, and reliability diagrams do not establish production accuracy.",
+    "Four binary-probability calibrators are compared; time-series conformal interval methods remain in V5-P09.",
+    "No candidate is promoted to Alpha, Paper, Shadow, Testnet, Canary, or Live use.",
+    "No causal effect, market forecast accuracy, backtest return, or trading edge is claimed."
+  ],
+  "result": "PASS"
+}

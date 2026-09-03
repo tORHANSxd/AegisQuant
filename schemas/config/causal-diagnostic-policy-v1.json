@@ -1,0 +1,140 @@
+{
+  "$defs": {
+    "PlaceboKind": {
+      "enum": [
+        "EVENT_TIMESTAMP",
+        "ASSET",
+        "TREATMENT_PERMUTATION"
+      ],
+      "title": "PlaceboKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.causal-diagnostic-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "maximum_absolute_smd": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "0.25",
+      "ge": "0",
+      "title": "Maximum Absolute Smd"
+    },
+    "maximum_placebo_p_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "0.10",
+      "ge": "0",
+      "le": "1",
+      "title": "Maximum Placebo P Value"
+    },
+    "maximum_pre_treatment_nrmse": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "0.25",
+      "ge": "0",
+      "title": "Maximum Pre Treatment Nrmse"
+    },
+    "maximum_pretrend_slope_gap": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "0.05",
+      "ge": "0",
+      "title": "Maximum Pretrend Slope Gap"
+    },
+    "minimum_controls": {
+      "default": 3,
+      "minimum": 2,
+      "title": "Minimum Controls",
+      "type": "integer"
+    },
+    "minimum_placebo_draws": {
+      "default": 19,
+      "minimum": 9,
+      "title": "Minimum Placebo Draws",
+      "type": "integer"
+    },
+    "policy_id": {
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "propensity_lower_bound": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "0.05",
+      "ge": "0",
+      "le": "1",
+      "title": "Propensity Lower Bound"
+    },
+    "propensity_upper_bound": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "default": "0.95",
+      "ge": "0",
+      "le": "1",
+      "title": "Propensity Upper Bound"
+    },
+    "required_placebo_kinds": {
+      "default": [
+        "EVENT_TIMESTAMP",
+        "ASSET",
+        "TREATMENT_PERMUTATION"
+      ],
+      "items": {
+        "$ref": "#/$defs/PlaceboKind"
+      },
+      "title": "Required Placebo Kinds",
+      "type": "array"
+    }
+  },
+  "required": [
+    "policy_id"
+  ],
+  "title": "CausalDiagnosticPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.causal-diagnostic-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

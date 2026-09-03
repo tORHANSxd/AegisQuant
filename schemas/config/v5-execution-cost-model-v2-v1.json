@@ -1,0 +1,195 @@
+{
+  "$defs": {
+    "CostCalibrationState": {
+      "enum": [
+        "UNVERIFIED",
+        "WITHIN_TOLERANCE",
+        "MISCALIBRATED"
+      ],
+      "title": "CostCalibrationState",
+      "type": "string"
+    },
+    "ExecutionCostComponent": {
+      "enum": [
+        "fee",
+        "spread",
+        "slippage",
+        "market_impact",
+        "queue_probability",
+        "maker_adverse_selection",
+        "latency_cost",
+        "funding",
+        "borrow",
+        "settlement",
+        "liquidation_risk"
+      ],
+      "title": "ExecutionCostComponent",
+      "type": "string"
+    },
+    "MakerQueueMode": {
+      "enum": [
+        "CONSERVATIVE_QUEUE",
+        "REPLAY_QUEUE"
+      ],
+      "title": "MakerQueueMode",
+      "type": "string"
+    },
+    "ReplayQueueInputs": {
+      "additionalProperties": false,
+      "properties": {
+        "cancel_replace_sha256": {
+          "title": "Cancel Replace Sha256",
+          "type": "string"
+        },
+        "l2_deltas_sha256": {
+          "title": "L2 Deltas Sha256",
+          "type": "string"
+        },
+        "l2_snapshots_sha256": {
+          "title": "L2 Snapshots Sha256",
+          "type": "string"
+        },
+        "order_arrival_sha256": {
+          "title": "Order Arrival Sha256",
+          "type": "string"
+        },
+        "queue_ahead_sha256": {
+          "title": "Queue Ahead Sha256",
+          "type": "string"
+        },
+        "trades_sha256": {
+          "title": "Trades Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "l2_snapshots_sha256",
+        "l2_deltas_sha256",
+        "trades_sha256",
+        "order_arrival_sha256",
+        "cancel_replace_sha256",
+        "queue_ahead_sha256"
+      ],
+      "title": "ReplayQueueInputs",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-execution-cost-model-v2/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "calibration_state": {
+      "$ref": "#/$defs/CostCalibrationState"
+    },
+    "components": {
+      "default": [
+        "fee",
+        "spread",
+        "slippage",
+        "market_impact",
+        "queue_probability",
+        "maker_adverse_selection",
+        "latency_cost",
+        "funding",
+        "borrow",
+        "settlement",
+        "liquidation_risk"
+      ],
+      "items": {
+        "$ref": "#/$defs/ExecutionCostComponent"
+      },
+      "title": "Components",
+      "type": "array"
+    },
+    "cost_confidence": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Cost Confidence"
+    },
+    "environments": {
+      "default": [
+        "BACKTEST",
+        "PAPER",
+        "LIVE"
+      ],
+      "items": {
+        "enum": [
+          "BACKTEST",
+          "PAPER",
+          "LIVE"
+        ],
+        "type": "string"
+      },
+      "title": "Environments",
+      "type": "array"
+    },
+    "model_sha256": {
+      "title": "Model Sha256",
+      "type": "string"
+    },
+    "queue_mode": {
+      "$ref": "#/$defs/MakerQueueMode"
+    },
+    "real_world_tca_claimed": {
+      "const": false,
+      "default": false,
+      "title": "Real World Tca Claimed",
+      "type": "boolean"
+    },
+    "replay_inputs": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ReplayQueueInputs"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "tca_artifact_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tca Artifact Sha256"
+    },
+    "tca_sample_count": {
+      "minimum": 0,
+      "title": "Tca Sample Count",
+      "type": "integer"
+    },
+    "version": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "queue_mode",
+    "calibration_state",
+    "tca_sample_count",
+    "cost_confidence",
+    "model_sha256"
+  ],
+  "title": "ExecutionCostModelV2",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-execution-cost-model-v2",
+  "x-aegisquant-schema-version": "1.0.0"
+}

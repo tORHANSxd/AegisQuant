@@ -1,0 +1,312 @@
+{
+  "$defs": {
+    "CausalEstimand": {
+      "enum": [
+        "ATT",
+        "ATE"
+      ],
+      "title": "CausalEstimand",
+      "type": "string"
+    },
+    "CausalMethod": {
+      "enum": [
+        "MATCHED_EVENT_STUDY",
+        "SYNTHETIC_CONTROL",
+        "DOUBLY_ROBUST_AIPW"
+      ],
+      "title": "CausalMethod",
+      "type": "string"
+    },
+    "CausalPointEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence_lower": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confidence Lower"
+        },
+        "confidence_upper": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confidence Upper"
+        },
+        "control_count": {
+          "exclusiveMinimum": 0,
+          "title": "Control Count",
+          "type": "integer"
+        },
+        "effect": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Effect"
+        },
+        "estimand": {
+          "$ref": "#/$defs/CausalEstimand"
+        },
+        "estimator_spec_sha256": {
+          "title": "Estimator Spec Sha256",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/$defs/CausalMethod"
+        },
+        "standard_error": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                }
+              ],
+              "ge": "0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Standard Error"
+        },
+        "treated_count": {
+          "exclusiveMinimum": 0,
+          "title": "Treated Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "method",
+        "estimand",
+        "effect",
+        "standard_error",
+        "confidence_lower",
+        "confidence_upper",
+        "treated_count",
+        "control_count",
+        "estimator_spec_sha256"
+      ],
+      "title": "CausalPointEstimate",
+      "type": "object"
+    },
+    "PreTreatmentFitReport": {
+      "additionalProperties": false,
+      "properties": {
+        "counterfactual_path": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 3,
+          "title": "Counterfactual Path",
+          "type": "array"
+        },
+        "maximum_normalized_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Maximum Normalized Error"
+        },
+        "normalized_root_mean_squared_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Normalized Root Mean Squared Error"
+        },
+        "outcome_scale": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Outcome Scale"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "root_mean_squared_error": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "title": "Root Mean Squared Error"
+        },
+        "treated_path": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ]
+          },
+          "minItems": 3,
+          "title": "Treated Path",
+          "type": "array"
+        }
+      },
+      "required": [
+        "treated_path",
+        "counterfactual_path",
+        "root_mean_squared_error",
+        "outcome_scale",
+        "normalized_root_mean_squared_error",
+        "maximum_normalized_error",
+        "passed"
+      ],
+      "title": "PreTreatmentFitReport",
+      "type": "object"
+    },
+    "StateWeight": {
+      "additionalProperties": false,
+      "properties": {
+        "state_id": {
+          "title": "State Id",
+          "type": "string"
+        },
+        "state_sha256": {
+          "title": "State Sha256",
+          "type": "string"
+        },
+        "weight": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Weight"
+        }
+      },
+      "required": [
+        "state_id",
+        "state_sha256",
+        "weight"
+      ],
+      "title": "StateWeight",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.synthetic-control-result/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "converged": {
+      "const": true,
+      "title": "Converged",
+      "type": "boolean"
+    },
+    "counterfactual_outcome": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "title": "Counterfactual Outcome"
+    },
+    "donor_weights": {
+      "items": {
+        "$ref": "#/$defs/StateWeight"
+      },
+      "minItems": 2,
+      "title": "Donor Weights",
+      "type": "array"
+    },
+    "iterations": {
+      "exclusiveMinimum": 0,
+      "title": "Iterations",
+      "type": "integer"
+    },
+    "point_estimate": {
+      "$ref": "#/$defs/CausalPointEstimate"
+    },
+    "pre_treatment_fit": {
+      "$ref": "#/$defs/PreTreatmentFitReport"
+    }
+  },
+  "required": [
+    "point_estimate",
+    "donor_weights",
+    "counterfactual_outcome",
+    "pre_treatment_fit",
+    "converged",
+    "iterations"
+  ],
+  "title": "SyntheticControlResult",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.synthetic-control-result",
+  "x-aegisquant-schema-version": "1.0.0"
+}

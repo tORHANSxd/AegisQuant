@@ -1,0 +1,62 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.forecast-model-arena-spec/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "baseline_candidate_id": {
+      "title": "Baseline Candidate Id",
+      "type": "string"
+    },
+    "evaluation_cutoff": {
+      "format": "date-time",
+      "title": "Evaluation Cutoff",
+      "type": "string"
+    },
+    "expected_fold_count": {
+      "minimum": 2,
+      "title": "Expected Fold Count",
+      "type": "integer"
+    },
+    "final_holdout_opened": {
+      "const": false,
+      "default": false,
+      "title": "Final Holdout Opened",
+      "type": "boolean"
+    },
+    "minimum_absolute_improvement": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Minimum Absolute Improvement"
+    },
+    "universal_model_assumption": {
+      "const": false,
+      "default": false,
+      "title": "Universal Model Assumption",
+      "type": "boolean"
+    },
+    "zero_shot_promotion_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Zero Shot Promotion Allowed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "baseline_candidate_id",
+    "expected_fold_count",
+    "minimum_absolute_improvement",
+    "evaluation_cutoff"
+  ],
+  "title": "ModelArenaSpec",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.forecast-model-arena-spec",
+  "x-aegisquant-schema-version": "1.0.0"
+}

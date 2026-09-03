@@ -183,6 +183,10 @@ class SourceIdentityId(TypedId):
     kind = "source-identity"
 
 
+class SourceId(TypedId):
+    kind = "source"
+
+
 class SourcePolicyId(TypedId):
     kind = "source-policy"
 

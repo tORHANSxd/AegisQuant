@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "EvidenceQuery": {
+      "additionalProperties": false,
+      "description": "One bounded retrieval query in its original language.",
+      "properties": {
+        "end_time": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Time"
+        },
+        "language": {
+          "maxLength": 35,
+          "minLength": 2,
+          "title": "Language",
+          "type": "string"
+        },
+        "start_time": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Time"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "language"
+      ],
+      "title": "EvidenceQuery",
+      "type": "object"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.evidence-search-plan/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "PIT search plan that requires both confirming and disconfirming work.",
+  "properties": {
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "claim_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "contradiction_queries": {
+      "items": {
+        "$ref": "#/$defs/EvidenceQuery"
+      },
+      "minItems": 1,
+      "title": "Contradiction Queries",
+      "type": "array"
+    },
+    "decision_time": {
+      "format": "date-time",
+      "title": "Decision Time",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "official_denial_queries": {
+      "items": {
+        "$ref": "#/$defs/EvidenceQuery"
+      },
+      "minItems": 1,
+      "title": "Official Denial Queries",
+      "type": "array"
+    },
+    "primary_source_queries": {
+      "items": {
+        "$ref": "#/$defs/EvidenceQuery"
+      },
+      "minItems": 1,
+      "title": "Primary Source Queries",
+      "type": "array"
+    },
+    "probability_aggregation": {
+      "const": "CALIBRATED_MODEL_NOT_AGENT_VOTE",
+      "default": "CALIBRATED_MODEL_NOT_AGENT_VOTE",
+      "title": "Probability Aggregation",
+      "type": "string"
+    },
+    "revision_queries": {
+      "items": {
+        "$ref": "#/$defs/EvidenceQuery"
+      },
+      "minItems": 1,
+      "title": "Revision Queries",
+      "type": "array"
+    },
+    "search_plan_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Search Plan Id",
+      "type": "string"
+    },
+    "support_queries": {
+      "items": {
+        "$ref": "#/$defs/EvidenceQuery"
+      },
+      "minItems": 1,
+      "title": "Support Queries",
+      "type": "array"
+    },
+    "timeline_queries": {
+      "items": {
+        "$ref": "#/$defs/EvidenceQuery"
+      },
+      "minItems": 1,
+      "title": "Timeline Queries",
+      "type": "array"
+    }
+  },
+  "required": [
+    "search_plan_id",
+    "claim_id",
+    "generated_at",
+    "available_at",
+    "decision_time",
+    "support_queries",
+    "contradiction_queries",
+    "primary_source_queries",
+    "official_denial_queries",
+    "revision_queries",
+    "timeline_queries"
+  ],
+  "title": "EvidenceSearchPlan",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.evidence-search-plan",
+  "x-aegisquant-schema-version": "1.0.0"
+}

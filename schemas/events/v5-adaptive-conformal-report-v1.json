@@ -1,0 +1,435 @@
+{
+  "$defs": {
+    "AdaptiveConformalPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "critical_shortfall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Critical Shortfall"
+        },
+        "maximum_adjustment_step": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Maximum Adjustment Step"
+        },
+        "maximum_window_age_seconds": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "gt": "0",
+          "title": "Maximum Window Age Seconds"
+        },
+        "method": {
+          "$ref": "#/$defs/CalibrationMethod"
+        },
+        "minimum_sample_count": {
+          "minimum": 2,
+          "title": "Minimum Sample Count",
+          "type": "integer"
+        },
+        "target_coverage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Target Coverage"
+        },
+        "warning_shortfall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1",
+          "title": "Warning Shortfall"
+        }
+      },
+      "required": [
+        "method",
+        "target_coverage",
+        "warning_shortfall",
+        "critical_shortfall",
+        "minimum_sample_count",
+        "maximum_window_age_seconds",
+        "maximum_adjustment_step"
+      ],
+      "title": "AdaptiveConformalPolicy",
+      "type": "object"
+    },
+    "CalibrationDriftAction": {
+      "enum": [
+        "NONE",
+        "RECALIBRATE",
+        "DEGRADE",
+        "ABSTAIN"
+      ],
+      "title": "CalibrationDriftAction",
+      "type": "string"
+    },
+    "CalibrationMethod": {
+      "enum": [
+        "PLATT_LOGISTIC",
+        "ISOTONIC",
+        "TEMPERATURE",
+        "BETA",
+        "ADAPTIVE_CONFORMAL",
+        "DISTRIBUTION_AWARE_CONFORMAL",
+        "ROLLING_QUANTILE"
+      ],
+      "title": "CalibrationMethod",
+      "type": "string"
+    },
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "IntervalCoverageObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "outcome_available_at": {
+          "format": "date-time",
+          "title": "Outcome Available At",
+          "type": "string"
+        },
+        "predicted_at": {
+          "format": "date-time",
+          "title": "Predicted At",
+          "type": "string"
+        },
+        "predicted_lower": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Lower"
+        },
+        "predicted_median": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Median"
+        },
+        "predicted_upper": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Predicted Upper"
+        },
+        "realized_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Realized Value"
+        },
+        "sample_id": {
+          "minLength": 1,
+          "title": "Sample Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sample_id",
+        "predicted_lower",
+        "predicted_median",
+        "predicted_upper",
+        "realized_value",
+        "predicted_at",
+        "outcome_available_at"
+      ],
+      "title": "IntervalCoverageObservation",
+      "type": "object"
+    },
+    "IntervalCoverageWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "calibration_artifact_sha256": {
+          "title": "Calibration Artifact Sha256",
+          "type": "string"
+        },
+        "dataset_manifest_sha256": {
+          "title": "Dataset Manifest Sha256",
+          "type": "string"
+        },
+        "decision_time": {
+          "format": "date-time",
+          "title": "Decision Time",
+          "type": "string"
+        },
+        "horizon": {
+          "$ref": "#/$defs/CouncilHorizon"
+        },
+        "model_revision_sha256": {
+          "title": "Model Revision Sha256",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/IntervalCoverageObservation"
+          },
+          "minItems": 2,
+          "title": "Observations",
+          "type": "array"
+        },
+        "regime": {
+          "$ref": "#/$defs/MarketRegime"
+        },
+        "window_end": {
+          "format": "date-time",
+          "title": "Window End",
+          "type": "string"
+        },
+        "window_sha256": {
+          "title": "Window Sha256",
+          "type": "string"
+        },
+        "window_start": {
+          "format": "date-time",
+          "title": "Window Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_id",
+        "horizon",
+        "regime",
+        "model_revision_sha256",
+        "dataset_manifest_sha256",
+        "calibration_artifact_sha256",
+        "window_start",
+        "window_end",
+        "decision_time",
+        "observations",
+        "window_sha256"
+      ],
+      "title": "IntervalCoverageWindow",
+      "type": "object"
+    },
+    "MarketRegime": {
+      "enum": [
+        "TREND",
+        "MEAN_REVERSION",
+        "LOW_VOL_COMPRESSION",
+        "VOL_EXPANSION",
+        "LIQUIDITY_CRISIS",
+        "NEWS_SHOCK",
+        "LIQUIDATION_CASCADE",
+        "FUNDING_DISLOCATION",
+        "CORRELATION_BREAKDOWN",
+        "RISK_ON",
+        "RISK_OFF",
+        "UNKNOWN",
+        "OOD"
+      ],
+      "title": "MarketRegime",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-adaptive-conformal-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/CalibrationDriftAction"
+    },
+    "calibration_drift": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Calibration Drift"
+    },
+    "coverage_shortfall": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Coverage Shortfall"
+    },
+    "distribution_scale_normalized": {
+      "title": "Distribution Scale Normalized",
+      "type": "boolean"
+    },
+    "exchangeability_assumed": {
+      "const": false,
+      "default": false,
+      "title": "Exchangeability Assumed",
+      "type": "boolean"
+    },
+    "observed_coverage": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Observed Coverage"
+    },
+    "policy": {
+      "$ref": "#/$defs/AdaptiveConformalPolicy"
+    },
+    "real_world_coverage_claimed": {
+      "const": false,
+      "default": false,
+      "title": "Real World Coverage Claimed",
+      "type": "boolean"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "recommended_residual_quantile": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Recommended Residual Quantile"
+    },
+    "recommended_scale_multiplier": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Recommended Scale Multiplier"
+    },
+    "report_sha256": {
+      "title": "Report Sha256",
+      "type": "string"
+    },
+    "window": {
+      "$ref": "#/$defs/IntervalCoverageWindow"
+    }
+  },
+  "required": [
+    "window",
+    "policy",
+    "observed_coverage",
+    "coverage_shortfall",
+    "calibration_drift",
+    "recommended_residual_quantile",
+    "recommended_scale_multiplier",
+    "distribution_scale_normalized",
+    "action",
+    "reason_codes",
+    "report_sha256"
+  ],
+  "title": "AdaptiveConformalReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-adaptive-conformal-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

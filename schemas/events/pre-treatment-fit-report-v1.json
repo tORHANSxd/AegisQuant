@@ -1,0 +1,108 @@
+{
+  "$id": "https://aegisquant.local/schemas/aegisquant.pre-treatment-fit-report/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "counterfactual_path": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 3,
+      "title": "Counterfactual Path",
+      "type": "array"
+    },
+    "maximum_normalized_error": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Maximum Normalized Error"
+    },
+    "normalized_root_mean_squared_error": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Normalized Root Mean Squared Error"
+    },
+    "outcome_scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "gt": "0",
+      "title": "Outcome Scale"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "root_mean_squared_error": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "title": "Root Mean Squared Error"
+    },
+    "treated_path": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          }
+        ]
+      },
+      "minItems": 3,
+      "title": "Treated Path",
+      "type": "array"
+    }
+  },
+  "required": [
+    "treated_path",
+    "counterfactual_path",
+    "root_mean_squared_error",
+    "outcome_scale",
+    "normalized_root_mean_squared_error",
+    "maximum_normalized_error",
+    "passed"
+  ],
+  "title": "PreTreatmentFitReport",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.pre-treatment-fit-report",
+  "x-aegisquant-schema-version": "1.0.0"
+}

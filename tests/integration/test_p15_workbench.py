@@ -17,6 +17,21 @@ def test_workbench_and_domain_routes_share_snapshot(project_root: Path) -> None:
     assert response.status_code == 200
     payload = response.json()
     assert payload["live_trading_locked"] is True
+    assert payload["evidence"] == {
+        "evidence_tier": "FIXTURE",
+        "alpha_promotion_eligible": False,
+        "source_artifacts": [
+            "reports/backtests/p06-golden/run_manifest.json",
+            "reports/backtests/p06-golden/equity_curve.parquet",
+            "reports/backtests/p06-golden/pnl_attribution.parquet",
+        ],
+        "reason_codes": [
+            "GOLDEN_TEST_FIXTURE",
+            "PLACEHOLDER_HASHES",
+            "EXTREME_SHORT_WINDOW",
+            "NO_ALPHA_PROMOTION",
+        ],
+    }
     assert payload["capabilities"] == {
         "read_only": True,
         "trading_write": False,

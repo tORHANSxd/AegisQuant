@@ -1,0 +1,170 @@
+{
+  "$defs": {
+    "EventClusterStatus": {
+      "enum": [
+        "RUMOR",
+        "EMERGING",
+        "CORROBORATED",
+        "CONFIRMED",
+        "DENIED",
+        "RESOLVED"
+      ],
+      "title": "EventClusterStatus",
+      "type": "string"
+    },
+    "QualityState": {
+      "enum": [
+        "GOOD",
+        "DEGRADED",
+        "STALE",
+        "INVALID"
+      ],
+      "title": "QualityState",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.event-directional-gate/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "const": "RESEARCH_PROPOSAL_ONLY",
+      "default": "RESEARCH_PROPOSAL_ONLY",
+      "title": "Action",
+      "type": "string"
+    },
+    "as_of_time": {
+      "format": "date-time",
+      "title": "As Of Time",
+      "type": "string"
+    },
+    "directional_candidate_allowed": {
+      "title": "Directional Candidate Allowed",
+      "type": "boolean"
+    },
+    "event_cluster_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Cluster Id",
+      "type": "string"
+    },
+    "event_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_revision_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Event Revision Id",
+      "type": "string"
+    },
+    "event_stage": {
+      "$ref": "#/$defs/EventClusterStatus"
+    },
+    "gate_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Gate Id",
+      "type": "string"
+    },
+    "gate_sha256": {
+      "title": "Gate Sha256",
+      "type": "string"
+    },
+    "high_price_in_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "High Price In Threshold"
+    },
+    "market_reflection_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Market Reflection Id",
+      "type": "string"
+    },
+    "market_reflection_quality": {
+      "$ref": "#/$defs/QualityState"
+    },
+    "market_reflection_score": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "ge": "0",
+          "le": "1"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Market Reflection Score"
+    },
+    "order_submission_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Order Submission Allowed",
+      "type": "boolean"
+    },
+    "policy_version": {
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "risk_overlay_allowed": {
+      "default": true,
+      "title": "Risk Overlay Allowed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "gate_id",
+    "event_id",
+    "event_revision_id",
+    "event_cluster_id",
+    "market_reflection_id",
+    "as_of_time",
+    "event_stage",
+    "high_price_in_threshold",
+    "market_reflection_quality",
+    "directional_candidate_allowed",
+    "reason_codes",
+    "policy_version",
+    "gate_sha256"
+  ],
+  "title": "EventDirectionalGate",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.event-directional-gate",
+  "x-aegisquant-schema-version": "1.0.0"
+}

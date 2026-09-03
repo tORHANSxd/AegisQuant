@@ -564,6 +564,34 @@ export type EventRecord = {
 };
 
 /**
+ * EvidenceDisclosure
+ *
+ * Machine-readable disclosure attached to evidence-backed user views.
+ */
+export type EvidenceDisclosure = {
+    /**
+     * Alpha Promotion Eligible
+     */
+    alpha_promotion_eligible: boolean;
+    evidence_tier: EvidenceTier;
+    /**
+     * Reason Codes
+     */
+    reason_codes: Array<string>;
+    /**
+     * Source Artifacts
+     */
+    source_artifacts: Array<string>;
+};
+
+/**
+ * EvidenceTier
+ *
+ * Mutually exclusive evidence maturity levels from the v5 SSOT.
+ */
+export type EvidenceTier = 'FIXTURE' | 'SYNTHETIC' | 'DEVELOPMENT' | 'OOS_DEVELOPMENT' | 'FINAL_HOLDOUT' | 'PAPER_FORWARD' | 'SHADOW_FORWARD' | 'TESTNET_FORWARD' | 'CANARY_LIVE' | 'LIVE';
+
+/**
  * ExecutionQualityPayload
  */
 export type ExecutionQualityPayload = {
@@ -3164,6 +3192,7 @@ export type WorkbenchResponse = {
      * Events
      */
     events: Array<EventRecord>;
+    evidence: EvidenceDisclosure;
     /**
      * Execution Quality
      */

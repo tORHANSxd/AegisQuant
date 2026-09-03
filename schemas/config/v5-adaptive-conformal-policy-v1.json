@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "CalibrationMethod": {
+      "enum": [
+        "PLATT_LOGISTIC",
+        "ISOTONIC",
+        "TEMPERATURE",
+        "BETA",
+        "ADAPTIVE_CONFORMAL",
+        "DISTRIBUTION_AWARE_CONFORMAL",
+        "ROLLING_QUANTILE"
+      ],
+      "title": "CalibrationMethod",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-adaptive-conformal-policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "critical_shortfall": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Critical Shortfall"
+    },
+    "maximum_adjustment_step": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "gt": "0",
+      "title": "Maximum Adjustment Step"
+    },
+    "maximum_window_age_seconds": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "gt": "0",
+      "title": "Maximum Window Age Seconds"
+    },
+    "method": {
+      "$ref": "#/$defs/CalibrationMethod"
+    },
+    "minimum_sample_count": {
+      "minimum": 2,
+      "title": "Minimum Sample Count",
+      "type": "integer"
+    },
+    "target_coverage": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Target Coverage"
+    },
+    "warning_shortfall": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        }
+      ],
+      "ge": "0",
+      "le": "1",
+      "title": "Warning Shortfall"
+    }
+  },
+  "required": [
+    "method",
+    "target_coverage",
+    "warning_shortfall",
+    "critical_shortfall",
+    "minimum_sample_count",
+    "maximum_window_age_seconds",
+    "maximum_adjustment_step"
+  ],
+  "title": "AdaptiveConformalPolicy",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-adaptive-conformal-policy",
+  "x-aegisquant-schema-version": "1.0.0"
+}

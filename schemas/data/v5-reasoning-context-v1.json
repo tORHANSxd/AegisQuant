@@ -1,0 +1,91 @@
+{
+  "$defs": {
+    "ReasoningInputBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_sha256": {
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ReasoningInputKind"
+        }
+      },
+      "required": [
+        "kind",
+        "artifact_sha256"
+      ],
+      "title": "ReasoningInputBinding",
+      "type": "object"
+    },
+    "ReasoningInputKind": {
+      "enum": [
+        "TRUTH_ASSESSMENTS",
+        "EVIDENCE_GRAPH",
+        "EVENT_STRUCTURE",
+        "MODEL_FORECASTS",
+        "MARKET_REGIME",
+        "MODEL_RELIABILITY",
+        "CALIBRATION",
+        "OOD",
+        "MARKET_REFLECTION",
+        "COST_FORECAST",
+        "PORTFOLIO_STATE",
+        "RISK_STATE"
+      ],
+      "title": "ReasoningInputKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.v5-reasoning-context/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "context_sha256": {
+      "title": "Context Sha256",
+      "type": "string"
+    },
+    "decision_time": {
+      "format": "date-time",
+      "title": "Decision Time",
+      "type": "string"
+    },
+    "input_artifacts": {
+      "items": {
+        "$ref": "#/$defs/ReasoningInputBinding"
+      },
+      "minItems": 1,
+      "title": "Input Artifacts",
+      "type": "array"
+    },
+    "meta_reasoner_model_revision_sha256": {
+      "title": "Meta Reasoner Model Revision Sha256",
+      "type": "string"
+    },
+    "meta_reasoner_prompt_sha256": {
+      "title": "Meta Reasoner Prompt Sha256",
+      "type": "string"
+    },
+    "skeptic_model_revision_sha256": {
+      "title": "Skeptic Model Revision Sha256",
+      "type": "string"
+    },
+    "skeptic_prompt_sha256": {
+      "title": "Skeptic Prompt Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "decision_time",
+    "input_artifacts",
+    "meta_reasoner_prompt_sha256",
+    "meta_reasoner_model_revision_sha256",
+    "skeptic_prompt_sha256",
+    "skeptic_model_revision_sha256",
+    "context_sha256"
+  ],
+  "title": "ReasoningContext",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.v5-reasoning-context",
+  "x-aegisquant-schema-version": "1.0.0"
+}

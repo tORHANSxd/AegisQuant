@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import cast
 
 from aegisquant.data.provider_registry import SourcePolicyRegistry
-from aegisquant.domain.identifiers import ArtifactId, SourceIdentityId
-from aegisquant.domain.intelligence import EngagementSnapshot, RightsState, SourceIdentity
+from aegisquant.domain.identifiers import ArtifactId
+from aegisquant.domain.intelligence import EngagementSnapshot, RightsState
 from aegisquant.intelligence.collectors import content_contracts, parse_x
 from aegisquant.intelligence.store import ContentProjectionStore, IntelligenceMetadataArchive
 
@@ -118,35 +118,66 @@ def test_engagement_is_point_in_time_not_current_backfill(project_root: Path) ->
 
 def test_source_identity_versions_are_append_only(project_root: Path) -> None:
     item = load_x(project_root)
+    policy = SourcePolicyRegistry.from_yaml(
+        project_root / "data/catalogs/source_policy_registry.yaml"
+    ).get("x_official_restricted_v1")
     identity, _, _ = content_contracts(
         item,
         available_time=NOW,
         ingest_time=NOW,
-        source_policy_id=SourcePolicyRegistry.from_yaml(
-            project_root / "data/catalogs/source_policy_registry.yaml"
-        )
-        .get("x_official_restricted_v1")
-        .source_policy_id,
+        source_policy_id=policy.source_policy_id,
         rights_state=RightsState.LIMITED,
     )
-    second = SourceIdentity(
-        source_identity_id=SourceIdentityId("identity-version-2"),
-        provider_id=identity.provider_id,
-        provider_native_id=identity.provider_native_id,
-        display_name="Renamed Official Fixture",
-        ownership_group=identity.ownership_group,
-        independence_group=identity.independence_group,
-        verified=True,
-        first_observed_time=NOW + timedelta(days=1),
-        version=2,
-        supersedes_source_identity_id=identity.source_identity_id,
+    renamed = item.model_copy(
+        update={
+            "display_name": "Renamed Official Fixture",
+            "verified_source": not identity.verified,
+            "observed_time": NOW + timedelta(days=1),
+        }
     )
+    second, second_envelope, _ = content_contracts(
+        renamed,
+        available_time=NOW + timedelta(days=1),
+        ingest_time=NOW + timedelta(days=1),
+        source_policy_id=policy.source_policy_id,
+        rights_state=RightsState.LIMITED,
+        previous_identity=identity,
+    )
+    assert second.version == 2
+    assert second.supersedes_source_identity_id == identity.source_identity_id
+    assert second_envelope.source_identity_id == second.source_identity_id
+    unchanged, _, _ = content_contracts(
+        renamed.model_copy(update={"observed_time": NOW + timedelta(days=2)}),
+        available_time=NOW + timedelta(days=2),
+        ingest_time=NOW + timedelta(days=2),
+        source_policy_id=policy.source_policy_id,
+        rights_state=RightsState.LIMITED,
+        previous_identity=second,
+    )
+    assert unchanged == second
     store = ContentProjectionStore()
     store.apply_identity(identity)
+    store.apply_identity(second)
     store.apply_identity(second)
     assert store.identity_history(
         provider_id=identity.provider_id, provider_native_id=identity.provider_native_id
     ) == (identity, second)
+    assert (
+        store.identity_as_of(
+            provider_id=identity.provider_id,
+            provider_native_id=identity.provider_native_id,
+            decision_time=NOW,
+        )
+        == identity
+    )
+    assert (
+        store.identity_as_of(
+            provider_id=identity.provider_id,
+            provider_native_id=identity.provider_native_id,
+            decision_time=NOW + timedelta(days=1),
+        )
+        == second
+    )
 
 
 def test_identity_and_engagement_metadata_are_persisted_append_only(

@@ -1,0 +1,141 @@
+{
+  "$defs": {
+    "CalibrationMethod": {
+      "enum": [
+        "PLATT_LOGISTIC",
+        "ISOTONIC",
+        "TEMPERATURE",
+        "BETA",
+        "ADAPTIVE_CONFORMAL",
+        "DISTRIBUTION_AWARE_CONFORMAL",
+        "ROLLING_QUANTILE"
+      ],
+      "title": "CalibrationMethod",
+      "type": "string"
+    },
+    "CouncilHorizon": {
+      "enum": [
+        "5s",
+        "15s",
+        "30s",
+        "1m",
+        "3m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "4h",
+        "12h",
+        "1d",
+        "3d",
+        "7d"
+      ],
+      "title": "CouncilHorizon",
+      "type": "string"
+    },
+    "MarketRegime": {
+      "enum": [
+        "TREND",
+        "MEAN_REVERSION",
+        "LOW_VOL_COMPRESSION",
+        "VOL_EXPANSION",
+        "LIQUIDITY_CRISIS",
+        "NEWS_SHOCK",
+        "LIQUIDATION_CASCADE",
+        "FUNDING_DISLOCATION",
+        "CORRELATION_BREAKDOWN",
+        "RISK_ON",
+        "RISK_OFF",
+        "UNKNOWN",
+        "OOD"
+      ],
+      "title": "MarketRegime",
+      "type": "string"
+    }
+  },
+  "$id": "https://aegisquant.local/schemas/aegisquant.forecast-calibration-artifact/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_sha256": {
+      "title": "Artifact Sha256",
+      "type": "string"
+    },
+    "asset_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "calibration_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+      "title": "Calibration Id",
+      "type": "string"
+    },
+    "calibration_sample_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "title": "Calibration Sample Ids",
+      "type": "array"
+    },
+    "fitted_at": {
+      "format": "date-time",
+      "title": "Fitted At",
+      "type": "string"
+    },
+    "forbidden_test_sample_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Forbidden Test Sample Ids",
+      "type": "array"
+    },
+    "horizon": {
+      "$ref": "#/$defs/CouncilHorizon"
+    },
+    "method": {
+      "$ref": "#/$defs/CalibrationMethod"
+    },
+    "regime": {
+      "$ref": "#/$defs/MarketRegime"
+    },
+    "split_sha256": {
+      "title": "Split Sha256",
+      "type": "string"
+    },
+    "training_cutoff": {
+      "format": "date-time",
+      "title": "Training Cutoff",
+      "type": "string"
+    }
+  },
+  "required": [
+    "calibration_id",
+    "method",
+    "asset_id",
+    "horizon",
+    "regime",
+    "training_cutoff",
+    "fitted_at",
+    "available_at",
+    "calibration_sample_ids",
+    "forbidden_test_sample_ids",
+    "split_sha256",
+    "artifact_sha256"
+  ],
+  "title": "CalibrationArtifact",
+  "type": "object",
+  "x-aegisquant-schema-name": "aegisquant.forecast-calibration-artifact",
+  "x-aegisquant-schema-version": "1.0.0"
+}
