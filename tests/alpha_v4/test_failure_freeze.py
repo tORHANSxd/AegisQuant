@@ -155,10 +155,10 @@ def test_v4_ssot_identity_and_safety_remain_explicit(project_root: Path) -> None
     assert state["spec_lines"] == len(
         (project_root / audit.SPEC).read_text(encoding="utf-8").splitlines()
     )
-    assert state["current_phase"] == "A" and state["phase_a_complete"] is False
+    assert state["current_phase"] in {"A", "B", "C", "D", "E", "F", "G", "COMPLETE"}
     assert state["branch"] == "main" and state["branch_creation_allowed"] is False
     assert state["alpha_promotion_eligible"] is False
-    assert state["model_retrained"] is False
+    assert state["model_retraining_scope"] == "original_baseline_reconstruction_only"
     assert state["final_holdout_access_count"] == 0
     assert LIVE_TRADING is False and ORDER_SUBMISSION_ENABLED is False and LIVE_ADAPTERS == ()
     assert audit.SPEC in (project_root / "CODEX_BOOTSTRAP.md").read_text(encoding="utf-8")

@@ -5,11 +5,12 @@
 研究目标为 AegisAlpha-CAT：低频 LONG/FLAT 趋势、经济过滤器、动态全成本门槛、波动率目标仓位
 和严格滚动样本外验证。所有工作只使用 `main`；v5、v3.1 保留为历史实现和证据。
 
-当前已开始 Phase A，冻结 60,480 行已有预测并复现所选组合指标。`50.0810%` 方向准确率对应
+Phase A 已冻结 60,480 行已有预测并复现所选组合指标。`50.0810%` 方向准确率对应
 净复合收益 `+20.6379%` 的所选组合；`-38.8225%` 属于 `logistic_core` 候选。
-候选完整逐样本预测未保存，因此 Phase A 状态为 `BLOCKED_MISSING_FAILED_PREDICTIONS`，
-尚不能完成同预测失败归因或进入策略修改。详见
-[`current_failure_report.md`](artifacts/alpha_v4/before/current_failure_report.md)。
+用户已明确允许重建缺失的旧候选预测并保留来源标记；重建结果位于
+[`reconstruction_manifest.json`](artifacts/alpha_v4/reconstructed_before/reconstruction_manifest.json)，
+标记为 `RECONSTRUCTED_BASELINE`，与原候选指标的差异小于 `1e-12`。原始冻结报告保留当时的缺口记录。
+Phase B 已接通标签时序、全行情 MTM 与成交经济约束，正在完成评估指标和模型委员会。
 
 ## 当前安全状态
 
@@ -24,11 +25,12 @@
 
 ```text
 .venv\Scripts\python.exe scripts/audit_current_failure.py --check
+.venv\Scripts\python.exe scripts/reconstruct_alpha_v4_baseline.py --check
 .venv\Scripts\python.exe -m pytest tests/alpha_v4 tests/research/test_public_market_backtest.py tests/p00
 ```
 
 冻结工具只读取已存在的公开回测输出，不下载数据、不训练模型。`--check` 校验冻结工件的完整性，
-成功不等于 Phase A 缺口已解决，更不代表存在可交易 Alpha。
+成功只说明证据完整性，不代表存在可交易 Alpha。
 
 历史 v5 验证命令保留：
 
@@ -56,4 +58,5 @@ pnpm verify
 
 当前状态位于 `state/ALPHA_V4_PROJECT_STATE.yaml`，规格索引位于 `state/SPEC_INDEX.md`。
 `state/V5_PROJECT_STATE.yaml`、`reports/v5/`、`state/PROJECT_PHASE_STATE.yaml`、
-`reports/phases/` 和旧规格仅保留历史含义。Phase A 期间不得运行会重训原模型的历史生成命令。
+`reports/phases/` 和旧规格仅保留历史含义。旧基线的授权重建结果与原始冻结证据分开保存；
+不得覆盖原始产物或把重建结果冒充原始预测。

@@ -41,7 +41,9 @@ Phase A 已冻结现有 selected-policy 60,480 行预测，原始数据和报告
 所选组合的 `50.0810%` 准确率与候选 `logistic_core` 的 `-38.8225%` 净复合收益来自不同策略。
 亏损候选的完整原始预测未保存，不能把现有文件宣称为其冻结序列；详见
 `artifacts/alpha_v4/before/current_failure_report.md`。
-尚未进入 Phase B–G，也未分配或读取最终 holdout。Live 和订单提交继续锁定。
+用户明确授权重建并保留来源标记后，已保存 `RECONSTRUCTED_BASELINE` 并复核原指标。
+Phase B 标签、MTM 和经济约束已实现，评估指标、委员会及 A0–A10 完整归因待完成。
+最终 holdout 尚未分配或读取。Live 和订单提交继续锁定。
 
 ## 历史实现与规格身份
 

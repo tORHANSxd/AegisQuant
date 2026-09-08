@@ -10,11 +10,12 @@ branch_creation_allowed: false
 user_overrides:
   - '任务书 §1 建研究分支示例不执行，只使用 main。'
   - '提交信息使用 YYYY:MM:DD Codex 和中文修改点。'
+  - '用户已明确授权：允许重建，并保留来源标记。仅按原代码、数据、配置和 seed 重建旧基线，标记 RECONSTRUCTED_BASELINE。'
 historical_states:
   - state/V5_PROJECT_STATE.yaml
   - state/PROJECT_PHASE_STATE.yaml
-current_phase: A
-status: blocked_missing_original_failed_predictions
+current_phase: B
+status: implementing_correctness_and_same_signal_attribution
 phase_a_complete: false
 evidence_tier: OOS_DEVELOPMENT
 alpha_promotion_eligible: false
@@ -23,6 +24,7 @@ frozen_evidence_commit: fa9d436
 evidence_manifest: artifacts/alpha_v4/before/run_manifest.json
 failure_report: artifacts/alpha_v4/before/current_failure_report.md
 validation_report: artifacts/alpha_v4/activation/validation.json
+reconstruction_manifest: artifacts/alpha_v4/reconstructed_before/reconstruction_manifest.json
 completed:
   - latest_committed_version_fast_forwarded_to_local_and_origin_main
   - all_other_source_repository_local_and_origin_branches_deleted
@@ -32,18 +34,14 @@ completed:
   - existing_selected_policy_60480_predictions_frozen_without_retraining
   - selected_policy_a0_metrics_reproduced_without_retraining
   - original_failure_metric_lineage_identified
-blockers:
-  - code: MISSING_ORIGINAL_FAILED_CANDIDATE_PREDICTIONS
-    candidate: logistic_core
-    archived_compounded_net_return_display: '-38.8225%'
-    detail: '原 OOS CSV 只有 selected policy；原 manifest 和 trial ledger 无候选完整逐样本预测或模型文件。'
-    required_input: '原始候选预测导出；若未保存，需用户明确允许按原代码、数据和 seed 重建并标记 RECONSTRUCTED_BASELINE。'
-    ssot_constraint: '§2.2 冻结当前预测，不允许重新训练。'
-    dependent_work:
-      - failed_candidate_same_signal_A0_A10_attribution
-      - phase_B_and_later_strategy_commits
-pending_phases: [B, C, D, E, F, G]
-model_retrained: false
+  - authorized_reconstruction_matches_original_candidate_metrics_within_1e_12
+  - executable_entry_directional_action_value_labels
+  - all_market_event_replay_and_fixed_frequency_mtm
+  - cash_margin_liquidation_borrow_reduce_only_oco_and_depth_integrity
+blockers: []
+pending_phases: [A_diagnostic_matrix, B_metrics_and_council, C, D, E, F, G]
+model_retrained: true
+model_retraining_scope: original_baseline_reconstruction_only
 strategy_source_modified: false
 hyperparameter_optimization_started: false
 final_holdout_allocated: false
@@ -51,7 +49,7 @@ final_holdout_access_count: 0
 live_trading: false
 order_submission_enabled: false
 live_adapter_registry_empty: true
-next_action: obtain_original_failed_candidate_predictions_or_explicit_reconstruction_exception
+next_action: finish_metrics_and_council_then_same_signal_A0_A10_attribution
 local_archive:
   status: blocked_existing_non_main_archive
   path: 'D:\Workspace\git\Personal--Quantitative_Trading.git'

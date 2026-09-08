@@ -12,8 +12,10 @@
 提交使用 `YYYY:MM:DD Codex` 和中文修改点，按任务书 §14 分隔证据、标签、回测器、经济约束和模型改动。
 首个提交已仅保存原始失败证据及其 Git 字节保全规则；不能把所选组合的预测冒充亏损候选预测。
 
-当前 Phase A 存在原始 `logistic_core` 逐样本预测缺失。依据 §2.2，未获得该导出或用户对
-重建基线的明确例外授权前，不重新训练、不进入依赖该基线的归因和策略修改。
+原始 `logistic_core` 逐样本预测未保存。用户已明确授权“允许重建，并保留来源标记”，
+按原代码、数据、配置和 seed 重建的结果已保存至 `artifacts/alpha_v4/reconstructed_before/`，
+标记 `RECONSTRUCTED_BASELINE`；该例外只覆盖旧基线重建，不允许覆盖原始冻结证据。
+Phase B 标签、MTM 和成交经济约束已实现；A1 修复引擎归因与 B 指标、委员会仍在推进。
 冻结工件只能校验，不能原地覆盖；最终 holdout 尚未分配或读取，已用开发 OOS 数据不能冒充封存集。
 
 安全硬约束：`LIVE_TRADING = false`、`ORDER_SUBMISSION_ENABLED = false`，
