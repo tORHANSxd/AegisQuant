@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 from collections.abc import Mapping
+from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from pathlib import Path
@@ -56,25 +57,51 @@ INSTRUMENT = InstrumentId("SIM:SPOT:BTCUSDT")
 DEFAULT_GATE_POLICY = EconomicGatePolicy()
 
 
+@dataclass(frozen=True, slots=True)
+class CatMarket:
+    """Explicit spot asset units and declared research execution precision."""
+
+    base_asset: AssetId = BTC
+    tick_size: Decimal = Decimal("0.01")
+    quantity_step: Decimal = Decimal("0.000001")
+
+    def __post_init__(self) -> None:
+        if self.base_asset == USDT or not str(self.base_asset).isalnum():
+            raise ValueError("CAT market requires an explicit non-USDT base asset")
+        if any(
+            not value.is_finite() or value <= 0 for value in (self.tick_size, self.quantity_step)
+        ):
+            raise ValueError("market precision must be finite and positive")
+
+    @property
+    def instrument_id(self) -> InstrumentId:
+        return InstrumentId(f"SIM:SPOT:{self.base_asset}USDT")
+
+
+DEFAULT_MARKET = CatMarket()
+
+
 def decimal(value: float) -> Decimal:
     return Decimal(format(value, ".15g"))
 
 
-def cat_instrument() -> AccountingInstrument:
+def cat_instrument(market_spec: CatMarket = DEFAULT_MARKET) -> AccountingInstrument:
     return AccountingInstrument(
-        instrument_id=INSTRUMENT,
+        instrument_id=market_spec.instrument_id,
         venue="SIM",
-        base_asset_id=BTC,
+        base_asset_id=market_spec.base_asset,
         quote_asset_id=USDT,
         settlement_asset_id=USDT,
-        quantity_asset_id=BTC,
+        quantity_asset_id=market_spec.base_asset,
         instrument_type=InstrumentType.SPOT,
         contract_form=ContractForm.SPOT,
         contract_multiplier=Decimal("1"),
     )
 
 
-def load_completed_bars(path: Path, *, hours: int = 4) -> tuple[BarEvent, ...]:
+def load_completed_bars(
+    path: Path, *, hours: int = 4, market_spec: CatMarket = DEFAULT_MARKET
+) -> tuple[BarEvent, ...]:
     """Discard incomplete buckets; never invent a missing market observation."""
     if hours not in (1, 4):
         raise ValueError("CAT supports only original hourly and declared four-hour bars")
@@ -97,10 +124,10 @@ def load_completed_bars(path: Path, *, hours: int = 4) -> tuple[BarEvent, ...]:
             continue
         bars.append(
             BarEvent(
-                event_id=BacktestEventId(f"btc{hours}h-{start}"),
-                instrument_id=INSTRUMENT,
+                event_id=BacktestEventId(f"{str(market_spec.base_asset).lower()}{hours}h-{start}"),
+                instrument_id=market_spec.instrument_id,
                 venue_id=VENUE,
-                base_asset_id=BTC,
+                base_asset_id=market_spec.base_asset,
                 quote_asset_id=USDT,
                 event_time=datetime.fromtimestamp(start / 1000, UTC),
                 available_time=datetime.fromtimestamp((start + width - 1) / 1000, UTC),
@@ -148,11 +175,19 @@ def replay_cat(
     latency_multiplier: int = 1,
     omit_cost: str | None = None,
     fixed_orders: tuple[BacktestOrder, ...] | None = None,
+    market_spec: CatMarket = DEFAULT_MARKET,
 ) -> tuple[BacktestResult, list[dict[str, Any]]]:
     if len(bars) < 3 or min(cost_multiplier, spread_multiplier, slippage_multiplier) < 0:
         raise ValueError("CAT replay requires at least three bars and nonnegative costs")
     if not 0 < volume_multiplier <= 1 or latency_multiplier < 1:
         raise ValueError("invalid CAT stress assumptions")
+    if any(
+        bar.instrument_id != market_spec.instrument_id
+        or bar.base_asset_id != market_spec.base_asset
+        or bar.quote_asset_id != USDT
+        for bar in bars
+    ):
+        raise ValueError("CAT market bars and execution asset units differ")
     schedules: list[CostSchedule] = []
     for n, bar in enumerate(bars):
         i = feature_indices[bar.available_time]
@@ -172,7 +207,7 @@ def replay_cat(
                 cost_schedule_id=CostScheduleId(f"cat-cost-{n}"),
                 version="cat-proxy-v1",
                 venue_id=VENUE,
-                instrument_id=INSTRUMENT,
+                instrument_id=market_spec.instrument_id,
                 effective_from=bar.event_time,
                 effective_to=bars[n + 1].event_time if n + 1 < len(bars) else None,
                 maker_fee_bps=fee * cost_multiplier,
@@ -191,16 +226,16 @@ def replay_cat(
     rule = HistoricalInstrumentRule(
         instrument_rule_id=InstrumentRuleId("cat-rule-proxy-v1"),
         version="cat-rule-proxy-v1",
-        instrument_id=INSTRUMENT,
+        instrument_id=market_spec.instrument_id,
         venue_id=VENUE,
         effective_from=bars[0].event_time,
-        tick_size=Decimal("0.01"),
-        step_size=Decimal("0.000001"),
-        minimum_quantity=Decimal("0.000001"),
+        tick_size=market_spec.tick_size,
+        step_size=market_spec.quantity_step,
+        minimum_quantity=market_spec.quantity_step,
         minimum_notional=Decimal("10"),
         trading_enabled=True,
         source="PREREGISTERED_PROXY_NOT_HISTORICAL_EXCHANGE_RULE_PROOF",
-        approximation="BTC step and notional assumptions; venue history unverified",
+        approximation=f"{market_spec.base_asset} step and notional assumptions; venue history unverified",
     )
     engine = EventBacktestEngine(
         project_root=root,
@@ -317,11 +352,11 @@ def replay_cat(
                     backtest_order_id=BacktestOrderId(key),
                     client_order_id=ClientOrderId(key),
                     order_intent_id=OrderIntentId(key),
-                    instrument_id=INSTRUMENT,
+                    instrument_id=market_spec.instrument_id,
                     venue_id=VENUE,
                     side=OrderSide.BUY if delta > 0 else OrderSide.SELL,
                     order_type=OrderType.MARKET,
-                    quantity=Quantity(amount=abs(delta), asset_id=BTC),
+                    quantity=Quantity(amount=abs(delta), asset_id=market_spec.base_asset),
                     time_in_force=TimeInForce.IMMEDIATE_OR_CANCEL,
                     reduce_only=delta < 0,
                     decision_time=time,
@@ -333,7 +368,7 @@ def replay_cat(
     market = tuple(b.model_copy(update={"volume": b.volume * volume_multiplier}) for b in bars)
     result = engine.run(
         spec=spec,
-        instrument=cat_instrument(),
+        instrument=cat_instrument(market_spec),
         market_events=market,
         orders=fixed_orders or (),
         decision_callback=callback if fixed_orders is None else None,
