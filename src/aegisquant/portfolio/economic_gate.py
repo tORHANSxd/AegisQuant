@@ -15,6 +15,7 @@ from aegisquant.domain.values import (
     PositiveDecimal,
     UnitInterval,
 )
+from aegisquant.portfolio.event_risk_overlay import EventRiskOverlay
 from aegisquant.portfolio.transition_costs import TransitionCostEstimate
 from aegisquant.research.models.economic_gate import CalibrationStatus, EconomicForecast
 
@@ -75,11 +76,36 @@ def decide_economic_transition(
     uncertainty_filter: bool = True,
     volatility_sizing: bool = True,
     resize_permitted: bool = False,
+    event_overlay: EventRiskOverlay | None = None,
 ) -> EconomicGateDecision:
     if not 0 <= current_weight <= 1 or downside_risk_penalty < 0 or annualized_volatility <= 0:
         raise ValueError("CAT requires long/flat weights and positive volatility")
     if forecast.available_time > decision_time or costs.available_time > decision_time:
         raise ValueError("economic gate cannot consume future forecasts or costs")
+    entry_multiplier = scale = Decimal("1")
+    if event_overlay is not None:
+        if event_overlay.available_time > decision_time:
+            raise ValueError("event risk evidence is not yet available")
+        data_quality_passed &= event_overlay.valid_until >= decision_time
+        hard_risk_veto |= event_overlay.risk_veto
+        risk_allows_entry &= event_overlay.data_confidence > 0
+        entry_multiplier = event_overlay.entry_hurdle_multiplier
+        scale = event_overlay.position_scale * event_overlay.data_confidence
+        costs = costs.model_copy(
+            update={
+                "entry": costs.entry.model_copy(
+                    update={
+                        "slippage": costs.entry.slippage
+                        * event_overlay.expected_slippage_multiplier
+                    }
+                ),
+                "exit": costs.exit.model_copy(
+                    update={
+                        "slippage": costs.exit.slippage * event_overlay.expected_slippage_multiplier
+                    }
+                ),
+            }
+        )
     conservative = (
         forecast.conservative_return(policy.uncertainty_weight)
         if uncertainty_filter
@@ -87,10 +113,18 @@ def decide_economic_transition(
     )
     q_long = conservative - costs.holding - downside_risk_penalty
     buffer = policy.model_uncertainty_buffer + policy.execution_uncertainty_buffer
-    entry_hurdle = policy.lambda_cost * costs.round_trip + buffer
+    entry_hurdle = policy.lambda_cost * costs.round_trip * entry_multiplier + buffer
     exit_hurdle = policy.lambda_cost * costs.exit.total + buffer
 
     def decision(action: EconomicAction, weight: Decimal, reason: str) -> EconomicGateDecision:
+        if action is EconomicAction.ENTER_LONG:
+            weight *= scale
+            if weight == 0:
+                action, reason = EconomicAction.NO_TRADE, "EVENT_CONFIDENCE_OR_POSITION_SCALE_ZERO"
+        elif action in {EconomicAction.HOLD_CURRENT, EconomicAction.REDUCE}:
+            cap = policy.maximum_weight * scale
+            if weight > cap:
+                action, weight, reason = EconomicAction.REDUCE, cap, "EVENT_RISK_POSITION_CAP"
         return EconomicGateDecision(
             action=action,
             target_weight=weight,
