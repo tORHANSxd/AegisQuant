@@ -118,6 +118,11 @@ def _orders(result: BacktestResult) -> list[dict[str, object]]:
             "unknown_reason": item.unknown_reason,
             "recovery_evidence_json": _json(list(item.recovery_evidence)),
             "reduce_only": item.order.reduce_only,
+            "exit_trigger": item.order.exit_trigger.value if item.order.exit_trigger else None,
+            "trigger_price": _decimal(item.order.trigger_price.amount)
+            if item.order.trigger_price
+            else None,
+            "oco_group_id": item.order.oco_group_id,
             "multi_leg_plan_id": (
                 str(item.order.multi_leg_plan_id) if item.order.multi_leg_plan_id else None
             ),
@@ -213,6 +218,9 @@ ORDER_SCHEMA = _string_schema(
         ("unknown_reason", pa.string()),
         ("recovery_evidence_json", pa.string()),
         ("reduce_only", pa.bool_()),
+        ("exit_trigger", pa.string()),
+        ("trigger_price", pa.string()),
+        ("oco_group_id", pa.string()),
         ("multi_leg_plan_id", pa.string()),
         ("leg_index", pa.int64()),
     )
@@ -298,6 +306,8 @@ PNL_SCHEMA = _string_schema(
         ("impact_cost", pa.string()),
         ("funding", pa.string()),
         ("borrow_interest", pa.string()),
+        ("settlement_fees", pa.string()),
+        ("liquidation_penalties", pa.string()),
         ("net_pnl", pa.string()),
     )
 )
@@ -350,6 +360,8 @@ def _write_tables(result: BacktestResult, output: Path) -> None:
                 "impact_cost": str(item.impact_cost),
                 "funding": str(item.funding),
                 "borrow_interest": str(item.borrow_interest),
+                "settlement_fees": str(item.settlement_fees),
+                "liquidation_penalties": str(item.liquidation_penalties),
                 "net_pnl": str(item.net_pnl),
             }
             for item in result.pnl_attribution
@@ -389,6 +401,9 @@ def _write_reports(result: BacktestResult, output: Path) -> None:
                 f"- Impact cost: `{costs.impact_cost}`",
                 f"- Funding: `{costs.funding}`",
                 f"- Borrow interest: `{costs.borrow_interest}`",
+                f"- Settlement fees: `{costs.settlement_fees}`",
+                f"- Liquidation penalties: `{costs.liquidation_penalties}`",
+                f"- Independent reference PnL reconciliation residual: `{result.cost_identity_residual}`",
                 f"- Net PnL: `{costs.net_pnl}`",
                 "- Cost arithmetic: `Decimal; no binary float at domain boundary`",
             )
@@ -404,6 +419,12 @@ def _write_reports(result: BacktestResult, output: Path) -> None:
                 "# Backtest Risk Report",
                 "",
                 f"- Maximum drawdown: `{result.metrics.maximum_drawdown}`",
+                f"- Mark-to-market final equity: `{result.mark_to_market_final_equity}`",
+                f"- Forced-close final equity: `{result.forced_close_final_equity}`",
+                f"- Forced-close status: `{result.forced_close_status}`",
+                f"- Final mark to executable quote adjustment: `{result.forced_close_mark_adjustment}`",
+                f"- Forced-close cost: `{result.forced_close_cost.total if result.forced_close_cost else None}`",
+                f"- Metric frequency in seconds: `{result.spec.metric_frequency_seconds}`",
                 f"- Expected shortfall: `{result.metrics.expected_shortfall}`",
                 f"- Maximum multi-leg exposure: `{result.metrics.maximum_multi_leg_exposure}`",
                 f"- Order status counts: `{_json(status_counts)}`",
@@ -437,7 +458,7 @@ def write_backtest_artifacts(result: BacktestResult, output_directory: Path) -> 
         if name != "run_manifest.json"
     }
     manifest = {
-        "schema_version": "p06-backtest-run-manifest-v1",
+        "schema_version": "alpha-v4-backtest-run-manifest-v1",
         "run_id": str(result.spec.run_id),
         "engine_kind": result.engine_kind.value,
         "strategy_id": str(result.spec.strategy_id),
@@ -449,6 +470,19 @@ def write_backtest_artifacts(result: BacktestResult, output_directory: Path) -> 
         "start_time": result.spec.start_time.isoformat(),
         "end_time": result.spec.end_time.isoformat(),
         "created_at": result.spec.created_at.isoformat(),
+        "initial_cash": result.spec.initial_cash.model_dump(mode="json"),
+        "metric_frequency_seconds": result.spec.metric_frequency_seconds,
+        "spot_borrow_policy": result.spec.spot_borrow_policy.model_dump(mode="json")
+        if result.spec.spot_borrow_policy
+        else None,
+        "mark_to_market_final_equity": _decimal(result.mark_to_market_final_equity),
+        "forced_close_final_equity": _decimal(result.forced_close_final_equity),
+        "forced_close_status": result.forced_close_status,
+        "forced_close_mark_adjustment": str(result.forced_close_mark_adjustment),
+        "forced_close_cost": result.forced_close_cost.model_dump(mode="json")
+        if result.forced_close_cost
+        else None,
+        "cost_identity_residual": str(result.cost_identity_residual),
         "accounting_policy_version": result.spec.accounting_policy_version,
         "cost_policy_version": result.spec.cost_policy_version,
         "rule_policy_version": result.spec.rule_policy_version,

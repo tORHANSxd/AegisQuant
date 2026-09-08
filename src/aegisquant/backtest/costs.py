@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from datetime import datetime
 from decimal import Decimal
 from itertools import pairwise
 
@@ -14,7 +15,7 @@ from aegisquant.backtest.models import (
     LiquidityRole,
 )
 from aegisquant.domain.execution import OrderSide
-from aegisquant.domain.identifiers import AssetId
+from aegisquant.domain.identifiers import AssetId, InstrumentId, VenueId
 from aegisquant.domain.time import UtcDateTime
 from aegisquant.domain.values import Price, canonical_result
 
@@ -56,17 +57,45 @@ class HistoricalCostBook:
         return self._schedules
 
     def at(self, order: BacktestOrder, event_time: UtcDateTime) -> CostSchedule:
+        return self.for_instrument(order.venue_id, order.instrument_id, event_time)
+
+    def for_instrument(
+        self, venue_id: VenueId, instrument_id: InstrumentId, event_time: datetime
+    ) -> CostSchedule:
         candidates = tuple(
             schedule
             for schedule in self._schedules
-            if schedule.venue_id == order.venue_id
-            and schedule.instrument_id == order.instrument_id
+            if schedule.venue_id == venue_id
+            and schedule.instrument_id == instrument_id
             and schedule.effective_from <= event_time
             and (schedule.effective_to is None or event_time < schedule.effective_to)
         )
         if len(candidates) != 1:
             raise ValueError("AQ-BACKTEST-HISTORICAL-COST-MISSING")
         return candidates[0]
+
+    def borrow_cost_between(
+        self,
+        *,
+        venue_id: VenueId,
+        instrument_id: InstrumentId,
+        start: datetime,
+        end: datetime,
+        borrowed_notional: Decimal,
+    ) -> Decimal:
+        """Accrue a quote-settled loan across each historical rate boundary."""
+        total = Decimal("0")
+        cursor = start
+        while cursor < end:
+            schedule = self.for_instrument(venue_id, instrument_id, cursor)
+            stop = min(end, schedule.effective_to or end)
+            elapsed = stop - cursor
+            seconds = Decimal(elapsed.days * 86400 + elapsed.seconds) + Decimal(
+                elapsed.microseconds
+            ) / Decimal("1000000")
+            total += borrowed_notional * schedule.borrow_rate_annual * seconds / SECONDS_PER_YEAR
+            cursor = stop
+        return canonical_result(total)
 
 
 def execution_price_and_cost(
@@ -76,9 +105,16 @@ def execution_price_and_cost(
     schedule: CostSchedule,
     base_asset_id: AssetId,
     quote_asset_id: AssetId,
+    contract_multiplier: Decimal = Decimal("1"),
+    settlement_quantity: Decimal = Decimal("0"),
+    liquidation_penalty_bps: Decimal = Decimal("0"),
 ) -> tuple[Price, CostBreakdown]:
     """Apply explicit adverse spread, slippage and size impact to one fill slice."""
     quantity = fill_slice.quantity
+    if contract_multiplier <= 0 or not 0 <= settlement_quantity <= quantity:
+        raise ValueError("invalid execution multiplier or settlement quantity")
+    if liquidation_penalty_bps < 0:
+        raise ValueError("liquidation penalty cannot be negative")
     reference = fill_slice.reference_price
     if fill_slice.available_liquidity == 0:
         participation = Decimal("1")
@@ -94,8 +130,8 @@ def execution_price_and_cost(
     adverse_bps = spread_bps + slippage_bps + impact_bps
     direction = Decimal("1") if order.side is OrderSide.BUY else Decimal("-1")
     execution = canonical_result(reference * (Decimal("1") + direction * adverse_bps / BPS))
-    gross_notional = canonical_result(quantity * reference)
-    execution_notional = canonical_result(quantity * execution)
+    gross_notional = canonical_result(quantity * contract_multiplier * reference)
+    execution_notional = canonical_result(quantity * contract_multiplier * execution)
     fee_bps = (
         schedule.maker_fee_bps
         if fill_slice.liquidity_role is LiquidityRole.MAKER
@@ -110,7 +146,14 @@ def execution_price_and_cost(
         impact=canonical_result(gross_notional * impact_bps / BPS),
         funding=Decimal("0"),
         borrow_interest=Decimal("0"),
-        settlement_fee=Decimal("0"),
+        settlement_fee=canonical_result(
+            settlement_quantity
+            * contract_multiplier
+            * execution
+            * schedule.settlement_fee_bps
+            / BPS
+        ),
+        liquidation_penalty=canonical_result(execution_notional * liquidation_penalty_bps / BPS),
     )
     return (
         Price(
@@ -127,9 +170,12 @@ def funding_cost(
     signed_quantity: Decimal,
     mark_price: Decimal,
     funding_rate: Decimal,
+    contract_multiplier: Decimal = Decimal("1"),
 ) -> Decimal:
     """Return signed funding expense: positive is paid, negative is received."""
-    return canonical_result(signed_quantity * mark_price * funding_rate)
+    if contract_multiplier <= 0:
+        raise ValueError("funding multiplier must be positive")
+    return canonical_result(signed_quantity * contract_multiplier * mark_price * funding_rate)
 
 
 def borrow_interest_cost(

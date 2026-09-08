@@ -120,6 +120,7 @@ def engine(value: BacktestPolicy | None = None) -> EventBacktestEngine:
         cost_book=HistoricalCostBook(selected.cost_schedules),
         rule_book=HistoricalRuleBook(selected.instrument_rules),
         latency_policy=selected.latency_policy,
+        margin_policies=selected.margin_policies,
     )
 
 

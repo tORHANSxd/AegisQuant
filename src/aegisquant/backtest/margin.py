@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from datetime import datetime
 from decimal import Decimal
 
@@ -12,6 +13,7 @@ from aegisquant.domain.execution import OrderSide, OrderType, TimeInForce
 from aegisquant.domain.identifiers import (
     BacktestOrderId,
     ClientOrderId,
+    InstrumentId,
     OrderIntentId,
     VenueId,
 )
@@ -32,6 +34,26 @@ class LiquidationInstruction(DomainModel):
     liquidation_price: PositiveDecimal
     penalty: FiniteDecimal
     reason: str
+
+
+def margin_policy_at(
+    policies: Iterable[MarginPolicy],
+    *,
+    venue_id: VenueId,
+    instrument_id: InstrumentId,
+    at_time: datetime,
+) -> MarginPolicy:
+    matches = tuple(
+        policy
+        for policy in policies
+        if policy.venue_id == venue_id
+        and policy.instrument_id == instrument_id
+        and policy.effective_from <= at_time
+        and (policy.effective_to is None or at_time < policy.effective_to)
+    )
+    if len(matches) != 1:
+        raise ValueError("AQ-BACKTEST-HISTORICAL-MARGIN-MISSING-OR-OVERLAPPING")
+    return matches[0]
 
 
 def select_margin_bracket(policy: MarginPolicy, notional: Decimal) -> MarginBracket:

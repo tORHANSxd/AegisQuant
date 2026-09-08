@@ -546,6 +546,14 @@ class LedgerEngine:
     def _spot_fill(
         self, fill: Fill, instrument: AccountingInstrument
     ) -> tuple[list[_PostingDraft], list[LotChange], Money]:
+        lots = self._lots.get(instrument.instrument_id, ())
+        available = sum(
+            (lot.remaining_quantity for lot in lots if lot.side is LotSide.LONG), Decimal("0")
+        )
+        if any(lot.side is LotSide.SHORT for lot in lots) or (
+            fill.side.value == "SELL" and fill.quantity.amount > available
+        ):
+            return self._borrowed_spot_fill(fill, instrument)
         drafts: list[_PostingDraft] = []
         changes: list[LotChange] = []
         quantity = fill.quantity.amount
@@ -711,6 +719,94 @@ class LedgerEngine:
             realized = Money(amount=realized_amount, asset_id=instrument.settlement_asset_id)
         self._fee_postings(drafts, fill, venue)
         return drafts, changes, realized
+
+    def _borrowed_spot_fill(
+        self, fill: Fill, instrument: AccountingInstrument
+    ) -> tuple[list[_PostingDraft], list[LotChange], Money]:
+        """FIFO short lots backed by an actual native-asset borrow journal entry."""
+        drafts: list[_PostingDraft] = []
+        venue = instrument.venue
+        base = self._account(AccountRole.CASH, venue=venue, subject=str(instrument.base_asset_id))
+        quote = self._account(AccountRole.CASH, venue=venue, subject=str(instrument.quote_asset_id))
+        inventory = self._account(
+            AccountRole.INVENTORY_CLEARING, venue=venue, subject=str(instrument.instrument_id)
+        )
+        cost = self._account(
+            AccountRole.POSITION_COST, venue=venue, subject=str(instrument.instrument_id)
+        )
+        buys = fill.side.value == "BUY"
+        base_quantity = fill.quantity.amount * instrument.contract_multiplier
+        if (
+            not buys
+            and self._balances.get((base.account_id, instrument.base_asset_id), Decimal("0"))
+            < base_quantity
+        ):
+            raise ValueError("AQ-LEDGER-SPOT-SHORT-REQUIRES-BORROWED-INVENTORY")
+        incoming = LotSide.LONG if buys else LotSide.SHORT
+        residual, realized_amount, changes = self._consume_fifo(
+            fill=fill,
+            instrument=instrument,
+            incoming_side=incoming,
+            quantity=fill.quantity.amount,
+            drafts=drafts,
+        )
+        if residual > 0:
+            lot = self._new_lot(
+                fill=fill,
+                instrument=instrument,
+                side=incoming,
+                quantity=residual,
+                ordinal=len(changes),
+            )
+            self._lots.setdefault(instrument.instrument_id, []).append(lot)
+            changes.append(
+                LotChange(
+                    action=LotAction.OPEN,
+                    lot_after=lot,
+                    affected_quantity=residual,
+                    realized_pnl=Money(
+                        amount=Decimal("0"), asset_id=instrument.settlement_asset_id
+                    ),
+                )
+            )
+        self._pair(
+            drafts,
+            debit=base if buys else inventory,
+            credit=inventory if buys else base,
+            amount=base_quantity,
+            asset_id=instrument.base_asset_id,
+            memo=f"borrow-backed spot delivery for {fill.fill_id}",
+        )
+        self._pair(
+            drafts,
+            debit=cost if buys else quote,
+            credit=quote if buys else cost,
+            amount=base_quantity * fill.price.amount,
+            asset_id=instrument.quote_asset_id,
+            memo=f"borrow-backed spot consideration for {fill.fill_id}",
+        )
+        if realized_amount != 0:
+            pnl = self._account(
+                AccountRole.TRADING_REALIZED_PNL
+                if realized_amount > 0
+                else AccountRole.TRADING_LOSS,
+                venue=venue,
+                subject=str(instrument.quote_asset_id),
+            )
+            self._pair(
+                drafts,
+                debit=cost if realized_amount > 0 else pnl,
+                credit=pnl if realized_amount > 0 else cost,
+                amount=abs(realized_amount),
+                asset_id=instrument.quote_asset_id,
+                memo=f"borrow-backed spot FIFO PnL {fill.fill_id}",
+            )
+        self._fee_postings(drafts, fill, venue)
+        return (
+            drafts,
+            changes,
+            Money(amount=realized_amount, asset_id=instrument.settlement_asset_id),
+        )
 
     def _derivative_fill(
         self, fill: Fill, instrument: AccountingInstrument

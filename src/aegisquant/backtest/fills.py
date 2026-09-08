@@ -7,6 +7,7 @@ from decimal import Decimal
 from aegisquant.backtest.models import (
     BacktestOrder,
     BarEvent,
+    ExitTrigger,
     FillPrecision,
     FillSlice,
     L2BookEvent,
@@ -169,18 +170,49 @@ def _l2_fill(
     return tuple(output)
 
 
+def exit_trigger_reference(order: BacktestOrder, event: MarketEvent) -> Decimal | None:
+    """Known bar range only: stop gaps get the adverse open, TP gets its threshold."""
+    if order.exit_trigger is None or order.trigger_price is None:
+        raise ValueError("exit trigger reference requires a triggered order")
+    trigger = order.trigger_price.amount
+    sells = order.side is OrderSide.SELL
+    stop = order.exit_trigger is ExitTrigger.STOP_LOSS
+    if isinstance(event, BarEvent):
+        lower, upper, opening = event.low, event.high, event.open
+    else:
+        if isinstance(event, TradeQuoteEvent):
+            opening = event.bid_price if sells else event.ask_price
+        else:
+            opening = event.bids[0].price if sells else event.asks[0].price
+        lower = upper = opening
+    downward = sells == stop
+    touched = lower <= trigger if downward else upper >= trigger
+    if not touched:
+        return None
+    if not stop:
+        return trigger
+    return min(opening, trigger) if sells else max(opening, trigger)
+
+
 def decide_fills(
     *,
     order: BacktestOrder,
     event: MarketEvent,
     remaining: Decimal,
     participation_cap: Decimal,
+    triggered: bool = False,
 ) -> tuple[FillSlice, ...]:
     """Return deterministic fill slices without mutating historical market data."""
     if event.instrument_id != order.instrument_id or event.venue_id != order.venue_id:
         return ()
     if remaining <= 0:
         return ()
+    if order.exit_trigger is not None and not triggered:
+        reference = exit_trigger_reference(order, event)
+        if reference is None:
+            return ()
+        if isinstance(event, BarEvent):
+            event = event.model_copy(update={"open": reference})
     if isinstance(event, BarEvent):
         return _bar_fill(order, event, remaining, participation_cap)
     if isinstance(event, TradeQuoteEvent):

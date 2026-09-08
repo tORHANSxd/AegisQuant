@@ -69,6 +69,29 @@ class MarginMode(StrEnum):
     ISOLATED = "ISOLATED"
 
 
+class ExitTrigger(StrEnum):
+    STOP_LOSS = "STOP_LOSS"
+    TAKE_PROFIT = "TAKE_PROFIT"
+
+
+class SpotBorrowPolicy(DomainModel):
+    """Explicit quote-settled borrowing assumptions; absent means no spot borrowing."""
+
+    maximum_quantity: PositiveDecimal
+    initial_margin_rate: UnitInterval = Decimal("1")
+    maintenance_margin_rate: UnitInterval = Decimal("0.30")
+    liquidation_penalty_bps: NonNegativeDecimal = Decimal("50")
+    source: str
+
+    @model_validator(mode="after")
+    def validate_borrow(self) -> SpotBorrowPolicy:
+        if not 0 < self.maintenance_margin_rate <= self.initial_margin_rate:
+            raise ValueError("borrow margin rates must satisfy 0 < maintenance <= initial")
+        if not self.source.strip():
+            raise ValueError("borrow policy requires a source")
+        return self
+
+
 class FaultType(StrEnum):
     DISCONNECT = "DISCONNECT"
     VENUE_HALT = "VENUE_HALT"
@@ -115,6 +138,7 @@ class BacktestRunSpec(DomainModel):
     reproduction_command: str
     live_trading_locked: Literal[True] = True
     metric_frequency_seconds: PositiveInt = 3600
+    spot_borrow_policy: SpotBorrowPolicy | None = None
 
     @field_validator("dataset_sha256", "config_sha256", "code_sha256")
     @classmethod
@@ -232,6 +256,9 @@ class BacktestOrder(DomainModel):
     reduce_only: bool = False
     multi_leg_plan_id: MultiLegPlanId | None = None
     leg_index: NonNegativeInt | None = None
+    exit_trigger: ExitTrigger | None = None
+    trigger_price: Price | None = None
+    oco_group_id: str | None = None
 
     @model_validator(mode="after")
     def validate_order(self) -> BacktestOrder:
@@ -244,6 +271,16 @@ class BacktestOrder(DomainModel):
             raise ValueError("limit price must appear exactly on limit orders")
         if (self.multi_leg_plan_id is None) != (self.leg_index is None):
             raise ValueError("multi-leg plan id and leg index must appear together")
+        if (self.exit_trigger is None) != (self.trigger_price is None):
+            raise ValueError("exit trigger and price must appear together")
+        if self.exit_trigger is not None and (
+            not self.reduce_only or self.order_type is not OrderType.MARKET
+        ):
+            raise ValueError("triggered exits must be reduce-only market orders")
+        if self.oco_group_id is not None and (
+            not self.oco_group_id.strip() or self.exit_trigger is None
+        ):
+            raise ValueError("OCO groups require a named triggered exit")
         return self
 
 
@@ -324,6 +361,7 @@ class CostBreakdown(DomainModel):
     funding: FiniteDecimal
     borrow_interest: NonNegativeDecimal
     settlement_fee: NonNegativeDecimal
+    liquidation_penalty: NonNegativeDecimal = Decimal("0")
 
     @property
     def total(self) -> Decimal:
@@ -335,6 +373,7 @@ class CostBreakdown(DomainModel):
             + self.funding
             + self.borrow_interest
             + self.settlement_fee
+            + self.liquidation_penalty
         )
 
 
@@ -553,6 +592,8 @@ class PnLAttributionPoint(DomainModel):
     impact_cost: NonNegativeDecimal
     funding: FiniteDecimal
     borrow_interest: NonNegativeDecimal
+    settlement_fees: NonNegativeDecimal = Decimal("0")
+    liquidation_penalties: NonNegativeDecimal = Decimal("0")
     net_pnl: FiniteDecimal
 
     @model_validator(mode="after")
@@ -565,6 +606,8 @@ class PnLAttributionPoint(DomainModel):
             - self.impact_cost
             - self.funding
             - self.borrow_interest
+            - self.settlement_fees
+            - self.liquidation_penalties
         )
         if expected != self.net_pnl:
             raise ValueError("backtest PnL attribution does not conserve")
@@ -613,7 +656,9 @@ class BacktestResult(DomainModel):
     mark_to_market_final_equity: FiniteDecimal | None = None
     forced_close_final_equity: FiniteDecimal | None = None
     forced_close_cost: CostBreakdown | None = None
+    forced_close_mark_adjustment: FiniteDecimal = Decimal("0")
     forced_close_status: str = "LEGACY_NOT_EVALUATED"
+    cost_identity_residual: FiniteDecimal = Decimal("0")
 
     @field_validator("economic_event_hash")
     @classmethod

@@ -275,6 +275,7 @@ def run_translation_candidate(
         cost_book=HistoricalCostBook(policy.cost_schedules),
         rule_book=HistoricalRuleBook(policy.instrument_rules),
         latency_policy=policy.latency_policy,
+        margin_policies=policy.margin_policies,
     )
     spec = _run_spec(candidate=candidate, bars=bars, policy_payload=policy.model_dump(mode="json"))
     result = engine.run(

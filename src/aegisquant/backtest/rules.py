@@ -68,11 +68,18 @@ class HistoricalRuleBook:
             raise ValueError("AQ-BACKTEST-HISTORICAL-RULE-MISSING")
         return candidates[0]
 
-    def validate_order(self, order: BacktestOrder, *, reference_price: Decimal) -> RuleDecision:
+    def validate_order(
+        self,
+        order: BacktestOrder,
+        *,
+        reference_price: Decimal,
+        event_time: UtcDateTime | None = None,
+        contract_multiplier: Decimal = Decimal("1"),
+    ) -> RuleDecision:
         rule = self.at(
             venue_id=order.venue_id,
             instrument_id=order.instrument_id,
-            event_time=order.submitted_at,
+            event_time=event_time or order.submitted_at,
         )
         rejection: str | None = None
         quantity = order.quantity.amount
@@ -87,6 +94,6 @@ class HistoricalRuleBook:
             rejection = "AQ-BACKTEST-RULE-STEP-SIZE"
         elif order.limit_price is not None and price % rule.tick_size != 0:
             rejection = "AQ-BACKTEST-RULE-TICK-SIZE"
-        elif quantity * price < rule.minimum_notional:
+        elif quantity * contract_multiplier * price < rule.minimum_notional:
             rejection = "AQ-BACKTEST-RULE-MIN-NOTIONAL"
         return RuleDecision(rule=rule, valid=rejection is None, rejection_code=rejection)

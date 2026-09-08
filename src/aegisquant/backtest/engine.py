@@ -19,7 +19,14 @@ from aegisquant.accounting.models import (
     CashflowType,
 )
 from aegisquant.backtest.costs import HistoricalCostBook, execution_price_and_cost, funding_cost
-from aegisquant.backtest.fills import decide_fills
+from aegisquant.backtest.fills import decide_fills, exit_trigger_reference
+from aegisquant.backtest.margin import (
+    create_liquidation_order,
+    evaluate_margin,
+    liquidation_instruction,
+    margin_policy_at,
+    select_margin_bracket,
+)
 from aegisquant.backtest.metrics import calculate_metrics
 from aegisquant.backtest.models import (
     BacktestFill,
@@ -29,7 +36,9 @@ from aegisquant.backtest.models import (
     BacktestRunSpec,
     BarEvent,
     CancelRequest,
+    CostBreakdown,
     EquityPoint,
+    ExitTrigger,
     FaultType,
     FaultWindow,
     FillPrecision,
@@ -38,6 +47,9 @@ from aegisquant.backtest.models import (
     L2BookEvent,
     LatencyPolicy,
     LiquidityRole,
+    MarginBracket,
+    MarginMode,
+    MarginPolicy,
     MarketEvent,
     MultiLegExposure,
     MultiLegPlan,
@@ -57,8 +69,10 @@ from aegisquant.domain.identifiers import (
     ClientOrderId,
     FillId,
     IdempotencyKey,
+    MarginPolicyId,
     MultiLegPlanId,
     OrderIntentId,
+    VenueId,
     VenueOrderId,
 )
 from aegisquant.domain.values import Money, Price, Quantity, canonical_result
@@ -79,6 +93,8 @@ class _MutableOrderState:
     unknown_reason: str | None = None
     recovery_evidence: tuple[str, ...] = ()
     fill_sequence: int = 0
+    triggered: bool = False
+    liquidation_penalty_bps: Decimal | None = None
 
 
 def _delta_nanoseconds(later: datetime, earlier: datetime) -> int:
@@ -137,12 +153,14 @@ class EventBacktestEngine:
         rule_book: HistoricalRuleBook,
         latency_policy: LatencyPolicy,
         liquidity_consumption: bool = True,
+        margin_policies: Iterable[MarginPolicy] = (),
     ) -> None:
         self.project_root = project_root
         self.cost_book = cost_book
         self.rule_book = rule_book
         self.latency_policy = latency_policy
         self.liquidity_consumption = liquidity_consumption
+        self.margin_policies = tuple(margin_policies)
 
     def _ledger(self, spec: BacktestRunSpec) -> LedgerEngine:
         policy = AccountingPolicy.from_yaml(
@@ -187,6 +205,8 @@ class EventBacktestEngine:
                     if event.instrument_id == order.instrument_id
                     and event.venue_id == order.venue_id
                     and event.available_time >= arrival
+                    and event.event_time >= arrival
+                    and event.event_time > order.decision_time
                 ),
                 None,
             )
@@ -199,15 +219,6 @@ class EventBacktestEngine:
             if relevant is None:
                 state.status = VenueOrderStatus.EXPIRED
                 state.completed_at = spec.end_time
-            else:
-                decision = self.rule_book.validate_order(
-                    order,
-                    reference_price=_event_reference(relevant, order.side),
-                )
-                if not decision.valid:
-                    state.status = VenueOrderStatus.REJECTED
-                    state.rejection_code = decision.rejection_code
-                    state.completed_at = arrival
             if order.multi_leg_plan_id is not None:
                 failed_index = failed_leg_indices.get(order.multi_leg_plan_id)
                 if failed_index is not None and order.leg_index is not None:
@@ -240,6 +251,7 @@ class EventBacktestEngine:
         state: _MutableOrderState,
         fill_slice: FillSlice,
         instrument: AccountingInstrument,
+        settlement_quantity: Decimal = Decimal("0"),
     ) -> tuple[BacktestFill, Fill]:
         state.fill_sequence += 1
         schedule = self.cost_book.at(state.order, fill_slice.event_time)
@@ -249,12 +261,15 @@ class EventBacktestEngine:
             schedule=schedule,
             base_asset_id=instrument.base_asset_id,
             quote_asset_id=instrument.quote_asset_id,
+            contract_multiplier=instrument.contract_multiplier,
+            settlement_quantity=settlement_quantity,
+            liquidation_penalty_bps=state.liquidation_penalty_bps or Decimal("0"),
         )
         fill_id = FillId(f"simfill:{state.order.backtest_order_id}:{state.fill_sequence}")
         if state.venue_order_id is None:
             raise RuntimeError("accepted simulated order lacks venue order id")
         fee = _fee_in_settlement_asset(
-            quote_fee=breakdown.fee,
+            quote_fee=breakdown.fee + breakdown.settlement_fee + breakdown.liquidation_penalty,
             execution_price=execution_price.amount,
             instrument=instrument,
         )
@@ -424,6 +439,13 @@ class EventBacktestEngine:
         multi_leg_plans: Iterable[MultiLegPlan] = (),
         failed_leg_indices: Mapping[MultiLegPlanId, int] | None = None,
     ) -> BacktestResult:
+        if (
+            instrument.settlement_asset_id != spec.reporting_asset_id
+            or instrument.quote_asset_id != spec.reporting_asset_id
+        ):
+            raise ValueError("AQ-BACKTEST-REPORTING-ASSET-FX-REQUIRED")
+        if instrument.contract_form is ContractForm.INVERSE:
+            raise ValueError("AQ-BACKTEST-INVERSE-MARGIN-NOT-IMPLEMENTED")
         events = tuple(
             sorted(
                 (
@@ -438,11 +460,35 @@ class EventBacktestEngine:
             raise ValueError("AQ-BACKTEST-MARKET-EVENTS-EMPTY")
         if any(event.instrument_id != instrument.instrument_id for event in events):
             raise ValueError("market event instrument differs from accounting instrument")
+        unique_events: dict[str, MarketEvent] = {}
+        for event in events:
+            key = str(event.event_id)
+            if key in unique_events and unique_events[key] != event:
+                raise ValueError("AQ-BACKTEST-MARKET-EVENT-ID-CONFLICT")
+            unique_events[key] = event
+        events = tuple(unique_events.values())
         order_values = tuple(
             sorted(orders, key=lambda item: (item.submitted_at, str(item.backtest_order_id)))
         )
         if len({order.backtest_order_id for order in order_values}) != len(order_values):
             raise ValueError("duplicate backtest order id")
+        if len({order.client_order_id for order in order_values}) != len(order_values):
+            raise ValueError("duplicate client order id")
+        if any(
+            order.instrument_id != instrument.instrument_id
+            or order.quantity.asset_id != instrument.quantity_asset_id
+            for order in order_values
+        ):
+            raise ValueError("AQ-BACKTEST-ORDER-INSTRUMENT-OR-QUANTITY-UNIT-MISMATCH")
+        oco_groups: dict[str, list[BacktestOrder]] = {}
+        for order in order_values:
+            if order.oco_group_id is not None:
+                oco_groups.setdefault(order.oco_group_id, []).append(order)
+        for group in oco_groups.values():
+            if len(group) != 2 or {order.exit_trigger for order in group} != set(ExitTrigger):
+                raise ValueError("AQ-BACKTEST-OCO-REQUIRES-ONE-STOP-AND-ONE-TAKE-PROFIT")
+            if group[0].side is not group[1].side or group[0].venue_id != group[1].venue_id:
+                raise ValueError("AQ-BACKTEST-OCO-EXIT-SIDES-OR-VENUES-DIFFER")
         fault_values = tuple(sorted(faults, key=lambda item: item.starts_at))
         failures = failed_leg_indices or {}
         states = self._initial_states(
@@ -463,6 +509,37 @@ class EventBacktestEngine:
         cash = spec.initial_cash.amount
         realized = Decimal("0")
         funding_total = Decimal("0")
+        borrow_total = Decimal("0")
+        borrowed_quantity = Decimal("0")
+        borrow_accrued_at = spec.start_time
+        run_warnings: list[str] = []
+        liquidation_sequence = 0
+        is_spot = instrument.instrument_type is InstrumentType.SPOT
+        borrow_policy = spec.spot_borrow_policy
+        borrow_margin = (
+            MarginPolicy(
+                margin_policy_id=MarginPolicyId("explicit-spot-borrow-margin"),
+                version="alpha-v4-spot-borrow",
+                venue_id=VenueId(instrument.venue),
+                instrument_id=instrument.instrument_id,
+                mode=MarginMode.CROSS,
+                effective_from=spec.start_time,
+                brackets=(
+                    MarginBracket(
+                        notional_floor=Decimal("0"),
+                        maximum_leverage=Decimal("1") / borrow_policy.initial_margin_rate,
+                        initial_margin_rate=borrow_policy.initial_margin_rate,
+                        maintenance_margin_rate=borrow_policy.maintenance_margin_rate,
+                    ),
+                ),
+                liquidation_penalty_bps=borrow_policy.liquidation_penalty_bps,
+                conservative_buffer_rate=Decimal("0"),
+                collateral_asset_id=spec.reporting_asset_id,
+                source=borrow_policy.source,
+            )
+            if borrow_policy is not None
+            else None
+        )
         equity_curve: list[EquityPoint] = [
             EquityPoint(
                 time=spec.start_time,
@@ -521,7 +598,364 @@ class EventBacktestEngine:
             else:
                 equity_curve.append(point)
 
+        def margin_at(at_time: datetime, venue_id: VenueId) -> MarginPolicy:
+            if is_spot:
+                if borrow_margin is None:
+                    raise ValueError("AQ-BACKTEST-SPOT-BORROW-NOT-AUTHORIZED")
+                return borrow_margin
+            policy = margin_policy_at(
+                self.margin_policies,
+                venue_id=venue_id,
+                instrument_id=instrument.instrument_id,
+                at_time=at_time,
+            )
+            if policy.collateral_asset_id != spec.reporting_asset_id:
+                raise ValueError("AQ-BACKTEST-MARGIN-COLLATERAL-FX-REQUIRED")
+            if policy.mode is not MarginMode.CROSS:
+                raise ValueError("AQ-BACKTEST-ISOLATED-COLLATERAL-ALLOCATION-REQUIRED")
+            return policy
+
+        def cashflow(
+            kind: CashflowType,
+            amount: Decimal,
+            *,
+            at_time: datetime,
+            identity: str,
+            asset: Money | None = None,
+        ) -> None:
+            if amount == 0:
+                return
+            ledger.process_cashflow(
+                CashflowEvent(
+                    event_id=ArtifactId(identity),
+                    venue=instrument.venue,
+                    cashflow_type=kind,
+                    direction=CashflowDirection.INFLOW if amount > 0 else CashflowDirection.OUTFLOW,
+                    amount=asset or Money(amount=abs(amount), asset_id=spec.reporting_asset_id),
+                    event_time=at_time,
+                    recorded_at=at_time,
+                    idempotency_key=IdempotencyKey(identity),
+                    reference=identity,
+                )
+            )
+
+        def accrue_borrow(at_time: datetime) -> None:
+            nonlocal cash, borrow_total, borrow_accrued_at
+            if borrowed_quantity > 0 and at_time > borrow_accrued_at:
+                cost = self.cost_book.borrow_cost_between(
+                    venue_id=VenueId(instrument.venue),
+                    instrument_id=instrument.instrument_id,
+                    start=borrow_accrued_at,
+                    end=at_time,
+                    borrowed_notional=borrowed_quantity * latest_mark,
+                )
+                cashflow(
+                    CashflowType.BORROW_INTEREST,
+                    -cost,
+                    at_time=at_time,
+                    identity=f"borrow-interest:{spec.run_id}:{at_time:%Y%m%dT%H%M%S%fZ}",
+                )
+                cash = canonical_result(cash - cost)
+                borrow_total = canonical_result(borrow_total + cost)
+            borrow_accrued_at = at_time
+
+        def apply_slice(state: _MutableOrderState, fill_slice: FillSlice) -> None:
+            nonlocal cash, realized, borrowed_quantity
+            quantity, _, _ = position_at(fill_slice.reference_price)
+            direction = Decimal("1") if state.order.side is OrderSide.BUY else Decimal("-1")
+            closing = (
+                min(abs(quantity), fill_slice.quantity)
+                if quantity * direction < 0
+                else Decimal("0")
+            )
+            projected = quantity + direction * fill_slice.quantity
+            if is_spot and max(Decimal("0"), -projected) > borrowed_quantity:
+                additional = -projected - borrowed_quantity
+                cashflow(
+                    CashflowType.BORROW,
+                    additional,
+                    at_time=fill_slice.available_time,
+                    identity=f"borrow:{state.order.backtest_order_id}:{state.fill_sequence + 1}",
+                    asset=Money(amount=additional, asset_id=instrument.base_asset_id),
+                )
+                borrowed_quantity += additional
+            backtest_fill, ledger_fill = self._backtest_fill(
+                state=state,
+                fill_slice=fill_slice,
+                instrument=instrument,
+                settlement_quantity=closing,
+            )
+            outcome = ledger.process_fill(ledger_fill, instrument)
+            if not outcome.inserted:
+                raise RuntimeError("AQ-BACKTEST-DUPLICATE-FILL-APPLICATION")
+            fills.append(backtest_fill)
+            state.filled = canonical_result(state.filled + fill_slice.quantity)
+            state.fill_value = canonical_result(
+                state.fill_value + fill_slice.quantity * backtest_fill.execution_price.amount
+            )
+            if self.liquidity_consumption:
+                event_capacity[str(fill_slice.source_event_id)] = canonical_result(
+                    event_capacity[str(fill_slice.source_event_id)] - fill_slice.quantity
+                )
+                level_key = (
+                    str(fill_slice.source_event_id),
+                    state.order.side,
+                    fill_slice.reference_price,
+                )
+                if level_key in level_remaining:
+                    level_remaining[level_key] -= fill_slice.quantity
+            if is_spot:
+                notional = fill_slice.quantity * backtest_fill.execution_price.amount
+                cash = canonical_result(cash - direction * notional - backtest_fill.fee.amount)
+                repaid = min(borrowed_quantity, closing) if direction > 0 else Decimal("0")
+                if repaid > 0:
+                    cashflow(
+                        CashflowType.REPAY,
+                        -repaid,
+                        at_time=fill_slice.available_time,
+                        identity=f"repay:{backtest_fill.fill_id}",
+                        asset=Money(amount=repaid, asset_id=instrument.base_asset_id),
+                    )
+                    borrowed_quantity = canonical_result(borrowed_quantity - repaid)
+            else:
+                cash = canonical_result(
+                    cash + outcome.applied_fill.realized_pnl.amount - backtest_fill.fee.amount
+                )
+            realized = canonical_result(realized + outcome.applied_fill.realized_pnl.amount)
+
+        def reject(state: _MutableOrderState, code: str, at_time: datetime) -> None:
+            state.status = VenueOrderStatus.REJECTED
+            state.rejection_code = code
+            state.completed_at = at_time
+
+        def execution_rejection(
+            state: _MutableOrderState,
+            fill_slice: FillSlice,
+        ) -> str | None:
+            quantity, _, unrealized_pnl = position_at(fill_slice.reference_price)
+            direction = Decimal("1") if state.order.side is OrderSide.BUY else Decimal("-1")
+            projected = canonical_result(quantity + direction * fill_slice.quantity)
+            closing = (
+                min(abs(quantity), fill_slice.quantity)
+                if quantity * direction < 0
+                else Decimal("0")
+            )
+            execution, cost = execution_price_and_cost(
+                order=state.order,
+                fill_slice=fill_slice,
+                schedule=self.cost_book.at(state.order, fill_slice.event_time),
+                base_asset_id=instrument.base_asset_id,
+                quote_asset_id=instrument.quote_asset_id,
+                contract_multiplier=instrument.contract_multiplier,
+                settlement_quantity=closing,
+            )
+            if is_spot:
+                after_cash = (
+                    cash
+                    - direction * fill_slice.quantity * execution.amount
+                    - cost.fee
+                    - cost.settlement_fee
+                )
+                if direction > 0 and after_cash < 0:
+                    return "AQ-BACKTEST-SPOT-INSUFFICIENT-CASH"
+                if projected >= 0:
+                    return None
+                if borrow_policy is None:
+                    return "AQ-BACKTEST-SPOT-INSUFFICIENT-INVENTORY"
+                if -projected > borrow_policy.maximum_quantity:
+                    return "AQ-BACKTEST-SPOT-BORROW-LIMIT-EXCEEDED"
+                equity_after = after_cash + projected * fill_slice.reference_price
+            else:
+                equity_after = cash + unrealized_pnl - cost.total
+            # Reducing a losing position stays possible; every increase needs fresh collateral.
+            increases = abs(projected) > abs(quantity) or projected * quantity < 0
+            if not increases:
+                return None
+            policy = margin_at(fill_slice.event_time, state.order.venue_id)
+            notional = abs(projected) * instrument.contract_multiplier * fill_slice.reference_price
+            bracket = select_margin_bracket(policy, notional)
+            if equity_after < notional * bracket.initial_margin_rate:
+                return "AQ-BACKTEST-INITIAL-MARGIN-INSUFFICIENT"
+            if equity_after <= 0 or notional > equity_after * bracket.maximum_leverage:
+                return "AQ-BACKTEST-MARGIN-LEVERAGE-EXCEEDED"
+            return None
+
         event_capacity: dict[str, Decimal] = {}
+        level_remaining: dict[tuple[str, OrderSide, Decimal], Decimal] = {}
+        raw_capacity = Decimal("0")
+
+        def available_slices(
+            order: BacktestOrder, slices: tuple[FillSlice, ...]
+        ) -> tuple[FillSlice, ...]:
+            if not self.liquidity_consumption or not slices:
+                return slices
+            limited = tuple(
+                slice_.model_copy(
+                    update={
+                        "quantity": min(
+                            slice_.quantity,
+                            level_remaining.get(
+                                (str(slice_.source_event_id), order.side, slice_.reference_price),
+                                slice_.quantity,
+                            ),
+                        )
+                    }
+                )
+                for slice_ in slices
+            )
+            return self._clip_for_consumption(
+                tuple(slice_ for slice_ in limited if slice_.quantity > 0),
+                event_capacity[str(slices[0].source_event_id)],
+            )
+
+        def market_slices(
+            order: BacktestOrder,
+            event: MarketEvent,
+            remaining: Decimal,
+            participation_cap: Decimal,
+            *,
+            triggered: bool = False,
+        ) -> tuple[FillSlice, ...]:
+            if isinstance(event, L2BookEvent) and self.liquidity_consumption:
+                levels = event.asks if order.side is OrderSide.BUY else event.bids
+                remaining_levels = tuple(
+                    level.model_copy(
+                        update={
+                            "quantity": level_remaining[
+                                (str(event.event_id), order.side, level.price)
+                            ]
+                        }
+                    )
+                    for level in levels
+                )
+                residual_book = event.model_copy(
+                    update={"asks" if order.side is OrderSide.BUY else "bids": remaining_levels}
+                )
+                slices = decide_fills(
+                    order=order,
+                    event=residual_book,
+                    remaining=remaining,
+                    participation_cap=Decimal("1"),
+                    triggered=triggered,
+                )
+                raw_by_price = {
+                    level.price: level.quantity * (Decimal("1") - participation_cap)
+                    + level_remaining[(str(event.event_id), order.side, level.price)]
+                    for level in levels
+                }
+                return tuple(
+                    slice_.model_copy(
+                        update={"available_liquidity": raw_by_price[slice_.reference_price]}
+                    )
+                    for slice_ in slices
+                )
+            return decide_fills(
+                order=order,
+                event=event,
+                remaining=remaining,
+                participation_cap=participation_cap,
+                triggered=triggered,
+            )
+
+        def liquidate_at(mark: Decimal, at_time: datetime, event: MarketEvent | None) -> None:
+            nonlocal liquidation_sequence
+            if is_spot and borrow_policy is None:
+                return
+            quantity, average, _ = position_at(mark)
+            if quantity == 0 or (is_spot and quantity > 0):
+                return
+            if average is None:
+                raise RuntimeError("nonzero position lacks an entry basis")
+            venue = event.venue_id if event is not None else VenueId(instrument.venue)
+            policy = margin_at(at_time, venue)
+            evaluation = evaluate_margin(
+                policy=policy,
+                signed_quantity=quantity,
+                entry_price=average,
+                mark_price=mark,
+                collateral=cash + quantity * average if is_spot else cash,
+                contract_multiplier=instrument.contract_multiplier,
+            )
+            pending = next(
+                (
+                    candidate
+                    for candidate in states.values()
+                    if candidate.liquidation_penalty_bps is not None
+                    and candidate.status
+                    in {VenueOrderStatus.ACCEPTED, VenueOrderStatus.PARTIALLY_FILLED}
+                ),
+                None,
+            )
+            if not evaluation.liquidation_required and pending is None:
+                return
+            if pending is None:
+                liquidation_sequence += 1
+                instruction = liquidation_instruction(evaluation=evaluation, policy=policy)
+                liquidation = create_liquidation_order(
+                    instruction=instruction,
+                    instrument=instrument,
+                    venue_id=venue,
+                    decision_time=at_time,
+                    identity=f"{spec.run_id}:{liquidation_sequence}",
+                )
+                # Penalty is a separate ledger fee; do not also use the penalized price.
+                pending = _MutableOrderState(
+                    order=liquidation,
+                    arrival_time=at_time,
+                    status=VenueOrderStatus.ACCEPTED,
+                    venue_order_id=VenueOrderId(f"simorder:{liquidation.backtest_order_id}"),
+                    liquidation_penalty_bps=policy.liquidation_penalty_bps,
+                )
+                for candidate in states.values():
+                    if candidate.status in {
+                        VenueOrderStatus.ACCEPTED,
+                        VenueOrderStatus.PARTIALLY_FILLED,
+                    }:
+                        candidate.status = VenueOrderStatus.CANCELED
+                        candidate.completed_at = at_time
+                        candidate.rejection_code = "AQ-BACKTEST-CANCELED-BY-LIQUIDATION"
+                states[liquidation.backtest_order_id] = pending
+            if event is None:
+                warning = "AQ-BACKTEST-FUNDING-MARGIN-BREACH-AWAITS-NEXT-EXECUTABLE-MARKET"
+                if warning not in run_warnings:
+                    run_warnings.append(warning)
+                return
+            remaining = min(abs(quantity), pending.order.quantity.amount - pending.filled)
+            if isinstance(event, BarEvent):
+                liquidation_slices = (
+                    FillSlice(
+                        quantity=remaining,
+                        reference_price=mark,
+                        available_liquidity=raw_capacity,
+                        precision=FillPrecision.BAR_CONSERVATIVE,
+                        liquidity_role=LiquidityRole.TAKER,
+                        source_event_id=event.event_id,
+                        event_time=at_time,
+                        available_time=at_time,
+                    ),
+                )
+            else:
+                liquidation_slices = market_slices(
+                    order=pending.order,
+                    event=event,
+                    remaining=remaining,
+                    participation_cap=self.cost_book.at(pending.order, at_time).participation_cap,
+                )
+            liquidation_slices = available_slices(pending.order, liquidation_slices)
+            for slice_ in liquidation_slices:
+                apply_slice(pending, slice_)
+            executable = sum((slice_.quantity for slice_ in liquidation_slices), Decimal("0"))
+            pending.status = (
+                VenueOrderStatus.FILLED
+                if pending.filled == pending.order.quantity.amount
+                else VenueOrderStatus.CANCELED
+            )
+            pending.completed_at = at_time
+            if executable < remaining:
+                warning = "AQ-BACKTEST-LIQUIDATION-INCOMPLETE-DUE-TO-LIQUIDITY"
+                if warning not in run_warnings:
+                    run_warnings.append(warning)
+
         funding_values = tuple(
             sorted(
                 (
@@ -532,11 +966,35 @@ class EventBacktestEngine:
                 key=lambda item: (item.available_time, str(item.event_id)),
             )
         )
+        if is_spot and funding_values:
+            raise ValueError("AQ-BACKTEST-SPOT-CANNOT-ACCRUE-PERPETUAL-FUNDING")
+        unique_funding: dict[str, FundingEvent] = {}
+        for funding_event in funding_values:
+            key = str(funding_event.event_id)
+            if key in unique_funding and unique_funding[key] != funding_event:
+                raise ValueError("AQ-BACKTEST-FUNDING-EVENT-ID-CONFLICT")
+            if funding_event.instrument_id != instrument.instrument_id:
+                raise ValueError("AQ-BACKTEST-FUNDING-INSTRUMENT-MISMATCH")
+            unique_funding[key] = funding_event
+        funding_values = tuple(unique_funding.values())
         timeline: list[tuple[datetime, int, MarketEvent | FundingEvent]] = []
         timeline.extend((event.available_time, 0, event) for event in events)
         timeline.extend((event.available_time, 1, event) for event in funding_values)
         timeline.sort(key=lambda item: (item[0], item[1]))
+        active_states = sorted(
+            states.values(),
+            key=lambda state: (
+                0
+                if state.order.exit_trigger is ExitTrigger.STOP_LOSS
+                else 2
+                if state.order.exit_trigger is ExitTrigger.TAKE_PROFIT
+                else 1,
+                state.order.submitted_at,
+                str(state.order.backtest_order_id),
+            ),
+        )
         for timeline_index, (at_time, kind, item) in enumerate(timeline):
+            accrue_borrow(at_time)
             timestamp_complete = (
                 timeline_index + 1 == len(timeline) or timeline[timeline_index + 1][0] != at_time
             )
@@ -549,6 +1007,7 @@ class EventBacktestEngine:
                     signed_quantity=signed_quantity,
                     mark_price=funding_event.mark_price,
                     funding_rate=funding_event.funding_rate,
+                    contract_multiplier=instrument.contract_multiplier,
                 )
                 latest_mark = funding_event.mark_price
                 if cost != 0:
@@ -574,6 +1033,7 @@ class EventBacktestEngine:
                     )
                     cash = canonical_result(cash - cost)
                     funding_total = canonical_result(funding_total + cost)
+                liquidate_at(funding_event.mark_price, at_time, None)
                 if timestamp_complete:
                     record_equity(at_time)
                 continue
@@ -581,6 +1041,10 @@ class EventBacktestEngine:
             if not isinstance(event, (BarEvent, TradeQuoteEvent, L2BookEvent)):
                 raise TypeError("market timeline item has the wrong type")
             latest_mark = _event_mark(event)
+            if is_spot and borrow_policy is None and not active_states and event is not events[-1]:
+                if timestamp_complete:
+                    record_equity(at_time)
+                continue
             if isinstance(event, BarEvent):
                 raw_capacity = event.volume
             elif isinstance(event, TradeQuoteEvent):
@@ -591,8 +1055,19 @@ class EventBacktestEngine:
                     sum((level.quantity for level in event.asks), Decimal("0")),
                 )
             capacity_key = str(event.event_id)
-            event_capacity.setdefault(capacity_key, raw_capacity)
-            for state in states.values():
+            capacity_schedule = self.cost_book.for_instrument(
+                event.venue_id, event.instrument_id, event.event_time
+            )
+            event_capacity[capacity_key] = raw_capacity * capacity_schedule.participation_cap
+            if isinstance(event, L2BookEvent):
+                for side, levels in ((OrderSide.BUY, event.asks), (OrderSide.SELL, event.bids)):
+                    for level in levels:
+                        level_remaining[(capacity_key, side, level.price)] = (
+                            level.quantity * capacity_schedule.participation_cap
+                        )
+            opening_mark = event.open if isinstance(event, BarEvent) else _event_mark(event)
+            liquidate_at(opening_mark, at_time, event)
+            for state in active_states:
                 if state.status not in {
                     VenueOrderStatus.ACCEPTED,
                     VenueOrderStatus.PARTIALLY_FILLED,
@@ -600,11 +1075,24 @@ class EventBacktestEngine:
                     continue
                 if event.available_time < state.arrival_time:
                     continue
+                if state.order.venue_id != event.venue_id:
+                    continue
                 if (
                     event.event_time <= state.order.decision_time
                     or event.event_time < state.arrival_time
                 ):
                     continue
+                if isinstance(event, BarEvent) and (
+                    state.order.exit_trigger is ExitTrigger.TAKE_PROFIT
+                    or state.order.order_type is OrderType.LIMIT
+                ):
+                    held_now, _, _ = position_at(opening_mark)
+                    liquidate_at(event.low if held_now > 0 else event.high, at_time, event)
+                    if state.status not in {
+                        VenueOrderStatus.ACCEPTED,
+                        VenueOrderStatus.PARTIALLY_FILLED,
+                    }:
+                        continue
                 cancel_time = cancel_by_order.get(state.order.backtest_order_id)
                 if cancel_time is not None and cancel_time < event.available_time:
                     state.status = VenueOrderStatus.CANCELED
@@ -621,58 +1109,95 @@ class EventBacktestEngine:
                     state.completed_at = event.available_time
                     continue
                 remaining = state.order.quantity.amount - state.filled
+                held, _, _ = position_at(opening_mark)
+                direction = Decimal("1") if state.order.side is OrderSide.BUY else Decimal("-1")
+                if state.order.reduce_only:
+                    if held * direction >= 0:
+                        reject(state, "AQ-BACKTEST-REDUCE-ONLY-NO-REDUCIBLE-POSITION", at_time)
+                        continue
+                    remaining = min(remaining, abs(held))
+                was_triggered = state.triggered
+                if state.order.exit_trigger is not None and not state.triggered:
+                    if exit_trigger_reference(state.order, event) is None:
+                        continue
+                    state.triggered = True
+                    if state.order.oco_group_id is not None:
+                        for sibling in oco_groups[state.order.oco_group_id]:
+                            if sibling.backtest_order_id != state.order.backtest_order_id:
+                                other = states[sibling.backtest_order_id]
+                                if other.status in {
+                                    VenueOrderStatus.ACCEPTED,
+                                    VenueOrderStatus.PARTIALLY_FILLED,
+                                }:
+                                    other.status = VenueOrderStatus.CANCELED
+                                    other.completed_at = at_time
+                                    other.rejection_code = "AQ-BACKTEST-OCO-SIBLING-TRIGGERED"
                 schedule = self.cost_book.at(state.order, event.event_time)
-                slices = decide_fills(
+                effective_order = state.order.model_copy(
+                    update={
+                        "quantity": Quantity(
+                            amount=remaining, asset_id=instrument.quantity_asset_id
+                        )
+                    }
+                )
+                rule_decision = self.rule_book.validate_order(
+                    effective_order,
+                    reference_price=_event_reference(event, state.order.side),
+                    event_time=event.event_time,
+                    contract_multiplier=instrument.contract_multiplier,
+                )
+                if not rule_decision.valid:
+                    reject(
+                        state, rule_decision.rejection_code or "AQ-BACKTEST-RULE-INVALID", at_time
+                    )
+                    continue
+                slices = market_slices(
                     order=state.order,
                     event=event,
                     remaining=remaining,
                     participation_cap=schedule.participation_cap,
+                    triggered=was_triggered,
                 )
-                if self.liquidity_consumption:
-                    slices = self._clip_for_consumption(slices, event_capacity[capacity_key])
+                slices = available_slices(state.order, slices)
+                if slices:
+                    worst_reference = (
+                        max(slice_.reference_price for slice_ in slices)
+                        if state.order.side is OrderSide.BUY
+                        else min(slice_.reference_price for slice_ in slices)
+                    )
+                    preview = slices[0].model_copy(
+                        update={"quantity": remaining, "reference_price": worst_reference}
+                    )
+                    rejection = execution_rejection(state, preview)
+                    if rejection is not None:
+                        reject(state, rejection, at_time)
+                        continue
                 if (
                     state.order.time_in_force is TimeInForce.FILL_OR_KILL
                     and sum((slice_.quantity for slice_ in slices), Decimal("0")) < remaining
                 ):
                     slices = ()
                 for fill_slice in slices:
-                    backtest_fill, ledger_fill = self._backtest_fill(
-                        state=state,
-                        fill_slice=fill_slice,
-                        instrument=instrument,
-                    )
-                    outcome = ledger.process_fill(ledger_fill, instrument)
-                    fills.append(backtest_fill)
-                    state.filled = canonical_result(state.filled + fill_slice.quantity)
-                    state.fill_value = canonical_result(
-                        state.fill_value
-                        + fill_slice.quantity * backtest_fill.execution_price.amount
-                    )
-                    if self.liquidity_consumption:
-                        event_capacity[capacity_key] = canonical_result(
-                            event_capacity[capacity_key] - fill_slice.quantity
-                        )
-                    if instrument.settlement_asset_id != spec.reporting_asset_id:
-                        raise ValueError("AQ-BACKTEST-REPORTING-ASSET-FX-REQUIRED")
-                    if instrument.instrument_type is InstrumentType.SPOT:
-                        notional = fill_slice.quantity * backtest_fill.execution_price.amount
-                        cash = canonical_result(
-                            cash
-                            + (-notional if state.order.side is OrderSide.BUY else notional)
-                            - backtest_fill.fee.amount
-                        )
-                    else:
-                        cash = canonical_result(
-                            cash
-                            + outcome.applied_fill.realized_pnl.amount
-                            - backtest_fill.fee.amount
-                        )
-                    realized = canonical_result(realized + outcome.applied_fill.realized_pnl.amount)
+                    rejection = execution_rejection(state, fill_slice)
+                    if rejection is not None:
+                        reject(state, rejection, at_time)
+                        break
+                    apply_slice(state, fill_slice)
+                if state.status is VenueOrderStatus.REJECTED:
+                    continue
                 if state.filled == state.order.quantity.amount:
                     state.status = VenueOrderStatus.FILLED
                     state.completed_at = event.available_time
                 elif state.filled > 0:
                     state.status = VenueOrderStatus.PARTIALLY_FILLED
+                if (
+                    state.order.reduce_only
+                    and position_at(opening_mark)[0] == 0
+                    and state.status is not VenueOrderStatus.FILLED
+                ):
+                    state.status = VenueOrderStatus.CANCELED
+                    state.completed_at = at_time
+                    state.rejection_code = "AQ-BACKTEST-REDUCE-ONLY-EXCESS-CLIPPED"
                 if state.order.time_in_force is TimeInForce.IMMEDIATE_OR_CANCEL:
                     if state.status is not VenueOrderStatus.FILLED:
                         state.status = VenueOrderStatus.CANCELED
@@ -692,12 +1217,25 @@ class EventBacktestEngine:
                 ):
                     state.status = VenueOrderStatus.CANCELED
                     state.completed_at = cancel_time
+            held_after, _, _ = position_at(latest_mark)
+            if isinstance(event, BarEvent) and held_after != 0:
+                adverse_mark = event.low if held_after > 0 else event.high
+                liquidate_at(adverse_mark, at_time, event)
+            liquidate_at(latest_mark, at_time, event)
+            active_states = [
+                state
+                for state in active_states
+                if state.status in {VenueOrderStatus.ACCEPTED, VenueOrderStatus.PARTIALLY_FILLED}
+            ]
             if timestamp_complete:
                 record_equity(at_time)
+        accrue_borrow(spec.end_time)
+        liquidate_at(latest_mark, spec.end_time, None)
         signed_quantity, average_entry, unrealized = position_at(latest_mark)
         record_equity(spec.end_time)
         final_mtm = equity_curve[-1].equity
         forced_close_equity = final_mtm
+        forced_close_mark_adjustment = Decimal("0")
         exit_cost = None
         close_status = "NO_POSITION"
         if signed_quantity != 0:
@@ -720,7 +1258,7 @@ class EventBacktestEngine:
             close_slice = FillSlice(
                 quantity=abs(signed_quantity),
                 reference_price=latest_mark,
-                available_liquidity=event_capacity[str(events[-1].event_id)],
+                available_liquidity=raw_capacity,
                 precision=FillPrecision.BAR_CONSERVATIVE,
                 liquidity_role=LiquidityRole.TAKER,
                 source_event_id=events[-1].event_id,
@@ -728,15 +1266,55 @@ class EventBacktestEngine:
                 available_time=spec.end_time,
             )
             schedule = self.cost_book.at(close_order, spec.end_time)
-            if close_slice.quantity <= close_slice.available_liquidity * schedule.participation_cap:
-                _, exit_cost = execution_price_and_cost(
+            if isinstance(events[-1], BarEvent):
+                close_slices = (close_slice,)
+            else:
+                close_slices = market_slices(
                     order=close_order,
-                    fill_slice=close_slice,
-                    schedule=schedule,
-                    base_asset_id=instrument.base_asset_id,
-                    quote_asset_id=instrument.quote_asset_id,
+                    event=events[-1],
+                    remaining=abs(signed_quantity),
+                    participation_cap=schedule.participation_cap,
                 )
-                forced_close_equity = canonical_result(final_mtm - exit_cost.total)
+            close_slices = available_slices(close_order, close_slices)
+            closed_quantity = sum((slice_.quantity for slice_ in close_slices), Decimal("0"))
+            if closed_quantity == abs(signed_quantity):
+                costs: list[CostBreakdown] = []
+                for slice_ in close_slices:
+                    _, cost = execution_price_and_cost(
+                        order=close_order,
+                        fill_slice=slice_,
+                        schedule=schedule,
+                        base_asset_id=instrument.base_asset_id,
+                        quote_asset_id=instrument.quote_asset_id,
+                        contract_multiplier=instrument.contract_multiplier,
+                        settlement_quantity=slice_.quantity,
+                    )
+                    costs.append(cost)
+                    forced_close_mark_adjustment += (
+                        (Decimal("1") if signed_quantity > 0 else Decimal("-1"))
+                        * slice_.quantity
+                        * instrument.contract_multiplier
+                        * (slice_.reference_price - latest_mark)
+                    )
+                exit_cost = costs[0].model_copy(
+                    update={
+                        field: sum((getattr(cost, field) for cost in costs), Decimal("0"))
+                        for field in (
+                            "gross_notional",
+                            "fee",
+                            "spread",
+                            "slippage",
+                            "impact",
+                            "funding",
+                            "borrow_interest",
+                            "settlement_fee",
+                            "liquidation_penalty",
+                        )
+                    }
+                )
+                forced_close_equity = canonical_result(
+                    final_mtm + forced_close_mark_adjustment - exit_cost.total
+                )
                 close_status = "SIMULATED_AT_FINAL_MARK_WITH_FULL_EXIT_COST"
             else:
                 forced_close_equity = None
@@ -762,8 +1340,35 @@ class EventBacktestEngine:
         spread = sum((fill.cost_breakdown.spread for fill in fills), Decimal("0"))
         slippage = sum((fill.cost_breakdown.slippage for fill in fills), Decimal("0"))
         impact = sum((fill.cost_breakdown.impact for fill in fills), Decimal("0"))
+        settlement_fees = sum((fill.cost_breakdown.settlement_fee for fill in fills), Decimal("0"))
+        liquidation_penalties = sum(
+            (fill.cost_breakdown.liquidation_penalty for fill in fills), Decimal("0")
+        )
         net_pnl = canonical_result(equity_curve[-1].equity - spec.initial_cash.amount)
-        gross_pnl = canonical_result(net_pnl + fees + spread + slippage + impact + funding_total)
+        gross_pnl = canonical_result(
+            net_pnl
+            + fees
+            + spread
+            + slippage
+            + impact
+            + funding_total
+            + borrow_total
+            + settlement_fees
+            + liquidation_penalties
+        )
+        reference_pnl = sum(
+            (
+                (Decimal("1") if fill.side is OrderSide.BUY else Decimal("-1"))
+                * fill.quantity.amount
+                * instrument.contract_multiplier
+                * (latest_mark - fill.reference_price.amount)
+                for fill in fills
+            ),
+            Decimal("0"),
+        )
+        identity_residual = canonical_result(reference_pnl - gross_pnl)
+        if abs(identity_residual) > Decimal("1e-12") * max(Decimal("1"), spec.initial_cash.amount):
+            raise ValueError("AQ-BACKTEST-COST-IDENTITY-FAILED")
         attribution = (
             PnLAttributionPoint(
                 time=spec.end_time,
@@ -773,7 +1378,9 @@ class EventBacktestEngine:
                 slippage_cost=slippage,
                 impact_cost=impact,
                 funding=funding_total,
-                borrow_interest=Decimal("0"),
+                borrow_interest=borrow_total,
+                settlement_fees=settlement_fees,
+                liquidation_penalties=liquidation_penalties,
                 net_pnl=net_pnl,
             ),
         )
@@ -847,13 +1454,18 @@ class EventBacktestEngine:
             mark_to_market_final_equity=final_mtm,
             forced_close_final_equity=forced_close_equity,
             forced_close_cost=exit_cost,
+            forced_close_mark_adjustment=canonical_result(forced_close_mark_adjustment),
             forced_close_status=close_status,
+            cost_identity_residual=identity_residual,
             precision_levels=tuple(
                 sorted({fill.precision for fill in fills}, key=lambda item: item.value)
             ),
-            warnings=tuple(
-                rule.approximation
-                for rule in self.rule_book.rules
-                if rule.approximation is not None
+            warnings=(
+                *run_warnings,
+                *(
+                    rule.approximation
+                    for rule in self.rule_book.rules
+                    if rule.approximation is not None
+                ),
             ),
         )
