@@ -1,0 +1,27 @@
+{
+  "schema_version": "alpha-v4-holdout-v1",
+  "status": "CONFIGURATION_FROZEN_DATA_INELIGIBLE",
+  "research_configuration_sha256": "00b719123b043c56deb24a154817de4cab6d273edcb51a068bb446e2e7f1190c",
+  "research_code_sha256": "2da9b6697a5cf63bd401559550b8500390edc2432049e22d9c9f3722e8e11fea",
+  "known_source_data_sha256": "96d99d52e9d4eb422d5018ae72ef7a62ac9ba887bb30d0102131f3635f75fc50",
+  "minimum_holdout_months": 12,
+  "eligible_dataset": null,
+  "actual_data_access_count": 0,
+  "frozen_components": [
+    "features",
+    "trend_formula",
+    "model_families",
+    "horizon",
+    "cost_multipliers",
+    "lambda_cost",
+    "positioning",
+    "risk_rules",
+    "promotion_gates"
+  ],
+  "reason": "The existing source dataset ends at 2026-01-01 and its proposed trailing 12 months overlap the original v5 development OOS through 2025-10-08. The source file has already been used. No previously unused >=12-month final holdout is available. No data loader was invoked for final evaluation.",
+  "future_eligible_data_gate": "aegisquant.research.validation.persistent_holdout.open_persistent_holdout",
+  "files_sha256": {
+    "holdout_access_log.jsonl": "a2ae9310abd93e92682e523d23bf669f39343de7c8cb223c83a23820425d65ff",
+    "final_results.json": "93268590a2b5f9821843121656cc2c598036050fabf0c84d3ad321d1fe0b7dff"
+  }
+}

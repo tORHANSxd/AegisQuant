@@ -1,0 +1,1 @@
+{"status":"INPUT_VALIDATION_FAILURE_BEFORE_MODEL_FITTING","reason":"Five source hourly candles have early/noncanonical close_time_ms. Completed-bar loader now excludes these buckets and preserves their gaps. Calibration months with fewer than 30 valid rows fail closed; no parameter tuning.","model_fits_completed":0,"final_holdout_access_count":0}
