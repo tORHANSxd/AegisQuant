@@ -1,0 +1,16 @@
+{
+  "status": "POST_RUN_SOURCE_SNAPSHOT_BEFORE_VALIDATION_HARDENING",
+  "files": {
+    "src/aegisquant/research/validation/cat_replay.py": "bc851f26bb70840eacde4f1324809e232ac86279712b743e1b184854d2d080b9",
+    "src/aegisquant/research/validation/cat_contract.py": "d3692987c65e9eb772b5c10071763cd009abb496a02acff22bdd1848740e769a",
+    "src/aegisquant/portfolio/economic_gate.py": "fa267bbfd2b80d430088ef5728bb9096ea530d0629ae85d6503398f4fad6e246",
+    "src/aegisquant/portfolio/transition_costs.py": "a5ef1344b128a0944942c0a1f60a2261545176c89621e45c8a49ea6aa3f02045",
+    "src/aegisquant/research/models/economic_filter.py": "56ccda05a851ff1f4e7f533f31045a8369992b6e3a4efc7efcc4df04f0e32092",
+    "src/aegisquant/research/models/economic_gate.py": "71cb5c3881d9fc695d7980435952847ce56e4f07356ea01ec0d5b6cc2a760016",
+    "src/aegisquant/research/models/baselines.py": "2195cee85b2f6856277c198febd9bf792edf0abf349ec3ca0eba8222f7b22251",
+    "src/aegisquant/research/strategies/cost_aware_trend.py": "c4d2b2a791db2e6433f7ca997b8ec0f3b3971d942f25b6e73733d2d8eb2ad1fa",
+    "scripts/run_alpha_v4_audit.py": "e75712678378b21b3ba6779aa1fe2e57458752fa4e1606a9db4fba73854ce1eb",
+    "scripts/run_alpha_v4_continuous_audit.py": "a6766a0c3b269955f123ff0df449d33a648f037a2de471a7e1267ac61ef54848",
+    "scripts/summarize_alpha_v4_audit.py": "428c09179d766592b082bf21a2fb0765bd99050300d063626dbaaca51d63df18"
+  }
+}

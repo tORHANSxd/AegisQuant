@@ -1,0 +1,62 @@
+[
+  {
+    "arm": "A0",
+    "reference": "ORIGINAL_FROZEN",
+    "orders": 2,
+    "fills": 2,
+    "equity_points": 553,
+    "status": "PASS",
+    "cash_equity_and_fill_values": "EXACT_DECIMAL",
+    "ignored_fields": "run-specific order/fill identifiers only"
+  },
+  {
+    "arm": "LEGACY_B5",
+    "reference": "ORIGINAL_FROZEN",
+    "orders": 8,
+    "fills": 8,
+    "equity_points": 553,
+    "status": "PASS",
+    "cash_equity_and_fill_values": "EXACT_DECIMAL",
+    "ignored_fields": "run-specific order/fill identifiers only"
+  },
+  {
+    "arm": "LEGACY_B6",
+    "reference": "ORIGINAL_FROZEN",
+    "orders": 6,
+    "fills": 6,
+    "equity_points": 553,
+    "status": "PASS",
+    "cash_equity_and_fill_values": "EXACT_DECIMAL",
+    "ignored_fields": "run-specific order/fill identifiers only"
+  },
+  {
+    "arm": "LEGACY_B7",
+    "reference": "ORIGINAL_FROZEN",
+    "orders": 6,
+    "fills": 6,
+    "equity_points": 553,
+    "status": "PASS",
+    "cash_equity_and_fill_values": "EXACT_DECIMAL",
+    "ignored_fields": "run-specific order/fill identifiers only"
+  },
+  {
+    "arm": "A1",
+    "reference": "PRIOR_AUDIT_STRESS_REUSE",
+    "orders": 43,
+    "fills": 43,
+    "equity_points": 553,
+    "status": "PASS",
+    "cash_equity_and_fill_values": "EXACT_DECIMAL",
+    "ignored_fields": "run-specific order/fill identifiers only"
+  },
+  {
+    "arm": "A3",
+    "reference": "PRIOR_AUDIT_STRESS_REUSE",
+    "orders": 43,
+    "fills": 43,
+    "equity_points": 553,
+    "status": "PASS",
+    "cash_equity_and_fill_values": "EXACT_DECIMAL",
+    "ignored_fields": "run-specific order/fill identifiers only"
+  }
+]

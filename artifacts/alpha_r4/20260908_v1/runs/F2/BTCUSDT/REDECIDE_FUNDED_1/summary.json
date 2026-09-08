@@ -1,0 +1,29 @@
+{
+  "arm": "F2",
+  "symbol": "BTCUSDT",
+  "mode": "REDECIDE_FUNDED",
+  "cost_multiplier": "1",
+  "status": "REPLAYED",
+  "output": "runs/F2/BTCUSDT/REDECIDE_FUNDED_1",
+  "final_cash": "15115.04019075519749678041881",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "15115.04019075519749678041881",
+      "final_cash": "15115.04019075519749678041881",
+      "position_quantity": "0",
+      "total_cost": "739.3735485448025032195812072",
+      "orders": 477,
+      "fills": 477,
+      "rejections": 0,
+      "closed_trades": 15,
+      "cost_identity_residual": "-1.909012E-23",
+      "exit_decision_mtm": "15115.04019075519749678041881",
+      "terminal_mtm_at_exit_reference": "15115.04019075519749678041881",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": null
+    }
+  ]
+}

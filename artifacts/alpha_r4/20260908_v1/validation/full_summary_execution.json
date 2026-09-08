@@ -1,0 +1,5 @@
+{
+  "command": "python -m scripts.summarize_alpha_r4 --output artifacts/alpha_r4/20260908_v1",
+  "recorded_at": "2026-09-08T11:44:19.8087938+00:00",
+  "exit_code": 0
+}

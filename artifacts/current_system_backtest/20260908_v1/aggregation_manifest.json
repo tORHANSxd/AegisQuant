@@ -1,0 +1,6 @@
+{
+  "source_sha256": "2577091d41c6c37eeb52f9c4f4fdd7746e92c8ae8ce144a1cb9717cf932d5846",
+  "replay_source_sha256": "464f8e2e570025d189cb98e61ff548d8502af56c04965071758454d2c6f68543",
+  "change_after_replay": "read serialized closed trades from existing payload_json column and require all 280 partitions; no strategy, execution, forecast or raw ledger changes",
+  "replayed_again": false
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "arm": "A0",
+    "equity_difference": "0E-24",
+    "fills": 6,
+    "status": "PASS"
+  },
+  {
+    "arm": "LEGACY_B7",
+    "equity_difference": "0.0",
+    "fills": 0,
+    "status": "PASS"
+  }
+]

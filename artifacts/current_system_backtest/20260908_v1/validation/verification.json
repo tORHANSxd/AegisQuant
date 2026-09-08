@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "source_evidence": {
+    "status": "PASS",
+    "files": 795,
+    "changed": []
+  },
+  "funded_partitions": 280,
+  "no_new_model_fits": true,
+  "read_only_subagent_check": "PASS: 260 equal quarter-boundary duplicates; all clocks contain exactly 5 assets; 206 serialized trades match counts; A1 agrees with previously verified continuous baseline",
+  "portfolio_direct_checks": [
+    {
+      "arm": "CASH",
+      "equity_points": 7675,
+      "final_cash": "50000.0000",
+      "direct_net_return": 0.0,
+      "direct_maximum_drawdown": 0.0,
+      "status": "PASS"
+    },
+    {
+      "arm": "A1",
+      "equity_points": 7675,
+      "final_cash": "64104.13840725648573040381758",
+      "direct_net_return": 0.2820827681451297,
+      "direct_maximum_drawdown": 0.2043152420549691,
+      "status": "PASS"
+    },
+    {
+      "arm": "A3",
+      "equity_points": 7675,
+      "final_cash": "53484.68868035022035724344608",
+      "direct_net_return": 0.0696937736070044,
+      "direct_maximum_drawdown": 0.15135058427985149,
+      "status": "PASS"
+    },
+    {
+      "arm": "A7",
+      "equity_points": 7675,
+      "final_cash": "51042.48608469835341494832890",
+      "direct_net_return": 0.02084972169396707,
+      "direct_maximum_drawdown": 0.010965404415873348,
+      "status": "PASS"
+    }
+  ],
+  "chart_visually_inspected": true,
+  "new_runner_static_checks": "ruff_final.json / pyright_final.json; zero diagnostics",
+  "production_safety_unchanged": true,
+  "final_holdout_access_count": 0
+}

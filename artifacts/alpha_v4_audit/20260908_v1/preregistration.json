@@ -1,0 +1,379 @@
+{
+  "version": "alpha-v4-audit-20260908-v1",
+  "registered_at": "2026-09-08T07:24:55.531259+00:00",
+  "git_sha": "469f559479401903714a969615ebdcf1988de950",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "test_start": "2022-04-01T00:00:00Z",
+  "test_end_exclusive": "2025-10-01T00:00:00+00:00",
+  "evidence_tier": "DEVELOPMENT_ATTRIBUTION_NOT_NEW_OOS",
+  "arms": {
+    "C0": {
+      "version": "cat-audit-v2",
+      "execution": {
+        "version": "cat-execution-v2",
+        "fee_bps": "10",
+        "half_spread_bps": "1",
+        "slippage_floor_bps": "2",
+        "natr_slippage_coefficient": "0.01",
+        "impact_coefficient_bps": "25",
+        "latency_adverse_bps": "1",
+        "participation_cap": "0.01",
+        "minimum_notional": "10",
+        "latency_ns": 100000,
+        "price_reserve_natr_fraction": "0.25",
+        "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+        "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+      },
+      "switches": {
+        "use_model_entry_filter": false,
+        "use_cost_entry_gate": false,
+        "use_probability_entry_gate": false,
+        "use_uncertainty_entry_gate": false,
+        "use_model_economic_exit": false,
+        "use_risk_sizing": false,
+        "use_confidence_sizing": false,
+        "use_rebalancing_band": false
+      },
+      "rebalance_weight_band": "0.02",
+      "rebalance_cooldown_seconds": 86400,
+      "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+      "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+      "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+      "live_trading": false,
+      "order_submission_enabled": false
+    },
+    "A1": {
+      "version": "cat-audit-v2",
+      "execution": {
+        "version": "cat-execution-v2",
+        "fee_bps": "10",
+        "half_spread_bps": "1",
+        "slippage_floor_bps": "2",
+        "natr_slippage_coefficient": "0.01",
+        "impact_coefficient_bps": "25",
+        "latency_adverse_bps": "1",
+        "participation_cap": "0.01",
+        "minimum_notional": "10",
+        "latency_ns": 100000,
+        "price_reserve_natr_fraction": "0.25",
+        "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+        "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+      },
+      "switches": {
+        "use_model_entry_filter": false,
+        "use_cost_entry_gate": false,
+        "use_probability_entry_gate": false,
+        "use_uncertainty_entry_gate": false,
+        "use_model_economic_exit": false,
+        "use_risk_sizing": true,
+        "use_confidence_sizing": false,
+        "use_rebalancing_band": true
+      },
+      "rebalance_weight_band": "0.02",
+      "rebalance_cooldown_seconds": 86400,
+      "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+      "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+      "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+      "live_trading": false,
+      "order_submission_enabled": false
+    },
+    "A2": {
+      "version": "cat-audit-v2",
+      "execution": {
+        "version": "cat-execution-v2",
+        "fee_bps": "10",
+        "half_spread_bps": "1",
+        "slippage_floor_bps": "2",
+        "natr_slippage_coefficient": "0.01",
+        "impact_coefficient_bps": "25",
+        "latency_adverse_bps": "1",
+        "participation_cap": "0.01",
+        "minimum_notional": "10",
+        "latency_ns": 100000,
+        "price_reserve_natr_fraction": "0.25",
+        "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+        "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+      },
+      "switches": {
+        "use_model_entry_filter": true,
+        "use_cost_entry_gate": false,
+        "use_probability_entry_gate": false,
+        "use_uncertainty_entry_gate": false,
+        "use_model_economic_exit": false,
+        "use_risk_sizing": true,
+        "use_confidence_sizing": false,
+        "use_rebalancing_band": true
+      },
+      "rebalance_weight_band": "0.02",
+      "rebalance_cooldown_seconds": 86400,
+      "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+      "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+      "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+      "live_trading": false,
+      "order_submission_enabled": false
+    },
+    "A3": {
+      "version": "cat-audit-v2",
+      "execution": {
+        "version": "cat-execution-v2",
+        "fee_bps": "10",
+        "half_spread_bps": "1",
+        "slippage_floor_bps": "2",
+        "natr_slippage_coefficient": "0.01",
+        "impact_coefficient_bps": "25",
+        "latency_adverse_bps": "1",
+        "participation_cap": "0.01",
+        "minimum_notional": "10",
+        "latency_ns": 100000,
+        "price_reserve_natr_fraction": "0.25",
+        "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+        "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+      },
+      "switches": {
+        "use_model_entry_filter": true,
+        "use_cost_entry_gate": true,
+        "use_probability_entry_gate": false,
+        "use_uncertainty_entry_gate": false,
+        "use_model_economic_exit": false,
+        "use_risk_sizing": true,
+        "use_confidence_sizing": false,
+        "use_rebalancing_band": true
+      },
+      "rebalance_weight_band": "0.02",
+      "rebalance_cooldown_seconds": 86400,
+      "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+      "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+      "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+      "live_trading": false,
+      "order_submission_enabled": false
+    },
+    "A4": {
+      "version": "cat-audit-v2",
+      "execution": {
+        "version": "cat-execution-v2",
+        "fee_bps": "10",
+        "half_spread_bps": "1",
+        "slippage_floor_bps": "2",
+        "natr_slippage_coefficient": "0.01",
+        "impact_coefficient_bps": "25",
+        "latency_adverse_bps": "1",
+        "participation_cap": "0.01",
+        "minimum_notional": "10",
+        "latency_ns": 100000,
+        "price_reserve_natr_fraction": "0.25",
+        "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+        "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+      },
+      "switches": {
+        "use_model_entry_filter": true,
+        "use_cost_entry_gate": true,
+        "use_probability_entry_gate": false,
+        "use_uncertainty_entry_gate": false,
+        "use_model_economic_exit": true,
+        "use_risk_sizing": true,
+        "use_confidence_sizing": false,
+        "use_rebalancing_band": true
+      },
+      "rebalance_weight_band": "0.02",
+      "rebalance_cooldown_seconds": 86400,
+      "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+      "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+      "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+      "live_trading": false,
+      "order_submission_enabled": false
+    },
+    "A5": {
+      "version": "cat-audit-v2",
+      "execution": {
+        "version": "cat-execution-v2",
+        "fee_bps": "10",
+        "half_spread_bps": "1",
+        "slippage_floor_bps": "2",
+        "natr_slippage_coefficient": "0.01",
+        "impact_coefficient_bps": "25",
+        "latency_adverse_bps": "1",
+        "participation_cap": "0.01",
+        "minimum_notional": "10",
+        "latency_ns": 100000,
+        "price_reserve_natr_fraction": "0.25",
+        "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+        "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+      },
+      "switches": {
+        "use_model_entry_filter": true,
+        "use_cost_entry_gate": true,
+        "use_probability_entry_gate": true,
+        "use_uncertainty_entry_gate": false,
+        "use_model_economic_exit": false,
+        "use_risk_sizing": true,
+        "use_confidence_sizing": false,
+        "use_rebalancing_band": true
+      },
+      "rebalance_weight_band": "0.02",
+      "rebalance_cooldown_seconds": 86400,
+      "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+      "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+      "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+      "live_trading": false,
+      "order_submission_enabled": false
+    },
+    "A6": {
+      "version": "cat-audit-v2",
+      "execution": {
+        "version": "cat-execution-v2",
+        "fee_bps": "10",
+        "half_spread_bps": "1",
+        "slippage_floor_bps": "2",
+        "natr_slippage_coefficient": "0.01",
+        "impact_coefficient_bps": "25",
+        "latency_adverse_bps": "1",
+        "participation_cap": "0.01",
+        "minimum_notional": "10",
+        "latency_ns": 100000,
+        "price_reserve_natr_fraction": "0.25",
+        "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+        "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+      },
+      "switches": {
+        "use_model_entry_filter": true,
+        "use_cost_entry_gate": true,
+        "use_probability_entry_gate": true,
+        "use_uncertainty_entry_gate": true,
+        "use_model_economic_exit": false,
+        "use_risk_sizing": true,
+        "use_confidence_sizing": false,
+        "use_rebalancing_band": true
+      },
+      "rebalance_weight_band": "0.02",
+      "rebalance_cooldown_seconds": 86400,
+      "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+      "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+      "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+      "live_trading": false,
+      "order_submission_enabled": false
+    },
+    "A7": {
+      "version": "cat-audit-v2",
+      "execution": {
+        "version": "cat-execution-v2",
+        "fee_bps": "10",
+        "half_spread_bps": "1",
+        "slippage_floor_bps": "2",
+        "natr_slippage_coefficient": "0.01",
+        "impact_coefficient_bps": "25",
+        "latency_adverse_bps": "1",
+        "participation_cap": "0.01",
+        "minimum_notional": "10",
+        "latency_ns": 100000,
+        "price_reserve_natr_fraction": "0.25",
+        "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+        "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+      },
+      "switches": {
+        "use_model_entry_filter": true,
+        "use_cost_entry_gate": true,
+        "use_probability_entry_gate": true,
+        "use_uncertainty_entry_gate": true,
+        "use_model_economic_exit": false,
+        "use_risk_sizing": true,
+        "use_confidence_sizing": true,
+        "use_rebalancing_band": true
+      },
+      "rebalance_weight_band": "0.02",
+      "rebalance_cooldown_seconds": 86400,
+      "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+      "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+      "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+      "live_trading": false,
+      "order_submission_enabled": false
+    }
+  },
+  "legacy_reproductions": [
+    "B3",
+    "B7"
+  ],
+  "primary_no_ml": "A1",
+  "primary_ml": "A3",
+  "main_hypotheses": [
+    "A1 > CASH",
+    "A3 > A1",
+    "A3 > NULL_A3"
+  ],
+  "minimum_economic_increment_annual": 0.02,
+  "risk_anchor_annual_volatility": 0.2,
+  "alpha_confidence": 0.95,
+  "blocks_bars": [
+    6,
+    18,
+    42,
+    84
+  ],
+  "bootstrap_repetitions": 10000,
+  "quarter_cluster_bootstrap": true,
+  "seed": 20260908,
+  "bridge_C0": "legacy B3 -> v2 causal reserve, no ML/no risk sizing; separates execution contract from A1 risk",
+  "model_entry_rule": "frozen calibrated expected_gross_return > 0; no outcome-based redefinition",
+  "prediction_contract": "legacy decision-offset-v1: entry i+1, exit i+6, five intervals/20h; no relabelling",
+  "primary_trend": "same legacy B3 10/40 and complete-feature validity for A0/C0/A1-A7",
+  "model_challengers": {
+    "NULL_A3": "training mean plus EXACT same validation Platt/residual calibration, no tree fit",
+    "EN_A3": "frozen Elastic Net forecasts, A3 controls; separate registered comparison"
+  },
+  "continuous": "A1 only; carry actual final cash into next quarter, paid liquidation, no cross-sleeve transfer",
+  "covariance": "A1 covariance challenger; trailing 180 common 4h returns, 50% diagonal shrinkage, quarter-start capital weights, frozen quarterly cap, no leverage",
+  "cost_stress": {
+    "arms": [
+      "A1",
+      "A3"
+    ],
+    "multipliers": [
+      1.5,
+      2.0
+    ],
+    "modes": [
+      "SAME_FILL_SHADOW",
+      "FROZEN_ORDERS_FUNDED",
+      "REDECIDE_FUNDED"
+    ]
+  },
+  "selection_budget": {
+    "new_return_model_fits": 0,
+    "new_constant_calibration_slots": 70,
+    "hyperparameter_searches": 0,
+    "new_symbol_selection": 0,
+    "historical_fixed_model_fits": 186,
+    "historical_planned_slots": 210,
+    "history_of_independent_hypotheses": "INCOMPLETE_DO_NOT_PASS_DSR_PBO"
+  },
+  "promotion": {
+    "minimum_oos_net_return": 0.0,
+    "minimum_net_return_at_1_5_cost": 0.0,
+    "minimum_positive_fold_ratio": 0.6,
+    "minimum_median_fold_return": 0.0,
+    "minimum_net_sharpe": 0.8,
+    "minimum_calmar": 0.5,
+    "maximum_drawdown": 0.25,
+    "maximum_cost_to_gross_profit": 0.4,
+    "maximum_single_fold_profit_share": 0.4,
+    "maximum_single_year_profit_share": 0.4,
+    "minimum_deflated_sharpe_probability": 0.95,
+    "maximum_pbo": 0.2,
+    "maximum_matched_random_p_value": 0.05,
+    "destructive_loss_at_2_cost": -0.5,
+    "minimum_closed_trades": 30,
+    "final_holdout_minimum_months": 12,
+    "missing_evidence": "FAIL_CLOSED"
+  },
+  "final_holdout": "NOT_ALLOCATED_NO_ACCESS; 12 previously unused months still required",
+  "production_policy": "CASH",
+  "production_ml_enabled": false,
+  "live_trading": false,
+  "order_submission_enabled": false,
+  "sha256": "d9eb8edfdb03a1ee5adc3b2572daafa2c0f98e878477d88fdd2b8f49f7c9039e"
+}

@@ -1,0 +1,6 @@
+{
+  "started_at": "2026-09-08T19:22:18.0677578+08:00",
+  "exit_code": 0,
+  "command": ".venv/Scripts/python.exe -m pytest -q --basetemp=.pytest_tmp_r4_full --junitxml=artifacts/alpha_r4/20260908_v1/validation/full_pytest.xml",
+  "finished_at": "2026-09-08T19:24:54.5743769+08:00"
+}

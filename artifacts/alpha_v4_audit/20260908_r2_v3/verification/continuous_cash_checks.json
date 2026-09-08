@@ -1,0 +1,29 @@
+{
+  "transitions": 140,
+  "source": "artifacts\\alpha_v4_audit\\20260908_v1\\continuous",
+  "status": "PASS",
+  "metrics": [
+    {
+      "arm": "A1_CONTINUOUS",
+      "net_compound_return": 0.28208276814514033,
+      "cagr": 0.07353966137202606,
+      "sharpe": 0.6327556999675998,
+      "calmar": 0.3599323311974991,
+      "maximum_drawdown": 0.20431524205496832,
+      "actual_initial_cash": 50000.0,
+      "actual_terminal_cash": 64104.13840725648,
+      "cross_sleeve_transfers": false
+    },
+    {
+      "arm": "A1_COVARIANCE",
+      "net_compound_return": 0.3061226282580176,
+      "cagr": 0.0792500538540526,
+      "sharpe": 0.7150563063434013,
+      "calmar": 0.4404677378944058,
+      "maximum_drawdown": 0.17992249383098147,
+      "actual_initial_cash": 50000.0,
+      "actual_terminal_cash": 65306.13141290058,
+      "cross_sleeve_transfers": false
+    }
+  ]
+}

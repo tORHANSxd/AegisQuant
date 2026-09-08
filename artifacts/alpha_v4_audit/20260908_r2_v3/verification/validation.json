@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "original_evidence": {
+    "status": "PASS",
+    "files": 795,
+    "changed": []
+  },
+  "checked_r2_artifact_files": 770,
+  "legacy_reproduction_partitions": 280,
+  "stress_reuse_base_partitions": 140,
+  "legacy_compared_equity_points": 153760,
+  "legacy_compared_orders": 633,
+  "legacy_compared_fills": 633,
+  "decision_trace_rows": 537110,
+  "trace_rows_with_saved_raw_and_bias": 32710,
+  "prior_null_calibration_fits": 62,
+  "r2_new_return_model_fits": 0,
+  "r2_new_calibration_fits": 0,
+  "mature_training_label_memberships": 129847,
+  "calibration_row_memberships": 10636,
+  "maximum_accounting_identity_residual": "4.9878521E-23",
+  "planned_increment_cost_rows": 8362,
+  "cost_estimation_error_is_not_accounting_error": true,
+  "maximum_actual_participation": "0.002525669708593812414258364678",
+  "original_forecast_status_counts": {
+    "VALIDATION_CALIBRATED": 98130
+  },
+  "width_groups": 186,
+  "all_widths_constant_within_1e_12": true,
+  "scaler_diagnostic_folds": 70,
+  "maximum_standardized_training_difference": 3.441691376337985e-14,
+  "scaler_real_model_refits": 0,
+  "same_fill_shadow_rows": 280,
+  "final_holdout_allocated": false,
+  "final_holdout_access_count": 0,
+  "maximum_replay_end_exclusive": "2025-10-01T00:00:00+00:00",
+  "secrets_or_trading_accounts_accessed": false,
+  "production_policy": "CASH",
+  "production_ml_enabled": false,
+  "live_trading": false,
+  "order_submission_enabled": false,
+  "verification_script_sha256": "5527f73c2d2280a8f781b12b9b570fa9c3a0e43efff08328d4e3eb9c7f73d09b"
+}

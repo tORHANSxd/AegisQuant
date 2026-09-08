@@ -1,0 +1,9 @@
+{
+  "symbol": "BTCUSDT",
+  "status": "COMPLETED",
+  "completed_folds": 14,
+  "actual_model_fits": 0,
+  "planned_fit_slots": 0,
+  "base_evidence": "REUSED_FROZEN_BTC",
+  "run_manifest_sha256": "1a96848fe87eb8de79ee07e5b5583fd2b020f3b3720eb40dd4142d4738e13adc"
+}

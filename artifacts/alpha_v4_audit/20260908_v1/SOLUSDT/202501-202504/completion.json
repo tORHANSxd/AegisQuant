@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "preregistration_sha256": "d9eb8edfdb03a1ee5adc3b2572daafa2c0f98e878477d88fdd2b8f49f7c9039e",
+  "files": {
+    "decision_trace.parquet": "5cd5b5d03d53fce6959121cc5be758bf33820b6289e7c9c55a552f1c6f2f262c",
+    "fills.parquet": "77c6c6e0b58c40cd81e5c5056fe8fcddaca6ab3abccd1e70138fe61930fca4d0",
+    "fold_contract.json": "8b5e02859c3344a0099ae9208f3ad31f2a406c7505bd7af2db521430e557b525",
+    "fold_stability.parquet": "ea72a6d16e7bf2fd6454c3aa0a03a3b47b4fe94d8d50adde5a7790fa70b28ea7",
+    "forecast_diagnostics.parquet": "c25b33b6012bf266f5ed929ce355ad5293e11106696b4f484da90b2940ad3ee5",
+    "mtm_equity.parquet": "ec620c8218131a50a09c57a404a9b2fa0ed67cfd8dd2430b7215a5ccbec21979",
+    "null_model.json": "54ce025d9dff5de8343f280056848fc8d59e582cd5dbf1114c22aa6e5eb5041f",
+    "orders.parquet": "db42452ecd37e6df24137d47d0432aa8cbd8117214f22706223b65d6431605aa",
+    "reproduction.json": "22d8b3bafeede06da6492a74356e72cf9259d66ffa153d381770cda152e40da3",
+    "same_fill_shadow.parquet": "63a2c4ed05576b6c3de166a77c25945b3317526740f90f4b58fd009448bba08e",
+    "terminal_attribution.parquet": "9be03d51a1abc832e78f1a3cd02023173fa33f3ba63d7cb9a2da01fea91a791c",
+    "trades.parquet": "2b2de262901832cb4b40ad71b44b2c18e63b91b5cf75562ee987ca740f896fb4"
+  },
+  "new_tree_or_linear_fits": 0,
+  "finished_at": "2026-09-08T07:28:34.161358+00:00"
+}

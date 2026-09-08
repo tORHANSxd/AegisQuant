@@ -1,0 +1,21 @@
+{
+  "status": "COMPLETE_RESEARCH_ONLY",
+  "initial_total_cash": "50000",
+  "terminal_actual_cash": {
+    "A1_CONTINUOUS": "64104.13840725648573040381758",
+    "A1_COVARIANCE": "65306.13141290057518266492604"
+  },
+  "files": {
+    "cash_transitions.parquet": "309fb132cde549a1dc35f37e80f912c171c6a780ec60ee8af75fe56aef695e9a",
+    "covariance_budget.json": "c65aadd7df7adbbb51bd64dab913f398a4986cf69d1cdf63f0f50c85011d0e6d",
+    "decision_trace.parquet": "5c6d8d3e9f16083828fdac8a4e0f78a7e1bdcd280d471b4e23a927a92717f8fb",
+    "fills.parquet": "7476ef7c94b86cac4aa73607cc11ca45697ebbe29b9e483c58cf431a80e087c7",
+    "fold_stability.parquet": "829ec95e38c8fe61d63a1a6dd5c613bbfd013932449534890b5c46d27d8ba20f",
+    "mtm_equity.parquet": "e86007a1eb73250ca6e883a071b6fde925aab87494f03700162b418de5a5be2a",
+    "orders.parquet": "989da35d8061b68a3f84d2715fe8f9114b89e6c60ddfd7ef49a345a098773bcd",
+    "terminal_attribution.parquet": "39ac2a5a6ce6243c12c284fb0c6441c64d1b332a16e00b2abcd3c2041c8b1768",
+    "trades.parquet": "50ab755e288a5838384836e39700aac7b6c5186ab9781b4b2341932800d60dee"
+  },
+  "quarter_liquidation": "paid; next quarter uses actual remaining money, not reset/reweighted returns",
+  "capacity": "participation proxy recomputed for actual current cash; no larger-capital proof"
+}

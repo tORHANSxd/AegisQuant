@@ -1,0 +1,294 @@
+{
+  "trials": [
+    {
+      "arm": "F4",
+      "symbol": "ETHUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "1",
+      "status": "REPLAYED",
+      "output": "runs/F4/ETHUSDT/REDECIDE_FUNDED_1",
+      "final_cash": "11970.85715168902512610749407",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "11970.85715168902512610749407",
+          "final_cash": "11970.85715168902512610749407",
+          "position_quantity": "0",
+          "total_cost": "197.5963273109748738925059246",
+          "orders": 341,
+          "fills": 341,
+          "rejections": 0,
+          "closed_trades": 9,
+          "cost_identity_residual": "5.140057E-24",
+          "exit_decision_mtm": "11976.74679405577333411768306",
+          "terminal_mtm_at_exit_reference": "11976.75595405577333411768306",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F4",
+      "symbol": "ETHUSDT",
+      "mode": "FROZEN_ORDERS_FUNDED",
+      "cost_multiplier": "1.5",
+      "status": "REPLAYED",
+      "output": "runs/F4/ETHUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "final_cash": "11872.06395553838037533030433",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "11872.06395553838037533030433",
+          "final_cash": "11872.06395553838037533030433",
+          "position_quantity": "0",
+          "total_cost": "296.3895234616196246696956591",
+          "orders": 341,
+          "fills": 341,
+          "rejections": 0,
+          "closed_trades": 9,
+          "cost_identity_residual": "1.1910084E-23",
+          "exit_decision_mtm": null,
+          "terminal_mtm_at_exit_reference": "11880.91059141462374724948407",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": true
+        }
+      ]
+    },
+    {
+      "arm": "F4",
+      "symbol": "ETHUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "1.5",
+      "status": "REPLAYED",
+      "output": "runs/F4/ETHUSDT/REDECIDE_FUNDED_1.5",
+      "final_cash": "11863.31023053118604388220858",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "11863.31023053118604388220858",
+          "final_cash": "11863.31023053118604388220858",
+          "position_quantity": "0",
+          "total_cost": "295.0417124688139561177914053",
+          "orders": 341,
+          "fills": 341,
+          "rejections": 0,
+          "closed_trades": 9,
+          "cost_identity_residual": "1.5077948E-23",
+          "exit_decision_mtm": "11872.07052146340519553591881",
+          "terminal_mtm_at_exit_reference": "11872.07960146340519553591882",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F4",
+      "symbol": "ETHUSDT",
+      "mode": "FROZEN_ORDERS_FUNDED",
+      "cost_multiplier": "2",
+      "status": "REPLAYED",
+      "output": "runs/F4/ETHUSDT/FROZEN_ORDERS_FUNDED_2",
+      "final_cash": "11773.27407105763074866582342",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "11773.27407105763074866582342",
+          "final_cash": "11773.27407105763074866582342",
+          "position_quantity": "0",
+          "total_cost": "395.1794079423692513341765725",
+          "orders": 341,
+          "fills": 341,
+          "rejections": 0,
+          "closed_trades": 9,
+          "cost_identity_residual": "8.080121E-24",
+          "exit_decision_mtm": null,
+          "terminal_mtm_at_exit_reference": "11785.06749532744999109659141",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": true
+        }
+      ]
+    },
+    {
+      "arm": "F4",
+      "symbol": "ETHUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "2",
+      "status": "REPLAYED",
+      "output": "runs/F4/ETHUSDT/REDECIDE_FUNDED_2",
+      "final_cash": "11757.07251910793568922747856",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "11757.07251910793568922747856",
+          "final_cash": "11757.07251910793568922747856",
+          "position_quantity": "0",
+          "total_cost": "391.6026758920643107725214014",
+          "orders": 341,
+          "fills": 341,
+          "rejections": 0,
+          "closed_trades": 9,
+          "cost_identity_residual": "3.8092688E-23",
+          "exit_decision_mtm": "11768.65222660111546521719329",
+          "terminal_mtm_at_exit_reference": "11768.66122760111546521719328",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "ETHUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "1",
+      "status": "REPLAYED",
+      "output": "runs/F5/ETHUSDT/REDECIDE_FUNDED_1",
+      "final_cash": "14904.83138009454230753783914",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "14904.83138009454230753783914",
+          "final_cash": "14904.83138009454230753783914",
+          "position_quantity": "0",
+          "total_cost": "415.6021099054576924621608544",
+          "orders": 702,
+          "fills": 702,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "6.257134E-24",
+          "exit_decision_mtm": "14915.30754301436562153645320",
+          "terminal_mtm_at_exit_reference": "14915.32383601436562153645320",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "ETHUSDT",
+      "mode": "FROZEN_ORDERS_FUNDED",
+      "cost_multiplier": "1.5",
+      "status": "REPLAYED",
+      "output": "runs/F5/ETHUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "final_cash": "14697.04224773305042482640413",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "14697.04224773305042482640413",
+          "final_cash": "14697.04224773305042482640413",
+          "position_quantity": "0",
+          "total_cost": "623.3912422669495751735958912",
+          "orders": 702,
+          "fills": 702,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "-2.0314318E-23",
+          "exit_decision_mtm": null,
+          "terminal_mtm_at_exit_reference": "14712.77814303268267561862055",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": true
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "ETHUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "1.5",
+      "status": "REPLAYED",
+      "output": "runs/F5/ETHUSDT/REDECIDE_FUNDED_1.5",
+      "final_cash": "14629.98974385498872408554779",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "14629.98974385498872408554779",
+          "final_cash": "14629.98974385498872408554779",
+          "position_quantity": "0",
+          "total_cost": "617.1882481450112759144521629",
+          "orders": 702,
+          "fills": 702,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "4.6650532E-23",
+          "exit_decision_mtm": "14645.42471669553121207148516",
+          "terminal_mtm_at_exit_reference": "14645.44071469553121207148516",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "ETHUSDT",
+      "mode": "FROZEN_ORDERS_FUNDED",
+      "cost_multiplier": "2",
+      "status": "REPLAYED",
+      "output": "runs/F5/ETHUSDT/FROZEN_ORDERS_FUNDED_2",
+      "final_cash": "14489.26106376571651779473270",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "14489.26106376571651779473270",
+          "final_cash": "14489.26106376571651779473270",
+          "position_quantity": "0",
+          "total_cost": "831.1724262342834822052673320",
+          "orders": 702,
+          "fills": 702,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "-3.328578E-23",
+          "exit_decision_mtm": null,
+          "terminal_mtm_at_exit_reference": "14510.23853939175589191008171",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": true
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "ETHUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "2",
+      "status": "REPLAYED",
+      "output": "runs/F5/ETHUSDT/REDECIDE_FUNDED_2",
+      "final_cash": "14359.45242579417400786397735",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "14359.45242579417400786397735",
+          "final_cash": "14359.45242579417400786397735",
+          "position_quantity": "0",
+          "total_cost": "814.7141202058259921360226760",
+          "orders": 703,
+          "fills": 703,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "-2.426172E-23",
+          "exit_decision_mtm": "14379.66096789133498628264243",
+          "terminal_mtm_at_exit_reference": "14379.67667589133498628264244",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    }
+  ]
+}

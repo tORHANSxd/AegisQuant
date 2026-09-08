@@ -1,0 +1,23 @@
+{
+  "status": "CONSTANT_CALIBRATION_COMPLETED",
+  "model_id": "cat-constant-h6",
+  "family": "CONSTANT",
+  "model_spec_sha256": "1f0949d6712073618eca6caa389a682a4d04df7e0456e41ce801141af731d7a6",
+  "training_samples_sha256": "17cfb7d109dd4e8af0e72cd175bbe6feb6ec333467cf60cf7af27390544c577a",
+  "calibration_sha256": "246b862c958aeac04f2405116d975b7c665ec3a2c8f0222a030a82d00c113dcf",
+  "training_rows": 2184,
+  "validation_rows": 173,
+  "validation_positive_labels": 90,
+  "calibration_status": "VALIDATION_CALIBRATED",
+  "trials_consumed": 1,
+  "calibration_method": "validation-only Platt and residual q10/q50/q90",
+  "test_targets_used": false,
+  "primary_direction_source": "TREND_MODULE_ONLY",
+  "raw_prediction_std": 4.336808689942018e-19,
+  "mean_bias": 0.005704659058650003,
+  "effective_coefficient_count": null,
+  "intercept": null,
+  "coefficients": null,
+  "target_standard_deviation": 0.04008806805382366,
+  "regularization_alpha": null
+}

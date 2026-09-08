@@ -1,0 +1,29 @@
+{
+  "arm": "F3",
+  "symbol": "SOLUSDT",
+  "mode": "FROZEN_ORDERS_FUNDED",
+  "cost_multiplier": "1.5",
+  "status": "REPLAYED",
+  "output": "runs/F3/SOLUSDT/FROZEN_ORDERS_FUNDED_1.5",
+  "final_cash": "13087.28955791057818077171474",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "13087.28955791057818077171474",
+      "final_cash": "13087.28955791057818077171474",
+      "position_quantity": "0",
+      "total_cost": "359.2187120894218192282852310",
+      "orders": 362,
+      "fills": 362,
+      "rejections": 0,
+      "closed_trades": 15,
+      "cost_identity_residual": "2.862835E-23",
+      "exit_decision_mtm": null,
+      "terminal_mtm_at_exit_reference": "13097.64384243918235598484723",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": true
+    }
+  ]
+}

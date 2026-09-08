@@ -1,0 +1,29 @@
+{
+  "arm": "F2",
+  "symbol": "ETHUSDT",
+  "mode": "FROZEN_ORDERS_FUNDED",
+  "cost_multiplier": "1.5",
+  "status": "REPLAYED",
+  "output": "runs/F2/ETHUSDT/FROZEN_ORDERS_FUNDED_1.5",
+  "final_cash": "8896.906131776998478805612439",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "8896.906131776998478805612439",
+      "final_cash": "8896.906131776998478805612439",
+      "position_quantity": "0",
+      "total_cost": "654.2022572230015211943875400",
+      "orders": 366,
+      "fills": 365,
+      "rejections": 2,
+      "closed_trades": 19,
+      "cost_identity_residual": "2.073018E-23",
+      "exit_decision_mtm": null,
+      "terminal_mtm_at_exit_reference": "8896.906131776998478805612439",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": false
+    }
+  ]
+}

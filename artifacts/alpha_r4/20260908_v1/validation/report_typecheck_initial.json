@@ -1,0 +1,46 @@
+{
+    "version": "1.1.411",
+    "time": "1788866155466",
+    "generalDiagnostics": [
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\scripts\\summarize_alpha_r4.py",
+            "severity": "error",
+            "message": "Type of \"append\" is partially unknown\n  Type of \"append\" is \"(object: Unknown, /) -> None\"",
+            "range": {
+                "start": {
+                    "line": 372,
+                    "character": 8
+                },
+                "end": {
+                    "line": 372,
+                    "character": 21
+                }
+            },
+            "rule": "reportUnknownMemberType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\scripts\\summarize_alpha_r4.py",
+            "severity": "error",
+            "message": "Argument type is partially unknown\n  Argument corresponds to parameter \"value\" in function \"write_json\"\n  Argument type is \"dict[str, str | list[Unknown]]\"",
+            "range": {
+                "start": {
+                    "line": 384,
+                    "character": 8
+                },
+                "end": {
+                    "line": 388,
+                    "character": 9
+                }
+            },
+            "rule": "reportUnknownArgumentType"
+        }
+    ],
+    "summary": {
+        "filesAnalyzed": 1,
+        "errorCount": 2,
+        "warningCount": 0,
+        "informationCount": 0,
+        "timeInSec": 2.534
+    }
+}
+

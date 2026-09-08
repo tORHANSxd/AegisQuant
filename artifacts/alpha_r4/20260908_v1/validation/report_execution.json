@@ -1,0 +1,5 @@
+{
+  "recorded_at": "2026-09-08T11:53:39.7789015+00:00",
+  "exit_code": 0,
+  "command": "python -m scripts.finalize_alpha_r4 report --output artifacts/alpha_r4/20260908_v1"
+}

@@ -1,0 +1,18 @@
+{
+  "source_branch": "main",
+  "source_head": "469f559479401903714a969615ebdcf1988de950",
+  "source_status": "M AGENTS.md\n M CODEX_BOOTSTRAP.md\n M apps/web/AGENTS.md\n M scripts/run_alpha_v4_multi_asset.py\n M scripts/run_alpha_v4_walkforward.py\n M src/aegisquant/portfolio/economic_gate.py\n M src/aegisquant/portfolio/transition_costs.py\n M src/aegisquant/research/models/baselines.py\n M src/aegisquant/research/models/economic_filter.py\n M src/aegisquant/research/models/economic_gate.py\n M src/aegisquant/research/strategies/cost_aware_trend.py\n M src/aegisquant/research/validation/cat_replay.py\n M state/ALPHA_V4_PROJECT_STATE.yaml\n M state/SPEC_INDEX.md\n?? .pytest_tmp_r4_full/\n?? AegisQuant_Audit_Package_20260908/\n?? AegisQuant_R4/\n?? AegisQuant_盈利验证修复任务书_R2_2026-09-08.md\n?? artifacts/alpha_r4/\n?? artifacts/alpha_v4_audit/\n?? artifacts/current_system_backtest/\n?? scripts/audit_alpha_v4_data_quality.py\n?? scripts/export_alpha_v4_audit_bundle.py\n?? scripts/finalize_alpha_r4.py\n?? scripts/run_alpha_r4.py\n?? scripts/run_alpha_r4_challengers.py\n?? scripts/run_alpha_v4_audit.py\n?? scripts/run_alpha_v4_audit_r2.py\n?? scripts/run_alpha_v4_continuous_audit.py\n?? scripts/run_current_system_backtest.py\n?? scripts/summarize_alpha_r4.py\n?? scripts/summarize_alpha_v4_audit.py\n?? scripts/verify_alpha_r4.py\n?? scripts/verify_alpha_v4_audit_r2.py\n?? src/aegisquant/research/strategies/buffered_target.py\n?? src/aegisquant/research/validation/cat_contract.py\n?? tests/alpha_v4/test_audit_contracts.py\n?? tests/alpha_v4/test_audit_r2_contracts.py\n?? tests/alpha_v4/test_r4_contracts.py",
+  "new_commit_created": false,
+  "original_source_files_checked": 362,
+  "original_source_files_changed_by_r4": [
+    "scripts/run_alpha_r4.py",
+    "src/aegisquant/portfolio/economic_gate.py",
+    "src/aegisquant/research/strategies/cost_aware_trend.py",
+    "src/aegisquant/research/validation/cat_replay.py"
+  ],
+  "other_original_source_files_unchanged": 358,
+  "frozen_integrated_files": 363,
+  "plot_visually_checked": true,
+  "old_user_changes_preserved": true,
+  "test_temp_cleanup": "automatic approval review rejected cleanup command with blocked by policy; temporary directories retained and excluded from evidence bundle"
+}

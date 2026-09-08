@@ -1,0 +1,34 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\Personal\Quantitative_Trading\scripts\summarize_alpha_r4.py", line 884, in <module>
+    run(parser.parse_args().output.resolve())
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Personal\Quantitative_Trading\scripts\summarize_alpha_r4.py", line 877, in run
+    readiness_diagnostics(output, sleeves)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\Personal\Quantitative_Trading\scripts\summarize_alpha_r4.py", line 847, in readiness_diagnostics
+    local = local.with_columns(
+            ~~~~~~~~~~~~~~~~~~^
+        pl.col("F3").diff().alias("f3_pnl"), pl.col("F4").diff().alias("f4_pnl"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pl.col("time").shift(1).alias("interval_start"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).drop_nulls("interval_start")
+    ^
+  File "D:\Personal\Quantitative_Trading\.venv\Lib\site-packages\polars\dataframe\frame.py", line 10751, in with_columns
+    ._collect_eager(optimizations=QueryOptFlags._eager())
+     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Personal\Quantitative_Trading\.venv\Lib\site-packages\polars\lazyframe\frame.py", line 2240, in _collect_eager
+    return _eager_engine().collect(
+           ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, optimizations=optimizations, background=False
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Personal\Quantitative_Trading\.venv\Lib\site-packages\polars\lazyframe\engine.py", line 435, in collect
+    return wrap_df(ldf.collect(self.name, callback))
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+polars.exceptions.ColumnNotFoundError: unable to find column "F4"; valid columns: ["time", "F3"]
+
+Did you mean "F3"?

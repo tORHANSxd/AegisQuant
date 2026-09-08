@@ -1,0 +1,29 @@
+{
+  "arm": "F3",
+  "symbol": "XRPUSDT",
+  "mode": "REDECIDE_FUNDED",
+  "cost_multiplier": "2",
+  "status": "REPLAYED",
+  "output": "runs/F3/XRPUSDT/REDECIDE_FUNDED_2",
+  "final_cash": "10210.14998387574548653655005",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "10210.14998387574548653655005",
+      "final_cash": "10210.14998387574548653655005",
+      "position_quantity": "0",
+      "total_cost": "570.0634561242545134634499371",
+      "orders": 356,
+      "fills": 356,
+      "rejections": 0,
+      "closed_trades": 16,
+      "cost_identity_residual": "1.259595E-23",
+      "exit_decision_mtm": "10210.14998387574548653655005",
+      "terminal_mtm_at_exit_reference": "10210.14998387574548653655005",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": null
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "symbol": "XRPUSDT",
+  "status": "COMPLETED",
+  "completed_folds": 14,
+  "actual_model_fits": 39,
+  "planned_fit_slots": 42,
+  "base_evidence": "NEW_FIXED_PARAMETER_DEVELOPMENT_OOS",
+  "run_manifest_sha256": "a07c1cd67c1549fcfec26c843f48749c4837f7b3d30d27c824e9a284a598fee7"
+}

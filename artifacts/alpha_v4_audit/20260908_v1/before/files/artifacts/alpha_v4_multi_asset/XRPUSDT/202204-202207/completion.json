@@ -1,0 +1,15 @@
+{
+  "status": "COMPLETED",
+  "files": {
+    "all_trials.parquet": "d30c8f74dbf24697ef52814adedb9424ebd495c9cef4fee4644dccbf938f0c09",
+    "decisions.parquet": "42b43544691edbb00e248225fa9681a8056204d5f4beaf21844d3b54f5c6c99b",
+    "fills.parquet": "0fa5ad0be08af788b4b86268c72efddb922b2e5fb0a013b6dc2e990d906b529c",
+    "fold_manifest.json": "7c69afe28f4014a1384bc6ad37472df7bf1797370acda33f92eefafa7c7416d9",
+    "fold_stability.parquet": "35565ed38fbb32fe82c87c05b8b3e6e154197647d172e44f8bbd0122096e76a0",
+    "mtm_equity.parquet": "502b4aba6fefd612031299f7cb21d4008fd0da74161efa69ccfab375a4356ff3",
+    "orders.parquet": "1822e8a5eafd36b2777c25fffa3b77ebe8d5b000d996150137878bbdfa03e06a",
+    "predictions.parquet": "8deeeeb5b333e06d5356d655c8884dd167a755eae8c81c998ba62d0cf53d9d04",
+    "terminal_attribution.parquet": "a23b8277fb81d584340bb3be199f86d0a29afeef8b77cd7fb414101358ca5233",
+    "trades.parquet": "946375805db4988d658f0cf1ad415a96cbfc3a89a47c376e96217d34afe01f7f"
+  }
+}

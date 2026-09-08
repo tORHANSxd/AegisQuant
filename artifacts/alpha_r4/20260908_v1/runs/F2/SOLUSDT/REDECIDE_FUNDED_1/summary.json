@@ -1,0 +1,29 @@
+{
+  "arm": "F2",
+  "symbol": "SOLUSDT",
+  "mode": "REDECIDE_FUNDED",
+  "cost_multiplier": "1",
+  "status": "REPLAYED",
+  "output": "runs/F2/SOLUSDT/REDECIDE_FUNDED_1",
+  "final_cash": "12791.21486539561610028448244",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "12791.21486539561610028448244",
+      "final_cash": "12791.21486539561610028448244",
+      "position_quantity": "0",
+      "total_cost": "325.5351246043838997155175731",
+      "orders": 342,
+      "fills": 342,
+      "rejections": 0,
+      "closed_trades": 15,
+      "cost_identity_residual": "-1.269632E-23",
+      "exit_decision_mtm": "12797.79402409648339061352731",
+      "terminal_mtm_at_exit_reference": "12797.79402409648339061352732",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": null
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "arm": "F4",
+  "symbol": "BNBUSDT",
+  "mode": "REDECIDE_FUNDED",
+  "cost_multiplier": "2",
+  "status": "REPLAYED",
+  "output": "runs/F4/BNBUSDT/REDECIDE_FUNDED_2",
+  "final_cash": "14915.20514710659591520882630",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "14915.20514710659591520882630",
+      "final_cash": "14915.20514710659591520882630",
+      "position_quantity": "0",
+      "total_cost": "653.7700528934040847911736935",
+      "orders": 441,
+      "fills": 441,
+      "rejections": 0,
+      "closed_trades": 8,
+      "cost_identity_residual": "7.36523E-24",
+      "exit_decision_mtm": "14932.35335303656884111205595",
+      "terminal_mtm_at_exit_reference": "14932.35335303656884111205595",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": null
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "status": "FAILED_EVIDENCE_DESERIALIZATION",
+  "reason": "Parquet reporting_asset_id is a struct while domain JSON expects a string; BTC B3 order/fill comparison had passed, equity decoding stopped before comparison",
+  "completed_folds": 0,
+  "source_snapshot_preserved": true,
+  "retry_directory": "artifacts/alpha_v4_audit/20260908_r2_v3",
+  "strategy_parameters_changed": false
+}

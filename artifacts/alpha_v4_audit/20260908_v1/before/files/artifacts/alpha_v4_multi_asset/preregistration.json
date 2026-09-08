@@ -1,0 +1,89 @@
+{
+  "config_sha256": "6c96d30344820bb47cb66864f8aee68bf710ea4f48dc9f4905ab63b0392cfcde",
+  "policy": {
+    "version": "alpha-v4-multi-asset-20260908-v1",
+    "authorization": "user_requested_fixed_strategy_historical_expansion_beyond_btc",
+    "source_baseline_commit": "1e1a2e61ac1dd8101cb061ce4aeb30c68b17b02f",
+    "strategy_config": "configs/strategies/aegisalpha_cat_v1.yaml",
+    "research_config": "configs/research/aegis_alpha_v4.yaml",
+    "universe_selection": "fixed_before_new_asset_data_download_no_return_based_removal",
+    "universe_limit": "illustrative_surviving_assets_not_point_in_time_whole_market_universe",
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "first_train_start": "2021-01-01T00:00:00Z",
+    "development_end": "2025-10-01T00:00:00Z",
+    "levels": [
+      "B0",
+      "B1",
+      "B3",
+      "B4",
+      "B5",
+      "B6",
+      "B7",
+      "LIGHTGBM",
+      "ELASTIC_NET"
+    ],
+    "cost_multipliers": [
+      "0",
+      "1",
+      "1.5",
+      "2"
+    ],
+    "model_families": [
+      "XGBOOST",
+      "LIGHTGBM",
+      "ELASTIC_NET"
+    ],
+    "model_parameters": "unchanged_from_alpha_v4_frozen_centers",
+    "trials_per_fold_per_family": 1,
+    "test_selection": "none",
+    "btc_policy": "reuse_frozen_base_equity_and_orders_no_new_model_fit",
+    "portfolio": {
+      "allocation": "five_independent_equal_cash_sleeves_at_each_fold_start",
+      "cash_per_asset_usdt": 10000,
+      "total_initial_cash_usdt": 50000,
+      "cross_sleeve_transfers_within_fold": false,
+      "fold_accounting": "compound_returns_after_costed_fold_end_liquidations"
+    },
+    "execution_rules": {
+      "evidence": "declared_proxy_not_verified_historical_exchange_rules",
+      "BTCUSDT": {
+        "base_asset": "BTC",
+        "tick_size": "0.01",
+        "quantity_step": "0.000001"
+      },
+      "ETHUSDT": {
+        "base_asset": "ETH",
+        "tick_size": "0.01",
+        "quantity_step": "0.0001"
+      },
+      "BNBUSDT": {
+        "base_asset": "BNB",
+        "tick_size": "0.01",
+        "quantity_step": "0.001"
+      },
+      "SOLUSDT": {
+        "base_asset": "SOL",
+        "tick_size": "0.01",
+        "quantity_step": "0.001"
+      },
+      "XRPUSDT": {
+        "base_asset": "XRP",
+        "tick_size": "0.0001",
+        "quantity_step": "0.1"
+      }
+    },
+    "bootstrap_repetitions": 10000,
+    "bootstrap_block_bars": 6,
+    "seed": 20260903,
+    "final_holdout_access_count": 0,
+    "live_trading": false,
+    "order_submission_enabled": false,
+    "production_ml_enabled": false
+  }
+}

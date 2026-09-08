@@ -1,0 +1,1617 @@
+{
+  "repetitions": 10000,
+  "block_bars": 6,
+  "column_order": [
+    [
+      "BTCUSDT",
+      "B0"
+    ],
+    [
+      "BTCUSDT",
+      "B1"
+    ],
+    [
+      "BTCUSDT",
+      "B3"
+    ],
+    [
+      "BTCUSDT",
+      "B4"
+    ],
+    [
+      "BTCUSDT",
+      "B5"
+    ],
+    [
+      "BTCUSDT",
+      "B6"
+    ],
+    [
+      "BTCUSDT",
+      "B7"
+    ],
+    [
+      "BTCUSDT",
+      "LIGHTGBM"
+    ],
+    [
+      "BTCUSDT",
+      "ELASTIC_NET"
+    ],
+    [
+      "ETHUSDT",
+      "B0"
+    ],
+    [
+      "ETHUSDT",
+      "B1"
+    ],
+    [
+      "ETHUSDT",
+      "B3"
+    ],
+    [
+      "ETHUSDT",
+      "B4"
+    ],
+    [
+      "ETHUSDT",
+      "B5"
+    ],
+    [
+      "ETHUSDT",
+      "B6"
+    ],
+    [
+      "ETHUSDT",
+      "B7"
+    ],
+    [
+      "ETHUSDT",
+      "LIGHTGBM"
+    ],
+    [
+      "ETHUSDT",
+      "ELASTIC_NET"
+    ],
+    [
+      "BNBUSDT",
+      "B0"
+    ],
+    [
+      "BNBUSDT",
+      "B1"
+    ],
+    [
+      "BNBUSDT",
+      "B3"
+    ],
+    [
+      "BNBUSDT",
+      "B4"
+    ],
+    [
+      "BNBUSDT",
+      "B5"
+    ],
+    [
+      "BNBUSDT",
+      "B6"
+    ],
+    [
+      "BNBUSDT",
+      "B7"
+    ],
+    [
+      "BNBUSDT",
+      "LIGHTGBM"
+    ],
+    [
+      "BNBUSDT",
+      "ELASTIC_NET"
+    ],
+    [
+      "SOLUSDT",
+      "B0"
+    ],
+    [
+      "SOLUSDT",
+      "B1"
+    ],
+    [
+      "SOLUSDT",
+      "B3"
+    ],
+    [
+      "SOLUSDT",
+      "B4"
+    ],
+    [
+      "SOLUSDT",
+      "B5"
+    ],
+    [
+      "SOLUSDT",
+      "B6"
+    ],
+    [
+      "SOLUSDT",
+      "B7"
+    ],
+    [
+      "SOLUSDT",
+      "LIGHTGBM"
+    ],
+    [
+      "SOLUSDT",
+      "ELASTIC_NET"
+    ],
+    [
+      "XRPUSDT",
+      "B0"
+    ],
+    [
+      "XRPUSDT",
+      "B1"
+    ],
+    [
+      "XRPUSDT",
+      "B3"
+    ],
+    [
+      "XRPUSDT",
+      "B4"
+    ],
+    [
+      "XRPUSDT",
+      "B5"
+    ],
+    [
+      "XRPUSDT",
+      "B6"
+    ],
+    [
+      "XRPUSDT",
+      "B7"
+    ],
+    [
+      "XRPUSDT",
+      "LIGHTGBM"
+    ],
+    [
+      "XRPUSDT",
+      "ELASTIC_NET"
+    ],
+    [
+      "EQUAL_FIVE",
+      "B0"
+    ],
+    [
+      "EQUAL_FIVE",
+      "B1"
+    ],
+    [
+      "EQUAL_FIVE",
+      "B3"
+    ],
+    [
+      "EQUAL_FIVE",
+      "B4"
+    ],
+    [
+      "EQUAL_FIVE",
+      "B5"
+    ],
+    [
+      "EQUAL_FIVE",
+      "B6"
+    ],
+    [
+      "EQUAL_FIVE",
+      "B7"
+    ],
+    [
+      "EQUAL_FIVE",
+      "LIGHTGBM"
+    ],
+    [
+      "EQUAL_FIVE",
+      "ELASTIC_NET"
+    ]
+  ],
+  "return_intervals": [
+    {
+      "symbol": "BTCUSDT",
+      "level": "B0",
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0
+    },
+    {
+      "symbol": "BTCUSDT",
+      "level": "B1",
+      "ci95_lower": -0.6152437725881089,
+      "ci95_upper": 13.559846290248505
+    },
+    {
+      "symbol": "BTCUSDT",
+      "level": "B3",
+      "ci95_lower": -0.4069763465521301,
+      "ci95_upper": 5.965471737765407
+    },
+    {
+      "symbol": "BTCUSDT",
+      "level": "B4",
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0
+    },
+    {
+      "symbol": "BTCUSDT",
+      "level": "B5",
+      "ci95_lower": -0.5968296164925292,
+      "ci95_upper": 1.0399264631902931
+    },
+    {
+      "symbol": "BTCUSDT",
+      "level": "B6",
+      "ci95_lower": -0.230154459316576,
+      "ci95_upper": 0.11146409104731307
+    },
+    {
+      "symbol": "BTCUSDT",
+      "level": "B7",
+      "ci95_lower": -0.05626745941819211,
+      "ci95_upper": 0.024127596909245465
+    },
+    {
+      "symbol": "BTCUSDT",
+      "level": "LIGHTGBM",
+      "ci95_lower": -0.5432536297618725,
+      "ci95_upper": 1.417664876360623
+    },
+    {
+      "symbol": "BTCUSDT",
+      "level": "ELASTIC_NET",
+      "ci95_lower": -0.31320076795646495,
+      "ci95_upper": 1.7881888396463204
+    },
+    {
+      "symbol": "ETHUSDT",
+      "level": "B0",
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0
+    },
+    {
+      "symbol": "ETHUSDT",
+      "level": "B1",
+      "ci95_lower": -0.8921113468758273,
+      "ci95_upper": 13.04959910267085
+    },
+    {
+      "symbol": "ETHUSDT",
+      "level": "B3",
+      "ci95_lower": -0.7919524009559229,
+      "ci95_upper": 4.127192748418046
+    },
+    {
+      "symbol": "ETHUSDT",
+      "level": "B4",
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0
+    },
+    {
+      "symbol": "ETHUSDT",
+      "level": "B5",
+      "ci95_lower": -0.6009555677652636,
+      "ci95_upper": 1.4597063958755834
+    },
+    {
+      "symbol": "ETHUSDT",
+      "level": "B6",
+      "ci95_lower": -0.289393502124866,
+      "ci95_upper": 0.3985127614866718
+    },
+    {
+      "symbol": "ETHUSDT",
+      "level": "B7",
+      "ci95_lower": -0.06419363975044654,
+      "ci95_upper": 0.08059190022580942
+    },
+    {
+      "symbol": "ETHUSDT",
+      "level": "LIGHTGBM",
+      "ci95_lower": -0.4723416583841197,
+      "ci95_upper": 2.2638573467476983
+    },
+    {
+      "symbol": "ETHUSDT",
+      "level": "ELASTIC_NET",
+      "ci95_lower": -0.6611425510265243,
+      "ci95_upper": 0.7166912999663676
+    },
+    {
+      "symbol": "BNBUSDT",
+      "level": "B0",
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0
+    },
+    {
+      "symbol": "BNBUSDT",
+      "level": "B1",
+      "ci95_lower": -0.6953052161683454,
+      "ci95_upper": 16.140462751396818
+    },
+    {
+      "symbol": "BNBUSDT",
+      "level": "B3",
+      "ci95_lower": -0.32872021817338987,
+      "ci95_upper": 10.15953339884633
+    },
+    {
+      "symbol": "BNBUSDT",
+      "level": "B4",
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0
+    },
+    {
+      "symbol": "BNBUSDT",
+      "level": "B5",
+      "ci95_lower": -0.7366587758161195,
+      "ci95_upper": 0.8584202077906218
+    },
+    {
+      "symbol": "BNBUSDT",
+      "level": "B6",
+      "ci95_lower": -0.16621531225440295,
+      "ci95_upper": 0.40464844545128037
+    },
+    {
+      "symbol": "BNBUSDT",
+      "level": "B7",
+      "ci95_lower": -0.03976977375948251,
+      "ci95_upper": 0.06613797148618276
+    },
+    {
+      "symbol": "BNBUSDT",
+      "level": "LIGHTGBM",
+      "ci95_lower": -0.676745148297324,
+      "ci95_upper": 1.6282445696271333
+    },
+    {
+      "symbol": "BNBUSDT",
+      "level": "ELASTIC_NET",
+      "ci95_lower": -0.44485866060173856,
+      "ci95_upper": 0.7973993005061897
+    },
+    {
+      "symbol": "SOLUSDT",
+      "level": "B0",
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0
+    },
+    {
+      "symbol": "SOLUSDT",
+      "level": "B1",
+      "ci95_lower": -0.9475686290141118,
+      "ci95_upper": 63.585571678497985
+    },
+    {
+      "symbol": "SOLUSDT",
+      "level": "B3",
+      "ci95_lower": -0.88599698600229,
+      "ci95_upper": 18.41096623332703
+    },
+    {
+      "symbol": "SOLUSDT",
+      "level": "B4",
+      "ci95_lower": -0.7563858406609422,
+      "ci95_upper": 0.8466342395951502
+    },
+    {
+      "symbol": "SOLUSDT",
+      "level": "B5",
+      "ci95_lower": -0.5808958403741634,
+      "ci95_upper": 25.442962206342578
+    },
+    {
+      "symbol": "SOLUSDT",
+      "level": "B6",
+      "ci95_lower": -0.16598449701133766,
+      "ci95_upper": 0.27281684310340565
+    },
+    {
+      "symbol": "SOLUSDT",
+      "level": "B7",
+      "ci95_lower": -0.025258890409573326,
+      "ci95_upper": 0.006522563079519645
+    },
+    {
+      "symbol": "SOLUSDT",
+      "level": "LIGHTGBM",
+      "ci95_lower": -0.7340635144215985,
+      "ci95_upper": 19.27346253148383
+    },
+    {
+      "symbol": "SOLUSDT",
+      "level": "ELASTIC_NET",
+      "ci95_lower": -0.7007740628694673,
+      "ci95_upper": 23.742740190746606
+    },
+    {
+      "symbol": "XRPUSDT",
+      "level": "B0",
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0
+    },
+    {
+      "symbol": "XRPUSDT",
+      "level": "B1",
+      "ci95_lower": -0.8033962876836751,
+      "ci95_upper": 72.00907339326908
+    },
+    {
+      "symbol": "XRPUSDT",
+      "level": "B3",
+      "ci95_lower": -0.7585227767500832,
+      "ci95_upper": 15.417976490336606
+    },
+    {
+      "symbol": "XRPUSDT",
+      "level": "B4",
+      "ci95_lower": -0.35336840097369643,
+      "ci95_upper": 0.1400856460058764
+    },
+    {
+      "symbol": "XRPUSDT",
+      "level": "B5",
+      "ci95_lower": -0.42741814277691764,
+      "ci95_upper": 5.842629453132415
+    },
+    {
+      "symbol": "XRPUSDT",
+      "level": "B6",
+      "ci95_lower": -0.22350651264725102,
+      "ci95_upper": 1.2555719391235105
+    },
+    {
+      "symbol": "XRPUSDT",
+      "level": "B7",
+      "ci95_lower": -0.04773538896763506,
+      "ci95_upper": 0.21342243104402828
+    },
+    {
+      "symbol": "XRPUSDT",
+      "level": "LIGHTGBM",
+      "ci95_lower": -0.5313102868604491,
+      "ci95_upper": 3.5534118095463967
+    },
+    {
+      "symbol": "XRPUSDT",
+      "level": "ELASTIC_NET",
+      "ci95_lower": -0.28407666848613566,
+      "ci95_upper": 14.751849074018077
+    },
+    {
+      "symbol": "EQUAL_FIVE",
+      "level": "B0",
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0
+    },
+    {
+      "symbol": "EQUAL_FIVE",
+      "level": "B1",
+      "ci95_lower": -0.643737203243329,
+      "ci95_upper": 30.90901321556589
+    },
+    {
+      "symbol": "EQUAL_FIVE",
+      "level": "B3",
+      "ci95_lower": -0.3912915191649989,
+      "ci95_upper": 9.601134147503556
+    },
+    {
+      "symbol": "EQUAL_FIVE",
+      "level": "B4",
+      "ci95_lower": -0.26389043885428565,
+      "ci95_upper": 0.14060551027527268
+    },
+    {
+      "symbol": "EQUAL_FIVE",
+      "level": "B5",
+      "ci95_lower": -0.3104649890729348,
+      "ci95_upper": 2.469827458377775
+    },
+    {
+      "symbol": "EQUAL_FIVE",
+      "level": "B6",
+      "ci95_lower": -0.08986413998411302,
+      "ci95_upper": 0.2443722581400269
+    },
+    {
+      "symbol": "EQUAL_FIVE",
+      "level": "B7",
+      "ci95_lower": -0.021206064078884767,
+      "ci95_upper": 0.0468173116532259
+    },
+    {
+      "symbol": "EQUAL_FIVE",
+      "level": "LIGHTGBM",
+      "ci95_lower": -0.295998377846555,
+      "ci95_upper": 2.6909479412961974
+    },
+    {
+      "symbol": "EQUAL_FIVE",
+      "level": "ELASTIC_NET",
+      "ci95_lower": -0.12657505764469806,
+      "ci95_upper": 4.11291562144659
+    }
+  ],
+  "comparisons": {
+    "BTCUSDT/B0_vs_B1": {
+      "observed_compound_return_difference": -1.3353343346103501,
+      "ci95_lower": -13.559846290248505,
+      "ci95_upper": 0.6152437725881088,
+      "one_sided_mean_p_value": 0.9124087591240876,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B0_vs_B3": {
+      "observed_compound_return_difference": -1.026910325552591,
+      "ci95_lower": -5.965471737765408,
+      "ci95_upper": 0.40697634655212983,
+      "one_sided_mean_p_value": 0.9192080791920808,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B1_vs_B0": {
+      "observed_compound_return_difference": 1.3353343346103501,
+      "ci95_lower": -0.6152437725881089,
+      "ci95_upper": 13.559846290248505,
+      "one_sided_mean_p_value": 0.08769123087691232,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B1_vs_B3": {
+      "observed_compound_return_difference": 0.308424009057759,
+      "ci95_lower": -2.3894434773672657,
+      "ci95_upper": 9.700023267218329,
+      "one_sided_mean_p_value": 0.2963703629637036,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B3_vs_B0": {
+      "observed_compound_return_difference": 1.026910325552591,
+      "ci95_lower": -0.4069763465521301,
+      "ci95_upper": 5.965471737765407,
+      "one_sided_mean_p_value": 0.08089191080891911,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B3_vs_B1": {
+      "observed_compound_return_difference": -0.308424009057759,
+      "ci95_lower": -9.700023267218333,
+      "ci95_upper": 2.3894434773672644,
+      "one_sided_mean_p_value": 0.7037296270372962,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B4_vs_B0": {
+      "observed_compound_return_difference": 0.0,
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0,
+      "one_sided_mean_p_value": 1.0,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B4_vs_B1": {
+      "observed_compound_return_difference": -1.3353343346103501,
+      "ci95_lower": -13.559846290248505,
+      "ci95_upper": 0.6152437725881088,
+      "one_sided_mean_p_value": 0.9124087591240876,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B4_vs_B3": {
+      "observed_compound_return_difference": -1.026910325552591,
+      "ci95_lower": -5.965471737765408,
+      "ci95_upper": 0.40697634655212983,
+      "one_sided_mean_p_value": 0.9192080791920808,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B5_vs_B0": {
+      "observed_compound_return_difference": -0.0985294721364001,
+      "ci95_lower": -0.5968296164925292,
+      "ci95_upper": 1.0399264631902931,
+      "one_sided_mean_p_value": 0.5192480751924807,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B5_vs_B1": {
+      "observed_compound_return_difference": -1.4338638067467502,
+      "ci95_lower": -13.165387943077906,
+      "ci95_upper": 0.4788300435124902,
+      "one_sided_mean_p_value": 0.937006299370063,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B5_vs_B3": {
+      "observed_compound_return_difference": -1.1254397976889912,
+      "ci95_lower": -5.350815059619699,
+      "ci95_upper": 0.08997581247797794,
+      "one_sided_mean_p_value": 0.975002499750025,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B6_vs_B0": {
+      "observed_compound_return_difference": -0.07223040172003639,
+      "ci95_lower": -0.230154459316576,
+      "ci95_upper": 0.11146409104731307,
+      "one_sided_mean_p_value": 0.782021797820218,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B6_vs_B1": {
+      "observed_compound_return_difference": -1.4075647363303865,
+      "ci95_lower": -13.604723237367391,
+      "ci95_upper": 0.5466744233723885,
+      "one_sided_mean_p_value": 0.9247075292470753,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B6_vs_B3": {
+      "observed_compound_return_difference": -1.0991407272726275,
+      "ci95_lower": -5.9866154896047235,
+      "ci95_upper": 0.31990574383825776,
+      "one_sided_mean_p_value": 0.9405059494050595,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B7_vs_B0": {
+      "observed_compound_return_difference": -0.015116494234798274,
+      "ci95_lower": -0.05626745941819211,
+      "ci95_upper": 0.024127596909245465,
+      "one_sided_mean_p_value": 0.7816218378162184,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B7_vs_B1": {
+      "observed_compound_return_difference": -1.3504508288451484,
+      "ci95_lower": -13.583864897471662,
+      "ci95_upper": 0.600633225549353,
+      "one_sided_mean_p_value": 0.9158084191580842,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/B7_vs_B3": {
+      "observed_compound_return_difference": -1.0420268197873894,
+      "ci95_lower": -5.977135214152417,
+      "ci95_upper": 0.3876860011100834,
+      "one_sided_mean_p_value": 0.9247075292470753,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/LIGHTGBM_vs_B0": {
+      "observed_compound_return_difference": 0.04130421232119412,
+      "ci95_lower": -0.5432536297618725,
+      "ci95_upper": 1.417664876360623,
+      "one_sided_mean_p_value": 0.38206179382061795,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/LIGHTGBM_vs_B1": {
+      "observed_compound_return_difference": -1.294030122289156,
+      "ci95_lower": -12.86547844219285,
+      "ci95_upper": 0.6333759706473594,
+      "one_sided_mean_p_value": 0.9117088291170883,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/LIGHTGBM_vs_B3": {
+      "observed_compound_return_difference": -0.985606113231397,
+      "ci95_lower": -5.05878155050222,
+      "ci95_upper": 0.22806972000489173,
+      "one_sided_mean_p_value": 0.9523047695230477,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/ELASTIC_NET_vs_B0": {
+      "observed_compound_return_difference": 0.36976256499838056,
+      "ci95_lower": -0.31320076795646495,
+      "ci95_upper": 1.7881888396463204,
+      "one_sided_mean_p_value": 0.14728527147285272,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/ELASTIC_NET_vs_B1": {
+      "observed_compound_return_difference": -0.9655717696119696,
+      "ci95_lower": -12.576006549298897,
+      "ci95_upper": 1.0813877017809748,
+      "one_sided_mean_p_value": 0.847015298470153,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BTCUSDT/ELASTIC_NET_vs_B3": {
+      "observed_compound_return_difference": -0.6571477605542105,
+      "ci95_lower": -4.967611310952964,
+      "ci95_upper": 0.7079116158353054,
+      "one_sided_mean_p_value": 0.8368163183681632,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B0_vs_B1": {
+      "observed_compound_return_difference": -0.21652247369605565,
+      "ci95_lower": -13.049599102670854,
+      "ci95_upper": 0.8921113468758273,
+      "one_sided_mean_p_value": 0.7781221877812219,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B0_vs_B3": {
+      "observed_compound_return_difference": 0.001468885207972106,
+      "ci95_lower": -4.127192748418047,
+      "ci95_upper": 0.7919524009559228,
+      "one_sided_mean_p_value": 0.651034896510349,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B1_vs_B0": {
+      "observed_compound_return_difference": 0.21652247369605565,
+      "ci95_lower": -0.8921113468758273,
+      "ci95_upper": 13.04959910267085,
+      "one_sided_mean_p_value": 0.22197780221977803,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B1_vs_B3": {
+      "observed_compound_return_difference": 0.21799135890402777,
+      "ci95_lower": -1.8169763020902043,
+      "ci95_upper": 10.799829596757307,
+      "one_sided_mean_p_value": 0.2515748425157484,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B3_vs_B0": {
+      "observed_compound_return_difference": -0.001468885207972106,
+      "ci95_lower": -0.7919524009559229,
+      "ci95_upper": 4.127192748418046,
+      "one_sided_mean_p_value": 0.34906509349065096,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B3_vs_B1": {
+      "observed_compound_return_difference": -0.21799135890402777,
+      "ci95_lower": -10.799829596757329,
+      "ci95_upper": 1.816976302090204,
+      "one_sided_mean_p_value": 0.7485251474852515,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B4_vs_B0": {
+      "observed_compound_return_difference": 0.0,
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0,
+      "one_sided_mean_p_value": 1.0,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B4_vs_B1": {
+      "observed_compound_return_difference": -0.21652247369605565,
+      "ci95_lower": -13.049599102670854,
+      "ci95_upper": 0.8921113468758273,
+      "one_sided_mean_p_value": 0.7781221877812219,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B4_vs_B3": {
+      "observed_compound_return_difference": 0.001468885207972106,
+      "ci95_lower": -4.127192748418047,
+      "ci95_upper": 0.7919524009559228,
+      "one_sided_mean_p_value": 0.651034896510349,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B5_vs_B0": {
+      "observed_compound_return_difference": -0.008515989310501619,
+      "ci95_lower": -0.6009555677652636,
+      "ci95_upper": 1.4597063958755834,
+      "one_sided_mean_p_value": 0.42745725427457254,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B5_vs_B1": {
+      "observed_compound_return_difference": -0.22503846300655728,
+      "ci95_lower": -12.568511502321094,
+      "ci95_upper": 1.2851477775361175,
+      "one_sided_mean_p_value": 0.7718228177182281,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B5_vs_B3": {
+      "observed_compound_return_difference": -0.007047104102529513,
+      "ci95_lower": -3.4965693878148776,
+      "ci95_upper": 1.0581939371599312,
+      "one_sided_mean_p_value": 0.6352364763523648,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B6_vs_B0": {
+      "observed_compound_return_difference": 0.003672795732615775,
+      "ci95_lower": -0.289393502124866,
+      "ci95_upper": 0.3985127614866718,
+      "one_sided_mean_p_value": 0.45525447455254475,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B6_vs_B1": {
+      "observed_compound_return_difference": -0.21284967796343987,
+      "ci95_lower": -12.94099112188888,
+      "ci95_upper": 0.9812629256990252,
+      "one_sided_mean_p_value": 0.7774222577742226,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B6_vs_B3": {
+      "observed_compound_return_difference": 0.005141680940587881,
+      "ci95_lower": -4.093304468898605,
+      "ci95_upper": 0.8640893111235178,
+      "one_sided_mean_p_value": 0.6458354164583542,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B7_vs_B0": {
+      "observed_compound_return_difference": 0.004203709918909666,
+      "ci95_lower": -0.06419363975044654,
+      "ci95_upper": 0.08059190022580942,
+      "one_sided_mean_p_value": 0.43295670432956707,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B7_vs_B1": {
+      "observed_compound_return_difference": -0.21231876377714598,
+      "ci95_lower": -13.048167918112078,
+      "ci95_upper": 0.897002568147596,
+      "one_sided_mean_p_value": 0.7787221277872213,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/B7_vs_B3": {
+      "observed_compound_return_difference": 0.005672595126881772,
+      "ci95_lower": -4.098997668926629,
+      "ci95_upper": 0.7909284265654442,
+      "one_sided_mean_p_value": 0.6502349765023497,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/LIGHTGBM_vs_B0": {
+      "observed_compound_return_difference": 0.301654924292967,
+      "ci95_lower": -0.4723416583841197,
+      "ci95_upper": 2.2638573467476983,
+      "one_sided_mean_p_value": 0.22227777222277773,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/LIGHTGBM_vs_B1": {
+      "observed_compound_return_difference": 0.08513245059691132,
+      "ci95_lower": -12.238771916734999,
+      "ci95_upper": 1.8475107283297352,
+      "one_sided_mean_p_value": 0.692030796920308,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/LIGHTGBM_vs_B3": {
+      "observed_compound_return_difference": 0.3031238095009391,
+      "ci95_lower": -2.9929915633122537,
+      "ci95_upper": 1.6911785402901485,
+      "one_sided_mean_p_value": 0.47885211478852113,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/ELASTIC_NET_vs_B0": {
+      "observed_compound_return_difference": -0.22151856498878195,
+      "ci95_lower": -0.6611425510265243,
+      "ci95_upper": 0.7166912999663676,
+      "one_sided_mean_p_value": 0.6633336666333367,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/ELASTIC_NET_vs_B1": {
+      "observed_compound_return_difference": -0.43804103868483757,
+      "ci95_lower": -13.108737614183577,
+      "ci95_upper": 0.8860913296770007,
+      "one_sided_mean_p_value": 0.8263173682631737,
+      "holm_adjusted_p_value": 1.0
+    },
+    "ETHUSDT/ELASTIC_NET_vs_B3": {
+      "observed_compound_return_difference": -0.22004967978080983,
+      "ci95_lower": -3.9562654049270303,
+      "ci95_upper": 0.6798679772412561,
+      "one_sided_mean_p_value": 0.7532246775322468,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B0_vs_B1": {
+      "observed_compound_return_difference": -1.2689888254736226,
+      "ci95_lower": -16.140462751396857,
+      "ci95_upper": 0.6953052161683453,
+      "one_sided_mean_p_value": 0.9107089291070893,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B0_vs_B3": {
+      "observed_compound_return_difference": -1.6740674408034568,
+      "ci95_lower": -10.159533398846332,
+      "ci95_upper": 0.32872021817338987,
+      "one_sided_mean_p_value": 0.9581041895810419,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B1_vs_B0": {
+      "observed_compound_return_difference": 1.2689888254736226,
+      "ci95_lower": -0.6953052161683454,
+      "ci95_upper": 16.140462751396818,
+      "one_sided_mean_p_value": 0.0893910608939106,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B1_vs_B3": {
+      "observed_compound_return_difference": -0.40507861532983425,
+      "ci95_lower": -4.643432568973305,
+      "ci95_upper": 9.607891951874056,
+      "one_sided_mean_p_value": 0.44395560443955606,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B3_vs_B0": {
+      "observed_compound_return_difference": 1.6740674408034568,
+      "ci95_lower": -0.32872021817338987,
+      "ci95_upper": 10.15953339884633,
+      "one_sided_mean_p_value": 0.041995800419958006,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B3_vs_B1": {
+      "observed_compound_return_difference": 0.40507861532983425,
+      "ci95_lower": -9.607891951874059,
+      "ci95_upper": 4.643432568973304,
+      "one_sided_mean_p_value": 0.5561443855614439,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B4_vs_B0": {
+      "observed_compound_return_difference": 0.0,
+      "ci95_lower": 0.0,
+      "ci95_upper": 0.0,
+      "one_sided_mean_p_value": 1.0,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B4_vs_B1": {
+      "observed_compound_return_difference": -1.2689888254736226,
+      "ci95_lower": -16.140462751396857,
+      "ci95_upper": 0.6953052161683453,
+      "one_sided_mean_p_value": 0.9107089291070893,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B4_vs_B3": {
+      "observed_compound_return_difference": -1.6740674408034568,
+      "ci95_lower": -10.159533398846332,
+      "ci95_upper": 0.32872021817338987,
+      "one_sided_mean_p_value": 0.9581041895810419,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B5_vs_B0": {
+      "observed_compound_return_difference": -0.30553314878088006,
+      "ci95_lower": -0.7366587758161195,
+      "ci95_upper": 0.8584202077906218,
+      "one_sided_mean_p_value": 0.6671332866713329,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B5_vs_B1": {
+      "observed_compound_return_difference": -1.5745219742545027,
+      "ci95_lower": -15.817836638711363,
+      "ci95_upper": 0.32884720715562965,
+      "one_sided_mean_p_value": 0.963003699630037,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B5_vs_B3": {
+      "observed_compound_return_difference": -1.979600589584337,
+      "ci95_lower": -9.875402131077898,
+      "ci95_upper": -0.23220031501605334,
+      "one_sided_mean_p_value": 0.9968003199680032,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B6_vs_B0": {
+      "observed_compound_return_difference": 0.054535469012527864,
+      "ci95_lower": -0.16621531225440295,
+      "ci95_upper": 0.40464844545128037,
+      "one_sided_mean_p_value": 0.3016698330166983,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B6_vs_B1": {
+      "observed_compound_return_difference": -1.2144533564610946,
+      "ci95_lower": -16.094652310558658,
+      "ci95_upper": 0.7725653164505186,
+      "one_sided_mean_p_value": 0.8998100189981002,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B6_vs_B3": {
+      "observed_compound_return_difference": -1.619531971790929,
+      "ci95_lower": -10.0793975328451,
+      "ci95_upper": 0.3707164570464787,
+      "one_sided_mean_p_value": 0.9525047495250475,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B7_vs_B0": {
+      "observed_compound_return_difference": 0.007344628876710786,
+      "ci95_lower": -0.03976977375948251,
+      "ci95_upper": 0.06613797148618276,
+      "one_sided_mean_p_value": 0.36676332366763326,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B7_vs_B1": {
+      "observed_compound_return_difference": -1.2616441965969118,
+      "ci95_lower": -16.117994612856165,
+      "ci95_upper": 0.6960220463290461,
+      "one_sided_mean_p_value": 0.91000899910009,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/B7_vs_B3": {
+      "observed_compound_return_difference": -1.666722811926746,
+      "ci95_lower": -10.1707150669141,
+      "ci95_upper": 0.33285534538555955,
+      "one_sided_mean_p_value": 0.958004199580042,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/LIGHTGBM_vs_B0": {
+      "observed_compound_return_difference": -0.09762160737002844,
+      "ci95_lower": -0.676745148297324,
+      "ci95_upper": 1.6282445696271333,
+      "one_sided_mean_p_value": 0.4607539246075392,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/LIGHTGBM_vs_B1": {
+      "observed_compound_return_difference": -1.366610432843651,
+      "ci95_lower": -15.19046488276027,
+      "ci95_upper": 0.600368258554358,
+      "one_sided_mean_p_value": 0.938006199380062,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/LIGHTGBM_vs_B3": {
+      "observed_compound_return_difference": -1.7716890481734853,
+      "ci95_lower": -9.301539029556574,
+      "ci95_upper": -0.09881097602893193,
+      "one_sided_mean_p_value": 0.9921007899210079,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/ELASTIC_NET_vs_B0": {
+      "observed_compound_return_difference": 0.005211931354023361,
+      "ci95_lower": -0.44485866060173856,
+      "ci95_upper": 0.7973993005061897,
+      "one_sided_mean_p_value": 0.43865613438656137,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/ELASTIC_NET_vs_B1": {
+      "observed_compound_return_difference": -1.2637768941195993,
+      "ci95_lower": -15.761356023395471,
+      "ci95_upper": 0.744448076675719,
+      "one_sided_mean_p_value": 0.9104089591040896,
+      "holm_adjusted_p_value": 1.0
+    },
+    "BNBUSDT/ELASTIC_NET_vs_B3": {
+      "observed_compound_return_difference": -1.6688555094494335,
+      "ci95_lower": -9.87341124971498,
+      "ci95_upper": 0.2609275472064851,
+      "one_sided_mean_p_value": 0.966003399660034,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B0_vs_B1": {
+      "observed_compound_return_difference": -0.749787840948533,
+      "ci95_lower": -63.585571678498084,
+      "ci95_upper": 0.9475686290141117,
+      "one_sided_mean_p_value": 0.8866113388661134,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B0_vs_B3": {
+      "observed_compound_return_difference": -0.44762220582049356,
+      "ci95_lower": -18.41096623332703,
+      "ci95_upper": 0.8859969860022899,
+      "one_sided_mean_p_value": 0.8143185681431857,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B1_vs_B0": {
+      "observed_compound_return_difference": 0.749787840948533,
+      "ci95_lower": -0.9475686290141118,
+      "ci95_upper": 63.585571678497985,
+      "one_sided_mean_p_value": 0.11348865113488651,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B1_vs_B3": {
+      "observed_compound_return_difference": 0.30216563512803946,
+      "ci95_lower": -6.637711577823121,
+      "ci95_upper": 52.990531019734135,
+      "one_sided_mean_p_value": 0.21637836216378362,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B3_vs_B0": {
+      "observed_compound_return_difference": 0.44762220582049356,
+      "ci95_lower": -0.88599698600229,
+      "ci95_upper": 18.41096623332703,
+      "one_sided_mean_p_value": 0.1857814218578142,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B3_vs_B1": {
+      "observed_compound_return_difference": -0.30216563512803946,
+      "ci95_lower": -52.990531019734185,
+      "ci95_upper": 6.637711577823118,
+      "one_sided_mean_p_value": 0.7837216278372163,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B4_vs_B0": {
+      "observed_compound_return_difference": -0.3219083527778495,
+      "ci95_lower": -0.7563858406609422,
+      "ci95_upper": 0.8466342395951502,
+      "one_sided_mean_p_value": 0.6791320867913209,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B4_vs_B1": {
+      "observed_compound_return_difference": -1.0716961937263825,
+      "ci95_lower": -62.79500032383516,
+      "ci95_upper": 0.9109729314189274,
+      "one_sided_mean_p_value": 0.9172082791720828,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B4_vs_B3": {
+      "observed_compound_return_difference": -0.7695305585983431,
+      "ci95_lower": -18.35197643257035,
+      "ci95_upper": 0.7287051581150954,
+      "one_sided_mean_p_value": 0.8754124587541245,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B5_vs_B0": {
+      "observed_compound_return_difference": 2.354810935537083,
+      "ci95_lower": -0.5808958403741634,
+      "ci95_upper": 25.442962206342578,
+      "one_sided_mean_p_value": 0.0532946705329467,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B5_vs_B1": {
+      "observed_compound_return_difference": 1.60502309458855,
+      "ci95_lower": -53.77945122597973,
+      "ci95_upper": 15.135783727490239,
+      "one_sided_mean_p_value": 0.6338366163383662,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B5_vs_B3": {
+      "observed_compound_return_difference": 1.9071887297165895,
+      "ci95_lower": -5.0096573876775885,
+      "ci95_upper": 15.232371770997114,
+      "one_sided_mean_p_value": 0.2532746725327467,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B6_vs_B0": {
+      "observed_compound_return_difference": 0.023590859724943708,
+      "ci95_lower": -0.16598449701133766,
+      "ci95_upper": 0.27281684310340565,
+      "one_sided_mean_p_value": 0.36646335366463356,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B6_vs_B1": {
+      "observed_compound_return_difference": -0.7261969812235893,
+      "ci95_lower": -63.55575619112011,
+      "ci95_upper": 1.0125395262951522,
+      "one_sided_mean_p_value": 0.8836116388361164,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B6_vs_B3": {
+      "observed_compound_return_difference": -0.4240313460955498,
+      "ci95_lower": -18.31061423659794,
+      "ci95_upper": 0.9322502779337668,
+      "one_sided_mean_p_value": 0.8064193580641936,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B7_vs_B0": {
+      "observed_compound_return_difference": -0.005638413948740541,
+      "ci95_lower": -0.025258890409573326,
+      "ci95_upper": 0.006522563079519645,
+      "one_sided_mean_p_value": 0.7717228277172283,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B7_vs_B1": {
+      "observed_compound_return_difference": -0.7554262548972736,
+      "ci95_lower": -63.58461444618889,
+      "ci95_upper": 0.9420585340401967,
+      "one_sided_mean_p_value": 0.8872112788721128,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/B7_vs_B3": {
+      "observed_compound_return_difference": -0.4532606197692341,
+      "ci95_lower": -18.410560570780678,
+      "ci95_upper": 0.8790125352375587,
+      "one_sided_mean_p_value": 0.815918408159184,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/LIGHTGBM_vs_B0": {
+      "observed_compound_return_difference": 1.333818406637194,
+      "ci95_lower": -0.7340635144215985,
+      "ci95_upper": 19.27346253148383,
+      "one_sided_mean_p_value": 0.11018898110188981,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/LIGHTGBM_vs_B1": {
+      "observed_compound_return_difference": 0.5840305656886611,
+      "ci95_lower": -54.91222801229929,
+      "ci95_upper": 10.428796345767305,
+      "one_sided_mean_p_value": 0.7167283271672833,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/LIGHTGBM_vs_B3": {
+      "observed_compound_return_difference": 0.8861962008167006,
+      "ci95_lower": -7.680964706075796,
+      "ci95_upper": 9.505242243788516,
+      "one_sided_mean_p_value": 0.41205879412058793,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/ELASTIC_NET_vs_B0": {
+      "observed_compound_return_difference": 1.8439087565415466,
+      "ci95_lower": -0.7007740628694673,
+      "ci95_upper": 23.742740190746606,
+      "one_sided_mean_p_value": 0.0796920307969203,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/ELASTIC_NET_vs_B1": {
+      "observed_compound_return_difference": 1.0941209155930136,
+      "ci95_lower": -51.88156862356035,
+      "ci95_upper": 14.33805637268392,
+      "one_sided_mean_p_value": 0.6646335366463354,
+      "holm_adjusted_p_value": 1.0
+    },
+    "SOLUSDT/ELASTIC_NET_vs_B3": {
+      "observed_compound_return_difference": 1.3962865507210531,
+      "ci95_lower": -4.986608478429603,
+      "ci95_upper": 13.238907820548029,
+      "one_sided_mean_p_value": 0.29587041295870414,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B0_vs_B1": {
+      "observed_compound_return_difference": -2.7022830632909924,
+      "ci95_lower": -72.00907339326912,
+      "ci95_upper": 0.8033962876836751,
+      "one_sided_mean_p_value": 0.9405059494050595,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B0_vs_B3": {
+      "observed_compound_return_difference": -0.9497929730634205,
+      "ci95_lower": -15.417976490336606,
+      "ci95_upper": 0.7585227767500832,
+      "one_sided_mean_p_value": 0.8754124587541245,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B1_vs_B0": {
+      "observed_compound_return_difference": 2.7022830632909924,
+      "ci95_lower": -0.8033962876836751,
+      "ci95_upper": 72.00907339326908,
+      "one_sided_mean_p_value": 0.05959404059594041,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B1_vs_B3": {
+      "observed_compound_return_difference": 1.752490090227572,
+      "ci95_lower": -3.7048970115062594,
+      "ci95_upper": 63.07623960353104,
+      "one_sided_mean_p_value": 0.1488851114888511,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B3_vs_B0": {
+      "observed_compound_return_difference": 0.9497929730634205,
+      "ci95_lower": -0.7585227767500832,
+      "ci95_upper": 15.417976490336606,
+      "one_sided_mean_p_value": 0.12468753124687532,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B3_vs_B1": {
+      "observed_compound_return_difference": -1.752490090227572,
+      "ci95_lower": -63.07623960353111,
+      "ci95_upper": 3.704897011506249,
+      "one_sided_mean_p_value": 0.8512148785121488,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B4_vs_B0": {
+      "observed_compound_return_difference": -0.14160023559483892,
+      "ci95_lower": -0.35336840097369643,
+      "ci95_upper": 0.1400856460058764,
+      "one_sided_mean_p_value": 0.833016698330167,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B4_vs_B1": {
+      "observed_compound_return_difference": -2.8438832988858316,
+      "ci95_lower": -72.12041820085973,
+      "ci95_upper": 0.6659487393998716,
+      "one_sided_mean_p_value": 0.9501049895010499,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B4_vs_B3": {
+      "observed_compound_return_difference": -1.0913932086582594,
+      "ci95_lower": -15.496830974499542,
+      "ci95_upper": 0.6146486033078911,
+      "one_sided_mean_p_value": 0.9009099090090991,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B5_vs_B0": {
+      "observed_compound_return_difference": 0.9441366351881597,
+      "ci95_lower": -0.42741814277691764,
+      "ci95_upper": 5.842629453132415,
+      "one_sided_mean_p_value": 0.08559144085591441,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B5_vs_B1": {
+      "observed_compound_return_difference": -1.7581464281028327,
+      "ci95_lower": -69.43003609737886,
+      "ci95_upper": 2.7353109890140557,
+      "one_sided_mean_p_value": 0.8657134286571343,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B5_vs_B3": {
+      "observed_compound_return_difference": -0.005656337875260764,
+      "ci95_lower": -12.274728097106536,
+      "ci95_upper": 3.053963035204053,
+      "one_sided_mean_p_value": 0.6688331166883311,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B6_vs_B0": {
+      "observed_compound_return_difference": 0.2956391024306049,
+      "ci95_lower": -0.22350651264725102,
+      "ci95_upper": 1.2555719391235105,
+      "one_sided_mean_p_value": 0.13938606139386062,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B6_vs_B1": {
+      "observed_compound_return_difference": -2.4066439608603876,
+      "ci95_lower": -71.42883567424849,
+      "ci95_upper": 1.2004515728676637,
+      "one_sided_mean_p_value": 0.918108189181082,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B6_vs_B3": {
+      "observed_compound_return_difference": -0.6541538706328156,
+      "ci95_lower": -14.811527723413732,
+      "ci95_upper": 1.1549925839570514,
+      "one_sided_mean_p_value": 0.8187181281871813,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B7_vs_B0": {
+      "observed_compound_return_difference": 0.06785724836386728,
+      "ci95_lower": -0.04773538896763506,
+      "ci95_upper": 0.21342243104402828,
+      "one_sided_mean_p_value": 0.13658634136586342,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B7_vs_B1": {
+      "observed_compound_return_difference": -2.634425814927125,
+      "ci95_lower": -71.8591145418927,
+      "ci95_upper": 0.8649187708593067,
+      "one_sided_mean_p_value": 0.9363063693630637,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/B7_vs_B3": {
+      "observed_compound_return_difference": -0.8819357246995532,
+      "ci95_lower": -15.356540159199163,
+      "ci95_upper": 0.8003238634947997,
+      "one_sided_mean_p_value": 0.8663133686631337,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/LIGHTGBM_vs_B0": {
+      "observed_compound_return_difference": 0.4412374251786055,
+      "ci95_lower": -0.5313102868604491,
+      "ci95_upper": 3.5534118095463967,
+      "one_sided_mean_p_value": 0.17648235176482352,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/LIGHTGBM_vs_B1": {
+      "observed_compound_return_difference": -2.261045638112387,
+      "ci95_lower": -70.46640313996632,
+      "ci95_upper": 1.7073509058742482,
+      "one_sided_mean_p_value": 0.9049095090490951,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/LIGHTGBM_vs_B3": {
+      "observed_compound_return_difference": -0.5085555478848149,
+      "ci95_lower": -13.334655183803132,
+      "ci95_upper": 1.7062584109806558,
+      "one_sided_mean_p_value": 0.7874212578742126,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/ELASTIC_NET_vs_B0": {
+      "observed_compound_return_difference": 2.2244898476553723,
+      "ci95_lower": -0.28407666848613566,
+      "ci95_upper": 14.751849074018077,
+      "one_sided_mean_p_value": 0.03849615038496151,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/ELASTIC_NET_vs_B1": {
+      "observed_compound_return_difference": -0.47779321563562016,
+      "ci95_lower": -64.97629723597453,
+      "ci95_upper": 6.875018416728899,
+      "one_sided_mean_p_value": 0.7707229277072293,
+      "holm_adjusted_p_value": 1.0
+    },
+    "XRPUSDT/ELASTIC_NET_vs_B3": {
+      "observed_compound_return_difference": 1.2746968745919518,
+      "ci95_lower": -6.477206431421353,
+      "ci95_upper": 7.6358914347974345,
+      "one_sided_mean_p_value": 0.3885611438856114,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B0_vs_B1": {
+      "observed_compound_return_difference": -2.34485321739108,
+      "ci95_lower": -30.90901321556592,
+      "ci95_upper": 0.6437372032433283,
+      "one_sided_mean_p_value": 0.9495050494950505,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B0_vs_B3": {
+      "observed_compound_return_difference": -1.5203695703903923,
+      "ci95_lower": -9.601134147503556,
+      "ci95_upper": 0.3912915191649988,
+      "one_sided_mean_p_value": 0.9494050594940506,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B1_vs_B0": {
+      "observed_compound_return_difference": 2.34485321739108,
+      "ci95_lower": -0.643737203243329,
+      "ci95_upper": 30.90901321556589,
+      "one_sided_mean_p_value": 0.050594940505949405,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B1_vs_B3": {
+      "observed_compound_return_difference": 0.8244836470006875,
+      "ci95_lower": -2.538610520695436,
+      "ci95_upper": 24.008640945880604,
+      "one_sided_mean_p_value": 0.1984801519848015,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B1_vs_BTC_same_strategy": {
+      "observed_compound_return_difference": 1.0095188827807298,
+      "ci95_lower": -2.285896401038807,
+      "ci95_upper": 21.005811751228414,
+      "one_sided_mean_p_value": 0.1603839616038396,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B3_vs_B0": {
+      "observed_compound_return_difference": 1.5203695703903923,
+      "ci95_lower": -0.3912915191649989,
+      "ci95_upper": 9.601134147503556,
+      "one_sided_mean_p_value": 0.05069493050694931,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B3_vs_B1": {
+      "observed_compound_return_difference": -0.8244836470006875,
+      "ci95_lower": -24.00864094588062,
+      "ci95_upper": 2.538610520695436,
+      "one_sided_mean_p_value": 0.8016198380161984,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B3_vs_BTC_same_strategy": {
+      "observed_compound_return_difference": 0.49345924483780124,
+      "ci95_lower": -1.9072409006814686,
+      "ci95_upper": 5.733930627760521,
+      "one_sided_mean_p_value": 0.26447355264473554,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B4_vs_B0": {
+      "observed_compound_return_difference": -0.08323548571207909,
+      "ci95_lower": -0.26389043885428565,
+      "ci95_upper": 0.14060551027527268,
+      "one_sided_mean_p_value": 0.7648235176482352,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B4_vs_B1": {
+      "observed_compound_return_difference": -2.428088703103159,
+      "ci95_lower": -30.95686715385447,
+      "ci95_upper": 0.5200278523768609,
+      "one_sided_mean_p_value": 0.9593040695930407,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B4_vs_B3": {
+      "observed_compound_return_difference": -1.6036050561024715,
+      "ci95_lower": -9.602241686015601,
+      "ci95_upper": 0.25256270256029506,
+      "one_sided_mean_p_value": 0.9665033496650335,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B4_vs_BTC_same_strategy": {
+      "observed_compound_return_difference": -0.08323548571207909,
+      "ci95_lower": -0.26389043885428565,
+      "ci95_upper": 0.14060551027527268,
+      "one_sided_mean_p_value": 0.7648235176482352,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B5_vs_B0": {
+      "observed_compound_return_difference": 0.536991085820484,
+      "ci95_lower": -0.3104649890729348,
+      "ci95_upper": 2.469827458377775,
+      "one_sided_mean_p_value": 0.11078892110788921,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B5_vs_B1": {
+      "observed_compound_return_difference": -1.8078621315705958,
+      "ci95_lower": -29.585498371898584,
+      "ci95_upper": 0.9446458012221317,
+      "one_sided_mean_p_value": 0.9233076692330767,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B5_vs_B3": {
+      "observed_compound_return_difference": -0.9833784845699083,
+      "ci95_lower": -7.589547899035789,
+      "ci95_upper": 0.379159028918575,
+      "one_sided_mean_p_value": 0.9361063893610639,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B5_vs_BTC_same_strategy": {
+      "observed_compound_return_difference": 0.6355205579568841,
+      "ci95_lower": -0.23733835694752384,
+      "ci95_upper": 2.13094307628933,
+      "one_sided_mean_p_value": 0.07899210078992101,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B6_vs_B0": {
+      "observed_compound_return_difference": 0.06262311689923111,
+      "ci95_lower": -0.08986413998411302,
+      "ci95_upper": 0.2443722581400269,
+      "one_sided_mean_p_value": 0.21787821217878212,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B6_vs_B1": {
+      "observed_compound_return_difference": -2.282230100491849,
+      "ci95_lower": -30.78746081856921,
+      "ci95_upper": 0.6852533588977514,
+      "one_sided_mean_p_value": 0.9451054894510549,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B6_vs_B3": {
+      "observed_compound_return_difference": -1.4577464534911613,
+      "ci95_lower": -9.481949074067295,
+      "ci95_upper": 0.416979823204865,
+      "one_sided_mean_p_value": 0.9437056294370563,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B6_vs_BTC_same_strategy": {
+      "observed_compound_return_difference": 0.1348535186192675,
+      "ci95_lower": -0.06716637713894219,
+      "ci95_upper": 0.3457529475079015,
+      "one_sided_mean_p_value": 0.10118988101189881,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B7_vs_B0": {
+      "observed_compound_return_difference": 0.011815309326319275,
+      "ci95_lower": -0.021206064078884767,
+      "ci95_upper": 0.0468173116532259,
+      "one_sided_mean_p_value": 0.24297570242975702,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B7_vs_B1": {
+      "observed_compound_return_difference": -2.3330379080647607,
+      "ci95_lower": -30.919049666366984,
+      "ci95_upper": 0.6496120615854034,
+      "one_sided_mean_p_value": 0.9487051294870513,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B7_vs_B3": {
+      "observed_compound_return_difference": -1.508554261064073,
+      "ci95_lower": -9.58571332195639,
+      "ci95_upper": 0.39306598089062317,
+      "one_sided_mean_p_value": 0.948005199480052,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/B7_vs_BTC_same_strategy": {
+      "observed_compound_return_difference": 0.02693180356111755,
+      "ci95_lower": -0.013761666856788141,
+      "ci95_upper": 0.06977137429835774,
+      "one_sided_mean_p_value": 0.10438956104389562,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/LIGHTGBM_vs_B0": {
+      "observed_compound_return_difference": 0.6075858743117661,
+      "ci95_lower": -0.295998377846555,
+      "ci95_upper": 2.6909479412961974,
+      "one_sided_mean_p_value": 0.09459054094590541,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/LIGHTGBM_vs_B1": {
+      "observed_compound_return_difference": -1.7372673430793137,
+      "ci95_lower": -29.2567342784859,
+      "ci95_upper": 1.0270899437595074,
+      "one_sided_mean_p_value": 0.9137086291370863,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/LIGHTGBM_vs_B3": {
+      "observed_compound_return_difference": -0.9127836960786262,
+      "ci95_lower": -7.424417759889049,
+      "ci95_upper": 0.4507019087669123,
+      "one_sided_mean_p_value": 0.9215078492150784,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/LIGHTGBM_vs_BTC_same_strategy": {
+      "observed_compound_return_difference": 0.5662816619905721,
+      "ci95_lower": -0.48925837679051853,
+      "ci95_upper": 2.1543076788453392,
+      "one_sided_mean_p_value": 0.1491850814918508,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/ELASTIC_NET_vs_B0": {
+      "observed_compound_return_difference": 1.124996043831568,
+      "ci95_lower": -0.12657505764469806,
+      "ci95_upper": 4.11291562144659,
+      "one_sided_mean_p_value": 0.0301969803019698,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/ELASTIC_NET_vs_B1": {
+      "observed_compound_return_difference": -1.2198571735595118,
+      "ci95_lower": -28.1682661744633,
+      "ci95_upper": 1.8040001023070469,
+      "one_sided_mean_p_value": 0.8538146185381462,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/ELASTIC_NET_vs_B3": {
+      "observed_compound_return_difference": -0.3953735265588243,
+      "ci95_lower": -6.313738983655659,
+      "ci95_upper": 1.0895983197800638,
+      "one_sided_mean_p_value": 0.7827217278272173,
+      "holm_adjusted_p_value": 1.0
+    },
+    "EQUAL_FIVE/ELASTIC_NET_vs_BTC_same_strategy": {
+      "observed_compound_return_difference": 0.7552334788331875,
+      "ci95_lower": -0.6342724157060388,
+      "ci95_upper": 3.3679003333903608,
+      "one_sided_mean_p_value": 0.14928507149285072,
+      "holm_adjusted_p_value": 1.0
+    }
+  },
+  "holm_comparison_count": 152,
+  "reality_check_p_value": 0.15308469153084692,
+  "limitation": "Conditional circular block inference on fixed survivor assets; no new final holdout or full matched-random test."
+}

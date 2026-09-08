@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "files": {
+    "calibration_by_age.parquet": "c263cad044fe0ad6181903bf3601ccf5dfb2c0435c984571ab179943f4872ecd",
+    "component_rejection_summary.json": "61a1d7211c2d4b79282808e6f0c86e396fa7588b68d4b0f2f883bde10535211f",
+    "continuous_cash_checks.json": "3cefd56998b3c3d22652f9f30550d5287f56978985950243621572d1c5c99653",
+    "cost_estimation_summary.parquet": "2643fefcbb4b2ed49d28f75102c96fb572a68baf2b291488ad92d38fc364dff4",
+    "coverage.parquet": "e6edb7a1acfaa5edf4d699e506d516cd9fb3dfa280df31a5ac2d4502012e97c8",
+    "exit_reentry_summary.parquet": "e1b3fbe3a9ddeaae86f5b2eb77711c54cc2667721b3710d3694bed08d2087cf1",
+    "planned_vs_realized_cost.parquet": "3f0b01c947e0806d53bd5581f11629c247fa3c8904fb8ef7c25b7fa08714eeb2",
+    "prediction_width_and_age.parquet": "bba84c48d846b295e69d60d646b6f58e55d8fa271d233fb5564e0706d178145e",
+    "reference_candidates_by_component.parquet": "c7e866e0fdf34a5bb7d3bd042eed103f97ab494b21ec832a37f0bd1738737fbd",
+    "reproduction_checks.parquet": "8aa062321043529a82e5742da2893006205919faa73490deac9450be1f0af115",
+    "scaling_diagnostics.parquet": "872a84d7e79146341822ac7a7b0917974015ae7a2da2034bcc3ef461cf312fc2",
+    "trade_economics_by_age.parquet": "6fc8f1cce42215724119d5449298501955c30095671d0eddd8897196fa897172",
+    "validation.json": "a2f2a1e1a6c8951f80b4491b9f28c3fac97b793200693854379b902b570760ce"
+  }
+}

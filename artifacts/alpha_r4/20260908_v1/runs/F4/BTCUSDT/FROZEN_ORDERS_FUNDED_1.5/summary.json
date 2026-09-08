@@ -1,0 +1,29 @@
+{
+  "arm": "F4",
+  "symbol": "BTCUSDT",
+  "mode": "FROZEN_ORDERS_FUNDED",
+  "cost_multiplier": "1.5",
+  "status": "REPLAYED",
+  "output": "runs/F4/BTCUSDT/FROZEN_ORDERS_FUNDED_1.5",
+  "final_cash": "17899.74358177711362008387501",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "17899.74358177711362008387501",
+      "final_cash": "17899.74358177711362008387501",
+      "position_quantity": "0",
+      "total_cost": "631.1393921528863799161249981",
+      "orders": 451,
+      "fills": 451,
+      "rejections": 0,
+      "closed_trades": 6,
+      "cost_identity_residual": "-7.189642E-24",
+      "exit_decision_mtm": null,
+      "terminal_mtm_at_exit_reference": "17921.95466001233897747050000",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": true
+    }
+  ]
+}

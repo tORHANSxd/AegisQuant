@@ -1,0 +1,5 @@
+{
+  "command": "python -m ruff check src scripts tests",
+  "recorded_at": "2026-09-08T11:52:53.4598986+00:00",
+  "exit_code": 0
+}

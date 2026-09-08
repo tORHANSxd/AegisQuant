@@ -1,0 +1,8 @@
+{
+  "status": "REPLAYED",
+  "economic_hash": "e14534b3a0ec397e12f850171b6d9cc36ba624c65525a32acb4ccbadd0fcdf56",
+  "files": {
+    "decision_trace.parquet": "2056a3b21ff12bc3c5b245ab3370013fc568ead4549d2fd390c2362a2bdc3060",
+    "result.json.gz": "d47b399bd1cfc970c2169722221e2472f9ab345c605e27362e0fa8b63b19a35b"
+  }
+}

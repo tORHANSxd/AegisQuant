@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "new_return_model_fits": 0,
+  "new_calibration_fits": 0,
+  "preregistration_sha256": "e16c0222d2811109e83fa83c9a4cbb51c7b589999464e4b283346787c5d5e70e",
+  "files": {
+    "decision_trace.parquet": "25e5f85f8c016e62b44f2fd67d0352ecf3d4525b85e2f699ee299f2f2310cb3a",
+    "fills.parquet": "117465faaa073e6dbc0a22465e9867d0d8ac3e20096a764ed4a1e0f542d4ba4e",
+    "fold_contract.json": "c8c08d665ae95bf51bedee56ade45490e6c9a137a7ca2426715e303525225bfb",
+    "fold_stability.parquet": "f31063c201671a8ef8668ec3bceb23dadcf4357d9c4149741abd6f3404c2a02b",
+    "forecast_diagnostics.parquet": "ab5965e7028d6d9b2bcbccacee59e6616b55a6031476a846881f29df780759b5",
+    "mtm_equity.parquet": "d2074ff45fd4d18b49df395a1329eed791235fe72116e103eedcc6138a81274d",
+    "orders.parquet": "7410dac303739a833561c9f6972ae8af5603ef0b22285e86916274e727a80ae9",
+    "reproduction.json": "7699134b693c163ea491be0225a9048a61eebfd2335f4a789247b0d19e587c81",
+    "same_fill_shadow.parquet": "9357a627e45c5ec06206984b2af00d67c399ce3395cc8c977349bd39657bd725",
+    "terminal_attribution.parquet": "59011ff8b22d3f1a391f325dc8ae42444e0178a3185fd53a34ab19a1884d3880",
+    "trades.parquet": "5929651f6b38915152a2add84ef6a997dd15b9597c65b5ec04921b31f90b4ed3"
+  },
+  "reused_stresses": "only after A1/A3 complete funded ledger equality",
+  "finished_at": "2026-09-08T08:13:50.319047+00:00"
+}

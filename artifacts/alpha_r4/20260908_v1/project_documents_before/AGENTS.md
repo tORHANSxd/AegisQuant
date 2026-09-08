@@ -1,0 +1,20 @@
+## 当前项目 SSOT
+
+- 项目最高优先级工程与研究 SSOT 为根目录 `AegisQuant_盈利导向重构任务书_v4.md`。
+- 当前用户明确要求优先：只在 `main` 工作，不执行任务书 §1 的研究分支创建命令；提交信息仍遵循中文审计格式。
+- 启动入口为 `CODEX_BOOTSTRAP.md`，当前状态为 `state/ALPHA_V4_PROJECT_STATE.yaml`，规格身份及章节索引为 `state/SPEC_INDEX.md`。
+- v5、v3.1 任务书、阶段状态及报告保留为历史实现与证据；存在冲突时以 v4 和当前明确用户要求为准，不继续用旧阶段状态推进新任务。
+- 执行顺序遵循 v4 §14；先冻结失败证据，禁止在 §2.2 未满足时偷偷重训或把重建预测当作原始预测。实际缺口必须写入状态和报告。
+- `LIVE_TRADING = false`、`ORDER_SUBMISSION_ENABLED = false`、实盘适配器注册表为空；不读取或要求真实 API 私钥。
+- v4 本轮最终结论为 `NO_PROVEN_ALPHA`；以 `artifacts/alpha_v4/reports/final_go_no_go.md` 和当前状态核对结果。模型、carry 与纸面前向均未获准入，不能把实现完成或旧阶段通过解释为交易授权。
+- 用户随后授权的固定五币历史扩展已完成，历史研究报告为 `artifacts/alpha_v4_multi_asset/report.md`，结论仍为 `NO_PROVEN_ALPHA`。原 BTC 冻结报告保留；不把新增币种测试解释为参数搜索、最终留出验证或交易授权。
+- 当前审计修复按 `AegisQuant_盈利验证修复任务书_R2_2026-09-08.md` 执行，替代前版审计计划；v4 安全及晋级约束保持有效。当前状态和新证据分别见 `state/ALPHA_V4_PROJECT_STATE.yaml` 与 `artifacts/alpha_v4_audit/20260908_r2_v3/`，前版审计工件独立保留。
+- R2 审计已完成至明确停止条件，最新总报告为 `artifacts/alpha_v4_audit/20260908_r2_v3/go_no_go.md`。1,147 项测试通过，B3/B5/B6/B7 的 280 个旧分区复现一致；R2 未新拟合收益模型或校准器。工程修复不代表经济晋级，结论仍为 `NO_PROVEN_ALPHA`，生产 CASH、ML/纸面/实盘/订单继续关闭。
+
+## Git 分支规则
+
+- 所有工作与提交（包括直接提交、自动提交、独立归档和子代理操作）默认始终在 `main`。用户未明确要求创建分支时，严禁创建其他分支，包括 `codex/*`、功能分支、修复分支和 `codex-archive`。
+- 普通开发、修复、提交、隔离环境、worktree 或 PR 的需求不等于创建分支授权；禁止通过 `checkout -b/-B`、`switch -c/-C`、`branch <名称>` 或自动派生分支的 `worktree add` 绕过限制。
+- 工作前核对当前分支；只在不会影响用户已有改动时使用已有 `main`。`main` 缺失、当前非 `main` 或 detached HEAD 无法安全处理时，保留现场并停止依赖分支的操作，不自动重命名、删除分支、迁移提交或丢弃改动。
+- 用户明确要求创建分支时，只创建其授权范围内的分支；Skill、配置默认值、工具惯例或子代理建议均不能代替用户授权。
+- 已授权的独立归档可在新的独立仓库初始化默认 `main`；已有非 `main` 归档保留并报错，不自动另建分支或迁移历史。`.codex-git.toml` 仍是自动 Git 开关，本节不自动启用 Git。

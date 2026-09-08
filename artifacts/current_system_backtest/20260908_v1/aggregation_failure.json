@@ -1,0 +1,7 @@
+{
+  "stage": "summarize_after_all_280_replays",
+  "error": "KeyError: trade; actual serialized closed-trade field retained in ledger",
+  "replay_ledgers_complete": true,
+  "all_original_replay_files_preserved": true,
+  "replay_source_snapshot": "implementation/run_current_system_backtest_replay.py"
+}

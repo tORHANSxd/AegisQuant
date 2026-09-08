@@ -1,0 +1,29 @@
+{
+  "arm": "F2",
+  "symbol": "XRPUSDT",
+  "mode": "FROZEN_ORDERS_FUNDED",
+  "cost_multiplier": "2",
+  "status": "REPLAYED",
+  "output": "runs/F2/XRPUSDT/FROZEN_ORDERS_FUNDED_2",
+  "final_cash": "10205.24884838563384691847523",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "10205.24884838563384691847523",
+      "final_cash": "10205.24884838563384691847523",
+      "position_quantity": "0",
+      "total_cost": "751.8632616143661530815247597",
+      "orders": 338,
+      "fills": 338,
+      "rejections": 0,
+      "closed_trades": 16,
+      "cost_identity_residual": "1.027567E-23",
+      "exit_decision_mtm": null,
+      "terminal_mtm_at_exit_reference": "10205.24884838563384691847523",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": true
+    }
+  ]
+}

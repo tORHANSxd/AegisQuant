@@ -1,0 +1,45 @@
+test_all_outputs_finite_nonnegative_and_bounded (test_buffered_target.BufferTests.test_all_outputs_finite_nonnegative_and_bounded) ... ok
+test_at_lower_holds (test_buffered_target.BufferTests.test_at_lower_holds) ... ok
+test_at_upper_holds (test_buffered_target.BufferTests.test_at_upper_holds) ... ok
+test_band_cannot_exceed_hard_cap (test_buffered_target.BufferTests.test_band_cannot_exceed_hard_cap) ... ok
+test_due_after_full_interval (test_buffered_target.BufferTests.test_due_after_full_interval) ... ok
+test_excessive_buffer_rejected (test_buffered_target.BufferTests.test_excessive_buffer_rejected) ... ok
+test_explicit_original_schedule_can_defer (test_buffered_target.BufferTests.test_explicit_original_schedule_can_defer) ... ok
+test_explicit_original_schedule_takes_precedence (test_buffered_target.BufferTests.test_explicit_original_schedule_takes_precedence) ... ok
+test_float_rejected (test_buffered_target.BufferTests.test_float_rejected) ... ok
+test_future_input_rejected (test_buffered_target.BufferTests.test_future_input_rejected) ... ok
+test_future_review_rejected (test_buffered_target.BufferTests.test_future_review_rejected) ... ok
+test_hard_cap_bypasses_daily_review (test_buffered_target.BufferTests.test_hard_cap_bypasses_daily_review) ... ok
+test_hard_exit_bypasses_buffer (test_buffered_target.BufferTests.test_hard_exit_bypasses_buffer) ... ok
+test_infinite_rejected (test_buffered_target.BufferTests.test_infinite_rejected) ... ok
+test_inside_holds (test_buffered_target.BufferTests.test_inside_holds) ... ok
+test_invalid_pending_count_rejected (test_buffered_target.BufferTests.test_invalid_pending_count_rejected) ... ok
+test_naive_datetime_rejected (test_buffered_target.BufferTests.test_naive_datetime_rejected) ... ok
+test_nan_rejected (test_buffered_target.BufferTests.test_nan_rejected) ... ok
+test_negative_buffer_rejected (test_buffered_target.BufferTests.test_negative_buffer_rejected) ... ok
+test_negative_quantity_rejected (test_buffered_target.BufferTests.test_negative_quantity_rejected) ... ok
+test_new_entry_bypasses_daily_review (test_buffered_target.BufferTests.test_new_entry_bypasses_daily_review) ... ok
+test_non_boolean_state_rejected (test_buffered_target.BufferTests.test_non_boolean_state_rejected) ... ok
+test_non_utc_rejected (test_buffered_target.BufferTests.test_non_utc_rejected) ... ok
+test_not_due_holds (test_buffered_target.BufferTests.test_not_due_holds) ... ok
+test_oscillation_demo_is_only_synthetic (test_buffered_target.BufferTests.test_oscillation_demo_is_only_synthetic) ... ok
+test_pending_hard_exit_requires_reconciliation (test_buffered_target.BufferTests.test_pending_hard_exit_requires_reconciliation) ... ok
+test_pending_prevents_duplicate_order (test_buffered_target.BufferTests.test_pending_prevents_duplicate_order) ... ok
+test_reduce_to_near_boundary_not_center (test_buffered_target.BufferTests.test_reduce_to_near_boundary_not_center) ... ok
+test_restore_to_near_boundary_not_center (test_buffered_target.BufferTests.test_restore_to_near_boundary_not_center) ... ok
+test_schedule_override_must_be_boolean (test_buffered_target.BufferTests.test_schedule_override_must_be_boolean) ... ok
+test_scheduled_zero_soft_target_exits (test_buffered_target.BufferTests.test_scheduled_zero_soft_target_exits) ... ok
+test_target_clips_to_cap_for_entry (test_buffered_target.BufferTests.test_target_clips_to_cap_for_entry) ... ok
+test_trend_exit_bypasses_daily_review (test_buffered_target.BufferTests.test_trend_exit_bypasses_daily_review) ... ok
+test_unexecutable_market_does_not_fake_exit (test_buffered_target.BufferTests.test_unexecutable_market_does_not_fake_exit) ... ok
+test_unit_scaling_invariance (test_buffered_target.BufferTests.test_unit_scaling_invariance) ... ok
+test_unscheduled_zero_soft_target_is_not_hard_exit (test_buffered_target.BufferTests.test_unscheduled_zero_soft_target_is_not_hard_exit) ... ok
+test_zero_buffer_reaches_target (test_buffered_target.BufferTests.test_zero_buffer_reaches_target) ... ok
+test_zero_cap_requests_exit (test_buffered_target.BufferTests.test_zero_cap_requests_exit) ... ok
+test_zero_reference_with_positive_target_rejected (test_buffered_target.BufferTests.test_zero_reference_with_positive_target_rejected) ... ok
+test_zero_review_interval_rejected (test_buffered_target.BufferTests.test_zero_review_interval_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 40 tests in 0.001s
+
+OK

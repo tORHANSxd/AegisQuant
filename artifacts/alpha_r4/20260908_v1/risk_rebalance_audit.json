@@ -1,0 +1,13 @@
+{
+  "status": "AUDITED",
+  "bugfix_bridge_required": false,
+  "findings": {
+    "hold_quantity": "HOLD uses actual quantity; no repeated 0.99 in audited path",
+    "double_risk_scaling": "not observed; reserve clamps affordability once",
+    "clock": "86400s since last submitted order; preserved",
+    "pending": "original signed-pending manager retained; IOC completes or cancels at each market event",
+    "precision_residual": "logged, minimum-notional dust escalated; never booked as flat",
+    "partial_fill_episode": "fill-derived episodes exactly matched engine closed cycles"
+  },
+  "limits": "no historical orderbook evidence; reversal amount is descriptive, not a confirmed bug"
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "gate": "mean_positive",
+    "rejected_reference_candidates": 32,
+    "missed_reference_winner_pnl": "51258.47859399873412847287624",
+    "avoided_reference_loser_pnl": "-23306.19692966226160859372261",
+    "exclusive_or_additive": false
+  },
+  {
+    "gate": "mean_above_cost_hurdle",
+    "rejected_reference_candidates": 66,
+    "missed_reference_winner_pnl": "118473.5606905513836304144373",
+    "avoided_reference_loser_pnl": "-32169.99226266379956697136140",
+    "exclusive_or_additive": false
+  },
+  {
+    "gate": "probability_pass",
+    "rejected_reference_candidates": 85,
+    "missed_reference_winner_pnl": "137058.4506524314307964345297",
+    "avoided_reference_loser_pnl": "-49585.20800769518626039822513",
+    "exclusive_or_additive": false
+  },
+  {
+    "gate": "quantile_pass",
+    "rejected_reference_candidates": 94,
+    "missed_reference_winner_pnl": "139164.3139866403816341287696",
+    "avoided_reference_loser_pnl": "-54028.35518455347901844524848",
+    "exclusive_or_additive": false
+  }
+]

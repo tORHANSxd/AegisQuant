@@ -1,0 +1,642 @@
+{
+  "legacy": {
+    "version": "cat-legacy-effective-v1",
+    "declared": {
+      "strategy": {
+        "version": "aegisalpha-cat-v1",
+        "instrument": "BTCUSDT",
+        "instrument_type": "SPOT",
+        "frequency_seconds": 14400,
+        "risk_frequency_seconds": 86400,
+        "fast_days": 10,
+        "slow_days": 40,
+        "fast_day_neighbors": [
+          7,
+          10,
+          14
+        ],
+        "slow_day_neighbors": [
+          30,
+          40,
+          60
+        ],
+        "entry_threshold": 0.25,
+        "exit_threshold": -0.25,
+        "confirmations": 2,
+        "horizon_bars": 6,
+        "allowed_horizons": [
+          6,
+          12
+        ],
+        "lambda_cost": 2.0,
+        "allowed_lambda_cost": [
+          1.5,
+          2.0,
+          2.5
+        ],
+        "target_annual_volatility": 0.2,
+        "allowed_target_volatility": [
+          0.15,
+          0.2,
+          0.25
+        ],
+        "p_enter": 0.55,
+        "p_full_size": 0.7,
+        "uncertainty_weight": 0.25,
+        "maximum_weight": 1.0,
+        "maximum_gross_weight": 1.0,
+        "maximum_leverage": 1.0,
+        "allow_short": false,
+        "fixed_take_profit": null,
+        "execution": "next_executable_event_after_closed_bar",
+        "training": {
+          "train_months": 12,
+          "validation_months": 3,
+          "test_months": 3,
+          "step_months": 3,
+          "purge_bars": 12,
+          "embargo_bars": 1,
+          "selection_policy": "fixed_center_no_optimizer",
+          "model_families": [
+            "XGBOOST",
+            "LIGHTGBM",
+            "ELASTIC_NET"
+          ],
+          "maximum_trials_per_fold_per_family": 30,
+          "planned_trials_per_fold_per_family": 1,
+          "seed": 20260903,
+          "estimators": 32,
+          "maximum_depth": 3,
+          "learning_rate": 0.05,
+          "calibration": "validation_only_platt_and_residual_quantiles"
+        },
+        "cost_assumptions": {
+          "provenance": "preregistered_proxy_not_verified_historical_fee_tier_or_orderbook",
+          "taker_fee_bps": 10,
+          "half_spread_bps": 1,
+          "slippage_floor_bps": 2,
+          "natr_slippage_coefficient": 0.01,
+          "impact_coefficient_bps": 25,
+          "maximum_participation": 0.01,
+          "latency_adverse_bps": 1,
+          "minimum_notional": 10,
+          "quantity_step": 1e-06,
+          "initial_cash": 10000
+        },
+        "validation": {
+          "bootstrap_repetitions": 10000,
+          "bootstrap_block_bars": 6,
+          "random_baselines": 1000,
+          "cost_multipliers": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0
+          ],
+          "final_holdout_minimum_months": 12,
+          "final_holdout_must_be_previously_unused": true
+        },
+        "live_trading": false,
+        "order_submission_enabled": false
+      },
+      "research": {
+        "version": "alpha-v4-frozen-research-v1",
+        "strategy_config": "configs/strategies/aegisalpha_cat_v1.yaml",
+        "feature_set": "aegisalpha-cat-v1-17-causal-market-features",
+        "data_source": "data/bronze/real_market_backtest/BTCUSDT_1h.csv",
+        "data_classification": "PREVIOUSLY_USED_DEVELOPMENT_DATA",
+        "first_train_start": "2021-01-01T00:00:00Z",
+        "development_end": "2025-10-01T00:00:00Z",
+        "selection_policy": "preregistered_centers_no_profit_optimization",
+        "neighborhood_check_scope": "validation_only_no_test_selection",
+        "validation_calibration": "first_calendar_month_purged_before_later_validation",
+        "validation_neighborhood_checks": "last_two_calendar_months",
+        "fold_accounting": "independent_cash_reset_compound_fold_returns_with_scheduled_next_open_exit",
+        "initial_cash": 10000,
+        "cash_reserve_fraction": 0.01,
+        "minimum_economic_order_notional": 10,
+        "execution_latency_ns": 100000,
+        "execution_uncertainty_buffer": 0.0002,
+        "trial_budget_per_fold_per_family": 30,
+        "planned_trials_per_fold_per_family": 1,
+        "bootstrap_replications": 10000,
+        "bootstrap_block_bars": 6,
+        "matched_random_strategies": 1000,
+        "seed": 20260903,
+        "promotion": {
+          "minimum_oos_net_return": 0.0,
+          "minimum_net_return_at_1_5_cost": 0.0,
+          "minimum_positive_fold_ratio": 0.6,
+          "minimum_median_fold_return": 0.0,
+          "minimum_net_sharpe": 0.8,
+          "minimum_calmar": 0.5,
+          "maximum_drawdown": 0.25,
+          "maximum_cost_to_gross_profit": 0.4,
+          "maximum_single_fold_profit_share": 0.4,
+          "maximum_single_year_profit_share": 0.4,
+          "minimum_deflated_sharpe_probability": 0.95,
+          "maximum_pbo": 0.2,
+          "maximum_matched_random_p_value": 0.05,
+          "destructive_loss_at_2_cost": -0.5,
+          "minimum_closed_trades": 30,
+          "final_holdout_minimum_months": 12,
+          "missing_evidence": "FAIL_CLOSED"
+        },
+        "safety": {
+          "live_trading": false,
+          "order_submission_enabled": false,
+          "production_ml_enabled": false
+        }
+      },
+      "multi_asset": {
+        "version": "alpha-v4-multi-asset-20260908-v1",
+        "authorization": "user_requested_fixed_strategy_historical_expansion_beyond_btc",
+        "source_baseline_commit": "1e1a2e61ac1dd8101cb061ce4aeb30c68b17b02f",
+        "strategy_config": "configs/strategies/aegisalpha_cat_v1.yaml",
+        "research_config": "configs/research/aegis_alpha_v4.yaml",
+        "universe_selection": "fixed_before_new_asset_data_download_no_return_based_removal",
+        "universe_limit": "illustrative_surviving_assets_not_point_in_time_whole_market_universe",
+        "symbols": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT"
+        ],
+        "first_train_start": "2021-01-01T00:00:00Z",
+        "development_end": "2025-10-01T00:00:00Z",
+        "levels": [
+          "B0",
+          "B1",
+          "B3",
+          "B4",
+          "B5",
+          "B6",
+          "B7",
+          "LIGHTGBM",
+          "ELASTIC_NET"
+        ],
+        "cost_multipliers": [
+          "0",
+          "1",
+          "1.5",
+          "2"
+        ],
+        "model_families": [
+          "XGBOOST",
+          "LIGHTGBM",
+          "ELASTIC_NET"
+        ],
+        "model_parameters": "unchanged_from_alpha_v4_frozen_centers",
+        "trials_per_fold_per_family": 1,
+        "test_selection": "none",
+        "btc_policy": "reuse_frozen_base_equity_and_orders_no_new_model_fit",
+        "portfolio": {
+          "allocation": "five_independent_equal_cash_sleeves_at_each_fold_start",
+          "cash_per_asset_usdt": 10000,
+          "total_initial_cash_usdt": 50000,
+          "cross_sleeve_transfers_within_fold": false,
+          "fold_accounting": "compound_returns_after_costed_fold_end_liquidations"
+        },
+        "execution_rules": {
+          "evidence": "declared_proxy_not_verified_historical_exchange_rules",
+          "BTCUSDT": {
+            "base_asset": "BTC",
+            "tick_size": "0.01",
+            "quantity_step": "0.000001"
+          },
+          "ETHUSDT": {
+            "base_asset": "ETH",
+            "tick_size": "0.01",
+            "quantity_step": "0.0001"
+          },
+          "BNBUSDT": {
+            "base_asset": "BNB",
+            "tick_size": "0.01",
+            "quantity_step": "0.001"
+          },
+          "SOLUSDT": {
+            "base_asset": "SOL",
+            "tick_size": "0.01",
+            "quantity_step": "0.001"
+          },
+          "XRPUSDT": {
+            "base_asset": "XRP",
+            "tick_size": "0.0001",
+            "quantity_step": "0.1"
+          }
+        },
+        "bootstrap_repetitions": 10000,
+        "bootstrap_block_bars": 6,
+        "seed": 20260903,
+        "final_holdout_access_count": 0,
+        "live_trading": false,
+        "order_submission_enabled": false,
+        "production_ml_enabled": false
+      }
+    },
+    "effective_sha256": "0480055d77460ce1342469e14a532e6ed83a20640887e792e5abce763dd302f2",
+    "label_contract": {
+      "version": "decision-offset-v1",
+      "entry_offset": 1,
+      "exit_offset": 6,
+      "holding_intervals": 5,
+      "return_unit": "arithmetic"
+    },
+    "trend_score": "ma_distance_natr_column_0",
+    "trend_validity": "all_17_features",
+    "execution": {
+      "fee_bps": 10,
+      "half_spread_bps": 1,
+      "slippage_floor_bps": 2,
+      "natr_slippage_coefficient": 0.01,
+      "impact_coefficient_bps": 25,
+      "latency_adverse_bps": 1,
+      "cash_reserve_fraction": 0.01,
+      "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+      "latency_ns": 100000
+    },
+    "sizing": "B7_DAILY_RISK_CAP_REDUCE_ONLY_CONFIDENCE_AT_ENTRY",
+    "unsupported_changes": "REJECT_ALL_LEGACY_CONFIGURATION_PERTURBATIONS"
+  },
+  "audit": {
+    "version": "alpha-v4-audit-20260908-v1",
+    "registered_at": "2026-09-08T07:24:55.531259+00:00",
+    "git_sha": "469f559479401903714a969615ebdcf1988de950",
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "test_start": "2022-04-01T00:00:00Z",
+    "test_end_exclusive": "2025-10-01T00:00:00+00:00",
+    "evidence_tier": "DEVELOPMENT_ATTRIBUTION_NOT_NEW_OOS",
+    "arms": {
+      "C0": {
+        "version": "cat-audit-v2",
+        "execution": {
+          "version": "cat-execution-v2",
+          "fee_bps": "10",
+          "half_spread_bps": "1",
+          "slippage_floor_bps": "2",
+          "natr_slippage_coefficient": "0.01",
+          "impact_coefficient_bps": "25",
+          "latency_adverse_bps": "1",
+          "participation_cap": "0.01",
+          "minimum_notional": "10",
+          "latency_ns": 100000,
+          "price_reserve_natr_fraction": "0.25",
+          "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+          "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+        },
+        "switches": {
+          "use_model_entry_filter": false,
+          "use_cost_entry_gate": false,
+          "use_probability_entry_gate": false,
+          "use_uncertainty_entry_gate": false,
+          "use_model_economic_exit": false,
+          "use_risk_sizing": false,
+          "use_confidence_sizing": false,
+          "use_rebalancing_band": false
+        },
+        "rebalance_weight_band": "0.02",
+        "rebalance_cooldown_seconds": 86400,
+        "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+        "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+        "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+        "live_trading": false,
+        "order_submission_enabled": false
+      },
+      "A1": {
+        "version": "cat-audit-v2",
+        "execution": {
+          "version": "cat-execution-v2",
+          "fee_bps": "10",
+          "half_spread_bps": "1",
+          "slippage_floor_bps": "2",
+          "natr_slippage_coefficient": "0.01",
+          "impact_coefficient_bps": "25",
+          "latency_adverse_bps": "1",
+          "participation_cap": "0.01",
+          "minimum_notional": "10",
+          "latency_ns": 100000,
+          "price_reserve_natr_fraction": "0.25",
+          "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+          "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+        },
+        "switches": {
+          "use_model_entry_filter": false,
+          "use_cost_entry_gate": false,
+          "use_probability_entry_gate": false,
+          "use_uncertainty_entry_gate": false,
+          "use_model_economic_exit": false,
+          "use_risk_sizing": true,
+          "use_confidence_sizing": false,
+          "use_rebalancing_band": true
+        },
+        "rebalance_weight_band": "0.02",
+        "rebalance_cooldown_seconds": 86400,
+        "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+        "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+        "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+        "live_trading": false,
+        "order_submission_enabled": false
+      },
+      "A2": {
+        "version": "cat-audit-v2",
+        "execution": {
+          "version": "cat-execution-v2",
+          "fee_bps": "10",
+          "half_spread_bps": "1",
+          "slippage_floor_bps": "2",
+          "natr_slippage_coefficient": "0.01",
+          "impact_coefficient_bps": "25",
+          "latency_adverse_bps": "1",
+          "participation_cap": "0.01",
+          "minimum_notional": "10",
+          "latency_ns": 100000,
+          "price_reserve_natr_fraction": "0.25",
+          "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+          "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+        },
+        "switches": {
+          "use_model_entry_filter": true,
+          "use_cost_entry_gate": false,
+          "use_probability_entry_gate": false,
+          "use_uncertainty_entry_gate": false,
+          "use_model_economic_exit": false,
+          "use_risk_sizing": true,
+          "use_confidence_sizing": false,
+          "use_rebalancing_band": true
+        },
+        "rebalance_weight_band": "0.02",
+        "rebalance_cooldown_seconds": 86400,
+        "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+        "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+        "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+        "live_trading": false,
+        "order_submission_enabled": false
+      },
+      "A3": {
+        "version": "cat-audit-v2",
+        "execution": {
+          "version": "cat-execution-v2",
+          "fee_bps": "10",
+          "half_spread_bps": "1",
+          "slippage_floor_bps": "2",
+          "natr_slippage_coefficient": "0.01",
+          "impact_coefficient_bps": "25",
+          "latency_adverse_bps": "1",
+          "participation_cap": "0.01",
+          "minimum_notional": "10",
+          "latency_ns": 100000,
+          "price_reserve_natr_fraction": "0.25",
+          "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+          "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+        },
+        "switches": {
+          "use_model_entry_filter": true,
+          "use_cost_entry_gate": true,
+          "use_probability_entry_gate": false,
+          "use_uncertainty_entry_gate": false,
+          "use_model_economic_exit": false,
+          "use_risk_sizing": true,
+          "use_confidence_sizing": false,
+          "use_rebalancing_band": true
+        },
+        "rebalance_weight_band": "0.02",
+        "rebalance_cooldown_seconds": 86400,
+        "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+        "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+        "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+        "live_trading": false,
+        "order_submission_enabled": false
+      },
+      "A4": {
+        "version": "cat-audit-v2",
+        "execution": {
+          "version": "cat-execution-v2",
+          "fee_bps": "10",
+          "half_spread_bps": "1",
+          "slippage_floor_bps": "2",
+          "natr_slippage_coefficient": "0.01",
+          "impact_coefficient_bps": "25",
+          "latency_adverse_bps": "1",
+          "participation_cap": "0.01",
+          "minimum_notional": "10",
+          "latency_ns": 100000,
+          "price_reserve_natr_fraction": "0.25",
+          "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+          "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+        },
+        "switches": {
+          "use_model_entry_filter": true,
+          "use_cost_entry_gate": true,
+          "use_probability_entry_gate": false,
+          "use_uncertainty_entry_gate": false,
+          "use_model_economic_exit": true,
+          "use_risk_sizing": true,
+          "use_confidence_sizing": false,
+          "use_rebalancing_band": true
+        },
+        "rebalance_weight_band": "0.02",
+        "rebalance_cooldown_seconds": 86400,
+        "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+        "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+        "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+        "live_trading": false,
+        "order_submission_enabled": false
+      },
+      "A5": {
+        "version": "cat-audit-v2",
+        "execution": {
+          "version": "cat-execution-v2",
+          "fee_bps": "10",
+          "half_spread_bps": "1",
+          "slippage_floor_bps": "2",
+          "natr_slippage_coefficient": "0.01",
+          "impact_coefficient_bps": "25",
+          "latency_adverse_bps": "1",
+          "participation_cap": "0.01",
+          "minimum_notional": "10",
+          "latency_ns": 100000,
+          "price_reserve_natr_fraction": "0.25",
+          "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+          "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+        },
+        "switches": {
+          "use_model_entry_filter": true,
+          "use_cost_entry_gate": true,
+          "use_probability_entry_gate": true,
+          "use_uncertainty_entry_gate": false,
+          "use_model_economic_exit": false,
+          "use_risk_sizing": true,
+          "use_confidence_sizing": false,
+          "use_rebalancing_band": true
+        },
+        "rebalance_weight_band": "0.02",
+        "rebalance_cooldown_seconds": 86400,
+        "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+        "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+        "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+        "live_trading": false,
+        "order_submission_enabled": false
+      },
+      "A6": {
+        "version": "cat-audit-v2",
+        "execution": {
+          "version": "cat-execution-v2",
+          "fee_bps": "10",
+          "half_spread_bps": "1",
+          "slippage_floor_bps": "2",
+          "natr_slippage_coefficient": "0.01",
+          "impact_coefficient_bps": "25",
+          "latency_adverse_bps": "1",
+          "participation_cap": "0.01",
+          "minimum_notional": "10",
+          "latency_ns": 100000,
+          "price_reserve_natr_fraction": "0.25",
+          "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+          "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+        },
+        "switches": {
+          "use_model_entry_filter": true,
+          "use_cost_entry_gate": true,
+          "use_probability_entry_gate": true,
+          "use_uncertainty_entry_gate": true,
+          "use_model_economic_exit": false,
+          "use_risk_sizing": true,
+          "use_confidence_sizing": false,
+          "use_rebalancing_band": true
+        },
+        "rebalance_weight_band": "0.02",
+        "rebalance_cooldown_seconds": 86400,
+        "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+        "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+        "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+        "live_trading": false,
+        "order_submission_enabled": false
+      },
+      "A7": {
+        "version": "cat-audit-v2",
+        "execution": {
+          "version": "cat-execution-v2",
+          "fee_bps": "10",
+          "half_spread_bps": "1",
+          "slippage_floor_bps": "2",
+          "natr_slippage_coefficient": "0.01",
+          "impact_coefficient_bps": "25",
+          "latency_adverse_bps": "1",
+          "participation_cap": "0.01",
+          "minimum_notional": "10",
+          "latency_ns": 100000,
+          "price_reserve_natr_fraction": "0.25",
+          "fee_currency": "QUOTE_USDT_NO_DISCOUNT",
+          "approximation": "CLOSED_BAR_PROXY_NOT_ORDERBOOK_PROOF"
+        },
+        "switches": {
+          "use_model_entry_filter": true,
+          "use_cost_entry_gate": true,
+          "use_probability_entry_gate": true,
+          "use_uncertainty_entry_gate": true,
+          "use_model_economic_exit": false,
+          "use_risk_sizing": true,
+          "use_confidence_sizing": true,
+          "use_rebalancing_band": true
+        },
+        "rebalance_weight_band": "0.02",
+        "rebalance_cooldown_seconds": 86400,
+        "missing_forecast_policy": "NO_ENTRY_HOLD_UNTIL_TREND_OR_RISK_EXIT",
+        "model_entry_rule": "FROZEN_CALIBRATED_EXPECTED_GROSS_RETURN_GT_ZERO",
+        "uncertainty_definition": "VALIDATION_RESIDUAL_PREDICTIVE_WIDTH_NOT_MEAN_STANDARD_ERROR",
+        "live_trading": false,
+        "order_submission_enabled": false
+      }
+    },
+    "legacy_reproductions": [
+      "B3",
+      "B7"
+    ],
+    "primary_no_ml": "A1",
+    "primary_ml": "A3",
+    "main_hypotheses": [
+      "A1 > CASH",
+      "A3 > A1",
+      "A3 > NULL_A3"
+    ],
+    "minimum_economic_increment_annual": 0.02,
+    "risk_anchor_annual_volatility": 0.2,
+    "alpha_confidence": 0.95,
+    "blocks_bars": [
+      6,
+      18,
+      42,
+      84
+    ],
+    "bootstrap_repetitions": 10000,
+    "quarter_cluster_bootstrap": true,
+    "seed": 20260908,
+    "bridge_C0": "legacy B3 -> v2 causal reserve, no ML/no risk sizing; separates execution contract from A1 risk",
+    "model_entry_rule": "frozen calibrated expected_gross_return > 0; no outcome-based redefinition",
+    "prediction_contract": "legacy decision-offset-v1: entry i+1, exit i+6, five intervals/20h; no relabelling",
+    "primary_trend": "same legacy B3 10/40 and complete-feature validity for A0/C0/A1-A7",
+    "model_challengers": {
+      "NULL_A3": "training mean plus EXACT same validation Platt/residual calibration, no tree fit",
+      "EN_A3": "frozen Elastic Net forecasts, A3 controls; separate registered comparison"
+    },
+    "continuous": "A1 only; carry actual final cash into next quarter, paid liquidation, no cross-sleeve transfer",
+    "covariance": "A1 covariance challenger; trailing 180 common 4h returns, 50% diagonal shrinkage, quarter-start capital weights, frozen quarterly cap, no leverage",
+    "cost_stress": {
+      "arms": [
+        "A1",
+        "A3"
+      ],
+      "multipliers": [
+        1.5,
+        2.0
+      ],
+      "modes": [
+        "SAME_FILL_SHADOW",
+        "FROZEN_ORDERS_FUNDED",
+        "REDECIDE_FUNDED"
+      ]
+    },
+    "selection_budget": {
+      "new_return_model_fits": 0,
+      "new_constant_calibration_slots": 70,
+      "hyperparameter_searches": 0,
+      "new_symbol_selection": 0,
+      "historical_fixed_model_fits": 186,
+      "historical_planned_slots": 210,
+      "history_of_independent_hypotheses": "INCOMPLETE_DO_NOT_PASS_DSR_PBO"
+    },
+    "promotion": {
+      "minimum_oos_net_return": 0.0,
+      "minimum_net_return_at_1_5_cost": 0.0,
+      "minimum_positive_fold_ratio": 0.6,
+      "minimum_median_fold_return": 0.0,
+      "minimum_net_sharpe": 0.8,
+      "minimum_calmar": 0.5,
+      "maximum_drawdown": 0.25,
+      "maximum_cost_to_gross_profit": 0.4,
+      "maximum_single_fold_profit_share": 0.4,
+      "maximum_single_year_profit_share": 0.4,
+      "minimum_deflated_sharpe_probability": 0.95,
+      "maximum_pbo": 0.2,
+      "maximum_matched_random_p_value": 0.05,
+      "destructive_loss_at_2_cost": -0.5,
+      "minimum_closed_trades": 30,
+      "final_holdout_minimum_months": 12,
+      "missing_evidence": "FAIL_CLOSED"
+    },
+    "final_holdout": "NOT_ALLOCATED_NO_ACCESS; 12 previously unused months still required",
+    "production_policy": "CASH",
+    "production_ml_enabled": false,
+    "live_trading": false,
+    "order_submission_enabled": false,
+    "sha256": "d9eb8edfdb03a1ee5adc3b2572daafa2c0f98e878477d88fdd2b8f49f7c9039e"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "dispatcher_sha256": "68158c328a2311266e0a35bd8e4b145e895df8ab81518953f254bc1963e6e79d",
+  "workers": 2,
+  "engine_and_strategy_source": "ba60fe4deafd3c6c8af4fdd03c0dd309614954cd69dcf1f015c4e64406177d59",
+  "arms": [
+    "F4",
+    "F5"
+  ],
+  "new_parameter_selection": false,
+  "isolation": "one independent symbol per process, no shared account or registry writes"
+}

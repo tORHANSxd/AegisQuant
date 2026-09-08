@@ -1,0 +1,449 @@
+{
+  "status": "PASS",
+  "funded_sleeve_scenarios": 150,
+  "authoritative_engine_runs": 800,
+  "original_baseline_reproduction_partitions": 70,
+  "integrated_f0_full_regressions": [
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202204-202207",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202207-202210",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202210-202301",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202301-202304",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202304-202307",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202307-202310",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202310-202401",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202401-202404",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202404-202407",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202407-202410",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202410-202501",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202501-202504",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202504-202507",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "quarter": "202507-202510",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202204-202207",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202207-202210",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202210-202301",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202301-202304",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202304-202307",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202307-202310",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202310-202401",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202401-202404",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202404-202407",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202407-202410",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202410-202501",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202501-202504",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202504-202507",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "quarter": "202507-202510",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202204-202207",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202207-202210",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202210-202301",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202301-202304",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202304-202307",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202307-202310",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202310-202401",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202401-202404",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202404-202407",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202407-202410",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202410-202501",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202501-202504",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202504-202507",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "quarter": "202507-202510",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202204-202207",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202207-202210",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202210-202301",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202301-202304",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202304-202307",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202307-202310",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202310-202401",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202401-202404",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202404-202407",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202407-202410",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202410-202501",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202501-202504",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202504-202507",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "quarter": "202507-202510",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202204-202207",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202207-202210",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202210-202301",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202301-202304",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202304-202307",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202307-202310",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202310-202401",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202401-202404",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202404-202407",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202407-202410",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202410-202501",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202501-202504",
+      "full_mtm_points": 541,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202504-202507",
+      "full_mtm_points": 547,
+      "status": "PASS"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "quarter": "202507-202510",
+      "full_mtm_points": 553,
+      "status": "PASS"
+    }
+  ],
+  "frozen_baseline_files_unchanged": 25,
+  "boundary_recovery_checks": 28,
+  "boundary_recovery_scope": "BTCUSDT F2/F3, all 14 quarterly causal event prefixes",
+  "common_ready_attribution_reconciled_sleeves": 5,
+  "full_pytest": {
+    "tests": 1156,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reference_component_tests": 40,
+  "pyright_errors": 0,
+  "ruff_errors": 0,
+  "warnings": "11 third-party deprecations: Starlette/httpx and Nautilus/Pandas/NumPy timedelta",
+  "new_model_fits": 0,
+  "new_calibration_fits": 0,
+  "final_holdout_access_count": 0,
+  "production_policy": "CASH",
+  "paper_trading_admitted": false,
+  "live_trading": false,
+  "order_submission_enabled": false
+}

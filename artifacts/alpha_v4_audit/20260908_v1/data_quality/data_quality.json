@@ -1,0 +1,4841 @@
+{
+  "version": "public-gap-audit-v1",
+  "symbols": [
+    {
+      "symbol": "BTCUSDT",
+      "rows": 41602,
+      "duplicate_opens": 0,
+      "unordered_pairs": 0,
+      "missing_hours": 14,
+      "missing_open_times_ms": [
+        1613016000000,
+        1614996000000,
+        1618884000000,
+        1618887600000,
+        1619326800000,
+        1619330400000,
+        1619334000000,
+        1628820000000,
+        1628823600000,
+        1628827200000,
+        1628830800000,
+        1632898800000,
+        1632902400000,
+        1679662800000
+      ],
+      "early_close_open_times_ms": [
+        1613012400000,
+        1619323200000,
+        1628816400000,
+        1640318400000,
+        1679659200000
+      ],
+      "zero_volume_times_ms": [
+        1613012400000,
+        1679659200000
+      ],
+      "input_sha256": "96d99d52e9d4eb422d5018ae72ef7a62ac9ba887bb30d0102131f3635f75fc50",
+      "rest_time_unit": "milliseconds",
+      "cause": "UNVERIFIED_EXCHANGE_OUTAGE_OR_SOURCE_GAP; no invented suspension/delisting claim",
+      "missing_in_both_rest_and_archive": 14,
+      "missing_rest_present_archive": 0,
+      "unverified_due_to_archive_unavailable": 0
+    },
+    {
+      "symbol": "ETHUSDT",
+      "rows": 41602,
+      "duplicate_opens": 0,
+      "unordered_pairs": 0,
+      "missing_hours": 14,
+      "missing_open_times_ms": [
+        1613016000000,
+        1614996000000,
+        1618884000000,
+        1618887600000,
+        1619326800000,
+        1619330400000,
+        1619334000000,
+        1628820000000,
+        1628823600000,
+        1628827200000,
+        1628830800000,
+        1632898800000,
+        1632902400000,
+        1679662800000
+      ],
+      "early_close_open_times_ms": [
+        1613012400000,
+        1619323200000,
+        1628816400000,
+        1640318400000,
+        1679659200000
+      ],
+      "zero_volume_times_ms": [
+        1613012400000,
+        1679659200000
+      ],
+      "input_sha256": "5470524b040cbc106c4eb80c77fb706d949a53173b619ec399f9aae87fe6c433",
+      "rest_time_unit": "milliseconds",
+      "cause": "UNVERIFIED_EXCHANGE_OUTAGE_OR_SOURCE_GAP; no invented suspension/delisting claim",
+      "missing_in_both_rest_and_archive": 14,
+      "missing_rest_present_archive": 0,
+      "unverified_due_to_archive_unavailable": 0
+    },
+    {
+      "symbol": "BNBUSDT",
+      "rows": 41602,
+      "duplicate_opens": 0,
+      "unordered_pairs": 0,
+      "missing_hours": 14,
+      "missing_open_times_ms": [
+        1613016000000,
+        1614996000000,
+        1618884000000,
+        1618887600000,
+        1619326800000,
+        1619330400000,
+        1619334000000,
+        1628820000000,
+        1628823600000,
+        1628827200000,
+        1628830800000,
+        1632898800000,
+        1632902400000,
+        1679662800000
+      ],
+      "early_close_open_times_ms": [
+        1613012400000,
+        1619323200000,
+        1628816400000,
+        1640318400000,
+        1679659200000
+      ],
+      "zero_volume_times_ms": [
+        1613012400000,
+        1679659200000
+      ],
+      "input_sha256": "45453780abb9776be461972d3951b62b6f334f52ae53edca3836db83b6b561c2",
+      "rest_time_unit": "milliseconds",
+      "cause": "UNVERIFIED_EXCHANGE_OUTAGE_OR_SOURCE_GAP; no invented suspension/delisting claim",
+      "missing_in_both_rest_and_archive": 14,
+      "missing_rest_present_archive": 0,
+      "unverified_due_to_archive_unavailable": 0
+    },
+    {
+      "symbol": "SOLUSDT",
+      "rows": 41602,
+      "duplicate_opens": 0,
+      "unordered_pairs": 0,
+      "missing_hours": 14,
+      "missing_open_times_ms": [
+        1613016000000,
+        1614996000000,
+        1618884000000,
+        1618887600000,
+        1619326800000,
+        1619330400000,
+        1619334000000,
+        1628820000000,
+        1628823600000,
+        1628827200000,
+        1628830800000,
+        1632898800000,
+        1632902400000,
+        1679662800000
+      ],
+      "early_close_open_times_ms": [
+        1613012400000,
+        1619323200000,
+        1628816400000,
+        1679659200000
+      ],
+      "zero_volume_times_ms": [
+        1613012400000,
+        1679659200000
+      ],
+      "input_sha256": "5f24735678d944cce3220004d1c05e995f2c6409a22ffc7e32d7c2fc07af2e5e",
+      "rest_time_unit": "milliseconds",
+      "cause": "UNVERIFIED_EXCHANGE_OUTAGE_OR_SOURCE_GAP; no invented suspension/delisting claim",
+      "missing_in_both_rest_and_archive": 14,
+      "missing_rest_present_archive": 0,
+      "unverified_due_to_archive_unavailable": 0
+    },
+    {
+      "symbol": "XRPUSDT",
+      "rows": 41602,
+      "duplicate_opens": 0,
+      "unordered_pairs": 0,
+      "missing_hours": 14,
+      "missing_open_times_ms": [
+        1613016000000,
+        1614996000000,
+        1618884000000,
+        1618887600000,
+        1619326800000,
+        1619330400000,
+        1619334000000,
+        1628820000000,
+        1628823600000,
+        1628827200000,
+        1628830800000,
+        1632898800000,
+        1632902400000,
+        1679662800000
+      ],
+      "early_close_open_times_ms": [
+        1613012400000,
+        1619323200000,
+        1628816400000,
+        1679659200000
+      ],
+      "zero_volume_times_ms": [
+        1613012400000,
+        1679659200000
+      ],
+      "input_sha256": "abb39449f095168e8ff0797ffc97f6d97898ddb312a1ecd44938a5db1d182fcb",
+      "rest_time_unit": "milliseconds",
+      "cause": "UNVERIFIED_EXCHANGE_OUTAGE_OR_SOURCE_GAP; no invented suspension/delisting claim",
+      "missing_in_both_rest_and_archive": 14,
+      "missing_rest_present_archive": 0,
+      "unverified_due_to_archive_unavailable": 0
+    }
+  ],
+  "archive_responses": [
+    {
+      "symbol": "BTCUSDT",
+      "date": "2021-02-11",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2021-02-11.zip",
+      "downloaded_at": "2026-09-08T07:38:14.687180+00:00",
+      "sha256": "951079a2c9f0ce16b0b6b4411529db6e45f7973585fe98b72ed39810ebe1449a",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1613001600000,
+          "close_time_ms": 1613005199999,
+          "volume": "4145.40034300"
+        },
+        {
+          "open_time_ms": 1613005200000,
+          "close_time_ms": 1613008799999,
+          "volume": "2791.70519700"
+        },
+        {
+          "open_time_ms": 1613008800000,
+          "close_time_ms": 1613012399999,
+          "volume": "825.57125600"
+        },
+        {
+          "open_time_ms": 1613012400000,
+          "close_time_ms": 1613014854773,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1613019600000,
+          "close_time_ms": 1613023199999,
+          "volume": "2359.40984600"
+        },
+        {
+          "open_time_ms": 1613023200000,
+          "close_time_ms": 1613026799999,
+          "volume": "2121.32005100"
+        },
+        {
+          "open_time_ms": 1613026800000,
+          "close_time_ms": 1613030399999,
+          "volume": "2885.69503200"
+        },
+        {
+          "open_time_ms": 1613030400000,
+          "close_time_ms": 1613033999999,
+          "volume": "2819.24106000"
+        },
+        {
+          "open_time_ms": 1613034000000,
+          "close_time_ms": 1613037599999,
+          "volume": "3446.63083900"
+        },
+        {
+          "open_time_ms": 1613037600000,
+          "close_time_ms": 1613041199999,
+          "volume": "4555.92155500"
+        },
+        {
+          "open_time_ms": 1613041200000,
+          "close_time_ms": 1613044799999,
+          "volume": "4197.20832600"
+        },
+        {
+          "open_time_ms": 1613044800000,
+          "close_time_ms": 1613048399999,
+          "volume": "3578.10764600"
+        },
+        {
+          "open_time_ms": 1613048400000,
+          "close_time_ms": 1613051999999,
+          "volume": "13364.20517400"
+        },
+        {
+          "open_time_ms": 1613052000000,
+          "close_time_ms": 1613055599999,
+          "volume": "5336.00574200"
+        },
+        {
+          "open_time_ms": 1613055600000,
+          "close_time_ms": 1613059199999,
+          "volume": "4946.07776600"
+        },
+        {
+          "open_time_ms": 1613059200000,
+          "close_time_ms": 1613062799999,
+          "volume": "4852.40756700"
+        },
+        {
+          "open_time_ms": 1613062800000,
+          "close_time_ms": 1613066399999,
+          "volume": "3618.16439500"
+        },
+        {
+          "open_time_ms": 1613066400000,
+          "close_time_ms": 1613069999999,
+          "volume": "3425.20414100"
+        },
+        {
+          "open_time_ms": 1613070000000,
+          "close_time_ms": 1613073599999,
+          "volume": "3150.42137400"
+        },
+        {
+          "open_time_ms": 1613073600000,
+          "close_time_ms": 1613077199999,
+          "volume": "6204.93255600"
+        },
+        {
+          "open_time_ms": 1613077200000,
+          "close_time_ms": 1613080799999,
+          "volume": "5079.47740900"
+        },
+        {
+          "open_time_ms": 1613080800000,
+          "close_time_ms": 1613084399999,
+          "volume": "2820.02394000"
+        },
+        {
+          "open_time_ms": 1613084400000,
+          "close_time_ms": 1613087999999,
+          "volume": "3037.95023900"
+        }
+      ]
+    },
+    {
+      "symbol": "BTCUSDT",
+      "date": "2021-03-06",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2021-03-06.zip",
+      "downloaded_at": "2026-09-08T07:38:14.688670+00:00",
+      "sha256": "a85039f9b0c7285354770cd85b0a58ebc4fbb7b56d599e94e2d8cd80f46f96ee",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1614988800000,
+          "close_time_ms": 1614992399999,
+          "volume": "1845.19339200"
+        },
+        {
+          "open_time_ms": 1614992400000,
+          "close_time_ms": 1614995999999,
+          "volume": "1293.84492500"
+        },
+        {
+          "open_time_ms": 1614999600000,
+          "close_time_ms": 1615003199999,
+          "volume": "818.44067300"
+        },
+        {
+          "open_time_ms": 1615003200000,
+          "close_time_ms": 1615006799999,
+          "volume": "1726.74406000"
+        },
+        {
+          "open_time_ms": 1615006800000,
+          "close_time_ms": 1615010399999,
+          "volume": "1653.75943400"
+        },
+        {
+          "open_time_ms": 1615010400000,
+          "close_time_ms": 1615013999999,
+          "volume": "1754.07195500"
+        },
+        {
+          "open_time_ms": 1615014000000,
+          "close_time_ms": 1615017599999,
+          "volume": "1647.18114200"
+        },
+        {
+          "open_time_ms": 1615017600000,
+          "close_time_ms": 1615021199999,
+          "volume": "2233.92258700"
+        },
+        {
+          "open_time_ms": 1615021200000,
+          "close_time_ms": 1615024799999,
+          "volume": "1882.87757900"
+        },
+        {
+          "open_time_ms": 1615024800000,
+          "close_time_ms": 1615028399999,
+          "volume": "2154.95648200"
+        },
+        {
+          "open_time_ms": 1615028400000,
+          "close_time_ms": 1615031999999,
+          "volume": "1402.21562700"
+        },
+        {
+          "open_time_ms": 1615032000000,
+          "close_time_ms": 1615035599999,
+          "volume": "3296.63806100"
+        },
+        {
+          "open_time_ms": 1615035600000,
+          "close_time_ms": 1615039199999,
+          "volume": "3107.86133500"
+        },
+        {
+          "open_time_ms": 1615039200000,
+          "close_time_ms": 1615042799999,
+          "volume": "1820.41148200"
+        },
+        {
+          "open_time_ms": 1615042800000,
+          "close_time_ms": 1615046399999,
+          "volume": "1475.15553400"
+        },
+        {
+          "open_time_ms": 1615046400000,
+          "close_time_ms": 1615049999999,
+          "volume": "2487.13413100"
+        },
+        {
+          "open_time_ms": 1615050000000,
+          "close_time_ms": 1615053599999,
+          "volume": "2674.93363700"
+        },
+        {
+          "open_time_ms": 1615053600000,
+          "close_time_ms": 1615057199999,
+          "volume": "2003.05469900"
+        },
+        {
+          "open_time_ms": 1615057200000,
+          "close_time_ms": 1615060799999,
+          "volume": "1584.42261600"
+        },
+        {
+          "open_time_ms": 1615060800000,
+          "close_time_ms": 1615064399999,
+          "volume": "2390.26653700"
+        },
+        {
+          "open_time_ms": 1615064400000,
+          "close_time_ms": 1615067999999,
+          "volume": "1716.06082200"
+        },
+        {
+          "open_time_ms": 1615068000000,
+          "close_time_ms": 1615071599999,
+          "volume": "1991.42598100"
+        },
+        {
+          "open_time_ms": 1615071600000,
+          "close_time_ms": 1615075199999,
+          "volume": "1438.66155100"
+        }
+      ]
+    },
+    {
+      "symbol": "BTCUSDT",
+      "date": "2021-04-20",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2021-04-20.zip",
+      "downloaded_at": "2026-09-08T07:38:14.689358+00:00",
+      "sha256": "c8d5b18b256df13d20b6520a23b7858a8eef1de376c99747eeb49fd3e0391eeb",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1618876800000,
+          "close_time_ms": 1618880399999,
+          "volume": "5959.82084200"
+        },
+        {
+          "open_time_ms": 1618880400000,
+          "close_time_ms": 1618883999999,
+          "volume": "3262.76421500"
+        },
+        {
+          "open_time_ms": 1618891200000,
+          "close_time_ms": 1618894799999,
+          "volume": "1818.06227800"
+        },
+        {
+          "open_time_ms": 1618894800000,
+          "close_time_ms": 1618898399999,
+          "volume": "2658.61753800"
+        },
+        {
+          "open_time_ms": 1618898400000,
+          "close_time_ms": 1618901999999,
+          "volume": "4276.74323600"
+        },
+        {
+          "open_time_ms": 1618902000000,
+          "close_time_ms": 1618905599999,
+          "volume": "3889.65360800"
+        },
+        {
+          "open_time_ms": 1618905600000,
+          "close_time_ms": 1618909199999,
+          "volume": "3227.00617700"
+        },
+        {
+          "open_time_ms": 1618909200000,
+          "close_time_ms": 1618912799999,
+          "volume": "2858.55335600"
+        },
+        {
+          "open_time_ms": 1618912800000,
+          "close_time_ms": 1618916399999,
+          "volume": "4372.32248900"
+        },
+        {
+          "open_time_ms": 1618916400000,
+          "close_time_ms": 1618919999999,
+          "volume": "2774.06053000"
+        },
+        {
+          "open_time_ms": 1618920000000,
+          "close_time_ms": 1618923599999,
+          "volume": "2705.94434800"
+        },
+        {
+          "open_time_ms": 1618923600000,
+          "close_time_ms": 1618927199999,
+          "volume": "2723.86699800"
+        },
+        {
+          "open_time_ms": 1618927200000,
+          "close_time_ms": 1618930799999,
+          "volume": "4285.54439300"
+        },
+        {
+          "open_time_ms": 1618930800000,
+          "close_time_ms": 1618934399999,
+          "volume": "3870.66336000"
+        },
+        {
+          "open_time_ms": 1618934400000,
+          "close_time_ms": 1618937999999,
+          "volume": "3801.77306500"
+        },
+        {
+          "open_time_ms": 1618938000000,
+          "close_time_ms": 1618941599999,
+          "volume": "2436.86756500"
+        },
+        {
+          "open_time_ms": 1618941600000,
+          "close_time_ms": 1618945199999,
+          "volume": "3648.74096900"
+        },
+        {
+          "open_time_ms": 1618945200000,
+          "close_time_ms": 1618948799999,
+          "volume": "3592.81465000"
+        },
+        {
+          "open_time_ms": 1618948800000,
+          "close_time_ms": 1618952399999,
+          "volume": "3872.75890500"
+        },
+        {
+          "open_time_ms": 1618952400000,
+          "close_time_ms": 1618955999999,
+          "volume": "2491.56773700"
+        },
+        {
+          "open_time_ms": 1618956000000,
+          "close_time_ms": 1618959599999,
+          "volume": "2308.19090900"
+        },
+        {
+          "open_time_ms": 1618959600000,
+          "close_time_ms": 1618963199999,
+          "volume": "1908.14498300"
+        }
+      ]
+    },
+    {
+      "symbol": "BTCUSDT",
+      "date": "2021-04-25",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2021-04-25.zip",
+      "downloaded_at": "2026-09-08T07:38:14.689781+00:00",
+      "sha256": "f084c398523cc0d82538865d4a4d5a3be25aa80dcce5a538585c5369824cdafc",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1619308800000,
+          "close_time_ms": 1619312399999,
+          "volume": "2241.49560400"
+        },
+        {
+          "open_time_ms": 1619312400000,
+          "close_time_ms": 1619315999999,
+          "volume": "1304.81959700"
+        },
+        {
+          "open_time_ms": 1619316000000,
+          "close_time_ms": 1619319599999,
+          "volume": "1210.92218900"
+        },
+        {
+          "open_time_ms": 1619319600000,
+          "close_time_ms": 1619323199999,
+          "volume": "1663.77132300"
+        },
+        {
+          "open_time_ms": 1619323200000,
+          "close_time_ms": 1619323258146,
+          "volume": "5.88703400"
+        },
+        {
+          "open_time_ms": 1619337600000,
+          "close_time_ms": 1619341199999,
+          "volume": "920.19312100"
+        },
+        {
+          "open_time_ms": 1619341200000,
+          "close_time_ms": 1619344799999,
+          "volume": "3835.86226300"
+        },
+        {
+          "open_time_ms": 1619344800000,
+          "close_time_ms": 1619348399999,
+          "volume": "3900.25998700"
+        },
+        {
+          "open_time_ms": 1619348400000,
+          "close_time_ms": 1619351999999,
+          "volume": "1867.41153500"
+        },
+        {
+          "open_time_ms": 1619352000000,
+          "close_time_ms": 1619355599999,
+          "volume": "2412.98610500"
+        },
+        {
+          "open_time_ms": 1619355600000,
+          "close_time_ms": 1619359199999,
+          "volume": "2934.15451200"
+        },
+        {
+          "open_time_ms": 1619359200000,
+          "close_time_ms": 1619362799999,
+          "volume": "2830.29717200"
+        },
+        {
+          "open_time_ms": 1619362800000,
+          "close_time_ms": 1619366399999,
+          "volume": "2411.06346600"
+        },
+        {
+          "open_time_ms": 1619366400000,
+          "close_time_ms": 1619369999999,
+          "volume": "1930.64503500"
+        },
+        {
+          "open_time_ms": 1619370000000,
+          "close_time_ms": 1619373599999,
+          "volume": "2065.13255500"
+        },
+        {
+          "open_time_ms": 1619373600000,
+          "close_time_ms": 1619377199999,
+          "volume": "2454.07313500"
+        },
+        {
+          "open_time_ms": 1619377200000,
+          "close_time_ms": 1619380799999,
+          "volume": "1782.22428100"
+        },
+        {
+          "open_time_ms": 1619380800000,
+          "close_time_ms": 1619384399999,
+          "volume": "5353.12136900"
+        },
+        {
+          "open_time_ms": 1619384400000,
+          "close_time_ms": 1619387999999,
+          "volume": "8179.86644300"
+        },
+        {
+          "open_time_ms": 1619388000000,
+          "close_time_ms": 1619391599999,
+          "volume": "5607.32232100"
+        },
+        {
+          "open_time_ms": 1619391600000,
+          "close_time_ms": 1619395199999,
+          "volume": "3344.13595700"
+        }
+      ]
+    },
+    {
+      "symbol": "BTCUSDT",
+      "date": "2021-08-13",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2021-08-13.zip",
+      "downloaded_at": "2026-09-08T07:38:15.417296+00:00",
+      "sha256": "4008bd522671e86df59f6e4dc563946b7c89063718a826f82f9c64ab86bce30c",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1628812800000,
+          "close_time_ms": 1628816399999,
+          "volume": "2803.71791300"
+        },
+        {
+          "open_time_ms": 1628816400000,
+          "close_time_ms": 1628819999000,
+          "volume": "1980.12661900"
+        },
+        {
+          "open_time_ms": 1628834400000,
+          "close_time_ms": 1628837999999,
+          "volume": "2391.28250100"
+        },
+        {
+          "open_time_ms": 1628838000000,
+          "close_time_ms": 1628841599999,
+          "volume": "4690.91757900"
+        },
+        {
+          "open_time_ms": 1628841600000,
+          "close_time_ms": 1628845199999,
+          "volume": "3063.92669300"
+        },
+        {
+          "open_time_ms": 1628845200000,
+          "close_time_ms": 1628848799999,
+          "volume": "2987.87923200"
+        },
+        {
+          "open_time_ms": 1628848800000,
+          "close_time_ms": 1628852399999,
+          "volume": "1862.49860900"
+        },
+        {
+          "open_time_ms": 1628852400000,
+          "close_time_ms": 1628855999999,
+          "volume": "2476.34928100"
+        },
+        {
+          "open_time_ms": 1628856000000,
+          "close_time_ms": 1628859599999,
+          "volume": "2080.60962900"
+        },
+        {
+          "open_time_ms": 1628859600000,
+          "close_time_ms": 1628863199999,
+          "volume": "1712.30516500"
+        },
+        {
+          "open_time_ms": 1628863200000,
+          "close_time_ms": 1628866799999,
+          "volume": "2144.31358100"
+        },
+        {
+          "open_time_ms": 1628866800000,
+          "close_time_ms": 1628870399999,
+          "volume": "2251.54975400"
+        },
+        {
+          "open_time_ms": 1628870400000,
+          "close_time_ms": 1628873999999,
+          "volume": "1388.82384700"
+        },
+        {
+          "open_time_ms": 1628874000000,
+          "close_time_ms": 1628877599999,
+          "volume": "1130.23580200"
+        },
+        {
+          "open_time_ms": 1628877600000,
+          "close_time_ms": 1628881199999,
+          "volume": "1563.41913500"
+        },
+        {
+          "open_time_ms": 1628881200000,
+          "close_time_ms": 1628884799999,
+          "volume": "1094.08683400"
+        },
+        {
+          "open_time_ms": 1628884800000,
+          "close_time_ms": 1628888399999,
+          "volume": "7305.58112900"
+        },
+        {
+          "open_time_ms": 1628888400000,
+          "close_time_ms": 1628891999999,
+          "volume": "2084.47273900"
+        },
+        {
+          "open_time_ms": 1628892000000,
+          "close_time_ms": 1628895599999,
+          "volume": "1299.78094800"
+        },
+        {
+          "open_time_ms": 1628895600000,
+          "close_time_ms": 1628899199999,
+          "volume": "1927.49344100"
+        }
+      ]
+    },
+    {
+      "symbol": "BTCUSDT",
+      "date": "2021-09-29",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2021-09-29.zip",
+      "downloaded_at": "2026-09-08T07:38:15.421435+00:00",
+      "sha256": "f57acec9a851361ee99e241de0db2445d097879c8e9ff21971ebbe5e1ab3fb80",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1632873600000,
+          "close_time_ms": 1632877199999,
+          "volume": "2974.71787000"
+        },
+        {
+          "open_time_ms": 1632877200000,
+          "close_time_ms": 1632880799999,
+          "volume": "1498.89243000"
+        },
+        {
+          "open_time_ms": 1632880800000,
+          "close_time_ms": 1632884399999,
+          "volume": "1333.30085000"
+        },
+        {
+          "open_time_ms": 1632884400000,
+          "close_time_ms": 1632887999999,
+          "volume": "1739.26848000"
+        },
+        {
+          "open_time_ms": 1632888000000,
+          "close_time_ms": 1632891599999,
+          "volume": "1725.14050000"
+        },
+        {
+          "open_time_ms": 1632891600000,
+          "close_time_ms": 1632895199999,
+          "volume": "1069.90024000"
+        },
+        {
+          "open_time_ms": 1632895200000,
+          "close_time_ms": 1632898799999,
+          "volume": "1075.21816000"
+        },
+        {
+          "open_time_ms": 1632906000000,
+          "close_time_ms": 1632909599999,
+          "volume": "1181.42556000"
+        },
+        {
+          "open_time_ms": 1632909600000,
+          "close_time_ms": 1632913199999,
+          "volume": "1558.96585000"
+        },
+        {
+          "open_time_ms": 1632913200000,
+          "close_time_ms": 1632916799999,
+          "volume": "1279.33086000"
+        },
+        {
+          "open_time_ms": 1632916800000,
+          "close_time_ms": 1632920399999,
+          "volume": "2248.58478000"
+        },
+        {
+          "open_time_ms": 1632920400000,
+          "close_time_ms": 1632923999999,
+          "volume": "1813.01897000"
+        },
+        {
+          "open_time_ms": 1632924000000,
+          "close_time_ms": 1632927599999,
+          "volume": "1252.97882000"
+        },
+        {
+          "open_time_ms": 1632927600000,
+          "close_time_ms": 1632931199999,
+          "volume": "2110.32291000"
+        },
+        {
+          "open_time_ms": 1632931200000,
+          "close_time_ms": 1632934799999,
+          "volume": "1909.07145000"
+        },
+        {
+          "open_time_ms": 1632934800000,
+          "close_time_ms": 1632938399999,
+          "volume": "1255.96865000"
+        },
+        {
+          "open_time_ms": 1632938400000,
+          "close_time_ms": 1632941999999,
+          "volume": "1691.00881000"
+        },
+        {
+          "open_time_ms": 1632942000000,
+          "close_time_ms": 1632945599999,
+          "volume": "1051.47418000"
+        },
+        {
+          "open_time_ms": 1632945600000,
+          "close_time_ms": 1632949199999,
+          "volume": "1885.35329000"
+        },
+        {
+          "open_time_ms": 1632949200000,
+          "close_time_ms": 1632952799999,
+          "volume": "953.37130000"
+        },
+        {
+          "open_time_ms": 1632952800000,
+          "close_time_ms": 1632956399999,
+          "volume": "1088.02375000"
+        },
+        {
+          "open_time_ms": 1632956400000,
+          "close_time_ms": 1632959999999,
+          "volume": "816.19716000"
+        }
+      ]
+    },
+    {
+      "symbol": "BTCUSDT",
+      "date": "2021-12-24",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2021-12-24.zip",
+      "downloaded_at": "2026-09-08T07:38:15.432244+00:00",
+      "sha256": "63fa9b4e1602b631124e3e4d12e6d6977b549cb02de400ad86930e86cec9c1ad",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1640304000000,
+          "close_time_ms": 1640307599999,
+          "volume": "1258.57071000"
+        },
+        {
+          "open_time_ms": 1640307600000,
+          "close_time_ms": 1640311199999,
+          "volume": "3037.17958000"
+        },
+        {
+          "open_time_ms": 1640311200000,
+          "close_time_ms": 1640314799999,
+          "volume": "2286.33021000"
+        },
+        {
+          "open_time_ms": 1640314800000,
+          "close_time_ms": 1640318399999,
+          "volume": "1260.66778000"
+        },
+        {
+          "open_time_ms": 1640318400000,
+          "close_time_ms": 1640321994362,
+          "volume": "560.62320000"
+        },
+        {
+          "open_time_ms": 1640322000000,
+          "close_time_ms": 1640325599999,
+          "volume": "765.92466000"
+        },
+        {
+          "open_time_ms": 1640325600000,
+          "close_time_ms": 1640329199999,
+          "volume": "955.19150000"
+        },
+        {
+          "open_time_ms": 1640329200000,
+          "close_time_ms": 1640332799999,
+          "volume": "913.84277000"
+        },
+        {
+          "open_time_ms": 1640332800000,
+          "close_time_ms": 1640336399999,
+          "volume": "998.78873000"
+        },
+        {
+          "open_time_ms": 1640336400000,
+          "close_time_ms": 1640339999999,
+          "volume": "909.00254000"
+        },
+        {
+          "open_time_ms": 1640340000000,
+          "close_time_ms": 1640343599999,
+          "volume": "780.55018000"
+        },
+        {
+          "open_time_ms": 1640343600000,
+          "close_time_ms": 1640347199999,
+          "volume": "2212.41929000"
+        },
+        {
+          "open_time_ms": 1640347200000,
+          "close_time_ms": 1640350799999,
+          "volume": "982.19209000"
+        },
+        {
+          "open_time_ms": 1640350800000,
+          "close_time_ms": 1640354399999,
+          "volume": "971.86647000"
+        },
+        {
+          "open_time_ms": 1640354400000,
+          "close_time_ms": 1640357999999,
+          "volume": "1466.83006000"
+        },
+        {
+          "open_time_ms": 1640358000000,
+          "close_time_ms": 1640361599999,
+          "volume": "1950.43136000"
+        },
+        {
+          "open_time_ms": 1640361600000,
+          "close_time_ms": 1640365199999,
+          "volume": "1619.27325000"
+        },
+        {
+          "open_time_ms": 1640365200000,
+          "close_time_ms": 1640368799999,
+          "volume": "684.89831000"
+        },
+        {
+          "open_time_ms": 1640368800000,
+          "close_time_ms": 1640372399999,
+          "volume": "1861.91217000"
+        },
+        {
+          "open_time_ms": 1640372400000,
+          "close_time_ms": 1640375999999,
+          "volume": "1935.07156000"
+        },
+        {
+          "open_time_ms": 1640376000000,
+          "close_time_ms": 1640379599999,
+          "volume": "1640.57091000"
+        },
+        {
+          "open_time_ms": 1640379600000,
+          "close_time_ms": 1640383199999,
+          "volume": "598.85044000"
+        },
+        {
+          "open_time_ms": 1640383200000,
+          "close_time_ms": 1640386799999,
+          "volume": "1001.76155000"
+        },
+        {
+          "open_time_ms": 1640386800000,
+          "close_time_ms": 1640390399999,
+          "volume": "1032.09337000"
+        }
+      ]
+    },
+    {
+      "symbol": "BTCUSDT",
+      "date": "2023-03-24",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2023-03-24.zip",
+      "downloaded_at": "2026-09-08T07:38:15.518984+00:00",
+      "sha256": "ea9d94f28a39ad8029c9c2863cbb7769137188edd957fea35d0313ae4183561f",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1679616000000,
+          "close_time_ms": 1679619599999,
+          "volume": "2887.21044000"
+        },
+        {
+          "open_time_ms": 1679619600000,
+          "close_time_ms": 1679623199999,
+          "volume": "2294.16851000"
+        },
+        {
+          "open_time_ms": 1679623200000,
+          "close_time_ms": 1679626799999,
+          "volume": "2066.26067000"
+        },
+        {
+          "open_time_ms": 1679626800000,
+          "close_time_ms": 1679630399999,
+          "volume": "1572.69903000"
+        },
+        {
+          "open_time_ms": 1679630400000,
+          "close_time_ms": 1679633999999,
+          "volume": "2009.41868000"
+        },
+        {
+          "open_time_ms": 1679634000000,
+          "close_time_ms": 1679637599999,
+          "volume": "2593.46960000"
+        },
+        {
+          "open_time_ms": 1679637600000,
+          "close_time_ms": 1679641199999,
+          "volume": "1783.26087000"
+        },
+        {
+          "open_time_ms": 1679641200000,
+          "close_time_ms": 1679644799999,
+          "volume": "2678.97653000"
+        },
+        {
+          "open_time_ms": 1679644800000,
+          "close_time_ms": 1679648399999,
+          "volume": "5156.44522000"
+        },
+        {
+          "open_time_ms": 1679648400000,
+          "close_time_ms": 1679651999999,
+          "volume": "4506.28931000"
+        },
+        {
+          "open_time_ms": 1679652000000,
+          "close_time_ms": 1679655599999,
+          "volume": "3639.24610000"
+        },
+        {
+          "open_time_ms": 1679655600000,
+          "close_time_ms": 1679659199999,
+          "volume": "1267.41714000"
+        },
+        {
+          "open_time_ms": 1679659200000,
+          "close_time_ms": 1679661581646,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1679666400000,
+          "close_time_ms": 1679669999999,
+          "volume": "8983.24018000"
+        },
+        {
+          "open_time_ms": 1679670000000,
+          "close_time_ms": 1679673599999,
+          "volume": "5198.28681000"
+        },
+        {
+          "open_time_ms": 1679673600000,
+          "close_time_ms": 1679677199999,
+          "volume": "3377.68679000"
+        },
+        {
+          "open_time_ms": 1679677200000,
+          "close_time_ms": 1679680799999,
+          "volume": "8886.72594000"
+        },
+        {
+          "open_time_ms": 1679680800000,
+          "close_time_ms": 1679684399999,
+          "volume": "4729.14975000"
+        },
+        {
+          "open_time_ms": 1679684400000,
+          "close_time_ms": 1679687999999,
+          "volume": "3328.40802000"
+        },
+        {
+          "open_time_ms": 1679688000000,
+          "close_time_ms": 1679691599999,
+          "volume": "4095.63602000"
+        },
+        {
+          "open_time_ms": 1679691600000,
+          "close_time_ms": 1679695199999,
+          "volume": "8237.35346000"
+        },
+        {
+          "open_time_ms": 1679695200000,
+          "close_time_ms": 1679698799999,
+          "volume": "4289.67920000"
+        },
+        {
+          "open_time_ms": 1679698800000,
+          "close_time_ms": 1679702399999,
+          "volume": "2661.03717000"
+        }
+      ]
+    },
+    {
+      "symbol": "ETHUSDT",
+      "date": "2021-02-11",
+      "url": "https://data.binance.vision/data/spot/daily/klines/ETHUSDT/1h/ETHUSDT-1h-2021-02-11.zip",
+      "downloaded_at": "2026-09-08T07:38:15.871824+00:00",
+      "sha256": "f27d5d4a2af7149a77689e69fe2905cb6d9eefb4e8b3d390558f4b8dc825e734",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1613001600000,
+          "close_time_ms": 1613005199999,
+          "volume": "42406.10078000"
+        },
+        {
+          "open_time_ms": 1613005200000,
+          "close_time_ms": 1613008799999,
+          "volume": "28234.08416000"
+        },
+        {
+          "open_time_ms": 1613008800000,
+          "close_time_ms": 1613012399999,
+          "volume": "8029.33405000"
+        },
+        {
+          "open_time_ms": 1613012400000,
+          "close_time_ms": 1613014855829,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1613019600000,
+          "close_time_ms": 1613023199999,
+          "volume": "29550.42731000"
+        },
+        {
+          "open_time_ms": 1613023200000,
+          "close_time_ms": 1613026799999,
+          "volume": "20764.26951000"
+        },
+        {
+          "open_time_ms": 1613026800000,
+          "close_time_ms": 1613030399999,
+          "volume": "29187.07631000"
+        },
+        {
+          "open_time_ms": 1613030400000,
+          "close_time_ms": 1613033999999,
+          "volume": "29923.16816000"
+        },
+        {
+          "open_time_ms": 1613034000000,
+          "close_time_ms": 1613037599999,
+          "volume": "33419.04121000"
+        },
+        {
+          "open_time_ms": 1613037600000,
+          "close_time_ms": 1613041199999,
+          "volume": "40356.69629000"
+        },
+        {
+          "open_time_ms": 1613041200000,
+          "close_time_ms": 1613044799999,
+          "volume": "38658.21157000"
+        },
+        {
+          "open_time_ms": 1613044800000,
+          "close_time_ms": 1613048399999,
+          "volume": "33566.79049000"
+        },
+        {
+          "open_time_ms": 1613048400000,
+          "close_time_ms": 1613051999999,
+          "volume": "82515.11930000"
+        },
+        {
+          "open_time_ms": 1613052000000,
+          "close_time_ms": 1613055599999,
+          "volume": "38766.72095000"
+        },
+        {
+          "open_time_ms": 1613055600000,
+          "close_time_ms": 1613059199999,
+          "volume": "34208.43983000"
+        },
+        {
+          "open_time_ms": 1613059200000,
+          "close_time_ms": 1613062799999,
+          "volume": "38851.90790000"
+        },
+        {
+          "open_time_ms": 1613062800000,
+          "close_time_ms": 1613066399999,
+          "volume": "28756.31250000"
+        },
+        {
+          "open_time_ms": 1613066400000,
+          "close_time_ms": 1613069999999,
+          "volume": "25633.92261000"
+        },
+        {
+          "open_time_ms": 1613070000000,
+          "close_time_ms": 1613073599999,
+          "volume": "22018.36062000"
+        },
+        {
+          "open_time_ms": 1613073600000,
+          "close_time_ms": 1613077199999,
+          "volume": "51806.88384000"
+        },
+        {
+          "open_time_ms": 1613077200000,
+          "close_time_ms": 1613080799999,
+          "volume": "36756.98742000"
+        },
+        {
+          "open_time_ms": 1613080800000,
+          "close_time_ms": 1613084399999,
+          "volume": "15244.71271000"
+        },
+        {
+          "open_time_ms": 1613084400000,
+          "close_time_ms": 1613087999999,
+          "volume": "26425.25947000"
+        }
+      ]
+    },
+    {
+      "symbol": "ETHUSDT",
+      "date": "2021-03-06",
+      "url": "https://data.binance.vision/data/spot/daily/klines/ETHUSDT/1h/ETHUSDT-1h-2021-03-06.zip",
+      "downloaded_at": "2026-09-08T07:38:15.889922+00:00",
+      "sha256": "d80d3d5fc9e4b6b102a0d95955672f18737a9f0d032e57f99413615daa294c50",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1614988800000,
+          "close_time_ms": 1614992399999,
+          "volume": "25814.69938000"
+        },
+        {
+          "open_time_ms": 1614992400000,
+          "close_time_ms": 1614995999999,
+          "volume": "15698.48561000"
+        },
+        {
+          "open_time_ms": 1614999600000,
+          "close_time_ms": 1615003199999,
+          "volume": "9122.65568000"
+        },
+        {
+          "open_time_ms": 1615003200000,
+          "close_time_ms": 1615006799999,
+          "volume": "17425.99616000"
+        },
+        {
+          "open_time_ms": 1615006800000,
+          "close_time_ms": 1615010399999,
+          "volume": "57215.20686000"
+        },
+        {
+          "open_time_ms": 1615010400000,
+          "close_time_ms": 1615013999999,
+          "volume": "43026.00511000"
+        },
+        {
+          "open_time_ms": 1615014000000,
+          "close_time_ms": 1615017599999,
+          "volume": "34101.79286000"
+        },
+        {
+          "open_time_ms": 1615017600000,
+          "close_time_ms": 1615021199999,
+          "volume": "50664.63108000"
+        },
+        {
+          "open_time_ms": 1615021200000,
+          "close_time_ms": 1615024799999,
+          "volume": "38269.93054000"
+        },
+        {
+          "open_time_ms": 1615024800000,
+          "close_time_ms": 1615028399999,
+          "volume": "30331.52105000"
+        },
+        {
+          "open_time_ms": 1615028400000,
+          "close_time_ms": 1615031999999,
+          "volume": "25795.98286000"
+        },
+        {
+          "open_time_ms": 1615032000000,
+          "close_time_ms": 1615035599999,
+          "volume": "53566.65814000"
+        },
+        {
+          "open_time_ms": 1615035600000,
+          "close_time_ms": 1615039199999,
+          "volume": "47552.68242000"
+        },
+        {
+          "open_time_ms": 1615039200000,
+          "close_time_ms": 1615042799999,
+          "volume": "31188.41767000"
+        },
+        {
+          "open_time_ms": 1615042800000,
+          "close_time_ms": 1615046399999,
+          "volume": "28771.95725000"
+        },
+        {
+          "open_time_ms": 1615046400000,
+          "close_time_ms": 1615049999999,
+          "volume": "75054.63299000"
+        },
+        {
+          "open_time_ms": 1615050000000,
+          "close_time_ms": 1615053599999,
+          "volume": "65714.40761000"
+        },
+        {
+          "open_time_ms": 1615053600000,
+          "close_time_ms": 1615057199999,
+          "volume": "63235.28616000"
+        },
+        {
+          "open_time_ms": 1615057200000,
+          "close_time_ms": 1615060799999,
+          "volume": "48382.22862000"
+        },
+        {
+          "open_time_ms": 1615060800000,
+          "close_time_ms": 1615064399999,
+          "volume": "100485.33697000"
+        },
+        {
+          "open_time_ms": 1615064400000,
+          "close_time_ms": 1615067999999,
+          "volume": "66044.53592000"
+        },
+        {
+          "open_time_ms": 1615068000000,
+          "close_time_ms": 1615071599999,
+          "volume": "41203.68058000"
+        },
+        {
+          "open_time_ms": 1615071600000,
+          "close_time_ms": 1615075199999,
+          "volume": "44634.20776000"
+        }
+      ]
+    },
+    {
+      "symbol": "ETHUSDT",
+      "date": "2021-04-20",
+      "url": "https://data.binance.vision/data/spot/daily/klines/ETHUSDT/1h/ETHUSDT-1h-2021-04-20.zip",
+      "downloaded_at": "2026-09-08T07:38:15.912518+00:00",
+      "sha256": "61b1ea57906dc9aacddf7fd790f3550f6bb226d1ac72093398667941d3c38ad4",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1618876800000,
+          "close_time_ms": 1618880399999,
+          "volume": "75883.57099000"
+        },
+        {
+          "open_time_ms": 1618880400000,
+          "close_time_ms": 1618883999999,
+          "volume": "49608.33214000"
+        },
+        {
+          "open_time_ms": 1618891200000,
+          "close_time_ms": 1618894799999,
+          "volume": "22162.51639000"
+        },
+        {
+          "open_time_ms": 1618894800000,
+          "close_time_ms": 1618898399999,
+          "volume": "32537.00383000"
+        },
+        {
+          "open_time_ms": 1618898400000,
+          "close_time_ms": 1618901999999,
+          "volume": "44560.24930000"
+        },
+        {
+          "open_time_ms": 1618902000000,
+          "close_time_ms": 1618905599999,
+          "volume": "44503.25884000"
+        },
+        {
+          "open_time_ms": 1618905600000,
+          "close_time_ms": 1618909199999,
+          "volume": "45829.64764000"
+        },
+        {
+          "open_time_ms": 1618909200000,
+          "close_time_ms": 1618912799999,
+          "volume": "33461.62453000"
+        },
+        {
+          "open_time_ms": 1618912800000,
+          "close_time_ms": 1618916399999,
+          "volume": "55596.65713000"
+        },
+        {
+          "open_time_ms": 1618916400000,
+          "close_time_ms": 1618919999999,
+          "volume": "31737.72949000"
+        },
+        {
+          "open_time_ms": 1618920000000,
+          "close_time_ms": 1618923599999,
+          "volume": "30726.82542000"
+        },
+        {
+          "open_time_ms": 1618923600000,
+          "close_time_ms": 1618927199999,
+          "volume": "39038.33643000"
+        },
+        {
+          "open_time_ms": 1618927200000,
+          "close_time_ms": 1618930799999,
+          "volume": "53495.06019000"
+        },
+        {
+          "open_time_ms": 1618930800000,
+          "close_time_ms": 1618934399999,
+          "volume": "49637.26839000"
+        },
+        {
+          "open_time_ms": 1618934400000,
+          "close_time_ms": 1618937999999,
+          "volume": "66058.63368000"
+        },
+        {
+          "open_time_ms": 1618938000000,
+          "close_time_ms": 1618941599999,
+          "volume": "48919.33623000"
+        },
+        {
+          "open_time_ms": 1618941600000,
+          "close_time_ms": 1618945199999,
+          "volume": "56348.44684000"
+        },
+        {
+          "open_time_ms": 1618945200000,
+          "close_time_ms": 1618948799999,
+          "volume": "51323.89105000"
+        },
+        {
+          "open_time_ms": 1618948800000,
+          "close_time_ms": 1618952399999,
+          "volume": "51075.64839000"
+        },
+        {
+          "open_time_ms": 1618952400000,
+          "close_time_ms": 1618955999999,
+          "volume": "31737.44445000"
+        },
+        {
+          "open_time_ms": 1618956000000,
+          "close_time_ms": 1618959599999,
+          "volume": "38372.48204000"
+        },
+        {
+          "open_time_ms": 1618959600000,
+          "close_time_ms": 1618963199999,
+          "volume": "39626.84561000"
+        }
+      ]
+    },
+    {
+      "symbol": "ETHUSDT",
+      "date": "2021-04-25",
+      "url": "https://data.binance.vision/data/spot/daily/klines/ETHUSDT/1h/ETHUSDT-1h-2021-04-25.zip",
+      "downloaded_at": "2026-09-08T07:38:15.993415+00:00",
+      "sha256": "e516945eccba21b90c4d97ea2a580c65551e2d4c378f5313e569babb7a7815d4",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1619308800000,
+          "close_time_ms": 1619312399999,
+          "volume": "36778.89441000"
+        },
+        {
+          "open_time_ms": 1619312400000,
+          "close_time_ms": 1619315999999,
+          "volume": "24524.63948000"
+        },
+        {
+          "open_time_ms": 1619316000000,
+          "close_time_ms": 1619319599999,
+          "volume": "20904.37222000"
+        },
+        {
+          "open_time_ms": 1619319600000,
+          "close_time_ms": 1619323199999,
+          "volume": "36115.45445000"
+        },
+        {
+          "open_time_ms": 1619323200000,
+          "close_time_ms": 1619323259271,
+          "volume": "161.74877000"
+        },
+        {
+          "open_time_ms": 1619337600000,
+          "close_time_ms": 1619341199999,
+          "volume": "15317.75822000"
+        },
+        {
+          "open_time_ms": 1619341200000,
+          "close_time_ms": 1619344799999,
+          "volume": "42929.41882000"
+        },
+        {
+          "open_time_ms": 1619344800000,
+          "close_time_ms": 1619348399999,
+          "volume": "55203.39084000"
+        },
+        {
+          "open_time_ms": 1619348400000,
+          "close_time_ms": 1619351999999,
+          "volume": "37518.56328000"
+        },
+        {
+          "open_time_ms": 1619352000000,
+          "close_time_ms": 1619355599999,
+          "volume": "55713.89758000"
+        },
+        {
+          "open_time_ms": 1619355600000,
+          "close_time_ms": 1619359199999,
+          "volume": "34641.49834000"
+        },
+        {
+          "open_time_ms": 1619359200000,
+          "close_time_ms": 1619362799999,
+          "volume": "56673.90862000"
+        },
+        {
+          "open_time_ms": 1619362800000,
+          "close_time_ms": 1619366399999,
+          "volume": "42350.28141000"
+        },
+        {
+          "open_time_ms": 1619366400000,
+          "close_time_ms": 1619369999999,
+          "volume": "39023.23775000"
+        },
+        {
+          "open_time_ms": 1619370000000,
+          "close_time_ms": 1619373599999,
+          "volume": "34971.62602000"
+        },
+        {
+          "open_time_ms": 1619373600000,
+          "close_time_ms": 1619377199999,
+          "volume": "42757.52092000"
+        },
+        {
+          "open_time_ms": 1619377200000,
+          "close_time_ms": 1619380799999,
+          "volume": "29970.19119000"
+        },
+        {
+          "open_time_ms": 1619380800000,
+          "close_time_ms": 1619384399999,
+          "volume": "54574.71438000"
+        },
+        {
+          "open_time_ms": 1619384400000,
+          "close_time_ms": 1619387999999,
+          "volume": "81135.87169000"
+        },
+        {
+          "open_time_ms": 1619388000000,
+          "close_time_ms": 1619391599999,
+          "volume": "68469.66842000"
+        },
+        {
+          "open_time_ms": 1619391600000,
+          "close_time_ms": 1619395199999,
+          "volume": "47780.72537000"
+        }
+      ]
+    },
+    {
+      "symbol": "ETHUSDT",
+      "date": "2021-08-13",
+      "url": "https://data.binance.vision/data/spot/daily/klines/ETHUSDT/1h/ETHUSDT-1h-2021-08-13.zip",
+      "downloaded_at": "2026-09-08T07:38:16.352859+00:00",
+      "sha256": "fd21c14c628ae95fcca06f493da507a796ba216a4f1f4468077d23161f2b3901",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1628812800000,
+          "close_time_ms": 1628816399999,
+          "volume": "26306.11420000"
+        },
+        {
+          "open_time_ms": 1628816400000,
+          "close_time_ms": 1628819999000,
+          "volume": "23702.03514000"
+        },
+        {
+          "open_time_ms": 1628834400000,
+          "close_time_ms": 1628837999999,
+          "volume": "28370.16757000"
+        },
+        {
+          "open_time_ms": 1628838000000,
+          "close_time_ms": 1628841599999,
+          "volume": "58228.69375000"
+        },
+        {
+          "open_time_ms": 1628841600000,
+          "close_time_ms": 1628845199999,
+          "volume": "47701.08929000"
+        },
+        {
+          "open_time_ms": 1628845200000,
+          "close_time_ms": 1628848799999,
+          "volume": "26186.31119000"
+        },
+        {
+          "open_time_ms": 1628848800000,
+          "close_time_ms": 1628852399999,
+          "volume": "33575.18407000"
+        },
+        {
+          "open_time_ms": 1628852400000,
+          "close_time_ms": 1628855999999,
+          "volume": "23517.16321000"
+        },
+        {
+          "open_time_ms": 1628856000000,
+          "close_time_ms": 1628859599999,
+          "volume": "19115.66896000"
+        },
+        {
+          "open_time_ms": 1628859600000,
+          "close_time_ms": 1628863199999,
+          "volume": "15782.41754000"
+        },
+        {
+          "open_time_ms": 1628863200000,
+          "close_time_ms": 1628866799999,
+          "volume": "26890.73187000"
+        },
+        {
+          "open_time_ms": 1628866800000,
+          "close_time_ms": 1628870399999,
+          "volume": "38245.80821000"
+        },
+        {
+          "open_time_ms": 1628870400000,
+          "close_time_ms": 1628873999999,
+          "volume": "22142.07664000"
+        },
+        {
+          "open_time_ms": 1628874000000,
+          "close_time_ms": 1628877599999,
+          "volume": "13354.91920000"
+        },
+        {
+          "open_time_ms": 1628877600000,
+          "close_time_ms": 1628881199999,
+          "volume": "11612.68759000"
+        },
+        {
+          "open_time_ms": 1628881200000,
+          "close_time_ms": 1628884799999,
+          "volume": "9997.18059000"
+        },
+        {
+          "open_time_ms": 1628884800000,
+          "close_time_ms": 1628888399999,
+          "volume": "80397.79076000"
+        },
+        {
+          "open_time_ms": 1628888400000,
+          "close_time_ms": 1628891999999,
+          "volume": "23500.09972000"
+        },
+        {
+          "open_time_ms": 1628892000000,
+          "close_time_ms": 1628895599999,
+          "volume": "17809.15272000"
+        },
+        {
+          "open_time_ms": 1628895600000,
+          "close_time_ms": 1628899199999,
+          "volume": "32898.11101000"
+        }
+      ]
+    },
+    {
+      "symbol": "ETHUSDT",
+      "date": "2021-09-29",
+      "url": "https://data.binance.vision/data/spot/daily/klines/ETHUSDT/1h/ETHUSDT-1h-2021-09-29.zip",
+      "downloaded_at": "2026-09-08T07:38:16.407046+00:00",
+      "sha256": "a9f1eb29c0d710997ddeccb461293fc1c395d349901fcee1322aaeb4965b1232",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1632873600000,
+          "close_time_ms": 1632877199999,
+          "volume": "29937.66390000"
+        },
+        {
+          "open_time_ms": 1632877200000,
+          "close_time_ms": 1632880799999,
+          "volume": "16445.02280000"
+        },
+        {
+          "open_time_ms": 1632880800000,
+          "close_time_ms": 1632884399999,
+          "volume": "16016.97930000"
+        },
+        {
+          "open_time_ms": 1632884400000,
+          "close_time_ms": 1632887999999,
+          "volume": "18071.51180000"
+        },
+        {
+          "open_time_ms": 1632888000000,
+          "close_time_ms": 1632891599999,
+          "volume": "25639.01170000"
+        },
+        {
+          "open_time_ms": 1632891600000,
+          "close_time_ms": 1632895199999,
+          "volume": "15042.63740000"
+        },
+        {
+          "open_time_ms": 1632895200000,
+          "close_time_ms": 1632898799999,
+          "volume": "15229.28120000"
+        },
+        {
+          "open_time_ms": 1632906000000,
+          "close_time_ms": 1632909599999,
+          "volume": "16139.67300000"
+        },
+        {
+          "open_time_ms": 1632909600000,
+          "close_time_ms": 1632913199999,
+          "volume": "24172.84260000"
+        },
+        {
+          "open_time_ms": 1632913200000,
+          "close_time_ms": 1632916799999,
+          "volume": "13691.84760000"
+        },
+        {
+          "open_time_ms": 1632916800000,
+          "close_time_ms": 1632920399999,
+          "volume": "21185.81570000"
+        },
+        {
+          "open_time_ms": 1632920400000,
+          "close_time_ms": 1632923999999,
+          "volume": "20811.78610000"
+        },
+        {
+          "open_time_ms": 1632924000000,
+          "close_time_ms": 1632927599999,
+          "volume": "12748.17200000"
+        },
+        {
+          "open_time_ms": 1632927600000,
+          "close_time_ms": 1632931199999,
+          "volume": "29689.70540000"
+        },
+        {
+          "open_time_ms": 1632931200000,
+          "close_time_ms": 1632934799999,
+          "volume": "20252.00460000"
+        },
+        {
+          "open_time_ms": 1632934800000,
+          "close_time_ms": 1632938399999,
+          "volume": "17164.87220000"
+        },
+        {
+          "open_time_ms": 1632938400000,
+          "close_time_ms": 1632941999999,
+          "volume": "21473.42450000"
+        },
+        {
+          "open_time_ms": 1632942000000,
+          "close_time_ms": 1632945599999,
+          "volume": "14091.80920000"
+        },
+        {
+          "open_time_ms": 1632945600000,
+          "close_time_ms": 1632949199999,
+          "volume": "26805.09050000"
+        },
+        {
+          "open_time_ms": 1632949200000,
+          "close_time_ms": 1632952799999,
+          "volume": "12498.32670000"
+        },
+        {
+          "open_time_ms": 1632952800000,
+          "close_time_ms": 1632956399999,
+          "volume": "14395.63600000"
+        },
+        {
+          "open_time_ms": 1632956400000,
+          "close_time_ms": 1632959999999,
+          "volume": "9801.97510000"
+        }
+      ]
+    },
+    {
+      "symbol": "ETHUSDT",
+      "date": "2021-12-24",
+      "url": "https://data.binance.vision/data/spot/daily/klines/ETHUSDT/1h/ETHUSDT-1h-2021-12-24.zip",
+      "downloaded_at": "2026-09-08T07:38:16.425687+00:00",
+      "sha256": "09274dcd189ffbc1567bc8f685f625084a94789b10f035dd9b730b5e2db0385f",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1640304000000,
+          "close_time_ms": 1640307599999,
+          "volume": "12263.60830000"
+        },
+        {
+          "open_time_ms": 1640307600000,
+          "close_time_ms": 1640311199999,
+          "volume": "15260.27790000"
+        },
+        {
+          "open_time_ms": 1640311200000,
+          "close_time_ms": 1640314799999,
+          "volume": "9773.33660000"
+        },
+        {
+          "open_time_ms": 1640314800000,
+          "close_time_ms": 1640318399999,
+          "volume": "9130.33950000"
+        },
+        {
+          "open_time_ms": 1640318400000,
+          "close_time_ms": 1640321996158,
+          "volume": "3425.58040000"
+        },
+        {
+          "open_time_ms": 1640322000000,
+          "close_time_ms": 1640325599999,
+          "volume": "6195.96630000"
+        },
+        {
+          "open_time_ms": 1640325600000,
+          "close_time_ms": 1640329199999,
+          "volume": "8196.18210000"
+        },
+        {
+          "open_time_ms": 1640329200000,
+          "close_time_ms": 1640332799999,
+          "volume": "6837.63200000"
+        },
+        {
+          "open_time_ms": 1640332800000,
+          "close_time_ms": 1640336399999,
+          "volume": "8889.88950000"
+        },
+        {
+          "open_time_ms": 1640336400000,
+          "close_time_ms": 1640339999999,
+          "volume": "6722.23610000"
+        },
+        {
+          "open_time_ms": 1640340000000,
+          "close_time_ms": 1640343599999,
+          "volume": "6002.55070000"
+        },
+        {
+          "open_time_ms": 1640343600000,
+          "close_time_ms": 1640347199999,
+          "volume": "11409.66730000"
+        },
+        {
+          "open_time_ms": 1640347200000,
+          "close_time_ms": 1640350799999,
+          "volume": "7910.61410000"
+        },
+        {
+          "open_time_ms": 1640350800000,
+          "close_time_ms": 1640354399999,
+          "volume": "8716.01420000"
+        },
+        {
+          "open_time_ms": 1640354400000,
+          "close_time_ms": 1640357999999,
+          "volume": "11348.58210000"
+        },
+        {
+          "open_time_ms": 1640358000000,
+          "close_time_ms": 1640361599999,
+          "volume": "13169.37030000"
+        },
+        {
+          "open_time_ms": 1640361600000,
+          "close_time_ms": 1640365199999,
+          "volume": "10505.41400000"
+        },
+        {
+          "open_time_ms": 1640365200000,
+          "close_time_ms": 1640368799999,
+          "volume": "4330.59520000"
+        },
+        {
+          "open_time_ms": 1640368800000,
+          "close_time_ms": 1640372399999,
+          "volume": "9989.49700000"
+        },
+        {
+          "open_time_ms": 1640372400000,
+          "close_time_ms": 1640375999999,
+          "volume": "14724.22000000"
+        },
+        {
+          "open_time_ms": 1640376000000,
+          "close_time_ms": 1640379599999,
+          "volume": "16185.14330000"
+        },
+        {
+          "open_time_ms": 1640379600000,
+          "close_time_ms": 1640383199999,
+          "volume": "6402.57130000"
+        },
+        {
+          "open_time_ms": 1640383200000,
+          "close_time_ms": 1640386799999,
+          "volume": "9828.27430000"
+        },
+        {
+          "open_time_ms": 1640386800000,
+          "close_time_ms": 1640390399999,
+          "volume": "13615.60360000"
+        }
+      ]
+    },
+    {
+      "symbol": "ETHUSDT",
+      "date": "2023-03-24",
+      "url": "https://data.binance.vision/data/spot/daily/klines/ETHUSDT/1h/ETHUSDT-1h-2023-03-24.zip",
+      "downloaded_at": "2026-09-08T07:38:16.470880+00:00",
+      "sha256": "7b9d19487c37b354003717872987ae5ecb2178b4ff0de1ecdd5a5c84da2f10b1",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1679616000000,
+          "close_time_ms": 1679619599999,
+          "volume": "15995.39010000"
+        },
+        {
+          "open_time_ms": 1679619600000,
+          "close_time_ms": 1679623199999,
+          "volume": "14678.57690000"
+        },
+        {
+          "open_time_ms": 1679623200000,
+          "close_time_ms": 1679626799999,
+          "volume": "13979.77000000"
+        },
+        {
+          "open_time_ms": 1679626800000,
+          "close_time_ms": 1679630399999,
+          "volume": "13296.85990000"
+        },
+        {
+          "open_time_ms": 1679630400000,
+          "close_time_ms": 1679633999999,
+          "volume": "33401.92970000"
+        },
+        {
+          "open_time_ms": 1679634000000,
+          "close_time_ms": 1679637599999,
+          "volume": "10406.07310000"
+        },
+        {
+          "open_time_ms": 1679637600000,
+          "close_time_ms": 1679641199999,
+          "volume": "8944.42150000"
+        },
+        {
+          "open_time_ms": 1679641200000,
+          "close_time_ms": 1679644799999,
+          "volume": "17660.92990000"
+        },
+        {
+          "open_time_ms": 1679644800000,
+          "close_time_ms": 1679648399999,
+          "volume": "32760.26110000"
+        },
+        {
+          "open_time_ms": 1679648400000,
+          "close_time_ms": 1679651999999,
+          "volume": "32335.10880000"
+        },
+        {
+          "open_time_ms": 1679652000000,
+          "close_time_ms": 1679655599999,
+          "volume": "25267.18820000"
+        },
+        {
+          "open_time_ms": 1679655600000,
+          "close_time_ms": 1679659199999,
+          "volume": "6266.94600000"
+        },
+        {
+          "open_time_ms": 1679659200000,
+          "close_time_ms": 1679661583061,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1679666400000,
+          "close_time_ms": 1679669999999,
+          "volume": "59739.74520000"
+        },
+        {
+          "open_time_ms": 1679670000000,
+          "close_time_ms": 1679673599999,
+          "volume": "40962.97410000"
+        },
+        {
+          "open_time_ms": 1679673600000,
+          "close_time_ms": 1679677199999,
+          "volume": "21022.14040000"
+        },
+        {
+          "open_time_ms": 1679677200000,
+          "close_time_ms": 1679680799999,
+          "volume": "63428.44150000"
+        },
+        {
+          "open_time_ms": 1679680800000,
+          "close_time_ms": 1679684399999,
+          "volume": "43008.08040000"
+        },
+        {
+          "open_time_ms": 1679684400000,
+          "close_time_ms": 1679687999999,
+          "volume": "19578.76390000"
+        },
+        {
+          "open_time_ms": 1679688000000,
+          "close_time_ms": 1679691599999,
+          "volume": "28814.54730000"
+        },
+        {
+          "open_time_ms": 1679691600000,
+          "close_time_ms": 1679695199999,
+          "volume": "33987.58230000"
+        },
+        {
+          "open_time_ms": 1679695200000,
+          "close_time_ms": 1679698799999,
+          "volume": "12927.29890000"
+        },
+        {
+          "open_time_ms": 1679698800000,
+          "close_time_ms": 1679702399999,
+          "volume": "16307.11250000"
+        }
+      ]
+    },
+    {
+      "symbol": "BNBUSDT",
+      "date": "2021-02-11",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BNBUSDT/1h/BNBUSDT-1h-2021-02-11.zip",
+      "downloaded_at": "2026-09-08T07:38:16.827586+00:00",
+      "sha256": "3835db83469857ca48227b81bcdb8ba2324e786545cbd8486ff81e28cd334d01",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1613001600000,
+          "close_time_ms": 1613005199999,
+          "volume": "300472.49200000"
+        },
+        {
+          "open_time_ms": 1613005200000,
+          "close_time_ms": 1613008799999,
+          "volume": "285538.08600000"
+        },
+        {
+          "open_time_ms": 1613008800000,
+          "close_time_ms": 1613012399999,
+          "volume": "82726.27600000"
+        },
+        {
+          "open_time_ms": 1613012400000,
+          "close_time_ms": 1613014854577,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1613019600000,
+          "close_time_ms": 1613023199999,
+          "volume": "283179.39800000"
+        },
+        {
+          "open_time_ms": 1613023200000,
+          "close_time_ms": 1613026799999,
+          "volume": "224243.89200000"
+        },
+        {
+          "open_time_ms": 1613026800000,
+          "close_time_ms": 1613030399999,
+          "volume": "368943.54000000"
+        },
+        {
+          "open_time_ms": 1613030400000,
+          "close_time_ms": 1613033999999,
+          "volume": "296818.02000000"
+        },
+        {
+          "open_time_ms": 1613034000000,
+          "close_time_ms": 1613037599999,
+          "volume": "252703.42300000"
+        },
+        {
+          "open_time_ms": 1613037600000,
+          "close_time_ms": 1613041199999,
+          "volume": "223577.87800000"
+        },
+        {
+          "open_time_ms": 1613041200000,
+          "close_time_ms": 1613044799999,
+          "volume": "349704.74200000"
+        },
+        {
+          "open_time_ms": 1613044800000,
+          "close_time_ms": 1613048399999,
+          "volume": "294233.25000000"
+        },
+        {
+          "open_time_ms": 1613048400000,
+          "close_time_ms": 1613051999999,
+          "volume": "730405.61800000"
+        },
+        {
+          "open_time_ms": 1613052000000,
+          "close_time_ms": 1613055599999,
+          "volume": "295629.28200000"
+        },
+        {
+          "open_time_ms": 1613055600000,
+          "close_time_ms": 1613059199999,
+          "volume": "216391.68200000"
+        },
+        {
+          "open_time_ms": 1613059200000,
+          "close_time_ms": 1613062799999,
+          "volume": "324852.71400000"
+        },
+        {
+          "open_time_ms": 1613062800000,
+          "close_time_ms": 1613066399999,
+          "volume": "163417.41600000"
+        },
+        {
+          "open_time_ms": 1613066400000,
+          "close_time_ms": 1613069999999,
+          "volume": "156924.20100000"
+        },
+        {
+          "open_time_ms": 1613070000000,
+          "close_time_ms": 1613073599999,
+          "volume": "169483.31000000"
+        },
+        {
+          "open_time_ms": 1613073600000,
+          "close_time_ms": 1613077199999,
+          "volume": "197390.53400000"
+        },
+        {
+          "open_time_ms": 1613077200000,
+          "close_time_ms": 1613080799999,
+          "volume": "168990.57800000"
+        },
+        {
+          "open_time_ms": 1613080800000,
+          "close_time_ms": 1613084399999,
+          "volume": "308209.89800000"
+        },
+        {
+          "open_time_ms": 1613084400000,
+          "close_time_ms": 1613087999999,
+          "volume": "226564.02500000"
+        }
+      ]
+    },
+    {
+      "symbol": "BNBUSDT",
+      "date": "2021-03-06",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BNBUSDT/1h/BNBUSDT-1h-2021-03-06.zip",
+      "downloaded_at": "2026-09-08T07:38:16.877931+00:00",
+      "sha256": "ae74a4b7ce29455981abd313d17db65cd74dee1d20a7c4e841e3262130c10e3e",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1614988800000,
+          "close_time_ms": 1614992399999,
+          "volume": "105718.91100000"
+        },
+        {
+          "open_time_ms": 1614992400000,
+          "close_time_ms": 1614995999999,
+          "volume": "67525.03000000"
+        },
+        {
+          "open_time_ms": 1614999600000,
+          "close_time_ms": 1615003199999,
+          "volume": "54333.59500000"
+        },
+        {
+          "open_time_ms": 1615003200000,
+          "close_time_ms": 1615006799999,
+          "volume": "94282.65800000"
+        },
+        {
+          "open_time_ms": 1615006800000,
+          "close_time_ms": 1615010399999,
+          "volume": "116801.00000000"
+        },
+        {
+          "open_time_ms": 1615010400000,
+          "close_time_ms": 1615013999999,
+          "volume": "151792.94100000"
+        },
+        {
+          "open_time_ms": 1615014000000,
+          "close_time_ms": 1615017599999,
+          "volume": "82936.93200000"
+        },
+        {
+          "open_time_ms": 1615017600000,
+          "close_time_ms": 1615021199999,
+          "volume": "199743.08400000"
+        },
+        {
+          "open_time_ms": 1615021200000,
+          "close_time_ms": 1615024799999,
+          "volume": "191204.36800000"
+        },
+        {
+          "open_time_ms": 1615024800000,
+          "close_time_ms": 1615028399999,
+          "volume": "112634.61600000"
+        },
+        {
+          "open_time_ms": 1615028400000,
+          "close_time_ms": 1615031999999,
+          "volume": "100032.22500000"
+        },
+        {
+          "open_time_ms": 1615032000000,
+          "close_time_ms": 1615035599999,
+          "volume": "164100.78200000"
+        },
+        {
+          "open_time_ms": 1615035600000,
+          "close_time_ms": 1615039199999,
+          "volume": "177609.02500000"
+        },
+        {
+          "open_time_ms": 1615039200000,
+          "close_time_ms": 1615042799999,
+          "volume": "117723.83200000"
+        },
+        {
+          "open_time_ms": 1615042800000,
+          "close_time_ms": 1615046399999,
+          "volume": "91977.12300000"
+        },
+        {
+          "open_time_ms": 1615046400000,
+          "close_time_ms": 1615049999999,
+          "volume": "132612.61400000"
+        },
+        {
+          "open_time_ms": 1615050000000,
+          "close_time_ms": 1615053599999,
+          "volume": "126974.69000000"
+        },
+        {
+          "open_time_ms": 1615053600000,
+          "close_time_ms": 1615057199999,
+          "volume": "136025.47800000"
+        },
+        {
+          "open_time_ms": 1615057200000,
+          "close_time_ms": 1615060799999,
+          "volume": "75298.76600000"
+        },
+        {
+          "open_time_ms": 1615060800000,
+          "close_time_ms": 1615064399999,
+          "volume": "106010.49400000"
+        },
+        {
+          "open_time_ms": 1615064400000,
+          "close_time_ms": 1615067999999,
+          "volume": "69808.10900000"
+        },
+        {
+          "open_time_ms": 1615068000000,
+          "close_time_ms": 1615071599999,
+          "volume": "89009.89800000"
+        },
+        {
+          "open_time_ms": 1615071600000,
+          "close_time_ms": 1615075199999,
+          "volume": "99219.36500000"
+        }
+      ]
+    },
+    {
+      "symbol": "BNBUSDT",
+      "date": "2021-04-20",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BNBUSDT/1h/BNBUSDT-1h-2021-04-20.zip",
+      "downloaded_at": "2026-09-08T07:38:16.950757+00:00",
+      "sha256": "3f83435860766a600da372bdc54a68a0033e5f04cef00467145af56c97957fd7",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1618876800000,
+          "close_time_ms": 1618880399999,
+          "volume": "284694.85600000"
+        },
+        {
+          "open_time_ms": 1618880400000,
+          "close_time_ms": 1618883999999,
+          "volume": "170387.09400000"
+        },
+        {
+          "open_time_ms": 1618891200000,
+          "close_time_ms": 1618894799999,
+          "volume": "125899.54600000"
+        },
+        {
+          "open_time_ms": 1618894800000,
+          "close_time_ms": 1618898399999,
+          "volume": "159990.00800000"
+        },
+        {
+          "open_time_ms": 1618898400000,
+          "close_time_ms": 1618901999999,
+          "volume": "208158.26900000"
+        },
+        {
+          "open_time_ms": 1618902000000,
+          "close_time_ms": 1618905599999,
+          "volume": "196753.77500000"
+        },
+        {
+          "open_time_ms": 1618905600000,
+          "close_time_ms": 1618909199999,
+          "volume": "163721.39800000"
+        },
+        {
+          "open_time_ms": 1618909200000,
+          "close_time_ms": 1618912799999,
+          "volume": "132797.12200000"
+        },
+        {
+          "open_time_ms": 1618912800000,
+          "close_time_ms": 1618916399999,
+          "volume": "232290.00300000"
+        },
+        {
+          "open_time_ms": 1618916400000,
+          "close_time_ms": 1618919999999,
+          "volume": "295096.85100000"
+        },
+        {
+          "open_time_ms": 1618920000000,
+          "close_time_ms": 1618923599999,
+          "volume": "241011.09300000"
+        },
+        {
+          "open_time_ms": 1618923600000,
+          "close_time_ms": 1618927199999,
+          "volume": "385042.25600000"
+        },
+        {
+          "open_time_ms": 1618927200000,
+          "close_time_ms": 1618930799999,
+          "volume": "300910.98100000"
+        },
+        {
+          "open_time_ms": 1618930800000,
+          "close_time_ms": 1618934399999,
+          "volume": "226194.11900000"
+        },
+        {
+          "open_time_ms": 1618934400000,
+          "close_time_ms": 1618937999999,
+          "volume": "334974.27300000"
+        },
+        {
+          "open_time_ms": 1618938000000,
+          "close_time_ms": 1618941599999,
+          "volume": "275204.26300000"
+        },
+        {
+          "open_time_ms": 1618941600000,
+          "close_time_ms": 1618945199999,
+          "volume": "414882.83400000"
+        },
+        {
+          "open_time_ms": 1618945200000,
+          "close_time_ms": 1618948799999,
+          "volume": "553217.72300000"
+        },
+        {
+          "open_time_ms": 1618948800000,
+          "close_time_ms": 1618952399999,
+          "volume": "368947.75700000"
+        },
+        {
+          "open_time_ms": 1618952400000,
+          "close_time_ms": 1618955999999,
+          "volume": "286749.18300000"
+        },
+        {
+          "open_time_ms": 1618956000000,
+          "close_time_ms": 1618959599999,
+          "volume": "158716.53400000"
+        },
+        {
+          "open_time_ms": 1618959600000,
+          "close_time_ms": 1618963199999,
+          "volume": "215255.38700000"
+        }
+      ]
+    },
+    {
+      "symbol": "BNBUSDT",
+      "date": "2021-04-25",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BNBUSDT/1h/BNBUSDT-1h-2021-04-25.zip",
+      "downloaded_at": "2026-09-08T07:38:17.022256+00:00",
+      "sha256": "2a92a447611485ff2de70afc7f82e5c6b9d203487c2bb5c3eb9e27718d6c5c00",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1619308800000,
+          "close_time_ms": 1619312399999,
+          "volume": "111005.17700000"
+        },
+        {
+          "open_time_ms": 1619312400000,
+          "close_time_ms": 1619315999999,
+          "volume": "80449.51300000"
+        },
+        {
+          "open_time_ms": 1619316000000,
+          "close_time_ms": 1619319599999,
+          "volume": "63785.47700000"
+        },
+        {
+          "open_time_ms": 1619319600000,
+          "close_time_ms": 1619323199999,
+          "volume": "98129.07900000"
+        },
+        {
+          "open_time_ms": 1619323200000,
+          "close_time_ms": 1619323257981,
+          "volume": "520.52700000"
+        },
+        {
+          "open_time_ms": 1619337600000,
+          "close_time_ms": 1619341199999,
+          "volume": "47190.50500000"
+        },
+        {
+          "open_time_ms": 1619341200000,
+          "close_time_ms": 1619344799999,
+          "volume": "110725.25820000"
+        },
+        {
+          "open_time_ms": 1619344800000,
+          "close_time_ms": 1619348399999,
+          "volume": "89659.51180000"
+        },
+        {
+          "open_time_ms": 1619348400000,
+          "close_time_ms": 1619351999999,
+          "volume": "87251.98050000"
+        },
+        {
+          "open_time_ms": 1619352000000,
+          "close_time_ms": 1619355599999,
+          "volume": "125295.28350000"
+        },
+        {
+          "open_time_ms": 1619355600000,
+          "close_time_ms": 1619359199999,
+          "volume": "147590.34120000"
+        },
+        {
+          "open_time_ms": 1619359200000,
+          "close_time_ms": 1619362799999,
+          "volume": "149412.77310000"
+        },
+        {
+          "open_time_ms": 1619362800000,
+          "close_time_ms": 1619366399999,
+          "volume": "159959.67390000"
+        },
+        {
+          "open_time_ms": 1619366400000,
+          "close_time_ms": 1619369999999,
+          "volume": "98335.59610000"
+        },
+        {
+          "open_time_ms": 1619370000000,
+          "close_time_ms": 1619373599999,
+          "volume": "83743.31320000"
+        },
+        {
+          "open_time_ms": 1619373600000,
+          "close_time_ms": 1619377199999,
+          "volume": "133294.22530000"
+        },
+        {
+          "open_time_ms": 1619377200000,
+          "close_time_ms": 1619380799999,
+          "volume": "81222.93330000"
+        },
+        {
+          "open_time_ms": 1619380800000,
+          "close_time_ms": 1619384399999,
+          "volume": "176892.60470000"
+        },
+        {
+          "open_time_ms": 1619384400000,
+          "close_time_ms": 1619387999999,
+          "volume": "256481.90970000"
+        },
+        {
+          "open_time_ms": 1619388000000,
+          "close_time_ms": 1619391599999,
+          "volume": "221959.03050000"
+        },
+        {
+          "open_time_ms": 1619391600000,
+          "close_time_ms": 1619395199999,
+          "volume": "166851.91220000"
+        }
+      ]
+    },
+    {
+      "symbol": "BNBUSDT",
+      "date": "2021-08-13",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BNBUSDT/1h/BNBUSDT-1h-2021-08-13.zip",
+      "downloaded_at": "2026-09-08T07:38:17.300885+00:00",
+      "sha256": "cffba357c3569801a197e03f03377ff4456f5ac2aa00d9638874ed42884ad94f",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1628812800000,
+          "close_time_ms": 1628816399999,
+          "volume": "101361.38830000"
+        },
+        {
+          "open_time_ms": 1628816400000,
+          "close_time_ms": 1628819999000,
+          "volume": "67449.85640000"
+        },
+        {
+          "open_time_ms": 1628834400000,
+          "close_time_ms": 1628837999999,
+          "volume": "57127.27170000"
+        },
+        {
+          "open_time_ms": 1628838000000,
+          "close_time_ms": 1628841599999,
+          "volume": "114551.08320000"
+        },
+        {
+          "open_time_ms": 1628841600000,
+          "close_time_ms": 1628845199999,
+          "volume": "79361.45990000"
+        },
+        {
+          "open_time_ms": 1628845200000,
+          "close_time_ms": 1628848799999,
+          "volume": "76528.24510000"
+        },
+        {
+          "open_time_ms": 1628848800000,
+          "close_time_ms": 1628852399999,
+          "volume": "47523.91780000"
+        },
+        {
+          "open_time_ms": 1628852400000,
+          "close_time_ms": 1628855999999,
+          "volume": "82379.73120000"
+        },
+        {
+          "open_time_ms": 1628856000000,
+          "close_time_ms": 1628859599999,
+          "volume": "53353.24830000"
+        },
+        {
+          "open_time_ms": 1628859600000,
+          "close_time_ms": 1628863199999,
+          "volume": "48097.63960000"
+        },
+        {
+          "open_time_ms": 1628863200000,
+          "close_time_ms": 1628866799999,
+          "volume": "47927.45080000"
+        },
+        {
+          "open_time_ms": 1628866800000,
+          "close_time_ms": 1628870399999,
+          "volume": "74214.99310000"
+        },
+        {
+          "open_time_ms": 1628870400000,
+          "close_time_ms": 1628873999999,
+          "volume": "74645.40750000"
+        },
+        {
+          "open_time_ms": 1628874000000,
+          "close_time_ms": 1628877599999,
+          "volume": "34767.29430000"
+        },
+        {
+          "open_time_ms": 1628877600000,
+          "close_time_ms": 1628881199999,
+          "volume": "25724.68650000"
+        },
+        {
+          "open_time_ms": 1628881200000,
+          "close_time_ms": 1628884799999,
+          "volume": "23792.54200000"
+        },
+        {
+          "open_time_ms": 1628884800000,
+          "close_time_ms": 1628888399999,
+          "volume": "100640.03970000"
+        },
+        {
+          "open_time_ms": 1628888400000,
+          "close_time_ms": 1628891999999,
+          "volume": "44564.04520000"
+        },
+        {
+          "open_time_ms": 1628892000000,
+          "close_time_ms": 1628895599999,
+          "volume": "30507.91670000"
+        },
+        {
+          "open_time_ms": 1628895600000,
+          "close_time_ms": 1628899199999,
+          "volume": "77309.07520000"
+        }
+      ]
+    },
+    {
+      "symbol": "BNBUSDT",
+      "date": "2021-09-29",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BNBUSDT/1h/BNBUSDT-1h-2021-09-29.zip",
+      "downloaded_at": "2026-09-08T07:38:17.461329+00:00",
+      "sha256": "c371d173047e087b1f000b5a9c25b3f211f25be7543c683aca9cff27213103da",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1632873600000,
+          "close_time_ms": 1632877199999,
+          "volume": "56500.76400000"
+        },
+        {
+          "open_time_ms": 1632877200000,
+          "close_time_ms": 1632880799999,
+          "volume": "42955.82400000"
+        },
+        {
+          "open_time_ms": 1632880800000,
+          "close_time_ms": 1632884399999,
+          "volume": "28218.91800000"
+        },
+        {
+          "open_time_ms": 1632884400000,
+          "close_time_ms": 1632887999999,
+          "volume": "34692.59200000"
+        },
+        {
+          "open_time_ms": 1632888000000,
+          "close_time_ms": 1632891599999,
+          "volume": "48774.81300000"
+        },
+        {
+          "open_time_ms": 1632891600000,
+          "close_time_ms": 1632895199999,
+          "volume": "31872.79500000"
+        },
+        {
+          "open_time_ms": 1632895200000,
+          "close_time_ms": 1632898799999,
+          "volume": "34599.43900000"
+        },
+        {
+          "open_time_ms": 1632906000000,
+          "close_time_ms": 1632909599999,
+          "volume": "39592.90700000"
+        },
+        {
+          "open_time_ms": 1632909600000,
+          "close_time_ms": 1632913199999,
+          "volume": "460036.99800000"
+        },
+        {
+          "open_time_ms": 1632913200000,
+          "close_time_ms": 1632916799999,
+          "volume": "144874.19600000"
+        },
+        {
+          "open_time_ms": 1632916800000,
+          "close_time_ms": 1632920399999,
+          "volume": "116892.64600000"
+        },
+        {
+          "open_time_ms": 1632920400000,
+          "close_time_ms": 1632923999999,
+          "volume": "95849.79200000"
+        },
+        {
+          "open_time_ms": 1632924000000,
+          "close_time_ms": 1632927599999,
+          "volume": "84154.16300000"
+        },
+        {
+          "open_time_ms": 1632927600000,
+          "close_time_ms": 1632931199999,
+          "volume": "105705.93100000"
+        },
+        {
+          "open_time_ms": 1632931200000,
+          "close_time_ms": 1632934799999,
+          "volume": "78848.76200000"
+        },
+        {
+          "open_time_ms": 1632934800000,
+          "close_time_ms": 1632938399999,
+          "volume": "49288.06400000"
+        },
+        {
+          "open_time_ms": 1632938400000,
+          "close_time_ms": 1632941999999,
+          "volume": "45738.00300000"
+        },
+        {
+          "open_time_ms": 1632942000000,
+          "close_time_ms": 1632945599999,
+          "volume": "32236.46400000"
+        },
+        {
+          "open_time_ms": 1632945600000,
+          "close_time_ms": 1632949199999,
+          "volume": "38425.86600000"
+        },
+        {
+          "open_time_ms": 1632949200000,
+          "close_time_ms": 1632952799999,
+          "volume": "33386.61100000"
+        },
+        {
+          "open_time_ms": 1632952800000,
+          "close_time_ms": 1632956399999,
+          "volume": "43867.70500000"
+        },
+        {
+          "open_time_ms": 1632956400000,
+          "close_time_ms": 1632959999999,
+          "volume": "49906.79200000"
+        }
+      ]
+    },
+    {
+      "symbol": "BNBUSDT",
+      "date": "2021-12-24",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BNBUSDT/1h/BNBUSDT-1h-2021-12-24.zip",
+      "downloaded_at": "2026-09-08T07:38:17.604284+00:00",
+      "sha256": "ef112a7d707cd452de278b316f3caa5a0a8c93ccf73f6350bf042de37aaaa8f0",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1640304000000,
+          "close_time_ms": 1640307599999,
+          "volume": "27676.16700000"
+        },
+        {
+          "open_time_ms": 1640307600000,
+          "close_time_ms": 1640311199999,
+          "volume": "31467.72600000"
+        },
+        {
+          "open_time_ms": 1640311200000,
+          "close_time_ms": 1640314799999,
+          "volume": "23922.18900000"
+        },
+        {
+          "open_time_ms": 1640314800000,
+          "close_time_ms": 1640318399999,
+          "volume": "25019.44300000"
+        },
+        {
+          "open_time_ms": 1640318400000,
+          "close_time_ms": 1640321994118,
+          "volume": "12475.67200000"
+        },
+        {
+          "open_time_ms": 1640322000000,
+          "close_time_ms": 1640325599999,
+          "volume": "19454.36800000"
+        },
+        {
+          "open_time_ms": 1640325600000,
+          "close_time_ms": 1640329199999,
+          "volume": "22213.41800000"
+        },
+        {
+          "open_time_ms": 1640329200000,
+          "close_time_ms": 1640332799999,
+          "volume": "21516.46300000"
+        },
+        {
+          "open_time_ms": 1640332800000,
+          "close_time_ms": 1640336399999,
+          "volume": "28576.49000000"
+        },
+        {
+          "open_time_ms": 1640336400000,
+          "close_time_ms": 1640339999999,
+          "volume": "19513.54900000"
+        },
+        {
+          "open_time_ms": 1640340000000,
+          "close_time_ms": 1640343599999,
+          "volume": "16988.30900000"
+        },
+        {
+          "open_time_ms": 1640343600000,
+          "close_time_ms": 1640347199999,
+          "volume": "30323.75500000"
+        },
+        {
+          "open_time_ms": 1640347200000,
+          "close_time_ms": 1640350799999,
+          "volume": "22971.78000000"
+        },
+        {
+          "open_time_ms": 1640350800000,
+          "close_time_ms": 1640354399999,
+          "volume": "24415.55200000"
+        },
+        {
+          "open_time_ms": 1640354400000,
+          "close_time_ms": 1640357999999,
+          "volume": "52773.58500000"
+        },
+        {
+          "open_time_ms": 1640358000000,
+          "close_time_ms": 1640361599999,
+          "volume": "61890.79400000"
+        },
+        {
+          "open_time_ms": 1640361600000,
+          "close_time_ms": 1640365199999,
+          "volume": "33623.42500000"
+        },
+        {
+          "open_time_ms": 1640365200000,
+          "close_time_ms": 1640368799999,
+          "volume": "22029.99200000"
+        },
+        {
+          "open_time_ms": 1640368800000,
+          "close_time_ms": 1640372399999,
+          "volume": "35934.80300000"
+        },
+        {
+          "open_time_ms": 1640372400000,
+          "close_time_ms": 1640375999999,
+          "volume": "28189.83600000"
+        },
+        {
+          "open_time_ms": 1640376000000,
+          "close_time_ms": 1640379599999,
+          "volume": "27934.32700000"
+        },
+        {
+          "open_time_ms": 1640379600000,
+          "close_time_ms": 1640383199999,
+          "volume": "18673.75400000"
+        },
+        {
+          "open_time_ms": 1640383200000,
+          "close_time_ms": 1640386799999,
+          "volume": "25317.35300000"
+        },
+        {
+          "open_time_ms": 1640386800000,
+          "close_time_ms": 1640390399999,
+          "volume": "32785.66500000"
+        }
+      ]
+    },
+    {
+      "symbol": "BNBUSDT",
+      "date": "2023-03-24",
+      "url": "https://data.binance.vision/data/spot/daily/klines/BNBUSDT/1h/BNBUSDT-1h-2023-03-24.zip",
+      "downloaded_at": "2026-09-08T07:38:17.644697+00:00",
+      "sha256": "d50547fad806804736bb6314fbe7b11a7edca4c987020b5278a9473c6c31e408",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1679616000000,
+          "close_time_ms": 1679619599999,
+          "volume": "8217.01400000"
+        },
+        {
+          "open_time_ms": 1679619600000,
+          "close_time_ms": 1679623199999,
+          "volume": "8614.15300000"
+        },
+        {
+          "open_time_ms": 1679623200000,
+          "close_time_ms": 1679626799999,
+          "volume": "9399.11500000"
+        },
+        {
+          "open_time_ms": 1679626800000,
+          "close_time_ms": 1679630399999,
+          "volume": "6519.20600000"
+        },
+        {
+          "open_time_ms": 1679630400000,
+          "close_time_ms": 1679633999999,
+          "volume": "8708.25300000"
+        },
+        {
+          "open_time_ms": 1679634000000,
+          "close_time_ms": 1679637599999,
+          "volume": "17464.44600000"
+        },
+        {
+          "open_time_ms": 1679637600000,
+          "close_time_ms": 1679641199999,
+          "volume": "13398.09900000"
+        },
+        {
+          "open_time_ms": 1679641200000,
+          "close_time_ms": 1679644799999,
+          "volume": "11727.49600000"
+        },
+        {
+          "open_time_ms": 1679644800000,
+          "close_time_ms": 1679648399999,
+          "volume": "21364.13100000"
+        },
+        {
+          "open_time_ms": 1679648400000,
+          "close_time_ms": 1679651999999,
+          "volume": "15210.97200000"
+        },
+        {
+          "open_time_ms": 1679652000000,
+          "close_time_ms": 1679655599999,
+          "volume": "16005.86600000"
+        },
+        {
+          "open_time_ms": 1679655600000,
+          "close_time_ms": 1679659199999,
+          "volume": "4832.16800000"
+        },
+        {
+          "open_time_ms": 1679659200000,
+          "close_time_ms": 1679661581451,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1679666400000,
+          "close_time_ms": 1679669999999,
+          "volume": "28542.56200000"
+        },
+        {
+          "open_time_ms": 1679670000000,
+          "close_time_ms": 1679673599999,
+          "volume": "36068.18500000"
+        },
+        {
+          "open_time_ms": 1679673600000,
+          "close_time_ms": 1679677199999,
+          "volume": "10893.65700000"
+        },
+        {
+          "open_time_ms": 1679677200000,
+          "close_time_ms": 1679680799999,
+          "volume": "23395.34000000"
+        },
+        {
+          "open_time_ms": 1679680800000,
+          "close_time_ms": 1679684399999,
+          "volume": "12646.13900000"
+        },
+        {
+          "open_time_ms": 1679684400000,
+          "close_time_ms": 1679687999999,
+          "volume": "11069.91100000"
+        },
+        {
+          "open_time_ms": 1679688000000,
+          "close_time_ms": 1679691599999,
+          "volume": "12591.80300000"
+        },
+        {
+          "open_time_ms": 1679691600000,
+          "close_time_ms": 1679695199999,
+          "volume": "13084.72300000"
+        },
+        {
+          "open_time_ms": 1679695200000,
+          "close_time_ms": 1679698799999,
+          "volume": "9432.82400000"
+        },
+        {
+          "open_time_ms": 1679698800000,
+          "close_time_ms": 1679702399999,
+          "volume": "7843.93900000"
+        }
+      ]
+    },
+    {
+      "symbol": "SOLUSDT",
+      "date": "2021-02-11",
+      "url": "https://data.binance.vision/data/spot/daily/klines/SOLUSDT/1h/SOLUSDT-1h-2021-02-11.zip",
+      "downloaded_at": "2026-09-08T07:38:17.861643+00:00",
+      "sha256": "54938883ebae9100a19929c2e3b39fbcc23dbccbd2b6359b44cfafe5bdec90f0",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1613001600000,
+          "close_time_ms": 1613005199999,
+          "volume": "489329.06000000"
+        },
+        {
+          "open_time_ms": 1613005200000,
+          "close_time_ms": 1613008799999,
+          "volume": "206839.57000000"
+        },
+        {
+          "open_time_ms": 1613008800000,
+          "close_time_ms": 1613012399999,
+          "volume": "32034.09000000"
+        },
+        {
+          "open_time_ms": 1613012400000,
+          "close_time_ms": 1613014857968,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1613019600000,
+          "close_time_ms": 1613023199999,
+          "volume": "308031.63000000"
+        },
+        {
+          "open_time_ms": 1613023200000,
+          "close_time_ms": 1613026799999,
+          "volume": "395100.14000000"
+        },
+        {
+          "open_time_ms": 1613026800000,
+          "close_time_ms": 1613030399999,
+          "volume": "288088.36000000"
+        },
+        {
+          "open_time_ms": 1613030400000,
+          "close_time_ms": 1613033999999,
+          "volume": "265471.37000000"
+        },
+        {
+          "open_time_ms": 1613034000000,
+          "close_time_ms": 1613037599999,
+          "volume": "247134.99000000"
+        },
+        {
+          "open_time_ms": 1613037600000,
+          "close_time_ms": 1613041199999,
+          "volume": "864160.28000000"
+        },
+        {
+          "open_time_ms": 1613041200000,
+          "close_time_ms": 1613044799999,
+          "volume": "600196.16000000"
+        },
+        {
+          "open_time_ms": 1613044800000,
+          "close_time_ms": 1613048399999,
+          "volume": "221453.94000000"
+        },
+        {
+          "open_time_ms": 1613048400000,
+          "close_time_ms": 1613051999999,
+          "volume": "178552.95000000"
+        },
+        {
+          "open_time_ms": 1613052000000,
+          "close_time_ms": 1613055599999,
+          "volume": "139735.20000000"
+        },
+        {
+          "open_time_ms": 1613055600000,
+          "close_time_ms": 1613059199999,
+          "volume": "100640.29000000"
+        },
+        {
+          "open_time_ms": 1613059200000,
+          "close_time_ms": 1613062799999,
+          "volume": "242704.06000000"
+        },
+        {
+          "open_time_ms": 1613062800000,
+          "close_time_ms": 1613066399999,
+          "volume": "243608.99000000"
+        },
+        {
+          "open_time_ms": 1613066400000,
+          "close_time_ms": 1613069999999,
+          "volume": "143016.29000000"
+        },
+        {
+          "open_time_ms": 1613070000000,
+          "close_time_ms": 1613073599999,
+          "volume": "124997.41000000"
+        },
+        {
+          "open_time_ms": 1613073600000,
+          "close_time_ms": 1613077199999,
+          "volume": "136423.93000000"
+        },
+        {
+          "open_time_ms": 1613077200000,
+          "close_time_ms": 1613080799999,
+          "volume": "144169.97000000"
+        },
+        {
+          "open_time_ms": 1613080800000,
+          "close_time_ms": 1613084399999,
+          "volume": "147148.51000000"
+        },
+        {
+          "open_time_ms": 1613084400000,
+          "close_time_ms": 1613087999999,
+          "volume": "176041.58000000"
+        }
+      ]
+    },
+    {
+      "symbol": "SOLUSDT",
+      "date": "2021-03-06",
+      "url": "https://data.binance.vision/data/spot/daily/klines/SOLUSDT/1h/SOLUSDT-1h-2021-03-06.zip",
+      "downloaded_at": "2026-09-08T07:38:18.031944+00:00",
+      "sha256": "ab03fe6290f1548c0f5ea4e66afe9e5e03770454eb018e401cbe78498feca782",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1614988800000,
+          "close_time_ms": 1614992399999,
+          "volume": "52413.40000000"
+        },
+        {
+          "open_time_ms": 1614992400000,
+          "close_time_ms": 1614995999999,
+          "volume": "81934.17000000"
+        },
+        {
+          "open_time_ms": 1614999600000,
+          "close_time_ms": 1615003199999,
+          "volume": "64224.33000000"
+        },
+        {
+          "open_time_ms": 1615003200000,
+          "close_time_ms": 1615006799999,
+          "volume": "70446.96000000"
+        },
+        {
+          "open_time_ms": 1615006800000,
+          "close_time_ms": 1615010399999,
+          "volume": "51251.38000000"
+        },
+        {
+          "open_time_ms": 1615010400000,
+          "close_time_ms": 1615013999999,
+          "volume": "100817.56000000"
+        },
+        {
+          "open_time_ms": 1615014000000,
+          "close_time_ms": 1615017599999,
+          "volume": "85576.31000000"
+        },
+        {
+          "open_time_ms": 1615017600000,
+          "close_time_ms": 1615021199999,
+          "volume": "91181.26000000"
+        },
+        {
+          "open_time_ms": 1615021200000,
+          "close_time_ms": 1615024799999,
+          "volume": "51616.74000000"
+        },
+        {
+          "open_time_ms": 1615024800000,
+          "close_time_ms": 1615028399999,
+          "volume": "71952.73000000"
+        },
+        {
+          "open_time_ms": 1615028400000,
+          "close_time_ms": 1615031999999,
+          "volume": "108833.53000000"
+        },
+        {
+          "open_time_ms": 1615032000000,
+          "close_time_ms": 1615035599999,
+          "volume": "142376.39000000"
+        },
+        {
+          "open_time_ms": 1615035600000,
+          "close_time_ms": 1615039199999,
+          "volume": "340349.97000000"
+        },
+        {
+          "open_time_ms": 1615039200000,
+          "close_time_ms": 1615042799999,
+          "volume": "392124.77000000"
+        },
+        {
+          "open_time_ms": 1615042800000,
+          "close_time_ms": 1615046399999,
+          "volume": "144106.07000000"
+        },
+        {
+          "open_time_ms": 1615046400000,
+          "close_time_ms": 1615049999999,
+          "volume": "110290.45000000"
+        },
+        {
+          "open_time_ms": 1615050000000,
+          "close_time_ms": 1615053599999,
+          "volume": "83693.22000000"
+        },
+        {
+          "open_time_ms": 1615053600000,
+          "close_time_ms": 1615057199999,
+          "volume": "222701.59000000"
+        },
+        {
+          "open_time_ms": 1615057200000,
+          "close_time_ms": 1615060799999,
+          "volume": "110715.96000000"
+        },
+        {
+          "open_time_ms": 1615060800000,
+          "close_time_ms": 1615064399999,
+          "volume": "197271.81000000"
+        },
+        {
+          "open_time_ms": 1615064400000,
+          "close_time_ms": 1615067999999,
+          "volume": "259643.69000000"
+        },
+        {
+          "open_time_ms": 1615068000000,
+          "close_time_ms": 1615071599999,
+          "volume": "109610.58000000"
+        },
+        {
+          "open_time_ms": 1615071600000,
+          "close_time_ms": 1615075199999,
+          "volume": "118541.36000000"
+        }
+      ]
+    },
+    {
+      "symbol": "SOLUSDT",
+      "date": "2021-04-20",
+      "url": "https://data.binance.vision/data/spot/daily/klines/SOLUSDT/1h/SOLUSDT-1h-2021-04-20.zip",
+      "downloaded_at": "2026-09-08T07:38:18.078495+00:00",
+      "sha256": "c4c197ca8ef6beab5695315b33ddb34dd2dec3c2b5c78183893a9d4999fb1e79",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1618876800000,
+          "close_time_ms": 1618880399999,
+          "volume": "761396.58000000"
+        },
+        {
+          "open_time_ms": 1618880400000,
+          "close_time_ms": 1618883999999,
+          "volume": "481977.09000000"
+        },
+        {
+          "open_time_ms": 1618891200000,
+          "close_time_ms": 1618894799999,
+          "volume": "271926.87000000"
+        },
+        {
+          "open_time_ms": 1618894800000,
+          "close_time_ms": 1618898399999,
+          "volume": "434794.80000000"
+        },
+        {
+          "open_time_ms": 1618898400000,
+          "close_time_ms": 1618901999999,
+          "volume": "516826.78000000"
+        },
+        {
+          "open_time_ms": 1618902000000,
+          "close_time_ms": 1618905599999,
+          "volume": "398219.80000000"
+        },
+        {
+          "open_time_ms": 1618905600000,
+          "close_time_ms": 1618909199999,
+          "volume": "398477.07000000"
+        },
+        {
+          "open_time_ms": 1618909200000,
+          "close_time_ms": 1618912799999,
+          "volume": "230968.14000000"
+        },
+        {
+          "open_time_ms": 1618912800000,
+          "close_time_ms": 1618916399999,
+          "volume": "332699.15000000"
+        },
+        {
+          "open_time_ms": 1618916400000,
+          "close_time_ms": 1618919999999,
+          "volume": "354063.04000000"
+        },
+        {
+          "open_time_ms": 1618920000000,
+          "close_time_ms": 1618923599999,
+          "volume": "215049.57000000"
+        },
+        {
+          "open_time_ms": 1618923600000,
+          "close_time_ms": 1618927199999,
+          "volume": "269469.63000000"
+        },
+        {
+          "open_time_ms": 1618927200000,
+          "close_time_ms": 1618930799999,
+          "volume": "242756.67000000"
+        },
+        {
+          "open_time_ms": 1618930800000,
+          "close_time_ms": 1618934399999,
+          "volume": "263941.81000000"
+        },
+        {
+          "open_time_ms": 1618934400000,
+          "close_time_ms": 1618937999999,
+          "volume": "220204.94000000"
+        },
+        {
+          "open_time_ms": 1618938000000,
+          "close_time_ms": 1618941599999,
+          "volume": "209100.08000000"
+        },
+        {
+          "open_time_ms": 1618941600000,
+          "close_time_ms": 1618945199999,
+          "volume": "300970.01000000"
+        },
+        {
+          "open_time_ms": 1618945200000,
+          "close_time_ms": 1618948799999,
+          "volume": "302800.65000000"
+        },
+        {
+          "open_time_ms": 1618948800000,
+          "close_time_ms": 1618952399999,
+          "volume": "348554.55000000"
+        },
+        {
+          "open_time_ms": 1618952400000,
+          "close_time_ms": 1618955999999,
+          "volume": "195371.92000000"
+        },
+        {
+          "open_time_ms": 1618956000000,
+          "close_time_ms": 1618959599999,
+          "volume": "135063.36000000"
+        },
+        {
+          "open_time_ms": 1618959600000,
+          "close_time_ms": 1618963199999,
+          "volume": "151468.41000000"
+        }
+      ]
+    },
+    {
+      "symbol": "SOLUSDT",
+      "date": "2021-04-25",
+      "url": "https://data.binance.vision/data/spot/daily/klines/SOLUSDT/1h/SOLUSDT-1h-2021-04-25.zip",
+      "downloaded_at": "2026-09-08T07:38:18.108688+00:00",
+      "sha256": "dcd7d3005de2ed9a3ad258e95e22f19ff731e7dd479c8fc6c795918a9860beb8",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1619308800000,
+          "close_time_ms": 1619312399999,
+          "volume": "828038.10000000"
+        },
+        {
+          "open_time_ms": 1619312400000,
+          "close_time_ms": 1619315999999,
+          "volume": "412285.77000000"
+        },
+        {
+          "open_time_ms": 1619316000000,
+          "close_time_ms": 1619319599999,
+          "volume": "282386.90000000"
+        },
+        {
+          "open_time_ms": 1619319600000,
+          "close_time_ms": 1619323199999,
+          "volume": "516282.79000000"
+        },
+        {
+          "open_time_ms": 1619323200000,
+          "close_time_ms": 1619323261539,
+          "volume": "1393.58000000"
+        },
+        {
+          "open_time_ms": 1619337600000,
+          "close_time_ms": 1619341199999,
+          "volume": "92440.18600000"
+        },
+        {
+          "open_time_ms": 1619341200000,
+          "close_time_ms": 1619344799999,
+          "volume": "498308.38800000"
+        },
+        {
+          "open_time_ms": 1619344800000,
+          "close_time_ms": 1619348399999,
+          "volume": "314665.30000000"
+        },
+        {
+          "open_time_ms": 1619348400000,
+          "close_time_ms": 1619351999999,
+          "volume": "267749.61600000"
+        },
+        {
+          "open_time_ms": 1619352000000,
+          "close_time_ms": 1619355599999,
+          "volume": "449950.83600000"
+        },
+        {
+          "open_time_ms": 1619355600000,
+          "close_time_ms": 1619359199999,
+          "volume": "676313.49800000"
+        },
+        {
+          "open_time_ms": 1619359200000,
+          "close_time_ms": 1619362799999,
+          "volume": "705141.33400000"
+        },
+        {
+          "open_time_ms": 1619362800000,
+          "close_time_ms": 1619366399999,
+          "volume": "684048.03200000"
+        },
+        {
+          "open_time_ms": 1619366400000,
+          "close_time_ms": 1619369999999,
+          "volume": "611363.88500000"
+        },
+        {
+          "open_time_ms": 1619370000000,
+          "close_time_ms": 1619373599999,
+          "volume": "594328.43900000"
+        },
+        {
+          "open_time_ms": 1619373600000,
+          "close_time_ms": 1619377199999,
+          "volume": "699056.74300000"
+        },
+        {
+          "open_time_ms": 1619377200000,
+          "close_time_ms": 1619380799999,
+          "volume": "365043.66400000"
+        },
+        {
+          "open_time_ms": 1619380800000,
+          "close_time_ms": 1619384399999,
+          "volume": "699071.91100000"
+        },
+        {
+          "open_time_ms": 1619384400000,
+          "close_time_ms": 1619387999999,
+          "volume": "906914.58200000"
+        },
+        {
+          "open_time_ms": 1619388000000,
+          "close_time_ms": 1619391599999,
+          "volume": "1559337.78000000"
+        },
+        {
+          "open_time_ms": 1619391600000,
+          "close_time_ms": 1619395199999,
+          "volume": "800632.46700000"
+        }
+      ]
+    },
+    {
+      "symbol": "SOLUSDT",
+      "date": "2021-08-13",
+      "url": "https://data.binance.vision/data/spot/daily/klines/SOLUSDT/1h/SOLUSDT-1h-2021-08-13.zip",
+      "downloaded_at": "2026-09-08T07:38:18.441204+00:00",
+      "sha256": "a6ad3f844ea177f5488f64ba82d87bcf4016a63f8507e5872f6b4e9d5e00badc",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1628812800000,
+          "close_time_ms": 1628816399999,
+          "volume": "88735.42300000"
+        },
+        {
+          "open_time_ms": 1628816400000,
+          "close_time_ms": 1628819999000,
+          "volume": "121247.99000000"
+        },
+        {
+          "open_time_ms": 1628834400000,
+          "close_time_ms": 1628837999999,
+          "volume": "80305.70200000"
+        },
+        {
+          "open_time_ms": 1628838000000,
+          "close_time_ms": 1628841599999,
+          "volume": "164182.76400000"
+        },
+        {
+          "open_time_ms": 1628841600000,
+          "close_time_ms": 1628845199999,
+          "volume": "118860.73800000"
+        },
+        {
+          "open_time_ms": 1628845200000,
+          "close_time_ms": 1628848799999,
+          "volume": "220063.82800000"
+        },
+        {
+          "open_time_ms": 1628848800000,
+          "close_time_ms": 1628852399999,
+          "volume": "112260.44500000"
+        },
+        {
+          "open_time_ms": 1628852400000,
+          "close_time_ms": 1628855999999,
+          "volume": "142856.27900000"
+        },
+        {
+          "open_time_ms": 1628856000000,
+          "close_time_ms": 1628859599999,
+          "volume": "118470.70900000"
+        },
+        {
+          "open_time_ms": 1628859600000,
+          "close_time_ms": 1628863199999,
+          "volume": "124779.15000000"
+        },
+        {
+          "open_time_ms": 1628863200000,
+          "close_time_ms": 1628866799999,
+          "volume": "97812.53100000"
+        },
+        {
+          "open_time_ms": 1628866800000,
+          "close_time_ms": 1628870399999,
+          "volume": "132236.59600000"
+        },
+        {
+          "open_time_ms": 1628870400000,
+          "close_time_ms": 1628873999999,
+          "volume": "78591.27600000"
+        },
+        {
+          "open_time_ms": 1628874000000,
+          "close_time_ms": 1628877599999,
+          "volume": "74291.20700000"
+        },
+        {
+          "open_time_ms": 1628877600000,
+          "close_time_ms": 1628881199999,
+          "volume": "111524.15500000"
+        },
+        {
+          "open_time_ms": 1628881200000,
+          "close_time_ms": 1628884799999,
+          "volume": "62653.26600000"
+        },
+        {
+          "open_time_ms": 1628884800000,
+          "close_time_ms": 1628888399999,
+          "volume": "168495.45800000"
+        },
+        {
+          "open_time_ms": 1628888400000,
+          "close_time_ms": 1628891999999,
+          "volume": "80826.92200000"
+        },
+        {
+          "open_time_ms": 1628892000000,
+          "close_time_ms": 1628895599999,
+          "volume": "60883.17700000"
+        },
+        {
+          "open_time_ms": 1628895600000,
+          "close_time_ms": 1628899199999,
+          "volume": "122262.37400000"
+        }
+      ]
+    },
+    {
+      "symbol": "SOLUSDT",
+      "date": "2021-09-29",
+      "url": "https://data.binance.vision/data/spot/daily/klines/SOLUSDT/1h/SOLUSDT-1h-2021-09-29.zip",
+      "downloaded_at": "2026-09-08T07:38:18.527551+00:00",
+      "sha256": "a7a95844f9136fb7ea0e294019cbe9551e37e8fa9f8934f91545be78ce57772a",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1632873600000,
+          "close_time_ms": 1632877199999,
+          "volume": "432202.04000000"
+        },
+        {
+          "open_time_ms": 1632877200000,
+          "close_time_ms": 1632880799999,
+          "volume": "180820.53000000"
+        },
+        {
+          "open_time_ms": 1632880800000,
+          "close_time_ms": 1632884399999,
+          "volume": "160410.65000000"
+        },
+        {
+          "open_time_ms": 1632884400000,
+          "close_time_ms": 1632887999999,
+          "volume": "190975.37000000"
+        },
+        {
+          "open_time_ms": 1632888000000,
+          "close_time_ms": 1632891599999,
+          "volume": "179307.65000000"
+        },
+        {
+          "open_time_ms": 1632891600000,
+          "close_time_ms": 1632895199999,
+          "volume": "158770.92000000"
+        },
+        {
+          "open_time_ms": 1632895200000,
+          "close_time_ms": 1632898799999,
+          "volume": "126000.99000000"
+        },
+        {
+          "open_time_ms": 1632906000000,
+          "close_time_ms": 1632909599999,
+          "volume": "173756.83000000"
+        },
+        {
+          "open_time_ms": 1632909600000,
+          "close_time_ms": 1632913199999,
+          "volume": "160181.24000000"
+        },
+        {
+          "open_time_ms": 1632913200000,
+          "close_time_ms": 1632916799999,
+          "volume": "137488.49000000"
+        },
+        {
+          "open_time_ms": 1632916800000,
+          "close_time_ms": 1632920399999,
+          "volume": "174797.41000000"
+        },
+        {
+          "open_time_ms": 1632920400000,
+          "close_time_ms": 1632923999999,
+          "volume": "153296.95000000"
+        },
+        {
+          "open_time_ms": 1632924000000,
+          "close_time_ms": 1632927599999,
+          "volume": "135681.04000000"
+        },
+        {
+          "open_time_ms": 1632927600000,
+          "close_time_ms": 1632931199999,
+          "volume": "176095.81000000"
+        },
+        {
+          "open_time_ms": 1632931200000,
+          "close_time_ms": 1632934799999,
+          "volume": "153523.48000000"
+        },
+        {
+          "open_time_ms": 1632934800000,
+          "close_time_ms": 1632938399999,
+          "volume": "152087.25000000"
+        },
+        {
+          "open_time_ms": 1632938400000,
+          "close_time_ms": 1632941999999,
+          "volume": "194275.84000000"
+        },
+        {
+          "open_time_ms": 1632942000000,
+          "close_time_ms": 1632945599999,
+          "volume": "161049.65000000"
+        },
+        {
+          "open_time_ms": 1632945600000,
+          "close_time_ms": 1632949199999,
+          "volume": "172147.12000000"
+        },
+        {
+          "open_time_ms": 1632949200000,
+          "close_time_ms": 1632952799999,
+          "volume": "109753.29000000"
+        },
+        {
+          "open_time_ms": 1632952800000,
+          "close_time_ms": 1632956399999,
+          "volume": "98166.09000000"
+        },
+        {
+          "open_time_ms": 1632956400000,
+          "close_time_ms": 1632959999999,
+          "volume": "104709.64000000"
+        }
+      ]
+    },
+    {
+      "symbol": "SOLUSDT",
+      "date": "2023-03-24",
+      "url": "https://data.binance.vision/data/spot/daily/klines/SOLUSDT/1h/SOLUSDT-1h-2023-03-24.zip",
+      "downloaded_at": "2026-09-08T07:38:18.538540+00:00",
+      "sha256": "ec4941f66dd4579e321046b7fc6403417b965f319d01ca77fef930078856b5d5",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1679616000000,
+          "close_time_ms": 1679619599999,
+          "volume": "122996.54000000"
+        },
+        {
+          "open_time_ms": 1679619600000,
+          "close_time_ms": 1679623199999,
+          "volume": "84304.67000000"
+        },
+        {
+          "open_time_ms": 1679623200000,
+          "close_time_ms": 1679626799999,
+          "volume": "80528.26000000"
+        },
+        {
+          "open_time_ms": 1679626800000,
+          "close_time_ms": 1679630399999,
+          "volume": "44746.49000000"
+        },
+        {
+          "open_time_ms": 1679630400000,
+          "close_time_ms": 1679633999999,
+          "volume": "93632.68000000"
+        },
+        {
+          "open_time_ms": 1679634000000,
+          "close_time_ms": 1679637599999,
+          "volume": "81550.97000000"
+        },
+        {
+          "open_time_ms": 1679637600000,
+          "close_time_ms": 1679641199999,
+          "volume": "63433.90000000"
+        },
+        {
+          "open_time_ms": 1679641200000,
+          "close_time_ms": 1679644799999,
+          "volume": "80504.37000000"
+        },
+        {
+          "open_time_ms": 1679644800000,
+          "close_time_ms": 1679648399999,
+          "volume": "312973.66000000"
+        },
+        {
+          "open_time_ms": 1679648400000,
+          "close_time_ms": 1679651999999,
+          "volume": "150326.54000000"
+        },
+        {
+          "open_time_ms": 1679652000000,
+          "close_time_ms": 1679655599999,
+          "volume": "159984.76000000"
+        },
+        {
+          "open_time_ms": 1679655600000,
+          "close_time_ms": 1679659199999,
+          "volume": "37770.75000000"
+        },
+        {
+          "open_time_ms": 1679659200000,
+          "close_time_ms": 1679661586948,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1679666400000,
+          "close_time_ms": 1679669999999,
+          "volume": "242360.58000000"
+        },
+        {
+          "open_time_ms": 1679670000000,
+          "close_time_ms": 1679673599999,
+          "volume": "494516.63000000"
+        },
+        {
+          "open_time_ms": 1679673600000,
+          "close_time_ms": 1679677199999,
+          "volume": "704950.68000000"
+        },
+        {
+          "open_time_ms": 1679677200000,
+          "close_time_ms": 1679680799999,
+          "volume": "859980.02000000"
+        },
+        {
+          "open_time_ms": 1679680800000,
+          "close_time_ms": 1679684399999,
+          "volume": "443542.33000000"
+        },
+        {
+          "open_time_ms": 1679684400000,
+          "close_time_ms": 1679687999999,
+          "volume": "164807.91000000"
+        },
+        {
+          "open_time_ms": 1679688000000,
+          "close_time_ms": 1679691599999,
+          "volume": "320808.82000000"
+        },
+        {
+          "open_time_ms": 1679691600000,
+          "close_time_ms": 1679695199999,
+          "volume": "243334.31000000"
+        },
+        {
+          "open_time_ms": 1679695200000,
+          "close_time_ms": 1679698799999,
+          "volume": "111941.85000000"
+        },
+        {
+          "open_time_ms": 1679698800000,
+          "close_time_ms": 1679702399999,
+          "volume": "97001.49000000"
+        }
+      ]
+    },
+    {
+      "symbol": "XRPUSDT",
+      "date": "2021-02-11",
+      "url": "https://data.binance.vision/data/spot/daily/klines/XRPUSDT/1h/XRPUSDT-1h-2021-02-11.zip",
+      "downloaded_at": "2026-09-08T07:38:18.595148+00:00",
+      "sha256": "5694502defda170fa1fc569f171384758a7d25876df851a133e19c8c756c0934",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1613001600000,
+          "close_time_ms": 1613005199999,
+          "volume": "86425668.90000000"
+        },
+        {
+          "open_time_ms": 1613005200000,
+          "close_time_ms": 1613008799999,
+          "volume": "60270400.10000000"
+        },
+        {
+          "open_time_ms": 1613008800000,
+          "close_time_ms": 1613012399999,
+          "volume": "12273588.70000000"
+        },
+        {
+          "open_time_ms": 1613012400000,
+          "close_time_ms": 1613014859081,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1613019600000,
+          "close_time_ms": 1613023199999,
+          "volume": "35623236.30000000"
+        },
+        {
+          "open_time_ms": 1613023200000,
+          "close_time_ms": 1613026799999,
+          "volume": "32566120.60000000"
+        },
+        {
+          "open_time_ms": 1613026800000,
+          "close_time_ms": 1613030399999,
+          "volume": "34119318.20000000"
+        },
+        {
+          "open_time_ms": 1613030400000,
+          "close_time_ms": 1613033999999,
+          "volume": "50712147.40000000"
+        },
+        {
+          "open_time_ms": 1613034000000,
+          "close_time_ms": 1613037599999,
+          "volume": "46061593.40000000"
+        },
+        {
+          "open_time_ms": 1613037600000,
+          "close_time_ms": 1613041199999,
+          "volume": "52820719.20000000"
+        },
+        {
+          "open_time_ms": 1613041200000,
+          "close_time_ms": 1613044799999,
+          "volume": "46100261.00000000"
+        },
+        {
+          "open_time_ms": 1613044800000,
+          "close_time_ms": 1613048399999,
+          "volume": "61066052.20000000"
+        },
+        {
+          "open_time_ms": 1613048400000,
+          "close_time_ms": 1613051999999,
+          "volume": "59007469.90000000"
+        },
+        {
+          "open_time_ms": 1613052000000,
+          "close_time_ms": 1613055599999,
+          "volume": "51594992.50000000"
+        },
+        {
+          "open_time_ms": 1613055600000,
+          "close_time_ms": 1613059199999,
+          "volume": "37276410.80000000"
+        },
+        {
+          "open_time_ms": 1613059200000,
+          "close_time_ms": 1613062799999,
+          "volume": "62358334.60000000"
+        },
+        {
+          "open_time_ms": 1613062800000,
+          "close_time_ms": 1613066399999,
+          "volume": "32397264.10000000"
+        },
+        {
+          "open_time_ms": 1613066400000,
+          "close_time_ms": 1613069999999,
+          "volume": "25192255.40000000"
+        },
+        {
+          "open_time_ms": 1613070000000,
+          "close_time_ms": 1613073599999,
+          "volume": "35294311.90000000"
+        },
+        {
+          "open_time_ms": 1613073600000,
+          "close_time_ms": 1613077199999,
+          "volume": "46351558.90000000"
+        },
+        {
+          "open_time_ms": 1613077200000,
+          "close_time_ms": 1613080799999,
+          "volume": "49207584.20000000"
+        },
+        {
+          "open_time_ms": 1613080800000,
+          "close_time_ms": 1613084399999,
+          "volume": "20066456.80000000"
+        },
+        {
+          "open_time_ms": 1613084400000,
+          "close_time_ms": 1613087999999,
+          "volume": "24616527.10000000"
+        }
+      ]
+    },
+    {
+      "symbol": "XRPUSDT",
+      "date": "2021-03-06",
+      "url": "https://data.binance.vision/data/spot/daily/klines/XRPUSDT/1h/XRPUSDT-1h-2021-03-06.zip",
+      "downloaded_at": "2026-09-08T07:38:19.021125+00:00",
+      "sha256": "d9e4d77fd7be66a93aa5587613d9faa1cca8b000b34d4c12b59c3e4e77ed6e15",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1614988800000,
+          "close_time_ms": 1614992399999,
+          "volume": "22042757.90000000"
+        },
+        {
+          "open_time_ms": 1614992400000,
+          "close_time_ms": 1614995999999,
+          "volume": "12043490.00000000"
+        },
+        {
+          "open_time_ms": 1614999600000,
+          "close_time_ms": 1615003199999,
+          "volume": "32725290.80000000"
+        },
+        {
+          "open_time_ms": 1615003200000,
+          "close_time_ms": 1615006799999,
+          "volume": "29304257.70000000"
+        },
+        {
+          "open_time_ms": 1615006800000,
+          "close_time_ms": 1615010399999,
+          "volume": "14360816.40000000"
+        },
+        {
+          "open_time_ms": 1615010400000,
+          "close_time_ms": 1615013999999,
+          "volume": "13838785.00000000"
+        },
+        {
+          "open_time_ms": 1615014000000,
+          "close_time_ms": 1615017599999,
+          "volume": "12265369.70000000"
+        },
+        {
+          "open_time_ms": 1615017600000,
+          "close_time_ms": 1615021199999,
+          "volume": "21221268.90000000"
+        },
+        {
+          "open_time_ms": 1615021200000,
+          "close_time_ms": 1615024799999,
+          "volume": "14970402.70000000"
+        },
+        {
+          "open_time_ms": 1615024800000,
+          "close_time_ms": 1615028399999,
+          "volume": "12522085.60000000"
+        },
+        {
+          "open_time_ms": 1615028400000,
+          "close_time_ms": 1615031999999,
+          "volume": "10625671.00000000"
+        },
+        {
+          "open_time_ms": 1615032000000,
+          "close_time_ms": 1615035599999,
+          "volume": "25076530.10000000"
+        },
+        {
+          "open_time_ms": 1615035600000,
+          "close_time_ms": 1615039199999,
+          "volume": "28638789.90000000"
+        },
+        {
+          "open_time_ms": 1615039200000,
+          "close_time_ms": 1615042799999,
+          "volume": "14191581.40000000"
+        },
+        {
+          "open_time_ms": 1615042800000,
+          "close_time_ms": 1615046399999,
+          "volume": "10681667.80000000"
+        },
+        {
+          "open_time_ms": 1615046400000,
+          "close_time_ms": 1615049999999,
+          "volume": "16212902.80000000"
+        },
+        {
+          "open_time_ms": 1615050000000,
+          "close_time_ms": 1615053599999,
+          "volume": "14281045.10000000"
+        },
+        {
+          "open_time_ms": 1615053600000,
+          "close_time_ms": 1615057199999,
+          "volume": "12177328.20000000"
+        },
+        {
+          "open_time_ms": 1615057200000,
+          "close_time_ms": 1615060799999,
+          "volume": "9264348.10000000"
+        },
+        {
+          "open_time_ms": 1615060800000,
+          "close_time_ms": 1615064399999,
+          "volume": "10858042.60000000"
+        },
+        {
+          "open_time_ms": 1615064400000,
+          "close_time_ms": 1615067999999,
+          "volume": "9644249.90000000"
+        },
+        {
+          "open_time_ms": 1615068000000,
+          "close_time_ms": 1615071599999,
+          "volume": "9046765.90000000"
+        },
+        {
+          "open_time_ms": 1615071600000,
+          "close_time_ms": 1615075199999,
+          "volume": "9978580.00000000"
+        }
+      ]
+    },
+    {
+      "symbol": "XRPUSDT",
+      "date": "2021-04-20",
+      "url": "https://data.binance.vision/data/spot/daily/klines/XRPUSDT/1h/XRPUSDT-1h-2021-04-20.zip",
+      "downloaded_at": "2026-09-08T07:38:19.063623+00:00",
+      "sha256": "30f86d54b85671c368628cc177ed7e2d8214b57441985aaffe49f2380c16ad84",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1618876800000,
+          "close_time_ms": 1618880399999,
+          "volume": "149382271.20000000"
+        },
+        {
+          "open_time_ms": 1618880400000,
+          "close_time_ms": 1618883999999,
+          "volume": "72865442.50000000"
+        },
+        {
+          "open_time_ms": 1618891200000,
+          "close_time_ms": 1618894799999,
+          "volume": "37391347.50000000"
+        },
+        {
+          "open_time_ms": 1618894800000,
+          "close_time_ms": 1618898399999,
+          "volume": "51557876.90000000"
+        },
+        {
+          "open_time_ms": 1618898400000,
+          "close_time_ms": 1618901999999,
+          "volume": "71910681.40000000"
+        },
+        {
+          "open_time_ms": 1618902000000,
+          "close_time_ms": 1618905599999,
+          "volume": "87238813.70000000"
+        },
+        {
+          "open_time_ms": 1618905600000,
+          "close_time_ms": 1618909199999,
+          "volume": "78249804.90000000"
+        },
+        {
+          "open_time_ms": 1618909200000,
+          "close_time_ms": 1618912799999,
+          "volume": "54782586.00000000"
+        },
+        {
+          "open_time_ms": 1618912800000,
+          "close_time_ms": 1618916399999,
+          "volume": "87580703.60000000"
+        },
+        {
+          "open_time_ms": 1618916400000,
+          "close_time_ms": 1618919999999,
+          "volume": "55726607.10000000"
+        },
+        {
+          "open_time_ms": 1618920000000,
+          "close_time_ms": 1618923599999,
+          "volume": "52202325.90000000"
+        },
+        {
+          "open_time_ms": 1618923600000,
+          "close_time_ms": 1618927199999,
+          "volume": "55303531.90000000"
+        },
+        {
+          "open_time_ms": 1618927200000,
+          "close_time_ms": 1618930799999,
+          "volume": "86504353.70000000"
+        },
+        {
+          "open_time_ms": 1618930800000,
+          "close_time_ms": 1618934399999,
+          "volume": "69021275.10000000"
+        },
+        {
+          "open_time_ms": 1618934400000,
+          "close_time_ms": 1618937999999,
+          "volume": "78507327.80000000"
+        },
+        {
+          "open_time_ms": 1618938000000,
+          "close_time_ms": 1618941599999,
+          "volume": "50981720.50000000"
+        },
+        {
+          "open_time_ms": 1618941600000,
+          "close_time_ms": 1618945199999,
+          "volume": "61040912.30000000"
+        },
+        {
+          "open_time_ms": 1618945200000,
+          "close_time_ms": 1618948799999,
+          "volume": "63420055.50000000"
+        },
+        {
+          "open_time_ms": 1618948800000,
+          "close_time_ms": 1618952399999,
+          "volume": "98866984.40000000"
+        },
+        {
+          "open_time_ms": 1618952400000,
+          "close_time_ms": 1618955999999,
+          "volume": "67707912.90000000"
+        },
+        {
+          "open_time_ms": 1618956000000,
+          "close_time_ms": 1618959599999,
+          "volume": "48635683.10000000"
+        },
+        {
+          "open_time_ms": 1618959600000,
+          "close_time_ms": 1618963199999,
+          "volume": "43318075.60000000"
+        }
+      ]
+    },
+    {
+      "symbol": "XRPUSDT",
+      "date": "2021-04-25",
+      "url": "https://data.binance.vision/data/spot/daily/klines/XRPUSDT/1h/XRPUSDT-1h-2021-04-25.zip",
+      "downloaded_at": "2026-09-08T07:38:19.073720+00:00",
+      "sha256": "ee92f418febb92608a4e1c23f5c70394ed5d77c17b513e865bc25129d1e7478e",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1619308800000,
+          "close_time_ms": 1619312399999,
+          "volume": "51840821.00000000"
+        },
+        {
+          "open_time_ms": 1619312400000,
+          "close_time_ms": 1619315999999,
+          "volume": "25711882.00000000"
+        },
+        {
+          "open_time_ms": 1619316000000,
+          "close_time_ms": 1619319599999,
+          "volume": "28905379.70000000"
+        },
+        {
+          "open_time_ms": 1619319600000,
+          "close_time_ms": 1619323199999,
+          "volume": "28866355.60000000"
+        },
+        {
+          "open_time_ms": 1619323200000,
+          "close_time_ms": 1619323262802,
+          "volume": "114404.50000000"
+        },
+        {
+          "open_time_ms": 1619337600000,
+          "close_time_ms": 1619341199999,
+          "volume": "11315815.07000000"
+        },
+        {
+          "open_time_ms": 1619341200000,
+          "close_time_ms": 1619344799999,
+          "volume": "34324748.34000000"
+        },
+        {
+          "open_time_ms": 1619344800000,
+          "close_time_ms": 1619348399999,
+          "volume": "30013603.23000000"
+        },
+        {
+          "open_time_ms": 1619348400000,
+          "close_time_ms": 1619351999999,
+          "volume": "18929885.00000000"
+        },
+        {
+          "open_time_ms": 1619352000000,
+          "close_time_ms": 1619355599999,
+          "volume": "39862558.01000000"
+        },
+        {
+          "open_time_ms": 1619355600000,
+          "close_time_ms": 1619359199999,
+          "volume": "39472598.42000000"
+        },
+        {
+          "open_time_ms": 1619359200000,
+          "close_time_ms": 1619362799999,
+          "volume": "37679990.08000000"
+        },
+        {
+          "open_time_ms": 1619362800000,
+          "close_time_ms": 1619366399999,
+          "volume": "88481216.97000000"
+        },
+        {
+          "open_time_ms": 1619366400000,
+          "close_time_ms": 1619369999999,
+          "volume": "59238018.97000000"
+        },
+        {
+          "open_time_ms": 1619370000000,
+          "close_time_ms": 1619373599999,
+          "volume": "45118038.05000000"
+        },
+        {
+          "open_time_ms": 1619373600000,
+          "close_time_ms": 1619377199999,
+          "volume": "42600137.07000000"
+        },
+        {
+          "open_time_ms": 1619377200000,
+          "close_time_ms": 1619380799999,
+          "volume": "34189331.78000000"
+        },
+        {
+          "open_time_ms": 1619380800000,
+          "close_time_ms": 1619384399999,
+          "volume": "73924243.82000000"
+        },
+        {
+          "open_time_ms": 1619384400000,
+          "close_time_ms": 1619387999999,
+          "volume": "182171446.84000000"
+        },
+        {
+          "open_time_ms": 1619388000000,
+          "close_time_ms": 1619391599999,
+          "volume": "100505943.88000000"
+        },
+        {
+          "open_time_ms": 1619391600000,
+          "close_time_ms": 1619395199999,
+          "volume": "52799785.19000000"
+        }
+      ]
+    },
+    {
+      "symbol": "XRPUSDT",
+      "date": "2021-08-13",
+      "url": "https://data.binance.vision/data/spot/daily/klines/XRPUSDT/1h/XRPUSDT-1h-2021-08-13.zip",
+      "downloaded_at": "2026-09-08T07:38:19.127671+00:00",
+      "sha256": "e4b0257b502055ee687fc6a3a84813edaae40140676f741030424adb16907fa3",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1628812800000,
+          "close_time_ms": 1628816399999,
+          "volume": "37825959.03000000"
+        },
+        {
+          "open_time_ms": 1628816400000,
+          "close_time_ms": 1628819999000,
+          "volume": "24462793.91000000"
+        },
+        {
+          "open_time_ms": 1628834400000,
+          "close_time_ms": 1628837999999,
+          "volume": "25750026.37000000"
+        },
+        {
+          "open_time_ms": 1628838000000,
+          "close_time_ms": 1628841599999,
+          "volume": "69696843.20000000"
+        },
+        {
+          "open_time_ms": 1628841600000,
+          "close_time_ms": 1628845199999,
+          "volume": "45138725.63000000"
+        },
+        {
+          "open_time_ms": 1628845200000,
+          "close_time_ms": 1628848799999,
+          "volume": "41274314.88000000"
+        },
+        {
+          "open_time_ms": 1628848800000,
+          "close_time_ms": 1628852399999,
+          "volume": "19106213.97000000"
+        },
+        {
+          "open_time_ms": 1628852400000,
+          "close_time_ms": 1628855999999,
+          "volume": "29424266.84000000"
+        },
+        {
+          "open_time_ms": 1628856000000,
+          "close_time_ms": 1628859599999,
+          "volume": "26696501.46000000"
+        },
+        {
+          "open_time_ms": 1628859600000,
+          "close_time_ms": 1628863199999,
+          "volume": "19483239.65000000"
+        },
+        {
+          "open_time_ms": 1628863200000,
+          "close_time_ms": 1628866799999,
+          "volume": "26493213.63000000"
+        },
+        {
+          "open_time_ms": 1628866800000,
+          "close_time_ms": 1628870399999,
+          "volume": "44892859.56000000"
+        },
+        {
+          "open_time_ms": 1628870400000,
+          "close_time_ms": 1628873999999,
+          "volume": "38813856.65000000"
+        },
+        {
+          "open_time_ms": 1628874000000,
+          "close_time_ms": 1628877599999,
+          "volume": "20743732.77000000"
+        },
+        {
+          "open_time_ms": 1628877600000,
+          "close_time_ms": 1628881199999,
+          "volume": "15022515.27000000"
+        },
+        {
+          "open_time_ms": 1628881200000,
+          "close_time_ms": 1628884799999,
+          "volume": "21300287.00000000"
+        },
+        {
+          "open_time_ms": 1628884800000,
+          "close_time_ms": 1628888399999,
+          "volume": "63162165.11000000"
+        },
+        {
+          "open_time_ms": 1628888400000,
+          "close_time_ms": 1628891999999,
+          "volume": "29940445.55000000"
+        },
+        {
+          "open_time_ms": 1628892000000,
+          "close_time_ms": 1628895599999,
+          "volume": "31330996.30000000"
+        },
+        {
+          "open_time_ms": 1628895600000,
+          "close_time_ms": 1628899199999,
+          "volume": "43848571.53000000"
+        }
+      ]
+    },
+    {
+      "symbol": "XRPUSDT",
+      "date": "2021-09-29",
+      "url": "https://data.binance.vision/data/spot/daily/klines/XRPUSDT/1h/XRPUSDT-1h-2021-09-29.zip",
+      "downloaded_at": "2026-09-08T07:38:19.607089+00:00",
+      "sha256": "514ff62fd5eb3cf5535b295474b22f8cbe872ae8f9dc8f16c617cd4fea6a4d09",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1632873600000,
+          "close_time_ms": 1632877199999,
+          "volume": "26585527.00000000"
+        },
+        {
+          "open_time_ms": 1632877200000,
+          "close_time_ms": 1632880799999,
+          "volume": "12298982.00000000"
+        },
+        {
+          "open_time_ms": 1632880800000,
+          "close_time_ms": 1632884399999,
+          "volume": "6987438.00000000"
+        },
+        {
+          "open_time_ms": 1632884400000,
+          "close_time_ms": 1632887999999,
+          "volume": "12120052.00000000"
+        },
+        {
+          "open_time_ms": 1632888000000,
+          "close_time_ms": 1632891599999,
+          "volume": "15694316.00000000"
+        },
+        {
+          "open_time_ms": 1632891600000,
+          "close_time_ms": 1632895199999,
+          "volume": "9624216.00000000"
+        },
+        {
+          "open_time_ms": 1632895200000,
+          "close_time_ms": 1632898799999,
+          "volume": "9899319.00000000"
+        },
+        {
+          "open_time_ms": 1632906000000,
+          "close_time_ms": 1632909599999,
+          "volume": "10275542.00000000"
+        },
+        {
+          "open_time_ms": 1632909600000,
+          "close_time_ms": 1632913199999,
+          "volume": "15449255.00000000"
+        },
+        {
+          "open_time_ms": 1632913200000,
+          "close_time_ms": 1632916799999,
+          "volume": "11542767.00000000"
+        },
+        {
+          "open_time_ms": 1632916800000,
+          "close_time_ms": 1632920399999,
+          "volume": "18099996.00000000"
+        },
+        {
+          "open_time_ms": 1632920400000,
+          "close_time_ms": 1632923999999,
+          "volume": "139041201.00000000"
+        },
+        {
+          "open_time_ms": 1632924000000,
+          "close_time_ms": 1632927599999,
+          "volume": "32448649.00000000"
+        },
+        {
+          "open_time_ms": 1632927600000,
+          "close_time_ms": 1632931199999,
+          "volume": "31625893.00000000"
+        },
+        {
+          "open_time_ms": 1632931200000,
+          "close_time_ms": 1632934799999,
+          "volume": "14536967.00000000"
+        },
+        {
+          "open_time_ms": 1632934800000,
+          "close_time_ms": 1632938399999,
+          "volume": "14633276.00000000"
+        },
+        {
+          "open_time_ms": 1632938400000,
+          "close_time_ms": 1632941999999,
+          "volume": "16703416.00000000"
+        },
+        {
+          "open_time_ms": 1632942000000,
+          "close_time_ms": 1632945599999,
+          "volume": "15255397.00000000"
+        },
+        {
+          "open_time_ms": 1632945600000,
+          "close_time_ms": 1632949199999,
+          "volume": "16415035.00000000"
+        },
+        {
+          "open_time_ms": 1632949200000,
+          "close_time_ms": 1632952799999,
+          "volume": "9056589.00000000"
+        },
+        {
+          "open_time_ms": 1632952800000,
+          "close_time_ms": 1632956399999,
+          "volume": "10096060.00000000"
+        },
+        {
+          "open_time_ms": 1632956400000,
+          "close_time_ms": 1632959999999,
+          "volume": "11270903.00000000"
+        }
+      ]
+    },
+    {
+      "symbol": "XRPUSDT",
+      "date": "2023-03-24",
+      "url": "https://data.binance.vision/data/spot/daily/klines/XRPUSDT/1h/XRPUSDT-1h-2023-03-24.zip",
+      "downloaded_at": "2026-09-08T07:38:19.663538+00:00",
+      "sha256": "0d5945d87dc191823344736c03e02aa6edaa3e18bf824db29890d52ff0e20479",
+      "checksum_verified": true,
+      "unit": "milliseconds",
+      "records": [
+        {
+          "open_time_ms": 1679616000000,
+          "close_time_ms": 1679619599999,
+          "volume": "26069138.00000000"
+        },
+        {
+          "open_time_ms": 1679619600000,
+          "close_time_ms": 1679623199999,
+          "volume": "25629189.00000000"
+        },
+        {
+          "open_time_ms": 1679623200000,
+          "close_time_ms": 1679626799999,
+          "volume": "26617675.00000000"
+        },
+        {
+          "open_time_ms": 1679626800000,
+          "close_time_ms": 1679630399999,
+          "volume": "15153770.00000000"
+        },
+        {
+          "open_time_ms": 1679630400000,
+          "close_time_ms": 1679633999999,
+          "volume": "23597103.00000000"
+        },
+        {
+          "open_time_ms": 1679634000000,
+          "close_time_ms": 1679637599999,
+          "volume": "17107045.00000000"
+        },
+        {
+          "open_time_ms": 1679637600000,
+          "close_time_ms": 1679641199999,
+          "volume": "15145775.00000000"
+        },
+        {
+          "open_time_ms": 1679641200000,
+          "close_time_ms": 1679644799999,
+          "volume": "17116550.00000000"
+        },
+        {
+          "open_time_ms": 1679644800000,
+          "close_time_ms": 1679648399999,
+          "volume": "36901426.00000000"
+        },
+        {
+          "open_time_ms": 1679648400000,
+          "close_time_ms": 1679651999999,
+          "volume": "21486493.00000000"
+        },
+        {
+          "open_time_ms": 1679652000000,
+          "close_time_ms": 1679655599999,
+          "volume": "20851053.00000000"
+        },
+        {
+          "open_time_ms": 1679655600000,
+          "close_time_ms": 1679659199999,
+          "volume": "9458572.00000000"
+        },
+        {
+          "open_time_ms": 1679659200000,
+          "close_time_ms": 1679661588301,
+          "volume": "0.00000000"
+        },
+        {
+          "open_time_ms": 1679666400000,
+          "close_time_ms": 1679669999999,
+          "volume": "31139778.00000000"
+        },
+        {
+          "open_time_ms": 1679670000000,
+          "close_time_ms": 1679673599999,
+          "volume": "26938726.00000000"
+        },
+        {
+          "open_time_ms": 1679673600000,
+          "close_time_ms": 1679677199999,
+          "volume": "23329766.00000000"
+        },
+        {
+          "open_time_ms": 1679677200000,
+          "close_time_ms": 1679680799999,
+          "volume": "47244713.00000000"
+        },
+        {
+          "open_time_ms": 1679680800000,
+          "close_time_ms": 1679684399999,
+          "volume": "24501744.00000000"
+        },
+        {
+          "open_time_ms": 1679684400000,
+          "close_time_ms": 1679687999999,
+          "volume": "21949242.00000000"
+        },
+        {
+          "open_time_ms": 1679688000000,
+          "close_time_ms": 1679691599999,
+          "volume": "21918304.00000000"
+        },
+        {
+          "open_time_ms": 1679691600000,
+          "close_time_ms": 1679695199999,
+          "volume": "24037763.00000000"
+        },
+        {
+          "open_time_ms": 1679695200000,
+          "close_time_ms": 1679698799999,
+          "volume": "17265350.00000000"
+        },
+        {
+          "open_time_ms": 1679698800000,
+          "close_time_ms": 1679702399999,
+          "volume": "14518392.00000000"
+        }
+      ]
+    }
+  ],
+  "original_files_modified": false,
+  "gaps_filled": false,
+  "final_holdout_access_count": 0,
+  "universe": {
+    "status": "CONDITIONAL_FIXED_SURVIVORS",
+    "listing_delisting_evidence": "INCOMPLETE",
+    "future_eligibility_rule": "require dated listing, 240 complete 4h history bars and positive trailing 30d liquidity known before entry; missing listing/delisting provenance excludes asset from broad-universe claims"
+  }
+}

@@ -9,6 +9,13 @@
 *.parquet binary
 artifacts/alpha_v4/before/** -text whitespace=cr-at-eol
 artifacts/alpha_v4_multi_asset/** -text whitespace=cr-at-eol
+# Frozen tool output retains its original final blank lines and document line breaks.
+artifacts/alpha_v4_audit/** -text whitespace=-blank-at-eof,cr-at-eol
+artifacts/current_system_backtest/** -text whitespace=-blank-at-eof,cr-at-eol
+artifacts/alpha_r4/** -text whitespace=-blank-at-eof,cr-at-eol
+AegisQuant_Audit_Package_20260908/** -text whitespace=-trailing-space,cr-at-eol
+AegisQuant_R4/** -text whitespace=cr-at-eol
+AegisQuant_盈利验证修复任务书_R2_2026-09-08.md -text whitespace=-trailing-space,cr-at-eol
 artifacts/alpha_v4_multi_asset/summary/portfolio_performance.svg whitespace=-trailing-space
 AegisQuant_盈利导向重构任务书_v4.md -text whitespace=-trailing-space
 AegisQuant_v3.1_Multimodal_Event_Intelligence_Codex_Master_Taskbook.md whitespace=-trailing-space

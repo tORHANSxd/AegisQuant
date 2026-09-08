@@ -1,0 +1,412 @@
+{
+  "status": "COMPLETE_RESEARCH_BACKTEST_NOT_TRADING_ADMISSION",
+  "test_start": "2022-04-01T00:00:00Z",
+  "test_end_exclusive": "2025-10-01T00:00:00Z",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "accounting": "actual continuous cash, paid quarterly liquidation, no external flows or reweighting",
+  "new_model_fits": 0,
+  "new_calibration_fits": 0,
+  "final_holdout_access_count": 0,
+  "portfolio": [
+    {
+      "arm": "CASH",
+      "label": "当前生产配置：现金",
+      "initial_cash": "50000",
+      "final_cash": "50000.0000",
+      "net_profit": "0.0000",
+      "net_compound_return": 0.0,
+      "cagr": 0.0,
+      "sharpe": null,
+      "calmar": null,
+      "maximum_drawdown": 0.0,
+      "closed_trades": 0,
+      "win_rate": null,
+      "mean_holding_days": null,
+      "total_cost": "0.0000",
+      "orders": 0,
+      "fills": 0,
+      "rejections": 0,
+      "positive_quarters": 0,
+      "capital_weighted_exposure": 0.0,
+      "maximum_actual_participation": 0.0
+    },
+    {
+      "arm": "A1",
+      "label": "风险控制趋势（无 ML）",
+      "initial_cash": "50000",
+      "final_cash": "64104.13840725648573040381758",
+      "net_profit": "14104.13840725648573040381758",
+      "net_compound_return": 0.2820827681451399,
+      "cagr": 0.07353966137202606,
+      "sharpe": 0.6327556999675972,
+      "calmar": 0.3599323311974981,
+      "maximum_drawdown": 0.20431524205496887,
+      "closed_trades": 104,
+      "win_rate": 0.41346153846153844,
+      "mean_holding_days": 30.190705128205128,
+      "total_cost": "2912.380238193514269596182425",
+      "orders": 2022,
+      "fills": 2022,
+      "rejections": 0,
+      "positive_quarters": 6,
+      "capital_weighted_exposure": 0.19979353544605558,
+      "maximum_actual_participation": 0.0017973454899037557
+    },
+    {
+      "arm": "A3",
+      "label": "ML 入场与成本过滤",
+      "initial_cash": "50000",
+      "final_cash": "53484.68868035022035724344608",
+      "net_profit": "3484.68868035022035724344608",
+      "net_compound_return": 0.06969377360700557,
+      "cagr": 0.0194261336679602,
+      "sharpe": 0.25793339560209283,
+      "calmar": 0.1283518908129296,
+      "maximum_drawdown": 0.15135058427984838,
+      "closed_trades": 77,
+      "win_rate": 0.42857142857142855,
+      "mean_holding_days": 26.13203463203463,
+      "total_cost": "1855.826105799779642756554033",
+      "orders": 1291,
+      "fills": 1291,
+      "rejections": 0,
+      "positive_quarters": 6,
+      "capital_weighted_exposure": 0.12047874116421219,
+      "maximum_actual_participation": 0.0006099127356502427
+    },
+    {
+      "arm": "A7",
+      "label": "完整研究版本（概率/分位/置信仓位）",
+      "initial_cash": "50000",
+      "final_cash": "51042.48608469835341494832890",
+      "net_profit": "1042.48608469835341494832890",
+      "net_compound_return": 0.020849721693968037,
+      "cagr": 0.005910328115931618,
+      "sharpe": 0.49437954486090885,
+      "calmar": 0.5389977324845547,
+      "maximum_drawdown": 0.010965404415872904,
+      "closed_trades": 25,
+      "win_rate": 0.52,
+      "mean_holding_days": 4.773333333333333,
+      "total_cost": "204.6901077316465850516710885",
+      "orders": 94,
+      "fills": 94,
+      "rejections": 0,
+      "positive_quarters": 6,
+      "capital_weighted_exposure": 0.002644162992243738,
+      "maximum_actual_participation": 0.00013280910171397295
+    }
+  ],
+  "assets": [
+    {
+      "arm": "CASH",
+      "symbol": "BTCUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10000.00",
+      "net_compound_return": 0.0,
+      "cagr": 0.0,
+      "sharpe": null,
+      "calmar": null,
+      "maximum_drawdown": 0.0
+    },
+    {
+      "arm": "CASH",
+      "symbol": "ETHUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10000.00",
+      "net_compound_return": 0.0,
+      "cagr": 0.0,
+      "sharpe": null,
+      "calmar": null,
+      "maximum_drawdown": 0.0
+    },
+    {
+      "arm": "CASH",
+      "symbol": "BNBUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10000.00",
+      "net_compound_return": 0.0,
+      "cagr": 0.0,
+      "sharpe": null,
+      "calmar": null,
+      "maximum_drawdown": 0.0
+    },
+    {
+      "arm": "CASH",
+      "symbol": "SOLUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10000.00",
+      "net_compound_return": 0.0,
+      "cagr": 0.0,
+      "sharpe": null,
+      "calmar": null,
+      "maximum_drawdown": 0.0
+    },
+    {
+      "arm": "CASH",
+      "symbol": "XRPUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10000.0000",
+      "net_compound_return": 0.0,
+      "cagr": 0.0,
+      "sharpe": null,
+      "calmar": null,
+      "maximum_drawdown": 0.0
+    },
+    {
+      "arm": "A1",
+      "symbol": "BTCUSDT",
+      "initial_cash": 10000,
+      "final_cash": "15144.54001830974958523870025",
+      "net_compound_return": 0.5144540018309787,
+      "cagr": 0.12583973436036922,
+      "sharpe": 0.8011082331814835,
+      "calmar": 0.5468807374332009,
+      "maximum_drawdown": 0.2301045287332688
+    },
+    {
+      "arm": "A1",
+      "symbol": "ETHUSDT",
+      "initial_cash": 10000,
+      "final_cash": "9013.625081467276931057045004",
+      "net_compound_return": -0.09863749185327764,
+      "cagr": -0.029220857549932866,
+      "sharpe": -0.11302475175498496,
+      "calmar": -0.0930156513039169,
+      "maximum_drawdown": 0.3141498999394995
+    },
+    {
+      "arm": "A1",
+      "symbol": "BNBUSDT",
+      "initial_cash": 10000,
+      "final_cash": "16666.08545334829773305169557",
+      "net_compound_return": 0.6666085453348294,
+      "cagr": 0.15704448818917993,
+      "sharpe": 0.9606315820416701,
+      "calmar": 0.7533604375237553,
+      "maximum_drawdown": 0.20845863462829894
+    },
+    {
+      "arm": "A1",
+      "symbol": "SOLUSDT",
+      "initial_cash": 10000,
+      "final_cash": "12675.37728339394017141053604",
+      "net_compound_return": 0.26753772833938916,
+      "cagr": 0.07004741793188463,
+      "sharpe": 0.5066737797103096,
+      "calmar": 0.2598267858617666,
+      "maximum_drawdown": 0.26959275079957057
+    },
+    {
+      "arm": "A1",
+      "symbol": "XRPUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10604.51057073722130964584072",
+      "net_compound_return": 0.06045105707371978,
+      "cagr": 0.016902881621998045,
+      "sharpe": 0.1869786532882482,
+      "calmar": 0.07347779868403002,
+      "maximum_drawdown": 0.23004066431935433
+    },
+    {
+      "arm": "A3",
+      "symbol": "BTCUSDT",
+      "initial_cash": 10000,
+      "final_cash": "12056.67867300683196853134236",
+      "net_compound_return": 0.20566786730068087,
+      "cagr": 0.054864239111774404,
+      "sharpe": 0.4688487791785702,
+      "calmar": 0.4612808386801684,
+      "maximum_drawdown": 0.1189389077351527
+    },
+    {
+      "arm": "A3",
+      "symbol": "ETHUSDT",
+      "initial_cash": 10000,
+      "final_cash": "8434.436904634926614877416699",
+      "net_compound_return": -0.15655630953650435,
+      "cagr": -0.047459404534427874,
+      "sharpe": -0.3485517230770694,
+      "calmar": -0.19298660331972284,
+      "maximum_drawdown": 0.24592072049582325
+    },
+    {
+      "arm": "A3",
+      "symbol": "BNBUSDT",
+      "initial_cash": 10000,
+      "final_cash": "8300.500394093260993323338177",
+      "net_compound_return": -0.16994996059066925,
+      "cagr": -0.05180375726220199,
+      "sharpe": -0.3946790120569022,
+      "calmar": -0.2159306613842555,
+      "maximum_drawdown": 0.23990922331319842
+    },
+    {
+      "arm": "A3",
+      "symbol": "SOLUSDT",
+      "initial_cash": 10000,
+      "final_cash": "15887.72332343599971991448482",
+      "net_compound_return": 0.5887723323436003,
+      "cagr": 0.14134809710379392,
+      "sharpe": 1.0140844854546218,
+      "calmar": 0.7948410949206812,
+      "maximum_drawdown": 0.1778318937043628
+    },
+    {
+      "arm": "A3",
+      "symbol": "XRPUSDT",
+      "initial_cash": 10000,
+      "final_cash": "8805.349385179201060596864019",
+      "net_compound_return": -0.11946506148207736,
+      "cagr": -0.03568032750256667,
+      "sharpe": -0.2365505697947712,
+      "calmar": -0.20514189682590186,
+      "maximum_drawdown": 0.17392998726558306
+    },
+    {
+      "arm": "A7",
+      "symbol": "BTCUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10178.40805208537831422542014",
+      "net_compound_return": 0.017840805208537036,
+      "cagr": 0.0050627396212463704,
+      "sharpe": 0.36583324975904435,
+      "calmar": 0.3518356523753131,
+      "maximum_drawdown": 0.014389501425073892
+    },
+    {
+      "arm": "A7",
+      "symbol": "ETHUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10056.72918286768594433131256",
+      "net_compound_return": 0.005672918286769191,
+      "cagr": 0.0016167694422655199,
+      "sharpe": 0.08883144324425192,
+      "calmar": 0.04409006775377032,
+      "maximum_drawdown": 0.036669697386148004
+    },
+    {
+      "arm": "A7",
+      "symbol": "BNBUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10205.99306613000028326568208",
+      "net_compound_return": 0.020599306612998802,
+      "cagr": 0.005839856266123489,
+      "sharpe": 0.28100171674866925,
+      "calmar": 0.2142767154808844,
+      "maximum_drawdown": 0.027253807083133408
+    },
+    {
+      "arm": "A7",
+      "symbol": "SOLUSDT",
+      "initial_cash": 10000,
+      "final_cash": "9794.522328695239417612710887",
+      "net_compound_return": -0.02054776713047457,
+      "cagr": -0.0059115047762546835,
+      "sharpe": -0.3377270690123564,
+      "calmar": -0.14712065523083,
+      "maximum_drawdown": 0.0401813380111693
+    },
+    {
+      "arm": "A7",
+      "symbol": "XRPUSDT",
+      "initial_cash": 10000,
+      "final_cash": "10806.83345492004945551320323",
+      "net_compound_return": 0.08068334549200507,
+      "cagr": 0.022406086220648103,
+      "sharpe": 0.5958057076525197,
+      "calmar": 0.738442356239484,
+      "maximum_drawdown": 0.03034236326143458
+    }
+  ],
+  "year_returns": [
+    {
+      "arm": "CASH",
+      "year": 2022,
+      "net_return": 0.0
+    },
+    {
+      "arm": "CASH",
+      "year": 2023,
+      "net_return": 0.0
+    },
+    {
+      "arm": "CASH",
+      "year": 2024,
+      "net_return": 0.0
+    },
+    {
+      "arm": "CASH",
+      "year": 2025,
+      "net_return": 0.0
+    },
+    {
+      "arm": "A1",
+      "year": 2022,
+      "net_return": -0.14349435618567286
+    },
+    {
+      "arm": "A1",
+      "year": 2023,
+      "net_return": 0.1898077406528853
+    },
+    {
+      "arm": "A1",
+      "year": 2024,
+      "net_return": 0.12558858782990012
+    },
+    {
+      "arm": "A1",
+      "year": 2025,
+      "net_return": 0.1177105824015714
+    },
+    {
+      "arm": "A3",
+      "year": 2022,
+      "net_return": -0.07996196496270946
+    },
+    {
+      "arm": "A3",
+      "year": 2023,
+      "net_return": 0.1447168862510373
+    },
+    {
+      "arm": "A3",
+      "year": 2024,
+      "net_return": 0.028986018181526685
+    },
+    {
+      "arm": "A3",
+      "year": 2025,
+      "net_return": -0.012934157965344695
+    },
+    {
+      "arm": "A7",
+      "year": 2022,
+      "net_return": -0.0008666309510875214
+    },
+    {
+      "arm": "A7",
+      "year": 2023,
+      "net_return": 0.0
+    },
+    {
+      "arm": "A7",
+      "year": 2024,
+      "net_return": 0.007998954445301854
+    },
+    {
+      "arm": "A7",
+      "year": 2025,
+      "net_return": 0.013627230987412142
+    }
+  ],
+  "cash_transitions_verified": 280,
+  "maximum_cost_identity_residual": "5.52156658E-23"
+}

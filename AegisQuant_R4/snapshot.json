@@ -1,0 +1,27 @@
+{
+  "source": "用户本轮粘贴的《当前量化系统：历史回测结果》，手工结构化摘录；不是原 results.json",
+  "reported_run_directory": "artifacts/current_system_backtest/20260908_v1",
+  "source_binary_files_obtained": false,
+  "initial_usdt": "50000",
+  "start": "2022-04-01T00:00:00+00:00",
+  "end_exclusive": "2025-10-01T00:00:00+00:00",
+  "capital_policy": "逐币现金跨季继承；季度末付费平仓；无跨币转资",
+  "ledger_partitions_reported": 280,
+  "training_fits_reported": 0,
+  "calibrator_fits_reported": 0,
+  "parameter_optimizations_reported": 0,
+  "model_economic_exit_enabled_reported": false,
+  "strategies": {
+    "A1": {"final_usdt":"64104.14", "execution_cost_usdt":"2912.38", "cagr":"0.0735", "max_drawdown":"0.2043", "sharpe":"0.633", "closed_trades":104, "fills":2022, "average_exposure":"0.19979", "win_rate":"0.4135"},
+    "A3": {"final_usdt":"53484.69", "execution_cost_usdt":"1855.83", "cagr":"0.0194", "max_drawdown":"0.1514", "sharpe":"0.258", "closed_trades":77, "fills":1291, "average_exposure":"0.12048", "win_rate":"0.4286"},
+    "A7": {"final_usdt":"51042.49", "execution_cost_usdt":"204.69", "cagr":"0.0059", "max_drawdown":"0.0110", "sharpe":"0.494", "closed_trades":25, "fills":94, "average_exposure":"0.00264", "win_rate":"0.52"}
+  },
+  "coin_returns": {
+    "BTCUSDT":{"A1":"0.5145", "A3":"0.2057", "A7":"0.0178"},
+    "ETHUSDT":{"A1":"-0.0986", "A3":"-0.1566", "A7":"0.0057"},
+    "BNBUSDT":{"A1":"0.6666", "A3":"-0.1699", "A7":"0.0206"},
+    "SOLUSDT":{"A1":"0.2675", "A3":"0.5888", "A7":"-0.0205"},
+    "XRPUSDT":{"A1":"0.0605", "A3":"-0.1195", "A7":"0.0807"}
+  },
+  "limitations": ["已使用开发期非最终盲测", "固定存活五币", "费用和容量为研究代理", "未读取本地逐笔证据", "归档失败未产生新提交"]
+}

@@ -1,0 +1,29 @@
+{
+  "arm": "F4",
+  "symbol": "ETHUSDT",
+  "mode": "REDECIDE_FUNDED",
+  "cost_multiplier": "1.5",
+  "status": "REPLAYED",
+  "output": "runs/F4/ETHUSDT/REDECIDE_FUNDED_1.5",
+  "final_cash": "11863.31023053118604388220858",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "11863.31023053118604388220858",
+      "final_cash": "11863.31023053118604388220858",
+      "position_quantity": "0",
+      "total_cost": "295.0417124688139561177914053",
+      "orders": 341,
+      "fills": 341,
+      "rejections": 0,
+      "closed_trades": 9,
+      "cost_identity_residual": "1.5077948E-23",
+      "exit_decision_mtm": "11872.07052146340519553591881",
+      "terminal_mtm_at_exit_reference": "11872.07960146340519553591882",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": null
+    }
+  ]
+}

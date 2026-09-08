@@ -1,0 +1,22 @@
+{
+  "status": "NO_PROVEN_ALPHA",
+  "folds": 70,
+  "final_holdout_access_count": 0,
+  "files": {
+    "ablation_results.parquet": "8584a7c49d97f8cc8f15ce09b4062f49ab603fe4d2d8b0d590a9c358733c88a2",
+    "all_trade_outcomes.parquet": "ad3b60963d6abe5303f03b8d4e03bdf4c579c3fae1bc4276d4d87e0d928147d1",
+    "alpha_attribution.md": "74b6c20e2a28937df882484c6c68c5d2ded37981f4c3d1cb509d1068c0a54475",
+    "calibration_curve.parquet": "27bf402fbf4b923bce86949f3a793fc8cf3c1484209fa519a2a79c82b6c8b4fb",
+    "candidate_rejections.json": "ed9d0ef09b28a93ecd211f2ef837f6cb680cfe47d0981f383b32c1a02920ffe9",
+    "candidate_trade_labels.parquet": "3d4f49f780be7833ae8896e1a1a4be089a5fd6c3108150aac779dff5d68161e3",
+    "concentration.json": "bcd921a4063b3d5dfef92a5ea604798cd78970c2daadb4cc4b28f52332aec466",
+    "early_exit_reentry.parquet": "e4e476d611c67bb931dc1766071cfb6d9e2a1c55edf271b4935d5cfb49259c31",
+    "fold_stability.parquet": "6dd9a44c7fbe9d54414de365670837f0cb8e544b292f9b66caa0e902e339759c",
+    "model_research_gate.json": "472037611b66dbfdd2a70c6ba1a334b82ec6b52223f25f35eb58f993431691b2",
+    "monthly_calibration.parquet": "514497214bbcbf05c667659512f52be0a5adc55bf4238b2afcf5f5131f1c282f",
+    "paired_statistics.json": "14e5f118e6b4f97f0bab98509282b132efe985127fdc9eb2f76ac33f6c931f04",
+    "portfolio_curves.parquet": "3feeccba8576887bae29a5fefbe7832dafa58709e465ba60756a3f7294d759bc",
+    "reason_counts.parquet": "8a967eada8c8b8aaf31aefb4003b3c3d9c58feb70d88199c605a6e16107e4de0",
+    "same_fill_shadow.parquet": "722aba92242a5c944960dcf47b81000b55e9db3165d139fead26d5ad7355b2c0"
+  }
+}

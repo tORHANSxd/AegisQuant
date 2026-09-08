@@ -1,0 +1,294 @@
+{
+  "trials": [
+    {
+      "arm": "F4",
+      "symbol": "XRPUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "1",
+      "status": "REPLAYED",
+      "output": "runs/F4/XRPUSDT/REDECIDE_FUNDED_1",
+      "final_cash": "10398.52839473785699682787934",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "10398.52839473785699682787934",
+          "final_cash": "10398.52839473785699682787934",
+          "position_quantity": "0",
+          "total_cost": "180.6921152621430031721206661",
+          "orders": 389,
+          "fills": 389,
+          "rejections": 0,
+          "closed_trades": 10,
+          "cost_identity_residual": "-5.883715E-24",
+          "exit_decision_mtm": "10403.03899319043408540972260",
+          "terminal_mtm_at_exit_reference": "10403.14289319043408540972260",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F4",
+      "symbol": "XRPUSDT",
+      "mode": "FROZEN_ORDERS_FUNDED",
+      "cost_multiplier": "1.5",
+      "status": "REPLAYED",
+      "output": "runs/F4/XRPUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "final_cash": "10308.18609522592398788517672",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "10308.18609522592398788517672",
+          "final_cash": "10308.18609522592398788517672",
+          "position_quantity": "0",
+          "total_cost": "271.0344147740760121148232693",
+          "orders": 389,
+          "fills": 389,
+          "rejections": 0,
+          "closed_trades": 10,
+          "cost_identity_residual": "1.012442E-23",
+          "exit_decision_mtm": null,
+          "terminal_mtm_at_exit_reference": "10315.10661241661201033107837",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": true
+        }
+      ]
+    },
+    {
+      "arm": "F4",
+      "symbol": "XRPUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "1.5",
+      "status": "REPLAYED",
+      "output": "runs/F4/XRPUSDT/REDECIDE_FUNDED_1.5",
+      "final_cash": "10297.83661218607780890933593",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "10297.83661218607780890933593",
+          "final_cash": "10297.83661218607780890933593",
+          "position_quantity": "0",
+          "total_cost": "269.7065878139221910906640774",
+          "orders": 389,
+          "fills": 389,
+          "rejections": 0,
+          "closed_trades": 10,
+          "cost_identity_residual": "-7.45048E-24",
+          "exit_decision_mtm": "10304.58892759522127337606955",
+          "terminal_mtm_at_exit_reference": "10304.69184759522127337606955",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F4",
+      "symbol": "XRPUSDT",
+      "mode": "FROZEN_ORDERS_FUNDED",
+      "cost_multiplier": "2",
+      "status": "REPLAYED",
+      "output": "runs/F4/XRPUSDT/FROZEN_ORDERS_FUNDED_2",
+      "final_cash": "10217.84630112674997403804596",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "10217.84630112674997403804596",
+          "final_cash": "10217.84630112674997403804596",
+          "position_quantity": "0",
+          "total_cost": "361.3742088732500259619540551",
+          "orders": 389,
+          "fills": 389,
+          "rejections": 0,
+          "closed_trades": 10,
+          "cost_identity_residual": "-1.456734E-23",
+          "exit_decision_mtm": null,
+          "terminal_mtm_at_exit_reference": "10227.07201673009719006343049",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": true
+        }
+      ]
+    },
+    {
+      "arm": "F4",
+      "symbol": "XRPUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "2",
+      "status": "REPLAYED",
+      "output": "runs/F4/XRPUSDT/REDECIDE_FUNDED_2",
+      "final_cash": "10198.12800585714986240942792",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "10198.12800585714986240942792",
+          "final_cash": "10198.12800585714986240942792",
+          "position_quantity": "0",
+          "total_cost": "357.8473441428501375905720804",
+          "orders": 389,
+          "fills": 389,
+          "rejections": 0,
+          "closed_trades": 10,
+          "cost_identity_residual": "1.5657E-25",
+          "exit_decision_mtm": "10207.07860585882066737817397",
+          "terminal_mtm_at_exit_reference": "10207.18055585882066737817397",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "XRPUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "1",
+      "status": "REPLAYED",
+      "output": "runs/F5/XRPUSDT/REDECIDE_FUNDED_1",
+      "final_cash": "15012.34824201477547737994608",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "15012.34824201477547737994608",
+          "final_cash": "15012.34824201477547737994608",
+          "position_quantity": "0",
+          "total_cost": "419.9901679852245226200539000",
+          "orders": 766,
+          "fills": 766,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "1.970863E-23",
+          "exit_decision_mtm": "15021.84718456923413132413233",
+          "terminal_mtm_at_exit_reference": "15022.06596456923413132413232",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "XRPUSDT",
+      "mode": "FROZEN_ORDERS_FUNDED",
+      "cost_multiplier": "1.5",
+      "status": "REPLAYED",
+      "output": "runs/F5/XRPUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "final_cash": "14802.37250975079121301037892",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "14802.37250975079121301037892",
+          "final_cash": "14802.37250975079121301037892",
+          "position_quantity": "0",
+          "total_cost": "629.9659002492087869896211144",
+          "orders": 766,
+          "fills": 766,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "-3.418690E-23",
+          "exit_decision_mtm": null,
+          "terminal_mtm_at_exit_reference": "14816.94650176497584658886234",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": true
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "XRPUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "1.5",
+      "status": "REPLAYED",
+      "output": "runs/F5/XRPUSDT/REDECIDE_FUNDED_1.5",
+      "final_cash": "14702.90353502607752789766377",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "14702.90353502607752789766377",
+          "final_cash": "14702.90353502607752789766377",
+          "position_quantity": "0",
+          "total_cost": "623.1515549739224721023362372",
+          "orders": 768,
+          "fills": 768,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "-7.17693E-24",
+          "exit_decision_mtm": "14716.96735633760165317019964",
+          "terminal_mtm_at_exit_reference": "14717.18169633760165317019963",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "XRPUSDT",
+      "mode": "FROZEN_ORDERS_FUNDED",
+      "cost_multiplier": "2",
+      "status": "REPLAYED",
+      "output": "runs/F5/XRPUSDT/FROZEN_ORDERS_FUNDED_2",
+      "final_cash": "14592.40967863922561326778486",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "14592.40967863922561326778486",
+          "final_cash": "14592.40967863922561326778486",
+          "position_quantity": "0",
+          "total_cost": "839.9287313607743867322151703",
+          "orders": 766,
+          "fills": 766,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "-3.218253E-23",
+          "exit_decision_mtm": null,
+          "terminal_mtm_at_exit_reference": "14611.83821223480066158870151",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": true
+        }
+      ]
+    },
+    {
+      "arm": "F5",
+      "symbol": "XRPUSDT",
+      "mode": "REDECIDE_FUNDED",
+      "cost_multiplier": "2",
+      "status": "REPLAYED",
+      "output": "runs/F5/XRPUSDT/REDECIDE_FUNDED_2",
+      "final_cash": "14409.32362906587137965031428",
+      "segments": [
+        {
+          "segment": "continuous",
+          "initial_cash": "10000",
+          "final_equity": "14409.32362906587137965031428",
+          "final_cash": "14409.32362906587137965031428",
+          "position_quantity": "0",
+          "total_cost": "821.8291309341286203496857908",
+          "orders": 768,
+          "fills": 768,
+          "rejections": 0,
+          "closed_trades": 1,
+          "cost_identity_residual": "-7.272957E-23",
+          "exit_decision_mtm": "14427.77372335382433208562381",
+          "terminal_mtm_at_exit_reference": "14427.98385335382433208562382",
+          "exit_reference_time": "2025-09-30 20:00:00+00:00",
+          "forced_close_status": "NO_POSITION",
+          "same_fill_quantities_as_1x": null
+        }
+      ]
+    }
+  ]
+}

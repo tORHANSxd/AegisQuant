@@ -1,0 +1,29 @@
+{
+  "arm": "F4",
+  "symbol": "BNBUSDT",
+  "mode": "FROZEN_ORDERS_FUNDED",
+  "cost_multiplier": "1.5",
+  "status": "REPLAYED",
+  "output": "runs/F4/BNBUSDT/FROZEN_ORDERS_FUNDED_1.5",
+  "final_cash": "15191.18281905347455228123488",
+  "segments": [
+    {
+      "segment": "continuous",
+      "initial_cash": "10000",
+      "final_equity": "15191.18281905347455228123488",
+      "final_cash": "15191.18281905347455228123488",
+      "position_quantity": "0",
+      "total_cost": "497.8198109465254477187651375",
+      "orders": 443,
+      "fills": 443,
+      "rejections": 0,
+      "closed_trades": 8,
+      "cost_identity_residual": "-1.859999E-23",
+      "exit_decision_mtm": null,
+      "terminal_mtm_at_exit_reference": "15204.42146129665497078536350",
+      "exit_reference_time": "2025-09-30 20:00:00+00:00",
+      "forced_close_status": "NO_POSITION",
+      "same_fill_quantities_as_1x": true
+    }
+  ]
+}
