@@ -15,7 +15,7 @@ import pyarrow.parquet as pq
 from aegisquant.backtest.models import BacktestResult
 from aegisquant.data.hashing import canonical_json_bytes, sha256_file
 
-REQUIRED_BACKTEST_ARTIFACTS = (
+LEGACY_P06_BACKTEST_ARTIFACTS = (
     "run_manifest.json",
     "orders.parquet",
     "fills.parquet",
@@ -29,6 +29,7 @@ REQUIRED_BACKTEST_ARTIFACTS = (
     "risk_report.md",
     "reproduction_command.txt",
 )
+REQUIRED_BACKTEST_ARTIFACTS = (*LEGACY_P06_BACKTEST_ARTIFACTS, "closed_trades.parquet")
 
 
 class _ParquetWrite(Protocol):
@@ -314,6 +315,23 @@ PNL_SCHEMA = _string_schema(
 
 
 def _write_tables(result: BacktestResult, output: Path) -> None:
+    _write_parquet(
+        output / "closed_trades.parquet",
+        (trade.model_dump(mode="json") for trade in result.closed_trades),
+        _string_schema(
+            tuple(
+                (field, pa.string())
+                for field in (
+                    "opened_at",
+                    "closed_at",
+                    "side",
+                    "gross_pnl",
+                    "net_pnl",
+                    "holding_seconds",
+                )
+            )
+        ),
+    )
     _write_parquet(output / "orders.parquet", _orders(result), ORDER_SCHEMA)
     _write_parquet(output / "fills.parquet", _fills(result), FILL_SCHEMA)
     _write_parquet(output / "ledger_entries.parquet", _ledger_entries(result), LEDGER_SCHEMA)

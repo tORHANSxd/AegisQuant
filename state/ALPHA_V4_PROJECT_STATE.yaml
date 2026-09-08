@@ -38,8 +38,9 @@ completed:
   - executable_entry_directional_action_value_labels
   - all_market_event_replay_and_fixed_frequency_mtm
   - cash_margin_liquidation_borrow_reduce_only_oco_and_depth_integrity
+  - calibrated_no_trade_default_compounded_costed_metrics_and_abstaining_council
 blockers: []
-pending_phases: [A_diagnostic_matrix, B_metrics_and_council, C, D, E, F, G]
+pending_phases: [A_diagnostic_matrix, C, D, E, F, G]
 model_retrained: true
 model_retraining_scope: original_baseline_reconstruction_only
 strategy_source_modified: false
@@ -49,7 +50,7 @@ final_holdout_access_count: 0
 live_trading: false
 order_submission_enabled: false
 live_adapter_registry_empty: true
-next_action: finish_metrics_and_council_then_same_signal_A0_A10_attribution
+next_action: same_signal_A0_A10_attribution_then_frozen_CAT_baselines
 local_archive:
   status: blocked_existing_non_main_archive
   path: 'D:\Workspace\git\Personal--Quantitative_Trading.git'

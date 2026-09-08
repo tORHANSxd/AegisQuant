@@ -27,7 +27,7 @@ from aegisquant.backtest.margin import (
     margin_policy_at,
     select_margin_bracket,
 )
-from aegisquant.backtest.metrics import calculate_metrics
+from aegisquant.backtest.metrics import calculate_metrics, closed_round_trips
 from aegisquant.backtest.models import (
     BacktestFill,
     BacktestOrder,
@@ -510,6 +510,7 @@ class EventBacktestEngine:
         realized = Decimal("0")
         funding_total = Decimal("0")
         borrow_total = Decimal("0")
+        carrying_cost_points: list[tuple[int, Decimal]] = []
         borrowed_quantity = Decimal("0")
         borrow_accrued_at = spec.start_time
         run_warnings: list[str] = []
@@ -657,6 +658,8 @@ class EventBacktestEngine:
                 )
                 cash = canonical_result(cash - cost)
                 borrow_total = canonical_result(borrow_total + cost)
+                if cost != 0:
+                    carrying_cost_points.append((len(fills), cost))
             borrow_accrued_at = at_time
 
         def apply_slice(state: _MutableOrderState, fill_slice: FillSlice) -> None:
@@ -1033,6 +1036,7 @@ class EventBacktestEngine:
                     )
                     cash = canonical_result(cash - cost)
                     funding_total = canonical_result(funding_total + cost)
+                    carrying_cost_points.append((len(fills), cost))
                 liquidate_at(funding_event.mark_price, at_time, None)
                 if timestamp_complete:
                     record_equity(at_time)
@@ -1395,6 +1399,11 @@ class EventBacktestEngine:
             ),
         )
         exposure_tuple = tuple(exposures)
+        closed_trades, reversal_count = closed_round_trips(
+            fills_tuple,
+            contract_multiplier=instrument.contract_multiplier,
+            carrying_costs=tuple(carrying_cost_points),
+        )
         metrics = calculate_metrics(
             equity_curve=tuple(equity_curve),
             fills=fills_tuple,
@@ -1402,6 +1411,10 @@ class EventBacktestEngine:
             multi_leg_exposures=exposure_tuple,
             frequency_seconds=spec.metric_frequency_seconds,
             initial_equity=spec.initial_cash.amount,
+            closed_trades=closed_trades,
+            reversal_count=reversal_count,
+            carrying_cost=funding_total + borrow_total,
+            contract_multiplier=instrument.contract_multiplier,
         )
         economic_hash = canonical_sha256(
             {
@@ -1457,6 +1470,7 @@ class EventBacktestEngine:
             forced_close_mark_adjustment=canonical_result(forced_close_mark_adjustment),
             forced_close_status=close_status,
             cost_identity_residual=identity_residual,
+            closed_trades=closed_trades,
             precision_levels=tuple(
                 sorted({fill.precision for fill in fills}, key=lambda item: item.value)
             ),

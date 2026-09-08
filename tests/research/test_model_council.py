@@ -8,7 +8,7 @@ from aegisquant.research.council import CandidateState, CouncilCandidate, run_mo
 from aegisquant.research.models.baselines import ResearchModality
 
 
-def _candidate(
+def candidate(
     model_id: str, family: str, modality: ResearchModality, loss: str
 ) -> CouncilCandidate:
     return CouncilCandidate(
@@ -22,7 +22,12 @@ def _candidate(
         seed=7,
         state=CandidateState.EVALUATED,
         primary_loss=Decimal(loss),
-        net_return=Decimal("0"),
+        net_return=Decimal("0.10"),
+        statistical_gate_passed=True,
+        economic_gate_passed=True,
+        cost_stress_gate_passed=True,
+        stability_gate_passed=True,
+        gate_evidence_sha256="f" * 64,
         train_seconds=Decimal("1"),
         peak_memory_mb=Decimal("100"),
     )
@@ -30,9 +35,9 @@ def _candidate(
 
 def test_complex_model_is_eliminated_without_incremental_oos_improvement() -> None:
     candidates = (
-        _candidate("linear", "LINEAR", ResearchModality.MARKET_ONLY, "0.10"),
-        _candidate("event-tree", "LIGHTGBM", ResearchModality.EVENT_ONLY, "0.12"),
-        _candidate("fused-deep", "TCN", ResearchModality.FUSED, "0.099"),
+        candidate("linear", "LINEAR", ResearchModality.MARKET_ONLY, "0.10"),
+        candidate("event-tree", "LIGHTGBM", ResearchModality.EVENT_ONLY, "0.12"),
+        candidate("fused-deep", "TCN", ResearchModality.FUSED, "0.099"),
     )
     report = run_model_council(
         candidates=candidates,

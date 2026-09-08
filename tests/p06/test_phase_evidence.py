@@ -9,7 +9,7 @@ from typing import cast
 
 import yaml
 
-from aegisquant.backtest.artifacts import REQUIRED_BACKTEST_ARTIFACTS
+from aegisquant.backtest.artifacts import LEGACY_P06_BACKTEST_ARTIFACTS
 
 
 def _json(path: Path) -> dict[str, object]:
@@ -208,7 +208,7 @@ def test_p06_traceability_has_13_verified_tasks_and_6_deferred_acceptance_rows(
 def test_p06_golden_backtest_has_exact_artifact_contract(project_root: Path) -> None:
     output = project_root / "reports/backtests/p06-golden"
     assert {path.name for path in output.iterdir() if path.is_file()} == set(
-        REQUIRED_BACKTEST_ARTIFACTS
+        LEGACY_P06_BACKTEST_ARTIFACTS
     )
     manifest = _json(output / "run_manifest.json")
     assert manifest["schema_version"] == "p06-backtest-run-manifest-v1"

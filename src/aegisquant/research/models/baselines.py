@@ -4,9 +4,10 @@
 from __future__ import annotations
 
 import math
+from datetime import UTC, datetime
 from decimal import Decimal
 from enum import StrEnum
-from typing import Annotated
+from typing import Annotated, Literal
 
 import numpy as np
 from pydantic import Field, model_validator
@@ -21,9 +22,11 @@ from aegisquant.domain.time import UtcDateTime
 from aegisquant.domain.values import (
     FiniteDecimal,
     NonNegativeDecimal,
+    PositiveDecimal,
     UnitInterval,
-    canonical_result,
 )
+from aegisquant.research.prediction_metrics import PredictionMetrics, prediction_metrics
+from aegisquant.research.return_evaluation import ReturnEvaluation, evaluate_return_path
 
 
 class BaselineModelKind(StrEnum):
@@ -105,6 +108,7 @@ class BaselinePrediction(DomainModel):
     sample_ids: tuple[str, ...]
     predictions: tuple[FiniteDecimal, ...]
     positive_probabilities: tuple[UnitInterval, ...] | None = None
+    class_probabilities: tuple[tuple[UnitInterval, UnitInterval, UnitInterval], ...] | None = None
 
     @model_validator(mode="after")
     def validate_dimensions(self) -> BaselinePrediction:
@@ -114,6 +118,11 @@ class BaselinePrediction(DomainModel):
             self.predictions
         ):
             raise ValueError("probability dimensions differ")
+        if self.class_probabilities is not None and (
+            len(self.class_probabilities) != len(self.predictions)
+            or any(abs(sum(row) - 1) > Decimal("1e-12") for row in self.class_probabilities)
+        ):
+            raise ValueError("three-class probability dimensions or sums differ")
         return self
 
 
@@ -139,6 +148,7 @@ def fit_predict_baseline(
     test_x = np.asarray(test.features, dtype=np.float64)
     train_y = np.asarray(train.targets, dtype=np.float64)
     probabilities: tuple[Decimal, ...] | None = None
+    class_probabilities: tuple[tuple[Decimal, Decimal, Decimal], ...] | None = None
 
     if spec.kind is BaselineModelKind.LINEAR:
         estimator = _regression_pipeline(LinearRegression())
@@ -180,6 +190,19 @@ def fit_predict_baseline(
             raise TypeError("logistic pipeline contract changed")
         probability_matrix = classifier.predict_proba(test_x)
         classes = tuple(float(value) for value in model.classes_)
+
+        def class_probability(value: float) -> tuple[Decimal, ...]:
+            return (
+                _as_decimal(probability_matrix[:, classes.index(value)])
+                if value in classes
+                else (Decimal("0"),) * len(test.sample_ids)
+            )
+
+        class_probabilities = tuple(
+            zip(
+                class_probability(-1.0), class_probability(0.0), class_probability(1.0), strict=True
+            )
+        )
         if 1.0 in classes:
             probabilities = _as_decimal(probability_matrix[:, classes.index(1.0)])
         else:
@@ -220,7 +243,16 @@ def fit_predict_baseline(
         sample_ids=test.sample_ids,
         predictions=_as_decimal(np.asarray(raw_predictions)),
         positive_probabilities=probabilities,
+        class_probabilities=class_probabilities,
     )
+
+
+class CalibratedThreshold(DomainModel):
+    edge_threshold: PositiveDecimal
+    class_flat_band: NonNegativeDecimal
+    calibrated_at: UtcDateTime
+    evidence_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    source: Literal["VALIDATION_ONLY"] = "VALIDATION_ONLY"
 
 
 class ModelEvaluation(DomainModel):
@@ -231,13 +263,19 @@ class ModelEvaluation(DomainModel):
     direction_accuracy: UnitInterval
     brier_score: NonNegativeDecimal | None
     gross_return: FiniteDecimal
-    transaction_cost: NonNegativeDecimal
+    # Difference between compounded cost-free and compounded net NAV.
+    # Actual debited costs are account.cash_cost_paid.
+    transaction_cost: FiniteDecimal
     net_return: FiniteDecimal
     turnover: NonNegativeDecimal
+    decision: str
+    threshold_evidence_sha256: str | None
+    prediction_metrics: PredictionMetrics
+    account: ReturnEvaluation
 
     @model_validator(mode="after")
     def validate_economics(self) -> ModelEvaluation:
-        if self.net_return != canonical_result(self.gross_return - self.transaction_cost):
+        if abs(self.net_return - (self.gross_return - self.transaction_cost)) > Decimal("1e-24"):
             raise ValueError("model evaluation net return must conserve")
         return self
 
@@ -248,68 +286,58 @@ def evaluate_predictions(
     modality: ResearchModality,
     realized_returns: tuple[Decimal, ...],
     cost_rates: tuple[Decimal, ...],
-    edge_threshold: Decimal = Decimal("0"),
+    calibration: CalibratedThreshold | None = None,
+    evaluation_start: datetime | None = None,
+    frequency_seconds: int = 3600,
+    past_benchmark: tuple[Decimal, ...] | None = None,
 ) -> ModelEvaluation:
     if len(predictions.predictions) != len(realized_returns) or len(cost_rates) != len(
         realized_returns
     ):
         raise ValueError("evaluation dimensions differ")
-    if any(value < 0 for value in cost_rates):
-        raise ValueError("evaluation costs cannot be negative")
+    if calibration is not None and (
+        evaluation_start is None or calibration.calibrated_at >= evaluation_start
+    ):
+        raise ValueError("threshold calibration must precede evaluation")
+    edge_threshold = calibration.edge_threshold if calibration is not None else None
     positions = tuple(
         Decimal("1")
-        if value > edge_threshold
+        if edge_threshold is not None and value > edge_threshold
         else Decimal("-1")
-        if value < -edge_threshold
+        if edge_threshold is not None and value < -edge_threshold
         else Decimal("0")
         for value in predictions.predictions
     )
-    gross = sum(
-        (
-            position * realized
-            for position, realized in zip(positions, realized_returns, strict=True)
-        ),
-        Decimal("0"),
+    diagnostics = prediction_metrics(
+        predictions.predictions,
+        realized_returns,
+        flat_band=calibration.class_flat_band if calibration is not None else Decimal("0"),
+        past_benchmark=past_benchmark,
+        class_probabilities=predictions.class_probabilities,
+        positive_probabilities=predictions.positive_probabilities,
     )
-    previous = Decimal("0")
-    turnover = Decimal("0")
-    transaction_cost = Decimal("0")
-    for position, cost in zip(positions, cost_rates, strict=True):
-        change = abs(position - previous)
-        turnover += change
-        transaction_cost += change * cost
-        previous = position
-    errors = tuple(
-        prediction - realized
-        for prediction, realized in zip(predictions.predictions, realized_returns, strict=True)
+    account = evaluate_return_path(
+        positions=positions,
+        realized_returns=realized_returns,
+        one_way_cost_rates=cost_rates,
+        start=evaluation_start or datetime(1970, 1, 1, tzinfo=UTC),
+        frequency_seconds=frequency_seconds,
     )
-    mse = sum((error * error for error in errors), Decimal("0")) / Decimal(len(errors))
-    correct = sum(
-        (prediction > 0) == (realized > 0)
-        for prediction, realized in zip(predictions.predictions, realized_returns, strict=True)
-        if realized != 0
-    )
-    nonzero = sum(value != 0 for value in realized_returns)
-    accuracy = Decimal(correct) / Decimal(nonzero) if nonzero else Decimal("0")
-    brier: Decimal | None = None
-    if predictions.positive_probabilities is not None:
-        brier = sum(
-            (probability - (Decimal("1") if realized > 0 else Decimal("0"))) ** 2
-            for probability, realized in zip(
-                predictions.positive_probabilities, realized_returns, strict=True
-            )
-        ) / Decimal(len(realized_returns))
     return ModelEvaluation(
         model_id=predictions.model_id,
         modality=modality,
         observations=len(realized_returns),
-        mean_squared_error=canonical_result(mse),
-        direction_accuracy=canonical_result(accuracy),
-        brier_score=canonical_result(brier) if brier is not None else None,
-        gross_return=canonical_result(gross),
-        transaction_cost=canonical_result(transaction_cost),
-        net_return=canonical_result(gross - transaction_cost),
-        turnover=canonical_result(turnover),
+        mean_squared_error=diagnostics.mean_squared_error,
+        direction_accuracy=diagnostics.direction_accuracy,
+        brier_score=diagnostics.brier_score,
+        gross_return=account.gross_return,
+        transaction_cost=account.cost_drag,
+        net_return=account.net_return,
+        turnover=account.turnover,
+        decision="NO_TRADE" if not any(positions) else "NORMALIZED_SIGNAL_SCREEN",
+        threshold_evidence_sha256=calibration.evidence_sha256 if calibration is not None else None,
+        prediction_metrics=diagnostics,
+        account=account,
     )
 
 

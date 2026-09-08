@@ -614,6 +614,26 @@ class PnLAttributionPoint(DomainModel):
         return self
 
 
+class ClosedTrade(DomainModel):
+    opened_at: UtcDateTime
+    closed_at: UtcDateTime
+    side: OrderSide
+    gross_pnl: FiniteDecimal
+    net_pnl: FiniteDecimal
+    holding_seconds: NonNegativeDecimal
+
+
+class TradeStatistics(DomainModel):
+    closed_trade_count: NonNegativeInt = 0
+    win_rate: UnitInterval = Decimal("0")
+    average_win: NonNegativeDecimal = Decimal("0")
+    average_loss: NonNegativeDecimal = Decimal("0")
+    payoff_ratio: NonNegativeDecimal | None = None
+    expectancy: FiniteDecimal = Decimal("0")
+    average_holding_seconds: NonNegativeDecimal = Decimal("0")
+    reversal_count: NonNegativeInt = 0
+
+
 class BacktestMetrics(DomainModel):
     total_return: FiniteDecimal
     annualized_return: FiniteDecimal | None
@@ -636,6 +656,9 @@ class BacktestMetrics(DomainModel):
     cancel_rate: UnitInterval
     average_latency_ns: NonNegativeDecimal
     maximum_multi_leg_exposure: NonNegativeDecimal
+    trade_statistics: TradeStatistics = Field(default_factory=TradeStatistics)
+    cost_to_gross_profit_ratio: NonNegativeDecimal | None = None
+    metric_frequency_seconds: PositiveInt = 3600
 
 
 class BacktestResult(DomainModel):
@@ -659,6 +682,7 @@ class BacktestResult(DomainModel):
     forced_close_mark_adjustment: FiniteDecimal = Decimal("0")
     forced_close_status: str = "LEGACY_NOT_EVALUATED"
     cost_identity_residual: FiniteDecimal = Decimal("0")
+    closed_trades: tuple[ClosedTrade, ...] = ()
 
     @field_validator("economic_event_hash")
     @classmethod
