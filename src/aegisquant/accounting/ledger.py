@@ -57,7 +57,7 @@ from aegisquant.domain.identifiers import (
     ValuationSnapshotId,
 )
 from aegisquant.domain.time import UtcDateTime, ensure_utc
-from aegisquant.domain.values import Money, canonical_result
+from aegisquant.domain.values import Money, canonical_result, exact_decimal_sum
 
 ZERO_HASH: Final = "0" * 64
 
@@ -643,6 +643,9 @@ class LedgerEngine:
                 Decimal("0"),
             )
             proceeds = notional
+            # Posted proceeds and FIFO basis are the accounting amounts. Recomputing
+            # quantity * (exit - entry) can differ in the last Decimal place.
+            realized_amount = exact_decimal_sum((proceeds, cost_basis.copy_negate()))
             self._pair(
                 drafts,
                 debit=inventory,
@@ -703,7 +706,7 @@ class LedgerEngine:
                         _PostingDraft(
                             loss,
                             PostingSide.DEBIT,
-                            -realized_amount,
+                            realized_amount.copy_negate(),
                             instrument.quote_asset_id,
                             f"spot realized loss for {fill.fill_id}",
                         ),

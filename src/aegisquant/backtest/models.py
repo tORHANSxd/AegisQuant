@@ -718,6 +718,7 @@ class BacktestResult(DomainModel):
     forced_close_mark_adjustment: FiniteDecimal = Decimal("0")
     forced_close_status: str = "LEGACY_NOT_EVALUATED"
     cost_identity_residual: FiniteDecimal = Decimal("0")
+    cost_identity_tolerance: PositiveDecimal = Decimal("0.00000001")
     closed_trades: tuple[ClosedTrade, ...] = ()
 
     @field_validator("economic_event_hash")

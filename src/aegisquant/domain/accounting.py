@@ -17,7 +17,7 @@ from aegisquant.domain.identifiers import (
     PostingId,
 )
 from aegisquant.domain.time import UtcDateTime
-from aegisquant.domain.values import Money, Price, Quantity
+from aegisquant.domain.values import Money, Price, Quantity, exact_decimal_sum
 
 
 class PostingSide(StrEnum):
@@ -60,11 +60,13 @@ class JournalEntry(DomainModel):
         posting_ids = {posting.posting_id for posting in self.postings}
         if len(posting_ids) != len(self.postings):
             raise ValueError("journal posting ids must be unique")
-        balances: dict[str, Decimal] = defaultdict(Decimal)
+        balances: dict[str, list[Decimal]] = defaultdict(list)
         for posting in self.postings:
-            sign = Decimal("1") if posting.side is PostingSide.DEBIT else Decimal("-1")
-            balances[str(posting.amount.asset_id)] += sign * posting.amount.amount
-        if any(balance != 0 for balance in balances.values()):
+            amount = posting.amount.amount
+            balances[str(posting.amount.asset_id)].append(
+                amount if posting.side is PostingSide.DEBIT else amount.copy_negate()
+            )
+        if any(exact_decimal_sum(balance) != 0 for balance in balances.values()):
             raise ValueError("AQ-LEDGER-UNBALANCED: debits and credits must balance per asset")
         if self.recorded_at < self.event_time:
             raise ValueError("journal entry cannot be recorded before its event")

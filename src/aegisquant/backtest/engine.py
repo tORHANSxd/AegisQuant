@@ -1460,7 +1460,7 @@ class EventBacktestEngine:
             Decimal("0"),
         )
         identity_residual = canonical_result(reference_pnl - gross_pnl)
-        if abs(identity_residual) > Decimal("1e-12") * max(Decimal("1"), spec.initial_cash.amount):
+        if abs(identity_residual) >= Decimal("0.00000001"):
             raise ValueError("AQ-BACKTEST-COST-IDENTITY-FAILED")
         attribution = (
             PnLAttributionPoint(

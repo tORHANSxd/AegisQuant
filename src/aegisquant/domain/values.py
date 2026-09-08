@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from decimal import ROUND_CEILING, ROUND_DOWN, ROUND_FLOOR, ROUND_HALF_EVEN, Decimal
+from collections.abc import Iterable
+from decimal import ROUND_CEILING, ROUND_DOWN, ROUND_FLOOR, ROUND_HALF_EVEN, Decimal, localcontext
 from enum import StrEnum
 from typing import Annotated, Self
 
@@ -26,6 +27,19 @@ def validate_decimal(value: object) -> Decimal:
 def canonical_result(value: Decimal) -> Decimal:
     """Remove a signed zero created by exact Decimal arithmetic."""
     return value.copy_abs() if value.is_zero() else value
+
+
+def exact_decimal_sum(values: Iterable[Decimal]) -> Decimal:
+    """Sum finite posted amounts without losing small terms to context precision."""
+    amounts = tuple(validate_decimal(value) for value in values)
+    nonzero = tuple(value for value in amounts if value)
+    if not nonzero:
+        return Decimal("0")
+    lowest = min(int(value.as_tuple().exponent) for value in nonzero)
+    highest = max(value.adjusted() for value in nonzero)
+    with localcontext() as context:
+        context.prec = max(context.prec, highest - lowest + len(str(len(amounts))) + 2)
+        return canonical_result(sum(amounts, Decimal("0")))
 
 
 FiniteDecimal = Annotated[Decimal, AfterValidator(validate_decimal)]
