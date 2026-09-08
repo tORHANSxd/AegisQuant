@@ -42,6 +42,7 @@ from aegisquant.domain.values import (
     Quantity,
     UnitInterval,
     canonical_result,
+    exact_decimal_sum,
 )
 
 NonNegativeInt = Annotated[int, Field(ge=0)]
@@ -634,16 +635,23 @@ class PnLAttributionPoint(DomainModel):
 
     @model_validator(mode="after")
     def attribution_conserves(self) -> PnLAttributionPoint:
-        expected = canonical_result(
-            self.gross_trading_pnl
-            - self.trading_fees
-            - self.spread_cost
-            - self.slippage_cost
-            - self.impact_cost
-            - self.funding
-            - self.borrow_interest
-            - self.settlement_fees
-            - self.liquidation_penalties
+        expected = exact_decimal_sum(
+            (
+                self.gross_trading_pnl,
+                *(
+                    canonical_result(value.copy_negate())
+                    for value in (
+                        self.trading_fees,
+                        self.spread_cost,
+                        self.slippage_cost,
+                        self.impact_cost,
+                        self.funding,
+                        self.borrow_interest,
+                        self.settlement_fees,
+                        self.liquidation_penalties,
+                    )
+                ),
+            )
         )
         if expected != self.net_pnl:
             raise ValueError("backtest PnL attribution does not conserve")

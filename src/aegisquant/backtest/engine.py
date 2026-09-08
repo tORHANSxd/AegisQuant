@@ -78,7 +78,7 @@ from aegisquant.domain.identifiers import (
     VenueId,
     VenueOrderId,
 )
-from aegisquant.domain.values import Money, Price, Quantity, canonical_result
+from aegisquant.domain.values import Money, Price, Quantity, canonical_result, exact_decimal_sum
 
 _EQUITY_ADAPTER = TypeAdapter(tuple[EquityPoint, ...])
 
@@ -1438,16 +1438,18 @@ class EventBacktestEngine:
             (fill.cost_breakdown.liquidation_penalty for fill in fills), Decimal("0")
         )
         net_pnl = canonical_result(equity_curve[-1].equity - spec.initial_cash.amount)
-        gross_pnl = canonical_result(
-            net_pnl
-            + fees
-            + spread
-            + slippage
-            + impact
-            + funding_total
-            + borrow_total
-            + settlement_fees
-            + liquidation_penalties
+        gross_pnl = exact_decimal_sum(
+            (
+                net_pnl,
+                fees,
+                spread,
+                slippage,
+                impact,
+                funding_total,
+                borrow_total,
+                settlement_fees,
+                liquidation_penalties,
+            )
         )
         reference_pnl = sum(
             (
