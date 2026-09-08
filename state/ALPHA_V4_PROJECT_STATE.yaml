@@ -40,11 +40,13 @@ completed:
   - cash_margin_liquidation_borrow_reduce_only_oco_and_depth_integrity
   - calibrated_no_trade_default_compounded_costed_metrics_and_abstaining_council
   - frozen_signal_A0_A10_full_clock_diagnostics_and_1000_matched_random_baselines
+  - preregistered_causal_4h_trend_features_and_training_only_robust_transform
+  - full_transition_cost_gate_hold_current_pending_adjustment_and_next_event_strategy_callback
 blockers: []
 pending_phases: [C, D, E, F, G]
 model_retrained: true
 model_retraining_scope: original_baseline_reconstruction_only
-strategy_source_modified: false
+strategy_source_modified: true
 hyperparameter_optimization_started: false
 final_holdout_allocated: false
 final_holdout_access_count: 0

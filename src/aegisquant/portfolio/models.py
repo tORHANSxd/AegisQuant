@@ -45,6 +45,15 @@ class RiskRegime(StrEnum):
     CRISIS = "CRISIS"
 
 
+class TargetQuantityAdjustment(DomainModel):
+    target_quantity: NonNegativeDecimal
+    current_quantity: NonNegativeDecimal
+    signed_pending_quantity: FiniteDecimal
+    signed_order_quantity: FiniteDecimal
+    cancel_pending_first: bool
+    reason: str
+
+
 class SignalInput(DomainModel):
     signal_id: SignalId
     asset_id: AssetId

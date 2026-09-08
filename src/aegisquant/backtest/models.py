@@ -289,6 +289,42 @@ class CancelRequest(DomainModel):
     requested_at: UtcDateTime
 
 
+class PendingBacktestOrder(DomainModel):
+    backtest_order_id: BacktestOrderId
+    side: OrderSide
+    remaining_quantity: PositiveDecimal
+    status: VenueOrderStatus
+
+
+class BacktestDecisionContext(DomainModel):
+    """A post-event snapshot; no future bars, prices or future ledger state."""
+
+    event: MarketEvent
+    cash: FiniteDecimal
+    position_quantity: FiniteDecimal
+    equity: FiniteDecimal
+    pending_orders: tuple[PendingBacktestOrder, ...]
+
+    @property
+    def signed_pending_quantity(self) -> Decimal:
+        return canonical_result(
+            sum(
+                (
+                    p.remaining_quantity * (1 if p.side is OrderSide.BUY else -1)
+                    for p in self.pending_orders
+                ),
+                Decimal("0"),
+            )
+        )
+
+
+class BacktestDecisionUpdate(DomainModel):
+    """Simulation-only market orders and cancellation requests produced at this event."""
+
+    orders: tuple[BacktestOrder, ...] = ()
+    cancel_order_ids: tuple[BacktestOrderId, ...] = ()
+
+
 class FaultWindow(DomainModel):
     fault_type: FaultType
     venue_id: VenueId

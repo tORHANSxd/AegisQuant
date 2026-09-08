@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import timedelta
-from decimal import Decimal
+from decimal import ROUND_DOWN, Decimal
 
 from aegisquant.data.hashing import canonical_sha256
 from aegisquant.domain.identifiers import ProposalId
@@ -18,10 +18,48 @@ from aegisquant.portfolio.models import (
     PortfolioLeg,
     PortfolioProposal,
     SignalInput,
+    TargetQuantityAdjustment,
 )
 
 ZERO = Decimal("0")
 ONE = Decimal("1")
+
+
+def target_quantity_adjustment(
+    *,
+    target_quantity: Decimal,
+    current_quantity: Decimal,
+    signed_pending_quantity: Decimal,
+    price: Decimal,
+    quantity_step: Decimal,
+    minimum_notional: Decimal,
+    minimum_economic_notional: Decimal = ZERO,
+) -> TargetQuantityAdjustment:
+    if (
+        min(target_quantity, current_quantity, minimum_notional, minimum_economic_notional) < 0
+        or min(price, quantity_step) <= 0
+    ):
+        raise ValueError("target adjustment requires valid long/flat quantities and market rules")
+    delta = target_quantity - current_quantity - signed_pending_quantity
+    conflict = delta * signed_pending_quantity < 0
+    if conflict:
+        quantity, reason = ZERO, "CANCEL_OPPOSING_PENDING_THEN_RECOMPUTE_FROM_ACK"
+    else:
+        rounded = (abs(delta) / quantity_step).to_integral_value(
+            rounding=ROUND_DOWN
+        ) * quantity_step
+        quantity = rounded if delta > 0 else -rounded
+        reason = "TARGET_MINUS_CURRENT_MINUS_PENDING"
+        if abs(quantity) * price < max(minimum_notional, minimum_economic_notional):
+            quantity, reason = ZERO, "BELOW_MINIMUM_ECONOMIC_REBALANCE"
+    return TargetQuantityAdjustment(
+        target_quantity=target_quantity,
+        current_quantity=current_quantity,
+        signed_pending_quantity=signed_pending_quantity,
+        signed_order_quantity=canonical_result(quantity),
+        cancel_pending_first=conflict,
+        reason=reason,
+    )
 
 
 def _clip_unit(value: Decimal) -> Decimal:

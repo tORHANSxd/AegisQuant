@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
@@ -29,6 +29,8 @@ from aegisquant.backtest.margin import (
 )
 from aegisquant.backtest.metrics import calculate_metrics, closed_round_trips
 from aegisquant.backtest.models import (
+    BacktestDecisionContext,
+    BacktestDecisionUpdate,
     BacktestFill,
     BacktestOrder,
     BacktestOrderResult,
@@ -53,6 +55,7 @@ from aegisquant.backtest.models import (
     MarketEvent,
     MultiLegExposure,
     MultiLegPlan,
+    PendingBacktestOrder,
     PnLAttributionPoint,
     PositionPoint,
     TradeQuoteEvent,
@@ -100,6 +103,17 @@ class _MutableOrderState:
 def _delta_nanoseconds(later: datetime, earlier: datetime) -> int:
     delta = later - earlier
     return (delta.days * 86_400 + delta.seconds) * 1_000_000_000 + delta.microseconds * 1_000
+
+
+def _state_priority(state: _MutableOrderState) -> tuple[int, datetime, str]:
+    priority = (
+        0
+        if state.order.exit_trigger is ExitTrigger.STOP_LOSS
+        else 2
+        if state.order.exit_trigger is ExitTrigger.TAKE_PROFIT
+        else 1
+    )
+    return priority, state.order.submitted_at, str(state.order.backtest_order_id)
 
 
 def _event_reference(event: MarketEvent, side: OrderSide) -> Decimal:
@@ -438,6 +452,8 @@ class EventBacktestEngine:
         funding_events: Iterable[FundingEvent] = (),
         multi_leg_plans: Iterable[MultiLegPlan] = (),
         failed_leg_indices: Mapping[MultiLegPlanId, int] | None = None,
+        decision_callback: Callable[[BacktestDecisionContext], BacktestDecisionUpdate]
+        | None = None,
     ) -> BacktestResult:
         if (
             instrument.settlement_asset_id != spec.reporting_asset_id
@@ -984,18 +1000,83 @@ class EventBacktestEngine:
         timeline.extend((event.available_time, 0, event) for event in events)
         timeline.extend((event.available_time, 1, event) for event in funding_values)
         timeline.sort(key=lambda item: (item[0], item[1]))
-        active_states = sorted(
-            states.values(),
-            key=lambda state: (
-                0
-                if state.order.exit_trigger is ExitTrigger.STOP_LOSS
-                else 2
-                if state.order.exit_trigger is ExitTrigger.TAKE_PROFIT
-                else 1,
-                state.order.submitted_at,
-                str(state.order.backtest_order_id),
-            ),
-        )
+        active_states = sorted(states.values(), key=_state_priority)
+
+        def collect_decision(event: MarketEvent) -> None:
+            if decision_callback is None:
+                return
+            quantity, _, unrealized_pnl = position_at(latest_mark)
+            pending = tuple(
+                PendingBacktestOrder(
+                    backtest_order_id=s.order.backtest_order_id,
+                    side=s.order.side,
+                    remaining_quantity=s.order.quantity.amount - s.filled,
+                    status=s.status,
+                )
+                for s in states.values()
+                if s.status
+                in {
+                    VenueOrderStatus.ACCEPTED,
+                    VenueOrderStatus.PARTIALLY_FILLED,
+                    VenueOrderStatus.UNKNOWN,
+                }
+                and s.order.quantity.amount > s.filled
+            )
+            update = decision_callback(
+                BacktestDecisionContext(
+                    event=event,
+                    cash=cash,
+                    position_quantity=quantity,
+                    equity=canonical_result(
+                        cash + (quantity * latest_mark if is_spot else unrealized_pnl)
+                    ),
+                    pending_orders=pending,
+                )
+            )
+            for order_id in update.cancel_order_ids:
+                if order_id not in states:
+                    raise ValueError("AQ-BACKTEST-CALLBACK-CANCEL-UNKNOWN-ORDER")
+                cancellation = nanoseconds_after(
+                    event.available_time, self.latency_policy.cancel_ns
+                )
+                cancel_by_order[order_id] = min(
+                    cancel_by_order.get(order_id, cancellation), cancellation
+                )
+            known_clients = {s.order.client_order_id for s in states.values()}
+            for order in update.orders:
+                if (
+                    order.decision_time != event.available_time
+                    or order.submitted_at < event.available_time
+                ):
+                    raise ValueError("AQ-BACKTEST-CALLBACK-BACKDATED-DECISION")
+                if order.backtest_order_id in states or order.client_order_id in known_clients:
+                    raise ValueError("AQ-BACKTEST-CALLBACK-DUPLICATE-ORDER")
+                if (
+                    order.instrument_id != instrument.instrument_id
+                    or order.venue_id != event.venue_id
+                    or order.quantity.asset_id != instrument.quantity_asset_id
+                ):
+                    raise ValueError("AQ-BACKTEST-CALLBACK-INSTRUMENT-MISMATCH")
+                if (
+                    order.order_type is not OrderType.MARKET
+                    or order.oco_group_id is not None
+                    or order.exit_trigger is not None
+                    or order.multi_leg_plan_id is not None
+                ):
+                    raise ValueError("AQ-BACKTEST-CALLBACK-REQUIRES-PLAIN-MARKET-ORDER")
+                registered = self._initial_states(
+                    spec=spec,
+                    orders=(order,),
+                    market_events=events,
+                    faults=fault_values,
+                    failed_leg_indices=failures,
+                )
+                states.update(registered)
+                active_states.extend(registered.values())
+                known_clients.add(order.client_order_id)
+            if update.orders:
+                active_states.sort(key=_state_priority)
+
         for timeline_index, (at_time, kind, item) in enumerate(timeline):
             accrue_borrow(at_time)
             timestamp_complete = (
@@ -1045,7 +1126,13 @@ class EventBacktestEngine:
             if not isinstance(event, (BarEvent, TradeQuoteEvent, L2BookEvent)):
                 raise TypeError("market timeline item has the wrong type")
             latest_mark = _event_mark(event)
-            if is_spot and borrow_policy is None and not active_states and event is not events[-1]:
+            if (
+                decision_callback is None
+                and is_spot
+                and borrow_policy is None
+                and not active_states
+                and event is not events[-1]
+            ):
                 if timestamp_complete:
                     record_equity(at_time)
                 continue
@@ -1098,7 +1185,8 @@ class EventBacktestEngine:
                     }:
                         continue
                 cancel_time = cancel_by_order.get(state.order.backtest_order_id)
-                if cancel_time is not None and cancel_time < event.available_time:
+                # A cancellation during an OHLC bar cannot erase an earlier opening fill.
+                if cancel_time is not None and cancel_time < event.event_time:
                     state.status = VenueOrderStatus.CANCELED
                     state.completed_at = cancel_time
                     continue
@@ -1233,6 +1321,7 @@ class EventBacktestEngine:
             ]
             if timestamp_complete:
                 record_equity(at_time)
+            collect_decision(event)
         accrue_borrow(spec.end_time)
         liquidate_at(latest_mark, spec.end_time, None)
         signed_quantity, average_entry, unrealized = position_at(latest_mark)
