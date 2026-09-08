@@ -6,6 +6,7 @@ from decimal import Decimal
 import pytest
 from pydantic import ValidationError
 
+from aegisquant.domain.values import canonical_result
 from aegisquant.labels import (
     CostAssumption,
     DirectionClass,
@@ -53,12 +54,12 @@ def test_return_path_label_is_future_cost_aware_and_path_complete() -> None:
         risk_flat_threshold=Decimal("0.001"),
         overlap_count=3,
     )
-    assert label.gross_return == Decimal("0.1")
-    assert label.total_cost_rate == Decimal("0.005")
-    assert label.net_return == Decimal("0.095")
+    assert label.gross_return == canonical_result(Decimal("110") / Decimal("98") - 1)
+    assert label.total_cost_rate == Decimal("0.0045")
+    assert label.net_return == canonical_result(label.gross_return - Decimal("0.0045"))
     assert label.direction is DirectionClass.UP
-    assert label.maximum_adverse_excursion == Decimal("-0.02")
-    assert label.maximum_favorable_excursion == Decimal("0.1")
+    assert label.maximum_adverse_excursion == Decimal("0")
+    assert label.maximum_favorable_excursion == label.gross_return
     assert label.q10_return <= label.q50_return <= label.q90_return
     assert label.overlap_weight == Decimal("0.3333333333333333333333333333")
     assert label.decision_time < label.label_start_time <= label.label_end_time

@@ -84,6 +84,19 @@ class CostAssumption(DomainModel):
     impact_rate: NonNegativeDecimal = Decimal("0")
     borrow_rate: NonNegativeDecimal = Decimal("0")
     funding_rate: FiniteDecimal = Decimal("0")
+    # Legacy execution rates are round-trip totals; explicit legs override the equal split.
+    long_entry_cost: NonNegativeDecimal | None = None
+    long_exit_cost: NonNegativeDecimal | None = None
+    short_entry_cost: NonNegativeDecimal | None = None
+    short_exit_cost: NonNegativeDecimal | None = None
+    expected_funding_long: FiniteDecimal | None = None
+    expected_funding_short: FiniteDecimal | None = None
+
+    @property
+    def execution_rate(self) -> Decimal:
+        return canonical_result(
+            self.fee_rate + self.spread_rate + self.slippage_rate + self.impact_rate
+        )
 
     @property
     def total_rate(self) -> Decimal:
@@ -108,6 +121,70 @@ class PricePathObservation(DomainModel):
     def validate_availability(self) -> PricePathObservation:
         if self.available_time < self.event_time:
             raise ValueError("price cannot be available before event time")
+        return self
+
+
+class ActionValueLabel(DomainModel):
+    decision_time: UtcDateTime
+    earliest_execution_time: UtcDateTime
+    horizon_end_time: UtcDateTime
+    gross_long_return: FiniteDecimal
+    gross_short_return: FiniteDecimal
+    long_entry_cost: NonNegativeDecimal
+    long_exit_cost: NonNegativeDecimal
+    short_entry_cost: NonNegativeDecimal
+    short_exit_cost: NonNegativeDecimal
+    expected_funding_long: FiniteDecimal
+    expected_funding_short: FiniteDecimal
+    expected_borrow_short: NonNegativeDecimal
+    long_risk_buffer: NonNegativeDecimal = Decimal("0")
+    short_tail_risk_buffer: NonNegativeDecimal = Decimal("0")
+    uncertainty_buffer: NonNegativeDecimal = Decimal("0")
+    minimum_economic_margin: NonNegativeDecimal = Decimal("0")
+    net_value_long: FiniteDecimal
+    net_value_flat: FiniteDecimal = Decimal("0")
+    net_value_short: FiniteDecimal
+    best_action: DirectionClass
+    action_margin: FiniteDecimal
+
+    @model_validator(mode="after")
+    def validate_action_values(self) -> ActionValueLabel:
+        if not self.decision_time < self.earliest_execution_time <= self.horizon_end_time:
+            raise ValueError("action label must begin at a strictly future executable event")
+        expected_long = canonical_result(
+            self.gross_long_return
+            - self.long_entry_cost
+            - self.long_exit_cost
+            - self.expected_funding_long
+            - self.long_risk_buffer
+        )
+        expected_short = canonical_result(
+            self.gross_short_return
+            - self.short_entry_cost
+            - self.short_exit_cost
+            - self.expected_funding_short
+            - self.expected_borrow_short
+            - self.short_tail_risk_buffer
+        )
+        if (
+            self.net_value_flat != 0
+            or self.net_value_long != expected_long
+            or self.net_value_short != expected_short
+        ):
+            raise ValueError("action value costs must conserve separately for LONG/FLAT/SHORT")
+        margin = canonical_result(max(expected_long, expected_short))
+        if self.action_margin != margin:
+            raise ValueError("action margin must compare the best directional value against cash")
+        expected_action = DirectionClass.FLAT
+        if (
+            margin > self.uncertainty_buffer + self.minimum_economic_margin
+            and expected_long != expected_short
+        ):
+            expected_action = (
+                DirectionClass.UP if expected_long > expected_short else DirectionClass.DOWN
+            )
+        if self.best_action is not expected_action:
+            raise ValueError("action must exceed the uncertainty and economic margin over FLAT")
         return self
 
 
