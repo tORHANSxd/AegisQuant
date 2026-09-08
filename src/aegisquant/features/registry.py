@@ -35,6 +35,11 @@ class FeatureRegistry:
         for definition in definitions:
             self.register(definition)
 
+    def register_cost_aware_trend(self) -> None:
+        from aegisquant.features.market import cat_market_feature_definitions
+
+        self.register_all(cat_market_feature_definitions())
+
     def get(self, feature_key: str) -> FeatureDefinition:
         try:
             return self._definitions[feature_key]

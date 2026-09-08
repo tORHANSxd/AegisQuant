@@ -1,0 +1,64 @@
+version: aegisalpha-cat-v1
+instrument: BTCUSDT
+instrument_type: SPOT
+frequency_seconds: 14400
+risk_frequency_seconds: 86400
+fast_days: 10
+slow_days: 40
+fast_day_neighbors: [7, 10, 14]
+slow_day_neighbors: [30, 40, 60]
+entry_threshold: 0.25
+exit_threshold: -0.25
+confirmations: 2
+horizon_bars: 6
+allowed_horizons: [6, 12]
+lambda_cost: 2.0
+allowed_lambda_cost: [1.5, 2.0, 2.5]
+target_annual_volatility: 0.20
+allowed_target_volatility: [0.15, 0.20, 0.25]
+p_enter: 0.55
+p_full_size: 0.70
+uncertainty_weight: 0.25
+maximum_weight: 1.0
+maximum_gross_weight: 1.0
+maximum_leverage: 1.0
+allow_short: false
+fixed_take_profit: null
+execution: next_executable_event_after_closed_bar
+training:
+  train_months: 12
+  validation_months: 3
+  test_months: 3
+  step_months: 3
+  purge_bars: 12
+  embargo_bars: 1
+  selection_policy: fixed_center_no_optimizer
+  model_families: [XGBOOST, LIGHTGBM, ELASTIC_NET]
+  maximum_trials_per_fold_per_family: 30
+  planned_trials_per_fold_per_family: 1
+  seed: 20260903
+  estimators: 32
+  maximum_depth: 3
+  learning_rate: 0.05
+  calibration: validation_only_platt_and_residual_quantiles
+cost_assumptions:
+  provenance: preregistered_proxy_not_verified_historical_fee_tier_or_orderbook
+  taker_fee_bps: 10
+  half_spread_bps: 1
+  slippage_floor_bps: 2
+  natr_slippage_coefficient: 0.01
+  impact_coefficient_bps: 25
+  maximum_participation: 0.01
+  latency_adverse_bps: 1
+  minimum_notional: 10
+  quantity_step: 0.000001
+  initial_cash: 10000
+validation:
+  bootstrap_repetitions: 10000
+  bootstrap_block_bars: 6
+  random_baselines: 1000
+  cost_multipliers: [0.0, 0.5, 1.0, 1.5, 2.0]
+  final_holdout_minimum_months: 12
+  final_holdout_must_be_previously_unused: true
+live_trading: false
+order_submission_enabled: false

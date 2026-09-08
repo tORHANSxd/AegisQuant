@@ -65,6 +65,38 @@ class MarketFeatureConfig(DomainModel):
     frequency_seconds: Annotated[int, Field(gt=0)] = 60
 
 
+def cat_market_feature_definitions() -> tuple[FeatureDefinition, ...]:
+    """Registered center-policy schema; values are built from completed 4h bars."""
+    from aegisquant.research.strategies.cost_aware_trend import CAT_FEATURE_NAMES
+
+    return tuple(
+        FeatureDefinition(
+            feature_id="cat.component",
+            version="1.0.0",
+            description=f"CAT causal {name}",
+            entity=FeatureEntity.INSTRUMENT,
+            dtype=FeatureDType.FLOAT64,
+            unit="documented_raw_feature",
+            inputs=("closed_4h_ohlcv",),
+            formula_reference="AegisQuant v4 sections 4.2-4.3",
+            parameters=(
+                FeatureParameter(name="fast_days", value="10"),
+                FeatureParameter(name="name", value=name),
+                FeatureParameter(name="slow_days", value="40"),
+            ),
+            lookback_seconds=240 * 14400,
+            minimum_history=241,
+            frequency_seconds=14400,
+            normalization="training_only_1_99_winsor_median_MAD",
+            missing_policy="abstain_until_contiguous_warmup",
+            online_compatible=True,
+            owner="research",
+            tests=("tests/unit/research/test_cost_aware_trend.py",),
+        )
+        for name in CAT_FEATURE_NAMES
+    )
+
+
 def _definition(
     feature_id: str,
     *,
