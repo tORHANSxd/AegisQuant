@@ -1,0 +1,31 @@
+audit:
+  failed_candidate: logistic_core
+  frozen_scope: SELECTED_POLICY_ONLY
+  model_retrained: false
+  network_access: false
+original_experiment:
+  assumed_execution_bps_per_turnover: 3.0
+  assumed_fee_bps_per_turnover: 10.0
+  bootstrap_block_hours: 24
+  bootstrap_repetitions: 1000
+  calibration_hours: 720
+  embargo_hours: 24
+  end_at_exclusive: '2026-01-01T00:00:00Z'
+  execution_delay: decision after bar t close; enter at bar t+1 open
+  final_holdout_opened: false
+  forecast_horizon: one-hour open-to-open return
+  interval: 1h
+  purge_hours: 2
+  seed: 20260903
+  source: BINANCE_SPOT_PUBLIC_REST
+  start_at: '2021-01-01T00:00:00Z'
+  step_hours: 2160
+  symbols:
+  - BTCUSDT
+  - ETHUSDT
+  test_hours: 2160
+  train_hours: 8760
+  validation_hours: 720
+safety:
+  live_trading: false
+  order_submission_enabled: false

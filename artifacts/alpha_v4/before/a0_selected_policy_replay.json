@@ -1,0 +1,67 @@
+{
+  "arithmetic_return": 0.4818166203356422,
+  "classification": {
+    "balanced_accuracy": 0.49991538904470495,
+    "bernoulli_crps": 0.38995884258450314,
+    "brier_score": 0.38995884258450314,
+    "calibration_curve": [
+      {
+        "lower": 0.4,
+        "mean_probability": 0.4824437310307624,
+        "observations": 1201,
+        "observed_positive_frequency": 0.46378018318068276,
+        "upper": 0.5
+      },
+      {
+        "lower": 0.5,
+        "mean_probability": 0.5008199528734963,
+        "observations": 24692,
+        "observed_positive_frequency": 0.5072898104649279,
+        "upper": 0.6
+      },
+      {
+        "lower": 0.6,
+        "mean_probability": 0.6132258147537528,
+        "observations": 27,
+        "observed_positive_frequency": 0.4074074074074074,
+        "upper": 0.7
+      },
+      {
+        "lower": 0.9,
+        "mean_probability": 1.0,
+        "observations": 34560,
+        "observed_positive_frequency": 0.5050925925925925,
+        "upper": 1.0
+      }
+    ],
+    "direction_accuracy": 0.5008101851851852,
+    "expected_calibration_error_10_bin": 0.2859081637171615,
+    "log_loss": 8.111263449222573,
+    "observations": 60480,
+    "positive_label_rate": 0.5051256613756614,
+    "return_quantile_pinball_loss": "NOT_EVALUATED_NO_QUANTILE_FORECAST"
+  },
+  "model_retrained": false,
+  "normalized_final_equity": 1.2063790134405152,
+  "normalized_initial_equity": 1.0,
+  "performance": {
+    "active_fraction": 0.6428571428571429,
+    "active_hit_rate": 0.5084876543209876,
+    "annualized_net_return": 0.05585535392202057,
+    "annualized_sharpe": 0.33830910915152546,
+    "annualized_volatility": 0.4125631219039185,
+    "calmar": 0.09818149725224969,
+    "cost_to_absolute_gross_sum_ratio": 0.023707408257178438,
+    "expected_shortfall_5pct_hourly": -0.011157798015617854,
+    "gross_compound_return": 0.22058675083157842,
+    "hourly_sharpe_for_inference": 0.003614611603943482,
+    "maximum_drawdown": 0.5688989828553539,
+    "net_compound_return": 0.20637901344051524,
+    "observations": 30240,
+    "position_change_count": 11,
+    "sortino": 0.33437033498386215,
+    "total_transaction_cost_return_units": 0.0117,
+    "turnover_units": 9.0
+  },
+  "scope": "SELECTED_POLICY_ONLY"
+}

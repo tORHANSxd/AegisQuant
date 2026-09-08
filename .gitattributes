@@ -7,5 +7,6 @@
 *.gif binary
 *.zip binary
 *.parquet binary
+artifacts/alpha_v4/before/** -text whitespace=cr-at-eol
 AegisQuant_v3.1_Multimodal_Event_Intelligence_Codex_Master_Taskbook.md whitespace=-trailing-space
 docs/spec/AegisQuant_Master_Taskbook_v3_1.md whitespace=-trailing-space
