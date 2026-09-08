@@ -14,8 +14,9 @@ user_overrides:
 historical_states:
   - state/V5_PROJECT_STATE.yaml
   - state/PROJECT_PHASE_STATE.yaml
-current_phase: C
-status: old_model_rejected_begin_preregistered_trend_baseline
+current_phase: COMPLETE
+status: completed_with_no_proven_alpha_and_explicit_evidence_gaps
+final_decision: NO_PROVEN_ALPHA
 phase_a_complete: true
 evidence_tier: OOS_DEVELOPMENT
 alpha_promotion_eligible: false
@@ -43,21 +44,54 @@ completed:
   - preregistered_causal_4h_trend_features_and_training_only_robust_transform
   - full_transition_cost_gate_hold_current_pending_adjustment_and_next_event_strategy_callback
   - fixed_budget_tree_and_elastic_net_filters_with_validation_only_probability_and_residual_calibration
+  - fourteen_calendar_12_3_3_walkforward_folds_with_purge_embargo_and_all_trial_ledger
+  - B0_B7_and_two_challengers_ablations_bootstrap_dsr_pbo_and_cost_stress
+  - persistent_single_access_holdout_firewall_and_ineligible_data_non_access_record
+  - independent_carry_value_gate_and_two_ledger_failed_leg_recovery_validation
+  - public_funding_history_screen_without_claiming_funded_OOS_profit
+  - restricted_event_risk_overlay_without_direction_generation
+  - final_correctness_attribution_model_strategy_and_go_no_go_reports
 blockers: []
-pending_phases: [C, D, E, F, G]
+pending_phases: []
+phase_outcomes:
+  A: completed_old_signal_no_proven_alpha
+  B: implemented_and_verified
+  C: implemented_research_only_not_admitted
+  D: development_walkforward_complete_final_holdout_insufficient_evidence
+  E: no_candidate_passed_all_incremental_and_stability_gates
+  F: gates_and_recovery_verified_public_screen_failed_no_funded_OOS_no_combination
+  G: risk_overlay_implemented_no_directional_event_alpha_claim
+evidence_gaps:
+  - previously_unused_twelve_month_final_holdout_unavailable
+  - historical_fee_tiers_orderbook_capacity_and_venue_rules_unverified
+  - cash_notional_and_fractional_size_not_exactly_matched_by_random_diagnostic
+  - carry_historical_basis_margin_calendar_and_two_leg_liquidity_unverified
+  - too_few_trades_and_return_intervals_cover_severe_loss
 model_retrained: true
-model_retraining_scope: original_baseline_reconstruction_only
+model_retraining_scope: authorized_baseline_reconstruction_and_preregistered_development_walkforward
+completed_development_model_fits: 36
+planned_model_fit_slots: 42
+skipped_model_fits: 6
+selected_model_id: null
+production_ml_enabled: false
+production_policy: CASH
+paper_trading_admitted: false
 strategy_source_modified: true
 hyperparameter_optimization_started: false
 final_holdout_allocated: false
 final_holdout_access_count: 0
+final_holdout_decision: INSUFFICIENT_EVIDENCE
 live_trading: false
 order_submission_enabled: false
 live_adapter_registry_empty: true
-next_action: implement_preregistered_CAT_trend_gate_and_walkforward_with_holdout_firewall
+next_action: retain_cash_and_frozen_failure_evidence_no_profit_parameter_optimization
 old_model_decision: NO_PROVEN_ALPHA
 old_model_parameter_optimization_stopped: true
 diagnostic_report: artifacts/alpha_v4/diagnostics/failure_attribution.md
+walkforward_manifest: artifacts/alpha_v4/walkforward/run_manifest.json
+final_report: artifacts/alpha_v4/reports/final_go_no_go.md
+final_validation: artifacts/alpha_v4/correctness/backtest_invariants.json
+carry_report: artifacts/alpha_v4/funding_basis/admission_report.json
 local_archive:
   status: blocked_existing_non_main_archive
   path: 'D:\Workspace\git\Personal--Quantitative_Trading.git'

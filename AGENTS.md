@@ -6,6 +6,7 @@
 - v5、v3.1 任务书、阶段状态及报告保留为历史实现与证据；存在冲突时以 v4 和当前明确用户要求为准，不继续用旧阶段状态推进新任务。
 - 执行顺序遵循 v4 §14；先冻结失败证据，禁止在 §2.2 未满足时偷偷重训或把重建预测当作原始预测。实际缺口必须写入状态和报告。
 - `LIVE_TRADING = false`、`ORDER_SUBMISSION_ENABLED = false`、实盘适配器注册表为空；不读取或要求真实 API 私钥。
+- v4 本轮最终结论为 `NO_PROVEN_ALPHA`；以 `artifacts/alpha_v4/reports/final_go_no_go.md` 和当前状态核对结果。模型、carry 与纸面前向均未获准入，不能把实现完成或旧阶段通过解释为交易授权。
 
 ## Git 分支规则
 

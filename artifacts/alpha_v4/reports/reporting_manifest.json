@@ -1,0 +1,51 @@
+{
+  "version": "alpha-v4-final-reporting-v1",
+  "method": "Read saved results and test evidence only; no raw-market load, model fit, holdout access or strategy selection.",
+  "walkforward_execution_source_snapshot_commit": "7ebec24",
+  "validated_implementation_commit": "bb3c37f6d6be374b51ea9ea0814c758797a9b44b",
+  "reporting_script_sha256": "f9b98da464fa679dabe113a56972ae183956db4d9f942d023a766161d095abbc",
+  "input_sha256": {
+    "artifacts/alpha_v4/diagnostics/failure_attribution.parquet": "ef10bedc701638fe459d3eeab8e51fd41938a9bb748a640d0812b6d3c9fca9e2",
+    "artifacts/alpha_v4/correctness/final_pytest.xml": "83fd08254692fae686557d7600becfef254978e21353c7c41c5801d054579d9f",
+    "artifacts/alpha_v4/holdout/final_results.json": "93268590a2b5f9821843121656cc2c598036050fabf0c84d3ad321d1fe0b7dff",
+    "artifacts/alpha_v4/funding_basis/admission_report.json": "30366c1cad2e4200e0149329a69cb7520cc76e7d66765e9e77279b83d106a002",
+    "artifacts/alpha_v4/walkforward/run_manifest.json": "b7912371aab27f37639e483571bee64dcf3956c15e44a6126d843c5443c878e1",
+    "artifacts/alpha_v4/walkforward/ablation_results.parquet": "ba1fc81abe26eaf80de69e98b38b63e3299d02899533d6f3dd0afdb22c90a56a",
+    "artifacts/alpha_v4/walkforward/aggregate_stress.parquet": "431dbb99293bdcfc25672b42a62293ad11ed37d7357b34100bf18437a0ee10ae",
+    "artifacts/alpha_v4/walkforward/all_trials.parquet": "9b4b591c6f3b0cd5d42d7e91d098f1ca36c72aec5c5be061a82d2658edb1b658",
+    "artifacts/alpha_v4/walkforward/bootstrap_results.json": "83142d5f767586a29367b79f9890db146e8039276889dd467928346575ac301c",
+    "artifacts/alpha_v4/walkforward/cost_waterfall.parquet": "88e2fa941b787a72a9b9dcd9f2e56d28342f9613ff9e49fe8aa8134d93bfec80",
+    "artifacts/alpha_v4/walkforward/decisions.parquet": "f74aa068d5fb2c96d262b2dd12f1db4fc20c12ed31f269640c389546279c4068",
+    "artifacts/alpha_v4/walkforward/dsr_pbo.json": "28da2b736ef7385cb0f78d169fee8808bd56d6b6b81a0cac5e88653d10007730",
+    "artifacts/alpha_v4/walkforward/fills.parquet": "3c1819616ed667c0e3ab14f22a38ea69eee7197c40f653ff2c9d485bb90786fb",
+    "artifacts/alpha_v4/walkforward/fold_manifest.parquet": "831c99e994a121b2925b67e4018009fa28a9dc05e008aa7e8203e509607deb84",
+    "artifacts/alpha_v4/walkforward/fold_stability.parquet": "06287a6f42fa8417fb85f68545cf2c6003b5bda63bfa4dc16d1eb6c663884d69",
+    "artifacts/alpha_v4/walkforward/mtm_equity.parquet": "f171cd30883596396d118e6e75a53ed4b3b5811273f5b24a2768cdc3bcad0f07",
+    "artifacts/alpha_v4/walkforward/neighborhood_stability.parquet": "952b43922644af23284f8f1a6af059d66f4c0e3e944688f981e17d280bad5718",
+    "artifacts/alpha_v4/walkforward/orders.parquet": "9a69daa6569044b64e6983deb7187e9586594c5b260697282182c885ed36b9d7",
+    "artifacts/alpha_v4/walkforward/positions.parquet": "31f58345c844c9808c714ffbeeeec6fcd00d572a18c9f9056ad21bd63f232b56",
+    "artifacts/alpha_v4/walkforward/predictions.parquet": "f3e15582770207692c83a110b4b6a280a5fbeec5843aaa78cfc5f432f143b3b9",
+    "artifacts/alpha_v4/walkforward/trades.parquet": "07ac8e5960f57c34d3c5fa96d0473d2dd44314511a92c21356a1ea5b59353390"
+  },
+  "output_sha256": {
+    "artifacts/alpha_v4/correctness/backtest_invariants.json": "4dd5cc147245a85e17ad5a56c2236066653e90fd45893523a47846a7f6283f35",
+    "artifacts/alpha_v4/correctness/cost_identity.json": "c094c293ec489edcba3f3c89fd36d4b2efe795b5765c09c7f5979cc8bb599415",
+    "artifacts/alpha_v4/correctness/before_after_same_signal.parquet": "384089a38c5b51943316515f87d479ae08610b960fbfa8729a8caaede1d8d530",
+    "artifacts/alpha_v4/correctness/final_validation_output.txt": "f27b39d4f08163710ac547dff91a0085586daaa0ab98d72c6e3924986276a4c7",
+    "artifacts/alpha_v4/reports/backtest_correctness_report.md": "de7a645a382c996f7c1fdc1b5a9fffaa70fb4418d7d1b29f863127258ce8fbdc",
+    "artifacts/alpha_v4/reports/economic_attribution_report.md": "7414b66a237a899f30c40b6acb11e914d2a6a8d4ad990a64ea7c6b181f92618f",
+    "artifacts/alpha_v4/reports/final_go_no_go.md": "041c7642d2a174edde881e40e5102c47095e99f18b864ccb55ea739667a0fa95",
+    "artifacts/alpha_v4/reports/model_card.md": "dbb828e056aff62c920ddfe20dcdee6686c1d5b935bff71235b000f35d344e60",
+    "artifacts/alpha_v4/reports/strategy_card.md": "973266b1c2f4cf83eb7bf8c460263fd537d4ec8153961d99b37bd94560b55f6b",
+    "artifacts/alpha_v4/reports/promotion_decisions.json": "d5af853578ff5140593fb1310f9ccc40d98945817913a64f71666710e2650b07"
+  },
+  "metadata_correction": {
+    "original_manifest_sha256": "9d9b02a8727d7998cbcf2ccd8f76e1e58192613bfa57ad87eec553ea8e10ce81",
+    "original_manifest_git_commit": "7ebec24",
+    "execution_source_snapshot_commit": "7ebec24",
+    "reason": "Count completed fits separately from six unavailable-calibration slots; no models, predictions, decisions, results, or financial artifacts reevaluated.",
+    "original_number_of_model_fits": 42,
+    "all_trials_file_unchanged": true,
+    "original_execution_code_sha256_retained": true
+  }
+}

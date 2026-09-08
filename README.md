@@ -10,7 +10,12 @@ Phase A 已冻结 60,480 行已有预测并复现所选组合指标。`50.0810%`
 用户已明确允许重建缺失的旧候选预测并保留来源标记；重建结果位于
 [`reconstruction_manifest.json`](artifacts/alpha_v4/reconstructed_before/reconstruction_manifest.json)，
 标记为 `RECONSTRUCTED_BASELINE`，与原候选指标的差异小于 `1e-12`。原始冻结报告保留当时的缺口记录。
-Phase B 已接通标签时序、全行情 MTM 与成交经济约束，正在完成评估指标和模型委员会。
+本轮实现、开发期验证和报告已完成，结论为 **NO_PROVEN_ALPHA**，维持空仓。
+14 折中透明趋势 B3 累计净收益 `+102.69%`，但仅 `6/14` 折盈利，最大回撤 `42.47%`，
+未通过统计和稳定性门槛。动态门槛 B4 全程空仓；XGBoost 完整版本 B7 为 `-1.51%`。
+ML 未获生产准入，资金费组合未获独立准入；没有可用的、此前未使用的连续 12 个月最终留出集，访问次数为 0。
+具体数字、成本压力限制及任务书要求的 12 项回答见
+[`最终结论`](artifacts/alpha_v4/reports/final_go_no_go.md)。
 
 ## 当前安全状态
 
@@ -24,12 +29,17 @@ Phase B 已接通标签时序、全行情 MTM 与成交经济约束，正在完�
 ## 本地验证
 
 ```text
-.venv\Scripts\python.exe scripts/audit_current_failure.py --check
-.venv\Scripts\python.exe scripts/reconstruct_alpha_v4_baseline.py --check
-.venv\Scripts\python.exe -m pytest tests/alpha_v4 tests/research/test_public_market_backtest.py tests/p00
+.venv\Scripts\python.exe -m scripts.audit_current_failure --check
+.venv\Scripts\python.exe -m scripts.reconstruct_alpha_v4_baseline --check
+.venv\Scripts\python.exe -m scripts.run_alpha_v4_walkforward --check
+.venv\Scripts\python.exe -m scripts.run_alpha_v4_final_holdout --check
+.venv\Scripts\python.exe -m scripts.audit_alpha_v4_carry --check
+.venv\Scripts\python.exe -m scripts.finalize_alpha_v4_evidence --check
+.venv\Scripts\python.exe -m pytest -q
+.venv\Scripts\python.exe -m pyright
 ```
 
-冻结工具只读取已存在的公开回测输出，不下载数据、不训练模型。`--check` 校验冻结工件的完整性，
+上述 `--check` 只校验已存在工件，不重新拟合模型或访问最终留出集。
 成功只说明证据完整性，不代表存在可交易 Alpha。
 
 历史 v5 验证命令保留：

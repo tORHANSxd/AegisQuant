@@ -42,8 +42,10 @@ Phase A 已冻结现有 selected-policy 60,480 行预测，原始数据和报告
 亏损候选的完整原始预测未保存，不能把现有文件宣称为其冻结序列；详见
 `artifacts/alpha_v4/before/current_failure_report.md`。
 用户明确授权重建并保留来源标记后，已保存 `RECONSTRUCTED_BASELINE` 并复核原指标。
-Phase B 标签、MTM 和经济约束已实现，评估指标、委员会及 A0–A10 完整归因待完成。
-最终 holdout 尚未分配或读取。Live 和订单提交继续锁定。
+Phase A–E 的实现、完整归因及 14 折开发期验证已完成；最终结论为 `NO_PROVEN_ALPHA`。
+Phase F 完成独立价值门槛、两腿失败恢复验证和公开资金费筛查，未获实盘历史执行资料支持，未进行 B9 合并。
+Phase G 仅接入受限风险覆盖层。结果见 `artifacts/alpha_v4/reports/final_go_no_go.md`。
+最终 holdout 因没有此前未使用的 12 个月数据而未分配，访问次数为 0。Live、订单提交与生产 ML 继续锁定。
 
 ## 历史实现与规格身份
 

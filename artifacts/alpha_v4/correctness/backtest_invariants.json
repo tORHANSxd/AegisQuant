@@ -1,0 +1,62 @@
+{
+  "schema_version": "alpha-v4-final-invariants-v1",
+  "decision": "ENGINEERING_CHECKS_PASSED_NOT_ALPHA_ADMISSION",
+  "validated_implementation_commit": "bb3c37f6d6be374b51ea9ea0814c758797a9b44b",
+  "pytest_command": ".venv/Scripts/python.exe -m pytest -q --junitxml=artifacts/alpha_v4/correctness/final_pytest.xml",
+  "pytest": {
+    "tests": "1128",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "90.508"
+  },
+  "pytest_xml_sha256": "83fd08254692fae686557d7600becfef254978e21353c7c41c5801d054579d9f",
+  "required_test_modules": {
+    "tests/unit/labels/test_action_value_symmetry.py": true,
+    "tests/unit/labels/test_executable_entry_time.py": true,
+    "tests/unit/labels/test_funding_sign.py": true,
+    "tests/unit/backtest/test_vector_replays_all_bars.py": true,
+    "tests/unit/backtest/test_final_bar_valuation.py": true,
+    "tests/unit/backtest/test_intraholding_drawdown.py": true,
+    "tests/unit/backtest/test_fill_fragmentation_metric_invariance.py": true,
+    "tests/unit/backtest/test_forced_close_costs.py": true,
+    "tests/unit/backtest/test_automatic_liquidation.py": true,
+    "tests/unit/backtest/test_insufficient_collateral_rejection.py": true,
+    "tests/unit/backtest/test_reduce_only_clipping.py": true,
+    "tests/unit/backtest/test_oco_double_touch.py": true,
+    "tests/unit/backtest/test_cost_attribution_identity.py": true,
+    "tests/unit/research/test_no_zero_threshold_default.py": true,
+    "tests/unit/research/test_three_class_metrics.py": true,
+    "tests/unit/research/test_compounded_equity.py": true,
+    "tests/unit/research/test_purged_walkforward.py": true,
+    "tests/unit/research/test_calibration_train_validation_only.py": true,
+    "tests/unit/research/test_council_can_return_no_alpha.py": true,
+    "tests/unit/portfolio/test_dynamic_economic_gate.py": true,
+    "tests/unit/portfolio/test_hold_current_inside_no_trade_region.py": true,
+    "tests/unit/portfolio/test_target_position_idempotency.py": true,
+    "tests/unit/portfolio/test_pending_order_adjustment.py": true,
+    "tests/unit/portfolio/test_long_flat_only.py": true,
+    "tests/integration/test_cost_aware_trend_end_to_end.py": true,
+    "tests/integration/test_same_signal_before_after_backtest_fix.py": true,
+    "tests/integration/test_walkforward_holdout_firewall.py": true,
+    "tests/integration/test_cost_stress_matrix.py": true
+  },
+  "required_test_module_count": 28,
+  "six_required_properties": {
+    "higher_costs_cannot_improve_pnl_on_same_fills": "tests/property/test_backtest_economics.py::test_higher_fees_and_slippage_cannot_improve_net_pnl_on_the_same_fills",
+    "higher_slippage_cannot_improve_pnl_on_same_fills": "tests/property/test_backtest_economics.py::test_higher_fees_and_slippage_cannot_improve_net_pnl_on_the_same_fills",
+    "fixed_frequency_metrics_ignore_fill_fragmentation": "tests/unit/backtest/test_fill_fragmentation_metric_invariance.py::test_same_timestamp_split_orders_do_not_change_fixed_frequency_risk_metrics",
+    "target_position_idempotency_including_pending": "tests/unit/portfolio/test_target_position_idempotency.py::test_repeating_filled_or_pending_target_does_not_place_another_order",
+    "reduce_only_never_expands_absolute_position": "tests/property/test_backtest_economics.py::test_reduce_only_never_increases_or_reverses_absolute_position",
+    "available_time_never_exposes_future_facts": "tests/property/test_data_properties.py::test_pit_property_never_exposes_future_available_fact"
+  },
+  "validation_output": "final_validation_output.txt",
+  "limitations": [
+    "Synthetic economics and recovery tests do not establish historical venue rules or liquidity.",
+    "Some stressed frozen orders have different fills due to cash constraints; see cost_identity.json.",
+    "Historical P07 label-evidence hashes predate corrected label semantics and are preserved, not re-certified."
+  ],
+  "live_trading": false,
+  "order_submission_enabled": false,
+  "production_ml_enabled": false
+}
