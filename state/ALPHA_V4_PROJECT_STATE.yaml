@@ -14,9 +14,9 @@ user_overrides:
 historical_states:
   - state/V5_PROJECT_STATE.yaml
   - state/PROJECT_PHASE_STATE.yaml
-current_phase: B
-status: implementing_correctness_and_same_signal_attribution
-phase_a_complete: false
+current_phase: C
+status: old_model_rejected_begin_preregistered_trend_baseline
+phase_a_complete: true
 evidence_tier: OOS_DEVELOPMENT
 alpha_promotion_eligible: false
 source_baseline_commit: 558f5350247c29749d5bf3b8c92ab1e52a572361
@@ -39,8 +39,9 @@ completed:
   - all_market_event_replay_and_fixed_frequency_mtm
   - cash_margin_liquidation_borrow_reduce_only_oco_and_depth_integrity
   - calibrated_no_trade_default_compounded_costed_metrics_and_abstaining_council
+  - frozen_signal_A0_A10_full_clock_diagnostics_and_1000_matched_random_baselines
 blockers: []
-pending_phases: [A_diagnostic_matrix, C, D, E, F, G]
+pending_phases: [C, D, E, F, G]
 model_retrained: true
 model_retraining_scope: original_baseline_reconstruction_only
 strategy_source_modified: false
@@ -50,7 +51,10 @@ final_holdout_access_count: 0
 live_trading: false
 order_submission_enabled: false
 live_adapter_registry_empty: true
-next_action: same_signal_A0_A10_attribution_then_frozen_CAT_baselines
+next_action: implement_preregistered_CAT_trend_gate_and_walkforward_with_holdout_firewall
+old_model_decision: NO_PROVEN_ALPHA
+old_model_parameter_optimization_stopped: true
+diagnostic_report: artifacts/alpha_v4/diagnostics/failure_attribution.md
 local_archive:
   status: blocked_existing_non_main_archive
   path: 'D:\Workspace\git\Personal--Quantitative_Trading.git'

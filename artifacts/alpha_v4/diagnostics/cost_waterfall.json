@@ -1,0 +1,57 @@
+{
+  "a0_original_net": -0.3882254286773622,
+  "a1_funded_full_clock_net": -0.34754219908882644,
+  "a2_zero_cost_net": -0.00864467134347291,
+  "attribution_bridge": {
+    "original_hourly_equal_weight_return_aggregation": -0.3882254286773622,
+    "same_original_cost_formula_initial_funded_sleeves": -0.34769075482217815,
+    "corrected_cost_timing_same_prediction_rows": -0.34754219908882644,
+    "complete_market_clock_same_frozen_targets": -0.34754219908882644,
+    "allocation_change_delta": 0.040534673855184056,
+    "self_financing_cost_timing_delta": 0.00014855573335170735,
+    "missing_prediction_interval_valuation_delta": 0.0
+  },
+  "frozen_rows_matching_executable_raw_price_targets_and_time_order": {
+    "BTCUSDT": 30240,
+    "ETHUSDT": 30240
+  },
+  "shift_scan_interpretation": "nonzero best shift triggers investigation, but all original executable targets match raw prices; no demonstrated timestamp implementation error",
+  "cash_cost_paid_initial_nav": 0.34722491733286454,
+  "compound_cost_drag": 0.33889752774535353,
+  "all_in_cost_bps_one_way": 13,
+  "fee_assumption_bps": 10,
+  "combined_execution_assumption_bps": 3,
+  "execution_components": "3bps spread/slippage/impact not separately identifiable from original evidence; no invented allocation",
+  "funding_borrow": "not applicable to original SPOT LONG/FLAT",
+  "missing_market_hours": {
+    "BTCUSDT": 1,
+    "ETHUSDT": 1
+  },
+  "full_clock_observations": 30411,
+  "frozen_prediction_observations_per_asset": 30240,
+  "random_baseline": {
+    "replicates": 1000,
+    "median_net_return": -0.34316525178704027,
+    "strategy_one_sided_rank_p_value": 0.5454545454545454,
+    "outperforms_random_at_5pct": false,
+    "matching": "exact complete holding runs, long/flat ratio and transition units; same cross-asset shift; cash-notional turnover is outcome dependent"
+  },
+  "zero_cost_hourly_mean_95pct_moving_block_bootstrap": [
+    -7.97237112932365e-06,
+    7.446570419043456e-06
+  ],
+  "bootstrap_repetitions": 10000,
+  "bootstrap_block_hours": 24,
+  "findings": [
+    "NO_VISIBLE_GROSS_EDGE_DO_NOT_RESCUE_WITH_TRADING_PARAMETERS",
+    "NO_DEMONSTRATED_PREDICTIVE_EDGE",
+    "TARGET_EXECUTION_ALIGNMENT_FAILURE_REQUIRES_INVESTIGATION"
+  ],
+  "alpha_promotion_eligible": false,
+  "not_proven_by_this_diagnostic": [
+    "exact historical fee tier",
+    "orderbook liquidity",
+    "actual original account order quantities",
+    "unused final holdout"
+  ]
+}
