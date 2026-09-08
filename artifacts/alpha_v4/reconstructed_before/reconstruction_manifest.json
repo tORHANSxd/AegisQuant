@@ -1,0 +1,174 @@
+{
+  "evidence_origin": "RECONSTRUCTED_BASELINE",
+  "evidence_tier": "OOS_DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "user_authorized_reconstruction": true,
+  "authorization": "2026-09-08: 允许重建，并保留来源标记",
+  "original_code_commit": "558f5350247c29749d5bf3b8c92ab1e52a572361",
+  "python_version": "3.13.15",
+  "experiment": {
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT"
+    ],
+    "source": "BINANCE_SPOT_PUBLIC_REST",
+    "interval": "1h",
+    "start_at": "2021-01-01T00:00:00Z",
+    "end_at_exclusive": "2026-01-01T00:00:00Z",
+    "forecast_horizon": "one-hour open-to-open return",
+    "execution_delay": "decision after bar t close; enter at bar t+1 open",
+    "train_hours": 8760,
+    "validation_hours": 720,
+    "calibration_hours": 720,
+    "test_hours": 2160,
+    "purge_hours": 2,
+    "embargo_hours": 24,
+    "step_hours": 2160,
+    "assumed_fee_bps_per_turnover": 10.0,
+    "assumed_execution_bps_per_turnover": 3.0,
+    "bootstrap_repetitions": 1000,
+    "bootstrap_block_hours": 24,
+    "seed": 20260903,
+    "final_holdout_opened": false
+  },
+  "original_artifact_hashes_verified_before_reconstruction": true,
+  "originals_overwritten": false,
+  "network_used": false,
+  "model_refit": true,
+  "comparisons": [
+    {
+      "candidate": "always_flat",
+      "metric": "net_compound_return",
+      "expected": 0.0,
+      "actual": 0.0,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "always_flat",
+      "metric": "gross_compound_return",
+      "expected": 0.0,
+      "actual": 0.0,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "always_flat",
+      "metric": "direction_accuracy",
+      "expected": 0.4948743386243386,
+      "actual": 0.4948743386243386,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "always_long",
+      "metric": "net_compound_return",
+      "expected": 1.13304553791951,
+      "actual": 1.13304553791951,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "always_long",
+      "metric": "gross_compound_return",
+      "expected": 1.1386133677151271,
+      "actual": 1.1386133677151271,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "always_long",
+      "metric": "direction_accuracy",
+      "expected": 0.5051256613756614,
+      "actual": 0.5051256613756614,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "logistic_core",
+      "metric": "net_compound_return",
+      "expected": -0.3882254286773622,
+      "actual": -0.3882254286773622,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "logistic_core",
+      "metric": "gross_compound_return",
+      "expected": -0.0037370799845951597,
+      "actual": -0.0037370799845951597,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "logistic_core",
+      "metric": "direction_accuracy",
+      "expected": 0.5350859788359789,
+      "actual": 0.5350859788359789,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "logistic_slow",
+      "metric": "net_compound_return",
+      "expected": -0.4021143866457674,
+      "actual": -0.4021143866457674,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "logistic_slow",
+      "metric": "gross_compound_return",
+      "expected": 0.3530532381460112,
+      "actual": 0.3530532381460112,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "logistic_slow",
+      "metric": "direction_accuracy",
+      "expected": 0.517526455026455,
+      "actual": 0.517526455026455,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "logistic_full",
+      "metric": "net_compound_return",
+      "expected": -0.4588300632359118,
+      "actual": -0.4588300632359118,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "logistic_full",
+      "metric": "gross_compound_return",
+      "expected": -0.14571246157414453,
+      "actual": -0.14571246157414453,
+      "difference": 0.0,
+      "matches_original_summary": true
+    },
+    {
+      "candidate": "logistic_full",
+      "metric": "direction_accuracy",
+      "expected": 0.5332837301587302,
+      "actual": 0.5332837301587302,
+      "difference": 0.0,
+      "matches_original_summary": true
+    }
+  ],
+  "all_summary_comparisons_passed": true,
+  "frozen_files_sha256": {
+    "BTCUSDT_always_flat.parquet": "4481a09d3d82ddf2be43a5c5929b12b6c03c28882e35546aa6598288c244258a",
+    "BTCUSDT_always_long.parquet": "2896e827395505a961d42428ce8bfe344a53a3e95a8dba92d6333224993b6d69",
+    "BTCUSDT_logistic_core.parquet": "565c453a41aeaa92cc8e32888f8c35712c7aca82317f4b0b50ffac96ee98e303",
+    "BTCUSDT_logistic_full.parquet": "41434540e62b9feefc06294684806f292bc47fb8a425557aa4846a35b21f9f12",
+    "BTCUSDT_logistic_slow.parquet": "91e96a4e52093959e2cf927a2d59698de9452c2a54c765cecf3766319cb9b666",
+    "ETHUSDT_always_flat.parquet": "19f956fa98dd2af2fe9952ed4ca7bda63e8b44c4ab89dc80c10d17ed81532415",
+    "ETHUSDT_always_long.parquet": "56e4729998bbd38d14e606d8e06cc87ab610f42146ca52f12f8c204545f898ef",
+    "ETHUSDT_logistic_core.parquet": "5647d75dfdc5cd2e047b9bf531a8da1ec96ba64aa509e47b2b3697bc267c9917",
+    "ETHUSDT_logistic_full.parquet": "f98b842a91f55fb7adb42f9e3016e9a6d435e13b9907c8c6b030f3d5835e9c33",
+    "ETHUSDT_logistic_slow.parquet": "c193746341275014583d5cacd0d1bd4a9af476da3b624b4a5393f774bd1f82a2"
+  },
+  "limitation": "Matching summary metrics does not turn reconstructed predictions into original archived outputs."
+}
