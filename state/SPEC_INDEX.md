@@ -47,6 +47,10 @@ Phase F 完成独立价值门槛、两腿失败恢复验证和公开资金费筛
 Phase G 仅接入受限风险覆盖层。结果见 `artifacts/alpha_v4/reports/final_go_no_go.md`。
 最终 holdout 因没有此前未使用的 12 个月数据而未分配，访问次数为 0。Live、订单提交与生产 ML 继续锁定。
 
+用户新增的固定多币种历史对照已完成，报告为 `artifacts/alpha_v4_multi_asset/report.md`。
+范围是 BTC/ETH/BNB/SOL/XRP 的同日期固定参数开发测试；BTC 证据复用，其他四币新增 150 次拟合。
+该扩展未改变 v4 规格身份、原始冻结证据或交易准入结论。
+
 ## 历史实现与规格身份
 
 v5 和 v3.1 均为历史参考，不再作为当前 SSOT，也不据旧验收结果自动通过 alpha-v4 门槛。

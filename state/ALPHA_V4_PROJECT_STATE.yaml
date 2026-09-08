@@ -15,7 +15,7 @@ historical_states:
   - state/V5_PROJECT_STATE.yaml
   - state/PROJECT_PHASE_STATE.yaml
 current_phase: COMPLETE
-status: completed_with_no_proven_alpha_and_explicit_evidence_gaps
+status: completed_with_no_proven_alpha_including_fixed_multi_asset_extension
 final_decision: NO_PROVEN_ALPHA
 phase_a_complete: true
 evidence_tier: OOS_DEVELOPMENT
@@ -68,10 +68,10 @@ evidence_gaps:
   - carry_historical_basis_margin_calendar_and_two_leg_liquidity_unverified
   - too_few_trades_and_return_intervals_cover_severe_loss
 model_retrained: true
-model_retraining_scope: authorized_baseline_reconstruction_and_preregistered_development_walkforward
-completed_development_model_fits: 36
-planned_model_fit_slots: 42
-skipped_model_fits: 6
+model_retraining_scope: authorized_baseline_reconstruction_and_preregistered_development_walkforward_including_user_requested_multi_asset_extension
+completed_development_model_fits: 186
+planned_model_fit_slots: 210
+skipped_model_fits: 24
 selected_model_id: null
 production_ml_enabled: false
 production_policy: CASH
@@ -92,6 +92,28 @@ walkforward_manifest: artifacts/alpha_v4/walkforward/run_manifest.json
 final_report: artifacts/alpha_v4/reports/final_go_no_go.md
 final_validation: artifacts/alpha_v4/correctness/backtest_invariants.json
 carry_report: artifacts/alpha_v4/funding_basis/admission_report.json
+latest_research_report: artifacts/alpha_v4_multi_asset/report.md
+research_extensions:
+  fixed_multi_asset_20260908:
+    authorization: '用户要求：如果不止炒btc呢，在用历史数据做回测看看。'
+    status: COMPLETED_NO_PROVEN_ALPHA
+    config: configs/research/alpha_v4_multi_asset.yaml
+    symbols: [BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT]
+    universe_limit: fixed_survivor_examples_not_point_in_time_whole_market
+    test_start: '2022-04-01T00:00:00Z'
+    test_end_exclusive: '2025-10-01T00:00:00Z'
+    folds: 14
+    btc_original_fits_reused: 36
+    new_model_fits: 150
+    new_planned_fit_slots: 168
+    new_skipped_model_fits: 18
+    parameter_selection_from_test: false
+    portfolio: five_independent_equal_cash_sleeves_per_fold
+    report: artifacts/alpha_v4_multi_asset/report.md
+    validation: artifacts/alpha_v4_multi_asset/summary/validation.json
+    final_holdout_access_count: 0
+    paper_trading_admitted: false
+    production_ml_enabled: false
 local_archive:
   status: blocked_existing_non_main_archive
   path: 'D:\Workspace\git\Personal--Quantitative_Trading.git'

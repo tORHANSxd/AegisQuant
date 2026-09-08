@@ -1,0 +1,12 @@
+{
+  "symbol": "BTCUSDT",
+  "fold_id": "202307-202310",
+  "train_start": "2022-04-01 00:00:00+00:00",
+  "validation_start": "2023-04-01 00:00:00+00:00",
+  "test_start": "2023-07-01 00:00:00+00:00",
+  "test_end": "2023-10-01 00:00:00+00:00",
+  "purge_bars": 12,
+  "embargo_bars": 1,
+  "actual_model_fits": 0,
+  "source": "REUSED_FROZEN_BTC_NO_REFIT"
+}

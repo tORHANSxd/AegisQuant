@@ -1,0 +1,154 @@
+final_pytest
+........................................................................ [  6%]
+........................................................................ [ 12%]
+........................................................................ [ 19%]
+........................................................................ [ 25%]
+........................................................................ [ 31%]
+........................................................................ [ 38%]
+........................................................................ [ 44%]
+........................................................................ [ 50%]
+........................................................................ [ 57%]
+........................................................................ [ 63%]
+........................................................................ [ 69%]
+........................................................................ [ 76%]
+........................................................................ [ 82%]
+........................................................................ [ 88%]
+........................................................................ [ 95%]
+......................................................                   [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\Personal\Quantitative_Trading\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\nautilus_trader\persistence\catalog\parquet.py:829
+  D:\Personal\Quantitative_Trading\.venv\Lib\site-packages\nautilus_trader\persistence\catalog\parquet.py:829: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+    period: pd.Timedelta = pd.Timedelta(days=1),
+
+.venv\Lib\site-packages\nautilus_trader\persistence\catalog\parquet.py:895
+  D:\Personal\Quantitative_Trading\.venv\Lib\site-packages\nautilus_trader\persistence\catalog\parquet.py:895: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+    period: pd.Timedelta = pd.Timedelta(days=1),
+
+tests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines
+tests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines
+tests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines
+tests/contract/test_nautilus_replay.py::test_fixed_replay_is_identical_across_fresh_engines
+tests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only
+tests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only
+tests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only
+tests/contract/test_p06_nautilus_contract.py::test_pinned_nautilus_replay_is_deterministic_and_read_only
+  D:\Personal\Quantitative_Trading\.venv\Lib\site-packages\pandas\core\tools\timedeltas.py:233: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+    result = Timedelta(r, unit)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1134 passed, 11 warnings in 110.73s (0:01:50)
+
+
+final_pyright
+0 errors, 0 warnings, 0 informations
+
+
+final_ruff
+All checks passed!
+
+
+final_bandit
+[tester]	WARNING	nosec encountered (B603), but no failed test on file scripts\audit_current_failure.py:420
+[manager]	WARNING	Test in comment: locally is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: generated is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: pytest is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: XML is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: only is not a test name or id, ignoring
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p15_evidence.py:357
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p15_evidence.py:358
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p15_evidence.py:359
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p15_evidence.py:360
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p15_evidence.py:356
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p15_evidence.py:357
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p15_evidence.py:358
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p15_evidence.py:359
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p15_evidence.py:360
+[manager]	WARNING	Test in comment: audit is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: boolean is not a test name or id, ignoring
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:506
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:507
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:508
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:509
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:510
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:511
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:512
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:513
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:514
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:515
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:516
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:517
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:519
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:506
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_p18_evidence.py:507
+[manager]	WARNING	Test in comment: boolean is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: audit is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: outcome is not a test name or id, ignoring
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:150
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:151
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:152
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:153
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:154
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:155
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:156
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:157
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:158
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:159
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:160
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:161
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:162
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:164
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:165
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:166
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:167
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:168
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:169
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:170
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:171
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:172
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:173
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:179
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:180
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:186
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:187
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:209
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:218
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:219
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:220
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:150
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:151
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:152
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:172
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:182
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:183
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:184
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:218
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:219
+[tester]	WARNING	nosec encountered (B105), but no failed test on file scripts\generate_v5_p12_evidence.py:220
+[manager]	WARNING	Test in comment: status is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: token is not a test name or id, ignoring
+[tester]	WARNING	nosec encountered (B608), but no failed test on file src\aegisquant\data\pit.py:80
+[tester]	WARNING	nosec encountered (B608), but no failed test on file src\aegisquant\data\pit.py:81
+[tester]	WARNING	nosec encountered (B608), but no failed test on file src\aegisquant\data\pit.py:82
+[tester]	WARNING	nosec encountered (B608), but no failed test on file src\aegisquant\data\pit.py:85
+[manager]	WARNING	Test in comment: status is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: token is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: status is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: token is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: bounded is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: input is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: rejects is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: DTD is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: entity is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: declarations is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: pinned is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: PostgreSQL is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: programs is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: no is not a test name or id, ignoring
+[manager]	WARNING	Test in comment: shell is not a test name or id, ignoring
+
+
+After documentation/state update: 15 targeted tests passed; targeted Pyright/Ruff passed. Chart code also passed targeted Pyright/Ruff and endpoint verification.

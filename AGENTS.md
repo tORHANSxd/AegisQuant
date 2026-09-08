@@ -7,6 +7,7 @@
 - 执行顺序遵循 v4 §14；先冻结失败证据，禁止在 §2.2 未满足时偷偷重训或把重建预测当作原始预测。实际缺口必须写入状态和报告。
 - `LIVE_TRADING = false`、`ORDER_SUBMISSION_ENABLED = false`、实盘适配器注册表为空；不读取或要求真实 API 私钥。
 - v4 本轮最终结论为 `NO_PROVEN_ALPHA`；以 `artifacts/alpha_v4/reports/final_go_no_go.md` 和当前状态核对结果。模型、carry 与纸面前向均未获准入，不能把实现完成或旧阶段通过解释为交易授权。
+- 用户随后授权的固定五币历史扩展已完成，最新研究报告为 `artifacts/alpha_v4_multi_asset/report.md`，结论仍为 `NO_PROVEN_ALPHA`。原 BTC 冻结报告保留；不把新增币种测试解释为参数搜索、最终留出验证或交易授权。
 
 ## Git 分支规则
 

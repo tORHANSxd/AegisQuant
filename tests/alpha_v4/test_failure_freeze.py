@@ -160,6 +160,7 @@ def test_v4_ssot_identity_and_safety_remain_explicit(project_root: Path) -> None
     assert state["alpha_promotion_eligible"] is False
     assert state["model_retraining_scope"] == (
         "authorized_baseline_reconstruction_and_preregistered_development_walkforward"
+        "_including_user_requested_multi_asset_extension"
     )
     assert state["final_decision"] == "NO_PROVEN_ALPHA"
     assert state["selected_model_id"] is None and state["production_ml_enabled"] is False

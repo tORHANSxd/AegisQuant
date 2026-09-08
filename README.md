@@ -17,6 +17,13 @@ ML 未获生产准入，资金费组合未获独立准入；没有可用的、�
 具体数字、成本压力限制及任务书要求的 12 项回答见
 [`最终结论`](artifacts/alpha_v4/reports/final_go_no_go.md)。
 
+用户随后要求扩展 BTC 以外的历史回测。固定 BTC/ETH/BNB/SOL/XRP 五币组合的 14 折研究已完成：
+透明趋势净收益 `+152.04%`、最大回撤 `46.68%`；Elastic Net 为 `+112.50%`、回撤 `32.90%`。
+新完成 150 次固定模型拟合，另有 18 次因校准样本不足跳过，BTC 基准沿用冻结结果。
+区间估计、多重比较和执行证据仍不足以证明 Alpha；维持 CASH。
+完整单币对照、资金约束造成的成本压力路径变化见
+[`五币种回测报告`](artifacts/alpha_v4_multi_asset/report.md)。
+
 ## 当前安全状态
 
 - `LIVE_TRADING = false`
@@ -35,6 +42,9 @@ ML 未获生产准入，资金费组合未获独立准入；没有可用的、�
 .venv\Scripts\python.exe -m scripts.run_alpha_v4_final_holdout --check
 .venv\Scripts\python.exe -m scripts.audit_alpha_v4_carry --check
 .venv\Scripts\python.exe -m scripts.finalize_alpha_v4_evidence --check
+.venv\Scripts\python.exe -m scripts.download_alpha_v4_multi_asset --check
+.venv\Scripts\python.exe -m scripts.run_alpha_v4_multi_asset --check
+.venv\Scripts\python.exe -m scripts.summarize_alpha_v4_multi_asset --check
 .venv\Scripts\python.exe -m pytest -q
 .venv\Scripts\python.exe -m pyright
 ```
