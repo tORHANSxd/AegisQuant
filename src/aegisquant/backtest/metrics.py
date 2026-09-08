@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import timedelta
 from decimal import ROUND_CEILING, Decimal
 from itertools import pairwise
 
@@ -18,6 +19,30 @@ from aegisquant.domain.values import canonical_result
 
 SECONDS_PER_YEAR = Decimal("31557600")
 BPS = Decimal("10000")
+
+
+def resample_equity(
+    points: tuple[EquityPoint, ...],
+    frequency_seconds: int,
+) -> tuple[EquityPoint, ...]:
+    """Last available mark at a declared grid; never interpolate from future marks."""
+    if frequency_seconds <= 0:
+        raise ValueError("metric frequency must be positive")
+    if not points:
+        return ()
+    ordered = tuple(
+        {point.time: point for point in sorted(points, key=lambda point: point.time)}.values()
+    )
+    step = timedelta(seconds=frequency_seconds)
+    at_time = ordered[0].time
+    cursor = 0
+    output: list[EquityPoint] = []
+    while at_time <= ordered[-1].time:
+        while cursor + 1 < len(ordered) and ordered[cursor + 1].time <= at_time:
+            cursor += 1
+        output.append(ordered[cursor].model_copy(update={"time": at_time}))
+        at_time += step
+    return tuple(output)
 
 
 def _seconds(start: object, end: object) -> Decimal:
@@ -78,23 +103,22 @@ def calculate_metrics(
     fills: tuple[BacktestFill, ...],
     orders: tuple[BacktestOrderResult, ...],
     multi_leg_exposures: tuple[MultiLegExposure, ...] = (),
+    frequency_seconds: int = 3600,
+    initial_equity: Decimal | None = None,
 ) -> BacktestMetrics:
     if not equity_curve:
         raise ValueError("metrics require an equity curve")
-    initial = equity_curve[0].equity
+    initial = equity_curve[0].equity if initial_equity is None else initial_equity
     final = equity_curve[-1].equity
+    regular_curve = resample_equity(equity_curve, frequency_seconds)
     total_return = Decimal("0") if initial == 0 else canonical_result(final / initial - 1)
     returns = [
         canonical_result(current.equity / previous.equity - 1)
-        for previous, current in pairwise(equity_curve)
+        for previous, current in pairwise(regular_curve)
         if previous.equity != 0
     ]
     elapsed_seconds = max(Decimal("0"), _seconds(equity_curve[0].time, equity_curve[-1].time))
-    periods_per_year = (
-        Decimal(len(returns)) * SECONDS_PER_YEAR / elapsed_seconds
-        if returns and elapsed_seconds > 0
-        else Decimal("0")
-    )
+    periods_per_year = SECONDS_PER_YEAR / Decimal(frequency_seconds) if returns else Decimal("0")
     standard_deviation = _population_std(returns)
     annualized_volatility = canonical_result(
         standard_deviation * periods_per_year.sqrt() if periods_per_year > 0 else Decimal("0")
@@ -107,7 +131,7 @@ def calculate_metrics(
         else None
     )
     downside = [min(value, Decimal("0")) for value in returns]
-    downside_std = _population_std(downside)
+    downside_std = _mean([value * value for value in downside]).sqrt()
     annualized_downside = canonical_result(
         downside_std * periods_per_year.sqrt() if periods_per_year > 0 else Decimal("0")
     )
@@ -118,7 +142,13 @@ def calculate_metrics(
     if initial > 0 and final > 0 and elapsed_seconds >= Decimal("86400"):
         years = elapsed_seconds / SECONDS_PER_YEAR
         annualized_return = canonical_result(((final / initial).ln() / years).exp() - 1)
-    maximum_drawdown, underwater_seconds = _maximum_drawdown(equity_curve)
+    # Include the observed terminal mark for drawdown, without annualizing a partial bin.
+    drawdown_curve = (
+        regular_curve
+        if regular_curve[-1].time == equity_curve[-1].time
+        else (*regular_curve, equity_curve[-1])
+    )
+    maximum_drawdown, underwater_seconds = _maximum_drawdown(drawdown_curve)
     calmar = (
         canonical_result(annualized_return / maximum_drawdown)
         if annualized_return is not None and maximum_drawdown > 0
@@ -152,7 +182,7 @@ def calculate_metrics(
         (fill.quantity.amount * fill.execution_price.amount for fill in fills),
         Decimal("0"),
     )
-    average_equity = _mean([abs(point.equity) for point in equity_curve])
+    average_equity = _mean([abs(point.equity) for point in drawdown_curve])
     turnover = (
         canonical_result(gross_turnover / average_equity) if average_equity > 0 else Decimal("0")
     )

@@ -6,7 +6,10 @@ from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
+from hashlib import sha256
 from pathlib import Path
+
+from pydantic import TypeAdapter
 
 from aegisquant.accounting.ledger import AccountingPolicy, LedgerEngine, calculate_contract_pnl
 from aegisquant.accounting.models import (
@@ -29,10 +32,12 @@ from aegisquant.backtest.models import (
     EquityPoint,
     FaultType,
     FaultWindow,
+    FillPrecision,
     FillSlice,
     FundingEvent,
     L2BookEvent,
     LatencyPolicy,
+    LiquidityRole,
     MarketEvent,
     MultiLegExposure,
     MultiLegPlan,
@@ -44,17 +49,21 @@ from aegisquant.backtest.models import (
 from aegisquant.backtest.multileg import summarize_multi_leg_exposure
 from aegisquant.backtest.rules import HistoricalRuleBook
 from aegisquant.data.hashing import canonical_sha256
-from aegisquant.data.market import InstrumentType
-from aegisquant.domain.execution import Fill, OrderSide, TimeInForce, VenueOrderStatus
+from aegisquant.data.market import ContractForm, InstrumentType
+from aegisquant.domain.execution import Fill, OrderSide, OrderType, TimeInForce, VenueOrderStatus
 from aegisquant.domain.identifiers import (
     ArtifactId,
     BacktestOrderId,
+    ClientOrderId,
     FillId,
     IdempotencyKey,
     MultiLegPlanId,
+    OrderIntentId,
     VenueOrderId,
 )
 from aegisquant.domain.values import Money, Price, Quantity, canonical_result
+
+_EQUITY_ADAPTER = TypeAdapter(tuple[EquityPoint, ...])
 
 
 @dataclass(slots=True)
@@ -466,6 +475,52 @@ class EventBacktestEngine:
             )
         ]
         latest_mark = _event_mark(events[0])
+        cached_revision = -1
+        cached_position = (Decimal("0"), None, Decimal("0"))
+        cached_mark = latest_mark
+
+        def position_at(mark: Decimal) -> tuple[Decimal, Decimal | None, Decimal]:
+            # Open lots change only on fills. Reuse their basis across quiet market events.
+            nonlocal cached_revision, cached_position, cached_mark
+            if cached_revision != len(fills) or instrument.contract_form is ContractForm.INVERSE:
+                cached_position = self._position(
+                    ledger=ledger, instrument=instrument, mark_price=mark
+                )
+                cached_revision = len(fills)
+                cached_mark = mark
+            quantity, average, anchored_pnl = cached_position
+            multiplier = (
+                Decimal("1")
+                if instrument.instrument_type is InstrumentType.SPOT
+                else instrument.contract_multiplier
+            )
+            return (
+                quantity,
+                average,
+                canonical_result(anchored_pnl + quantity * multiplier * (mark - cached_mark)),
+            )
+
+        def record_equity(at_time: datetime) -> None:
+            quantity, _, unrealized_pnl = position_at(latest_mark)
+            position_value = (
+                quantity * latest_mark
+                if instrument.instrument_type is InstrumentType.SPOT
+                else unrealized_pnl
+            )
+            point = EquityPoint(
+                time=at_time,
+                cash=cash,
+                position_value=canonical_result(position_value),
+                realized_pnl=realized,
+                unrealized_pnl=unrealized_pnl,
+                equity=canonical_result(cash + position_value),
+                reporting_asset_id=spec.reporting_asset_id,
+            )
+            if equity_curve[-1].time == at_time:
+                equity_curve[-1] = point
+            else:
+                equity_curve.append(point)
+
         event_capacity: dict[str, Decimal] = {}
         funding_values = tuple(
             sorted(
@@ -481,16 +536,15 @@ class EventBacktestEngine:
         timeline.extend((event.available_time, 0, event) for event in events)
         timeline.extend((event.available_time, 1, event) for event in funding_values)
         timeline.sort(key=lambda item: (item[0], item[1]))
-        for _, kind, item in timeline:
+        for timeline_index, (at_time, kind, item) in enumerate(timeline):
+            timestamp_complete = (
+                timeline_index + 1 == len(timeline) or timeline[timeline_index + 1][0] != at_time
+            )
             if kind == 1:
                 funding_event = item
                 if not isinstance(funding_event, FundingEvent):
                     raise TypeError("funding timeline item has the wrong type")
-                signed_quantity, _, unrealized = self._position(
-                    ledger=ledger,
-                    instrument=instrument,
-                    mark_price=funding_event.mark_price,
-                )
+                signed_quantity, _, unrealized = position_at(funding_event.mark_price)
                 cost = funding_cost(
                     signed_quantity=signed_quantity,
                     mark_price=funding_event.mark_price,
@@ -520,22 +574,8 @@ class EventBacktestEngine:
                     )
                     cash = canonical_result(cash - cost)
                     funding_total = canonical_result(funding_total + cost)
-                    position_value = (
-                        signed_quantity * latest_mark
-                        if instrument.instrument_type is InstrumentType.SPOT
-                        else unrealized
-                    )
-                    equity_curve.append(
-                        EquityPoint(
-                            time=funding_event.available_time,
-                            cash=cash,
-                            position_value=position_value,
-                            realized_pnl=realized,
-                            unrealized_pnl=unrealized,
-                            equity=canonical_result(cash + position_value),
-                            reporting_asset_id=spec.reporting_asset_id,
-                        )
-                    )
+                if timestamp_complete:
+                    record_equity(at_time)
                 continue
             event = item
             if not isinstance(event, (BarEvent, TradeQuoteEvent, L2BookEvent)):
@@ -559,6 +599,11 @@ class EventBacktestEngine:
                 }:
                     continue
                 if event.available_time < state.arrival_time:
+                    continue
+                if (
+                    event.event_time <= state.order.decision_time
+                    or event.event_time < state.arrival_time
+                ):
                     continue
                 cancel_time = cancel_by_order.get(state.order.backtest_order_id)
                 if cancel_time is not None and cancel_time < event.available_time:
@@ -623,27 +668,6 @@ class EventBacktestEngine:
                             - backtest_fill.fee.amount
                         )
                     realized = canonical_result(realized + outcome.applied_fill.realized_pnl.amount)
-                    signed_quantity, _, unrealized = self._position(
-                        ledger=ledger,
-                        instrument=instrument,
-                        mark_price=latest_mark,
-                    )
-                    position_value = (
-                        signed_quantity * latest_mark
-                        if instrument.instrument_type is InstrumentType.SPOT
-                        else unrealized
-                    )
-                    equity_curve.append(
-                        EquityPoint(
-                            time=backtest_fill.available_time,
-                            cash=cash,
-                            position_value=canonical_result(position_value),
-                            realized_pnl=realized,
-                            unrealized_pnl=unrealized,
-                            equity=canonical_result(cash + position_value),
-                            reporting_asset_id=spec.reporting_asset_id,
-                        )
-                    )
                 if state.filled == state.order.quantity.amount:
                     state.status = VenueOrderStatus.FILLED
                     state.completed_at = event.available_time
@@ -668,28 +692,55 @@ class EventBacktestEngine:
                 ):
                     state.status = VenueOrderStatus.CANCELED
                     state.completed_at = cancel_time
-        signed_quantity, average_entry, unrealized = self._position(
-            ledger=ledger,
-            instrument=instrument,
-            mark_price=latest_mark,
-        )
-        position_value = (
-            signed_quantity * latest_mark
-            if instrument.instrument_type is InstrumentType.SPOT
-            else unrealized
-        )
-        if equity_curve[-1].time < spec.end_time:
-            equity_curve.append(
-                EquityPoint(
-                    time=spec.end_time,
-                    cash=cash,
-                    position_value=canonical_result(position_value),
-                    realized_pnl=realized,
-                    unrealized_pnl=unrealized,
-                    equity=canonical_result(cash + position_value),
-                    reporting_asset_id=spec.reporting_asset_id,
-                )
+            if timestamp_complete:
+                record_equity(at_time)
+        signed_quantity, average_entry, unrealized = position_at(latest_mark)
+        record_equity(spec.end_time)
+        final_mtm = equity_curve[-1].equity
+        forced_close_equity = final_mtm
+        exit_cost = None
+        close_status = "NO_POSITION"
+        if signed_quantity != 0:
+            close_order = BacktestOrder(
+                backtest_order_id=BacktestOrderId(f"terminal-close:{spec.run_id}"),
+                client_order_id=ClientOrderId(f"terminal-close:{spec.run_id}"),
+                order_intent_id=OrderIntentId(f"terminal-close:{spec.run_id}"),
+                instrument_id=instrument.instrument_id,
+                venue_id=events[-1].venue_id,
+                side=OrderSide.SELL if signed_quantity > 0 else OrderSide.BUY,
+                order_type=OrderType.MARKET,
+                quantity=Quantity(
+                    amount=abs(signed_quantity), asset_id=instrument.quantity_asset_id
+                ),
+                time_in_force=TimeInForce.IMMEDIATE_OR_CANCEL,
+                decision_time=spec.end_time,
+                submitted_at=spec.end_time,
+                reduce_only=True,
             )
+            close_slice = FillSlice(
+                quantity=abs(signed_quantity),
+                reference_price=latest_mark,
+                available_liquidity=event_capacity[str(events[-1].event_id)],
+                precision=FillPrecision.BAR_CONSERVATIVE,
+                liquidity_role=LiquidityRole.TAKER,
+                source_event_id=events[-1].event_id,
+                event_time=spec.end_time,
+                available_time=spec.end_time,
+            )
+            schedule = self.cost_book.at(close_order, spec.end_time)
+            if close_slice.quantity <= close_slice.available_liquidity * schedule.participation_cap:
+                _, exit_cost = execution_price_and_cost(
+                    order=close_order,
+                    fill_slice=close_slice,
+                    schedule=schedule,
+                    base_asset_id=instrument.base_asset_id,
+                    quote_asset_id=instrument.quote_asset_id,
+                )
+                forced_close_equity = canonical_result(final_mtm - exit_cost.total)
+                close_status = "SIMULATED_AT_FINAL_MARK_WITH_FULL_EXIT_COST"
+            else:
+                forced_close_equity = None
+                close_status = "INSUFFICIENT_EXIT_LIQUIDITY"
         order_results = self._order_results(states, spec.end_time)
         fills_tuple = tuple(fills)
         plan_values = tuple(multi_leg_plans)
@@ -742,6 +793,8 @@ class EventBacktestEngine:
             fills=fills_tuple,
             orders=order_results,
             multi_leg_exposures=exposure_tuple,
+            frequency_seconds=spec.metric_frequency_seconds,
+            initial_equity=spec.initial_cash.amount,
         )
         economic_hash = canonical_sha256(
             {
@@ -769,10 +822,12 @@ class EventBacktestEngine:
                     }
                     for fill in fills
                 ],
-                "equity": [
-                    {"time": point.time.isoformat(), "equity": str(point.equity)}
-                    for point in equity_curve
-                ],
+                "equity_schema": "alpha-v4-every-market-event",
+                "equity_sha256": sha256(
+                    _EQUITY_ADAPTER.dump_json(
+                        tuple(equity_curve), include={"__all__": {"time", "equity"}}
+                    )
+                ).hexdigest(),
                 "position": str(signed_quantity),
             }
         )
@@ -789,6 +844,10 @@ class EventBacktestEngine:
             multi_leg_exposures=exposure_tuple,
             events_processed=len(timeline),
             economic_event_hash=economic_hash,
+            mark_to_market_final_equity=final_mtm,
+            forced_close_final_equity=forced_close_equity,
+            forced_close_cost=exit_cost,
+            forced_close_status=close_status,
             precision_levels=tuple(
                 sorted({fill.precision for fill in fills}, key=lambda item: item.value)
             ),

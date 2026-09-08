@@ -114,6 +114,7 @@ class BacktestRunSpec(DomainModel):
     rule_policy_version: str
     reproduction_command: str
     live_trading_locked: Literal[True] = True
+    metric_frequency_seconds: PositiveInt = 3600
 
     @field_validator("dataset_sha256", "config_sha256", "code_sha256")
     @classmethod
@@ -609,6 +610,10 @@ class BacktestResult(DomainModel):
     economic_event_hash: str
     precision_levels: tuple[FillPrecision, ...]
     warnings: tuple[str, ...] = ()
+    mark_to_market_final_equity: FiniteDecimal | None = None
+    forced_close_final_equity: FiniteDecimal | None = None
+    forced_close_cost: CostBreakdown | None = None
+    forced_close_status: str = "LEGACY_NOT_EVALUATED"
 
     @field_validator("economic_event_hash")
     @classmethod

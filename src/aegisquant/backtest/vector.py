@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta
 from decimal import Decimal
-
-import polars as pl
 
 from aegisquant.accounting.models import AccountingInstrument
 from aegisquant.backtest.engine import EventBacktestEngine
@@ -20,7 +18,6 @@ from aegisquant.backtest.models import (
     FaultWindow,
     FundingEvent,
     MultiLegPlan,
-    nanoseconds_after,
 )
 from aegisquant.domain.execution import OrderSide, OrderType, TimeInForce
 from aegisquant.domain.identifiers import (
@@ -30,18 +27,9 @@ from aegisquant.domain.identifiers import (
 )
 from aegisquant.domain.values import Quantity
 
-EPOCH = datetime(1970, 1, 1, tzinfo=UTC)
-
-
-def _datetime_ns(value: datetime) -> int:
-    """Convert a UTC datetime without a binary-float timestamp round trip."""
-
-    delta = value - EPOCH
-    return (delta.days * 86_400 + delta.seconds) * 1_000_000_000 + delta.microseconds * 1_000
-
 
 class VectorBacktestEngine:
-    """Fast as-of alignment; economic facts still pass through the P05 ledger."""
+    """Batch signals with authoritative event alignment and full position-path replay."""
 
     def __init__(self, event_engine: EventBacktestEngine) -> None:
         self.event_engine = event_engine
@@ -66,40 +54,10 @@ class VectorBacktestEngine:
             raise ValueError("vector engine only supports market benchmark orders")
         if not bar_values:
             raise ValueError("vector backtest requires bars")
-        bar_frame = pl.DataFrame(
-            {
-                "available_ns": [_datetime_ns(item.available_time) for item in bar_values],
-                "event_id": [str(item.event_id) for item in bar_values],
-            }
-        ).sort("available_ns")
-        order_frame = pl.DataFrame(
-            {
-                "arrival_ns": [
-                    _datetime_ns(
-                        nanoseconds_after(
-                            item.submitted_at,
-                            self.event_engine.latency_policy.order_arrival_ns,
-                        )
-                    )
-                    for item in order_values
-                ],
-                "order_id": [str(item.backtest_order_id) for item in order_values],
-            }
-        ).sort("arrival_ns")
-        aligned = order_frame.join_asof(
-            bar_frame,
-            left_on="arrival_ns",
-            right_on="available_ns",
-            strategy="forward",
-        )
-        selected_ids = {
-            value for value in aligned.get_column("event_id").to_list() if isinstance(value, str)
-        }
-        selected_bars = tuple(item for item in bar_values if str(item.event_id) in selected_ids)
         return self.event_engine.run(
             spec=spec,
             instrument=instrument,
-            market_events=selected_bars,
+            market_events=bar_values,
             orders=order_values,
             cancel_requests=cancel_requests,
             faults=faults,
