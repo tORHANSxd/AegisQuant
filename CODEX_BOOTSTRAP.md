@@ -1,16 +1,20 @@
 # Codex 启动契约
 
-每次工程执行前必须按以下顺序读取：
+当前最高优先级项目 SSOT 为 `AegisQuant_盈利导向重构任务书_v4.md`。
+开始执行时完整读取该任务书；后续按问题复核相关章节，并读取：
 
-1. `AegisQuant_v5.0_Truth_Causal_AI_Forecast_Codex_Master_Plan.md`；
-2. `state/V5_PROJECT_STATE.yaml` 与 `state/V5_OPEN_RISKS.yaml`；
-3. `reports/v5/<phase>/PLAN.md`、`RISKS.md` 与 `NEXT_ACTIONS.md`；
-4. 仅在核对旧实现时读取 v3.1 规格、`state/PROJECT_PHASE_STATE.yaml` 和旧追踪矩阵。
+1. `AGENTS.md` 中当前用户要求及分支规则；
+2. `state/ALPHA_V4_PROJECT_STATE.yaml` 与 `state/SPEC_INDEX.md`；
+3. `artifacts/alpha_v4/before/current_failure_report.md`、`run_manifest.json` 和 `metric_lineage.json`；
+4. 修改涉及的实现及测试；v5/v3.1 资料只按需要作为历史实现契约参考。
 
-只执行 v5 状态指定的阶段。先形成可追踪计划，再修改；运行阶段规定的完整测试并
-生成证据。验收失败时把状态标记为 `failed` 或 `blocked` 并停止，不能进入下一阶段。
-旧 v3.1 状态不得覆盖或推进 v5 状态。
+当前用户要求只使用 `main`，覆盖任务书 §1 的建研究分支示例；不得再创建任何其他分支。
+提交使用 `YYYY:MM:DD Codex` 和中文修改点，按任务书 §14 分隔证据、标签、回测器、经济约束和模型改动。
+首个提交已仅保存原始失败证据及其 Git 字节保全规则；不能把所选组合的预测冒充亏损候选预测。
 
-安全硬约束：研究、CI 和 Web 进程不能持有交易秘密；未经过独立的未来人工解锁流
-程，任何代码路径都不能发送真实订单。V5 各阶段在正式 Promotion Gate 前始终保持 Live
-锁定。
+当前 Phase A 存在原始 `logistic_core` 逐样本预测缺失。依据 §2.2，未获得该导出或用户对
+重建基线的明确例外授权前，不重新训练、不进入依赖该基线的归因和策略修改。
+冻结工件只能校验，不能原地覆盖；最终 holdout 尚未分配或读取，已用开发 OOS 数据不能冒充封存集。
+
+安全硬约束：`LIVE_TRADING = false`、`ORDER_SUBMISSION_ENABLED = false`，
+实盘适配器注册表为空，不读取或要求真实 API 私钥。任何纸面模拟结论都不授权真实交易。

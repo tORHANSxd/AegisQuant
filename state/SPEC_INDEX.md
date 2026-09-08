@@ -1,56 +1,58 @@
-# AegisQuant v5.0 规格索引
+# AegisQuant 盈利导向重构 v4 规格索引
 
-- 当前 SSOT：`AegisQuant_v5.0_Truth_Causal_AI_Forecast_Codex_Master_Plan.md`
-- 规格版本：`5.0`
-- 规格日期：`2026-09-02`
-- SHA-256：`aee366d5fa1a8ebd7449c597e6f822535546633efc335c1ab0053333d160a255`
-- 总行数：2,799
+- 当前最高优先级项目 SSOT：`AegisQuant_盈利导向重构任务书_v4.md`
+- 规格版本：`alpha-v4`；规格日期：`2026-09-03`；启用日期：`2026-09-08`
+- SHA-256：`36e51644b2e3bb5d9570f8dcc18c4a7136f542e9f878b3b709739aa84eb9be85`
+- 总行数：1,510；本次已完整读取，保留原文件字节。
+- 当前状态：`state/ALPHA_V4_PROJECT_STATE.yaml`
+- 当前明确用户要求覆盖 §1 建分支示例：只在 `main` 工作；提交继续采用中文审计格式。
 
-## 全局主题
+## 章节与实施顺序
 
 | 起始行 | 主题 |
 |---:|---|
-| 15 | 执行契约、SSOT 与禁止事项 |
-| 108 | 当前必须修复的问题与 EvidenceTier |
-| 197 | Truth Engine、证据图、时间语义与校准 |
-| 724 | 事件理解、price-in 与反事实影响 |
-| 1094 | Forecast Council、概率校准与可靠度衰减 |
-| 1450 | Net Edge、风险、执行与研究协议 |
-| 1872 | 数据库、API 与 Dashboard 契约 |
-| 2008 | V5-P00 至 V5-P12 阶段计划 |
-| 2313 | Promotion Gate、失败注入与最终成功标准 |
+| 11 | §0 最终技术决策与盈利定义 |
+| 52 | §1 安全约束与首笔证据提交 |
+| 75 | §2 Phase A：冻结预测、指标血缘与 A0–A10 失败归因 |
+| 202 | §3 Phase B：标签、全部行情、MTM、经济约束、指标和委员会 |
+| 443 | §4 Phase C：AegisAlpha-CAT LONG/FLAT 策略 |
+| 641 | §4.6 动态全成本经济门槛 |
+| 728 | §4.7 仓位、未完成订单与换手控制 |
+| 813 | §5 Phase D：Walk-forward 与防过拟合 |
+| 838 | §5.2 最终封存集与单次访问 |
+| 887 | §6 Phase E：逐层消融 |
+| 928 | §7 Phase F：独立资金费/基差策略，需先通过前置门槛 |
+| 987 | §8 Phase G：事件智能仅作为风险覆盖层 |
+| 1022 | §9 成本恒等式与压力测试 |
+| 1084 | §10 工程、经济、统计、稳定性及 ML 晋级门槛 |
+| 1151 | §11 必须新增的测试 |
+| 1201 | §12 文件修改映射 |
+| 1234 | §13 建议配置骨架 |
+| 1315 | §14 执行顺序与提交边界 |
+| 1381 | §15 最终产物与允许结论 |
+| 1433 | §16 停止条件 |
+| 1458 | §17 最终报告必须回答的问题 |
+| 1475 | §18 参考案例与采用范围 |
+| 1503 | §19 先可信回测，再毛优势、成本门槛和 ML 增量 |
 
-## 阶段索引
+## 当前证据边界
 
-| 阶段 | 起始行 | 责任域 |
-|---|---:|---|
-| V5-P00 | 2012 | Evidence Reset 与 SSOT Migration |
-| V5-P01 | 2039 | Truth contracts 与 temporal semantics |
-| V5-P02 | 2058 | Source Registry、identity 与 C2PA |
-| V5-P03 | 2078 | Evidence retrieval 与 independence graph |
-| V5-P04 | 2105 | Truth Council 与 calibration |
-| V5-P05 | 2125 | Event canonicalization、surprise 与 price-in |
-| V5-P06 | 2143 | Event response dataset 与 causal layer |
-| V5-P07 | 2163 | Forecast Council 2.0 |
-| V5-P08 | 2186 | Truth-aware event counterfactual forecast |
-| V5-P09 | 2206 | Meta-reasoner、skeptic、ensemble 与 conformal |
-| V5-P10 | 2226 | Net Edge、portfolio 与 risk integration |
-| V5-P11 | 2249 | Paper / Shadow forward proof |
-| V5-P12 | 2282 | Testnet / Canary readiness |
+Phase A 已冻结现有 selected-policy 60,480 行预测，原始数据和报告哈希通过校验。
+所选组合的 `50.0810%` 准确率与候选 `logistic_core` 的 `-38.8225%` 净复合收益来自不同策略。
+亏损候选的完整原始预测未保存，不能把现有文件宣称为其冻结序列；详见
+`artifacts/alpha_v4/before/current_failure_report.md`。
+尚未进入 Phase B–G，也未分配或读取最终 holdout。Live 和订单提交继续锁定。
 
-## 历史实现基线
+## 历史实现与规格身份
 
-`AegisQuant_v3.1_Multimodal_Event_Intelligence_Codex_Master_Taskbook.md`、
-`docs/spec/AegisQuant_Master_Taskbook_v3_1.md`、`state/PROJECT_PHASE_STATE.yaml` 和
-`reports/phases/` 保留为 v3.1 历史实现及证据，不是当前 SSOT，也不自动具备 v5
-Promotion 资格。
+v5 和 v3.1 均为历史参考，不再作为当前 SSOT，也不据旧验收结果自动通过 alpha-v4 门槛。
 
-- 历史规格 SHA-256：`1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f`
-- 历史规格总行数：7,023
-- 历史阶段范围：P00-P18
+- v5：`AegisQuant_v5.0_Truth_Causal_AI_Forecast_Codex_Master_Plan.md`
+  - SHA-256：`aee366d5fa1a8ebd7449c597e6f822535546633efc335c1ab0053333d160a255`
+  - 2,799 行，V5-P00–V5-P12；状态 `state/V5_PROJECT_STATE.yaml`，证据 `reports/v5/`。
+- v3.1：`AegisQuant_v3.1_Multimodal_Event_Intelligence_Codex_Master_Taskbook.md`
+  与原字节副本 `docs/spec/AegisQuant_Master_Taskbook_v3_1.md`
+  - SHA-256：`1265a4feeb126bf9004685b80c0aa01d053fd983079b80d5c9063abefc382d1f`
+  - 7,023 行，P00–P18；状态 `state/PROJECT_PHASE_STATE.yaml`，证据 `reports/phases/`。
 
-## 当前边界
-
-`V5-P00` 至 `V5-P06` 已验收；`V5-P07` 正在实施，其后阶段仍未授权。P07 建立 Forecast Council
-2.0 的统一张量、完整输出、能力矩阵、候选门禁与等折 OOS 竞技场。开发 fixture 上的 Truth、
-Causal 与 Forecast 指标不得包装成真实世界准确率、因果效应或交易 Alpha。
+旧规格文件、历史状态、历史证据及其完整性测试保持历史语义；不能覆盖当前状态或授权实盘。

@@ -1,0 +1,79 @@
+{
+  "schema_version": "alpha-v4-activation-validation-v1",
+  "date": "2026-09-08",
+  "evidence_tier": "DEVELOPMENT",
+  "alpha_promotion_eligible": false,
+  "scope": "SSOT activation, existing-evidence freeze and audit tooling only; no strategy changes",
+  "phase_a_complete": false,
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe scripts/run_real_market_backtest.py --check",
+      "result": "PASS",
+      "detail": "Original public run artifact hashes verified before any source changes."
+    },
+    {
+      "command": ".venv/Scripts/python.exe scripts/audit_current_failure.py --check",
+      "result": "PASS",
+      "detail": "60480 selected-policy predictions frozen; original failed-candidate predictions still missing."
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/alpha_v4 tests/research/test_public_market_backtest.py tests/p00 -q",
+      "result": "PASS",
+      "passed": 49,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check scripts/audit_current_failure.py tests/alpha_v4",
+      "result": "PASS"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff format --check scripts/audit_current_failure.py tests/alpha_v4",
+      "result": "PASS"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pyright scripts/audit_current_failure.py tests/alpha_v4",
+      "result": "PASS",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m bandit -q scripts/audit_current_failure.py",
+      "result": "PASS",
+      "findings": 0,
+      "reviewed_exceptions": "Existing repository convention: B404/B603 for resolved Git executable with literal rev-parse HEAD arguments, without a shell."
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pip_audit --local --skip-editable --progress-spinner off --format json",
+      "result": "PASS",
+      "installed_distribution_records": 174,
+      "audited_distributions": 173,
+      "known_vulnerabilities": 0,
+      "skipped": [{"name": "aegisquant", "reason": "editable project itself"}]
+    },
+    {
+      "check": "Committed frozen-file Git blobs match run_manifest SHA-256 values",
+      "result": "PASS",
+      "mismatches": 0,
+      "detail": ".gitattributes preserves frozen evidence bytes across platforms."
+    },
+    {
+      "check": "Independent read-only comparison against original report and CSV",
+      "result": "PASS",
+      "detail": "No conflation of selected and failed policy; no invented account capital, order quantities or actual TCA."
+    },
+    {
+      "check": "Local archive action",
+      "result": "BLOCKED",
+      "path": "D:\\Workspace\\git\\Personal--Quantitative_Trading.git",
+      "reason": "Existing refs/heads/codex-archive is disallowed by main-only archive policy; old archive preserved without migration."
+    }
+  ],
+  "not_performed": [
+    "Failed-candidate same-prediction A0-A10 attribution: original candidate series missing",
+    "Model retraining or parameter optimization",
+    "Phase B-G strategy implementation",
+    "Final holdout allocation or evaluation",
+    "Live trading or order submission"
+  ]
+}
