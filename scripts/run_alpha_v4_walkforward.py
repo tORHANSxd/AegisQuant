@@ -175,7 +175,10 @@ def run(root: Path, output: Path) -> None:
         policy["target_annual_volatility"],
     ) != (10, 40, 6, 2, 0.2):
         raise ValueError("the registered center configuration changed")
-    if config["safety"]["live_trading"] or config["safety"]["order_submission_enabled"]:
+    if any(
+        config["safety"].get(name) is not False
+        for name in ("live_trading", "order_submission_enabled", "production_ml_enabled")
+    ):
         raise ValueError("CAT runner must remain safety locked")
     raw = root / config["data_source"]
     old_file = root / "artifacts/alpha_v4/reconstructed_before/BTCUSDT_logistic_core.parquet"
@@ -900,7 +903,16 @@ def aggregate(
             "number_of_horizons_tried": 1,
             "number_of_model_families_tried": 3,
             "number_of_model_fits": sum(
+                row["kind"] == "MODEL_FIT" and row["status"] == "COMPLETED"
+                for row in collections["all_trials"]
+            ),
+            "number_of_planned_model_fit_slots": sum(
                 row["kind"] == "MODEL_FIT" for row in collections["all_trials"]
+            ),
+            "number_of_skipped_model_fits": sum(
+                row["kind"] == "MODEL_FIT"
+                and row["status"] == "INSUFFICIENT_CALIBRATION_DATA_NO_FIT"
+                for row in collections["all_trials"]
             ),
             "number_of_hyperparameter_trials_per_model_per_fold": 1,
             "number_of_cost_thresholds_tried_in_validation": 3,

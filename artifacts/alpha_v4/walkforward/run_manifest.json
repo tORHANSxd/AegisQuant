@@ -165,7 +165,7 @@
   "number_of_features_tried": 17,
   "number_of_horizons_tried": 1,
   "number_of_model_families_tried": 3,
-  "number_of_model_fits": 42,
+  "number_of_model_fits": 36,
   "number_of_hyperparameter_trials_per_model_per_fold": 1,
   "number_of_cost_thresholds_tried_in_validation": 3,
   "number_of_target_volatility_values_tried_in_validation": 3,
@@ -187,5 +187,16 @@
     "positions.parquet": "31f58345c844c9808c714ffbeeeec6fcd00d572a18c9f9056ad21bd63f232b56",
     "predictions.parquet": "f3e15582770207692c83a110b4b6a280a5fbeec5843aaa78cfc5f432f143b3b9",
     "trades.parquet": "07ac8e5960f57c34d3c5fa96d0473d2dd44314511a92c21356a1ea5b59353390"
+  },
+  "number_of_planned_model_fit_slots": 42,
+  "number_of_skipped_model_fits": 6,
+  "metadata_correction": {
+    "original_manifest_sha256": "9d9b02a8727d7998cbcf2ccd8f76e1e58192613bfa57ad87eec553ea8e10ce81",
+    "original_manifest_git_commit": "7ebec24",
+    "execution_source_snapshot_commit": "7ebec24",
+    "reason": "Count completed fits separately from six unavailable-calibration slots; no models, predictions, decisions, results, or financial artifacts reevaluated.",
+    "original_number_of_model_fits": 42,
+    "all_trials_file_unchanged": true,
+    "original_execution_code_sha256_retained": true
   }
 }
