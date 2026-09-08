@@ -42,6 +42,7 @@ completed:
   - frozen_signal_A0_A10_full_clock_diagnostics_and_1000_matched_random_baselines
   - preregistered_causal_4h_trend_features_and_training_only_robust_transform
   - full_transition_cost_gate_hold_current_pending_adjustment_and_next_event_strategy_callback
+  - fixed_budget_tree_and_elastic_net_filters_with_validation_only_probability_and_residual_calibration
 blockers: []
 pending_phases: [C, D, E, F, G]
 model_retrained: true
