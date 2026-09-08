@@ -8,6 +8,7 @@
 *.zip binary
 *.parquet binary
 artifacts/alpha_v4/before/** -text whitespace=cr-at-eol
+artifacts/alpha_v4_multi_asset/** -text whitespace=cr-at-eol
 AegisQuant_盈利导向重构任务书_v4.md -text whitespace=-trailing-space
 AegisQuant_v3.1_Multimodal_Event_Intelligence_Codex_Master_Taskbook.md whitespace=-trailing-space
 docs/spec/AegisQuant_Master_Taskbook_v3_1.md whitespace=-trailing-space
