@@ -1,7 +1,0 @@
-{
-  "status": "FAILED_BEFORE_ANY_NEW_MODEL_FIT_OR_REPLAY",
-  "reason": "Strict EquityPoint requires explicit Decimal and AssetId restoration from saved Parquet rows.",
-  "new_model_fits": 0,
-  "new_asset_oos_runs": 0,
-  "fix": "Decode the previously declared base-10 strings and identifier struct explicitly. No model, universe, period, or cost change."
-}

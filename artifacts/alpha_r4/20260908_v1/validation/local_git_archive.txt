@@ -1,1 +1,0 @@
-{"status": "error", "message": "独立归档只允许 main，实际分支为：refs/heads/codex-archive；保留旧归档，未创建分支或迁移历史。"}

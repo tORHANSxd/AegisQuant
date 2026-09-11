@@ -1,7 +1,0 @@
-{
-  "status": "REPLAY_INITIALIZATION_FAILED_BEFORE_ENGINE_RUN",
-  "reason": "Strict Decimal gate config requires model_validate_json; fixed input adapter, no policy change",
-  "engine_runs": 0,
-  "data_download_complete": true,
-  "successor": "../20260908_v3"
-}

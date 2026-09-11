@@ -1,26 +1,21 @@
-## 当前项目 SSOT
+## 当前项目入口与 SSOT
 
-- 项目最高优先级工程与研究 SSOT 为根目录 `AegisQuant_盈利导向重构任务书_v4.md`。
-- 当前用户明确要求优先：只在 `main` 工作，不执行任务书 §1 的研究分支创建命令；提交信息仍遵循中文审计格式。
-- 启动入口为 `CODEX_BOOTSTRAP.md`，当前状态为 `state/ALPHA_V4_PROJECT_STATE.yaml`，规格身份及章节索引为 `state/SPEC_INDEX.md`。
-- v5、v3.1 任务书、阶段状态及报告保留为历史实现与证据；存在冲突时以 v4 和当前明确用户要求为准，不继续用旧阶段状态推进新任务。
-- 执行顺序遵循 v4 §14；先冻结失败证据，禁止在 §2.2 未满足时偷偷重训或把重建预测当作原始预测。实际缺口必须写入状态和报告。
-- `LIVE_TRADING = false`、`ORDER_SUBMISSION_ENABLED = false`、实盘适配器注册表为空；不读取或要求真实 API 私钥。
-- v4 本轮最终结论为 `NO_PROVEN_ALPHA`；以 `artifacts/alpha_v4/reports/final_go_no_go.md` 和当前状态核对结果。模型、carry 与纸面前向均未获准入，不能把实现完成或旧阶段通过解释为交易授权。
-- 用户随后授权的固定五币历史扩展已完成，历史研究报告为 `artifacts/alpha_v4_multi_asset/report.md`，结论仍为 `NO_PROVEN_ALPHA`。原 BTC 冻结报告保留；不把新增币种测试解释为参数搜索、最终留出验证或交易授权。
-- R2 审计修复依据为 `AegisQuant_盈利验证修复任务书_R2_2026-09-08.md`，历史证据保留在 `artifacts/alpha_v4_audit/20260908_r2_v3/`，前版审计工件独立保留。
-- R2 审计已完成至明确停止条件，历史总报告为 `artifacts/alpha_v4_audit/20260908_r2_v3/go_no_go.md`。1,147 项测试通过，B3/B5/B6/B7 的 280 个旧分区复现一致；R2 未新拟合收益模型或校准器。
-- 用户随后授权执行 `AegisQuant_R4/AegisQuant_R4_低换手与连续持仓优化任务书_20260908.md`，替代旧实施队列；v4 安全和经济晋级约束继续有效。R4 已完成 F0–F5 固定六配置及成本压力的 800 次矩阵引擎回放，最新报告为 `artifacts/alpha_r4/20260908_v1/go_no_go.md`，当前状态见 `state/ALPHA_V4_PROJECT_STATE.yaml` 的 `r4_20260908`。
-- R4 原 A1 70 分区及集成后 F0 逐单/成交/完整 MTM 复现一致，1,156 项全仓测试、40 项参考测试、28 次 BTC 季度事件日志恢复核验通过。R4 新模型/校准拟合和最终留出访问均为 0；F3/F4 未通过全部经济与统计门槛，仍为 `NO_PROVEN_ALPHA`，生产 CASH、ML/纸面/实盘/订单继续关闭。原 A1/A3/A7 证据不覆盖，不把缓冲省费或 F4 更高历史收益当作已证明信号增量。
+- 当前任务方案为根目录 `AegisQuant_整改与验证方案_20260909.md`；最新结果入口为 `AegisQuant_最新结果与代码审阅包_20260911.md`。
+- 启动入口为 `CODEX_BOOTSTRAP.md`，当前状态为 `state/ALPHA_V4_PROJECT_STATE.yaml`，有效约束和章节索引为 `state/SPEC_INDEX.md`。原 v4 安全与经济晋级约束继续有效，不能因删除旧文档放宽。
+- 用户于 2026-09-11 明确确认删除清单中的旧任务书、包和历史工件。8,846 个跟踪文件已从工作树删除；清单与恢复说明见 `state/LATEST_ONLY_CLEANUP_PLAN.md`。
+- 历史内容保存在 Git 提交 `8b6f80040f123a50faf1391710aeeeb1f2beb152`；不继续将已删除任务书或旧阶段状态当作当前执行队列。
+- 保留的最新报告、研究配置与冻结源码快照维持原字节及原身份。旧路径在这些文件中仍是历史引用；涉及完整复现、源哈希或前代清单的核验，先按恢复说明取得历史快照。不得改写冻结清单、删除测试或降低断言来掩盖缺失。
 
-## 深度审计任务书后续授权
+## 当前结果与运行边界
 
-- 用户明确授权以 `deep-research-report.md` 开始修改，并使用 Ponytail 与 workflow；按该报告“第一批只修研究有效性和 churn”的顺序执行。v4 安全及晋级约束继续有效。
-- 当前 generation 为 `alpha-r5-research-churn-20260908-v3`，配置为 `configs/research/aegis_alpha_v5.yaml`，入口为 `python -m scripts.run_alpha_v5_research`，证据在 `artifacts/alpha_v5/20260908_research_churn_v3/`。此处 R5 研究 generation 与历史工程 v5 任务书是不同身份。
-- v1 数据区间守卫失败、v2 严格 Decimal 配置恢复失败均保留；新策略回放前修复入口，策略参数及比较集合未改变。不得删失败记录、使用旧 generation 重跑或更改冻结策略后继续原试验。
-- 首批已完成：70 个原 A1 季度分区及 5 个原 F3 连续 sleeve 精确复现，55 次预登记回放完成；1,188 项全仓测试、类型检查和本轮 13 个 Python 文件格式检查通过。61 条新旧曲线的完整四小时/UTC 日历核验通过。全仓格式检查仅有未修改的 `scripts/run_alpha_v4_final_holdout.py` 既有问题。
-- 最新报告为 `artifacts/alpha_v5/20260908_research_churn_v3/report.md`。G1 五项 churn 门槛通过，相对 F0 成交名义额减少 58.54%、实际成本减少 58.13%；但盈利季度仅 6/14，全部预登记比较的 Holm 校正 p 值大于 0.05，仍为 `NO_PROVEN_ALPHA`。生产 CASH，ML/纸面/实盘/订单继续关闭，未训练新模型或读取最终留出。
-- 首批仅做固定存活五币开发诊断；PIT 选样组件测试不能冒充真实 PIT universe。真实历史费用/规则/盘口/延迟、未使用至少十二个月留出及完整独立试验历史仍缺。后续 ML、组合风险、成本实证和准入阶段按各自证据门槛推进。
+- B0–B7 工程契约和合成验证已交付，汇总为 `artifacts/alpha_v5/20260910_final_contract_v1/report.md`；完整研究验收仍缺真实证据和独立授权。
+- 最新保存模拟记录核验为 `artifacts/alpha_v5/20260910_saved_evidence_v2/report.md`：215 个保存运行、17 组，`VERIFIED_STORED_SIMULATION`。重新核验部分血缘需要恢复前代输入；该状态不代表真实执行验证。
+- G1 历史业绩来自 `artifacts/alpha_v5/20260908_research_churn_v3/report.md`；近期报告 `artifacts/current_system_recent/20260908_v3/report.md` 对应冻结 R4 F3。最新工程源码不能冒充这些冻结业绩的运行源码，G1 最近六个月结果仍缺。
+- 当前结论为 `NO_PROVEN_ALPHA`，生产 `CASH`；`LIVE_TRADING = false`、`ORDER_SUBMISSION_ENABLED = false`，实盘适配器注册表为空。生产 ML、纸面、实盘和订单均未获准入，不读取或要求真实 API 私钥。
+- 真实 PIT、历史费用/规则/盘口/延迟、完整独立试验史及未使用至少十二个月留出仍不足；合成测试、只读核验或实现完成不能替代相应准入证据。
+- 当前研究配置 `configs/research/aegis_alpha_v5.yaml` 和 generation `alpha-r5-research-churn-20260908-v3` 保持冻结。不得使用同一 generation 重跑、修改后冒充原试验，或把清理授权当作新研究/拟合/留出/交易授权。
+- 历史重建继续标记 `RECONSTRUCTED_BASELINE`；已失败试验仍属于试验历史，不能因工作树清理而从统计中省略。
+- 审阅包的全仓验证数字对应清理前快照。当前保留运行功能的检查及历史核验限制见清理记录；不得宣称当前全仓测试全部通过。
 
 ## Git 分支规则
 

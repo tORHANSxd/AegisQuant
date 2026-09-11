@@ -1,6 +1,0 @@
-{
-  "command": "python -m pytest -q --basetemp=.pytest_tmp_r5_full --junitxml=artifacts/alpha_v5/20260908_research_churn_v1/validation/full_pytest.xml",
-  "started_at": "2026-09-08T14:50:44.0882112Z",
-  "finished_at": "2026-09-08T14:52:35.0164058Z",
-  "exit_code": 0
-}

@@ -1,9 +1,0 @@
-{
-  "symbol": "BTCUSDT",
-  "status": "STARTED",
-  "completed_folds": 0,
-  "actual_model_fits": 0,
-  "planned_fit_slots": 0,
-  "base_evidence": "REUSED_FROZEN_BTC",
-  "run_manifest_sha256": "a0854481e7c5aab5a00105cafbf7c926d2adc3c7ee237e4d113869615c644c1e"
-}

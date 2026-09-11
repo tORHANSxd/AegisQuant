@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="1.769" timestamp="2026-09-08T19:52:53.768371+08:00" hostname="Dionysus-Workspace"><testcase classname="tests.alpha_v4.test_failure_freeze" name="test_v4_ssot_identity_and_safety_remain_explicit" time="0.011" /></testsuite></testsuites>

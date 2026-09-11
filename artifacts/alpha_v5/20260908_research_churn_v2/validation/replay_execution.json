@@ -1,6 +1,0 @@
-{
-  "command": "python -m scripts.run_alpha_v5_research run",
-  "started_at": "2026-09-08T14:56:35.7095916Z",
-  "finished_at": "2026-09-08T14:57:07.4207283Z",
-  "exit_code": 1
-}

@@ -1,8 +1,0 @@
-{
-  "status": "REPLAYED",
-  "economic_hash": "9cd9faf6c8980794b18a5bb17ad8ad5d92dae8a8583a6d332606b12cf2f1685c",
-  "files": {
-    "decision_trace.parquet": "790a7c5974f796fd2ee3c5f143328cd3b97d846c344cdc7d9bacbc8df2a45251",
-    "result.json.gz": "39f051480a61dcc392bf9f5ec25fe58da57d35d6f6dcdf76e629aeef7beff0c0"
-  }
-}

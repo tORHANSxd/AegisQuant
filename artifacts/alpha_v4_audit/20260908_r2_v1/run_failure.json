@@ -1,8 +1,0 @@
-{
-  "status": "FAILED_BEFORE_FIRST_REPLAY",
-  "reason": "strict Decimal gate configuration was passed through model_validate instead of model_validate_json",
-  "completed_folds": 0,
-  "source_snapshot_preserved": true,
-  "retry_directory": "artifacts/alpha_v4_audit/20260908_r2_v2",
-  "strategy_parameters_changed": false
-}
