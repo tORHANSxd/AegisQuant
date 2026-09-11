@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "item": "real_pit_universe_and_joint_daily_returns",
+      "status": "NOT_RECEIVED"
+    },
+    {
+      "item": "historical_available_cash_pending_and_settlement_events",
+      "status": "NOT_RECEIVED"
+    },
+    {
+      "item": "empirically_verified_execution_capacity",
+      "status": "NOT_COLLECTED"
+    },
+    {
+      "item": "economic_adoption_of_proposed_risk_policy",
+      "status": "NOT_ADOPTED"
+    },
+    {
+      "item": "joint_tail_uncertainty_and_independent_stress_replay",
+      "status": "NOT_COLLECTED"
+    }
+  ],
+  "pit_quality": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE",
+  "execution_calibration": "NOT_COLLECTED",
+  "promotion_admitted": false
+}

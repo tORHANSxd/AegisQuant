@@ -1,0 +1,53 @@
+{
+  "status": "NOT_COLLECTED",
+  "statistics": {
+    "estimand_id": "MEAN_LOG_NET_RETURN_DIFFERENCE_PER_OBSERVATION_V1",
+    "sampling": "UTC_DAY",
+    "comparisons": [
+      "G1-CASH",
+      "G1-F5_MATCHED",
+      "G1-G1_PASSIVE",
+      "G1-SIMPLE_TREND"
+    ],
+    "repetitions": 10000,
+    "seed": 20260910,
+    "block_rule": "AUTO_MAX_RETURN_AND_SQUARED_RETURN_CLIPPED_2_TO_N_DIV_4",
+    "block_sensitivity_multipliers": [
+      "0.5",
+      "2"
+    ],
+    "sensitivity_use": "REPORT_ALL_NO_BEST_BLOCK_SELECTION",
+    "correction": "HOLM_ALL_FOUR"
+  },
+  "comparisons": {
+    "G1-CASH": {
+      "estimand_id": "MEAN_LOG_NET_RETURN_DIFFERENCE_PER_OBSERVATION_V1",
+      "observed": null,
+      "ci95": null,
+      "one_sided_p_value": null,
+      "holm_adjusted_p_value": null
+    },
+    "G1-F5_MATCHED": {
+      "estimand_id": "MEAN_LOG_NET_RETURN_DIFFERENCE_PER_OBSERVATION_V1",
+      "observed": null,
+      "ci95": null,
+      "one_sided_p_value": null,
+      "holm_adjusted_p_value": null
+    },
+    "G1-G1_PASSIVE": {
+      "estimand_id": "MEAN_LOG_NET_RETURN_DIFFERENCE_PER_OBSERVATION_V1",
+      "observed": null,
+      "ci95": null,
+      "one_sided_p_value": null,
+      "holm_adjusted_p_value": null
+    },
+    "G1-SIMPLE_TREND": {
+      "estimand_id": "MEAN_LOG_NET_RETURN_DIFFERENCE_PER_OBSERVATION_V1",
+      "observed": null,
+      "ci95": null,
+      "one_sided_p_value": null,
+      "holm_adjusted_p_value": null
+    }
+  },
+  "legacy_results_cannot_populate_new_comparisons": true
+}

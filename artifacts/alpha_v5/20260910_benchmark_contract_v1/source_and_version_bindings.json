@@ -1,0 +1,67 @@
+{
+  "generation": "alpha-r5-benchmark-contract-20260910-v1",
+  "head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+  "branch": "main",
+  "reads": {
+    "artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json": {
+      "sha256": "a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce",
+      "bytes": 53455,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260908_research_churn_v3/paired_statistics.json": {
+      "sha256": "c0eaf857759fa4d0a1bddc495a66e2ee56c5b59f001187efa60242d6ce597024",
+      "bytes": 3237,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260909_review_contract_v2/OUTPUT_MANIFEST.json": {
+      "sha256": "fccc6e6a60185811d37b4e8a40a7772da3209b46e95ea15e83cfef9d39519edf",
+      "bytes": 4337,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260909_review_contract_v2/cost_mode_audit.json": {
+      "sha256": "70cff69763f6f75c52554d1fafebbf061cce6370a4327cb369b1ff11c3b65c3e",
+      "bytes": 11735,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_pit_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "fd01dd906c5d096842a9c3a278a6bd8612fa15a609c31f179678820c7e130c52",
+      "bytes": 5644,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json": {
+      "sha256": "c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26",
+      "bytes": 1341,
+      "scope": "SAVED_CONTENT"
+    },
+    "configs/research/aegis_alpha_v5.yaml": {
+      "sha256": "c4b7a2e734168ea31385ccf0416963e2dc532cb416293710f6dd6891a8deca5c",
+      "bytes": 3236,
+      "scope": "SAVED_CONTENT"
+    },
+    "src/aegisquant/bootstrap/live_lock.py": {
+      "sha256": "e8a58bab46939635796028c9454d0c6c4acdd53b1ea3d59c38abe1ae95a70f24",
+      "bytes": 1272,
+      "scope": "SAVED_CONTENT"
+    }
+  },
+  "modified_files": {
+    "src/aegisquant/research/validation/paired_bootstrap.py": {
+      "before": "b9039213443199c378ac451049912aae2c4a68097aa9898b61ea9e895a3b6200",
+      "after": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba"
+    },
+    "scripts/audit_alpha_profitability_root_causes.py": {
+      "before": "79d78534487fddc920258a07bbf63c81556e0a34ace6e376c18c4073e70a10a4",
+      "after": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02"
+    }
+  },
+  "new_files": {
+    "src/aegisquant/research/validation/benchmark_contract.py": "e6f335316d4f3a19a4962ee10c0b6ccc44c34713b7098b1085f3badff2220b85",
+    "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+    "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+    "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+    "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+  },
+  "commits_created": 0,
+  "pushes": 0,
+  "branches_created": 0
+}

@@ -1,0 +1,7 @@
+{
+  "status": "NOT_COLLECTED",
+  "rows": null,
+  "basis": "COMPLETE_UNFILTERED_BASE_OPPORTUNITIES",
+  "rejected_opportunities": "COUNTERFACTUAL_FROZEN_BASE",
+  "independent_episodes": null
+}

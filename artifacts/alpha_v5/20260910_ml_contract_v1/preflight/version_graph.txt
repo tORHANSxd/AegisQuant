@@ -1,0 +1,8 @@
+d8c6d40 (HEAD -> main, origin/main, origin/HEAD) 2026:09:08 Codex - 同步R2审计修复与当前系统历史回测证据 - 集成R4数量缓冲、连续持仓及固定六配置验证 - 保存冻结源码和研究报告并保持NO_PROVEN_ALPHA - 保全证据文件字节并忽略测试临时目录
+469f559 2026:09:08 Codex
+86d3d28 2026:09:08 Codex
+9367739 2026:09:08 Codex
+1e1a2e6 2026:09:08 Codex
+bb3c37f 2026:09:08 Codex
+ff2ced8 2026:09:08 Codex
+1898979 2026:09:08 Codex

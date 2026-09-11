@@ -1,0 +1,91 @@
+{
+  "config": {
+    "schema_version": "aegis-benchmark-contract-b3-v1",
+    "generation": "alpha-r5-benchmark-contract-20260910-v1",
+    "output": "artifacts/alpha_v5/20260910_benchmark_contract_v1",
+    "scope": "B3_CONTRACTS_READ_ONLY_AND_SYNTHETIC_TESTS",
+    "branch_required": "main",
+    "source_head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+    "taskbook": "AegisQuant_整改与验证方案_20260909.md",
+    "budgets": {
+      "contract_jobs": 1,
+      "historical_bootstrap_runs": 0,
+      "historical_strategy_engine_runs": 0,
+      "real_return_model_fits": 0,
+      "real_calibration_fits": 0,
+      "final_holdout_accesses": 0,
+      "real_orders": 0
+    },
+    "sources": {
+      "r5_manifest": {
+        "path": "artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json",
+        "sha256": "a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce"
+      },
+      "r5_statistics": {
+        "path": "artifacts/alpha_v5/20260908_research_churn_v3/paired_statistics.json",
+        "sha256": "c0eaf857759fa4d0a1bddc495a66e2ee56c5b59f001187efa60242d6ce597024"
+      },
+      "b0_manifest": {
+        "path": "artifacts/alpha_v5/20260909_review_contract_v2/OUTPUT_MANIFEST.json",
+        "sha256": "fccc6e6a60185811d37b4e8a40a7772da3209b46e95ea15e83cfef9d39519edf"
+      },
+      "b0_cost_audit": {
+        "path": "artifacts/alpha_v5/20260909_review_contract_v2/cost_mode_audit.json",
+        "sha256": "70cff69763f6f75c52554d1fafebbf061cce6370a4327cb369b1ff11c3b65c3e"
+      },
+      "b2_manifest": {
+        "path": "artifacts/alpha_v5/20260910_pit_contract_v1/OUTPUT_MANIFEST.json",
+        "sha256": "fd01dd906c5d096842a9c3a278a6bd8612fa15a609c31f179678820c7e130c52"
+      },
+      "b2_safety": {
+        "path": "artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json",
+        "sha256": "c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26"
+      }
+    },
+    "symbols": [
+      "BNBUSDT",
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "cost_multipliers": [
+      "1",
+      "1.5",
+      "2"
+    ],
+    "initial_cash_per_symbol": "10000",
+    "period_start": "2022-04-01T00:00:00+00:00",
+    "period_end": "2025-10-01T00:00:00+00:00",
+    "historical_matrix_inputs": null,
+    "historical_matrix_executed": false,
+    "statistics": {
+      "estimand_id": "MEAN_LOG_NET_RETURN_DIFFERENCE_PER_OBSERVATION_V1",
+      "sampling": "UTC_DAY",
+      "comparisons": [
+        "G1-CASH",
+        "G1-F5_MATCHED",
+        "G1-G1_PASSIVE",
+        "G1-SIMPLE_TREND"
+      ],
+      "repetitions": 10000,
+      "seed": 20260910,
+      "block_rule": "AUTO_MAX_RETURN_AND_SQUARED_RETURN_CLIPPED_2_TO_N_DIV_4",
+      "block_sensitivity_multipliers": [
+        "0.5",
+        "2"
+      ],
+      "sensitivity_use": "REPORT_ALL_NO_BEST_BLOCK_SELECTION",
+      "correction": "HOLM_ALL_FOUR"
+    },
+    "research_conclusion": "NO_PROVEN_ALPHA",
+    "production_policy": "CASH",
+    "production_ml_enabled": false,
+    "paper_trading_admitted": false,
+    "live_trading": false,
+    "order_submission_enabled": false
+  },
+  "planned_run_ids": [
+    "alpha-r5-benchmark-contract-20260910-v1:CONTRACT_REPORT"
+  ]
+}

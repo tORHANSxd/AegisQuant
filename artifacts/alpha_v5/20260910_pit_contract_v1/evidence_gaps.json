@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "item": "universe_events",
+      "status": "NOT_RECEIVED",
+      "reason": "No registered historical PIT file; no zero-row universe inferred."
+    },
+    {
+      "item": "liquidity_windows",
+      "status": "NOT_RECEIVED",
+      "reason": "No registered historical PIT file; no zero-row universe inferred."
+    },
+    {
+      "item": "rules_provenance",
+      "status": "NOT_RECEIVED",
+      "reason": "No registered historical PIT file; no zero-row universe inferred."
+    },
+    {
+      "item": "coverage_manifest",
+      "status": "NOT_RECEIVED",
+      "reason": "No registered historical PIT file; no zero-row universe inferred."
+    },
+    {
+      "item": "minimum_trailing_30d_quote_volume",
+      "status": "NOT_REGISTERED",
+      "reason": "No historical threshold is invented from synthetic examples."
+    }
+  ],
+  "synthetic_evidence_is_historical": false
+}

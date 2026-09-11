@@ -1,0 +1,73 @@
+{
+  "generation": "alpha-r5-final-contract-20260910-v1",
+  "head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+  "branch": "main",
+  "reads": {
+    "artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json": {
+      "sha256": "a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce",
+      "bytes": 53455,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260909_review_contract_v2/OUTPUT_MANIFEST.json": {
+      "sha256": "fccc6e6a60185811d37b4e8a40a7772da3209b46e95ea15e83cfef9d39519edf",
+      "bytes": 4337,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_pit_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "fd01dd906c5d096842a9c3a278a6bd8612fa15a609c31f179678820c7e130c52",
+      "bytes": 5644,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_benchmark_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "293d3bbd5993f54e81cb9a88e3702978d6c6fcb08261406f51c8a2998b76abcb",
+      "bytes": 5218,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_execution_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "bc4687a0c6e5c9ae76d1021a69d769d22fb7699ef566c8cf495c10afa02023d3",
+      "bytes": 6892,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_portfolio_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "405d950315e256ddf954ccda49468effb0334da8c03e361f6c9433b921b81f84",
+      "bytes": 5410,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_ml_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "d28c6840587de3ef30e5d7972ace4b5213b5123fd5a4a37c62c2f4273ea85b76",
+      "bytes": 6379,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json": {
+      "sha256": "c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26",
+      "bytes": 1341,
+      "scope": "SAVED_CONTENT"
+    },
+    "configs/research/aegis_alpha_v5.yaml": {
+      "sha256": "c4b7a2e734168ea31385ccf0416963e2dc532cb416293710f6dd6891a8deca5c",
+      "bytes": 3236,
+      "scope": "SAVED_CONTENT"
+    },
+    "src/aegisquant/bootstrap/live_lock.py": {
+      "sha256": "e8a58bab46939635796028c9454d0c6c4acdd53b1ea3d59c38abe1ae95a70f24",
+      "bytes": 1272,
+      "scope": "SAVED_CONTENT"
+    }
+  },
+  "source_sha256": {
+    "src/aegisquant/research/validation/persistent_holdout.py": "13da12bdb8fba71935fb1985ecb42c1ef80f311d9bbe53b3a7df8e44872e3e1a",
+    "src/aegisquant/research/validation/holdout.py": "23898b93c1fa8aca75f599ae1fe5a3d439a5555725a02925596e7ac71eab391c",
+    "src/aegisquant/research/validation/experiment_registry.py": "f28666c0bc2983d5a81e92577d454a0d832ad745b1766736a9c3c95c0e2cf3db",
+    "tests/integration/test_walkforward_holdout_firewall.py": "547558b2cab0c1275081f7e4fbb5e38f8552b8dae7d24756e8868b3d589f6bec",
+    "src/aegisquant/research/validation/holdout_contract.py": "a332a431d68d7a81110b55972fc1d7a65c70895e67f46662cd84cdc9cdacd822",
+    "scripts/run_alpha_v5_final_holdout.py": "8cc92fb4637c31b0ea9861712e76036805106b7f0c8f0c700bbae014769c5d29",
+    "configs/research/alpha_v5_final_holdout_contract.yaml": "78bfa236547afa120bc986bff1a40a1007e900c69686eb4f84cdf08a2084d861",
+    "tests/alpha_v5/test_holdout_contract.py": "2212a02790378aba8f71ad7ae47934b633452cdc26e2882b36ed462871fde6aa",
+    "docs/research/alpha_v5_final_holdout_contract.md": "02581244d8be106996169646b3b3ae0ff669fe38d6803b1a309f7c1ed7df6040"
+  },
+  "pure_test_count": 64,
+  "check_record_count": 15,
+  "commits_created": 0,
+  "pushes": 0,
+  "branches_created": 0
+}

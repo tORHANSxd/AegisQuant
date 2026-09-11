@@ -1,0 +1,6 @@
+{
+  "command": "python -m pytest tests/alpha_v4/test_failure_freeze.py -q --basetemp=.pytest_tmp_r5_closeout --junitxml=artifacts/alpha_v5/20260908_research_churn_v3/validation/state_contract.xml",
+  "started_at": "2026-09-08T15:20:49.7495293Z",
+  "finished_at": "2026-09-08T15:20:52.9303925Z",
+  "exit_code": 0
+}

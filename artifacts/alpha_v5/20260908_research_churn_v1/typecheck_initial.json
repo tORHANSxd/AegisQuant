@@ -1,0 +1,366 @@
+{
+    "version": "1.1.411",
+    "time": "1788878351623",
+    "generalDiagnostics": [
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\scripts\\run_alpha_v5_research.py",
+            "severity": "error",
+            "message": "Argument of type \"Decimal\" cannot be assigned to parameter \"review_interval\" of type \"timedelta\" in function \"__init__\"\n  \"Decimal\" is not assignable to \"timedelta\"",
+            "range": {
+                "start": {
+                    "line": 47,
+                    "character": 23
+                },
+                "end": {
+                    "line": 47,
+                    "character": 89
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\scripts\\run_alpha_v5_research.py",
+            "severity": "error",
+            "message": "Import \"scripts.audit_alpha_profitability_root_causes\" could not be resolved",
+            "range": {
+                "start": {
+                    "line": 359,
+                    "character": 13
+                },
+                "end": {
+                    "line": 359,
+                    "character": 58
+                }
+            },
+            "rule": "reportMissingImports"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\scripts\\run_alpha_v5_research.py",
+            "severity": "error",
+            "message": "Type of \"report\" is unknown",
+            "range": {
+                "start": {
+                    "line": 359,
+                    "character": 66
+                },
+                "end": {
+                    "line": 359,
+                    "character": 72
+                }
+            },
+            "rule": "reportUnknownVariableType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\experiment_registry.py",
+            "severity": "error",
+            "message": "The function \"contextmanager\" is deprecated\n  Annotating the return type as `-> Iterator[Foo]` with `@contextmanager` is deprecated. Use `-> Generator[Foo]` instead.",
+            "range": {
+                "start": {
+                    "line": 50,
+                    "character": 1
+                },
+                "end": {
+                    "line": 50,
+                    "character": 15
+                }
+            },
+            "rule": "reportDeprecated"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"instrument_id\" of type \"str\" in function \"membership_id\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"str\"\n    \"datetime\" is not assignable to \"str\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 64
+                },
+                "end": {
+                    "line": 119,
+                    "character": 70
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"eligible\" of type \"bool\" in function \"membership_id\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"bool\"\n    \"datetime\" is not assignable to \"bool\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 64
+                },
+                "end": {
+                    "line": 119,
+                    "character": 70
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"effective_from\" of type \"UtcDateTime\" in function \"membership_id\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"UtcDateTime\"\n    \"int\" is not assignable to \"datetime\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 64
+                },
+                "end": {
+                    "line": 119,
+                    "character": 70
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"effective_to\" of type \"UtcDateTime | None\" in function \"membership_id\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"UtcDateTime | None\"\n    Type \"int\" is not assignable to type \"UtcDateTime | None\"\n      \"int\" is not assignable to \"datetime\"\n      \"int\" is not assignable to \"None\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 64
+                },
+                "end": {
+                    "line": 119,
+                    "character": 70
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"available_time\" of type \"UtcDateTime\" in function \"membership_id\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"UtcDateTime\"\n    \"int\" is not assignable to \"datetime\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 64
+                },
+                "end": {
+                    "line": 119,
+                    "character": 70
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"revision_time\" of type \"UtcDateTime | None\" in function \"membership_id\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"UtcDateTime | None\"\n    Type \"int\" is not assignable to type \"UtcDateTime | None\"\n      \"int\" is not assignable to \"datetime\"\n      \"int\" is not assignable to \"None\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 64
+                },
+                "end": {
+                    "line": 119,
+                    "character": 70
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"revision\" of type \"int\" in function \"membership_id\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"int\"\n    \"datetime\" is not assignable to \"int\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 64
+                },
+                "end": {
+                    "line": 119,
+                    "character": 70
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"reason_codes\" of type \"tuple[str, ...]\" in function \"membership_id\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"tuple[str, ...]\"\n    \"datetime\" is not assignable to \"tuple[str, ...]\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 64
+                },
+                "end": {
+                    "line": 119,
+                    "character": 70
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"source_dataset_id\" of type \"str\" in function \"membership_id\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"str\"\n    \"datetime\" is not assignable to \"str\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 64
+                },
+                "end": {
+                    "line": 119,
+                    "character": 70
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"instrument_id\" of type \"str\" in function \"__init__\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"str\"\n    \"datetime\" is not assignable to \"str\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 75
+                },
+                "end": {
+                    "line": 119,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"eligible\" of type \"bool\" in function \"__init__\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"bool\"\n    \"datetime\" is not assignable to \"bool\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 75
+                },
+                "end": {
+                    "line": 119,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"effective_from\" of type \"UtcDateTime\" in function \"__init__\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"UtcDateTime\"\n    \"int\" is not assignable to \"datetime\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 75
+                },
+                "end": {
+                    "line": 119,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"effective_to\" of type \"UtcDateTime | None\" in function \"__init__\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"UtcDateTime | None\"\n    Type \"int\" is not assignable to type \"UtcDateTime | None\"\n      \"int\" is not assignable to \"datetime\"\n      \"int\" is not assignable to \"None\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 75
+                },
+                "end": {
+                    "line": 119,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"available_time\" of type \"UtcDateTime\" in function \"__init__\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"UtcDateTime\"\n    \"int\" is not assignable to \"datetime\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 75
+                },
+                "end": {
+                    "line": 119,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"revision_time\" of type \"UtcDateTime | None\" in function \"__init__\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"UtcDateTime | None\"\n    Type \"int\" is not assignable to type \"UtcDateTime | None\"\n      \"int\" is not assignable to \"datetime\"\n      \"int\" is not assignable to \"None\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 75
+                },
+                "end": {
+                    "line": 119,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"revision\" of type \"int\" in function \"__init__\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"int\"\n    \"datetime\" is not assignable to \"int\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 75
+                },
+                "end": {
+                    "line": 119,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"reason_codes\" of type \"tuple[str, ...]\" in function \"__init__\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"tuple[str, ...]\"\n    \"datetime\" is not assignable to \"tuple[str, ...]\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 75
+                },
+                "end": {
+                    "line": 119,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_research_guards.py",
+            "severity": "error",
+            "message": "Argument of type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" cannot be assigned to parameter \"source_dataset_id\" of type \"str\" in function \"__init__\"\n  Type \"str | bool | datetime | int | tuple[Literal['LISTING', 'DELISTING']] | None\" is not assignable to type \"str\"\n    \"datetime\" is not assignable to \"str\"",
+            "range": {
+                "start": {
+                    "line": 119,
+                    "character": 75
+                },
+                "end": {
+                    "line": 119,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        }
+    ],
+    "summary": {
+        "filesAnalyzed": 743,
+        "errorCount": 22,
+        "warningCount": 0,
+        "informationCount": 0,
+        "timeInSec": 44.486
+    }
+}
+

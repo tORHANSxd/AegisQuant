@@ -1,0 +1,320 @@
+--- a/src/aegisquant/research/validation/saved_run_audit.py
++++ b/src/aegisquant/research/validation/saved_run_audit.py
+@@ -34,6 +34,7 @@
+ R5 = "artifacts/alpha_v5/20260908_research_churn_v3"
+ R4 = "artifacts/alpha_r4/20260908_v1"
+ SYMBOLS = ("BNBUSDT", "BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT")
++R4_ARMS = ("F0", "F1", "F2", "F3", "F4", "F5")
+ ZERO = Decimal(0)
+ MONEY_TOLERANCE = Decimal("1e-18")
+ COST_FIELDS = (
+@@ -87,6 +88,11 @@
+     values = {row[key]: row for row in rows}
+     checks.check("unique_" + key, len(values) == len(rows), key)
+     return values
++
++
++def tag_saved_row(tags: Mapping[str, Any], row: Mapping[str, Any]) -> dict[str, Any]:
++    require(not tags.keys() & row.keys(), "AQ-SAVED-EVIDENCE-TAG-COLLISION")
++    return {**tags, **row}
+ 
+ 
+ def audit_saved_result(
+@@ -202,7 +208,7 @@
+                 "reference_price": str(reference),
+                 "execution_price": str(execution),
+                 "gross_notional": costs["gross_notional"],
+-                "cost": str(paid),
++                "paid_cost": str(paid),
+                 "fee_asset": fill["fee"]["asset_id"],
+                 "fee": str(fee),
+             }
+@@ -573,7 +579,7 @@
+             "trace_rows": len(trace),
+             "raw_mtm_points": len(raw_curve),
+             "grid_points": len(grid),
+-            "cost": str(total_cost),
++            "paid_cost": str(total_cost),
+             "initial_cash": spec["initial_cash"]["amount"],
+             "final_cash": str(cash[quote]),
+             "clock_rows_checked": clock_rows,
+@@ -707,7 +713,8 @@
+     require(
+         config["scope"] == "B1_SAVED_SIMULATION_JOINS_NO_REPLAY"
+         and config["saved_scope"]
+-        == {"r5_registered_runs": 55, "r4_f0_quarter_segments": 70, "new_strategy_runs": 0},
++        == {"r5_registered_runs": 55, "r4_registered_segments": 160, "new_strategy_runs": 0}
++        and config["r4_cost_1_arms"] == list(R4_ARMS),
+         "AQ-SAVED-EVIDENCE-SCOPE",
+     )
+     require(
+@@ -757,8 +764,7 @@
+     require(len(tasks) == 55, "AQ-SAVED-EVIDENCE-R5-SCOPE")
+     r4_registry = sources["r4_registry"]
+     for trial in r4_registry["trials"]:
+-        if (trial["arm"], trial["mode"], trial["cost_multiplier"]) != (
+-            "F0",
++        if trial["arm"] not in R4_ARMS or (trial["mode"], trial["cost_multiplier"]) != (
+             "REDECIDE_FUNDED",
+             "1",
+         ):
+@@ -766,13 +772,13 @@
+         require(
+             trial["status"] == "REPLAYED"
+             and trial["symbol"] in SYMBOLS
+-            and len(trial["segments"]) == 14,
+-            "AQ-SAVED-EVIDENCE-F0-SCOPE",
++            and len(trial["segments"]) == (14 if trial["arm"] in {"F0", "F1"} else 1),
++            "AQ-SAVED-EVIDENCE-R4-SCOPE",
+         )
+         for segment in trial["segments"]:
+             tasks.append(
+                 {
+-                    "arm": "F0",
++                    "arm": trial["arm"],
+                     "symbol": trial["symbol"],
+                     "cost": "1",
+                     "segment": segment["segment"],
+@@ -781,7 +787,7 @@
+                 }
+             )
+     require(
+-        len(tasks) == 125 and len({r["folder"] for r in tasks}) == 125,
++        len(tasks) == 215 and len({r["folder"] for r in tasks}) == 215,
+         "AQ-SAVED-EVIDENCE-COMPLETE-SCOPE",
+     )
+     summaries: list[dict[str, Any]] = []
+@@ -800,9 +806,9 @@
+             cost_benefit_lambda=amount(r5_manifest["config"]["resize"]["cost_benefit_lambda"]),
+         )
+         tags = {k: task[k] for k in ("arm", "symbol", "cost", "segment")}
+-        summaries.append({**tags, **audit["summary"]})
+-        joins.extend({**tags, **row} for row in audit["joins"])
+-        funnels.extend({**tags, **row} for row in audit["gate_funnel"])
++        summaries.append(tag_saved_row(tags, audit["summary"]))
++        joins.extend(tag_saved_row(tags, row) for row in audit["joins"])
++        funnels.extend(tag_saved_row(tags, row) for row in audit["gate_funnel"])
+         groups[(task["arm"], task["cost"], task["symbol"])].append(audit["curve"])
+         if index % 10 == 0:
+             print(f"saved evidence {index}/{len(tasks)} (no strategy execution)", flush=True)
+@@ -822,7 +828,7 @@
+     attribution = pl.read_parquet(read(R5 + "/execution_reason_attribution.parquet")).to_dicts()
+     saved_r5 = [row for row in attribution if row["arm"] in r5_manifest["config"]["arms"]]
+     saved_by_fill = {row["fill_id"]: row for row in saved_r5}
+-    reconstructed = [row for row in joins if row["arm"] != "F0"]
++    reconstructed = [row for row in joins if row["arm"] not in R4_ARMS]
+     derived_checks = AuditChecks()
+     derived_checks.check("unique_saved_derived_fill_ids", len(saved_by_fill) == len(saved_r5), "R5")
+     derived_checks.check(
+@@ -837,13 +843,14 @@
+         derived_checks.check(
+             "saved_reason_and_order",
+             prior["reason_primary"] == row["reason_primary"]
+-            and prior["order_id"] == row["order_id"],
++            and prior["order_id"] == row["order_id"]
++            and all(prior[key] == row[key] for key in ("arm", "symbol", "cost")),
+             row["fill_id"],
+         )
+         for old_key, new_key in (
+             ("filled_qty", "signed_quantity"),
+             ("filled_notional", "gross_notional"),
+-            ("total_cost", "cost"),
++            ("total_cost", "paid_cost"),
+             ("fee_paid", "fee"),
+         ):
+             derived_checks.equal(
+@@ -861,12 +868,32 @@
+         for row in joins
+         if row["reason_primary"] in {"ORDINARY_RISK_REDUCE", "ORDINARY_RISK_RESTORE"}
+     )
++    arm_costs = sorted({(row["arm"], row["cost"]) for row in summaries})
++    require(len(arm_costs) == 17 and len(tails) == 17, "AQ-SAVED-EVIDENCE-ALL-17-GROUPS")
+     status = "VERIFIED_STORED_SIMULATION" if passed else "INCONSISTENT_STORED_SIMULATION"
+     return {
+         "raw_source_inventory.json": {
+             "reads": reads,
+             "source_identity": "B0_HASHED_ORIGINAL_FILES_AND_R5_JOURNAL_BOUND_CATALOG",
+             "new_strategy_runs": 0,
++        },
++        "prior_output_issues.json": {
++            "source_manifest": "artifacts/alpha_v5/20260910_saved_evidence_v1/OUTPUT_MANIFEST.json",
++            "status": "V1_COST_GROUP_LABELS_SUPERSEDED_BY_V2",
++            "defect": "V1_ROW_COST_AMOUNT_OVERWROTE_COST_SCENARIO_TAG",
++            "affected": [
++                "run_summary_cost_tag",
++                "fill_join_cost_tag",
++                "ordinary_fill_count_groups",
++            ],
++            "unaffected": [
++                "original_source_bytes",
++                "per_run_ledger_mtm_checks",
++                "twelve_tail_groups",
++            ],
++            "repair": "COST_SCENARIO_IN_COST_AND_MONEY_IN_PAID_COST_WITH_COLLISION_REJECTION",
++            "prior_output_preserved": True,
++            "new_strategy_or_significance_calculations": False,
+         },
+         "raw_order_fill_ledger_audit.json": {
+             "status": status,
+@@ -880,8 +907,9 @@
+             "groups": funnels,
+             "all_internal_gate_evaluations": "NOT_PERSISTED_CANNOT_RECONSTRUCT_SKIPPED_GATES",
+             "ordinary_fill_counts": [
+-                {"arm": key[0], "cost": key[1], "reason": key[2], "fills": value}
+-                for key, value in sorted(ordinary.items())
++                {"arm": arm, "cost": cost, "reason": reason, "fills": ordinary[(arm, cost, reason)]}
++                for arm, cost in arm_costs
++                for reason in ("ORDINARY_RISK_REDUCE", "ORDINARY_RISK_RESTORE")
+             ],
+         },
+         "all_worst_5pct_inventory.json": {
+@@ -901,13 +929,15 @@
+             "real_execution_verified": False,
+             "research_conclusion": "NO_PROVEN_ALPHA",
+         },
+-        "report.md": f"""# 已保存 R5 与 F0 原始模拟记录只读核验
++        "report.md": f"""# 全部 17 组已保存原始模拟记录只读核验
+ 
+ **NO_PROVEN_ALPHA / CASH；模型、纸面、实盘和订单继续关闭。**
+ 
+-本批核验原 R5 的全部 55 个保存结果及原 F0 的 70 个季度分区；所有输入先与 B0 封存哈希核对。当前结果：**{status}**。这是读取原始模拟记录后的联结与算术核验，没有调用策略引擎、重建行情、重定价成交、训练或重新计算显著性。此前 HASH_ONLY/NOT_VERIFIED 报告保留，不能把本报告倒填成此前已经完成。
+-
+-逐单核对 trace→order→fill→ledger、数量/时钟/费用资产、原账本哈希链和每资产借贷平衡，并从已有 postings 和 lot changes 核对每个已保存 MTM 的资金、原生库存和已记录价格。F0 季度边界要求付费退出与下一季度初始资金一致，不能遗漏不利边界。检查逐项计数和失败示例见 raw_order_fill_ledger_audit.json；失败不会被删掉或强制改成预期数字。
++本批核验原 R5 的全部 55 个保存结果及原 R4 的 F0–F5 共 160 个保存分区（F0/F1 各 70 个季度，F2–F5 各 5 个连续 sleeve），覆盖原汇总的全部 17 个策略/成本组；所有输入先与 B0 封存哈希核对。当前结果：**{status}**。这是读取原始模拟记录后的联结与算术核验，没有调用策略引擎、重建行情、重定价成交、训练或重新计算显著性。此前 HASH_ONLY/NOT_VERIFIED 报告保留，不能把本报告倒填成此前已经完成。
++
++v1 的逐 run 对账和 12 组尾部核验已完成，但新汇总将成本金额与成本倍率同名为 cost，覆盖了 run/fill 的倍率标签，普通调仓表因此按金额错误分组。v1 原目录及 manifest 保留，问题详情见 prior_output_issues.json。本 v2 以 cost 记录冻结倍率、paid_cost 记录费用金额，并拒绝标签冲突；重新读取原保存数据核对元数据后才输出替代表，同时补齐 F1–F5。它没有重新运行任何原策略。
++
++逐单核对 trace→order→fill→ledger、数量/时钟/费用资产、原账本哈希链和每资产借贷平衡，并从已有 postings 和 lot changes 核对每个已保存 MTM 的资金、原生库存和已记录价格。F0/F1 季度边界要求付费退出与下一季度初始资金一致，不能遗漏不利边界。检查逐项计数和失败示例见 raw_order_fill_ledger_audit.json；失败不会被删掉或强制改成预期数字。原 G1/1 的普通减仓为 {ordinary[("G1", "1", "ORDINARY_RISK_REDUCE")]} 笔、普通恢复为 {ordinary[("G1", "1", "ORDINARY_RISK_RESTORE")]} 笔，所有组的零计数也显式列示。
+ 
+ 共读取 {sum(r["trace_rows"] for r in summaries)} 行决策 trace。门槛表覆盖这些行的已记录终态理由；它不是未保存的逐个内部门槛执行轨迹。复核状态从前行保存状态及提交事件核对，未下单也可能消耗到期复核。没有外部 ack/cancel/queue 流，不能据此声称真实场所时钟已验证。
+ 
+--- /dev/null
++++ b/scripts/audit_alpha_v5_saved_runs.py
+@@ -0,0 +1,42 @@
++"""Audit existing simulation records under the zero research-operation guard."""
++
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import yaml
++
++from aegisquant.research.validation.evidence_contract import (
++    checked_path,
++    run_zero_research_contract,
++)
++from aegisquant.research.validation.saved_run_audit import FILES, build_documents, validate_config
++from scripts.export_alpha_v4_audit_bundle import git
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--config", required=True, type=Path)
++    parser.add_argument("--preflight-dir", required=True, type=Path)
++    args = parser.parse_args()
++    config = yaml.safe_load(checked_path(ROOT, args.config.as_posix()).read_text(encoding="utf-8"))
++    validate_config(config)
++    output = run_zero_research_contract(
++        root=ROOT,
++        config=config,
++        stage=args.preflight_dir,
++        git_state={
++            "head": git(ROOT, "rev-parse", "HEAD"),
++            "branch": git(ROOT, "branch", "--show-current"),
++        },
++        files=FILES,
++        build_documents=lambda sources: build_documents(ROOT, sources),
++    )
++    print(f"Saved simulation evidence audit: {output}; no new strategy run", flush=True)
++
++
++if __name__ == "__main__":
++    main()
+--- a/configs/research/alpha_v5_saved_run_audit.yaml
++++ b/configs/research/alpha_v5_saved_run_audit.yaml
+@@ -1,6 +1,6 @@
+ schema_version: aegis-saved-evidence-audit-v1
+-generation: alpha-r5-saved-evidence-20260910-v1
+-output: artifacts/alpha_v5/20260910_saved_evidence_v1
++generation: alpha-r5-saved-evidence-20260910-v2
++output: artifacts/alpha_v5/20260910_saved_evidence_v2
+ scope: B1_SAVED_SIMULATION_JOINS_NO_REPLAY
+ branch_required: main
+ source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
+@@ -27,10 +27,14 @@
+   r4_registry:
+     path: artifacts/alpha_r4/20260908_v1/experiment_registry.json
+     sha256: ab77f669e9dabedd303d2706b506f09c9c63904b40a03d9f92e7363046b4aebf
++  prior_saved_manifest:
++    path: artifacts/alpha_v5/20260910_saved_evidence_v1/OUTPUT_MANIFEST.json
++    sha256: 188cdaa378d9a28916f279453fce7faad61850428cf9d470731e7904f8a5808c
+ saved_scope:
+   r5_registered_runs: 55
+-  r4_f0_quarter_segments: 70
++  r4_registered_segments: 160
+   new_strategy_runs: 0
++r4_cost_1_arms: [F0, F1, F2, F3, F4, F5]
+ source_period: ['2022-04-01T00:00:00Z', '2025-10-01T00:00:00Z']
+ tail_fraction: '0.05'
+ research_conclusion: NO_PROVEN_ALPHA
+--- a/tests/alpha_v5/test_saved_run_audit.py
++++ b/tests/alpha_v5/test_saved_run_audit.py
+@@ -16,6 +16,7 @@
+     at,
+     audit_saved_result,
+     combine_segments,
++    tag_saved_row,
+     tail_inventory,
+     validate_config,
+ )
+@@ -284,7 +285,7 @@
+         summary["ledger_records"],
+         summary["raw_mtm_points"],
+     ) == (2, 2, 3, 6)
+-    assert summary["final_cash"] == "1016" and summary["cost"] == "4"
++    assert summary["final_cash"] == "1016" and summary["paid_cost"] == "4"
+     assert len(audited["joins"]) == 2 and all(r["ledger_event_hash"] for r in audited["joins"])
+     assert sum(r["rows"] for r in audited["gate_funnel"]) == 4
+     assert audited["curve"][1]["equity"] == D(1000)  # 04:00 cannot use the 07:59 mark.
+@@ -464,6 +465,18 @@
+         tail_inventory({"A": curve([D(0), D(100)])})
+ 
+ 
++def test_cost_scenario_cannot_be_replaced_by_a_paid_amount_in_assembled_rows() -> None:
++    result, trace = fixture()
++    audit = run_audit(result, trace)
++    tags = {"arm": "G1", "symbol": "BTCUSDT", "cost": "1.5", "segment": "continuous"}
++    summary = tag_saved_row(tags, audit["summary"])
++    joins = [tag_saved_row(tags, row) for row in audit["joins"]]
++    assert summary["cost"] == "1.5" and summary["paid_cost"] == "4"
++    assert all(row["cost"] == "1.5" and row["paid_cost"] == "2" for row in joins)
++    with pytest.raises(ValueError, match="TAG-COLLISION"):
++        tag_saved_row(tags, {"cost": "4"})
++
++
+ def test_saved_audit_operates_inside_zero_research_guard(
+     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+ ) -> None:
+--- a/docs/research/alpha_v5_saved_run_audit.md
++++ b/docs/research/alpha_v5_saved_run_audit.md
+@@ -1,12 +1,14 @@
+ # 已保存模拟记录的只读补充核验
+ 
+-入口 `python -m scripts.audit_alpha_v5_saved_runs --config configs/research/alpha_v5_saved_run_audit.yaml --preflight-dir <检查目录>` 沿用已有 claim、哈希链、零研究预算守卫与封存函数。新增五个文件，不修改旧实现或任何历史结果。
++入口 `python -m scripts.audit_alpha_v5_saved_runs --config configs/research/alpha_v5_saved_run_audit.yaml --preflight-dir <检查目录>` 沿用已有 claim、哈希链、零研究预算守卫与封存函数。v1 新增五个文件；v2 只修改其中的模块、配置、测试和本文，不修改任何历史策略实现或冻结结果。
+ 
+-固定读取原 R5 v3 全部 55 个保存 run 和原 F0 的 70 个季度分区。结果/trace bytes 必须先匹配 B0 已封存 catalog 或修改前 baseline 的 SHA256 与长度，然后才解压 JSON 或读取 parquet。解析是只读原模拟结果，不执行 engine、ledger 命令、市场回放、模型拟合或重新定价成交；使用已有纯 `resample_equity` 和 `execution_reason`。
++v2 固定读取原 R5 v3 全部 55 个保存 run 及原 R4 F0–F5 的 160 个分区：F0/F1 各 70 个季度，F2–F5 各 5 个连续 sleeve。共 215 个结果，覆盖原汇总的全部 17 组。结果/trace bytes 必须先匹配 B0 已封存 catalog 或修改前 baseline 的 SHA256 与长度，然后才解压 JSON 或读取 parquet。解析是只读原模拟结果，不执行 engine、ledger 命令、市场回放、模型拟合或重新定价成交；使用已有纯 `resample_equity` 和 `execution_reason`。
++
++v1 逐 run 对账与尾部数据保留；其汇总将成本金额覆盖了同名的倍率标签，普通成交分组错误。v2 明确 `cost` 是倍率、`paid_cost` 是费用金额，拒绝任何标签键碰撞；完整保留 v1，并在新报告列明问题。该修正及补齐 F1–F5 均不改变研究候选、策略参数或旧显著性结果。
+ 
+ 核对 trace→order→fill→ledger 的已保存 ID、数量、时钟与费用资产；每条原账本记录重算哈希链并检查逐资产借贷平衡。复用既有 LotChange 模型校验数量与生命周期，并将 lot 的原始成交 ID、单位、数量、开仓价格及费用连回保存 fill；账本幂等键须匹配冻结模拟器的 `simfill:<fill_id>`。从已有原生 CASH postings 和 lot changes 检查每个已保存 MTM 的现金、净库存及已记录价格。它验证保存记录的内部一致性，不能证明模拟器等价于真实交易所，也不是重跑会计策略。金额算术容差预先固定 1e-18 USDT，数量终态严格为零；报告全部检查次数、失败数和最大算术残差。
+ 
+-共同四小时日历沿用原因果标记前填。原始行情 gap 仍是缺口；每格保留源标记时间，超过四小时的前填计数单列。F0 分区仅合并资金、仓位和净值完全相等的重复边界，不删除付费退出。最差窗口取完整日历中 ceil(5%×N) 的最小净收益并纳入所有临界值并列；全部五币逐窗列示。现金和库存价值变化相加必须等于净值变化，再加总到组合。只能称原模拟账户贡献，不能据此声称因子 alpha 或独立尾部因果解释。
++共同四小时日历沿用原因果标记前填。原始行情 gap 仍是缺口；每格保留源标记时间，超过四小时的前填计数单列。F0/F1 分区仅合并资金、仓位和净值完全相等的重复边界，不删除付费退出。最差窗口取完整日历中 ceil(5%×N) 的最小净收益并纳入所有临界值并列；全部五币逐窗列示。现金和库存价值变化相加必须等于净值变化，再加总到组合。只能称原模拟账户贡献，不能据此声称因子 alpha 或独立尾部因果解释。
+ 
+ 门槛漏斗统计覆盖所有已保存 trace 行的终态理由，未记录的内部每一道 gate、veto 前 target、二次取整前后全状态、外部 ack/cancel/queue 仍 NOT_VERIFIED。复核到期状态由前行保存状态与提交事件核对；没有订单也可能更新到期复核，不将最后成交时间替换复核时钟。
+ 

@@ -1,0 +1,10 @@
+{
+  "historical_snapshots": null,
+  "historical_coverage": {
+    "candidate_count": null,
+    "delisted_count": null,
+    "unknown_exclusion_fraction": null,
+    "real_history_coverage": "NOT_VERIFIED"
+  },
+  "legacy_five_asset_comparison": null
+}

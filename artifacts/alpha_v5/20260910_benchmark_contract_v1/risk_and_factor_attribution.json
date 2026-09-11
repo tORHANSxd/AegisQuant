@@ -1,0 +1,10 @@
+{
+  "status": "NOT_COLLECTED",
+  "factorial_summary": null,
+  "estimator": "scripts.audit_alpha_profitability_root_causes::benchmark_factorial_attribution",
+  "pit_market_factor": "NOT_RECEIVED",
+  "ex_ante_risk_forecasts": "NOT_RECEIVED",
+  "market_alpha_regression": null,
+  "full_sample_realized_vol_sizing_allowed": false,
+  "factorial_effects_are_descriptive_not_causal_alpha": true
+}

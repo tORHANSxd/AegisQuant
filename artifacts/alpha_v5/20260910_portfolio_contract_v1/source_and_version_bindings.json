@@ -1,0 +1,48 @@
+{
+  "generation": "alpha-r5-portfolio-contract-20260910-v1",
+  "head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+  "branch": "main",
+  "reads": {
+    "artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json": {
+      "sha256": "a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce",
+      "bytes": 53455,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_execution_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "bc4687a0c6e5c9ae76d1021a69d769d22fb7699ef566c8cf495c10afa02023d3",
+      "bytes": 6892,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json": {
+      "sha256": "c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26",
+      "bytes": 1341,
+      "scope": "SAVED_CONTENT"
+    },
+    "configs/research/aegis_alpha_v5.yaml": {
+      "sha256": "c4b7a2e734168ea31385ccf0416963e2dc532cb416293710f6dd6891a8deca5c",
+      "bytes": 3236,
+      "scope": "SAVED_CONTENT"
+    },
+    "src/aegisquant/bootstrap/live_lock.py": {
+      "sha256": "e8a58bab46939635796028c9454d0c6c4acdd53b1ea3d59c38abe1ae95a70f24",
+      "bytes": 1272,
+      "scope": "SAVED_CONTENT"
+    }
+  },
+  "source_sha256": {
+    "src/aegisquant/portfolio/risk_estimation.py": "d573840a972ff66b8695a4c8ee4a084811932b1a848511181f32a1caaed6bd90",
+    "src/aegisquant/portfolio/models.py": "d1fa75250dec48d59457ce82944af18c0fb19ed4ba9dd4832169394385dcbde8",
+    "src/aegisquant/portfolio/optimizer.py": "5cb1aed0a371b608fa71007edce183429f6e488ebfa217942b33efab8457031a",
+    "src/aegisquant/accounting/ledger.py": "0156449710a88645f45e9d68f470f2bd57336ce38d61ec2efc3b08b4e36b7bf3",
+    "src/aegisquant/research/validation/portfolio_replay.py": "61c2e4148ff76956997243d4fc34d95369109d2dad621e802bda7f85b217212e",
+    "scripts/run_alpha_v5_portfolio_diagnostics.py": "4ed91ad20ce0560b27c88d5cb1c7e04ca6d09d9caa4c20f0c4c6895f09423f0e",
+    "configs/research/alpha_v5_portfolio_contract.yaml": "d300ffa145459a86a9792541ba5f006184de2a8929f068e403e1729456bed643",
+    "tests/alpha_v5/test_portfolio_contract.py": "3314dad57c9cacbd517c103f9688326759fb7956efada49789ee02ada32db652",
+    "docs/research/alpha_v5_portfolio_contract.md": "4aeb7027e9c6b8c2133abd40b540bbd3be70acb992db0dd1882d8573ad62a2e0"
+  },
+  "pure_test_count": 100,
+  "check_record_count": 18,
+  "commits_created": 0,
+  "pushes": 0,
+  "branches_created": 0
+}

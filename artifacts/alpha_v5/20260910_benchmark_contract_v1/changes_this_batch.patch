@@ -1,0 +1,1596 @@
+--- a/src/aegisquant/research/validation/paired_bootstrap.py
++++ b/src/aegisquant/research/validation/paired_bootstrap.py
+@@ -9,6 +9,7 @@
+ from numpy.typing import NDArray
+ 
+ FloatArray = NDArray[np.float64]
++LOG_GROWTH_ESTIMAND = "MEAN_LOG_NET_RETURN_DIFFERENCE_PER_OBSERVATION_V1"
+ 
+ 
+ @dataclass(frozen=True)
+@@ -20,6 +21,14 @@
+     reality_check_p_value: float
+     repetitions: int
+     block_bars: int
++
++    @property
++    def estimand_ids(self) -> dict[str, str]:
++        """Sidecar identity; legacy serialized fields and difference keys stay intact."""
++        return {
++            "ci95": "TERMINAL_COMPOUND_NET_RETURN_DIFFERENCE_V1",
++            "one_sided_mean_p_value": "MEAN_SIMPLE_NET_RETURN_DIFFERENCE_PER_OBSERVATION_V1",
++        }
+ 
+     def difference(self, candidate: int, baseline: int) -> dict[str, float]:
+         delta = self.compound_returns[:, candidate] - self.compound_returns[:, baseline]
+@@ -40,6 +49,38 @@
+         }
+ 
+ 
++def _validate_returns(values: FloatArray, repetitions: int, block_bars: int) -> None:
++    if values.ndim != 2 or not np.all(np.isfinite(values)) or np.any(values <= -1):
++        raise ValueError("bootstrap requires finite aligned strategy return columns above -100%")
++    count, strategies = values.shape
++    if count < block_bars * 4 or block_bars < 1 or repetitions < 100 or strategies < 1:
++        raise ValueError("insufficient bootstrap observations or repetitions")
++
++
++def _circular_block_totals(
++    values: FloatArray, *, repetitions: int, block_bars: int, seed: int
++) -> FloatArray:
++    """One shared row-index draw for every column; never draw assets independently."""
++    count, strategies = values.shape
++    full_blocks, remainder = divmod(count, block_bars)
++    starts_per_draw = full_blocks + bool(remainder)
++    # Prefix sums avoid allocating repetitions x bars x strategies arrays.
++    doubled = np.concatenate((values, values[:block_bars]), axis=0)
++    prefix = np.concatenate((np.zeros((1, strategies)), np.cumsum(doubled, axis=0)))
++    block_sum = prefix[block_bars : count + block_bars] - prefix[:count]
++    rng = np.random.default_rng(seed)
++    sampled = np.empty((repetitions, strategies))
++    for begin in range(0, repetitions, 128):
++        end = min(repetitions, begin + 128)
++        starts = rng.integers(0, count, size=(end - begin, starts_per_draw))
++        totals = np.sum(block_sum[starts[:, :full_blocks]], axis=1)
++        if remainder:
++            last = starts[:, -1]
++            totals += prefix[last + remainder] - prefix[last]
++        sampled[begin:end] = totals
++    return sampled
++
++
+ def paired_block_bootstrap(
+     values: FloatArray,
+     *,
+@@ -47,33 +88,17 @@
+     block_bars: int = 6,
+     seed: int = 20260903,
+ ) -> PairedBootstrap:
+-    if values.ndim != 2 or not np.all(np.isfinite(values)) or np.any(values <= -1):
+-        raise ValueError("bootstrap requires finite aligned strategy return columns above -100%")
+-    count, strategies = values.shape
+-    if count < block_bars * 4 or block_bars < 1 or repetitions < 100 or strategies < 1:
+-        raise ValueError("insufficient bootstrap observations or repetitions")
+-    full_blocks, remainder = divmod(count, block_bars)
+-    starts_per_draw = full_blocks + bool(remainder)
+-    # Prefix sums avoid allocating repetitions x bars x strategies arrays.
+-    doubled = np.concatenate((values, values[:block_bars]), axis=0)
+-    prefix = np.concatenate((np.zeros((1, strategies)), np.cumsum(doubled, axis=0)))
+-    log_prefix = np.concatenate((np.zeros((1, strategies)), np.cumsum(np.log1p(doubled), axis=0)))
+-    block_sum = prefix[block_bars : count + block_bars] - prefix[:count]
+-    block_log = log_prefix[block_bars : count + block_bars] - log_prefix[:count]
+-    rng = np.random.default_rng(seed)
+-    compounded = np.empty((repetitions, strategies))
+-    means = np.empty_like(compounded)
+-    for begin in range(0, repetitions, 128):
+-        end = min(repetitions, begin + 128)
+-        starts = rng.integers(0, count, size=(end - begin, starts_per_draw))
+-        totals = np.sum(block_sum[starts[:, :full_blocks]], axis=1)
+-        logs = np.sum(block_log[starts[:, :full_blocks]], axis=1)
+-        if remainder:
+-            last = starts[:, -1]
+-            totals += prefix[last + remainder] - prefix[last]
+-            logs += log_prefix[last + remainder] - log_prefix[last]
+-        compounded[begin:end] = np.expm1(logs)
+-        means[begin:end] = totals / count
++    _validate_returns(values, repetitions, block_bars)
++    count = len(values)
++    means = (
++        _circular_block_totals(values, repetitions=repetitions, block_bars=block_bars, seed=seed)
++        / count
++    )
++    compounded = np.expm1(
++        _circular_block_totals(
++            np.log1p(values), repetitions=repetitions, block_bars=block_bars, seed=seed
++        )
++    )
+     observed_means = np.mean(values, axis=0)
+     max_null = np.max(means - observed_means, axis=1)
+     reality_p = (int(np.sum(max_null >= max(0.0, float(np.max(observed_means))))) + 1) / (
+@@ -92,6 +117,51 @@
+     )
+ 
+ 
++@dataclass(frozen=True)
++class PairedLogGrowth:
++    """CI and centered one-sided test for the same mean log-growth difference."""
++
++    mean_log_returns: FloatArray
++    observed_mean_log_returns: FloatArray
++    repetitions: int
++    block_bars: int
++    estimand_id: str = LOG_GROWTH_ESTIMAND
++
++    def difference(self, candidate: int, baseline: int) -> dict[str, float | str]:
++        delta = self.mean_log_returns[:, candidate] - self.mean_log_returns[:, baseline]
++        observed = float(
++            self.observed_mean_log_returns[candidate] - self.observed_mean_log_returns[baseline]
++        )
++        low, high = np.quantile(delta, (0.025, 0.975))
++        return {
++            "estimand_id": self.estimand_id,
++            "observed_mean_log_return_difference": observed,
++            "ci95_lower": float(low),
++            "ci95_upper": float(high),
++            "one_sided_p_value": float(
++                (np.sum(delta - observed >= observed) + 1) / (self.repetitions + 1)
++            ),
++        }
++
++
++def paired_log_growth_bootstrap(
++    values: FloatArray,
++    *,
++    repetitions: int = 10000,
++    block_bars: int,
++    seed: int,
++) -> PairedLogGrowth:
++    """Inputs are simple net returns on a caller-validated common clock, including CASH."""
++    _validate_returns(values, repetitions, block_bars)
++    logs = np.log1p(values)
++    sampled = _circular_block_totals(
++        logs, repetitions=repetitions, block_bars=block_bars, seed=seed
++    ) / len(values)
++    if not np.all(np.isfinite(sampled)):
++        raise ValueError("bootstrap produced non-finite log growth")
++    return PairedLogGrowth(sampled, np.mean(logs, axis=0), repetitions, block_bars)
++
++
+ def holm_adjust(p_values: dict[str, float]) -> dict[str, float]:
+     if not p_values or any(not 0 <= value <= 1 for value in p_values.values()):
+         raise ValueError("Holm requires finite probabilities")
+--- a/scripts/audit_alpha_profitability_root_causes.py
++++ b/scripts/audit_alpha_profitability_root_causes.py
+@@ -4,6 +4,7 @@
+ 
+ import argparse
+ import math
++from collections.abc import Sequence
+ from pathlib import Path
+ from typing import Any, cast
+ 
+@@ -12,7 +13,12 @@
+ 
+ from aegisquant.research.experiments.journal import ExperimentEventJournal, ExperimentEventType
+ from aegisquant.research.validation.experiment_registry import require_promotion_evidence
+-from aegisquant.research.validation.paired_bootstrap import holm_adjust, paired_block_bootstrap
++from aegisquant.research.validation.paired_bootstrap import (
++    LOG_GROWTH_ESTIMAND,
++    FloatArray,
++    holm_adjust,
++    paired_block_bootstrap,
++)
+ from scripts.export_alpha_v4_audit_bundle import digest
+ from scripts.run_alpha_r4 import read_result
+ from scripts.run_alpha_v4_audit import SYMBOLS, read_json
+@@ -354,6 +360,61 @@
+     return result
+ 
+ 
++def benchmark_factorial_attribution(
++    simple_net_returns: FloatArray, cells: Sequence[tuple[str, str]]
++) -> dict[str, Any]:
++    """Descriptive balanced 2x3 decomposition; no fit, resampling, prices or file writes."""
++    signals = ("ALWAYS_HOLD", "TREND_10_40")
++    controls = ("G0", "G1", "FIXED_QTY")
++    expected = {(signal, control) for signal in signals for control in controls}
++    if (
++        len(cells) != 6
++        or set(cells) != expected
++        or simple_net_returns.ndim != 2
++        or simple_net_returns.shape[1] != 6
++        or not len(simple_net_returns)
++        or not np.all(np.isfinite(simple_net_returns))
++        or np.any(simple_net_returns <= -1)
++    ):
++        raise ValueError("B3 attribution requires six complete aligned 2x3 net-return cells")
++    means = dict(zip(cells, map(float, np.mean(np.log1p(simple_net_returns), axis=0)), strict=True))
++    grand = math.fsum(means.values()) / 6
++    signal_effects = {
++        signal: math.fsum(means[signal, control] for control in controls) / 3 - grand
++        for signal in signals
++    }
++    control_effects = {
++        control: math.fsum(means[signal, control] for signal in signals) / 2 - grand
++        for control in controls
++    }
++    return {
++        "kind": "DESCRIPTIVE_FACTORIAL_DECOMPOSITION_NOT_CAUSAL_ALPHA",
++        "estimand_id": LOG_GROWTH_ESTIMAND,
++        "observations": len(simple_net_returns),
++        "grand_mean": grand,
++        "signal_main_effects": signal_effects,
++        "control_main_effects": control_effects,
++        "cells": [
++            {
++                "signal": signal,
++                "control": control,
++                "mean_log_return": means[signal, control],
++                "interaction": means[signal, control]
++                - grand
++                - signal_effects[signal]
++                - control_effects[control],
++            }
++            for signal in signals
++            for control in controls
++        ],
++        "trend_minus_always_by_control": {
++            control: means["TREND_10_40", control] - means["ALWAYS_HOLD", control]
++            for control in controls
++        },
++        "market_factor_regression": "NOT_RUN_NO_PIT_FACTOR_EVIDENCE",
++    }
++
++
+ if __name__ == "__main__":
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+--- /dev/null
++++ b/src/aegisquant/research/validation/benchmark_contract.py
+@@ -0,0 +1,626 @@
++"""B3 benchmark contracts and one read-only report job; no strategy/market loader."""
++
++from __future__ import annotations
++
++import csv
++import difflib
++import json
++import re
++from collections.abc import Mapping
++from dataclasses import asdict
++from datetime import timedelta
++from decimal import Decimal
++from pathlib import Path
++from typing import Any
++from xml.etree import ElementTree
++
++from aegisquant.data.hashing import canonical_sha256, ensure_sha256, sha256_file
++from aegisquant.research.validation.evidence_contract import (
++    BASE,
++    LOCKS,
++    MONEY_TOLERANCE,
++    ZERO_BUDGETS,
++    EvidenceReader,
++    Row,
++    audit_existing_files,
++    check_calendar_contract,
++    checked_path,
++    claim_output,
++    decimal,
++    require,
++    safety_literals,
++    seal_output,
++    statistics_identity,
++    utc,
++    write_json_exclusive,
++    zero_budget_guard,
++)
++from aegisquant.research.validation.experiment_registry import registered_run
++from aegisquant.research.validation.paired_bootstrap import LOG_GROWTH_ESTIMAND
++
++ARMS = {
++    "F5_MATCHED": ("ALWAYS_HOLD", "G0"),
++    "SIMPLE_TREND": ("TREND_10_40", "G0"),
++    "G1_PASSIVE": ("ALWAYS_HOLD", "G1"),
++    "G1": ("TREND_10_40", "G1"),
++    "PASSIVE_FIXED_QTY": ("ALWAYS_HOLD", "FIXED_QTY"),
++    "TREND_FIXED_QTY": ("TREND_10_40", "FIXED_QTY"),
++}
++PRIMARY_COMPARISONS = ("G1-CASH", "G1-F5_MATCHED", "G1-G1_PASSIVE", "G1-SIMPLE_TREND")
++SYMBOLS = ("BNBUSDT", "BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT")
++MODIFIED_FILES = (
++    "src/aegisquant/research/validation/paired_bootstrap.py",
++    "scripts/audit_alpha_profitability_root_causes.py",
++)
++NEW_FILES = (
++    "src/aegisquant/research/validation/benchmark_contract.py",
++    "scripts/run_alpha_v5_benchmark_diagnostics.py",
++    "configs/research/alpha_v5_benchmark_contract.yaml",
++    "tests/alpha_v5/test_benchmark_contract.py",
++    "docs/research/alpha_v5_benchmark_contract.md",
++)
++B3_FILES = (*MODIFIED_FILES, *NEW_FILES)
++COMMON_FIELDS = (
++    "input_snapshot_sha256",
++    "risk_policy_sha256",
++    "execution_policy_sha256",
++    "capital_mode",
++    "cost_mode",
++    "cost_multiplier",
++    "initial_cash",
++    "symbols",
++    "terminal_exit",
++    "risk_sizing_basis",
++)
++
++
++def validate_config(config: dict[str, Any]) -> None:
++    match = re.fullmatch(r"alpha-r5-benchmark-contract-(\d{8})-v([1-9]\d*)", config["generation"])
++    require(match is not None, "AQ-BENCHMARK-GENERATION")
++    if match is None:
++        return
++    require(
++        config["output"] == f"artifacts/alpha_v5/{match[1]}_benchmark_contract_v{match[2]}",
++        "AQ-BENCHMARK-OUTPUT",
++    )
++    require(
++        config["scope"] == "B3_CONTRACTS_READ_ONLY_AND_SYNTHETIC_TESTS"
++        and config["branch_required"] == "main"
++        and config["source_head"] == BASE,
++        "AQ-BENCHMARK-SCOPE",
++    )
++    require(
++        config["budgets"]
++        == {"contract_jobs": 1, "historical_bootstrap_runs": 0, **dict.fromkeys(ZERO_BUDGETS, 0)},
++        "AQ-BENCHMARK-NONZERO-RESEARCH-BUDGET",
++    )
++    require(
++        config["production_policy"] == "CASH"
++        and config["research_conclusion"] == "NO_PROVEN_ALPHA"
++        and all(config[key] is False for key in LOCKS),
++        "AQ-BENCHMARK-SAFETY-LOCK",
++    )
++    require(tuple(config["symbols"]) == SYMBOLS, "AQ-BENCHMARK-SYMBOLS")
++    require(config["cost_multipliers"] == ["1", "1.5", "2"], "AQ-BENCHMARK-COST-SCENARIOS")
++    require(
++        config["period_start"] == "2022-04-01T00:00:00+00:00"
++        and config["period_end"] == "2025-10-01T00:00:00+00:00"
++        and config["initial_cash_per_symbol"] == "10000",
++        "AQ-BENCHMARK-DEVELOPMENT-BOUNDARY",
++    )
++    stats = config["statistics"]
++    require(
++        stats["estimand_id"] == LOG_GROWTH_ESTIMAND
++        and stats["sampling"] == "UTC_DAY"
++        and tuple(stats["comparisons"]) == PRIMARY_COMPARISONS
++        and stats["repetitions"] == 10000
++        and stats["seed"] == 20260910
++        and stats["block_rule"] == "AUTO_MAX_RETURN_AND_SQUARED_RETURN_CLIPPED_2_TO_N_DIV_4"
++        and stats["correction"] == "HOLM_ALL_FOUR"
++        and stats["block_sensitivity_multipliers"] == ["0.5", "2"],
++        "AQ-BENCHMARK-STATISTICAL-REGISTRATION",
++    )
++    require(
++        config["historical_matrix_inputs"] is None
++        and config["historical_matrix_executed"] is False,
++        "AQ-BENCHMARK-HISTORICAL-INPUT-NOT-AUTHORIZED",
++    )
++
++
++def build_benchmark_contract(r5_manifest: dict[str, Any]) -> dict[str, Any]:
++    # Reuse the actual frozen control constructors, without calling a replay entry.
++    from scripts.run_alpha_v5_research import controls
++
++    config = r5_manifest["config"]
++    policies: dict[str, Any] = {}
++    for name in ("G0", "G1"):
++        buffer, resize = controls(config, name)
++        serialized: list[dict[str, Any] | None] = []
++        for policy in (buffer, resize):
++            serialized.append(
++                {
++                    key: str(value)
++                    if isinstance(value, Decimal)
++                    else int(value.total_seconds())
++                    if isinstance(value, timedelta)
++                    else value
++                    for key, value in asdict(policy).items()
++                }
++                if policy is not None
++                else None
++            )
++        policies[name] = {"buffer": serialized[0], "resize": serialized[1]}
++    policies["FIXED_QTY"] = {
++        "ordinary_target": "CURRENT_EXECUTED_QUANTITY_AFTER_ENTRY",
++        "entry_sizing": "SAME_FROZEN_A1_GATE",
++        "hard_exit_and_cap": "EXISTING_SHARED_HARD_RISK_PATH",
++        "pending_and_partial_fills": "EXISTING_SIGNED_PENDING_MANAGER_AND_ACTUAL_FILLED_QUANTITY",
++        "execution_adapter": "NOT_IMPLEMENTED_IN_ZERO_REPLAY_CONTRACT_BATCH",
++    }
++    return {
++        "status": "CONTRACT_DEFINED_HISTORY_NOT_COLLECTED",
++        "candidate": "G1",
++        "arms": {
++            arm: {
++                "signal": signal,
++                "control": control,
++                "control_sha256": canonical_sha256(policies[control]),
++                "configuration_sha256": canonical_sha256(
++                    {"signal": signal, "control": policies[control]}
++                ),
++            }
++            for arm, (signal, control) in ARMS.items()
++        },
++        "controls": policies,
++        "shared_gate": r5_manifest["gate"],
++        "shared_gate_sha256": canonical_sha256(r5_manifest["gate"]),
++        "risk_matching": "SAME_EX_ANTE_LIMITS_AND_INPUTS_NOT_EQUAL_REALIZED_VOLATILITY",
++        "capital_mode": "FIVE_EQUAL_INITIAL_SLEEVES_NO_TRANSFERS",
++        "initial_cash_per_symbol": "10000",
++        "initial_total_cash": "50000",
++        "terminal_exit": "EVALUATION_END_NEXT_OPEN_EXIT_PAID_BOUNDARY_INCLUDED",
++        "signal_source": "scripts/run_alpha_r4.py::run_sleeve; F5 always-true override; existing 10/40 trend",
++        "controls_source": "scripts/run_alpha_v5_research.py::controls; frozen G0/G1",
++        "engine_source": "aegisquant.research.validation.cat_replay::replay_cat",
++        "historical_evidence": "NOT_COLLECTED",
++        "legacy_reference_only": ["F0", "F3", "F5", "99PCT_BUY_AND_HOLD"],
++        "f5_matched_is_not_relabelled_old_f5": True,
++        "future_matrix_slots": len(ARMS) * len(SYMBOLS) * 3,
++        "future_matrix_slots_authorized_now": 0,
++        "synthetic_equivalence_is_engine_proof": False,
++    }
++
++
++def cash_reference(*, start: str, end: str, capital: Decimal) -> list[dict[str, Any]]:
++    require(capital.is_finite() and capital > 0, "AQ-BENCHMARK-CASH-CAPITAL")
++    begin, finish = utc(start), utc(end)
++    require(begin < finish, "AQ-BENCHMARK-CASH-PERIOD")
++    require(
++        all(
++            t.hour % 4 == 0 and not t.minute and not t.second and not t.microsecond
++            for t in (begin, finish)
++        ),
++        "AQ-BENCHMARK-CALENDAR-GRID",
++    )
++    rows: list[dict[str, Any]] = []
++    time = begin
++    while time <= finish:
++        rows.append(
++            {
++                "time": time.isoformat(),
++                "equity": str(capital),
++                "cash": str(capital),
++                "position_value": "0",
++                "cash_flow": "0",
++                "cost": "0",
++                "orders": 0,
++                "fills": 0,
++            }
++        )
++        time += timedelta(hours=4)
++    return rows
++
++
++def validate_benchmark_paths(
++    paths: Mapping[str, Row], contract: Row, *, start: str, end: str
++) -> dict[str, Any]:
++    """Check supplied economic paths; this does not prove an engine generated them."""
++    require(set(paths) == {*ARMS, "CASH"}, "AQ-BENCHMARK-INCOMPLETE-MATRIX")
++    reference = paths["G1"]["common"]
++    require(set(reference) == set(COMMON_FIELDS), "AQ-BENCHMARK-COMMON-CONTRACT-FIELDS")
++    require(
++        reference["capital_mode"] == "FIVE_EQUAL_INITIAL_SLEEVES_NO_TRANSFERS"
++        and reference["cost_mode"] == "REDECIDE_FUNDED"
++        and reference["cost_multiplier"] in {"1", "1.5", "2"}
++        and decimal(reference["initial_cash"]) == Decimal("50000")
++        and reference["symbols"] == list(SYMBOLS)
++        and reference["terminal_exit"] == "EVALUATION_END_NEXT_OPEN_EXIT_PAID_BOUNDARY_INCLUDED"
++        and reference["risk_sizing_basis"] == "EX_ANTE_PRECEDING_DATA",
++        "AQ-BENCHMARK-COMMON-ACCOUNT-OR-RISK",
++    )
++    for field in COMMON_FIELDS[:3]:
++        ensure_sha256(reference[field], field_name=field)
++    require(
++        reference["risk_policy_sha256"] == contract["shared_gate_sha256"],
++        "AQ-BENCHMARK-UNBOUND-RISK-POLICY",
++    )
++    cash = paths["CASH"]
++    expected_cash = cash_reference(start=start, end=end, capital=Decimal("50000"))
++    require(cash["orders"] == [] and cash["fills"] == [], "AQ-BENCHMARK-CASH-TRADES")
++    calendars: list[list[Any]] = []
++    all_ready: list[list[bool]] = []
++    risk_ready: list[list[bool]] = []
++    for arm, path in paths.items():
++        require(
++            path["definition"]
++            == ({"signal": "CASH", "control": "CASH"} if arm == "CASH" else contract["arms"][arm]),
++            "AQ-BENCHMARK-ARM-DEFINITION-CONFLICT",
++        )
++        require(path["common"] == reference, "AQ-BENCHMARK-MIXED-COMMON-CONTRACT")
++        rows = path["rows"]
++        calendars.append(
++            check_calendar_contract(rows, start=start, end=end, interval=timedelta(hours=4))
++        )
++        require(decimal(rows[0]["equity"]) == Decimal("50000"), "AQ-BENCHMARK-INITIAL-CASH")
++        require(
++            decimal(rows[0]["position_value"]) == 0 and decimal(rows[-1]["position_value"]) == 0,
++            "AQ-BENCHMARK-NONFLAT-ACCOUNT-BOUNDARY",
++        )
++        ready: list[bool] = []
++        risk: list[bool] = []
++        for index, row in enumerate(rows):
++            equity, available_cash, position = (
++                decimal(row[name]) for name in ("equity", "cash", "position_value")
++            )
++            require(
++                equity > 0
++                and available_cash >= 0
++                and position >= 0
++                and abs(equity - available_cash - position) <= MONEY_TOLERANCE
++                and decimal(row["cash_flow"]) == 0,
++                "AQ-BENCHMARK-CAPITAL-IDENTITY",
++            )
++            require(
++                type(row["risk_ready"]) is bool and type(row["signal_ready"]) is bool,
++                "AQ-BENCHMARK-UNKNOWN-READINESS",
++            )
++            ready.append(row["risk_ready"] and row["signal_ready"])
++            risk.append(row["risk_ready"])
++            if arm == "CASH":
++                require(row["risk_ready"] and row["signal_ready"], "AQ-BENCHMARK-CASH-READINESS")
++                require(
++                    all(row[key] == value for key, value in expected_cash[index].items()),
++                    "AQ-BENCHMARK-CASH-IDENTITY",
++                )
++        all_ready.append(ready)
++        if arm != "CASH":
++            risk_ready.append(risk)
++    require(all(times == calendars[0] for times in calendars), "AQ-BENCHMARK-MIXED-CALENDAR")
++    require(
++        all(flags == risk_ready[0] for flags in risk_ready), "AQ-BENCHMARK-MIXED-RISK-READINESS"
++    )
++    return {
++        "kind": "SUPPLIED_PATH_CONTRACT_CHECK_NOT_ENGINE_OR_LEDGER_PROOF",
++        "full_calendar": [time.isoformat() for time in calendars[0]],
++        "common_ready": [all(flags) for flags in zip(*all_ready, strict=True)],
++        "full_calendar_observations": len(calendars[0]),
++        "engine_equivalence": "NOT_VERIFIED",
++    }
++
++
++def assert_same_configuration_paths(left: Row, right: Row) -> None:
++    """Compare normalized economic payloads supplied by the caller, not run IDs."""
++    require(
++        left["definition"] == right["definition"] and left["common"] == right["common"],
++        "AQ-BENCHMARK-DIFFERENT-CONFIGURATION",
++    )
++    require(
++        all(left[key] == right[key] for key in ("rows", "orders", "fills")),
++        "AQ-BENCHMARK-SAME-CONFIG-DIFFERENT-ECONOMIC-PATH",
++    )
++
++
++def _test_receipts(root: Path, stage: Path) -> tuple[list[dict[str, Any]], int]:
++    records = json.loads((stage / "validation_records.json").read_text(encoding="utf-8"))
++    latest = {row["check"]: row for row in records}
++    hashes = {name: sha256_file(checked_path(root, name)) for name in B3_FILES}
++    for check in ("pytest", "ruff", "format", "pyright"):
++        require(
++            latest.get(check, {}).get("exit_code") == 0
++            and latest[check]["source_sha256"] == hashes,
++            f"AQ-BENCHMARK-STALE-VALIDATION:{check}",
++        )
++    require(NEW_FILES[3] in latest["pytest"]["command"], "AQ-BENCHMARK-MISSING-PURE-TEST")
++    cases = ElementTree.parse(stage / "pytest_results.xml").getroot().findall(".//testcase")  # noqa: S314 -- local pytest receipt.
++    require(
++        bool(cases)
++        and all(not any(c.tag in {"failure", "error", "skipped"} for c in case) for case in cases),
++        "AQ-BENCHMARK-TEST-FAILURE-OR-SKIP",
++    )
++    return records, len(cases)
++
++
++def run_contract_job(
++    root: Path, config: dict[str, Any], stage: Path, git_state: dict[str, str]
++) -> Path:
++    validate_config(config)
++    require(git_state == {"head": BASE, "branch": "main"}, "AQ-BENCHMARK-GIT-IDENTITY")
++    baseline = json.loads((stage / "baseline_workspace.json").read_text(encoding="utf-8"))
++    require(
++        baseline["head"] == BASE
++        and baseline["branch"] == "main"
++        and Path(baseline["root"]).resolve() == root.resolve()
++        and set(baseline["allowed_modifications"]) == set(MODIFIED_FILES),
++        "AQ-BENCHMARK-PREFLIGHT",
++    )
++    protected = {
++        **baseline,
++        "files": {
++            name: row for name, row in baseline["files"].items() if name not in MODIFIED_FILES
++        },
++    }
++    records, count = _test_receipts(root, stage)
++    frozen = [root / Path(binding["path"]).parent for binding in config["sources"].values()]
++    output = claim_output(root, config["output"], frozen_roots=frozen)
++    counters: dict[str, int] = dict.fromkeys(ZERO_BUDGETS, 0)
++    reader = EvidenceReader(root)
++    run_id = config["generation"] + ":CONTRACT_REPORT"
++    try:
++        with registered_run(  # noqa: SIM117 -- journal remains outside the write guard.
++            output,
++            run_id,
++            planned_run_ids=[run_id],
++            bindings={"kind": "B3_CONTRACT_REPORT_NOT_ALPHA_TRIAL"},
++        ):
++            with zero_budget_guard(output, root, counters):
++                write_json_exclusive(
++                    output / "preregistration.json", {"config": config, "planned_run_ids": [run_id]}
++                )
++                before = audit_existing_files(root, protected)
++                for name in (
++                    "baseline_workspace.json",
++                    "workspace_before.patch",
++                    "version_graph.txt",
++                    "validation_records.json",
++                    "test_commands_and_results.txt",
++                    "pytest_results.xml",
++                ):
++                    group = (
++                        "validation"
++                        if name
++                        in {
++                            "validation_records.json",
++                            "test_commands_and_results.txt",
++                            "pytest_results.xml",
++                        }
++                        else "preflight"
++                    )
++                    target = output / group / name
++                    target.parent.mkdir(parents=True, exist_ok=True)
++                    with target.open("xb") as stream:
++                        stream.write(checked_path(stage, name).read_bytes())
++                patch = ""
++                for name in B3_FILES:
++                    source = checked_path(root, name)
++                    previous = (
++                        checked_path(stage, "before/" + name) if name in MODIFIED_FILES else None
++                    )
++                    if previous is not None:
++                        require(
++                            sha256_file(previous) == baseline["files"][name]["sha256"],
++                            "AQ-BENCHMARK-BEFORE-COPY",
++                        )
++                        target = output / "before" / name
++                        target.parent.mkdir(parents=True, exist_ok=True)
++                        with target.open("xb") as stream:
++                            stream.write(previous.read_bytes())
++                    target = output / "implementation" / name
++                    target.parent.mkdir(parents=True, exist_ok=True)
++                    with target.open("xb") as stream:
++                        stream.write(source.read_bytes())
++                    patch += "".join(
++                        difflib.unified_diff(
++                            previous.read_text(encoding="utf-8").splitlines(keepends=True)
++                            if previous
++                            else [],
++                            source.read_text(encoding="utf-8").splitlines(keepends=True),
++                            fromfile="a/" + name if previous else "/dev/null",
++                            tofile="b/" + name,
++                        )
++                    )
++                with (output / "changes_this_batch.patch").open(
++                    "x", encoding="utf-8", newline="\n"
++                ) as stream:
++                    stream.write(patch)
++                sources: dict[str, Any] = {}
++                for name, binding in config["sources"].items():
++                    path = reader.path(binding["path"])
++                    require(
++                        sha256_file(path) == binding["sha256"], f"AQ-BENCHMARK-FROZEN-SOURCE:{name}"
++                    )
++                    sources[name] = (
++                        json.loads(path.read_text(encoding="utf-8"), parse_float=str)
++                        if name == "r5_statistics"
++                        else json.loads(path.read_text(encoding="utf-8"))
++                    )
++                r5 = sources["r5_manifest"]
++                require(r5["source_head"] == BASE, "AQ-BENCHMARK-SOURCE-HEAD")
++                locks = safety_literals(reader, r5)
++                contract = build_benchmark_contract(r5)
++                write_json_exclusive(output / "benchmark_contract.json", contract)
++                write_json_exclusive(
++                    output / "legacy_statistics_identity.json",
++                    statistics_identity(sources["r5_statistics"], r5["config"]["statistics"]),
++                )
++                with (output / "legacy_paired_statistics_original.json").open("xb") as stream:
++                    stream.write(
++                        reader.path(config["sources"]["r5_statistics"]["path"]).read_bytes()
++                    )
++                write_json_exclusive(
++                    output / "primary_comparisons.json",
++                    {
++                        "status": "NOT_COLLECTED",
++                        "statistics": config["statistics"],
++                        "comparisons": {
++                            name: {
++                                "estimand_id": LOG_GROWTH_ESTIMAND,
++                                "observed": None,
++                                "ci95": None,
++                                "one_sided_p_value": None,
++                                "holm_adjusted_p_value": None,
++                            }
++                            for name in PRIMARY_COMPARISONS
++                        },
++                        "legacy_results_cannot_populate_new_comparisons": True,
++                    },
++                )
++                cash = cash_reference(
++                    start=config["period_start"], end=config["period_end"], capital=Decimal("50000")
++                )
++                with (output / "cash_full_calendar.csv").open(
++                    "x", encoding="utf-8", newline=""
++                ) as stream:
++                    writer = csv.DictWriter(stream, fieldnames=list(cash[0]))
++                    writer.writeheader()
++                    writer.writerows(cash)
++                write_json_exclusive(
++                    output / "calendar_contract.json",
++                    {
++                        "kind": "DETERMINISTIC_CASH_REFERENCE_NOT_NEW_MARKET_EVIDENCE",
++                        "start": config["period_start"],
++                        "end_inclusive_paid_terminal_boundary": config["period_end"],
++                        "interval_seconds": 14400,
++                        "cash_four_hour_points": len(cash),
++                        "cash_utc_daily_points": sum(utc(row["time"]).hour == 0 for row in cash),
++                        "required_arms": [*ARMS, "CASH"],
++                        "historical_common_ready": None,
++                        "risk_arm_calendars": "NOT_COLLECTED",
++                        "flat_periods_must_remain": True,
++                        "common_ready_is_supplement_not_date_selection": True,
++                    },
++                )
++                write_json_exclusive(
++                    output / "risk_and_factor_attribution.json",
++                    {
++                        "status": "NOT_COLLECTED",
++                        "factorial_summary": None,
++                        "estimator": "scripts.audit_alpha_profitability_root_causes::benchmark_factorial_attribution",
++                        "pit_market_factor": "NOT_RECEIVED",
++                        "ex_ante_risk_forecasts": "NOT_RECEIVED",
++                        "market_alpha_regression": None,
++                        "full_sample_realized_vol_sizing_allowed": False,
++                        "factorial_effects_are_descriptive_not_causal_alpha": True,
++                    },
++                )
++                write_json_exclusive(
++                    output / "same_fill_shadow_contract.json",
++                    {
++                        "new_matrix_shadow": "NOT_COLLECTED",
++                        "cost_mode": "SAME_FILL_SHADOW",
++                        "reuse": "aegisquant.research.validation.evidence_contract::audit_cost_path",
++                        "required_identity": [
++                            "time",
++                            "quantity",
++                            "side",
++                            "reference_price",
++                            "inventory",
++                        ],
++                        "worse_cost_must_not_improve_shadow_wealth": True,
++                        "funded_monotonicity_required": False,
++                        "funding_feasibility_claimed": False,
++                        "old_audit_reference": config["sources"]["b0_cost_audit"],
++                        "old_audit": sources["b0_cost_audit"],
++                    },
++                )
++                gaps = [
++                    {"item": "six_risk_arm_history_and_raw_paths", "status": "NOT_COLLECTED"},
++                    {
++                        "item": "fixed_quantity_engine_adapter",
++                        "status": "NOT_IMPLEMENTED_ZERO_REPLAY_BATCH",
++                    },
++                    {
++                        "item": "actual_engine_same_configuration_equivalence",
++                        "status": "NOT_VERIFIED",
++                    },
++                    {"item": "historical_primary_statistics_and_holm", "status": "NOT_COLLECTED"},
++                    {"item": "pit_universe", "status": sources["b2_safety"]["strict_data_quality"]},
++                    {"item": "pit_factor_and_causal_risk_forecasts", "status": "NOT_RECEIVED"},
++                ]
++                write_json_exclusive(
++                    output / "evidence_gaps.json", {"gaps": gaps, "promotion_admitted": False}
++                )
++                after = audit_existing_files(root, protected)
++                write_json_exclusive(
++                    output / "safety_and_budget_audit.json",
++                    {
++                        "actual": {"contract_jobs": 1, "historical_bootstrap_runs": 0, **counters},
++                        "authorized": config["budgets"],
++                        "before": before,
++                        "after": after,
++                        "live_lock_literals": locks,
++                        "production_policy": "CASH",
++                        "research_conclusion": "NO_PROVEN_ALPHA",
++                        **dict.fromkeys(LOCKS, False),
++                        "alpha_trials": 0,
++                        "promotion_admitted": False,
++                    },
++                )
++                write_json_exclusive(
++                    output / "source_and_version_bindings.json",
++                    {
++                        "generation": config["generation"],
++                        **git_state,
++                        "reads": reader.reads,
++                        "modified_files": {
++                            name: {
++                                "before": baseline["files"][name]["sha256"],
++                                "after": sha256_file(root / name),
++                            }
++                            for name in MODIFIED_FILES
++                        },
++                        "new_files": {name: sha256_file(root / name) for name in NEW_FILES},
++                        "commits_created": 0,
++                        "pushes": 0,
++                        "branches_created": 0,
++                    },
++                )
++                report = [
++                    "# B3 共同风险基准：契约与合成验证",
++                    "",
++                    "**NO_PROVEN_ALPHA / CASH；ML、纸面准入、实盘及订单提交全部关闭。**",
++                    "",
++                    f"Generation：{config['generation']}；已有 main {BASE}，绑定冻结 R5 v3、B0/B1 v2 和 B2 v1。",
++                    f"本批 {count} 项限定纯测试、Ruff、格式和类型检查通过；{len(records)} 条实际检查记录（含失败尝试）全部保存。",
++                    "已完成六风险臂＋CASH契约、只读入口、完整现金日历、2×3描述性归因和配对对数净收益统计接口。",
++                    "历史策略回放、真实模型拟合、真实校准拟合、最终留出访问、真实订单及历史统计重采样均为 0。",
++                    "",
++                    "两个信号固定为始终持有、现有10/40趋势；三类控制为G0/F3、原G1、入场后数量固定且保留硬退出/硬上限。",
++                    "G0/G1控制复用现有构造函数；数量固定臂本批仅定义契约，执行适配与真实引擎等价尚未完成。",
++                    "相同事前限制不保证实现波动相同；禁止以全样本实现波动反推交易权重。账户仍为五个10,000 USDT独立sleeve，无跨币资金转移。",
++                    "同配置路径测试只验证提供的经济记录比较器，不冒充实际引擎会产生相同订单。",
++                    "",
++                    "新的四项主要比较：G1 对 CASH、F5_MATCHED、G1_PASSIVE、SIMPLE_TREND。区间和单侧p值使用同一平均对数净收益差estimand，UTC日采样、同时间块联合抽样、四项一起Holm。",
++                    "新矩阵、归因、四项统计及影子成本均 NOT_COLLECTED；旧F0–F5及旧G1曲线不改名填入。旧九项比较原字节及不同CI/p estimand身份保留，不重算历史显著性。",
++                    f"现金参考保留 {len(cash)} 个四小时点和付费退出边界；它是确定性参考，不证明六个风险臂已具备同一日历。",
++                    "",
++                    "B2仍缺真实PIT资料；真实因子、事前风险及完整执行证据也不足，全部缺口见 evidence_gaps.json。合成通过不能取得研究或交易晋级。",
++                    "方案90次历史矩阵仅记录为未来规模，当前授权槽位0；本批只消费1次契约报告作业。",
++                    f"保护范围内 {after['files_checked']} 个既有文件未变；两处修改的原字节、七个实施文件和本批补丁已封存。",
++                    "本 generation 仅封存 B3 契约；后续工程按各自范围和证据门槛继续，历史矩阵、真实拟合及最终留出保持关闭。",
++                    "",
++                ]
++                with (output / "report.md").open("x", encoding="utf-8", newline="\n") as stream:
++                    stream.write("\n".join(report))
++    except BaseException as error:
++        write_json_exclusive(
++            output / "failure.json",
++            {
++                "error": f"{type(error).__name__}: {error}",
++                "actual": {"contract_jobs": 1, "historical_bootstrap_runs": 0, **counters},
++                "kind": "B3_CONTRACT_REPORT_NOT_ALPHA_TRIAL",
++            },
++        )
++        seal_output(output)
++        raise
++    seal_output(output)
++    return output
+--- /dev/null
++++ b/scripts/run_alpha_v5_benchmark_diagnostics.py
+@@ -0,0 +1,33 @@
++"""Create one B3 contract report; no run/replay mode or historical matrix input."""
++
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import yaml
++
++from aegisquant.research.validation.benchmark_contract import run_contract_job
++from aegisquant.research.validation.evidence_contract import checked_path
++from scripts.export_alpha_v4_audit_bundle import git
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--config", required=True, type=Path)
++    parser.add_argument("--preflight-dir", required=True, type=Path)
++    args = parser.parse_args()
++    config = yaml.safe_load(checked_path(ROOT, args.config.as_posix()).read_text(encoding="utf-8"))
++    output = run_contract_job(
++        ROOT,
++        config,
++        args.preflight_dir,
++        {"head": git(ROOT, "rev-parse", "HEAD"), "branch": git(ROOT, "branch", "--show-current")},
++    )
++    print(f"B3 contract report: {output}; historical matrix NOT_COLLECTED", flush=True)
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/configs/research/alpha_v5_benchmark_contract.yaml
+@@ -0,0 +1,57 @@
++schema_version: aegis-benchmark-contract-b3-v1
++generation: alpha-r5-benchmark-contract-20260910-v1
++output: artifacts/alpha_v5/20260910_benchmark_contract_v1
++scope: B3_CONTRACTS_READ_ONLY_AND_SYNTHETIC_TESTS
++branch_required: main
++source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
++taskbook: AegisQuant_整改与验证方案_20260909.md
++budgets:
++  contract_jobs: 1
++  historical_bootstrap_runs: 0
++  historical_strategy_engine_runs: 0
++  real_return_model_fits: 0
++  real_calibration_fits: 0
++  final_holdout_accesses: 0
++  real_orders: 0
++sources:
++  r5_manifest:
++    path: artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json
++    sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
++  r5_statistics:
++    path: artifacts/alpha_v5/20260908_research_churn_v3/paired_statistics.json
++    sha256: c0eaf857759fa4d0a1bddc495a66e2ee56c5b59f001187efa60242d6ce597024
++  b0_manifest:
++    path: artifacts/alpha_v5/20260909_review_contract_v2/OUTPUT_MANIFEST.json
++    sha256: fccc6e6a60185811d37b4e8a40a7772da3209b46e95ea15e83cfef9d39519edf
++  b0_cost_audit:
++    path: artifacts/alpha_v5/20260909_review_contract_v2/cost_mode_audit.json
++    sha256: 70cff69763f6f75c52554d1fafebbf061cce6370a4327cb369b1ff11c3b65c3e
++  b2_manifest:
++    path: artifacts/alpha_v5/20260910_pit_contract_v1/OUTPUT_MANIFEST.json
++    sha256: fd01dd906c5d096842a9c3a278a6bd8612fa15a609c31f179678820c7e130c52
++  b2_safety:
++    path: artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json
++    sha256: c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26
++symbols: [BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT]
++cost_multipliers: ['1', '1.5', '2']
++initial_cash_per_symbol: '10000'
++period_start: '2022-04-01T00:00:00+00:00'
++period_end: '2025-10-01T00:00:00+00:00'
++historical_matrix_inputs: null
++historical_matrix_executed: false
++statistics:
++  estimand_id: MEAN_LOG_NET_RETURN_DIFFERENCE_PER_OBSERVATION_V1
++  sampling: UTC_DAY
++  comparisons: [G1-CASH, G1-F5_MATCHED, G1-G1_PASSIVE, G1-SIMPLE_TREND]
++  repetitions: 10000
++  seed: 20260910
++  block_rule: AUTO_MAX_RETURN_AND_SQUARED_RETURN_CLIPPED_2_TO_N_DIV_4
++  block_sensitivity_multipliers: ['0.5', '2']
++  sensitivity_use: REPORT_ALL_NO_BEST_BLOCK_SELECTION
++  correction: HOLM_ALL_FOUR
++research_conclusion: NO_PROVEN_ALPHA
++production_policy: CASH
++production_ml_enabled: false
++paper_trading_admitted: false
++live_trading: false
++order_submission_enabled: false
+--- /dev/null
++++ b/tests/alpha_v5/test_benchmark_contract.py
+@@ -0,0 +1,550 @@
++"""Synthetic B3 contracts only: never load market data, replay, fit or access holdout."""
++
++from __future__ import annotations
++
++import copy
++import json
++import sys
++from dataclasses import fields
++from datetime import timedelta
++from decimal import Decimal
++from pathlib import Path
++from types import ModuleType
++from typing import Any
++from unittest.mock import Mock
++
++import numpy as np
++import pytest
++import yaml
++
++from aegisquant.data.hashing import sha256_file
++from aegisquant.research.validation import benchmark_contract as contract
++from aegisquant.research.validation.evidence_contract import (
++    CostMode,
++    audit_cost_path,
++    load_evidence_manifest,
++)
++from aegisquant.research.validation.paired_bootstrap import (
++    LOG_GROWTH_ESTIMAND,
++    PairedBootstrap,
++    holm_adjust,
++    paired_block_bootstrap,
++    paired_log_growth_bootstrap,
++)
++from scripts.audit_alpha_profitability_root_causes import benchmark_factorial_attribution
++from tests.alpha_v5.test_evidence_contract import statistics_fixture
++
++ROOT = Path(__file__).resolve().parents[2]
++START = "2024-01-01T00:00:00+00:00"
++END = "2024-01-04T00:00:00+00:00"
++
++
++def r5_fixture() -> dict[str, Any]:
++    # Strategy parameters are configuration, not historical performance or market data.
++    config = yaml.safe_load(
++        (ROOT / "configs/research/aegis_alpha_v5.yaml").read_text(encoding="utf-8")
++    )
++    return {"source_head": contract.BASE, "config": config, "gate": {"synthetic_common_gate": True}}
++
++
++def paths_fixture() -> tuple[dict[str, Any], dict[str, Any]]:
++    definition = contract.build_benchmark_contract(r5_fixture())
++    common = {
++        "input_snapshot_sha256": "a" * 64,
++        "risk_policy_sha256": definition["shared_gate_sha256"],
++        "execution_policy_sha256": "b" * 64,
++        "capital_mode": "FIVE_EQUAL_INITIAL_SLEEVES_NO_TRANSFERS",
++        "cost_mode": "REDECIDE_FUNDED",
++        "cost_multiplier": "1",
++        "initial_cash": "50000",
++        "symbols": list(contract.SYMBOLS),
++        "terminal_exit": "EVALUATION_END_NEXT_OPEN_EXIT_PAID_BOUNDARY_INCLUDED",
++        "risk_sizing_basis": "EX_ANTE_PRECEDING_DATA",
++    }
++    cash = contract.cash_reference(start=START, end=END, capital=Decimal("50000"))
++    paths: dict[str, Any] = {}
++    for number, arm in enumerate([*contract.ARMS, "CASH"], start=1):
++        rows = copy.deepcopy(cash)
++        for index, row in enumerate(rows):
++            row.update(risk_ready=arm == "CASH" or index >= 2, signal_ready=True)
++            if arm != "CASH" and index >= 2:
++                profit = (index - 2) * number
++                row["equity"] = str(50000 + profit)
++                row["position_value"] = str(5000 + profit) if index < len(rows) - 1 else "0"
++                row["cash"] = "45000" if index < len(rows) - 1 else row["equity"]
++        paths[arm] = {
++            "definition": {"signal": "CASH", "control": "CASH"}
++            if arm == "CASH"
++            else copy.deepcopy(definition["arms"][arm]),
++            "common": copy.deepcopy(common),
++            "rows": rows,
++            "orders": []
++            if arm == "CASH"
++            else [
++                {"time": rows[2]["time"], "side": "BUY", "quantity": "1"},
++                {"time": rows[-1]["time"], "side": "SELL", "quantity": "1"},
++            ],
++            "fills": []
++            if arm == "CASH"
++            else [
++                {"time": rows[2]["time"], "quantity": "1", "reference_price": "5000"},
++                {
++                    "time": rows[-1]["time"],
++                    "quantity": "-1",
++                    "reference_price": str(5000 + (len(rows) - 3) * number),
++                },
++            ],
++        }
++    return paths, definition
++
++
++def test_b3_matrix_reuses_frozen_g0_and_g1_without_changing_parameters() -> None:
++    frozen = r5_fixture()
++    before = copy.deepcopy(frozen)
++    result = contract.build_benchmark_contract(frozen)
++    assert frozen == before
++    assert len(result["arms"]) == 6 and result["future_matrix_slots"] == 90
++    assert result["future_matrix_slots_authorized_now"] == 0
++    assert result["controls"]["G1"]["resize"]["smoothing_half_life"] == 5 * 86400
++    assert result["controls"]["G1"]["resize"]["review_interval"] == 48 * 3600
++    assert result["controls"]["G1"]["resize"]["cost_benefit_lambda"] == "1"
++    assert result["controls"]["G0"]["resize"] is None
++    assert result["arms"]["G1"]["control_sha256"] == result["arms"]["G1_PASSIVE"]["control_sha256"]
++    assert (
++        result["arms"]["G1"]["configuration_sha256"]
++        != result["arms"]["G1_PASSIVE"]["configuration_sha256"]
++    )
++    assert result["controls"]["FIXED_QTY"]["execution_adapter"].startswith("NOT_IMPLEMENTED")
++
++
++def test_b3_cash_calendar_keeps_flat_periods_and_readiness_is_only_a_subset() -> None:
++    paths, definition = paths_fixture()
++    before = copy.deepcopy(paths)
++    result = contract.validate_benchmark_paths(paths, definition, start=START, end=END)
++    assert result["full_calendar_observations"] == 19
++    assert result["common_ready"][:3] == [False, False, True]
++    assert result["full_calendar"][0] == START and result["full_calendar"][-1] == END
++    assert paths == before and result["engine_equivalence"] == "NOT_VERIFIED"
++    assert all(row["equity"] == "50000" and row["cost"] == "0" for row in paths["CASH"]["rows"])
++
++
++@pytest.mark.parametrize(
++    "mutation",
++    [
++        "missing_arm",
++        "wrong_signal",
++        "missing_flat_day",
++        "mixed_fee",
++        "mixed_risk",
++        "shared_account",
++        "shadow_account",
++        "full_sample_vol",
++        "cash_trade",
++        "cash_cost",
++        "cash_profit",
++        "cash_readiness",
++        "cash_flow",
++        "bad_balance",
++        "nonflat_end",
++        "unknown_ready",
++        "different_risk_ready",
++        "naive_clock",
++    ],
++)
++def test_b3_panel_rejects_noncomparable_or_incomplete_paths(mutation: str) -> None:
++    paths, definition = paths_fixture()
++    g1, cash = paths["G1"], paths["CASH"]
++    if mutation == "missing_arm":
++        del paths["SIMPLE_TREND"]
++    elif mutation == "wrong_signal":
++        g1["definition"]["signal"] = "ALWAYS_HOLD"
++    elif mutation == "missing_flat_day":
++        del g1["rows"][1]
++    elif mutation == "mixed_fee":
++        g1["common"]["cost_multiplier"] = "2"
++    elif mutation == "mixed_risk":
++        g1["common"]["risk_policy_sha256"] = "c" * 64
++    elif mutation in {"shared_account", "shadow_account", "full_sample_vol"}:
++        key, value = {
++            "shared_account": ("capital_mode", "SHARED_PORTFOLIO"),
++            "shadow_account": ("cost_mode", "SAME_FILL_SHADOW"),
++            "full_sample_vol": ("risk_sizing_basis", "FULL_SAMPLE_REALIZED_VOLATILITY"),
++        }[mutation]
++        for path in paths.values():
++            path["common"][key] = value
++    elif mutation == "cash_trade":
++        cash["orders"].append({"quantity": "1"})
++    elif mutation == "cash_cost":
++        cash["rows"][1]["cost"] = "1"
++    elif mutation == "cash_profit":
++        cash["rows"][1].update(equity="50001", cash="50001")
++    elif mutation == "cash_readiness":
++        cash["rows"][1]["risk_ready"] = False
++    elif mutation == "cash_flow":
++        g1["rows"][1]["cash_flow"] = "1"
++    elif mutation == "bad_balance":
++        g1["rows"][3]["cash"] = "0"
++    elif mutation == "nonflat_end":
++        g1["rows"][-1]["position_value"] = "1"
++    elif mutation == "unknown_ready":
++        g1["rows"][1]["risk_ready"] = None
++    elif mutation == "different_risk_ready":
++        g1["rows"][1]["risk_ready"] = True
++    elif mutation == "naive_clock":
++        g1["rows"][1]["time"] = g1["rows"][1]["time"].removesuffix("+00:00")
++    with pytest.raises(ValueError):
++        contract.validate_benchmark_paths(paths, definition, start=START, end=END)
++
++
++def test_b3_same_configuration_compares_orders_fills_and_returns() -> None:
++    paths, _ = paths_fixture()
++    left, right = paths["G1"], copy.deepcopy(paths["G1"])
++    right["run_id"] = "another-synthetic-run"
++    contract.assert_same_configuration_paths(left, right)
++    for field in ("rows", "orders", "fills"):
++        altered = copy.deepcopy(right)
++        altered[field][-1] = {"changed_economic_payload": True}
++        with pytest.raises(ValueError, match="DIFFERENT-ECONOMIC-PATH"):
++            contract.assert_same_configuration_paths(left, altered)
++    with pytest.raises(ValueError, match="DIFFERENT-CONFIGURATION"):
++        contract.assert_same_configuration_paths(paths["G1"], paths["G1_PASSIVE"])
++
++
++def test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding() -> None:
++    fill = {
++        "time": START,
++        "quantity": "1",
++        "side": "BUY",
++        "reference_price": "100",
++        "inventory": "1",
++    }
++    rows: list[dict[str, Any]] = [
++        {
++            "arm": "G1",
++            "symbol": "TEST",
++            "cost": cost,
++            "total_cost": total,
++            "final_equity": wealth,
++            "fill_path": [dict(fill)],
++        }
++        for cost, total, wealth in (("1", "1", "109"), ("1.5", "1.5", "108.5"), ("2", "2", "108"))
++    ]
++    result = audit_cost_path(CostMode.SAME_FILL_SHADOW, rows)
++    assert result["status"] == "VERIFIED" and not result["funding_feasibility_claimed"]
++    broken = copy.deepcopy(rows)
++    broken[-1]["fill_path"][0]["quantity"] = "2"
++    with pytest.raises(ValueError, match="SHADOW-PATH-CHANGED"):
++        audit_cost_path(CostMode.SAME_FILL_SHADOW, broken)
++    assert not audit_cost_path(CostMode.REDECIDE_FUNDED, rows)["monotonic_wealth_required"]
++
++
++def test_b3_legacy_bootstrap_is_bitwise_equal_to_frozen_source(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    frozen = ROOT / "artifacts/alpha_v5/20260908_research_churn_v3"
++    manifest = json.loads((frozen / "audit_manifest.json").read_text(encoding="utf-8"))
++    name = "src/aegisquant/research/validation/paired_bootstrap.py"
++    source = frozen / "implementation" / name
++    assert sha256_file(source) == manifest["source_hashes"][name]
++    module = ModuleType("b3_frozen_bootstrap_synthetic_test_only")
++    monkeypatch.setitem(sys.modules, module.__name__, module)
++    exec(compile(source.read_bytes(), str(source), "exec"), module.__dict__)  # noqa: S102 -- hash-verified repository code, synthetic arrays only.
++    values = np.column_stack(
++        (np.sin(np.arange(241)) / 1000, np.cos(np.arange(241)) / 1000, np.zeros(241))
++    )
++    old: Any = module.paired_block_bootstrap(values, repetitions=257, block_bars=11, seed=17)
++    current = paired_block_bootstrap(values, repetitions=257, block_bars=11, seed=17)
++    assert [field.name for field in fields(PairedBootstrap)] == [
++        field.name for field in fields(old)
++    ]
++    for name in (
++        "compound_returns",
++        "mean_returns",
++        "observed_compound_returns",
++        "observed_mean_returns",
++    ):
++        assert np.array_equal(getattr(current, name), getattr(old, name)), name
++    assert current.reality_check_p_value == old.reality_check_p_value
++    assert current.difference(0, 1) == old.difference(0, 1)
++    assert len(current.difference(0, 1)) == 4
++    assert current.estimand_ids["ci95"] != current.estimand_ids["one_sided_mean_p_value"]
++
++
++def test_b3_log_growth_ci_p_value_and_known_constant_increment() -> None:
++    base = np.sin(np.arange(240)) / 1000
++    values = np.expm1(np.column_stack((base, base, base + 0.002, np.zeros(240))))
++    draw = paired_log_growth_bootstrap(values, repetitions=1000, block_bars=6, seed=23)
++    same = draw.difference(1, 0)
++    better = draw.difference(2, 0)
++    assert (
++        same["observed_mean_log_return_difference"] == same["ci95_lower"] == same["ci95_upper"] == 0
++    )
++    assert same["one_sided_p_value"] == 1
++    assert better["estimand_id"] == LOG_GROWTH_ESTIMAND
++    assert better["observed_mean_log_return_difference"] == pytest.approx(0.002)
++    assert better["ci95_lower"] == pytest.approx(0.002) and better["ci95_upper"] == pytest.approx(
++        0.002
++    )
++    assert better["one_sided_p_value"] == pytest.approx(1 / 1001)
++    assert np.array_equal(draw.mean_log_returns[:, 0], draw.mean_log_returns[:, 1])
++    assert np.all(draw.mean_log_returns[:, 3] == 0)
++
++
++def test_b3_log_growth_handles_compound_underflow_and_column_permutation() -> None:
++    values = np.column_stack((np.full(240, -0.9), np.zeros(240), np.sin(np.arange(240)) / 1000))
++    draw = paired_log_growth_bootstrap(values, repetitions=257, block_bars=7, seed=11)
++    reordered = paired_log_growth_bootstrap(
++        values[:, [2, 0, 1]], repetitions=257, block_bars=7, seed=11
++    )
++    assert np.array_equal(draw.mean_log_returns, reordered.mean_log_returns[:, [1, 2, 0]])
++    assert np.all(np.isfinite(draw.mean_log_returns))
++    assert draw.difference(1, 0)["observed_mean_log_return_difference"] == pytest.approx(
++        -np.log(0.1)
++    )
++
++
++@pytest.mark.parametrize(
++    "bad", ["nan", "infinite", "bankrupt", "short", "no_columns", "few_repetitions"]
++)
++def test_b3_log_bootstrap_rejects_invalid_or_insufficient_observations(bad: str) -> None:
++    values = np.zeros((240, 2))
++    repetitions = 100
++    if bad in {"nan", "infinite", "bankrupt"}:
++        values[0, 0] = {"nan": np.nan, "infinite": np.inf, "bankrupt": -1}[bad]
++    elif bad == "short":
++        values = values[:3]
++    elif bad == "no_columns":
++        values = np.zeros((240, 0))
++    else:
++        repetitions = 99
++    with pytest.raises(ValueError):
++        paired_log_growth_bootstrap(values, repetitions=repetitions, block_bars=6, seed=1)
++
++
++def test_b3_four_comparisons_remain_one_holm_family() -> None:
++    p_values: dict[str, float] = dict(
++        zip(contract.PRIMARY_COMPARISONS, [0.01, 0.02, 0.4, 0.8], strict=True)
++    )
++    adjusted = holm_adjust(p_values)
++    assert len(adjusted) == 4
++    assert adjusted["G1-CASH"] == pytest.approx(0.04)
++    assert adjusted["G1-F5_MATCHED"] == pytest.approx(0.06)
++    assert adjusted["G1-G1_PASSIVE"] == adjusted["G1-SIMPLE_TREND"] == pytest.approx(0.8)
++
++
++def test_b3_factorial_effects_reconstruct_each_cell_and_survive_column_order() -> None:
++    cells = list(contract.ARMS.values())
++    control_effect = {"G0": -0.001, "G1": 0.002, "FIXED_QTY": -0.001}
++    interaction = {"G0": -0.0002, "G1": 0.0001, "FIXED_QTY": 0.0001}
++    base = 0.01 + np.sin(np.arange(48)) / 10000
++    logs = np.column_stack(
++        [
++            base
++            + control_effect[control]
++            + (1 if signal == "TREND_10_40" else -1) * (0.003 + interaction[control])
++            for signal, control in cells
++        ]
++    )
++    simple_returns = np.expm1(logs)
++    result = benchmark_factorial_attribution(simple_returns, cells)
++    assert result["signal_main_effects"]["TREND_10_40"] == pytest.approx(0.003)
++    assert result["control_main_effects"] == pytest.approx(control_effect)
++    for row in result["cells"]:
++        reconstructed = (
++            result["grand_mean"]
++            + result["signal_main_effects"][row["signal"]]
++            + result["control_main_effects"][row["control"]]
++            + row["interaction"]
++        )
++        assert reconstructed == pytest.approx(row["mean_log_return"], abs=1e-15)
++    assert benchmark_factorial_attribution(simple_returns[:, ::-1], cells[::-1]) == result
++    with pytest.raises(ValueError):
++        benchmark_factorial_attribution(simple_returns[:, :-1], cells[:-1])
++    with pytest.raises(ValueError):
++        benchmark_factorial_attribution(simple_returns, [cells[0]] * 6)
++
++
++def report_fixture(tmp_path: Path) -> tuple[Path, Path, dict[str, Any]]:
++    """Fake repository/receipts for CLI mechanics; never copied to a real generation."""
++    root, stage = tmp_path / "synthetic-repo", tmp_path / "synthetic-stage"
++    root.mkdir()
++    stage.mkdir()
++    config = yaml.safe_load(
++        (ROOT / "configs/research/alpha_v5_benchmark_contract.yaml").read_text(encoding="utf-8")
++    )
++
++    def save(name: str, data: str | bytes) -> Path:
++        path = root / name
++        path.parent.mkdir(parents=True, exist_ok=True)
++        path.write_bytes(data.encode() if isinstance(data, str) else data)
++        return path
++
++    for name in contract.B3_FILES:
++        save(name, "SYNTHETIC TASK FILE ONLY\n")
++    stats, settings = statistics_fixture()
++    # Exercise preservation of actual JSON numeric tokens as well as Decimal strings.
++    stats["comparisons"]["G1-G0"]["one_sided_mean_p_value"] = 0.123
++    r5 = r5_fixture()
++    r5["config"]["statistics"] = settings
++    source_data = {
++        "r5_manifest": r5,
++        "r5_statistics": stats,
++        "b0_manifest": {"SYNTHETIC_ONLY": True},
++        "b0_cost_audit": {"status": "SYNTHETIC_REFERENCE_ONLY"},
++        "b2_manifest": {"SYNTHETIC_ONLY": True},
++        "b2_safety": {"strict_data_quality": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE"},
++    }
++    for name, binding in config["sources"].items():
++        binding["sha256"] = sha256_file(save(binding["path"], json.dumps(source_data[name])))
++    save("configs/research/aegis_alpha_v5.yaml", yaml.safe_dump(r5["config"]))
++    save(
++        "src/aegisquant/bootstrap/live_lock.py",
++        "LIVE_TRADING: bool = False\nORDER_SUBMISSION_ENABLED: bool = False\nLIVE_ADAPTERS: tuple = ()\n",
++    )
++    save("configs/research/alpha_v5_benchmark_contract.yaml", yaml.safe_dump(config))
++    baseline = {
++        "root": str(root),
++        "head": contract.BASE,
++        "branch": "main",
++        "allowed_modifications": list(contract.MODIFIED_FILES),
++        "files": {
++            path.relative_to(root).as_posix(): {
++                "sha256": sha256_file(path),
++                "bytes": path.stat().st_size,
++            }
++            for path in root.rglob("*")
++            if path.is_file()
++        },
++    }
++    (stage / "baseline_workspace.json").write_text(json.dumps(baseline), encoding="utf-8")
++    for name in contract.MODIFIED_FILES:
++        target = stage / "before" / name
++        target.parent.mkdir(parents=True, exist_ok=True)
++        target.write_bytes((root / name).read_bytes())
++    for name in ("workspace_before.patch", "version_graph.txt", "test_commands_and_results.txt"):
++        (stage / name).write_text("SYNTHETIC RECEIPT ONLY\n", encoding="utf-8")
++    hashes = {name: sha256_file(root / name) for name in contract.B3_FILES}
++    records = [
++        {
++            "check": check,
++            "exit_code": 0,
++            "command": ["SYNTHETIC_FIXTURE_ONLY", contract.NEW_FILES[3]],
++            "source_sha256": hashes,
++        }
++        for check in ("ruff", "format", "pyright", "pytest")
++    ]
++    (stage / "validation_records.json").write_text(json.dumps(records), encoding="utf-8")
++    (stage / "pytest_results.xml").write_text(
++        '<testsuite name="SYNTHETIC_RECEIPT_ONLY"><testcase name="synthetic_contract_fixture"/></testsuite>',
++        encoding="utf-8",
++    )
++    return root, stage, config
++
++
++def test_b3_cli_seals_read_only_report_without_replay_or_resampling(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    from aegisquant.research.validation import paired_bootstrap as statistics
++    from scripts import audit_alpha_profitability_root_causes as old_report
++    from scripts import run_alpha_v5_benchmark_diagnostics as entry
++    from scripts import run_alpha_v5_research as old_runner
++
++    root, stage, config = report_fixture(tmp_path)
++    poison = Mock(
++        side_effect=AssertionError("B3 contract job attempted market/replay/old inference")
++    )
++    for name in ("run", "run_one", "inputs", "replay_cat", "load_completed_bars", "preregister"):
++        monkeypatch.setattr(old_runner, name, poison)
++    for name in ("report", "collect", "paired_statistics"):
++        monkeypatch.setattr(old_report, name, poison)
++    monkeypatch.setattr(statistics, "paired_block_bootstrap", poison)
++    monkeypatch.setattr(statistics, "paired_log_growth_bootstrap", poison)
++    monkeypatch.setattr(entry, "ROOT", root)
++
++    def synthetic_git(_root: Path, *args: str) -> str:
++        return "main" if args[0] == "branch" else contract.BASE
++
++    monkeypatch.setattr(entry, "git", synthetic_git)
++    monkeypatch.setattr(
++        sys,
++        "argv",
++        [
++            "b3",
++            "--config",
++            "configs/research/alpha_v5_benchmark_contract.yaml",
++            "--preflight-dir",
++            str(stage),
++        ],
++    )
++    entry.main()
++    output = root / config["output"]
++    assert load_evidence_manifest(output, "OUTPUT_MANIFEST.json")["status"] == "VERIFIED"
++    assert (output / "legacy_paired_statistics_original.json").read_bytes() == (
++        root / config["sources"]["r5_statistics"]["path"]
++    ).read_bytes()
++    primary = json.loads((output / "primary_comparisons.json").read_text())
++    assert primary["status"] == "NOT_COLLECTED" and len(primary["comparisons"]) == 4
++    assert all(row["one_sided_p_value"] is None for row in primary["comparisons"].values())
++    budget = json.loads((output / "safety_and_budget_audit.json").read_text())["actual"]
++    assert budget.pop("contract_jobs") == 1 and not any(budget.values())
++    assert not poison.called
++    with pytest.raises(FileExistsError):
++        contract.run_contract_job(root, config, stage, {"head": contract.BASE, "branch": "main"})
++
++
++@pytest.mark.parametrize(
++    "mutation",
++    [
++        "replay",
++        "fit",
++        "historical_inference",
++        "live",
++        "wrong_comparisons",
++        "seed",
++        "historical_input",
++    ],
++)
++def test_b3_scope_cannot_be_expanded_by_configuration(mutation: str) -> None:
++    config = yaml.safe_load(
++        (ROOT / "configs/research/alpha_v5_benchmark_contract.yaml").read_text(encoding="utf-8")
++    )
++    if mutation in {"replay", "fit", "historical_inference"}:
++        key = {
++            "replay": "historical_strategy_engine_runs",
++            "fit": "real_return_model_fits",
++            "historical_inference": "historical_bootstrap_runs",
++        }[mutation]
++        config["budgets"][key] = 1
++    elif mutation == "live":
++        config["live_trading"] = True
++    elif mutation == "wrong_comparisons":
++        config["statistics"]["comparisons"] = ["G1-F0"]
++    elif mutation == "seed":
++        config["statistics"]["seed"] = 999
++    else:
++        config["historical_matrix_inputs"] = "data/not_authorized.json"
++    with pytest.raises(ValueError):
++        contract.validate_config(config)
++
++
++def test_b3_failure_is_retained_with_manifest_and_consumed_slot(tmp_path: Path) -> None:
++    root, stage, config = report_fixture(tmp_path)
++    config["sources"]["r5_statistics"]["sha256"] = "0" * 64
++    with pytest.raises(ValueError, match="FROZEN-SOURCE"):
++        contract.run_contract_job(root, config, stage, {"head": contract.BASE, "branch": "main"})
++    output = root / config["output"]
++    assert load_evidence_manifest(output, "OUTPUT_MANIFEST.json")["status"] == "VERIFIED"
++    assert json.loads((output / "failure.json").read_text())["actual"]["contract_jobs"] == 1
++    events = [
++        json.loads(line)["event"]["event_type"]
++        for line in (output / "experiment_events.jsonl").read_text().splitlines()
++    ]
++    assert events == ["STARTED", "ERROR"]
++    with pytest.raises(FileExistsError):
++        contract.run_contract_job(root, config, stage, {"head": contract.BASE, "branch": "main"})
++
++
++def test_b3_calendar_rejects_non_four_hour_end_boundary() -> None:
++    invalid = (contract.utc(END) + timedelta(hours=1)).isoformat()
++    with pytest.raises(ValueError, match="CALENDAR-GRID"):
++        contract.cash_reference(start=START, end=invalid, capital=Decimal("50000"))
+--- /dev/null
++++ b/docs/research/alpha_v5_benchmark_contract.md
+@@ -0,0 +1,68 @@
++# B3：共同风险基准的契约与合成验证
++
++本批延续零历史回放、零真实模型/校准拟合、零最终留出访问和零订单约束，完成 B3 的工程契约。
++新增入口 `scripts/run_alpha_v5_benchmark_diagnostics.py` 只有只读契约报告功能；没有历史运行命令、
++行情参数或收益搜索。独占 generation 为 `alpha-r5-benchmark-contract-20260910-v1`，只消费一次报告作业。
++旧 R5、R4、B0/B1、B2 产物及全部失败记录保留，不自动提交、推送或归档。后续工程使用各自独立 generation。
++
++## 六臂及账户身份
++
++| 新矩阵臂 | 信号 | 普通仓位控制 |
++|---|---|---|
++| F5_MATCHED | 始终持有 | G0/F3 缓冲 |
++| SIMPLE_TREND | 现有 10/40 趋势 | G0/F3 缓冲 |
++| G1_PASSIVE | 始终持有 | 冻结 G1 |
++| G1 | 现有 10/40 趋势 | 冻结 G1 |
++| PASSIVE_FIXED_QTY | 始终持有 | 入场后实际数量固定 |
++| TREND_FIXED_QTY | 现有 10/40 趋势 | 入场后实际数量固定 |
++
++另列 CASH。六个风险臂共用当时可知输入、原 A1 gate、执行及终止约定；G0/G1 的参数直接使用
++现有 `controls()` 构造器。报告中的 Decimal 为字符串、timedelta 为整数秒。
++数量固定臂仅定义保持实际已成交数量的普通控制，硬退出/硬上限、pending、部分成交和资金限制仍须走
++已有路径；本批未实现它的执行适配，也未取得引擎等价证据。
++
++相同事前风险限制不意味着实现波动完全相同。不得用全样本实现波动缩放交易权重。
++资金模式固定为五个各 10,000 USDT、无转移的独立 sleeve，不能混入共享资金组合或 shadow 排名。
++`F5_MATCHED` 不等于把旧 F5 改名；旧 F0/F3/F5/99%buyhold 仅作为历史参考。
++
++`validate_benchmark_paths()` 接收已提供的经济路径，检查配置、输入/risk/execution hash、日历、
++资金模式、现金流、首尾资金边界和 readiness；缺失行、未知 ready、影子账户和未平终值均拒绝。
++CASH 不产生订单、成交、成本或收益，四小时零风险期完整保留。共同 ready 子集只作诊断，不能删日期。
++相同配置的经济 payload 比较器不负责生成订单；合成记录相同不等于实际策略执行已经复现。
++
++## 统计及归因
++
++新增 `PairedLogGrowth` 使用 `mean(log(1+r_candidate)-log(1+r_benchmark))`，CI 与单侧居中检验
++都对应同一统计量。统计核心的单位是每个登记观测点；本批契约固定为 UTC 日，不能把四小时输出冒充日值。
++同一 circular block 行索引同时作用于全部列；观测收益必须有限且大于 -100%。对数空间直接累计，
++不从已下溢到 -100% 的复合结果反推 log growth。CASH 列一并保留。
++
++原 `PairedBootstrap` 的字段及 `difference()` 四个旧输出键不变，新增 `estimand_ids` 旁路属性分别
++说明旧复合差 CI 和简单均值差 p 的身份。共享抽样求和辅助函数保留原算法；限定合成样本与冻结源码逐数组
++精确比较。原九项历史 JSON 原字节复制，不重新执行旧历史统计。
++
++新主要比较族固定为 G1 对 CASH、F5_MATCHED、G1_PASSIVE、SIMPLE_TREND，四项全部进入 Holm。
++拟议历史评估固定 10,000 次、seed 20260910，复用现有 `automatic_block` 在已登记全列收益及平方序列
++上取最大值、ceil 后限制在 `[2, n//4]`；至少四块是计算守卫，不是统计充分性保证。
++半/双倍块长敏感性全部报告，不能选择最显著结果。当前历史抽样执行数为 0，四项结果为 null/NOT_COLLECTED。
++
++`benchmark_factorial_attribution()` 只做平衡 2×3 表格的描述性分解：grand mean、信号主效应、
++控制主效应及交互逐格重建平均 log growth。它不是回归拟合，也不证明因果 alpha。
++缺少真实 PIT 市场因子和事前风险证据时，不输出伪造的 beta、截距或风险贡献。
++同成交影子复用 `audit_cost_path` 的 quantity/time/side/reference/inventory 契约；缺真实新成交则 NOT_COLLECTED。
++
++## 运行与交付
++
++```powershell
++.\.venv\Scripts\python.exe -m scripts.run_alpha_v5_benchmark_diagnostics --config configs/research/alpha_v5_benchmark_contract.yaml --preflight-dir <本批保全及实际测试记录目录>
++```
++
++运行前校验 main/HEAD、冻结来源 hash、零预算及当前源码对应的实际测试记录。独占目录和 journal 消耗一个
++契约报告槽位，失败也保留并封存，不能删除重跑。源文件只读、报告只写新目录；封存包含旧文件备份、本批
++implementation、diff、来源、报告、测试记录、完整 CASH 日历与不可变 manifest。
++
++工程契约作业可以成功，真实研究验收仍不成立：B2 实际 PIT 缺件未解决、90 次历史矩阵未执行、固定数量
++执行适配未完成，所有新统计/归因/执行证据均未收集。取得数据及相应范围授权后，必须在新的 generation
++登记并执行；不得复用本 generation 填入后来的收益结果。
++
++最终保持 **NO_PROVEN_ALPHA / CASH**，ML、纸面准入、实盘及订单提交全部关闭。

@@ -1,0 +1,37 @@
+CHECK format_apply
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'format', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+1 file reformatted, 2 files left unchanged
+
+
+
+CHECK ruff
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'check', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+All checks passed!
+
+
+
+CHECK format
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'format', '--check', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+3 files already formatted
+
+
+
+CHECK pyright
+COMMAND ['.venv/Scripts/python.exe', '-m', 'pyright', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+
+CHECK pytest
+COMMAND ['.venv/Scripts/python.exe', '-m', 'pytest', '-q', 'tests/alpha_v5/test_saved_run_audit.py', '-p', 'no:cacheprovider', '--basetemp', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-complete-20260910-casddv_6/pytest-01', '--junitxml', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-complete-20260910-casddv_6/pytest-01.xml']
+EXIT 0
+.............................                                            [100%]
+29 passed in 4.83s
+

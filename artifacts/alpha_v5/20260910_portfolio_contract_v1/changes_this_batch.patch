@@ -1,0 +1,2242 @@
+--- a/src/aegisquant/portfolio/risk_estimation.py
++++ b/src/aegisquant/portfolio/risk_estimation.py
+@@ -3,12 +3,20 @@
+ from __future__ import annotations
+ 
+ from decimal import Decimal
++from typing import Any
+ 
+ from aegisquant.data.hashing import canonical_sha256
+ from aegisquant.domain.identifiers import AssetId
+ from aegisquant.domain.time import UtcDateTime
+ from aegisquant.domain.values import canonical_result
+-from aegisquant.portfolio.models import CovarianceEstimate, FactorRisk, RiskRegime
++from aegisquant.portfolio.models import (
++    CovarianceEstimate,
++    CovarianceEvidence,
++    CovarianceInputContract,
++    FactorRisk,
++    RiskRegime,
++    covariance_psd_check,
++)
+ 
+ 
+ def _validate_sample(
+@@ -39,10 +47,20 @@
+     regime_multiplier: Decimal,
+     observed_at: UtcDateTime,
+     available_at: UtcDateTime,
++    contract: CovarianceInputContract | None = None,
+ ) -> CovarianceEstimate:
+     """Shrink off-diagonal noise, add factor covariance, then apply regime stress."""
+ 
+     _validate_sample(asset_ids, sample_covariance)
++    minimum_eigenvalue, tolerance = covariance_psd_check(asset_ids, sample_covariance)
++    jitter = tolerance if contract is not None and minimum_eigenvalue < 0 else Decimal("0")
++    if contract is not None:
++        if contract.basis == "TOTAL" and factors:
++            raise ValueError("AQ-COVARIANCE-TOTAL-CANNOT-ADD-FACTORS")
++        if contract.basis == "RESIDUAL" and not factors:
++            raise ValueError("AQ-COVARIANCE-RESIDUAL-REQUIRES-DEFINED-FACTORS")
++    if len({factor.factor_id for factor in factors}) != len(factors):
++        raise ValueError("AQ-COVARIANCE-DUPLICATE-FACTOR")
+     if not Decimal("0") <= shrinkage <= Decimal("1"):
+         raise ValueError("covariance shrinkage must be in [0, 1]")
+     if regime_multiplier <= 0 or not regime_multiplier.is_finite():
+@@ -57,7 +75,11 @@
+     for row_index, row in enumerate(sample_covariance):
+         output_row: list[Decimal] = []
+         for column_index, sample_value in enumerate(row):
+-            shrunk = sample_value if row_index == column_index else sample_value * (1 - shrinkage)
++            shrunk = (
++                sample_value + jitter
++                if row_index == column_index
++                else sample_value * (1 - shrinkage)
++            )
+             factor_covariance = sum(
+                 (
+                     factor.exposures.get(asset_keys[row_index], Decimal("0"))
+@@ -67,9 +89,12 @@
+                 ),
+                 start=Decimal("0"),
+             )
+-            output_row.append(canonical_result((shrunk + factor_covariance) * regime_multiplier))
++            value = (shrunk + factor_covariance) * regime_multiplier
++            if contract is not None:
++                value *= contract.annualization_days
++            output_row.append(canonical_result(value))
+         matrix.append(tuple(output_row))
+-    payload = {
++    payload: dict[str, Any] = {
+         "assets": asset_keys,
+         "matrix": [[str(value) for value in row] for row in matrix],
+         "shrinkage": str(shrinkage),
+@@ -79,6 +104,15 @@
+         "observed_at": observed_at.isoformat(),
+         "available_at": available_at.isoformat(),
+     }
++    evidence = None
++    if contract is not None:
++        evidence = CovarianceEvidence(
++            contract=contract,
++            minimum_sample_eigenvalue=Decimal(str(minimum_eigenvalue)),
++            diagonal_jitter=jitter,
++            correction_frobenius_norm=canonical_result(Decimal(len(asset_ids)).sqrt() * jitter),
++        )
++        payload["evidence"] = evidence.model_dump(mode="json")
+     return CovarianceEstimate(
+         asset_ids=asset_ids,
+         matrix=tuple(matrix),
+@@ -89,4 +123,5 @@
+         observed_at=observed_at,
+         available_at=available_at,
+         estimate_sha256=canonical_sha256(payload),
++        evidence=evidence,
+     )
+--- a/src/aegisquant/portfolio/models.py
++++ b/src/aegisquant/portfolio/models.py
+@@ -2,8 +2,11 @@
+ 
+ from __future__ import annotations
+ 
++from decimal import Decimal
+ from enum import StrEnum
+-
++from typing import Literal
++
++import numpy as np
+ from pydantic import Field, field_validator, model_validator
+ 
+ from aegisquant.data.hashing import ensure_sha256
+@@ -110,6 +113,51 @@
+         return value
+ 
+ 
++def covariance_psd_check(
++    asset_ids: tuple[AssetId, ...], matrix: tuple[tuple[Decimal, ...], ...]
++) -> tuple[float, Decimal]:
++    """Fixed relative tolerance, with a canonical asset order for numerical eigensolving."""
++    order = sorted(range(len(asset_ids)), key=lambda index: str(asset_ids[index]))
++    values = np.asarray([[float(matrix[i][j]) for j in order] for i in order])
++    if not np.all(np.isfinite(values)):
++        raise ValueError("AQ-COVARIANCE-FLOAT-RANGE")
++    scale = max((abs(v) for row in matrix for v in row), default=Decimal("0"))
++    tolerance = scale * Decimal("1e-12")
++    minimum = float(np.linalg.eigvalsh(values)[0])
++    if minimum < -float(tolerance):
++        raise ValueError("AQ-COVARIANCE-NOT-PSD")
++    return minimum, tolerance
++
++
++class CovarianceInputContract(DomainModel):
++    basis: Literal["TOTAL", "RESIDUAL"]
++    return_frequency: Literal["UTC_DAILY"] = "UTC_DAILY"
++    input_unit: Literal["DAILY_DECIMAL_RETURN_COVARIANCE"] = "DAILY_DECIMAL_RETURN_COVARIANCE"
++    output_unit: Literal["ANNUALIZED_DECIMAL_RETURN_COVARIANCE"] = (
++        "ANNUALIZED_DECIMAL_RETURN_COVARIANCE"
++    )
++    annualization_days: PositiveDecimal = Decimal("365.25")
++    complete_calendar_observations: int = Field(ge=2)
++    missing_asset_policy: Literal["FAIL_CLOSED"] = "FAIL_CLOSED"
++    factor_structure: Literal["ORTHOGONAL_DEFINED_FACTORS"] = "ORTHOGONAL_DEFINED_FACTORS"
++    input_sha256: str
++
++    @field_validator("input_sha256")
++    @classmethod
++    def validate_input_hash(cls, value: str) -> str:
++        return ensure_sha256(value, field_name="covariance input hash")
++
++
++class CovarianceEvidence(DomainModel):
++    contract: CovarianceInputContract
++    minimum_sample_eigenvalue: FiniteDecimal
++    diagonal_jitter: NonNegativeDecimal
++    correction_frobenius_norm: NonNegativeDecimal
++    psd_rule: Literal["REJECT_BELOW_REL_1E12_ELSE_FIXED_DIAGONAL_JITTER"] = (
++        "REJECT_BELOW_REL_1E12_ELSE_FIXED_DIAGONAL_JITTER"
++    )
++
++
+ class CovarianceEstimate(DomainModel):
+     asset_ids: tuple[AssetId, ...] = Field(min_length=1)
+     matrix: tuple[tuple[FiniteDecimal, ...], ...] = Field(min_length=1)
+@@ -120,6 +168,9 @@
+     observed_at: UtcDateTime
+     available_at: UtcDateTime
+     estimate_sha256: str
++    evidence: CovarianceEvidence | None = Field(
++        default=None, exclude_if=lambda value: value is None
++    )
+ 
+     @field_validator("estimate_sha256")
+     @classmethod
+@@ -141,6 +192,7 @@
+                     raise ValueError("covariance matrix must be symmetric")
+         if self.available_at < self.observed_at:
+             raise ValueError("covariance availability cannot precede observation")
++        covariance_psd_check(self.asset_ids, self.matrix)
+         return self
+ 
+ 
+--- a/src/aegisquant/portfolio/optimizer.py
++++ b/src/aegisquant/portfolio/optimizer.py
+@@ -2,11 +2,12 @@
+ 
+ from __future__ import annotations
+ 
++from collections.abc import Mapping
+ from datetime import timedelta
+ from decimal import ROUND_DOWN, Decimal
+ 
+ from aegisquant.data.hashing import canonical_sha256
+-from aegisquant.domain.identifiers import ProposalId
++from aegisquant.domain.identifiers import InstrumentId, ProposalId
+ from aegisquant.domain.time import UtcDateTime
+ from aegisquant.domain.values import canonical_result
+ from aegisquant.portfolio.models import (
+@@ -262,6 +263,8 @@
+     as_of_time: UtcDateTime,
+     created_at: UtcDateTime,
+     validity_seconds: int = 60,
++    raw_target_weights: Mapping[InstrumentId, Decimal] | None = None,
++    hard_risk_reduction: bool = False,
+ ) -> PortfolioProposal:
+     """Build a proposal by conservative projections; hard conflicts fail closed."""
+ 
+@@ -273,16 +276,52 @@
+         raise ValueError("AQ-PORTFOLIO-FUTURE-COVARIANCE")
+     if created_at < as_of_time or validity_seconds <= 0:
+         raise ValueError("portfolio proposal timing is invalid")
++    if hard_risk_reduction and raw_target_weights is None:
++        raise ValueError("hard reduction requires explicit existing targets")
++    if raw_target_weights is not None:
++        if (
++            set(raw_target_weights) != {signal.instrument_id for signal in signals}
++            or any(not value.is_finite() or value < ZERO for value in raw_target_weights.values())
++            or any(signal.current_weight < ZERO for signal in signals)
++        ):
++            raise ValueError("AQ-PORTFOLIO-RAW-TARGET-COVERAGE-OR-LONG-FLAT")
++        if hard_risk_reduction and any(
++            raw_target_weights[signal.instrument_id] > signal.current_weight for signal in signals
++        ):
++            raise ValueError("AQ-PORTFOLIO-HARD-REDUCTION-CANNOT-INCREASE")
+     asset_index = {asset_id: index for index, asset_id in enumerate(covariance.asset_ids)}
+     if any(signal.asset_id not in asset_index for signal in signals):
+         raise ValueError("every signal asset requires covariance coverage")
+     budget_by_asset = {item.asset_id: item.maximum_risk_share for item in policy.risk_budgets}
+     if any(signal.asset_id not in budget_by_asset for signal in signals):
+         raise ValueError("every signal asset requires a risk budget")
+-    normalized = tuple(normalize_signal(signal, policy) for signal in signals)
++    normalized = tuple(
++        normalize_signal(signal, policy)
++        if raw_target_weights is None
++        else NormalizedSignal(
++            signal=signal,
++            clipped_score=ZERO,
++            discounted_score=ZERO,
++            robust_score=ZERO,
++            in_no_trade_zone=False,
++            reason_codes=("AQ-PORTFOLIO-EXISTING-TARGET-NO-RETURN-FORECAST",),
++        )
++        for signal in signals
++    )
+     weights: list[Decimal] = []
+     reasons = [list(item.reason_codes) for item in normalized]
+     for item in normalized:
++        if raw_target_weights is not None:
++            diagonal = covariance.matrix[asset_index[item.signal.asset_id]][
++                asset_index[item.signal.asset_id]
++            ]
++            if (
++                diagonal <= ZERO
++                and raw_target_weights[item.signal.instrument_id] > item.signal.current_weight
++            ):
++                raise ValueError("AQ-PORTFOLIO-NONPOSITIVE-ASSET-VARIANCE")
++            weights.append(raw_target_weights[item.signal.instrument_id])
++            continue
+         if item.in_no_trade_zone:
+             weights.append(item.signal.current_weight)
+             continue
+@@ -322,12 +361,13 @@
+         policy=policy,
+         reasons=reasons,
+     )
+-    _apply_turnover(
+-        weights=weights,
+-        signals=signals,
+-        maximum_turnover=policy.maximum_turnover,
+-        reasons=reasons,
+-    )
++    if not hard_risk_reduction:
++        _apply_turnover(
++            weights=weights,
++            signals=signals,
++            maximum_turnover=policy.maximum_turnover,
++            reasons=reasons,
++        )
+     _scale_all(weights, policy.maximum_gross_weight)
+     _apply_group_constraints(
+         weights=weights,
+@@ -335,13 +375,40 @@
+         constraints=policy.exposure_constraints,
+         reasons=reasons,
+     )
+-    _assert_constraints(
+-        weights=weights,
+-        signals=signals,
+-        capacities=capacities,
+-        policy=policy,
+-        covariance_matrix=ordered_matrix,
+-    )
++    checked_policy = policy
++    if hard_risk_reduction:
++        # A hard exit can exceed ordinary turnover, but never available liquidity.
++        capacities = _apply_capacity(
++            weights=weights, signals=signals, nav=portfolio_nav, policy=policy, reasons=reasons
++        )
++        checked_policy = policy.model_copy(
++            update={
++                "maximum_turnover": max(
++                    policy.maximum_turnover,
++                    sum((abs(signal.current_weight) for signal in signals), start=ZERO),
++                )
++            }
++        )
++    try:
++        _assert_constraints(
++            weights=weights,
++            signals=signals,
++            capacities=capacities,
++            policy=checked_policy,
++            covariance_matrix=ordered_matrix,
++        )
++    except ValueError as error:
++        if not hard_risk_reduction:
++            raise
++        if any(
++            weight < ZERO
++            or weight > signal.current_weight
++            or abs(weight - signal.current_weight) > capacities[index]
++            for index, (weight, signal) in enumerate(zip(weights, signals, strict=True))
++        ):
++            raise ValueError("AQ-PORTFOLIO-HARD-REDUCTION-LIQUIDITY-OR-DIRECTION") from error
++        for values in reasons:
++            values.append("AQ-PORTFOLIO-UNRESOLVED-BREACH:" + str(error))
+     portfolio_variance = _portfolio_variance(weights, ordered_matrix)
+     portfolio_volatility = portfolio_variance.sqrt()
+     covariance_times_weight = [
+@@ -379,7 +446,7 @@
+                 delta_weight=delta,
+                 normalized_signal=normalized[index].robust_score,
+                 expected_return_contribution=canonical_result(
+-                    weights[index] * signal.expected_return
++                    weights[index] * signal.expected_return if raw_target_weights is None else ZERO
+                 ),
+                 marginal_variance_contribution=canonical_result(
+                     weights[index] * covariance_times_weight[index]
+--- a/src/aegisquant/accounting/ledger.py
++++ b/src/aegisquant/accounting/ledger.py
+@@ -1489,7 +1489,17 @@
+         valuation: ValuationSnapshot,
+         reporting_asset_id: AssetId,
+         fx_rates: Mapping[AssetId, FxRate],
++        valuation_basis: Literal["LEGACY", "SPOT_NATIVE_MTM_V2"] = "LEGACY",
+     ) -> EquitySnapshot:
++        if valuation_basis not in {"LEGACY", "SPOT_NATIVE_MTM_V2"}:
++            raise ValueError("AQ-LEDGER-UNKNOWN-VALUATION-BASIS")
++        if valuation_basis == "SPOT_NATIVE_MTM_V2":
++            if valuation.policy_version != self.policy.policy_version or {
++                str(lot.position_lot_id) for lot in self.open_lots()
++            } != {str(item.position_lot_id) for item in valuation.lots}:
++                raise ValueError("AQ-LEDGER-STALE-VALUATION-LOTS")
++            if any(rate.as_of_time > valuation.as_of_time for rate in fx_rates.values()):
++                raise ValueError("AQ-LEDGER-FUTURE-FX")
+         balances = self.native_balances()
+         balance_value = Decimal("0")
+         for balance in balances:
+@@ -1507,6 +1517,13 @@
+             balance_value += sign * balance.amount * rate
+         unrealized_value = Decimal("0")
+         for item in valuation.lots:
++            if (
++                valuation_basis == "SPOT_NATIVE_MTM_V2"
++                and self._instrument_by_id[item.instrument_id].instrument_type
++                is InstrumentType.SPOT
++            ):
++                # Native spot cash is already valued at current FX/mark, including its PnL.
++                continue
+             rate = self._fx_rate(
+                 asset_id=item.unrealized_pnl.asset_id,
+                 reporting_asset_id=reporting_asset_id,
+@@ -1522,6 +1539,8 @@
+             "balance_value": str(balance_value),
+             "unrealized_pnl_value": str(unrealized_value),
+         }
++        if valuation_basis != "LEGACY":
++            identity["valuation_basis"] = valuation_basis
+         return EquitySnapshot(
+             account_snapshot_id=AccountSnapshotId(canonical_sha256(identity)),
+             as_of_time=valuation.as_of_time,
+--- /dev/null
++++ b/src/aegisquant/research/validation/portfolio_replay.py
+@@ -0,0 +1,993 @@
++"""Thin, proposal-only shared-capital bridge over the existing ledger and risk modules."""
++
++from __future__ import annotations
++
++import re
++from collections.abc import Mapping, Sequence
++from dataclasses import dataclass
++from datetime import timedelta
++from decimal import ROUND_DOWN, Decimal
++from itertools import pairwise
++from typing import Any
++
++import numpy as np
++from numpy.typing import NDArray
++from pydantic import Field, model_validator
++
++from aegisquant.accounting.ledger import LedgerEngine
++from aegisquant.accounting.models import (
++    AccountingInstrument,
++    AccountRole,
++    FxRate,
++    ValuationQuote,
++    ValuationSnapshot,
++)
++from aegisquant.data.hashing import canonical_sha256
++from aegisquant.data.market import InstrumentType
++from aegisquant.domain.accounting import LotSide
++from aegisquant.domain.base import DomainModel
++from aegisquant.domain.execution import OrderSide
++from aegisquant.domain.identifiers import (
++    AssetId,
++    InstrumentId,
++    ProposalId,
++    RiskDecisionId,
++    ValuationSnapshotId,
++)
++from aegisquant.domain.time import UtcDateTime
++from aegisquant.domain.values import (
++    NonNegativeDecimal,
++    PositiveDecimal,
++    UnitInterval,
++    canonical_result,
++)
++from aegisquant.execution.accounts import AccountBalance
++from aegisquant.portfolio.models import (
++    CovarianceEstimate,
++    CovarianceInputContract,
++    ExposureConstraint,
++    ExposureDimension,
++    PortfolioConstructionPolicy,
++    PortfolioProposal,
++    RiskRegime,
++    SignalInput,
++)
++from aegisquant.portfolio.optimizer import (
++    _capacity_weight,  # pyright: ignore[reportPrivateUsage] -- reuse the existing capacity curve.
++    _dimension_key,  # pyright: ignore[reportPrivateUsage] -- one definition of group membership.
++    _portfolio_variance,  # pyright: ignore[reportPrivateUsage] -- reuse Decimal risk arithmetic.
++    build_portfolio_proposal,
++    target_quantity_adjustment,
++)
++from aegisquant.portfolio.risk_estimation import estimate_covariance
++from aegisquant.research.validation.evidence_contract import Row, decimal, require, utc
++from aegisquant.risk.engine import evaluate_circuit_breakers, evaluate_portfolio_proposal
++from aegisquant.risk.models import (
++    RiskDecision,
++    RiskDecisionStatus,
++    RiskEvent,
++    RiskSnapshot,
++    RiskState,
++)
++from aegisquant.risk.policy import SignedRiskPolicy, verify_signed_risk_policy
++from aegisquant.risk.state_machine import SAFETY_RANK, transition_risk_state
++from aegisquant.risk.stress import PortfolioStressScenario, run_portfolio_stress
++
++ZERO, ONE = Decimal("0"), Decimal("1")
++FILES = (
++    "src/aegisquant/portfolio/risk_estimation.py",
++    "src/aegisquant/portfolio/models.py",
++    "src/aegisquant/portfolio/optimizer.py",
++    "src/aegisquant/accounting/ledger.py",
++    "src/aegisquant/research/validation/portfolio_replay.py",
++    "scripts/run_alpha_v5_portfolio_diagnostics.py",
++    "configs/research/alpha_v5_portfolio_contract.yaml",
++    "tests/alpha_v5/test_portfolio_contract.py",
++    "docs/research/alpha_v5_portfolio_contract.md",
++)
++
++
++def daily_covariance_from_rows(
++    rows: Sequence[Row], *, asset_ids: tuple[AssetId, ...], decision_time: UtcDateTime
++) -> CovarianceEstimate:
++    """Fixed 90 complete UTC days, 30-day EWMA, 20% shrinkage; supplied observations only."""
++    decision = utc(decision_time)
++    end = decision.replace(hour=0, minute=0, second=0, microsecond=0)
++    boundaries = tuple(end - timedelta(days=i) for i in range(89, -1, -1))
++    assets = tuple(sorted(asset_ids, key=str))
++    require(len(set(assets)) == len(assets) and bool(assets), "AQ-PORTFOLIO-ASSET-COVERAGE")
++    known: dict[UtcDateTime, Row] = {}
++    for row in rows:
++        closed, available = utc(row["close_time"]), utc(row["available_time"])
++        if available > decision or closed > end or closed < boundaries[0]:
++            continue
++        require(available >= closed and closed in boundaries, "AQ-PORTFOLIO-DAILY-CALENDAR")
++        require(closed not in known, "AQ-PORTFOLIO-DUPLICATE-DAY")
++        require(
++            set(row["returns"]) == {str(asset) for asset in assets}, "AQ-PORTFOLIO-MISSING-ASSET"
++        )
++        known[closed] = row
++    require(set(known) == set(boundaries), "AQ-PORTFOLIO-INCOMPLETE-90-DAY-WINDOW")
++    accepted = [known[day] for day in boundaries]
++    values: NDArray[np.float64] = np.asarray(
++        [[float(decimal(row["returns"][str(asset)])) for asset in assets] for row in accepted],
++        dtype=np.float64,
++    )
++    require(
++        bool(np.all(np.isfinite(values))) and bool(np.all(values > -1)), "AQ-PORTFOLIO-DAILY-RETURN"
++    )
++    weights: NDArray[np.float64] = np.exp2(-np.arange(89, -1, -1, dtype=np.float64) / 30)
++    weights /= weights.sum()
++    centered: NDArray[np.float64] = values - np.sum(values * weights[:, None], axis=0)
++    sample: NDArray[np.float64] = (
++        (centered.T * weights) @ centered / (1 - float(np.sum(weights * weights)))
++    )
++    sample = (sample + sample.T) / 2
++    contract = CovarianceInputContract(
++        basis="TOTAL",
++        complete_calendar_observations=90,
++        input_sha256=canonical_sha256(accepted),
++    )
++    return estimate_covariance(
++        asset_ids=assets,
++        sample_covariance=tuple(tuple(Decimal(str(value)) for value in row) for row in sample),
++        shrinkage=Decimal("0.20"),
++        factors=(),
++        regime=RiskRegime.NORMAL,
++        regime_multiplier=ONE,
++        observed_at=end,
++        available_at=max(utc(row["available_time"]) for row in accepted),
++        contract=contract,
++    )
++
++
++class BridgeAsset(DomainModel):
++    instrument: AccountingInstrument
++    signal: SignalInput
++    mark: PositiveDecimal
++    quantity_step: PositiveDecimal
++    minimum_notional: NonNegativeDecimal
++    maximum_execution_cost_fraction: UnitInterval
++    available_at: UtcDateTime
++
++    @model_validator(mode="after")
++    def match_instrument(self) -> BridgeAsset:
++        if (
++            self.instrument.instrument_type is not InstrumentType.SPOT
++            or self.instrument.contract_multiplier != 1
++        ):
++            raise ValueError("AQ-BRIDGE-FUNDED-UNIT-SPOT-ONLY")
++        if (
++            self.signal.instrument_id != self.instrument.instrument_id
++            or self.signal.asset_id != self.instrument.base_asset_id
++            or str(self.signal.venue_id) != self.instrument.venue
++            or self.instrument.settlement_asset_id != self.instrument.quote_asset_id
++        ):
++            raise ValueError("AQ-BRIDGE-INSTRUMENT-IDENTITY")
++        if self.signal.impact_model is None:
++            raise ValueError("AQ-BRIDGE-EXPLICIT-IMPACT-REQUIRED")
++        return self
++
++
++class PendingReservation(DomainModel):
++    order_id: str = Field(min_length=1)
++    instrument_id: InstrumentId
++    side: OrderSide
++    remaining_quantity: PositiveDecimal
++    maximum_price: PositiveDecimal
++    maximum_cost_fraction: UnitInterval
++    available_at: UtcDateTime
++
++    @property
++    def quote_reserve(self) -> Decimal:
++        return (
++            self.remaining_quantity * self.maximum_price * (1 + self.maximum_cost_fraction)
++            if self.side is OrderSide.BUY
++            else ZERO
++        )
++
++
++@dataclass(frozen=True)
++class BridgeAccount:
++    ledger_hash: str
++    decision_time: UtcDateTime
++    nav: Decimal
++    quote_asset: AssetId
++    quote_total: Decimal
++    quote_available: Decimal
++    pending_quote_reserved: Decimal
++    unsettled_quote: Decimal
++    current_quantities: Mapping[InstrumentId, Decimal]
++    assets: tuple[BridgeAsset, ...]
++    pending: tuple[PendingReservation, ...]
++
++
++def account_from_ledger(
++    ledger: LedgerEngine,
++    *,
++    assets: Sequence[BridgeAsset],
++    quote_balance: AccountBalance,
++    fx_rates: Mapping[AssetId, FxRate],
++    pending: Sequence[PendingReservation],
++    unsettled_quote: Decimal,
++    decision_time: UtcDateTime,
++    balance_available_at: UtcDateTime,
++    fx_available_at: UtcDateTime,
++) -> BridgeAccount:
++    """Read the authoritative ledger; venue available cash is a ceiling, never sale proceeds."""
++    at = utc(decision_time)
++    require(
++        utc(balance_available_at) <= at and utc(fx_available_at) <= at,
++        "AQ-BRIDGE-FUTURE-BALANCE-OR-FX",
++    )
++    ordered = tuple(sorted(assets, key=lambda item: str(item.instrument.instrument_id)))
++    require(
++        bool(ordered) and len({a.instrument.instrument_id for a in ordered}) == len(ordered),
++        "AQ-BRIDGE-ASSET-IDENTITY",
++    )
++    require(
++        len({a.instrument.base_asset_id for a in ordered}) == len(ordered),
++        "AQ-BRIDGE-DUPLICATE-BASE-ASSET",
++    )
++    require(len({a.instrument.venue for a in ordered}) == 1, "AQ-BRIDGE-SINGLE-VENUE-ACCOUNT")
++    require(len({a.signal.account_id for a in ordered}) == 1, "AQ-BRIDGE-SINGLE-VENUE-ACCOUNT")
++    quote, venue = quote_balance.asset_id, ordered[0].instrument.venue
++    require(
++        all(a.instrument.quote_asset_id == quote and a.available_at <= at for a in ordered),
++        "AQ-BRIDGE-QUOTE-OR-FUTURE-MARK",
++    )
++    require(
++        all(record.journal_entry.recorded_at <= at for record in ledger.records),
++        "AQ-BRIDGE-FUTURE-LEDGER-EVENT",
++    )
++    require(
++        ledger.policy.spot_fee_policy == "SPOT_NATIVE_FEES_V2",
++        "AQ-BRIDGE-NATIVE-FEE-POLICY-REQUIRED",
++    )
++    require(unsettled_quote.is_finite() and unsettled_quote >= 0, "AQ-BRIDGE-UNSETTLED-QUOTE")
++    by_id = {a.instrument.instrument_id: a for a in ordered}
++    native: dict[AssetId, Decimal] = {}
++    for balance in ledger.native_balances():
++        definition = ledger.chart.definition(balance.account_id)
++        if definition.economic_balance:
++            require(
++                definition.role is AccountRole.CASH and definition.venue == venue,
++                "AQ-BRIDGE-UNSUPPORTED-ACCOUNT-OR-LIABILITY",
++            )
++            native[balance.asset_id] = native.get(balance.asset_id, ZERO) + balance.amount
++    require(all(v >= 0 for v in native.values()), "AQ-BRIDGE-NEGATIVE-CASH")
++    require(
++        native.get(quote, ZERO) == quote_balance.total and unsettled_quote <= quote_balance.total,
++        "AQ-BRIDGE-QUOTE-RECONCILIATION",
++    )
++    quantities = dict.fromkeys(by_id, ZERO)
++    for lot in ledger.open_lots():
++        require(
++            lot.instrument_id in by_id and lot.side is LotSide.LONG,
++            "AQ-BRIDGE-UNCOVERED-OR-SHORT-POSITION",
++        )
++        quantities[lot.instrument_id] += lot.remaining_quantity
++    for asset in ordered:
++        require(
++            native.get(asset.instrument.base_asset_id, ZERO)
++            == quantities[asset.instrument.instrument_id],
++            "AQ-BRIDGE-BASE-CASH-LOT-MISMATCH",
++        )
++        rate = fx_rates.get(asset.instrument.base_asset_id)
++        require(
++            rate is not None
++            and rate.rate == asset.mark
++            and rate.reporting_asset_id == quote
++            and rate.as_of_time <= at,
++            "AQ-BRIDGE-MARK-FX-RECONCILIATION",
++        )
++    quotes = {
++        a.instrument.instrument_id: ValuationQuote(
++            instrument_id=a.instrument.instrument_id, as_of_time=at, available_time=at, mark=a.mark
++        )
++        for a in ordered
++    }
++    if ledger.open_lots():
++        valuation = ledger.valuation_snapshot(quotes)
++    else:
++        identity = canonical_sha256(
++            {
++                "ledger": ledger.state_digest().state_hash,
++                "as_of": at.isoformat(),
++                "empty_lots": True,
++            }
++        )
++        valuation = ValuationSnapshot(
++            valuation_snapshot_id=ValuationSnapshotId(identity),
++            as_of_time=at,
++            available_time=at,
++            policy_version=ledger.policy.policy_version,
++            lots=(),
++            content_hash=identity,
++        )
++    nav = ledger.equity_snapshot(
++        valuation=valuation,
++        reporting_asset_id=quote,
++        fx_rates=fx_rates,
++        valuation_basis="SPOT_NATIVE_MTM_V2",
++    ).equity
++    require(nav > 0, "AQ-BRIDGE-NONPOSITIVE-NAV")
++    reservations = tuple(sorted(pending, key=lambda item: item.order_id))
++    require(
++        len({p.order_id for p in reservations}) == len(reservations), "AQ-BRIDGE-DUPLICATE-PENDING"
++    )
++    sells: dict[InstrumentId, Decimal] = dict.fromkeys(by_id, ZERO)
++    sides: dict[InstrumentId, set[OrderSide]] = {key: set() for key in by_id}
++    for item in reservations:
++        require(
++            item.instrument_id in by_id and item.available_at <= at,
++            "AQ-BRIDGE-UNKNOWN-OR-FUTURE-PENDING",
++        )
++        sides[item.instrument_id].add(item.side)
++        if item.side is OrderSide.SELL:
++            sells[item.instrument_id] += item.remaining_quantity
++    require(
++        all(len(value) <= 1 for value in sides.values()),
++        "AQ-BRIDGE-OPPOSING-PENDING-REQUIRES-RECONCILIATION",
++    )
++    require(
++        all(sells[key] <= quantities[key] for key in by_id),
++        "AQ-BRIDGE-PENDING-SELL-EXCEEDS-INVENTORY",
++    )
++    reserved = sum((p.quote_reserve for p in reservations), start=ZERO)
++    require(reserved + unsettled_quote <= quote_balance.total, "AQ-BRIDGE-PENDING-EXCEEDS-CASH")
++    available = min(quote_balance.available, quote_balance.total - unsettled_quote - reserved)
++    return BridgeAccount(
++        ledger.state_digest().state_hash,
++        at,
++        nav,
++        quote,
++        quote_balance.total,
++        available,
++        reserved,
++        unsettled_quote,
++        quantities,
++        ordered,
++        reservations,
++    )
++
++
++def risk_metrics(
++    weights: Mapping[InstrumentId, Decimal],
++    *,
++    assets: Sequence[BridgeAsset],
++    covariance: CovarianceEstimate,
++    policy: PortfolioConstructionPolicy,
++) -> dict[str, Any]:
++    index = {key: i for i, key in enumerate(covariance.asset_ids)}
++    ordered = tuple(sorted(assets, key=lambda a: str(a.instrument.instrument_id)))
++    require(
++        set(weights) == {a.instrument.instrument_id for a in ordered}
++        and all(a.signal.asset_id in index for a in ordered),
++        "AQ-BRIDGE-RISK-COVERAGE",
++    )
++    matrix = tuple(
++        tuple(
++            covariance.matrix[index[a.signal.asset_id]][index[b.signal.asset_id]] for b in ordered
++        )
++        for a in ordered
++    )
++    vector = [weights[a.instrument.instrument_id] for a in ordered]
++    require(all(w.is_finite() and w >= 0 for w in vector), "AQ-BRIDGE-RISK-LONG-FLAT")
++    variance = _portfolio_variance(vector, matrix)
++    volatility = variance.sqrt()
++    gross = sum(vector, start=ZERO)
++    breaches: list[str] = []
++    if gross > min(ONE, policy.maximum_gross_weight):
++        breaches.append("GROSS")
++    if volatility > policy.volatility_target:
++        breaches.append("VOLATILITY")
++    group_gross = {}
++    for constraint in policy.exposure_constraints:
++        value = sum(
++            (
++                vector[i]
++                for i, a in enumerate(ordered)
++                if _dimension_key(a.signal, constraint.dimension) == constraint.key
++            ),
++            start=ZERO,
++        )
++        group_gross[constraint.dimension.value + ":" + constraint.key] = str(value)
++        if value > constraint.maximum_absolute_weight:
++            breaches.append(constraint.dimension.value + ":" + constraint.key)
++    contributions = {
++        str(a.signal.asset_id): vector[i]
++        * sum((matrix[i][j] * vector[j] for j in range(len(vector))), start=ZERO)
++        for i, a in enumerate(ordered)
++    }
++    return {
++        "annualized_volatility": str(volatility),
++        "variance": str(variance),
++        "gross": str(gross),
++        "group_gross": group_gross,
++        "variance_contributions": {k: str(v) for k, v in contributions.items()},
++        "risk_contribution_shares": {
++            k: str(v / variance) if variance else None for k, v in contributions.items()
++        },
++        "breaches": breaches,
++    }
++
++
++@dataclass(frozen=True)
++class PortfolioBridgePlan:
++    proposal: PortfolioProposal
++    risk_decision: RiskDecision
++    signed_quantities: Mapping[InstrumentId, Decimal]
++    quote_required: Decimal
++    cancel_first: tuple[str, ...]
++    status: str
++    diagnostics: Mapping[str, Any]
++
++
++def plan_shared_capital(
++    *,
++    ledger: LedgerEngine,
++    account: BridgeAccount,
++    raw_target_weights: Mapping[InstrumentId, Decimal],
++    covariance: CovarianceEstimate,
++    construction: PortfolioConstructionPolicy,
++    risk_snapshot: RiskSnapshot,
++    signed_policy: SignedRiskPolicy,
++    trusted_public_keys: dict[str, bytes],
++    prior_risk_state: RiskState,
++    risk_transition_sequence: int,
++    events: tuple[RiskEvent, ...] = (),
++    tail_evidence_ready: bool = False,
++) -> PortfolioBridgePlan:
++    """Deterministic funded allocation; returns quantities only and never submits orders."""
++    require(
++        ledger.state_digest().state_hash == account.ledger_hash,
++        "AQ-BRIDGE-LEDGER-CHANGED-RECOMPUTE",
++    )
++    require(
++        type(risk_transition_sequence) is int and risk_transition_sequence >= 1,
++        "AQ-BRIDGE-RISK-TRANSITION-SEQUENCE",
++    )
++    require(
++        covariance.evidence is not None and covariance.available_at <= account.decision_time,
++        "AQ-BRIDGE-CAUSAL-COVARIANCE-REQUIRED",
++    )
++    if covariance.evidence is not None:
++        require(
++            covariance.evidence.contract.annualization_days == Decimal("365.25")
++            and covariance.evidence.contract.complete_calendar_observations >= 90,
++            "AQ-BRIDGE-COVARIANCE-UNIT-OR-COVERAGE",
++        )
++    require(
++        risk_snapshot.ledger_reconciled and risk_snapshot.as_of_time == account.decision_time,
++        "AQ-BRIDGE-RISK-SNAPSHOT-RECONCILIATION",
++    )
++    assets = account.assets
++    ids = tuple(a.instrument.instrument_id for a in assets)
++    current = {
++        a.instrument.instrument_id: canonical_result(
++            account.current_quantities[a.instrument.instrument_id] * a.mark / account.nav
++        )
++        for a in assets
++    }
++    positions = {p.instrument_id: p.signed_weight for p in risk_snapshot.positions}
++    require(
++        set(positions) <= set(ids) and all(positions.get(key, ZERO) == current[key] for key in ids),
++        "AQ-BRIDGE-RISK-POSITION-MISMATCH",
++    )
++    signals = tuple(
++        a.signal.model_copy(
++            update={"current_weight": current[a.instrument.instrument_id], "expected_return": ZERO}
++        )
++        for a in assets
++    )
++    policy = verify_signed_risk_policy(
++        signed_policy,
++        trusted_public_keys=trusted_public_keys,
++        decision_time=account.decision_time,
++        deployment_stage=construction.environment_stage,
++    )
++    # Enforce the stricter signed limits also on pending and intermediate fill order.
++    constraints = {(c.dimension, c.key): c for c in construction.exposure_constraints}
++    limits = policy.pre_trade_limits
++    for dimension, keys, maximum in (
++        (
++            ExposureDimension.ASSET,
++            {str(a.signal.asset_id) for a in assets},
++            limits.maximum_asset_gross_weight,
++        ),
++        (
++            ExposureDimension.STRATEGY,
++            {str(a.signal.strategy_id) for a in assets},
++            limits.maximum_strategy_gross_weight,
++        ),
++    ):
++        for key in keys:
++            previous = constraints.get((dimension, key))
++            constraints[(dimension, key)] = ExposureConstraint(
++                dimension=dimension,
++                key=key,
++                maximum_absolute_weight=min(maximum, previous.maximum_absolute_weight)
++                if previous
++                else maximum,
++            )
++    construction = construction.model_copy(
++        update={
++            "maximum_gross_weight": min(
++                construction.maximum_gross_weight, limits.maximum_account_gross_weight, ONE
++            ),
++            "exposure_constraints": tuple(
++                constraints[key]
++                for key in sorted(constraints, key=lambda key: (key[0].value, key[1]))
++            ),
++        }
++    )
++    circuit = evaluate_circuit_breakers(
++        snapshot=risk_snapshot, policy=policy, decision_time=account.decision_time, events=events
++    )
++    current_risk = risk_metrics(current, assets=assets, covariance=covariance, policy=construction)
++    triggered = max(
++        circuit.state,
++        RiskState.REDUCE_ONLY if current_risk["breaches"] else RiskState.NORMAL,
++        key=SAFETY_RANK.__getitem__,
++    )
++    transition = None
++    if prior_risk_state is RiskState.RECOVERY:
++        effective_state = RiskState.HALTED if triggered is RiskState.HALTED else RiskState.RECOVERY
++    else:
++        effective_state = max(prior_risk_state, triggered, key=SAFETY_RANK.__getitem__)
++        if effective_state is not prior_risk_state:
++            transition = transition_risk_state(
++                sequence=risk_transition_sequence,
++                current=prior_risk_state,
++                target=effective_state,
++                automatic=True,
++                actor="independent-risk-engine",
++                reason_code="AQ-BRIDGE-HARD-RISK",
++                occurred_at=account.decision_time,
++            )
++    hard = effective_state in {RiskState.REDUCE_ONLY, RiskState.HALTED}
++    targets = dict.fromkeys(ids, ZERO) if hard else dict(raw_target_weights)
++    require(set(raw_target_weights) == set(ids), "AQ-BRIDGE-RAW-TARGET-COVERAGE")
++    proposal = build_portfolio_proposal(
++        proposal_id=ProposalId(
++            canonical_sha256(
++                {
++                    "ledger": account.ledger_hash,
++                    "targets": {str(k): str(v) for k, v in targets.items()},
++                    "as_of": account.decision_time.isoformat(),
++                }
++            )
++        ),
++        signals=signals,
++        covariance=covariance,
++        policy=construction,
++        portfolio_nav=account.nav,
++        as_of_time=account.decision_time,
++        created_at=account.decision_time,
++        raw_target_weights=targets,
++        hard_risk_reduction=hard,
++    )
++    decision = evaluate_portfolio_proposal(
++        proposal=proposal,
++        snapshot=risk_snapshot,
++        signed_policy=signed_policy,
++        trusted_public_keys=trusted_public_keys,
++        decision_time=account.decision_time,
++        events=events,
++    )
++    if effective_state is not RiskState.NORMAL:
++        reduced = tuple(
++            t for t in decision.approved_targets if 0 <= t.approved_target_weight < t.current_weight
++        )
++        decision = RiskDecision.model_validate(
++            {
++                **dict(decision),
++                "risk_decision_id": RiskDecisionId(
++                    canonical_sha256(
++                        {
++                            "source": str(decision.risk_decision_id),
++                            "latched_state": effective_state.value,
++                        }
++                    )
++                ),
++                "state": effective_state,
++                "new_risk_allowed": False,
++                "status": RiskDecisionStatus.REDUCE_ONLY
++                if effective_state is RiskState.REDUCE_ONLY
++                else RiskDecisionStatus.HALTED
++                if effective_state is RiskState.HALTED
++                else RiskDecisionStatus.REJECTED,
++                "approved_targets": reduced if effective_state is RiskState.REDUCE_ONLY else (),
++                "reason_codes": (*decision.reason_codes, "AQ-BRIDGE-PERSISTED-RISK-STATE"),
++            }
++        )
++    approved = {t.instrument_id: t.approved_target_weight for t in decision.approved_targets}
++    pending_net = dict.fromkeys(ids, ZERO)
++    pending_buy = dict.fromkeys(ids, ZERO)
++    pending_sell = dict.fromkeys(ids, ZERO)
++    for item in account.pending:
++        direction = ONE if item.side is OrderSide.BUY else -ONE
++        pending_net[item.instrument_id] += direction * item.remaining_quantity
++        (pending_buy if item.side is OrderSide.BUY else pending_sell)[item.instrument_id] += (
++            item.remaining_quantity
++        )
++    candidates: dict[InstrumentId, Decimal] = dict.fromkeys(ids, ZERO)
++    cancels: list[str] = [
++        p.order_id
++        for p in account.pending
++        if p.side is OrderSide.BUY
++        and (hard or not decision.new_risk_allowed or not tail_evidence_ready)
++    ]
++    blocked: list[str] = (
++        ["RISK_STATE_BLOCKED"] if effective_state in {RiskState.CAUTION, RiskState.RECOVERY} else []
++    )
++    for asset, signal in zip(assets, signals, strict=True):
++        key = asset.instrument.instrument_id
++        if key not in approved:
++            continue
++        adjustment = target_quantity_adjustment(
++            target_quantity=approved[key] * account.nav / asset.mark,
++            current_quantity=account.current_quantities[key],
++            signed_pending_quantity=pending_net[key],
++            price=asset.mark,
++            quantity_step=asset.quantity_step,
++            minimum_notional=asset.minimum_notional,
++        )
++        if adjustment.cancel_pending_first:
++            cancels.extend(p.order_id for p in account.pending if p.instrument_id == key)
++            continue
++        quantity = adjustment.signed_order_quantity
++        capacity_qty = (
++            _capacity_weight(signal, nav=account.nav, policy=construction)
++            * account.nav
++            / asset.mark
++        )
++        capacity_qty = (capacity_qty / asset.quantity_step).to_integral_value(
++            rounding=ROUND_DOWN
++        ) * asset.quantity_step
++        quantity = min(abs(quantity), capacity_qty) * (ONE if quantity >= 0 else -ONE)
++        if quantity < 0:
++            quantity = -min(abs(quantity), account.current_quantities[key] - pending_sell[key])
++        if quantity > 0 and (hard or not decision.new_risk_allowed or not tail_evidence_ready):
++            quantity = ZERO
++            blocked.append("NEW_RISK_NOT_ADMITTED")
++        candidates[key] = quantity
++    required = sum(
++        (
++            max(ZERO, candidates[a.instrument.instrument_id])
++            * a.mark
++            * (1 + a.maximum_execution_cost_fraction)
++            for a in assets
++        ),
++        start=ZERO,
++    )
++    scale = min(ONE, account.quote_available / required) if required else ONE
++    for asset in assets:
++        key = asset.instrument.instrument_id
++        if candidates[key] > 0:
++            candidates[key] = (candidates[key] * scale / asset.quantity_step).to_integral_value(
++                rounding=ROUND_DOWN
++            ) * asset.quantity_step
++        if abs(candidates[key]) * asset.mark < asset.minimum_notional:
++            candidates[key] = ZERO
++
++    def post_risk(quantities: Mapping[InstrumentId, Decimal], worst_prefix: bool) -> dict[str, Any]:
++        maximum_costs = sum(
++            (
++                p.remaining_quantity * p.maximum_price * p.maximum_cost_fraction
++                for p in account.pending
++            ),
++            start=ZERO,
++        )
++        maximum_costs += sum(
++            (
++                abs(quantities[a.instrument.instrument_id])
++                * a.mark
++                * a.maximum_execution_cost_fraction
++                for a in assets
++            ),
++            start=ZERO,
++        )
++        post_nav = account.nav - maximum_costs
++        require(post_nav > 0, "AQ-BRIDGE-COSTS-EXHAUST-NAV")
++        weights = {
++            a.instrument.instrument_id: canonical_result(
++                (
++                    account.current_quantities[a.instrument.instrument_id]
++                    + pending_buy[a.instrument.instrument_id]
++                    + (
++                        max(ZERO, quantities[a.instrument.instrument_id])
++                        if worst_prefix
++                        else quantities[a.instrument.instrument_id]
++                        - pending_sell[a.instrument.instrument_id]
++                    )
++                )
++                * a.mark
++                / post_nav
++            )
++            for a in assets
++        }
++        return risk_metrics(weights, assets=assets, covariance=covariance, policy=construction)
++
++    worst, post = post_risk(candidates, True), post_risk(candidates, False)
++    if worst["breaches"] or post["breaches"]:
++        # Unfilled sales never finance or offset the risk of buys. Retain executable hard exits.
++        candidates = {key: min(ZERO, value) if hard else ZERO for key, value in candidates.items()}
++        blocked.append("POST_ROUNDING_RISK")
++        worst, post = post_risk(candidates, True), post_risk(candidates, False)
++    required = sum(
++        (
++            max(ZERO, candidates[a.instrument.instrument_id])
++            * a.mark
++            * (1 + a.maximum_execution_cost_fraction)
++            for a in assets
++        ),
++        start=ZERO,
++    )
++    require(required <= account.quote_available, "AQ-BRIDGE-CASH-POSTCONDITION")
++    unresolved = bool(
++        current_risk["breaches"]
++        or worst["breaches"]
++        or post["breaches"]
++        or any("UNRESOLVED-BREACH" in reason for reason in proposal.constraint_summary)
++    )
++    status = (
++        "BREACH_UNEXECUTABLE_OR_PENDING"
++        if hard or unresolved
++        else "CANCEL_PENDING_FIRST"
++        if cancels
++        else "BLOCKED"
++        if blocked
++        else "PROPOSAL_ONLY"
++    )
++    return PortfolioBridgePlan(
++        proposal,
++        decision,
++        candidates,
++        required,
++        tuple(sorted(set(cancels))),
++        status,
++        {
++            "current_risk": current_risk,
++            "worst_fill_order_risk": worst,
++            "post_rounding_risk": post,
++            "pending_quote_reserved": str(account.pending_quote_reserved),
++            "unsettled_quote": str(account.unsettled_quote),
++            "quote_available": str(account.quote_available),
++            "blocked": sorted(set(blocked)),
++            "assumed_sale_proceeds": "0",
++            "submitted_orders": 0,
++            "tail_evidence_ready": tail_evidence_ready,
++            "partial_fill_requires_fresh_ledger_and_risk_snapshot": True,
++            "effective_risk_state": effective_state.value,
++            "risk_transition": transition.model_dump(mode="json") if transition else None,
++            "automatic_recovery_allowed": False,
++        },
++    )
++
++
++def cvar_evidence(
++    daily_returns: Sequence[Decimal], *, confidence: Decimal = Decimal("0.95")
++) -> dict[str, Any]:
++    require(confidence == Decimal("0.95"), "AQ-BRIDGE-CVAR-FROZEN-CONFIDENCE")
++    require(
++        bool(daily_returns) and all(v.is_finite() and v > -1 for v in daily_returns),
++        "AQ-BRIDGE-CVAR-RETURNS",
++    )
++    losses = sorted((-value for value in daily_returns), reverse=True)
++    tail_mass = Decimal(len(losses)) * (1 - confidence)
++    whole = int(tail_mass)
++    tail_sum = sum(losses[:whole], start=ZERO)
++    if tail_mass > whole:
++        tail_sum += losses[whole] * (tail_mass - whole)
++    point = max(ZERO, tail_sum / tail_mass)
++    return {
++        "daily_cvar95_point": str(point),
++        "tail_mass": str(tail_mass),
++        "observations": len(losses),
++        "status": "UNKNOWN_INSUFFICIENT_TAIL_BLOCKS",
++        "safety_proven": False,
++        "block_uncertainty": None,
++        "joint_stress_required": True,
++    }
++
++
++def joint_stress_diagnostic(
++    *,
++    plan: PortfolioBridgePlan,
++    account: BridgeAccount,
++    snapshot: RiskSnapshot,
++    signed_policy: SignedRiskPolicy,
++    scenario: PortfolioStressScenario,
++) -> dict[str, Any]:
++    result = run_portfolio_stress(
++        proposal=plan.proposal, snapshot=snapshot, policy=signed_policy.policy, scenario=scenario
++    )
++    blocked = [
++        str(a.instrument.instrument_id)
++        for a in account.assets
++        if account.current_quantities[a.instrument.instrument_id] > 0
++        and (a.signal.venue_id in scenario.unavailable_venues or scenario.liquidity_multiplier == 0)
++    ]
++    return {
++        "scenario": scenario.model_dump(mode="json"),
++        "legacy_risk_action": result.model_dump(mode="json"),
++        "actual_positions_not_exited": blocked,
++        "execution_status": "UNEXECUTABLE" if blocked else "NOT_REPLAYED",
++        "scenario_kind": "PREDECLARED_STRESS_ASSUMPTION",
++        "realized_tail_loss": None,
++        "instant_cash_assumed": False,
++        "historical_replay_runs": 0,
++    }
++
++
++def drawdown_history(rows: Sequence[Row], *, decision_time: UtcDateTime) -> dict[str, Any]:
++    """Full and trailing 30-day drawdown stay separate; no automatic recovery permission."""
++    at = utc(decision_time)
++    known = sorted(
++        (row for row in rows if utc(row["available_time"]) <= at and utc(row["close_time"]) <= at),
++        key=lambda row: utc(row["close_time"]),
++    )
++    require(bool(known), "AQ-BRIDGE-NO-EQUITY-HISTORY")
++    times = [utc(row["close_time"]) for row in known]
++    require(
++        all(right - left == timedelta(days=1) for left, right in pairwise(times)),
++        "AQ-BRIDGE-EQUITY-DAILY-CALENDAR",
++    )
++    values = [decimal(row["equity"]) for row in known]
++    require(all(v > 0 for v in values), "AQ-BRIDGE-EQUITY-POSITIVE")
++
++    def metrics(prices: Sequence[Decimal]) -> tuple[Decimal, int]:
++        peak, maximum, duration, longest = prices[0], ZERO, 0, 0
++        for value in prices:
++            peak = max(peak, value)
++            maximum = max(maximum, ONE - value / peak)
++            duration = duration + 1 if value < peak else 0
++            longest = max(longest, duration)
++        return maximum, longest
++
++    full, duration = metrics(values)
++    trailing, trailing_duration = metrics(values[-31:])
++    return {
++        "full_period_maximum_drawdown": str(full),
++        "full_period_maximum_duration_days": duration,
++        "trailing_30d_maximum_drawdown": str(trailing) if len(values) >= 31 else None,
++        "trailing_30d_maximum_duration_days": trailing_duration if len(values) >= 31 else None,
++        "window_status": "COMPLETE" if len(values) >= 31 else "UNKNOWN_INCOMPLETE",
++        "soft_gate_reached": trailing >= Decimal("0.08") if len(values) >= 31 else None,
++        "hard_gate_reached": trailing >= Decimal("0.12") if len(values) >= 31 else None,
++        "automatic_recovery_allowed": False,
++    }
++
++
++def validate_config(config: Row) -> None:
++    match = re.fullmatch(r"alpha-r5-portfolio-contract-(\d{8})-v([1-9]\d*)", config["generation"])
++    require(match is not None, "AQ-PORTFOLIO-GENERATION")
++    if match is None:
++        return
++    require(
++        config["output"] == f"artifacts/alpha_v5/{match[1]}_portfolio_contract_v{match[2]}",
++        "AQ-PORTFOLIO-OUTPUT",
++    )
++    require(
++        config["scope"] == "B5_PORTFOLIO_BRIDGE_AND_SYNTHETIC_CONTRACT_TESTS", "AQ-PORTFOLIO-SCOPE"
++    )
++    require(
++        config["historical_portfolio_inputs"] is None
++        and config["economic_policy_adopted"] is False,
++        "AQ-PORTFOLIO-REAL-RESEARCH-NOT-AUTHORIZED",
++    )
++    require(
++        config["future_scenarios"]
++        == {
++            "modes": ["INDEPENDENT_SLEEVES", "SHARED_CASH_BRIDGE", "SHARED_CASH_WITH_RISK"],
++            "stress_paths": [
++                "JOINT_CORRELATED_GAP",
++                "DEPTH_LATENCY_AND_VENUE_HALT",
++                "USDT_DEPEG_AND_BLOCKED_EXIT",
++            ],
++            "capital": "50000",
++            "authorized_runs_now": 0,
++        },
++        "AQ-PORTFOLIO-MATRIX-REGISTRATION",
++    )
++    require(
++        config["proposed_risk_policy"]
++        == {
++            "return_frequency": "UTC_DAILY",
++            "lookback_calendar_days": 90,
++            "ewma_half_life_days": 30,
++            "diagonal_shrinkage": "0.20",
++            "covariance_basis": "TOTAL",
++            "annualization_days": "365.25",
++            "volatility_target_annual": "0.12",
++            "gross_max": "1.0",
++            "single_asset_max": "0.30",
++            "crypto_cluster_gross_max": "0.40",
++            "cvar_confidence": "0.95",
++            "cvar_loss_daily_max": "0.02",
++            "drawdown_window_days": 30,
++            "drawdown_soft": "0.08",
++            "drawdown_hard": "0.12",
++            "automatic_recovery_allowed": False,
++            "enable_for_live": False,
++        },
++        "AQ-PORTFOLIO-RISK-PROPOSAL-IDENTITY",
++    )
++
++
++def build_documents(sources: dict[str, Any]) -> Mapping[str, Any]:
++    gaps = [
++        {"item": "real_pit_universe_and_joint_daily_returns", "status": "NOT_RECEIVED"},
++        {
++            "item": "historical_available_cash_pending_and_settlement_events",
++            "status": "NOT_RECEIVED",
++        },
++        {"item": "empirically_verified_execution_capacity", "status": "NOT_COLLECTED"},
++        {"item": "economic_adoption_of_proposed_risk_policy", "status": "NOT_ADOPTED"},
++        {"item": "joint_tail_uncertainty_and_independent_stress_replay", "status": "NOT_COLLECTED"},
++    ]
++    return {
++        "portfolio_bridge_reconciliation.json": {
++            "status": "SYNTHETIC_CONTRACTS_ONLY",
++            "actual_joint_paths": None,
++            "same_configuration_engine_equivalence": "NOT_VERIFIED",
++            "cash_source": "EXISTING_LEDGER_NATIVE_BALANCES",
++            "available_cash_rule": "MIN_VENUE_AVAILABLE_AND_LEDGER_TOTAL_MINUS_UNSETTLED_MINUS_PENDING_BUY_RESERVE",
++            "unfilled_sale_proceeds_available": False,
++            "rounding": "DOWN_WITH_POST_ROUNDING_RISK_CHECK",
++            "partial_fill_action": "RECOMPUTE_FROM_FRESH_LEDGER_AND_RISK_SNAPSHOT",
++        },
++        "covariance_and_risk_forecasts.json": {
++            "status": "NOT_COLLECTED",
++            "historical_forecasts": None,
++            "TOTAL_factor_addition": "FORBIDDEN",
++            "RESIDUAL_factor_addition": "DEFINED_ORTHOGONAL_FACTORS_ONLY",
++            "psd_rule": "RELATIVE_1E12_REJECT_OR_RECORDED_FIXED_DIAGONAL_JITTER",
++            "missing_asset_policy": "FAIL_CLOSED",
++            "annualized_unit": "DAILY_DECIMAL_RETURN_COVARIANCE_TIMES_365_25",
++            "lookback_calendar_days": 90,
++        },
++        "daily_risk_contribution.json": {
++            "status": "NOT_COLLECTED",
++            "rows": None,
++            "cluster_limit_semantics": "GROSS_EXPOSURE_NOT_VARIANCE_SHARE",
++            "zero_variance_share": None,
++        },
++        "joint_stress_and_breach_ledger.json": {
++            "status": "NOT_COLLECTED",
++            "real_paths": None,
++            "hard_reduction_bypasses_ordinary_turnover": True,
++            "hard_reduction_bypasses_liquidity": False,
++            "unexecutable_exit": "KEEP_REAL_HOLDINGS_AND_BREACH_NO_INSTANT_CASH",
++            "automatic_recovery_allowed": False,
++        },
++        "three_mode_attribution.json": {
++            "status": "NOT_COLLECTED",
++            "capital": "50000",
++            "funding_bridge_contribution": None,
++            "incremental_risk_projection_contribution": None,
++            "historical_matrix_runs": 0,
++        },
++        "evidence_gaps.json": {
++            "gaps": gaps,
++            "pit_quality": sources["b2_safety"]["strict_data_quality"],
++            "execution_calibration": "NOT_COLLECTED",
++            "promotion_admitted": False,
++        },
++        "report.md": """# B5 组合风险与共享资金契约
++
++**NO_PROVEN_ALPHA / CASH；ML、纸面准入、实盘、订单全部关闭。**
++
++已为 covariance 增加 TOTAL/RESIDUAL、单位和 PSD 契约；只有浮点容差内的小负特征值允许固定修正并记录。90 个完整 UTC 日的 EWMA/shrinkage 使用固定规则，缺币或缺日失败。原数值调用保留；显式目标投影直接使用已有 raw targets，期望收益字段为 0，不把二元趋势信号当收益预测。
++
++共享资金适配器读取原 ledger，计入真实可用现金、pending BUY 预留、未结算收入与未完成卖出。按固定比例预算并向下取整，逐次检查最坏成交顺序和取整后的风险。partial fill 后要求重新读取账本及风险快照。硬风险减仓可越过普通换手限额，但流动性不够、撤单未确认或场所停摆时保留持仓与 BREACH。
++
++显式 SPOT_NATIVE_MTM_V2 估值避免在已经按现价估值的现货余额上再次叠加 lot 浮盈。旧估值默认不改。费用币资产仍必须有可知 FX，底层原生币账本继续复用；没有另造账本或下单器。
++
++风险贡献、30 日回撤与全期回撤分开。90 日 CVaR95 的尾部点不足以证明安全，状态保持 UNKNOWN，必须补充独立时间块不确定性和联合压力。任务书的风险数值仍是待经济采用的研究起点，本批不启用该风险配置做真实研究。
++
++仅完成接口及合成验证。三模式九个历史组合回放、真实预测/实现风险、资金共享贡献、尾部非劣与容量均 NOT_COLLECTED；不能由工程通过推断风险策略或 alpha 准入。历史回放、真实模型/校准拟合、最终留出读取、订单均为 0。
++""",
++    }
+--- /dev/null
++++ b/scripts/run_alpha_v5_portfolio_diagnostics.py
+@@ -0,0 +1,42 @@
++"""One B5 protocol report; no historical portfolio replay or order submission."""
++
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import yaml
++
++from aegisquant.research.validation.evidence_contract import (
++    checked_path,
++    run_zero_research_contract,
++)
++from aegisquant.research.validation.portfolio_replay import FILES, build_documents, validate_config
++from scripts.export_alpha_v4_audit_bundle import git
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--config", required=True, type=Path)
++    parser.add_argument("--preflight-dir", required=True, type=Path)
++    args = parser.parse_args()
++    config = yaml.safe_load(checked_path(ROOT, args.config.as_posix()).read_text(encoding="utf-8"))
++    validate_config(config)
++    output = run_zero_research_contract(
++        root=ROOT,
++        config=config,
++        stage=args.preflight_dir,
++        git_state={
++            "head": git(ROOT, "rev-parse", "HEAD"),
++            "branch": git(ROOT, "branch", "--show-current"),
++        },
++        files=FILES,
++        build_documents=build_documents,
++    )
++    print(f"B5 portfolio protocol: {output}; actual joint replay NOT_COLLECTED", flush=True)
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/configs/research/alpha_v5_portfolio_contract.yaml
+@@ -0,0 +1,54 @@
++schema_version: aegis-portfolio-contract-b5-v1
++generation: alpha-r5-portfolio-contract-20260910-v1
++output: artifacts/alpha_v5/20260910_portfolio_contract_v1
++scope: B5_PORTFOLIO_BRIDGE_AND_SYNTHETIC_CONTRACT_TESTS
++branch_required: main
++source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
++budgets:
++  contract_jobs: 1
++  historical_strategy_engine_runs: 0
++  real_return_model_fits: 0
++  real_calibration_fits: 0
++  final_holdout_accesses: 0
++  real_orders: 0
++sources:
++  r5_manifest:
++    path: artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json
++    sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
++  b4_manifest:
++    path: artifacts/alpha_v5/20260910_execution_contract_v1/OUTPUT_MANIFEST.json
++    sha256: bc4687a0c6e5c9ae76d1021a69d769d22fb7699ef566c8cf495c10afa02023d3
++  b2_safety:
++    path: artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json
++    sha256: c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26
++historical_portfolio_inputs: null
++economic_policy_adopted: false
++proposed_risk_policy:
++  return_frequency: UTC_DAILY
++  lookback_calendar_days: 90
++  ewma_half_life_days: 30
++  diagonal_shrinkage: '0.20'
++  covariance_basis: TOTAL
++  annualization_days: '365.25'
++  volatility_target_annual: '0.12'
++  gross_max: '1.0'
++  single_asset_max: '0.30'
++  crypto_cluster_gross_max: '0.40'
++  cvar_confidence: '0.95'
++  cvar_loss_daily_max: '0.02'
++  drawdown_window_days: 30
++  drawdown_soft: '0.08'
++  drawdown_hard: '0.12'
++  automatic_recovery_allowed: false
++  enable_for_live: false
++future_scenarios:
++  modes: [INDEPENDENT_SLEEVES, SHARED_CASH_BRIDGE, SHARED_CASH_WITH_RISK]
++  stress_paths: [JOINT_CORRELATED_GAP, DEPTH_LATENCY_AND_VENUE_HALT, USDT_DEPEG_AND_BLOCKED_EXIT]
++  capital: '50000'
++  authorized_runs_now: 0
++research_conclusion: NO_PROVEN_ALPHA
++production_policy: CASH
++production_ml_enabled: false
++paper_trading_admitted: false
++live_trading: false
++order_submission_enabled: false
+--- /dev/null
++++ b/tests/alpha_v5/test_portfolio_contract.py
+@@ -0,0 +1,745 @@
++"""B5 supplied/synthetic covariance, cash, risk and ledger contracts; no engine replay."""
++
++from __future__ import annotations
++
++import copy
++import json
++import sys
++from collections.abc import Mapping
++from datetime import timedelta
++from decimal import Decimal
++from pathlib import Path
++from types import ModuleType
++from typing import Any, NoReturn
++
++import pytest
++import yaml
++
++from aegisquant.accounting.ledger import LedgerEngine
++from aegisquant.accounting.models import AccountingInstrument, FxRate, ValuationQuote
++from aegisquant.data.hashing import sha256_file
++from aegisquant.domain.execution import OrderSide
++from aegisquant.domain.identifiers import InstrumentId, ProposalId, VenueId
++from aegisquant.execution.accounts import AccountBalance
++from aegisquant.portfolio.models import (
++    CovarianceEstimate,
++    CovarianceInputContract,
++    ExposureConstraint,
++    ExposureDimension,
++    FactorRisk,
++    PortfolioConstructionPolicy,
++    RiskRegime,
++    SignalInput,
++)
++from aegisquant.portfolio.optimizer import build_portfolio_proposal
++from aegisquant.portfolio.risk_estimation import estimate_covariance
++from aegisquant.research.validation import evidence_contract as evidence
++from aegisquant.research.validation import portfolio_replay as bridge
++from aegisquant.risk.engine import build_risk_snapshot
++from aegisquant.risk.models import RiskPosition, RiskSnapshot, RiskState
++from aegisquant.risk.stress import PortfolioStressScenario
++from tests import p11_helpers as p11
++from tests.alpha_v5.test_benchmark_contract import r5_fixture
++from tests.alpha_v5.test_execution_contract import cash, curve, native_ledger
++from tests.p05 import helpers as accounting
++
++D = Decimal
++ROOT = Path(__file__).resolve().parents[2]
++NOW = p11.AS_OF
++BTC, ETH, USDT = p11.BTC, p11.ETH, p11.USDT
++HASH = "1" * 64
++
++
++def cov_args() -> dict[str, Any]:
++    return dict(
++        asset_ids=(BTC, ETH),
++        sample_covariance=((D("0.0001"), D("0")), (D("0"), D("0.0001"))),
++        shrinkage=D("0.2"),
++        factors=(),
++        regime=RiskRegime.NORMAL,
++        regime_multiplier=D("1"),
++        observed_at=NOW - timedelta(days=1),
++        available_at=NOW,
++        contract=CovarianceInputContract(
++            basis="TOTAL", complete_calendar_observations=90, input_sha256=HASH
++        ),
++    )
++
++
++def test_symmetric_positive_diagonal_indefinite_covariance_fails_before_shrinkage() -> None:
++    args = cov_args()
++    args["sample_covariance"] = ((D("1"), D("2")), (D("2"), D("1")))
++    args["shrinkage"] = D("1")
++    with pytest.raises(ValueError, match="NOT-PSD"):
++        estimate_covariance(**args)
++    base = estimate_covariance(**cov_args())
++    with pytest.raises(ValueError, match="NOT-PSD"):
++        CovarianceEstimate.model_validate({**dict(base), "matrix": args["sample_covariance"]})
++
++
++def test_total_cannot_double_count_factor_and_residual_requires_defined_factors() -> None:
++    args = cov_args()
++    factor = FactorRisk(
++        factor_id="market", variance=D("0.0002"), exposures={"BTC": D("1"), "ETH": D("1")}
++    )
++    args["factors"] = (factor,)
++    with pytest.raises(ValueError, match="TOTAL-CANNOT"):
++        estimate_covariance(**args)
++    args["contract"] = args["contract"].model_copy(update={"basis": "RESIDUAL"})
++    result = estimate_covariance(**args)
++    assert result.matrix[0][0] == D("0.0003") * D("365.25")
++    assert result.matrix[0][1] == D("0.0002") * D("365.25")
++    args["factors"] = ()
++    with pytest.raises(ValueError, match="REQUIRES-DEFINED"):
++        estimate_covariance(**args)
++
++
++def test_fixed_tiny_psd_correction_is_recorded_and_asset_order_invariant() -> None:
++    args = cov_args()
++    args["sample_covariance"] = ((D("1"), D("1.0000000000001")), (D("1.0000000000001"), D("1")))
++    args["shrinkage"] = D("0")
++    a = estimate_covariance(**args)
++    assert a.evidence is not None and a.evidence.diagonal_jitter > 0
++    assert a.evidence.correction_frobenius_norm > 0
++    args["asset_ids"] = (ETH, BTC)
++    b = estimate_covariance(**args)
++    assert a.matrix == b.matrix and a.evidence == b.evidence
++    args["sample_covariance"] = ((D("1"), D("1")), (D("1"), D("1")))
++    perfect = estimate_covariance(**args)
++    assert perfect.matrix[0][0] >= perfect.matrix[0][1]
++
++
++def daily_rows() -> list[dict[str, Any]]:
++    end = NOW.replace(hour=0, minute=0, second=0, microsecond=0)
++    return [
++        dict(
++            close_time=(end - timedelta(days=89 - i)).isoformat(),
++            available_time=(end - timedelta(days=89 - i)).isoformat(),
++            returns={"BTC": str(D((i % 7) - 3) / 1000), "ETH": str(D((i % 7) - 3) / 500)},
++        )
++        for i in range(90)
++    ]
++
++
++def test_closed_daily_covariance_future_mutations_and_reordering_do_not_change_past() -> None:
++    rows = daily_rows()
++    base = bridge.daily_covariance_from_rows(rows, asset_ids=(BTC, ETH), decision_time=NOW)
++    future = dict(
++        close_time=(NOW + timedelta(days=1)).isoformat(),
++        available_time=(NOW + timedelta(days=2)).isoformat(),
++        returns={"BTC": "999", "UNKNOWN": "-999"},
++    )
++    changed = bridge.daily_covariance_from_rows(
++        [future, *reversed(rows)], asset_ids=(ETH, BTC), decision_time=NOW
++    )
++    assert base == changed and base.evidence is not None
++    assert base.evidence.contract.complete_calendar_observations == 90
++    assert base.evidence.contract.return_frequency == "UTC_DAILY"
++
++
++@pytest.mark.parametrize("kind", ["gap", "asset", "duplicate", "intraday", "late", "zero"])
++def test_missing_new_asset_or_unready_covariance_fails_closed(kind: str) -> None:
++    rows = daily_rows()
++    if kind == "gap":
++        rows.pop(20)
++    elif kind == "asset":
++        rows[20]["returns"].pop("ETH")
++    elif kind == "duplicate":
++        rows.append(copy.deepcopy(rows[20]))
++    elif kind == "intraday":
++        rows[20]["close_time"] = (NOW - timedelta(days=60)).isoformat()
++    elif kind == "late":
++        rows[20]["available_time"] = (NOW + timedelta(days=1)).isoformat()
++    else:
++        for row in rows:
++            row["returns"] = {"BTC": "0", "ETH": "0"}
++        zero = bridge.daily_covariance_from_rows(rows, asset_ids=(BTC, ETH), decision_time=NOW)
++        with pytest.raises(ValueError, match="NONPOSITIVE-ASSET-VARIANCE"):
++            build_portfolio_proposal(
++                proposal_id=ProposalId("zero"),
++                signals=p11.signals(),
++                covariance=zero,
++                policy=p11.construction_policy(),
++                portfolio_nav=D("1000"),
++                as_of_time=NOW,
++                created_at=NOW,
++                raw_target_weights={s.instrument_id: D("0.1") for s in p11.signals()},
++            )
++        return
++    with pytest.raises(ValueError):
++        bridge.daily_covariance_from_rows(rows, asset_ids=(BTC, ETH), decision_time=NOW)
++
++
++def assets(
++    *, adv: str = "1000000", step: str = "0.01", cost: str = "0.01"
++) -> tuple[bridge.BridgeAsset, ...]:
++    result: list[bridge.BridgeAsset] = []
++    for asset in (BTC, ETH):
++        spec = AccountingInstrument.model_validate(
++            {
++                **dict(accounting.spot_instrument()),
++                "instrument_id": InstrumentId(f"SIM:SPOT:{asset}USDT"),
++                "base_asset_id": asset,
++                "quantity_asset_id": asset,
++            }
++        )
++        context = p11.signal(
++            asset=asset,
++            instrument=str(spec.instrument_id),
++            raw_score=D("1"),
++            confidence=D("1"),
++            adv=D(adv),
++            impact_bps=D("10"),
++            cluster="crypto",
++        )
++        context = SignalInput.model_validate(
++            {
++                **dict(context),
++                "venue_id": VenueId("SIM"),
++                "impact_model": curve(),
++                "liquidity_horizon_seconds": 60,
++            }
++        )
++        result.append(
++            bridge.BridgeAsset(
++                instrument=spec,
++                signal=context,
++                mark=D("100"),
++                quantity_step=D(step),
++                minimum_notional=D("1"),
++                maximum_execution_cost_fraction=D(cost),
++                available_at=NOW,
++            )
++        )
++    return tuple(result)
++
++
++def construction() -> PortfolioConstructionPolicy:
++    return p11.construction_policy().model_copy(
++        update={
++            "maximum_gross_weight": D("0.9"),
++            "maximum_turnover": D("1"),
++            "volatility_target": D("0.5"),
++            "exposure_constraints": tuple(
++                ExposureConstraint(dimension=dimension, key=key, maximum_absolute_weight=D(value))
++                for dimension, key, value in (
++                    (ExposureDimension.ASSET, "BTC", "0.6"),
++                    (ExposureDimension.ASSET, "ETH", "0.6"),
++                    (ExposureDimension.CORRELATION_CLUSTER, "crypto", "0.9"),
++                )
++            ),
++        }
++    )
++
++
++def account_args(
++    ledger: LedgerEngine,
++    selected: tuple[bridge.BridgeAsset, ...] | None = None,
++    *,
++    available: str | None = None,
++    unsettled: str = "0",
++    pending: tuple[bridge.PendingReservation, ...] = (),
++) -> dict[str, Any]:
++    selected = selected or assets()
++    total = cash(ledger, USDT)
++    return dict(
++        assets=selected,
++        quote_balance=AccountBalance(
++            asset_id=USDT, total=total, available=total if available is None else D(available)
++        ),
++        fx_rates={
++            a.instrument.base_asset_id: FxRate(
++                asset_id=a.instrument.base_asset_id,
++                reporting_asset_id=USDT,
++                rate=a.mark,
++                as_of_time=NOW,
++                policy_version="SYNTHETIC",
++            )
++            for a in selected
++        },
++        pending=pending,
++        unsettled_quote=D(unsettled),
++        decision_time=NOW,
++        balance_available_at=NOW,
++        fx_available_at=NOW,
++    )
++
++
++def snapshot(account: bridge.BridgeAccount, **changes: Any) -> RiskSnapshot:
++    values: dict[str, Any] = dict(
++        snapshot_id="b5-synthetic",
++        as_of_time=NOW,
++        available_at=NOW,
++        data_last_available_at=NOW,
++        model_last_available_at=NOW,
++        positions=tuple(
++            RiskPosition(
++                instrument_id=a.instrument.instrument_id,
++                asset_id=a.signal.asset_id,
++                strategy_id=a.signal.strategy_id,
++                account_id=a.signal.account_id,
++                signed_weight=account.current_quantities[a.instrument.instrument_id]
++                * a.mark
++                / account.nav,
++            )
++            for a in account.assets
++        ),
++        daily_pnl_fraction=D("0"),
++        drawdown_fraction=D("0"),
++        margin_utilization=D("0"),
++        liquidity_score=D("1"),
++        venue_operational=True,
++        security_clear=True,
++        major_event_clear=True,
++        ledger_reconciled=True,
++    )
++    values.update(changes)
++    return build_risk_snapshot(**values)
++
++
++def plan_args(
++    ledger: LedgerEngine,
++    account: bridge.BridgeAccount,
++    *,
++    targets: Mapping[InstrumentId, Decimal] | None = None,
++    policy: PortfolioConstructionPolicy | None = None,
++    **changes: Any,
++) -> dict[str, Any]:
++    values: dict[str, Any] = dict(
++        ledger=ledger,
++        account=account,
++        raw_target_weights=targets
++        or {a.instrument.instrument_id: D("0.2") for a in account.assets},
++        covariance=estimate_covariance(**cov_args()),
++        construction=policy or construction(),
++        risk_snapshot=snapshot(account),
++        signed_policy=p11.signed_policy(),
++        trusted_public_keys=p11.trusted_public_keys(),
++        prior_risk_state=RiskState.NORMAL,
++        risk_transition_sequence=1,
++        tail_evidence_ready=True,
++    )
++    return {**values, **changes}
++
++
++def test_funded_buys_compete_proportionally_and_input_order_is_invariant() -> None:
++    ledger = native_ledger()
++    selected = assets()
++    a = bridge.account_from_ledger(ledger, **account_args(ledger, selected, available="100"))
++    plan = bridge.plan_shared_capital(**plan_args(ledger, a))
++    assert set(plan.signed_quantities.values()) == {D("0.49")}
++    assert plan.quote_required == D("98.98") <= a.quote_available
++    assert plan.proposal.expected_return == 0 and all(
++        leg.expected_return_contribution == 0 for leg in plan.proposal.legs
++    )
++    b = bridge.account_from_ledger(
++        ledger, **account_args(ledger, tuple(reversed(selected)), available="100")
++    )
++    other = bridge.plan_shared_capital(**plan_args(ledger, b))
++    assert plan == other
++    assert not plan.diagnostics["post_rounding_risk"]["breaches"]
++
++
++def test_unfilled_sales_and_unsettled_cash_never_finance_buys() -> None:
++    ledger, selected = native_ledger(), assets(cost="0")
++    ledger.process_fill(
++        accounting.fill(
++            selected[0].instrument, sequence=1, side=OrderSide.BUY, quantity="2", price="100"
++        ),
++        selected[0].instrument,
++    )
++    account = bridge.account_from_ledger(ledger, **account_args(ledger, selected, available="0"))
++    targets = {
++        selected[0].instrument.instrument_id: D("0"),
++        selected[1].instrument.instrument_id: D("0.2"),
++    }
++    plan = bridge.plan_shared_capital(**plan_args(ledger, account, targets=targets))
++    assert plan.signed_quantities[selected[0].instrument.instrument_id] == D("-2")
++    assert plan.signed_quantities[selected[1].instrument.instrument_id] == 0
++    assert plan.diagnostics["assumed_sale_proceeds"] == "0"
++    ledger.process_fill(
++        accounting.fill(
++            selected[0].instrument, sequence=2, side=OrderSide.SELL, quantity="0.5", price="100"
++        ),
++        selected[0].instrument,
++    )
++    with pytest.raises(ValueError, match="LEDGER-CHANGED"):
++        bridge.plan_shared_capital(**plan_args(ledger, account, targets=targets))
++    fresh = bridge.account_from_ledger(
++        ledger, **account_args(ledger, selected, available="50", unsettled="850")
++    )
++    recomputed = bridge.plan_shared_capital(**plan_args(ledger, fresh, targets=targets))
++    assert recomputed.signed_quantities[selected[0].instrument.instrument_id] == D("-1.5")
++    assert recomputed.signed_quantities[selected[1].instrument.instrument_id] == 0
++
++
++def pending_buy(
++    selected: tuple[bridge.BridgeAsset, ...], quantity: str = "4.5"
++) -> bridge.PendingReservation:
++    return bridge.PendingReservation(
++        order_id="pending-btc",
++        instrument_id=selected[0].instrument.instrument_id,
++        side=OrderSide.BUY,
++        remaining_quantity=D(quantity),
++        maximum_price=D("100"),
++        maximum_cost_fraction=D("0"),
++        available_at=NOW,
++    )
++
++
++def test_pending_risk_and_reserves_are_not_netted_by_hoped_for_cancellation() -> None:
++    ledger, selected = native_ledger(), assets(cost="0")
++    pending = pending_buy(selected)
++    account = bridge.account_from_ledger(
++        ledger, **account_args(ledger, selected, pending=(pending,))
++    )
++    assert account.quote_available == D("550") and account.pending_quote_reserved == D("450")
++    plan = bridge.plan_shared_capital(**plan_args(ledger, account))
++    assert plan.cancel_first == (pending.order_id,)
++    assert set(plan.signed_quantities.values()) == {D("0")}
++    assert plan.status == "BREACH_UNEXECUTABLE_OR_PENDING"
++    assert "ASSET:BTC" in plan.diagnostics["worst_fill_order_risk"]["breaches"]
++    assert account.quote_available == D("550")
++
++
++@pytest.mark.parametrize(
++    "kind",
++    [
++        "future_balance",
++        "future_fx",
++        "future_pending",
++        "overreserved",
++        "oversold",
++        "opposing",
++        "unknown_pending",
++        "bad_cash",
++        "future_ledger",
++    ],
++)
++def test_bad_funding_inputs_fail_before_proposal(kind: str) -> None:
++    ledger, selected = native_ledger(), assets()
++    args = account_args(ledger, selected)
++    p = pending_buy(selected, "1")
++    if kind == "future_balance":
++        args["balance_available_at"] = NOW + timedelta(seconds=1)
++    elif kind == "future_fx":
++        args["fx_available_at"] = NOW + timedelta(seconds=1)
++    elif kind == "future_pending":
++        args["pending"] = (p.model_copy(update={"available_at": NOW + timedelta(seconds=1)}),)
++    elif kind == "overreserved":
++        args["pending"] = (p.model_copy(update={"remaining_quantity": D("11")}),)
++    elif kind == "oversold":
++        args["pending"] = (p.model_copy(update={"side": OrderSide.SELL}),)
++    elif kind == "opposing":
++        args["pending"] = (p, p.model_copy(update={"order_id": "opposite", "side": OrderSide.SELL}))
++    elif kind == "unknown_pending":
++        args["pending"] = (p.model_copy(update={"instrument_id": InstrumentId("UNKNOWN")}),)
++    elif kind == "bad_cash":
++        args["quote_balance"] = AccountBalance(asset_id=USDT, total=D("999"), available=D("999"))
++    else:
++        args["decision_time"] = accounting.NOW - timedelta(seconds=1)
++        args["balance_available_at"] = args["fx_available_at"] = args["decision_time"]
++        args["assets"] = tuple(
++            a.model_copy(update={"available_at": args["decision_time"]}) for a in selected
++        )
++    with pytest.raises(ValueError):
++        bridge.account_from_ledger(ledger, **args)
++
++
++def test_hard_risk_bypasses_turnover_but_retains_liquidity_breach() -> None:
++    ledger, selected = native_ledger(), assets(adv="100", cost="0")
++    ledger.process_fill(
++        accounting.fill(
++            selected[0].instrument, sequence=1, side=OrderSide.BUY, quantity="5", price="100"
++        ),
++        selected[0].instrument,
++    )
++    account = bridge.account_from_ledger(ledger, **account_args(ledger, selected))
++    tiny_turnover = construction().model_copy(update={"maximum_turnover": D("0.0001")})
++    plan = bridge.plan_shared_capital(**plan_args(ledger, account, policy=tiny_turnover))
++    assert plan.signed_quantities[selected[0].instrument.instrument_id] == D("-0.1")
++    assert all(value <= 0 for value in plan.signed_quantities.values())
++    assert plan.status == "BREACH_UNEXECUTABLE_OR_PENDING"
++    assert plan.proposal.turnover > tiny_turnover.maximum_turnover
++    assert "ASSET:BTC" in plan.diagnostics["post_rounding_risk"]["breaches"]
++    assert cash(ledger, BTC) == D("5")
++
++
++def test_halted_venue_and_depeg_do_not_invent_an_exit() -> None:
++    ledger, selected = native_ledger(), assets(cost="0")
++    ledger.process_fill(
++        accounting.fill(
++            selected[0].instrument, sequence=1, side=OrderSide.BUY, quantity="2", price="100"
++        ),
++        selected[0].instrument,
++    )
++    account = bridge.account_from_ledger(ledger, **account_args(ledger, selected))
++    stopped = snapshot(account, venue_operational=False)
++    plan = bridge.plan_shared_capital(**plan_args(ledger, account, risk_snapshot=stopped))
++    assert not any(plan.signed_quantities.values()) and cash(ledger, BTC) == 2
++    scenario = PortfolioStressScenario(
++        scenario_id="SYNTHETIC-DEPEG-HALT",
++        asset_return_shocks={"BTC": D("-0.4"), "ETH": D("-0.4")},
++        stablecoin_return_shocks={"USDT": D("-0.1")},
++        correlation_multiplier=D("2"),
++        liquidity_multiplier=D("0"),
++        margin_multiplier=D("1"),
++        unavailable_venues=(VenueId("SIM"),),
++    )
++    stress = bridge.joint_stress_diagnostic(
++        plan=plan,
++        account=account,
++        snapshot=stopped,
++        signed_policy=p11.signed_policy(),
++        scenario=scenario,
++    )
++    assert stress["execution_status"] == "UNEXECUTABLE" and stress[
++        "actual_positions_not_exited"
++    ] == [str(selected[0].instrument.instrument_id)]
++    assert stress["realized_tail_loss"] is None and not stress["instant_cash_assumed"]
++
++
++def test_post_rounding_risk_includes_execution_cost_loss_in_nav() -> None:
++    ledger, selected = native_ledger(), assets(step="1", cost="0.5")
++    account = bridge.account_from_ledger(ledger, **account_args(ledger, selected))
++    targets = {a.instrument.instrument_id: D("0.3") for a in selected}
++    plan = bridge.plan_shared_capital(**plan_args(ledger, account, targets=targets))
++    assert not any(plan.signed_quantities.values())
++    assert "POST_ROUNDING_RISK" in plan.diagnostics["blocked"]
++    assert plan.quote_required == 0
++
++
++def test_unknown_tail_evidence_blocks_increase_but_not_risk_exit() -> None:
++    ledger, selected = native_ledger(), assets(cost="0")
++    account = bridge.account_from_ledger(ledger, **account_args(ledger, selected))
++    plan = bridge.plan_shared_capital(**plan_args(ledger, account, tail_evidence_ready=False))
++    assert not any(plan.signed_quantities.values())
++    point = bridge.cvar_evidence([D("-0.01")] * 90)
++    assert point["tail_mass"] == "4.50" and point["daily_cvar95_point"] == "0.01"
++    assert not point["safety_proven"] and point["block_uncertainty"] is None
++
++
++def test_signed_order_limit_still_bounds_the_actual_rounded_quantity() -> None:
++    ledger, selected = native_ledger(), assets(cost="0")
++    account = bridge.account_from_ledger(ledger, **account_args(ledger, selected))
++    targets = {
++        selected[0].instrument.instrument_id: D("0.4"),
++        selected[1].instrument.instrument_id: D("0"),
++    }
++    plan = bridge.plan_shared_capital(**plan_args(ledger, account, targets=targets))
++    maximum = p11.signed_policy().policy.pre_trade_limits.maximum_order_weight
++    assert maximum == D("0.3")
++    assert plan.signed_quantities[selected[0].instrument.instrument_id] == D("3")
++    for asset in selected:
++        assert (
++            abs(plan.signed_quantities[asset.instrument.instrument_id]) * asset.mark / account.nav
++            <= maximum
++        )
++
++
++def test_normalized_risk_snapshot_cannot_automatically_unlock_a_previous_hard_gate() -> None:
++    ledger = native_ledger()
++    account = bridge.account_from_ledger(ledger, **account_args(ledger))
++    first = bridge.plan_shared_capital(
++        **plan_args(ledger, account, risk_snapshot=snapshot(account, daily_pnl_fraction=D("-0.06")))
++    )
++    assert first.diagnostics["effective_risk_state"] == "REDUCE_ONLY"
++    assert first.diagnostics["risk_transition"]["automatic"] is True
++    second = bridge.plan_shared_capital(
++        **plan_args(ledger, account, prior_risk_state=RiskState.REDUCE_ONLY)
++    )
++    assert second.risk_decision.state is RiskState.REDUCE_ONLY
++    assert second.risk_decision.new_risk_allowed is False
++    assert not any(second.signed_quantities.values())
++    assert not second.diagnostics["automatic_recovery_allowed"]
++
++
++def test_legacy_optimizer_payload_matches_sealed_b4_implementation(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    frozen = ROOT / "artifacts/alpha_v5/20260910_execution_contract_v1"
++    name = "implementation/src/aegisquant/portfolio/optimizer.py"
++    manifest = json.loads((frozen / "OUTPUT_MANIFEST.json").read_text(encoding="utf-8"))
++    assert sha256_file(frozen / name) == manifest["files"][name]["sha256"]
++    module = ModuleType("b5_legacy_optimizer")
++    monkeypatch.setitem(sys.modules, module.__name__, module)
++    exec(compile((frozen / name).read_bytes(), str(frozen / name), "exec"), module.__dict__)  # noqa: S102 -- hash-verified frozen project code, synthetic inputs only.
++    kwargs: dict[str, Any] = dict(
++        proposal_id=ProposalId("same-synthetic"),
++        signals=p11.signals(),
++        covariance=p11.covariance(),
++        policy=p11.construction_policy(),
++        portfolio_nav=D("100000"),
++        as_of_time=NOW,
++        created_at=p11.CREATED,
++    )
++    assert build_portfolio_proposal(**kwargs).model_dump(
++        mode="json"
++    ) == module.build_portfolio_proposal(**kwargs).model_dump(mode="json")
++    assert "evidence" not in p11.covariance().model_dump()
++
++
++def test_spot_native_mtm_values_price_move_once_and_legacy_stays_distinct() -> None:
++    ledger = native_ledger()
++    instrument = accounting.spot_instrument()
++    ledger.process_fill(
++        accounting.fill(instrument, sequence=1, side=OrderSide.BUY, quantity="1", price="100"),
++        instrument,
++    )
++    valuation = ledger.valuation_snapshot(
++        {
++            instrument.instrument_id: ValuationQuote(
++                instrument_id=instrument.instrument_id,
++                as_of_time=NOW,
++                available_time=NOW,
++                mark=D("200"),
++            )
++        }
++    )
++    fx = {
++        BTC: FxRate(
++            asset_id=BTC,
++            reporting_asset_id=USDT,
++            rate=D("200"),
++            as_of_time=NOW,
++            policy_version="SYNTHETIC",
++        )
++    }
++    legacy = ledger.equity_snapshot(valuation=valuation, reporting_asset_id=USDT, fx_rates=fx)
++    current = ledger.equity_snapshot(
++        valuation=valuation,
++        reporting_asset_id=USDT,
++        fx_rates=fx,
++        valuation_basis="SPOT_NATIVE_MTM_V2",
++    )
++    assert legacy.equity == D("1200") and current.equity == D("1100")
++    assert current.unrealized_pnl_value == 0 and valuation.lots[0].unrealized_pnl.amount == D("100")
++    assert current.account_snapshot_id != legacy.account_snapshot_id
++
++
++def test_drawdown_windows_do_not_conflate_full_period_loss_and_recent_recovery() -> None:
++    rows = [
++        dict(
++            close_time=(NOW - timedelta(days=39 - i)).isoformat(),
++            available_time=(NOW - timedelta(days=39 - i)).isoformat(),
++            equity="100" if i == 0 else "80",
++        )
++        for i in range(40)
++    ]
++    value = bridge.drawdown_history(rows, decision_time=NOW)
++    assert D(value["full_period_maximum_drawdown"]) == D("0.2")
++    assert D(value["trailing_30d_maximum_drawdown"]) == 0
++    assert value["full_period_maximum_duration_days"] == 39
++    assert value["automatic_recovery_allowed"] is False
++    assert (
++        bridge.drawdown_history(rows[-5:], decision_time=NOW)["trailing_30d_maximum_drawdown"]
++        is None
++    )
++
++
++@pytest.mark.parametrize("kind", ["data", "adopt", "runs", "policy", "capital"])
++def test_b5_report_cannot_activate_economic_research(kind: str) -> None:
++    config = yaml.safe_load(
++        (ROOT / "configs/research/alpha_v5_portfolio_contract.yaml").read_text(encoding="utf-8")
++    )
++    if kind == "data":
++        config["historical_portfolio_inputs"] = "history.csv"
++    elif kind == "adopt":
++        config["economic_policy_adopted"] = True
++    elif kind == "runs":
++        config["future_scenarios"]["authorized_runs_now"] = 9
++    elif kind == "policy":
++        config["proposed_risk_policy"]["volatility_target_annual"] = "0.5"
++    else:
++        config["future_scenarios"]["capital"] = "500000"
++    with pytest.raises(ValueError):
++        bridge.validate_config(config)
++
++
++def test_b5_contract_job_seals_without_invoking_real_paths(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    root = tmp_path / "root"
++    root.mkdir()
++    for name in bridge.FILES:
++        target = root / name
++        target.parent.mkdir(parents=True, exist_ok=True)
++        target.write_text("SYNTHETIC_IMPLEMENTATION", encoding="utf-8")
++    config = yaml.safe_load(
++        (ROOT / "configs/research/alpha_v5_portfolio_contract.yaml").read_text(encoding="utf-8")
++    )
++    manifest = root / config["sources"]["r5_manifest"]["path"]
++    manifest.parent.mkdir(parents=True, exist_ok=True)
++    source = r5_fixture()
++    manifest.write_text(json.dumps(source), encoding="utf-8")
++    research_config = root / "configs/research/aegis_alpha_v5.yaml"
++    research_config.write_text(yaml.safe_dump(source["config"]), encoding="utf-8")
++    lock = root / "src/aegisquant/bootstrap/live_lock.py"
++    lock.parent.mkdir(parents=True, exist_ok=True)
++    lock.write_text(
++        "LIVE_TRADING: bool = False\nORDER_SUBMISSION_ENABLED: bool = False\nLIVE_ADAPTERS: tuple = ()\n",
++        encoding="utf-8",
++    )
++    config["sources"]["r5_manifest"]["sha256"] = sha256_file(manifest)
++    for name in ("b4_manifest", "b2_safety"):
++        path = root / config["sources"][name]["path"]
++        path.parent.mkdir(parents=True, exist_ok=True)
++        path.write_text(
++            json.dumps({"strict_data_quality": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE"}),
++            encoding="utf-8",
++        )
++        config["sources"][name]["sha256"] = sha256_file(path)
++    stage = tmp_path / "preflight"
++    stage.mkdir()
++    (stage / "baseline_workspace.json").write_text(
++        json.dumps(
++            {
++                "root": str(root),
++                "branch": "main",
++                "head": evidence.BASE,
++                "files": {},
++                "allowed_modifications": [],
++            }
++        ),
++        encoding="utf-8",
++    )
++    for name in ("workspace_before.patch", "version_graph.txt", "test_commands_and_results.txt"):
++        (stage / name).write_text("SYNTHETIC", encoding="utf-8")
++    hashes = {name: sha256_file(root / name) for name in bridge.FILES}
++    (stage / "validation_records.json").write_text(
++        json.dumps(
++            [
++                dict(check=k, command=["SYNTHETIC"], exit_code=0, source_sha256=hashes)
++                for k in ("ruff", "format", "pyright", "pytest")
++            ]
++        ),
++        encoding="utf-8",
++    )
++    (stage / "pytest_results.xml").write_text(
++        '<testsuite><testcase name="SYNTHETIC"/></testsuite>', encoding="utf-8"
++    )
++
++    def forbidden(*args: object, **kwargs: object) -> NoReturn:
++        raise AssertionError("real portfolio work not authorized")
++
++    monkeypatch.setattr(bridge, "plan_shared_capital", forbidden)
++    monkeypatch.setattr(bridge, "daily_covariance_from_rows", forbidden)
++    monkeypatch.setattr(bridge, "run_portfolio_stress", forbidden)
++    bridge.validate_config(config)
++    output = evidence.run_zero_research_contract(
++        root=root,
++        config=config,
++        stage=stage,
++        git_state={"head": evidence.BASE, "branch": "main"},
++        files=bridge.FILES,
++        build_documents=bridge.build_documents,
++    )
++    assert evidence.load_evidence_manifest(output, "OUTPUT_MANIFEST.json")["status"] == "VERIFIED"
++    actual = json.loads((output / "safety_and_budget_audit.json").read_text())["actual"]
++    assert actual.pop("contract_jobs") == 1 and not any(actual.values())
++    assert (
++        json.loads((output / "three_mode_attribution.json").read_text())[
++            "funding_bridge_contribution"
++        ]
++        is None
++    )
+--- /dev/null
++++ b/docs/research/alpha_v5_portfolio_contract.md
+@@ -0,0 +1,14 @@
++# B5 组合与资金桥接
++
++`python -m scripts.run_alpha_v5_portfolio_diagnostics --config configs/research/alpha_v5_portfolio_contract.yaml --preflight-dir <真实检查回执目录>` 仅输出一次协议报告。实际联合路径未输入，九个历史场景预算为 0。
++
++- `estimate_covariance(..., contract=...)` 显式区分 TOTAL 和 RESIDUAL；TOTAL 不能另加市场因子，RESIDUAL 只接受已定义且正交的 FactorRisk。原数值接口和结果序列化保留，明显非 PSD 矩阵在任何接口都拒绝。
++- 特征值先按资产 ID 排序计算，容差固定为矩阵最大绝对元素的 `1e-12`。负特征值越界失败；容差内按固定对角 jitter 修复，记录输入最小特征值和修正 Frobenius 范数。不能为追求收益调 shrinkage。
++- `daily_covariance_from_rows` 只处理提供的 90 个完整 UTC 日，半衰期 30 日、diagonal shrinkage 0.20、年化 365.25。收益使用小数单位；future rows 不进入过去估计，缺失币种或日期拒绝。
++- `build_portfolio_proposal` 新增显式 `raw_target_weights` 与 `hard_risk_reduction`。新路径不调用均值优化、不将二元信号假装期望收益；继续复用原约束、容量与 risk engine。硬降风险产生的未解决约束保留在 proposal，不表示已经修复实际持仓。
++- `account_from_ledger` 从原 ledger 对账，限定同账户/场所、同 quote、单位现货、long/flat。交易资产的现金余额必须与净 FIFO 库存一致；可用现金为场所 available 和 ledger 扣除未结算及 pending BUY 预留后余额的较小值。输入余额/FX可知时间必须不晚于决策。
++- `plan_shared_capital` 仅生成研究数量建议；资金竞争按比例分配再向下取整，输入币种顺序不改变结果。未成交 SELL 不释放现金或抵消 BUY 风险，pending 反向冲突先请求撤单，未确认前不释放预留。partial fill 后必须以新 ledger 和独立 risk snapshot 重算。调用者必须提供持久化的上次风险状态及下一条 transition 序号；本函数复用既有状态机，只返回更保守的自动 transition，由调用者写入既有控制日志。新快照恢复正常不会自动清除原风险状态。
++- `SPOT_NATIVE_MTM_V2` 是显式估值参数，现货余额已包含市价变化，因此只追加衍生品浮盈；旧 `LEGACY` 估值默认保留。现货总浮盈可在原 valuation lots 查看，不能再次加到 NAV。
++- `cvar_evidence` 的点估计不能声明安全，独立尾部区块不确定性未识别时返回 UNKNOWN。`drawdown_history` 分开记录全期与 30 日窗口。恢复仍需已有状态机的明确研究复核，不自动开启风险或生产。
++
++任务书风险数值仅冻结为待采用的研究起点。合成测试通过不等于真实 PIT、费用、资金历史或尾部证据通过，仍为 NO_PROVEN_ALPHA / CASH。

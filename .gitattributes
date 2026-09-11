@@ -13,10 +13,22 @@ artifacts/alpha_v4_multi_asset/** -text whitespace=cr-at-eol
 artifacts/alpha_v4_audit/** -text whitespace=-blank-at-eof,cr-at-eol
 artifacts/current_system_backtest/** -text whitespace=-blank-at-eof,cr-at-eol
 artifacts/alpha_r4/** -text whitespace=-blank-at-eof,cr-at-eol
+artifacts/alpha_v5/** -text whitespace=-blank-at-eof,cr-at-eol
+artifacts/current_system_recent/** -text whitespace=-blank-at-eof,cr-at-eol
+# Frozen diff context and captured tool output retain meaningful whitespace.
+artifacts/alpha_v5/**/*.patch whitespace=-trailing-space,-blank-at-eof,cr-at-eol
+artifacts/alpha_v5/**/validation/*.txt whitespace=-trailing-space,-blank-at-eof,cr-at-eol
+artifacts/current_system_recent/**/equity_and_drawdown.svg whitespace=-trailing-space
+configs/research/alpha_v5_execution_contract.yaml whitespace=-blank-at-eof
 AegisQuant_Audit_Package_20260908/** -text whitespace=-trailing-space,cr-at-eol
 AegisQuant_R4/** -text whitespace=cr-at-eol
 AegisQuant_盈利验证修复任务书_R2_2026-09-08.md -text whitespace=-trailing-space,cr-at-eol
 artifacts/alpha_v4_multi_asset/summary/portfolio_performance.svg whitespace=-trailing-space
 AegisQuant_盈利导向重构任务书_v4.md -text whitespace=-trailing-space
+# Research inputs and audit reports are referenced by byte-level hashes.
+AegisQuant_Codex_下一批任务书_20260909.md -text whitespace=-trailing-space,cr-at-eol
+AegisQuant_整改与验证方案_20260909.md -text whitespace=-trailing-space,cr-at-eol
+AegisQuant_Compact_Arithmetic_Audit_20260909.json -text whitespace=cr-at-eol
+deep-research-report.md -text whitespace=-trailing-space,cr-at-eol
 AegisQuant_v3.1_Multimodal_Event_Intelligence_Codex_Master_Taskbook.md whitespace=-trailing-space
 docs/spec/AegisQuant_Master_Taskbook_v3_1.md whitespace=-trailing-space

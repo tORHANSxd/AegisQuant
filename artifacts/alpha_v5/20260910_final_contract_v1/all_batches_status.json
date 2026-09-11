@@ -1,0 +1,52 @@
+{
+  "batches": [
+    {
+      "batch": "B0/B1",
+      "engineering": "COMPLETED",
+      "pure_tests": 48,
+      "real_evidence": "RAW_BUNDLES_AND_TRACES_INCOMPLETE"
+    },
+    {
+      "batch": "B2",
+      "engineering": "COMPLETED",
+      "pure_tests": 49,
+      "real_evidence": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE",
+      "quality_jobs": 1
+    },
+    {
+      "batch": "B3",
+      "engineering": "COMPLETED",
+      "pure_tests": 44,
+      "real_evidence": "MATRIX_AND_INCREMENTAL_STATISTICS_NOT_COLLECTED"
+    },
+    {
+      "batch": "B4",
+      "engineering": "COMPLETED",
+      "pure_tests": 85,
+      "real_evidence": "EXECUTION_CALIBRATION_NOT_COLLECTED"
+    },
+    {
+      "batch": "B5",
+      "engineering": "COMPLETED",
+      "pure_tests": 100,
+      "real_evidence": "JOINT_PORTFOLIO_REPLAYS_NOT_COLLECTED"
+    },
+    {
+      "batch": "B6",
+      "engineering": "COMPLETED",
+      "pure_tests": 48,
+      "real_evidence": "REAL_FITS_AND_OUTER_RESULTS_NOT_COLLECTED"
+    },
+    {
+      "batch": "B7",
+      "engineering": "CONTRACT_REPORT_WITH_SOURCE_BOUND_TEST_RECEIPTS",
+      "pure_tests": "SEE_SOURCE_AND_VERSION_BINDINGS",
+      "real_evidence": "NO_ELIGIBLE_HOLDOUT_OR_INDEPENDENT_ADMISSION_REVIEW"
+    }
+  ],
+  "test_counts_are_per_batch_and_overlap": true,
+  "research_conclusion": "NO_PROVEN_ALPHA",
+  "authorized_engineering_scope": "B0_THROUGH_B7",
+  "real_research_acceptance": "NOT_COMPLETED_MISSING_DATA_AND_SEPARATE_AUTHORIZATION",
+  "live_or_order_authorization": false
+}

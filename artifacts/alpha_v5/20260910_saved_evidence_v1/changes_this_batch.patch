@@ -1,0 +1,1523 @@
+--- /dev/null
++++ b/src/aegisquant/research/validation/saved_run_audit.py
+@@ -0,0 +1,918 @@
++"""Read-only joins and arithmetic over saved simulations; never execute a strategy."""
++
++from __future__ import annotations
++
++import gzip
++import hashlib
++import json
++import re
++from collections import Counter, defaultdict
++from collections.abc import Mapping, Sequence
++from dataclasses import dataclass, field
++from datetime import UTC, datetime, timedelta
++from decimal import Decimal
++from itertools import pairwise
++from pathlib import Path
++from typing import Any
++
++import polars as pl
++
++from aegisquant.accounting.models import LotChange
++from aegisquant.backtest.metrics import resample_equity
++from aegisquant.backtest.models import EquityPoint
++from aegisquant.data.hashing import canonical_sha256
++from aegisquant.research.validation.evidence_contract import checked_path, decimal, require
++from scripts.summarize_alpha_r4 import execution_reason
++
++FILES = (
++    "src/aegisquant/research/validation/saved_run_audit.py",
++    "scripts/audit_alpha_v5_saved_runs.py",
++    "configs/research/alpha_v5_saved_run_audit.yaml",
++    "tests/alpha_v5/test_saved_run_audit.py",
++    "docs/research/alpha_v5_saved_run_audit.md",
++)
++R5 = "artifacts/alpha_v5/20260908_research_churn_v3"
++R4 = "artifacts/alpha_r4/20260908_v1"
++SYMBOLS = ("BNBUSDT", "BTCUSDT", "ETHUSDT", "SOLUSDT", "XRPUSDT")
++ZERO = Decimal(0)
++MONEY_TOLERANCE = Decimal("1e-18")
++COST_FIELDS = (
++    "fee",
++    "spread",
++    "slippage",
++    "impact",
++    "funding",
++    "borrow_interest",
++    "settlement_fee",
++    "liquidation_penalty",
++)
++
++
++def at(value: Any) -> datetime:
++    result = value if isinstance(value, datetime) else datetime.fromisoformat(str(value))
++    if result.tzinfo is None or result.utcoffset() != timedelta(0):
++        raise ValueError("saved evidence clocks must be explicit UTC")
++    return result.astimezone(UTC)
++
++
++def amount(value: Any) -> Decimal:
++    return decimal(value)
++
++
++@dataclass
++class AuditChecks:
++    counts: dict[str, dict[str, Any]] = field(default_factory=lambda: dict[str, dict[str, Any]]())
++
++    def check(self, name: str, passed: bool, identity: str) -> None:
++        row = self.counts.setdefault(name, {"checked": 0, "failed": 0, "examples": []})
++        row["checked"] += 1
++        if not passed:
++            row["failed"] += 1
++            if len(row["examples"]) < 5:
++                row["examples"].append(identity)
++
++    def equal(self, name: str, left: Decimal, right: Decimal, identity: str) -> None:
++        self.check(name, abs(left - right) <= MONEY_TOLERANCE, identity)
++        row = self.counts[name]
++        row["maximum_absolute_residual"] = str(
++            max(amount(row.get("maximum_absolute_residual", "0")), abs(left - right))
++        )
++
++    @property
++    def passed(self) -> bool:
++        return bool(self.counts) and all(row["failed"] == 0 for row in self.counts.values())
++
++
++def _unique(rows: Sequence[dict[str, Any]], key: str, checks: AuditChecks) -> dict[str, Any]:
++    values = {row[key]: row for row in rows}
++    checks.check("unique_" + key, len(values) == len(rows), key)
++    return values
++
++
++def audit_saved_result(
++    result: dict[str, Any],
++    trace: list[dict[str, Any]],
++    *,
++    symbol: str,
++    review_interval_hours: int | None,
++    cost_benefit_lambda: Decimal = Decimal(1),
++) -> dict[str, Any]:
++    """Verify stored links, postings and marks. No engine or ledger commands are invoked."""
++    checks = AuditChecks()
++    spec = result["spec"]
++    run_id = str(spec["run_id"])
++    base, quote = symbol.removesuffix("USDT"), "USDT"
++    start, end = at(spec["start_time"]), at(spec["end_time"])
++    checks.check(
++        "frozen_simulation_identity",
++        spec["live_trading_locked"] is True
++        and spec["accounting_policy_version"] == "accounting-v1"
++        and spec["cost_policy_version"] == "cat-proxy-v2",
++        run_id,
++    )
++    orders = {row["order"]["backtest_order_id"]: row for row in result["orders"]}
++    checks.check("unique_orders", len(orders) == len(result["orders"]), run_id)
++    fills = _unique(result["fills"], "fill_id", checks)
++    by_order: dict[str, list[dict[str, Any]]] = defaultdict(list)
++    trace_orders = {row["order_id"]: row for row in trace if row.get("order_id")}
++    checks.check(
++        "unique_trace_orders",
++        len(trace_orders) == sum(bool(r.get("order_id")) for r in trace),
++        run_id,
++    )
++    checks.check("complete_trace_order_join", set(trace_orders) == set(orders), run_id)
++    checks.check("unique_trace_clock", len({at(r["time"]) for r in trace}) == len(trace), run_id)
++    checks.check(
++        "trace_clock_order",
++        [at(r["time"]) for r in trace] == sorted(at(r["time"]) for r in trace),
++        run_id,
++    )
++    checks.check("trace_in_period", all(start <= at(r["time"]) <= end for r in trace), run_id)
++    total_cost = ZERO
++    joined: list[dict[str, Any]] = []
++    fill_position = ZERO
++    episodes = 0
++    for fill_id, fill in fills.items():
++        key = fill["backtest_order_id"]
++        checks.check("fill_order_exists", key in orders and key in trace_orders, fill_id)
++        if key not in orders or key not in trace_orders:
++            continue
++        order, saved = orders[key]["order"], trace_orders[key]
++        quantity = amount(fill["quantity"]["amount"])
++        signed = quantity if fill["side"] == "BUY" else -quantity
++        checks.check(
++            "fill_units_and_ids",
++            quantity > 0
++            and fill["quantity"]["asset_id"] == base
++            and fill["fee"]["asset_id"] == quote
++            and fill["cost_breakdown"]["asset_id"] == quote
++            and all(
++                fill[name] == order[name]
++                for name in ("client_order_id", "order_intent_id", "instrument_id", "side")
++            )
++            and fill["venue_order_id"] == orders[key]["venue_order_id"],
++            fill_id,
++        )
++        checks.check(
++            "fill_causal_clocks",
++            at(order["decision_time"])
++            == at(saved["decision_time"])
++            <= at(order["submitted_at"])
++            <= at(orders[key]["arrival_time"])
++            <= at(fill["event_time"])
++            <= at(fill["available_time"])
++            <= at(fill["ingest_time"]),
++            fill_id,
++        )
++        costs = fill["cost_breakdown"]
++        fee = amount(fill["fee"]["amount"])
++        reference, execution = (
++            amount(fill["reference_price"]["amount"]),
++            amount(fill["execution_price"]["amount"]),
++        )
++        adverse = sum((amount(costs[name]) for name in ("spread", "slippage", "impact")), ZERO)
++        paid = sum((amount(costs[name]) for name in COST_FIELDS), ZERO)
++        checks.equal(
++            "reference_notional", amount(costs["gross_notional"]), quantity * reference, fill_id
++        )
++        checks.equal("fee_money", amount(costs["fee"]), fee, fill_id)
++        checks.equal(
++            "execution_price_cost_bridge", signed * (execution - reference), adverse, fill_id
++        )
++        by_order[key].append(fill)
++        total_cost += paid
++        if fill_position == 0:
++            episodes += 1
++        fill_position += signed
++        checks.check("funded_long_fill_path", fill_position >= 0, fill_id)
++        joined.append(
++            {
++                "run_id": run_id,
++                "order_id": key,
++                "fill_id": fill_id,
++                "decision_time": at(saved["decision_time"]).isoformat(),
++                "submitted_at": order["submitted_at"],
++                "arrival_time": orders[key]["arrival_time"],
++                "event_time": fill["event_time"],
++                "available_time": fill["available_time"],
++                "source_event_id": fill["source_event_id"],
++                "reason_primary": execution_reason(saved),
++                "reason": saved["reason"],
++                "signed_quantity": str(signed),
++                "reference_price": str(reference),
++                "execution_price": str(execution),
++                "gross_notional": costs["gross_notional"],
++                "cost": str(paid),
++                "fee_asset": fill["fee"]["asset_id"],
++                "fee": str(fee),
++            }
++        )
++    for key, saved_order in orders.items():
++        order, linked = saved_order["order"], by_order[key]
++        quantity = sum((amount(row["quantity"]["amount"]) for row in linked), ZERO)
++        checks.equal(
++            "order_cumulative_fill",
++            amount(saved_order["cumulative_filled_quantity"]),
++            quantity,
++            key,
++        )
++        checks.check("order_not_overfilled", quantity <= amount(order["quantity"]["amount"]), key)
++        if key in trace_orders:
++            row = trace_orders[key]
++            signed = amount(order["quantity"]["amount"]) * (1 if order["side"] == "BUY" else -1)
++            checks.equal(
++                "submitted_quantity_matches_trace",
++                signed,
++                amount(row["signed_planned_quantity"]),
++                key,
++            )
++            checks.equal(
++                "trace_fill_notional",
++                amount(row["actual_fill_notional"]),
++                sum((amount(f["cost_breakdown"]["gross_notional"]) for f in linked), ZERO),
++                key,
++            )
++            checks.equal(
++                "trace_realized_execution_cost",
++                amount(row["realized_execution_cost"]),
++                sum(
++                    (
++                        sum((amount(f["cost_breakdown"][name]) for name in COST_FIELDS), ZERO)
++                        for f in linked
++                    ),
++                    ZERO,
++                ),
++                key,
++            )
++            checks.check(
++                "trace_order_outcome",
++                row["order_status"] == saved_order["status"]
++                and row["rejection_reason"] == saved_order["rejection_code"],
++                key,
++            )
++    checks.check(
++        "terminal_flat",
++        fill_position == 0 and amount(result["positions"][-1]["quantity"]) == 0,
++        run_id,
++    )
++    checks.check("closed_episode_count", episodes == len(result["closed_trades"]), run_id)
++
++    records = result["ledger_records"]
++    cash: dict[str, Decimal] = defaultdict(lambda: ZERO)
++    lots: dict[str, dict[str, Any]] = {}
++    chain = "0" * 64
++    seen_fill_records: dict[str, dict[str, Any]] = {}
++    snapshots: list[dict[str, Any]] = []
++    external_records = 0
++    for ordinal, record in enumerate(records):
++        identity = record["journal_entry"]["journal_entry_id"]
++        checks.check(
++            "ledger_hash_chain",
++            record["previous_hash"] == chain
++            and record["event_hash"]
++            == canonical_sha256({k: v for k, v in record.items() if k != "event_hash"}),
++            identity,
++        )
++        chain = record["event_hash"]
++        journal = record["journal_entry"]
++        checks.check(
++            "journal_identity",
++            identity == record["command_hash"]
++            and not journal["reconciliation_adjustment"]
++            and journal["supersedes_entry_id"] is None,
++            identity,
++        )
++        balancing: dict[str, Decimal] = defaultdict(lambda: ZERO)
++        cash_delta: dict[str, Decimal] = defaultdict(lambda: ZERO)
++        for posting in journal["postings"]:
++            asset, value = posting["amount"]["asset_id"], amount(posting["amount"]["amount"])
++            checks.check(
++                "posting_nonnegative_and_side",
++                value >= 0 and posting["side"] in {"DEBIT", "CREDIT"},
++                identity,
++            )
++            signed = value if posting["side"] == "DEBIT" else -value
++            balancing[asset] += signed
++            if posting["account_id"].startswith("cash:"):
++                cash_delta[asset] += signed
++                cash[asset] += signed
++        checks.check(
++            "double_entry_by_asset",
++            all(abs(value) <= MONEY_TOLERANCE for value in balancing.values()),
++            identity,
++        )
++        source_fill = record["source_fill_id"]
++        if source_fill is None:
++            external_records += 1
++            checks.check(
++                "only_registered_initial_funding",
++                ordinal == 0
++                and record["entry_template_id"] == "external-transfer"
++                and at(journal["event_time"]) == start
++                and dict(cash_delta) == {quote: amount(spec["initial_cash"]["amount"])},
++                identity,
++            )
++        else:
++            checks.check(
++                "unique_fill_ledger_link",
++                source_fill in fills and source_fill not in seen_fill_records,
++                identity,
++            )
++            seen_fill_records[source_fill] = record
++            if source_fill in fills:
++                fill = fills[source_fill]
++                qty = amount(fill["quantity"]["amount"]) * (1 if fill["side"] == "BUY" else -1)
++                checks.equal("ledger_fill_base_cash", cash_delta[base], qty, identity)
++                checks.equal(
++                    "ledger_fill_quote_cash",
++                    cash_delta[quote],
++                    -qty * amount(fill["execution_price"]["amount"])
++                    - amount(fill["fee"]["amount"]),
++                    identity,
++                )
++                checks.check(
++                    "ledger_fill_clocks_and_intent",
++                    record["source_order_intent_id"] == fill["order_intent_id"]
++                    and record["idempotency_key"] == "simfill:" + source_fill
++                    and at(journal["event_time"]) == at(fill["event_time"])
++                    and at(journal["recorded_at"]) == at(fill["ingest_time"]),
++                    identity,
++                )
++        for change in record["lot_changes"]:
++            try:
++                LotChange.model_validate_json(json.dumps(change))
++            except ValueError:
++                checks.check("lot_schema", False, identity)
++                continue
++            checks.check("lot_schema", True, identity)
++            before, after = change["lot_before"], change["lot_after"]
++            lot_id = (before or after)["position_lot_id"]
++            checks.check(
++                "lot_change_continuity", lots.get(lot_id) == before, identity + ":" + lot_id
++            )
++            for lot in (before, after):
++                if lot is None:
++                    continue
++                opening = fills.get(lot["source_fill_id"])
++                checks.check("lot_opening_fill_exists", opening is not None, lot_id)
++                if opening is not None:
++                    checks.check(
++                        "lot_opening_fill_identity",
++                        lot_id == canonical_sha256({"fill_id": opening["fill_id"], "ordinal": 0})
++                        and opening["side"] == "BUY"
++                        and lot["side"] == "LONG"
++                        and lot["instrument_id"] == opening["instrument_id"]
++                        and lot["quantity_unit"] == "BASE_ASSET"
++                        and lot["quantity_asset_id"] == base
++                        and lot["settlement_asset_id"] == quote
++                        and lot["contract_form"] == "SPOT"
++                        and amount(lot["contract_multiplier"]) == 1
++                        and at(lot["opened_at"]) == at(opening["event_time"]),
++                        lot_id,
++                    )
++                    checks.equal(
++                        "lot_opened_quantity",
++                        amount(lot["opened_quantity"]),
++                        amount(opening["quantity"]["amount"]),
++                        lot_id,
++                    )
++                    checks.equal(
++                        "lot_entry_price",
++                        amount(lot["entry_price"]),
++                        amount(opening["execution_price"]["amount"]),
++                        lot_id,
++                    )
++                    checks.check(
++                        "lot_opening_fee_asset",
++                        lot["opening_fee"]["asset_id"] == quote,
++                        lot_id,
++                    )
++                    checks.equal(
++                        "lot_opening_fee",
++                        amount(lot["opening_fee"]["amount"]),
++                        amount(opening["fee"]["amount"]),
++                        lot_id,
++                    )
++            if after is None:
++                lots.pop(lot_id, None)
++            else:
++                lots[lot_id] = after
++        checks.equal(
++            "native_inventory_matches_net_lots",
++            cash[base],
++            sum((amount(lot["remaining_quantity"]) for lot in lots.values()), ZERO),
++            identity,
++        )
++        checks.check(
++            "native_cash_funded",
++            cash[base] >= -MONEY_TOLERANCE and cash[quote] >= -MONEY_TOLERANCE,
++            identity,
++        )
++        snapshots.append(
++            {"time": at(journal["recorded_at"]), "quantity": cash[base], "cash": cash[quote]}
++        )
++    checks.check(
++        "all_fills_have_ledger",
++        set(seen_fill_records) == set(fills) and external_records == 1,
++        run_id,
++    )
++    checks.check(
++        "ledger_information_order",
++        [r["time"] for r in snapshots] == sorted(r["time"] for r in snapshots),
++        run_id,
++    )
++    for row in joined:
++        ledger = seen_fill_records.get(row["fill_id"])
++        row["ledger_event_hash"] = ledger["event_hash"] if ledger else None
++
++    trace_by_time = {at(row["time"]): row for row in trace}
++    raw_curve = result["equity_curve"]
++    raw_times = [at(row["time"]) for row in raw_curve]
++    checks.check(
++        "raw_mtm_clock",
++        raw_times == sorted(set(raw_times)) and raw_times[0] == start and raw_times[-1] == end,
++        run_id,
++    )
++    cursor = 0
++    information: dict[datetime, dict[str, Any]] = {}
++    for point, time in zip(raw_curve, raw_times, strict=True):
++        while cursor + 1 < len(snapshots) and snapshots[cursor + 1]["time"] <= time:
++            cursor += 1
++        snapshot = snapshots[cursor]
++        checks.check("ledger_known_before_mark", snapshot["time"] <= time, time.isoformat())
++        checks.equal(
++            "ledger_cash_matches_every_mtm",
++            snapshot["cash"],
++            amount(point["cash"]),
++            time.isoformat(),
++        )
++        checks.equal(
++            "every_mtm_funding_identity",
++            amount(point["cash"]) + amount(point["position_value"]),
++            amount(point["equity"]),
++            time.isoformat(),
++        )
++        saved = trace_by_time.get(time)
++        price = amount(saved["known_close"]) if saved is not None else None
++        if snapshot["quantity"] == 0:
++            checks.equal(
++                "every_mtm_native_position_value",
++                amount(point["position_value"]),
++                ZERO,
++                time.isoformat(),
++            )
++        elif price is not None:
++            checks.equal(
++                "every_mtm_native_position_value",
++                snapshot["quantity"] * price,
++                amount(point["position_value"]),
++                time.isoformat(),
++            )
++        else:
++            checks.check("held_mtm_requires_saved_price", False, time.isoformat())
++        if saved is not None:
++            checks.equal(
++                "decision_native_quantity",
++                amount(saved["current_quantity"]),
++                amount(snapshot["quantity"]),
++                time.isoformat(),
++            )
++            checks.equal(
++                "decision_quote_cash", amount(saved["cash"]), snapshot["cash"], time.isoformat()
++            )
++        information[time] = {"quantity": snapshot["quantity"], "mark": price, "source_time": time}
++    points = tuple(EquityPoint.model_validate_json(json.dumps(row)) for row in raw_curve)
++    grid = resample_equity(points, 14400)
++    cursor = 0
++    curve: list[dict[str, Any]] = []
++    for point in grid:
++        while cursor + 1 < len(raw_times) and raw_times[cursor + 1] <= point.time:
++            cursor += 1
++        info = information[raw_times[cursor]]
++        curve.append(
++            {
++                "time": point.time,
++                "equity": point.equity,
++                "cash": point.cash,
++                "position_value": point.position_value,
++                **info,
++            }
++        )
++
++    funnel: Counter[tuple[str, str, str, str]] = Counter()
++    last_review = last_submitted = None
++    clock_rows = no_order_reviews = 0
++    for ordinal, row in enumerate(trace, 1):
++        time = at(row["time"])
++        funnel[
++            (
++                str(row["reason"]),
++                str(row.get("resize_gate_reason")),
++                str(row.get("rebalance_permitted")),
++                str(row["order_status"]),
++            )
++        ] += 1
++        if row.get("rebalance_permitted") is not None and review_interval_hours is not None:
++            permitted = last_review is None or time - last_review >= timedelta(
++                hours=review_interval_hours
++            )
++            shown = (
++                at(row["last_regular_review"])
++                if row.get("last_regular_review") is not None
++                else None
++            )
++            submitted_before = (
++                at(row["last_resize_time_before_decision"])
++                if row.get("last_resize_time_before_decision") is not None
++                else None
++            )
++            checks.check(
++                "review_due_from_previous_state",
++                row["rebalance_permitted"] is permitted,
++                str(ordinal),
++            )
++            checks.check(
++                "review_state_transition",
++                shown == last_review or (permitted and shown == time),
++                str(ordinal),
++            )
++            checks.check(
++                "submitted_clock_is_not_fill_clock",
++                submitted_before == last_submitted,
++                str(ordinal),
++            )
++            clock_rows += 1
++            if shown == time and not row.get("order_id"):
++                no_order_reviews += 1
++            last_review = shown
++        reason = row.get("resize_gate_reason")
++        if reason in {"REBALANCE_COST_EXCEEDS_RISK_BENEFIT", "REBALANCE_RISK_BENEFIT_COVERS_COST"}:
++            benefit, cost = (
++                amount(row["rebalance_risk_benefit"]),
++                amount(row["rebalance_cost_equity_fraction"]),
++            )
++            accepted = benefit > 0 and cost <= cost_benefit_lambda * benefit
++            checks.check(
++                "recorded_cost_benefit_veto",
++                accepted is (reason == "REBALANCE_RISK_BENEFIT_COVERS_COST"),
++                str(ordinal),
++            )
++        if row.get("order_id"):
++            last_submitted = time
++            if review_interval_hours is not None:
++                last_review = time
++    return {
++        "summary": {
++            "run_id": run_id,
++            "status": "VERIFIED_STORED_SIMULATION"
++            if checks.passed
++            else "INCONSISTENT_STORED_SIMULATION",
++            "orders": len(orders),
++            "fills": len(fills),
++            "ledger_records": len(records),
++            "trace_rows": len(trace),
++            "raw_mtm_points": len(raw_curve),
++            "grid_points": len(grid),
++            "cost": str(total_cost),
++            "initial_cash": spec["initial_cash"]["amount"],
++            "final_cash": str(cash[quote]),
++            "clock_rows_checked": clock_rows,
++            "carried_mark_older_than_4h": sum(
++                row["time"] - row["source_time"] > timedelta(hours=4) for row in curve
++            ),
++            "due_reviews_without_order": no_order_reviews,
++            "checks": checks.counts,
++        },
++        "joins": joined,
++        "curve": curve,
++        "gate_funnel": [
++            {
++                "reason": key[0],
++                "resize_gate_reason": key[1],
++                "review_due": key[2],
++                "order_status": key[3],
++                "rows": count,
++            }
++            for key, count in sorted(funnel.items())
++        ],
++    }
++
++
++def combine_segments(segments: Sequence[list[dict[str, Any]]]) -> list[dict[str, Any]]:
++    output: list[dict[str, Any]] = []
++    for segment in segments:
++        if not segment:
++            raise ValueError("missing segment curve")
++        if output:
++            previous, current = output[-1], segment[0]
++            if previous["time"] != current["time"] or any(
++                previous[key] != current[key]
++                for key in ("equity", "cash", "quantity", "position_value")
++            ):
++                raise ValueError("quarter boundary must preserve the paid exit and inherited cash")
++            output.extend(segment[1:])
++        else:
++            output.extend(segment)
++    if any(b["time"] - a["time"] != timedelta(hours=4) for a, b in pairwise(output)):
++        raise ValueError("complete four-hour calendar required")
++    return output
++
++
++def tail_inventory(curves: Mapping[str, list[dict[str, Any]]]) -> dict[str, Any]:
++    if not curves or any(
++        [r["time"] for r in curve] != [r["time"] for r in next(iter(curves.values()))]
++        for curve in curves.values()
++    ):
++        raise ValueError("tail attribution needs the same full calendar for every asset")
++    symbols = sorted(curves)
++    size = len(curves[symbols[0]])
++    if size < 2:
++        raise ValueError("tail attribution needs at least two marks")
++    if any(b["time"] - a["time"] != timedelta(hours=4) for a, b in pairwise(curves[symbols[0]])):
++        raise ValueError("tail attribution needs a complete four-hour calendar")
++    nav = [
++        sum((curves[symbol][index]["equity"] for symbol in symbols), ZERO) for index in range(size)
++    ]
++    if any(value <= 0 for value in nav):
++        raise ValueError("tail attribution requires positive portfolio NAV")
++    returns = [(nav[index] - nav[index - 1]) / nav[index - 1] for index in range(1, size)]
++    rank = (len(returns) + 19) // 20
++    threshold = sorted(returns)[rank - 1]
++    selected = [index for index in range(1, size) if returns[index - 1] <= threshold]
++    rows: list[dict[str, Any]] = []
++    for index in selected:
++        components: list[dict[str, Any]] = []
++        total = ZERO
++        for symbol in symbols:
++            previous, current = curves[symbol][index - 1], curves[symbol][index]
++            change = current["equity"] - previous["equity"]
++            total += change
++            components.append(
++                {
++                    "symbol": symbol,
++                    "quantity_before": str(previous["quantity"]),
++                    "quantity_after": str(current["quantity"]),
++                    "saved_mark_before": str(previous["mark"])
++                    if previous["mark"] is not None
++                    else None,
++                    "saved_mark_after": str(current["mark"])
++                    if current["mark"] is not None
++                    else None,
++                    "cash_change": str(current["cash"] - previous["cash"]),
++                    "position_value_change": str(
++                        current["position_value"] - previous["position_value"]
++                    ),
++                    "equity_change": str(change),
++                    "portfolio_return_contribution": str(change / nav[index - 1]),
++                    "source_mark_before": previous["source_time"].isoformat(),
++                    "source_mark_after": current["source_time"].isoformat(),
++                    "source_age_seconds_after": str(
++                        (current["time"] - current["source_time"]).total_seconds()
++                    ),
++                }
++            )
++        residual = total - (nav[index] - nav[index - 1])
++        if abs(residual) > MONEY_TOLERANCE:
++            raise ValueError("asset changes do not sum to portfolio change")
++        rows.append(
++            {
++                "start": curves[symbols[0]][index - 1]["time"].isoformat(),
++                "end": curves[symbols[0]][index]["time"].isoformat(),
++                "net_return": str(returns[index - 1]),
++                "equity_change": str(total),
++                "sum_residual": str(residual),
++                "assets": components,
++            }
++        )
++    return {
++        "selection": "WORST_CEIL_5_PERCENT_OF_ALL_4H_RETURNS_INCLUDING_ALL_CUTOFF_TIES",
++        "observations": len(returns),
++        "minimum_selected": rank,
++        "threshold": str(threshold),
++        "selected": len(rows),
++        "rows": rows,
++        "meaning": "STORED_SIMULATED_ACCOUNT_CONTRIBUTIONS_NOT_CAUSAL_FACTOR_ALPHA",
++    }
++
++
++def validate_config(config: Mapping[str, Any]) -> None:
++    match = re.fullmatch(r"alpha-r5-saved-evidence-(\d{8})-v([1-9]\d*)", config["generation"])
++    require(match is not None, "AQ-SAVED-EVIDENCE-GENERATION")
++    if match is None:
++        return
++    require(
++        config["output"] == f"artifacts/alpha_v5/{match[1]}_saved_evidence_v{match[2]}",
++        "AQ-SAVED-EVIDENCE-OUTPUT",
++    )
++    require(
++        config["scope"] == "B1_SAVED_SIMULATION_JOINS_NO_REPLAY"
++        and config["saved_scope"]
++        == {"r5_registered_runs": 55, "r4_f0_quarter_segments": 70, "new_strategy_runs": 0},
++        "AQ-SAVED-EVIDENCE-SCOPE",
++    )
++    require(
++        config["tail_fraction"] == "0.05"
++        and config["source_period"] == ["2022-04-01T00:00:00Z", "2025-10-01T00:00:00Z"],
++        "AQ-SAVED-EVIDENCE-FIXED-AUDIT",
++    )
++
++
++def build_documents(root: Path, sources: dict[str, Any]) -> Mapping[str, Any]:
++    catalog, original = sources["b0_catalog"]["reads"], sources["b0_baseline"]["files"]
++    reads: list[dict[str, Any]] = []
++
++    def read(name: str) -> bytes:
++        binding = catalog.get(name) or original.get(name)
++        require(binding is not None, "AQ-SAVED-EVIDENCE-UNREGISTERED-SOURCE:" + name)
++        path = checked_path(root, name)
++        raw = path.read_bytes()
++        require(
++            hashlib.sha256(raw).hexdigest() == binding["sha256"] and len(raw) == binding["bytes"],
++            "AQ-SAVED-EVIDENCE-CHANGED-SOURCE:" + name,
++        )
++        reads.append({"path": name, "sha256": binding["sha256"], "bytes": len(raw)})
++        return raw
++
++    r5_manifest = sources["r5_manifest"]
++    tasks: list[dict[str, Any]] = []
++    for run in r5_manifest["planned_runs"]:
++        arm, symbol, cost = (str(run[k]) for k in ("arm", "symbol", "cost"))
++        require(
++            symbol in SYMBOLS
++            and arm in r5_manifest["config"]["arms"]
++            and cost in r5_manifest["config"]["arms"][arm]["costs"],
++            "AQ-SAVED-EVIDENCE-UNREGISTERED-RUN",
++        )
++        settings = {**r5_manifest["config"]["resize"], **r5_manifest["config"]["arms"][arm]}
++        tasks.append(
++            {
++                "arm": arm,
++                "symbol": symbol,
++                "cost": cost,
++                "segment": "continuous",
++                "folder": f"{R5}/runs/{arm}/{symbol}/{cost}",
++                "hours": None if arm == "G0" else settings["review_interval_hours"],
++            }
++        )
++    require(len(tasks) == 55, "AQ-SAVED-EVIDENCE-R5-SCOPE")
++    r4_registry = sources["r4_registry"]
++    for trial in r4_registry["trials"]:
++        if (trial["arm"], trial["mode"], trial["cost_multiplier"]) != (
++            "F0",
++            "REDECIDE_FUNDED",
++            "1",
++        ):
++            continue
++        require(
++            trial["status"] == "REPLAYED"
++            and trial["symbol"] in SYMBOLS
++            and len(trial["segments"]) == 14,
++            "AQ-SAVED-EVIDENCE-F0-SCOPE",
++        )
++        for segment in trial["segments"]:
++            tasks.append(
++                {
++                    "arm": "F0",
++                    "symbol": trial["symbol"],
++                    "cost": "1",
++                    "segment": segment["segment"],
++                    "folder": f"{R4}/{trial['output']}/{segment['segment']}",
++                    "hours": None,
++                }
++            )
++    require(
++        len(tasks) == 125 and len({r["folder"] for r in tasks}) == 125,
++        "AQ-SAVED-EVIDENCE-COMPLETE-SCOPE",
++    )
++    summaries: list[dict[str, Any]] = []
++    joins: list[dict[str, Any]] = []
++    funnels: list[dict[str, Any]] = []
++    groups: dict[tuple[str, str, str], list[list[dict[str, Any]]]] = defaultdict(list)
++    for index, task in enumerate(tasks, 1):
++        folder = task["folder"]
++        result = json.loads(gzip.decompress(read(folder + "/result.json.gz")), parse_float=str)
++        trace = pl.read_parquet(read(folder + "/decision_trace.parquet")).to_dicts()
++        audit = audit_saved_result(
++            result,
++            trace,
++            symbol=task["symbol"],
++            review_interval_hours=task["hours"],
++            cost_benefit_lambda=amount(r5_manifest["config"]["resize"]["cost_benefit_lambda"]),
++        )
++        tags = {k: task[k] for k in ("arm", "symbol", "cost", "segment")}
++        summaries.append({**tags, **audit["summary"]})
++        joins.extend({**tags, **row} for row in audit["joins"])
++        funnels.extend({**tags, **row} for row in audit["gate_funnel"])
++        groups[(task["arm"], task["cost"], task["symbol"])].append(audit["curve"])
++        if index % 10 == 0:
++            print(f"saved evidence {index}/{len(tasks)} (no strategy execution)", flush=True)
++    curves = {key: combine_segments(value) for key, value in groups.items()}
++    require(
++        all(
++            curve[0]["time"] == at("2022-04-01T00:00:00Z")
++            and curve[-1]["time"] == at("2025-10-01T00:00:00Z")
++            for curve in curves.values()
++        ),
++        "AQ-SAVED-EVIDENCE-FULL-REGISTERED-PERIOD",
++    )
++    tails: list[dict[str, Any]] = []
++    for arm, cost in sorted({(key[0], key[1]) for key in curves}):
++        sleeves = {symbol: curves[(arm, cost, symbol)] for symbol in SYMBOLS}
++        tails.append({"arm": arm, "cost": cost, **tail_inventory(sleeves)})
++    attribution = pl.read_parquet(read(R5 + "/execution_reason_attribution.parquet")).to_dicts()
++    saved_r5 = [row for row in attribution if row["arm"] in r5_manifest["config"]["arms"]]
++    saved_by_fill = {row["fill_id"]: row for row in saved_r5}
++    reconstructed = [row for row in joins if row["arm"] != "F0"]
++    derived_checks = AuditChecks()
++    derived_checks.check("unique_saved_derived_fill_ids", len(saved_by_fill) == len(saved_r5), "R5")
++    derived_checks.check(
++        "complete_saved_derived_fill_ids",
++        set(saved_by_fill) == {row["fill_id"] for row in reconstructed},
++        "R5",
++    )
++    for row in reconstructed:
++        prior = saved_by_fill.get(row["fill_id"])
++        if prior is None:
++            continue
++        derived_checks.check(
++            "saved_reason_and_order",
++            prior["reason_primary"] == row["reason_primary"]
++            and prior["order_id"] == row["order_id"],
++            row["fill_id"],
++        )
++        for old_key, new_key in (
++            ("filled_qty", "signed_quantity"),
++            ("filled_notional", "gross_notional"),
++            ("total_cost", "cost"),
++            ("fee_paid", "fee"),
++        ):
++            derived_checks.equal(
++                "saved_derived_" + old_key,
++                amount(prior[old_key]),
++                amount(row[new_key]),
++                row["fill_id"],
++            )
++    passed = (
++        all(row["status"] == "VERIFIED_STORED_SIMULATION" for row in summaries)
++        and derived_checks.passed
++    )
++    ordinary = Counter(
++        (row["arm"], row["cost"], row["reason_primary"])
++        for row in joins
++        if row["reason_primary"] in {"ORDINARY_RISK_REDUCE", "ORDINARY_RISK_RESTORE"}
++    )
++    status = "VERIFIED_STORED_SIMULATION" if passed else "INCONSISTENT_STORED_SIMULATION"
++    return {
++        "raw_source_inventory.json": {
++            "reads": reads,
++            "source_identity": "B0_HASHED_ORIGINAL_FILES_AND_R5_JOURNAL_BOUND_CATALOG",
++            "new_strategy_runs": 0,
++        },
++        "raw_order_fill_ledger_audit.json": {
++            "status": status,
++            "runs": summaries,
++            "joins": joins,
++            "derived_table_checks": derived_checks.counts,
++        },
++        "recorded_gate_funnel.json": {
++            "status": "OBSERVED_RECORDED_TERMINAL_GATES_ONLY",
++            "total_decisions": sum(r["trace_rows"] for r in summaries),
++            "groups": funnels,
++            "all_internal_gate_evaluations": "NOT_PERSISTED_CANNOT_RECONSTRUCT_SKIPPED_GATES",
++            "ordinary_fill_counts": [
++                {"arm": key[0], "cost": key[1], "reason": key[2], "fills": value}
++                for key, value in sorted(ordinary.items())
++            ],
++        },
++        "all_worst_5pct_inventory.json": {
++            "groups": tails,
++            "statistical_test_or_bootstrap": False,
++            "new_candidate_selection": False,
++        },
++        "evidence_gaps.json": {
++            "still_unverified": [
++                "EVERY_INTERNAL_GATE_AND_PRE_VETO_POST_SECOND_ROUNDING_TARGET",
++                "EXTERNAL_ACK_CANCEL_AND_QUEUE_EVENT_STREAM",
++                "INDEPENDENT_PIT_FEE_RULE_DEPTH_LATENCY",
++                "CAUSAL_FACTOR_AND_EXECUTION_DECOMPOSITION_OF_TAIL",
++                "COMPLETE_TRIAL_HISTORY_AND_UNUSED_HOLDOUT",
++            ],
++            "old_reports_preserved": True,
++            "real_execution_verified": False,
++            "research_conclusion": "NO_PROVEN_ALPHA",
++        },
++        "report.md": f"""# 已保存 R5 与 F0 原始模拟记录只读核验
++
++**NO_PROVEN_ALPHA / CASH；模型、纸面、实盘和订单继续关闭。**
++
++本批核验原 R5 的全部 55 个保存结果及原 F0 的 70 个季度分区；所有输入先与 B0 封存哈希核对。当前结果：**{status}**。这是读取原始模拟记录后的联结与算术核验，没有调用策略引擎、重建行情、重定价成交、训练或重新计算显著性。此前 HASH_ONLY/NOT_VERIFIED 报告保留，不能把本报告倒填成此前已经完成。
++
++逐单核对 trace→order→fill→ledger、数量/时钟/费用资产、原账本哈希链和每资产借贷平衡，并从已有 postings 和 lot changes 核对每个已保存 MTM 的资金、原生库存和已记录价格。F0 季度边界要求付费退出与下一季度初始资金一致，不能遗漏不利边界。检查逐项计数和失败示例见 raw_order_fill_ledger_audit.json；失败不会被删掉或强制改成预期数字。
++
++共读取 {sum(r["trace_rows"] for r in summaries)} 行决策 trace。门槛表覆盖这些行的已记录终态理由；它不是未保存的逐个内部门槛执行轨迹。复核状态从前行保存状态及提交事件核对，未下单也可能消耗到期复核。没有外部 ack/cancel/queue 流，不能据此声称真实场所时钟已验证。
++
++最差窗口固定为每个策略/成本组完整四小时日历的最差 ceil(5%×N)，临界值并列全部保留；每个窗口列出全部五币的原生持仓、cash/position value 变化和组合收益贡献。沿用原 resample_equity 的已知标记前填规则并记录 source_time/标记年龄；网格完整不代表底层行情无缺口。只是原模拟账户贡献，不是因果因子归因或信号 alpha。没有读取新的行情，也没有事后挑选一两个故事窗口。
++
++仍缺逐个内部门槛、veto 前和二次取整后完整目标、真实 PIT/费用/盘口/延迟、完整试验史及未使用留出。任务的完整实证验收仍未完成；所有新历史策略回放、真实收益模型拟合、真实校准拟合、最终留出读取和真实订单均为 0。
++""",
++    }
+--- /dev/null
++++ b/scripts/audit_alpha_v5_saved_runs.py
+@@ -0,0 +1,42 @@
++"""Audit existing simulation records under the zero research-operation guard."""
++
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import yaml
++
++from aegisquant.research.validation.evidence_contract import (
++    checked_path,
++    run_zero_research_contract,
++)
++from aegisquant.research.validation.saved_run_audit import FILES, build_documents, validate_config
++from scripts.export_alpha_v4_audit_bundle import git
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--config", required=True, type=Path)
++    parser.add_argument("--preflight-dir", required=True, type=Path)
++    args = parser.parse_args()
++    config = yaml.safe_load(checked_path(ROOT, args.config.as_posix()).read_text(encoding="utf-8"))
++    validate_config(config)
++    output = run_zero_research_contract(
++        root=ROOT,
++        config=config,
++        stage=args.preflight_dir,
++        git_state={
++            "head": git(ROOT, "rev-parse", "HEAD"),
++            "branch": git(ROOT, "branch", "--show-current"),
++        },
++        files=FILES,
++        build_documents=lambda sources: build_documents(ROOT, sources),
++    )
++    print(f"Saved simulation evidence audit: {output}; no new strategy run", flush=True)
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/configs/research/alpha_v5_saved_run_audit.yaml
+@@ -0,0 +1,41 @@
++schema_version: aegis-saved-evidence-audit-v1
++generation: alpha-r5-saved-evidence-20260910-v1
++output: artifacts/alpha_v5/20260910_saved_evidence_v1
++scope: B1_SAVED_SIMULATION_JOINS_NO_REPLAY
++branch_required: main
++source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
++budgets:
++  contract_jobs: 1
++  historical_strategy_engine_runs: 0
++  real_return_model_fits: 0
++  real_calibration_fits: 0
++  final_holdout_accesses: 0
++  real_orders: 0
++sources:
++  r5_manifest:
++    path: artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json
++    sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
++  b0_catalog:
++    path: artifacts/alpha_v5/20260909_review_contract_v2/evidence_contract.json
++    sha256: 696be552a769b21f63cf0bf488feacd767d90958682126fae0b6fdf104fb9724
++  b0_baseline:
++    path: artifacts/alpha_v5/20260909_review_contract_v2/preflight/baseline_workspace.json
++    sha256: d0a38317bd5114b2c12375653b268c29ad9e553787fcb9b94d6c3cfd3fefcf7f
++  b7_manifest:
++    path: artifacts/alpha_v5/20260910_final_contract_v1/OUTPUT_MANIFEST.json
++    sha256: b96416c3931b9b2870afae05092770e1f4ea66ca798ec56c1c5c7f783cabc094
++  r4_registry:
++    path: artifacts/alpha_r4/20260908_v1/experiment_registry.json
++    sha256: ab77f669e9dabedd303d2706b506f09c9c63904b40a03d9f92e7363046b4aebf
++saved_scope:
++  r5_registered_runs: 55
++  r4_f0_quarter_segments: 70
++  new_strategy_runs: 0
++source_period: ['2022-04-01T00:00:00Z', '2025-10-01T00:00:00Z']
++tail_fraction: '0.05'
++research_conclusion: NO_PROVEN_ALPHA
++production_policy: CASH
++production_ml_enabled: false
++paper_trading_admitted: false
++live_trading: false
++order_submission_enabled: false
+--- /dev/null
++++ b/tests/alpha_v5/test_saved_run_audit.py
+@@ -0,0 +1,494 @@
++from __future__ import annotations
++
++from collections.abc import Sequence
++from copy import deepcopy
++from datetime import UTC, datetime, timedelta
++from decimal import Decimal
++from pathlib import Path
++from typing import Any
++
++import pytest
++import yaml
++
++from aegisquant.data.hashing import canonical_sha256
++from aegisquant.research.validation.evidence_contract import ZERO_BUDGETS, zero_budget_guard
++from aegisquant.research.validation.saved_run_audit import (
++    at,
++    audit_saved_result,
++    combine_segments,
++    tail_inventory,
++    validate_config,
++)
++
++D = Decimal
++START = datetime(2020, 1, 1, tzinfo=UTC)
++
++
++def iso(hours: int, *, before: bool = False) -> str:
++    return (
++        START + timedelta(hours=hours) - (timedelta(milliseconds=1) if before else timedelta(0))
++    ).isoformat()
++
++
++def fixture() -> tuple[dict[str, Any], list[dict[str, Any]]]:
++    """A two-fill synthetic example; no historical input or strategy execution."""
++    trace: list[dict[str, Any]] = []
++    orders: list[dict[str, Any]] = []
++    fills: list[dict[str, Any]] = []
++    for index, (hour, qty, cash, price) in enumerate(
++        ((4, 0, 1000, 100), (8, 1, 898, 112), (12, 1, 898, 114), (16, 0, 1016, 120))
++    ):
++        active = index in (0, 2)
++        side = "BUY" if index == 0 else "SELL"
++        key = f"synthetic-{index + 1}"
++        time = iso(hour, before=True)
++        reference = "100" if index == 0 else "120"
++        row = {
++            "time": time,
++            "decision_time": time,
++            "known_close": str(price),
++            "cash": str(cash),
++            "current_quantity": str(qty),
++            "target_quantity": "1" if index < 2 else "0",
++            "signed_planned_quantity": ("1" if index == 0 else "-1") if active else "0",
++            "reason": "TREND_ENTRY_PASSED_ENABLED_GATES"
++            if index == 0
++            else "CONFIRMED_TREND_EXIT"
++            if index == 2
++            else "INSIDE_ECONOMIC_NO_TRADE_REGION",
++            "order_id": key if active else None,
++            "order_status": "FILLED" if active else "NO_ORDER",
++            "rejection_reason": None,
++            "actual_fill_notional": reference if active else "0",
++            "realized_execution_cost": "2" if active else "0",
++            "rebalance_permitted": index == 0,
++            "last_regular_review": None if index == 0 else iso(4 if index < 3 else 12, before=True),
++            "last_resize_time_before_decision": None
++            if index == 0
++            else iso(4 if index < 3 else 12, before=True),
++            "resize_gate_reason": None,
++        }
++        trace.append(row)
++        if not active:
++            continue
++        order = {
++            "backtest_order_id": key,
++            "client_order_id": key,
++            "order_intent_id": key,
++            "instrument_id": "SIM:SPOT:BTCUSDT",
++            "side": side,
++            "quantity": {"amount": "1", "asset_id": "BTC"},
++            "decision_time": time,
++            "submitted_at": time,
++        }
++        venue_id = "simorder:" + key
++        orders.append(
++            {
++                "order": order,
++                "venue_order_id": venue_id,
++                "status": "FILLED",
++                "arrival_time": time,
++                "cumulative_filled_quantity": "1",
++                "rejection_code": None,
++            }
++        )
++        costs = {
++            "asset_id": "USDT",
++            "gross_notional": reference,
++            "fee": "1",
++            "spread": "1",
++            "slippage": "0",
++            "impact": "0",
++            "funding": "0",
++            "borrow_interest": "0",
++            "settlement_fee": "0",
++            "liquidation_penalty": "0",
++        }
++        fills.append(
++            {
++                "fill_id": "simfill:" + key,
++                "backtest_order_id": key,
++                "client_order_id": key,
++                "order_intent_id": key,
++                "instrument_id": "SIM:SPOT:BTCUSDT",
++                "side": side,
++                "venue_order_id": venue_id,
++                "quantity": {"amount": "1", "asset_id": "BTC"},
++                "reference_price": {"amount": reference},
++                "execution_price": {"amount": "101" if index == 0 else "119"},
++                "fee": {"amount": "1", "asset_id": "USDT"},
++                "cost_breakdown": costs,
++                "source_event_id": "synthetic-bar",
++                "event_time": iso(hour),
++                "available_time": iso(hour + 4, before=True),
++                "ingest_time": iso(hour + 4, before=True),
++            }
++        )
++    records: list[dict[str, Any]] = []
++    lot = {
++        "position_lot_id": canonical_sha256({"fill_id": fills[0]["fill_id"], "ordinal": 0}),
++        "account_id": "position_cost:SIM:SIM:SPOT:BTCUSDT",
++        "instrument_id": "SIM:SPOT:BTCUSDT",
++        "side": "LONG",
++        "quantity_unit": "BASE_ASSET",
++        "quantity_asset_id": "BTC",
++        "opened_quantity": "1",
++        "remaining_quantity": "1",
++        "entry_price": "101",
++        "contract_form": "SPOT",
++        "contract_multiplier": "1",
++        "settlement_asset_id": "USDT",
++        "opening_fee": {"amount": "1", "asset_id": "USDT"},
++        "source_fill_id": fills[0]["fill_id"],
++        "opened_at": fills[0]["event_time"],
++        "closed_at": None,
++    }
++
++    def posting(account: str, asset: str, value: str, side: str) -> dict[str, Any]:
++        return {"account_id": account, "side": side, "amount": {"asset_id": asset, "amount": value}}
++
++    def record(
++        index: int,
++        entries: list[dict[str, Any]],
++        fill: dict[str, Any] | None,
++        changes: list[dict[str, Any]],
++    ) -> None:
++        identity = str(index + 1) * 64
++        payload = {
++            "journal_entry": {
++                "journal_entry_id": identity,
++                "event_time": fill["event_time"] if fill else iso(0),
++                "recorded_at": fill["ingest_time"] if fill else iso(0),
++                "postings": entries,
++                "reconciliation_adjustment": False,
++                "supersedes_entry_id": None,
++            },
++            "policy_version": "accounting-v1",
++            "chart_version": "coa-v1",
++            "entry_template_id": "spot-fill" if fill else "external-transfer",
++            "template_version": "entry-templates-v1",
++            "source_fill_id": fill["fill_id"] if fill else None,
++            "source_order_intent_id": fill["order_intent_id"] if fill else None,
++            "idempotency_key": "simfill:" + fill["fill_id"] if fill else identity,
++            "command_hash": identity,
++            "previous_hash": records[-1]["event_hash"] if records else "0" * 64,
++            "lot_changes": changes,
++        }
++        records.append({**payload, "event_hash": canonical_sha256(payload)})
++
++    record(
++        0,
++        [
++            posting("cash:SIM:USDT", "USDT", "1000", "DEBIT"),
++            posting("owner:SIM:USDT", "USDT", "1000", "CREDIT"),
++        ],
++        None,
++        [],
++    )
++    record(
++        1,
++        [
++            posting("cash:SIM:BTC", "BTC", "1", "DEBIT"),
++            posting("clearing:SIM:BTC", "BTC", "1", "CREDIT"),
++            posting("position_cost:SIM:BTC", "USDT", "101", "DEBIT"),
++            posting("cash:SIM:USDT", "USDT", "101", "CREDIT"),
++            posting("fee:SIM:USDT", "USDT", "1", "DEBIT"),
++            posting("cash:SIM:USDT", "USDT", "1", "CREDIT"),
++        ],
++        fills[0],
++        [
++            {
++                "action": "OPEN",
++                "lot_before": None,
++                "lot_after": lot,
++                "affected_quantity": "1",
++                "realized_pnl": {"amount": "0", "asset_id": "USDT"},
++            }
++        ],
++    )
++    record(
++        2,
++        [
++            posting("cash:SIM:BTC", "BTC", "1", "CREDIT"),
++            posting("clearing:SIM:BTC", "BTC", "1", "DEBIT"),
++            posting("cash:SIM:USDT", "USDT", "119", "DEBIT"),
++            posting("position_cost:SIM:BTC", "USDT", "101", "CREDIT"),
++            posting("realized:SIM:USDT", "USDT", "18", "CREDIT"),
++            posting("fee:SIM:USDT", "USDT", "1", "DEBIT"),
++            posting("cash:SIM:USDT", "USDT", "1", "CREDIT"),
++        ],
++        fills[1],
++        [
++            {
++                "action": "CLOSE",
++                "lot_before": lot,
++                "lot_after": None,
++                "affected_quantity": "1",
++                "realized_pnl": {"amount": "18", "asset_id": "USDT"},
++            }
++        ],
++    )
++    raw_points: list[dict[str, Any]] = []
++    for time, cash, position in (
++        (iso(0), "1000", "0"),
++        (iso(4, before=True), "1000", "0"),
++        (iso(8, before=True), "898", "112"),
++        (iso(12, before=True), "898", "114"),
++        (iso(16, before=True), "1016", "0"),
++        (iso(16), "1016", "0"),
++    ):
++        raw_points.append(
++            {
++                "time": time,
++                "cash": cash,
++                "position_value": position,
++                "realized_pnl": "0",
++                "unrealized_pnl": "0",
++                "equity": str(D(cash) + D(position)),
++                "reporting_asset_id": "USDT",
++            }
++        )
++    return {
++        "spec": {
++            "run_id": "synthetic",
++            "start_time": iso(0),
++            "end_time": iso(16),
++            "initial_cash": {"amount": "1000", "asset_id": "USDT"},
++            "live_trading_locked": True,
++            "accounting_policy_version": "accounting-v1",
++            "cost_policy_version": "cat-proxy-v2",
++        },
++        "orders": orders,
++        "fills": fills,
++        "ledger_records": records,
++        "positions": [{"quantity": "0"}],
++        "closed_trades": [{}],
++        "equity_curve": raw_points,
++    }, trace
++
++
++def run_audit(
++    result: dict[str, Any], trace: list[dict[str, Any]], hours: int = 48
++) -> dict[str, Any]:
++    return audit_saved_result(result, trace, symbol="BTCUSDT", review_interval_hours=hours)
++
++
++def test_original_records_join_and_native_cash_close_without_running_a_strategy() -> None:
++    result, trace = fixture()
++    audited = run_audit(result, trace)
++    summary = audited["summary"]
++    assert summary["status"] == "VERIFIED_STORED_SIMULATION", summary["checks"]
++    assert (
++        summary["orders"],
++        summary["fills"],
++        summary["ledger_records"],
++        summary["raw_mtm_points"],
++    ) == (2, 2, 3, 6)
++    assert summary["final_cash"] == "1016" and summary["cost"] == "4"
++    assert len(audited["joins"]) == 2 and all(r["ledger_event_hash"] for r in audited["joins"])
++    assert sum(r["rows"] for r in audited["gate_funnel"]) == 4
++    assert audited["curve"][1]["equity"] == D(1000)  # 04:00 cannot use the 07:59 mark.
++    assert audited["curve"][2]["equity"] == D(1010)
++
++
++@pytest.mark.parametrize(
++    "problem,check",
++    [
++        ("duplicate_fill", "unique_fill_id"),
++        ("unknown_order", "fill_order_exists"),
++        ("missing_trace", "complete_trace_order_join"),
++        ("order_overfill", "order_not_overfilled"),
++        ("cumulative", "order_cumulative_fill"),
++        ("future_fill", "fill_causal_clocks"),
++        ("fee_asset", "fill_units_and_ids"),
++        ("fee_amount", "fee_money"),
++        ("ledger_hash", "ledger_hash_chain"),
++        ("unbalanced", "double_entry_by_asset"),
++        ("lot_chain", "lot_change_continuity"),
++        ("extra_cash", "ledger_cash_matches_every_mtm"),
++        ("wrong_price", "every_mtm_native_position_value"),
++        ("wrong_clock", "review_state_transition"),
++    ],
++)
++def test_inconsistent_saved_evidence_is_not_declared_verified(problem: str, check: str) -> None:
++    result, trace = fixture()
++    if problem == "duplicate_fill":
++        result["fills"].append(deepcopy(result["fills"][0]))
++    elif problem == "unknown_order":
++        result["fills"][0]["backtest_order_id"] = "missing"
++    elif problem == "missing_trace":
++        trace[0]["order_id"] = None
++    elif problem == "order_overfill":
++        result["orders"][0]["order"]["quantity"]["amount"] = "0.5"
++    elif problem == "cumulative":
++        result["orders"][0]["cumulative_filled_quantity"] = "0"
++    elif problem == "future_fill":
++        result["fills"][0]["available_time"] = iso(0)
++    elif problem == "fee_asset":
++        result["fills"][0]["fee"]["asset_id"] = "BNB"
++    elif problem == "fee_amount":
++        result["fills"][0]["fee"]["amount"] = "2"
++    elif problem == "ledger_hash":
++        result["ledger_records"][1]["previous_hash"] = "0" * 64
++    elif problem == "unbalanced":
++        result["ledger_records"][1]["journal_entry"]["postings"][0]["amount"]["amount"] = "2"
++    elif problem == "lot_chain":
++        result["ledger_records"][2]["lot_changes"][0]["lot_before"] = {
++            **result["ledger_records"][2]["lot_changes"][0]["lot_before"],
++            "remaining_quantity": "0.5",
++        }
++    elif problem == "extra_cash":
++        result["equity_curve"][2]["cash"] = "900"
++        result["equity_curve"][2]["equity"] = "1012"
++    elif problem == "wrong_price":
++        trace[1]["known_close"] = "1000"
++    elif problem == "wrong_clock":
++        trace[1]["last_regular_review"] = iso(100)
++    audited = run_audit(result, trace)["summary"]
++    assert audited["status"] == "INCONSISTENT_STORED_SIMULATION"
++    assert audited["checks"][check]["failed"] > 0
++
++
++@pytest.mark.parametrize(
++    "field,value,check",
++    [
++        ("opened_quantity", "0", "lot_schema"),
++        ("source_fill_id", "unknown", "lot_opening_fill_exists"),
++        ("quantity_asset_id", "ETH", "lot_opening_fill_identity"),
++        ("entry_price", "999", "lot_entry_price"),
++        ("opened_quantity", "2", "lot_opened_quantity"),
++    ],
++)
++def test_rehashed_illegal_lot_cannot_hide_behind_a_valid_ledger_chain(
++    field: str, value: str, check: str
++) -> None:
++    result, trace = fixture()
++    result["ledger_records"][1]["lot_changes"][0]["lot_after"][field] = value
++    rehash(result)
++    audited = run_audit(result, trace)["summary"]
++    assert audited["checks"]["ledger_hash_chain"]["failed"] == 0
++    assert audited["checks"][check]["failed"] > 0
++    assert audited["status"] == "INCONSISTENT_STORED_SIMULATION"
++
++
++def rehash(result: dict[str, Any]) -> None:
++    previous = "0" * 64
++    for record in result["ledger_records"]:
++        record["previous_hash"] = previous
++        record["event_hash"] = canonical_sha256(
++            {key: value for key, value in record.items() if key != "event_hash"}
++        )
++        previous = record["event_hash"]
++
++
++def test_rehashed_wrong_fill_idempotency_is_not_a_valid_link() -> None:
++    result, trace = fixture()
++    result["ledger_records"][1]["idempotency_key"] = "simfill:wrong-fill"
++    rehash(result)
++    checks = run_audit(result, trace)["summary"]["checks"]
++    assert checks["ledger_hash_chain"]["failed"] == 0
++    assert checks["ledger_fill_clocks_and_intent"]["failed"] == 1
++
++
++def test_due_review_without_order_and_cost_veto_are_auditable() -> None:
++    result, trace = fixture()
++    for row in trace:
++        row["rebalance_permitted"] = True
++    trace[1]["last_regular_review"] = trace[1]["time"]
++    trace[2]["last_regular_review"] = trace[1]["time"]
++    trace[1].update(
++        resize_gate_reason="REBALANCE_COST_EXCEEDS_RISK_BENEFIT",
++        rebalance_risk_benefit="0.01",
++        rebalance_cost_equity_fraction="0.02",
++    )
++    first = run_audit(result, trace, hours=4)["summary"]
++    assert first["status"] == "VERIFIED_STORED_SIMULATION", first["checks"]
++    assert first["due_reviews_without_order"] == 1
++    trace[1]["resize_gate_reason"] = "REBALANCE_RISK_BENEFIT_COVERS_COST"
++    assert (
++        run_audit(result, trace, hours=4)["summary"]["checks"]["recorded_cost_benefit_veto"][
++            "failed"
++        ]
++        == 1
++    )
++
++
++def curve(values: Sequence[Decimal]) -> list[dict[str, Any]]:
++    return [
++        {
++            "time": START + timedelta(hours=4 * i),
++            "source_time": START + timedelta(hours=4 * i),
++            "equity": value,
++            "cash": value,
++            "position_value": D(0),
++            "quantity": D(0),
++            "mark": D(100),
++        }
++        for i, value in enumerate(values)
++    ]
++
++
++def test_all_tail_cutoff_ties_and_all_assets_are_preserved() -> None:
++    values = [D(100)] * 38 + [D(90), D(81), D("72.9")]
++    a, b = curve(values), curve([value * 2 for value in values])
++    result = tail_inventory({"B": b, "A": a})
++    assert result["minimum_selected"] == 2 and result["selected"] == 3
++    assert all(
++        len(row["assets"]) == 2 and row["sum_residual"] == "0.0" for row in result["rows"][-1:]
++    )
++    assert result == tail_inventory({"A": a, "B": b})
++    all_flat = tail_inventory({"A": curve([D(100)] * 41)})
++    assert all_flat["selected"] == 40
++
++
++def test_tail_missing_asset_calendar_is_rejected_and_boundary_cash_cannot_reset() -> None:
++    series = curve([D(100), D(101), D(102)])
++    with pytest.raises(ValueError, match="same full calendar"):
++        tail_inventory({"A": series, "B": series[1:]})
++    assert combine_segments([series[:2], series[1:]]) == series
++    wrong = deepcopy(series[1:])
++    wrong[0]["cash"] += 1
++    with pytest.raises(ValueError, match="inherited cash"):
++        combine_segments([series[:2], wrong])
++
++
++def test_naive_clocks_are_rejected() -> None:
++    with pytest.raises(ValueError, match="explicit UTC"):
++        at("2020-01-01T00:00:00")
++
++
++def test_tail_common_gap_and_zero_nav_are_explicitly_rejected() -> None:
++    with pytest.raises(ValueError, match="complete four-hour"):
++        tail_inventory({"A": curve([D(100)] * 3)[::2]})
++    with pytest.raises(ValueError, match="positive portfolio NAV"):
++        tail_inventory({"A": curve([D(0), D(100)])})
++
++
++def test_saved_audit_operates_inside_zero_research_guard(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    from aegisquant.accounting.ledger import LedgerEngine
++    from aegisquant.backtest.engine import EventBacktestEngine
++
++    def forbidden(*_: Any, **__: Any) -> None:
++        raise AssertionError("an audit cannot execute an engine or ledger command")
++
++    monkeypatch.setattr(EventBacktestEngine, "run", forbidden)
++    monkeypatch.setattr(LedgerEngine, "process_fill", forbidden)
++    output = tmp_path / "new-output"
++    output.mkdir()
++    counters: dict[str, int] = dict.fromkeys(ZERO_BUDGETS, 0)
++    result, trace = fixture()
++    with zero_budget_guard(output, tmp_path, counters):
++        assert run_audit(result, trace)["summary"]["status"] == "VERIFIED_STORED_SIMULATION"
++    assert all(value == 0 for value in counters.values())
++
++
++def test_saved_scope_cannot_turn_into_a_new_strategy_trial() -> None:
++    config = yaml.safe_load(
++        Path("configs/research/alpha_v5_saved_run_audit.yaml").read_text(encoding="utf-8")
++    )
++    validate_config(config)
++    config["saved_scope"]["new_strategy_runs"] = 1
++    with pytest.raises(ValueError, match="SCOPE"):
++        validate_config(config)
+--- /dev/null
++++ b/docs/research/alpha_v5_saved_run_audit.md
+@@ -0,0 +1,13 @@
++# 已保存模拟记录的只读补充核验
++
++入口 `python -m scripts.audit_alpha_v5_saved_runs --config configs/research/alpha_v5_saved_run_audit.yaml --preflight-dir <检查目录>` 沿用已有 claim、哈希链、零研究预算守卫与封存函数。新增五个文件，不修改旧实现或任何历史结果。
++
++固定读取原 R5 v3 全部 55 个保存 run 和原 F0 的 70 个季度分区。结果/trace bytes 必须先匹配 B0 已封存 catalog 或修改前 baseline 的 SHA256 与长度，然后才解压 JSON 或读取 parquet。解析是只读原模拟结果，不执行 engine、ledger 命令、市场回放、模型拟合或重新定价成交；使用已有纯 `resample_equity` 和 `execution_reason`。
++
++核对 trace→order→fill→ledger 的已保存 ID、数量、时钟与费用资产；每条原账本记录重算哈希链并检查逐资产借贷平衡。复用既有 LotChange 模型校验数量与生命周期，并将 lot 的原始成交 ID、单位、数量、开仓价格及费用连回保存 fill；账本幂等键须匹配冻结模拟器的 `simfill:<fill_id>`。从已有原生 CASH postings 和 lot changes 检查每个已保存 MTM 的现金、净库存及已记录价格。它验证保存记录的内部一致性，不能证明模拟器等价于真实交易所，也不是重跑会计策略。金额算术容差预先固定 1e-18 USDT，数量终态严格为零；报告全部检查次数、失败数和最大算术残差。
++
++共同四小时日历沿用原因果标记前填。原始行情 gap 仍是缺口；每格保留源标记时间，超过四小时的前填计数单列。F0 分区仅合并资金、仓位和净值完全相等的重复边界，不删除付费退出。最差窗口取完整日历中 ceil(5%×N) 的最小净收益并纳入所有临界值并列；全部五币逐窗列示。现金和库存价值变化相加必须等于净值变化，再加总到组合。只能称原模拟账户贡献，不能据此声称因子 alpha 或独立尾部因果解释。
++
++门槛漏斗统计覆盖所有已保存 trace 行的终态理由，未记录的内部每一道 gate、veto 前 target、二次取整前后全状态、外部 ack/cancel/queue 仍 NOT_VERIFIED。复核到期状态由前行保存状态与提交事件核对；没有订单也可能更新到期复核，不将最后成交时间替换复核时钟。
++
++所有失败均保留且不修改原结果。此前 B0/B7 缺口报告保持冻结，本补充只提升已经核对的记录范围。真实 PIT、费用/规则/盘口/延迟、完整试验史、真实 ML/组合验证和未使用留出仍依赖外部证据及独立授权。`NO_PROVEN_ALPHA / CASH` 和四项关闭状态继续有效。

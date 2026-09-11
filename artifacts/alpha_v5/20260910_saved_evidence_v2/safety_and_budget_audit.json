@@ -1,0 +1,45 @@
+{
+  "actual": {
+    "contract_jobs": 1,
+    "historical_strategy_engine_runs": 0,
+    "real_return_model_fits": 0,
+    "real_calibration_fits": 0,
+    "final_holdout_accesses": 0,
+    "real_orders": 0
+  },
+  "authorized": {
+    "contract_jobs": 1,
+    "historical_strategy_engine_runs": 0,
+    "real_return_model_fits": 0,
+    "real_calibration_fits": 0,
+    "final_holdout_accesses": 0,
+    "real_orders": 0
+  },
+  "before": {
+    "status": "VERIFIED",
+    "files_checked": 12342,
+    "changed": [],
+    "protected_holdout_contents_read": false,
+    "basis": "SHA256 before implementation and after audit"
+  },
+  "after": {
+    "status": "VERIFIED",
+    "files_checked": 12342,
+    "changed": [],
+    "protected_holdout_contents_read": false,
+    "basis": "SHA256 before implementation and after audit"
+  },
+  "live_lock_literals": {
+    "LIVE_TRADING": false,
+    "ORDER_SUBMISSION_ENABLED": false,
+    "LIVE_ADAPTERS": []
+  },
+  "production_policy": "CASH",
+  "research_conclusion": "NO_PROVEN_ALPHA",
+  "production_ml_enabled": false,
+  "paper_trading_admitted": false,
+  "live_trading": false,
+  "order_submission_enabled": false,
+  "alpha_trials": 0,
+  "promotion_admitted": false
+}

@@ -1,0 +1,15 @@
+{
+  "DSR": {
+    "status": "INSUFFICIENT",
+    "probability": null,
+    "reason": "MISSING_COMPLETE_TRIAL_HISTORY_AND_DEPENDENCE_EVIDENCE"
+  },
+  "PBO": {
+    "status": "INSUFFICIENT",
+    "probability": null,
+    "reason": "NO_REGISTERED_SELECTION_MATRIX"
+  },
+  "predictive_distribution": "NOT_COLLECTED",
+  "conditional_mean_uncertainty": "NOT_IDENTIFIED",
+  "exact_nonstationary_conformal_coverage": false
+}

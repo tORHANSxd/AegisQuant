@@ -1,0 +1,283 @@
+CHECK format_apply
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'format', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+3 files reformatted
+
+
+
+CHECK ruff
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'check', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 1
+B905 `zip()` without an explicit `strict=` parameter
+   --> src\aegisquant\research\validation\saved_run_audit.py:564:68
+    |
+562 |         else:
+563 |             output.extend(segment)
+564 |     if any(b["time"] - a["time"] != timedelta(hours=4) for a, b in zip(output, output[1:])):
+    |                                                                    ^^^^^^^^^^^^^^^^^^^^^^^
+565 |         raise ValueError("complete four-hour calendar required")
+566 |     return output
+    |
+help: Add explicit value for parameter `strict=`
+
+RUF007 Prefer `itertools.pairwise()` over `zip()` when iterating over successive pairs
+   --> src\aegisquant\research\validation\saved_run_audit.py:564:68
+    |
+562 |         else:
+563 |             output.extend(segment)
+564 |     if any(b["time"] - a["time"] != timedelta(hours=4) for a, b in zip(output, output[1:])):
+    |                                                                    ^^^
+565 |         raise ValueError("complete four-hour calendar required")
+566 |     return output
+    |
+help: Replace `zip()` with `itertools.pairwise()`
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests\alpha_v5\test_saved_run_audit.py:1:1
+   |
+ 1 | / from __future__ import annotations
+ 2 | |
+ 3 | | from copy import deepcopy
+ 4 | | from collections.abc import Sequence
+ 5 | | from datetime import UTC, datetime, timedelta
+ 6 | | from decimal import Decimal
+ 7 | | from pathlib import Path
+ 8 | | from typing import Any
+ 9 | |
+10 | | import pytest
+11 | | import yaml
+12 | |
+13 | | from aegisquant.data.hashing import canonical_sha256
+14 | | from aegisquant.research.validation.evidence_contract import ZERO_BUDGETS, zero_budget_guard
+15 | | from aegisquant.research.validation.saved_run_audit import (
+16 | |     at,
+17 | |     audit_saved_result,
+18 | |     combine_segments,
+19 | |     tail_inventory,
+20 | |     validate_config,
+21 | | )
+   | |_^
+22 |
+23 |   D = Decimal
+   |
+help: Organize imports
+  |
+2 |
+3 + from collections.abc import Sequence
+4 | from copy import deepcopy
+  - from collections.abc import Sequence
+5 | from datetime import UTC, datetime, timedelta
+  |
+
+Found 3 errors.
+[*] 1 fixable with the `--fix` option (2 hidden fixes can be enabled with the `--unsafe-fixes` option).
+
+
+
+CHECK format
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'format', '--check', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+3 files already formatted
+
+
+
+CHECK pyright
+COMMAND ['.venv/Scripts/python.exe', '-m', 'pyright', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 1
+d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\saved_run_audit.py
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\saved_run_audit.py:62:5 - error: Type of "counts" is partially unknown
+    Type of "counts" is "dict[Unknown, Unknown]" (reportUnknownVariableType)
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\saved_run_audit.py:425:17 - error: Argument of type "Any | Literal[0]" cannot be assigned to parameter "right" of type "Decimal" in function "equal"
+    Type "Any | Literal[0]" is not assignable to type "Decimal"
+      "Literal[0]" is not assignable to "Decimal" (reportArgumentType)
+d:\Personal\Quantitative_Trading\tests\alpha_v5\test_saved_run_audit.py
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_saved_run_audit.py:398:46 - error: Argument of type "dict[Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders'], int]" cannot be assigned to parameter "counters" of type "dict[str, int]"
+    "dict[Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders'], int]" is not assignable to "dict[str, int]"
+      Type parameter "_KT@dict" is invariant, but "Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders']" is not the same as "str" (reportArgumentType)
+3 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+
+CHECK pytest
+COMMAND ['.venv/Scripts/python.exe', '-m', 'pytest', '-q', '-p', 'no:cacheprovider', '--basetemp', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-20260910-eo4rfals/pytest-01', '--junitxml', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-20260910-eo4rfals/pytest-01.xml', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 1
+............F........                                                    [100%]
+================================== FAILURES ===================================
+_ test_inconsistent_saved_evidence_is_not_declared_verified[extra_cash-ledger_cash_matches_every_mtm] _
+
+problem = 'extra_cash', check = 'ledger_cash_matches_every_mtm'
+
+    @pytest.mark.parametrize(
+        "problem,check",
+        [
+            ("duplicate_fill", "unique_fill_id"),
+            ("unknown_order", "fill_order_exists"),
+            ("missing_trace", "complete_trace_order_join"),
+            ("order_overfill", "order_not_overfilled"),
+            ("cumulative", "order_cumulative_fill"),
+            ("future_fill", "fill_causal_clocks"),
+            ("fee_asset", "fill_units_and_ids"),
+            ("fee_amount", "fee_money"),
+            ("ledger_hash", "ledger_hash_chain"),
+            ("unbalanced", "double_entry_by_asset"),
+            ("lot_chain", "lot_change_continuity"),
+            ("extra_cash", "ledger_cash_matches_every_mtm"),
+            ("wrong_price", "every_mtm_native_position_value"),
+            ("wrong_clock", "review_state_transition"),
+        ],
+    )
+    def test_inconsistent_saved_evidence_is_not_declared_verified(problem: str, check: str) -> None:
+        result, trace = fixture()
+        if problem == "duplicate_fill":
+            result["fills"].append(deepcopy(result["fills"][0]))
+        elif problem == "unknown_order":
+            result["fills"][0]["backtest_order_id"] = "missing"
+        elif problem == "missing_trace":
+            trace[0]["order_id"] = None
+        elif problem == "order_overfill":
+            result["orders"][0]["order"]["quantity"]["amount"] = "0.5"
+        elif problem == "cumulative":
+            result["orders"][0]["cumulative_filled_quantity"] = "0"
+        elif problem == "future_fill":
+            result["fills"][0]["available_time"] = iso(0)
+        elif problem == "fee_asset":
+            result["fills"][0]["fee"]["asset_id"] = "BNB"
+        elif problem == "fee_amount":
+            result["fills"][0]["fee"]["amount"] = "2"
+        elif problem == "ledger_hash":
+            result["ledger_records"][1]["previous_hash"] = "0" * 64
+        elif problem == "unbalanced":
+            result["ledger_records"][1]["journal_entry"]["postings"][0]["amount"]["amount"] = "2"
+        elif problem == "lot_chain":
+            result["ledger_records"][2]["lot_changes"][0]["lot_before"] = None
+        elif problem == "extra_cash":
+            result["equity_curve"][2]["cash"] = "900"
+        elif problem == "wrong_price":
+            trace[1]["known_close"] = "1000"
+        elif problem == "wrong_clock":
+            trace[1]["last_regular_review"] = iso(100)
+>       audited = run_audit(result, trace)["summary"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_saved_run_audit.py:311: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_saved_run_audit.py:241: in run_audit
+    return audit_saved_result(result, trace, symbol="BTCUSDT", review_interval_hours=hours)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\aegisquant\research\validation\saved_run_audit.py:432: in audit_saved_result
+    points = tuple(EquityPoint.model_validate_json(json.dumps(row)) for row in raw_curve)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = <list_iterator object at 0x000001F67D2E4940>
+
+>   points = tuple(EquityPoint.model_validate_json(json.dumps(row)) for row in raw_curve)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   pydantic_core._pydantic_core.ValidationError: 1 validation error for EquityPoint
+E     Value error, backtest equity does not conserve cash plus position value [type=value_error, input_value={'time': '2020-01-01T07:5...rting_asset_id': 'USDT'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.13/v/value_error
+
+src\aegisquant\research\validation\saved_run_audit.py:432: ValidationError
+=========================== short test summary info ===========================
+FAILED tests/alpha_v5/test_saved_run_audit.py::test_inconsistent_saved_evidence_is_not_declared_verified[extra_cash-ledger_cash_matches_every_mtm]
+1 failed, 20 passed in 3.60s
+
+
+
+CHECK format_apply
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'format', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+3 files left unchanged
+
+
+
+CHECK ruff
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'check', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+All checks passed!
+
+
+
+CHECK format
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'format', '--check', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+3 files already formatted
+
+
+
+CHECK pyright
+COMMAND ['.venv/Scripts/python.exe', '-m', 'pyright', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+
+CHECK pytest
+COMMAND ['.venv/Scripts/python.exe', '-m', 'pytest', '-q', '-p', 'no:cacheprovider', '--basetemp', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-20260910-eo4rfals/pytest-02', '--junitxml', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-20260910-eo4rfals/pytest-02.xml', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+.....................                                                    [100%]
+21 passed in 3.18s
+
+
+
+CHECK frozen_helpers
+COMMAND ['.venv/Scripts/python.exe', '-X', 'utf8', '-c', "import ast,hashlib,json\nfrom pathlib import Path\nroot=Path.cwd()\nfrozen=root/'artifacts/alpha_v5/20260908_research_churn_v3/implementation'\nfor name,symbol in [('src/aegisquant/backtest/metrics.py','resample_equity'),('scripts/summarize_alpha_r4.py','execution_reason')]:\n    def body(path):\n        module=ast.parse(path.read_text(encoding='utf-8'))\n        node=next(n for n in module.body if isinstance(n,ast.FunctionDef) and n.name==symbol)\n        return ast.dump(node,include_attributes=False)\n    current,old=root/name,frozen/name\n    assert body(current)==body(old),(name,symbol)\n    print(json.dumps({'symbol':symbol,'path':name,'status':'AST_IDENTICAL_TO_FROZEN_R5','current_sha256':hashlib.sha256(current.read_bytes()).hexdigest(),'frozen_sha256':hashlib.sha256(old.read_bytes()).hexdigest()}))\n"]
+EXIT 0
+{"symbol": "resample_equity", "path": "src/aegisquant/backtest/metrics.py", "status": "AST_IDENTICAL_TO_FROZEN_R5", "current_sha256": "f1d502c48de6f83992f39e6ff948a4a22bd4d64480925b024bac890caffe56b2", "frozen_sha256": "f1d502c48de6f83992f39e6ff948a4a22bd4d64480925b024bac890caffe56b2"}
+{"symbol": "execution_reason", "path": "scripts/summarize_alpha_r4.py", "status": "AST_IDENTICAL_TO_FROZEN_R5", "current_sha256": "0507d9244b518fa32f2af29580640b85fce6108294c5e059bf57a1efa4362385", "frozen_sha256": "0507d9244b518fa32f2af29580640b85fce6108294c5e059bf57a1efa4362385"}
+
+
+
+CHECK format_apply
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'format', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+2 files reformatted, 1 file left unchanged
+
+
+
+CHECK ruff
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'check', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+All checks passed!
+
+
+
+CHECK format
+COMMAND ['.venv/Scripts/python.exe', '-m', 'ruff', 'format', '--check', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+3 files already formatted
+
+
+
+CHECK pyright
+COMMAND ['.venv/Scripts/python.exe', '-m', 'pyright', 'src/aegisquant/research/validation/saved_run_audit.py', 'scripts/audit_alpha_v5_saved_runs.py', 'tests/alpha_v5/test_saved_run_audit.py']
+EXIT 0
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+
+CHECK pytest
+COMMAND ['.venv/Scripts/python.exe', '-m', 'pytest', '-q', 'tests/alpha_v5/test_saved_run_audit.py', '-p', 'no:cacheprovider', '--basetemp', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-20260910-eo4rfals/pytest-03', '--junitxml', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-20260910-eo4rfals/pytest-03.xml']
+EXIT 0
+............................                                             [100%]
+28 passed in 3.84s
+
+
+
+CHECK frozen_helpers
+COMMAND ['.venv/Scripts/python.exe', '-X', 'utf8', '-c', "import ast,hashlib,json\nfrom pathlib import Path\nroot=Path.cwd()\nfrozen=root/'artifacts/alpha_v5/20260908_research_churn_v3/implementation'\nfor name,symbol in [('src/aegisquant/backtest/metrics.py','resample_equity'),('scripts/summarize_alpha_r4.py','execution_reason'),('src/aegisquant/accounting/models.py','LotChange'),('src/aegisquant/accounting/models.py','PositionLotState')]:\n    def body(path):\n        module=ast.parse(path.read_text(encoding='utf-8'))\n        node=next(n for n in module.body if isinstance(n,(ast.FunctionDef,ast.ClassDef)) and n.name==symbol)\n        return ast.dump(node,include_attributes=False)\n    current,old=root/name,frozen/name\n    assert body(current)==body(old),(name,symbol)\n    print(json.dumps({'symbol':symbol,'path':name,'status':'AST_IDENTICAL_TO_FROZEN_R5','current_sha256':hashlib.sha256(current.read_bytes()).hexdigest(),'frozen_sha256':hashlib.sha256(old.read_bytes()).hexdigest()}))\n"]
+EXIT 0
+{"symbol": "resample_equity", "path": "src/aegisquant/backtest/metrics.py", "status": "AST_IDENTICAL_TO_FROZEN_R5", "current_sha256": "f1d502c48de6f83992f39e6ff948a4a22bd4d64480925b024bac890caffe56b2", "frozen_sha256": "f1d502c48de6f83992f39e6ff948a4a22bd4d64480925b024bac890caffe56b2"}
+{"symbol": "execution_reason", "path": "scripts/summarize_alpha_r4.py", "status": "AST_IDENTICAL_TO_FROZEN_R5", "current_sha256": "0507d9244b518fa32f2af29580640b85fce6108294c5e059bf57a1efa4362385", "frozen_sha256": "0507d9244b518fa32f2af29580640b85fce6108294c5e059bf57a1efa4362385"}
+{"symbol": "LotChange", "path": "src/aegisquant/accounting/models.py", "status": "AST_IDENTICAL_TO_FROZEN_R5", "current_sha256": "13a2e9bcecf56b5331a5a24b67d9d411f1e7f18b4c43a5d41f903b1bb82a72dd", "frozen_sha256": "13a2e9bcecf56b5331a5a24b67d9d411f1e7f18b4c43a5d41f903b1bb82a72dd"}
+{"symbol": "PositionLotState", "path": "src/aegisquant/accounting/models.py", "status": "AST_IDENTICAL_TO_FROZEN_R5", "current_sha256": "13a2e9bcecf56b5331a5a24b67d9d411f1e7f18b4c43a5d41f903b1bb82a72dd", "frozen_sha256": "13a2e9bcecf56b5331a5a24b67d9d411f1e7f18b4c43a5d41f903b1bb82a72dd"}
+

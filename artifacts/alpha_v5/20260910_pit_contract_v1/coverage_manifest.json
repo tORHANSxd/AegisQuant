@@ -1,0 +1,67 @@
+{
+  "status": "NOT_RECEIVED",
+  "schema": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": "pit-coverage-b2-v1",
+        "title": "Schema Version",
+        "type": "string"
+      },
+      "classification": {
+        "const": "PREVIOUSLY_USED_DEVELOPMENT_METADATA",
+        "title": "Classification",
+        "type": "string"
+      },
+      "period_start": {
+        "format": "date-time",
+        "title": "Period Start",
+        "type": "string"
+      },
+      "period_end_exclusive": {
+        "format": "date-time",
+        "title": "Period End Exclusive",
+        "type": "string"
+      },
+      "candidate_instrument_uids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Candidate Instrument Uids",
+        "type": "array"
+      },
+      "event_stream_complete": {
+        "title": "Event Stream Complete",
+        "type": "boolean"
+      },
+      "includes_delisted_instruments": {
+        "title": "Includes Delisted Instruments",
+        "type": "boolean"
+      },
+      "source_files": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Source Files",
+        "type": "object"
+      }
+    },
+    "required": [
+      "schema_version",
+      "classification",
+      "period_start",
+      "period_end_exclusive",
+      "candidate_instrument_uids",
+      "event_stream_complete",
+      "includes_delisted_instruments",
+      "source_files"
+    ],
+    "title": "PITCoverageManifest",
+    "type": "object"
+  },
+  "source": {
+    "path": null,
+    "sha256": null
+  },
+  "records": null
+}

@@ -1,0 +1,9 @@
+{
+  "files": {
+    "scripts/run_recent_multi_asset_backtest.py": "60e80306e3dcc5bab28ecbcc3f3f8bd28e7757384e98a1bc85950fbf819763bf",
+    "scripts/report_recent_multi_asset_backtest.py": "b340f0c41a0c6f40b677d944a8da61493f69709ff867011089e0b30435a313ba",
+    "tests/research/test_recent_multi_asset_backtest.py": "e437b0c0139cedf496da1732cead599b35fb6ca1ab9a290cf77a1764e59aba50"
+  },
+  "source_ledger": "00689a7de2aefbedc625f0c6cff2105887bcb37a9f0e21eebcbb086732ad8381",
+  "report_sha256": "7f6e747e8bc59be864dc55395b1921c35f0b5591ba79bd4c685bbb4bcce39be1"
+}

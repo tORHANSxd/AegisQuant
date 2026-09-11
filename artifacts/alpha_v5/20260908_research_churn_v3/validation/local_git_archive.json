@@ -1,0 +1,7 @@
+{
+  "command": "local_git_archive.py archive --project D:\\Personal\\Quantitative_Trading",
+  "started_at": "2026-09-08T15:22:42.7494612Z",
+  "finished_at": "2026-09-08T15:22:43.1678030Z",
+  "exit_code": 2,
+  "output": "{\"status\": \"error\", \"message\": \"独立归档只允许 main，实际分支为：refs/heads/codex-archive；保留旧归档，未创建分支或迁移历史。\"}\r\n"
+}

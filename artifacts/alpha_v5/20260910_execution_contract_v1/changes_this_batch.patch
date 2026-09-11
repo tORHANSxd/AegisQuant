@@ -1,0 +1,2681 @@
+--- a/src/aegisquant/backtest/models.py
++++ b/src/aegisquant/backtest/models.py
+@@ -44,6 +44,7 @@
+     canonical_result,
+     exact_decimal_sum,
+ )
++from aegisquant.portfolio.transition_costs import ImpactModel
+ 
+ NonNegativeInt = Annotated[int, Field(ge=0)]
+ PositiveInt = Annotated[int, Field(gt=0)]
+@@ -356,6 +357,93 @@
+         return self.signal_ns + self.risk_ns + self.network_ns
+ 
+ 
++class CommissionRates(DomainModel):
++    """Role and side components; rates are basis points, including supported rebates."""
++
++    maker: FiniteDecimal
++    taker: FiniteDecimal
++    buyer: FiniteDecimal = Decimal("0")
++    seller: FiniteDecimal = Decimal("0")
++
++    def for_fill(self, role: LiquidityRole, side: OrderSide) -> Decimal:
++        return (self.maker if role is LiquidityRole.MAKER else self.taker) + (
++            self.buyer if side is OrderSide.BUY else self.seller
++        )
++
++
++class FeeTerms(DomainModel):
++    standard: CommissionRates
++    special: CommissionRates
++    tax: CommissionRates
++    normal_fee_asset: Literal["RECEIVED_ASSET", "QUOTE"]
++    discount_asset_id: AssetId | None = None
++    standard_discount_fraction: UnitInterval = Decimal("0")
++    discount_effective_from: UtcDateTime | None = None
++    discount_effective_to: UtcDateTime | None = None
++
++    @model_validator(mode="after")
++    def validate_discount(self) -> FeeTerms:
++        if self.standard_discount_fraction > 0 and (
++            self.discount_asset_id is None or self.discount_effective_from is None
++        ):
++            raise ValueError("discount requires an asset and an effective start")
++        if self.discount_effective_to is not None and (
++            self.discount_effective_from is None
++            or self.discount_effective_to <= self.discount_effective_from
++        ):
++            raise ValueError("discount interval must be positive")
++        for rates in (self.standard, self.special, self.tax):
++            if any(value < Decimal("-100") for value in rates.model_dump().values()):
++                raise ValueError("commission rebate exceeds supported bound")
++        return self
++
++
++class ExecutionCostEvidence(DomainModel):
++    schema_version: Literal["EXECUTION_COST_V2"] = "EXECUTION_COST_V2"
++    account_scope: str = Field(min_length=1)
++    available_at: UtcDateTime
++    source_sha256: str
++    verified_kind: Literal["PROXY_ONLY", "SYNTHETIC_ONLY", "HISTORICAL_ACCOUNT_EVIDENCE"]
++    impact_model: ImpactModel
++    fee_terms: FeeTerms | None = None
++
++    @field_validator("source_sha256")
++    @classmethod
++    def validate_source(cls, value: str) -> str:
++        return ensure_sha256(value, field_name="execution cost source hash")
++
++
++class ExecutionReference(DomainModel):
++    schema_version: Literal["EXECUTION_REFERENCE_V2"] = "EXECUTION_REFERENCE_V2"
++    reference_price_kind: Literal["MID", "BBO", "DEPTH_VWAP", "BAR_OPEN_PROXY", "MAKER_LIMIT"]
++    included_cost_components: tuple[
++        Literal["SPREAD", "VISIBLE_DEPTH", "SLIPPAGE", "RESIDUAL_IMPACT"], ...
++    ]
++    source_sha256: str
++    evidence_kind: Literal["PROXY_ONLY", "SYNTHETIC_ONLY", "HISTORICAL_MARKET_EVIDENCE"]
++    participation_window_seconds: int = Field(gt=0)
++    window_quote_turnover: PositiveDecimal
++
++    @field_validator("source_sha256")
++    @classmethod
++    def validate_source(cls, value: str) -> str:
++        return ensure_sha256(value, field_name="execution reference source hash")
++
++    @model_validator(mode="after")
++    def validate_reference(self) -> ExecutionReference:
++        included = set(self.included_cost_components)
++        if len(included) != len(self.included_cost_components):
++            raise ValueError("included cost components must be unique")
++        required = {"BBO": {"SPREAD"}, "DEPTH_VWAP": {"SPREAD", "VISIBLE_DEPTH"}}
++        if not required.get(self.reference_price_kind, set()) <= included:
++            raise ValueError("AQ-EXECUTION-REFERENCE-MISSING-INCLUDED-COMPONENT")
++        if self.reference_price_kind == "MID" and included & {"SPREAD", "VISIBLE_DEPTH"}:
++            raise ValueError("MID cannot already contain spread or visible depth")
++        if self.reference_price_kind == "BAR_OPEN_PROXY" and self.evidence_kind != "PROXY_ONLY":
++            raise ValueError("whole-bar volume cannot prove opening-event liquidity")
++        return self
++
++
+ class CostSchedule(DomainModel):
+     cost_schedule_id: CostScheduleId
+     version: str
+@@ -374,6 +462,9 @@
+     settlement_fee_bps: NonNegativeDecimal
+     participation_cap: UnitInterval
+     source: str
++    evidence: ExecutionCostEvidence | None = Field(
++        default=None, exclude_if=lambda value: value is None
++    )
+ 
+     @model_validator(mode="after")
+     def validate_schedule(self) -> CostSchedule:
+@@ -385,7 +476,20 @@
+             raise ValueError("maximum impact must cover the base coefficient")
+         if not self.source.strip():
+             raise ValueError("cost schedule source is required")
+-        return self
++        if (
++            self.evidence is not None
++            and self.evidence.impact_model.coefficient_bps != self.impact_coefficient_bps
++        ):
++            raise ValueError("AQ-IMPACT-SCHEDULE-COEFFICIENT-MISMATCH")
++        return self
++
++
++class FeeSettlement(DomainModel):
++    fee: Money
++    quote_equivalent: FiniteDecimal
++    undiscounted_quote_equivalent: FiniteDecimal
++    discount_applied: bool
++    fallback_reason: str | None
+ 
+ 
+ class CostBreakdown(DomainModel):
+@@ -399,6 +503,9 @@
+     borrow_interest: NonNegativeDecimal
+     settlement_fee: NonNegativeDecimal
+     liquidation_penalty: NonNegativeDecimal = Decimal("0")
++    fee_settlement: FeeSettlement | None = Field(
++        default=None, exclude_if=lambda value: value is None
++    )
+ 
+     @property
+     def total(self) -> Decimal:
+@@ -423,6 +530,9 @@
+     source_event_id: BacktestEventId
+     event_time: UtcDateTime
+     available_time: UtcDateTime
++    reference: ExecutionReference | None = Field(
++        default=None, exclude_if=lambda value: value is None
++    )
+ 
+ 
+ class BacktestFill(DomainModel):
+--- a/src/aegisquant/backtest/fills.py
++++ b/src/aegisquant/backtest/fills.py
+@@ -2,11 +2,15 @@
+ 
+ from __future__ import annotations
+ 
++from dataclasses import dataclass
+ from decimal import Decimal
++
++from pydantic import Field, field_validator, model_validator
+ 
+ from aegisquant.backtest.models import (
+     BacktestOrder,
+     BarEvent,
++    ExecutionReference,
+     ExitTrigger,
+     FillPrecision,
+     FillSlice,
+@@ -15,7 +19,12 @@
+     MarketEvent,
+     TradeQuoteEvent,
+ )
++from aegisquant.data.hashing import canonical_sha256, ensure_sha256
++from aegisquant.domain.base import DomainModel
+ from aegisquant.domain.execution import OrderSide, OrderType, TimeInForce
++from aegisquant.domain.identifiers import InstrumentId, VenueId
++from aegisquant.domain.time import UtcDateTime
++from aegisquant.domain.values import PositiveDecimal
+ 
+ 
+ def _capped_quantity(
+@@ -218,3 +227,202 @@
+     if isinstance(event, TradeQuoteEvent):
+         return _trade_quote_fill(order, event, remaining, participation_cap)
+     return _l2_fill(order, event, remaining, participation_cap)
++
++
++class ParticipationWindow(DomainModel):
++    """Known cumulative quote turnover; neither ADV nor snapshot depth is turnover."""
++
++    window_id: str = Field(min_length=1)
++    instrument_id: InstrumentId
++    venue_id: VenueId
++    start: UtcDateTime
++    end: UtcDateTime
++    available_at: UtcDateTime
++    quote_turnover: PositiveDecimal
++    source_sha256: str
++
++    @field_validator("source_sha256")
++    @classmethod
++    def validate_hash(cls, value: str) -> str:
++        return ensure_sha256(value, field_name="participation window source hash")
++
++    @model_validator(mode="after")
++    def validate_window(self) -> ParticipationWindow:
++        if not self.start < self.end <= self.available_at:
++            raise ValueError("participation window must be complete before availability")
++        if (self.end - self.start).total_seconds() % 1:
++            raise ValueError("participation horizon uses whole seconds")
++        return self
++
++
++@dataclass(frozen=True)
++class ExecutionFillDecision:
++    slices: tuple[FillSlice, ...]
++    unfilled_quantity: Decimal
++    reason: str
++
++
++class EventLiquidityBudget:
++    """A shared window budget around decide_fills; caller commits only settled fills."""
++
++    def __init__(self, window: ParticipationWindow, maximum_participation: Decimal) -> None:
++        if not maximum_participation.is_finite() or not 0 <= maximum_participation <= 1:
++            raise ValueError("invalid shared participation cap")
++        self.window = window
++        self.maximum_quote_notional = window.quote_turnover * maximum_participation
++        self.used_quote_notional = Decimal("0")
++        # ponytail: retain event/fill keys for one supplied window; rotate only after it closes.
++        self._events: dict[str, str] = {}
++        self._levels: dict[tuple[str, OrderSide, Decimal], Decimal] = {}
++        self._prepared: set[str] = set()
++        self._fills: dict[str, str] = {}
++        self._order_filled: dict[str, Decimal] = {}
++
++    def preview(
++        self,
++        *,
++        order: BacktestOrder,
++        event: MarketEvent,
++        remaining: Decimal,
++        arrival_at: UtcDateTime,
++        cancel_effective_at: UtcDateTime | None = None,
++        queue_ahead: Decimal | None = None,
++        queue_source_sha256: str | None = None,
++    ) -> ExecutionFillDecision:
++        """Event wins an equal-time cancellation, matching the existing engine convention."""
++        order_id = str(order.backtest_order_id)
++        if (
++            not remaining.is_finite()
++            or remaining <= 0
++            or arrival_at < order.submitted_at
++            or remaining > order.quantity.amount - self._order_filled.get(order_id, Decimal("0"))
++        ):
++            raise ValueError("invalid execution remaining quantity or arrival clock")
++        if (
++            order.instrument_id != self.window.instrument_id
++            or order.venue_id != self.window.venue_id
++        ):
++            raise ValueError("AQ-EXECUTION-PARTICIPATION-WINDOW-INSTRUMENT-MISMATCH")
++        reason = (
++            "ORDER_NOT_AT_VENUE"
++            if event.event_time < arrival_at
++            else "CANCEL_ALREADY_EFFECTIVE"
++            if cancel_effective_at is not None and cancel_effective_at < event.event_time
++            else "BAR_PROXY_ONLY"
++            if isinstance(event, BarEvent)
++            else "WINDOW_NOT_KNOWN"
++            if self.window.available_at > event.available_time
++            or self.window.end != event.event_time
++            else None
++        )
++        if reason is not None:
++            return ExecutionFillDecision((), remaining, reason)
++        event_id = str(event.event_id)
++        event_hash = canonical_sha256(event.model_dump(mode="json"))
++        if event_id in self._events and self._events[event_id] != event_hash:
++            raise ValueError("AQ-EXECUTION-CONFLICTING-MARKET-EVENT")
++        self._events[event_id] = event_hash
++        execution_event = event
++        if isinstance(event, L2BookEvent):
++            levels = event.asks if order.side is OrderSide.BUY else event.bids
++            # Use the existing engine's residual-book convention to reach deeper levels.
++            execution_event = event.model_copy(
++                update={
++                    "asks" if order.side is OrderSide.BUY else "bids": tuple(
++                        level.model_copy(
++                            update={
++                                "quantity": self._levels.get(
++                                    (event_id, order.side, level.price), level.quantity
++                                )
++                            }
++                        )
++                        for level in levels
++                    )
++                }
++            )
++        raw = decide_fills(
++            order=order, event=execution_event, remaining=remaining, participation_cap=Decimal("1")
++        )
++        if any(item.liquidity_role is LiquidityRole.MAKER for item in raw):
++            if queue_ahead is None or queue_source_sha256 is None:
++                return ExecutionFillDecision((), remaining, "MAKER_QUEUE_UNKNOWN")
++            ensure_sha256(queue_source_sha256, field_name="maker queue source hash")
++            if not queue_ahead.is_finite() or queue_ahead < 0:
++                raise ValueError("maker queue ahead must be finite and nonnegative")
++        left_quote = self.maximum_quote_notional - self.used_quote_notional
++        output: list[FillSlice] = []
++        for item in raw:
++            key = (event_id, order.side, item.reference_price)
++            available = item.available_liquidity
++            if item.liquidity_role is LiquidityRole.MAKER:
++                available = max(Decimal("0"), available - (queue_ahead or Decimal("0")))
++            self._levels.setdefault(key, available)
++            quantity = min(item.quantity, self._levels[key], left_quote / item.reference_price)
++            if quantity <= 0:
++                continue
++            kind = (
++                "MAKER_LIMIT"
++                if item.liquidity_role is LiquidityRole.MAKER
++                else "DEPTH_VWAP"
++                if isinstance(event, L2BookEvent)
++                else "BBO"
++            )
++            reference = ExecutionReference(
++                reference_price_kind=kind,
++                included_cost_components=("SPREAD", "VISIBLE_DEPTH")
++                if kind == "DEPTH_VWAP"
++                else ("SPREAD",)
++                if kind == "BBO"
++                else (),
++                source_sha256=event_hash,
++                evidence_kind="SYNTHETIC_ONLY",
++                participation_window_seconds=int(
++                    (self.window.end - self.window.start).total_seconds()
++                ),
++                window_quote_turnover=self.window.quote_turnover,
++            )
++            selected = item.model_copy(update={"quantity": quantity, "reference": reference})
++            output.append(selected)
++            left_quote -= quantity * item.reference_price
++        filled = sum((item.quantity for item in output), Decimal("0"))
++        if order.time_in_force is TimeInForce.FILL_OR_KILL and filled < remaining:
++            return ExecutionFillDecision((), remaining, "FOK_INSUFFICIENT_SHARED_LIQUIDITY")
++        self._prepared.update(self._identity(order, selected) for selected in output)
++        return ExecutionFillDecision(
++            tuple(output),
++            remaining - filled,
++            "FILLED" if filled == remaining else "UNFILLED_RESIDUAL",
++        )
++
++    @staticmethod
++    def _identity(order: BacktestOrder, item: FillSlice) -> str:
++        return canonical_sha256(
++            {"order": order.model_dump(mode="json"), "slice": item.model_dump(mode="json")}
++        )
++
++    def commit(self, *, fill_id: str, order: BacktestOrder, item: FillSlice) -> bool:
++        """Idempotent consumption; opposite sides cannot net out window usage."""
++        identity = self._identity(order, item)
++        if fill_id in self._fills:
++            if self._fills[fill_id] != identity:
++                raise ValueError("AQ-EXECUTION-CONFLICTING-FILL-ID")
++            return False
++        if identity not in self._prepared:
++            raise ValueError("AQ-EXECUTION-FILL-WAS-NOT-PREPARED")
++        key = (str(item.source_event_id), order.side, item.reference_price)
++        order_id = str(order.backtest_order_id)
++        if self._order_filled.get(order_id, Decimal("0")) + item.quantity > order.quantity.amount:
++            raise ValueError("AQ-EXECUTION-FILL-EXCEEDS-ORDER-QUANTITY")
++        notional = item.quantity * item.reference_price
++        if (
++            item.quantity > self._levels[key]
++            or self.used_quote_notional + notional > self.maximum_quote_notional
++        ):
++            raise ValueError("AQ-EXECUTION-STALE-PREVIEW-EXCEEDS-LIQUIDITY")
++        self._levels[key] -= item.quantity
++        self.used_quote_notional += notional
++        self._fills[fill_id] = identity
++        self._order_filled[order_id] = (
++            self._order_filled.get(order_id, Decimal("0")) + item.quantity
++        )
++        return True
+--- a/src/aegisquant/backtest/costs.py
++++ b/src/aegisquant/backtest/costs.py
+@@ -2,7 +2,8 @@
+ 
+ from __future__ import annotations
+ 
+-from collections.abc import Iterable
++from collections.abc import Iterable, Mapping
++from dataclasses import dataclass
+ from datetime import datetime
+ from decimal import Decimal
+ from itertools import pairwise
+@@ -11,16 +12,26 @@
+     BacktestOrder,
+     CostBreakdown,
+     CostSchedule,
++    FeeSettlement,
++    FeeTerms,
+     FillSlice,
+     LiquidityRole,
+ )
+ from aegisquant.domain.execution import OrderSide
+ from aegisquant.domain.identifiers import AssetId, InstrumentId, VenueId
+ from aegisquant.domain.time import UtcDateTime
+-from aegisquant.domain.values import Price, canonical_result
++from aegisquant.domain.values import Money, Price, canonical_result
++from aegisquant.portfolio.transition_costs import legacy_impact_model
+ 
+ BPS = Decimal("10000")
+ SECONDS_PER_YEAR = Decimal("31557600")
++
++
++@dataclass(frozen=True)
++class FeeAccountState:
++    available_balances: Mapping[AssetId, Decimal]
++    quote_fx: Mapping[AssetId, Decimal]
++    fx_available_at: UtcDateTime
+ 
+ 
+ class HistoricalCostBook:
+@@ -59,6 +70,16 @@
+     def at(self, order: BacktestOrder, event_time: UtcDateTime) -> CostSchedule:
+         return self.for_instrument(order.venue_id, order.instrument_id, event_time)
+ 
++    def decision_at(self, order: BacktestOrder, decision_time: UtcDateTime) -> CostSchedule:
++        """Strict decision-known view; execution truth still uses effective-time at()."""
++        schedule = self.at(order, decision_time)
++        proof = schedule.evidence
++        if proof is None or proof.available_at > decision_time:
++            raise ValueError("AQ-EXECUTION-FEE-UNKNOWN-AT-DECISION")
++        if proof.verified_kind != "HISTORICAL_ACCOUNT_EVIDENCE":
++            raise ValueError("AQ-EXECUTION-FEE-PROXY-ONLY")
++        return schedule
++
+     def for_instrument(
+         self, venue_id: VenueId, instrument_id: InstrumentId, event_time: datetime
+     ) -> CostSchedule:
+@@ -108,6 +129,8 @@
+     contract_multiplier: Decimal = Decimal("1"),
+     settlement_quantity: Decimal = Decimal("0"),
+     liquidation_penalty_bps: Decimal = Decimal("0"),
++    strict_evidence: bool = False,
++    fee_account: FeeAccountState | None = None,
+ ) -> tuple[Price, CostBreakdown]:
+     """Apply explicit adverse spread, slippage and size impact to one fill slice."""
+     quantity = fill_slice.quantity
+@@ -120,13 +143,42 @@
+         participation = Decimal("1")
+     else:
+         participation = min(Decimal("1"), quantity / fill_slice.available_liquidity)
+-    impact_bps = min(
+-        schedule.maximum_impact_bps,
+-        schedule.impact_coefficient_bps * participation,
+-    )
++    proof = schedule.evidence
++    basis = fill_slice.reference
++    if (proof is None) != (basis is None):
++        raise ValueError("AQ-EXECUTION-MIXED-LEGACY-AND-VERSIONED-COST")
++    curve = (
++        proof.impact_model
++        if proof is not None
++        else legacy_impact_model(schedule.impact_coefficient_bps)
++    )
++    if basis is not None:
++        if curve.horizon_seconds != basis.participation_window_seconds:
++            raise ValueError("AQ-IMPACT-HORIZON-MISMATCH")
++        participation = quantity * contract_multiplier * reference / basis.window_quote_turnover
++    if strict_evidence and (
++        proof is None
++        or basis is None
++        or proof.verified_kind != "HISTORICAL_ACCOUNT_EVIDENCE"
++        or basis.evidence_kind != "HISTORICAL_MARKET_EVIDENCE"
++        or curve.evidence_status != "VERIFIED"
++        or proof.fee_terms is None
++    ):
++        raise ValueError("AQ-EXECUTION-EMPIRICAL-EVIDENCE-MISSING")
++    impact_bps = min(schedule.maximum_impact_bps, curve.impact_bps(participation))
+     is_taker = fill_slice.liquidity_role is LiquidityRole.TAKER
+     spread_bps = schedule.half_spread_bps if is_taker else Decimal("0")
+     slippage_bps = schedule.slippage_bps if is_taker else Decimal("0")
++    if basis is not None:
++        included = set(basis.included_cost_components)
++        if "SPREAD" in included:
++            spread_bps = Decimal("0")
++        if "SLIPPAGE" in included:
++            slippage_bps = Decimal("0")
++        if "RESIDUAL_IMPACT" in included or (
++            "VISIBLE_DEPTH" in included and curve.target == "TOTAL_PRICE_IMPACT"
++        ):
++            impact_bps = Decimal("0")
+     adverse_bps = spread_bps + slippage_bps + impact_bps
+     direction = Decimal("1") if order.side is OrderSide.BUY else Decimal("-1")
+     execution = canonical_result(reference * (Decimal("1") + direction * adverse_bps / BPS))
+@@ -137,10 +189,29 @@
+         if fill_slice.liquidity_role is LiquidityRole.MAKER
+         else schedule.taker_fee_bps
+     )
++    native_fee = None
++    if proof is not None and proof.fee_terms is not None:
++        if fee_account is None:
++            raise ValueError("AQ-EXECUTION-NATIVE-FEE-ACCOUNT-STATE-REQUIRED")
++        native_fee = settle_execution_fee(
++            terms=proof.fee_terms,
++            fill_time=fill_slice.event_time,
++            role=fill_slice.liquidity_role,
++            side=order.side,
++            quantity=quantity * contract_multiplier,
++            execution_price=execution,
++            base_asset_id=base_asset_id,
++            quote_asset_id=quote_asset_id,
++            available_balances=fee_account.available_balances,
++            quote_fx=fee_account.quote_fx,
++            fx_available_at=fee_account.fx_available_at,
++        )
+     breakdown = CostBreakdown(
+         asset_id=quote_asset_id,
+         gross_notional=gross_notional,
+-        fee=canonical_result(execution_notional * fee_bps / BPS),
++        fee=native_fee.quote_equivalent
++        if native_fee is not None
++        else canonical_result(execution_notional * fee_bps / BPS),
+         spread=canonical_result(gross_notional * spread_bps / BPS),
+         slippage=canonical_result(gross_notional * slippage_bps / BPS),
+         impact=canonical_result(gross_notional * impact_bps / BPS),
+@@ -154,6 +225,7 @@
+             / BPS
+         ),
+         liquidation_penalty=canonical_result(execution_notional * liquidation_penalty_bps / BPS),
++        fee_settlement=native_fee,
+     )
+     return (
+         Price(
+@@ -162,6 +234,94 @@
+             quote_asset_id=quote_asset_id,
+         ),
+         breakdown,
++    )
++
++
++def settle_execution_fee(
++    *,
++    terms: FeeTerms,
++    fill_time: UtcDateTime,
++    role: LiquidityRole,
++    side: OrderSide,
++    quantity: Decimal,
++    execution_price: Decimal,
++    base_asset_id: AssetId,
++    quote_asset_id: AssetId,
++    available_balances: Mapping[AssetId, Decimal],
++    quote_fx: Mapping[AssetId, Decimal],
++    fx_available_at: UtcDateTime,
++) -> FeeSettlement:
++    """Settle each partial fill separately; only the standard component is discounted."""
++    if (
++        not quantity.is_finite()
++        or not execution_price.is_finite()
++        or quantity <= 0
++        or execution_price <= 0
++        or fx_available_at > fill_time
++    ):
++        raise ValueError("AQ-EXECUTION-INVALID-FEE-OR-FUTURE-FX")
++    if any(not value.is_finite() or value < 0 for value in available_balances.values()):
++        raise ValueError("fee balances must be finite and nonnegative")
++    normal_asset = (
++        base_asset_id
++        if terms.normal_fee_asset == "RECEIVED_ASSET" and side is OrderSide.BUY
++        else quote_asset_id
++    )
++    standard = terms.standard.for_fill(role, side)
++    other = terms.special.for_fill(role, side) + terms.tax.for_fill(role, side)
++    notional = quantity * execution_price
++    ordinary_quote = notional * (standard + other) / BPS
++    active = (
++        terms.discount_asset_id is not None
++        and terms.standard_discount_fraction > 0
++        and terms.discount_effective_from is not None
++        and terms.discount_effective_from <= fill_time
++        and (terms.discount_effective_to is None or fill_time < terms.discount_effective_to)
++    )
++    reason = (
++        "DISCOUNT_NOT_EFFECTIVE" if terms.standard_discount_fraction > 0 and not active else None
++    )
++    # A rebate must never be reduced by a fee discount.
++    discounted_quote = (
++        notional
++        * (standard - max(Decimal("0"), standard) * terms.standard_discount_fraction + other)
++        / BPS
++    )
++    if active and terms.discount_asset_id is not None:
++        fx = quote_fx.get(terms.discount_asset_id)
++        if fx is None or not fx.is_finite() or fx <= 0:
++            reason = "DISCOUNT_FX_UNAVAILABLE"
++        elif discounted_quote <= 0:
++            reason = "REBATE_USES_NORMAL_FEE_ASSET"
++        elif available_balances.get(terms.discount_asset_id, Decimal("0")) < discounted_quote / fx:
++            reason = "DISCOUNT_ASSET_BALANCE_INSUFFICIENT"
++        else:
++            return FeeSettlement(
++                fee=Money(
++                    amount=canonical_result(discounted_quote / fx), asset_id=terms.discount_asset_id
++                ),
++                quote_equivalent=canonical_result(discounted_quote),
++                undiscounted_quote_equivalent=canonical_result(ordinary_quote),
++                discount_applied=True,
++                fallback_reason=None,
++            )
++    normal_fx = execution_price if normal_asset == base_asset_id else Decimal("1")
++    native = canonical_result(ordinary_quote / normal_fx)
++    received = (
++        quantity
++        if side is OrderSide.BUY and normal_asset == base_asset_id
++        else notional
++        if side is OrderSide.SELL
++        else Decimal("0")
++    )
++    if native > available_balances.get(normal_asset, Decimal("0")) + received:
++        raise ValueError("AQ-EXECUTION-NORMAL-FEE-ASSET-BALANCE-INSUFFICIENT")
++    return FeeSettlement(
++        fee=Money(amount=native, asset_id=normal_asset),
++        quote_equivalent=canonical_result(ordinary_quote),
++        undiscounted_quote_equivalent=canonical_result(ordinary_quote),
++        discount_applied=False,
++        fallback_reason=reason,
+     )
+ 
+ 
+--- a/src/aegisquant/portfolio/transition_costs.py
++++ b/src/aegisquant/portfolio/transition_costs.py
+@@ -3,10 +3,83 @@
+ from __future__ import annotations
+ 
+ from decimal import Decimal
++from typing import Literal
+ 
++from pydantic import Field, field_validator, model_validator
++
++from aegisquant.data.hashing import ensure_sha256
+ from aegisquant.domain.base import DomainModel
+ from aegisquant.domain.time import UtcDateTime
+-from aegisquant.domain.values import FiniteDecimal, NonNegativeDecimal
++from aegisquant.domain.values import FiniteDecimal, NonNegativeDecimal, UnitInterval
++
++
++class ImpactModel(DomainModel):
++    """A curve and its inverse use the same participation unit and time horizon."""
++
++    model_id: Literal["LINEAR_PROXY_V1", "SQRT_PROXY_V1", "LEGACY_SQRT_CAPACITY_V0"]
++    coefficient_bps: NonNegativeDecimal
++    horizon_seconds: int = Field(gt=0)
++    participation_unit: Literal["ORDER_QUOTE_NOTIONAL_OVER_WINDOW_QUOTE_TURNOVER"]
++    target: Literal["TOTAL_PRICE_IMPACT", "RESIDUAL_BEYOND_REFERENCE"]
++    evidence_status: Literal["PROXY_ONLY", "VERIFIED"]
++    maximum_supported_participation: UnitInterval
++    calibration_sha256: str | None = None
++
++    @field_validator("calibration_sha256")
++    @classmethod
++    def validate_hash(cls, value: str | None) -> str | None:
++        return (
++            ensure_sha256(value, field_name="impact calibration hash")
++            if value is not None
++            else None
++        )
++
++    @model_validator(mode="after")
++    def validate_evidence(self) -> ImpactModel:
++        if self.maximum_supported_participation <= 0:
++            raise ValueError("impact requires a positive supported participation range")
++        if (self.evidence_status == "VERIFIED") != (self.calibration_sha256 is not None):
++            raise ValueError("verified impact requires a calibration evidence hash")
++        return self
++
++    def _participation_effect(self, participation: Decimal) -> Decimal:
++        if (
++            not participation.is_finite()
++            or not 0 <= participation <= self.maximum_supported_participation
++        ):
++            raise ValueError("AQ-IMPACT-OUTSIDE-SUPPORTED-PARTICIPATION")
++        return participation if self.model_id == "LINEAR_PROXY_V1" else participation.sqrt()
++
++    def impact_bps(self, participation: Decimal) -> Decimal:
++        return self.coefficient_bps * self._participation_effect(participation)
++
++    def impact_fraction(self, participation: Decimal) -> Decimal:
++        # Preserve the legacy Decimal evaluation order used by decision-time estimates.
++        return self.coefficient_bps / 10000 * self._participation_effect(participation)
++
++    def participation_for_impact(self, maximum_bps: Decimal) -> Decimal:
++        if not maximum_bps.is_finite() or maximum_bps < 0:
++            raise ValueError("maximum impact must be finite and nonnegative")
++        if self.coefficient_bps == 0:
++            return self.maximum_supported_participation
++        ratio = maximum_bps / self.coefficient_bps
++        return min(
++            self.maximum_supported_participation,
++            ratio if self.model_id == "LINEAR_PROXY_V1" else ratio**2,
++        )
++
++
++def legacy_impact_model(coefficient: Decimal, *, capacity: bool = False) -> ImpactModel:
++    """Name the two old proxy conventions; never silently change either formula."""
++    return ImpactModel(
++        model_id="LEGACY_SQRT_CAPACITY_V0" if capacity else "LINEAR_PROXY_V1",
++        coefficient_bps=coefficient,
++        horizon_seconds=86400 if capacity else 14400,
++        participation_unit="ORDER_QUOTE_NOTIONAL_OVER_WINDOW_QUOTE_TURNOVER",
++        target="TOTAL_PRICE_IMPACT",
++        evidence_status="PROXY_ONLY",
++        maximum_supported_participation=Decimal("1"),
++    )
+ 
+ 
+ class ExecutionLegCost(DomainModel):
+@@ -59,6 +132,8 @@
+     exit_order_notional: Decimal | None = None,
+     exit_latency_adverse_bps: Decimal = Decimal("0"),
+     natr_slippage_coefficient: Decimal = Decimal("0.01"),
++    impact_model: ImpactModel | None = None,
++    liquidity_horizon_seconds: int | None = None,
+ ) -> TransitionCostEstimate:
+     exit_notional = order_notional if exit_order_notional is None else exit_order_notional
+     if (
+@@ -78,7 +153,13 @@
+         or quote_volume <= 0
+     ):
+         raise ValueError("cost estimates require nonnegative known inputs and positive liquidity")
+-    impact = impact_coefficient_bps / 10000 * min(Decimal("1"), order_notional / quote_volume)
++    curve = impact_model or legacy_impact_model(impact_coefficient_bps)
++    if impact_model is not None and (
++        curve.coefficient_bps != impact_coefficient_bps
++        or curve.horizon_seconds != liquidity_horizon_seconds
++    ):
++        raise ValueError("AQ-IMPACT-COEFFICIENT-OR-HORIZON-MISMATCH")
++    impact = curve.impact_fraction(min(Decimal("1"), order_notional / quote_volume))
+     slippage = slippage_floor_bps / 10000 + natr_slippage_coefficient * natr
+     entry = ExecutionLegCost(
+         fee=fee_bps / 10000,
+@@ -90,14 +171,16 @@
+     exit_leg = entry.model_copy(
+         update={
+             "latency_adverse_selection": exit_latency_adverse_bps / 10000,
+-            "impact": impact_coefficient_bps
+-            / 10000
+-            * min(Decimal("1"), exit_notional / quote_volume),
++            "impact": curve.impact_fraction(min(Decimal("1"), exit_notional / quote_volume)),
+         }
+     )
+     return TransitionCostEstimate(
+         entry=entry,
+         exit=exit_leg,
+         available_time=available_time,
+-        source="PREDECLARED_PROXY_FROM_CLOSED_BAR_NOT_HISTORICAL_ORDERBOOK_OR_FEE_TIER",
++        source=(
++            "PREDECLARED_PROXY_FROM_CLOSED_BAR_NOT_HISTORICAL_ORDERBOOK_OR_FEE_TIER"
++            if impact_model is None
++            else f"EXPLICIT_IMPACT:{curve.model_id}:{curve.horizon_seconds}s:{curve.evidence_status}"
++        ),
+     )
+--- a/src/aegisquant/portfolio/optimizer.py
++++ b/src/aegisquant/portfolio/optimizer.py
+@@ -20,6 +20,7 @@
+     SignalInput,
+     TargetQuantityAdjustment,
+ )
++from aegisquant.portfolio.transition_costs import legacy_impact_model
+ 
+ ZERO = Decimal("0")
+ ONE = Decimal("1")
+@@ -158,10 +159,8 @@
+     if signal.average_daily_notional == ZERO:
+         return ZERO
+     participation = policy.maximum_participation
+-    coefficient = signal.impact_coefficient_bps
+-    if coefficient > ZERO:
+-        impact_participation = (policy.maximum_impact_bps / coefficient) ** 2
+-        participation = min(participation, impact_participation)
++    curve = signal.impact_model or legacy_impact_model(signal.impact_coefficient_bps, capacity=True)
++    participation = min(participation, curve.participation_for_impact(policy.maximum_impact_bps))
+     return canonical_result(signal.average_daily_notional * participation / nav)
+ 
+ 
+@@ -360,7 +359,10 @@
+             if signal.average_daily_notional > ZERO
+             else ZERO
+         )
+-        impact = canonical_result(signal.impact_coefficient_bps * participation.sqrt())
++        curve = signal.impact_model or legacy_impact_model(
++            signal.impact_coefficient_bps, capacity=True
++        )
++        impact = canonical_result(curve.impact_bps(participation))
+         legs.append(
+             PortfolioLeg(
+                 signal_id=signal.signal_id,
+--- a/src/aegisquant/portfolio/models.py
++++ b/src/aegisquant/portfolio/models.py
+@@ -26,6 +26,7 @@
+     UnitInterval,
+     canonical_result,
+ )
++from aegisquant.portfolio.transition_costs import ImpactModel
+ 
+ 
+ class ExposureDimension(StrEnum):
+@@ -70,6 +71,21 @@
+     current_weight: FiniteDecimal
+     average_daily_notional: NonNegativeDecimal
+     impact_coefficient_bps: NonNegativeDecimal
++    impact_model: ImpactModel | None = Field(default=None, exclude_if=lambda value: value is None)
++    liquidity_horizon_seconds: int | None = Field(
++        default=None, gt=0, exclude_if=lambda value: value is None
++    )
++
++    @model_validator(mode="after")
++    def validate_impact_binding(self) -> SignalInput:
++        if self.impact_model is not None and (
++            self.impact_model.coefficient_bps != self.impact_coefficient_bps
++            or self.impact_model.horizon_seconds != self.liquidity_horizon_seconds
++        ):
++            raise ValueError("AQ-IMPACT-COEFFICIENT-OR-HORIZON-MISMATCH")
++        if (self.impact_model is None) != (self.liquidity_horizon_seconds is None):
++            raise ValueError("explicit impact requires a matching liquidity horizon")
++        return self
+ 
+ 
+ class NormalizedSignal(DomainModel):
+--- a/src/aegisquant/research/validation/evidence_contract.py
++++ b/src/aegisquant/research/validation/evidence_contract.py
+@@ -11,7 +11,7 @@
+ import re
+ import sys
+ from collections import Counter, defaultdict
+-from collections.abc import Generator, Mapping, Sequence
++from collections.abc import Callable, Generator, Mapping, Sequence
+ from contextlib import contextmanager
+ from dataclasses import asdict, dataclass, replace
+ from datetime import UTC, datetime, timedelta
+@@ -21,6 +21,7 @@
+ from pathlib import Path
+ from types import FrameType
+ from typing import Any, cast
++from xml.etree import ElementTree
+ 
+ import polars as pl
+ import yaml
+@@ -712,6 +713,8 @@
+             return
+         filename = frame.f_code.co_filename.replace("\\", "/").lower()
+         key = forbidden.get(frame.f_code.co_name)
++        if filename.endswith("/backtest/engine.py") and frame.f_code.co_name == "run":
++            key = "historical_strategy_engine_runs"
+         if "persistent_holdout" in filename:
+             key = "final_holdout_accesses"
+         if key:
+@@ -1703,3 +1706,205 @@
+     ]
+     with (output / "report.md").open("x", encoding="utf-8", newline="\n") as stream:
+         stream.write("\n".join(lines))
++
++
++def run_zero_research_contract(
++    *,
++    root: Path,
++    config: dict[str, Any],
++    stage: Path,
++    git_state: dict[str, str],
++    files: Sequence[str],
++    build_documents: Callable[[dict[str, Any]], Mapping[str, Any]],
++) -> Path:
++    """Reuse the existing claim, journal, guards and sealing for B4-B7 pure contracts."""
++    require(git_state == {"head": BASE, "branch": "main"}, "AQ-CONTRACT-GIT-IDENTITY")
++    require(
++        config["branch_required"] == "main" and config["source_head"] == BASE,
++        "AQ-CONTRACT-SOURCE-IDENTITY",
++    )
++    require(
++        config["budgets"] == {"contract_jobs": 1, **dict.fromkeys(ZERO_BUDGETS, 0)},
++        "AQ-CONTRACT-NONZERO-RESEARCH-BUDGET",
++    )
++    require(
++        config["production_policy"] == "CASH"
++        and config["research_conclusion"] == "NO_PROVEN_ALPHA"
++        and all(config[k] is False for k in LOCKS),
++        "AQ-CONTRACT-SAFETY-LOCK",
++    )
++    baseline = json.loads(
++        checked_path(stage, "baseline_workspace.json").read_text(encoding="utf-8")
++    )
++    require(
++        baseline["head"] == BASE
++        and baseline["branch"] == "main"
++        and Path(baseline["root"]).resolve() == root.resolve(),
++        "AQ-CONTRACT-PREFLIGHT",
++    )
++    modified = set(baseline["allowed_modifications"])
++    require(
++        modified <= set(files) and all(name in baseline["files"] for name in modified),
++        "AQ-CONTRACT-MODIFICATION-SCOPE",
++    )
++    records = json.loads(checked_path(stage, "validation_records.json").read_text(encoding="utf-8"))
++    latest = {row["check"]: row for row in records}
++    hashes = {name: sha256_file(checked_path(root, name)) for name in files}
++    for kind in ("ruff", "format", "pyright", "pytest"):
++        require(
++            latest.get(kind, {}).get("exit_code") == 0 and latest[kind]["source_sha256"] == hashes,
++            f"AQ-CONTRACT-STALE-VALIDATION:{kind}",
++        )
++    tests = (
++        ElementTree.parse(checked_path(stage, "pytest_results.xml"))  # noqa: S314 -- local pytest receipt.
++        .getroot()
++        .findall(".//testcase")
++    )
++    require(
++        bool(tests)
++        and all(
++            not any(child.tag in {"failure", "error", "skipped"} for child in test)
++            for test in tests
++        ),
++        "AQ-CONTRACT-TEST-FAILURE",
++    )
++    protected = {
++        **baseline,
++        "files": {name: row for name, row in baseline["files"].items() if name not in modified},
++    }
++    output = claim_output(
++        root,
++        config["output"],
++        frozen_roots=[root / Path(row["path"]).parent for row in config["sources"].values()],
++    )
++    counters: dict[str, int] = dict.fromkeys(ZERO_BUDGETS, 0)
++    reader = EvidenceReader(root)
++    run_id = config["generation"] + ":CONTRACT_REPORT"
++    try:
++        with registered_run(  # noqa: SIM117 -- guard exits before journal append.
++            output, run_id, planned_run_ids=[run_id], bindings={"kind": config["scope"]}
++        ):
++            with zero_budget_guard(output, root, counters):
++                write_json_exclusive(
++                    output / "preregistration.json", {"config": config, "planned_run_ids": [run_id]}
++                )
++                before = audit_existing_files(root, protected)
++                for name in (
++                    "baseline_workspace.json",
++                    "workspace_before.patch",
++                    "version_graph.txt",
++                    "validation_records.json",
++                    "test_commands_and_results.txt",
++                    "pytest_results.xml",
++                ):
++                    group = (
++                        "validation"
++                        if name
++                        in {
++                            "validation_records.json",
++                            "test_commands_and_results.txt",
++                            "pytest_results.xml",
++                        }
++                        else "preflight"
++                    )
++                    target = output / group / name
++                    target.parent.mkdir(parents=True, exist_ok=True)
++                    with target.open("xb") as stream:
++                        stream.write(checked_path(stage, name).read_bytes())
++                patch = ""
++                for name in files:
++                    previous = checked_path(stage, "before/" + name) if name in modified else None
++                    if previous is not None:
++                        require(
++                            sha256_file(previous) == baseline["files"][name]["sha256"],
++                            "AQ-CONTRACT-BEFORE-COPY",
++                        )
++                        target = output / "before" / name
++                        target.parent.mkdir(parents=True, exist_ok=True)
++                        with target.open("xb") as stream:
++                            stream.write(previous.read_bytes())
++                    source = checked_path(root, name)
++                    target = output / "implementation" / name
++                    target.parent.mkdir(parents=True, exist_ok=True)
++                    with target.open("xb") as stream:
++                        stream.write(source.read_bytes())
++                    patch += "".join(
++                        difflib.unified_diff(
++                            previous.read_text(encoding="utf-8").splitlines(keepends=True)
++                            if previous
++                            else [],
++                            source.read_text(encoding="utf-8").splitlines(keepends=True),
++                            fromfile="a/" + name if previous else "/dev/null",
++                            tofile="b/" + name,
++                        )
++                    )
++                with (output / "changes_this_batch.patch").open(
++                    "x", encoding="utf-8", newline="\n"
++                ) as stream:
++                    stream.write(patch)
++                sources: dict[str, Any] = {}
++                for name, binding in config["sources"].items():
++                    path = reader.path(binding["path"])
++                    require(
++                        sha256_file(path) == binding["sha256"], f"AQ-CONTRACT-SOURCE-HASH:{name}"
++                    )
++                    sources[name] = json.loads(path.read_text(encoding="utf-8"))
++                require(
++                    sources["r5_manifest"]["source_head"] == BASE, "AQ-CONTRACT-FROZEN-SOURCE-HEAD"
++                )
++                locks = safety_literals(reader, sources["r5_manifest"])
++                for name, value in build_documents(sources).items():
++                    target = checked_path(output, name)
++                    require(target.parent == output, "AQ-CONTRACT-DOCUMENT-PATH")
++                    if name.endswith(".json"):
++                        write_json_exclusive(target, value)
++                    else:
++                        require(
++                            name == "report.md" and isinstance(value, str),
++                            "AQ-CONTRACT-DOCUMENT-TYPE",
++                        )
++                        with target.open("x", encoding="utf-8", newline="\n") as stream:
++                            stream.write(value)
++                after = audit_existing_files(root, protected)
++                write_json_exclusive(
++                    output / "safety_and_budget_audit.json",
++                    {
++                        "actual": {"contract_jobs": 1, **counters},
++                        "authorized": config["budgets"],
++                        "before": before,
++                        "after": after,
++                        "live_lock_literals": locks,
++                        "production_policy": "CASH",
++                        "research_conclusion": "NO_PROVEN_ALPHA",
++                        **dict.fromkeys(LOCKS, False),
++                        "alpha_trials": 0,
++                        "promotion_admitted": False,
++                    },
++                )
++                write_json_exclusive(
++                    output / "source_and_version_bindings.json",
++                    {
++                        "generation": config["generation"],
++                        **git_state,
++                        "reads": reader.reads,
++                        "source_sha256": hashes,
++                        "pure_test_count": len(tests),
++                        "check_record_count": len(records),
++                        "commits_created": 0,
++                        "pushes": 0,
++                        "branches_created": 0,
++                    },
++                )
++    except BaseException as error:
++        write_json_exclusive(
++            output / "failure.json",
++            {
++                "error": f"{type(error).__name__}: {error}",
++                "actual": {"contract_jobs": 1, **counters},
++                "kind": config["scope"],
++            },
++        )
++        seal_output(output)
++        raise
++    seal_output(output)
++    return output
+--- a/src/aegisquant/accounting/ledger.py
++++ b/src/aegisquant/accounting/ledger.py
+@@ -7,7 +7,7 @@
+ from datetime import datetime
+ from decimal import Decimal
+ from pathlib import Path
+-from typing import Final, Self, cast
++from typing import Final, Literal, Self, cast
+ 
+ import yaml
+ from pydantic import BaseModel, ConfigDict, Field, model_validator
+@@ -73,6 +73,9 @@
+     lot_policy: str
+     valuation_priority: tuple[str, ...]
+     mutation_score_threshold: Decimal = Field(ge=Decimal("0"), le=Decimal("1"))
++    spot_fee_policy: Literal["SPOT_NATIVE_FEES_V2"] | None = Field(
++        default=None, exclude_if=lambda value: value is None
++    )
+ 
+     @model_validator(mode="after")
+     def supported_policy(self) -> AccountingPolicy:
+@@ -80,6 +83,8 @@
+             raise ValueError("P05 authoritative lot policy must be FIFO")
+         if self.valuation_priority != ("MARK", "MID", "LAST", "INDEX"):
+             raise ValueError("valuation priority differs from ADR-0009")
++        if self.spot_fee_policy is not None and not self.policy_version.endswith(":native-fees-v2"):
++            raise ValueError("native fee accounting requires a distinct versioned policy")
+         return self
+ 
+     @classmethod
+@@ -368,6 +373,141 @@
+                 asset_id=fill.fee.asset_id,
+                 memo=f"trading fee rebate for {fill.fill_id}",
+             )
++
++    def _validate_native_spot_fee(self, fill: Fill, instrument: AccountingInstrument) -> None:
++        """V2 is funded long/flat spot; validate before any lot/chart mutation."""
++        if any(lot.side is LotSide.SHORT for lot in self.open_lots(instrument.instrument_id)):
++            raise ValueError("AQ-LEDGER-NATIVE-FEE-REQUIRES-LONG-FLAT-SPOT")
++        balances: dict[AssetId, Decimal] = {}
++        for balance in self.native_balances():
++            definition = self.chart.definition(balance.account_id)
++            if definition.role is AccountRole.CASH and definition.venue == instrument.venue:
++                balances[balance.asset_id] = (
++                    balances.get(balance.asset_id, Decimal("0")) + balance.amount
++                )
++        base_quantity = fill.quantity.amount * instrument.contract_multiplier
++        notional = base_quantity * fill.price.amount
++        buy = fill.side.value == "BUY"
++        deltas = {
++            instrument.base_asset_id: base_quantity if buy else -base_quantity,
++            instrument.quote_asset_id: -notional if buy else notional,
++        }
++        deltas[fill.fee.asset_id] = deltas.get(fill.fee.asset_id, Decimal("0")) - max(
++            Decimal("0"), fill.fee.amount
++        )
++        if any(balances.get(asset, Decimal("0")) + delta < 0 for asset, delta in deltas.items()):
++            raise ValueError("AQ-LEDGER-NATIVE-FEE-OR-TRADE-BALANCE-INSUFFICIENT")
++        if fill.fee.amount != 0:
++            for other in self._instrument_by_id.values():
++                if (
++                    other.instrument_id != instrument.instrument_id
++                    and other.base_asset_id == fill.fee.asset_id
++                    and self.open_lots(other.instrument_id)
++                ):
++                    raise ValueError("AQ-LEDGER-THIRD-ASSET-FEE-OPEN-LOT-VALUATION-REQUIRED")
++        fee_quantity = (
++            max(Decimal("0"), fill.fee.amount) / instrument.contract_multiplier
++            if fill.fee.asset_id == instrument.base_asset_id
++            else Decimal("0")
++        )
++        available_lots = sum(
++            (lot.remaining_quantity for lot in self.open_lots(instrument.instrument_id)),
++            Decimal("0"),
++        )
++        if available_lots + (fill.quantity.amount if buy else -fill.quantity.amount) < fee_quantity:
++            raise ValueError("AQ-LEDGER-NATIVE-BASE-FEE-LOT-INSUFFICIENT")
++
++    def _native_spot_fee_lots(
++        self,
++        fill: Fill,
++        instrument: AccountingInstrument,
++        drafts: list[_PostingDraft],
++        changes: list[LotChange],
++    ) -> Decimal:
++        """Dispose positive base fees FIFO; base rebates create a lot at the fill mark."""
++        if fill.fee.asset_id != instrument.base_asset_id or fill.fee.amount == 0:
++            return Decimal("0")
++        quantity = abs(fill.fee.amount) / instrument.contract_multiplier
++        cost = self._account(
++            AccountRole.POSITION_COST, venue=instrument.venue, subject=str(instrument.instrument_id)
++        )
++        clearing = self._account(
++            AccountRole.POSITION_CLEARING,
++            venue=instrument.venue,
++            subject=str(instrument.instrument_id),
++        )
++        if fill.fee.amount > 0:
++            remaining, _, consumed = self._consume_fifo(
++                fill=fill,
++                instrument=instrument,
++                incoming_side=LotSide.SHORT,
++                quantity=quantity,
++                drafts=drafts,
++            )
++            if remaining != 0:
++                raise RuntimeError("prechecked native fee lot changed during consumption")
++            changes.extend(consumed)
++            basis = sum(
++                (
++                    change.affected_quantity
++                    * instrument.contract_multiplier
++                    * change.lot_before.entry_price
++                    for change in consumed
++                    if change.lot_before is not None
++                ),
++                Decimal("0"),
++            )
++            self._pair(
++                drafts,
++                debit=clearing,
++                credit=cost,
++                amount=basis,
++                asset_id=instrument.quote_asset_id,
++                memo=f"release FIFO basis of native fee {fill.fill_id}",
++            )
++            realized = exact_decimal_sum(
++                (
++                    quantity * instrument.contract_multiplier * fill.price.amount,
++                    basis.copy_negate(),
++                )
++            )
++            if realized != 0:
++                pnl_account = self._account(
++                    AccountRole.TRADING_REALIZED_PNL if realized > 0 else AccountRole.TRADING_LOSS,
++                    venue=instrument.venue,
++                    subject=str(instrument.quote_asset_id),
++                )
++                # The asset pays the fee: use memo clearing, never invent quote cash.
++                self._pair(
++                    drafts,
++                    debit=clearing if realized > 0 else pnl_account,
++                    credit=pnl_account if realized > 0 else clearing,
++                    amount=abs(realized),
++                    asset_id=instrument.quote_asset_id,
++                    memo=f"FIFO disposal PnL of native fee {fill.fill_id}",
++                )
++            return realized
++        lot = self._new_lot(
++            fill=fill, instrument=instrument, side=LotSide.LONG, quantity=quantity, ordinal=1
++        )
++        self._lots.setdefault(instrument.instrument_id, []).append(lot)
++        changes.append(
++            LotChange(
++                action=LotAction.OPEN,
++                lot_after=lot,
++                affected_quantity=quantity,
++                realized_pnl=Money(amount=Decimal("0"), asset_id=instrument.quote_asset_id),
++            )
++        )
++        self._pair(
++            drafts,
++            debit=cost,
++            credit=clearing,
++            amount=quantity * instrument.contract_multiplier * fill.price.amount,
++            asset_id=instrument.quote_asset_id,
++            memo=f"basis of native fee rebate {fill.fill_id}",
++        )
++        return Decimal("0")
+ 
+     def _realized_postings(
+         self,
+@@ -981,6 +1121,11 @@
+                 "fill": fill.model_dump(mode="json"),
+                 "instrument": instrument.model_dump(mode="json"),
+                 "policy_version": self.policy.policy_version,
++                **(
++                    {"spot_fee_policy": self.policy.spot_fee_policy}
++                    if self.policy.spot_fee_policy is not None
++                    else {}
++                ),
+             }
+         )
+         fill_key = str(fill.fill_id)
+@@ -998,7 +1143,15 @@
+                 raise ValueError("AQ-LEDGER-IDEMPOTENCY-CONFLICT")
+             return FillApplyOutcome(applied_fill=existing, inserted=False)
+         if instrument.instrument_type is InstrumentType.SPOT:
++            if self.policy.spot_fee_policy is not None:
++                self._validate_native_spot_fee(fill, instrument)
+             drafts, changes, realized = self._spot_fill(fill, instrument)
++            if self.policy.spot_fee_policy is not None:
++                fee_realized = self._native_spot_fee_lots(fill, instrument, drafts, changes)
++                realized = Money(
++                    amount=canonical_result(realized.amount + fee_realized),
++                    asset_id=realized.asset_id,
++                )
+             event_type = "SPOT_FILL"
+         else:
+             drafts, changes, realized = self._derivative_fill(fill, instrument)
+--- /dev/null
++++ b/src/aegisquant/research/validation/execution_contract.py
+@@ -0,0 +1,330 @@
++"""B4 execution evidence protocols and pure calibration checks; no market loader."""
++
++from __future__ import annotations
++
++import re
++from collections import defaultdict
++from collections.abc import Mapping, Sequence
++from datetime import timedelta
++from decimal import Decimal
++from typing import Any
++
++import numpy as np
++
++from aegisquant.data.hashing import ensure_sha256
++from aegisquant.research.validation.evidence_contract import CostMode, Row, decimal, require, utc
++from aegisquant.research.validation.paired_bootstrap import (
++    _circular_block_totals,  # pyright: ignore[reportPrivateUsage] -- reuse the existing shared row sampler without compounding counts.
++)
++
++FILES = (
++    "src/aegisquant/backtest/models.py",
++    "src/aegisquant/backtest/fills.py",
++    "src/aegisquant/backtest/costs.py",
++    "src/aegisquant/portfolio/transition_costs.py",
++    "src/aegisquant/portfolio/optimizer.py",
++    "src/aegisquant/portfolio/models.py",
++    "src/aegisquant/research/validation/evidence_contract.py",
++    "src/aegisquant/accounting/ledger.py",
++    "src/aegisquant/research/validation/execution_contract.py",
++    "scripts/run_alpha_v5_execution_diagnostics.py",
++    "configs/research/alpha_v5_execution_contract.yaml",
++    "tests/alpha_v5/test_execution_contract.py",
++    "docs/research/alpha_v5_execution_contract.md",
++)
++
++
++def validate_config(config: Row) -> None:
++    match = re.fullmatch(r"alpha-r5-execution-contract-(\d{8})-v([1-9]\d*)", config["generation"])
++    require(match is not None, "AQ-EXECUTION-GENERATION")
++    if match is None:
++        return
++    require(
++        config["output"] == f"artifacts/alpha_v5/{match[1]}_execution_contract_v{match[2]}",
++        "AQ-EXECUTION-OUTPUT",
++    )
++    require(
++        config["scope"] == "B4_EXECUTION_PROTOCOL_AND_SYNTHETIC_CONTRACT_TESTS",
++        "AQ-EXECUTION-SCOPE",
++    )
++    require(
++        config["execution_observations"] is None and config["calibration_split"] is None,
++        "AQ-EXECUTION-REAL-CALIBRATION-NOT-AUTHORIZED",
++    )
++    require(
++        config["future_scenarios"]
++        == {
++            "controls": ["G1", "SIMPLE_TREND"],
++            "capital_multipliers": ["1", "5", "10", "25", "50"],
++            "stress_paths": ["BASE", "COST_AND_LATENCY", "DEPTH_AND_HALT"],
++            "authorized_runs_now": 0,
++        },
++        "AQ-EXECUTION-SCENARIO-REGISTRATION",
++    )
++    require(
++        config["calibration_acceptance"]
++        == {
++            "minimum_bucket_samples": 200,
++            "minimum_bucket_days": 20,
++            "maximum_abs_median_residual_bps": "1",
++            "maximum_q95_exceedance_upper_bound": "0.10",
++            "block_days": 5,
++            "repetitions": 10000,
++            "seed": 20260910,
++        },
++        "AQ-EXECUTION-CALIBRATION-REGISTRATION",
++    )
++
++
++def validate_execution_observations(rows: Sequence[Row]) -> None:
++    """Reject duplicate/conflicting fills and contradictory clocks before any split."""
++    fills: set[str] = set()
++    totals: dict[str, Decimal] = defaultdict(lambda: Decimal("0"))
++    orders: dict[str, tuple[Decimal, str]] = {}
++    for row in rows:
++        ensure_sha256(row["source_sha256"], field_name="execution observation source")
++        require(row["fill_id"] not in fills, "AQ-EXECUTION-DUPLICATE-FILL")
++        fills.add(row["fill_id"])
++        clocks = {
++            key: utc(row[key]) if row[key] is not None else None
++            for key in (
++                "decision_at",
++                "send_at",
++                "venue_receive_at",
++                "ack_at",
++                "fill_at",
++                "receive_at",
++                "cancel_request_at",
++                "cancel_ack_at",
++            )
++        }
++        decision, send, fill, received = (
++            clocks[key] for key in ("decision_at", "send_at", "fill_at", "receive_at")
++        )
++        require(
++            all(value is not None for value in (decision, send, fill, received)),
++            "AQ-EXECUTION-MISSING-REQUIRED-CLOCK",
++        )
++        if decision is None or send is None or fill is None or received is None:
++            return
++        require(decision <= send <= fill <= received, "AQ-EXECUTION-CLOCK-ORDER")
++        if (arrival := clocks["venue_receive_at"]) is not None:
++            require(send <= arrival <= fill, "AQ-EXECUTION-ARRIVAL-CLOCK")
++        if (ack := clocks["ack_at"]) is not None:
++            require(ack >= send and (arrival is None or ack >= arrival), "AQ-EXECUTION-ACK-CLOCK")
++        if (cancel := clocks["cancel_request_at"]) is not None:
++            require(cancel >= send, "AQ-EXECUTION-CANCEL-CLOCK")
++        if (cancel_ack := clocks["cancel_ack_at"]) is not None:
++            require(
++                clocks["cancel_request_at"] is not None
++                and cancel_ack >= clocks["cancel_request_at"],
++                "AQ-EXECUTION-CANCEL-CLOCK",
++            )
++        require(
++            row["clock_error_ns"] is None
++            or (type(row["clock_error_ns"]) is int and row["clock_error_ns"] >= 0),
++            "AQ-EXECUTION-CLOCK-ERROR",
++        )
++        quantity, order_quantity = decimal(row["quantity"]), decimal(row["order_quantity"])
++        require(
++            0 < quantity <= order_quantity and row["side"] in {"BUY", "SELL"},
++            "AQ-EXECUTION-QUANTITY-OR-SIDE",
++        )
++        require(
++            row["reference_price_kind"]
++            in {"MID", "BBO", "DEPTH_VWAP", "BAR_OPEN_PROXY", "MAKER_LIMIT"}
++            and decimal(row["reference_price"]) > 0
++            and bool(row["fee_asset"]),
++            "AQ-EXECUTION-REFERENCE-OR-FEE-ASSET",
++        )
++        identity = (order_quantity, row["side"])
++        order_id = row["order_id"]
++        require(
++            order_id not in orders or orders[order_id] == identity, "AQ-EXECUTION-ORDER-CONFLICT"
++        )
++        orders[order_id] = identity
++        totals[order_id] += quantity
++        require(totals[order_id] <= order_quantity, "AQ-EXECUTION-OVERFILL")
++
++
++def split_execution_calibration(
++    rows: Sequence[Row],
++    *,
++    calibration_start: str,
++    calibration_end: str,
++    validation_start: str,
++    validation_end: str,
++) -> dict[str, Any]:
++    """One fixed split; a partially filled order cannot straddle the two regions."""
++    validate_execution_observations(rows)
++    cs, ce, vs, ve = map(
++        utc, (calibration_start, calibration_end, validation_start, validation_end)
++    )
++    require(cs < ce <= vs < ve, "AQ-EXECUTION-CALIBRATION-SPLIT-OVERLAP")
++    groups: dict[str, list[Row]] = {"calibration": [], "validation": [], "excluded": []}
++    memberships: dict[str, set[str]] = defaultdict(set)
++    for row in rows:
++        time = utc(row["fill_at"])
++        group = (
++            "calibration" if cs <= time < ce else "validation" if vs <= time < ve else "excluded"
++        )
++        require(
++            utc(row["receive_at"]) <= (ce if group == "calibration" else ve) or group == "excluded",
++            "AQ-EXECUTION-LABEL-NOT-KNOWN-BY-SPLIT",
++        )
++        memberships[row["order_id"]].add(group)
++        groups[group].append(row)
++    require(
++        all(len(regions) == 1 for regions in memberships.values()),
++        "AQ-EXECUTION-ORDER-CROSSES-SPLIT",
++    )
++    return {
++        "kind": "SUPPLIED_OBSERVATION_SPLIT_NOT_MODEL_FIT",
++        **{key: [row["fill_id"] for row in values] for key, values in groups.items()},
++    }
++
++
++def calibration_residual_buckets(rows: Sequence[Row]) -> dict[str, Any]:
++    """Pure fixed-rule validation; callers must separately verify real observation sources."""
++    validate_execution_observations(rows)
++    grouped: dict[str, list[Row]] = defaultdict(list)
++    for row in rows:
++        grouped[row["bucket"]].append(row)
++    results = {}
++    for bucket, values in sorted(grouped.items()):
++        by_day: dict[Any, list[Row]] = defaultdict(list)
++        for row in values:
++            by_day[utc(row["fill_at"]).date()].append(row)
++        require(all(decimal(row["fee_quantum"]) > 0 for row in values), "AQ-EXECUTION-FEE-QUANTUM")
++        fees_exact = all(
++            decimal(row["fee_amount"]) == decimal(row["expected_fee_amount"])
++            and decimal(row["fee_amount"]) % decimal(row["fee_quantum"]) == 0
++            for row in values
++        )
++        if len(values) < 200 or len(by_day) < 20:
++            results[bucket] = {
++                "status": "INSUFFICIENT_SAMPLE",
++                "samples": len(values),
++                "days": len(by_day),
++                "fees_exact": fees_exact,
++                "median_residual_bps": None,
++                "q95_exceedance_ci95": None,
++            }
++            continue
++        start, end = min(by_day), max(by_day)
++        days = [start + timedelta(days=i) for i in range((end - start).days + 1)]
++        counts = np.array(
++            [
++                [
++                    len(by_day[day]),
++                    sum(
++                        decimal(row["observed_adverse_bps"]) > decimal(row["predicted_q95_bps"])
++                        for row in by_day[day]
++                    ),
++                ]
++                for day in days
++            ],
++            dtype=np.float64,
++        )
++        sampled = _circular_block_totals(counts, repetitions=10000, block_bars=5, seed=20260910)
++        if np.any(sampled[:, 0] == 0):
++            results[bucket] = {
++                "status": "INSUFFICIENT_EFFECTIVE_TIME_BLOCKS",
++                "samples": len(values),
++                "days": len(by_day),
++            }
++            continue
++        low, high = np.quantile(sampled[:, 1] / sampled[:, 0], (0.025, 0.975))
++        median = float(np.median([float(decimal(row["residual_bps"])) for row in values]))
++        results[bucket] = {
++            "status": "SUPPLIED_RECORDS_PASS"
++            if fees_exact and abs(median) <= 1 and high <= 0.10
++            else "CALIBRATION_FAILED",
++            "samples": len(values),
++            "days": len(by_day),
++            "fees_exact": fees_exact,
++            "median_residual_bps": median,
++            "q95_exceedance_ci95": [float(low), float(high)],
++            "source_verification": "SEPARATE_REQUIRED",
++            "no_bucket_selection": True,
++        }
++    return {
++        "kind": "SUPPLIED_RESIDUAL_CHECK_NOT_MODEL_FIT_OR_EMPIRICAL_SOURCE_PROOF",
++        "buckets": results,
++    }
++
++
++def build_documents(sources: Mapping[str, Any]) -> Mapping[str, Any]:
++    missing = [
++        {"item": name, "status": "NOT_RECEIVED", "records": None}
++        for name in (
++            "historical_account_fee_rules",
++            "native_asset_balances_and_fee_fx",
++            "historical_l1_l2_sequence_and_trades",
++            "venue_and_client_latency_observations",
++            "queue_positions_and_cancel_observations",
++        )
++    ]
++    return {
++        "execution_protocol.json": {
++            "status": "PROTOCOL_DEFINED_EMPIRICAL_MODEL_NOT_CALIBRATED",
++            "legacy_execution": "LINEAR_PROXY_V1",
++            "legacy_capacity": "LEGACY_SQRT_CAPACITY_V0",
++            "explicit_curves_share_forward_and_inverse": True,
++            "prices": ["MID", "BBO", "DEPTH_VWAP", "BAR_OPEN_PROXY", "MAKER_LIMIT"],
++            "bar_volume_is_opening_liquidity_evidence": False,
++            "maker_queue_unknown": "NO_IDENTIFIED_FILL",
++            "strict_budget_scope": "ONE_INSTRUMENT_VENUE_CLOSED_CUMULATIVE_WINDOW_AT_EVENT_TIME",
++            "strict_budget_current_evidence_kind": "SYNTHETIC_ONLY",
++            "native_fee_accounting_policy": "SPOT_NATIVE_FEES_V2",
++            "native_fee_base": "FIFO_DISPOSAL_AT_FILL_MARK_REBATE_LOT_AT_FILL_MARK",
++            "third_fee_asset": "REQUIRES_FUNDED_CASH_AND_FX_OPEN_OTHER_INSTRUMENT_LOTS_FAIL_CLOSED",
++            "old_engine_default_changed": False,
++            "existing_g1_parameters_changed": False,
++        },
++        "execution_quality_tables.json": {"status": "NOT_RECEIVED", "tables": missing},
++        "calibration_freeze_manifest.json": {
++            "status": "NOT_ALLOCATED_MISSING_EXECUTION_OBSERVATIONS",
++            "calibration_period": None,
++            "validation_period": None,
++            "actual_data_splits": 0,
++            "model_fits": 0,
++            "replay_scenarios": 0,
++            "frozen_model_hash": None,
++        },
++        "calibration_residual_buckets.json": {"status": "NOT_COLLECTED", "buckets": None},
++        "cost_modes.json": {
++            mode.value: {
++                "monotonic_shadow_required": mode is CostMode.SAME_FILL_SHADOW,
++                "new_historical_result": None,
++            }
++            for mode in CostMode
++        },
++        "capacity_curve.json": {
++            "status": "NOT_COLLECTED",
++            "base_capital": "50000",
++            "capital_multipliers": ["1", "5", "10", "25", "50"],
++            "maximum_tradable_capital": None,
++            "coverage": None,
++            "empirical_extrapolation_allowed": False,
++        },
++        "evidence_gaps.json": {
++            "gaps": missing,
++            "pit_data_quality": sources["b2_safety"]["strict_data_quality"],
++            "promotion_admitted": False,
++        },
++        "report.md": """# B4 有效时点执行与成本契约
++
++**NO_PROVEN_ALPHA / CASH；ML、纸面准入、实盘、订单全部关闭。**
++
++已实现显式成交参考价、已包含成本组件、费用可知时间与有效时间分离、逐部分成交的费用币种/优惠/余额回退、共同 impact 正反函数及时间窗口绑定。旧执行线性代理、旧容量平方根代理分别保留；显式新版输入才采用统一模型。
++
++共享流动性工具复用 decide_fills，检查订单到达/撤单时序、maker queue 未知、窗口总绝对成交额和每事件深度消耗。它只处理输入的同一币种/场所、已知累计窗口截止事件；当前返回 SYNTHETIC_ONLY，不把窗口成交量宣称为瞬时盘口。未成交量和 FOK 失败保留。
++
++SPOT_NATIVE_FEES_V2 为显式独立账本规则：基础币手续费按成交价作 FIFO 库存处置，返佣建立带成本基础的新 lot；交易与费用余额不足时在修改前拒绝。第三币若另有该币交易 lots，必须取得对应估值并接入处置协议，目前明确拒绝。旧账本默认及冻结回放参数保留。
++
++合成 fixture、既有相关纯测试和静态检查见 validation/；真实样本缺失，不能以这些通过记录宣称执行模型已校准。独立校准/验证分割、残差分桶和容量曲线均未采集，实际数据切分与模型拟合为零。真实费用、FX、L1/L2、逐笔和延迟等缺口见 evidence_gaps.json。
++
++仅消费一次本 generation 协议报告；历史策略回放、真实收益模型/校准拟合、最终留出访问和真实订单均为零。后续 B5-B7 工程继续按证据门槛推进。
++""",
++    }
+--- /dev/null
++++ b/scripts/run_alpha_v5_execution_diagnostics.py
+@@ -0,0 +1,46 @@
++"""B4 execution protocol report only; real calibration and replay are disabled."""
++
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import yaml
++
++from aegisquant.research.validation.evidence_contract import (
++    checked_path,
++    run_zero_research_contract,
++)
++from aegisquant.research.validation.execution_contract import (
++    FILES,
++    build_documents,
++    validate_config,
++)
++from scripts.export_alpha_v4_audit_bundle import git
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--config", required=True, type=Path)
++    parser.add_argument("--preflight-dir", required=True, type=Path)
++    args = parser.parse_args()
++    config = yaml.safe_load(checked_path(ROOT, args.config.as_posix()).read_text(encoding="utf-8"))
++    validate_config(config)
++    output = run_zero_research_contract(
++        root=ROOT,
++        config=config,
++        stage=args.preflight_dir,
++        git_state={
++            "head": git(ROOT, "rev-parse", "HEAD"),
++            "branch": git(ROOT, "branch", "--show-current"),
++        },
++        files=FILES,
++        build_documents=build_documents,
++    )
++    print(f"B4 execution protocol: {output}; empirical calibration NOT_COLLECTED", flush=True)
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/configs/research/alpha_v5_execution_contract.yaml
+@@ -0,0 +1,45 @@
++schema_version: aegis-execution-contract-b4-v1
++generation: alpha-r5-execution-contract-20260910-v1
++output: artifacts/alpha_v5/20260910_execution_contract_v1
++scope: B4_EXECUTION_PROTOCOL_AND_SYNTHETIC_CONTRACT_TESTS
++branch_required: main
++source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
++budgets:
++  contract_jobs: 1
++  historical_strategy_engine_runs: 0
++  real_return_model_fits: 0
++  real_calibration_fits: 0
++  final_holdout_accesses: 0
++  real_orders: 0
++sources:
++  r5_manifest:
++    path: artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json
++    sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
++  b3_manifest:
++    path: artifacts/alpha_v5/20260910_benchmark_contract_v1/OUTPUT_MANIFEST.json
++    sha256: 293d3bbd5993f54e81cb9a88e3702978d6c6fcb08261406f51c8a2998b76abcb
++  b2_safety:
++    path: artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json
++    sha256: c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26
++execution_observations: null
++calibration_split: null
++calibration_acceptance:
++  minimum_bucket_samples: 200
++  minimum_bucket_days: 20
++  maximum_abs_median_residual_bps: '1'
++  maximum_q95_exceedance_upper_bound: '0.10'
++  block_days: 5
++  repetitions: 10000
++  seed: 20260910
++future_scenarios:
++  controls: [G1, SIMPLE_TREND]
++  capital_multipliers: ['1', '5', '10', '25', '50']
++  stress_paths: [BASE, COST_AND_LATENCY, DEPTH_AND_HALT]
++  authorized_runs_now: 0
++research_conclusion: NO_PROVEN_ALPHA
++production_policy: CASH
++production_ml_enabled: false
++paper_trading_admitted: false
++live_trading: false
++order_submission_enabled: false
++
+--- /dev/null
++++ b/tests/alpha_v5/test_execution_contract.py
+@@ -0,0 +1,961 @@
++"""B4 synthetic cost, liquidity, native-ledger and report checks; no strategy replay."""
++
++from __future__ import annotations
++
++import copy
++import json
++import sys
++from datetime import timedelta
++from decimal import Decimal
++from pathlib import Path
++from types import ModuleType
++from typing import Any
++
++import pytest
++import yaml
++
++from aegisquant.accounting.ledger import AccountingPolicy, LedgerEngine
++from aegisquant.accounting.models import (
++    AccountRole,
++    CashflowDirection,
++    CashflowEvent,
++    CashflowType,
++    FxRate,
++    ValuationQuote,
++)
++from aegisquant.backtest.costs import (
++    FeeAccountState,
++    HistoricalCostBook,
++    execution_price_and_cost,
++    settle_execution_fee,
++)
++from aegisquant.backtest.fills import EventLiquidityBudget, ParticipationWindow, decide_fills
++from aegisquant.backtest.models import (
++    CommissionRates,
++    CostSchedule,
++    ExecutionCostEvidence,
++    ExecutionReference,
++    FeeTerms,
++    FillPrecision,
++    FillSlice,
++    LiquidityRole,
++)
++from aegisquant.data.hashing import sha256_file
++from aegisquant.domain.execution import OrderSide, OrderType, TimeInForce
++from aegisquant.domain.identifiers import ArtifactId, AssetId, BacktestEventId, IdempotencyKey
++from aegisquant.domain.values import Money, Price
++from aegisquant.portfolio.models import SignalInput
++from aegisquant.portfolio.optimizer import (
++    _capacity_weight,  # pyright: ignore[reportPrivateUsage] -- test the actual internal capacity boundary.
++)
++from aegisquant.portfolio.transition_costs import (
++    ImpactModel,
++    estimate_spot_transition_costs,
++    legacy_impact_model,
++)
++from aegisquant.research.validation import evidence_contract as evidence
++from aegisquant.research.validation import execution_contract as contract
++from tests.alpha_v5.test_benchmark_contract import r5_fixture
++from tests.p05 import helpers as accounting
++from tests.p05.test_ledger_core import assert_balanced_by_asset
++from tests.p06.helpers import BTC, NOW, USDT, bars, l2_book, order, policy, trade_quote
++from tests.p11_helpers import construction_policy, signal
++
++ROOT = Path(__file__).resolve().parents[2]
++D = Decimal
++HASH = "1" * 64
++BNB = AssetId("BNB")
++
++
++def curve(model: str = "LINEAR_PROXY_V1", coefficient: str = "10", cap: str = "1") -> ImpactModel:
++    return ImpactModel.model_validate(
++        {
++            "model_id": model,
++            "coefficient_bps": D(coefficient),
++            "horizon_seconds": 60,
++            "participation_unit": "ORDER_QUOTE_NOTIONAL_OVER_WINDOW_QUOTE_TURNOVER",
++            "target": "TOTAL_PRICE_IMPACT",
++            "evidence_status": "PROXY_ONLY",
++            "maximum_supported_participation": D(cap),
++        }
++    )
++
++
++def execution_pair(
++    kind: str, price: str, included: tuple[str, ...] = ()
++) -> tuple[FillSlice, CostSchedule]:
++    reference = ExecutionReference.model_validate(
++        {
++            "reference_price_kind": kind,
++            "included_cost_components": included,
++            "source_sha256": HASH,
++            "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
++            "participation_window_seconds": 60,
++            "window_quote_turnover": D("10000"),
++        }
++    )
++    fill = FillSlice(
++        quantity=D("1"),
++        reference_price=D(price),
++        available_liquidity=D("100"),
++        precision=FillPrecision.L2_DEPTH,
++        liquidity_role=LiquidityRole.TAKER,
++        source_event_id=BacktestEventId("synthetic-reference"),
++        event_time=NOW,
++        available_time=NOW,
++        reference=reference,
++    )
++    schedule = CostSchedule.model_validate(
++        {
++            **dict(policy().cost_schedules[0]),
++            "maker_fee_bps": D("0"),
++            "taker_fee_bps": D("0"),
++            "half_spread_bps": D("10"),
++            "slippage_bps": D("0"),
++            "impact_coefficient_bps": D("0"),
++            "evidence": ExecutionCostEvidence(
++                account_scope="SYNTHETIC_ACCOUNT",
++                available_at=NOW,
++                source_sha256=HASH,
++                verified_kind="SYNTHETIC_ONLY",
++                impact_model=curve(coefficient="0"),
++            ),
++        }
++    )
++    return fill, schedule
++
++
++@pytest.mark.parametrize("side", [OrderSide.BUY, OrderSide.SELL])
++def test_mid_and_bbo_charge_spread_exactly_once(side: OrderSide) -> None:
++    mid, schedule = execution_pair("MID", "100")
++    bbo, _ = execution_pair("BBO", "100.1" if side is OrderSide.BUY else "99.9", ("SPREAD",))
++    candidate = order(sequence=1, side=side)
++    priced = [
++        execution_price_and_cost(
++            order=candidate,
++            fill_slice=value,
++            schedule=schedule,
++            base_asset_id=BTC,
++            quote_asset_id=USDT,
++        )
++        for value in (mid, bbo)
++    ]
++    assert priced[0][0] == priced[1][0]
++    assert priced[0][1].spread == D("0.1") and priced[1][1].spread == 0
++
++
++def test_depth_includes_visible_impact_and_explicit_residual_is_separate() -> None:
++    fill, schedule = execution_pair("DEPTH_VWAP", "101", ("SPREAD", "VISIBLE_DEPTH"))
++    proof = schedule.evidence
++    assert proof is not None
++    schedule = CostSchedule.model_validate(
++        {
++            **dict(schedule),
++            "impact_coefficient_bps": D("10"),
++            "evidence": proof.model_copy(update={"impact_model": curve()}),
++        }
++    )
++    args: dict[str, Any] = dict(
++        order=order(sequence=1, side=OrderSide.BUY),
++        fill_slice=fill,
++        schedule=schedule,
++        base_asset_id=BTC,
++        quote_asset_id=USDT,
++    )
++    price, cost = execution_price_and_cost(**args)
++    assert price.amount == 101 and cost.spread == cost.impact == 0
++    residual_curve = curve().model_copy(update={"target": "RESIDUAL_BEYOND_REFERENCE"})
++    residual = schedule.model_copy(
++        update={"evidence": proof.model_copy(update={"impact_model": residual_curve})}
++    )
++    residual_args: dict[str, Any] = {**args, "schedule": residual}
++    _, residual_cost = execution_price_and_cost(**residual_args)
++    assert residual_cost.impact > 0
++    with pytest.raises(ValueError, match="EMPIRICAL-EVIDENCE"):
++        execution_price_and_cost(**args, strict_evidence=True)
++
++
++@pytest.mark.parametrize(
++    "bad",
++    [
++        "unknown_bbo_component",
++        "mid_includes_spread",
++        "bar_is_real",
++        "mixed_version",
++        "wrong_horizon",
++    ],
++)
++def test_reference_evidence_conflicts_fail(bad: str) -> None:
++    fill, schedule = execution_pair("MID", "100")
++    assert fill.reference is not None and schedule.evidence is not None
++    if bad in {"unknown_bbo_component", "mid_includes_spread", "bar_is_real"}:
++        changes = {
++            "unknown_bbo_component": {"reference_price_kind": "BBO"},
++            "mid_includes_spread": {"included_cost_components": ("SPREAD",)},
++            "bar_is_real": {
++                "reference_price_kind": "BAR_OPEN_PROXY",
++                "evidence_kind": "HISTORICAL_MARKET_EVIDENCE",
++            },
++        }[bad]
++        with pytest.raises(ValueError):
++            ExecutionReference.model_validate({**fill.reference.model_dump(), **changes})
++    else:
++        changed = fill.model_copy(
++            update={
++                "reference": None
++                if bad == "mixed_version"
++                else fill.reference.model_copy(update={"participation_window_seconds": 3600})
++            }
++        )
++        with pytest.raises(ValueError):
++            execution_price_and_cost(
++                order=order(sequence=1, side=OrderSide.BUY),
++                fill_slice=changed,
++                schedule=schedule,
++                base_asset_id=BTC,
++                quote_asset_id=USDT,
++            )
++
++
++@pytest.mark.parametrize("model", ["LINEAR_PROXY_V1", "SQRT_PROXY_V1"])
++def test_impact_forward_inverse_and_capacity_use_one_horizon(model: str) -> None:
++    selected = curve(model, "100", "0.5")
++    for participation in map(D, ("0", "0.01", "0.25", "0.5")):
++        assert (
++            selected.participation_for_impact(selected.impact_bps(participation)) == participation
++        )
++    base = signal(
++        asset=BTC,
++        instrument="SYNTHETIC-BTC",
++        adv=D("10000"),
++        impact_bps=D("100"),
++        raw_score=D("1"),
++        confidence=D("1"),
++    )
++    versioned = SignalInput.model_validate(
++        {**dict(base), "impact_model": selected, "liquidity_horizon_seconds": 60}
++    )
++    cap = _capacity_weight(versioned, nav=D("1000"), policy=construction_policy())
++    assert cap == D("10") * min(
++        construction_policy().maximum_participation,
++        selected.participation_for_impact(construction_policy().maximum_impact_bps),
++    )
++    with pytest.raises(ValueError, match="HORIZON"):
++        SignalInput.model_validate(
++            {**dict(base), "impact_model": selected, "liquidity_horizon_seconds": 86400}
++        )
++    with pytest.raises(ValueError, match="OUTSIDE"):
++        selected.impact_bps(D("0.5001"))
++    assert selected.participation_for_impact(D("1000")) == D("0.5")
++
++
++def test_legacy_capacity_and_new_linear_capacity_are_explicitly_different() -> None:
++    legacy = legacy_impact_model(D("100"), capacity=True)
++    assert legacy.participation_for_impact(D("10")) == D("0.01")
++    assert curve(coefficient="100").participation_for_impact(D("10")) == D("0.1")
++    assert curve(coefficient="0", cap="0.4").participation_for_impact(D("0")) == D("0.4")
++
++
++def fee_terms() -> FeeTerms:
++    return FeeTerms(
++        standard=CommissionRates(maker=D("8"), taker=D("10"), buyer=D("1"), seller=D("2")),
++        special=CommissionRates(maker=D("1"), taker=D("1")),
++        tax=CommissionRates(maker=D("2"), taker=D("2")),
++        normal_fee_asset="RECEIVED_ASSET",
++        discount_asset_id=BNB,
++        standard_discount_fraction=D("0.25"),
++        discount_effective_from=NOW - timedelta(days=1),
++        discount_effective_to=NOW + timedelta(days=1),
++    )
++
++
++def fee_args() -> dict[str, Any]:
++    return dict(
++        terms=fee_terms(),
++        fill_time=NOW,
++        role=LiquidityRole.TAKER,
++        side=OrderSide.BUY,
++        quantity=D("2"),
++        execution_price=D("100"),
++        base_asset_id=BTC,
++        quote_asset_id=USDT,
++        available_balances={BNB: D("1"), USDT: D("1000")},
++        quote_fx={BNB: D("250")},
++        fx_available_at=NOW,
++    )
++
++
++def test_discount_only_reduces_standard_fee_and_partial_fills_consume_actual_balance() -> None:
++    args = fee_args()
++    first = settle_execution_fee(**args)
++    assert first.undiscounted_quote_equivalent == D("0.28")
++    assert first.quote_equivalent == D("0.225") and first.fee.amount == D("0.0009")
++    assert first.fee.asset_id == BNB and first.discount_applied
++    low_balance: dict[str, Any] = {**args, "available_balances": {BNB: first.fee.amount}}
++    paid = settle_execution_fee(**low_balance)
++    exhausted_balance: dict[str, Any] = {**low_balance, "available_balances": {BNB: D("0")}}
++    second = settle_execution_fee(**exhausted_balance)
++    assert paid.discount_applied and not second.discount_applied
++    assert second.fee.asset_id == BTC and second.fee.amount == D("0.0028")
++    assert second.fallback_reason == "DISCOUNT_ASSET_BALANCE_INSUFFICIENT"
++
++
++@pytest.mark.parametrize("cause", ["expired", "missing_fx", "future_fx", "insufficient_normal"])
++def test_discount_boundaries_and_fx_are_fail_closed(cause: str) -> None:
++    args = fee_args()
++    if cause == "expired":
++        args["fill_time"] = fee_terms().discount_effective_to
++        assert settle_execution_fee(**args).fallback_reason == "DISCOUNT_NOT_EFFECTIVE"
++    elif cause == "missing_fx":
++        args["quote_fx"] = {}
++        assert settle_execution_fee(**args).fallback_reason == "DISCOUNT_FX_UNAVAILABLE"
++    else:
++        if cause == "future_fx":
++            args["fx_available_at"] = NOW + timedelta(microseconds=1)
++        else:
++            args["terms"] = fee_terms().model_copy(update={"normal_fee_asset": "QUOTE"})
++            args["available_balances"] = {}
++        with pytest.raises(ValueError):
++            settle_execution_fee(**args)
++
++
++def test_fee_effective_time_is_not_decision_known_time_and_future_revisions_do_not_leak() -> None:
++    _, base = execution_pair("MID", "100")
++    assert base.evidence is not None
++    proof = base.evidence.model_copy(
++        update={
++            "available_at": NOW + timedelta(hours=1),
++            "verified_kind": "HISTORICAL_ACCOUNT_EVIDENCE",
++        }
++    )
++    late = base.model_copy(update={"evidence": proof})
++    book = HistoricalCostBook((late,))
++    candidate = order(sequence=1, side=OrderSide.BUY)
++    assert book.at(candidate, NOW) == late
++    with pytest.raises(ValueError, match="UNKNOWN-AT-DECISION"):
++        book.decision_at(candidate, NOW)
++    mutated = late.model_copy(
++        update={
++            "evidence": proof.model_copy(update={"source_sha256": "2" * 64}),
++            "taker_fee_bps": D("70"),
++        }
++    )
++    with pytest.raises(ValueError, match="UNKNOWN-AT-DECISION"):
++        HistoricalCostBook((mutated,)).decision_at(candidate, NOW)
++    assert book.decision_at(candidate, NOW + timedelta(hours=1)) == late
++
++
++def test_native_fee_contract_cannot_silently_use_old_quote_fee_engine_path() -> None:
++    fill, schedule = execution_pair("BBO", "100", ("SPREAD",))
++    assert schedule.evidence is not None
++    schedule = schedule.model_copy(
++        update={"evidence": schedule.evidence.model_copy(update={"fee_terms": fee_terms()})}
++    )
++    args: dict[str, Any] = dict(
++        order=order(sequence=1, side=OrderSide.BUY),
++        fill_slice=fill,
++        schedule=schedule,
++        base_asset_id=BTC,
++        quote_asset_id=USDT,
++    )
++    with pytest.raises(ValueError, match="ACCOUNT-STATE-REQUIRED"):
++        execution_price_and_cost(**args)
++    _, cost = execution_price_and_cost(
++        **args, fee_account=FeeAccountState({BNB: D("1")}, {BNB: D("250")}, NOW)
++    )
++    assert cost.fee_settlement is not None
++    assert (
++        cost.fee == cost.fee_settlement.quote_equivalent and cost.fee_settlement.fee.asset_id == BNB
++    )
++
++
++def window(event: Any, turnover: str = "10000") -> ParticipationWindow:
++    return ParticipationWindow(
++        window_id="SYNTHETIC_WINDOW",
++        instrument_id=event.instrument_id,
++        venue_id=event.venue_id,
++        start=event.event_time - timedelta(seconds=60),
++        end=event.event_time,
++        available_at=event.available_time,
++        quote_turnover=D(turnover),
++        source_sha256=HASH,
++    )
++
++
++def test_shared_depth_cannot_be_reused_and_fill_identity_is_idempotent() -> None:
++    event = l2_book()
++    budget = EventLiquidityBudget(window(event), D("1"))
++    first = order(sequence=1, side=OrderSide.BUY)
++    one = budget.preview(order=first, event=event, remaining=D("1"), arrival_at=first.submitted_at)
++    assert one.slices[0].reference_price == D("100.01")
++    assert budget.used_quote_notional == 0
++    assert budget.commit(fill_id="f1", order=first, item=one.slices[0])
++    assert not budget.commit(fill_id="f1", order=first, item=one.slices[0])
++    second = order(sequence=2, side=OrderSide.BUY)
++    two = budget.preview(
++        order=second, event=event, remaining=D("1"), arrival_at=second.submitted_at
++    )
++    assert two.slices[0].reference_price == D("100.02") and two.unfilled_quantity == 0
++    with pytest.raises(ValueError, match="CONFLICTING-FILL"):
++        budget.commit(fill_id="f1", order=second, item=two.slices[0])
++    altered = event.model_copy(update={"asks": event.asks[::-1]})
++    with pytest.raises(ValueError, match="CONFLICTING-MARKET"):
++        budget.preview(
++            order=second, event=altered, remaining=D("1"), arrival_at=second.submitted_at
++        )
++
++
++def test_shared_window_does_not_net_opposite_sides_and_preserves_fok_residual() -> None:
++    event = l2_book()
++    budget = EventLiquidityBudget(window(event, "150"), D("1"))
++    buy = order(sequence=1, side=OrderSide.BUY)
++    one = budget.preview(order=buy, event=event, remaining=D("1"), arrival_at=buy.submitted_at)
++    budget.commit(fill_id="buy", order=buy, item=one.slices[0])
++    sell = order(sequence=2, side=OrderSide.SELL, time_in_force=TimeInForce.FILL_OR_KILL)
++    denied = budget.preview(order=sell, event=event, remaining=D("1"), arrival_at=sell.submitted_at)
++    assert not denied.slices and denied.unfilled_quantity == 1 and "FOK" in denied.reason
++    partial = sell.model_copy(update={"time_in_force": TimeInForce.GOOD_TIL_CANCELED})
++    two = budget.preview(
++        order=partial, event=event, remaining=D("1"), arrival_at=partial.submitted_at
++    )
++    assert 0 < two.slices[0].quantity < 1 and two.unfilled_quantity > 0
++    budget.commit(fill_id="sell", order=partial, item=two.slices[0])
++    assert budget.used_quote_notional <= 150 and budget.used_quote_notional > 149
++
++
++def test_latency_queue_unknown_cancellation_and_bar_proxy_are_explicit() -> None:
++    event = trade_quote()
++    candidate = order(sequence=1, side=OrderSide.BUY)
++    budget = EventLiquidityBudget(window(event), D("1"))
++    assert (
++        budget.preview(
++            order=candidate,
++            event=event,
++            remaining=D("1"),
++            arrival_at=event.event_time + timedelta(microseconds=1),
++        ).reason
++        == "ORDER_NOT_AT_VENUE"
++    )
++    assert (
++        budget.preview(
++            order=candidate,
++            event=event,
++            remaining=D("1"),
++            arrival_at=candidate.submitted_at,
++            cancel_effective_at=event.event_time - timedelta(microseconds=1),
++        ).reason
++        == "CANCEL_ALREADY_EFFECTIVE"
++    )
++    assert budget.preview(
++        order=candidate,
++        event=event,
++        remaining=D("1"),
++        arrival_at=candidate.submitted_at,
++        cancel_effective_at=event.event_time,
++    ).slices
++    maker = order(sequence=3, side=OrderSide.SELL).model_copy(
++        update={
++            "order_type": OrderType.LIMIT,
++            "limit_price": Price(amount=D("100"), base_asset_id=BTC, quote_asset_id=USDT),
++        }
++    )
++    assert (
++        budget.preview(
++            order=maker, event=event, remaining=D("1"), arrival_at=maker.submitted_at
++        ).reason
++        == "MAKER_QUEUE_UNKNOWN"
++    )
++    assert not budget.preview(
++        order=maker,
++        event=event,
++        remaining=D("1"),
++        arrival_at=maker.submitted_at,
++        queue_ahead=D("3"),
++        queue_source_sha256=HASH,
++    ).slices
++    ready = EventLiquidityBudget(window(event), D("1")).preview(
++        order=maker,
++        event=event,
++        remaining=D("1"),
++        arrival_at=maker.submitted_at,
++        queue_ahead=D("0.5"),
++        queue_source_sha256=HASH,
++    )
++    assert (
++        ready.slices
++        and ready.slices[0].reference is not None
++        and ready.slices[0].reference.reference_price_kind == "MAKER_LIMIT"
++    )
++    bar = bars()[1]
++    assert (
++        EventLiquidityBudget(window(bar), D("1"))
++        .preview(order=candidate, event=bar, remaining=D("1"), arrival_at=candidate.submitted_at)
++        .reason
++        == "BAR_PROXY_ONLY"
++    )
++
++
++def deposit(ledger: LedgerEngine, asset: AssetId, amount: str) -> None:
++    ledger.process_cashflow(
++        CashflowEvent(
++            event_id=ArtifactId("deposit-" + str(asset)),
++            venue="SIM",
++            cashflow_type=CashflowType.EXTERNAL_TRANSFER_IN,
++            direction=CashflowDirection.INFLOW,
++            amount=Money(amount=D(amount), asset_id=asset),
++            event_time=accounting.NOW,
++            recorded_at=accounting.NOW,
++            idempotency_key=IdempotencyKey("deposit-" + str(asset)),
++            reference="SYNTHETIC_TEST_CAPITAL",
++        )
++    )
++
++
++def native_ledger() -> LedgerEngine:
++    policy_data = accounting.accounting_policy(ROOT).model_dump()
++    selected = AccountingPolicy.model_validate(
++        {
++            **policy_data,
++            "policy_version": policy_data["policy_version"] + ":native-fees-v2",
++            "spot_fee_policy": "SPOT_NATIVE_FEES_V2",
++        }
++    )
++    ledger = LedgerEngine(policy=selected, effective_from=accounting.NOW)
++    deposit(ledger, USDT, "1000")
++    return ledger
++
++
++def cash(ledger: LedgerEngine, asset: AssetId) -> Decimal:
++    return sum(
++        (
++            balance.amount
++            for balance in ledger.native_balances()
++            if balance.asset_id == asset
++            and ledger.chart.definition(balance.account_id).role is AccountRole.CASH
++        ),
++        D("0"),
++    )
++
++
++def test_native_base_fees_reduce_fifo_lots_partial_orders_and_rebuild_exactly() -> None:
++    ledger = native_ledger()
++    instrument = accounting.spot_instrument()
++    for sequence in (1, 2):
++        value = accounting.fill(
++            instrument,
++            sequence=sequence,
++            side=OrderSide.BUY,
++            quantity="0.5",
++            price="100",
++            fee="0.0005",
++            fee_asset=BTC,
++        )
++        assert ledger.process_fill(value, instrument).inserted
++        assert not ledger.process_fill(value, instrument).inserted
++    assert cash(ledger, BTC) == D("0.999")
++    assert sum(lot.remaining_quantity for lot in ledger.open_lots()) == D("0.999")
++    before = ledger.state_digest()
++    with pytest.raises(ValueError, match="BALANCE-INSUFFICIENT"):
++        ledger.process_fill(
++            accounting.fill(
++                instrument,
++                sequence=3,
++                side=OrderSide.SELL,
++                quantity="0.999",
++                price="100",
++                fee="0.001",
++                fee_asset=BTC,
++            ),
++            instrument,
++        )
++    assert ledger.state_digest() == before
++    ledger.process_fill(
++        accounting.fill(
++            instrument,
++            sequence=4,
++            side=OrderSide.SELL,
++            quantity="0.999",
++            price="100",
++            fee="0.1",
++            fee_asset=USDT,
++        ),
++        instrument,
++    )
++    assert not ledger.open_lots() and cash(ledger, BTC) == 0 and cash(ledger, USDT) == D("999.8")
++    assert ledger.rebuild().state_digest() == ledger.state_digest()
++    for record in ledger.records:
++        assert_balanced_by_asset(record)
++
++
++@pytest.mark.parametrize("side", [OrderSide.BUY, OrderSide.SELL])
++@pytest.mark.parametrize("price", ["50", "300"])
++def test_native_base_fee_fifo_pnl_is_posted_without_quote_cash(side: OrderSide, price: str) -> None:
++    ledger = native_ledger()
++    instrument = accounting.spot_instrument()
++    for sequence, entry in ((1, "100"), (2, "200")):
++        ledger.process_fill(
++            accounting.fill(
++                instrument,
++                sequence=sequence,
++                side=OrderSide.BUY,
++                quantity="1",
++                price=entry,
++                fee="0",
++            ),
++            instrument,
++        )
++    result = ledger.process_fill(
++        accounting.fill(
++            instrument,
++            sequence=3,
++            side=side,
++            quantity="1",
++            price=price,
++            fee="0.5",
++            fee_asset=BTC,
++        ),
++        instrument,
++    )
++    mark = D(price)
++    expected_realized = (
++        D("0.5") * (mark - 100) if side is OrderSide.BUY else mark - 100 + D("0.5") * (mark - 200)
++    )
++    posted = sum(
++        (
++            balance.amount * (1 if role is AccountRole.TRADING_REALIZED_PNL else -1)
++            for balance in ledger.native_balances()
++            if (role := ledger.chart.definition(balance.account_id).role)
++            in {AccountRole.TRADING_REALIZED_PNL, AccountRole.TRADING_LOSS}
++        ),
++        D("0"),
++    )
++    assert result.applied_fill.realized_pnl.amount == posted == expected_realized
++    assert cash(ledger, USDT) == 700 + (-mark if side is OrderSide.BUY else mark)
++    assert cash(ledger, BTC) == (D("2.5") if side is OrderSide.BUY else D("0.5"))
++    assert sum(lot.remaining_quantity for lot in ledger.open_lots()) == cash(ledger, BTC)
++    assert ledger.rebuild().state_digest() == ledger.state_digest()
++    for record in ledger.records:
++        assert_balanced_by_asset(record)
++
++
++def test_native_base_rebate_has_real_quantity_and_third_asset_needs_balance_and_fx() -> None:
++    ledger = native_ledger()
++    instrument = accounting.spot_instrument()
++    base = accounting.fill(
++        instrument,
++        sequence=1,
++        side=OrderSide.BUY,
++        quantity="1",
++        price="100",
++        fee="-0.001",
++        fee_asset=BTC,
++    )
++    ledger.process_fill(base, instrument)
++    assert cash(ledger, BTC) == D("1.001") and sum(
++        lot.remaining_quantity for lot in ledger.open_lots()
++    ) == D("1.001")
++    third = accounting.fill(
++        instrument,
++        sequence=2,
++        side=OrderSide.BUY,
++        quantity="1",
++        price="100",
++        fee="0.1",
++        fee_asset=BNB,
++    )
++    before = ledger.state_digest()
++    with pytest.raises(ValueError, match="BALANCE-INSUFFICIENT"):
++        ledger.process_fill(third, instrument)
++    assert ledger.state_digest() == before
++    deposit(ledger, BNB, "1")
++    ledger.process_fill(third, instrument)
++    assert cash(ledger, BNB) == D("0.9")
++    valuation = ledger.valuation_snapshot(
++        {
++            instrument.instrument_id: ValuationQuote(
++                instrument_id=instrument.instrument_id,
++                as_of_time=third.event_time,
++                available_time=third.available_time,
++                mark=D("100"),
++            )
++        }
++    )
++    fx = {
++        BTC: FxRate(
++            asset_id=BTC,
++            reporting_asset_id=USDT,
++            rate=D("100"),
++            as_of_time=third.event_time,
++            policy_version="SYNTHETIC",
++        )
++    }
++    with pytest.raises(ValueError):
++        ledger.equity_snapshot(valuation=valuation, reporting_asset_id=USDT, fx_rates=fx)
++    fx[BNB] = FxRate(
++        asset_id=BNB,
++        reporting_asset_id=USDT,
++        rate=D("250"),
++        as_of_time=third.event_time,
++        policy_version="SYNTHETIC",
++    )
++    assert ledger.equity_snapshot(
++        valuation=valuation, reporting_asset_id=USDT, fx_rates=fx
++    ).equity == D("1225.1")
++    assert ledger.rebuild().state_digest() == ledger.state_digest()
++
++
++def frozen_module(name: str, monkeypatch: pytest.MonkeyPatch) -> ModuleType:
++    frozen = ROOT / "artifacts/alpha_v5/20260908_research_churn_v3"
++    manifest = json.loads((frozen / "audit_manifest.json").read_text(encoding="utf-8"))
++    path = frozen / "implementation" / name
++    assert sha256_file(path) == manifest["source_hashes"][name]
++    module = ModuleType("b4_frozen_" + name.replace("/", "_").replace(".", "_"))
++    monkeypatch.setitem(sys.modules, module.__name__, module)
++    exec(compile(path.read_bytes(), str(path), "exec"), module.__dict__)  # noqa: S102 -- hash-verified project code, synthetic inputs only.
++    return module
++
++
++def test_legacy_cost_fills_transitions_and_ledger_keep_exact_payloads(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    old_cost = frozen_module("src/aegisquant/backtest/costs.py", monkeypatch)
++    old_fills = frozen_module("src/aegisquant/backtest/fills.py", monkeypatch)
++    old_transition = frozen_module("src/aegisquant/portfolio/transition_costs.py", monkeypatch)
++    old_ledger = frozen_module("src/aegisquant/accounting/ledger.py", monkeypatch)
++    candidate = order(sequence=1, side=OrderSide.BUY, quantity="2")
++    for event in (bars()[1], trade_quote(), l2_book()):
++        args: dict[str, Any] = dict(
++            order=candidate, event=event, remaining=D("2"), participation_cap=D("0.4")
++        )
++        current = decide_fills(**args)
++        assert current == old_fills.decide_fills(**args)
++        for item in current:
++            cost_args: dict[str, Any] = dict(
++                order=candidate,
++                fill_slice=item,
++                schedule=policy().cost_schedules[0],
++                base_asset_id=BTC,
++                quote_asset_id=USDT,
++            )
++            assert execution_price_and_cost(**cost_args) == old_cost.execution_price_and_cost(
++                **cost_args
++            )
++            assert "reference" not in item.model_dump()
++    assert "evidence" not in policy().cost_schedules[0].model_dump()
++    for notional in ("0", "1.123456789012345678901234567", "10000"):
++        args = dict(
++            available_time=NOW,
++            natr=D("0.012345"),
++            quote_volume=D("12345.678901"),
++            order_notional=D(notional),
++            exit_order_notional=D(notional) / 3,
++        )
++        assert estimate_spot_transition_costs(**args).model_dump(
++            mode="json"
++        ) == old_transition.estimate_spot_transition_costs(**args).model_dump(mode="json")
++    current = accounting.engine(ROOT)
++    old_policy = old_ledger.AccountingPolicy.model_validate(current.policy.model_dump())
++    old = old_ledger.LedgerEngine(policy=old_policy, effective_from=accounting.NOW)
++    instrument = accounting.spot_instrument()
++    for sequence, side in ((1, OrderSide.BUY), (2, OrderSide.SELL)):
++        value = accounting.fill(
++            instrument, sequence=sequence, side=side, quantity="1", price="100", fee="0.1"
++        )
++        current.process_fill(value, instrument)
++        old.process_fill(value, instrument)
++    assert current.state_digest() == old.state_digest()
++    assert "spot_fee_policy" not in current.policy.model_dump()
++
++
++def observations(days: int = 20, per_day: int = 10) -> list[dict[str, Any]]:
++    result: list[dict[str, Any]] = []
++    for day in range(days):
++        for index in range(per_day):
++            time = NOW + timedelta(days=day, minutes=index)
++            result.append(
++                dict(
++                    fill_id=f"fill-{day}-{index}",
++                    order_id=f"order-{day}-{index}",
++                    quantity="1",
++                    order_quantity="1",
++                    side="BUY",
++                    decision_at=(time - timedelta(seconds=2)).isoformat(),
++                    send_at=(time - timedelta(seconds=1)).isoformat(),
++                    venue_receive_at=time.isoformat(),
++                    ack_at=time.isoformat(),
++                    fill_at=time.isoformat(),
++                    receive_at=time.isoformat(),
++                    cancel_request_at=None,
++                    cancel_ack_at=None,
++                    clock_error_ns=0,
++                    source_sha256=HASH,
++                    bucket="REGISTERED_BUCKET",
++                    fee_asset="USDT",
++                    fee_amount="0.01",
++                    expected_fee_amount="0.01",
++                    fee_quantum="0.0001",
++                    residual_bps="0.5",
++                    observed_adverse_bps="1",
++                    predicted_q95_bps="2",
++                    reference_price_kind="BBO",
++                    reference_price="100",
++                )
++            )
++    return result
++
++
++@pytest.mark.parametrize("kind", ["duplicate", "overfill", "clock", "cancel", "reference"])
++def test_execution_observation_bad_records_cannot_enter_calibration(kind: str) -> None:
++    rows = observations(days=1, per_day=2)
++    if kind == "duplicate":
++        rows[1]["fill_id"] = rows[0]["fill_id"]
++    elif kind == "overfill":
++        rows[1]["order_id"] = rows[0]["order_id"]
++    elif kind == "clock":
++        rows[0]["send_at"] = (NOW + timedelta(days=1)).isoformat()
++    elif kind == "cancel":
++        rows[0]["cancel_ack_at"] = NOW.isoformat()
++    else:
++        rows[0]["reference_price_kind"] = "GUESSED_ORDERBOOK"
++    with pytest.raises(ValueError):
++        contract.validate_execution_observations(rows)
++
++
++def test_fixed_split_rejects_orders_across_boundary_and_future_receipts() -> None:
++    rows = observations(days=2, per_day=1)
++    args = dict(
++        calibration_start=(NOW - timedelta(days=1)).isoformat(),
++        calibration_end=(NOW + timedelta(hours=12)).isoformat(),
++        validation_start=(NOW + timedelta(hours=12)).isoformat(),
++        validation_end=(NOW + timedelta(days=2)).isoformat(),
++    )
++    result = contract.split_execution_calibration(rows, **args)
++    assert len(result["calibration"]) == len(result["validation"]) == 1
++    bad = copy.deepcopy(rows)
++    for row in bad:
++        row["order_id"] = "same-partial-order"
++        row["order_quantity"] = "2"
++    with pytest.raises(ValueError, match="CROSSES-SPLIT"):
++        contract.split_execution_calibration(bad, **args)
++    bad = copy.deepcopy(rows)
++    bad[0]["receive_at"] = (NOW + timedelta(days=3)).isoformat()
++    with pytest.raises(ValueError, match="NOT-KNOWN"):
++        contract.split_execution_calibration(bad, **args)
++
++
++def test_residual_quality_preserves_missing_and_failing_buckets_without_model_fit() -> None:
++    insufficient = contract.calibration_residual_buckets(observations(days=19))
++    assert insufficient["buckets"]["REGISTERED_BUCKET"]["status"] == "INSUFFICIENT_SAMPLE"
++    valid = observations()
++    assert (
++        contract.calibration_residual_buckets(valid)["buckets"]["REGISTERED_BUCKET"]["status"]
++        == "SUPPLIED_RECORDS_PASS"
++    )
++    for row in valid:
++        row["observed_adverse_bps"] = "3"
++    failed = contract.calibration_residual_buckets(valid)["buckets"]["REGISTERED_BUCKET"]
++    assert failed["status"] == "CALIBRATION_FAILED" and failed["q95_exceedance_ci95"] == [1, 1]
++
++
++def test_shared_report_seals_missing_evidence_and_blocks_reuse(tmp_path: Path) -> None:
++    root, stage = tmp_path / "synthetic-root", tmp_path / "synthetic-stage"
++    root.mkdir()
++    stage.mkdir()
++    config = yaml.safe_load(
++        (ROOT / "configs/research/alpha_v5_execution_contract.yaml").read_text(encoding="utf-8")
++    )
++
++    def save(name: str, data: str) -> Path:
++        target = root / name
++        target.parent.mkdir(parents=True, exist_ok=True)
++        target.write_text(data, encoding="utf-8")
++        return target
++
++    for name in contract.FILES:
++        save(name, "SYNTHETIC CODE RECEIPT\n")
++    source_data = {
++        "r5_manifest": r5_fixture(),
++        "b3_manifest": {"synthetic": True},
++        "b2_safety": {"strict_data_quality": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE"},
++    }
++    for name, binding in config["sources"].items():
++        binding["sha256"] = sha256_file(save(binding["path"], json.dumps(source_data[name])))
++    save(
++        "configs/research/aegis_alpha_v5.yaml", yaml.safe_dump(source_data["r5_manifest"]["config"])
++    )
++    save(
++        "src/aegisquant/bootstrap/live_lock.py",
++        "LIVE_TRADING: bool = False\nORDER_SUBMISSION_ENABLED: bool = False\nLIVE_ADAPTERS: tuple = ()\n",
++    )
++    baseline = dict(
++        root=str(root),
++        head=evidence.BASE,
++        branch="main",
++        allowed_modifications=list(contract.FILES[:8]),
++        files={
++            path.relative_to(root).as_posix(): dict(
++                sha256=sha256_file(path), bytes=path.stat().st_size
++            )
++            for path in root.rglob("*")
++            if path.is_file()
++        },
++    )
++    (stage / "baseline_workspace.json").write_text(json.dumps(baseline), encoding="utf-8")
++    for name in contract.FILES[:8]:
++        target = stage / "before" / name
++        target.parent.mkdir(parents=True, exist_ok=True)
++        target.write_bytes((root / name).read_bytes())
++    for name in ("workspace_before.patch", "version_graph.txt", "test_commands_and_results.txt"):
++        (stage / name).write_text("SYNTHETIC RECEIPT\n", encoding="utf-8")
++    hashes = {name: sha256_file(root / name) for name in contract.FILES}
++    (stage / "validation_records.json").write_text(
++        json.dumps(
++            [
++                dict(check=kind, command=["SYNTHETIC"], exit_code=0, source_sha256=hashes)
++                for kind in ("ruff", "format", "pyright", "pytest")
++            ]
++        ),
++        encoding="utf-8",
++    )
++    (stage / "pytest_results.xml").write_text(
++        '<testsuite><testcase name="SYNTHETIC"/></testsuite>', encoding="utf-8"
++    )
++    contract.validate_config(config)
++    output = evidence.run_zero_research_contract(
++        root=root,
++        config=config,
++        stage=stage,
++        git_state={"head": evidence.BASE, "branch": "main"},
++        files=contract.FILES,
++        build_documents=contract.build_documents,
++    )
++    assert evidence.load_evidence_manifest(output, "OUTPUT_MANIFEST.json")["status"] == "VERIFIED"
++    freeze = json.loads((output / "calibration_freeze_manifest.json").read_text())
++    assert freeze["actual_data_splits"] == freeze["model_fits"] == freeze["replay_scenarios"] == 0
++    assert freeze["validation_period"] is None
++    with pytest.raises(FileExistsError):
++        evidence.run_zero_research_contract(
++            root=root,
++            config=config,
++            stage=stage,
++            git_state={"head": evidence.BASE, "branch": "main"},
++            files=contract.FILES,
++            build_documents=contract.build_documents,
++        )
++
++
++@pytest.mark.parametrize("kind", ["data", "fit", "capital", "threshold"])
++def test_report_config_cannot_turn_into_empirical_run(kind: str) -> None:
++    config = yaml.safe_load(
++        (ROOT / "configs/research/alpha_v5_execution_contract.yaml").read_text(encoding="utf-8")
++    )
++    if kind == "data":
++        config["execution_observations"] = "real-data.csv"
++    elif kind == "fit":
++        config["calibration_split"] = {}
++    elif kind == "capital":
++        config["future_scenarios"]["capital_multipliers"].append("100")
++    else:
++        config["calibration_acceptance"]["maximum_abs_median_residual_bps"] = "10"
++    with pytest.raises(ValueError):
++        contract.validate_config(config)
+--- /dev/null
++++ b/docs/research/alpha_v5_execution_contract.md
+@@ -0,0 +1,14 @@
++# B4 执行与成本契约
++
++`python -m scripts.run_alpha_v5_execution_diagnostics --config configs/research/alpha_v5_execution_contract.yaml --preflight-dir <真实检查回执目录>` 只生成一次协议报告，不加载市场数据或训练模型。真实数据/分割仍为 null。
++
++- `ImpactModel` 将曲线、反函数、参与率单位、horizon 和已覆盖范围绑定。旧执行 LINEAR_PROXY_V1、旧组合 LEGACY_SQRT_CAPACITY_V0 保留；显式 model 与 signal/schedule/liquidity horizon 不一致即失败。代理身份不能升级为实证。
++- `FillSlice.reference` / `CostSchedule.evidence` 是显式 V2 包装。默认不进入旧序列化 payload。MID、BBO、DEPTH_VWAP、BAR_OPEN_PROXY 分离；MAKER_LIMIT 用于已给出队列证据的限价参考，不冒称 BBO。
++- `HistoricalCostBook.at` 保留执行有效时点选择；`decision_at` 额外要求历史账户证据及 available_at。实际费率晚知不会反写为决策已知。
++- 逐笔 `FeeAccountState` / `settle_execution_fee` 分别处理 standard、special、tax、role/side、标准费用优惠、失效、余额不足和 FX 不可用回退。新费率输入缺账户状态则拒绝，不能由旧 engine 静默按 quote fee 结算。金额使用现有 canonical Decimal 精度。
++- `SPOT_NATIVE_FEES_V2` 必须使用以 `:native-fees-v2` 结尾的新 AccountingPolicy 版本。交易+费用余额不足先拒绝；base fee 的 FIFO 消耗、处置损益分录和 rebate lot 随原成交记录一起重建。实物币支付费用的处置损益使用 clearing 对手科目，不产生计价币现金。第三费币若存在其他交易 lots，目前明确失败，避免偷偷留下未处置库存。第三币 MTM 仍需要真实可用 FX。
++- `EventLiquidityBudget` 复用既有撮合函数，作用于单 instrument/venue 的一个已知累计成交窗口截止时点。preview 不扣减实际流动性，资金结算后才 commit；同事件深度与窗口双向绝对量共享、fill id 幂等、残余可追溯。当前严格工具输出 SYNTHETIC_ONLY；不是整个历史引擎已接入实证模型。
++- 校准残差只接受提供的执行记录并检查原生费用精确到 quantum、200 样本/20 日、1bp 中位偏差、日区块 q95 超越率区间。来源核验是独立必要条件；合成记录通过不证明真实费用或容量。
++- 三种 CostMode 继续复用，只有 SAME_FILL_SHADOW 要求更差费用不改善影子净值。funded 路径不作单调断言。
++
++历史策略回放、真实收益模型/校准拟合、最终留出访问、真实订单均为 0；NO_PROVEN_ALPHA、CASH 及四个关闭开关保留。B3/B4 的真实矩阵和校准需数据与相应授权，不能用协议完成替代经济验收。

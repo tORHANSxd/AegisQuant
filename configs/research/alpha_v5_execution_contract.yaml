@@ -1,0 +1,45 @@
+schema_version: aegis-execution-contract-b4-v1
+generation: alpha-r5-execution-contract-20260910-v1
+output: artifacts/alpha_v5/20260910_execution_contract_v1
+scope: B4_EXECUTION_PROTOCOL_AND_SYNTHETIC_CONTRACT_TESTS
+branch_required: main
+source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
+budgets:
+  contract_jobs: 1
+  historical_strategy_engine_runs: 0
+  real_return_model_fits: 0
+  real_calibration_fits: 0
+  final_holdout_accesses: 0
+  real_orders: 0
+sources:
+  r5_manifest:
+    path: artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json
+    sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
+  b3_manifest:
+    path: artifacts/alpha_v5/20260910_benchmark_contract_v1/OUTPUT_MANIFEST.json
+    sha256: 293d3bbd5993f54e81cb9a88e3702978d6c6fcb08261406f51c8a2998b76abcb
+  b2_safety:
+    path: artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json
+    sha256: c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26
+execution_observations: null
+calibration_split: null
+calibration_acceptance:
+  minimum_bucket_samples: 200
+  minimum_bucket_days: 20
+  maximum_abs_median_residual_bps: '1'
+  maximum_q95_exceedance_upper_bound: '0.10'
+  block_days: 5
+  repetitions: 10000
+  seed: 20260910
+future_scenarios:
+  controls: [G1, SIMPLE_TREND]
+  capital_multipliers: ['1', '5', '10', '25', '50']
+  stress_paths: [BASE, COST_AND_LATENCY, DEPTH_AND_HALT]
+  authorized_runs_now: 0
+research_conclusion: NO_PROVEN_ALPHA
+production_policy: CASH
+production_ml_enabled: false
+paper_trading_admitted: false
+live_trading: false
+order_submission_enabled: false
+

@@ -1,0 +1,2106 @@
+--- a/src/aegisquant/research/validation/splits.py
++++ b/src/aegisquant/research/validation/splits.py
+@@ -4,9 +4,10 @@
+ 
+ from collections import defaultdict
+ from collections.abc import Iterable
++from datetime import timedelta
+ from enum import StrEnum
+-from itertools import combinations
+-from typing import Annotated
++from itertools import combinations, pairwise
++from typing import Annotated, Any, Literal
+ 
+ from pydantic import Field, model_validator
+ 
+@@ -27,12 +28,102 @@
+     label_start_time: UtcDateTime
+     label_end_time: UtcDateTime
+     regime: str | None = None
++    feature_dependency_start: UtcDateTime | None = Field(
++        default=None, exclude_if=lambda v: v is None
++    )
++    label_available_time: UtcDateTime | None = Field(default=None, exclude_if=lambda v: v is None)
++    episode_id: str | None = Field(default=None, exclude_if=lambda v: v is None)
+ 
+     @model_validator(mode="after")
+     def validate_span(self) -> SampleSpan:
+         if not self.group_time < self.label_start_time <= self.label_end_time:
+             raise ValueError("sample label window must be strictly future")
++        if (
++            self.feature_dependency_start is not None
++            and self.feature_dependency_start > self.group_time
++        ):
++            raise ValueError("feature dependency cannot begin after decision")
++        if (
++            self.label_available_time is not None
++            and self.label_available_time < self.label_end_time
++        ):
++            raise ValueError("label cannot be available before its end")
++        if self.episode_id is not None and not self.episode_id.strip():
++            raise ValueError("episode identity cannot be blank")
+         return self
++
++
++def dependency_interval(sample: SampleSpan) -> tuple[UtcDateTime, UtcDateTime]:
++    if (
++        sample.feature_dependency_start is None
++        or sample.label_available_time is None
++        or sample.episode_id is None
++    ):
++        raise ValueError(
++            "strict interval purge requires feature, availability and episode metadata"
++        )
++    return sample.feature_dependency_start, sample.label_available_time
++
++
++def purge_interval_partitions(
++    partitions: tuple[tuple[SampleSpan, ...], ...],
++    *,
++    ends: tuple[UtcDateTime, ...],
++    information_embargo: timedelta = timedelta(0),
++) -> tuple[tuple[tuple[SampleSpan, ...], ...], tuple[str, ...]]:
++    """Keep later partitions; remove whole earlier time/episode groups on any overlap.
++
++    Closed dependency intervals include label publication lag. Calendar ends are
++    exclusive. This conservative purge includes feature lookback, not only labels.
++    """
++    if len(partitions) != len(ends) or information_embargo < timedelta(0):
++        raise ValueError("invalid partition ends or information embargo")
++    values = tuple(item for partition in partitions for item in partition)
++    if len({item.sample_id for item in values}) != len(values):
++        raise ValueError("duplicate sample across partitions")
++    time_partition: dict[UtcDateTime, int] = {}
++    for index, partition in enumerate(partitions):
++        for item in partition:
++            dependency_interval(item)
++            if item.group_time >= ends[index] or (index and item.group_time < ends[index - 1]):
++                raise ValueError("sample decision outside ordered partition")
++            if time_partition.setdefault(item.group_time, index) != index:
++                raise ValueError("all assets at the same time must stay grouped")
++    if any(a >= b for a, b in pairwise(ends)):
++        raise ValueError("partition ends must increase")
++    kept: list[tuple[SampleSpan, ...]] = []
++    removed: set[str] = set()
++    for index, partition in enumerate(partitions):
++        future = tuple(item for later in partitions[index + 1 :] for item in later)
++        bad = {
++            item.sample_id
++            for item in partition
++            if dependency_interval(item)[1] + information_embargo >= ends[index]
++            or any(
++                item.episode_id == other.episode_id
++                or (
++                    dependency_interval(item)[0] <= dependency_interval(other)[1]
++                    and dependency_interval(item)[1] + information_embargo
++                    >= dependency_interval(other)[0]
++                )
++                for other in future
++            )
++        }
++        # ponytail: quadratic closure is fine for episode ledgers; index intervals if volume warrants it.
++        while True:
++            times = {item.group_time for item in partition if item.sample_id in bad}
++            episodes = {item.episode_id for item in partition if item.sample_id in bad}
++            expanded = {
++                item.sample_id
++                for item in partition
++                if item.group_time in times or item.episode_id in episodes
++            }
++            if expanded == bad:
++                break
++            bad = expanded
++        removed.update(bad)
++        kept.append(tuple(item for item in partition if item.sample_id not in bad))
++    return tuple(kept), tuple(sorted(removed))
+ 
+ 
+ class TemporalSplitPolicy(DomainModel):
+@@ -47,11 +138,24 @@
+     step_groups: Annotated[int, Field(ge=1)]
+     minimum_folds: Annotated[int, Field(ge=1)] = 1
+     shuffle: bool = False
++    interval_policy: Literal["ALL_BOUNDARIES_INTERVAL_V2"] | None = Field(
++        default=None, exclude_if=lambda v: v is None
++    )
++    information_embargo_seconds: int = Field(default=0, ge=0, exclude_if=lambda v: v == 0)
++    labels_observed_through: UtcDateTime | None = Field(
++        default=None, exclude_if=lambda v: v is None
++    )
+ 
+     @model_validator(mode="after")
+     def random_time_split_is_forbidden(self) -> TemporalSplitPolicy:
+         if self.shuffle:
+             raise ValueError("AQ-RESEARCH-RANDOM-TIME-SPLIT-FORBIDDEN")
++        if self.interval_policy is not None and self.labels_observed_through is None:
++            raise ValueError("strict split requires an explicit label observation cutoff")
++        if self.interval_policy is None and (
++            self.information_embargo_seconds or self.labels_observed_through is not None
++        ):
++            raise ValueError("interval metadata requires versioned policy")
+         return self
+ 
+ 
+@@ -64,6 +168,7 @@
+     purged_ids: tuple[str, ...]
+     validation_starts_at: UtcDateTime
+     test_ends_at: UtcDateTime
++    interval_contract_sha256: str | None = Field(default=None, exclude_if=lambda v: v is None)
+ 
+     @model_validator(mode="after")
+     def validate_partitions(self) -> TemporalFold:
+@@ -87,6 +192,8 @@
+             "validation_starts_at": self.validation_starts_at.isoformat(),
+             "test_ends_at": self.test_ends_at.isoformat(),
+         }
++        if self.interval_contract_sha256 is not None:
++            payload["interval_contract_sha256"] = self.interval_contract_sha256
+         if self.fold_id != canonical_sha256(payload):
+             raise ValueError("fold id must equal canonical partition hash")
+         return self
+@@ -169,7 +276,47 @@
+                 }
+             )
+         )
+-        payload = {
++        interval_hash = None
++        if policy.interval_policy is not None:
++            if policy.labels_observed_through is None:
++                raise ValueError("strict split requires a label observation cutoff")
++            cutoff = min(
++                times[test_end] if test_end < len(times) else policy.labels_observed_through,
++                policy.labels_observed_through,
++            )
++            raw = tuple(
++                tuple(sample for time in selected for sample in grouped[time])
++                for selected in (
++                    train_times,
++                    validation_times,
++                    times[validation_end:calibration_end],
++                    test_times,
++                )
++            )
++            strict_parts, strict_removed = purge_interval_partitions(
++                raw,
++                ends=(validation_times[0], times[validation_end], test_times[0], cutoff),
++                information_embargo=timedelta(seconds=policy.information_embargo_seconds),
++            )
++            if policy.mode is WalkForwardMode.RECENT_STATE:
++                raise ValueError("strict nested research does not preregister regime filtering")
++            train_ids, validation_ids, calibration_ids, test_ids = (
++                tuple(sorted(item.sample_id for item in part)) for part in strict_parts
++            )
++            purged_ids = tuple(sorted(set(purged_ids) | set(strict_removed)))
++            interval_hash = canonical_sha256(
++                {
++                    "policy": policy.model_dump(mode="json"),
++                    "samples": [
++                        item.model_dump(mode="json")
++                        for item in sorted(
++                            (sample for part in raw for sample in part),
++                            key=lambda item: item.sample_id,
++                        )
++                    ],
++                }
++            )
++        payload: dict[str, Any] = {
+             "train_ids": list(train_ids),
+             "validation_ids": list(validation_ids),
+             "calibration_ids": list(calibration_ids),
+@@ -178,6 +325,8 @@
+             "validation_starts_at": validation_boundary.isoformat(),
+             "test_ends_at": test_times[-1].isoformat(),
+         }
++        if interval_hash is not None:
++            payload["interval_contract_sha256"] = interval_hash
+         folds.append(
+             TemporalFold(
+                 fold_id=canonical_sha256(payload),
+@@ -188,6 +337,7 @@
+                 purged_ids=purged_ids,
+                 validation_starts_at=validation_boundary,
+                 test_ends_at=test_times[-1],
++                interval_contract_sha256=interval_hash,
+             )
+         )
+         train_end += policy.step_groups
+--- a/src/aegisquant/research/validation/calendar_walkforward.py
++++ b/src/aegisquant/research/validation/calendar_walkforward.py
+@@ -5,6 +5,9 @@
+ from dataclasses import dataclass
+ from datetime import datetime, timedelta
+ from itertools import pairwise
++
++from aegisquant.data.hashing import canonical_sha256
++from aegisquant.research.validation.splits import SampleSpan, purge_interval_partitions
+ 
+ 
+ def add_months(value: datetime, months: int) -> datetime:
+@@ -30,6 +33,14 @@
+     embargo_bars: int
+ 
+ 
++@dataclass(frozen=True)
++class CalendarIntervalFold(CalendarFold):
++    purged_indices: tuple[int, ...]
++    interval_contract_sha256: str
++    source_span_sha256: str
++    source_sample_ids: tuple[str, ...]
++
++
+ def calendar_walkforward(
+     *,
+     available_times: tuple[datetime, ...],
+@@ -45,11 +56,20 @@
+     purge_bars: int = 12,
+     embargo_bars: int = 1,
+     frequency_seconds: int = 14400,
++    sample_spans: tuple[SampleSpan, ...] | None = None,
+ ) -> tuple[CalendarFold, ...]:
+     if not len(available_times) == len(label_end_times) == len(valid):
+         raise ValueError("walk-forward metadata dimensions differ")
+-    if any(a >= b for a, b in pairwise(available_times)):
++    if any((a >= b if sample_spans is None else a > b) for a, b in pairwise(available_times)):
+         raise ValueError("walk-forward availability must strictly increase")
++    if sample_spans is not None and (
++        len(sample_spans) != len(available_times)
++        or any(
++            span.group_time != time or span.label_end_time != end
++            for span, time, end in zip(sample_spans, available_times, label_end_times, strict=True)
++        )
++    ):
++        raise ValueError("strict calendar span identities/times must align with observations")
+     if min(train_months, validation_months, test_months, step_months, frequency_seconds) <= 0:
+         raise ValueError("walk-forward windows must be positive")
+     if purge_bars < maximum_horizon_bars or embargo_bars < 1 or maximum_horizon_bars < 1:
+@@ -84,21 +104,74 @@
+             for i, (time, good) in enumerate(zip(available_times, valid, strict=True))
+             if good and test_start + embargo <= time < test_end
+         )
++        strict_removed: tuple[int, ...] = ()
++        interval_hash = None
++        if sample_spans is not None:
++            # Include long labels before interval purge so their whole time group
++            # is removed, rather than losing the offending row in legacy filtering.
++            invalid_times = {
++                time for time, good in zip(available_times, valid, strict=True) if not good
++            }
++            raw = tuple(
++                tuple(
++                    span
++                    for span, good in zip(sample_spans, valid, strict=True)
++                    if good
++                    and span.group_time not in invalid_times
++                    and left <= span.group_time < right
++                )
++                for left, right in (
++                    (start, validation_start - purge),
++                    (validation_start + embargo, test_start - purge),
++                    (test_start + embargo, test_end),
++                )
++            )
++            kept, _ = purge_interval_partitions(
++                raw, ends=(validation_start, test_start, test_end), information_embargo=embargo
++            )
++            index_by_id = {span.sample_id: i for i, span in enumerate(sample_spans)}
++            if len(index_by_id) != len(sample_spans):
++                raise ValueError("calendar sample identities must be unique")
++            train, validation, test = (
++                tuple(index_by_id[item.sample_id] for item in part) for part in kept
++            )
++            all_kept = set(train + validation + test)
++            strict_removed = tuple(
++                i
++                for i, (time, good) in enumerate(zip(available_times, valid, strict=True))
++                if good and start <= time < test_end and i not in all_kept
++            )
++            interval_hash = canonical_sha256(
++                {
++                    "policy": "ALL_BOUNDARIES_INTERVAL_V2",
++                    "spans": [item.model_dump(mode="json") for part in raw for item in part],
++                    "removed": strict_removed,
++                }
++            )
+         if min(len(train), len(validation), len(test)) < 20:
+             raise ValueError("insufficient valid observations in calendar partition")
+-        folds.append(
+-            CalendarFold(
+-                f"{test_start:%Y%m}-{test_end:%Y%m}",
+-                start,
+-                validation_start,
+-                test_start,
+-                test_end,
+-                train,
+-                validation,
+-                test,
+-                purge_bars,
+-                embargo_bars,
++        fold = CalendarFold(
++            f"{test_start:%Y%m}-{test_end:%Y%m}",
++            start,
++            validation_start,
++            test_start,
++            test_end,
++            train,
++            validation,
++            test,
++            purge_bars,
++            embargo_bars,
++        )
++        if interval_hash is not None:
++            fold = CalendarIntervalFold(
++                **fold.__dict__,
++                purged_indices=strict_removed,
++                interval_contract_sha256=interval_hash,
++                source_span_sha256=canonical_sha256(
++                    [item.model_dump(mode="json") for item in sample_spans or ()]
++                ),
++                source_sample_ids=tuple(item.sample_id for item in sample_spans or ()),
+             )
+-        )
++        folds.append(fold)
+         start = add_months(start, step_months)
+     return tuple(folds)
+--- a/src/aegisquant/research/models/economic_filter.py
++++ b/src/aegisquant/research/models/economic_filter.py
+@@ -8,6 +8,7 @@
+ from typing import Literal
+ 
+ import numpy as np
++from pydantic import Field
+ from sklearn.linear_model import LogisticRegression
+ 
+ from aegisquant.data.hashing import canonical_sha256
+@@ -25,6 +26,15 @@
+     PointForecastStatus,
+ )
+ from aegisquant.research.models.tree import TreeModelKind, TreeModelSpec, fit_predict_tree
++from aegisquant.research.validation.ml_contract import (
++    FitProvenance,
++    FoldRegistration,
++    OOFPrediction,
++    validate_oof_alignment,
++    validate_prediction_dependencies,
++    validate_registered_fit,
++)
++from aegisquant.research.validation.splits import SampleSpan
+ 
+ EconomicModelFamily = Literal["XGBOOST", "LIGHTGBM", "ELASTIC_NET", "CONSTANT"]
+ 
+@@ -51,6 +61,8 @@
+     coefficients: tuple[Decimal, ...] | None = None
+     target_standard_deviation: float = 0.0
+     regularization_alpha: Decimal | None = None
++    oof_provenance_sha256: str | None = Field(default=None, exclude_if=lambda v: v is None)
++    fitted_model_provenance_sha256: str | None = Field(default=None, exclude_if=lambda v: v is None)
+ 
+ 
+ def _decimal(value: float) -> Decimal:
+@@ -69,6 +81,10 @@
+     seed: int = 20260903,
+     horizon_bars: Literal[6, 12] = 6,
+     holding_intervals: int | None = None,
++    oof_predictions: tuple[OOFPrediction, ...] | None = None,
++    fit_provenance: FitProvenance | None = None,
++    evaluation_spans: tuple[SampleSpan, ...] | None = None,
++    registrations: tuple[FoldRegistration, ...] | None = None,
+ ) -> EconomicFilterResult:
+     if (
+         len(train_label_end_times) != len(train.sample_ids)
+@@ -79,17 +95,66 @@
+     if train.feature_names != validation.feature_names or train.feature_names != test.feature_names:
+         raise ValueError("economic filter feature schemas differ")
+     if (
+-        train.timestamps[-1] >= validation.timestamps[0]
+-        or validation.timestamps[-1] >= test.timestamps[0]
+-    ):
++        oof_predictions is None and train.timestamps[-1] >= validation.timestamps[0]
++    ) or validation.timestamps[-1] >= test.timestamps[0]:
+         raise ValueError("economic filter requires train -> validation -> test order")
+-    if (
+-        max(train_label_end_times) >= validation.timestamps[0]
+-        or max(validation_label_end_times) >= test.timestamps[0]
+-    ):
++    if (oof_predictions is None and max(train_label_end_times) >= validation.timestamps[0]) or max(
++        validation_label_end_times
++    ) >= test.timestamps[0]:
+         raise ValueError("economic filter label horizons were not purged before the next partition")
+     if any(not v.is_finite() or v < 0 for v in validation_round_trip_costs):
+         raise ValueError("economic filter costs must be known finite nonnegative estimates")
++    oof_hash = None
++    if oof_predictions is not None:
++        if (
++            fit_provenance is None
++            or evaluation_spans is None
++            or registrations is None
++            or fit_provenance.scope != "PURGED_OUTER_TRAIN"
++        ):
++            raise ValueError("OOF mode requires outer fit and evaluation provenance")
++        registered_outer = validate_registered_fit(fit_provenance, registrations)
++        oof_hash = validate_oof_alignment(
++            oof_predictions,
++            sample_ids=validation.sample_ids,
++            timestamps=validation.timestamps,
++            label_end_times=validation_label_end_times,
++            consumed_at=test.timestamps[0],
++            registrations=registrations,
++        )
++        if registered_outer.evaluation_spans != evaluation_spans:
++            raise ValueError("evaluation spans differ from the current registered outer fold")
++        for record in oof_predictions:
++            registered_inner = validate_registered_fit(record.fit, registrations)
++            if (
++                registered_inner.outer_fold_id != registered_outer.fold_id
++                or record.sample not in registered_outer.training_spans
++                or any(
++                    item not in registered_outer.training_spans
++                    for item in registered_inner.training_spans
++                )
++            ):
++                raise ValueError("OOF sample/fit must belong to the current outer training fold")
++        if (
++            tuple(item.sample_id for item in fit_provenance.training_spans) != train.sample_ids
++            or tuple(item.group_time for item in fit_provenance.training_spans) != train.timestamps
++            or tuple(item.label_end_time for item in fit_provenance.training_spans)
++            != train_label_end_times
++            or fit_provenance.training_payload_sha256
++            != canonical_sha256(
++                {"ids": train.sample_ids, "features": train.features, "targets": train.targets}
++            )
++        ):
++            raise ValueError("outer fit provenance does not bind the actual training payload")
++        if (
++            tuple(item.sample_id for item in evaluation_spans) != test.sample_ids
++            or tuple(item.group_time for item in evaluation_spans) != test.timestamps
++        ):
++            raise ValueError("evaluation provenance does not align with inference")
++        for span in evaluation_spans:
++            validate_prediction_dependencies(fit_provenance, span, span.group_time)
++    elif fit_provenance is not None or evaluation_spans is not None or registrations is not None:
++        raise ValueError("fit/evaluation provenance requires OOF mode")
+     # A single fitted model produces both validation and test point forecasts.
+     # Targets on the combined inference set are inert placeholders.
+     combined = BaselineDataset(
+@@ -109,6 +174,11 @@
+             alpha=Decimal("0.001"),
+             l1_ratio=Decimal("0.5"),
+         )
++        if (
++            fit_provenance is not None
++            and fit_provenance.model_specification_sha256 != linear_spec.spec_sha256
++        ):
++            raise ValueError("outer model specification hash mismatch")
+         prediction = fit_predict_baseline(spec=linear_spec, train=train, test=combined)
+         point = np.asarray([float(v) for v in prediction.predictions], dtype=np.float64)
+         model_hash = linear_spec.spec_sha256
+@@ -118,10 +188,12 @@
+             linear_spec.alpha,
+         )
+     elif family == "CONSTANT":
+-        point = np.full(len(combined.sample_ids), np.mean(train.targets), dtype=np.float64)
+         model_hash = canonical_sha256(
+             {"family": "CONSTANT", "rule": "TRAIN_MEAN_SAME_CALIBRATION", "seed": seed}
+         )
++        if fit_provenance is not None and fit_provenance.model_specification_sha256 != model_hash:
++            raise ValueError("outer model specification hash mismatch")
++        point = np.full(len(combined.sample_ids), np.mean(train.targets), dtype=np.float64)
+     else:
+         tree_spec = TreeModelSpec(
+             model_id=model_id,
+@@ -131,11 +203,21 @@
+             max_depth=3,
+             learning_rate=0.05,
+         )
++        if (
++            fit_provenance is not None
++            and fit_provenance.model_specification_sha256
++            != canonical_sha256(tree_spec.model_dump(mode="json"))
++        ):
++            raise ValueError("outer model specification hash mismatch")
+         tree_prediction = fit_predict_tree(spec=tree_spec, train=train, test=combined)
+         point = np.asarray([float(v) for v in tree_prediction.mean], dtype=np.float64)
+         model_hash = canonical_sha256(tree_spec.model_dump(mode="json"))
+     validation_count = len(validation.sample_ids)
+     calibration_point, test_point = point[:validation_count], point[validation_count:]
++    if oof_predictions is not None:
++        calibration_point = np.asarray(
++            [float(item.prediction) for item in oof_predictions], dtype=np.float64
++        )
+     validation_truth = np.asarray(validation.targets, dtype=np.float64)
+     cost = np.asarray([float(v) for v in validation_round_trip_costs], dtype=np.float64)
+     labels = (validation_truth > cost).astype(np.int64)
+@@ -237,4 +319,11 @@
+         if coefficients is not None
+         else None,
+         target_standard_deviation=float(np.std(train.targets)),
++        oof_provenance_sha256=oof_hash,
++        fitted_model_provenance_sha256=canonical_sha256(fit_provenance.model_dump(mode="json"))
++        if fit_provenance
++        else None,
++        calibration_method="purged OOF Platt and residual q10/q50/q90"
++        if oof_hash
++        else "validation-only Platt and residual q10/q50/q90",
+     )
+--- a/src/aegisquant/research/models/uncertainty.py
++++ b/src/aegisquant/research/models/uncertainty.py
+@@ -3,6 +3,7 @@
+ from __future__ import annotations
+ 
+ import math
++from datetime import datetime
+ from decimal import Decimal
+ from enum import StrEnum
+ 
+@@ -10,27 +11,64 @@
+ 
+ from aegisquant.domain.base import DomainModel
+ from aegisquant.domain.values import FiniteDecimal, NonNegativeDecimal, UnitInterval
++from aegisquant.research.validation.ml_contract import (
++    FoldRegistration,
++    OOFPrediction,
++    validate_oof_alignment,
++)
+ 
+ 
+ class ConformalCalibration(DomainModel):
+     alpha: UnitInterval
+     residual_quantile: NonNegativeDecimal
+     sample_count: int = Field(gt=0)
++    oof_provenance_sha256: str | None = Field(default=None, exclude_if=lambda v: v is None)
++    coverage_contract: str | None = Field(default=None, exclude_if=lambda v: v is None)
+ 
+ 
+ def fit_split_conformal(
+-    *, predictions: tuple[Decimal, ...], realized: tuple[Decimal, ...], alpha: Decimal
++    *,
++    predictions: tuple[Decimal, ...],
++    realized: tuple[Decimal, ...],
++    alpha: Decimal,
++    oof_predictions: tuple[OOFPrediction, ...] | None = None,
++    applied_at: datetime | None = None,
++    registrations: tuple[FoldRegistration, ...] | None = None,
+ ) -> ConformalCalibration:
+     if len(predictions) != len(realized) or not predictions:
+         raise ValueError("conformal calibration dimensions differ")
+     if not Decimal("0") < alpha < Decimal("1"):
+         raise ValueError("conformal alpha must be between zero and one")
++    if any(not value.is_finite() for value in predictions + realized):
++        raise ValueError("conformal observations must be finite")
++    provenance_hash = None
++    if oof_predictions is not None:
++        if (
++            applied_at is None
++            or registrations is None
++            or predictions != tuple(item.prediction for item in oof_predictions)
++        ):
++            raise ValueError("conformal OOF prediction values/time must align")
++        provenance_hash = validate_oof_alignment(
++            oof_predictions,
++            sample_ids=tuple(item.sample.sample_id for item in oof_predictions),
++            timestamps=tuple(item.sample.group_time for item in oof_predictions),
++            label_end_times=tuple(item.sample.label_end_time for item in oof_predictions),
++            consumed_at=applied_at,
++            registrations=registrations,
++        )
++    elif applied_at is not None or registrations is not None:
++        raise ValueError("conformal application time requires OOF provenance")
+     residuals = sorted(abs(left - right) for left, right in zip(predictions, realized, strict=True))
+     rank = min(len(residuals), math.ceil((len(residuals) + 1) * float(1 - alpha)))
+     return ConformalCalibration(
+         alpha=alpha,
+         residual_quantile=residuals[rank - 1],
+         sample_count=len(residuals),
++        oof_provenance_sha256=provenance_hash,
++        coverage_contract="OOF_RESIDUAL_PREDICTIVE_INTERVAL_NOT_MEAN_CI;TEMPORAL_BLOCK_COVERAGE_NOT_VERIFIED;NO_EXACT_NONSTATIONARY_GUARANTEE"
++        if provenance_hash
++        else None,
+     )
+ 
+ 
+--- a/src/aegisquant/research/validation/statistics.py
++++ b/src/aegisquant/research/validation/statistics.py
+@@ -6,11 +6,164 @@
+ from decimal import Decimal
+ from itertools import combinations
+ from statistics import NormalDist
++from typing import Any, Literal
+ 
+ from pydantic import Field, model_validator
+ 
++from aegisquant.data.hashing import ensure_sha256
+ from aegisquant.domain.base import DomainModel
+ from aegisquant.domain.values import FiniteDecimal, UnitInterval
++
++
++def audited_deflated_sharpe_ratio(
++    *,
++    observed_sharpe: Decimal,
++    observations: int,
++    skewness: Decimal,
++    kurtosis: Decimal,
++    trial_sharpes: tuple[Decimal, ...] | None,
++    trial_ids: tuple[str, ...] | None,
++    complete_trial_history: bool,
++    return_frequency: str | None,
++    kurtosis_convention: str | None,
++    sample_dependence: str | None,
++    trial_correlation_policy: str | None,
++    evidence_sha256: str | None,
++) -> dict[str, Any]:
++    """A strict per-period IID diagnostic; unknown dependence/history never fabricates DSR."""
++    missing: list[str] = []
++    if not complete_trial_history or not trial_ids or not trial_sharpes:
++        missing.append("COMPLETE_TRIAL_HISTORY")
++    if return_frequency not in {"UTC_DAILY_PER_PERIOD", "UTC_4H_PER_PERIOD"}:
++        missing.append("PER_PERIOD_SHARPE_FREQUENCY")
++    if kurtosis_convention != "RAW":
++        missing.append("RAW_KURTOSIS")
++    if sample_dependence != "IID_JUSTIFIED":
++        missing.append("SAMPLE_DEPENDENCE_NOT_IDENTIFIED")
++    if trial_correlation_policy != "ALL_REGISTERED_CANDIDATES_NO_REDUCTION":
++        missing.append("TRIAL_CORRELATION_POLICY")
++    if evidence_sha256 is None:
++        missing.append("SUPPORTING_EVIDENCE")
++    else:
++        ensure_sha256(evidence_sha256, field_name="DSR evidence")
++    if missing:
++        return {"status": "INSUFFICIENT", "probability": None, "missing": missing}
++    if trial_ids is None or trial_sharpes is None:
++        raise ValueError("DSR full trial history is required")
++    if len(trial_ids) != len(trial_sharpes) or len(set(trial_ids)) != len(trial_ids):
++        raise ValueError("DSR requires all unique candidate identities aligned with Sharpes")
++    result = deflated_sharpe_ratio(
++        observed_sharpe=observed_sharpe,
++        observations=observations,
++        skewness=skewness,
++        kurtosis=kurtosis,
++        trial_sharpes=trial_sharpes,
++    )
++    return {
++        "status": "SUPPLIED_EVIDENCE_DIAGNOSTIC_ONLY",
++        "probability": result.probability,
++        "inference": result.model_dump(mode="json"),
++        "trial_ids": trial_ids,
++        "return_frequency": return_frequency,
++        "sample_dependence": sample_dependence,
++        "trial_correlation_policy": trial_correlation_policy,
++        "evidence_sha256": evidence_sha256,
++        "independent_trial_count_estimated": False,
++    }
++
++
++def audited_probability_of_backtest_overfitting(
++    returns_by_segment: tuple[tuple[tuple[Decimal, ...], ...], ...] | None,
++    *,
++    strategy_ids: tuple[str, ...] | None,
++    score_id: Literal["MEAN_RETURN_V2", "SHARPE_PER_PERIOD_V2"],
++    registered_selection_score_id: str,
++    complete_trial_history: bool,
++) -> dict[str, Any]:
++    """CSCV over raw per-period returns, using the actual frozen selection score.
++
++    Uniform weight across tied training winners; test ties use mid-ranks and
++    half weight at the median. Identical candidates are not identifiable.
++    """
++    if (
++        score_id not in {"MEAN_RETURN_V2", "SHARPE_PER_PERIOD_V2"}
++        or score_id != registered_selection_score_id
++    ):
++        raise ValueError("PBO score must match the registered selection algorithm")
++    if not complete_trial_history or returns_by_segment is None or strategy_ids is None:
++        return {
++            "status": "INSUFFICIENT",
++            "probability": None,
++            "reason": "MISSING_FULL_SELECTION_HISTORY",
++        }
++    count, strategies = len(returns_by_segment), len(strategy_ids)
++    if (
++        count < 4
++        or count > 12
++        or count % 2
++        or strategies < 2
++        or len(set(strategy_ids)) != strategies
++    ):
++        raise ValueError("PBO requires 4..12 even segments and unique candidates")
++    for segment in returns_by_segment:
++        if (
++            len(segment) != strategies
++            or any(not values for values in segment)
++            or len({len(values) for values in segment}) != 1
++        ):
++            raise ValueError("PBO requires aligned complete per-period returns for every candidate")
++        for values in segment:
++            for value in values:
++                _finite(value, "PBO period return")
++
++    def score(indices: tuple[int, ...], strategy: int) -> Decimal | None:
++        values = tuple(value for index in indices for value in returns_by_segment[index][strategy])
++        mean = _mean(values)
++        if score_id == "MEAN_RETURN_V2":
++            return mean
++        variance = sum((value - mean) ** 2 for value in values) / Decimal(len(values) - 1)
++        return mean / variance.sqrt() if variance > 0 else None
++
++    losses: list[Decimal] = []
++    unidentifiable = 0
++    tied_selections = 0
++    for train in combinations(range(count), count // 2):
++        test = tuple(index for index in range(count) if index not in train)
++        train_scores = tuple(score(train, i) for i in range(strategies))
++        test_scores = tuple(score(test, i) for i in range(strategies))
++        if (
++            None in train_scores
++            or None in test_scores
++            or (len(set(train_scores)) == len(set(test_scores)) == 1)
++        ):
++            unidentifiable += 1
++            continue
++        known_train = tuple(value for value in train_scores if value is not None)
++        known_test = tuple(value for value in test_scores if value is not None)
++        winners = tuple(i for i, value in enumerate(known_train) if value == max(known_train))
++        tied_selections += len(winners) > 1
++        winner_losses: list[Decimal] = []
++        for winner in winners:
++            lower = sum(value < known_test[winner] for value in known_test)
++            equal = sum(value == known_test[winner] for value in known_test)
++            rank = Decimal(lower) + Decimal(equal + 1) / 2
++            median = Decimal(strategies + 1) / 2
++            winner_losses.append(
++                Decimal(1) if rank < median else Decimal("0.5") if rank == median else Decimal(0)
++            )
++        losses.append(_mean(tuple(winner_losses)))
++    return {
++        "status": "UNIDENTIFIABLE" if unidentifiable else "SUPPLIED_MATRIX_DIAGNOSTIC_ONLY",
++        "probability": None if unidentifiable else _mean(tuple(losses)),
++        "combinations": math.comb(count, count // 2),
++        "unidentifiable_combinations": unidentifiable,
++        "tied_training_selections": tied_selections,
++        "score_id": score_id,
++        "tie_rule": "UNIFORM_TRAIN_WINNERS_TEST_MIDRANK_MEDIAN_HALF",
++        "strategy_ids": tuple(sorted(strategy_ids)),
++        "causal_walkforward_replacement": False,
++    }
++
+ 
+ EULER_MASCHERONI = 0.5772156649015329
+ 
+--- /dev/null
++++ b/src/aegisquant/labels/episodes.py
+@@ -0,0 +1,129 @@
++"""Complete, unfiltered base-opportunity labels; no strategy execution or ML fit."""
++
++from __future__ import annotations
++
++from decimal import Decimal
++from typing import Literal
++
++from pydantic import Field, model_validator
++
++from aegisquant.data.hashing import canonical_sha256, ensure_sha256
++from aegisquant.domain.base import DomainModel
++from aegisquant.domain.time import UtcDateTime
++from aegisquant.domain.values import NonNegativeDecimal
++from aegisquant.labels.generators import generate_return_path_label
++from aegisquant.labels.models import CostAssumption, PricePathObservation, ReturnPathLabel
++from aegisquant.research.validation.splits import SampleSpan
++
++
++class BaseOpportunity(DomainModel):
++    opportunity_id: str
++    episode_id: str
++    base_policy_sha256: str
++    instrument_id: str
++    decision_index: int = Field(ge=0)
++    exit_index: int = Field(gt=0)
++    feature_dependency_start: UtcDateTime
++    decision_time: UtcDateTime
++    exit_reason: Literal["TREND_EXIT", "RISK_EXIT", "FROZEN_TERMINAL_EXIT"]
++    exit_reason_available_time: UtcDateTime
++    capital_committed: NonNegativeDecimal
++    accepted_by_ml: bool | None = None
++
++    @model_validator(mode="after")
++    def validate_opportunity(self) -> BaseOpportunity:
++        ensure_sha256(self.base_policy_sha256, field_name="base policy")
++        if not all(v.strip() for v in (self.opportunity_id, self.episode_id, self.instrument_id)):
++            raise ValueError("opportunity identities cannot be empty")
++        if (
++            self.exit_index <= self.decision_index
++            or self.feature_dependency_start > self.decision_time
++        ):
++            raise ValueError("opportunity must have a causal future exit")
++        if self.exit_reason_available_time <= self.decision_time:
++            raise ValueError("exit reason must be observed after the entry decision")
++        return self
++
++
++class EpisodeLabel(DomainModel):
++    opportunity: BaseOpportunity
++    span: SampleSpan
++    return_path: ReturnPathLabel
++    evidence_kind: Literal["COUNTERFACTUAL_FROZEN_BASE"] = "COUNTERFACTUAL_FROZEN_BASE"
++    worth_accepting: bool
++    capital_seconds: NonNegativeDecimal
++    opportunity_set_sha256: str
++    risk_exit_may_be_vetoed_by_ml: Literal[False] = False
++
++
++def label_base_opportunities(
++    *,
++    opportunities: tuple[BaseOpportunity, ...],
++    expected_opportunity_ids: tuple[str, ...],
++    opportunity_set_sha256: str,
++    observations: dict[str, tuple[PricePathObservation, ...]],
++    costs: dict[str, CostAssumption],
++    observed_through: UtcDateTime,
++) -> tuple[EpisodeLabel, ...]:
++    """The caller supplies a frozen complete opportunity ledger, including ML rejects.
++
++    The hash binds the supplied ID set; it is not proof of empirical completeness.
++    Counterfactual executable paths reuse the existing t+1, two-leg cost generator.
++    """
++    ids = tuple(item.opportunity_id for item in opportunities)
++    if (
++        len(ids) != len(set(ids))
++        or len(expected_opportunity_ids) != len(set(expected_opportunity_ids))
++        or set(ids) != set(expected_opportunity_ids)
++    ):
++        raise ValueError("must label the complete unfiltered opportunity set")
++    if opportunity_set_sha256 != canonical_sha256(sorted(expected_opportunity_ids)):
++        raise ValueError("frozen opportunity identity hash mismatch")
++    output: list[EpisodeLabel] = []
++    for item in sorted(opportunities, key=lambda x: (x.decision_time, x.opportunity_id)):
++        path = observations[item.instrument_id]
++        if (
++            item.exit_index >= len(path)
++            or path[item.decision_index].available_time != item.decision_time
++        ):
++            raise ValueError("opportunity path/decision identity mismatch")
++        if any(
++            p.instrument_id != item.instrument_id
++            for p in path[item.decision_index : item.exit_index + 1]
++        ):
++            raise ValueError("opportunity path instrument mismatch")
++        if item.exit_reason_available_time >= path[item.exit_index].event_time:
++            raise ValueError("exit cannot precede the causal exit reason")
++        available = max(
++            item.exit_reason_available_time,
++            *(p.available_time for p in path[item.decision_index + 1 : item.exit_index + 1]),
++        )
++        if available > observed_through:
++            raise ValueError("episode label has not matured")
++        label = generate_return_path_label(
++            observations=path,
++            decision_index=item.decision_index,
++            horizon_steps=item.exit_index - item.decision_index,
++            cost=costs[item.opportunity_id],
++            risk_flat_threshold=Decimal(0),
++        )
++        output.append(
++            EpisodeLabel(
++                opportunity=item,
++                span=SampleSpan(
++                    sample_id=item.opportunity_id,
++                    group_time=item.decision_time,
++                    label_start_time=label.label_start_time,
++                    label_end_time=label.label_end_time,
++                    feature_dependency_start=item.feature_dependency_start,
++                    label_available_time=available,
++                    episode_id=item.episode_id,
++                ),
++                return_path=label,
++                worth_accepting=label.net_return > 0,
++                capital_seconds=item.capital_committed
++                * Decimal(str((label.label_end_time - label.label_start_time).total_seconds())),
++                opportunity_set_sha256=opportunity_set_sha256,
++            )
++        )
++    return tuple(output)
+--- /dev/null
++++ b/src/aegisquant/research/validation/ml_contract.py
+@@ -0,0 +1,523 @@
++"""B6 causal episode/OOF protocols. All current real research budgets remain zero."""
++
++from __future__ import annotations
++
++import re
++from collections.abc import Callable, Mapping
++from datetime import UTC, datetime, timedelta
++from itertools import pairwise
++from pathlib import Path
++from typing import Any, Literal
++
++from pydantic import Field, JsonValue, model_validator
++
++from aegisquant.data.hashing import canonical_sha256, ensure_sha256
++from aegisquant.domain.base import DomainModel
++from aegisquant.domain.time import UtcDateTime
++from aegisquant.domain.values import FiniteDecimal
++from aegisquant.research.validation.calendar_walkforward import add_months
++from aegisquant.research.validation.evidence_contract import (
++    ZERO_BUDGETS,
++    require,
++    zero_budget_guard,
++)
++from aegisquant.research.validation.experiment_registry import registered_run
++from aegisquant.research.validation.splits import (
++    SampleSpan,
++    dependency_interval,
++    purge_interval_partitions,
++)
++
++FILES = (
++    "src/aegisquant/research/validation/splits.py",
++    "src/aegisquant/research/validation/calendar_walkforward.py",
++    "src/aegisquant/research/models/economic_filter.py",
++    "src/aegisquant/research/models/uncertainty.py",
++    "src/aegisquant/research/validation/statistics.py",
++    "src/aegisquant/labels/episodes.py",
++    "src/aegisquant/research/validation/ml_contract.py",
++    "scripts/run_alpha_v5_walkforward.py",
++    "configs/research/alpha_v5_ml_contract.yaml",
++    "tests/alpha_v5/test_ml_contract.py",
++    "docs/research/alpha_v5_ml_contract.md",
++)
++OUTER_BOUNDARIES = tuple(
++    datetime.fromisoformat(value).replace(tzinfo=UTC)
++    for value in ("2022-04-01", "2023-06-01", "2024-08-01", "2025-10-01")
++)
++DEVELOPMENT_START = datetime(2021, 1, 1, tzinfo=UTC)
++
++
++class TransformFit(DomainModel):
++    name: str
++    specification_sha256: str
++    fit_sample_ids: tuple[str, ...]
++    fitted_at: UtcDateTime
++
++
++class FoldRegistration(DomainModel):
++    generation: str
++    fold_id: str
++    outer_fold_id: str
++    scope: Literal["PURGED_INNER_TRAIN", "PURGED_OUTER_TRAIN"]
++    training_spans: tuple[SampleSpan, ...]
++    evaluation_spans: tuple[SampleSpan, ...]
++    label_contract: dict[str, JsonValue]
++    model_specification_sha256: str
++    transform_specification_hashes: dict[str, str]
++    information_embargo_seconds: int = Field(ge=0)
++
++    @model_validator(mode="after")
++    def validate_registration(self) -> FoldRegistration:
++        if (
++            not self.generation.strip()
++            or not self.fold_id.strip()
++            or not self.outer_fold_id.strip()
++            or not self.label_contract
++        ):
++            raise ValueError(
++                "fold registration needs actual generation, identities and label definition"
++            )
++        if self.scope == "PURGED_OUTER_TRAIN" and self.fold_id != self.outer_fold_id:
++            raise ValueError("outer registration identity must match")
++        values = self.training_spans + self.evaluation_spans
++        if (
++            not self.training_spans
++            or not self.evaluation_spans
++            or len({item.sample_id for item in values}) != len(values)
++        ):
++            raise ValueError("registered training/evaluation must be nonempty and disjoint")
++        for item in values:
++            dependency_interval(item)
++        for digest in (
++            self.model_specification_sha256,
++            *self.transform_specification_hashes.values(),
++        ):
++            ensure_sha256(digest, field_name="registered fit specification")
++        return self
++
++    @property
++    def manifest_sha256(self) -> str:
++        return canonical_sha256(self.model_dump(mode="json"))
++
++    @property
++    def label_contract_sha256(self) -> str:
++        return canonical_sha256(self.label_contract)
++
++
++class FitProvenance(DomainModel):
++    fold_id: str
++    model_specification_sha256: str
++    split_manifest_sha256: str
++    training_payload_sha256: str
++    label_contract_sha256: str
++    training_spans: tuple[SampleSpan, ...]
++    transforms: tuple[TransformFit, ...]
++    required_transform_names: tuple[str, ...]
++    trained_at: UtcDateTime
++    information_embargo_seconds: int = Field(ge=0)
++    scope: Literal["PURGED_INNER_TRAIN", "PURGED_OUTER_TRAIN"] = "PURGED_INNER_TRAIN"
++
++    @model_validator(mode="after")
++    def validate_fit(self) -> FitProvenance:
++        for digest in (
++            self.model_specification_sha256,
++            self.split_manifest_sha256,
++            self.training_payload_sha256,
++            self.label_contract_sha256,
++        ):
++            ensure_sha256(digest, field_name="fit provenance")
++        ids = {item.sample_id for item in self.training_spans}
++        if not ids or len(ids) != len(self.training_spans):
++            raise ValueError("fit training identities must be nonempty and unique")
++        if any(dependency_interval(item)[1] > self.trained_at for item in self.training_spans):
++            raise ValueError("training labels were not available at fit time")
++        names = tuple(item.name for item in self.transforms)
++        if (
++            len(set(names)) != len(names)
++            or len(set(self.required_transform_names)) != len(self.required_transform_names)
++            or set(names) != set(self.required_transform_names)
++        ):
++            raise ValueError("all registered transformations must supply fold-local provenance")
++        for transform in self.transforms:
++            ensure_sha256(transform.specification_sha256, field_name="transform specification")
++            if (
++                not transform.fit_sample_ids
++                or len(set(transform.fit_sample_ids)) != len(transform.fit_sample_ids)
++                or not set(transform.fit_sample_ids) <= ids
++            ):
++                raise ValueError("transform may fit only inner-train identities")
++            if transform.fitted_at > self.trained_at or any(
++                dependency_interval(item)[1] > transform.fitted_at
++                for item in self.training_spans
++                if item.sample_id in transform.fit_sample_ids
++            ):
++                raise ValueError("transform fitted outside causal training time")
++        return self
++
++
++class OOFPrediction(DomainModel):
++    sample: SampleSpan
++    prediction: FiniteDecimal
++    predicted_at: UtcDateTime
++    fit: FitProvenance
++
++    @model_validator(mode="after")
++    def validate_oof(self) -> OOFPrediction:
++        if self.fit.scope != "PURGED_INNER_TRAIN":
++            raise ValueError("outer refit cannot be relabelled as inner OOF")
++        validate_prediction_dependencies(self.fit, self.sample, self.predicted_at)
++        return self
++
++
++def validate_prediction_dependencies(
++    fit: FitProvenance, sample: SampleSpan, predicted_at: datetime
++) -> None:
++    FitProvenance.model_validate(
++        {
++            **dict(fit),
++            "training_spans": tuple(
++                SampleSpan.model_validate(dict(item)) for item in fit.training_spans
++            ),
++            "transforms": tuple(TransformFit.model_validate(dict(item)) for item in fit.transforms),
++        }
++    )
++    SampleSpan.model_validate(dict(sample))
++    left, _ = dependency_interval(sample)
++    if not fit.trained_at <= predicted_at <= sample.group_time:
++        raise ValueError("OOF prediction/model must exist by decision time")
++    embargo = timedelta(seconds=fit.information_embargo_seconds)
++    for trained in fit.training_spans:
++        if (
++            trained.sample_id == sample.sample_id
++            or trained.episode_id == sample.episode_id
++            or trained.group_time == sample.group_time
++            or dependency_interval(trained)[1] + embargo >= left
++        ):
++            raise ValueError("OOF fit overlaps held-out time, feature or episode dependencies")
++
++
++def validate_registered_fit(
++    fit: FitProvenance, registrations: tuple[FoldRegistration, ...]
++) -> FoldRegistration:
++    if (
++        not registrations
++        or len({item.fold_id for item in registrations}) != len(registrations)
++        or len({item.generation for item in registrations}) != 1
++    ):
++        raise ValueError("current experiment must have one generation and unique registered folds")
++    matching = tuple(item for item in registrations if item.fold_id == fit.fold_id)
++    if len(matching) != 1:
++        raise ValueError("fit fold is absent from the current registration")
++    registered = matching[0]
++    FoldRegistration.model_validate(dict(registered))
++    if (
++        fit.split_manifest_sha256 != registered.manifest_sha256
++        or fit.label_contract_sha256 != registered.label_contract_sha256
++        or fit.scope != registered.scope
++        or fit.training_spans != registered.training_spans
++        or fit.model_specification_sha256 != registered.model_specification_sha256
++        or fit.information_embargo_seconds != registered.information_embargo_seconds
++        or {item.name: item.specification_sha256 for item in fit.transforms}
++        != registered.transform_specification_hashes
++    ):
++        raise ValueError("fit provenance does not bind the current registered fold content")
++    return registered
++
++
++def validate_oof_alignment(
++    records: tuple[OOFPrediction, ...],
++    *,
++    sample_ids: tuple[str, ...],
++    timestamps: tuple[datetime, ...],
++    label_end_times: tuple[datetime, ...],
++    consumed_at: datetime,
++    registrations: tuple[FoldRegistration, ...],
++) -> str:
++    if (
++        not records
++        or len(set(sample_ids)) != len(sample_ids)
++        or tuple(item.sample.sample_id for item in records) != sample_ids
++        or len(records) != len(timestamps)
++        or len(records) != len(label_end_times)
++    ):
++        raise ValueError("OOF predictions must align exactly with all calibration identities")
++    for item, time, end in zip(records, timestamps, label_end_times, strict=True):
++        # Revalidate copied/deserialized models at the fit trust boundary.
++        OOFPrediction.model_validate(dict(item))
++        registered = validate_registered_fit(item.fit, registrations)
++        if item.sample not in registered.evaluation_spans:
++            raise ValueError("OOF sample is absent from its registered evaluation partition")
++        if (
++            item.sample.group_time != time
++            or item.sample.label_end_time != end
++            or dependency_interval(item.sample)[1] >= consumed_at
++        ):
++            raise ValueError("OOF calibration labels/timestamps are unavailable or misaligned")
++    return canonical_sha256([item.model_dump(mode="json") for item in records])
++
++
++def nested_split_manifest(
++    samples: tuple[SampleSpan, ...] | None, *, information_embargo_seconds: int = 14400
++) -> dict[str, Any]:
++    if information_embargo_seconds < 0:
++        raise ValueError("information embargo cannot be negative")
++    if samples is not None and len({item.sample_id for item in samples}) != len(samples):
++        raise ValueError("nested sample identities must be unique")
++    folds: list[dict[str, Any]] = []
++    for index, (start, end) in enumerate(pairwise(OUTER_BOUNDARIES)):
++        inner_dates = tuple(add_months(start, -9 + 3 * i) for i in range(4))
++        row: dict[str, Any] = {
++            "outer_fold": index + 1,
++            "train_start": DEVELOPMENT_START.isoformat(),
++            "test_start": start.isoformat(),
++            "test_end": end.isoformat(),
++            "inner_validation": [
++                {"start": a.isoformat(), "end": b.isoformat()} for a, b in pairwise(inner_dates)
++            ],
++            "samples": None,
++            "status": "NOT_COLLECTED",
++        }
++        if samples is not None:
++            embargo = timedelta(seconds=information_embargo_seconds)
++            train = tuple(item for item in samples if DEVELOPMENT_START <= item.group_time < start)
++            test = tuple(item for item in samples if start <= item.group_time < end)
++            outer, removed = purge_interval_partitions(
++                (train, test), ends=(start, end), information_embargo=embargo
++            )
++            inner_rows: list[dict[str, Any]] = []
++            for a, b in pairwise(inner_dates):
++                raw = (
++                    tuple(item for item in outer[0] if item.group_time < a),
++                    tuple(item for item in outer[0] if a <= item.group_time < b),
++                )
++                inner, purged = purge_interval_partitions(
++                    raw, ends=(a, b), information_embargo=embargo
++                )
++                inner_rows.append(
++                    {
++                        "train_ids": [item.sample_id for item in inner[0]],
++                        "validation_ids": [item.sample_id for item in inner[1]],
++                        "purged_ids": purged,
++                        "status": "PROTOCOL_ONLY" if all(inner) else "INSUFFICIENT",
++                    }
++                )
++            row["samples"] = {
++                "train_ids": [item.sample_id for item in outer[0]],
++                "test_ids": [item.sample_id for item in outer[1]],
++                "purged_ids": removed,
++                "inner": inner_rows,
++                "effective_episodes": [len({item.episode_id for item in part}) for part in outer],
++                "independent_time_blocks": None,
++            }
++            row["status"] = (
++                "PROTOCOL_ONLY"
++                if all(outer) and all(r["status"] == "PROTOCOL_ONLY" for r in inner_rows)
++                else "INSUFFICIENT"
++            )
++        folds.append(row)
++    payload = {
++        "policy": "NESTED_EPISODE_INTERVAL_V2",
++        "tier": "PREVIOUSLY_USED_DEVELOPMENT_NOT_HOLDOUT",
++        "information_embargo_seconds": information_embargo_seconds,
++        "outer_months": 42,
++        "folds": folds,
++        "statistical_sufficiency": "NOT_ESTABLISHED",
++        "source_span_sha256": None
++        if samples is None
++        else canonical_sha256([item.model_dump(mode="json") for item in samples]),
++        "rows_outside_development": None
++        if samples is None
++        else [
++            item.sample_id
++            for item in samples
++            if not DEVELOPMENT_START <= item.group_time < OUTER_BOUNDARIES[-1]
++        ],
++    }
++    return {**payload, "manifest_sha256": canonical_sha256(payload)}
++
++
++def planned_fit_ids() -> tuple[str, ...]:
++    base = tuple(
++        f"MODEL:{model}:OUTER:{fold}:{role}"
++        for model in ("LINEAR", "SHALLOW_TREE")
++        for fold in range(1, 4)
++        for role in ("INNER:1", "INNER:2", "INNER:3", "OUTER_REFIT")
++    )
++    uncertainty = tuple(
++        f"MODEL:{model}:OUTER:{fold}:MEAN_BLOCK:{block}"
++        for model in ("LINEAR", "SHALLOW_TREE")
++        for fold in range(1, 4)
++        for block in range(1, 21)
++    )
++    calibration = tuple(
++        f"CALIBRATION:{model}:OUTER:{fold}"
++        for model in ("LINEAR", "SHALLOW_TREE")
++        for fold in range(1, 4)
++    )
++    return base + uncertainty + calibration
++
++
++def registered_synthetic_fit_check[T](directory: Path, run_id: str, callback: Callable[[], T]) -> T:
++    """Exercise real claim/error persistence with a synthetic callback, never fit a model."""
++    with registered_run(  # noqa: SIM117 -- journal errors persist after the call guard exits.
++        directory,
++        run_id,
++        planned_run_ids=planned_fit_ids(),
++        bindings={
++            "kind": "SYNTHETIC_CALLBACK_CHECK_NOT_A_REAL_FIT",
++            "real_model_fits": 0,
++            "real_calibration_fits": 0,
++        },
++    ):
++        with zero_budget_guard(directory, Path.cwd(), dict.fromkeys(ZERO_BUDGETS, 0)):
++            return callback()
++
++
++def permit_ml_entry(*, risk_reduction: bool, model_available: bool, accepted: bool) -> bool:
++    return risk_reduction or (model_available and accepted)
++
++
++def validate_config(config: Mapping[str, Any]) -> None:
++    match = re.fullmatch(r"alpha-r5-ml-contract-(\d{8})-v([1-9]\d*)", config["generation"])
++    require(match is not None, "AQ-ML-GENERATION")
++    if match is None:
++        return
++    require(
++        config["output"] == f"artifacts/alpha_v5/{match[1]}_ml_contract_v{match[2]}", "AQ-ML-OUTPUT"
++    )
++    require(
++        config["schema_version"] == "aegis-ml-contract-b6-v1"
++        and config["scope"] == "B6_ML_PROTOCOL_AND_SYNTHETIC_CONTRACT_TESTS",
++        "AQ-ML-SCOPE",
++    )
++    require(
++        config["real_episode_inputs"] is None and config["real_training_authorized"] is False,
++        "AQ-ML-REAL-TRAINING-NOT-AUTHORIZED",
++    )
++    require(
++        config["future_fit_budget"]
++        == {
++            "model_fits": 144,
++            "calibration_fits": 6,
++            "inner_oof_mean_refits": 0,
++            "authorized_now": 0,
++        },
++        "AQ-ML-FIT-BUDGET",
++    )
++    require(
++        config["outer_boundaries"] == [value.strftime("%Y-%m-%d") for value in OUTER_BOUNDARIES],
++        "AQ-ML-FIXED-SPLITS",
++    )
++
++
++def build_documents(sources: dict[str, Any]) -> Mapping[str, Any]:
++    missing = {"status": "NOT_COLLECTED", "rows": None}
++    return {
++        "episode_ledger.json": {
++            **missing,
++            "basis": "COMPLETE_UNFILTERED_BASE_OPPORTUNITIES",
++            "rejected_opportunities": "COUNTERFACTUAL_FROZEN_BASE",
++            "independent_episodes": None,
++        },
++        "split_manifest.json": nested_split_manifest(None),
++        "oof_provenance.json": {
++            **missing,
++            "required": [
++                "model_and_transform_training_ids",
++                "full_dependency_intervals",
++                "episode_ids",
++                "training_payload_hash",
++                "split_hash",
++                "model_hash",
++                "label_contract_hash",
++                "fit_and_prediction_clocks",
++            ],
++            "future_outer_refits_in_inner_oof": "FORBIDDEN",
++        },
++        "fit_and_calibration_log.json": {
++            "real_model_fits": 0,
++            "real_calibration_fits": 0,
++            "future_slots": planned_fit_ids(),
++            "extra_inner_calibration_slots": 0,
++            "inner_mean_uncertainty": "DISABLED_NO_BUDGET",
++            "future_weights_and_update_program": None,
++        },
++        "trial_registry_status.json": {
++            "complete_history": "UNKNOWN",
++            "recovered_prior_engineering_errors": "RETAINED_IN_IMMUTABLE_PRIOR_GENERATIONS",
++            "independent_return_candidates": None,
++            "engineering_errors_are_independent_return_trials": False,
++        },
++        "outer_metrics.json": {
++            **missing,
++            "required": [
++                "brier",
++                "log_loss",
++                "calibration",
++                "oof_coverage_width",
++                "acceptance_rate",
++                "missed_positive_opportunities",
++                "avoided_negative_opportunities",
++                "net_pnl_delta",
++                "tail_delta",
++                "same_risk_no_ml_control",
++                "constant_probability_control",
++                "holm_adjusted_outer_comparisons",
++            ],
++            "actual_outer_results": None,
++        },
++        "statistical_evidence.json": {
++            "DSR": {
++                "status": "INSUFFICIENT",
++                "probability": None,
++                "reason": "MISSING_COMPLETE_TRIAL_HISTORY_AND_DEPENDENCE_EVIDENCE",
++            },
++            "PBO": {
++                "status": "INSUFFICIENT",
++                "probability": None,
++                "reason": "NO_REGISTERED_SELECTION_MATRIX",
++            },
++            "predictive_distribution": "NOT_COLLECTED",
++            "conditional_mean_uncertainty": "NOT_IDENTIFIED",
++            "exact_nonstationary_conformal_coverage": False,
++        },
++        "candidate_freeze_draft.json": {
++            "status": "NOT_ELIGIBLE",
++            "candidate": None,
++            "data_code_risk_cost_capacity_hashes": None,
++            "allowed_training_update_program": None,
++            "holdout_path": None,
++            "orders_authorized": False,
++        },
++        "evidence_gaps.json": {
++            "pit_quality": sources["b2_safety"]["strict_data_quality"],
++            "gaps": [
++                "REAL_PIT_LINEAGE",
++                "VERIFIED_EXECUTION_AND_SHARED_LEDGER",
++                "COMPLETE_MATURE_EPISODE_SET",
++                "INDEPENDENT_TIME_BLOCK_SUFFICIENCY",
++                "COMPLETE_TRIAL_HISTORY",
++                "FROZEN_MODEL_CALIBRATION_SELECTION_RULE",
++                "SEPARATE_REAL_FIT_AUTHORIZATION",
++                "UNUSED_TWELVE_MONTH_HOLDOUT",
++            ],
++            "promotion_admitted": False,
++        },
++        "report.md": """# B6 ML、episode 与统计契约
++
++**NO_PROVEN_ALPHA / CASH；ML、纸面、实盘和订单继续关闭。**
++
++新增完整基础机会集的 episode 包装，复用可执行 t+1、双腿成本与路径标签；被拒绝机会保留 COUNTERFACTUAL 标记。严格分割按完整特征依赖、标签可用时间、同时间资产组和 episode 清除所有后续边界重叠，记录 purge 和不成熟尾部。旧调用和默认输出契约保留。
++
++三个 outer 块固定为 2022-04 至 2023-06、2023-06 至 2024-08、2024-08 至 2025-10，共 42 个月，最后九个月各三块 inner 验证。仍是已使用开发区间；缺真实标签时只输出日期协议，不能宣称有三个有效统计 fold。
++
++OOF 元数据绑定每个训练、转换和预测的样本、episode、时钟及哈希。校准入口使用对齐的 OOF 预测；模型不可用不能否决风险减仓。预测分布与均值估计不确定性分别记录；conformal 不保证非平稳市场精确覆盖，30 行代码门槛不代表有效样本充分。
++
++未来拟议 144 模型 fit、6 校准 fit 全部列出；当前实际均为 0。内层额外校准和 OOF 均值重拟合没有预算，保持关闭。合成 callback 仅检查原 registry 的失败消耗，不是实际模型拟合。真实训练入口仍未启用。
++
++DSR 缺全试验史、频率/峰度/依赖依据时返回 INSUFFICIENT 和 null；PBO 使用相同登记 score、全部候选和 mid-rank/tie 权重，不因数组顺序造优胜。旧统计实现只保留历史复现兼容，不给新准入证据使用。
++
++episode 实证、outer 指标、OOF 覆盖、经济增量与候选冻结全部 NOT_COLLECTED；实际历史回放、真实模型/校准 fit、最终留出和订单均为 0。本批工程通过不代表 ML 有效或可交易。
++""",
++    }
+--- /dev/null
++++ b/scripts/run_alpha_v5_walkforward.py
+@@ -0,0 +1,42 @@
++"""One B6 protocol report; no model, calibrator, strategy engine or holdout execution."""
++
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import yaml
++
++from aegisquant.research.validation.evidence_contract import (
++    checked_path,
++    run_zero_research_contract,
++)
++from aegisquant.research.validation.ml_contract import FILES, build_documents, validate_config
++from scripts.export_alpha_v4_audit_bundle import git
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--config", required=True, type=Path)
++    parser.add_argument("--preflight-dir", required=True, type=Path)
++    args = parser.parse_args()
++    config = yaml.safe_load(checked_path(ROOT, args.config.as_posix()).read_text(encoding="utf-8"))
++    validate_config(config)
++    output = run_zero_research_contract(
++        root=ROOT,
++        config=config,
++        stage=args.preflight_dir,
++        git_state={
++            "head": git(ROOT, "rev-parse", "HEAD"),
++            "branch": git(ROOT, "branch", "--show-current"),
++        },
++        files=FILES,
++        build_documents=build_documents,
++    )
++    print(f"B6 ML protocol: {output}; actual fits and outer results NOT_COLLECTED", flush=True)
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/configs/research/alpha_v5_ml_contract.yaml
+@@ -0,0 +1,37 @@
++schema_version: aegis-ml-contract-b6-v1
++generation: alpha-r5-ml-contract-20260910-v1
++output: artifacts/alpha_v5/20260910_ml_contract_v1
++scope: B6_ML_PROTOCOL_AND_SYNTHETIC_CONTRACT_TESTS
++branch_required: main
++source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
++budgets:
++  contract_jobs: 1
++  historical_strategy_engine_runs: 0
++  real_return_model_fits: 0
++  real_calibration_fits: 0
++  final_holdout_accesses: 0
++  real_orders: 0
++sources:
++  r5_manifest:
++    path: artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json
++    sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
++  b5_manifest:
++    path: artifacts/alpha_v5/20260910_portfolio_contract_v1/OUTPUT_MANIFEST.json
++    sha256: 405d950315e256ddf954ccda49468effb0334da8c03e361f6c9433b921b81f84
++  b2_safety:
++    path: artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json
++    sha256: c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26
++real_episode_inputs: null
++real_training_authorized: false
++future_fit_budget:
++  model_fits: 144
++  calibration_fits: 6
++  inner_oof_mean_refits: 0
++  authorized_now: 0
++outer_boundaries: ['2022-04-01', '2023-06-01', '2024-08-01', '2025-10-01']
++research_conclusion: NO_PROVEN_ALPHA
++production_policy: CASH
++production_ml_enabled: false
++paper_trading_admitted: false
++live_trading: false
++order_submission_enabled: false
+--- /dev/null
++++ b/tests/alpha_v5/test_ml_contract.py
+@@ -0,0 +1,556 @@
++from __future__ import annotations
++
++import json
++from datetime import UTC, datetime, timedelta
++from decimal import Decimal
++from itertools import pairwise
++from pathlib import Path
++from typing import Any
++
++import pytest
++import yaml
++
++from aegisquant.data.hashing import canonical_sha256
++from aegisquant.labels.episodes import BaseOpportunity, label_base_opportunities
++from aegisquant.labels.models import CostAssumption, PricePathObservation
++from aegisquant.research.models.baselines import BaselineDataset
++from aegisquant.research.models.economic_filter import fit_economic_filter
++from aegisquant.research.models.uncertainty import fit_split_conformal
++from aegisquant.research.validation.calendar_walkforward import (
++    CalendarIntervalFold,
++    calendar_walkforward,
++)
++from aegisquant.research.validation.ml_contract import (
++    FitProvenance,
++    FoldRegistration,
++    OOFPrediction,
++    TransformFit,
++    build_documents,
++    nested_split_manifest,
++    permit_ml_entry,
++    planned_fit_ids,
++    registered_synthetic_fit_check,
++    validate_config,
++    validate_oof_alignment,
++)
++from aegisquant.research.validation.splits import (
++    SampleSpan,
++    TemporalSplitPolicy,
++    WalkForwardMode,
++    purge_interval_partitions,
++    walk_forward_splits,
++)
++from aegisquant.research.validation.statistics import (
++    audited_deflated_sharpe_ratio,
++    audited_probability_of_backtest_overfitting,
++)
++
++D = Decimal
++NOW = datetime(2022, 1, 1, tzinfo=UTC)
++HASH = "a" * 64
++
++
++def at(days: int) -> datetime:
++    return NOW + timedelta(days=days)
++
++
++def span(day: int, asset: str = "BTC", **updates: Any) -> SampleSpan:
++    values: dict[str, Any] = {
++        "sample_id": f"{asset}:{day}",
++        "group_time": at(day),
++        "label_start_time": at(day) + timedelta(minutes=1),
++        "label_end_time": at(day) + timedelta(hours=1),
++        "feature_dependency_start": at(day) - timedelta(hours=1),
++        "label_available_time": at(day) + timedelta(hours=2),
++        "episode_id": f"episode:{asset}:{day}",
++    }
++    return SampleSpan.model_validate({**values, **updates})
++
++
++def fit_proof(**updates: Any) -> FitProvenance:
++    values: dict[str, Any] = {
++        "fold_id": "inner-1",
++        "model_specification_sha256": HASH,
++        "split_manifest_sha256": HASH,
++        "training_payload_sha256": HASH,
++        "label_contract_sha256": HASH,
++        "training_spans": tuple(span(i) for i in range(4)),
++        "transforms": (),
++        "required_transform_names": (),
++        "trained_at": at(4),
++        "information_embargo_seconds": 3600,
++    }
++    return FitProvenance.model_validate({**values, **updates})
++
++
++def register_proof(
++    proof: FitProvenance, evaluated: tuple[SampleSpan, ...]
++) -> tuple[FitProvenance, FoldRegistration]:
++    registration = FoldRegistration(
++        generation="synthetic-current",
++        fold_id=proof.fold_id,
++        outer_fold_id="outer-1",
++        scope=proof.scope,
++        training_spans=proof.training_spans,
++        evaluation_spans=evaluated,
++        label_contract={"version": "episode-v2", "base_policy_sha256": HASH},
++        model_specification_sha256=proof.model_specification_sha256,
++        transform_specification_hashes={
++            item.name: item.specification_sha256 for item in proof.transforms
++        },
++        information_embargo_seconds=proof.information_embargo_seconds,
++    )
++    return FitProvenance.model_validate(
++        {
++            **dict(proof),
++            "split_manifest_sha256": registration.manifest_sha256,
++            "label_contract_sha256": registration.label_contract_sha256,
++        }
++    ), registration
++
++
++def test_all_boundaries_long_spans_time_groups_and_episode_purge() -> None:
++    raw = (
++        (
++            span(0),
++            span(1, label_end_time=at(11), label_available_time=at(11)),
++            span(1, "ETH"),
++            span(2, episode_id="shared"),
++        ),
++        (span(10), span(11, label_available_time=at(21))),
++        (span(20), span(21, label_end_time=at(31), label_available_time=at(31))),
++        (span(30), span(31, episode_id="shared"), span(32, label_available_time=at(40))),
++    )
++    parts, removed = purge_interval_partitions(raw, ends=(at(10), at(20), at(30), at(40)))
++    assert [[item.sample_id for item in part] for part in parts] == [
++        ["BTC:0"],
++        ["BTC:10"],
++        ["BTC:20"],
++        ["BTC:30", "BTC:31"],
++    ]
++    assert set(removed) == {"BTC:1", "ETH:1", "BTC:2", "BTC:11", "BTC:21", "BTC:32"}
++
++
++def test_later_feature_lookback_purges_earlier_mature_label() -> None:
++    kept, _ = purge_interval_partitions(
++        ((span(0), span(4)), (span(10, feature_dependency_start=at(3)),)), ends=(at(10), at(20))
++    )
++    assert [item.sample_id for item in kept[0]] == ["BTC:0"]
++
++
++def test_strict_metadata_required_and_legacy_payload_has_no_new_nulls() -> None:
++    old = SampleSpan(
++        sample_id="legacy", group_time=at(0), label_start_time=at(1), label_end_time=at(2)
++    )
++    assert "episode_id" not in old.model_dump(mode="json")
++    with pytest.raises(ValueError, match="requires feature"):
++        purge_interval_partitions(((old,),), ends=(at(5),))
++
++
++def test_versioned_walkforward_purges_validation_calibration_and_full_group() -> None:
++    rows = tuple(
++        span(i, asset, **({"label_available_time": at(6)} if i == 4 and asset == "BTC" else {}))
++        for i in range(10)
++        for asset in ("BTC", "ETH")
++    )
++    policy = TemporalSplitPolicy(
++        policy_id="strict",
++        mode=WalkForwardMode.EXPANDING,
++        train_groups=3,
++        validation_groups=2,
++        calibration_groups=2,
++        test_groups=3,
++        purge_groups=0,
++        embargo_groups=0,
++        step_groups=10,
++        interval_policy="ALL_BOUNDARIES_INTERVAL_V2",
++        labels_observed_through=at(11),
++    )
++    fold = walk_forward_splits(rows, policy)[0]
++    assert fold.validation_ids == ("BTC:3", "ETH:3")
++    assert {"BTC:4", "ETH:4"} <= set(fold.purged_ids)
++    assert fold.interval_contract_sha256 is not None
++    assert set(fold.test_ids) == {f"{asset}:{i}" for i in (7, 8, 9) for asset in ("BTC", "ETH")}
++
++
++def test_calendar_strict_test_tail_is_mature_and_legacy_shape_stays() -> None:
++    times = tuple(at(i) for i in range(90))
++    rows = tuple(span(i) for i in range(90))
++    kwargs: dict[str, Any] = {
++        "available_times": times,
++        "label_end_times": tuple(item.label_end_time for item in rows),
++        "valid": (True,) * len(rows),
++        "first_train_start": NOW,
++        "development_end": datetime(2022, 4, 1, tzinfo=UTC),
++        "train_months": 1,
++        "validation_months": 1,
++        "test_months": 1,
++        "maximum_horizon_bars": 1,
++        "purge_bars": 1,
++        "embargo_bars": 1,
++        "frequency_seconds": 3600,
++    }
++    legacy = calendar_walkforward(**kwargs)[0]
++    assert "interval_contract_sha256" not in legacy.__dict__
++    changed = (*rows[:-1], span(89, label_available_time=datetime(2022, 4, 2, tzinfo=UTC)))
++    strict = calendar_walkforward(**kwargs, sample_spans=changed)[0]
++    assert isinstance(strict, CalendarIntervalFold)
++    assert 89 not in strict.test_indices and 89 in strict.purged_indices
++    multi = tuple(
++        span(
++            i,
++            asset,
++            **(
++                {"label_end_time": at(35), "label_available_time": at(36)}
++                if i == 29 and asset == "BTC"
++                else {}
++            ),
++        )
++        for i in range(90)
++        for asset in ("BTC", "ETH")
++    )
++    multi_kwargs: dict[str, Any] = {
++        **kwargs,
++        "available_times": tuple(item.group_time for item in multi),
++        "label_end_times": tuple(item.label_end_time for item in multi),
++        "valid": (True,) * len(multi),
++        "sample_spans": multi,
++    }
++    grouped = calendar_walkforward(**multi_kwargs)[0]
++    assert isinstance(grouped, CalendarIntervalFold)
++    assert {58, 59} <= set(grouped.purged_indices)
++    assert not {58, 59} & set(grouped.train_indices)
++
++
++def test_nested_dates_cover_all_42_months_and_tail_rows_are_reported() -> None:
++    absent = nested_split_manifest(None)
++    assert absent["outer_months"] == 42
++    folds = absent["folds"]
++    assert folds[0]["test_start"].startswith("2022-04-01")
++    assert folds[-1]["test_end"].startswith("2025-10-01")
++    assert all(a["test_end"] == b["test_start"] for a, b in pairwise(folds))
++    supplied = nested_split_manifest((span(0), span(90), span(1368)))
++    assert all(row["status"] == "INSUFFICIENT" for row in supplied["folds"])
++    assert supplied["statistical_sufficiency"] == "NOT_ESTABLISHED"
++
++
++@pytest.mark.parametrize(
++    "change",
++    [
++        "same_episode",
++        "future_label",
++        "same_id",
++        "outer_refit",
++        "transform_val",
++        "missing_transform",
++    ],
++)
++def test_oof_leakage_is_rejected_before_any_fit(change: str) -> None:
++    held = span(10)
++    with pytest.raises(ValueError):
++        proof = fit_proof()
++        if change == "same_episode":
++            proof = fit_proof(training_spans=(span(0, episode_id=held.episode_id),))
++        elif change == "same_id":
++            proof = fit_proof(training_spans=(span(0, sample_id=held.sample_id),))
++        elif change == "future_label":
++            proof = fit_proof(
++                training_spans=(span(0, label_available_time=at(11)),), trained_at=at(12)
++            )
++        elif change == "outer_refit":
++            proof = fit_proof(scope="PURGED_OUTER_TRAIN")
++        elif change == "transform_val":
++            proof = fit_proof(
++                transforms=(
++                    TransformFit(
++                        name="scaler",
++                        specification_sha256=HASH,
++                        fit_sample_ids=(held.sample_id,),
++                        fitted_at=at(4),
++                    ),
++                ),
++                required_transform_names=("scaler",),
++            )
++        else:
++            proof = fit_proof(required_transform_names=("selector",))
++        OOFPrediction(sample=held, prediction=D(1), predicted_at=at(10), fit=proof)
++
++
++def test_oof_alignment_and_conformal_temporal_limit() -> None:
++    proof, registration = register_proof(fit_proof(), tuple(span(i) for i in range(10, 14)))
++    rows = tuple(
++        OOFPrediction(sample=span(i), prediction=D(i), predicted_at=at(i), fit=proof)
++        for i in range(10, 14)
++    )
++    kwargs: dict[str, Any] = {
++        "sample_ids": tuple(r.sample.sample_id for r in rows),
++        "timestamps": tuple(r.sample.group_time for r in rows),
++        "label_end_times": tuple(r.sample.label_end_time for r in rows),
++        "consumed_at": at(20),
++        "registrations": (registration,),
++    }
++    digest = validate_oof_alignment(rows, **kwargs)
++    fitted = fit_split_conformal(
++        predictions=tuple(r.prediction for r in rows),
++        realized=(D(11), D(12), D(13), D(14)),
++        alpha=D("0.2"),
++        oof_predictions=rows,
++        applied_at=at(20),
++        registrations=(registration,),
++    )
++    assert fitted.oof_provenance_sha256 == digest and fitted.residual_quantile == 1
++    assert fitted.coverage_contract is not None and "NOT_MEAN_CI" in fitted.coverage_contract
++    with pytest.raises(ValueError, match="align"):
++        validate_oof_alignment(rows[::-1], **kwargs)
++    early: dict[str, Any] = {**kwargs, "consumed_at": at(13)}
++    with pytest.raises(ValueError, match="unavailable"):
++        validate_oof_alignment(rows, **early)
++
++
++def test_economic_oof_binding_and_future_target_mutation_without_real_fit(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    def forbidden(*args: Any, **kwargs: Any) -> None:
++        raise AssertionError("no real model or calibration fit permitted")
++
++    monkeypatch.setattr(
++        "aegisquant.research.models.economic_filter.fit_predict_baseline", forbidden
++    )
++    monkeypatch.setattr("aegisquant.research.models.economic_filter.fit_predict_tree", forbidden)
++    monkeypatch.setattr(
++        "aegisquant.research.models.economic_filter.LogisticRegression.fit", forbidden
++    )
++
++    def dataset(days: tuple[int, ...]) -> BaselineDataset:
++        return BaselineDataset(
++            sample_ids=tuple(f"BTC:{i}" for i in days),
++            timestamps=tuple(at(i) for i in days),
++            feature_names=("trend",),
++            features=((1.0,),) * len(days),
++            targets=(1.0, 2.0, 3.0, 4.0) * (len(days) // 4),
++        )
++
++    train_days = (0, 1, 2, 3, 10, 11, 12, 13)
++    train, validation, test = (
++        dataset(train_days),
++        dataset((10, 11, 12, 13)),
++        dataset((20, 21, 22, 23)),
++    )
++    inner, inner_registration = register_proof(fit_proof(), tuple(span(i) for i in range(10, 14)))
++    oof = tuple(
++        OOFPrediction(sample=span(i), prediction=D(j), predicted_at=at(i), fit=inner)
++        for j, i in enumerate(range(10, 14))
++    )
++    proof, outer_registration = register_proof(
++        fit_proof(
++            fold_id="outer-1",
++            scope="PURGED_OUTER_TRAIN",
++            training_spans=tuple(span(i) for i in train_days),
++            trained_at=at(14),
++            model_specification_sha256=canonical_sha256(
++                {"family": "CONSTANT", "rule": "TRAIN_MEAN_SAME_CALIBRATION", "seed": 20260903}
++            ),
++            training_payload_sha256=canonical_sha256(
++                {"ids": train.sample_ids, "features": train.features, "targets": train.targets}
++            ),
++        ),
++        tuple(span(i) for i in range(20, 24)),
++    )
++    kwargs: dict[str, Any] = {
++        "family": "CONSTANT",
++        "train": train,
++        "validation": validation,
++        "test": test,
++        "train_label_end_times": tuple(span(i).label_end_time for i in train_days),
++        "validation_label_end_times": tuple(span(i).label_end_time for i in range(10, 14)),
++        "validation_round_trip_costs": (D(0),) * 4,
++        "oof_predictions": oof,
++        "fit_provenance": proof,
++        "evaluation_spans": tuple(span(i) for i in range(20, 24)),
++        "registrations": (inner_registration, outer_registration),
++    }
++    result = fit_economic_filter(**kwargs)
++    assert result.mean_bias == 1 and result.forecasts[0].expected_gross_return == D("3.5")
++    assert result.oof_provenance_sha256 and result.fitted_model_provenance_sha256
++    changed: dict[str, Any] = {
++        **kwargs,
++        "test": test.model_copy(update={"targets": (999.0, -500.0, 100.0, -20.0)}),
++    }
++    assert fit_economic_filter(**changed) == result
++    bad: dict[str, Any] = {
++        **kwargs,
++        "fit_provenance": proof.model_copy(update={"training_payload_sha256": "b" * 64}),
++    }
++    with pytest.raises(ValueError, match="actual training payload"):
++        fit_economic_filter(**bad)
++    wrong: dict[str, Any] = {
++        **kwargs,
++        "fit_provenance": proof.model_copy(update={"split_manifest_sha256": "b" * 64}),
++    }
++    with pytest.raises(ValueError, match="registered fold content"):
++        fit_economic_filter(**wrong)
++
++
++def test_fit_failure_consumes_original_registry_slot(tmp_path: Path) -> None:
++    ids = planned_fit_ids()
++    assert len(ids) == len(set(ids)) == 150
++    assert sum(item.startswith("MODEL:") for item in ids) == 144
++
++    def fail() -> None:
++        raise RuntimeError("synthetic fit failure")
++
++    with pytest.raises(RuntimeError, match="synthetic"):
++        registered_synthetic_fit_check(tmp_path, ids[0], fail)
++    with pytest.raises(FileExistsError):
++        registered_synthetic_fit_check(tmp_path, ids[0], lambda: None)
++    events = [
++        json.loads(line) for line in (tmp_path / "experiment_events.jsonl").read_text().splitlines()
++    ]
++    assert [row["event"]["event_type"] for row in events] == ["STARTED", "ERROR"]
++    assert all(row["event"]["details"]["real_model_fits"] == 0 for row in events)
++
++
++def test_synthetic_registry_wrapper_blocks_fit_before_its_body(tmp_path: Path) -> None:
++    called = False
++
++    def fit() -> None:
++        nonlocal called
++        called = True
++
++    with pytest.raises(PermissionError, match="FORBIDDEN-CALL"):
++        registered_synthetic_fit_check(tmp_path, planned_fit_ids()[0], fit)
++    assert not called
++    with pytest.raises(FileExistsError):
++        registered_synthetic_fit_check(tmp_path, planned_fit_ids()[0], lambda: None)
++
++
++def test_ml_cannot_veto_risk_reduction() -> None:
++    assert permit_ml_entry(risk_reduction=True, model_available=False, accepted=False)
++    assert not permit_ml_entry(risk_reduction=False, model_available=False, accepted=True)
++
++
++def test_episode_complete_rejected_opportunities_costs_and_maturity() -> None:
++    path = tuple(
++        PricePathObservation(
++            instrument_id="BTC",
++            event_time=at(i),
++            available_time=at(i) + timedelta(minutes=1),
++            executable_price=D(price),
++            source_dataset_id="synthetic",
++        )
++        for i, price in enumerate((100, 100, 90, 120, 110))
++    )
++    opportunities = tuple(
++        BaseOpportunity(
++            opportunity_id=f"o{i}",
++            episode_id=f"e{i}",
++            base_policy_sha256=HASH,
++            instrument_id="BTC",
++            decision_index=0,
++            exit_index=3,
++            feature_dependency_start=at(0),
++            decision_time=path[0].available_time,
++            exit_reason="RISK_EXIT",
++            exit_reason_available_time=at(2),
++            capital_committed=D(100),
++            accepted_by_ml=accepted,
++        )
++        for i, accepted in enumerate((False, True))
++    )
++    kwargs: dict[str, Any] = {
++        "opportunities": opportunities,
++        "expected_opportunity_ids": ("o0", "o1"),
++        "opportunity_set_sha256": canonical_sha256(["o0", "o1"]),
++        "observations": {"BTC": path},
++        "costs": {
++            f"o{i}": CostAssumption(
++                policy_version="frozen", long_entry_cost=D("0.01"), long_exit_cost=D("0.02")
++            )
++            for i in range(2)
++        },
++        "observed_through": at(4),
++    }
++    rows = label_base_opportunities(**kwargs)
++    assert len(rows) == 2 and rows[0].opportunity.accepted_by_ml is False
++    assert rows[0].return_path.net_return == D("0.17")
++    assert rows[0].return_path.maximum_adverse_excursion == D("-0.1")
++    assert rows[0].return_path.maximum_favorable_excursion == D("0.2")
++    assert rows[0].evidence_kind == "COUNTERFACTUAL_FROZEN_BASE"
++    assert rows[0].capital_seconds == D(100 * 2 * 86400)
++    missing: dict[str, Any] = {**kwargs, "opportunities": opportunities[1:]}
++    with pytest.raises(ValueError, match="unfiltered"):
++        label_base_opportunities(**missing)
++    early: dict[str, Any] = {**kwargs, "observed_through": at(3)}
++    with pytest.raises(ValueError, match="matured"):
++        label_base_opportunities(**early)
++
++
++def test_missing_history_never_fabricates_dsr_or_pbo() -> None:
++    result = audited_deflated_sharpe_ratio(
++        observed_sharpe=D(1),
++        observations=100,
++        skewness=D(0),
++        kurtosis=D(3),
++        trial_sharpes=None,
++        trial_ids=None,
++        complete_trial_history=False,
++        return_frequency=None,
++        kurtosis_convention=None,
++        sample_dependence=None,
++        trial_correlation_policy=None,
++        evidence_sha256=None,
++    )
++    assert result["status"] == "INSUFFICIENT" and result["probability"] is None
++    pbo = audited_probability_of_backtest_overfitting(
++        None,
++        strategy_ids=None,
++        score_id="MEAN_RETURN_V2",
++        registered_selection_score_id="MEAN_RETURN_V2",
++        complete_trial_history=False,
++    )
++    assert pbo["probability"] is None
++
++
++@pytest.mark.parametrize("score", ["MEAN_RETURN_V2", "SHARPE_PER_PERIOD_V2"])
++def test_pbo_ties_are_invariant_to_array_order_and_identical_is_unknown(score: Any) -> None:
++    matrix = tuple(((D(i), D(i + 1)), (D(i), D(i + 1)), (D(4 - i), D(2 - i))) for i in range(4))
++    kwargs: dict[str, Any] = {
++        "score_id": score,
++        "registered_selection_score_id": score,
++        "complete_trial_history": True,
++    }
++    a = audited_probability_of_backtest_overfitting(matrix, strategy_ids=("a", "b", "c"), **kwargs)
++    b = audited_probability_of_backtest_overfitting(
++        tuple(tuple(segment[i] for i in (2, 0, 1)) for segment in matrix),
++        strategy_ids=("c", "a", "b"),
++        **kwargs,
++    )
++    assert a == b
++    same = tuple(((D(i), D(i + 1)),) * 3 for i in range(4))
++    result = audited_probability_of_backtest_overfitting(
++        same, strategy_ids=("a", "b", "c"), **kwargs
++    )
++    assert result["status"] == "UNIDENTIFIABLE" and result["probability"] is None
++    with pytest.raises(ValueError, match="registered selection"):
++        audited_probability_of_backtest_overfitting(
++            matrix,
++            strategy_ids=("a", "b", "c"),
++            score_id="SHARPE_PER_PERIOD_V2",
++            registered_selection_score_id="MEAN_RETURN_V2",
++            complete_trial_history=True,
++        )
++
++
++def test_protocol_report_cannot_claim_real_results_or_enable_training() -> None:
++    config = yaml.safe_load(
++        Path("configs/research/alpha_v5_ml_contract.yaml").read_text(encoding="utf-8")
++    )
++    validate_config(config)
++    config["real_training_authorized"] = True
++    with pytest.raises(ValueError, match="NOT-AUTHORIZED"):
++        validate_config(config)
++    docs = build_documents({"b2_safety": {"strict_data_quality": "INSUFFICIENT"}})
++    assert docs["outer_metrics.json"]["rows"] is None
++    assert docs["fit_and_calibration_log.json"]["real_model_fits"] == 0
++    assert docs["candidate_freeze_draft.json"]["holdout_path"] is None
++    assert "NO_PROVEN_ALPHA" in docs["report.md"]
+--- /dev/null
++++ b/docs/research/alpha_v5_ml_contract.md
+@@ -0,0 +1,15 @@
++# B6 ML 契约
++
++入口 `python -m scripts.run_alpha_v5_walkforward --config configs/research/alpha_v5_ml_contract.yaml --preflight-dir <已核验目录>` 只生成一次独立封存的工程报告。真实研究的五项预算均为 0，未启用真实训练。旧 generation、失败日志和历史模型结果保留。
++
++`SampleSpan` 的版本化扩展记录 `feature_dependency_start`、`label_available_time`、`episode_id`。严格分割以完整闭区间执行 purge，日历分区右端不含；跨资产同一时间组、同 episode 同步剔除，所有 train/val/calibration/test 交界及测试尾部均检查。固定 bar purge 只是额外缓冲，不能替代长 episode 的真实信息尾巴。未提供新策略时保留旧序列化和分割身份；严格结果有独立契约哈希。
++
++episode ledger 从冻结的完整基础机会集生成，ID 缺失或只提供 ML 接受者报错。标签复用原生成器，记录实际可知退出原因、label 可用时间、成本、MAE/MFE 和资本秒数。输入冻结集 hash 仅证明所供记录内部一致，不证明外部机会完整；所有此路径收益是冻结基础策略的反事实，不冒充实际成交获利。
++
++OOF 预测必须绑定 purged inner-train 样本及转换器拟合 ID、标签契约、模型/数据/split hash 和时钟。禁止同 episode、同时间、特征或标签依赖交叠；转换器也只能拟合该 fold 的训练样本。`fit_economic_filter` 的严格路径接收逐条 OOF、outer fit 与测试依赖元数据，并在实际拟合前核对训练内容及模型配置。旧单验证集调用保留为历史兼容。风险减仓独立于模型可用性。
++
++三个 outer 块完整覆盖 `[2022-04-01,2025-10-01)`；inner 验证取每个 outer-train 最后九个月的三块三个月。没有真实样本时仅登记日期，purge 后实际行数、有效 episode 和独立时间块保持未知，不能用原 30 行校准门槛证明统计充分。未来 24 个基础模型 fit 加 120 个 outer 均值区块重拟合、6 个最终校准 fit 是拟议预算，当前不执行。outer 重拟合不能回填为包含其训练样本的 OOF；内层均值不确定性和额外校准没有授权预算。
++
++新 DSR wrapper 要求完整候选史、逐期 Sharpe、raw kurtosis、样本依赖依据及保留全部候选的相关性口径；不足返回 null。新 PBO wrapper 接受每分段每候选的原始逐期收益，并使用与实际预登记选择一致的均值或 Sharpe；训练并列均匀加权、测试并列 mid-rank，无法辨识不制造排名。旧统计函数留给原报告复现。
++
++合成验证不能证明真实 OOF 覆盖、经济增量或候选准入。conformal 只描述预测残差区间，不是均值置信区间，也不保证非平稳时序精确覆盖。真实 PIT、执行/组合、成熟 episode、独立块数量、全试验史和模型选择冻结仍是推进条件；最终 `NO_PROVEN_ALPHA / CASH`，四个开关关闭。

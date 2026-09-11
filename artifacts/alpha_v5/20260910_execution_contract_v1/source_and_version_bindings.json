@@ -1,0 +1,52 @@
+{
+  "generation": "alpha-r5-execution-contract-20260910-v1",
+  "head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+  "branch": "main",
+  "reads": {
+    "artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json": {
+      "sha256": "a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce",
+      "bytes": 53455,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_benchmark_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "293d3bbd5993f54e81cb9a88e3702978d6c6fcb08261406f51c8a2998b76abcb",
+      "bytes": 5218,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json": {
+      "sha256": "c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26",
+      "bytes": 1341,
+      "scope": "SAVED_CONTENT"
+    },
+    "configs/research/aegis_alpha_v5.yaml": {
+      "sha256": "c4b7a2e734168ea31385ccf0416963e2dc532cb416293710f6dd6891a8deca5c",
+      "bytes": 3236,
+      "scope": "SAVED_CONTENT"
+    },
+    "src/aegisquant/bootstrap/live_lock.py": {
+      "sha256": "e8a58bab46939635796028c9454d0c6c4acdd53b1ea3d59c38abe1ae95a70f24",
+      "bytes": 1272,
+      "scope": "SAVED_CONTENT"
+    }
+  },
+  "source_sha256": {
+    "src/aegisquant/backtest/models.py": "ba4ea17c01faba1cfbda731bcd5f56f918debe4847c9337ab7079a10916489c5",
+    "src/aegisquant/backtest/fills.py": "c59c9af68c2a81a8465d93b7d4bb699a5e276e53491b187b214883c1c5ac7190",
+    "src/aegisquant/backtest/costs.py": "63b70b2fcd7cc6a2033210363df03d5892d51476f834a549f08484bd9de287fb",
+    "src/aegisquant/portfolio/transition_costs.py": "ed10073118bf805acc74447da5cffb5baf86b495f566a2ea8ebf483b50de46c1",
+    "src/aegisquant/portfolio/optimizer.py": "05f11464c46d5bab72c286d808372b23b65ead28d7b1cb35eea3d91b84ebe44c",
+    "src/aegisquant/portfolio/models.py": "0036fc694a83f135d9d3d4d0c1b95fb939800e36008065ddccf3553061216f1f",
+    "src/aegisquant/research/validation/evidence_contract.py": "3f69c097cd8e3142dea0642101afb79d104bc5d1f0697a0e7104226eeb7ca4c7",
+    "src/aegisquant/accounting/ledger.py": "894401b189860be6afd98e20800683b9db2aaba598fbc5884aa3f46aa144794d",
+    "src/aegisquant/research/validation/execution_contract.py": "8afb50c7b251eb2a89ae24e0990bd4be9240570ea36382f3e1f4b9fe6e3b34dd",
+    "scripts/run_alpha_v5_execution_diagnostics.py": "b39d5cdb1c2f1a85acfcb179942dffd98ea6ddb8e819c2e70f206aaf8bbe778c",
+    "configs/research/alpha_v5_execution_contract.yaml": "0a5ac8929dc20db9c7e5ece3addfa91faa16d7c7da015220b13d488f45512471",
+    "tests/alpha_v5/test_execution_contract.py": "43309a6c633b3cd762cdd74bec95939694a9ecf417291ae78e9a22246aad8e31",
+    "docs/research/alpha_v5_execution_contract.md": "390693af7fd347f0209435bceb74706729cda6f5f1dda6bb5475401b1340daf4"
+  },
+  "pure_test_count": 85,
+  "check_record_count": 21,
+  "commits_created": 0,
+  "pushes": 0,
+  "branches_created": 0
+}

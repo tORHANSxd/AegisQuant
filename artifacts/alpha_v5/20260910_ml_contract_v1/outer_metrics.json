@@ -1,0 +1,19 @@
+{
+  "status": "NOT_COLLECTED",
+  "rows": null,
+  "required": [
+    "brier",
+    "log_loss",
+    "calibration",
+    "oof_coverage_width",
+    "acceptance_rate",
+    "missed_positive_opportunities",
+    "avoided_negative_opportunities",
+    "net_pnl_delta",
+    "tail_delta",
+    "same_risk_no_ml_control",
+    "constant_probability_control",
+    "holm_adjusted_outer_comparisons"
+  ],
+  "actual_outer_results": null
+}

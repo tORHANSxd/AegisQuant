@@ -1,0 +1,15 @@
+{
+  "status": "NOT_COLLECTED",
+  "rows": null,
+  "required": [
+    "model_and_transform_training_ids",
+    "full_dependency_intervals",
+    "episode_ids",
+    "training_payload_hash",
+    "split_hash",
+    "model_hash",
+    "label_contract_hash",
+    "fit_and_prediction_clocks"
+  ],
+  "future_outer_refits_in_inner_oof": "FORBIDDEN"
+}

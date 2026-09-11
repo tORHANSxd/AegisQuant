@@ -1,0 +1,18 @@
+{
+  "source_manifest": "artifacts/alpha_v5/20260910_saved_evidence_v1/OUTPUT_MANIFEST.json",
+  "status": "V1_COST_GROUP_LABELS_SUPERSEDED_BY_V2",
+  "defect": "V1_ROW_COST_AMOUNT_OVERWROTE_COST_SCENARIO_TAG",
+  "affected": [
+    "run_summary_cost_tag",
+    "fill_join_cost_tag",
+    "ordinary_fill_count_groups"
+  ],
+  "unaffected": [
+    "original_source_bytes",
+    "per_run_ledger_mtm_checks",
+    "twelve_tail_groups"
+  ],
+  "repair": "COST_SCENARIO_IN_COST_AND_MONEY_IN_PAID_COST_WITH_COLLISION_REJECTION",
+  "prior_output_preserved": true,
+  "new_strategy_or_significance_calculations": false
+}

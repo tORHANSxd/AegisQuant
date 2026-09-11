@@ -1,0 +1,102 @@
+{
+  "gaps": [
+    {
+      "item": "README_FIRST.md",
+      "status": "NOT_RECEIVED",
+      "reason": "Not supplied in this workspace; no package verification claimed."
+    },
+    {
+      "item": "VERSION_MAP.json",
+      "status": "NOT_RECEIVED",
+      "reason": "Not supplied in this workspace; no package verification claimed."
+    },
+    {
+      "item": "FULL_EVIDENCE_REFERENCE.json",
+      "status": "NOT_RECEIVED",
+      "reason": "Not supplied in this workspace; no package verification claimed."
+    },
+    {
+      "item": "changes_since_github_main.patch",
+      "status": "NOT_RECEIVED",
+      "reason": "Not supplied in this workspace; no package verification claimed."
+    },
+    {
+      "item": "compact MANIFEST/readable CSV",
+      "status": "NOT_RECEIVED",
+      "reason": "Not supplied in this workspace; no package verification claimed."
+    },
+    {
+      "item": "AegisQuant_Review_20260909.zip",
+      "status": "NOT_RECEIVED",
+      "reason": "Not supplied in this workspace; no package verification claimed."
+    },
+    {
+      "item": "recent G1 trial",
+      "status": "NOT_COLLECTED",
+      "reason": "Frozen recent arms contain F3, not G1; no such G1 experiment was executed."
+    },
+    {
+      "item": "real historical fees/rules/L2/latency",
+      "status": "NOT_COLLECTED",
+      "reason": "Current execution is explicitly a proxy."
+    },
+    {
+      "item": "real PIT universe",
+      "status": "NOT_COLLECTED",
+      "reason": "Fixed surviving five assets; PIT tests are synthetic."
+    },
+    {
+      "item": "complete independent trial history",
+      "status": "NOT_COLLECTED",
+      "reason": "Global history remains incomplete; DSR/PBO and trial count stay null."
+    },
+    {
+      "item": "unused >=12 month final holdout",
+      "status": "NOT_COLLECTED",
+      "reason": "NOT_ALLOCATED; protected paths were not opened."
+    },
+    {
+      "item": "raw/smoothed/proposed conflicts",
+      "status": "NOT_VERIFIED",
+      "reason": "Saved raw result/trace hashes exist, but original ledger reconstruction and complete semantic fields are not verified.",
+      "required_hash_inventory": "resize_semantics_cases.json#original_trace_inventory"
+    },
+    {
+      "item": "gate funnel over ALL decisions",
+      "status": "NOT_VERIFIED",
+      "reason": "Saved raw result/trace hashes exist, but original ledger reconstruction and complete semantic fields are not verified.",
+      "required_hash_inventory": "resize_semantics_cases.json#original_trace_inventory"
+    },
+    {
+      "item": "review/submission/fill clocks and pending/refusal joins",
+      "status": "NOT_VERIFIED",
+      "reason": "Saved raw result/trace hashes exist, but original ledger reconstruction and complete semantic fields are not verified.",
+      "required_hash_inventory": "resize_semantics_cases.json#original_trace_inventory"
+    },
+    {
+      "item": "second rounding",
+      "status": "NOT_VERIFIED",
+      "reason": "Saved raw result/trace hashes exist, but original ledger reconstruction and complete semantic fields are not verified.",
+      "required_hash_inventory": "resize_semantics_cases.json#original_trace_inventory"
+    },
+    {
+      "item": "ALL indicators warmup after gaps",
+      "status": "NOT_VERIFIED",
+      "reason": "Saved raw result/trace hashes exist, but original ledger reconstruction and complete semantic fields are not verified.",
+      "required_hash_inventory": "resize_semantics_cases.json#original_trace_inventory"
+    },
+    {
+      "item": "hard exits and pending reconciliation",
+      "status": "NOT_VERIFIED",
+      "reason": "Saved raw result/trace hashes exist, but original ledger reconstruction and complete semantic fields are not verified.",
+      "required_hash_inventory": "resize_semantics_cases.json#original_trace_inventory"
+    },
+    {
+      "item": "per-asset inventory and common shock for ALL worst 5% four-hour windows",
+      "status": "NOT_VERIFIED",
+      "reason": "Saved raw result/trace hashes exist, but original ledger reconstruction and complete semantic fields are not verified.",
+      "required_hash_inventory": "resize_semantics_cases.json#original_trace_inventory"
+    }
+  ],
+  "full_raw_bundle_received": false
+}

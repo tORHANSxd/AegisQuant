@@ -1,0 +1,116 @@
+{
+  "schema_version": "immutable-evidence-output-v1",
+  "files": {
+    "arithmetic_audit.json": {
+      "sha256": "c3338458c6f1986bb98a0dea260b970259200424670ff70f655a5400bea314a9",
+      "bytes": 88447
+    },
+    "changed_files.json": {
+      "sha256": "c4428b531921ae0bbe3d605679b3d7419a490960cc261423ccba8c7d9bbcb6bc",
+      "bytes": 2157
+    },
+    "changes_this_batch.patch": {
+      "sha256": "fbb0830376c486907dfb1ccf8909b34e2d9960459847a994c53893c5c666a8eb",
+      "bytes": 128250
+    },
+    "cost_mode_audit.json": {
+      "sha256": "70cff69763f6f75c52554d1fafebbf061cce6370a4327cb369b1ff11c3b65c3e",
+      "bytes": 11735
+    },
+    "evidence_contract.json": {
+      "sha256": "696be552a769b21f63cf0bf488feacd767d90958682126fae0b6fdf104fb9724",
+      "bytes": 298112
+    },
+    "evidence_gaps.json": {
+      "sha256": "2e38d1a9928577f454809fcc6de7faba6455da5096175833b0d78a6fa77659a2",
+      "bytes": 4207
+    },
+    "experiment_events.jsonl": {
+      "sha256": "9100454028a642459f43ec7317fc2550ce6e95bdc78f228dbb8fa89fe16aa257",
+      "bytes": 908
+    },
+    "failure_history_index.json": {
+      "sha256": "0c4ace5b683bf4714acf9e9457fd64891a75d48ec8d6e1ac2ca4a83b9534acee",
+      "bytes": 181959
+    },
+    "preflight/baseline_workspace.json": {
+      "sha256": "d0a38317bd5114b2c12375653b268c29ad9e553787fcb9b94d6c3cfd3fefcf7f",
+      "bytes": 2582616
+    },
+    "preflight/remote_main.txt": {
+      "sha256": "0b58c0fb478b617b351befa9ac220abd799098fb35d62d38cc25c1c5117d987d",
+      "bytes": 57
+    },
+    "preflight/version_graph.txt": {
+      "sha256": "d65e81a0e8f99859ddbdc10a2a7d456d1bffd9c59afef7014037c94408b44c37",
+      "bytes": 3003
+    },
+    "preflight/workspace_before.patch": {
+      "sha256": "63a09e19da1acb480bee11b56d180e6a815a77ce812cf5517e4341ba3d6c0e91",
+      "bytes": 37657
+    },
+    "preregistration.json": {
+      "sha256": "28c27d3e6a459b04eeb54ee9e435ce7e0c3fe230e2be60ae0ec2ffa7e62312cc",
+      "bytes": 3838
+    },
+    "readable/r5_daily_equity_utc.csv": {
+      "sha256": "30d40274e991325384f6a98eb485b35900be5f999ddb50601e6d9ff0329aa8c2",
+      "bytes": 3027500
+    },
+    "readable/r5_execution_reason_summary.csv": {
+      "sha256": "95fa3bf6d1679b3b457a7c7407c0bdd53c808a648e01256f251845b6a1ebc249",
+      "bytes": 2058
+    },
+    "readable/r5_quarterly_returns.csv": {
+      "sha256": "54685fa3ca0113e5182146a441b78d06886a4495fb32b621ebf112d618d2ff35",
+      "bytes": 15735
+    },
+    "report.md": {
+      "sha256": "3393d30b9fff2c5d17aed4480d99c621b1f44b82812f5fc241e2aa42f96fc9d6",
+      "bytes": 5123
+    },
+    "resize_semantics_cases.json": {
+      "sha256": "999d1a2e340e11c1fe3c7469e53d3e34507e47044b92b72584f80b4af3bcb6a5",
+      "bytes": 67579
+    },
+    "run_claims/cc14522c5e2e59522855768102076bf5e608a9a932df7928525fe9792e714120": {
+      "sha256": "cc14522c5e2e59522855768102076bf5e608a9a932df7928525fe9792e714120",
+      "bytes": 43
+    },
+    "safety_and_budget_audit.json": {
+      "sha256": "084c021454e4a2424d2f0923df6cfb64b174c378f288336c8ed32312c72961e7",
+      "bytes": 2561
+    },
+    "source_and_version_bindings.json": {
+      "sha256": "c51bf00550d577921ddf07d1c95f7b6bddc96d72882e125a249a3511806c6a1a",
+      "bytes": 1301
+    },
+    "sources/AegisQuant_Compact_Arithmetic_Audit_20260909.json": {
+      "sha256": "3cd9a7fafc60b703112a92fe172ce373633d647302277af1c5345c541d4aa5de",
+      "bytes": 10452
+    },
+    "sources/paired_statistics.json": {
+      "sha256": "c0eaf857759fa4d0a1bddc495a66e2ee56c5b59f001187efa60242d6ce597024",
+      "bytes": 3237
+    },
+    "sources/root_cause_audit.json": {
+      "sha256": "38da863e6e5996f71d2a98b1f0111f0cec900d599d58fea7541492c603dfac80",
+      "bytes": 25171
+    },
+    "statistics_identity.json": {
+      "sha256": "b4e06361c7581840134dca902b30fcaf522515aa3f2fd40a642a74ae28c9eea8",
+      "bytes": 9553
+    },
+    "validation/test_commands_and_results.txt": {
+      "sha256": "bbf107c93c7139f7c81f7ed10352a769fe6d5b754cdfbe37a860520050b95960",
+      "bytes": 74487
+    },
+    "validation/validation_records.json": {
+      "sha256": "a19a52ea5801ca763dc9049e1b335ec5e284c2fdcf425f91018e79a87d8f7faa",
+      "bytes": 79698
+    }
+  },
+  "content_sha256": "79af42b29f312e7bc06ce994d5068511cc28c971e2cc5635197c5f16e2220ac3",
+  "self_excluded": "OUTPUT_MANIFEST.json",
+  "write_policy": "EXCLUSIVE_GENERATION_NO_REOPEN"
+}

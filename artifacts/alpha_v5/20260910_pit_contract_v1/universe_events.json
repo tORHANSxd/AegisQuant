@@ -1,0 +1,180 @@
+{
+  "status": "NOT_RECEIVED",
+  "schema": {
+    "$defs": {
+      "MembershipEvidence": {
+        "additionalProperties": false,
+        "description": "A business event identity is stable across revisions; a symbol is not a UID.",
+        "properties": {
+          "event_id": {
+            "minLength": 1,
+            "title": "Event Id",
+            "type": "string"
+          },
+          "symbol": {
+            "minLength": 1,
+            "title": "Symbol",
+            "type": "string"
+          },
+          "venue": {
+            "minLength": 1,
+            "title": "Venue",
+            "type": "string"
+          },
+          "event_kind": {
+            "enum": [
+              "LISTED",
+              "TRADING_STARTED",
+              "SUSPENDED",
+              "RESUMED",
+              "DELISTED",
+              "MIGRATED",
+              "RELISTED",
+              "SYMBOL_CHANGED",
+              "QUOTE_CHANGED"
+            ],
+            "title": "Event Kind",
+            "type": "string"
+          },
+          "source_published_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Published At"
+          },
+          "first_observed_at": {
+            "format": "date-time",
+            "title": "First Observed At",
+            "type": "string"
+          },
+          "availability_evidence_kind": {
+            "enum": [
+              "ARCHIVED_PUBLICATION",
+              "OBSERVED_AT_RECEIPT",
+              "UNKNOWN",
+              "SYNTHETIC"
+            ],
+            "title": "Availability Evidence Kind",
+            "type": "string"
+          },
+          "source_sha256": {
+            "title": "Source Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "event_id",
+          "symbol",
+          "venue",
+          "event_kind",
+          "source_published_at",
+          "first_observed_at",
+          "availability_evidence_kind",
+          "source_sha256"
+        ],
+        "title": "MembershipEvidence",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "membership_id": {
+        "title": "Membership Id",
+        "type": "string"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "eligible": {
+        "title": "Eligible",
+        "type": "boolean"
+      },
+      "effective_from": {
+        "format": "date-time",
+        "title": "Effective From",
+        "type": "string"
+      },
+      "effective_to": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Effective To"
+      },
+      "available_time": {
+        "format": "date-time",
+        "title": "Available Time",
+        "type": "string"
+      },
+      "revision_time": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Revision Time"
+      },
+      "revision": {
+        "title": "Revision",
+        "type": "integer"
+      },
+      "reason_codes": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Reason Codes",
+        "type": "array"
+      },
+      "source_dataset_id": {
+        "title": "Source Dataset Id",
+        "type": "string"
+      },
+      "evidence": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/MembershipEvidence"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "required": [
+      "membership_id",
+      "instrument_id",
+      "eligible",
+      "effective_from",
+      "available_time",
+      "revision",
+      "reason_codes",
+      "source_dataset_id"
+    ],
+    "title": "UniverseMembership",
+    "type": "object"
+  },
+  "source": {
+    "path": null,
+    "sha256": null
+  },
+  "records": null
+}

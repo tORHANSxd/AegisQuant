@@ -1,0 +1,1747 @@
+COMMAND: [".venv/Scripts/python.exe", "-m", "ruff", "format", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+7 files reformatted
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "ruff", "check", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 1
+RUF043 Pattern passed to `match=` contains metacharacters but is neither escaped nor raw
+   --> tests\alpha_v5\test_holdout_contract.py:514:47
+    |
+513 |     monkeypatch.setattr(Path, "open", no_data_open)
+514 |     with pytest.raises(PermissionError, match="LINEAGE|DERIVATION"):
+    |                                               ^^^^^^^^^^^^^^^^^^^^
+515 |         checked_development_path(tmp_path, path, **kwargs)
+    |
+help: Use a raw string or `re.escape()` to make the intention explicit
+
+Found 1 error.
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "ruff", "format", "--check", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+7 files already formatted
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "pyright", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 1
+d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\holdout.py
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\holdout.py:96:13 - error: Argument of type "dict[str, Any]" cannot be assigned to parameter "value" of type "str | bool" in function "__setitem__"
+    Type "dict[str, Any]" is not assignable to type "str | bool"
+      "dict[str, Any]" is not assignable to "str"
+      "dict[str, Any]" is not assignable to "bool" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\holdout.py:130:9 - error: Argument of type "dict[str, Any]" cannot be assigned to parameter "value" of type "str | bool" in function "__setitem__"
+    Type "dict[str, Any]" is not assignable to type "str | bool"
+      "dict[str, Any]" is not assignable to "str"
+      "dict[str, Any]" is not assignable to "bool" (reportArgumentType)
+d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\holdout_contract.py
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\holdout_contract.py:66:16 - error: Type of "as_posix" is unknown (reportUnknownMemberType)
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\holdout_contract.py:66:41 - error: Cannot access attribute "as_posix" for class "str"
+    Attribute "as_posix" is unknown (reportAttributeAccessIssue)
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\holdout_contract.py:68:12 - error: Type of "parts" is unknown (reportUnknownMemberType)
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\holdout_contract.py:68:58 - error: Cannot access attribute "parts" for class "str"
+    Attribute "parts" is unknown (reportAttributeAccessIssue)
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\holdout_contract.py:156:8 - error: Condition will always evaluate to True since the types "set[str]" and "frozenset[str]" have no overlap (reportUnnecessaryComparison)
+d:\Personal\Quantitative_Trading\tests\alpha_v5\test_holdout_contract.py
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_holdout_contract.py:142:26 - error: Type of parameter "raw" is unknown (reportUnknownLambdaType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_holdout_contract.py:142:31 - error: Type of "decode" is unknown (reportUnknownMemberType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_holdout_contract.py:142:31 - error: Return type of lambda is unknown (reportUnknownLambdaType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_holdout_contract.py:460:33 - error: Argument type is partially unknown
+    Argument corresponds to parameter "value" in function "setattr"
+    Argument type is "(path: Unknown) -> (Unknown | bool)" (reportUnknownArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_holdout_contract.py:460:40 - error: Type of parameter "path" is unknown (reportUnknownLambdaType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_holdout_contract.py:460:46 - error: Return type of lambda, "Unknown | bool", is partially unknown (reportUnknownLambdaType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_holdout_contract.py:460:89 - error: Argument type is unknown
+    Argument corresponds to parameter "self" in function "is_symlink" (reportUnknownArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_holdout_contract.py:511:16 - error: Return type is unknown (reportUnknownVariableType)
+d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:24:16 - error: Return type is unknown (reportUnknownVariableType)
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:25:15 - error: Argument of type "Any | datetime | ((data: bytes) -> str) | None" cannot be assigned to parameter "directory" of type "Path" in function "open_persistent_holdout"
+    Type "Any | datetime | ((data: bytes) -> str) | None" is not assignable to type "Path"
+      "datetime" is not assignable to "Path" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:25:15 - error: Argument of type "Any | datetime | ((data: bytes) -> str) | None" cannot be assigned to parameter "manifest" of type "ResearchFreezeManifest | None" in function "open_persistent_holdout"
+    Type "Any | datetime | ((data: bytes) -> str) | None" is not assignable to type "ResearchFreezeManifest | None"
+      Type "datetime" is not assignable to type "ResearchFreezeManifest | None"
+        "datetime" is not assignable to "ResearchFreezeManifest"
+        "datetime" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:25:15 - error: Argument of type "Any | datetime | ((data: bytes) -> str) | None" cannot be assigned to parameter "expected_dataset_sha256" of type "str" in function "open_persistent_holdout"
+    Type "Any | datetime | ((data: bytes) -> str) | None" is not assignable to type "str"
+      "datetime" is not assignable to "str" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:25:15 - error: Argument of type "Any | datetime | ((data: bytes) -> str) | None" cannot be assigned to parameter "holdout_start" of type "datetime" in function "open_persistent_holdout"
+    Type "Any | datetime | ((data: bytes) -> str) | None" is not assignable to type "datetime"
+      "None" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:25:15 - error: Argument of type "Any | datetime | ((data: bytes) -> str) | None" cannot be assigned to parameter "holdout_end" of type "datetime" in function "open_persistent_holdout"
+    Type "Any | datetime | ((data: bytes) -> str) | None" is not assignable to type "datetime"
+      "None" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:25:15 - error: Argument of type "Any | datetime | ((data: bytes) -> str) | None" cannot be assigned to parameter "previously_used_through" of type "datetime" in function "open_persistent_holdout"
+    Type "Any | datetime | ((data: bytes) -> str) | None" is not assignable to type "datetime"
+      "None" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:25:15 - error: Argument of type "Any | datetime | ((data: bytes) -> str) | None" cannot be assigned to parameter "loader" of type "(bytes) -> T@open_persistent_holdout" in function "open_persistent_holdout"
+    Type "Any | datetime | ((data: bytes) -> str) | None" is not assignable to type "(bytes) -> T@open_persistent_holdout"
+      Type "datetime" is not assignable to type "(bytes) -> T@open_persistent_holdout" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:25:15 - error: Argument of type "Any | datetime | ((data: bytes) -> str) | None" cannot be assigned to parameter "accessed_at" of type "datetime" in function "open_persistent_holdout"
+    Type "Any | datetime | ((data: bytes) -> str) | None" is not assignable to type "datetime"
+      "None" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\integration\test_walkforward_holdout_firewall.py:25:15 - error: Argument of type "Any | datetime | ((data: bytes) -> str) | None" cannot be assigned to parameter "authorization" of type "HoldoutAccessAuthorization | None" in function "open_persistent_holdout"
+    Type "Any | datetime | ((data: bytes) -> str) | None" is not assignable to type "HoldoutAccessAuthorization | None"
+      Type "datetime" is not assignable to type "HoldoutAccessAuthorization | None"
+        "datetime" is not assignable to "HoldoutAccessAuthorization"
+        "datetime" is not assignable to "None" (reportArgumentType)
+25 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "pytest", "-q", "-p", "no:cacheprovider", "--basetemp", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b7-holdout-20260910-uxoa0hv5/pytest-01", "--junitxml", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b7-holdout-20260910-uxoa0hv5/pytest-01.xml", "tests/alpha_v5/test_holdout_contract.py", "tests/integration/test_walkforward_holdout_firewall.py", "tests/research/test_holdout.py", "tests/alpha_v5/test_ml_contract.py", "tests/alpha_v5/test_research_guards.py::test_development_guard_rejects_holdout_before_any_open", "tests/alpha_v5/test_research_guards.py::test_unknown_and_changed_development_bytes_fail_closed", "tests/alpha_v5/test_research_guards.py::test_failed_experiment_remains_consumed_and_unregistered_run_cannot_start"]
+EXIT: 1
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF..F..........................             [100%]
+================================== FAILURES ===================================
+____ test_preaccess_rejections_do_not_open_data_or_consume_claim[unfrozen] ____
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020590C555B0>
+problem = 'unfrozen'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+___ test_preaccess_rejections_do_not_open_data_or_consume_claim[wrong_hash] ___
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020590C550F0>
+problem = 'wrong_hash'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+_____ test_preaccess_rejections_do_not_open_data_or_consume_claim[short] ______
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205883EC830>
+problem = 'short'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+______ test_preaccess_rejections_do_not_open_data_or_consume_claim[used] ______
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002058829E360>
+problem = 'used'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+_ test_preaccess_rejections_do_not_open_data_or_consume_claim[unknown_source] _
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002058829EBE0>
+problem = 'unknown_source'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+__ test_preaccess_rejections_do_not_open_data_or_consume_claim[seen_source] ___
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020588279A50>
+problem = 'seen_source'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+__ test_preaccess_rejections_do_not_open_data_or_consume_claim[source_tail] ___
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020588279E50>
+problem = 'source_tail'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+_ test_preaccess_rejections_do_not_open_data_or_consume_claim[narrow_source] __
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n7')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020588223B60>
+problem = 'narrow_source'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+__ test_preaccess_rejections_do_not_open_data_or_consume_claim[wrong_anchor] __
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020588223D40>
+problem = 'wrong_anchor'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+_ test_preaccess_rejections_do_not_open_data_or_consume_claim[missing_extension] _
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n9')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002058857E430>
+problem = 'missing_extension'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+_ test_preaccess_rejections_do_not_open_data_or_consume_claim[future_authority] _
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_preaccess_rejections_do_n10')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002058857D390>
+problem = 'future_authority'
+
+    @pytest.mark.parametrize(
+        "problem",
+        [
+            "unfrozen",
+            "wrong_hash",
+            "short",
+            "used",
+            "unknown_source",
+            "seen_source",
+            "source_tail",
+            "narrow_source",
+            "wrong_anchor",
+            "missing_extension",
+            "future_authority",
+        ],
+    )
+    def test_preaccess_rejections_do_not_open_data_or_consume_claim(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+______ test_claim_is_durable_before_data_read_and_decoder_cannot_reread _______
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_claim_is_durable_before_d0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205885A9CC0>
+
+    def test_claim_is_durable_before_data_read_and_decoder_cannot_reread(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+>       kwargs, _, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:243: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+_____________ test_failures_consume_claim_without_retry[decoder] ______________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_failures_consume_claim_wi0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205884B1550>
+failure = 'decoder'
+
+    @pytest.mark.parametrize("failure", ["decoder", "read_missing", "wrong_bytes", "claim_fsync"])
+    def test_failures_consume_claim_without_retry(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
+    ) -> None:
+>       kwargs, _, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:276: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+___________ test_failures_consume_claim_without_retry[read_missing] ___________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_failures_consume_claim_wi1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205884B1C10>
+failure = 'read_missing'
+
+    @pytest.mark.parametrize("failure", ["decoder", "read_missing", "wrong_bytes", "claim_fsync"])
+    def test_failures_consume_claim_without_retry(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
+    ) -> None:
+>       kwargs, _, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:276: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+___________ test_failures_consume_claim_without_retry[wrong_bytes] ____________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_failures_consume_claim_wi2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002058847F330>
+failure = 'wrong_bytes'
+
+    @pytest.mark.parametrize("failure", ["decoder", "read_missing", "wrong_bytes", "claim_fsync"])
+    def test_failures_consume_claim_without_retry(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
+    ) -> None:
+>       kwargs, _, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:276: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+___________ test_failures_consume_claim_without_retry[claim_fsync] ____________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_failures_consume_claim_wi3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002058847F6A0>
+failure = 'claim_fsync'
+
+    @pytest.mark.parametrize("failure", ["decoder", "read_missing", "wrong_bytes", "claim_fsync"])
+    def test_failures_consume_claim_without_retry(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
+    ) -> None:
+>       kwargs, _, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:276: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+___ test_rename_alias_new_generation_and_new_candidate_share_claim_and_log ____
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_rename_alias_new_generati0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205884AB7F0>
+
+    def test_rename_alias_new_generation_and_new_candidate_share_claim_and_log(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:320: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+_____________ test_deleting_only_claim_does_not_reset_consumption _____________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_deleting_only_claim_does_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205884ABD90>
+
+    def test_deleting_only_claim_does_not_reset_consumption(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+>       kwargs, _, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:368: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+________ test_missing_or_corrupt_storage_is_not_reinitialized[missing] ________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_missing_or_corrupt_storag0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205884CA690>
+problem = 'missing'
+
+    @pytest.mark.parametrize("problem", ["missing", "corrupt", "wrong_genesis", "stale_lock"])
+    def test_missing_or_corrupt_storage_is_not_reinitialized(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:381: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+________ test_missing_or_corrupt_storage_is_not_reinitialized[corrupt] ________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_missing_or_corrupt_storag1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205884F41D0>
+problem = 'corrupt'
+
+    @pytest.mark.parametrize("problem", ["missing", "corrupt", "wrong_genesis", "stale_lock"])
+    def test_missing_or_corrupt_storage_is_not_reinitialized(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:381: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+_____ test_missing_or_corrupt_storage_is_not_reinitialized[wrong_genesis] _____
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_missing_or_corrupt_storag2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205884F6450>
+problem = 'wrong_genesis'
+
+    @pytest.mark.parametrize("problem", ["missing", "corrupt", "wrong_genesis", "stale_lock"])
+    def test_missing_or_corrupt_storage_is_not_reinitialized(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:381: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+______ test_missing_or_corrupt_storage_is_not_reinitialized[stale_lock] _______
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_missing_or_corrupt_storag3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205884DB3F0>
+problem = 'stale_lock'
+
+    @pytest.mark.parametrize("problem", ["missing", "corrupt", "wrong_genesis", "stale_lock"])
+    def test_missing_or_corrupt_storage_is_not_reinitialized(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
+    ) -> None:
+>       kwargs, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:381: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+________________ test_concurrent_calls_allow_only_one_decoder _________________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_concurrent_calls_allow_on0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205885130E0>
+
+    def test_concurrent_calls_allow_only_one_decoder(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+>       kwargs, _, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+______ test_read_firewall_blocks_raw_cache_feature_and_hardlink_aliases _______
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_read_firewall_blocks_raw_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020588511F60>
+
+    def test_read_firewall_blocks_raw_cache_feature_and_hardlink_aliases(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+>       _, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:429: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+__________ test_symlink_alias_and_reparse_registration_are_rejected ___________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_symlink_alias_and_reparse0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020588510280>
+record_property = <function record_property.<locals>.append_property at 0x00000205A92EAE80>
+
+    def test_symlink_alias_and_reparse_registration_are_rejected(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, record_property: Any
+    ) -> None:
+>       kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:449: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+____ test_development_cannot_read_holdout_copies_or_derived_features[copy] ____
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_development_cannot_read_h0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205885150F0>
+kind = 'copy'
+
+    @pytest.mark.parametrize("kind", ["copy", "preview", "feature", "unknown"])
+    def test_development_cannot_read_holdout_copies_or_derived_features(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, kind: str
+    ) -> None:
+>       _, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:489: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+__ test_development_cannot_read_holdout_copies_or_derived_features[preview] ___
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_development_cannot_read_h1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205885120B0>
+kind = 'preview'
+
+    @pytest.mark.parametrize("kind", ["copy", "preview", "feature", "unknown"])
+    def test_development_cannot_read_holdout_copies_or_derived_features(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, kind: str
+    ) -> None:
+>       _, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:489: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+__ test_development_cannot_read_holdout_copies_or_derived_features[feature] ___
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_development_cannot_read_h2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205884DB7E0>
+kind = 'feature'
+
+    @pytest.mark.parametrize("kind", ["copy", "preview", "feature", "unknown"])
+    def test_development_cannot_read_holdout_copies_or_derived_features(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, kind: str
+    ) -> None:
+>       _, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:489: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+__ test_development_cannot_read_holdout_copies_or_derived_features[unknown] ___
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_development_cannot_read_h3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020588517850>
+kind = 'unknown'
+
+    @pytest.mark.parametrize("kind", ["copy", "preview", "feature", "unknown"])
+    def test_development_cannot_read_holdout_copies_or_derived_features(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, kind: str
+    ) -> None:
+>       _, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:489: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+__ test_independent_development_source_remains_usable_with_complete_lineage ___
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_independent_development_s0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020588515630>
+
+    def test_independent_development_source_remains_usable_with_complete_lineage(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+>       _, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:521: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+__ test_legacy_freeze_hash_is_stable_and_extended_hash_binds_every_component __
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_legacy_freeze_hash_is_sta0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000205885177E0>
+
+    def test_legacy_freeze_hash_is_stable_and_extended_hash_binds_every_component(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+>       kwargs, _, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_holdout_contract.py:545: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+________ test_durable_firewall_denies_unfrozen_used_and_second_access _________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-01/test_durable_firewall_denies_u0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020588517690>
+
+    def test_durable_firewall_denies_unfrozen_used_and_second_access(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+>       kwargs, _, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_walkforward_holdout_firewall.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\alpha_v5\test_holdout_contract.py:103: in prepare_synthetic_holdout
+    dataset=HoldoutDataSeal(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = HoldoutDataSeal(semantic_dataset_id='synthetic:one-dataset', dataset_sha256='85d47cb84b848d0ec7223266b20991510a8e8601b...029c3289eb58059e955626',), derived_artifact_hashes=(), verification_note='SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION')
+
+    @model_validator(mode="after")
+    def validate_seal(self) -> HoldoutDataSeal:
+        for digest in (
+            self.dataset_sha256,
+            self.unused_and_coverage_evidence_sha256,
+            *self.lineage_source_hashes,
+            *self.derived_artifact_hashes,
+        ):
+            ensure_sha256(digest, field_name="sealed data evidence")
+        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
+            self.lineage_source_hashes
+        ):
+            raise ValueError("sealed data requires unique source lineage hashes")
+        for name in (self.sealed_relative_path, *self.registered_aliases):
+>           if safe_relative_path(name).as_posix() != name:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'str' object has no attribute 'as_posix'
+
+src\aegisquant\research\validation\holdout_contract.py:66: AttributeError
+============================== warnings summary ===============================
+tests/alpha_v5/test_holdout_contract.py::test_symlink_alias_and_reparse_registration_are_rejected
+  tests\alpha_v5\test_holdout_contract.py:446: PytestWarning: record_property is incompatible with junit_family 'xunit2' (use 'legacy' or 'xunit1')
+    def test_symlink_alias_and_reparse_registration_are_rejected(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[unfrozen]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[wrong_hash]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[short]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[used]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[unknown_source]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[seen_source]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[source_tail]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[narrow_source]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[wrong_anchor]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[missing_extension]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_preaccess_rejections_do_not_open_data_or_consume_claim[future_authority]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_claim_is_durable_before_data_read_and_decoder_cannot_reread
+FAILED tests/alpha_v5/test_holdout_contract.py::test_failures_consume_claim_without_retry[decoder]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_failures_consume_claim_without_retry[read_missing]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_failures_consume_claim_without_retry[wrong_bytes]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_failures_consume_claim_without_retry[claim_fsync]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_rename_alias_new_generation_and_new_candidate_share_claim_and_log
+FAILED tests/alpha_v5/test_holdout_contract.py::test_deleting_only_claim_does_not_reset_consumption
+FAILED tests/alpha_v5/test_holdout_contract.py::test_missing_or_corrupt_storage_is_not_reinitialized[missing]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_missing_or_corrupt_storage_is_not_reinitialized[corrupt]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_missing_or_corrupt_storage_is_not_reinitialized[wrong_genesis]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_missing_or_corrupt_storage_is_not_reinitialized[stale_lock]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_concurrent_calls_allow_only_one_decoder
+FAILED tests/alpha_v5/test_holdout_contract.py::test_read_firewall_blocks_raw_cache_feature_and_hardlink_aliases
+FAILED tests/alpha_v5/test_holdout_contract.py::test_symlink_alias_and_reparse_registration_are_rejected
+FAILED tests/alpha_v5/test_holdout_contract.py::test_development_cannot_read_holdout_copies_or_derived_features[copy]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_development_cannot_read_holdout_copies_or_derived_features[preview]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_development_cannot_read_holdout_copies_or_derived_features[feature]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_development_cannot_read_holdout_copies_or_derived_features[unknown]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_independent_development_source_remains_usable_with_complete_lineage
+FAILED tests/alpha_v5/test_holdout_contract.py::test_legacy_freeze_hash_is_stable_and_extended_hash_binds_every_component
+FAILED tests/integration/test_walkforward_holdout_firewall.py::test_durable_firewall_denies_unfrozen_used_and_second_access
+32 failed, 28 passed, 1 warning in 5.90s
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "ruff", "format", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+3 files reformatted, 4 files left unchanged
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "ruff", "check", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+All checks passed!
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "ruff", "format", "--check", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+7 files already formatted
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "pyright", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "pytest", "-q", "-p", "no:cacheprovider", "--basetemp", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b7-holdout-20260910-uxoa0hv5/pytest-02", "--junitxml", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b7-holdout-20260910-uxoa0hv5/pytest-02.xml", "tests/alpha_v5/test_holdout_contract.py", "tests/integration/test_walkforward_holdout_firewall.py", "tests/research/test_holdout.py", "tests/alpha_v5/test_ml_contract.py", "tests/alpha_v5/test_research_guards.py::test_development_guard_rejects_holdout_before_any_open", "tests/alpha_v5/test_research_guards.py::test_unknown_and_changed_development_bytes_fail_closed", "tests/alpha_v5/test_research_guards.py::test_failed_experiment_remains_consumed_and_unregistered_run_cannot_start"]
+EXIT: 1
+....................F.............F.............................         [100%]
+================================== FAILURES ===================================
+_ test_durability_failures_keep_lock_until_independent_storage_review[terminal_fsync] _
+
+descriptor = 11
+
+    def broken_fsync(descriptor: int) -> None:
+        nonlocal calls
+        calls += 1
+        if calls >= first_failure:
+>           raise OSError("synthetic durability failure")
+E           OSError: synthetic durability failure
+
+tests\alpha_v5\test_holdout_contract.py:398: OSError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-02/test_durability_failures_keep_3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021693A8BB50>
+failure = 'terminal_fsync'
+
+    @pytest.mark.parametrize("failure", ["lock_write", "lock_fsync", "start_fsync", "terminal_fsync"])
+    def test_durability_failures_keep_lock_until_independent_storage_review(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
+    ) -> None:
+        kwargs, _, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
+        original_read = Path.read_bytes
+        reads: list[Path] = []
+    
+        def watched(path: Path) -> bytes:
+            if path == data:
+                reads.append(path)
+            return original_read(path)
+    
+        monkeypatch.setattr(Path, "read_bytes", watched)
+        if failure == "lock_write":
+    
+            def broken_write(_: int, __: bytes) -> int:
+                raise OSError("synthetic lock write failure")
+    
+            monkeypatch.setattr(os, "write", broken_write)
+        else:
+            fsync = os.fsync
+            calls = 0
+            first_failure = {"lock_fsync": 1, "start_fsync": 2, "terminal_fsync": 4}[failure]
+    
+            def broken_fsync(descriptor: int) -> None:
+                nonlocal calls
+                calls += 1
+                if calls >= first_failure:
+                    raise OSError("synthetic durability failure")
+                fsync(descriptor)
+    
+            monkeypatch.setattr(os, "fsync", broken_fsync)
+        with pytest.raises(OSError):
+>           open_persistent_holdout(**kwargs)
+
+tests\alpha_v5\test_holdout_contract.py:403: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\aegisquant\research\validation\persistent_holdout.py:326: in open_persistent_holdout
+    _append_access_event(
+src\aegisquant\research\validation\persistent_holdout.py:171: in _append_access_event
+    journal.append(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <aegisquant.research.experiments.journal.ExperimentEventJournal object at 0x00000216934B1540>
+event = ExperimentEvent(event_id='FINAL-ACCESS:91e026d5-e938-45db-8f2c-6ac2b9149784:ERROR', run_id='FINAL-ACCESS:91e026d5-e938... 'candidate-1', 'claim_consumed': True, 'orders_authorized': False, 'reason': 'OSError: synthetic durability failure'})
+
+    def append(self, event: ExperimentEvent) -> ExperimentEventEntry:
+        entries = self.entries()
+        history = tuple(item.event for item in entries if item.event.run_id == event.run_id)
+        if any(item.event_id == event.event_id for item in history):
+            raise ValueError("AQ-EXPERIMENT-EVENT-ID-DUPLICATE")
+        if not history and event.event_type is not ExperimentEventType.STARTED:
+            raise ValueError("AQ-EXPERIMENT-TERMINAL-WITHOUT-START")
+        if history and history[-1].event_type in TERMINAL_EVENTS:
+>           raise ValueError("AQ-EXPERIMENT-RUN-ALREADY-TERMINAL")
+E           ValueError: AQ-EXPERIMENT-RUN-ALREADY-TERMINAL
+
+src\aegisquant\research\experiments\journal.py:103: ValueError
+__ test_legacy_freeze_hash_is_stable_and_extended_hash_binds_every_component __
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b7-holdout-20260910-uxoa0hv5/pytest-02/test_legacy_freeze_hash_is_sta0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021693C97850>
+
+    def test_legacy_freeze_hash_is_stable_and_extended_hash_binds_every_component(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        kwargs, _, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+        extended: ResearchFreezeManifest = kwargs["manifest"]
+        payload = extended.model_dump(mode="json", exclude={"freeze_id", "admission_extension"})
+>       legacy = ResearchFreezeManifest.model_validate_json(
+            json.dumps({**payload, "freeze_id": canonical_sha256(payload)})
+        )
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for ResearchFreezeManifest
+E         Value error, freeze_id must equal canonical manifest hash [type=value_error, input_value={'dataset_sha256': '85d47...8413420d0e20c62de43604'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/value_error
+
+tests\alpha_v5\test_holdout_contract.py:596: ValidationError
+============================== warnings summary ===============================
+tests/alpha_v5/test_holdout_contract.py::test_symlink_alias_and_reparse_registration_are_rejected
+  tests\alpha_v5\test_holdout_contract.py:492: PytestWarning: record_property is incompatible with junit_family 'xunit2' (use 'legacy' or 'xunit1')
+    def test_symlink_alias_and_reparse_registration_are_rejected(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/alpha_v5/test_holdout_contract.py::test_durability_failures_keep_lock_until_independent_storage_review[terminal_fsync]
+FAILED tests/alpha_v5/test_holdout_contract.py::test_legacy_freeze_hash_is_stable_and_extended_hash_binds_every_component
+2 failed, 62 passed, 1 warning in 4.42s
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "ruff", "format", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+7 files left unchanged
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "ruff", "check", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+All checks passed!
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "ruff", "format", "--check", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+7 files already formatted
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "pyright", "src/aegisquant/research/validation/persistent_holdout.py", "src/aegisquant/research/validation/holdout.py", "src/aegisquant/research/validation/experiment_registry.py", "tests/integration/test_walkforward_holdout_firewall.py", "src/aegisquant/research/validation/holdout_contract.py", "scripts/run_alpha_v5_final_holdout.py", "tests/alpha_v5/test_holdout_contract.py"]
+EXIT: 0
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+
+COMMAND: [".venv/Scripts/python.exe", "-m", "pytest", "-q", "-p", "no:cacheprovider", "-o", "junit_family=xunit1", "--basetemp", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b7-holdout-20260910-uxoa0hv5/pytest-03", "--junitxml", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b7-holdout-20260910-uxoa0hv5/pytest-03.xml", "tests/alpha_v5/test_holdout_contract.py", "tests/integration/test_walkforward_holdout_firewall.py", "tests/research/test_holdout.py", "tests/alpha_v5/test_ml_contract.py", "tests/alpha_v5/test_research_guards.py::test_development_guard_rejects_holdout_before_any_open", "tests/alpha_v5/test_research_guards.py::test_unknown_and_changed_development_bytes_fail_closed", "tests/alpha_v5/test_research_guards.py::test_failed_experiment_remains_consumed_and_unregistered_run_cannot_start"]
+EXIT: 0
+................................................................         [100%]
+64 passed in 4.10s
+

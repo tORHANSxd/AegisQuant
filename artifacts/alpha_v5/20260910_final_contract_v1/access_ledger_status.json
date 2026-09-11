@@ -1,0 +1,11 @@
+{
+  "status": "NO_REAL_ACCESS_REGISTRY_CREATED",
+  "actual_data_access_ledger": null,
+  "fixed_anchor_relative_path": "state/final_holdout_anchor.json",
+  "fixed_claim_relative_path": "state/final_holdout_access_claim.json",
+  "fixed_shared_journal_relative_path": "state/final_holdout_access_events.jsonl",
+  "caller_directory_is_claim_key": false,
+  "candidate_and_generation_are_claim_keys": false,
+  "loader_errors_consume_claim": true,
+  "storage_limit": "APPLICATION_GATE_REQUIRES_INDEPENDENT_APPEND_ONLY_STORAGE_ATTESTATION;NOT_AN_OS_SANDBOX"
+}

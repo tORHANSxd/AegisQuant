@@ -1,0 +1,6 @@
+{
+  "status": "NOT_COLLECTED",
+  "rows": null,
+  "cluster_limit_semantics": "GROSS_EXPOSURE_NOT_VARIANCE_SHARE",
+  "zero_variance_share": null
+}

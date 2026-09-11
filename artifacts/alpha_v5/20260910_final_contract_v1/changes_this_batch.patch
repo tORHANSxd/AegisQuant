@@ -1,0 +1,1730 @@
+--- a/src/aegisquant/research/validation/persistent_holdout.py
++++ b/src/aegisquant/research/validation/persistent_holdout.py
+@@ -2,13 +2,181 @@
+ 
+ from __future__ import annotations
+ 
+-import json
+-from collections.abc import Callable
++import hashlib
++import os
++import stat
++import sys
++from collections.abc import Callable, Generator
++from contextlib import contextmanager
++from contextvars import ContextVar
+ from datetime import datetime
+ from pathlib import Path
+-
++from typing import Any
++from uuid import uuid4
++
++from aegisquant.data.hashing import canonical_json_bytes, canonical_sha256, safe_relative_path
++from aegisquant.research.experiments.journal import (
++    ExperimentEvent,
++    ExperimentEventJournal,
++    ExperimentEventType,
++)
+ from aegisquant.research.validation.calendar_walkforward import add_months
+-from aegisquant.research.validation.holdout import ResearchFreezeManifest
++from aegisquant.research.validation.holdout import FinalHoldoutVault, ResearchFreezeManifest
++from aegisquant.research.validation.holdout_contract import (
++    ACCESS_JOURNAL_PATH,
++    ACCESS_LOCK_PATH,
++    ANCHOR_PATH,
++    CLAIM_PATH,
++    HoldoutAccessAuthorization,
++    HoldoutProjectAnchor,
++)
++
++# A caller's candidate/output directory never selects access storage. Tests replace
++# this constant with a temporary synthetic project; production has no root override.
++PROJECT_ROOT = Path(__file__).resolve().parents[4]
++_claimed_reader_path: ContextVar[Path | None] = ContextVar(
++    "aegis_claimed_reader_path", default=None
++)
++
++
++def _project_path(relative: str) -> Path:
++    root = PROJECT_ROOT.absolute()
++    if root.resolve() != root:
++        raise PermissionError("AQ-HOLDOUT-PROJECT-ROOT-ALIAS")
++    path = root / safe_relative_path(relative)
++    for part in (root, *path.parents, path):
++        if not part.is_relative_to(root):
++            continue
++        if part.is_symlink() or (
++            part.exists()
++            and getattr(part.lstat(), "st_file_attributes", 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT
++        ):
++            raise PermissionError("AQ-HOLDOUT-REPARSE-PATH-FORBIDDEN")
++    if not path.resolve().is_relative_to(root):
++        raise PermissionError("AQ-HOLDOUT-PATH-OUTSIDE-PROJECT")
++    return path
++
++
++def _read_anchor(authority: HoldoutAccessAuthorization) -> HoldoutProjectAnchor:
++    path = _project_path(ANCHOR_PATH)
++    if not path.is_file():
++        raise PermissionError("AQ-HOLDOUT-ANCHOR-NOT-REGISTERED")
++    anchor = HoldoutProjectAnchor.model_validate_json(path.read_bytes())
++    if (
++        anchor.anchor_sha256 != authority.anchor_sha256
++        or anchor.project_id != authority.project_id
++        or anchor.freeze_id != authority.freeze_id
++        or anchor.operator_authorization_sha256 != authority.operator_authorization_sha256
++    ):
++        raise PermissionError("AQ-HOLDOUT-ANCHOR-AUTHORITY-MISMATCH")
++    return anchor
++
++
++@contextmanager
++def holdout_read_firewall(anchor: HoldoutProjectAnchor) -> Generator[None]:
++    """Application-level reads, aliases and file identities; enable before opening handles.
++
++    This does not replace OS permissions or independent append-only custody. Native
++    extensions and already-open handles must not receive sealed paths/data in research.
++    """
++    root = PROJECT_ROOT.absolute()
++    paths = tuple(
++        root / safe_relative_path(name)
++        for name in (anchor.dataset.sealed_relative_path, *anchor.dataset.registered_aliases)
++    )
++    resolved = {path.resolve() for path in paths}
++    file_ids = {
++        (row.st_dev, row.st_ino) for path in paths if path.is_file() for row in (path.stat(),)
++    }
++    active = True
++
++    def audit(event: str, args: tuple[Any, ...]) -> None:
++        if not active or event != "open" or not args:
++            return
++        value = args[0]
++        target: Path | None = None
++        identity: tuple[int, int] | None = None
++        if isinstance(value, (str, bytes)):
++            target = Path(os.fsdecode(value)).absolute().resolve()
++            if target.is_file():
++                row = target.stat()
++                identity = (row.st_dev, row.st_ino)
++        elif isinstance(value, int):
++            row = os.fstat(value)
++            identity = (row.st_dev, row.st_ino)
++        protected = target in resolved or identity in file_ids
++        if not protected:
++            return
++        mode, flags = args[1] or "", args[2] or 0
++        if any(value in mode for value in "wax+") or flags & (
++            os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND
++        ):
++            raise PermissionError("AQ-HOLDOUT-SEALED-DATA-WRITE-FORBIDDEN")
++        if target is None or target != _claimed_reader_path.get():
++            raise PermissionError("AQ-HOLDOUT-READ-OUTSIDE-CLAIMED-GATE")
++
++    sys.addaudithook(audit)
++    try:
++        yield
++    finally:
++        active = False
++
++
++def _validate_eligibility(
++    anchor: HoldoutProjectAnchor,
++    manifest: ResearchFreezeManifest,
++    authority: HoldoutAccessAuthorization,
++    *,
++    holdout_start: datetime,
++    holdout_end: datetime,
++    previously_used_through: datetime,
++    accessed_at: datetime,
++) -> None:
++    seal = anchor.dataset
++    if manifest.admission_extension is None:
++        raise PermissionError("AQ-HOLDOUT-COMPLETE-FREEZE-EXTENSION-REQUIRED")
++    if manifest.freeze_id != anchor.freeze_id or manifest.dataset_sha256 != seal.dataset_sha256:
++        raise PermissionError("AQ-HOLDOUT-FROZEN-CANDIDATE-DATA-MISMATCH")
++    if (
++        not manifest.frozen_at <= authority.authorized_at <= accessed_at
++        or not anchor.created_at <= authority.authorized_at
++        or holdout_end > accessed_at
++    ):
++        raise PermissionError("AQ-HOLDOUT-AUTHORITY-OR-DATA-NOT-YET-AVAILABLE")
++    if (holdout_start, holdout_end, previously_used_through) != (
++        seal.start,
++        seal.end_exclusive,
++        seal.previously_used_through,
++    ):
++        raise PermissionError("AQ-HOLDOUT-REGISTERED-PERIOD-MISMATCH")
++    if (
++        seal.independent_metadata_verification != "VERIFIED"
++        or seal.source_was_previously_accessed is not False
++    ):
++        raise PermissionError("AQ-HOLDOUT-UNUSED-PROVENANCE-NOT-VERIFIED")
++    if (seal.source_material_start, seal.source_material_end_exclusive) != (
++        seal.start,
++        seal.end_exclusive,
++    ):
++        raise PermissionError("AQ-HOLDOUT-SOURCE-TAIL-OR-OUTSIDE-MATERIAL-CONTAMINATION")
++
++
++def _append_access_event(
++    journal: ExperimentEventJournal,
++    run_id: str,
++    kind: ExperimentEventType,
++    accessed_at: datetime,
++    details: dict[str, Any],
++) -> None:
++    journal.append(
++        ExperimentEvent(
++            event_id=f"{run_id}:{kind.value}",
++            run_id=run_id,
++            event_type=kind,
++            recorded_at_utc=accessed_at,
++            details=details,
++        )
++    )
+ 
+ 
+ def open_persistent_holdout[T](
+@@ -19,31 +187,173 @@
+     holdout_start: datetime,
+     holdout_end: datetime,
+     previously_used_through: datetime,
+-    loader: Callable[[], T],
++    loader: Callable[[bytes], T],
+     accessed_at: datetime,
++    authorization: HoldoutAccessAuthorization | None = None,
+ ) -> T:
++    """One project-wide claim, verified sealed bytes, then the caller's frozen decoder.
++
++    No unanchored legacy access is permitted. Missing logs/anchors are never created
++    here: an independently reviewed metadata registration must precede the first read.
++    """
+     if manifest is None or manifest.frozen_at > accessed_at:
+         raise PermissionError("AQ-HOLDOUT-NOT-FROZEN")
+     if manifest.dataset_sha256 != expected_dataset_sha256:
+         raise PermissionError("AQ-HOLDOUT-DATASET-HASH-MISMATCH")
+     if holdout_start <= previously_used_through or holdout_end < add_months(holdout_start, 12):
+         raise PermissionError("AQ-HOLDOUT-NO-UNUSED-TWELVE-MONTHS")
+-    directory.mkdir(parents=True, exist_ok=True)
+-    claim = directory / "holdout_access_claim.json"
+-    payload = {
+-        "freeze_id": manifest.freeze_id,
+-        "dataset_sha256": expected_dataset_sha256,
+-        "accessed_at": accessed_at.isoformat(),
+-        "start": holdout_start.isoformat(),
+-        "end": holdout_end.isoformat(),
+-        "status": "CLAIMED_BEFORE_LOADER",
+-    }
++    if authorization is None:
++        raise PermissionError("AQ-HOLDOUT-ANCHORED-AUTHORIZATION-REQUIRED")
++    manifest = ResearchFreezeManifest.model_validate_json(manifest.model_dump_json())
++    authorization = HoldoutAccessAuthorization.model_validate_json(authorization.model_dump_json())
++    anchor = _read_anchor(authorization)
++    _validate_eligibility(
++        anchor,
++        manifest,
++        authorization,
++        holdout_start=holdout_start,
++        holdout_end=holdout_end,
++        previously_used_through=previously_used_through,
++        accessed_at=accessed_at,
++    )
++    if not directory.absolute().is_relative_to(PROJECT_ROOT.absolute()):
++        raise PermissionError("AQ-HOLDOUT-OUTPUT-DIRECTORY-OUTSIDE-PROJECT")
++    if directory.absolute() != PROJECT_ROOT.absolute():
++        _project_path(directory.absolute().relative_to(PROJECT_ROOT.absolute()).as_posix())
++    claim = _project_path(CLAIM_PATH)
++    journal_path = _project_path(ACCESS_JOURNAL_PATH)
++    if not journal_path.is_file():
++        raise PermissionError("AQ-HOLDOUT-REGISTERED-JOURNAL-MISSING-NO-RESET")
++    lock = _project_path(ACCESS_LOCK_PATH)
+     try:
+-        with claim.open("x", encoding="utf-8", newline="\n") as stream:
+-            json.dump(payload, stream, ensure_ascii=False)
+-            stream.write("\n")
++        descriptor = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+     except FileExistsError as error:
+-        raise PermissionError("AQ-HOLDOUT-ALREADY-CLAIMED") from error
+-    # A loader failure deliberately consumes access; a documented code-defect
+-    # exception requires a separately reviewed recovery, never an automatic retry.
+-    return loader()
++        raise PermissionError("AQ-HOLDOUT-ACCESS-BUSY-OR-STALE-LOCK") from error
++    lock_identity = os.fstat(descriptor)
++    release_lock = False
++    try:
++        os.write(
++            descriptor,
++            canonical_json_bytes({"anchor_sha256": anchor.anchor_sha256, "pid": os.getpid()}),
++        )
++        os.fsync(descriptor)
++        journal = ExperimentEventJournal(journal_path)
++        entries = journal.entries()
++        if (
++            not entries
++            or entries[0].entry_hash != anchor.journal_genesis_entry_sha256
++            or entries[0].event.details.get("kind") != "PROJECT_HOLDOUT_ANCHOR_GENESIS"
++        ):
++            raise PermissionError("AQ-HOLDOUT-JOURNAL-GENESIS-MISMATCH-NO-RESET")
++        if _read_anchor(authorization) != anchor:
++            raise PermissionError("AQ-HOLDOUT-ANCHOR-CHANGED")
++        run_id = f"FINAL-ACCESS:{uuid4()}"
++        details: dict[str, Any] = {
++            "anchor_sha256": anchor.anchor_sha256,
++            "semantic_dataset_id": anchor.dataset.semantic_dataset_id,
++            "freeze_id": manifest.freeze_id,
++            "generation": authorization.generation,
++            "candidate_output_directory": directory.absolute()
++            .relative_to(PROJECT_ROOT.absolute())
++            .as_posix(),
++            "claim_consumed": False,
++            "orders_authorized": False,
++        }
++        _append_access_event(journal, run_id, ExperimentEventType.STARTED, accessed_at, details)
++        consumed = False
++        terminal_event_attempted = False
++        try:
++            if claim.exists() or any(
++                entry.event.details.get("claim_consumed") is True for entry in entries
++            ):
++                raise PermissionError("AQ-HOLDOUT-ALREADY-CLAIMED")
++            payload = {
++                **details,
++                "dataset_sha256": expected_dataset_sha256,
++                "accessed_at": accessed_at.isoformat(),
++                "start": holdout_start.isoformat(),
++                "end": holdout_end.isoformat(),
++                "status": "CLAIMED_BEFORE_ANY_DATA_READ",
++                "claim_consumed": True,
++            }
++            with claim.open("xb") as stream:
++                consumed = True
++                stream.write(
++                    canonical_json_bytes({**payload, "claim_sha256": canonical_sha256(payload)})
++                )
++                stream.flush()
++                os.fsync(stream.fileno())
++
++            def read_verified() -> T:
++                path = _project_path(anchor.dataset.sealed_relative_path)
++                token = _claimed_reader_path.set(path.resolve())
++                try:
++                    data = path.read_bytes()
++                finally:
++                    _claimed_reader_path.reset(token)
++                if (
++                    len(data) != anchor.dataset.content_bytes
++                    or hashlib.sha256(data).hexdigest() != expected_dataset_sha256
++                ):
++                    raise PermissionError("AQ-HOLDOUT-LOADED-BYTES-HASH-OR-SIZE-MISMATCH")
++                return loader(data)
++
++            with holdout_read_firewall(anchor):
++                vault = FinalHoldoutVault(
++                    holdout_id=anchor.dataset.semantic_dataset_id,
++                    expected_dataset_sha256=expected_dataset_sha256,
++                    loader=read_verified,
++                )
++                vault.freeze(manifest, occurred_at=accessed_at)
++                result = vault.open_once(freeze_id=manifest.freeze_id, occurred_at=accessed_at)
++            terminal_event_attempted = True
++            _append_access_event(
++                journal,
++                run_id,
++                ExperimentEventType.SUCCEEDED,
++                accessed_at,
++                {
++                    **details,
++                    "claim_consumed": True,
++                    "loaded_bytes_sha256": expected_dataset_sha256,
++                    "vault_state": vault.state.value,
++                    "vault_audit_sha256": canonical_sha256(
++                        [entry.model_dump(mode="json") for entry in vault.audit_log()]
++                    ),
++                },
++            )
++            release_lock = True
++            return result
++        except BaseException as error:
++            # A failed terminal fsync may already have appended a terminal row.
++            # Do not append a second terminal or hide the original storage error.
++            if not terminal_event_attempted:
++                try:
++                    _append_access_event(
++                        journal,
++                        run_id,
++                        ExperimentEventType.ERROR,
++                        accessed_at,
++                        {
++                            **details,
++                            "claim_consumed": consumed,
++                            "reason": f"{type(error).__name__}: {error}",
++                        },
++                    )
++                except BaseException as journal_error:
++                    error.add_note(f"Terminal audit could not persist: {journal_error}")
++                    raise error from journal_error
++                release_lock = True
++            raise
++    finally:
++        os.close(descriptor)
++        # If a durable terminal journal entry could not be written, retain the
++        # lock and require an independent storage review; never silently retry.
++        if release_lock:
++            current_lock = lock.lstat()
++            if (current_lock.st_dev, current_lock.st_ino) != (
++                lock_identity.st_dev,
++                lock_identity.st_ino,
++            ):
++                raise PermissionError("AQ-HOLDOUT-LOCK-IDENTITY-CHANGED")
++            lock.unlink()
+--- a/src/aegisquant/research/validation/holdout.py
++++ b/src/aegisquant/research/validation/holdout.py
+@@ -4,9 +4,9 @@
+ 
+ from collections.abc import Callable
+ from enum import StrEnum
+-from typing import Literal
+-
+-from pydantic import field_validator, model_validator
++from typing import Any, Literal
++
++from pydantic import Field, field_validator, model_validator
+ 
+ from aegisquant.data.hashing import canonical_sha256, ensure_sha256
+ from aegisquant.domain.base import DomainModel
+@@ -19,6 +19,30 @@
+     LOCKED = "LOCKED"
+     FROZEN = "FROZEN"
+     OPENED = "OPENED"
++
++
++class FreezeAdmissionExtension(DomainModel):
++    """The additional v5 evidence must be frozen with the original component set."""
++
++    schema_version: Literal["freeze-admission-v2"] = "freeze-admission-v2"
++    data_lineage_sha256: str
++    risk_policy_sha256: str
++    execution_rules_sha256: str
++    capacity_policy_sha256: str
++    statistical_protocol_sha256: str
++    comparison_family_sha256: str
++    complete_trial_registry_sha256: str
++    model_weights_manifest_sha256: str
++    training_update_program_sha256: str
++    training_update_policy: Literal["NO_TEST_PERIOD_UPDATES", "FROZEN_SCHEDULE_ONLY"]
++    independent_preaccess_review_sha256: str
++
++    @model_validator(mode="after")
++    def validate_components(self) -> FreezeAdmissionExtension:
++        for key, value in self.model_dump().items():
++            if key.endswith("_sha256"):
++                ensure_sha256(value, field_name=key)
++        return self
+ 
+ 
+ class ResearchFreezeManifest(DomainModel):
+@@ -34,6 +58,9 @@
+     code_sha256: str
+     frozen_at: UtcDateTime
+     frozen: Literal[True] = True
++    admission_extension: FreezeAdmissionExtension | None = Field(
++        default=None, exclude_if=lambda v: v is None
++    )
+ 
+     @field_validator(
+         "dataset_sha256",
+@@ -52,7 +79,7 @@
+ 
+     @model_validator(mode="after")
+     def validate_freeze_id(self) -> ResearchFreezeManifest:
+-        payload = {
++        payload: dict[str, Any] = {
+             "dataset_sha256": self.dataset_sha256,
+             "feature_set_sha256": self.feature_set_sha256,
+             "label_set_sha256": self.label_set_sha256,
+@@ -65,6 +92,8 @@
+             "frozen_at": self.frozen_at.isoformat(),
+             "frozen": self.frozen,
+         }
++        if self.admission_extension is not None:
++            payload["admission_extension"] = self.admission_extension.model_dump(mode="json")
+         if self.freeze_id != canonical_sha256(payload):
+             raise ValueError("freeze_id must equal canonical manifest hash")
+         return self
+@@ -82,8 +111,9 @@
+     parameters_sha256: str,
+     code_sha256: str,
+     frozen_at: UtcDateTime,
++    admission_extension: FreezeAdmissionExtension | None = None,
+ ) -> ResearchFreezeManifest:
+-    payload = {
++    payload: dict[str, Any] = {
+         "dataset_sha256": dataset_sha256,
+         "feature_set_sha256": feature_set_sha256,
+         "label_set_sha256": label_set_sha256,
+@@ -96,6 +126,8 @@
+         "frozen_at": frozen_at.isoformat(),
+         "frozen": True,
+     }
++    if admission_extension is not None:
++        payload["admission_extension"] = admission_extension.model_dump(mode="json")
+     return ResearchFreezeManifest(
+         freeze_id=canonical_sha256(payload),
+         dataset_sha256=dataset_sha256,
+@@ -109,6 +141,7 @@
+         code_sha256=code_sha256,
+         frozen_at=frozen_at,
+         frozen=True,
++        admission_extension=admission_extension,
+     )
+ 
+ 
+--- a/src/aegisquant/research/validation/experiment_registry.py
++++ b/src/aegisquant/research/validation/experiment_registry.py
+@@ -22,9 +22,15 @@
+     *,
+     allowed_sources: Mapping[str, str],
+     protected_roots: Sequence[Path],
++    protected_source_sha256: Sequence[str] = (),
++    source_lineage: Mapping[str, Sequence[str]] | None = None,
++    lineage_complete: Mapping[str, bool] | None = None,
++    expected_holdout_anchor_sha256: str | None = None,
+ ) -> Path:
+     """Reject protected/unknown paths before opening; then bind the approved bytes."""
+     resolved = path.resolve()
++    if {part.casefold() for part in resolved.parts} & {"holdout", "final_holdout"}:
++        raise PermissionError("AQ-DEVELOPMENT-HOLDOUT-PATH-FORBIDDEN")
+     if any(resolved.is_relative_to(p.resolve()) for p in protected_roots):
+         raise PermissionError("AQ-DEVELOPMENT-HOLDOUT-PATH-FORBIDDEN")
+     if not resolved.is_relative_to(root.resolve()):
+@@ -34,6 +40,39 @@
+     if expected is None:
+         raise PermissionError("AQ-DEVELOPMENT-DATA-NOT-REGISTERED")
+     ensure_sha256(expected, field_name="development source")
++    protected_hashes = set(protected_source_sha256)
++    anchor_path = root / "state/final_holdout_anchor.json"
++    if anchor_path.exists() or expected_holdout_anchor_sha256 is not None:
++        from aegisquant.research.validation.holdout_contract import HoldoutProjectAnchor
++
++        if (
++            not anchor_path.is_file()
++            or anchor_path.is_symlink()
++            or anchor_path.resolve() != anchor_path.absolute()
++        ):
++            raise PermissionError("AQ-DEVELOPMENT-HOLDOUT-ANCHOR-MISSING-OR-ALIASED")
++        anchor = HoldoutProjectAnchor.model_validate_json(anchor_path.read_bytes())
++        if anchor.anchor_sha256 != expected_holdout_anchor_sha256:
++            raise PermissionError("AQ-DEVELOPMENT-HOLDOUT-ANCHOR-NOT-PINNED")
++        protected_hashes.update(anchor.dataset.protected_hashes)
++    if protected_hashes or source_lineage is not None or lineage_complete is not None:
++        for digest in protected_hashes:
++            ensure_sha256(digest, field_name="protected source identity")
++        names = [name for name in allowed_sources if (root / name).resolve() == resolved]
++        if (
++            len(names) != 1
++            or source_lineage is None
++            or lineage_complete is None
++            or lineage_complete.get(names[0]) is not True
++        ):
++            raise PermissionError("AQ-DEVELOPMENT-COMPLETE-SOURCE-LINEAGE-REQUIRED")
++        lineage = source_lineage.get(names[0])
++        if not lineage or expected not in lineage:
++            raise PermissionError("AQ-DEVELOPMENT-SOURCE-LINEAGE-IDENTITY-MISSING")
++        for digest in lineage:
++            ensure_sha256(digest, field_name="source lineage")
++        if protected_hashes.intersection(lineage):
++            raise PermissionError("AQ-DEVELOPMENT-HOLDOUT-DERIVATION-FORBIDDEN")
+     with resolved.open("rb") as stream:
+         actual = hashlib.file_digest(stream, "sha256").hexdigest()
+     if actual != expected:
+--- a/tests/integration/test_walkforward_holdout_firewall.py
++++ b/tests/integration/test_walkforward_holdout_firewall.py
+@@ -1,48 +1,44 @@
+ from datetime import UTC, datetime
+ from pathlib import Path
++from typing import Any
+ 
+ import pytest
+ 
+-from aegisquant.research.validation.holdout import create_freeze_manifest
+ from aegisquant.research.validation.persistent_holdout import open_persistent_holdout
++from tests.alpha_v5.test_holdout_contract import prepare_synthetic_holdout
+ 
+ 
+-def test_durable_firewall_denies_unfrozen_used_and_second_access(tmp_path: Path) -> None:
+-    now = datetime(2026, 1, 1, tzinfo=UTC)
+-    frozen = create_freeze_manifest(
+-        dataset_sha256="1" * 64,
+-        feature_set_sha256="2" * 64,
+-        label_set_sha256="3" * 64,
+-        universe_sha256="4" * 64,
+-        split_sha256="5" * 64,
+-        cost_policy_sha256="6" * 64,
+-        model_spec_sha256="7" * 64,
+-        parameters_sha256="8" * 64,
+-        code_sha256="9" * 64,
+-        frozen_at=now,
+-    )
++def test_durable_firewall_denies_unfrozen_used_and_second_access(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    kwargs, _, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
+     loaded: list[bool] = []
+ 
+-    def loader() -> str:
++    def loader(data: bytes) -> str:
++        assert data.startswith(b"SYNTHETIC ONLY")
+         loaded.append(True)
+         return "sealed data"
+ 
+-    def attempt(*, frozen_ok: bool = True, used_year: int = 2023) -> str:
+-        return open_persistent_holdout(
+-            directory=tmp_path,
+-            manifest=frozen if frozen_ok else None,
+-            expected_dataset_sha256="1" * 64,
+-            holdout_start=datetime(2025, 1, 1, tzinfo=UTC),
+-            holdout_end=now,
+-            previously_used_through=datetime(used_year, 6, 1, tzinfo=UTC),
+-            loader=loader,
+-            accessed_at=now,
+-        )
++    def attempt(
++        *, frozen_ok: bool = True, already_used: bool = False, authorized: bool = True
++    ) -> str:
++        options: dict[str, Any] = {
++            **kwargs,
++            "manifest": kwargs["manifest"] if frozen_ok else None,
++            "previously_used_through": datetime(2025, 6, 1, tzinfo=UTC)
++            if already_used
++            else kwargs["previously_used_through"],
++            "loader": loader,
++            "authorization": kwargs["authorization"] if authorized else None,
++        }
++        return open_persistent_holdout(**options)
+ 
+     with pytest.raises(PermissionError, match="NOT-FROZEN"):
+         attempt(frozen_ok=False)
+     with pytest.raises(PermissionError, match="UNUSED"):
+-        attempt(used_year=2025)
++        attempt(already_used=True)
++    with pytest.raises(PermissionError, match="AUTHORIZATION-REQUIRED"):
++        attempt(authorized=False)
+     assert not loaded
+     assert attempt() == "sealed data"
+     with pytest.raises(PermissionError, match="ALREADY-CLAIMED"):
+--- /dev/null
++++ b/src/aegisquant/research/validation/holdout_contract.py
+@@ -0,0 +1,345 @@
++"""B7 metadata, explicit access authority and independent-review handoff contracts."""
++
++from __future__ import annotations
++
++import re
++from collections.abc import Mapping
++from pathlib import PurePosixPath
++from typing import Any, Literal
++
++from pydantic import Field, model_validator
++
++from aegisquant.data.hashing import canonical_sha256, ensure_sha256, safe_relative_path
++from aegisquant.domain.base import DomainModel
++from aegisquant.domain.time import UtcDateTime
++from aegisquant.research.experiments.ledger import PromotionDecision
++from aegisquant.research.validation.evidence_contract import require
++
++FILES = (
++    "src/aegisquant/research/validation/persistent_holdout.py",
++    "src/aegisquant/research/validation/holdout.py",
++    "src/aegisquant/research/validation/experiment_registry.py",
++    "tests/integration/test_walkforward_holdout_firewall.py",
++    "src/aegisquant/research/validation/holdout_contract.py",
++    "scripts/run_alpha_v5_final_holdout.py",
++    "configs/research/alpha_v5_final_holdout_contract.yaml",
++    "tests/alpha_v5/test_holdout_contract.py",
++    "docs/research/alpha_v5_final_holdout_contract.md",
++)
++ANCHOR_PATH = "state/final_holdout_anchor.json"
++CLAIM_PATH = "state/final_holdout_access_claim.json"
++ACCESS_JOURNAL_PATH = "state/final_holdout_access_events.jsonl"
++ACCESS_LOCK_PATH = "state/final_holdout_access.lock"
++
++
++class HoldoutDataSeal(DomainModel):
++    semantic_dataset_id: str = Field(min_length=1)
++    dataset_sha256: str
++    content_bytes: int = Field(gt=0)
++    sealed_relative_path: str
++    registered_aliases: tuple[str, ...] = ()
++    start: UtcDateTime
++    end_exclusive: UtcDateTime
++    source_material_start: UtcDateTime
++    source_material_end_exclusive: UtcDateTime
++    previously_used_through: UtcDateTime
++    source_was_previously_accessed: bool | None
++    unused_and_coverage_evidence_sha256: str
++    independent_metadata_verification: Literal["VERIFIED", "UNKNOWN"]
++    lineage_source_hashes: tuple[str, ...]
++    derived_artifact_hashes: tuple[str, ...] = ()
++    verification_note: str = Field(min_length=1)
++
++    @model_validator(mode="after")
++    def validate_seal(self) -> HoldoutDataSeal:
++        for digest in (
++            self.dataset_sha256,
++            self.unused_and_coverage_evidence_sha256,
++            *self.lineage_source_hashes,
++            *self.derived_artifact_hashes,
++        ):
++            ensure_sha256(digest, field_name="sealed data evidence")
++        if not self.lineage_source_hashes or len(set(self.lineage_source_hashes)) != len(
++            self.lineage_source_hashes
++        ):
++            raise ValueError("sealed data requires unique source lineage hashes")
++        for name in (self.sealed_relative_path, *self.registered_aliases):
++            if safe_relative_path(name) != name:
++                raise ValueError("sealed paths must be normalized relative paths")
++        if PurePosixPath(safe_relative_path(self.sealed_relative_path)).parts[:2] != (
++            "data",
++            "final_holdout",
++        ):
++            raise ValueError("sealed data must use the protected final_holdout data root")
++        if (
++            not self.semantic_dataset_id.strip()
++            or self.semantic_dataset_id != self.semantic_dataset_id.strip()
++        ):
++            raise ValueError("semantic dataset identity cannot be blank or padded")
++        if (
++            not self.start < self.end_exclusive
++            or not self.source_material_start < self.source_material_end_exclusive
++        ):
++            raise ValueError("invalid sealed data interval")
++        return self
++
++    @property
++    def protected_hashes(self) -> frozenset[str]:
++        return frozenset(
++            (self.dataset_sha256, *self.lineage_source_hashes, *self.derived_artifact_hashes)
++        )
++
++
++class HoldoutProjectAnchor(DomainModel):
++    schema_version: Literal["aegis-project-holdout-anchor-v1"] = "aegis-project-holdout-anchor-v1"
++    project_id: str = Field(min_length=1)
++    dataset: HoldoutDataSeal
++    freeze_id: str
++    operator_authorization_sha256: str
++    journal_genesis_entry_sha256: str
++    independent_storage_attestation_sha256: str
++    created_at: UtcDateTime
++    maximum_data_claims: Literal[1] = 1
++    approved_purpose: Literal["ONE_FINAL_EVALUATION_FROZEN_COMPARISON_FAMILY"] = (
++        "ONE_FINAL_EVALUATION_FROZEN_COMPARISON_FAMILY"
++    )
++
++    @model_validator(mode="after")
++    def validate_hashes(self) -> HoldoutProjectAnchor:
++        for digest in (
++            self.freeze_id,
++            self.operator_authorization_sha256,
++            self.journal_genesis_entry_sha256,
++            self.independent_storage_attestation_sha256,
++        ):
++            ensure_sha256(digest, field_name="project anchor")
++        return self
++
++    @property
++    def anchor_sha256(self) -> str:
++        return canonical_sha256(self.model_dump(mode="json"))
++
++
++class HoldoutAccessAuthorization(DomainModel):
++    """An explicit, separately approved authority record; metadata is not self-authorization."""
++
++    project_id: str = Field(min_length=1)
++    anchor_sha256: str
++    freeze_id: str
++    operator_authorization_sha256: str
++    generation: str = Field(min_length=1)
++    authorized_at: UtcDateTime
++    purpose: Literal["FINAL_EVALUATION"] = "FINAL_EVALUATION"
++    allow_data_read: Literal[True] = True
++
++    @model_validator(mode="after")
++    def validate_hashes(self) -> HoldoutAccessAuthorization:
++        for digest in (self.anchor_sha256, self.freeze_id, self.operator_authorization_sha256):
++            ensure_sha256(digest, field_name="holdout authority")
++        return self
++
++
++FINAL_GATE_NAMES = frozenset(
++    {
++        "original_profitability_and_stability_gates",
++        "holm_corrected_incremental_evidence",
++        "same_risk_no_ml_and_cash_comparisons",
++        "verified_pit_data_and_complete_trials",
++        "execution_and_capacity",
++        "funded_shared_ledger_and_tail_risk",
++        "frozen_model_weights_and_update_program",
++        "unused_twelve_month_claim_and_immutable_report",
++    }
++)
++
++
++def independent_review_handoff(
++    gates: Mapping[str, bool | None], *, immutable_report_sha256: str | None
++) -> dict[str, Any]:
++    """Even a complete pass can only request independent review, never promote or trade."""
++    if frozenset(gates) != FINAL_GATE_NAMES:
++        raise ValueError("final evaluation must retain every frozen gate")
++    if immutable_report_sha256 is not None:
++        ensure_sha256(immutable_report_sha256, field_name="immutable final report")
++    ready = all(value is True for value in gates.values()) and immutable_report_sha256 is not None
++    return {
++        "promotion_decision": PromotionDecision.HOLD
++        if ready or any(value is None for value in gates.values())
++        else PromotionDecision.REJECT,
++        "status": "INDEPENDENT_REVIEW_REQUIRED" if ready else "NO_PROVEN_ALPHA",
++        "gates": dict(gates),
++        "immutable_report_sha256": immutable_report_sha256,
++        "independent_review_completed": False,
++        "production_policy": "CASH",
++        "production_ml_enabled": False,
++        "paper_trading_admitted": False,
++        "live_trading": False,
++        "order_submission_enabled": False,
++    }
++
++
++def validate_config(config: Mapping[str, Any]) -> None:
++    match = re.fullmatch(r"alpha-r5-final-contract-(\d{8})-v([1-9]\d*)", config["generation"])
++    require(match is not None, "AQ-FINAL-CONTRACT-GENERATION")
++    if match is None:
++        return
++    require(
++        config["output"] == f"artifacts/alpha_v5/{match[1]}_final_contract_v{match[2]}",
++        "AQ-FINAL-CONTRACT-OUTPUT",
++    )
++    require(
++        config["schema_version"] == "aegis-final-contract-b7-v1"
++        and config["scope"] == "B7_ANCHORED_FIREWALL_AND_SYNTHETIC_CONTRACT_TESTS",
++        "AQ-FINAL-CONTRACT-SCOPE",
++    )
++    require(
++        all(
++            config[key] is None
++            for key in (
++                "eligible_unused_dataset",
++                "actual_project_anchor",
++                "actual_freeze_manifest",
++                "actual_access_authorization",
++            )
++        ),
++        "AQ-FINAL-CONTRACT-REAL-INPUTS-NOT-AUTHORIZED",
++    )
++    require(
++        config["future_access_budget"]
++        == {
++            "unique_data_claims": 1,
++            "authorized_now": 0,
++            "failure_consumes_claim": True,
++            "generation_reset_allowed": False,
++        },
++        "AQ-FINAL-CONTRACT-ACCESS-BUDGET",
++    )
++
++
++def build_documents(sources: dict[str, Any]) -> Mapping[str, Any]:
++    gates = dict.fromkeys(FINAL_GATE_NAMES, None)
++    batches = [
++        {
++            "batch": "B0/B1",
++            "engineering": "COMPLETED",
++            "pure_tests": 48,
++            "real_evidence": "RAW_BUNDLES_AND_TRACES_INCOMPLETE",
++        },
++        {
++            "batch": "B2",
++            "engineering": "COMPLETED",
++            "pure_tests": 49,
++            "real_evidence": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE",
++            "quality_jobs": 1,
++        },
++        {
++            "batch": "B3",
++            "engineering": "COMPLETED",
++            "pure_tests": 44,
++            "real_evidence": "MATRIX_AND_INCREMENTAL_STATISTICS_NOT_COLLECTED",
++        },
++        {
++            "batch": "B4",
++            "engineering": "COMPLETED",
++            "pure_tests": 85,
++            "real_evidence": "EXECUTION_CALIBRATION_NOT_COLLECTED",
++        },
++        {
++            "batch": "B5",
++            "engineering": "COMPLETED",
++            "pure_tests": 100,
++            "real_evidence": "JOINT_PORTFOLIO_REPLAYS_NOT_COLLECTED",
++        },
++        {
++            "batch": "B6",
++            "engineering": "COMPLETED",
++            "pure_tests": 48,
++            "real_evidence": "REAL_FITS_AND_OUTER_RESULTS_NOT_COLLECTED",
++        },
++        {
++            "batch": "B7",
++            "engineering": "CONTRACT_REPORT_WITH_SOURCE_BOUND_TEST_RECEIPTS",
++            "pure_tests": "SEE_SOURCE_AND_VERSION_BINDINGS",
++            "real_evidence": "NO_ELIGIBLE_HOLDOUT_OR_INDEPENDENT_ADMISSION_REVIEW",
++        },
++    ]
++    return {
++        "holdout_eligibility.json": {
++            "status": "NO_ELIGIBLE_UNUSED_TWELVE_MONTH_DATASET",
++            "dataset": None,
++            "actual_anchor": None,
++            "actual_freeze": None,
++            "actual_authorization": None,
++            "actual_content_accesses": 0,
++            "actual_data_claims": 0,
++            "minimum_months": 12,
++            "pit_quality": sources["b2_safety"]["strict_data_quality"],
++        },
++        "access_ledger_status.json": {
++            "status": "NO_REAL_ACCESS_REGISTRY_CREATED",
++            "actual_data_access_ledger": None,
++            "fixed_anchor_relative_path": ANCHOR_PATH,
++            "fixed_claim_relative_path": CLAIM_PATH,
++            "fixed_shared_journal_relative_path": ACCESS_JOURNAL_PATH,
++            "caller_directory_is_claim_key": False,
++            "candidate_and_generation_are_claim_keys": False,
++            "loader_errors_consume_claim": True,
++            "storage_limit": "APPLICATION_GATE_REQUIRES_INDEPENDENT_APPEND_ONLY_STORAGE_ATTESTATION;NOT_AN_OS_SANDBOX",
++        },
++        "freeze_component_contract.json": {
++            "status": "NOT_ELIGIBLE",
++            "candidate": None,
++            "original_components_preserved": True,
++            "additional_components": [
++                "data_lineage",
++                "risk",
++                "rules",
++                "capacity",
++                "statistics",
++                "comparison_family",
++                "complete_trials",
++                "weights",
++                "training_update_program",
++                "independent_preaccess_review",
++            ],
++            "missing_extension_blocks_read": True,
++        },
++        "independent_review.json": independent_review_handoff(gates, immutable_report_sha256=None),
++        "all_batches_status.json": {
++            "batches": batches,
++            "test_counts_are_per_batch_and_overlap": True,
++            "research_conclusion": "NO_PROVEN_ALPHA",
++            "authorized_engineering_scope": "B0_THROUGH_B7",
++            "real_research_acceptance": "NOT_COMPLETED_MISSING_DATA_AND_SEPARATE_AUTHORIZATION",
++            "live_or_order_authorization": False,
++        },
++        "evidence_gaps.json": {
++            "gaps": [
++                "UNMODIFIED_RAW_BUNDLE_AND_TRACE_LINKAGE",
++                "REAL_PIT_UNIVERSE_AND_LIQUIDITY_RULES",
++                "EXECUTION_FEE_DEPTH_LATENCY_CALIBRATION",
++                "JOINT_SHARED_CASH_REPLAY",
++                "MATURE_UNFILTERED_EPISODES_AND_COMPLETE_TRIAL_HISTORY",
++                "SEPARATE_REAL_REPLAY_FIT_AUTHORIZATION",
++                "UNUSED_CONTINUOUS_TWELVE_MONTH_HOLDOUT",
++                "INDEPENDENT_STORAGE_AND_ADMISSION_REVIEW",
++            ],
++            "unknown_history": "UNKNOWN_NOT_ZERO",
++            "failure_or_uncertainty": "NO_PROVEN_ALPHA",
++            "holdout_repair_and_retry": "FORBIDDEN",
++        },
++        "report.md": """# B7 一次性留出契约与整改工程交付
++
++**NO_PROVEN_ALPHA / CASH；ML、纸面准入、实盘、订单全部关闭。**
++
++本批为最后的工程契约：全项目使用同一个固定位置的 claim 和共享访问日志，候选、路径和 generation 不产生新次数。已有入口在读取前核验项目锚点、明确授权、完整冻结、数据身份和未使用十二个月条件；无锚点、无扩展冻结、未知来源或已用源尾部都拒绝。claim 以 exclusive create 和 fsync 落盘后才允许读取，loader 异常、内容 hash/长度不符仍消耗 claim；缺失或损坏已有日志不能自动初始化新次数。
++
++读取范围守卫覆盖声明的原始、别名及派生数据；开发加载器按登记的 hash/完整血缘拒绝缓存、预览和特征间接引用。应用级守卫不能替代操作系统权限或独立不可回滚存储；真实准入仍要求独立存储证明。当前没有创建真实锚点，也没有读取、预览或 hash 真实最终留出内容，所有访问测试仅使用临时合成文件。
++
++原冻结 manifest 增加版本化的风险、规则、容量、统计、比较族、试验史、模型权重、定期更新程序和独立预审绑定。即使未来所有门槛通过，也只交独立准入评审，不自动改模型别名或打开订单。失败、不确定、读取异常都不能回到同一留出改特征再试。
++
++B0/B1 至 B7 的当前授权工程与必要合成验证已依次交付，各批原始失败记录和封存证据保留，详见 all_batches_status.json 与各自 manifest。每批测试数量有重叠，不能相加当作独立测试总数。本批精确检查数量见 source_and_version_bindings.json。
++
++完整研究验收尚未完成：真实 PIT、费用/规则/盘口/延迟、共享现金历史回放、成熟机会及全试验史、真实 OOF/outer 和未使用留出仍缺证据或后批授权。现有已用历史不能改名为最终留出。当前历史策略回放、真实收益模型拟合、真实校准拟合、最终留出读取和实盘订单五项累计新增均为 0。
++""",
++    }
+--- /dev/null
++++ b/scripts/run_alpha_v5_final_holdout.py
+@@ -0,0 +1,42 @@
++"""B7 protocol/eligibility report only; no real final-holdout reader is dispatched."""
++
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import yaml
++
++from aegisquant.research.validation.evidence_contract import (
++    checked_path,
++    run_zero_research_contract,
++)
++from aegisquant.research.validation.holdout_contract import FILES, build_documents, validate_config
++from scripts.export_alpha_v4_audit_bundle import git
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--config", required=True, type=Path)
++    parser.add_argument("--preflight-dir", required=True, type=Path)
++    args = parser.parse_args()
++    config = yaml.safe_load(checked_path(ROOT, args.config.as_posix()).read_text(encoding="utf-8"))
++    validate_config(config)
++    output = run_zero_research_contract(
++        root=ROOT,
++        config=config,
++        stage=args.preflight_dir,
++        git_state={
++            "head": git(ROOT, "rev-parse", "HEAD"),
++            "branch": git(ROOT, "branch", "--show-current"),
++        },
++        files=FILES,
++        build_documents=build_documents,
++    )
++    print(f"B7 final protocol: {output}; eligible holdout absent, actual accesses zero", flush=True)
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/configs/research/alpha_v5_final_holdout_contract.yaml
+@@ -0,0 +1,53 @@
++schema_version: aegis-final-contract-b7-v1
++generation: alpha-r5-final-contract-20260910-v1
++output: artifacts/alpha_v5/20260910_final_contract_v1
++scope: B7_ANCHORED_FIREWALL_AND_SYNTHETIC_CONTRACT_TESTS
++branch_required: main
++source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
++budgets:
++  contract_jobs: 1
++  historical_strategy_engine_runs: 0
++  real_return_model_fits: 0
++  real_calibration_fits: 0
++  final_holdout_accesses: 0
++  real_orders: 0
++sources:
++  r5_manifest:
++    path: artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json
++    sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
++  b0_manifest:
++    path: artifacts/alpha_v5/20260909_review_contract_v2/OUTPUT_MANIFEST.json
++    sha256: fccc6e6a60185811d37b4e8a40a7772da3209b46e95ea15e83cfef9d39519edf
++  b2_manifest:
++    path: artifacts/alpha_v5/20260910_pit_contract_v1/OUTPUT_MANIFEST.json
++    sha256: fd01dd906c5d096842a9c3a278a6bd8612fa15a609c31f179678820c7e130c52
++  b3_manifest:
++    path: artifacts/alpha_v5/20260910_benchmark_contract_v1/OUTPUT_MANIFEST.json
++    sha256: 293d3bbd5993f54e81cb9a88e3702978d6c6fcb08261406f51c8a2998b76abcb
++  b4_manifest:
++    path: artifacts/alpha_v5/20260910_execution_contract_v1/OUTPUT_MANIFEST.json
++    sha256: bc4687a0c6e5c9ae76d1021a69d769d22fb7699ef566c8cf495c10afa02023d3
++  b5_manifest:
++    path: artifacts/alpha_v5/20260910_portfolio_contract_v1/OUTPUT_MANIFEST.json
++    sha256: 405d950315e256ddf954ccda49468effb0334da8c03e361f6c9433b921b81f84
++  b6_manifest:
++    path: artifacts/alpha_v5/20260910_ml_contract_v1/OUTPUT_MANIFEST.json
++    sha256: d28c6840587de3ef30e5d7972ace4b5213b5123fd5a4a37c62c2f4273ea85b76
++  b2_safety:
++    path: artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json
++    sha256: c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26
++eligible_unused_dataset: null
++actual_project_anchor: null
++actual_freeze_manifest: null
++actual_access_authorization: null
++future_access_budget:
++  unique_data_claims: 1
++  authorized_now: 0
++  failure_consumes_claim: true
++  generation_reset_allowed: false
++research_conclusion: NO_PROVEN_ALPHA
++production_policy: CASH
++production_ml_enabled: false
++paper_trading_admitted: false
++live_trading: false
++order_submission_enabled: false
+--- /dev/null
++++ b/tests/alpha_v5/test_holdout_contract.py
+@@ -0,0 +1,643 @@
++from __future__ import annotations
++
++import hashlib
++import json
++import os
++from concurrent.futures import ThreadPoolExecutor
++from datetime import UTC, datetime, timedelta
++from pathlib import Path
++from threading import Event
++from typing import IO, Any, cast
++
++import pytest
++import yaml
++
++from aegisquant.data.hashing import canonical_sha256
++from aegisquant.research.experiments.journal import (
++    ExperimentEvent,
++    ExperimentEventJournal,
++    ExperimentEventType,
++)
++from aegisquant.research.validation.experiment_registry import checked_development_path
++from aegisquant.research.validation.holdout import (
++    FreezeAdmissionExtension,
++    ResearchFreezeManifest,
++    create_freeze_manifest,
++)
++from aegisquant.research.validation.holdout_contract import (
++    ACCESS_JOURNAL_PATH,
++    ACCESS_LOCK_PATH,
++    ANCHOR_PATH,
++    CLAIM_PATH,
++    FINAL_GATE_NAMES,
++    HoldoutAccessAuthorization,
++    HoldoutDataSeal,
++    HoldoutProjectAnchor,
++    build_documents,
++    independent_review_handoff,
++    validate_config,
++)
++from aegisquant.research.validation.persistent_holdout import (
++    holdout_read_firewall,
++    open_persistent_holdout,
++)
++
++NOW = datetime(2026, 2, 1, tzinfo=UTC)
++START = datetime(2025, 1, 1, tzinfo=UTC)
++END = datetime(2026, 1, 1, tzinfo=UTC)
++HASH = "a" * 64
++
++
++def prepare_synthetic_holdout(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> tuple[dict[str, Any], HoldoutProjectAnchor, Path]:
++    """No market data: metadata truth flags only simulate a future reviewed registration."""
++    monkeypatch.setattr("aegisquant.research.validation.persistent_holdout.PROJECT_ROOT", tmp_path)
++    payload = b"SYNTHETIC ONLY: neither market observations nor unused data evidence.\n"
++    data = tmp_path / "data/final_holdout/sealed.bin"
++    data.parent.mkdir(parents=True)
++    data.write_bytes(payload)
++    digest = hashlib.sha256(payload).hexdigest()
++    extension = FreezeAdmissionExtension(
++        data_lineage_sha256=HASH,
++        risk_policy_sha256=HASH,
++        execution_rules_sha256=HASH,
++        capacity_policy_sha256=HASH,
++        statistical_protocol_sha256=HASH,
++        comparison_family_sha256=HASH,
++        complete_trial_registry_sha256=HASH,
++        model_weights_manifest_sha256=HASH,
++        training_update_program_sha256=HASH,
++        training_update_policy="NO_TEST_PERIOD_UPDATES",
++        independent_preaccess_review_sha256=HASH,
++    )
++    frozen = create_freeze_manifest(
++        dataset_sha256=digest,
++        feature_set_sha256=HASH,
++        label_set_sha256=HASH,
++        universe_sha256=HASH,
++        split_sha256=HASH,
++        cost_policy_sha256=HASH,
++        model_spec_sha256=HASH,
++        parameters_sha256=HASH,
++        code_sha256=HASH,
++        frozen_at=NOW - timedelta(days=2),
++        admission_extension=extension,
++    )
++    journal_path = tmp_path / ACCESS_JOURNAL_PATH
++    genesis = ExperimentEventJournal(journal_path).append(
++        ExperimentEvent(
++            event_id="synthetic-project:GENESIS",
++            run_id="synthetic-project:GENESIS",
++            event_type=ExperimentEventType.STARTED,
++            recorded_at_utc=NOW - timedelta(days=1),
++            details={
++                "kind": "PROJECT_HOLDOUT_ANCHOR_GENESIS",
++                "claim_consumed": False,
++                "evidence_kind": "SYNTHETIC_METADATA_ONLY",
++            },
++        )
++    )
++    anchor = HoldoutProjectAnchor(
++        project_id="synthetic-project",
++        dataset=HoldoutDataSeal(
++            semantic_dataset_id="synthetic:one-dataset",
++            dataset_sha256=digest,
++            content_bytes=len(payload),
++            sealed_relative_path=data.relative_to(tmp_path).as_posix(),
++            registered_aliases=("data/cache-preview.bin", "data/features.bin"),
++            start=START,
++            end_exclusive=END,
++            source_material_start=START,
++            source_material_end_exclusive=END,
++            previously_used_through=datetime(2024, 12, 1, tzinfo=UTC),
++            source_was_previously_accessed=False,
++            unused_and_coverage_evidence_sha256=HASH,
++            independent_metadata_verification="VERIFIED",
++            lineage_source_hashes=(digest,),
++            verification_note="SYNTHETIC_NOT_REAL_INDEPENDENT_VERIFICATION",
++        ),
++        freeze_id=frozen.freeze_id,
++        operator_authorization_sha256=HASH,
++        journal_genesis_entry_sha256=genesis.entry_hash,
++        independent_storage_attestation_sha256=HASH,
++        created_at=NOW - timedelta(days=1),
++    )
++    (tmp_path / ANCHOR_PATH).write_text(anchor.model_dump_json(), encoding="utf-8")
++    authority = HoldoutAccessAuthorization(
++        project_id=anchor.project_id,
++        anchor_sha256=anchor.anchor_sha256,
++        freeze_id=frozen.freeze_id,
++        operator_authorization_sha256=HASH,
++        generation="synthetic-generation-1",
++        authorized_at=NOW,
++    )
++
++    def decode(raw: bytes) -> str:
++        return raw.decode()
++
++    kwargs: dict[str, Any] = {
++        "directory": tmp_path / "candidate-1",
++        "manifest": frozen,
++        "expected_dataset_sha256": digest,
++        "holdout_start": START,
++        "holdout_end": END,
++        "previously_used_through": anchor.dataset.previously_used_through,
++        "loader": decode,
++        "accessed_at": NOW,
++        "authorization": authority,
++    }
++    return kwargs, anchor, data
++
++
++def replace_anchor(
++    root: Path, kwargs: dict[str, Any], anchor: HoldoutProjectAnchor, **changes: Any
++) -> tuple[dict[str, Any], HoldoutProjectAnchor]:
++    updated = HoldoutProjectAnchor.model_validate({**dict(anchor), **changes})
++    (root / ANCHOR_PATH).write_text(updated.model_dump_json(), encoding="utf-8")
++    authority = HoldoutAccessAuthorization.model_validate(
++        {
++            **dict(kwargs["authorization"]),
++            "anchor_sha256": updated.anchor_sha256,
++            "freeze_id": updated.freeze_id,
++        }
++    )
++    return {**kwargs, "authorization": authority}, updated
++
++
++@pytest.mark.parametrize(
++    "problem",
++    [
++        "unfrozen",
++        "wrong_hash",
++        "short",
++        "used",
++        "unknown_source",
++        "seen_source",
++        "source_tail",
++        "narrow_source",
++        "wrong_anchor",
++        "missing_extension",
++        "future_authority",
++    ],
++)
++def test_preaccess_rejections_do_not_open_data_or_consume_claim(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
++) -> None:
++    kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    if problem == "unfrozen":
++        kwargs["manifest"] = None
++    elif problem == "wrong_hash":
++        kwargs["expected_dataset_sha256"] = "b" * 64
++    elif problem == "short":
++        kwargs["holdout_end"] = datetime(2025, 12, 1, tzinfo=UTC)
++    elif problem == "used":
++        kwargs["previously_used_through"] = START
++    elif problem in {"unknown_source", "seen_source", "source_tail", "narrow_source"}:
++        update: dict[str, Any] = {
++            "source_was_previously_accessed": None if problem == "unknown_source" else True
++        }
++        if problem == "source_tail":
++            update = {"source_material_end_exclusive": END + timedelta(days=1)}
++        elif problem == "narrow_source":
++            update = {"source_material_start": START + timedelta(days=1)}
++        seal = HoldoutDataSeal.model_validate({**dict(anchor.dataset), **update})
++        kwargs, anchor = replace_anchor(tmp_path, kwargs, anchor, dataset=seal)
++    elif problem == "wrong_anchor":
++        kwargs["authorization"] = kwargs["authorization"].model_copy(
++            update={"anchor_sha256": "b" * 64}
++        )
++    elif problem == "missing_extension":
++        old = kwargs["manifest"]
++        frozen = create_freeze_manifest(
++            dataset_sha256=old.dataset_sha256,
++            feature_set_sha256=old.feature_set_sha256,
++            label_set_sha256=old.label_set_sha256,
++            universe_sha256=old.universe_sha256,
++            split_sha256=old.split_sha256,
++            cost_policy_sha256=old.cost_policy_sha256,
++            model_spec_sha256=old.model_spec_sha256,
++            parameters_sha256=old.parameters_sha256,
++            code_sha256=old.code_sha256,
++            frozen_at=old.frozen_at,
++        )
++        kwargs, anchor = replace_anchor(tmp_path, kwargs, anchor, freeze_id=frozen.freeze_id)
++        kwargs["manifest"] = frozen
++    else:
++        kwargs["authorization"] = kwargs["authorization"].model_copy(
++            update={"authorized_at": NOW + timedelta(days=1)}
++        )
++    original = Path.read_bytes
++    reads: list[Path] = []
++
++    def watched(path: Path) -> bytes:
++        if path == data:
++            reads.append(path)
++        return original(path)
++
++    monkeypatch.setattr(Path, "read_bytes", watched)
++    with pytest.raises(PermissionError):
++        open_persistent_holdout(**kwargs)
++    assert not reads and not (tmp_path / CLAIM_PATH).exists()
++
++
++def test_claim_is_durable_before_data_read_and_decoder_cannot_reread(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    kwargs, _, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    original = Path.read_bytes
++    observed: list[bool] = []
++
++    def watched(path: Path) -> bytes:
++        if path == data:
++            observed.append((tmp_path / CLAIM_PATH).is_file())
++        return original(path)
++
++    def decode(raw: bytes) -> bytes:
++        claim = json.loads((tmp_path / CLAIM_PATH).read_text(encoding="utf-8"))
++        assert claim["claim_consumed"] is True
++        assert claim["claim_sha256"] == canonical_sha256(
++            {key: value for key, value in claim.items() if key != "claim_sha256"}
++        )
++        with pytest.raises(PermissionError, match="OUTSIDE-CLAIMED"):
++            data.read_bytes()
++        return raw
++
++    monkeypatch.setattr(Path, "read_bytes", watched)
++    kwargs["loader"] = decode
++    result = open_persistent_holdout(**kwargs)
++    assert isinstance(result, bytes) and result.startswith(b"SYNTHETIC ONLY")
++    assert observed == [True, True]
++    entries = ExperimentEventJournal(tmp_path / ACCESS_JOURNAL_PATH).entries()
++    assert entries[-1].event.details["vault_state"] == "OPENED"
++    assert entries[-1].event.details["claim_consumed"] is True
++
++
++@pytest.mark.parametrize("failure", ["decoder", "read_missing", "wrong_bytes", "claim_fsync"])
++def test_failures_consume_claim_without_retry(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
++) -> None:
++    kwargs, _, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    if failure == "decoder":
++
++        def decode(_: bytes) -> None:
++            raise RuntimeError("synthetic decoder failure")
++
++        kwargs["loader"] = decode
++    elif failure == "read_missing":
++        assert data.resolve().is_relative_to(tmp_path.resolve())
++        data.unlink()
++    elif failure == "wrong_bytes":
++        data.write_bytes(b"tampered synthetic content")
++    else:
++        fsync = os.fsync
++        calls = 0
++
++        def broken_once(descriptor: int) -> None:
++            nonlocal calls
++            calls += 1
++            if calls == 3:
++                raise OSError("synthetic fsync failure after claim creation")
++            fsync(descriptor)
++
++        monkeypatch.setattr(os, "fsync", broken_once)
++    with pytest.raises((OSError, RuntimeError, PermissionError)):
++        open_persistent_holdout(**kwargs)
++    assert (tmp_path / CLAIM_PATH).is_file()
++    assert (
++        ExperimentEventJournal(tmp_path / ACCESS_JOURNAL_PATH)
++        .entries()[-1]
++        .event.details["claim_consumed"]
++        is True
++    )
++    kwargs["directory"] = tmp_path / "candidate-2"
++    kwargs["authorization"] = kwargs["authorization"].model_copy(
++        update={"generation": "new-generation"}
++    )
++    with pytest.raises(PermissionError, match="ALREADY-CLAIMED"):
++        open_persistent_holdout(**kwargs)
++
++
++def test_rename_alias_new_generation_and_new_candidate_share_claim_and_log(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    open_persistent_holdout(**kwargs)
++    renamed = data.with_name("renamed.bin")
++    assert data.resolve().is_relative_to(tmp_path.resolve()) and renamed.resolve().is_relative_to(
++        tmp_path.resolve()
++    )
++    data.rename(renamed)
++    old: ResearchFreezeManifest = kwargs["manifest"]
++    candidate = create_freeze_manifest(
++        dataset_sha256=old.dataset_sha256,
++        feature_set_sha256=old.feature_set_sha256,
++        label_set_sha256=old.label_set_sha256,
++        universe_sha256=old.universe_sha256,
++        split_sha256=old.split_sha256,
++        cost_policy_sha256=old.cost_policy_sha256,
++        model_spec_sha256=old.model_spec_sha256,
++        parameters_sha256="b" * 64,
++        code_sha256=old.code_sha256,
++        frozen_at=old.frozen_at,
++        admission_extension=old.admission_extension,
++    )
++    seal = HoldoutDataSeal.model_validate(
++        {
++            **dict(anchor.dataset),
++            "semantic_dataset_id": "renamed-semantic-id",
++            "sealed_relative_path": renamed.relative_to(tmp_path).as_posix(),
++        }
++    )
++    kwargs, _ = replace_anchor(
++        tmp_path, kwargs, anchor, dataset=seal, freeze_id=candidate.freeze_id
++    )
++    kwargs.update(manifest=candidate, directory=tmp_path / "another-candidate")
++    kwargs["authorization"] = kwargs["authorization"].model_copy(
++        update={"generation": "new-generation"}
++    )
++    with pytest.raises(PermissionError, match="ALREADY-CLAIMED"):
++        open_persistent_holdout(**kwargs)
++    events = [
++        entry.event for entry in ExperimentEventJournal(tmp_path / ACCESS_JOURNAL_PATH).entries()
++    ]
++    assert sum(event.event_type is ExperimentEventType.SUCCEEDED for event in events) == 1
++    assert events[-1].details["freeze_id"] == candidate.freeze_id
++    assert events[-1].details["generation"] == "new-generation"
++
++
++@pytest.mark.parametrize("failure", ["lock_write", "lock_fsync", "start_fsync", "terminal_fsync"])
++def test_durability_failures_keep_lock_until_independent_storage_review(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
++) -> None:
++    kwargs, _, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    original_read = Path.read_bytes
++    reads: list[Path] = []
++
++    def watched(path: Path) -> bytes:
++        if path == data:
++            reads.append(path)
++        return original_read(path)
++
++    monkeypatch.setattr(Path, "read_bytes", watched)
++    if failure == "lock_write":
++
++        def broken_write(_: int, __: bytes) -> int:
++            raise OSError("synthetic lock write failure")
++
++        monkeypatch.setattr(os, "write", broken_write)
++    else:
++        fsync = os.fsync
++        calls = 0
++        first_failure = {"lock_fsync": 1, "start_fsync": 2, "terminal_fsync": 4}[failure]
++
++        def broken_fsync(descriptor: int) -> None:
++            nonlocal calls
++            calls += 1
++            if calls >= first_failure:
++                raise OSError("synthetic durability failure")
++            fsync(descriptor)
++
++        monkeypatch.setattr(os, "fsync", broken_fsync)
++    with pytest.raises(OSError):
++        open_persistent_holdout(**kwargs)
++    assert (tmp_path / ACCESS_LOCK_PATH).is_file()
++    assert (tmp_path / CLAIM_PATH).exists() is (failure == "terminal_fsync")
++    assert len(reads) == (1 if failure == "terminal_fsync" else 0)
++    with pytest.raises(PermissionError, match="STALE-LOCK"):
++        open_persistent_holdout(**kwargs)
++
++
++def test_deleting_only_claim_does_not_reset_consumption(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    kwargs, _, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    open_persistent_holdout(**kwargs)
++    claim = tmp_path / CLAIM_PATH
++    assert claim.resolve().is_relative_to(tmp_path.resolve())
++    claim.unlink()
++    with pytest.raises(PermissionError, match="ALREADY-CLAIMED"):
++        open_persistent_holdout(**kwargs)
++
++
++@pytest.mark.parametrize("problem", ["missing", "corrupt", "wrong_genesis", "stale_lock"])
++def test_missing_or_corrupt_storage_is_not_reinitialized(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, problem: str
++) -> None:
++    kwargs, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    journal = tmp_path / ACCESS_JOURNAL_PATH
++    if problem == "missing":
++        assert journal.resolve().is_relative_to(tmp_path.resolve())
++        journal.unlink()
++    elif problem == "corrupt":
++        journal.write_text("corrupt\n", encoding="utf-8")
++    elif problem == "wrong_genesis":
++        kwargs, _ = replace_anchor(tmp_path, kwargs, anchor, journal_genesis_entry_sha256="b" * 64)
++    else:
++        (tmp_path / ACCESS_LOCK_PATH).write_text("owned by another access", encoding="utf-8")
++    with pytest.raises((PermissionError, ValueError)):
++        open_persistent_holdout(**kwargs)
++    assert not (tmp_path / CLAIM_PATH).exists()
++    if problem == "stale_lock":
++        assert (tmp_path / ACCESS_LOCK_PATH).read_text() == "owned by another access"
++
++
++def test_concurrent_calls_allow_only_one_decoder(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    kwargs, _, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    entered, release = Event(), Event()
++    calls: list[bytes] = []
++
++    def decode(raw: bytes) -> int:
++        calls.append(raw)
++        entered.set()
++        assert release.wait(3)
++        return len(raw)
++
++    kwargs["loader"] = decode
++    with ThreadPoolExecutor(max_workers=2) as pool:
++        first = pool.submit(open_persistent_holdout, **kwargs)
++        assert entered.wait(3)
++        second = pool.submit(open_persistent_holdout, **kwargs)
++        try:
++            with pytest.raises(PermissionError, match="BUSY"):
++                second.result(timeout=3)
++        finally:
++            release.set()
++        assert first.result(timeout=3) == len(calls[0])
++    assert len(calls) == 1
++
++
++def test_read_firewall_blocks_raw_cache_feature_and_hardlink_aliases(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    _, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    paths = [data]
++    for name in anchor.dataset.registered_aliases:
++        path = tmp_path / name
++        path.write_bytes(b"synthetic derivative")
++        paths.append(path)
++    hardlink = tmp_path / "outside-data-hardlink.bin"
++    os.link(data, hardlink)
++    paths.append(hardlink)
++    with holdout_read_firewall(anchor):
++        for path in paths:
++            with pytest.raises(PermissionError, match="OUTSIDE-CLAIMED"):
++                path.read_bytes()
++        with pytest.raises(PermissionError, match="WRITE-FORBIDDEN"):
++            data.write_bytes(b"no")
++
++
++def test_symlink_alias_and_reparse_registration_are_rejected(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, record_property: Any
++) -> None:
++    kwargs, anchor, data = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    link = tmp_path / "alias.bin"
++    try:
++        link.symlink_to(data)
++    except OSError as error:
++        record_property(
++            "native_symlink",
++            f"UNAVAILABLE:{error.winerror if hasattr(error, 'winerror') else error.errno};reparse_guard_synthetic_check",
++        )
++        original = Path.is_symlink
++
++        def simulated_reparse(path: Path) -> bool:
++            return path == tmp_path / ANCHOR_PATH or original(path)
++
++        monkeypatch.setattr(Path, "is_symlink", simulated_reparse)
++        with pytest.raises(PermissionError, match="REPARSE"):
++            open_persistent_holdout(**kwargs)
++    else:
++        record_property("native_symlink", "VERIFIED_ON_TEMP_SYNTHETIC_FILE")
++        with holdout_read_firewall(anchor), pytest.raises(PermissionError, match="OUTSIDE-CLAIMED"):
++            link.read_bytes()
++        second = data.with_name("linked.bin")
++        second.symlink_to(data)
++        kwargs, _ = replace_anchor(
++            tmp_path,
++            kwargs,
++            anchor,
++            dataset=HoldoutDataSeal.model_validate(
++                {
++                    **dict(anchor.dataset),
++                    "sealed_relative_path": second.relative_to(tmp_path).as_posix(),
++                }
++            ),
++        )
++        with pytest.raises(PermissionError, match="REPARSE"):
++            open_persistent_holdout(**kwargs)
++
++
++@pytest.mark.parametrize("kind", ["copy", "preview", "feature", "unknown"])
++def test_development_cannot_read_holdout_copies_or_derived_features(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, kind: str
++) -> None:
++    _, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    name = f"data/{kind}.bin"
++    content = b"derived synthetic feature"
++    digest = (
++        anchor.dataset.dataset_sha256 if kind == "copy" else hashlib.sha256(content).hexdigest()
++    )
++    # The protected content hash is already registered. No bytes need be opened
++    # to reject an alias; derived hashes include the complete source ancestry.
++    path = tmp_path / name
++    path.write_bytes(content)
++    kwargs: dict[str, Any] = {
++        "allowed_sources": {name: digest},
++        "protected_roots": [tmp_path / "data/final_holdout"],
++        "expected_holdout_anchor_sha256": anchor.anchor_sha256,
++        "source_lineage": {name: (digest, anchor.dataset.dataset_sha256)},
++        "lineage_complete": {name: kind != "unknown"},
++    }
++    original = Path.open
++
++    def no_data_open(selected: Path, *args: Any, **options: Any) -> IO[Any]:
++        if selected == path:
++            raise AssertionError("protected source opened before lineage rejection")
++        return cast("IO[Any]", original(selected, *args, **options))
++
++    monkeypatch.setattr(Path, "open", no_data_open)
++    with pytest.raises(PermissionError, match=r"LINEAGE|DERIVATION"):
++        checked_development_path(tmp_path, path, **kwargs)
++
++
++def test_independent_development_source_remains_usable_with_complete_lineage(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    _, anchor, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    name = "data/development.bin"
++    path = tmp_path / name
++    path.write_bytes(b"independent synthetic development")
++    digest = hashlib.sha256(path.read_bytes()).hexdigest()
++    assert (
++        checked_development_path(
++            tmp_path,
++            path,
++            allowed_sources={name: digest},
++            protected_roots=[tmp_path / "data/final_holdout"],
++            expected_holdout_anchor_sha256=anchor.anchor_sha256,
++            source_lineage={name: (digest,)},
++            lineage_complete={name: True},
++        )
++        == path
++    )
++    with pytest.raises(PermissionError, match="NOT-PINNED"):
++        checked_development_path(tmp_path, path, allowed_sources={name: digest}, protected_roots=[])
++
++
++def test_legacy_freeze_hash_is_stable_and_extended_hash_binds_every_component(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    kwargs, _, _ = prepare_synthetic_holdout(tmp_path, monkeypatch)
++    extended: ResearchFreezeManifest = kwargs["manifest"]
++    payload = extended.model_dump(mode="json", exclude={"freeze_id", "admission_extension"})
++    payload["frozen_at"] = extended.frozen_at.isoformat()
++    legacy = ResearchFreezeManifest.model_validate_json(
++        json.dumps({**payload, "freeze_id": canonical_sha256(payload)})
++    )
++    assert "admission_extension" not in legacy.model_dump(mode="json")
++    assert legacy.freeze_id != extended.freeze_id
++    with pytest.raises(ValueError, match="freeze_id"):
++        ResearchFreezeManifest.model_validate_json(
++            extended.model_copy(update={"admission_extension": None}).model_dump_json()
++        )
++
++
++def test_all_gates_even_when_passing_only_request_independent_review() -> None:
++    missing = independent_review_handoff(
++        dict.fromkeys(FINAL_GATE_NAMES, None), immutable_report_sha256=None
++    )
++    assert missing["status"] == "NO_PROVEN_ALPHA"
++    passed = independent_review_handoff(
++        dict.fromkeys(FINAL_GATE_NAMES, True), immutable_report_sha256=HASH
++    )
++    assert passed["status"] == "INDEPENDENT_REVIEW_REQUIRED"
++    assert passed["promotion_decision"] == "HOLD"
++    assert all(
++        passed[key] is False
++        for key in (
++            "production_ml_enabled",
++            "paper_trading_admitted",
++            "live_trading",
++            "order_submission_enabled",
++        )
++    )
++    with pytest.raises(ValueError, match="every frozen gate"):
++        independent_review_handoff({}, immutable_report_sha256=HASH)
++
++
++def test_real_inputs_and_access_are_absent_in_current_report() -> None:
++    config = yaml.safe_load(
++        Path("configs/research/alpha_v5_final_holdout_contract.yaml").read_text(encoding="utf-8")
++    )
++    validate_config(config)
++    config["actual_access_authorization"] = {"allow_data_read": True}
++    with pytest.raises(ValueError, match="NOT-AUTHORIZED"):
++        validate_config(config)
++    docs = build_documents({"b2_safety": {"strict_data_quality": "INSUFFICIENT"}})
++    assert docs["holdout_eligibility.json"]["actual_content_accesses"] == 0
++    assert docs["holdout_eligibility.json"]["dataset"] is None
++    assert docs["independent_review.json"]["independent_review_completed"] is False
++    assert docs["all_batches_status.json"]["real_research_acceptance"].startswith("NOT_COMPLETED")
+--- /dev/null
++++ b/docs/research/alpha_v5_final_holdout_contract.md
+@@ -0,0 +1,17 @@
++# B7 一次性留出与交付契约
++
++`python -m scripts.run_alpha_v5_final_holdout --config configs/research/alpha_v5_final_holdout_contract.yaml --preflight-dir <已核验目录>` 只生成一次封存的协议、资格状态及 B0–B7 交付索引。配置中的真实数据、项目锚点、冻结候选和数据访问授权都必须为 null，五项真实研究/交易预算均为 0。现有已用源的尾部不是最终留出；本批不创建任何真实留出登记。
++
++`open_persistent_holdout` 复用原一次性 claim 和 `FinalHoldoutVault`。它现在要求额外的 `HoldoutAccessAuthorization`；旧的任意目录调用不再有资格读取真实最终数据。`directory` 仅记录候选输出位置，访问状态固定为项目根目录下的 `state/final_holdout_anchor.json`、`state/final_holdout_access_claim.json` 与 `state/final_holdout_access_events.jsonl`。同一个项目、候选、路径、符号链接、重命名和 generation 不能生成第二个 claim。项目根由实现位置确定，生产 API 不接受 root override。
++
++未来真实登记必须经过独立审查和明确授权：锚点绑定语义数据 ID、原始 bytes 的 SHA256/长度、完整连续日期、源材料边界、完整来源/派生 hash、未使用证明、冻结候选、操作授权、日志 genesis 和独立不可回滚存储证明。哈希及 metadata 的一致性不等于来源事实已获独立查证。缺失、未知、已用源文件、尾部越界、覆盖不足或授权不匹配均在内容读取前拒绝。日志必须预先存在且与锚点 genesis 一致，程序不会创建一个空日志恢复访问次数。
++
++所有访问共享固定 OS exclusive lock 与原子 claim，claim 写入后 flush/fsync，随后才从登记的唯一源文件读取和校验完整 bytes，再交给 `loader(data: bytes)` 冻结解析器。解析失败、数据文件读取异常、hash/长度不符均消耗 claim。锁只协调并发，不是另一个访问计数器；异常退出遗留锁必须先独立审查，程序不自动清除。成功日志可证明已消费，单独删除 claim 文件也不能恢复访问。删除或回滚全部本地证据不是应用代码能解决的威胁，真实运行必须有独立不可回滚存储与 OS 访问权限。
++
++`holdout_read_firewall` 必须在文件句柄产生前启用，保护声明源、别名/派生路径及文件身份，识别普通路径、symlink 和 hardlink 读取；只有 claim 内的原始 bytes 读取拥有短暂许可，解析器不能再次打开源文件。开发加载器 `checked_development_path` 对已登记锚点强制 hash pin 和完整传递血缘，禁止复制缓存、预览结果或特征中的最终留出来源。未知血缘不能默认视为安全。该 Python 守卫不提供 OS 沙箱保证；不得把受保护路径或旧句柄交给绕过 Python audit 的原生扩展。
++
++`ResearchFreezeManifest.admission_extension` 为版本化扩展；旧哈希/序列化保持不变。新真实访问必须另外冻结风险、规则、容量、统计定义、比较族、完整试验史、数据血缘、模型权重、测试期定期更新程序与独立预审。没有登记更新程序就不能在测试期重训。所有原门槛和共同风险/执行/资金约束保留。
++
++`independent_review_handoff` 只使用现有 `PromotionDecision` 的 HOLD/REJECT。即使全部门槛和最终 immutable report 都已提供，也只返回 `INDEPENDENT_REVIEW_REQUIRED`，不切换模型 alias，不开启 ML、纸面或订单。本批独立实证准入评审是 NOT_COLLECTED，`NO_PROVEN_ALPHA / CASH` 继续有效。
++
++当前工程交付不代表完整研究验收完成。后续需要真实 PIT、历史费用/规则/盘口/延迟、共享现金回放、成熟基础机会和全试验史、后批真实运行/拟合授权，以及已证明未使用至少十二个月的数据。失败和不确定结果不得删除或通过新 generation 规避。

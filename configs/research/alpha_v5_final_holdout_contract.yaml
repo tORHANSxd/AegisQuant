@@ -1,0 +1,53 @@
+schema_version: aegis-final-contract-b7-v1
+generation: alpha-r5-final-contract-20260910-v1
+output: artifacts/alpha_v5/20260910_final_contract_v1
+scope: B7_ANCHORED_FIREWALL_AND_SYNTHETIC_CONTRACT_TESTS
+branch_required: main
+source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
+budgets:
+  contract_jobs: 1
+  historical_strategy_engine_runs: 0
+  real_return_model_fits: 0
+  real_calibration_fits: 0
+  final_holdout_accesses: 0
+  real_orders: 0
+sources:
+  r5_manifest:
+    path: artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json
+    sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
+  b0_manifest:
+    path: artifacts/alpha_v5/20260909_review_contract_v2/OUTPUT_MANIFEST.json
+    sha256: fccc6e6a60185811d37b4e8a40a7772da3209b46e95ea15e83cfef9d39519edf
+  b2_manifest:
+    path: artifacts/alpha_v5/20260910_pit_contract_v1/OUTPUT_MANIFEST.json
+    sha256: fd01dd906c5d096842a9c3a278a6bd8612fa15a609c31f179678820c7e130c52
+  b3_manifest:
+    path: artifacts/alpha_v5/20260910_benchmark_contract_v1/OUTPUT_MANIFEST.json
+    sha256: 293d3bbd5993f54e81cb9a88e3702978d6c6fcb08261406f51c8a2998b76abcb
+  b4_manifest:
+    path: artifacts/alpha_v5/20260910_execution_contract_v1/OUTPUT_MANIFEST.json
+    sha256: bc4687a0c6e5c9ae76d1021a69d769d22fb7699ef566c8cf495c10afa02023d3
+  b5_manifest:
+    path: artifacts/alpha_v5/20260910_portfolio_contract_v1/OUTPUT_MANIFEST.json
+    sha256: 405d950315e256ddf954ccda49468effb0334da8c03e361f6c9433b921b81f84
+  b6_manifest:
+    path: artifacts/alpha_v5/20260910_ml_contract_v1/OUTPUT_MANIFEST.json
+    sha256: d28c6840587de3ef30e5d7972ace4b5213b5123fd5a4a37c62c2f4273ea85b76
+  b2_safety:
+    path: artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json
+    sha256: c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26
+eligible_unused_dataset: null
+actual_project_anchor: null
+actual_freeze_manifest: null
+actual_access_authorization: null
+future_access_budget:
+  unique_data_claims: 1
+  authorized_now: 0
+  failure_consumes_claim: true
+  generation_reset_allowed: false
+research_conclusion: NO_PROVEN_ALPHA
+production_policy: CASH
+production_ml_enabled: false
+paper_trading_admitted: false
+live_trading: false
+order_submission_enabled: false

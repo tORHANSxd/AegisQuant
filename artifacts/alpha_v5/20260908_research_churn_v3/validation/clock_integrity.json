@@ -1,0 +1,435 @@
+{
+  "status": "PASS",
+  "generation": "alpha-r5-research-churn-20260908-v3",
+  "scope": "55 registered sleeves plus 6 frozen R4 comparison portfolios; every 4h and daily UTC point",
+  "first_point": "2022-04-01T00:00:00+00:00",
+  "last_point": "2025-10-01T00:00:00+00:00",
+  "terminal_point_interpretation": "closing MTM for end-exclusive development interval",
+  "curves": [
+    {
+      "curve": "G0/BTCUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G0/ETHUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G0/BNBUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 2.7284841053187847e-12
+    },
+    {
+      "curve": "G0/SOLUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G0/XRPUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1/BTCUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1/BTCUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1/BTCUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1/ETHUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1/ETHUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1/ETHUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1/BNBUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1/BNBUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1/BNBUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1/SOLUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1/SOLUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1/SOLUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 2.7284841053187847e-12
+    },
+    {
+      "curve": "G1/XRPUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1/XRPUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1/XRPUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_H3/BTCUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1_H3/ETHUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_H3/BNBUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1_H3/SOLUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_H3/XRPUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_H10/BTCUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1_H10/ETHUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_H10/BNBUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1_H10/SOLUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_H10/XRPUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_R24/BTCUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1_R24/ETHUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_R24/BNBUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1_R24/SOLUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_R24/XRPUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_R72/BTCUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_R72/ETHUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_R72/BNBUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1_R72/SOLUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.3642420526593924e-12
+    },
+    {
+      "curve": "G1_R72/XRPUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_PASSIVE/BTCUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_PASSIVE/BTCUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 3.637978807091713e-12
+    },
+    {
+      "curve": "G1_PASSIVE/BTCUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_PASSIVE/ETHUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.3642420526593924e-12
+    },
+    {
+      "curve": "G1_PASSIVE/ETHUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.3642420526593924e-12
+    },
+    {
+      "curve": "G1_PASSIVE/ETHUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 9.094947017729282e-13
+    },
+    {
+      "curve": "G1_PASSIVE/BNBUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.3642420526593924e-12
+    },
+    {
+      "curve": "G1_PASSIVE/BNBUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 9.094947017729282e-13
+    },
+    {
+      "curve": "G1_PASSIVE/BNBUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_PASSIVE/SOLUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_PASSIVE/SOLUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 9.663381206337363e-13
+    },
+    {
+      "curve": "G1_PASSIVE/SOLUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.3642420526593924e-12
+    },
+    {
+      "curve": "G1_PASSIVE/XRPUSDT/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.3642420526593924e-12
+    },
+    {
+      "curve": "G1_PASSIVE/XRPUSDT/1.5",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-12
+    },
+    {
+      "curve": "G1_PASSIVE/XRPUSDT/2",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 2.2737367544323206e-12
+    },
+    {
+      "curve": "legacy/F0/portfolio/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.4551915228366852e-11
+    },
+    {
+      "curve": "legacy/F1/portfolio/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.4551915228366852e-11
+    },
+    {
+      "curve": "legacy/F2/portfolio/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.4551915228366852e-11
+    },
+    {
+      "curve": "legacy/F3/portfolio/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.4551915228366852e-11
+    },
+    {
+      "curve": "legacy/F4/portfolio/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.4551915228366852e-11
+    },
+    {
+      "curve": "legacy/F5/portfolio/1",
+      "points_4h": 7675,
+      "points_daily": 1280,
+      "maximum_accounting_residual_usdt": 1.8189894035458565e-11
+    }
+  ],
+  "files_sha256": {
+    "runs/G0/BTCUSDT/1/equity.parquet": "2f4a84dadced91a14e526003987d4ae721745e6bdbbc08e927fffef10ee862e0",
+    "runs/G0/ETHUSDT/1/equity.parquet": "0398a9a869976618c2387033e03c547917fca39afb3c7f39a36960f15fad4062",
+    "runs/G0/BNBUSDT/1/equity.parquet": "3f5456b67b6e3fc9178ae6c75fae397d06a916c061a676be051678617ed7010f",
+    "runs/G0/SOLUSDT/1/equity.parquet": "e58151f678ad86e58a746dd62577963de553d1ebd41c7991c24c31754094d173",
+    "runs/G0/XRPUSDT/1/equity.parquet": "2632effa4863ba4b17aa2598c244d0e38af8bc6538f17b9c7c4f685d8127ba83",
+    "runs/G1/BTCUSDT/1/equity.parquet": "32fea328c2e1730c590f518920351e8899081fc870cb60784a2c0947522512d2",
+    "runs/G1/BTCUSDT/1.5/equity.parquet": "37aa338b5030c9a0ef380c7a136eac9248d9e4f58c4788865e71d888a77018a5",
+    "runs/G1/BTCUSDT/2/equity.parquet": "642bc50edb774d964fdf59d4e284bf1de5883d4a1f7b3b71f34b514605b7ff28",
+    "runs/G1/ETHUSDT/1/equity.parquet": "9eac3dd6f40fb5c887851bebbf9ba9434f6d6cf2c3f3f762233c0be1a35d11f4",
+    "runs/G1/ETHUSDT/1.5/equity.parquet": "82e6ff79e1d91c38c9094eac31beb5cd4d13b04279b572505682dcde0cbd5d2b",
+    "runs/G1/ETHUSDT/2/equity.parquet": "18e97cdcd1dda9b88bbde20ae587aab09b66f5098dde041d6b633cd293f21550",
+    "runs/G1/BNBUSDT/1/equity.parquet": "28681b549abc66995b77dcd5ac5627db959452252dc76374f0da2e07d596970b",
+    "runs/G1/BNBUSDT/1.5/equity.parquet": "8195e00c81409f0499e8c8e231524ef4981c518091309d7e40f4a9f613abe7f2",
+    "runs/G1/BNBUSDT/2/equity.parquet": "5beff29081a33c30e459a2e48b6248d1d3e7f60b1b5776171e678c56e79fdca8",
+    "runs/G1/SOLUSDT/1/equity.parquet": "3b6d5879c0c12375c8890b6e311797414db5e81b90e44620fc9c0bbfd7f685dc",
+    "runs/G1/SOLUSDT/1.5/equity.parquet": "a9f6c61df82b591e9a30b3db917773707793e7d30d91583e6d92515f8a740e3f",
+    "runs/G1/SOLUSDT/2/equity.parquet": "9745fd16b56d4e5c0f3b728183ae58f487c2955bbee76d88c916fc98aa746a6a",
+    "runs/G1/XRPUSDT/1/equity.parquet": "8b503f4d57da012d8c52bd88c5477f4ea6d56a501c826a238916d397ff014b7a",
+    "runs/G1/XRPUSDT/1.5/equity.parquet": "d9cc915033bec5eac974b9e9f9ff266559d779b7b9dbc57642e0d74f1c92209e",
+    "runs/G1/XRPUSDT/2/equity.parquet": "572ce2679c1b2090cd0e39254d96ae8c1b9177a4ba2e453e00fa5ced3c5f2712",
+    "runs/G1_H3/BTCUSDT/1/equity.parquet": "d33c7c47a0c1abb5065685548eafa0a28013755e278a17e7abe29626fe457ccf",
+    "runs/G1_H3/ETHUSDT/1/equity.parquet": "f9333bf68e30dc30e7fb452da6c5eebb78eae106a1650581138601f181804c26",
+    "runs/G1_H3/BNBUSDT/1/equity.parquet": "8a2fb19ff85b125fb8896865fdd305c9cb7a37e8e8c9a30d8aabb11239de0b13",
+    "runs/G1_H3/SOLUSDT/1/equity.parquet": "9f91e4b0db1ecabfb4a9e2543da6ed3410a87d8e36a6f9a99126db31173ac465",
+    "runs/G1_H3/XRPUSDT/1/equity.parquet": "c8feb3669cac0913927601d117a5cdc1b6c23c30afa170efa5f3c5e09835d027",
+    "runs/G1_H10/BTCUSDT/1/equity.parquet": "8d2566e8c471bef8c8744cd62e272d6c0d701264ea115523cca68f06c3333ad7",
+    "runs/G1_H10/ETHUSDT/1/equity.parquet": "05b55c6bf39a6fe7de78c5837e00ff51e0adac6a6dbc335ce28da43bc0801f6e",
+    "runs/G1_H10/BNBUSDT/1/equity.parquet": "fdb50e4296cfa9c9b988f4e406ee61f6d5f61855bba8de23ce83186fd439913f",
+    "runs/G1_H10/SOLUSDT/1/equity.parquet": "52d23f2ef19cc4aa4333e154704ed3e0c3b0b6ef1d1e0576b7aca81d52fc408d",
+    "runs/G1_H10/XRPUSDT/1/equity.parquet": "e576e484a8f23b8ffa4e6db8624f9f5f89463429baf542cbcb0ab7c83f5e4796",
+    "runs/G1_R24/BTCUSDT/1/equity.parquet": "b932551dac7677b0007804a02af42ab9c0aff5b6fffe8bdaa8980c4ec62b8e73",
+    "runs/G1_R24/ETHUSDT/1/equity.parquet": "64046db16dea65e49b46cfe5f87f52ec64875fde1a7de9b8f04de6ae1c78cbb6",
+    "runs/G1_R24/BNBUSDT/1/equity.parquet": "5c7d27aa40611606b999d0246a73c6c234aa6563ba32d0e4d89b939819548b4b",
+    "runs/G1_R24/SOLUSDT/1/equity.parquet": "ce633bf96d2d4241a2cb25eab8c4b0754bfd5cbeae62f27c912a9c65abb97595",
+    "runs/G1_R24/XRPUSDT/1/equity.parquet": "5eb974fe1f3f5819fda59bc36344cd231525cda02c3acbb06a7895e89033e822",
+    "runs/G1_R72/BTCUSDT/1/equity.parquet": "1bbee8c4943ca6dd9bffb285dd9a5edf7b7d461692f91b83c152f9f251e676a1",
+    "runs/G1_R72/ETHUSDT/1/equity.parquet": "da4e4df6aa8e576012413f17aa2949106968e9e5722f14e7003fcb08e61bdf05",
+    "runs/G1_R72/BNBUSDT/1/equity.parquet": "9eafdee6844956747ac8ac6bb971d51b9d0d61695b51546804adb58858e27aef",
+    "runs/G1_R72/SOLUSDT/1/equity.parquet": "082409e944533f7c8462712ac04b66bc5989b0791290c4e89ef2b3eae8cafd20",
+    "runs/G1_R72/XRPUSDT/1/equity.parquet": "99b9239cf3d60952c6a12df66130489b07188022862fdd386e713e982c2d5383",
+    "runs/G1_PASSIVE/BTCUSDT/1/equity.parquet": "ce460586d5860803f561449d9681f988c3e8ed120ee616cd6549583f24246a48",
+    "runs/G1_PASSIVE/BTCUSDT/1.5/equity.parquet": "bbb8372a0f3bc840131277083264ed286facad90c1eb6238c33976117dc22385",
+    "runs/G1_PASSIVE/BTCUSDT/2/equity.parquet": "495985a6edae1e1fc719d3724d24f94756aedc0a5c8f436db313f09409dd05e5",
+    "runs/G1_PASSIVE/ETHUSDT/1/equity.parquet": "bbdc502c69976fe387f4b371bc2099e803bed81d9250e1cef78dae1539fcd006",
+    "runs/G1_PASSIVE/ETHUSDT/1.5/equity.parquet": "1521afb76fd0a5dd2618befaa82d9448623b3c4070c1d179d5009d44968e9f13",
+    "runs/G1_PASSIVE/ETHUSDT/2/equity.parquet": "81b94259af6753819f83ccb36e597f2660e6e2437b00824e853efbbd261b7f1f",
+    "runs/G1_PASSIVE/BNBUSDT/1/equity.parquet": "4436b05e0c7de2821008dd2a2f1fa8e4c90ce3901703ae858348ab49d20cc229",
+    "runs/G1_PASSIVE/BNBUSDT/1.5/equity.parquet": "d0336bd1086760535d07da21488414026c47d932d7793c4b9b33056289d1d21e",
+    "runs/G1_PASSIVE/BNBUSDT/2/equity.parquet": "bc4196d4cdc9356a5f8cc91d112b167ef703aa8f64a54f84318e8b42478dc8f7",
+    "runs/G1_PASSIVE/SOLUSDT/1/equity.parquet": "a1ae1a6c6d4519f18b847ad000c7f228a8a79dd063f0a08d425b7f9c5e3cf3d4",
+    "runs/G1_PASSIVE/SOLUSDT/1.5/equity.parquet": "ce1aa9db6f42c1976574389253f8be40d102aa04ebc0a552dfaf003a3ff59167",
+    "runs/G1_PASSIVE/SOLUSDT/2/equity.parquet": "ccc081a02b70fb2a3e2a90c0639a938ef2afc82892107b0adc7bf017f42f2680",
+    "runs/G1_PASSIVE/XRPUSDT/1/equity.parquet": "049adc9410cd0120fe885aadec8647797cfb457a0bcc518b9ab51eddad743426",
+    "runs/G1_PASSIVE/XRPUSDT/1.5/equity.parquet": "98ab88f14a48ed7678d25cb958bc7e9d4df4b64bceb0171c53fea164cb78e7fc",
+    "runs/G1_PASSIVE/XRPUSDT/2/equity.parquet": "2a7cb741cd997a0850d89a678603cf831c14cc5e2df6e26e050c109160359a2d",
+    "D:\\Personal\\Quantitative_Trading\\artifacts\\alpha_r4\\20260908_v1\\portfolio_equity.parquet": "50efd7482d8708c54868a0d49f1e66d4af2d0649748680aba53410ed75a3459b"
+  },
+  "validator_sha256": "e5aa9242e9afd15212364ca343b5b55ac1b68bbfd20d6c7324db3d43067b206e"
+}

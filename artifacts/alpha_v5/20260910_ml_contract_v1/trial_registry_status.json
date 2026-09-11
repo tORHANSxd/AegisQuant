@@ -1,0 +1,6 @@
+{
+  "complete_history": "UNKNOWN",
+  "recovered_prior_engineering_errors": "RETAINED_IN_IMMUTABLE_PRIOR_GENERATIONS",
+  "independent_return_candidates": null,
+  "engineering_errors_are_independent_return_trials": false
+}

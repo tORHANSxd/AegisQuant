@@ -1,0 +1,7 @@
+{
+  "status": "BLOCKED_BY_AUTOMATIC_APPROVAL_REVIEW",
+  "action": "Remove only seven task-created .pytest_tmp_r5_* test temporary directories",
+  "reason": "blocked by policy",
+  "directories_preserved": true,
+  "implementation_or_verification_affected": false
+}

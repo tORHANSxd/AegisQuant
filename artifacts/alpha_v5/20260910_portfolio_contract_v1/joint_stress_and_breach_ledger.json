@@ -1,0 +1,8 @@
+{
+  "status": "NOT_COLLECTED",
+  "real_paths": null,
+  "hard_reduction_bypasses_ordinary_turnover": true,
+  "hard_reduction_bypasses_liquidity": false,
+  "unexecutable_exit": "KEEP_REAL_HOLDINGS_AND_BREACH_NO_INSTANT_CASH",
+  "automatic_recovery_allowed": false
+}

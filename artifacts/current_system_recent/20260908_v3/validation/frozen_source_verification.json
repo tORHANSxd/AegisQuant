@@ -1,0 +1,910 @@
+{
+  "status": "PASS",
+  "matched_complete_results": 180,
+  "new_research_trials": 0,
+  "additional_verification_engine_runs": 180,
+  "imported_runner": "D:\\Personal\\Quantitative_Trading\\artifacts\\current_system_recent\\20260908_v3\\implementation\\scripts\\run_recent_multi_asset_backtest.py",
+  "imported_replay": "D:\\Personal\\Quantitative_Trading\\artifacts\\current_system_recent\\20260908_v3\\implementation\\src\\aegisquant\\research\\validation\\cat_replay.py",
+  "checks": [
+    {
+      "path": "runs/CASH/BTCUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "aeb0b75834c807b901c2e94c6bb87a3c6bd6b413f8cb0e53eb29762b4fc450d3"
+    },
+    {
+      "path": "runs/F2/BTCUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "1f246b037648131dd74c5c80925a617c03ca74fdf1366bdd084131b95de8ed1a"
+    },
+    {
+      "path": "runs/F2/BTCUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "df6196fc57304c9d6a78849ec0f97df4e718cc0bab6771fc3e16db7ef839b46e"
+    },
+    {
+      "path": "runs/F2/BTCUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "000c9ce8fbdc6ec794aac0f0d858dc9acd4a3b56a6b4d93f025ebffaf929d530"
+    },
+    {
+      "path": "runs/F2/BTCUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "858c2dcc390ee41041437b76e6ae6634884b669e1ee77d019cec857f92326b77"
+    },
+    {
+      "path": "runs/F2/BTCUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a2728e48166490975d875ff302764abfeb069af7ccf91a07bb23b3a84972c287"
+    },
+    {
+      "path": "runs/F2/BTCUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "840cdc545e57d2d07e11663dd461b3d04893729be096fc1b003503841eeee186"
+    },
+    {
+      "path": "runs/F2/BTCUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "af5b2603523fa068f00d26e18fe3437f77c42eb49a4f463e5696f781a3fc8a1d"
+    },
+    {
+      "path": "runs/F3/BTCUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "f58968dca09c6c77c8d8c815afe54a103f99f7c3562fdd5c7ece17e28a6fb57e"
+    },
+    {
+      "path": "runs/F3/BTCUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "8f7d285b849ae3d121ac53ca292089e62de6669180fffd4b3a033af63c512f22"
+    },
+    {
+      "path": "runs/F3/BTCUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "8bebed84389b8389902805a6245f4e00000d3c8e260b5203d421323842f9b1bc"
+    },
+    {
+      "path": "runs/F3/BTCUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "5e285f8220388a9a5dce65479a268cab2878977aadc89aeba3fc36a3b618921a"
+    },
+    {
+      "path": "runs/F3/BTCUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "b60d69d77ba0d4a00eeb3eecb97c701ee204b4586c225a994a3c71eb9fcd30ee"
+    },
+    {
+      "path": "runs/F3/BTCUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "1af9f8a02d2fc0e40b4ee38c4a81b41dbd0b268111183aa7b13788f16b1b0986"
+    },
+    {
+      "path": "runs/F3/BTCUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "d43c7ee546e81a8f11c72591578e1fb848096ff99d9f015f95653a56d663b918"
+    },
+    {
+      "path": "runs/F4/BTCUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "77002fdbf5295a114b7424f0343e1d11806496e702a08f1e361f92ca5001d890"
+    },
+    {
+      "path": "runs/F4/BTCUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "3cb8d1e3aecbf3ed786b3d733ff0f3dbfdba533bf1f94bd57d05649ffd1f6bd5"
+    },
+    {
+      "path": "runs/F4/BTCUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "9e7dc12c914b808960a900d9c0c08ec8cfd5b1dac5a8efaa02204665742ed33d"
+    },
+    {
+      "path": "runs/F4/BTCUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "0f473d592878f2f10957db3335f8b1474815cbf225c8e100a82ae162bf483310"
+    },
+    {
+      "path": "runs/F4/BTCUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "87f080d11f0a542e4fdbd4f2278cbb2fe86fe8d0ea7cab89ff555f3bd89cdc0c"
+    },
+    {
+      "path": "runs/F4/BTCUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "db18d94f179e1ca272cce34462712db5b49186cc8a9cf91d17b735147d59f995"
+    },
+    {
+      "path": "runs/F4/BTCUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "cf533022e61bea6d4a318a117d8583b4136183648b35a749a8aa69f65ca64108"
+    },
+    {
+      "path": "runs/F5/BTCUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "bf31f4a845e8da3e860a169e9fc3e29357aef3a39d47b418b52ace128ee78008"
+    },
+    {
+      "path": "runs/F5/BTCUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "4bd2d54cdfcdd99e29220a947ded7cfa9d66fa7e494de86cbf5f3599a595e00b"
+    },
+    {
+      "path": "runs/F5/BTCUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "b18803919bcfec92ae8c5d609f470f5aeabb150a285c25d515e9f0d6d4edd43b"
+    },
+    {
+      "path": "runs/F5/BTCUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "955a181333552be36df5f85afb26e48ee2838a8c9f7be3b6c4b7e74a75fa6871"
+    },
+    {
+      "path": "runs/F5/BTCUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "420e0cd2748a13190e7cbc80572beb170c0e5b23f82282b989846ab5759fc90f"
+    },
+    {
+      "path": "runs/F5/BTCUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "e03b8cb0500b67585b0d83e782154ae01573fc82399fbf7869647919a7a220a2"
+    },
+    {
+      "path": "runs/F5/BTCUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "ab001eb6edb2bcbb829890ac850c98011bb16a3f6c6f7c85a6a5c9fe942a0f2e"
+    },
+    {
+      "path": "runs/BUY_HOLD/BTCUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "45e96e0133b65de2218ad3872fab8989242ef1133a6bf467a732444a9fb2f4e0"
+    },
+    {
+      "path": "runs/BUY_HOLD/BTCUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "12be833b09864fa935769416b715c47c44714418ae15081ad0de8fcd3e26b679"
+    },
+    {
+      "path": "runs/BUY_HOLD/BTCUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "845e2f3c97b990d0aebcd0c4961488d38b7597090a81cc16840aebd6efe8a881"
+    },
+    {
+      "path": "runs/BUY_HOLD/BTCUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "afdbba7292b0ee113d68e1e164881358f84823b4f26149fee856399e46465d98"
+    },
+    {
+      "path": "runs/BUY_HOLD/BTCUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "4ff2e1137fc8f664646b70559685291dea1597b25066b65b1bf93376188d3dd7"
+    },
+    {
+      "path": "runs/BUY_HOLD/BTCUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "afdbba7292b0ee113d68e1e164881358f84823b4f26149fee856399e46465d98"
+    },
+    {
+      "path": "runs/BUY_HOLD/BTCUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "4ff2e1137fc8f664646b70559685291dea1597b25066b65b1bf93376188d3dd7"
+    },
+    {
+      "path": "runs/CASH/ETHUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "aa592676b93492962a8ad74186d28321800fad20d093150c5bf47af2f89fa56b"
+    },
+    {
+      "path": "runs/F2/ETHUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "d6403e0d737fbdfbb8c4b75383a7c801b051aab452b7c635c70d0b4cab26bd8e"
+    },
+    {
+      "path": "runs/F2/ETHUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "3f9bb27ba7297c2c5b3ba5d583bb1cbf703d5553f4e2cdfd77c1420f57add97a"
+    },
+    {
+      "path": "runs/F2/ETHUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "9b2306f138a737317dff68e2b4543d758bb5f46ffebdb5867f15aead2bab8cc8"
+    },
+    {
+      "path": "runs/F2/ETHUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "6b96457eab6c30c0a44c7a8c02438cf80fb4f28975254cbc95134111fba67657"
+    },
+    {
+      "path": "runs/F2/ETHUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "589588b35571db9760130952105178d3c323b34dcd16e511ba26c8b0b2185aed"
+    },
+    {
+      "path": "runs/F2/ETHUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "7eaf8868299c6a8023f1e757a60a5e275b98467512235734dd9e4e379dee6a4f"
+    },
+    {
+      "path": "runs/F2/ETHUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a73a7e8a386ecc57426c7a491d60cfaa37faf1b4c8dde8a09f5e229dc88ca746"
+    },
+    {
+      "path": "runs/F3/ETHUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "17a43032d0fee7e276672aa92c0d4baf93460579116fe75d96bdff20968a04c7"
+    },
+    {
+      "path": "runs/F3/ETHUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "992517ea5acdb50e1cd303cb09ea6b83497779b1ded58ee1e4690efb15cda242"
+    },
+    {
+      "path": "runs/F3/ETHUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "4b4c4a036fdf329b7da0a135eda4feab24ad4181a152e6e9561139ebf64ea9da"
+    },
+    {
+      "path": "runs/F3/ETHUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "874474e95f05fae6771d9fb0c4a3ddefd144253efc25fe153259445a912d325a"
+    },
+    {
+      "path": "runs/F3/ETHUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "fbbc798007d424df4ecb29df49caf3487bfa0f38b67185cf1613989f6719ecc6"
+    },
+    {
+      "path": "runs/F3/ETHUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "57b4608483d4f51b79c86901fd1320af357fdc5e8795becc6e12c338f0c4b037"
+    },
+    {
+      "path": "runs/F3/ETHUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "64d44ab2411a2c7d09ad250824845af0c11b35e1c10356ec4a7059bb7c26bef1"
+    },
+    {
+      "path": "runs/F4/ETHUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "fbe49394cf39d62c1c7d9edf59730fb54f4578d5c1f7967dba9c059f948f7356"
+    },
+    {
+      "path": "runs/F4/ETHUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "0a8a7b26b87ed1cd1e639643cfe72ff21a85516837a979bf7cd22442d27a8a8d"
+    },
+    {
+      "path": "runs/F4/ETHUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "e76984d278308bb8611681966826adbd0b6a0c141d9dad58f39813eb27828bbc"
+    },
+    {
+      "path": "runs/F4/ETHUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a90ad88e57116ef851bcdc4222cc317aece818168accc4f1724aa316e84127ef"
+    },
+    {
+      "path": "runs/F4/ETHUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "c1061dc85dcc523e5586ae5f15b4ab83ca5b144875de507f72bfae88180b7079"
+    },
+    {
+      "path": "runs/F4/ETHUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "095cdb1b45a08d3e4dca617bd27b9bfce7990883e0099e3f1275464ab3b30ea3"
+    },
+    {
+      "path": "runs/F4/ETHUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "1d6fe383a3ef26bb54be2b0b8e1d6b8441f948d5d69598976988ac60a4544c06"
+    },
+    {
+      "path": "runs/F5/ETHUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "9367fbba1385b3baf14e92ecaa8ba820a1f16b0fd2fa64e0f0663e753a2430ce"
+    },
+    {
+      "path": "runs/F5/ETHUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "08398f7b8e0bf5d7c4f802fbcb79f9460302943ab7aa5b10f7aa5af394ca3cd3"
+    },
+    {
+      "path": "runs/F5/ETHUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "c8ce1c991c3ba54203a1768975c7d14ca676582ad2e344d20f7024f81b492303"
+    },
+    {
+      "path": "runs/F5/ETHUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "36fcac8bf7c0c0ee091a818152a7b67a89752f171c750082e62b8dc8baa5c05a"
+    },
+    {
+      "path": "runs/F5/ETHUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "ba058d7326990216f233450f3be57704046ef3cd0d84c9323ea958a041abd66c"
+    },
+    {
+      "path": "runs/F5/ETHUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "f031f6e255b01cfcd9e0d59b258a966d5ca6c2b25f431de6a49dff297f06c4d7"
+    },
+    {
+      "path": "runs/F5/ETHUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "2d2c20248d797313a0cba6e673549fb565f1acc1be89b1547562c2f58ea900c7"
+    },
+    {
+      "path": "runs/BUY_HOLD/ETHUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "5833f2ff7b4cd26470a7a9c2223159cc6556f841a9bc19837e15549d93550940"
+    },
+    {
+      "path": "runs/BUY_HOLD/ETHUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a18fc147d4f5b87be9fca90b90c2491370914752e5b4fc971b20f62643913a45"
+    },
+    {
+      "path": "runs/BUY_HOLD/ETHUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "95ccddf8f86e6273e1e158fac2dfa7ca859e45a7b9fd7b6a1a516bf457a012b9"
+    },
+    {
+      "path": "runs/BUY_HOLD/ETHUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "1a67b0cb25fc7aacaf50cd22f3d1ff46d02925cfe62408bdd02898da3376b408"
+    },
+    {
+      "path": "runs/BUY_HOLD/ETHUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "6d20ab86bc3ae051d17ea500968cbac140b3070a22fcd223d3237781377fb8e1"
+    },
+    {
+      "path": "runs/BUY_HOLD/ETHUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "1a67b0cb25fc7aacaf50cd22f3d1ff46d02925cfe62408bdd02898da3376b408"
+    },
+    {
+      "path": "runs/BUY_HOLD/ETHUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "6d20ab86bc3ae051d17ea500968cbac140b3070a22fcd223d3237781377fb8e1"
+    },
+    {
+      "path": "runs/CASH/BNBUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "109ed1df56a8db911b859a5834e874517e8dbee53d71fda6dcc44942624b3dfa"
+    },
+    {
+      "path": "runs/F2/BNBUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "c4dab5e6bd3146a2b8ffc011699d9098d62cfbcfe4868ce09d68b76890ba8bbf"
+    },
+    {
+      "path": "runs/F2/BNBUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "2397119e79c4b900830b782a8ff3a3c7bc7e5328dff0ca275e0b466e3fb9943d"
+    },
+    {
+      "path": "runs/F2/BNBUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "b038ba41714c633b659e2762f77c959d23bf34a549d9dd02babdd929345f4c5e"
+    },
+    {
+      "path": "runs/F2/BNBUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "421b703232c52c83acba3a0742c23064d99cd6b54df702a290c6e3dc0e4e1a39"
+    },
+    {
+      "path": "runs/F2/BNBUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "f92f016e9d56f1efabd85877cf877d097da9f1882b8b5c1c49a16516f89a8975"
+    },
+    {
+      "path": "runs/F2/BNBUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a826c8022a43993e4f5865335ccd13935c401ee5620269308f855d6945fbb62d"
+    },
+    {
+      "path": "runs/F2/BNBUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "c558bbef36172d5f6e5d0477653c5ee157c6dc85bedafa6493600e0a67dbc9a9"
+    },
+    {
+      "path": "runs/F3/BNBUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "c37ec1428691a9bff7fc62ed8d623e6c7f9fe31588238bb0199f37711cef1b0c"
+    },
+    {
+      "path": "runs/F3/BNBUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "394ce804e24b7535c108d84a261b66d5a7b974a84e52e8df32452a403dd54bc8"
+    },
+    {
+      "path": "runs/F3/BNBUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "377516d5c49b7fd061ca6c77c3d5d2223fb75dd2c684ee9db35d810ee5bfa3f1"
+    },
+    {
+      "path": "runs/F3/BNBUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "df5fb6a1928b8357f7fe9117a93965ebdc9dcc2694c584175ca850cf98d1b405"
+    },
+    {
+      "path": "runs/F3/BNBUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "e86fbf78d222abdc1661725d7b2962eeaf3e32cbbdbf2db2c0d26320b43dc655"
+    },
+    {
+      "path": "runs/F3/BNBUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "1c74d2885a5524ebfdb5cdb01ff4b2e04bff106af8906bceb8ca931d7f481d93"
+    },
+    {
+      "path": "runs/F3/BNBUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "3eb2f42762810768df203fb6eed6e2012f63504b793cca7b420597780fd79f0e"
+    },
+    {
+      "path": "runs/F4/BNBUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "e23159c557caf1ce9467b333f25ab2891d3b3f4b5ca8e7b76c0fd113aec33881"
+    },
+    {
+      "path": "runs/F4/BNBUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "5d5fdfefce6cfefee8fa553d33d73cbee05dc1777bfd8b109b08a580c737587b"
+    },
+    {
+      "path": "runs/F4/BNBUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "7b1d82195387730df3a023bfa173e710c8505a9541084f8d84b9d68d44f011a3"
+    },
+    {
+      "path": "runs/F4/BNBUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "b056da836e27ad1138644855c84fd483a7bc54f29886be1e136ce595ca6688e3"
+    },
+    {
+      "path": "runs/F4/BNBUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "bb9e46f0c4a0ced42860128b4d00f4b5b5b8a6039b31c22c14ca2146ad35f60d"
+    },
+    {
+      "path": "runs/F4/BNBUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "3e8fc06601180e0d56c977a3da489590edc6662d5c9e5851c6047fde24488d2e"
+    },
+    {
+      "path": "runs/F4/BNBUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a0b7258acd927e6a3d750e7bfcfe08cd4f7ca321b09a77c4d14b0bc0c5695f08"
+    },
+    {
+      "path": "runs/F5/BNBUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "d14ef000a134ecb4389429f40118115dd2f925cdca0281ac74a909588e7b171f"
+    },
+    {
+      "path": "runs/F5/BNBUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "bc6322146f0d1db6d24465726840da153c298d596ed4014bbdbb5fbd9b46c384"
+    },
+    {
+      "path": "runs/F5/BNBUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "8760e85ffc10328c351c3cf00f292bc0da58070ffc2c540048076f8a0d142c0a"
+    },
+    {
+      "path": "runs/F5/BNBUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "5ee666309d8f2569ef7c00047d0e85be57c6cb389fd4130b9904942e6de54326"
+    },
+    {
+      "path": "runs/F5/BNBUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "c097434619c150ff2462c95e31a8f190299de2b2c62f5ce3c9a52130663709e2"
+    },
+    {
+      "path": "runs/F5/BNBUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "07d06d9d7087a31aacea0f7081713670834f84ff8944aaa98ef6df0a4b0b5e35"
+    },
+    {
+      "path": "runs/F5/BNBUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "5241bbee436602fb672af889c24b63bd715042e6c42c43db666b5c07dd7db726"
+    },
+    {
+      "path": "runs/BUY_HOLD/BNBUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "bda530bdbf01cab2ae2213d72e74905f8eda86be44109fb80006b4922e96cb27"
+    },
+    {
+      "path": "runs/BUY_HOLD/BNBUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "b14fc9120a290f649d186bb8a6e797d38c79c1b9be861c04f14bdda923fcdeb3"
+    },
+    {
+      "path": "runs/BUY_HOLD/BNBUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "d74799027dd2b9227faae7c46bb4d8666be9afaff89f2df9c29bea443c1a10ee"
+    },
+    {
+      "path": "runs/BUY_HOLD/BNBUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "8fdde5a66e8ba915d124173338392cf086bcd0e055d802cf4fa0f147417dabed"
+    },
+    {
+      "path": "runs/BUY_HOLD/BNBUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "c072d8dc3ca77fbbf19b5426187a27ed426cde4e0e025a426632d7809f534181"
+    },
+    {
+      "path": "runs/BUY_HOLD/BNBUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "8fdde5a66e8ba915d124173338392cf086bcd0e055d802cf4fa0f147417dabed"
+    },
+    {
+      "path": "runs/BUY_HOLD/BNBUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "c072d8dc3ca77fbbf19b5426187a27ed426cde4e0e025a426632d7809f534181"
+    },
+    {
+      "path": "runs/CASH/SOLUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "adc97d85c8b2f87b16587aed371eff4ff1469c931f1252b59b57351be06db920"
+    },
+    {
+      "path": "runs/F2/SOLUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "9509f26bad079df134da34df0efc09a772e8c84c6659fa07baba49be5a066756"
+    },
+    {
+      "path": "runs/F2/SOLUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "dcbc76972018423e353608d7f7ae7d7c5a0f7dcd1b35cf6417fdd54dfb6956e0"
+    },
+    {
+      "path": "runs/F2/SOLUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "7146251978aeacea07cf8dfb15e1fd47e300990937f5292cfea4db264e9b779b"
+    },
+    {
+      "path": "runs/F2/SOLUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "3f73be4f679ea912e842f031d59560c0fd01e715ef4b93c534906b28276d0d53"
+    },
+    {
+      "path": "runs/F2/SOLUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a689a910e7b55382b7150e6cb66705e146a06613a75fa57bb3ff973f8674a68a"
+    },
+    {
+      "path": "runs/F2/SOLUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a1b366d0335c548c26538835c07257aee4137288fb6de0e0325d2de435b322b3"
+    },
+    {
+      "path": "runs/F2/SOLUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "03e694d8db74cd1a736ac76cf9bee3f0241c24648b103078f5c41260f6d8a096"
+    },
+    {
+      "path": "runs/F3/SOLUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "15639560cb4d2c3bdf028451167ac371e6035f1e4f500d473f5b315a52b73599"
+    },
+    {
+      "path": "runs/F3/SOLUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a2060b434f51d4221d81a3c3acaf493dc1a0a4aea893d176f6054bc3f1fef0ae"
+    },
+    {
+      "path": "runs/F3/SOLUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "572eaa26dd6bbb5375072eedcd55e31eeec040bb1de1aec00c021d572c3c5b2f"
+    },
+    {
+      "path": "runs/F3/SOLUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "b8a5131494fee21d3f8f9829bb661dbad16b0eca18f1f6644dee31f3d2dc345e"
+    },
+    {
+      "path": "runs/F3/SOLUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "81e4e6b325796b7b028626be27c611a3273b85923809919ab7f46d15937c2ad5"
+    },
+    {
+      "path": "runs/F3/SOLUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "2c97562819bcd8ab9548e4ec86933569f288c1d21b2f1102be19ab7ae78ccc5e"
+    },
+    {
+      "path": "runs/F3/SOLUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "6b2556707d18dac31ab1e1300ce24bc77166024a1e62dafc6d8a87e016c47e0e"
+    },
+    {
+      "path": "runs/F4/SOLUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "873a3af084de8ebed67438d4415025156949b2e5f321915374ed3f4b03427cc1"
+    },
+    {
+      "path": "runs/F4/SOLUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "85a641a3e0a3408b26e0ccbb48459fd32c0678250eef242256094752f3c5c24e"
+    },
+    {
+      "path": "runs/F4/SOLUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "25925da4b90cc6596edbdbfd8d14a2d5a231bdf91e139dbfdc23936dba2476e6"
+    },
+    {
+      "path": "runs/F4/SOLUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "9c32e892bebe3f1e661b067de6db83f4ee63360925101e0bbcf92732cfd85964"
+    },
+    {
+      "path": "runs/F4/SOLUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a8a69798d572131c4834f061642538ad128a49f3b609e7f3b8826293c7f89a9e"
+    },
+    {
+      "path": "runs/F4/SOLUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "f4a176862f833fcd80f81d2e01645013dfd551e3ec25769409bc240c77441b67"
+    },
+    {
+      "path": "runs/F4/SOLUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "d36d0d1f69bbf3e862bfb27d9dd8c1e12b0b3e29ef84ffac8455cfcf7b1f9b02"
+    },
+    {
+      "path": "runs/F5/SOLUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "6f6c63016314212b43d6895e92dd8bb24a2925d5628db3159faed433da795ea7"
+    },
+    {
+      "path": "runs/F5/SOLUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "38f710983c24437b803a4bcdee15cf0ec12700b470d228e67bde1381bd56d10b"
+    },
+    {
+      "path": "runs/F5/SOLUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "c2674fa2402873ea9780c7d8f6b41bf2684d6d70d1f062770778ea803569da77"
+    },
+    {
+      "path": "runs/F5/SOLUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "21e936b57e3c7957a25053ba8153a96b47f63477562aaae2fceb6ca2fed62bfb"
+    },
+    {
+      "path": "runs/F5/SOLUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "0477ba165146b6ead2436e2bdc1bd189710b9ebd36ce74dd6f6d0de0476c6aa2"
+    },
+    {
+      "path": "runs/F5/SOLUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "f183e750fd22141e647da97634dddab9ae9ae5c96d0a415154a94393a2dde913"
+    },
+    {
+      "path": "runs/F5/SOLUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "027bdc7cebd4460e02f5a119e96650976e3a969fb67b5908599d45afc0c7d04c"
+    },
+    {
+      "path": "runs/BUY_HOLD/SOLUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "7543ce6be9c6aae5576a57c671570787e7eddbcfd728f881bfd5b2e4d3412671"
+    },
+    {
+      "path": "runs/BUY_HOLD/SOLUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "032a608fa9370d22d3d280d19d10b831397ea4b114e88173a269f80939b28413"
+    },
+    {
+      "path": "runs/BUY_HOLD/SOLUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "7b89d65cb959964dd48a5598e8fddc018c7e1af7344c2a392160b263434754af"
+    },
+    {
+      "path": "runs/BUY_HOLD/SOLUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "42165a84d9a2391503598ced0df71c0208df724694f0a3c62c6dec59aaf38cd9"
+    },
+    {
+      "path": "runs/BUY_HOLD/SOLUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "2cddc3e2212faef55e852c41046c9286e8bb4b8e6f6ab6b95aa3bf579100a7e3"
+    },
+    {
+      "path": "runs/BUY_HOLD/SOLUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "42165a84d9a2391503598ced0df71c0208df724694f0a3c62c6dec59aaf38cd9"
+    },
+    {
+      "path": "runs/BUY_HOLD/SOLUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "2cddc3e2212faef55e852c41046c9286e8bb4b8e6f6ab6b95aa3bf579100a7e3"
+    },
+    {
+      "path": "runs/CASH/XRPUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "ec1351a958c5fe392f74422904c351caa246aff2b0daf7cba96ac9140879c376"
+    },
+    {
+      "path": "runs/F2/XRPUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "b82e2ab32944997eee45e4f6491cb49e2922d1ce673a031ef0405721808d058a"
+    },
+    {
+      "path": "runs/F2/XRPUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "3e0a60e538f99ffa14f16d7f969d0ec412be585ed4e29f5d4a06177c57533048"
+    },
+    {
+      "path": "runs/F2/XRPUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "5af79fd470ec5fd924fbbcb02e211224029f3e799d44a635c594a357b10fd457"
+    },
+    {
+      "path": "runs/F2/XRPUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "aaac1d13c4e82cd00d5e779c58d4a03a5d53a7a467ced1112981ccb542d31dc3"
+    },
+    {
+      "path": "runs/F2/XRPUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "d000163dbcbdebcd5ae80546cbca5596a8f23ce1d8c2e8d71791598ea4757dda"
+    },
+    {
+      "path": "runs/F2/XRPUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "e58246f7bc69b6a8deef76c34c817dd175133611c43e5882b34ac1684af4417f"
+    },
+    {
+      "path": "runs/F2/XRPUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "5d59f9e819bd5cbede2c80eb4e52ee3611db58b2052575e4fcb8621297f4b04d"
+    },
+    {
+      "path": "runs/F3/XRPUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "2ce3f88ed964702e9b53bbdc34240c3d33f1f9951b63c3f879796c3076900b26"
+    },
+    {
+      "path": "runs/F3/XRPUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "73a22b078b79729f9f7af299141d5130b0bc31938ef43e847ff412453e18a47c"
+    },
+    {
+      "path": "runs/F3/XRPUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a7852bcd4d778016182f9f3035c078ebb2854e628114ebb75b3bb479f4c7f5ba"
+    },
+    {
+      "path": "runs/F3/XRPUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "2f7b515cae1a2cacf7c5135f313b96004f16deff7081e900fbb0721b787d7e86"
+    },
+    {
+      "path": "runs/F3/XRPUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "302cd23bcee0ea6875992eafbd92645871b2a01d4f1abeedae71a90e48d1f0e5"
+    },
+    {
+      "path": "runs/F3/XRPUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "7363ae46f70b0309c511caed8a3da0f7c032255a2e39ede31ee5f42df8a914f8"
+    },
+    {
+      "path": "runs/F3/XRPUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "b825421b9ecc4903ec62a1b42c7a2ade773674d99fa05fc7bc7acc99f8cfb5b6"
+    },
+    {
+      "path": "runs/F4/XRPUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "2f9408327d3d159c46069d011452bab2dd91b3e2609bec13ea12f7cc79d26ab7"
+    },
+    {
+      "path": "runs/F4/XRPUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "059a221d798e4ff56ba0fa83ea67af0ad27a2b3ab8f7e105da4f50943f4e27c7"
+    },
+    {
+      "path": "runs/F4/XRPUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "bc33a1a199ab8065d4447718ae2aca35c2126d6f2770d36939513b6f6fe6d217"
+    },
+    {
+      "path": "runs/F4/XRPUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "dae4e630170de0d28acbe5f68884e4632563c4a3942fa4dc0835848375ce9cf0"
+    },
+    {
+      "path": "runs/F4/XRPUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "b329710c9aacb466b7034c39936870786dd15d1bf9fe0582eeac4431cd2fff89"
+    },
+    {
+      "path": "runs/F4/XRPUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "1ad1986d291e312152cec68ec4c9c026ebdc03815de2fff5a2b3f5fee0891ad8"
+    },
+    {
+      "path": "runs/F4/XRPUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "a20a3ea0127483623323e5959b51a009b1a8c52c4bc57f9c78ebf307b3183703"
+    },
+    {
+      "path": "runs/F5/XRPUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "216e80929f088a1b503ee938cae1f3bde3ec0f1bf5f322557d2be6574e57a619"
+    },
+    {
+      "path": "runs/F5/XRPUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "376b3bd1cc4eb1af68ceef6d8c85e254a715945d48b45c0fdcd59d9ce33a40a7"
+    },
+    {
+      "path": "runs/F5/XRPUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "4858d352f9b929f72a5dc1b76cb7c443c3f68ef14dfc70a716073e66bbaaac64"
+    },
+    {
+      "path": "runs/F5/XRPUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "533a33453f147ca7caadbccc3d33c124f0ac48417aae01e9777954d81a31040b"
+    },
+    {
+      "path": "runs/F5/XRPUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "705130b79a6bc8b4599c3724eae2dfd0942d3cfbca1c504eb01ba9621816298d"
+    },
+    {
+      "path": "runs/F5/XRPUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "8bbf6fc8ad82b61dad2f50d65d3c8a2a3d288815d469df010f84d969433febf4"
+    },
+    {
+      "path": "runs/F5/XRPUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "179af725663da56d622dfe250a400559bc63085eb17c211af84860a7730b40bb"
+    },
+    {
+      "path": "runs/BUY_HOLD/XRPUSDT/REDECIDE_FUNDED_1",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "16ffd7b19ed889109f8c015d6fc22792fa4ba4804eb58eeabb02b9c643987031"
+    },
+    {
+      "path": "runs/BUY_HOLD/XRPUSDT/REDECIDE_FUNDED_0",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "1022a97be05d1df4e9392164e6a666d1176ea561e9c972389940507e5622357d"
+    },
+    {
+      "path": "runs/BUY_HOLD/XRPUSDT/REDECIDE_FUNDED_0.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "5716de8f97c906971e6586bbce5e33c224a1e530d51775ed3a7b15681dd37114"
+    },
+    {
+      "path": "runs/BUY_HOLD/XRPUSDT/REDECIDE_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "bd1e8b5982a9e12a30515f986526d119cfb19c5a15d1be9affc179c33bc2f664"
+    },
+    {
+      "path": "runs/BUY_HOLD/XRPUSDT/REDECIDE_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "65607a50933419adf6ba602e408db23563d31a0022563c5474e737f77db4bed0"
+    },
+    {
+      "path": "runs/BUY_HOLD/XRPUSDT/FROZEN_ORDERS_FUNDED_1.5",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "bd1e8b5982a9e12a30515f986526d119cfb19c5a15d1be9affc179c33bc2f664"
+    },
+    {
+      "path": "runs/BUY_HOLD/XRPUSDT/FROZEN_ORDERS_FUNDED_2",
+      "status": "EXACT_COMPLETE_RESULT_MATCH",
+      "economic_event_hash": "65607a50933419adf6ba602e408db23563d31a0022563c5474e737f77db4bed0"
+    }
+  ]
+}

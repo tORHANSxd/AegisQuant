@@ -1,0 +1,76 @@
+{
+  "config": {
+    "schema_version": "aegis-portfolio-contract-b5-v1",
+    "generation": "alpha-r5-portfolio-contract-20260910-v1",
+    "output": "artifacts/alpha_v5/20260910_portfolio_contract_v1",
+    "scope": "B5_PORTFOLIO_BRIDGE_AND_SYNTHETIC_CONTRACT_TESTS",
+    "branch_required": "main",
+    "source_head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+    "budgets": {
+      "contract_jobs": 1,
+      "historical_strategy_engine_runs": 0,
+      "real_return_model_fits": 0,
+      "real_calibration_fits": 0,
+      "final_holdout_accesses": 0,
+      "real_orders": 0
+    },
+    "sources": {
+      "r5_manifest": {
+        "path": "artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json",
+        "sha256": "a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce"
+      },
+      "b4_manifest": {
+        "path": "artifacts/alpha_v5/20260910_execution_contract_v1/OUTPUT_MANIFEST.json",
+        "sha256": "bc4687a0c6e5c9ae76d1021a69d769d22fb7699ef566c8cf495c10afa02023d3"
+      },
+      "b2_safety": {
+        "path": "artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json",
+        "sha256": "c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26"
+      }
+    },
+    "historical_portfolio_inputs": null,
+    "economic_policy_adopted": false,
+    "proposed_risk_policy": {
+      "return_frequency": "UTC_DAILY",
+      "lookback_calendar_days": 90,
+      "ewma_half_life_days": 30,
+      "diagonal_shrinkage": "0.20",
+      "covariance_basis": "TOTAL",
+      "annualization_days": "365.25",
+      "volatility_target_annual": "0.12",
+      "gross_max": "1.0",
+      "single_asset_max": "0.30",
+      "crypto_cluster_gross_max": "0.40",
+      "cvar_confidence": "0.95",
+      "cvar_loss_daily_max": "0.02",
+      "drawdown_window_days": 30,
+      "drawdown_soft": "0.08",
+      "drawdown_hard": "0.12",
+      "automatic_recovery_allowed": false,
+      "enable_for_live": false
+    },
+    "future_scenarios": {
+      "modes": [
+        "INDEPENDENT_SLEEVES",
+        "SHARED_CASH_BRIDGE",
+        "SHARED_CASH_WITH_RISK"
+      ],
+      "stress_paths": [
+        "JOINT_CORRELATED_GAP",
+        "DEPTH_LATENCY_AND_VENUE_HALT",
+        "USDT_DEPEG_AND_BLOCKED_EXIT"
+      ],
+      "capital": "50000",
+      "authorized_runs_now": 0
+    },
+    "research_conclusion": "NO_PROVEN_ALPHA",
+    "production_policy": "CASH",
+    "production_ml_enabled": false,
+    "paper_trading_admitted": false,
+    "live_trading": false,
+    "order_submission_enabled": false
+  },
+  "planned_run_ids": [
+    "alpha-r5-portfolio-contract-20260910-v1:CONTRACT_REPORT"
+  ]
+}

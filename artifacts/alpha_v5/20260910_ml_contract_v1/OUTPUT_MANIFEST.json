@@ -1,0 +1,160 @@
+{
+  "schema_version": "immutable-evidence-output-v1",
+  "files": {
+    "before/src/aegisquant/research/models/economic_filter.py": {
+      "sha256": "ca53aa115f7a4c1912f7c4366dc0701a36137708e443b58da77da915a234c687",
+      "bytes": 10480
+    },
+    "before/src/aegisquant/research/models/uncertainty.py": {
+      "sha256": "1755cf5d47111970a4124deccc178a56354296bda65f826ff002335f4b34ecce",
+      "bytes": 3950
+    },
+    "before/src/aegisquant/research/validation/calendar_walkforward.py": {
+      "sha256": "6a97edb6164171a3499425f40848bd1232233f0eecd2924998cafdadd16eaed2",
+      "bytes": 3961
+    },
+    "before/src/aegisquant/research/validation/splits.py": {
+      "sha256": "ebc7330e188353586b3c8b8963f9b07d20bf32ed68453ab7cfa6333a4e2956a5",
+      "bytes": 9666
+    },
+    "before/src/aegisquant/research/validation/statistics.py": {
+      "sha256": "bac8af6f4f6ee9af1a47e228e61f4848a827435abf6534c26b555f969570acce",
+      "bytes": 7199
+    },
+    "candidate_freeze_draft.json": {
+      "sha256": "a25bf4f3dae0f262cb473e76f0b65caf21fe969738c422cc4c2275c3709f91b7",
+      "bytes": 196
+    },
+    "changes_this_batch.patch": {
+      "sha256": "348f707b318e7cb86e0d4991907be71be46739ac53e9c014173cfd5d260d5722",
+      "bytes": 91183
+    },
+    "episode_ledger.json": {
+      "sha256": "02294caa2fee74b1295d3dda4abe699f55755adc7cfa64924bf7310e3830df15",
+      "bytes": 191
+    },
+    "evidence_gaps.json": {
+      "sha256": "2ead7d2eb0e71a1fa3c3114d6f264f4c94efb1247cf76b2d889389bb45a62a39",
+      "bytes": 406
+    },
+    "experiment_events.jsonl": {
+      "sha256": "4b4761ed9afbbb9740488ddbc1c293a1be523e820c3b5b246307ac3dac2a22b9",
+      "bytes": 952
+    },
+    "fit_and_calibration_log.json": {
+      "sha256": "367cd72bc2c67b320a23ffec2a1b598720119ece4a3c14d1a4b3e57b270843d8",
+      "bytes": 6742
+    },
+    "implementation/configs/research/alpha_v5_ml_contract.yaml": {
+      "sha256": "3d7e9de6996967b4a0485cc4dc5d603b6f4e3c9cd5cb5648cf9aaf3f57a8635f",
+      "bytes": 1362
+    },
+    "implementation/docs/research/alpha_v5_ml_contract.md": {
+      "sha256": "01a560976c5c9dca20575b2afc4f604d979163f5187f6bcef7ea5315e6e8bf05",
+      "bytes": 2966
+    },
+    "implementation/scripts/run_alpha_v5_walkforward.py": {
+      "sha256": "87760008afcab4cfa590141dddb4a41a1b90afdd829da1d4495b579e2f1fca21",
+      "bytes": 1324
+    },
+    "implementation/src/aegisquant/labels/episodes.py": {
+      "sha256": "715722f35412bee7c7b11014e7fb3d95059b63b525a6d01c97ea21ab4e29e9b4",
+      "bytes": 5515
+    },
+    "implementation/src/aegisquant/research/models/economic_filter.py": {
+      "sha256": "e77e88ccc0ae864a271ed39671e8dba1449123aa2b4c839331d974df858ffef0",
+      "bytes": 15069
+    },
+    "implementation/src/aegisquant/research/models/uncertainty.py": {
+      "sha256": "bc4c03028cc690ba0e7bbb839952a0350cc77f7c3657c9ed71ef46665159d5f2",
+      "bytes": 5716
+    },
+    "implementation/src/aegisquant/research/validation/calendar_walkforward.py": {
+      "sha256": "01cf4d93d7dea8e20d4952accbb71ec6822e31894a977eaededf86b79e4a9afa",
+      "bytes": 7281
+    },
+    "implementation/src/aegisquant/research/validation/ml_contract.py": {
+      "sha256": "e40055462e924024ff301d708054284ad5152020572e80333f6d12e2eac22a55",
+      "bytes": 22218
+    },
+    "implementation/src/aegisquant/research/validation/splits.py": {
+      "sha256": "6cd46de145afac6ea774489cb4ea40de82c31a68e1cca0fcf95df1b4cd83a066",
+      "bytes": 16976
+    },
+    "implementation/src/aegisquant/research/validation/statistics.py": {
+      "sha256": "0ab4ff9462bfc8ddd369d06a1f78c861df9a3ba08fcbd3121d5e020302ee063c",
+      "bytes": 13793
+    },
+    "implementation/tests/alpha_v5/test_ml_contract.py": {
+      "sha256": "5dd623adb9f3126525b9f9fb58ab7c894cbdb154cf07c5164f9fe79d4c6e18f4",
+      "bytes": 21410
+    },
+    "oof_provenance.json": {
+      "sha256": "8c17481dcb95bd3ef7eb19b83ad4b2cea71600f766c97cdd1e16de367403609a",
+      "bytes": 336
+    },
+    "outer_metrics.json": {
+      "sha256": "d87accba022d9873a3809bb93476d13ef2135a934514286088db514f5fc990e1",
+      "bytes": 417
+    },
+    "preflight/baseline_workspace.json": {
+      "sha256": "a6c36b7f25366b75149a8c8cb7d0c1bee76be52a2331d11b1332a53499ec965a",
+      "bytes": 2894828
+    },
+    "preflight/version_graph.txt": {
+      "sha256": "8f3e7a79bd150ceae259d9a31471729b4d6d07d53d71568dc467a760449005ea",
+      "bytes": 473
+    },
+    "preflight/workspace_before.patch": {
+      "sha256": "3d348b0a59a05911e06ca531f8720846c2da419812e6be1216898008f948b094",
+      "bytes": 115734
+    },
+    "preregistration.json": {
+      "sha256": "0b87a909c88fafc239003201c0e8b7c1cf6ded72fbb48d2fe90f6160ed5cdc58",
+      "bytes": 1831
+    },
+    "report.md": {
+      "sha256": "e83ba0a8d9ef123da8f7d2aa032fb4dd1552d024d29cf834d7091f648d0ca47c",
+      "bytes": 1794
+    },
+    "run_claims/006b23f27475330a1c56432f34eb9294d6b1e967e7f89ec9f9609574e8c5ed5f": {
+      "sha256": "006b23f27475330a1c56432f34eb9294d6b1e967e7f89ec9f9609574e8c5ed5f",
+      "bytes": 48
+    },
+    "safety_and_budget_audit.json": {
+      "sha256": "fcb0db8517dd408fc7985f57140b9fb5775196c8b0be284178b1d5868fe2800d",
+      "bytes": 1189
+    },
+    "source_and_version_bindings.json": {
+      "sha256": "2a331d9ded009ea7e5432b103f547b81fc4af4c0c0cd920549453ee6c0cf8e8e",
+      "bytes": 2644
+    },
+    "split_manifest.json": {
+      "sha256": "2141846f84c5b5e73d76713fff4b9cc9062d48a36621cef3008695b465d6e31d",
+      "bytes": 2225
+    },
+    "statistical_evidence.json": {
+      "sha256": "f0e8dde4afc96bd3afbc0ba290d4fbadb7c55b63113bb85d73c4eb770c110123",
+      "bytes": 412
+    },
+    "trial_registry_status.json": {
+      "sha256": "f6b0a3c97a4841c5091d59f8ec2d742f129c3ae864f3f9fb27706f6b5d5fbe44",
+      "bytes": 221
+    },
+    "validation/pytest_results.xml": {
+      "sha256": "31b830b7af52c69b686cd01fd8f8e5fa831e5135b038859697f50844ec0a1413",
+      "bytes": 6805
+    },
+    "validation/test_commands_and_results.txt": {
+      "sha256": "e5207d91929ac744a3eede85816e1b3fafee950d9a3272e21655a40a25883398",
+      "bytes": 38603
+    },
+    "validation/validation_records.json": {
+      "sha256": "e24d9a8d6dcde2203d971f6f291ccb8971586cf30d13b2903c90885b08378abc",
+      "bytes": 42044
+    }
+  },
+  "content_sha256": "08f0a1e6bfd1f60e44ee8f30bd3711064cbc14c214809b84b29d1752728edc08",
+  "self_excluded": "OUTPUT_MANIFEST.json",
+  "write_policy": "EXCLUSIVE_GENERATION_NO_REOPEN"
+}

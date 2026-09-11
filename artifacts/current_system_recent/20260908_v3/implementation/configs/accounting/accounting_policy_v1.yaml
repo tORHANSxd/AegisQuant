@@ -1,0 +1,10 @@
+policy_version: "accounting-v1"
+chart_version: "coa-v1"
+template_version: "entry-templates-v1"
+lot_policy: "FIFO"
+valuation_priority:
+  - "MARK"
+  - "MID"
+  - "LAST"
+  - "INDEX"
+mutation_score_threshold: "0.90"

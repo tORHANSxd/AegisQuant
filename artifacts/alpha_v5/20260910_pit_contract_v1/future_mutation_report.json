@@ -1,0 +1,27 @@
+{
+  "kind": "SYNTHETIC_ONLY_NOT_HISTORICAL_COVERAGE",
+  "passed_tests": 49,
+  "future_mutation_cases": [
+    "test_b2_future_information_preserves_decision_snapshot_bytes[membership_revision]",
+    "test_b2_future_information_preserves_decision_snapshot_bytes[late_backfill]",
+    "test_b2_future_information_preserves_decision_snapshot_bytes[future_listing]",
+    "test_b2_future_information_preserves_decision_snapshot_bytes[liquidity_revision]",
+    "test_b2_future_information_preserves_decision_snapshot_bytes[rule_revision]",
+    "test_b2_future_information_preserves_decision_snapshot_bytes[cross_asset_listing]",
+    "test_b2_future_information_preserves_decision_snapshot_bytes[cross_asset_liquidity]",
+    "test_b2_future_announced_event_is_part_of_the_known_prefix",
+    "test_b2_future_mutation_and_input_reordering_are_cross_asset_stable"
+  ],
+  "real_engine_prefix_checks": "NOT_RUN_B2_SCOPE",
+  "source_sha256": {
+    "src/aegisquant/research/datasets/universe.py": "ce742f5e00009bb6584ece87eee8c997c4a2651f091eb97f30f961d8b304bd1c",
+    "src/aegisquant/research/datasets/pit_universe.py": "23e15f66924323e5112dfd6b381d74fa5d75f77b97edbf247e62bc9f19eaefca",
+    "scripts/run_alpha_v5_research.py": "01e6b51c5d532f12d8380ddf46dc93c18c49fed4645b57fc76e9c8633bd7eeda",
+    "tests/alpha_v5/test_research_guards.py": "76cfd95884cd1c0f2e1d08c1d22de1b2f954531128f8c192412faf3b58e97645",
+    "tests/alpha_v5/test_no_future_mutation.py": "8693e2115fa95e1a1d97017d9f9fae5bcb9148f6e935e474d634d022048cc916",
+    "src/aegisquant/research/validation/pit_contract.py": "e88071dba8fa6d968efc783d8fca528648161a83f42608bfc2849442c9c6b965",
+    "configs/research/alpha_v5_pit_contract.yaml": "65743cec992c15582b4cc5072f01a8292fbab03953e94f346026617226edd58a",
+    "docs/research/alpha_v5_pit_contract.md": "df195a557fbba66bfc7901063e0742f209eee53c0c64a0bdb58738f9463973ef"
+  },
+  "pytest_xml_sha256": "83e5b9b187f6f6621bdf926dfba0b4e18c78535c294d0832a52c319be77f1e93"
+}

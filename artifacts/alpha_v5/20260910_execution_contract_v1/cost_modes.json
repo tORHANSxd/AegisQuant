@@ -1,0 +1,14 @@
+{
+  "REDECIDE_FUNDED": {
+    "monotonic_shadow_required": false,
+    "new_historical_result": null
+  },
+  "FROZEN_ORDERS_FUNDED": {
+    "monotonic_shadow_required": false,
+    "new_historical_result": null
+  },
+  "SAME_FILL_SHADOW": {
+    "monotonic_shadow_required": true,
+    "new_historical_result": null
+  }
+}

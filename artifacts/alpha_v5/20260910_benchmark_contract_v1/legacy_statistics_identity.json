@@ -1,0 +1,227 @@
+{
+  "status": "DERIVED_ONLY",
+  "original_statistics": {
+    "evidence_tier": "DEVELOPMENT_UNCERTAINTY_ONLY",
+    "block_days": 52,
+    "comparisons": {
+      "G1-G0": {
+        "observed_compound_return_difference": "0.25970963150219656",
+        "ci95_lower": "0.0171237045221357",
+        "ci95_upper": "0.9249095029129479",
+        "one_sided_mean_p_value": "0.028697130286971302",
+        "terminal_wealth_difference_usdt": "12985.481575109909",
+        "holm_adjusted_p_value": "0.20087991200879912"
+      },
+      "G1-F0": {
+        "observed_compound_return_difference": "0.32120906231416496",
+        "ci95_lower": "0.04586509569931174",
+        "ci95_upper": "1.0752264824339488",
+        "one_sided_mean_p_value": "0.019098090190980903",
+        "terminal_wealth_difference_usdt": "16060.453115708311",
+        "holm_adjusted_p_value": "0.17188281171882813"
+      },
+      "G1-F5": {
+        "observed_compound_return_difference": "-0.017344944793440176",
+        "ci95_lower": "-1.1870917197650352",
+        "ci95_upper": "0.7947261012732433",
+        "one_sided_mean_p_value": "0.5558444155584441",
+        "terminal_wealth_difference_usdt": "-867.2472396717203",
+        "holm_adjusted_p_value": "0.5558444155584441"
+      },
+      "G1-G1_PASSIVE": {
+        "observed_compound_return_difference": "0.2712452473070123",
+        "ci95_lower": "-0.3688238997037245",
+        "ci95_upper": "1.2599588186764583",
+        "one_sided_mean_p_value": "0.205979402059794",
+        "terminal_wealth_difference_usdt": "13562.262365350616",
+        "holm_adjusted_p_value": "0.411958804119588"
+      },
+      "G1-CASH": {
+        "observed_compound_return_difference": "0.6032918304592945",
+        "ci95_lower": "-0.16422783332174046",
+        "ci95_upper": "2.2888449472584456",
+        "one_sided_mean_p_value": "0.07479252074792521",
+        "terminal_wealth_difference_usdt": "30164.591522964794",
+        "holm_adjusted_p_value": "0.22437756224377564"
+      },
+      "G1_H3-G0": {
+        "observed_compound_return_difference": "0.24398234784508893",
+        "ci95_lower": "0.013974673007877404",
+        "ci95_upper": "0.8694278177923079",
+        "one_sided_mean_p_value": "0.030596940305969402",
+        "terminal_wealth_difference_usdt": "12199.117392254338",
+        "holm_adjusted_p_value": "0.20087991200879912"
+      },
+      "G1_H10-G0": {
+        "observed_compound_return_difference": "0.2601574058847132",
+        "ci95_lower": "0.02323854166182963",
+        "ci95_upper": "0.8910853903169041",
+        "one_sided_mean_p_value": "0.0244975502449755",
+        "terminal_wealth_difference_usdt": "13007.870294235734",
+        "holm_adjusted_p_value": "0.195980401959804"
+      },
+      "G1_R24-G0": {
+        "observed_compound_return_difference": "0.2677177222832788",
+        "ci95_lower": "0.0017184429442271714",
+        "ci95_upper": "1.0153474119363775",
+        "one_sided_mean_p_value": "0.0375962403759624",
+        "terminal_wealth_difference_usdt": "13385.886114163892",
+        "holm_adjusted_p_value": "0.20087991200879912"
+      },
+      "G1_R72-G0": {
+        "observed_compound_return_difference": "0.21206908719323742",
+        "ci95_lower": "-0.0023848888784200654",
+        "ci95_upper": "0.7468289827440787",
+        "one_sided_mean_p_value": "0.03519648035196481",
+        "terminal_wealth_difference_usdt": "10603.454359661817",
+        "holm_adjusted_p_value": "0.20087991200879912"
+      }
+    },
+    "dsr": null,
+    "pbo": null,
+    "dsr_pbo_status": "INSUFFICIENT_COMPLETE_HISTORICAL_INDEPENDENT_TRIAL_HISTORY"
+  },
+  "comparisons": {
+    "G1-G0": {
+      "original_values": {
+        "observed_compound_return_difference": "0.25970963150219656",
+        "ci95_lower": "0.0171237045221357",
+        "ci95_upper": "0.9249095029129479",
+        "one_sided_mean_p_value": "0.028697130286971302",
+        "terminal_wealth_difference_usdt": "12985.481575109909",
+        "holm_adjusted_p_value": "0.20087991200879912"
+      },
+      "p_value_estimand": "DAILY_MEAN_RETURN_DIFFERENCE",
+      "secondary_interval_estimand": "COMPOUNDED_RETURN_DIFFERENCE",
+      "secondary_interval_multiplicity_adjusted": false,
+      "correction": "HOLM"
+    },
+    "G1-F0": {
+      "original_values": {
+        "observed_compound_return_difference": "0.32120906231416496",
+        "ci95_lower": "0.04586509569931174",
+        "ci95_upper": "1.0752264824339488",
+        "one_sided_mean_p_value": "0.019098090190980903",
+        "terminal_wealth_difference_usdt": "16060.453115708311",
+        "holm_adjusted_p_value": "0.17188281171882813"
+      },
+      "p_value_estimand": "DAILY_MEAN_RETURN_DIFFERENCE",
+      "secondary_interval_estimand": "COMPOUNDED_RETURN_DIFFERENCE",
+      "secondary_interval_multiplicity_adjusted": false,
+      "correction": "HOLM"
+    },
+    "G1-F5": {
+      "original_values": {
+        "observed_compound_return_difference": "-0.017344944793440176",
+        "ci95_lower": "-1.1870917197650352",
+        "ci95_upper": "0.7947261012732433",
+        "one_sided_mean_p_value": "0.5558444155584441",
+        "terminal_wealth_difference_usdt": "-867.2472396717203",
+        "holm_adjusted_p_value": "0.5558444155584441"
+      },
+      "p_value_estimand": "DAILY_MEAN_RETURN_DIFFERENCE",
+      "secondary_interval_estimand": "COMPOUNDED_RETURN_DIFFERENCE",
+      "secondary_interval_multiplicity_adjusted": false,
+      "correction": "HOLM"
+    },
+    "G1-G1_PASSIVE": {
+      "original_values": {
+        "observed_compound_return_difference": "0.2712452473070123",
+        "ci95_lower": "-0.3688238997037245",
+        "ci95_upper": "1.2599588186764583",
+        "one_sided_mean_p_value": "0.205979402059794",
+        "terminal_wealth_difference_usdt": "13562.262365350616",
+        "holm_adjusted_p_value": "0.411958804119588"
+      },
+      "p_value_estimand": "DAILY_MEAN_RETURN_DIFFERENCE",
+      "secondary_interval_estimand": "COMPOUNDED_RETURN_DIFFERENCE",
+      "secondary_interval_multiplicity_adjusted": false,
+      "correction": "HOLM"
+    },
+    "G1-CASH": {
+      "original_values": {
+        "observed_compound_return_difference": "0.6032918304592945",
+        "ci95_lower": "-0.16422783332174046",
+        "ci95_upper": "2.2888449472584456",
+        "one_sided_mean_p_value": "0.07479252074792521",
+        "terminal_wealth_difference_usdt": "30164.591522964794",
+        "holm_adjusted_p_value": "0.22437756224377564"
+      },
+      "p_value_estimand": "DAILY_MEAN_RETURN_DIFFERENCE",
+      "secondary_interval_estimand": "COMPOUNDED_RETURN_DIFFERENCE",
+      "secondary_interval_multiplicity_adjusted": false,
+      "correction": "HOLM"
+    },
+    "G1_H3-G0": {
+      "original_values": {
+        "observed_compound_return_difference": "0.24398234784508893",
+        "ci95_lower": "0.013974673007877404",
+        "ci95_upper": "0.8694278177923079",
+        "one_sided_mean_p_value": "0.030596940305969402",
+        "terminal_wealth_difference_usdt": "12199.117392254338",
+        "holm_adjusted_p_value": "0.20087991200879912"
+      },
+      "p_value_estimand": "DAILY_MEAN_RETURN_DIFFERENCE",
+      "secondary_interval_estimand": "COMPOUNDED_RETURN_DIFFERENCE",
+      "secondary_interval_multiplicity_adjusted": false,
+      "correction": "HOLM"
+    },
+    "G1_H10-G0": {
+      "original_values": {
+        "observed_compound_return_difference": "0.2601574058847132",
+        "ci95_lower": "0.02323854166182963",
+        "ci95_upper": "0.8910853903169041",
+        "one_sided_mean_p_value": "0.0244975502449755",
+        "terminal_wealth_difference_usdt": "13007.870294235734",
+        "holm_adjusted_p_value": "0.195980401959804"
+      },
+      "p_value_estimand": "DAILY_MEAN_RETURN_DIFFERENCE",
+      "secondary_interval_estimand": "COMPOUNDED_RETURN_DIFFERENCE",
+      "secondary_interval_multiplicity_adjusted": false,
+      "correction": "HOLM"
+    },
+    "G1_R24-G0": {
+      "original_values": {
+        "observed_compound_return_difference": "0.2677177222832788",
+        "ci95_lower": "0.0017184429442271714",
+        "ci95_upper": "1.0153474119363775",
+        "one_sided_mean_p_value": "0.0375962403759624",
+        "terminal_wealth_difference_usdt": "13385.886114163892",
+        "holm_adjusted_p_value": "0.20087991200879912"
+      },
+      "p_value_estimand": "DAILY_MEAN_RETURN_DIFFERENCE",
+      "secondary_interval_estimand": "COMPOUNDED_RETURN_DIFFERENCE",
+      "secondary_interval_multiplicity_adjusted": false,
+      "correction": "HOLM"
+    },
+    "G1_R72-G0": {
+      "original_values": {
+        "observed_compound_return_difference": "0.21206908719323742",
+        "ci95_lower": "-0.0023848888784200654",
+        "ci95_upper": "0.7468289827440787",
+        "one_sided_mean_p_value": "0.03519648035196481",
+        "terminal_wealth_difference_usdt": "10603.454359661817",
+        "holm_adjusted_p_value": "0.20087991200879912"
+      },
+      "p_value_estimand": "DAILY_MEAN_RETURN_DIFFERENCE",
+      "secondary_interval_estimand": "COMPOUNDED_RETURN_DIFFERENCE",
+      "secondary_interval_multiplicity_adjusted": false,
+      "correction": "HOLM"
+    }
+  },
+  "family_size": 9,
+  "family_sha256": "b305ec216930219699128d19007f79a552c6e8e5079954c2d273015a14b1b4b6",
+  "bootstrap": {
+    "seed": 20260908,
+    "repetitions": 10000,
+    "block_days": 52,
+    "method": "PAIRED_CIRCULAR_BLOCK",
+    "source": "FROZEN_PREREGISTRATION_AND_IMPLEMENTATION"
+  },
+  "new_resamples": 0,
+  "dsr": null,
+  "pbo": null,
+  "dsr_pbo_status": "INSUFFICIENT_COMPLETE_HISTORICAL_INDEPENDENT_TRIAL_HISTORY",
+  "independent_trial_count": null,
+  "promotion_authorization": false
+}

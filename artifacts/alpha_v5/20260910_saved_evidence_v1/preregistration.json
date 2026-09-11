@@ -1,0 +1,59 @@
+{
+  "config": {
+    "schema_version": "aegis-saved-evidence-audit-v1",
+    "generation": "alpha-r5-saved-evidence-20260910-v1",
+    "output": "artifacts/alpha_v5/20260910_saved_evidence_v1",
+    "scope": "B1_SAVED_SIMULATION_JOINS_NO_REPLAY",
+    "branch_required": "main",
+    "source_head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+    "budgets": {
+      "contract_jobs": 1,
+      "historical_strategy_engine_runs": 0,
+      "real_return_model_fits": 0,
+      "real_calibration_fits": 0,
+      "final_holdout_accesses": 0,
+      "real_orders": 0
+    },
+    "sources": {
+      "r5_manifest": {
+        "path": "artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json",
+        "sha256": "a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce"
+      },
+      "b0_catalog": {
+        "path": "artifacts/alpha_v5/20260909_review_contract_v2/evidence_contract.json",
+        "sha256": "696be552a769b21f63cf0bf488feacd767d90958682126fae0b6fdf104fb9724"
+      },
+      "b0_baseline": {
+        "path": "artifacts/alpha_v5/20260909_review_contract_v2/preflight/baseline_workspace.json",
+        "sha256": "d0a38317bd5114b2c12375653b268c29ad9e553787fcb9b94d6c3cfd3fefcf7f"
+      },
+      "b7_manifest": {
+        "path": "artifacts/alpha_v5/20260910_final_contract_v1/OUTPUT_MANIFEST.json",
+        "sha256": "b96416c3931b9b2870afae05092770e1f4ea66ca798ec56c1c5c7f783cabc094"
+      },
+      "r4_registry": {
+        "path": "artifacts/alpha_r4/20260908_v1/experiment_registry.json",
+        "sha256": "ab77f669e9dabedd303d2706b506f09c9c63904b40a03d9f92e7363046b4aebf"
+      }
+    },
+    "saved_scope": {
+      "r5_registered_runs": 55,
+      "r4_f0_quarter_segments": 70,
+      "new_strategy_runs": 0
+    },
+    "source_period": [
+      "2022-04-01T00:00:00Z",
+      "2025-10-01T00:00:00Z"
+    ],
+    "tail_fraction": "0.05",
+    "research_conclusion": "NO_PROVEN_ALPHA",
+    "production_policy": "CASH",
+    "production_ml_enabled": false,
+    "paper_trading_admitted": false,
+    "live_trading": false,
+    "order_submission_enabled": false
+  },
+  "planned_run_ids": [
+    "alpha-r5-saved-evidence-20260910-v1:CONTRACT_REPORT"
+  ]
+}

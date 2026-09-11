@@ -1,0 +1,30 @@
+{
+  "status": "NOT_RECEIVED",
+  "tables": [
+    {
+      "item": "historical_account_fee_rules",
+      "status": "NOT_RECEIVED",
+      "records": null
+    },
+    {
+      "item": "native_asset_balances_and_fee_fx",
+      "status": "NOT_RECEIVED",
+      "records": null
+    },
+    {
+      "item": "historical_l1_l2_sequence_and_trades",
+      "status": "NOT_RECEIVED",
+      "records": null
+    },
+    {
+      "item": "venue_and_client_latency_observations",
+      "status": "NOT_RECEIVED",
+      "records": null
+    },
+    {
+      "item": "queue_positions_and_cancel_observations",
+      "status": "NOT_RECEIVED",
+      "records": null
+    }
+  ]
+}

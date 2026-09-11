@@ -1,0 +1,136 @@
+{
+  "schema_version": "immutable-evidence-output-v1",
+  "files": {
+    "access_ledger_status.json": {
+      "sha256": "863d2e27d32dc1cef862f06fb3e1949550780d39ad5ebe5125588597f5a95e17",
+      "bytes": 552
+    },
+    "all_batches_status.json": {
+      "sha256": "c6efa9c494cc951086a6809e8ffbb50b4e9269b695fe73185c5206bd8ac7325d",
+      "bytes": 1500
+    },
+    "before/src/aegisquant/research/validation/experiment_registry.py": {
+      "sha256": "a0e7ce14064a667363f0257a48a7f496d4fa8f1e8173929561e7a73c502b6a17",
+      "bytes": 3472
+    },
+    "before/src/aegisquant/research/validation/holdout.py": {
+      "sha256": "5a8e9212d958aee0b1cad425a7cef32b322be52b36b3dcc846cf46866209cfd6",
+      "bytes": 8331
+    },
+    "before/src/aegisquant/research/validation/persistent_holdout.py": {
+      "sha256": "8cd443079bd1fb765d16ebc7bc46bfe3710c6c1f9702a9fb0e729bad306756ad",
+      "bytes": 1930
+    },
+    "before/tests/integration/test_walkforward_holdout_firewall.py": {
+      "sha256": "cc46ce7502898c0f0ddbbc6c133cb83aea73cefc69173061f66f9a579ae74170",
+      "bytes": 1688
+    },
+    "changes_this_batch.patch": {
+      "sha256": "fc7a061a11afdc4b6f16a236e3b2ac27bd8cd2b44ddfe62f02dada8e0213f10c",
+      "bytes": 74425
+    },
+    "evidence_gaps.json": {
+      "sha256": "3bc91bcf6313aaebe242d17da8211cd1e3c00974a0d783425bcd33df656a1c66",
+      "bytes": 522
+    },
+    "experiment_events.jsonl": {
+      "sha256": "a1508ba8b7e1f892489f3fd621ca6b8614689e5681c25623cbcea209005098cf",
+      "bytes": 976
+    },
+    "freeze_component_contract.json": {
+      "sha256": "bfa3adda18fa49c53c3160ae082facc7bb7084d563e745b1f6de35ae702c9137",
+      "bytes": 376
+    },
+    "holdout_eligibility.json": {
+      "sha256": "88ae27c437a3315472f2ff42d59fe529c9bbf0b0441afe5879f5ac8d597962a7",
+      "bytes": 302
+    },
+    "implementation/configs/research/alpha_v5_final_holdout_contract.yaml": {
+      "sha256": "78bfa236547afa120bc986bff1a40a1007e900c69686eb4f84cdf08a2084d861",
+      "bytes": 2239
+    },
+    "implementation/docs/research/alpha_v5_final_holdout_contract.md": {
+      "sha256": "02581244d8be106996169646b3b3ae0ff669fe38d6803b1a309f7c1ed7df6040",
+      "bytes": 3941
+    },
+    "implementation/scripts/run_alpha_v5_final_holdout.py": {
+      "sha256": "8cc92fb4637c31b0ea9861712e76036805106b7f0c8f0c700bbae014769c5d29",
+      "bytes": 1331
+    },
+    "implementation/src/aegisquant/research/validation/experiment_registry.py": {
+      "sha256": "f28666c0bc2983d5a81e92577d454a0d832ad745b1766736a9c3c95c0e2cf3db",
+      "bytes": 5643
+    },
+    "implementation/src/aegisquant/research/validation/holdout.py": {
+      "sha256": "23898b93c1fa8aca75f599ae1fe5a3d439a5555725a02925596e7ac71eab391c",
+      "bytes": 9797
+    },
+    "implementation/src/aegisquant/research/validation/holdout_contract.py": {
+      "sha256": "a332a431d68d7a81110b55972fc1d7a65c70895e67f46662cd84cdc9cdacd822",
+      "bytes": 14982
+    },
+    "implementation/src/aegisquant/research/validation/persistent_holdout.py": {
+      "sha256": "13da12bdb8fba71935fb1985ecb42c1ef80f311d9bbe53b3a7df8e44872e3e1a",
+      "bytes": 14500
+    },
+    "implementation/tests/alpha_v5/test_holdout_contract.py": {
+      "sha256": "2212a02790378aba8f71ad7ae47934b633452cdc26e2882b36ed462871fde6aa",
+      "bytes": 25065
+    },
+    "implementation/tests/integration/test_walkforward_holdout_firewall.py": {
+      "sha256": "547558b2cab0c1275081f7e4fbb5e38f8552b8dae7d24756e8868b3d589f6bec",
+      "bytes": 1661
+    },
+    "independent_review.json": {
+      "sha256": "d4d58ea9b02a72b1e53d5dcf84dc5b71fb6c08ea5b2ce010b7cf9525bf404a3c",
+      "bytes": 724
+    },
+    "preflight/baseline_workspace.json": {
+      "sha256": "82fb1f868c1dbad189e9278f1b6b4fbfb1adf7b2b5b14104aa95eb5b27a0468d",
+      "bytes": 2908054
+    },
+    "preflight/version_graph.txt": {
+      "sha256": "8f3e7a79bd150ceae259d9a31471729b4d6d07d53d71568dc467a760449005ea",
+      "bytes": 473
+    },
+    "preflight/workspace_before.patch": {
+      "sha256": "17dc25101a898c5716a623f598b0a79ee41096894e51afd6caf989a5aedbf5ea",
+      "bytes": 151875
+    },
+    "preregistration.json": {
+      "sha256": "bd7d009e53030e6d7258f29570a451ae9e54916bd3719fab1be462116517de5f",
+      "bytes": 2858
+    },
+    "report.md": {
+      "sha256": "e753e955ab24e24685471c5f857e264a6eb435e56353d6bdc2a270194cec4bba",
+      "bytes": 2106
+    },
+    "run_claims/6f7b1416cd3eadb64975ee786cddb67753890303446a8c172069b43f9cdb4f23": {
+      "sha256": "6f7b1416cd3eadb64975ee786cddb67753890303446a8c172069b43f9cdb4f23",
+      "bytes": 51
+    },
+    "safety_and_budget_audit.json": {
+      "sha256": "3a0d81f2844f60dcc0caed296cfac89f38948850c5650b8d7b5009c603b4f153",
+      "bytes": 1189
+    },
+    "source_and_version_bindings.json": {
+      "sha256": "a7d43eb7b802c3d2f5c0fd749930f437e12aa85b07199de7389a1496424feec4",
+      "bytes": 3563
+    },
+    "validation/pytest_results.xml": {
+      "sha256": "f89e6f50af7bc992fb0924bdfd2856b97bbb691145d163c0945633dfca700a8c",
+      "bytes": 13209
+    },
+    "validation/test_commands_and_results.txt": {
+      "sha256": "5b63d5e67ad54c90394cd68fd7888201e3fa5cdafa9347df2e26e36a053a0cbb",
+      "bytes": 99468
+    },
+    "validation/validation_records.json": {
+      "sha256": "54dbc442e6be6e70b2df84fead2a9a118b1e754abd18f0360e5bcb5f8b5cd5ef",
+      "bytes": 123173
+    }
+  },
+  "content_sha256": "aac2508c8d5ffd41ae883cb5ca0ffafc470cddcdb925ba7aab42d88207f99404",
+  "self_excluded": "OUTPUT_MANIFEST.json",
+  "write_policy": "EXCLUSIVE_GENERATION_NO_REOPEN"
+}

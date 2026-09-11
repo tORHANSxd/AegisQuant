@@ -1,0 +1,19 @@
+{
+  "new_files": {
+    "src/aegisquant/research/validation/evidence_contract.py": "109c8fd165409edfaf123a45aad1e1440d71466d50b3cab00030a75cc8c239b1",
+    "scripts/audit_alpha_v5_evidence.py": "7a0a4846319fc9473034cc054debe2a115a8f5636d2de1e35723be1198726d41",
+    "configs/research/alpha_v5_review_contract.yaml": "c1c083315b29ff11b4d8581f219e9fb206768f3d75e925cfbfe596ff8c222504",
+    "tests/alpha_v5/test_evidence_contract.py": "e6f5ac1eee24c85699bc62ddb21ff858fa0e5c1e983ebacdc59b26ec8c1b06a3",
+    "tests/alpha_v5/test_resize_semantics_contract.py": "50d7c426ef60b60bcb751f5e7d82098d607b31b992b1ac1c611dfb80a13edefe",
+    "docs/research/alpha_v5_review_contract.md": "2f6926bc057af00af05313502cf76905c1baef40db6d93a38de105b36d08f08f"
+  },
+  "modified_preexisting_files": [],
+  "git_at_audit": {
+    "head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+    "branch": "main",
+    "status": "M AGENTS.md\n M CODEX_BOOTSTRAP.md\n M configs/research/alpha_v4_multi_asset.yaml\n M scripts/run_alpha_r4.py\n M scripts/run_alpha_v4_audit.py\n M src/aegisquant/portfolio/economic_gate.py\n M src/aegisquant/research/strategies/buffered_target.py\n M src/aegisquant/research/validation/cat_replay.py\n M state/ALPHA_V4_PROJECT_STATE.yaml\n M state/SPEC_INDEX.md\n?? AegisQuant_Codex_下一批任务书_20260909.md\n?? AegisQuant_Compact_Arithmetic_Audit_20260909.json\n?? AegisQuant_整改与验证方案_20260909.md\n?? artifacts/alpha_v5/\n?? artifacts/current_system_recent/\n?? configs/research/aegis_alpha_v5.yaml\n?? configs/research/alpha_v5_review_contract.yaml\n?? deep-research-report.md\n?? docs/research/\n?? scripts/audit_alpha_profitability_root_causes.py\n?? scripts/audit_alpha_v5_evidence.py\n?? scripts/report_recent_multi_asset_backtest.py\n?? scripts/run_alpha_v5_research.py\n?? scripts/run_recent_multi_asset_backtest.py\n?? src/aegisquant/research/datasets/pit_universe.py\n?? src/aegisquant/research/validation/evidence_contract.py\n?? src/aegisquant/research/validation/experiment_registry.py\n?? tests/alpha_v5/\n?? tests/research/test_recent_multi_asset_backtest.py"
+  },
+  "commits_created": 0,
+  "pushes": 0,
+  "branches_created": 0
+}

@@ -1,0 +1,50 @@
+{
+  "symbols": [
+    {
+      "symbol": "BTCUSDT",
+      "completed_4h_bars": 1107,
+      "expected_4h_bars": 1107,
+      "warmup_4h_bars": 2190,
+      "first_open": "2026-03-08 00:00:00+00:00",
+      "last_close": "2026-09-08 11:59:59.999000+00:00",
+      "full_ensemble_ready_bars": 1107
+    },
+    {
+      "symbol": "ETHUSDT",
+      "completed_4h_bars": 1107,
+      "expected_4h_bars": 1107,
+      "warmup_4h_bars": 2190,
+      "first_open": "2026-03-08 00:00:00+00:00",
+      "last_close": "2026-09-08 11:59:59.999000+00:00",
+      "full_ensemble_ready_bars": 1107
+    },
+    {
+      "symbol": "BNBUSDT",
+      "completed_4h_bars": 1107,
+      "expected_4h_bars": 1107,
+      "warmup_4h_bars": 2190,
+      "first_open": "2026-03-08 00:00:00+00:00",
+      "last_close": "2026-09-08 11:59:59.999000+00:00",
+      "full_ensemble_ready_bars": 1107
+    },
+    {
+      "symbol": "SOLUSDT",
+      "completed_4h_bars": 1107,
+      "expected_4h_bars": 1107,
+      "warmup_4h_bars": 2190,
+      "first_open": "2026-03-08 00:00:00+00:00",
+      "last_close": "2026-09-08 11:59:59.999000+00:00",
+      "full_ensemble_ready_bars": 1107
+    },
+    {
+      "symbol": "XRPUSDT",
+      "completed_4h_bars": 1107,
+      "expected_4h_bars": 1107,
+      "warmup_4h_bars": 2190,
+      "first_open": "2026-03-08 00:00:00+00:00",
+      "last_close": "2026-09-08 11:59:59.999000+00:00",
+      "full_ensemble_ready_bars": 1107
+    }
+  ],
+  "no_forward_fill": true
+}

@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "item": "six_risk_arm_history_and_raw_paths",
+      "status": "NOT_COLLECTED"
+    },
+    {
+      "item": "fixed_quantity_engine_adapter",
+      "status": "NOT_IMPLEMENTED_ZERO_REPLAY_BATCH"
+    },
+    {
+      "item": "actual_engine_same_configuration_equivalence",
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "item": "historical_primary_statistics_and_holm",
+      "status": "NOT_COLLECTED"
+    },
+    {
+      "item": "pit_universe",
+      "status": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE"
+    },
+    {
+      "item": "pit_factor_and_causal_risk_forecasts",
+      "status": "NOT_RECEIVED"
+    }
+  ],
+  "promotion_admitted": false
+}

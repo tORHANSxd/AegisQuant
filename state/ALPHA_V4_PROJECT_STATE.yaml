@@ -15,8 +15,43 @@ historical_states:
   - state/V5_PROJECT_STATE.yaml
   - state/PROJECT_PHASE_STATE.yaml
 current_phase: COMPLETE
-active_research_extension: r4_20260908
-status: completed_with_no_proven_alpha_r4
+active_research_extension: r5_research_churn_20260908
+status: completed_first_batch_churn_pass_no_proven_alpha
+latest_review_package: AegisQuant_最新结果与代码审阅包_20260911.md
+latest_engineering_contract_report: artifacts/alpha_v5/20260910_final_contract_v1/report.md
+latest_saved_simulation_audit:
+  generation: alpha-r5-saved-evidence-20260910-v2
+  report: artifacts/alpha_v5/20260910_saved_evidence_v2/report.md
+  output_manifest_sha256: e58bca7a899b837f8085cfd99ded5c9c5c843409a167043c965852c2fb74828a
+  status: VERIFIED_STORED_SIMULATION
+  saved_runs: 215
+  strategy_cost_groups: 17
+  fills: 16685
+  decision_trace_rows: 652205
+  raw_mtm_points: 652635
+  ledger_records: 16900
+  tail_windows: 6528
+  real_execution_verified: false
+  new_historical_strategy_replays: 0
+  new_real_model_fits: 0
+  new_real_calibration_fits: 0
+  final_holdout_access_count: 0
+  real_orders: 0
+  prior_failed_and_superseded_evidence_preserved: true
+  full_research_acceptance: BLOCKED_MISSING_REAL_EVIDENCE_AND_SEPARATE_AUTHORIZATION
+latest_engineering_does_not_replace_frozen_performance: true
+publication_review_validation_20260911:
+  scope: current_worktree_full_python_suite_outside_sandbox
+  passed: 1488
+  failed: 2
+  skipped: 0
+  ruff_lint: PASS
+  pyright: PASS
+  full_format_check: FAIL_ONE_PREEXISTING_UNMODIFIED_FILE
+  failed_tests:
+    - tests/alpha_v5/test_resize_semantics_contract.py::test_invoked_pure_functions_match_frozen_sources
+    - tests/architecture/test_risk_boundaries.py::test_research_and_model_packages_do_not_import_independent_risk_engine
+  failure_handling: PRESERVED_FOR_REVIEW_NO_ASSERTIONS_OR_FROZEN_SOURCES_CHANGED
 final_decision: NO_PROVEN_ALPHA
 phase_a_complete: true
 evidence_tier: RETROSPECTIVE_DEVELOPMENT
@@ -85,7 +120,7 @@ final_holdout_decision: INSUFFICIENT_EVIDENCE
 live_trading: false
 order_submission_enabled: false
 live_adapter_registry_empty: true
-next_action: retain_cash_and_frozen_failure_evidence_no_profit_parameter_optimization
+next_action: retain_cash_and_frozen_first_batch_evidence_no_result_driven_parameter_search
 old_model_decision: NO_PROVEN_ALPHA
 old_model_parameter_optimization_stopped: true
 diagnostic_report: artifacts/alpha_v4/diagnostics/failure_attribution.md
@@ -93,8 +128,128 @@ walkforward_manifest: artifacts/alpha_v4/walkforward/run_manifest.json
 final_report: artifacts/alpha_v4/reports/final_go_no_go.md
 final_validation: artifacts/alpha_v4/correctness/backtest_invariants.json
 carry_report: artifacts/alpha_v4/funding_basis/admission_report.json
-latest_research_report: artifacts/alpha_r4/20260908_v1/go_no_go.md
+latest_research_report: artifacts/alpha_v5/20260908_research_churn_v3/report.md
+latest_recent_backtest_report: artifacts/current_system_recent/20260908_v3/report.md
 research_extensions:
+  r5_research_churn_20260908:
+    authorization: '用户明确要求：用 deep-research-report.md 作为任务书开始修改，使用 Ponytail 与 workflow。'
+    taskbook: deep-research-report.md
+    taskbook_sha256: fbd6038da014075e68d88eaf6aa5ffdc8d435dcef4a1e04650942be2739ec5f6
+    scope: FIRST_BATCH_RESEARCH_VALIDITY_AND_CHURN_ONLY
+    generation: alpha-r5-research-churn-20260908-v3
+    config: configs/research/aegis_alpha_v5.yaml
+    output: artifacts/alpha_v5/20260908_research_churn_v3
+    status: COMPLETED_FIRST_BATCH_CHURN_PASS_NO_PROVEN_ALPHA
+    report: artifacts/alpha_v5/20260908_research_churn_v3/report.md
+    validation: artifacts/alpha_v5/20260908_research_churn_v3/validation/actual_test_execution.json
+    research_conclusion: NO_PROVEN_ALPHA
+    baseline_partitions_exact: 70
+    original_f3_continuous_sleeves_exact: 5
+    continuous_engine_runs: 55
+    completed_registered_slots: 56
+    failed_registered_slots_this_generation: 0
+    clock_integrity_curves: 61
+    complete_4h_points_per_curve: 7675
+    complete_utc_daily_points_per_curve: 1280
+    pytest_passed: 1188
+    pytest_failed: 0
+    pytest_skipped: 0
+    pyright_errors: 0
+    ruff_lint_errors: 0
+    changed_python_format_check: PASS_13_FILES
+    full_format_check: ONE_UNCHANGED_PREEXISTING_FILE_WOULD_REFORMAT
+    preexisting_format_file: scripts/run_alpha_v4_final_holdout.py
+    churn_all_passed: true
+    primary_candidate: G1
+    selected_model_id: null
+    turnover_reduction_vs_f0: 0.5854263975428623
+    actual_cost_reduction_vs_f0: 0.5813299091874293
+    g1_cagr: 0.14431713024012272
+    g1_maximum_drawdown: 0.16817333986769611
+    g1_final_equity_usdt: '80164.5915229648'
+    g1_risk_resize_fill_share: 0.06818181818181818
+    g1_positive_quarters: 6
+    quarter_count: 14
+    all_preregistered_holm_p_values_above_005: true
+    dsr_pbo_status: INSUFFICIENT_COMPLETE_HISTORICAL_INDEPENDENT_TRIAL_HISTORY
+    local_archive_status: blocked_existing_non_main_archive_no_new_commit
+    local_archive_attempt: artifacts/alpha_v5/20260908_research_churn_v3/validation/local_git_archive.json
+    predecessor_generations_preserved:
+      - artifacts/alpha_v5/20260908_research_churn_v1
+      - artifacts/alpha_v5/20260908_research_churn_v2
+    strategy_parameters_unchanged_across_entry_fixes: true
+    evidence_tier: RETROSPECTIVE_DEVELOPMENT
+    full_taskbook_completed: false
+    new_return_model_fits: 0
+    new_calibration_fits: 0
+    final_holdout_access_count: 0
+    parameter_selection_from_results: false
+    production_policy: CASH
+    production_ml_enabled: false
+    paper_trading_admitted: false
+    live_trading: false
+    order_submission_enabled: false
+    next_action: retain_cash_and_frozen_first_batch_evidence_no_result_driven_parameter_search
+    remaining_stages:
+      - verified_PIT_universe_membership_liquidity_and_venue_history
+      - empirical_execution_cost_latency_capacity_validation
+      - portfolio_covariance_and_joint_tail_risk_controls
+      - episode_labels_nested_validation_OOF_uncertainty
+      - benchmark_superiority_multiple_testing_candidate_lock
+      - unused_twelve_month_final_holdout_and_separate_trading_admission
+  recent_fixed_policy_20260908:
+    authorization: '用户要求：用最新几个月到今天的历史数据来测试当前量化系统、多种虚拟货币。'
+    status: COMPLETED_FIXED_POLICY_RECENT_TEST_NO_PROVEN_ALPHA
+    output: artifacts/current_system_recent/20260908_v3
+    report: artifacts/current_system_recent/20260908_v3/report.md
+    source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
+    tested_version: frozen_R4_at_task_start
+    concurrent_workspace_strategy_changes_included: false
+    concurrent_workspace_changes_preserved: true
+    symbols: [BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT]
+    test_start: '2026-03-08T00:00:00Z'
+    test_end_exclusive: '2026-09-08T12:00:00Z'
+    terminal_costed_exit_reference: '2026-09-08T08:00:00Z'
+    source: Binance_unsigned_public_spot_1h_aggregated_to_complete_4h
+    warmup_days: 365
+    hourly_rows_per_symbol_including_warmup: 13188
+    evaluation_4h_bars_per_symbol: 1107
+    evaluation_gap_count: 0
+    all_three_trend_windows_ready_bars_per_symbol: 1107
+    configurations: [CASH, F2, F3, F4, F5, BUY_HOLD]
+    primary_candidate: F3
+    cash_per_symbol_usdt: '10000'
+    cost_multipliers: ['0', '0.5', '1', '1.5', '2']
+    research_engine_runs: 180
+    additional_frozen_source_verification_engine_runs: 180
+    exact_complete_result_matches: 180
+    contract_tests_passed: 21
+    recent_harness_tests_passed: 8
+    tests_failed: 0
+    full_repository_suite_rerun: false
+    new_return_model_fits: 0
+    new_calibration_fits: 0
+    new_scaler_fits: 0
+    parameter_searches: 0
+    final_holdout_access_count: 0
+    f3_final_cash_usdt: '53035.48638872181979835611912'
+    f3_net_compound_return: 0.06070972777443484
+    f3_maximum_drawdown: 0.06589229055392443
+    evidence_tier: RECENT_FIXED_POLICY_RETROSPECTIVE_NOT_FINAL_HOLDOUT
+    evidence_gaps:
+      - six_month_sample_not_a_preregistered_twelve_month_final_holdout
+      - profit_concentrated_in_august_and_joint_bootstrap_interval_includes_loss
+      - incomplete_independent_trial_history_for_dsr_pbo
+      - fixed_survivor_universe_and_proxy_historical_fees_rules_orderbooks_capacity
+      - no_recent_frozen_A3_A7_forecasts_no_unauthorized_retraining
+    research_conclusion: NO_PROVEN_ALPHA
+    production_policy: CASH
+    live_trading: false
+    order_submission_enabled: false
+    validation: artifacts/current_system_recent/20260908_v3/validation/actual_test_execution.json
+    frozen_source_verification: artifacts/current_system_recent/20260908_v3/validation/frozen_source_verification.json
+    local_archive_status: blocked_existing_non_main_archive_no_new_commit
+    local_archive_attempt: artifacts/current_system_recent/20260908_v3/validation/local_git_archive.json
   r4_20260908:
     authorization: '用户明确要求：使用 Ponytail 和 workflow 执行 AegisQuant_R4。'
     status: COMPLETED_NO_PROVEN_ALPHA_WITH_EVIDENCE_GAPS
@@ -209,8 +364,8 @@ local_archive:
   path: 'D:\Workspace\git\Personal--Quantitative_Trading.git'
   existing_branch: codex-archive
   snapshot_created: false
-  last_attempt: '2026-09-08T11:50:00.5558993+00:00'
+  last_attempt: '2026-09-08T15:22:42.7494612Z'
   last_exit_code: 2
   new_commit_created: false
-  attempt_record: artifacts/alpha_r4/20260908_v1/validation/local_git_archive.json
+  attempt_record: artifacts/alpha_v5/20260908_research_churn_v3/validation/local_git_archive.json
   reason: '归档技能只允许 main；按已有非 main 归档保留并报错规则，未迁移历史。'

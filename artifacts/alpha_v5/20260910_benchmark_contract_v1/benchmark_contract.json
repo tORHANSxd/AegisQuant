@@ -1,0 +1,107 @@
+{
+  "status": "CONTRACT_DEFINED_HISTORY_NOT_COLLECTED",
+  "candidate": "G1",
+  "arms": {
+    "F5_MATCHED": {
+      "signal": "ALWAYS_HOLD",
+      "control": "G0",
+      "control_sha256": "f047a30167cbe38d1ef55d21d0e85fb4538e44a2ee58d9b555d77a4d7b8d345d",
+      "configuration_sha256": "aece44f4eed91417b1f929b4c5a1429851ea1fb7dc1bbd14fef6fb17db5b063e"
+    },
+    "SIMPLE_TREND": {
+      "signal": "TREND_10_40",
+      "control": "G0",
+      "control_sha256": "f047a30167cbe38d1ef55d21d0e85fb4538e44a2ee58d9b555d77a4d7b8d345d",
+      "configuration_sha256": "d6825e224eca3ccd0b1213fcfdcc13ce9c750a43ed5760e72450d77a243d5493"
+    },
+    "G1_PASSIVE": {
+      "signal": "ALWAYS_HOLD",
+      "control": "G1",
+      "control_sha256": "af6a550819c09c5a3b5f0f18a840e0a944c4c586bf82656222aeb8d27933b064",
+      "configuration_sha256": "86889e4208193062a09653ce816b35533efbe2e91642834bbc24cc944ae8edfe"
+    },
+    "G1": {
+      "signal": "TREND_10_40",
+      "control": "G1",
+      "control_sha256": "af6a550819c09c5a3b5f0f18a840e0a944c4c586bf82656222aeb8d27933b064",
+      "configuration_sha256": "2cef4242e3c50df8ef67fe789caa1dae6bded0fba439700dc7b08899d173f74d"
+    },
+    "PASSIVE_FIXED_QTY": {
+      "signal": "ALWAYS_HOLD",
+      "control": "FIXED_QTY",
+      "control_sha256": "d41de0ee50d14b00e3e398996e65dee52196418e51a4ba8a2b149900e36a50c5",
+      "configuration_sha256": "49090a1ac4b11e409fba331d0ab110d003b2da2c46ae4cd8c93bc3faf7dd8d93"
+    },
+    "TREND_FIXED_QTY": {
+      "signal": "TREND_10_40",
+      "control": "FIXED_QTY",
+      "control_sha256": "d41de0ee50d14b00e3e398996e65dee52196418e51a4ba8a2b149900e36a50c5",
+      "configuration_sha256": "bc93ccc276df27dd77f07a4fa8713f31c64cc6e32cb947b6f85f8b6ed02fe759"
+    }
+  },
+  "controls": {
+    "G0": {
+      "buffer": {
+        "relative_half_width": "0.10",
+        "review_interval": 86400,
+        "restore_half_width": null,
+        "reduce_half_width": null,
+        "absolute_weight_floor": "0"
+      },
+      "resize": null
+    },
+    "G1": {
+      "buffer": {
+        "relative_half_width": "0.10",
+        "review_interval": 86400,
+        "restore_half_width": "0.20",
+        "reduce_half_width": "0.10",
+        "absolute_weight_floor": "0.03"
+      },
+      "resize": {
+        "smoothing_half_life": 432000,
+        "review_interval": 172800,
+        "minimum_weight_change": "0.03",
+        "minimum_notional": "50",
+        "cost_benefit_lambda": "1"
+      }
+    },
+    "FIXED_QTY": {
+      "ordinary_target": "CURRENT_EXECUTED_QUANTITY_AFTER_ENTRY",
+      "entry_sizing": "SAME_FROZEN_A1_GATE",
+      "hard_exit_and_cap": "EXISTING_SHARED_HARD_RISK_PATH",
+      "pending_and_partial_fills": "EXISTING_SIGNED_PENDING_MANAGER_AND_ACTUAL_FILLED_QUANTITY",
+      "execution_adapter": "NOT_IMPLEMENTED_IN_ZERO_REPLAY_CONTRACT_BATCH"
+    }
+  },
+  "shared_gate": {
+    "lambda_cost": "2",
+    "p_enter": "0.55",
+    "p_full_size": "0.70",
+    "uncertainty_weight": "0.25",
+    "model_uncertainty_buffer": "0",
+    "execution_uncertainty_buffer": "0.0002",
+    "target_volatility": "0.20",
+    "maximum_weight": "1"
+  },
+  "shared_gate_sha256": "7647091eb35b2e9867960a9e418e6a02235f9f70babb3a63ff6ed7740a06b62d",
+  "risk_matching": "SAME_EX_ANTE_LIMITS_AND_INPUTS_NOT_EQUAL_REALIZED_VOLATILITY",
+  "capital_mode": "FIVE_EQUAL_INITIAL_SLEEVES_NO_TRANSFERS",
+  "initial_cash_per_symbol": "10000",
+  "initial_total_cash": "50000",
+  "terminal_exit": "EVALUATION_END_NEXT_OPEN_EXIT_PAID_BOUNDARY_INCLUDED",
+  "signal_source": "scripts/run_alpha_r4.py::run_sleeve; F5 always-true override; existing 10/40 trend",
+  "controls_source": "scripts/run_alpha_v5_research.py::controls; frozen G0/G1",
+  "engine_source": "aegisquant.research.validation.cat_replay::replay_cat",
+  "historical_evidence": "NOT_COLLECTED",
+  "legacy_reference_only": [
+    "F0",
+    "F3",
+    "F5",
+    "99PCT_BUY_AND_HOLD"
+  ],
+  "f5_matched_is_not_relabelled_old_f5": true,
+  "future_matrix_slots": 90,
+  "future_matrix_slots_authorized_now": 0,
+  "synthetic_equivalence_is_engine_proof": false
+}

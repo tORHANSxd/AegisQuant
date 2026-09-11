@@ -1,0 +1,10 @@
+{
+  "status": "NOT_COLLECTED",
+  "historical_forecasts": null,
+  "TOTAL_factor_addition": "FORBIDDEN",
+  "RESIDUAL_factor_addition": "DEFINED_ORTHOGONAL_FACTORS_ONLY",
+  "psd_rule": "RELATIVE_1E12_REJECT_OR_RECORDED_FIXED_DIAGONAL_JITTER",
+  "missing_asset_policy": "FAIL_CLOSED",
+  "annualized_unit": "DAILY_DECIMAL_RETURN_COVARIANCE_TIMES_365_25",
+  "lookback_calendar_days": 90
+}

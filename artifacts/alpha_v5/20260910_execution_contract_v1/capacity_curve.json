@@ -1,0 +1,14 @@
+{
+  "status": "NOT_COLLECTED",
+  "base_capital": "50000",
+  "capital_multipliers": [
+    "1",
+    "5",
+    "10",
+    "25",
+    "50"
+  ],
+  "maximum_tradable_capital": null,
+  "coverage": null,
+  "empirical_extrapolation_allowed": false
+}

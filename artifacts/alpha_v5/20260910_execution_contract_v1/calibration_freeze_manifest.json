@@ -1,0 +1,9 @@
+{
+  "status": "NOT_ALLOCATED_MISSING_EXECUTION_OBSERVATIONS",
+  "calibration_period": null,
+  "validation_period": null,
+  "actual_data_splits": 0,
+  "model_fits": 0,
+  "replay_scenarios": 0,
+  "frozen_model_hash": null
+}

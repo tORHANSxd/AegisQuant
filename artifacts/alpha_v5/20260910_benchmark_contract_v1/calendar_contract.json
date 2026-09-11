@@ -1,0 +1,21 @@
+{
+  "kind": "DETERMINISTIC_CASH_REFERENCE_NOT_NEW_MARKET_EVIDENCE",
+  "start": "2022-04-01T00:00:00+00:00",
+  "end_inclusive_paid_terminal_boundary": "2025-10-01T00:00:00+00:00",
+  "interval_seconds": 14400,
+  "cash_four_hour_points": 7675,
+  "cash_utc_daily_points": 1280,
+  "required_arms": [
+    "F5_MATCHED",
+    "SIMPLE_TREND",
+    "G1_PASSIVE",
+    "G1",
+    "PASSIVE_FIXED_QTY",
+    "TREND_FIXED_QTY",
+    "CASH"
+  ],
+  "historical_common_ready": null,
+  "risk_arm_calendars": "NOT_COLLECTED",
+  "flat_periods_must_remain": true,
+  "common_ready_is_supplement_not_date_selection": true
+}

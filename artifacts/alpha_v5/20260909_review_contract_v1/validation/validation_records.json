@@ -1,0 +1,293 @@
+[
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.12073740002233535,
+    "stdout": "4 files reformatted\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 0.11696160002611578,
+    "stdout": "F401 [*] `aegisquant.research.validation.evidence_contract.quarter_returns` imported but unused\n  --> scripts\\audit_alpha_v5_evidence.py:43:5\n   |\n41 |     decimal,\n42 |     load_evidence_manifest,\n43 |     quarter_returns,\n   |     ^^^^^^^^^^^^^^^\n44 |     require,\n45 |     resize_cost_allowed,\n   |\nhelp: Remove unused import: `aegisquant.research.validation.evidence_contract.quarter_returns`\n   |\n42 |     load_evidence_manifest,\n   -     quarter_returns,\n43 |     require,\n   |\n\nSIM117 Use a single `with` statement with multiple contexts instead of nested `with` statements\n   --> scripts\\audit_alpha_v5_evidence.py:785:9\n    |\n783 |       run_id = config[\"generation\"] + \":REPORT\"\n784 |       try:\n785 | /         with registered_run(\n786 | |             output, run_id, planned_run_ids=[run_id], bindings={\"kind\": config[\"kind\"]}\n787 | |         ):\n788 | |             with zero_budget_guard(output, root, counters):\n    | |___________________________________________________________^\n789 |                   write_json_exclusive(\n790 |                       output / \"preregistration.json\",\n    |\nhelp: Combine `with` statements\n\nRUF007 Prefer `itertools.pairwise()` over `zip()` when iterating over successive pairs\n   --> src\\aegisquant\\research\\validation\\evidence_contract.py:183:43\n    |\n181 |     require(times[0] == utc(start) and times[-1] == utc(end), \"AQ-EVIDENCE-CALENDAR-ENDPOINTS\")\n182 |     require(\n183 |         all(b - a == interval for a, b in zip(times, times[1:], strict=False)),\n    |                                           ^^^\n184 |         \"AQ-EVIDENCE-CALENDAR-GAP\",\n185 |     )\n    |\nhelp: Replace `zip()` with `itertools.pairwise()`\n\nRUF007 Prefer `itertools.pairwise()` over `zip()` when iterating over successive pairs\n   --> src\\aegisquant\\research\\validation\\evidence_contract.py:196:30\n    |\n194 |     with localcontext() as ctx:\n195 |         ctx.prec = 50\n196 |         for before, after in zip(rows, rows[1:], strict=False):\n    |                              ^^^\n197 |             time = utc(after[\"time\"]) - timedelta(microseconds=1)\n198 |             key = f\"{time.year}Q{(time.month - 1) // 3 + 1}\"\n    |\nhelp: Replace `zip()` with `itertools.pairwise()`\n\nRUF007 Prefer `itertools.pairwise()` over `zip()` when iterating over successive pairs\n   --> src\\aegisquant\\research\\validation\\evidence_contract.py:419:26\n    |\n417 |             \"AQ-EVIDENCE-SHADOW-PATH-CHANGED\",\n418 |         )\n419 |     for before, after in zip(ordered, ordered[1:], strict=False):\n    |                          ^^^\n420 |         cost_delta = decimal(after[\"total_cost\"]) - decimal(before[\"total_cost\"])\n421 |         wealth_delta = decimal(after[\"final_equity\"]) - decimal(before[\"final_equity\"])\n    |\nhelp: Replace `zip()` with `itertools.pairwise()`\n\nSIM117 [*] Use a single `with` statement with multiple contexts instead of nested `with` statements\n   --> tests\\alpha_v5\\test_evidence_contract.py:308:5\n    |\n306 |       with pytest.raises(FileExistsError):\n307 |           claim_output(tmp_path, \"artifacts/alpha_v5/new\")\n308 | /     with pytest.raises(ValueError, match=\"synthetic failure\"):\n309 | |         with registered_run(\n310 | |             output, \"report\", planned_run_ids=[\"report\"], bindings={\"kind\": \"SYNTHETIC\"}\n311 | |         ):\n    | |__________^\n312 |               raise ValueError(\"synthetic failure\")\n313 |       assert (\n    |\nhelp: Combine `with` statements\n    |\n307 |         claim_output(tmp_path, \"artifacts/alpha_v5/new\")\n    -     with pytest.raises(ValueError, match=\"synthetic failure\"):\n    -         with registered_run(\n    -             output, \"report\", planned_run_ids=[\"report\"], bindings={\"kind\": \"SYNTHETIC\"}\n    -         ):\n    -             raise ValueError(\"synthetic failure\")\n308 +     with pytest.raises(ValueError, match=\"synthetic failure\"), registered_run(\n309 +         output, \"report\", planned_run_ids=[\"report\"], bindings={\"kind\": \"SYNTHETIC\"}\n310 +     ):\n311 +         raise ValueError(\"synthetic failure\")\n312 |     assert (\n    |\n\nSIM117 Use a single `with` statement with multiple contexts instead of nested `with` statements\n   --> tests\\alpha_v5\\test_evidence_contract.py:317:5\n    |\n315 |           == ExperimentEventType.ERROR\n316 |       )\n317 | /     with pytest.raises(FileExistsError):\n318 | |         with registered_run(output, \"report\", planned_run_ids=[\"report\"], bindings={}):\n    | |_______________________________________________________________________________________^\n319 |               pytest.fail(\"consumed report slot reopened\")\n    |\nhelp: Combine `with` statements\n\nSIM117 Use a single `with` statement with multiple contexts instead of nested `with` statements\n   --> tests\\alpha_v5\\test_evidence_contract.py:337:9\n    |\n335 |       ):\n336 |           counters = dict.fromkeys(cli.ZERO_BUDGETS, 0)\n337 | /         with pytest.raises(PermissionError):\n338 | |             with cli.zero_budget_guard(output, tmp_path, counters):\n    | |___________________________________________________________________^\n339 |                   action()\n340 |       calls.assert_not_called()\n    |\nhelp: Combine `with` statements\n\nFound 8 errors.\n[*] 2 fixable with the `--fix` option (3 hidden fixes can be enabled with the `--unsafe-fixes` option).\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-review-contract-20260909-3mcg6ov0\\pytest-run-1",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 4.8731616999721155,
+    "stdout": "..............................................                           [100%]\n46 passed in 3.90s\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pyright",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 2.8537327999947593,
+    "stdout": "d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:43:5 - error: Import \"quarter_returns\" is not accessed (reportUnusedImport)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:142:2 - error: The function \"contextmanager\" is deprecated\n    Annotating the return type as `-> Iterator[Foo]` with `@contextmanager` is deprecated. Use `-> Generator[Foo]` instead. (reportDeprecated)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:236:40 - error: No overloads for \"__init__\" match the provided arguments (reportCallIssue)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:236:45 - error: Argument of type \"JsonValue\" cannot be assigned to parameter \"iterable\" of type \"Iterable[list[bytes]]\" in function \"__init__\"\n    Type \"JsonValue\" is not assignable to type \"Iterable[list[bytes]]\"\n      \"float\" is incompatible with protocol \"Iterable[list[bytes]]\"\n        \"__iter__\" is not present (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:238:21 - error: Condition will always evaluate to False since the types \"str\" and \"bytes\" have no overlap (reportUnnecessaryComparison)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:276:13 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:374:9 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:417:9 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:423:80 - error: Type of \"names\" is unknown (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:423:80 - error: Argument type is unknown\n    Argument corresponds to parameter \"iterable\" in function \"__init__\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:423:87 - error: Cannot access attribute \"names\" for class \"dict[str, DataType]\"\n    Attribute \"names\" is unknown (reportAttributeAccessIssue)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:482:13 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:496:9 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:510:9 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:550:80 - error: Argument of type \"Any | Decimal\" cannot be assigned to parameter \"start\" of type \"str\" in function \"audit_equity\"\n    Type \"Any | Decimal\" is not assignable to type \"str\"\n      \"Decimal\" is not assignable to \"str\" (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:550:80 - error: Argument of type \"Any | Decimal\" cannot be assigned to parameter \"end\" of type \"str\" in function \"audit_equity\"\n    Type \"Any | Decimal\" is not assignable to type \"str\"\n      \"Decimal\" is not assignable to \"str\" (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:550:80 - error: Argument of type \"Any | Decimal\" cannot be assigned to parameter \"quarters\" of type \"Sequence[Row] | None\" in function \"audit_equity\"\n    Type \"Any | Decimal\" is not assignable to type \"Sequence[Row] | None\"\n      Type \"Decimal\" is not assignable to type \"Sequence[Row] | None\"\n        \"Decimal\" is not assignable to \"Sequence[Row]\"\n        \"Decimal\" is not assignable to \"None\" (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:551:53 - error: Argument of type \"Any | Decimal\" cannot be assigned to parameter \"start\" of type \"str\" in function \"audit_equity\"\n    Type \"Any | Decimal\" is not assignable to type \"str\"\n      \"Decimal\" is not assignable to \"str\" (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:551:53 - error: Argument of type \"Any | Decimal\" cannot be assigned to parameter \"end\" of type \"str\" in function \"audit_equity\"\n    Type \"Any | Decimal\" is not assignable to type \"str\"\n      \"Decimal\" is not assignable to \"str\" (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:551:53 - error: Argument of type \"Any | Decimal\" cannot be assigned to parameter \"interval\" of type \"timedelta\" in function \"audit_equity\"\n    Type \"Any | Decimal\" is not assignable to type \"timedelta\"\n      \"Decimal\" is not assignable to \"timedelta\" (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:551:53 - error: Argument of type \"Any | Decimal\" cannot be assigned to parameter \"quarters\" of type \"Sequence[Row] | None\" in function \"audit_equity\"\n    Type \"Any | Decimal\" is not assignable to type \"Sequence[Row] | None\"\n      Type \"Decimal\" is not assignable to type \"Sequence[Row] | None\"\n        \"Decimal\" is not assignable to \"Sequence[Row]\"\n        \"Decimal\" is not assignable to \"None\" (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:704:13 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:730:39 - error: Argument of type \"expr | None\" cannot be assigned to parameter \"node_or_string\" of type \"str | AST\" in function \"literal_eval\"\n    Type \"expr | None\" is not assignable to type \"str | AST\"\n      Type \"None\" is not assignable to type \"str | AST\"\n        \"None\" is not assignable to \"str\"\n        \"None\" is not assignable to \"AST\" (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_v5_evidence.py:788:50 - error: Argument of type \"dict[Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders'], int]\" cannot be assigned to parameter \"counters\" of type \"dict[str, int]\"\n    \"dict[Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders'], int]\" is not assignable to \"dict[str, int]\"\n      Type parameter \"_KT@dict\" is invariant, but \"Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders']\" is not the same as \"str\" (reportArgumentType)\nd:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:138:9 - error: Type of \"files\" is partially unknown\n    Type of \"files\" is \"list[dict[str, Unknown]]\" (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:139:18 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"map\" in function \"__init__\"\n    Argument type is \"dict[Unknown, Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:139:30 - error: Argument type is unknown\n    Argument corresponds to parameter \"path\" in function \"__init__\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:140:17 - error: Type of \"key\" is unknown (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:140:22 - error: Type of \"value\" is unknown (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:143:9 - error: Type of \"item\" is partially unknown\n    Type of \"item\" is \"dict[str, Unknown] | Any\" (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:145:19 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"element\" in function \"add\"\n    Argument type is \"Unknown | Any\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:146:37 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"name\" in function \"checked_path\"\n    Argument type is \"Unknown | Any\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:148:17 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"condition\" in function \"require\"\n    Argument type is \"Unknown | Any\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:150:21 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"condition\" in function \"require\"\n    Argument type is \"Unknown | Any\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:249:13 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:255:17 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:296:9 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:307:45 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"iterable\" in function \"max\"\n    Argument type is \"list[Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:312:24 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"obj\" in function \"len\"\n    Argument type is \"list[Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:316:12 - error: Return type, \"list[Unknown]\", is partially unknown (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:352:17 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:353:17 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:354:17 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:362:13 - error: Type of \"cost_residual\" is partially unknown\n    Type of \"cost_residual\" is \"Unknown | Decimal\" (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:362:33 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"iterable\" in function \"sum\"\n    Argument type is \"list[Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:363:13 - error: Type of \"notional_residual\" is partially unknown\n    Type of \"notional_residual\" is \"Unknown | Decimal\" (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:363:37 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"iterable\" in function \"sum\"\n    Argument type is \"list[Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:365:21 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"x\" in function \"abs\"\n    Argument type is \"Unknown | Decimal\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:365:63 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"x\" in function \"abs\"\n    Argument type is \"Unknown | Decimal\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:368:13 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:376:37 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"iterable\" in function \"sum\"\n    Argument type is \"list[Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:377:39 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"iterable\" in function \"sum\"\n    Argument type is \"list[Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:380:51 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"iterable\" in function \"max\"\n    Argument type is \"list[Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\evidence_contract.py:384:12 - error: Return type, \"list[Unknown]\", is partially unknown (reportUnknownVariableType)\nd:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:53:13 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:78:12 - error: Return type, \"tuple[list[Unknown], list[dict[str, str | int]]]\", is partially unknown (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:106:5 - error: Operator \"+=\" not supported for types \"str | Any\" and \"Decimal\"\n    Operator \"+\" not supported for types \"str\" and \"Decimal\" (reportOperatorIssue)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:302:45 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"value\" in function \"setattr\"\n    Argument type is \"(p: Unknown) -> (Unknown | bool)\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:302:52 - error: Type of parameter \"p\" is unknown (reportUnknownLambdaType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:302:55 - error: Return type of lambda, \"Unknown | bool\", is partially unknown (reportUnknownLambdaType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:302:79 - error: Argument type is unknown\n    Argument corresponds to parameter \"self\" in function \"is_symlink\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:338:58 - error: Argument of type \"dict[Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders'], int]\" cannot be assigned to parameter \"counters\" of type \"dict[str, int]\"\n    \"dict[Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders'], int]\" is not assignable to \"dict[str, int]\"\n      Type parameter \"_KT@dict\" is invariant, but \"Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders']\" is not the same as \"str\" (reportArgumentType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:404:9 - error: Type of \"portfolio\" is partially unknown\n    Type of \"portfolio\" is \"list[Unknown]\" (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:416:9 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:466:47 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"rows\" in function \"parquet\"\n    Argument type is \"list[Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_evidence_contract.py:484:9 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"value\" in function \"write\"\n    Argument type is \"dict[str, bool | dict[str, bool] | list[Unknown]]\" (reportUnknownArgumentType)\n66 errors, 0 warnings, 0 informations\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.09135010000318289,
+    "stdout": "2 files reformatted, 2 files left unchanged\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.08744750003097579,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pyright",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.4796682000160217,
+    "stdout": "0 errors, 0 warnings, 0 informations\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "READ_ONLY_PREFLIGHT",
+      "verify_sources",
+      "audit_existing_files"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 16.29819060000591,
+    "stdout": "{\"bindings\": {\"r5\": {\"source_head\": \"d8c6d4013097f6323ab8b7a424c860ba0ccbd62b\", \"source_manifest_sha256\": \"a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce\", \"generation\": \"alpha-r5-research-churn-20260908-v3\", \"strategy\": \"G1\", \"start\": \"2022-04-01T00:00:00Z\", \"end_exclusive\": \"2025-10-01T00:00:00Z\", \"tier\": \"PREVIOUSLY_USED_RETROSPECTIVE_DEVELOPMENT\"}, \"recent_r4\": {\"config\": \"artifacts/current_system_recent/20260908_v3/effective_config.json\", \"strategy\": \"F3\", \"start\": \"2026-03-08T00:00:00Z\", \"end_exclusive\": \"2026-09-08T12:00:00Z\", \"tier\": \"RETROSPECTIVE_DIAGNOSTIC\"}, \"source_manifest_status\": \"VERIFIED\", \"frozen_source_files_verified\": 283, \"recent_frozen_source_files_verified\": 367, \"current_workspace_different_from_r5\": [], \"audited_source\": \"FROZEN_IMPLEMENTATION\", \"strategy_stitching_allowed\": false, \"recent_g1\": \"NOT_COLLECTED\"}, \"preservation\": {\"status\": \"VERIFIED\", \"files_checked\": 10464, \"changed\": [], \"protected_holdout_contents_read\": false, \"basis\": \"SHA256 before implementation and after audit\"}}",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "--fix",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.09269229997880757,
+    "stdout": "Found 1 error (1 fixed, 0 remaining).\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.08762219996424392,
+    "stdout": "2 files reformatted, 2 files left unchanged\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pyright",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.4679788000066765,
+    "stdout": "0 errors, 0 warnings, 0 informations\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-review-contract-20260909-3mcg6ov0\\pytest-run-2",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.5824445000034757,
+    "stdout": "...............................................                          [100%]\n47 passed in 2.76s\n",
+    "stderr": ""
+  },
+  {
+    "check": "ruff",
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.10825970000587404,
+    "source_sha256": {
+      "src/aegisquant/research/validation/evidence_contract.py": "5027fd6439d802345b62b83f201dccb63029b06ed26f31b73c94a8cb92cc8e44",
+      "scripts/audit_alpha_v5_evidence.py": "7a0a4846319fc9473034cc054debe2a115a8f5636d2de1e35723be1198726d41",
+      "configs/research/alpha_v5_review_contract.yaml": "bdd3f509bd9274b2cd2eb0a4c835620423ee7245295c1cd4c9232b7d91373027",
+      "tests/alpha_v5/test_evidence_contract.py": "fd0ea62182d6fb4a8147d0c6627e82773854278f500be8082982f84a28ee8e56",
+      "tests/alpha_v5/test_resize_semantics_contract.py": "50d7c426ef60b60bcb751f5e7d82098d607b31b992b1ac1c611dfb80a13edefe",
+      "docs/research/alpha_v5_review_contract.md": "6e201fb05a1dbf750c180ff2b061b94269e009339a4bc1a2be2f1e707e16fe4b"
+    },
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "check": "format",
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "--check",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.09345139999641106,
+    "source_sha256": {
+      "src/aegisquant/research/validation/evidence_contract.py": "5027fd6439d802345b62b83f201dccb63029b06ed26f31b73c94a8cb92cc8e44",
+      "scripts/audit_alpha_v5_evidence.py": "7a0a4846319fc9473034cc054debe2a115a8f5636d2de1e35723be1198726d41",
+      "configs/research/alpha_v5_review_contract.yaml": "bdd3f509bd9274b2cd2eb0a4c835620423ee7245295c1cd4c9232b7d91373027",
+      "tests/alpha_v5/test_evidence_contract.py": "fd0ea62182d6fb4a8147d0c6627e82773854278f500be8082982f84a28ee8e56",
+      "tests/alpha_v5/test_resize_semantics_contract.py": "50d7c426ef60b60bcb751f5e7d82098d607b31b992b1ac1c611dfb80a13edefe",
+      "docs/research/alpha_v5_review_contract.md": "6e201fb05a1dbf750c180ff2b061b94269e009339a4bc1a2be2f1e707e16fe4b"
+    },
+    "stdout": "4 files already formatted\n",
+    "stderr": ""
+  },
+  {
+    "check": "pyright",
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pyright",
+      "src/aegisquant/research/validation/evidence_contract.py",
+      "scripts/audit_alpha_v5_evidence.py",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.5311777000315487,
+    "source_sha256": {
+      "src/aegisquant/research/validation/evidence_contract.py": "5027fd6439d802345b62b83f201dccb63029b06ed26f31b73c94a8cb92cc8e44",
+      "scripts/audit_alpha_v5_evidence.py": "7a0a4846319fc9473034cc054debe2a115a8f5636d2de1e35723be1198726d41",
+      "configs/research/alpha_v5_review_contract.yaml": "bdd3f509bd9274b2cd2eb0a4c835620423ee7245295c1cd4c9232b7d91373027",
+      "tests/alpha_v5/test_evidence_contract.py": "fd0ea62182d6fb4a8147d0c6627e82773854278f500be8082982f84a28ee8e56",
+      "tests/alpha_v5/test_resize_semantics_contract.py": "50d7c426ef60b60bcb751f5e7d82098d607b31b992b1ac1c611dfb80a13edefe",
+      "docs/research/alpha_v5_review_contract.md": "6e201fb05a1dbf750c180ff2b061b94269e009339a4bc1a2be2f1e707e16fe4b"
+    },
+    "stdout": "0 errors, 0 warnings, 0 informations\n",
+    "stderr": ""
+  },
+  {
+    "check": "pytest",
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-review-contract-20260909-3mcg6ov0\\pytest-run-3",
+      "tests/alpha_v5/test_evidence_contract.py",
+      "tests/alpha_v5/test_resize_semantics_contract.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.838184399995953,
+    "source_sha256": {
+      "src/aegisquant/research/validation/evidence_contract.py": "5027fd6439d802345b62b83f201dccb63029b06ed26f31b73c94a8cb92cc8e44",
+      "scripts/audit_alpha_v5_evidence.py": "7a0a4846319fc9473034cc054debe2a115a8f5636d2de1e35723be1198726d41",
+      "configs/research/alpha_v5_review_contract.yaml": "bdd3f509bd9274b2cd2eb0a4c835620423ee7245295c1cd4c9232b7d91373027",
+      "tests/alpha_v5/test_evidence_contract.py": "fd0ea62182d6fb4a8147d0c6627e82773854278f500be8082982f84a28ee8e56",
+      "tests/alpha_v5/test_resize_semantics_contract.py": "50d7c426ef60b60bcb751f5e7d82098d607b31b992b1ac1c611dfb80a13edefe",
+      "docs/research/alpha_v5_review_contract.md": "6e201fb05a1dbf750c180ff2b061b94269e009339a4bc1a2be2f1e707e16fe4b"
+    },
+    "stdout": "...............................................                          [100%]\n47 passed in 2.94s\n",
+    "stderr": ""
+  }
+]

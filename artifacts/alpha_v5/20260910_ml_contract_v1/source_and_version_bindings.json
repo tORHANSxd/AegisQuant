@@ -1,0 +1,50 @@
+{
+  "generation": "alpha-r5-ml-contract-20260910-v1",
+  "head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+  "branch": "main",
+  "reads": {
+    "artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json": {
+      "sha256": "a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce",
+      "bytes": 53455,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_portfolio_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "405d950315e256ddf954ccda49468effb0334da8c03e361f6c9433b921b81f84",
+      "bytes": 5410,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_pit_contract_v1/safety_and_budget_audit.json": {
+      "sha256": "c9f727179b729265cb22d70d445ac0ac44ae1d7f5802a6ba5bec03065e1a4d26",
+      "bytes": 1341,
+      "scope": "SAVED_CONTENT"
+    },
+    "configs/research/aegis_alpha_v5.yaml": {
+      "sha256": "c4b7a2e734168ea31385ccf0416963e2dc532cb416293710f6dd6891a8deca5c",
+      "bytes": 3236,
+      "scope": "SAVED_CONTENT"
+    },
+    "src/aegisquant/bootstrap/live_lock.py": {
+      "sha256": "e8a58bab46939635796028c9454d0c6c4acdd53b1ea3d59c38abe1ae95a70f24",
+      "bytes": 1272,
+      "scope": "SAVED_CONTENT"
+    }
+  },
+  "source_sha256": {
+    "src/aegisquant/research/validation/splits.py": "6cd46de145afac6ea774489cb4ea40de82c31a68e1cca0fcf95df1b4cd83a066",
+    "src/aegisquant/research/validation/calendar_walkforward.py": "01cf4d93d7dea8e20d4952accbb71ec6822e31894a977eaededf86b79e4a9afa",
+    "src/aegisquant/research/models/economic_filter.py": "e77e88ccc0ae864a271ed39671e8dba1449123aa2b4c839331d974df858ffef0",
+    "src/aegisquant/research/models/uncertainty.py": "bc4c03028cc690ba0e7bbb839952a0350cc77f7c3657c9ed71ef46665159d5f2",
+    "src/aegisquant/research/validation/statistics.py": "0ab4ff9462bfc8ddd369d06a1f78c861df9a3ba08fcbd3121d5e020302ee063c",
+    "src/aegisquant/labels/episodes.py": "715722f35412bee7c7b11014e7fb3d95059b63b525a6d01c97ea21ab4e29e9b4",
+    "src/aegisquant/research/validation/ml_contract.py": "e40055462e924024ff301d708054284ad5152020572e80333f6d12e2eac22a55",
+    "scripts/run_alpha_v5_walkforward.py": "87760008afcab4cfa590141dddb4a41a1b90afdd829da1d4495b579e2f1fca21",
+    "configs/research/alpha_v5_ml_contract.yaml": "3d7e9de6996967b4a0485cc4dc5d603b6f4e3c9cd5cb5648cf9aaf3f57a8635f",
+    "tests/alpha_v5/test_ml_contract.py": "5dd623adb9f3126525b9f9fb58ab7c894cbdb154cf07c5164f9fe79d4c6e18f4",
+    "docs/research/alpha_v5_ml_contract.md": "01a560976c5c9dca20575b2afc4f604d979163f5187f6bcef7ea5315e6e8bf05"
+  },
+  "pure_test_count": 48,
+  "check_record_count": 15,
+  "commits_created": 0,
+  "pushes": 0,
+  "branches_created": 0
+}

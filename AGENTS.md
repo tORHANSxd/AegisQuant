@@ -13,6 +13,15 @@
 - 用户随后授权执行 `AegisQuant_R4/AegisQuant_R4_低换手与连续持仓优化任务书_20260908.md`，替代旧实施队列；v4 安全和经济晋级约束继续有效。R4 已完成 F0–F5 固定六配置及成本压力的 800 次矩阵引擎回放，最新报告为 `artifacts/alpha_r4/20260908_v1/go_no_go.md`，当前状态见 `state/ALPHA_V4_PROJECT_STATE.yaml` 的 `r4_20260908`。
 - R4 原 A1 70 分区及集成后 F0 逐单/成交/完整 MTM 复现一致，1,156 项全仓测试、40 项参考测试、28 次 BTC 季度事件日志恢复核验通过。R4 新模型/校准拟合和最终留出访问均为 0；F3/F4 未通过全部经济与统计门槛，仍为 `NO_PROVEN_ALPHA`，生产 CASH、ML/纸面/实盘/订单继续关闭。原 A1/A3/A7 证据不覆盖，不把缓冲省费或 F4 更高历史收益当作已证明信号增量。
 
+## 深度审计任务书后续授权
+
+- 用户明确授权以 `deep-research-report.md` 开始修改，并使用 Ponytail 与 workflow；按该报告“第一批只修研究有效性和 churn”的顺序执行。v4 安全及晋级约束继续有效。
+- 当前 generation 为 `alpha-r5-research-churn-20260908-v3`，配置为 `configs/research/aegis_alpha_v5.yaml`，入口为 `python -m scripts.run_alpha_v5_research`，证据在 `artifacts/alpha_v5/20260908_research_churn_v3/`。此处 R5 研究 generation 与历史工程 v5 任务书是不同身份。
+- v1 数据区间守卫失败、v2 严格 Decimal 配置恢复失败均保留；新策略回放前修复入口，策略参数及比较集合未改变。不得删失败记录、使用旧 generation 重跑或更改冻结策略后继续原试验。
+- 首批已完成：70 个原 A1 季度分区及 5 个原 F3 连续 sleeve 精确复现，55 次预登记回放完成；1,188 项全仓测试、类型检查和本轮 13 个 Python 文件格式检查通过。61 条新旧曲线的完整四小时/UTC 日历核验通过。全仓格式检查仅有未修改的 `scripts/run_alpha_v4_final_holdout.py` 既有问题。
+- 最新报告为 `artifacts/alpha_v5/20260908_research_churn_v3/report.md`。G1 五项 churn 门槛通过，相对 F0 成交名义额减少 58.54%、实际成本减少 58.13%；但盈利季度仅 6/14，全部预登记比较的 Holm 校正 p 值大于 0.05，仍为 `NO_PROVEN_ALPHA`。生产 CASH，ML/纸面/实盘/订单继续关闭，未训练新模型或读取最终留出。
+- 首批仅做固定存活五币开发诊断；PIT 选样组件测试不能冒充真实 PIT universe。真实历史费用/规则/盘口/延迟、未使用至少十二个月留出及完整独立试验历史仍缺。后续 ML、组合风险、成本实证和准入阶段按各自证据门槛推进。
+
 ## Git 分支规则
 
 - 所有工作与提交（包括直接提交、自动提交、独立归档和子代理操作）默认始终在 `main`。用户未明确要求创建分支时，严禁创建其他分支，包括 `codex/*`、功能分支、修复分支和 `codex-archive`。

@@ -1,0 +1,10 @@
+{
+  "status": "SYNTHETIC_CONTRACTS_ONLY",
+  "actual_joint_paths": null,
+  "same_configuration_engine_equivalence": "NOT_VERIFIED",
+  "cash_source": "EXISTING_LEDGER_NATIVE_BALANCES",
+  "available_cash_rule": "MIN_VENUE_AVAILABLE_AND_LEDGER_TOTAL_MINUS_UNSETTLED_MINUS_PENDING_BUY_RESERVE",
+  "unfilled_sale_proceeds_available": false,
+  "rounding": "DOWN_WITH_POST_ROUNDING_RISK_CHECK",
+  "partial_fill_action": "RECOMPUTE_FROM_FRESH_LEDGER_AND_RISK_SNAPSHOT"
+}

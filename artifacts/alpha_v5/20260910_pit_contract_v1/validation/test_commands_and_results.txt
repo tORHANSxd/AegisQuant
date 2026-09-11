@@ -1,0 +1,148 @@
+{"check": "format_apply", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "ruff", "format", "src/aegisquant/research/datasets/universe.py", "src/aegisquant/research/datasets/pit_universe.py", "scripts/run_alpha_v5_research.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "src/aegisquant/research/validation/pit_contract.py"], "exit_code": 0, "elapsed_seconds": 0.14206410001497716}
+6 files reformatted
+
+
+{"check": "ruff", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "ruff", "check", "src/aegisquant/research/datasets/universe.py", "src/aegisquant/research/datasets/pit_universe.py", "scripts/run_alpha_v5_research.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "src/aegisquant/research/validation/pit_contract.py"], "exit_code": 1, "elapsed_seconds": 0.1697755999630317}
+SIM117 Use a single `with` statement with multiple contexts instead of nested `with` statements
+   --> src\aegisquant\research\validation\pit_contract.py:399:9
+    |
+397 |       exit_code = 0
+398 |       try:
+399 | /         with registered_run(
+400 | |             output,
+401 | |             run_id,
+402 | |             planned_run_ids=[run_id],
+403 | |             bindings={"kind": "PIT_DATA_QUALITY_NOT_ALPHA_TRIAL"},
+404 | |         ):
+405 | |             with zero_budget_guard(output, root, counters):
+    | |___________________________________________________________^
+406 |                   write_json_exclusive(
+407 |                       output / "preregistration.json",
+    |
+help: Combine `with` statements
+
+Found 1 error.
+
+
+{"check": "format", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "ruff", "format", "--check", "src/aegisquant/research/datasets/universe.py", "src/aegisquant/research/datasets/pit_universe.py", "scripts/run_alpha_v5_research.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "src/aegisquant/research/validation/pit_contract.py"], "exit_code": 0, "elapsed_seconds": 0.13132580003002658}
+6 files already formatted
+
+
+{"check": "pyright", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "pyright", "src/aegisquant/research/datasets/universe.py", "src/aegisquant/research/datasets/pit_universe.py", "scripts/run_alpha_v5_research.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "src/aegisquant/research/validation/pit_contract.py"], "exit_code": 1, "elapsed_seconds": 3.729600499966182}
+d:\Personal\Quantitative_Trading\src\aegisquant\research\datasets\pit_universe.py
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\datasets\pit_universe.py:250:17 - error: Unnecessary isinstance call; "int" is always an instance of "int" (reportUnnecessaryIsInstance)
+d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\pit_contract.py
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\pit_contract.py:405:50 - error: Argument of type "dict[Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders'], int]" cannot be assigned to parameter "counters" of type "dict[str, int]"
+    "dict[Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders'], int]" is not assignable to "dict[str, int]"
+      Type parameter "_KT@dict" is invariant, but "Literal['historical_strategy_engine_runs', 'real_return_model_fits', 'real_calibration_fits', 'final_holdout_accesses', 'real_orders']" is not the same as "str" (reportArgumentType)
+d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:280:11 - error: Argument of type "str | datetime | Any" cannot be assigned to parameter "event_id" of type "str" in function "__init__"
+    Type "str | datetime | Any" is not assignable to type "str"
+      "datetime" is not assignable to "str" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:280:11 - error: Argument of type "str | datetime | Any" cannot be assigned to parameter "symbol" of type "str" in function "__init__"
+    Type "str | datetime | Any" is not assignable to type "str"
+      "datetime" is not assignable to "str" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:280:11 - error: Argument of type "str | datetime | Any" cannot be assigned to parameter "venue" of type "str" in function "__init__"
+    Type "str | datetime | Any" is not assignable to type "str"
+      "datetime" is not assignable to "str" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:280:11 - error: Argument of type "str | datetime | Any" cannot be assigned to parameter "event_kind" of type "Literal['LISTED', 'TRADING_STARTED', 'SUSPENDED', 'RESUMED', 'DELISTED', 'MIGRATED', 'RELISTED', 'SYMBOL_CHANGED', 'QUOTE_CHANGED']" in function "__init__"
+    Type "str | datetime | Any" is not assignable to type "Literal['LISTED', 'TRADING_STARTED', 'SUSPENDED', 'RESUMED', 'DELISTED', 'MIGRATED', 'RELISTED', 'SYMBOL_CHANGED', 'QUOTE_CHANGED']"
+      Type "datetime" is not assignable to type "Literal['LISTED', 'TRADING_STARTED', 'SUSPENDED', 'RESUMED', 'DELISTED', 'MIGRATED', 'RELISTED', 'SYMBOL_CHANGED', 'QUOTE_CHANGED']"
+        "datetime" is not assignable to "Literal['LISTED']"
+        "datetime" is not assignable to "Literal['TRADING_STARTED']"
+        "datetime" is not assignable to "Literal['SUSPENDED']"
+        "datetime" is not assignable to "Literal['RESUMED']"
+        "datetime" is not assignable to "Literal['DELISTED']"
+        "datetime" is not assignable to "Literal['MIGRATED']" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:280:11 - error: Argument of type "str | datetime | Any" cannot be assigned to parameter "source_published_at" of type "UtcDateTime | None" in function "__init__"
+    Type "str | datetime | Any" is not assignable to type "UtcDateTime | None"
+      Type "str" is not assignable to type "UtcDateTime | None"
+        "str" is not assignable to "datetime"
+        "str" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:280:11 - error: Argument of type "str | datetime | Any" cannot be assigned to parameter "first_observed_at" of type "UtcDateTime" in function "__init__"
+    Type "str | datetime | Any" is not assignable to type "UtcDateTime"
+      "str" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:280:11 - error: Argument of type "str | datetime | Any" cannot be assigned to parameter "availability_evidence_kind" of type "Literal['ARCHIVED_PUBLICATION', 'OBSERVED_AT_RECEIPT', 'UNKNOWN', 'SYNTHETIC']" in function "__init__"
+    Type "str | datetime | Any" is not assignable to type "Literal['ARCHIVED_PUBLICATION', 'OBSERVED_AT_RECEIPT', 'UNKNOWN', 'SYNTHETIC']"
+      Type "datetime" is not assignable to type "Literal['ARCHIVED_PUBLICATION', 'OBSERVED_AT_RECEIPT', 'UNKNOWN', 'SYNTHETIC']"
+        "datetime" is not assignable to "Literal['ARCHIVED_PUBLICATION']"
+        "datetime" is not assignable to "Literal['OBSERVED_AT_RECEIPT']"
+        "datetime" is not assignable to "Literal['UNKNOWN']"
+        "datetime" is not assignable to "Literal['SYNTHETIC']" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:280:11 - error: Argument of type "str | datetime | Any" cannot be assigned to parameter "source_sha256" of type "str" in function "__init__"
+    Type "str | datetime | Any" is not assignable to type "str"
+      "datetime" is not assignable to "str" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:432:11 - error: Argument of type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" cannot be assigned to parameter "rules" of type "Iterable[RuleProvenance]" in function "audit_universe_at"
+    Type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" is not assignable to type "Iterable[RuleProvenance]"
+      "Decimal" is incompatible with protocol "Iterable[RuleProvenance]"
+        "__iter__" is not present (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:432:11 - error: Argument of type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" cannot be assigned to parameter "decision_time" of type "UtcDateTime" in function "audit_universe_at"
+    Type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" is not assignable to type "UtcDateTime"
+      "Decimal" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:432:11 - error: Argument of type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" cannot be assigned to parameter "minimum_quote_volume" of type "Decimal" in function "audit_universe_at"
+    Type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" is not assignable to type "Decimal"
+      "bool" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:432:11 - error: Argument of type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" cannot be assigned to parameter "warmup_requirements" of type "Mapping[str, int]" in function "audit_universe_at"
+    Type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" is not assignable to type "Mapping[str, int]"
+      "Decimal" is not assignable to "Mapping[str, int]" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:432:11 - error: Argument of type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" cannot be assigned to parameter "minimum_history_bars" of type "int" in function "audit_universe_at"
+    Type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" is not assignable to type "int"
+      "Decimal" is not assignable to "int" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:432:11 - error: Argument of type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" cannot be assigned to parameter "maximum_age" of type "timedelta" in function "audit_universe_at"
+    Type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" is not assignable to type "timedelta"
+      "Decimal" is not assignable to "timedelta" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:432:11 - error: Argument of type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" cannot be assigned to parameter "held_instrument_ids" of type "Iterable[str]" in function "audit_universe_at"
+    Type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" is not assignable to type "Iterable[str]"
+      "Decimal" is incompatible with protocol "Iterable[str]"
+        "__iter__" is not present (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:432:11 - error: Argument of type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" cannot be assigned to parameter "allow_synthetic" of type "bool" in function "audit_universe_at"
+    Type "list[RuleProvenance] | Iterable[RuleProvenance] | datetime | Decimal | dict[str, int] | bool | Any" is not assignable to type "bool"
+      "Decimal" is not assignable to "bool" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:699:13 - error: Argument type is partially unknown
+    Argument corresponds to parameter "value" in function "setattr"
+    Argument type is "(path: Unknown) -> Unknown" (reportUnknownArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:699:20 - error: Type of parameter "path" is unknown (reportUnknownLambdaType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:699:26 - error: Type of "name" is unknown (reportUnknownMemberType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:699:26 - error: Return type of lambda is unknown (reportUnknownLambdaType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:704:9 - error: Type of "append" is partially unknown
+    Type of "append" is "(object: Unknown, /) -> None" (reportUnknownMemberType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:818:9 - error: Argument type is partially unknown
+    Argument corresponds to parameter "value" in function "setattr"
+    Argument type is "(root: Unknown, *args: Unknown) -> Literal['main', 'd8c6d4013097f6323ab8b7a424c860ba0ccbd62b']" (reportUnknownArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:818:16 - error: Type of parameter "root" is unknown (reportUnknownLambdaType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_research_guards.py:818:23 - error: Type of parameter "args" is partially unknown (reportUnknownLambdaType)
+26 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+{"check": "pytest", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "pytest", "-o", "addopts=", "--basetemp", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b2-pit-20260910-toz6l45l\\pytest-01", "tests/property/pit/test_universe.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "-k", "b2 or point_in_time_universe or universe_snapshot or point_in_time_listing", "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b2-pit-20260910-toz6l45l\\pytest-01.xml", "-q"], "exit_code": 0, "elapsed_seconds": 8.373541300010402}
+.................................................                        [100%]
+49 passed, 15 deselected in 6.88s
+
+
+{"check": "format-apply", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "ruff", "format", "src/aegisquant/research/datasets/universe.py", "src/aegisquant/research/datasets/pit_universe.py", "scripts/run_alpha_v5_research.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "src/aegisquant/research/validation/pit_contract.py"], "exit_code": 0, "elapsed_seconds": 0.09912580001400784}
+1 file reformatted, 5 files left unchanged
+
+
+{"check": "ruff", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "ruff", "check", "src/aegisquant/research/datasets/universe.py", "src/aegisquant/research/datasets/pit_universe.py", "scripts/run_alpha_v5_research.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "src/aegisquant/research/validation/pit_contract.py"], "exit_code": 0, "elapsed_seconds": 0.11872379999840632}
+All checks passed!
+
+
+{"check": "format", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "ruff", "format", "--check", "src/aegisquant/research/datasets/universe.py", "src/aegisquant/research/datasets/pit_universe.py", "scripts/run_alpha_v5_research.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "src/aegisquant/research/validation/pit_contract.py"], "exit_code": 0, "elapsed_seconds": 0.10115000000223517}
+6 files already formatted
+
+
+{"check": "pyright", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "pyright", "src/aegisquant/research/datasets/universe.py", "src/aegisquant/research/datasets/pit_universe.py", "scripts/run_alpha_v5_research.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "src/aegisquant/research/validation/pit_contract.py"], "exit_code": 0, "elapsed_seconds": 3.070665600011125}
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+{"check": "pytest", "command": ["D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe", "-m", "pytest", "-o", "addopts=", "--basetemp", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b2-pit-20260910-toz6l45l\\pytest-02", "tests/property/pit/test_universe.py", "tests/alpha_v5/test_research_guards.py", "tests/alpha_v5/test_no_future_mutation.py", "-k", "b2 or point_in_time_universe or universe_snapshot or point_in_time_listing", "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b2-pit-20260910-toz6l45l\\pytest-02.xml", "-q"], "exit_code": 0, "elapsed_seconds": 6.094050399959087}
+.................................................                        [100%]
+49 passed, 15 deselected in 4.94s
+
+

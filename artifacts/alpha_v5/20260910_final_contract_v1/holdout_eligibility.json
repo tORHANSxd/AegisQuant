@@ -1,0 +1,11 @@
+{
+  "status": "NO_ELIGIBLE_UNUSED_TWELVE_MONTH_DATASET",
+  "dataset": null,
+  "actual_anchor": null,
+  "actual_freeze": null,
+  "actual_authorization": null,
+  "actual_content_accesses": 0,
+  "actual_data_claims": 0,
+  "minimum_months": 12,
+  "pit_quality": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE"
+}

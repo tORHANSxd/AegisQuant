@@ -1,0 +1,48 @@
+{
+  "authorized": {
+    "data_quality_jobs": 1,
+    "historical_strategy_engine_runs": 0,
+    "real_return_model_fits": 0,
+    "real_calibration_fits": 0,
+    "final_holdout_accesses": 0,
+    "real_orders": 0
+  },
+  "actual": {
+    "data_quality_jobs": 1,
+    "historical_strategy_engine_runs": 0,
+    "real_return_model_fits": 0,
+    "real_calibration_fits": 0,
+    "final_holdout_accesses": 0,
+    "real_orders": 0
+  },
+  "strict_data_quality": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE",
+  "new_alpha_trials": 0,
+  "significance_recalculations": 0,
+  "historical_pit_snapshots": null,
+  "before": {
+    "status": "VERIFIED",
+    "files_checked": 12069,
+    "changed": [],
+    "protected_holdout_contents_read": false,
+    "basis": "SHA256 before implementation and after audit"
+  },
+  "after": {
+    "status": "VERIFIED",
+    "files_checked": 12069,
+    "changed": [],
+    "protected_holdout_contents_read": false,
+    "basis": "SHA256 before implementation and after audit"
+  },
+  "live_lock_literals": {
+    "LIVE_TRADING": false,
+    "ORDER_SUBMISSION_ENABLED": false,
+    "LIVE_ADAPTERS": []
+  },
+  "production_policy": "CASH",
+  "research_conclusion": "NO_PROVEN_ALPHA",
+  "production_ml_enabled": false,
+  "paper_trading_admitted": false,
+  "live_trading": false,
+  "order_submission_enabled": false,
+  "promotion_admitted": false
+}

@@ -1,0 +1,172 @@
+{
+  "schema_version": "immutable-evidence-output-v1",
+  "files": {
+    "before/src/aegisquant/accounting/ledger.py": {
+      "sha256": "e2f38f01e81f8555840fdb68def0c02f85cff78404d024ab8bfc3724de4fc097",
+      "bytes": 57810
+    },
+    "before/src/aegisquant/backtest/costs.py": {
+      "sha256": "a873b19ad15e668f089f90f7b93393bdca135a6058d2253db3ddbf821a0c46b3",
+      "bytes": 7439
+    },
+    "before/src/aegisquant/backtest/fills.py": {
+      "sha256": "a5c4336126ad355f075123d91f7230bb6b9f3d59955dfda6102eaaf44b95e147",
+      "bytes": 7732
+    },
+    "before/src/aegisquant/backtest/models.py": {
+      "sha256": "64dd4103e6e198a346308dda242ce46072d155b7f6ac62f5875997b06ec3c780",
+      "bytes": 26603
+    },
+    "before/src/aegisquant/portfolio/models.py": {
+      "sha256": "d6003bc97efbd4338574a82f006eb0bddc99e84226649183a7a459a1f353e1e8",
+      "bytes": 8185
+    },
+    "before/src/aegisquant/portfolio/optimizer.py": {
+      "sha256": "c52abbcaf1bbbb90715569a563fc85e57974f89e15ead33cc6db5d7e3bc033c1",
+      "bytes": 16508
+    },
+    "before/src/aegisquant/portfolio/transition_costs.py": {
+      "sha256": "a5ef1344b128a0944942c0a1f60a2261545176c89621e45c8a49ea6aa3f02045",
+      "bytes": 3390
+    },
+    "before/src/aegisquant/research/validation/evidence_contract.py": {
+      "sha256": "109c8fd165409edfaf123a45aad1e1440d71466d50b3cab00030a75cc8c239b1",
+      "bytes": 77123
+    },
+    "calibration_freeze_manifest.json": {
+      "sha256": "2f077afd818ab839188f154cf8ef6086745035f5fdc1e185b093d1e7f0d3fbf3",
+      "bytes": 222
+    },
+    "calibration_residual_buckets.json": {
+      "sha256": "446abc974f033a3c3c27b8384e762de65061ccabbcd30bc7467de2398f2b51cd",
+      "bytes": 51
+    },
+    "capacity_curve.json": {
+      "sha256": "073e35691333f9448ce2f9115486ac8bfcdb33eca543b6cda08ed70bb4567d22",
+      "bytes": 238
+    },
+    "changes_this_batch.patch": {
+      "sha256": "ca9d2dde7a638877e65d2dcf90ea57bd7e653e071a5fa927d9cf88f7c14b2a66",
+      "bytes": 113518
+    },
+    "cost_modes.json": {
+      "sha256": "a05ac62a1fd16c05ef5540396b8cdcee66d0d78aedeec9b7017d9c92ad86e0e2",
+      "bytes": 314
+    },
+    "evidence_gaps.json": {
+      "sha256": "289b46acc49d9b8e0e61c104b36b878c87b384d8fe06f9f922cddef1a33b94f5",
+      "bytes": 712
+    },
+    "execution_protocol.json": {
+      "sha256": "1e58cefd3bcf5b76ea8b5f06f36ba1842baae0d9060861273f2dd44e1e12979c",
+      "bytes": 859
+    },
+    "execution_quality_tables.json": {
+      "sha256": "716e7b21c97276dbab39df89cf040229a8056754cded5c7808605c5b36d6736b",
+      "bytes": 646
+    },
+    "experiment_events.jsonl": {
+      "sha256": "0c2751726e8e42758de7c4cad9449986d9f0debe865b1e29e730f5687912fb24",
+      "bytes": 994
+    },
+    "implementation/configs/research/alpha_v5_execution_contract.yaml": {
+      "sha256": "0a5ac8929dc20db9c7e5ece3addfa91faa16d7c7da015220b13d488f45512471",
+      "bytes": 1606
+    },
+    "implementation/docs/research/alpha_v5_execution_contract.md": {
+      "sha256": "390693af7fd347f0209435bceb74706729cda6f5f1dda6bb5475401b1340daf4",
+      "bytes": 2734
+    },
+    "implementation/scripts/run_alpha_v5_execution_diagnostics.py": {
+      "sha256": "b39d5cdb1c2f1a85acfcb179942dffd98ea6ddb8e819c2e70f206aaf8bbe778c",
+      "bytes": 1340
+    },
+    "implementation/src/aegisquant/accounting/ledger.py": {
+      "sha256": "894401b189860be6afd98e20800683b9db2aaba598fbc5884aa3f46aa144794d",
+      "bytes": 64849
+    },
+    "implementation/src/aegisquant/backtest/costs.py": {
+      "sha256": "63b70b2fcd7cc6a2033210363df03d5892d51476f834a549f08484bd9de287fb",
+      "bytes": 14129
+    },
+    "implementation/src/aegisquant/backtest/fills.py": {
+      "sha256": "c59c9af68c2a81a8465d93b7d4bb699a5e276e53491b187b214883c1c5ac7190",
+      "bytes": 17112
+    },
+    "implementation/src/aegisquant/backtest/models.py": {
+      "sha256": "ba4ea17c01faba1cfbda731bcd5f56f918debe4847c9337ab7079a10916489c5",
+      "bytes": 31305
+    },
+    "implementation/src/aegisquant/portfolio/models.py": {
+      "sha256": "0036fc694a83f135d9d3d4d0c1b95fb939800e36008065ddccf3553061216f1f",
+      "bytes": 9042
+    },
+    "implementation/src/aegisquant/portfolio/optimizer.py": {
+      "sha256": "05f11464c46d5bab72c286d808372b23b65ead28d7b1cb35eea3d91b84ebe44c",
+      "bytes": 16665
+    },
+    "implementation/src/aegisquant/portfolio/transition_costs.py": {
+      "sha256": "ed10073118bf805acc74447da5cffb5baf86b495f566a2ea8ebf483b50de46c1",
+      "bytes": 7200
+    },
+    "implementation/src/aegisquant/research/validation/evidence_contract.py": {
+      "sha256": "3f69c097cd8e3142dea0642101afb79d104bc5d1f0697a0e7104226eeb7ca4c7",
+      "bytes": 86174
+    },
+    "implementation/src/aegisquant/research/validation/execution_contract.py": {
+      "sha256": "8afb50c7b251eb2a89ae24e0990bd4be9240570ea36382f3e1f4b9fe6e3b34dd",
+      "bytes": 14636
+    },
+    "implementation/tests/alpha_v5/test_execution_contract.py": {
+      "sha256": "43309a6c633b3cd762cdd74bec95939694a9ecf417291ae78e9a22246aad8e31",
+      "bytes": 37169
+    },
+    "preflight/baseline_workspace.json": {
+      "sha256": "d286834603eac0a05c4b1637a804eceb3fc1be799c51d5a3087cdb4f14b4b8d6",
+      "bytes": 2869457
+    },
+    "preflight/version_graph.txt": {
+      "sha256": "8f3e7a79bd150ceae259d9a31471729b4d6d07d53d71568dc467a760449005ea",
+      "bytes": 473
+    },
+    "preflight/workspace_before.patch": {
+      "sha256": "ae48098f559781c8ff8c14591edd64f78028df7c737db30a2acbc10eabc5dd59",
+      "bytes": 53956
+    },
+    "preregistration.json": {
+      "sha256": "38a86980911ff4f6d6def39a194be98780630e5b513bc2f203c8a08ef96232bb",
+      "bytes": 2221
+    },
+    "report.md": {
+      "sha256": "6dee0a24993abaef718c2f026b1e47121390c436e257f058deb1aff79db2fd49",
+      "bytes": 1651
+    },
+    "run_claims/9168fef5d61d775efe28581dc02e15537059ede4a1a42e07967ae709c94bb44b": {
+      "sha256": "9168fef5d61d775efe28581dc02e15537059ede4a1a42e07967ae709c94bb44b",
+      "bytes": 55
+    },
+    "safety_and_budget_audit.json": {
+      "sha256": "50e086047e42aa1f0aa39550f2d46fe72d6dc0d1de49a0bc46a7357ec16cc84c",
+      "bytes": 1189
+    },
+    "source_and_version_bindings.json": {
+      "sha256": "8259b635190cba0483c30335e7a03e3a4923c1cb5249cdfcf3ae29220d618334",
+      "bytes": 2866
+    },
+    "validation/pytest_results.xml": {
+      "sha256": "9453b5656bffe65e7de38f7e5391c7684a2125f1da84df885cba13d4567b8a26",
+      "bytes": 12479
+    },
+    "validation/test_commands_and_results.txt": {
+      "sha256": "7e7f97d8caf30fadb55878199a25597fd949ce4f164526523689a613221549a5",
+      "bytes": 131219
+    },
+    "validation/validation_records.json": {
+      "sha256": "e2dd19d77c2568f2d871782d1d86c97c8b9bdf752ce335a7144bdd792057579e",
+      "bytes": 174551
+    }
+  },
+  "content_sha256": "293b43c81d9aecb4fa3ead35a45adaaa4eae03685d56737517d522fcc4b1ee9f",
+  "self_excluded": "OUTPUT_MANIFEST.json",
+  "write_policy": "EXCLUSIVE_GENERATION_NO_REOPEN"
+}

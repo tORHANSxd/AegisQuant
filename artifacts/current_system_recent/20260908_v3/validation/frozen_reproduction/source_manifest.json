@@ -1,0 +1,1241 @@
+{
+  "datasets": [
+    {
+      "symbol": "BTCUSDT",
+      "file": "data/BTCUSDT_1h.csv",
+      "sha256": "a2fe850072b7252fe40a7070a34f3200e687edceb9f22e0b5db3e44210412cfd",
+      "download": {
+        "schema_version": "aegisquant-public-kline-cache-v1",
+        "request": {
+          "provider": "binance_public",
+          "endpoint": "spot_klines",
+          "symbol": "BTCUSDT",
+          "interval": "1h",
+          "start_ms": 1741392000000,
+          "end_ms_exclusive": 1788868800000,
+          "limit": 1000
+        },
+        "source": {
+          "provider": "Binance",
+          "base_url": "https://data-api.binance.vision",
+          "official_documentation": "https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market",
+          "authentication_used": false
+        },
+        "dataset": {
+          "sha256": "636a7aa24f7aedff68dcae0df7a3e8e520a51719dbfb250653cc3932fc428ffa",
+          "page_count": 14,
+          "first_open_time_ms": 1741392000000,
+          "last_open_time_ms": 1788865200000,
+          "expected_hour_count": 13188,
+          "row_count": 13188,
+          "complete_hourly_grid": true,
+          "gap_count": 0,
+          "missing_hour_count": 0,
+          "early_close_count": 0
+        },
+        "pages": [
+          {
+            "file": "page-0000.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1741392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "ae0c0d2601af5aa67498e7f8fb9bbc1d5831dcb1aea060d8a418a0d72265b99d"
+            },
+            "content": {
+              "sha256": "6bfaa9653349c5353ee0e9f6b4d622517597b77e8cace0280615d42d9d8f04ff"
+            },
+            "received_at": "2026-09-08T14:25:44.508869Z",
+            "elapsed_ms": 333,
+            "row_count": 1000,
+            "first_open_time_ms": 1741392000000,
+            "last_open_time_ms": 1744988400000
+          },
+          {
+            "file": "page-0001.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1744992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "5bfb995d93f83ea072eb71b660c27c60fbce9197778b439d94b1353bfc913316"
+            },
+            "content": {
+              "sha256": "02c14ad06db3ea725d6fc7fd58904f912dd752d27f0206703f55cf29d514e9b4"
+            },
+            "received_at": "2026-09-08T14:25:44.585552Z",
+            "elapsed_ms": 69,
+            "row_count": 1000,
+            "first_open_time_ms": 1744992000000,
+            "last_open_time_ms": 1748588400000
+          },
+          {
+            "file": "page-0002.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1748592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "e4288af64626be359f570c35aa6f1d1efbc5b12e78675d0b958378357132c605"
+            },
+            "content": {
+              "sha256": "f7e8062c387bfa9133d174e971b1d4404b3507cd213c1f90fe288912a7bfa4db"
+            },
+            "received_at": "2026-09-08T14:25:44.661706Z",
+            "elapsed_ms": 69,
+            "row_count": 1000,
+            "first_open_time_ms": 1748592000000,
+            "last_open_time_ms": 1752188400000
+          },
+          {
+            "file": "page-0003.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1752192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "5805edff27f7cc70b86932f77aaf35c5d149652f6aaa854482e43467a25a80e8"
+            },
+            "content": {
+              "sha256": "7e4540eac83cfe2f42b748f6a1697493353124acbe679b8ed5d1b06ce47831c2"
+            },
+            "received_at": "2026-09-08T14:25:44.734990Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1752192000000,
+            "last_open_time_ms": 1755788400000
+          },
+          {
+            "file": "page-0004.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1755792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "bce50fc0a5863861e2bb46481d48279c64de42a0c681a26a2f541d2f9fbfb577"
+            },
+            "content": {
+              "sha256": "0d03d17cdd3789cfa21c2244aa5c8d2a1a6d90b7399598de85d011d362e8ea64"
+            },
+            "received_at": "2026-09-08T14:25:44.811617Z",
+            "elapsed_ms": 69,
+            "row_count": 1000,
+            "first_open_time_ms": 1755792000000,
+            "last_open_time_ms": 1759388400000
+          },
+          {
+            "file": "page-0005.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1759392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "35bea20f1eefa756dbe9d1ed6f4f0def1f39f02a885e73b4750db6f3d03b2df8"
+            },
+            "content": {
+              "sha256": "9dbf9e5bf87181f280f16383aa95729c3eb2c3067d91dd5472a6812eba6294e8"
+            },
+            "received_at": "2026-09-08T14:25:44.884838Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1759392000000,
+            "last_open_time_ms": 1762988400000
+          },
+          {
+            "file": "page-0006.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1762992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "37d78ababb84c4a9cb1bccbd361e063c42f314b02d500482fab89349cbcff492"
+            },
+            "content": {
+              "sha256": "abcc38195f0e040623f7e92080e11abc428f6eeda8c2a20881be5d3aaea16ff7"
+            },
+            "received_at": "2026-09-08T14:25:44.960791Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1762992000000,
+            "last_open_time_ms": 1766588400000
+          },
+          {
+            "file": "page-0007.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1766592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "778ee3aab842190eeacf36b43ea04eb9c2de67d3d10af9a91c5a3ee1e21fcda6"
+            },
+            "content": {
+              "sha256": "d70f215db2cae64a25ef4058f8a4c9ec9626ae6b93965d18fb8d069f001aea27"
+            },
+            "received_at": "2026-09-08T14:25:45.036037Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1766592000000,
+            "last_open_time_ms": 1770188400000
+          },
+          {
+            "file": "page-0008.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1770192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "9b0e1d98a4956d818c47f9b8c4ecd71c278e2c91c3593ab30df7f0d50a2a2bb4"
+            },
+            "content": {
+              "sha256": "e40602605d59b32f3f82d3936864da098f6226930dd5e820ef12be76369aceac"
+            },
+            "received_at": "2026-09-08T14:25:45.115906Z",
+            "elapsed_ms": 68,
+            "row_count": 1000,
+            "first_open_time_ms": 1770192000000,
+            "last_open_time_ms": 1773788400000
+          },
+          {
+            "file": "page-0009.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1773792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "ca1e71d6d81d4d0d4ca81ebdf8cb582e93efe42b0db1b6dcbe2f63adad01be0a"
+            },
+            "content": {
+              "sha256": "f47c05515cb48f81e33dfd653b4320015b2888e09de4ef9a028166ae56523d24"
+            },
+            "received_at": "2026-09-08T14:25:45.190552Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1773792000000,
+            "last_open_time_ms": 1777388400000
+          },
+          {
+            "file": "page-0010.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1777392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "acb80577f2fcc7c9c24384ab8931efd869470005f74bd0973354cf9522c5f00d"
+            },
+            "content": {
+              "sha256": "05f32a6f11380d80157bd0b19f63b4a12336b447347627dc11edfa4ff2dbf433"
+            },
+            "received_at": "2026-09-08T14:25:45.264086Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1777392000000,
+            "last_open_time_ms": 1780988400000
+          },
+          {
+            "file": "page-0011.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1780992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "0279fec4123979d25237676dd0afad574d8ed545e1e4fe80d86ccd1eabdd0f73"
+            },
+            "content": {
+              "sha256": "da333bf2f39fbc52b4a997cfa219aa1d6badd106c098c7ef394088612417a391"
+            },
+            "received_at": "2026-09-08T14:25:45.338012Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1780992000000,
+            "last_open_time_ms": 1784588400000
+          },
+          {
+            "file": "page-0012.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1784592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "042317772be898c517fb3a8b77f18ca4073197fd3295401658b6c05bd3b6527d"
+            },
+            "content": {
+              "sha256": "a5217b515cd9f4f20cb881ad62924574e165ce7580739b775340d6c99309b74c"
+            },
+            "received_at": "2026-09-08T14:25:45.411507Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1784592000000,
+            "last_open_time_ms": 1788188400000
+          },
+          {
+            "file": "page-0013.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1788192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "d6a616d2bf26e5a65b3b2b64815f51ef8fca75470d17b8b7ea23b4cfbaefcc9b"
+            },
+            "content": {
+              "sha256": "902ce555c894528657c68d6cfe4c1e5a94d364805d99f90d6b252f18714d164a"
+            },
+            "received_at": "2026-09-08T14:25:45.470681Z",
+            "elapsed_ms": 52,
+            "row_count": 188,
+            "first_open_time_ms": 1788192000000,
+            "last_open_time_ms": 1788865200000
+          }
+        ]
+      }
+    },
+    {
+      "symbol": "ETHUSDT",
+      "file": "data/ETHUSDT_1h.csv",
+      "sha256": "f09adb5a7aa55cb6aa98adc28d1ee801033a6772cf72d27bc58809ba5bbabab4",
+      "download": {
+        "schema_version": "aegisquant-public-kline-cache-v1",
+        "request": {
+          "provider": "binance_public",
+          "endpoint": "spot_klines",
+          "symbol": "ETHUSDT",
+          "interval": "1h",
+          "start_ms": 1741392000000,
+          "end_ms_exclusive": 1788868800000,
+          "limit": 1000
+        },
+        "source": {
+          "provider": "Binance",
+          "base_url": "https://data-api.binance.vision",
+          "official_documentation": "https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market",
+          "authentication_used": false
+        },
+        "dataset": {
+          "sha256": "41c78fc7ec50baf87dd1ac1a52c680ca6a60ea4856e20797929d81bbafbc6543",
+          "page_count": 14,
+          "first_open_time_ms": 1741392000000,
+          "last_open_time_ms": 1788865200000,
+          "expected_hour_count": 13188,
+          "row_count": 13188,
+          "complete_hourly_grid": true,
+          "gap_count": 0,
+          "missing_hour_count": 0,
+          "early_close_count": 0
+        },
+        "pages": [
+          {
+            "file": "page-0000.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1741392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "10a878e79066f4a1af6312401d1b4e25a91ab1f013acff22fa6df03fc250036d"
+            },
+            "content": {
+              "sha256": "9a864c40c6170f81740189154fed0403b1fbc78d1733e0acd699d336850cb328"
+            },
+            "received_at": "2026-09-08T14:25:45.602044Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1741392000000,
+            "last_open_time_ms": 1744988400000
+          },
+          {
+            "file": "page-0001.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1744992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "5d3f705c16f298ab1510956b47cdcb131e119b1cbbc2b39d3ba6dd3ce2df8c99"
+            },
+            "content": {
+              "sha256": "2fd42539a8864997e968c327f124112f8f489f20675badc64fb17ba23dc212d9"
+            },
+            "received_at": "2026-09-08T14:25:45.676272Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1744992000000,
+            "last_open_time_ms": 1748588400000
+          },
+          {
+            "file": "page-0002.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1748592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "88920b3482e8f5f26dc1649cdb53f5a69d4c19b78a207829406bfbf8e5a5c5df"
+            },
+            "content": {
+              "sha256": "95098483a3391b01dcf7e308b244c6c94108f8b831a1d92d4d0c7f197a592050"
+            },
+            "received_at": "2026-09-08T14:25:45.749448Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1748592000000,
+            "last_open_time_ms": 1752188400000
+          },
+          {
+            "file": "page-0003.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1752192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "711cf46218e8e57568333ec0af43449044920c1031ce351c5eaf2e9114af774c"
+            },
+            "content": {
+              "sha256": "780b3dfac007a44cc006c8e65c9e3d1eea1134ea694740a95c32c860be3c9794"
+            },
+            "received_at": "2026-09-08T14:25:45.822414Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1752192000000,
+            "last_open_time_ms": 1755788400000
+          },
+          {
+            "file": "page-0004.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1755792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "b24e14d29d82d31d271b45a84ee089bcb91aa43ed7838c45b69eca854ea5e498"
+            },
+            "content": {
+              "sha256": "4730fcde4ed403dc5ec300c202c26e9f845da33583759881475fffb6064e2c2f"
+            },
+            "received_at": "2026-09-08T14:25:45.892459Z",
+            "elapsed_ms": 63,
+            "row_count": 1000,
+            "first_open_time_ms": 1755792000000,
+            "last_open_time_ms": 1759388400000
+          },
+          {
+            "file": "page-0005.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1759392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "2327e9f9e96c78dc0810d190981de1b0314d96ebac793a6e280c9cbd49da9200"
+            },
+            "content": {
+              "sha256": "4b1ec677f68910218fd55ede7d80f3448e3215e43663a57066d595220c7dfee0"
+            },
+            "received_at": "2026-09-08T14:25:45.966227Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1759392000000,
+            "last_open_time_ms": 1762988400000
+          },
+          {
+            "file": "page-0006.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1762992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "81705aa598d9fba58d30a5a837cffee5f71be08828bf82dc21c82a6f54bd5cc8"
+            },
+            "content": {
+              "sha256": "c01dfd8fce2eb54eeb98bb0b50323ee61778edb7363f1183006d832371095378"
+            },
+            "received_at": "2026-09-08T14:25:46.041428Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1762992000000,
+            "last_open_time_ms": 1766588400000
+          },
+          {
+            "file": "page-0007.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1766592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "cfbad834f9d36e4ea69e079c682c31dd2b7988666fd4370ee94a34964633314a"
+            },
+            "content": {
+              "sha256": "f71d986c8354f83f1c4f6c0d92c742b7f8f33588fa4a80f1255ed791f937352e"
+            },
+            "received_at": "2026-09-08T14:25:46.115036Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1766592000000,
+            "last_open_time_ms": 1770188400000
+          },
+          {
+            "file": "page-0008.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1770192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "b3d0085c6db117af891d24e5135154ba7235d14d41dec57e6f82c92fd9bd22cd"
+            },
+            "content": {
+              "sha256": "65d3e8a14daf3743dad28f1114b1a88b3e763def0efe29b07fd6f19a88f08607"
+            },
+            "received_at": "2026-09-08T14:25:46.190617Z",
+            "elapsed_ms": 68,
+            "row_count": 1000,
+            "first_open_time_ms": 1770192000000,
+            "last_open_time_ms": 1773788400000
+          },
+          {
+            "file": "page-0009.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1773792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "1173fc169dd8f988f1133619a2401fdb216607cd4a3aedd947289d8288bb6ebd"
+            },
+            "content": {
+              "sha256": "eebb24678c62221e05a0123f97620be83ddcffc7a85201a58cb6ce14266c1323"
+            },
+            "received_at": "2026-09-08T14:25:46.264231Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1773792000000,
+            "last_open_time_ms": 1777388400000
+          },
+          {
+            "file": "page-0010.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1777392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "a49790c94064d9f0c632632783ab3570fc2846e94bb8790788f66789bf540016"
+            },
+            "content": {
+              "sha256": "c6f6bfd7a0ad7b453ecd390299468df8afe0f846b550158e0d16bd30449783ca"
+            },
+            "received_at": "2026-09-08T14:25:46.335039Z",
+            "elapsed_ms": 63,
+            "row_count": 1000,
+            "first_open_time_ms": 1777392000000,
+            "last_open_time_ms": 1780988400000
+          },
+          {
+            "file": "page-0011.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1780992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "81f4851361134e982421c83ee7376a2251857862f420a3f6656dc43b545afaa7"
+            },
+            "content": {
+              "sha256": "0708120b5f48bdbe677eb401de77cd367cbbaa39bd9e8ffd348d8253eae6c353"
+            },
+            "received_at": "2026-09-08T14:25:46.406400Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1780992000000,
+            "last_open_time_ms": 1784588400000
+          },
+          {
+            "file": "page-0012.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1784592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "5408b22a4c9e6a88de92f98c82622c7541279fa2d0eb3851941ed3655fed9109"
+            },
+            "content": {
+              "sha256": "f4356936ba4668cf77d81938206916bf5e1daafffb06930071315c40b75e8e8c"
+            },
+            "received_at": "2026-09-08T14:25:46.482622Z",
+            "elapsed_ms": 68,
+            "row_count": 1000,
+            "first_open_time_ms": 1784592000000,
+            "last_open_time_ms": 1788188400000
+          },
+          {
+            "file": "page-0013.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1h&startTime=1788192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "6d04d61b8bf30a1501e66b0562614847be66ff5e9edd22f08b7791c78ad0389b"
+            },
+            "content": {
+              "sha256": "a89a5eecbcdcbc827acdedb97e31739b0f44745dcac0fac6cb5aba884cb89672"
+            },
+            "received_at": "2026-09-08T14:25:46.543302Z",
+            "elapsed_ms": 53,
+            "row_count": 188,
+            "first_open_time_ms": 1788192000000,
+            "last_open_time_ms": 1788865200000
+          }
+        ]
+      }
+    },
+    {
+      "symbol": "BNBUSDT",
+      "file": "data/BNBUSDT_1h.csv",
+      "sha256": "61af893befa9ae243f37dea8c523a4eddbd70d86ff0329315a5e3932041a63dc",
+      "download": {
+        "schema_version": "aegisquant-public-kline-cache-v1",
+        "request": {
+          "provider": "binance_public",
+          "endpoint": "spot_klines",
+          "symbol": "BNBUSDT",
+          "interval": "1h",
+          "start_ms": 1741392000000,
+          "end_ms_exclusive": 1788868800000,
+          "limit": 1000
+        },
+        "source": {
+          "provider": "Binance",
+          "base_url": "https://data-api.binance.vision",
+          "official_documentation": "https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market",
+          "authentication_used": false
+        },
+        "dataset": {
+          "sha256": "70e0a66a0ec30b23a6062116b95e084baed2c9d2e859b8ae88bee9a56b02f96f",
+          "page_count": 14,
+          "first_open_time_ms": 1741392000000,
+          "last_open_time_ms": 1788865200000,
+          "expected_hour_count": 13188,
+          "row_count": 13188,
+          "complete_hourly_grid": true,
+          "gap_count": 0,
+          "missing_hour_count": 0,
+          "early_close_count": 0
+        },
+        "pages": [
+          {
+            "file": "page-0000.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1741392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "3fd82ed3473eb6db5f174d3f68b818b00fe2536dd0db1172a9ee858e9dfeed34"
+            },
+            "content": {
+              "sha256": "51dde33027962b88f6b4920d8cebea5db1391b5e32d0ad989eb7cf847c1e8a70"
+            },
+            "received_at": "2026-09-08T14:25:46.671466Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1741392000000,
+            "last_open_time_ms": 1744988400000
+          },
+          {
+            "file": "page-0001.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1744992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "43c065163ea1529449eb6d41c61c971688f4a152eccaa7d71519a77b87f09edc"
+            },
+            "content": {
+              "sha256": "e81e3dd43cf86729eb6b0936e7b9fa2e27f2c6cd3690be101530146fcacb4dab"
+            },
+            "received_at": "2026-09-08T14:25:46.742698Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1744992000000,
+            "last_open_time_ms": 1748588400000
+          },
+          {
+            "file": "page-0002.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1748592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "c31bd74861fe39eb027925b10d1314b1b74f65b89ce1e7a0870cb3b834bc841a"
+            },
+            "content": {
+              "sha256": "5c571f5539a4b2a2edf1c32ec374388b11f9fb54a90aa2ffde0ed5932744606e"
+            },
+            "received_at": "2026-09-08T14:25:46.815633Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1748592000000,
+            "last_open_time_ms": 1752188400000
+          },
+          {
+            "file": "page-0003.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1752192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "54db1df10113573a57b8d68832dc0dd4e56df4269cee587773e68a87dd711999"
+            },
+            "content": {
+              "sha256": "6826e41c7150a079565382975f15829e4791f823fe041454d2b2a894b2df0ff2"
+            },
+            "received_at": "2026-09-08T14:25:46.887864Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1752192000000,
+            "last_open_time_ms": 1755788400000
+          },
+          {
+            "file": "page-0004.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1755792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "29731ec5eac06949c72af3e0034a335884e3d8ec67403a74c63bcf620b287a21"
+            },
+            "content": {
+              "sha256": "086f1d081a71f463036b0c8f7f66ca6a9b9b724c1db80e6a28e7e41bf3254c6c"
+            },
+            "received_at": "2026-09-08T14:25:46.958522Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1755792000000,
+            "last_open_time_ms": 1759388400000
+          },
+          {
+            "file": "page-0005.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1759392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "25c704b7ecfed889cb1bfed7418f24e227a9e6547844a10ba6fe5bac4d3bef2f"
+            },
+            "content": {
+              "sha256": "7cc30fceb4472174c3fb16f851e1f87811680a0ec65cf2d376462bf15d530bf1"
+            },
+            "received_at": "2026-09-08T14:25:47.032818Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1759392000000,
+            "last_open_time_ms": 1762988400000
+          },
+          {
+            "file": "page-0006.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1762992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "23e0159c917d155bfb036b095c423dcb9d20363cd1cd85814c97336a1af8a9d1"
+            },
+            "content": {
+              "sha256": "86b9ef1ac4a87d69fa1f9c057ea4e194687cd2c13616f535fb5708143da6fb0c"
+            },
+            "received_at": "2026-09-08T14:25:47.108543Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1762992000000,
+            "last_open_time_ms": 1766588400000
+          },
+          {
+            "file": "page-0007.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1766592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "8b782acdb0969bebf73b8582f73d4d822719ed67d53ecdab4585571111767cd3"
+            },
+            "content": {
+              "sha256": "9f8245a9221b9cfcdb55b07e48ebc80f9c432003dfe734318c5c7b24eddb150f"
+            },
+            "received_at": "2026-09-08T14:25:47.181647Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1766592000000,
+            "last_open_time_ms": 1770188400000
+          },
+          {
+            "file": "page-0008.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1770192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "fa3a6e2431494b3a597c769335859579bcfd5201346e7068834bfff22158db0d"
+            },
+            "content": {
+              "sha256": "26427d60cb3418f540a6574396b290ffe47007ba29b7be59d3faa8443c382b2a"
+            },
+            "received_at": "2026-09-08T14:25:47.254369Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1770192000000,
+            "last_open_time_ms": 1773788400000
+          },
+          {
+            "file": "page-0009.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1773792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "9d24d053c4ffb8f113b0f4ea5ae754ef5de76ac884cf3247e1431739a7659a5b"
+            },
+            "content": {
+              "sha256": "7572eff6ff14a7c544de882110ef66cee02e87ed70013976fb94b7464ec9a72b"
+            },
+            "received_at": "2026-09-08T14:25:47.324907Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1773792000000,
+            "last_open_time_ms": 1777388400000
+          },
+          {
+            "file": "page-0010.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1777392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "2a94b19b18887309994ff74ef1525d3e5cbaa17801a15d5b38f07a69970cb5c9"
+            },
+            "content": {
+              "sha256": "b44ef5855df9a3a26d2f7f5faabe1c39b3812edb6cd29481b1c83c281f68d67b"
+            },
+            "received_at": "2026-09-08T14:25:47.397617Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1777392000000,
+            "last_open_time_ms": 1780988400000
+          },
+          {
+            "file": "page-0011.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1780992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "2476ca7cbae7e34143e7ad264423e9f699795d41337c08e0c86c1fdca164630f"
+            },
+            "content": {
+              "sha256": "f37807fa94e8192ab3d0175a1ebcf760877c02075afcfcb785937b7675360b0a"
+            },
+            "received_at": "2026-09-08T14:25:47.468605Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1780992000000,
+            "last_open_time_ms": 1784588400000
+          },
+          {
+            "file": "page-0012.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1784592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "16f5170389506c084934aa34b317dc189ac22effc1897c8e18bff9828f47858d"
+            },
+            "content": {
+              "sha256": "de468afbe971db15448535a6ddfa6192b0387e027229bb55a068a8f8c6e217b0"
+            },
+            "received_at": "2026-09-08T14:25:47.541272Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1784592000000,
+            "last_open_time_ms": 1788188400000
+          },
+          {
+            "file": "page-0013.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=BNBUSDT&interval=1h&startTime=1788192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "e9e26552e05f27ed78765d0ad21091e88f27f2dea17aaf2f3a896ee5a7566b71"
+            },
+            "content": {
+              "sha256": "848139f8832dc65e6387ce1fb300a00301f27c8f21d9ea79fab3ec332a5bcc1e"
+            },
+            "received_at": "2026-09-08T14:25:47.602135Z",
+            "elapsed_ms": 53,
+            "row_count": 188,
+            "first_open_time_ms": 1788192000000,
+            "last_open_time_ms": 1788865200000
+          }
+        ]
+      }
+    },
+    {
+      "symbol": "SOLUSDT",
+      "file": "data/SOLUSDT_1h.csv",
+      "sha256": "7e22699cf236872fb86a2055bc8a3fc5c32f96a920f081ba645f0775cd3fff15",
+      "download": {
+        "schema_version": "aegisquant-public-kline-cache-v1",
+        "request": {
+          "provider": "binance_public",
+          "endpoint": "spot_klines",
+          "symbol": "SOLUSDT",
+          "interval": "1h",
+          "start_ms": 1741392000000,
+          "end_ms_exclusive": 1788868800000,
+          "limit": 1000
+        },
+        "source": {
+          "provider": "Binance",
+          "base_url": "https://data-api.binance.vision",
+          "official_documentation": "https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market",
+          "authentication_used": false
+        },
+        "dataset": {
+          "sha256": "1832fb2ed88282c07f8371ad8d840cde79591d8a570378c9f680a1fbeb08e59e",
+          "page_count": 14,
+          "first_open_time_ms": 1741392000000,
+          "last_open_time_ms": 1788865200000,
+          "expected_hour_count": 13188,
+          "row_count": 13188,
+          "complete_hourly_grid": true,
+          "gap_count": 0,
+          "missing_hour_count": 0,
+          "early_close_count": 0
+        },
+        "pages": [
+          {
+            "file": "page-0000.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1741392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "0c0f692ba3346cf9d5d18ea56c9f423a134fb3aff11388133af72686d7d165e1"
+            },
+            "content": {
+              "sha256": "4fd493a9c067bbf7dcf4974fbab220c6e61a9a2f9a176abd5603f4621f1d424a"
+            },
+            "received_at": "2026-09-08T14:25:47.725582Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1741392000000,
+            "last_open_time_ms": 1744988400000
+          },
+          {
+            "file": "page-0001.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1744992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "f06d397e211f73fe42d97d205f6d2ec0f3feaffca2aa8d0a3c1b9343c121448b"
+            },
+            "content": {
+              "sha256": "e106688b7d604216c5da0548694c9e183f31d592cec0165296239413fd20eda3"
+            },
+            "received_at": "2026-09-08T14:25:47.798859Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1744992000000,
+            "last_open_time_ms": 1748588400000
+          },
+          {
+            "file": "page-0002.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1748592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "1d98a1a35bbcd566f31e89d5ce7655455ff3623ea9c434217ab1341cdbfa0708"
+            },
+            "content": {
+              "sha256": "fd4ba8679bdf8359a48622e5a27598ebbcb91f929a9ec8b2cb22593e0a621218"
+            },
+            "received_at": "2026-09-08T14:25:47.871381Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1748592000000,
+            "last_open_time_ms": 1752188400000
+          },
+          {
+            "file": "page-0003.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1752192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "1ebc9a396f3419c67384d704694f5805c2c97f51c733e4e4aedd321c3facb78e"
+            },
+            "content": {
+              "sha256": "e3bbaf9d51782f6dcb63f93ec7f1a1b8ff0ed5ba7d0089d68c870cd26a0cb34f"
+            },
+            "received_at": "2026-09-08T14:25:47.943410Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1752192000000,
+            "last_open_time_ms": 1755788400000
+          },
+          {
+            "file": "page-0004.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1755792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "81f3b23376ff6fd9ab5b17487f6a5a931959fcb81c31c504b1218d4674c4cdb6"
+            },
+            "content": {
+              "sha256": "2e506c56c3359278583dd1e11a401ef2e12e33948161d01beada175556fb9a39"
+            },
+            "received_at": "2026-09-08T14:25:48.018333Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1755792000000,
+            "last_open_time_ms": 1759388400000
+          },
+          {
+            "file": "page-0005.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1759392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "e1d0edf6c5cf80c512c3489b8a3f38d814fab4898c64bc65e2a98b2f97b4bb3b"
+            },
+            "content": {
+              "sha256": "2645690038b7346c8186d69959571aa5906c59737b558d0c3b354b2f22b647ee"
+            },
+            "received_at": "2026-09-08T14:25:48.092242Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1759392000000,
+            "last_open_time_ms": 1762988400000
+          },
+          {
+            "file": "page-0006.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1762992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "dcaf59aebb4f08da79c5a7dc7ee7facd08f105aa2eba7c0a179dca2465cc663b"
+            },
+            "content": {
+              "sha256": "b23f7ac807c07b9849d0637e9bc9a4fc414b98775da5d47e0f8bdcea811e43ed"
+            },
+            "received_at": "2026-09-08T14:25:48.168572Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1762992000000,
+            "last_open_time_ms": 1766588400000
+          },
+          {
+            "file": "page-0007.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1766592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "6db61dceea3977bacf2e0a397adaf173bb1660d22ed3a41fdffa1dc822bb4918"
+            },
+            "content": {
+              "sha256": "a384b5ad7bb9bd622b89637d4af03137e1acbb4127c1e9e220acaa49add22b2b"
+            },
+            "received_at": "2026-09-08T14:25:48.244978Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1766592000000,
+            "last_open_time_ms": 1770188400000
+          },
+          {
+            "file": "page-0008.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1770192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "18180fb5d515616db45f3902e2b7cb6f29be31c840c28997e730114c99a53dc3"
+            },
+            "content": {
+              "sha256": "b833b5737a2b5ca169aa740f7903544ce245a74c89b22c908150719e302f4b00"
+            },
+            "received_at": "2026-09-08T14:25:48.317248Z",
+            "elapsed_ms": 63,
+            "row_count": 1000,
+            "first_open_time_ms": 1770192000000,
+            "last_open_time_ms": 1773788400000
+          },
+          {
+            "file": "page-0009.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1773792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "7b604637d3a9556e4f30a8ca1ff49f22c70bc525cdc24df4c6cf84b437f0d843"
+            },
+            "content": {
+              "sha256": "fff0eccc976bf7d7449e02dd17f6831cc66c7c7fe8fa04e9dbd0ad082cbaab0e"
+            },
+            "received_at": "2026-09-08T14:25:48.387562Z",
+            "elapsed_ms": 63,
+            "row_count": 1000,
+            "first_open_time_ms": 1773792000000,
+            "last_open_time_ms": 1777388400000
+          },
+          {
+            "file": "page-0010.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1777392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "65ca9f6f963cc39f1bb7677e65e51d913ae236dcd1f6048f8e4f6385001a3361"
+            },
+            "content": {
+              "sha256": "116a650bf7777184963036c7fe7bd939affb1cae4c99353a31cf2854e2a89b39"
+            },
+            "received_at": "2026-09-08T14:25:48.459873Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1777392000000,
+            "last_open_time_ms": 1780988400000
+          },
+          {
+            "file": "page-0011.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1780992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "8d09c4aa1196e35eec9b443d40d87da1e7d78d84ca994329f955fa2a9dd49b15"
+            },
+            "content": {
+              "sha256": "9736fef10c5154fff1d56448e38db4e4af8fbe54c3cdcef19096b7ac0bb4dcf6"
+            },
+            "received_at": "2026-09-08T14:25:48.531901Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1780992000000,
+            "last_open_time_ms": 1784588400000
+          },
+          {
+            "file": "page-0012.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1784592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "1d76f00ed90abf1a7237f576f8cb9051df6b95a382b9e884f52a84b3aa5d548a"
+            },
+            "content": {
+              "sha256": "53c41b9d266d5d2f97f53c3f452031b133ba9576fc5a3faa3b7278686e79a467"
+            },
+            "received_at": "2026-09-08T14:25:48.602906Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1784592000000,
+            "last_open_time_ms": 1788188400000
+          },
+          {
+            "file": "page-0013.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1788192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "e7701dc153c041dcb87085d6c566b28c906cf38c16c8c767d98f888dd78ee9f1"
+            },
+            "content": {
+              "sha256": "e8c3dca1b8db5ffe4ece444ecd276be1bbc43c50d786522fe925bd34b840413a"
+            },
+            "received_at": "2026-09-08T14:25:48.660565Z",
+            "elapsed_ms": 51,
+            "row_count": 188,
+            "first_open_time_ms": 1788192000000,
+            "last_open_time_ms": 1788865200000
+          }
+        ]
+      }
+    },
+    {
+      "symbol": "XRPUSDT",
+      "file": "data/XRPUSDT_1h.csv",
+      "sha256": "cd4f009ef13150c07f0cefd6d369589f4d3c581e85343f6819afa8ac682474d6",
+      "download": {
+        "schema_version": "aegisquant-public-kline-cache-v1",
+        "request": {
+          "provider": "binance_public",
+          "endpoint": "spot_klines",
+          "symbol": "XRPUSDT",
+          "interval": "1h",
+          "start_ms": 1741392000000,
+          "end_ms_exclusive": 1788868800000,
+          "limit": 1000
+        },
+        "source": {
+          "provider": "Binance",
+          "base_url": "https://data-api.binance.vision",
+          "official_documentation": "https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market",
+          "authentication_used": false
+        },
+        "dataset": {
+          "sha256": "9cc527995f1423eab34fc6b9d3a0217cfd2eb4dcdf3eed1e9b9e7ad5cd230a6f",
+          "page_count": 14,
+          "first_open_time_ms": 1741392000000,
+          "last_open_time_ms": 1788865200000,
+          "expected_hour_count": 13188,
+          "row_count": 13188,
+          "complete_hourly_grid": true,
+          "gap_count": 0,
+          "missing_hour_count": 0,
+          "early_close_count": 0
+        },
+        "pages": [
+          {
+            "file": "page-0000.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1741392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "4e0b24440fdb556f7c7e7de480fe284920305ea8b0e0753465ec53f9ec2b81cc"
+            },
+            "content": {
+              "sha256": "2ee3dbe05ee96b31a39ac56f4adde1ee83be9cf7a8cfb4317a7175e858222515"
+            },
+            "received_at": "2026-09-08T14:25:48.782775Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1741392000000,
+            "last_open_time_ms": 1744988400000
+          },
+          {
+            "file": "page-0001.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1744992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "5103ce0e3c3d523b707651dbe27d7df320e48a53e49295844d2baabeba6429a7"
+            },
+            "content": {
+              "sha256": "5d27f27c5fe3ff61a8761d32289d048229afe203533d2ce322c7fd6c94396729"
+            },
+            "received_at": "2026-09-08T14:25:48.856443Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1744992000000,
+            "last_open_time_ms": 1748588400000
+          },
+          {
+            "file": "page-0002.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1748592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "7ff9cbdddbc702ed73a48f14845ea763708764f465487a64c591d06db44eefd3"
+            },
+            "content": {
+              "sha256": "ee3535e5ae49c40f044a0210207bd6468815c18d27c021e90a272867009801a7"
+            },
+            "received_at": "2026-09-08T14:25:48.925815Z",
+            "elapsed_ms": 63,
+            "row_count": 1000,
+            "first_open_time_ms": 1748592000000,
+            "last_open_time_ms": 1752188400000
+          },
+          {
+            "file": "page-0003.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1752192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "735deca4d7e0a61f6f25017a54edbfd1892c92a24b9613d135c6b072020c986f"
+            },
+            "content": {
+              "sha256": "284f9b0675278f63cb4c961c353cf017f36acb0fc7f208b08e3d8ca91f3366b9"
+            },
+            "received_at": "2026-09-08T14:25:49.001094Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1752192000000,
+            "last_open_time_ms": 1755788400000
+          },
+          {
+            "file": "page-0004.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1755792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "4e6d91aeb5a93b8762a873b00fc4ab707874edc9f0799354acc85747a2f9add7"
+            },
+            "content": {
+              "sha256": "467a7cd48c685212fcc6c349a112e7abbd5e24fc02fa2adcb71f079a3271df62"
+            },
+            "received_at": "2026-09-08T14:25:49.073881Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1755792000000,
+            "last_open_time_ms": 1759388400000
+          },
+          {
+            "file": "page-0005.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1759392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "682a876402d16bd30ee5cd8d6cafa2aaf01c5f1c2afbbbc2bdeb07f526b05e83"
+            },
+            "content": {
+              "sha256": "0251ddf5b8a29485f738b16c74499f2783977a2b378566d2905eff72513d00c0"
+            },
+            "received_at": "2026-09-08T14:25:49.148310Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1759392000000,
+            "last_open_time_ms": 1762988400000
+          },
+          {
+            "file": "page-0006.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1762992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "510d46c4dff8201230822bc76c852fc68c03ddcf93690295644ff99485548941"
+            },
+            "content": {
+              "sha256": "7dbe8748a5e62b8fcbbfa094353a98ce589b20fa4419b69592b2e5d757258a24"
+            },
+            "received_at": "2026-09-08T14:25:49.222715Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1762992000000,
+            "last_open_time_ms": 1766588400000
+          },
+          {
+            "file": "page-0007.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1766592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "05ba037ce8ef740a3d5294c0f83f8be209f60446f36e951498c308cfede26757"
+            },
+            "content": {
+              "sha256": "079ca22b9688627b9fd5147c6410b683b233b3047107ed52bcc722eff61a23a0"
+            },
+            "received_at": "2026-09-08T14:25:49.294531Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1766592000000,
+            "last_open_time_ms": 1770188400000
+          },
+          {
+            "file": "page-0008.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1770192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "92e878ec45128425e92417a2ae75685738d7d88728550aa5d7ec99a369f0641e"
+            },
+            "content": {
+              "sha256": "5358dec25f1ab3fdfce995183bc067fcc3de3687cbc9c9e9eb3bcb5f1b45aa08"
+            },
+            "received_at": "2026-09-08T14:25:49.366891Z",
+            "elapsed_ms": 65,
+            "row_count": 1000,
+            "first_open_time_ms": 1770192000000,
+            "last_open_time_ms": 1773788400000
+          },
+          {
+            "file": "page-0009.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1773792000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "89a8577f91ea54d28b148b742455449c9e36b289a0864b92626365d7b87e9785"
+            },
+            "content": {
+              "sha256": "6599d447aa1591a36166b687d830dff8a9094ddc0073aa0c67528d5fc1120895"
+            },
+            "received_at": "2026-09-08T14:25:49.444017Z",
+            "elapsed_ms": 67,
+            "row_count": 1000,
+            "first_open_time_ms": 1773792000000,
+            "last_open_time_ms": 1777388400000
+          },
+          {
+            "file": "page-0010.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1777392000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "9547326a9290021c9f5b84fad0418ace8d7822bb6454433b0ed83bf8ad5d03bd"
+            },
+            "content": {
+              "sha256": "6c95176ebcd8eb3d56221da873263a827ff7e5c86e24bec29bb8c9568322b37d"
+            },
+            "received_at": "2026-09-08T14:25:49.515499Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1777392000000,
+            "last_open_time_ms": 1780988400000
+          },
+          {
+            "file": "page-0011.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1780992000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "cc114fd3642a3653969cb4f8cd7ac720f24d8c024ca681f1ae068832783283ea"
+            },
+            "content": {
+              "sha256": "4cf90685f2f9ff819ebc314391eb65b0a5fc4241bf49e6aaa905bcf37bf265ec"
+            },
+            "received_at": "2026-09-08T14:25:49.588071Z",
+            "elapsed_ms": 66,
+            "row_count": 1000,
+            "first_open_time_ms": 1780992000000,
+            "last_open_time_ms": 1784588400000
+          },
+          {
+            "file": "page-0012.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1784592000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "8a76804b81c4006c77a17ad9ab259623c370312e67ca36982f7295a42c4247f2"
+            },
+            "content": {
+              "sha256": "162d8614d3381444aaa09c821a921798d23a8ca171de2a5dbab7bfb4eca6ecd0"
+            },
+            "received_at": "2026-09-08T14:25:49.659390Z",
+            "elapsed_ms": 64,
+            "row_count": 1000,
+            "first_open_time_ms": 1784592000000,
+            "last_open_time_ms": 1788188400000
+          },
+          {
+            "file": "page-0013.json",
+            "request_url": "https://data-api.binance.vision/api/v3/klines?symbol=XRPUSDT&interval=1h&startTime=1788192000000&endTime=1788868799999&limit=1000",
+            "request": {
+              "sha256": "681dfc1cf85d90c93539450c3e2e9519054c58b9cd8df952ceda14b2a77679bd"
+            },
+            "content": {
+              "sha256": "b0409e278c44abe703b36121e9968179f616fb50d7e71fa19ecf7f6483f8f480"
+            },
+            "received_at": "2026-09-08T14:25:49.719835Z",
+            "elapsed_ms": 52,
+            "row_count": 188,
+            "first_open_time_ms": 1788192000000,
+            "last_open_time_ms": 1788865200000
+          }
+        ]
+      }
+    }
+  ],
+  "authentication_used": false,
+  "status": "COMPLETE"
+}

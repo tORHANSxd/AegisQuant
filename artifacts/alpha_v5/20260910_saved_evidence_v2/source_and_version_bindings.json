@@ -1,0 +1,59 @@
+{
+  "generation": "alpha-r5-saved-evidence-20260910-v2",
+  "head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+  "branch": "main",
+  "reads": {
+    "artifacts/alpha_v5/20260908_research_churn_v3/audit_manifest.json": {
+      "sha256": "a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce",
+      "bytes": 53455,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260909_review_contract_v2/evidence_contract.json": {
+      "sha256": "696be552a769b21f63cf0bf488feacd767d90958682126fae0b6fdf104fb9724",
+      "bytes": 298112,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260909_review_contract_v2/preflight/baseline_workspace.json": {
+      "sha256": "d0a38317bd5114b2c12375653b268c29ad9e553787fcb9b94d6c3cfd3fefcf7f",
+      "bytes": 2582616,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_final_contract_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "b96416c3931b9b2870afae05092770e1f4ea66ca798ec56c1c5c7f783cabc094",
+      "bytes": 5498,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_r4/20260908_v1/experiment_registry.json": {
+      "sha256": "ab77f669e9dabedd303d2706b506f09c9c63904b40a03d9f92e7363046b4aebf",
+      "bytes": 654076,
+      "scope": "SAVED_CONTENT"
+    },
+    "artifacts/alpha_v5/20260910_saved_evidence_v1/OUTPUT_MANIFEST.json": {
+      "sha256": "188cdaa378d9a28916f279453fce7faad61850428cf9d470731e7904f8a5808c",
+      "bytes": 3877,
+      "scope": "SAVED_CONTENT"
+    },
+    "configs/research/aegis_alpha_v5.yaml": {
+      "sha256": "c4b7a2e734168ea31385ccf0416963e2dc532cb416293710f6dd6891a8deca5c",
+      "bytes": 3236,
+      "scope": "SAVED_CONTENT"
+    },
+    "src/aegisquant/bootstrap/live_lock.py": {
+      "sha256": "e8a58bab46939635796028c9454d0c6c4acdd53b1ea3d59c38abe1ae95a70f24",
+      "bytes": 1272,
+      "scope": "SAVED_CONTENT"
+    }
+  },
+  "source_sha256": {
+    "src/aegisquant/research/validation/saved_run_audit.py": "00f09cef4671a6f838fc1713c317c2a77c024eaa023de1097b3cdb1319d624b2",
+    "scripts/audit_alpha_v5_saved_runs.py": "98f8cda06841ef84239e6e04831667eaf0cea56c1b227b27b5a6ffb043613b95",
+    "configs/research/alpha_v5_saved_run_audit.yaml": "3c7d3faad9bce7b2a309621443b82fe1c9e7ef3fb446c1dd8aa2caa49a6a62d3",
+    "tests/alpha_v5/test_saved_run_audit.py": "498d2156797f37267cc77e2d4c74a0363096f0503096eb92bd2eff4cbb0eb787",
+    "docs/research/alpha_v5_saved_run_audit.md": "20e99c04501b6be07056ca22133661164a95aeb4893918d778cef6567f105fcd"
+  },
+  "pure_test_count": 29,
+  "check_record_count": 5,
+  "commits_created": 0,
+  "pushes": 0,
+  "branches_created": 0
+}

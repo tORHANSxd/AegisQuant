@@ -1,0 +1,523 @@
+[
+  {
+    "check": "format-apply",
+    "command": [
+      "D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.10031119995983317,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "1e94dcc3472c310f11fd46d1c1b5e8a131aafc360beae5e85e5800ec8fc6dd83",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "67263853f3fef1181f50411bff4977f79fdef02ac3e6aa6148ae322ae844c7fc",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "3 files reformatted, 2 files left unchanged\n",
+    "stderr": ""
+  },
+  {
+    "check": "ruff",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 0.14032980002230033,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "1e94dcc3472c310f11fd46d1c1b5e8a131aafc360beae5e85e5800ec8fc6dd83",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "67263853f3fef1181f50411bff4977f79fdef02ac3e6aa6148ae322ae844c7fc",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "F401 [*] `collections.abc.Sequence` imported but unused\n  --> src\\aegisquant\\research\\validation\\benchmark_contract.py:9:38\n   |\n 7 | import json\n 8 | import re\n 9 | from collections.abc import Mapping, Sequence\n   |                                      ^^^^^^^^\n10 | from dataclasses import asdict\n11 | from datetime import timedelta\n   |\nhelp: Remove unused import: `collections.abc.Sequence`\n   |\n8  | import re\n   - from collections.abc import Mapping, Sequence\n9  + from collections.abc import Mapping\n10 | from dataclasses import asdict\n   |\n\nSIM117 Use a single `with` statement with multiple contexts instead of nested `with` statements\n   --> src\\aegisquant\\research\\validation\\benchmark_contract.py:369:9\n    |\n367 |       run_id = config[\"generation\"] + \":CONTRACT_REPORT\"\n368 |       try:\n369 | /         with registered_run(\n370 | |             output,\n371 | |             run_id,\n372 | |             planned_run_ids=[run_id],\n373 | |             bindings={\"kind\": \"B3_CONTRACT_REPORT_NOT_ALPHA_TRIAL\"},\n374 | |         ):  # noqa: SIM117 -- journal remains outside the write guard.\n375 | |             with zero_budget_guard(output, root, counters):\n    | |___________________________________________________________^\n376 |                   write_json_exclusive(\n377 |                       output / \"preregistration.json\", {\"config\": config, \"planned_run_ids\": [run_id]}\n    |\nhelp: Combine `with` statements\n\nRUF100 [*] Unused `noqa` directive (unused: `SIM117`)\n   --> src\\aegisquant\\research\\validation\\benchmark_contract.py:374:13\n    |\n372 |             planned_run_ids=[run_id],\n373 |             bindings={\"kind\": \"B3_CONTRACT_REPORT_NOT_ALPHA_TRIAL\"},\n374 |         ):  # noqa: SIM117 -- journal remains outside the write guard.\n    |             ^^^^^^^^^^^^^^\n375 |             with zero_budget_guard(output, root, counters):\n376 |                 write_json_exclusive(\n    |\nhelp: Remove unused `noqa` directive\n    |\n373 |             bindings={\"kind\": \"B3_CONTRACT_REPORT_NOT_ALPHA_TRIAL\"},\n    -         ):  # noqa: SIM117 -- journal remains outside the write guard.\n374 +         ):\n375 |             with zero_budget_guard(output, root, counters):\n    |\n\nFound 3 errors.\n[*] 2 fixable with the `--fix` option.\n",
+    "stderr": ""
+  },
+  {
+    "check": "format",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "--check",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.1203211999963969,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "1e94dcc3472c310f11fd46d1c1b5e8a131aafc360beae5e85e5800ec8fc6dd83",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "67263853f3fef1181f50411bff4977f79fdef02ac3e6aa6148ae322ae844c7fc",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "5 files already formatted\n",
+    "stderr": ""
+  },
+  {
+    "check": "pyright",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pyright",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 4.94137239997508,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "1e94dcc3472c310f11fd46d1c1b5e8a131aafc360beae5e85e5800ec8fc6dd83",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "67263853f3fef1181f50411bff4977f79fdef02ac3e6aa6148ae322ae844c7fc",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\benchmark_contract.py\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\benchmark_contract.py:9:38 - error: Import \"Sequence\" is not accessed (reportUnusedImport)\n  d:\\Personal\\Quantitative_Trading\\src\\aegisquant\\research\\validation\\benchmark_contract.py:140:13 - error: Type of \"append\" is partially unknown\n    Type of \"append\" is \"(object: Unknown, /) -> None\" (reportUnknownMemberType)\nd:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:232:5 - error: Type of \"result\" is unknown (reportUnknownVariableType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:232:14 - error: Argument missing for parameter \"rows\" (reportCallIssue)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:232:36 - error: Parameter \"mode\" is already assigned (reportCallIssue)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:235:5 - error: \"__setitem__\" method not defined on type \"str\" (reportIndexIssue)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:237:9 - error: Argument missing for parameter \"rows\" (reportCallIssue)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:237:33 - error: Parameter \"mode\" is already assigned (reportCallIssue)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:238:16 - error: Argument missing for parameter \"rows\" (reportCallIssue)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:238:38 - error: Parameter \"mode\" is already assigned (reportCallIssue)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:258:40 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"class_or_instance\" in function \"fields\"\n    Argument type is \"type[Unknown]\" (reportUnknownArgumentType)\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:326:28 - error: Argument of type \"dict[Literal['G1-CASH', 'G1-F5_MATCHED', 'G1-G1_PASSIVE', 'G1-SIMPLE_TREND'], float]\" cannot be assigned to parameter \"p_values\" of type \"dict[str, float]\" in function \"holm_adjust\"\n    \"dict[Literal['G1-CASH', 'G1-F5_MATCHED', 'G1-G1_PASSIVE', 'G1-SIMPLE_TREND'], float]\" is not assignable to \"dict[str, float]\"\n      Type parameter \"_KT@dict\" is invariant, but \"Literal['G1-CASH', 'G1-F5_MATCHED', 'G1-G1_PASSIVE', 'G1-SIMPLE_TREND']\" is not the same as \"str\" (reportArgumentType)\n12 errors, 0 warnings, 0 informations\nWARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).\nPlease install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`\n\n",
+    "stderr": ""
+  },
+  {
+    "check": "pytest",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pytest",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-01",
+      "tests/unit/research/test_paired_bootstrap.py",
+      "tests/alpha_v5/test_benchmark_contract.py",
+      "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-01.xml",
+      "-q"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 7.60981360002188,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "1e94dcc3472c310f11fd46d1c1b5e8a131aafc360beae5e85e5800ec8fc6dd83",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "67263853f3fef1181f50411bff4977f79fdef02ac3e6aa6148ae322ae844c7fc",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "......................F.....................                             [100%]\n================================== FAILURES ===================================\n______ test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding ______\n\n    def test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding() -> None:\n        fill = {\n            \"time\": START,\n            \"quantity\": \"1\",\n            \"side\": \"BUY\",\n            \"reference_price\": \"100\",\n            \"inventory\": \"1\",\n        }\n        rows = [\n            {\n                \"arm\": \"G1\",\n                \"symbol\": \"TEST\",\n                \"cost\": cost,\n                \"total_cost\": total,\n                \"final_equity\": wealth,\n                \"fill_path\": [fill],\n            }\n            for cost, total, wealth in ((\"1\", \"1\", \"109\"), (\"1.5\", \"1.5\", \"108.5\"), (\"2\", \"2\", \"108\"))\n        ]\n>       result = audit_cost_path(rows, mode=CostMode.SAME_FILL_SHADOW)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       TypeError: audit_cost_path() got multiple values for argument 'mode'\n\ntests\\alpha_v5\\test_benchmark_contract.py:232: TypeError\n=========================== short test summary info ===========================\nFAILED tests/alpha_v5/test_benchmark_contract.py::test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding\n1 failed, 43 passed in 6.16s\n",
+    "stderr": ""
+  },
+  {
+    "check": "format-apply",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.09964400000171736,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "ddab0b9a8e35e2f2c7366395a2fb9c6f7a0e84971f01707452a43a66ca922126",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "ae7cab894c5f08baac41bbc3673345ec1ef5af866de94985423394f652200bf6",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "5 files left unchanged\n",
+    "stderr": ""
+  },
+  {
+    "check": "ruff",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.13894539995817468,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "ddab0b9a8e35e2f2c7366395a2fb9c6f7a0e84971f01707452a43a66ca922126",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "ae7cab894c5f08baac41bbc3673345ec1ef5af866de94985423394f652200bf6",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "check": "format",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "--check",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.14349280000897124,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "ddab0b9a8e35e2f2c7366395a2fb9c6f7a0e84971f01707452a43a66ca922126",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "ae7cab894c5f08baac41bbc3673345ec1ef5af866de94985423394f652200bf6",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "5 files already formatted\n",
+    "stderr": ""
+  },
+  {
+    "check": "pyright",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pyright",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 4.318441400013398,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "ddab0b9a8e35e2f2c7366395a2fb9c6f7a0e84971f01707452a43a66ca922126",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "ae7cab894c5f08baac41bbc3673345ec1ef5af866de94985423394f652200bf6",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py\n  d:\\Personal\\Quantitative_Trading\\tests\\alpha_v5\\test_benchmark_contract.py:258:40 - error: Argument type is partially unknown\n    Argument corresponds to parameter \"class_or_instance\" in function \"fields\"\n    Argument type is \"type[Unknown]\" (reportUnknownArgumentType)\n1 error, 0 warnings, 0 informations\nWARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).\nPlease install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`\n\n",
+    "stderr": ""
+  },
+  {
+    "check": "pytest",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pytest",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-02",
+      "tests/unit/research/test_paired_bootstrap.py",
+      "tests/alpha_v5/test_benchmark_contract.py",
+      "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-02.xml",
+      "-q"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 6.588886699988507,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "ddab0b9a8e35e2f2c7366395a2fb9c6f7a0e84971f01707452a43a66ca922126",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "ae7cab894c5f08baac41bbc3673345ec1ef5af866de94985423394f652200bf6",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "......................F.....................                             [100%]\n================================== FAILURES ===================================\n______ test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding ______\n\n    def test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding() -> None:\n        fill = {\n            \"time\": START,\n            \"quantity\": \"1\",\n            \"side\": \"BUY\",\n            \"reference_price\": \"100\",\n            \"inventory\": \"1\",\n        }\n        rows: list[dict[str, Any]] = [\n            {\n                \"arm\": \"G1\",\n                \"symbol\": \"TEST\",\n                \"cost\": cost,\n                \"total_cost\": total,\n                \"final_equity\": wealth,\n                \"fill_path\": [fill],\n            }\n            for cost, total, wealth in ((\"1\", \"1\", \"109\"), (\"1.5\", \"1.5\", \"108.5\"), (\"2\", \"2\", \"108\"))\n        ]\n        result = audit_cost_path(CostMode.SAME_FILL_SHADOW, rows)\n        assert result[\"status\"] == \"VERIFIED\" and not result[\"funding_feasibility_claimed\"]\n        broken = copy.deepcopy(rows)\n        broken[-1][\"fill_path\"][0][\"quantity\"] = \"2\"\n>       with pytest.raises(ValueError, match=\"SHADOW-PATH-CHANGED\"):\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       Failed: DID NOT RAISE ValueError\n\ntests\\alpha_v5\\test_benchmark_contract.py:236: Failed\n=========================== short test summary info ===========================\nFAILED tests/alpha_v5/test_benchmark_contract.py::test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding\n1 failed, 43 passed in 5.23s\n",
+    "stderr": ""
+  },
+  {
+    "check": "ruff",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.11777970002731308,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "ddab0b9a8e35e2f2c7366395a2fb9c6f7a0e84971f01707452a43a66ca922126",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "check": "format",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "--check",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.11984930001199245,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "ddab0b9a8e35e2f2c7366395a2fb9c6f7a0e84971f01707452a43a66ca922126",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "5 files already formatted\n",
+    "stderr": ""
+  },
+  {
+    "check": "pyright",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pyright",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 4.075549000001047,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "ddab0b9a8e35e2f2c7366395a2fb9c6f7a0e84971f01707452a43a66ca922126",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "0 errors, 0 warnings, 0 informations\nWARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).\nPlease install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`\n\n",
+    "stderr": ""
+  },
+  {
+    "check": "pytest",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pytest",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-03",
+      "tests/unit/research/test_paired_bootstrap.py",
+      "tests/alpha_v5/test_benchmark_contract.py",
+      "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-03.xml",
+      "-q"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 5.889915100007784,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "ddab0b9a8e35e2f2c7366395a2fb9c6f7a0e84971f01707452a43a66ca922126",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "............................................                             [100%]\n44 passed in 4.62s\n",
+    "stderr": ""
+  },
+  {
+    "check": "format-apply",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.0928874000092037,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "e6f335316d4f3a19a4962ee10c0b6ccc44c34713b7098b1085f3badff2220b85",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "1 file reformatted, 4 files left unchanged\n",
+    "stderr": ""
+  },
+  {
+    "check": "ruff",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.1460926000145264,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "e6f335316d4f3a19a4962ee10c0b6ccc44c34713b7098b1085f3badff2220b85",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "check": "format",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "--check",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.1336394000099972,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "e6f335316d4f3a19a4962ee10c0b6ccc44c34713b7098b1085f3badff2220b85",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "5 files already formatted\n",
+    "stderr": ""
+  },
+  {
+    "check": "pyright",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pyright",
+      "src/aegisquant/research/validation/paired_bootstrap.py",
+      "scripts/audit_alpha_profitability_root_causes.py",
+      "src/aegisquant/research/validation/benchmark_contract.py",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py",
+      "tests/alpha_v5/test_benchmark_contract.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 4.026773799967486,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "e6f335316d4f3a19a4962ee10c0b6ccc44c34713b7098b1085f3badff2220b85",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "0 errors, 0 warnings, 0 informations\nWARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).\nPlease install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`\n\n",
+    "stderr": ""
+  },
+  {
+    "check": "pytest",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pytest",
+      "-o",
+      "addopts=",
+      "--basetemp",
+      "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-04",
+      "tests/unit/research/test_paired_bootstrap.py",
+      "tests/alpha_v5/test_benchmark_contract.py",
+      "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-04.xml",
+      "-q"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 5.949006299953908,
+    "source_sha256": {
+      "src/aegisquant/research/validation/paired_bootstrap.py": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "scripts/audit_alpha_profitability_root_causes.py": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "src/aegisquant/research/validation/benchmark_contract.py": "e6f335316d4f3a19a4962ee10c0b6ccc44c34713b7098b1085f3badff2220b85",
+      "scripts/run_alpha_v5_benchmark_diagnostics.py": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "configs/research/alpha_v5_benchmark_contract.yaml": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "tests/alpha_v5/test_benchmark_contract.py": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "docs/research/alpha_v5_benchmark_contract.md": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60"
+    },
+    "stdout": "............................................                             [100%]\n44 passed in 4.61s\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,2286 @@
+--- a/src/aegisquant/research/datasets/universe.py
++++ b/src/aegisquant/research/datasets/universe.py
+@@ -3,12 +3,53 @@
+ from __future__ import annotations
+ 
+ from collections.abc import Iterable
+-
+-from pydantic import model_validator
+-
+-from aegisquant.data.hashing import canonical_sha256
++from typing import Literal
++
++from pydantic import Field, model_validator
++
++from aegisquant.data.hashing import canonical_sha256, ensure_sha256
+ from aegisquant.domain.base import DomainModel
+ from aegisquant.domain.time import UtcDateTime, assert_point_in_time
++
++
++class MembershipEvidence(DomainModel):
++    """A business event identity is stable across revisions; a symbol is not a UID."""
++
++    event_id: str = Field(min_length=1)
++    symbol: str = Field(min_length=1)
++    venue: str = Field(min_length=1)
++    event_kind: Literal[
++        "LISTED",
++        "TRADING_STARTED",
++        "SUSPENDED",
++        "RESUMED",
++        "DELISTED",
++        "MIGRATED",
++        "RELISTED",
++        "SYMBOL_CHANGED",
++        "QUOTE_CHANGED",
++    ]
++    source_published_at: UtcDateTime | None
++    first_observed_at: UtcDateTime
++    availability_evidence_kind: Literal[
++        "ARCHIVED_PUBLICATION", "OBSERVED_AT_RECEIPT", "UNKNOWN", "SYNTHETIC"
++    ]
++    source_sha256: str
++
++    @model_validator(mode="after")
++    def validate_evidence(self) -> MembershipEvidence:
++        ensure_sha256(self.source_sha256, field_name="universe event source")
++        if (
++            self.source_published_at is not None
++            and self.first_observed_at < self.source_published_at
++        ):
++            raise ValueError("PIT observation cannot predate source publication")
++        if (
++            self.availability_evidence_kind == "ARCHIVED_PUBLICATION"
++            and self.source_published_at is None
++        ):
++            raise ValueError("archived availability requires publication evidence")
++        return self
+ 
+ 
+ class UniverseMembership(DomainModel):
+@@ -22,6 +63,7 @@
+     revision: int
+     reason_codes: tuple[str, ...]
+     source_dataset_id: str
++    evidence: MembershipEvidence | None = None
+ 
+     @model_validator(mode="after")
+     def validate_membership(self) -> UniverseMembership:
+@@ -31,18 +73,33 @@
+             raise ValueError("universe effective interval must be positive")
+         if self.revision_time is not None and self.revision_time < self.available_time:
+             raise ValueError("universe revision cannot predate initial availability")
+-        expected = canonical_sha256(
+-            {
+-                "instrument_id": self.instrument_id,
+-                "eligible": self.eligible,
+-                "effective_from": self.effective_from.isoformat(),
+-                "effective_to": self.effective_to.isoformat() if self.effective_to else None,
+-                "available_time": self.available_time.isoformat(),
+-                "revision_time": self.revision_time.isoformat() if self.revision_time else None,
+-                "revision": self.revision,
+-                "reason_codes": list(self.reason_codes),
+-                "source_dataset_id": self.source_dataset_id,
+-            }
++        if (proof := self.evidence) is not None:
++            known = self.revision_time or self.available_time
++            if proof.source_published_at is not None and known < proof.source_published_at:
++                raise ValueError("PIT availability cannot predate source publication")
++            if (
++                proof.availability_evidence_kind == "OBSERVED_AT_RECEIPT"
++                and known < proof.first_observed_at
++            ):
++                raise ValueError("receipt evidence cannot backdate availability")
++            if (
++                proof.event_kind in {"LISTED", "SUSPENDED", "DELISTED", "MIGRATED"}
++                and self.eligible
++            ):
++                raise ValueError("non-trading universe event cannot open new risk")
++            if proof.event_kind in {"TRADING_STARTED", "RESUMED", "RELISTED"} and not self.eligible:
++                raise ValueError("trading-start event must explicitly enable trading")
++        expected = membership_id(
++            instrument_id=self.instrument_id,
++            eligible=self.eligible,
++            effective_from=self.effective_from,
++            effective_to=self.effective_to,
++            available_time=self.available_time,
++            revision_time=self.revision_time,
++            revision=self.revision,
++            reason_codes=self.reason_codes,
++            source_dataset_id=self.source_dataset_id,
++            evidence=self.evidence,
+         )
+         if self.membership_id != expected:
+             raise ValueError("membership_id must equal canonical membership hash")
+@@ -86,7 +143,9 @@
+     revision: int,
+     reason_codes: tuple[str, ...],
+     source_dataset_id: str,
++    evidence: MembershipEvidence | None = None,
+ ) -> str:
++    # Preserve every legacy v1 identity. Evidence changes only explicitly versioned rows.
+     return canonical_sha256(
+         {
+             "instrument_id": instrument_id,
+@@ -98,6 +157,7 @@
+             "revision": revision,
+             "reason_codes": list(reason_codes),
+             "source_dataset_id": source_dataset_id,
++            **({"evidence": evidence.model_dump(mode="json")} if evidence is not None else {}),
+         }
+     )
+ 
+@@ -109,34 +169,71 @@
+             raise ValueError("universe membership ids must be unique")
+         self._memberships = values
+ 
+-    def snapshot(self, *, as_of_time: UtcDateTime) -> UniverseSnapshot:
+-        candidates: dict[str, list[UniverseMembership]] = {}
++    def known_events(self, *, as_of_time: UtcDateTime) -> tuple[UniverseMembership, ...]:
++        """Resolve known revisions before effective-time selection."""
++        revisions: dict[tuple[str, str, int], UniverseMembership] = {}
+         for membership in self._memberships:
+             if membership.available_time > as_of_time:
+                 continue
+             if membership.revision_time is not None and membership.revision_time > as_of_time:
+                 continue
+-            if membership.effective_from > as_of_time:
++            assert_point_in_time(available_time=membership.available_time, decision_time=as_of_time)
++            event = (
++                membership.evidence.event_id if membership.evidence else "LEGACY_GLOBAL_REVISION"
++            )
++            key = membership.instrument_id, event, membership.revision
++            if key in revisions and revisions[key] != membership:
++                raise ValueError("AQ-PIT-CONFLICTING-MEMBERSHIP-REVISION")
++            revisions[key] = membership
++        latest: dict[tuple[str, str], UniverseMembership] = {}
++        legacy: list[UniverseMembership] = []
++        for membership in revisions.values():
++            if membership.evidence is None:
++                legacy.append(membership)
+                 continue
+-            assert_point_in_time(available_time=membership.available_time, decision_time=as_of_time)
+-            candidates.setdefault(membership.instrument_id, []).append(membership)
+-
++            key = membership.instrument_id, membership.evidence.event_id
++            if key not in latest or membership.revision > latest[key].revision:
++                latest[key] = membership
++        return tuple(
++            sorted(
++                [*legacy, *latest.values()], key=lambda row: (row.instrument_id, row.membership_id)
++            )
++        )
++
++    def current_memberships(self, *, as_of_time: UtcDateTime) -> tuple[UniverseMembership, ...]:
++        candidates: dict[str, list[UniverseMembership]] = {}
++        for membership in self.known_events(as_of_time=as_of_time):
++            if membership.effective_from <= as_of_time:
++                candidates.setdefault(membership.instrument_id, []).append(membership)
+         selected: list[UniverseMembership] = []
+         for instrument_id in sorted(candidates):
+-            membership = max(
+-                candidates[instrument_id],
+-                key=lambda item: (
+-                    item.revision,
+-                    item.revision_time or item.available_time,
+-                    item.available_time,
+-                ),
+-            )
+-            if not membership.eligible:
+-                continue
+-            if membership.effective_to is not None and as_of_time >= membership.effective_to:
+-                continue
++            rows = candidates[instrument_id]
++            if any(row.evidence is not None for row in rows):
++                if any(row.evidence is None for row in rows):
++                    raise ValueError("AQ-PIT-MIXED-LEGACY-EVENT-IDENTITY")
++                newest = max(row.effective_from for row in rows)
++                active = [row for row in rows if row.effective_from == newest]
++                if len(active) != 1:
++                    raise ValueError("AQ-PIT-CONFLICTING-EFFECTIVE-EVENTS")
++                membership = active[0]
++            else:
++                membership = max(
++                    rows,
++                    key=lambda item: (
++                        item.revision,
++                        item.revision_time or item.available_time,
++                        item.available_time,
++                    ),
++                )
+             selected.append(membership)
+-
++        return tuple(selected)
++
++    def snapshot(self, *, as_of_time: UtcDateTime) -> UniverseSnapshot:
++        selected = [
++            row
++            for row in self.current_memberships(as_of_time=as_of_time)
++            if row.eligible and (row.effective_to is None or as_of_time < row.effective_to)
++        ]
+         payload = {
+             "as_of_time": as_of_time.isoformat(),
+             "instrument_ids": [item.instrument_id for item in selected],
+--- a/src/aegisquant/research/datasets/pit_universe.py
++++ b/src/aegisquant/research/datasets/pit_universe.py
+@@ -2,16 +2,67 @@
+ 
+ from __future__ import annotations
+ 
+-from collections.abc import Iterable
++import json
++from collections.abc import Iterable, Mapping
+ from datetime import timedelta
+ from decimal import Decimal
++from itertools import pairwise
++from typing import Literal
+ 
+ from pydantic import Field, model_validator
+ 
++from aegisquant.backtest.models import HistoricalInstrumentRule
++from aegisquant.backtest.rules import HistoricalRuleBook
++from aegisquant.data.hashing import canonical_sha256, ensure_sha256
+ from aegisquant.domain.base import DomainModel
+ from aegisquant.domain.time import UtcDateTime
+-from aegisquant.domain.values import NonNegativeDecimal
++from aegisquant.domain.values import NonNegativeDecimal, exact_decimal_sum
+ from aegisquant.research.datasets.universe import PointInTimeUniverse, UniverseSnapshot
++
++
++class ClosedLiquidityBar(DomainModel):
++    """Evidence for an exclusive UTC four-hour close, without a price/replay interface."""
++
++    close_time: UtcDateTime
++    available_time: UtcDateTime
++    quote_turnover: NonNegativeDecimal
++    source_sha256: str
++
++    @model_validator(mode="after")
++    def validate_bar(self) -> ClosedLiquidityBar:
++        ensure_sha256(self.source_sha256, field_name="closed liquidity bar source")
++        if (
++            self.close_time.hour % 4
++            or self.close_time.minute
++            or self.close_time.second
++            or self.close_time.microsecond
++        ):
++            raise ValueError("PIT bars require aligned exclusive four-hour UTC closes")
++        if self.available_time < self.close_time:
++            raise ValueError("unclosed liquidity evidence is not decision-known")
++        return self
++
++
++class LiquidityEvidence(DomainModel):
++    quote_method: Literal[
++        "EXCHANGE_QUOTE_TURNOVER",
++        "TRADE_QUOTE_SUM",
++        "BASE_VOLUME_TIMES_CLOSE_PROXY",
++        "UNKNOWN",
++        "SYNTHETIC",
++    ]
++    bars: tuple[ClosedLiquidityBar, ...]
++    detail_sha256: str
++
++    @model_validator(mode="after")
++    def validate_details(self) -> LiquidityEvidence:
++        ensure_sha256(self.detail_sha256, field_name="liquidity detail hash")
++        ordered = sorted(self.bars, key=lambda bar: bar.close_time)
++        if len({bar.close_time for bar in ordered}) != len(ordered):
++            raise ValueError("AQ-PIT-DUPLICATE-LIQUIDITY-BAR")
++        if canonical_sha256([bar.model_dump(mode="json") for bar in ordered]) != self.detail_sha256:
++            raise ValueError("AQ-PIT-LIQUIDITY-DETAIL-HASH")
++        return self
+ 
+ 
+ class LiquidityObservation(DomainModel):
+@@ -22,17 +73,357 @@
+     complete_history_4h_bars: int = Field(ge=0)
+     trailing_quote_volume: NonNegativeDecimal
+     source_sha256: str
++    revision: int = Field(default=1, ge=1)
++    revision_time: UtcDateTime | None = None
++    evidence: LiquidityEvidence | None = None
+ 
+     @model_validator(mode="after")
+     def valid_window(self) -> LiquidityObservation:
+-        from aegisquant.data.hashing import ensure_sha256
+-
+         ensure_sha256(self.source_sha256, field_name="liquidity source hash")
+         if self.window_end - self.window_start != timedelta(days=30):
+             raise ValueError("liquidity requires an explicit trailing 30-day window")
+         if self.available_time < self.window_end:
+             raise ValueError("liquidity cannot be available before its window ends")
++        if self.revision_time is not None and self.revision_time < self.available_time:
++            raise ValueError("liquidity revision predates original availability")
++        if self.evidence is not None:
++            known = self.revision_time or self.available_time
++            if any(
++                bar.available_time > known or bar.close_time > self.window_end
++                for bar in self.evidence.bars
++            ):
++                raise ValueError("AQ-PIT-LIQUIDITY-DETAIL-LOOKAHEAD")
++            total = exact_decimal_sum(
++                bar.quote_turnover
++                for bar in self.evidence.bars
++                if self.window_start < bar.close_time <= self.window_end
++            )
++            if total != self.trailing_quote_volume:
++                raise ValueError("AQ-PIT-QUOTE-TURNOVER-RECONCILIATION")
+         return self
++
++
++class RuleProvenance(DomainModel):
++    """Decision-known provenance around the existing effective-time rule model."""
++
++    record_id: str = Field(min_length=1)
++    revision: int = Field(ge=1)
++    available_time: UtcDateTime
++    revision_time: UtcDateTime | None = None
++    account_scope: Literal["PUBLIC_SPOT_RULES"] = "PUBLIC_SPOT_RULES"
++    verified_kind: Literal["ARCHIVED_EXCHANGE_RULE", "PROXY", "UNKNOWN", "SYNTHETIC"]
++    rule: HistoricalInstrumentRule
++    source_sha256: str
++    filter_payload_json: str | None = None
++    payload_sha256: str
++
++    @model_validator(mode="after")
++    def validate_provenance(self) -> RuleProvenance:
++        ensure_sha256(self.source_sha256, field_name="historical rule source")
++        ensure_sha256(self.payload_sha256, field_name="historical rule payload")
++        if self.revision_time is not None and self.revision_time < self.available_time:
++            raise ValueError("rule revision predates original availability")
++        filters = (
++            json.loads(self.filter_payload_json) if self.filter_payload_json is not None else None
++        )
++        if (
++            canonical_sha256({"rule": self.rule.model_dump(mode="json"), "filters": filters})
++            != self.payload_sha256
++        ):
++            raise ValueError("AQ-PIT-RULE-PAYLOAD-HASH")
++        if self.verified_kind in {"ARCHIVED_EXCHANGE_RULE", "SYNTHETIC"}:
++            required = {
++                "PRICE_FILTER",
++                "LOT_SIZE",
++                "MARKET_LOT_SIZE",
++                "NOTIONAL",
++                "ORDER_PERMISSIONS",
++            }
++            if (
++                not isinstance(filters, dict)
++                or not required <= filters.keys()
++                or any(not filters[key] for key in required)
++            ):
++                raise ValueError("AQ-PIT-INCOMPLETE-RULE-PROVENANCE")
++            if self.rule.approximation is not None:
++                raise ValueError("proxy rules cannot be declared verified")
++        return self
++
++
++class UniverseDecision(DomainModel):
++    instrument_uid: str
++    membership_id: str | None
++    disposition: Literal["ELIGIBLE", "EXCLUDED", "UNKNOWN"]
++    reason_codes: tuple[str, ...]
++    liquidity_source_sha256: str | None = None
++    liquidity_detail_sha256: str | None = None
++    trailing_quote_volume: NonNegativeDecimal | None = None
++    contiguous_4h_bars: int | None = None
++    tradable_history_4h_bars: int | None = None
++    required_history_bars: int
++    liquidity_window_bars: int | None = None
++    liquidity_gap_count: int | None = None
++    rule_payload_sha256: str | None = None
++
++
++class PITUniverseSnapshot(DomainModel):
++    snapshot_sha256: str
++    membership_snapshot: UniverseSnapshot
++    eligible_instrument_ids: tuple[str, ...]
++    decisions: tuple[UniverseDecision, ...]
++    known_future_event_ids: tuple[str, ...]
++    held_instrument_ids: tuple[str, ...]
++    policy_sha256: str
++    scope: Literal["NEW_RISK_ONLY_NO_POSITION_MUTATION"] = "NEW_RISK_ONLY_NO_POSITION_MUTATION"
++
++
++def _latest_liquidity(
++    observations: Iterable[LiquidityObservation], decision_time: UtcDateTime
++) -> dict[str, LiquidityObservation]:
++    revisions: dict[tuple[str, UtcDateTime, int], LiquidityObservation] = {}
++    for row in observations:
++        if (
++            max(row.available_time, row.revision_time or row.available_time, row.window_end)
++            > decision_time
++        ):
++            continue
++        key = row.instrument_id, row.window_end, row.revision
++        if key in revisions and revisions[key] != row:
++            raise ValueError("AQ-PIT-CONFLICTING-LIQUIDITY-REVISION")
++        revisions[key] = row
++    latest: dict[str, LiquidityObservation] = {}
++    for row in revisions.values():
++        previous = latest.get(row.instrument_id)
++        if previous is None or (row.window_end, row.revision) > (
++            previous.window_end,
++            previous.revision,
++        ):
++            latest[row.instrument_id] = row
++    return latest
++
++
++def _known_rules(
++    rules: Iterable[RuleProvenance], decision_time: UtcDateTime
++) -> dict[str, list[RuleProvenance]]:
++    revisions: dict[tuple[str, str, str, int], RuleProvenance] = {}
++    for row in rules:
++        if max(row.available_time, row.revision_time or row.available_time) > decision_time:
++            continue
++        key = str(row.rule.venue_id), str(row.rule.instrument_id), row.record_id, row.revision
++        if key in revisions and revisions[key] != row:
++            raise ValueError("AQ-PIT-CONFLICTING-RULE-REVISION")
++        revisions[key] = row
++    latest: dict[tuple[str, str, str], RuleProvenance] = {}
++    for key, row in revisions.items():
++        if key[:3] not in latest or row.revision > latest[key[:3]].revision:
++            latest[key[:3]] = row
++    active: dict[str, list[RuleProvenance]] = {}
++    for row in latest.values():
++        if row.rule.effective_from <= decision_time and (
++            row.rule.effective_to is None or decision_time < row.rule.effective_to
++        ):
++            active.setdefault(str(row.rule.instrument_id), []).append(row)
++    return active
++
++
++def audit_universe_at(
++    universe: PointInTimeUniverse,
++    observations: Iterable[LiquidityObservation],
++    *,
++    rules: Iterable[RuleProvenance],
++    decision_time: UtcDateTime,
++    minimum_quote_volume: Decimal,
++    warmup_requirements: Mapping[str, int],
++    minimum_history_bars: int = 240,
++    maximum_age: timedelta = timedelta(hours=4),
++    held_instrument_ids: Iterable[str] = (),
++    allow_synthetic: bool = False,
++) -> PITUniverseSnapshot:
++    """Strict B2 decision view; no market loader, account mutation, order or PnL interface."""
++    if (
++        not minimum_quote_volume.is_finite()
++        or minimum_quote_volume <= 0
++        or minimum_history_bars < 1
++        or maximum_age <= timedelta(0)
++        or not warmup_requirements
++        or any(type(value) is not int or value < 1 for value in warmup_requirements.values())
++    ):
++        raise ValueError("AQ-PIT-UNREGISTERED-ELIGIBILITY-LIMITS")
++    required = max(minimum_history_bars, *warmup_requirements.values())
++    known = universe.known_events(as_of_time=decision_time)
++    current = {
++        row.instrument_id: row for row in universe.current_memberships(as_of_time=decision_time)
++    }
++    identities: set[tuple[str, str]] = set()
++    for member in current.values():
++        if (
++            member.eligible
++            and member.evidence is not None
++            and (member.effective_to is None or decision_time < member.effective_to)
++        ):
++            identity = member.evidence.venue, member.evidence.symbol
++            if identity in identities:
++                raise ValueError("AQ-PIT-OVERLAPPING-SYMBOL-INCARNATIONS")
++            identities.add(identity)
++    liquidity = _latest_liquidity(observations, decision_time)
++    rule_view = _known_rules(rules, decision_time)
++    held = tuple(sorted(set(held_instrument_ids)))
++    decisions: list[UniverseDecision] = []
++    for instrument in sorted({row.instrument_id for row in known} | set(held)):
++        member = current.get(instrument)
++        base = UniverseDecision(
++            instrument_uid=instrument,
++            membership_id=member.membership_id if member else None,
++            disposition="UNKNOWN",
++            reason_codes=(),
++            required_history_bars=required,
++        )
++        if member is None:
++            reason = (
++                "NOT_YET_EFFECTIVE"
++                if any(row.instrument_id == instrument for row in known)
++                else "MEMBERSHIP_NOT_KNOWN"
++            )
++            decisions.append(
++                base.model_copy(
++                    update={
++                        "disposition": "EXCLUDED" if reason == "NOT_YET_EFFECTIVE" else "UNKNOWN",
++                        "reason_codes": (reason,),
++                    }
++                )
++            )
++            continue
++        if not member.eligible or (
++            member.effective_to is not None and decision_time >= member.effective_to
++        ):
++            decisions.append(
++                base.model_copy(
++                    update={"disposition": "EXCLUDED", "reason_codes": ("MEMBERSHIP_NOT_TRADABLE",)}
++                )
++            )
++            continue
++        reasons: list[str] = []
++        unknown = False
++        proof = member.evidence
++        if (
++            proof is None
++            or proof.availability_evidence_kind == "UNKNOWN"
++            or (proof.availability_evidence_kind == "SYNTHETIC" and not allow_synthetic)
++        ):
++            reasons.append("MEMBERSHIP_EVIDENCE_UNVERIFIED")
++            unknown = True
++        row = liquidity.get(instrument)
++        if row is None:
++            reasons.append("LIQUIDITY_NOT_KNOWN")
++            unknown = True
++        else:
++            base = base.model_copy(
++                update={
++                    "liquidity_source_sha256": row.source_sha256,
++                    "trailing_quote_volume": row.trailing_quote_volume,
++                }
++            )
++            if decision_time - row.window_end > maximum_age:
++                reasons.append("LIQUIDITY_STALE")
++            if row.trailing_quote_volume <= 0 or row.trailing_quote_volume < minimum_quote_volume:
++                reasons.append("LIQUIDITY_BELOW_THRESHOLD")
++            detail = row.evidence
++            if detail is None:
++                reasons.append("LIQUIDITY_DETAIL_NOT_RECEIVED")
++                unknown = True
++            else:
++                if detail.quote_method not in {
++                    "EXCHANGE_QUOTE_TURNOVER",
++                    "TRADE_QUOTE_SUM",
++                } and not (allow_synthetic and detail.quote_method == "SYNTHETIC"):
++                    reasons.append("QUOTE_TURNOVER_NOT_EXACT")
++                    unknown = True
++                ordered = sorted(detail.bars, key=lambda bar: bar.close_time)
++                consecutive = int(bool(ordered) and ordered[-1].close_time == row.window_end)
++                for newer, older in pairwise(reversed(ordered)):
++                    if not consecutive or newer.close_time - older.close_time != timedelta(hours=4):
++                        break
++                    consecutive += 1
++                window_count = sum(
++                    row.window_start < bar.close_time <= row.window_end for bar in ordered
++                )
++                lifecycle_bars = (
++                    sum(bar.close_time > member.effective_from for bar in ordered[-consecutive:])
++                    if consecutive
++                    else 0
++                )
++                base = base.model_copy(
++                    update={
++                        "liquidity_detail_sha256": detail.detail_sha256,
++                        "contiguous_4h_bars": consecutive,
++                        "liquidity_window_bars": window_count,
++                        "tradable_history_4h_bars": lifecycle_bars,
++                        "liquidity_gap_count": 180 - window_count,
++                    }
++                )
++                if row.complete_history_4h_bars != consecutive:
++                    raise ValueError("AQ-PIT-CONTIGUOUS-HISTORY-COUNT-MISMATCH")
++                if window_count != 180:
++                    reasons.append("LIQUIDITY_WINDOW_GAP")
++                    unknown = True
++                if min(consecutive, lifecycle_bars) < required:
++                    reasons.append("CONTIGUOUS_WARMUP_INCOMPLETE")
++        active_rules = rule_view.get(instrument, [])
++        if len(active_rules) > 1:
++            raise ValueError("AQ-PIT-AMBIGUOUS-ACTIVE-RULE")
++        if not active_rules:
++            reasons.append("RULES_NOT_KNOWN")
++            unknown = True
++        else:
++            rule = active_rules[0]
++            base = base.model_copy(update={"rule_payload_sha256": rule.payload_sha256})
++            selected = HistoricalRuleBook((rule.rule,)).at(
++                venue_id=rule.rule.venue_id,
++                instrument_id=rule.rule.instrument_id,
++                event_time=decision_time,
++            )
++            if proof is not None and str(selected.venue_id) != proof.venue:
++                raise ValueError("AQ-PIT-RULE-VENUE-IDENTITY")
++            if rule.verified_kind != "ARCHIVED_EXCHANGE_RULE" and not (
++                allow_synthetic and rule.verified_kind == "SYNTHETIC"
++            ):
++                reasons.append("RULES_UNVERIFIED")
++                unknown = True
++            if not selected.trading_enabled:
++                reasons.append("RULES_TRADING_DISABLED")
++        decisions.append(
++            base.model_copy(
++                update={
++                    "reason_codes": tuple(reasons),
++                    "disposition": "UNKNOWN" if unknown else "EXCLUDED" if reasons else "ELIGIBLE",
++                }
++            )
++        )
++    membership_snapshot = universe.snapshot(as_of_time=decision_time)
++    policy_hash = canonical_sha256(
++        {
++            "minimum_quote_volume": str(minimum_quote_volume),
++            "warmup_requirements": dict(warmup_requirements),
++            "minimum_history_bars": minimum_history_bars,
++            "maximum_age_seconds": str(maximum_age.total_seconds()),
++            "allow_synthetic": allow_synthetic,
++        }
++    )
++    provisional = PITUniverseSnapshot(
++        snapshot_sha256="",
++        membership_snapshot=membership_snapshot,
++        eligible_instrument_ids=tuple(
++            row.instrument_uid for row in decisions if row.disposition == "ELIGIBLE"
++        ),
++        decisions=tuple(decisions),
++        known_future_event_ids=tuple(
++            sorted(row.membership_id for row in known if row.effective_from > decision_time)
++        ),
++        held_instrument_ids=held,
++        policy_sha256=policy_hash,
++    )
++    digest = canonical_sha256(provisional.model_dump(mode="json", exclude={"snapshot_sha256"}))
++    return provisional.model_copy(update={"snapshot_sha256": digest})
+ 
+ 
+ def eligible_universe_at(
+@@ -43,8 +434,23 @@
+     minimum_quote_volume: Decimal,
+     minimum_history_bars: int = 240,
+     maximum_age: timedelta = timedelta(hours=4),
++    strict_evidence: bool = False,
++    rules: Iterable[RuleProvenance] = (),
++    warmup_requirements: Mapping[str, int] | None = None,
+ ) -> tuple[UniverseSnapshot, tuple[str, ...]]:
+     """Absent/stale liquidity fails closed; future delisting revisions stay invisible."""
++    if strict_evidence:
++        result = audit_universe_at(
++            universe,
++            observations,
++            rules=rules,
++            decision_time=decision_time,
++            minimum_quote_volume=minimum_quote_volume,
++            warmup_requirements=warmup_requirements or {},
++            minimum_history_bars=minimum_history_bars,
++            maximum_age=maximum_age,
++        )
++        return result.membership_snapshot, result.eligible_instrument_ids
+     if (
+         not minimum_quote_volume.is_finite()
+         or minimum_quote_volume < 0
+--- a/scripts/run_alpha_v5_research.py
++++ b/scripts/run_alpha_v5_research.py
+@@ -423,10 +423,35 @@
+ 
+ def main() -> None:
+     parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument("command", choices=("register", "run", "report"))
+-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
++    parser.add_argument("command", choices=("register", "run", "report", "pit-audit"))
++    parser.add_argument("--output", type=Path)
++    parser.add_argument("--config", type=Path)
++    parser.add_argument("--preflight-dir", type=Path)
+     args = parser.parse_args()
+-    output = args.output.resolve()
++    if args.command == "pit-audit":
++        from aegisquant.research.validation.evidence_contract import checked_path
++        from aegisquant.research.validation.pit_contract import run_pit_quality_job
++
++        if args.config is None or args.preflight_dir is None or args.output is not None:
++            parser.error(
++                "pit-audit requires --config and --preflight-dir; output is bound in config"
++            )
++        config_path = checked_path(ROOT, args.config.as_posix())
++        config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
++        destination, status = run_pit_quality_job(
++            ROOT,
++            config,
++            args.preflight_dir,
++            {
++                "head": git(ROOT, "rev-parse", "HEAD"),
++                "branch": git(ROOT, "branch", "--show-current"),
++            },
++        )
++        print(f"PIT data-quality result: {destination}; exit={status}", flush=True)
++        raise SystemExit(status)
++    if args.config is not None or args.preflight_dir is not None:
++        parser.error("PIT-only options cannot change the frozen legacy research entry")
++    output = (args.output or DEFAULT_OUTPUT).resolve()
+     if not output.is_relative_to(ROOT / "artifacts/alpha_v5"):
+         raise ValueError("R5 evidence must stay in its own artifacts/alpha_v5 directory")
+     if args.command == "register":
+--- a/tests/alpha_v5/test_research_guards.py
++++ b/tests/alpha_v5/test_research_guards.py
+@@ -1,6 +1,8 @@
+ """Entry-point boundaries: protected data, immutable slots and actual PIT eligibility."""
+ 
+ import hashlib
++import json
++from collections.abc import Iterable
+ from datetime import UTC, datetime, timedelta
+ from decimal import Decimal
+ from pathlib import Path
+@@ -8,7 +10,12 @@
+ 
+ import pytest
+ 
+-from aegisquant.research.datasets.pit_universe import LiquidityObservation, eligible_universe_at
++from aegisquant.research.datasets.pit_universe import (
++    LiquidityObservation,
++    PITUniverseSnapshot,
++    RuleProvenance,
++    eligible_universe_at,
++)
+ from aegisquant.research.datasets.universe import (
+     PointInTimeUniverse,
+     UniverseMembership,
+@@ -250,3 +257,700 @@
+     assert prepared["BTCUSDT"]["excluded_outside_window_rows"] == 4
+     assert prepared["BTCUSDT"]["complete_4h_bars"] == 1
+     assert "NaN" not in (tmp_path / prepared["BTCUSDT"]["path"]).read_text(encoding="utf-8")
++
++
++# B2 fixtures below contain metadata and Decimal quote evidence only, never prices/replays.
++B2_TIME = datetime(2024, 6, 1, tzinfo=UTC)
++
++
++def pit_member(
++    uid: str = "asset-uid-1",
++    *,
++    kind: str = "TRADING_STARTED",
++    event: str | None = None,
++    effective: datetime = B2_TIME - timedelta(days=500),
++    known: datetime = B2_TIME - timedelta(days=501),
++    revision: int = 1,
++    symbol: str = "TESTUSDT",
++    **proof_fields: Any,
++) -> UniverseMembership:
++    from aegisquant.research.datasets.universe import MembershipEvidence
++
++    evidence = MembershipEvidence.model_validate(
++        {
++            "event_id": event or uid + ":" + kind,
++            "symbol": symbol,
++            "venue": "SYNTHETIC",
++            "event_kind": kind,
++            "source_published_at": known,
++            "first_observed_at": known,
++            "availability_evidence_kind": "SYNTHETIC",
++            "source_sha256": "a" * 64,
++            **proof_fields,
++        }
++    )
++    fields: dict[str, Any] = {
++        "instrument_id": uid,
++        "eligible": kind not in {"LISTED", "SUSPENDED", "DELISTED", "MIGRATED"},
++        "effective_from": effective,
++        "effective_to": None,
++        "available_time": known,
++        "revision_time": None,
++        "revision": revision,
++        "reason_codes": (kind,),
++        "source_dataset_id": "B2_SYNTHETIC_ONLY",
++        "evidence": evidence,
++    }
++    return UniverseMembership(membership_id=membership_id(**fields), **fields)
++
++
++def pit_liquidity(
++    uid: str = "asset-uid-1",
++    *,
++    count: int = 961,
++    quote: str = "10",
++    end: datetime = B2_TIME,
++    known: datetime | None = None,
++    gaps: tuple[int, ...] = (),
++    method: str = "SYNTHETIC",
++    revision: int = 1,
++) -> LiquidityObservation:
++    from aegisquant.data.hashing import canonical_sha256
++    from aegisquant.research.datasets.pit_universe import ClosedLiquidityBar, LiquidityEvidence
++
++    bars = tuple(
++        ClosedLiquidityBar(
++            close_time=end - timedelta(hours=4 * i),
++            available_time=end - timedelta(hours=4 * i),
++            quote_turnover=Decimal(quote),
++            source_sha256="b" * 64,
++        )
++        for i in reversed(range(count))
++        if i not in gaps
++    )
++    continuous = min((*gaps, count)) if gaps else count
++    detail = LiquidityEvidence.model_validate(
++        {
++            "quote_method": method,
++            "bars": bars,
++            "detail_sha256": canonical_sha256([bar.model_dump(mode="json") for bar in bars]),
++        }
++    )
++    return LiquidityObservation(
++        instrument_id=uid,
++        window_start=end - timedelta(days=30),
++        window_end=end,
++        available_time=known or end,
++        complete_history_4h_bars=continuous,
++        trailing_quote_volume=sum(
++            (
++                bar.quote_turnover
++                for bar in bars
++                if end - timedelta(days=30) < bar.close_time <= end
++            ),
++            Decimal(0),
++        ),
++        source_sha256="c" * 64,
++        evidence=detail,
++        revision=revision,
++    )
++
++
++def pit_rule(
++    uid: str = "asset-uid-1",
++    *,
++    known: datetime = B2_TIME - timedelta(days=501),
++    effective: datetime = B2_TIME - timedelta(days=500),
++    end: datetime | None = None,
++    kind: str = "SYNTHETIC",
++    trading: bool = True,
++    revision: int = 1,
++) -> RuleProvenance:
++    from aegisquant.backtest.models import HistoricalInstrumentRule
++    from aegisquant.data.hashing import canonical_sha256
++    from aegisquant.domain.identifiers import InstrumentId, InstrumentRuleId, VenueId
++    from aegisquant.research.datasets.pit_universe import RuleProvenance
++
++    rule = HistoricalInstrumentRule(
++        instrument_rule_id=InstrumentRuleId(uid + ":rule"),
++        instrument_id=InstrumentId(uid),
++        venue_id=VenueId("SYNTHETIC"),
++        version="B2_SYNTHETIC_ONLY",
++        effective_from=effective,
++        effective_to=end,
++        tick_size=Decimal(".01"),
++        step_size=Decimal(".01"),
++        minimum_quantity=Decimal(".01"),
++        maximum_quantity=Decimal("1000"),
++        minimum_notional=Decimal("10"),
++        trading_enabled=trading,
++        source="B2_SYNTHETIC_ONLY",
++    )
++    filters = {
++        "PRICE_FILTER": {"tickSize": ".01"},
++        "LOT_SIZE": {"minQty": ".01", "maxQty": "1000", "stepSize": ".01"},
++        "MARKET_LOT_SIZE": {"minQty": ".01", "maxQty": "1000", "stepSize": ".01"},
++        "NOTIONAL": {"minNotional": "10", "applyMinToMarket": True, "avgPriceMins": 0},
++        "ORDER_PERMISSIONS": {"orderTypes": ["MARKET", "LIMIT"]},
++    }
++    return RuleProvenance.model_validate(
++        {
++            "record_id": uid + ":rule",
++            "revision": revision,
++            "available_time": known,
++            "verified_kind": kind,
++            "rule": rule,
++            "source_sha256": "d" * 64,
++            "filter_payload_json": json.dumps(filters),
++            "payload_sha256": canonical_sha256(
++                {"rule": rule.model_dump(mode="json"), "filters": filters}
++            ),
++        }
++    )
++
++
++def pit_snapshot(
++    *,
++    members: Iterable[UniverseMembership] | None = None,
++    liquidity: Iterable[LiquidityObservation] | None = None,
++    rules: Iterable[RuleProvenance] | None = None,
++    **overrides: Any,
++) -> PITUniverseSnapshot:
++    from aegisquant.research.datasets.pit_universe import audit_universe_at
++
++    arguments: dict[str, Any] = {
++        "rules": [pit_rule()] if rules is None else rules,
++        "decision_time": B2_TIME,
++        "minimum_quote_volume": Decimal("1000"),
++        "warmup_requirements": {"slow_trend_160d": 961, "return_240": 241, "vol_42_returns": 43},
++        "allow_synthetic": True,
++        **overrides,
++    }
++    return audit_universe_at(
++        PointInTimeUniverse([pit_member()] if members is None else members),
++        [pit_liquidity()] if liquidity is None else liquidity,
++        **arguments,
++    )
++
++
++def test_b2_event_lifecycle_and_relisting_use_instrument_uid():
++    rows = [
++        pit_member(
++            kind="LISTED",
++            effective=B2_TIME - timedelta(days=510),
++            known=B2_TIME - timedelta(days=511),
++        ),
++        pit_member(),
++        pit_member(
++            kind="SUSPENDED",
++            effective=B2_TIME - timedelta(days=2),
++            known=B2_TIME - timedelta(days=3),
++        ),
++        pit_member(
++            kind="RESUMED",
++            effective=B2_TIME - timedelta(days=1),
++            known=B2_TIME - timedelta(days=1, hours=4),
++        ),
++        pit_member(kind="DELISTED", effective=B2_TIME, known=B2_TIME - timedelta(days=2)),
++        pit_member(
++            "asset-uid-2",
++            kind="RELISTED",
++            effective=B2_TIME + timedelta(days=1),
++            known=B2_TIME - timedelta(days=1),
++        ),
++    ]
++    universe = PointInTimeUniverse(rows)
++    for offset, expected in (
++        (-512, ()),
++        (-502, ()),
++        (-499, ("asset-uid-1",)),
++        (-1.5, ()),
++        (-0.5, ("asset-uid-1",)),
++        (0.5, ()),
++        (2, ("asset-uid-2",)),
++    ):
++        assert (
++            universe.snapshot(as_of_time=B2_TIME + timedelta(days=offset)).instrument_ids
++            == expected
++        )
++    held = pit_snapshot(members=rows, held_instrument_ids=("asset-uid-1",))
++    assert held.held_instrument_ids == ("asset-uid-1",) and held.eligible_instrument_ids == ()
++    assert held.known_future_event_ids
++
++
++def test_b2_archived_publication_and_late_receipt_are_different_clocks():
++    archived = pit_member(
++        availability_evidence_kind="ARCHIVED_PUBLICATION",
++        first_observed_at=B2_TIME + timedelta(days=100),
++    )
++    assert PointInTimeUniverse([archived]).snapshot(as_of_time=B2_TIME).instrument_ids == (
++        "asset-uid-1",
++    )
++    with pytest.raises(ValueError, match="receipt evidence"):
++        pit_member(
++            availability_evidence_kind="OBSERVED_AT_RECEIPT",
++            first_observed_at=B2_TIME + timedelta(days=100),
++        )
++    with pytest.raises(ValueError, match="publication evidence"):
++        pit_member(availability_evidence_kind="ARCHIVED_PUBLICATION", source_published_at=None)
++
++
++def test_b2_event_revision_changes_effective_time_without_applying_early():
++    original = pit_member(
++        kind="DELISTED",
++        event="scheduled-exit",
++        effective=B2_TIME,
++        known=B2_TIME - timedelta(days=2),
++    )
++    revised = pit_member(
++        kind="DELISTED",
++        event="scheduled-exit",
++        effective=B2_TIME + timedelta(days=2),
++        known=B2_TIME - timedelta(days=1),
++        revision=2,
++    )
++    universe = PointInTimeUniverse([pit_member(), original, revised])
++    assert universe.snapshot(as_of_time=B2_TIME).instrument_ids == ("asset-uid-1",)
++    assert universe.snapshot(as_of_time=B2_TIME + timedelta(days=2)).instrument_ids == ()
++
++
++def test_b2_membership_revision_conflict_fails_only_when_known():
++    first, conflict = pit_member(), pit_member(source_sha256="f" * 64)
++    for rows in ([first, conflict], [conflict, first]):
++        with pytest.raises(ValueError, match="CONFLICTING-MEMBERSHIP-REVISION"):
++            PointInTimeUniverse(rows).snapshot(as_of_time=B2_TIME)
++    future = [
++        pit_member("later", known=B2_TIME + timedelta(days=1)),
++        pit_member("later", known=B2_TIME + timedelta(days=2)),
++    ]
++    assert PointInTimeUniverse([first, *future]).snapshot(as_of_time=B2_TIME).instrument_ids == (
++        "asset-uid-1",
++    )
++    with pytest.raises(ValueError, match="CONFLICTING-MEMBERSHIP-REVISION"):
++        PointInTimeUniverse(future).snapshot(as_of_time=B2_TIME + timedelta(days=3))
++
++
++@pytest.mark.parametrize(
++    "count,gaps,expected,reason",
++    [
++        (961, (), 961, None),
++        (240, (), 240, "CONTIGUOUS_WARMUP_INCOMPLETE"),
++        (961, (200,), 200, "CONTIGUOUS_WARMUP_INCOMPLETE"),
++        (961, (4,), 4, "LIQUIDITY_WINDOW_GAP"),
++    ],
++)
++def test_b2_contiguous_warmup_and_exact_thirty_day_window(
++    count: int, gaps: tuple[int, ...], expected: int, reason: str | None
++):
++    result = pit_snapshot(liquidity=[pit_liquidity(count=count, gaps=gaps)])
++    decision = result.decisions[0]
++    assert decision.contiguous_4h_bars == expected and decision.required_history_bars == 961
++    if reason:
++        assert result.eligible_instrument_ids == () and reason in decision.reason_codes
++    else:
++        assert result.eligible_instrument_ids == ("asset-uid-1",)
++        assert decision.liquidity_window_bars == 180 and decision.trailing_quote_volume == Decimal(
++            "1800"
++        )
++    # Legacy count-only eligibility stays explicitly separate from the strict contract.
++    if count == 240:
++        assert eligible_universe_at(
++            PointInTimeUniverse([pit_member()]),
++            [pit_liquidity(count=count)],
++            decision_time=B2_TIME,
++            minimum_quote_volume=Decimal("1000"),
++        )[1] == ("asset-uid-1",)
++
++
++def test_b2_gap_recovery_and_resume_require_all_dependency_windows():
++    assert pit_snapshot(
++        liquidity=[pit_liquidity(count=962, gaps=(961,))]
++    ).eligible_instrument_ids == ("asset-uid-1",)
++    resumed = pit_member(
++        kind="RESUMED", effective=B2_TIME - timedelta(days=2), known=B2_TIME - timedelta(days=2)
++    )
++    decision = pit_snapshot(members=[pit_member(), resumed]).decisions[0]
++    assert decision.contiguous_4h_bars == 961 and decision.tradable_history_4h_bars == 12
++    assert "CONTIGUOUS_WARMUP_INCOMPLETE" in decision.reason_codes
++
++
++@pytest.mark.parametrize("case", ["zero", "missing", "proxy", "future", "stale", "no_detail"])
++def test_b2_liquidity_unavailable_or_proxy_never_opens_new_risk(case: str):
++    rows = (
++        []
++        if case == "missing"
++        else [
++            pit_liquidity(
++                quote="0" if case == "zero" else "10",
++                method="BASE_VOLUME_TIMES_CLOSE_PROXY" if case == "proxy" else "SYNTHETIC",
++                known=B2_TIME + timedelta(hours=1) if case == "future" else None,
++                end=B2_TIME - timedelta(hours=8) if case == "stale" else B2_TIME,
++            )
++        ]
++    )
++    if case == "no_detail":
++        rows = [rows[0].model_copy(update={"evidence": None})]
++    assert pit_snapshot(liquidity=rows).eligible_instrument_ids == ()
++
++
++def test_b2_liquidity_hash_amount_window_and_history_corruptions_rejected():
++    row = pit_liquidity()
++    for update, error in (
++        ({"trailing_quote_volume": Decimal("1801")}, "QUOTE-TURNOVER"),
++        ({"window_start": row.window_start - timedelta(hours=4)}, "30-day"),
++        ({"available_time": row.window_end - timedelta(seconds=1)}, "window ends"),
++    ):
++        with pytest.raises(ValueError, match=error):
++            LiquidityObservation.model_validate({**dict(row), **update})
++    with pytest.raises(ValueError, match="CONTIGUOUS-HISTORY-COUNT"):
++        pit_snapshot(liquidity=[row.model_copy(update={"complete_history_4h_bars": 9999})])
++    with pytest.raises(ValueError, match="CONFLICTING-LIQUIDITY-REVISION"):
++        pit_snapshot(liquidity=[row, pit_liquidity(quote="11")])
++    for value in ("-1", "NaN", "Infinity"):
++        with pytest.raises(ValueError):
++            pit_liquidity(quote=value)
++
++
++@pytest.mark.parametrize("case", ["missing", "future", "expired", "proxy", "disabled"])
++def test_b2_rule_provenance_is_required_for_new_risk(case: str):
++    rows = (
++        []
++        if case == "missing"
++        else [
++            pit_rule(
++                known=B2_TIME + timedelta(days=1)
++                if case == "future"
++                else B2_TIME - timedelta(days=501),
++                end=B2_TIME if case == "expired" else None,
++                kind="PROXY" if case == "proxy" else "SYNTHETIC",
++                trading=case != "disabled",
++            )
++        ]
++    )
++    result = pit_snapshot(rules=rows, held_instrument_ids=("asset-uid-1", "unmapped-held-uid"))
++    assert result.eligible_instrument_ids == ()
++    assert result.held_instrument_ids == ("asset-uid-1", "unmapped-held-uid")
++    assert result.scope == "NEW_RISK_ONLY_NO_POSITION_MUTATION"
++
++
++def test_b2_synthetic_sources_never_become_historical_evidence_by_default():
++    result = pit_snapshot(allow_synthetic=False)
++    assert result.eligible_instrument_ids == ()
++    assert "MEMBERSHIP_EVIDENCE_UNVERIFIED" in result.decisions[0].reason_codes
++    assert "RULES_UNVERIFIED" in result.decisions[0].reason_codes
++    with pytest.raises(ValueError, match="UNREGISTERED-ELIGIBILITY-LIMITS"):
++        pit_snapshot(warmup_requirements={})
++    with pytest.raises(ValueError, match="UNREGISTERED-ELIGIBILITY-LIMITS"):
++        pit_snapshot(minimum_quote_volume=Decimal(0))
++
++
++def test_b2_rule_conflict_and_simultaneous_symbol_reuse_are_rejected():
++    with pytest.raises(ValueError, match="CONFLICTING-RULE-REVISION"):
++        pit_snapshot(rules=[pit_rule(), pit_rule(trading=False)])
++    with pytest.raises(ValueError, match="OVERLAPPING-SYMBOL-INCARNATIONS"):
++        pit_snapshot(members=[pit_member(), pit_member("asset-uid-2")])
++
++
++def test_b2_bound_inputs_reject_changed_and_deleted_exited_asset_bytes(tmp_path: Path):
++    from aegisquant.research.validation.evidence_contract import EvidenceReader
++    from aegisquant.research.validation.pit_contract import read_bound_input
++
++    source = tmp_path / "data/research/pit/universe_events.json"
++    source.parent.mkdir(parents=True)
++    original = {
++        "records": [
++            pit_member().model_dump(mode="json"),
++            pit_member("old-uid", symbol="OLDUSDT", kind="DELISTED").model_dump(mode="json"),
++        ]
++    }
++    source.write_text(json.dumps(original), encoding="utf-8")
++    digest = hashlib.sha256(source.read_bytes()).hexdigest()
++    reader = EvidenceReader(tmp_path)
++    assert (
++        read_bound_input(
++            reader, "data/research/pit", "data/research/pit/universe_events.json", digest
++        )
++        == source
++    )
++    original["records"].pop()
++    source.write_text(json.dumps(original), encoding="utf-8")
++    with pytest.raises(ValueError, match="INPUT-HASH-CONFLICT"):
++        read_bound_input(
++            reader, "data/research/pit", "data/research/pit/universe_events.json", digest
++        )
++
++
++@pytest.mark.parametrize("kind", ["holdout", "symlink", "junction", "credential", "outside"])
++def test_b2_pit_path_guard_rejects_before_open(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, kind: str
++):
++    from aegisquant.research.validation.evidence_contract import EvidenceReader
++    from aegisquant.research.validation.pit_contract import read_bound_input
++
++    relative = {
++        "holdout": "data/research/pit/holdout/secret.json",
++        "credential": "data/research/pit/.env",
++        "outside": "elsewhere/metadata.json",
++    }.get(kind, "data/research/pit/linked.json")
++
++    def is_fixture_link(path: Path) -> bool:
++        return path.name == "linked.json"
++
++    if kind in {"symlink", "junction"}:
++        monkeypatch.setattr(
++            Path,
++            "is_symlink" if kind == "symlink" else "is_junction",
++            is_fixture_link,
++        )
++    opened: list[Path] = []
++
++    def forbidden_open(path: Path, *args: object, **kwargs: object):
++        opened.append(path)
++        raise AssertionError("PIT guard reached a forbidden input")
++
++    monkeypatch.setattr(Path, "open", forbidden_open)
++    with pytest.raises((PermissionError, ValueError)):
++        read_bound_input(EvidenceReader(tmp_path), "data/research/pit", relative, "a" * 64)
++    assert not opened
++
++
++def pit_job_fixture(tmp_path: Path, project_root: Path):
++    """All saved evidence/receipts here are synthetic; never copied into real reports."""
++    import yaml
++
++    from aegisquant.data.hashing import sha256_file
++    from aegisquant.research.validation import pit_contract as contract
++
++    root, stage = tmp_path / "synthetic-repo", tmp_path / "synthetic-stage"
++    root.mkdir()
++    stage.mkdir()
++    config = yaml.safe_load(
++        (project_root / "configs/research/alpha_v5_pit_contract.yaml").read_text(encoding="utf-8")
++    )
++
++    def save(relative: str, content: str):
++        target = root / relative
++        target.parent.mkdir(parents=True, exist_ok=True)
++        target.write_text(content, encoding="utf-8")
++        return target
++
++    for name in contract.B2_FILES:
++        save(name, "SYNTHETIC TASK FILE ONLY\n")
++    safety = {"production_policy": "CASH", **dict.fromkeys(contract.LOCKS, False)}
++    config["r5_manifest_sha256"] = sha256_file(
++        save(config["r5_frozen_root"] + "/audit_manifest.json", json.dumps({"config": safety}))
++    )
++    config["b0_manifest_sha256"] = sha256_file(
++        save(
++            config["b0_frozen_root"] + "/OUTPUT_MANIFEST.json", json.dumps({"SYNTHETIC_ONLY": True})
++        )
++    )
++    save("configs/research/aegis_alpha_v5.yaml", yaml.safe_dump(safety))
++    save(
++        "src/aegisquant/bootstrap/live_lock.py",
++        "LIVE_TRADING: bool = False\nORDER_SUBMISSION_ENABLED: bool = False\nLIVE_ADAPTERS: tuple = ()\n",
++    )
++    save("configs/research/alpha_v5_pit_contract.yaml", yaml.safe_dump(config))
++    files = {
++        path.relative_to(root).as_posix(): {
++            "sha256": sha256_file(path),
++            "bytes": path.stat().st_size,
++        }
++        for path in root.rglob("*")
++        if path.is_file()
++    }
++    baseline = {
++        "head": contract.BASE,
++        "branch": "main",
++        "root": str(root),
++        "allowed_modifications": list(contract.MODIFIED_FILES),
++        "files": files,
++    }
++    (stage / "baseline_workspace.json").write_text(json.dumps(baseline), encoding="utf-8")
++    for name in contract.MODIFIED_FILES:
++        target = stage / "before" / name
++        target.parent.mkdir(parents=True, exist_ok=True)
++        target.write_bytes((root / name).read_bytes())
++    for name in ("workspace_before.patch", "version_graph.txt", "test_commands_and_results.txt"):
++        (stage / name).write_text("SYNTHETIC FIXTURE NOT AN ACTUAL RUN\n", encoding="utf-8")
++    hashes = {name: sha256_file(root / name) for name in contract.B2_FILES}
++    receipts = [
++        {
++            "check": check,
++            "command": ["SYNTHETIC_FIXTURE_ONLY"],
++            "exit_code": 0,
++            "source_sha256": hashes,
++        }
++        for check in ("pytest", "ruff", "format", "pyright")
++    ]
++    (stage / "validation_records.json").write_text(json.dumps(receipts), encoding="utf-8")
++    (stage / "pytest_results.xml").write_text(
++        '<testsuite name="SYNTHETIC_RECEIPT_ONLY">'
++        + "".join(f'<testcase name="test_b2_future_fixture_{number}"/>' for number in range(9))
++        + "</testsuite>",
++        encoding="utf-8",
++    )
++    return root, stage, config
++
++
++def test_b2_actual_cli_missing_data_fails_closed_without_old_pipeline(
++    tmp_path: Path, project_root: Path, monkeypatch: pytest.MonkeyPatch
++):
++    import sys
++    from unittest.mock import Mock
++
++    from aegisquant.research.validation.evidence_contract import load_evidence_manifest
++    from aegisquant.research.validation.pit_contract import run_pit_quality_job
++    from scripts import run_alpha_v5_research as runner
++
++    root, stage, config = pit_job_fixture(tmp_path, project_root)
++    poison = Mock(side_effect=AssertionError("B2 invoked the old market/replay pipeline"))
++    for name in (
++        "inputs",
++        "load_completed_bars",
++        "replay_cat",
++        "reproduce",
++        "run",
++        "run_one",
++        "preregister",
++    ):
++        monkeypatch.setattr(runner, name, poison)
++    monkeypatch.setattr(runner, "ROOT", root)
++
++    def synthetic_git(_root: Path, *args: str) -> str:
++        return "main" if args[0] == "branch" else "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b"
++
++    monkeypatch.setattr(runner, "git", synthetic_git)
++    monkeypatch.setattr(
++        sys,
++        "argv",
++        [
++            "audit",
++            "pit-audit",
++            "--config",
++            "configs/research/alpha_v5_pit_contract.yaml",
++            "--preflight-dir",
++            str(stage),
++        ],
++    )
++    with pytest.raises(SystemExit) as ended:
++        runner.main()
++    assert ended.value.code == 2
++    poison.assert_not_called()
++    output = root / config["output"]
++    assert load_evidence_manifest(output, "OUTPUT_MANIFEST.json")["status"] == "VERIFIED"
++    assert json.loads((output / "universe_events.json").read_text())["records"] is None
++    status = json.loads((output / "safety_and_budget_audit.json").read_text())
++    assert status["strict_data_quality"] == "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE"
++    assert all(value == 0 for key, value in status["actual"].items() if key != "data_quality_jobs")
++    assert status["actual"]["data_quality_jobs"] == 1
++    assert (
++        ExperimentEventJournal(output / "experiment_events.jsonl").entries()[-1].event.event_type
++        == ExperimentEventType.ERROR
++    )
++    with pytest.raises(FileExistsError):
++        run_pit_quality_job(root, config, stage, {"branch": "main", "head": config["source_head"]})
++
++
++@pytest.mark.parametrize("mutation", ["fit", "live", "synthetic", "warmup", "scope"])
++def test_b2_config_rejects_scope_or_evidence_downgrade(project_root: Path, mutation: str):
++    import yaml
++
++    from aegisquant.research.validation.pit_contract import validate_pit_config
++
++    config = yaml.safe_load(
++        (project_root / "configs/research/alpha_v5_pit_contract.yaml").read_text(encoding="utf-8")
++    )
++    if mutation == "fit":
++        config["budgets"]["real_return_model_fits"] = 1
++    elif mutation == "live":
++        config["live_trading"] = True
++    elif mutation == "synthetic":
++        config["allow_synthetic_historical_evidence"] = True
++    elif mutation == "warmup":
++        config["warmup_requirements"]["trend_160d"] = 240
++    else:
++        config["mode"] = "REPLAY"
++    with pytest.raises(ValueError, match="AQ-PIT-"):
++        validate_pit_config(config)
++
++
++def test_b2_complete_bound_table_fixture_and_deleted_asset_census_guard(
++    tmp_path: Path, project_root: Path
++):
++    """The archive labels simulate a source contract, not real historical evidence."""
++    import yaml
++
++    from aegisquant.data.hashing import canonical_sha256, sha256_file
++    from aegisquant.research.datasets.pit_universe import LiquidityEvidence
++    from aegisquant.research.validation.evidence_contract import EvidenceReader
++    from aegisquant.research.validation.pit_contract import validate_pit_tables
++
++    config = yaml.safe_load(
++        (project_root / "configs/research/alpha_v5_pit_contract.yaml").read_text(encoding="utf-8")
++    )
++    directory = tmp_path / "data/research/pit"
++    directory.mkdir(parents=True)
++    archive = directory / "synthetic_archive.txt"
++    archive.write_text("SYNTHETIC ARCHIVE FIXTURE ONLY; NO REAL MARKET DATA", encoding="utf-8")
++    source_hash = sha256_file(archive)
++    members = [
++        pit_member(availability_evidence_kind="ARCHIVED_PUBLICATION", source_sha256=source_hash),
++        pit_member(
++            "gone-uid",
++            symbol="GONEUSDT",
++            kind="DELISTED",
++            effective=B2_TIME - timedelta(days=1),
++            known=B2_TIME - timedelta(days=2),
++            availability_evidence_kind="ARCHIVED_PUBLICATION",
++            source_sha256=source_hash,
++        ),
++    ]
++    liquidity = pit_liquidity(method="EXCHANGE_QUOTE_TURNOVER")
++    assert liquidity.evidence is not None
++    bars = tuple(
++        bar.model_copy(update={"source_sha256": source_hash}) for bar in liquidity.evidence.bars
++    )
++    detail = LiquidityEvidence(
++        quote_method="EXCHANGE_QUOTE_TURNOVER",
++        bars=bars,
++        detail_sha256=canonical_sha256([bar.model_dump(mode="json") for bar in bars]),
++    )
++    liquidity = liquidity.model_copy(update={"source_sha256": source_hash, "evidence": detail})
++    rule = pit_rule(kind="ARCHIVED_EXCHANGE_RULE").model_copy(update={"source_sha256": source_hash})
++    config["period_start"] = B2_TIME.isoformat()
++    config["period_end_exclusive"] = (B2_TIME + timedelta(hours=4)).isoformat()
++    config["minimum_trailing_30d_quote_volume"] = "1000"
++    documents = {
++        "universe_events": {"records": [row.model_dump(mode="json") for row in members]},
++        "liquidity_windows": {"records": [liquidity.model_dump(mode="json")]},
++        "rules_provenance": {"records": [rule.model_dump(mode="json")]},
++        "coverage_manifest": {
++            "schema_version": "pit-coverage-b2-v1",
++            "classification": "PREVIOUSLY_USED_DEVELOPMENT_METADATA",
++            "period_start": config["period_start"],
++            "period_end_exclusive": config["period_end_exclusive"],
++            "candidate_instrument_uids": ["asset-uid-1", "gone-uid"],
++            "event_stream_complete": True,
++            "includes_delisted_instruments": True,
++            "source_files": {"data/research/pit/synthetic_archive.txt": source_hash},
++        },
++    }
++    for name, document in documents.items():
++        path = directory / (name + ".json")
++        path.write_text(json.dumps(document), encoding="utf-8")
++        config["inputs"][name] = {
++            "path": path.relative_to(tmp_path).as_posix(),
++            "sha256": sha256_file(path),
++        }
++    products, gaps = validate_pit_tables(EvidenceReader(tmp_path), config)
++    assert not gaps
++    assert products["historical_coverage"]["candidate_count"] == 2
++    assert products["historical_coverage"]["delisted_count"] == 1
++    assert products["historical_coverage"]["unknown_exclusion_fraction"] == "0"
++    assert products["historical_snapshots"][0]["eligible_instrument_ids"] == ["asset-uid-1"]
++    path = directory / "universe_events.json"
++    path.write_text(json.dumps({"records": [members[0].model_dump(mode="json")]}), encoding="utf-8")
++    config["inputs"]["universe_events"]["sha256"] = sha256_file(path)
++    with pytest.raises(ValueError, match="CANDIDATE-COVERAGE-CONFLICT"):
++        validate_pit_tables(EvidenceReader(tmp_path), config)
+--- a/tests/alpha_v5/test_no_future_mutation.py
++++ b/tests/alpha_v5/test_no_future_mutation.py
+@@ -85,3 +85,123 @@
+     if mutation == "gap":
+         after_gap = next(row for row in results[1][1] if row["time"] == bars[326].available_time)
+         assert after_gap["smoothed_risk_weight"] == after_gap["unsmoothed_risk_weight"]
++
++
++@pytest.mark.parametrize(
++    "mutation",
++    [
++        "membership_revision",
++        "late_backfill",
++        "future_listing",
++        "liquidity_revision",
++        "rule_revision",
++        "cross_asset_listing",
++        "cross_asset_liquidity",
++    ],
++)
++def test_b2_future_information_preserves_decision_snapshot_bytes(mutation: str):
++    from tests.alpha_v5.test_research_guards import (
++        B2_TIME,
++        pit_liquidity,
++        pit_member,
++        pit_rule,
++        pit_snapshot,
++    )
++
++    known_later = B2_TIME + timedelta(days=1)
++    base = pit_snapshot()
++    members = [pit_member()]
++    liquidity = [pit_liquidity()]
++    rules = [pit_rule()]
++    if mutation in {"membership_revision", "late_backfill"}:
++        members.append(
++            pit_member(
++                kind="DELISTED",
++                known=known_later,
++                effective=B2_TIME - timedelta(days=10),
++                revision=2 if mutation == "membership_revision" else 1,
++            )
++        )
++    elif mutation in {"future_listing", "cross_asset_listing"}:
++        members.append(
++            pit_member(
++                "future-uid",
++                symbol="OTHERUSDT",
++                kind="RELISTED",
++                known=known_later,
++                effective=known_later
++                if mutation == "future_listing"
++                else B2_TIME - timedelta(days=20),
++            )
++        )
++    elif mutation == "liquidity_revision":
++        liquidity.append(pit_liquidity(known=known_later, revision=2, quote="9000"))
++    elif mutation == "rule_revision":
++        rules.append(pit_rule(known=known_later, revision=2, trading=False))
++    else:
++        liquidity.append(pit_liquidity("unseen-cross-asset", known=known_later, quote="900000"))
++    altered = pit_snapshot(members=members, liquidity=liquidity, rules=rules)
++    assert altered.model_dump_json() == base.model_dump_json()
++
++
++def test_b2_future_announced_event_is_part_of_the_known_prefix():
++    from tests.alpha_v5.test_research_guards import B2_TIME, pit_member, pit_snapshot
++
++    announced = pit_member(
++        kind="DELISTED", effective=B2_TIME + timedelta(days=1), known=B2_TIME - timedelta(days=1)
++    )
++    revised_known = pit_member(
++        kind="DELISTED", effective=B2_TIME + timedelta(days=2), known=B2_TIME - timedelta(days=1)
++    )
++    first = pit_snapshot(members=[pit_member(), announced])
++    second = pit_snapshot(members=[pit_member(), revised_known])
++    assert first.eligible_instrument_ids == second.eligible_instrument_ids == ("asset-uid-1",)
++    assert first.snapshot_sha256 != second.snapshot_sha256
++    assert first.known_future_event_ids == (announced.membership_id,)
++
++
++def test_b2_future_mutation_and_input_reordering_are_cross_asset_stable():
++    import random
++
++    from tests.alpha_v5.test_research_guards import (
++        B2_TIME,
++        pit_liquidity,
++        pit_member,
++        pit_rule,
++        pit_snapshot,
++    )
++
++    members = [
++        pit_member(),
++        pit_member("other-uid", symbol="OTHERUSDT"),
++        pit_member("exited-uid", symbol="OLDUSDT", kind="DELISTED", effective=B2_TIME),
++    ]
++    liquidity = [pit_liquidity(), pit_liquidity("other-uid", quote="20")]
++    rules = [pit_rule(), pit_rule("other-uid")]
++    expected = pit_snapshot(members=members, liquidity=liquidity, rules=rules).model_dump_json()
++    for seed in range(5):
++        rng = random.Random(seed)  # noqa: S311 -- deterministic synthetic ordering only.
++        for rows in (members, liquidity, rules):
++            rng.shuffle(rows)
++        actual = pit_snapshot(members=members, liquidity=liquidity, rules=rules)
++        assert actual.model_dump_json() == expected
++        assert any(row.instrument_uid == "exited-uid" for row in actual.decisions)
++
++
++def test_b2_legacy_research_function_bodies_remain_frozen():
++    import ast
++    from pathlib import Path
++
++    root = Path(__file__).resolve().parents[2]
++    relative = "scripts/run_alpha_v5_research.py"
++    frozen = root / "artifacts/alpha_v5/20260908_research_churn_v3/implementation" / relative
++    trees = [ast.parse(path.read_text(encoding="utf-8")) for path in (frozen, root / relative)]
++    functions = [
++        {
++            node.name: ast.dump(node)
++            for node in tree.body
++            if isinstance(node, ast.FunctionDef) and node.name != "main"
++        }
++        for tree in trees
++    ]
++    assert functions[0] == functions[1]
+--- /dev/null
++++ b/src/aegisquant/research/validation/pit_contract.py
+@@ -0,0 +1,595 @@
++"""One B2 data-quality job over explicitly registered PIT evidence; never run a strategy."""
++
++from __future__ import annotations
++
++import difflib
++import json
++import re
++from collections import Counter
++from datetime import UTC, datetime, timedelta
++from decimal import Decimal
++from pathlib import Path
++from typing import Any, Literal
++from xml.etree import ElementTree
++
++from pydantic import TypeAdapter, model_validator
++
++from aegisquant.data.hashing import ensure_sha256, sha256_file
++from aegisquant.domain.base import DomainModel
++from aegisquant.domain.time import UtcDateTime
++from aegisquant.research.datasets.pit_universe import (
++    LiquidityObservation,
++    PITUniverseSnapshot,
++    RuleProvenance,
++    audit_universe_at,
++)
++from aegisquant.research.datasets.universe import PointInTimeUniverse, UniverseMembership
++from aegisquant.research.validation.evidence_contract import (
++    BASE,
++    LOCKS,
++    ZERO_BUDGETS,
++    EvidenceReader,
++    audit_existing_files,
++    checked_path,
++    claim_output,
++    require,
++    safety_literals,
++    seal_output,
++    write_json_exclusive,
++    zero_budget_guard,
++)
++from aegisquant.research.validation.experiment_registry import registered_run
++
++MODIFIED_FILES = (
++    "src/aegisquant/research/datasets/universe.py",
++    "src/aegisquant/research/datasets/pit_universe.py",
++    "scripts/run_alpha_v5_research.py",
++    "tests/alpha_v5/test_research_guards.py",
++    "tests/alpha_v5/test_no_future_mutation.py",
++)
++NEW_FILES = (
++    "src/aegisquant/research/validation/pit_contract.py",
++    "configs/research/alpha_v5_pit_contract.yaml",
++    "docs/research/alpha_v5_pit_contract.md",
++)
++B2_FILES = (*MODIFIED_FILES, *NEW_FILES)
++INPUTS = ("universe_events", "liquidity_windows", "rules_provenance", "coverage_manifest")
++
++
++class PITCoverageManifest(DomainModel):
++    schema_version: Literal["pit-coverage-b2-v1"]
++    classification: Literal["PREVIOUSLY_USED_DEVELOPMENT_METADATA"]
++    period_start: UtcDateTime
++    period_end_exclusive: UtcDateTime
++    candidate_instrument_uids: tuple[str, ...]
++    event_stream_complete: bool
++    includes_delisted_instruments: bool
++    source_files: dict[str, str]
++
++    @model_validator(mode="after")
++    def validate_coverage(self) -> PITCoverageManifest:
++        require(self.period_start < self.period_end_exclusive, "AQ-PIT-COVERAGE-PERIOD")
++        require(
++            len(set(self.candidate_instrument_uids)) == len(self.candidate_instrument_uids),
++            "AQ-PIT-DUPLICATE-COVERAGE-UID",
++        )
++        for digest in self.source_files.values():
++            ensure_sha256(digest, field_name="PIT archive source")
++        return self
++
++
++class PITDataQualityError(ValueError):
++    """A retained data-quality failure is not an unsuccessful alpha candidate."""
++
++
++def validate_pit_config(config: dict[str, Any]) -> None:
++    match = re.fullmatch(r"alpha-r5-pit-contract-(\d{8})-v([1-9]\d*)", config["generation"])
++    require(match is not None, "AQ-PIT-GENERATION")
++    if match is None:
++        return
++    require(
++        config["output"] == f"artifacts/alpha_v5/{match[1]}_pit_contract_v{match[2]}",
++        "AQ-PIT-GENERATION-OUTPUT",
++    )
++    require(
++        config["scope"] == "B2_PIT_CONTRACTS_AND_SYNTHETIC_TESTS"
++        and config["mode"] == "PIT_DATA_QUALITY_ONLY",
++        "AQ-PIT-SCOPE",
++    )
++    require(config["source_head"] == BASE and config["branch_required"] == "main", "AQ-PIT-BASE")
++    require(
++        config["budgets"] == {"data_quality_jobs": 1, **dict.fromkeys(ZERO_BUDGETS, 0)},
++        "AQ-PIT-NONZERO-RESEARCH-BUDGET",
++    )
++    require(
++        config["production_policy"] == "CASH"
++        and config["research_conclusion"] == "NO_PROVEN_ALPHA"
++        and all(config[key] is False for key in LOCKS),
++        "AQ-PIT-SAFETY-LOCK",
++    )
++    require(
++        config["allow_synthetic_historical_evidence"] is False
++        and config["strict_data_quality"] is True,
++        "AQ-PIT-EVIDENCE-DOWNGRADE",
++    )
++    require(set(config["inputs"]) == set(INPUTS), "AQ-PIT-INPUT-COVERAGE")
++    require(config["input_root"] == "data/research/pit", "AQ-PIT-INPUT-ROOT")
++    for value in config["inputs"].values():
++        require((value["path"] is None) == (value["sha256"] is None), "AQ-PIT-UNBOUND-INPUT")
++        if value["sha256"] is not None:
++            ensure_sha256(value["sha256"], field_name="PIT registered input")
++    require(
++        config["warmup_requirements"]
++        == {"trend_40d": 241, "trend_80d": 481, "trend_160d": 961, "volatility_42_returns": 43},
++        "AQ-PIT-DEPENDENCY-WARMUP",
++    )
++
++
++def read_bound_input(reader: EvidenceReader, input_root: str, name: str, digest: str) -> Path:
++    path = checked_path(reader.root, name)
++    require(
++        path.resolve().is_relative_to((reader.root / input_root).resolve()),
++        "AQ-PIT-UNREGISTERED-INPUT-ROOT",
++    )
++    ensure_sha256(digest, field_name="PIT input SHA256")
++    require(sha256_file(path) == digest, "AQ-PIT-INPUT-HASH-CONFLICT")
++    return reader.path(name, "REGISTERED_PIT_METADATA_OR_ARCHIVE_HASH")
++
++
++def validate_pit_tables(
++    reader: EvidenceReader, config: dict[str, Any]
++) -> tuple[dict[str, Any], list[dict[str, Any]]]:
++    documents: dict[str, Any] = {}
++    gaps: list[dict[str, Any]] = []
++    for name, binding in config["inputs"].items():
++        if binding["path"] is None:
++            gaps.append(
++                {
++                    "item": name,
++                    "status": "NOT_RECEIVED",
++                    "reason": "No registered historical PIT file; no zero-row universe inferred.",
++                }
++            )
++            continue
++        path = read_bound_input(reader, config["input_root"], binding["path"], binding["sha256"])
++        documents[name] = json.loads(path.read_text(encoding="utf-8"))
++    if config["minimum_trailing_30d_quote_volume"] is None:
++        gaps.append(
++            {
++                "item": "minimum_trailing_30d_quote_volume",
++                "status": "NOT_REGISTERED",
++                "reason": "No historical threshold is invented from synthetic examples.",
++            }
++        )
++    schemas = {
++        "universe_events": UniverseMembership.model_json_schema(),
++        "liquidity_windows": LiquidityObservation.model_json_schema(),
++        "rules_provenance": RuleProvenance.model_json_schema(),
++        "coverage_manifest": PITCoverageManifest.model_json_schema(),
++    }
++    result: dict[str, Any] = {
++        "tables": {
++            name: {
++                "status": "NOT_RECEIVED" if name not in documents else "RECEIVED_NOT_YET_VERIFIED",
++                "schema": schema,
++                "source": config["inputs"][name],
++                "records": None,
++            }
++            for name, schema in schemas.items()
++        },
++        "historical_snapshots": None,
++        "historical_coverage": {
++            "candidate_count": None,
++            "delisted_count": None,
++            "unknown_exclusion_fraction": None,
++            "real_history_coverage": "NOT_VERIFIED",
++        },
++        "legacy_five_asset_comparison": None,
++    }
++    if set(documents) != set(INPUTS):
++        return result, gaps
++    members = TypeAdapter(tuple[UniverseMembership, ...]).validate_json(
++        json.dumps(documents["universe_events"]["records"])
++    )
++    observations = TypeAdapter(tuple[LiquidityObservation, ...]).validate_json(
++        json.dumps(documents["liquidity_windows"]["records"])
++    )
++    rules = TypeAdapter(tuple[RuleProvenance, ...]).validate_json(
++        json.dumps(documents["rules_provenance"]["records"])
++    )
++    coverage = PITCoverageManifest.model_validate_json(json.dumps(documents["coverage_manifest"]))
++    universe = PointInTimeUniverse(members)
++    require(
++        set(coverage.candidate_instrument_uids) == {row.instrument_id for row in members},
++        "AQ-PIT-CANDIDATE-COVERAGE-CONFLICT",
++    )
++    require(bool(members) and bool(observations) and bool(rules), "AQ-PIT-EMPTY-HISTORICAL-TABLE")
++    require(
++        coverage.period_start.isoformat() == config["period_start"]
++        and coverage.period_end_exclusive.isoformat() == config["period_end_exclusive"],
++        "AQ-PIT-COVERAGE-PERIOD-BINDING",
++    )
++    if not coverage.event_stream_complete or not coverage.includes_delisted_instruments:
++        gaps.append(
++            {
++                "item": "historical_universe_coverage",
++                "status": "NOT_VERIFIED",
++                "reason": "Coverage attestation is incomplete or omits delisted assets.",
++            }
++        )
++    if not any(
++        row.evidence is not None and row.evidence.event_kind == "DELISTED" for row in members
++    ):
++        gaps.append(
++            {
++                "item": "delisted_instruments",
++                "status": "NOT_VERIFIED",
++                "reason": "No delisting event supports the required historical coverage.",
++            }
++        )
++    for name, digest in coverage.source_files.items():
++        read_bound_input(reader, config["input_root"], name, digest)
++    source_hashes = set(coverage.source_files.values())
++    required_hashes = {row.source_sha256 for row in observations} | {
++        row.source_sha256 for row in rules
++    }
++    required_hashes |= {row.evidence.source_sha256 for row in members if row.evidence is not None}
++    required_hashes |= {
++        bar.source_sha256
++        for row in observations
++        if row.evidence is not None
++        for bar in row.evidence.bars
++    }
++    require(required_hashes <= source_hashes, "AQ-PIT-ARCHIVE-SOURCE-NOT-BOUND")
++    for name, rows in (
++        ("universe_events", members),
++        ("liquidity_windows", observations),
++        ("rules_provenance", rules),
++    ):
++        result["tables"][name].update(
++            status="SCHEMA_AND_SOURCE_HASH_VERIFIED",
++            records=[row.model_dump(mode="json") for row in rows],
++        )
++    result["tables"]["coverage_manifest"].update(
++        status="SOURCE_ATTESTATION_NOT_INDEPENDENT_CENSUS", records=coverage.model_dump(mode="json")
++    )
++    if config["minimum_trailing_30d_quote_volume"] is None:
++        return result, gaps
++    for bound in (coverage.period_start, coverage.period_end_exclusive):
++        require(
++            bound.hour % 4 == 0 and not bound.minute and not bound.second and not bound.microsecond,
++            "AQ-PIT-COVERAGE-CALENDAR-ALIGNMENT",
++        )
++    cutoff_times: list[datetime] = []
++    cutoff = coverage.period_start
++    while cutoff < coverage.period_end_exclusive:
++        cutoff_times.append(cutoff)
++        cutoff += timedelta(hours=4)
++    snapshots: list[PITUniverseSnapshot] = []
++    # ponytail: direct pure queries suit the current contract/no-data job. Index the
++    # same as-of semantics before ingesting a large full-market archive.
++    for cutoff in cutoff_times:
++        snapshots.append(
++            audit_universe_at(
++                universe,
++                observations,
++                rules=rules,
++                decision_time=cutoff,
++                minimum_quote_volume=Decimal(config["minimum_trailing_30d_quote_volume"]),
++                warmup_requirements=config["warmup_requirements"],
++                minimum_history_bars=config["minimum_history_4h_bars"],
++                maximum_age=timedelta(hours=config["maximum_liquidity_age_hours"]),
++            )
++        )
++    dispositions = Counter(row.disposition for snapshot in snapshots for row in snapshot.decisions)
++    if dispositions["UNKNOWN"]:
++        gaps.append(
++            {
++                "item": "strict_asof_coverage",
++                "status": "NOT_VERIFIED",
++                "reason": "At least one decision requires unknown membership, liquidity or rules evidence.",
++            }
++        )
++    result["historical_snapshots"] = [snapshot.model_dump(mode="json") for snapshot in snapshots]
++    result["historical_coverage"] = {
++        "candidate_count": len(coverage.candidate_instrument_uids),
++        "delisted_count": len(
++            {
++                row.instrument_id
++                for row in members
++                if row.evidence is not None and row.evidence.event_kind == "DELISTED"
++            }
++        ),
++        "snapshot_count": len(snapshots),
++        "dispositions": dict(dispositions),
++        "unknown_exclusion_fraction": str(
++            Decimal(dispositions["UNKNOWN"]) / sum(dispositions.values())
++        )
++        if dispositions
++        else None,
++        "real_history_coverage": "SOURCE_MANIFEST_ATTESTED_NOT_INDEPENDENT_CENSUS",
++    }
++    comparison: list[dict[str, Any]] = []
++    for snapshot in snapshots:
++        current = universe.current_memberships(as_of_time=snapshot.membership_snapshot.as_of_time)
++        selected = {
++            row.evidence.symbol
++            for row in current
++            if row.evidence is not None and row.instrument_id in snapshot.eligible_instrument_ids
++        }
++        legacy = set(config["legacy_symbols"])
++        comparison.append(
++            {
++                "as_of": snapshot.membership_snapshot.as_of_time,
++                "pit_only": sorted(selected - legacy),
++                "legacy_only": sorted(legacy - selected),
++                "interpretation": "COMPONENT_BIAS_DIAGNOSTIC_NO_PERFORMANCE_SELECTION",
++            }
++        )
++    result["legacy_five_asset_comparison"] = comparison
++    return result, gaps
++
++
++def test_receipts(root: Path, stage: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
++    records = json.loads((stage / "validation_records.json").read_text(encoding="utf-8"))
++    latest = {row["check"]: row for row in records}
++    hashes = {name: sha256_file(checked_path(root, name)) for name in B2_FILES}
++    for check in ("pytest", "ruff", "format", "pyright"):
++        require(
++            check in latest
++            and latest[check]["exit_code"] == 0
++            and latest[check]["source_sha256"] == hashes,
++            f"AQ-PIT-VALIDATION-NOT-CURRENT:{check}",
++        )
++    xml = stage / "pytest_results.xml"
++    cases = ElementTree.parse(xml).getroot().findall(".//testcase")  # noqa: S314 -- locally generated pytest receipt.
++    require(
++        bool(cases)
++        and all(
++            not any(row.tag in {"failure", "error", "skipped"} for row in case) for case in cases
++        ),
++        "AQ-PIT-TEST-FAILURE-OR-SKIP",
++    )
++    future = [case.attrib["name"] for case in cases if "test_b2_future" in case.attrib["name"]]
++    require(len(future) >= 9, "AQ-PIT-FUTURE-CONTRACT-TESTS-MISSING")
++    return records, {
++        "kind": "SYNTHETIC_ONLY_NOT_HISTORICAL_COVERAGE",
++        "passed_tests": len(cases),
++        "future_mutation_cases": future,
++        "real_engine_prefix_checks": "NOT_RUN_B2_SCOPE",
++        "source_sha256": hashes,
++        "pytest_xml_sha256": sha256_file(xml),
++    }
++
++
++def run_pit_quality_job(
++    root: Path, config: dict[str, Any], stage: Path, git_state: dict[str, str]
++) -> tuple[Path, int]:
++    validate_pit_config(config)
++    require(
++        git_state["branch"] == "main" and git_state["head"] == BASE, "AQ-PIT-WORKSPACE-IDENTITY"
++    )
++    baseline = json.loads((stage / "baseline_workspace.json").read_text(encoding="utf-8"))
++    require(
++        baseline["head"] == BASE
++        and baseline["branch"] == "main"
++        and Path(baseline["root"]).resolve() == root.resolve(),
++        "AQ-PIT-PREFLIGHT-IDENTITY",
++    )
++    require(
++        set(baseline["allowed_modifications"]) == set(MODIFIED_FILES), "AQ-PIT-MODIFICATION-SCOPE"
++    )
++    preserved = {
++        **baseline,
++        "files": {
++            name: row for name, row in baseline["files"].items() if name not in MODIFIED_FILES
++        },
++    }
++    records, receipts = test_receipts(root, stage)
++    output = claim_output(
++        root,
++        config["output"],
++        frozen_roots=[root / config["r5_frozen_root"], root / config["b0_frozen_root"]],
++    )
++    counters: dict[str, int] = dict.fromkeys(ZERO_BUDGETS, 0)
++    reader = EvidenceReader(root)
++    run_id = config["generation"] + ":DATA_QUALITY"
++    exit_code = 0
++    try:
++        with registered_run(  # noqa: SIM117 -- keep the journal scope outside the write guard.
++            output,
++            run_id,
++            planned_run_ids=[run_id],
++            bindings={"kind": "PIT_DATA_QUALITY_NOT_ALPHA_TRIAL"},
++        ):
++            with zero_budget_guard(output, root, counters):
++                write_json_exclusive(
++                    output / "preregistration.json",
++                    {
++                        "registered_at": datetime.now(UTC),
++                        "config": config,
++                        "planned_run_ids": [run_id],
++                        "kind": "PIT_DATA_QUALITY_NOT_ALPHA_TRIAL",
++                    },
++                )
++                before = audit_existing_files(root, preserved)
++                for name in (
++                    "baseline_workspace.json",
++                    "workspace_before.patch",
++                    "version_graph.txt",
++                    "validation_records.json",
++                    "test_commands_and_results.txt",
++                    "pytest_results.xml",
++                ):
++                    path = checked_path(stage, name)
++                    target = (
++                        output
++                        / (
++                            "validation"
++                            if name
++                            in {
++                                "validation_records.json",
++                                "test_commands_and_results.txt",
++                                "pytest_results.xml",
++                            }
++                            else "preflight"
++                        )
++                        / name
++                    )
++                    target.parent.mkdir(parents=True, exist_ok=True)
++                    with target.open("xb") as stream:
++                        stream.write(path.read_bytes())
++                patch = ""
++                for name in B2_FILES:
++                    path = checked_path(root, name)
++                    old = checked_path(stage, "before/" + name) if name in MODIFIED_FILES else None
++                    if old is not None:
++                        require(
++                            sha256_file(old) == baseline["files"][name]["sha256"],
++                            "AQ-PIT-BASELINE-COPY-CONFLICT",
++                        )
++                        target = output / "before" / name
++                        target.parent.mkdir(parents=True, exist_ok=True)
++                        with target.open("xb") as stream:
++                            stream.write(old.read_bytes())
++                    target = output / "implementation" / name
++                    target.parent.mkdir(parents=True, exist_ok=True)
++                    with target.open("xb") as stream:
++                        stream.write(path.read_bytes())
++                    patch += "".join(
++                        difflib.unified_diff(
++                            old.read_text(encoding="utf-8").splitlines(keepends=True)
++                            if old is not None
++                            else [],
++                            path.read_text(encoding="utf-8").splitlines(keepends=True),
++                            fromfile="a/" + name if old is not None else "/dev/null",
++                            tofile="b/" + name,
++                        )
++                    )
++                with (output / "changes_this_batch.patch").open(
++                    "x", encoding="utf-8", newline="\n"
++                ) as stream:
++                    stream.write(patch)
++                manifest_path = reader.path(config["r5_frozen_root"] + "/audit_manifest.json")
++                require(
++                    sha256_file(manifest_path) == config["r5_manifest_sha256"],
++                    "AQ-PIT-R5-FROZEN-IDENTITY",
++                )
++                b0_path = reader.path(config["b0_frozen_root"] + "/OUTPUT_MANIFEST.json")
++                require(
++                    sha256_file(b0_path) == config["b0_manifest_sha256"],
++                    "AQ-PIT-B0-FROZEN-IDENTITY",
++                )
++                locks = safety_literals(
++                    reader,
++                    reader.json(config["r5_frozen_root"] + "/audit_manifest.json", native=True),
++                )
++                products, gaps = validate_pit_tables(reader, config)
++                for name, table in products["tables"].items():
++                    write_json_exclusive(output / f"{name}.json", table)
++                write_json_exclusive(
++                    output / "asof_snapshot_manifest.json",
++                    {key: value for key, value in products.items() if key != "tables"},
++                )
++                write_json_exclusive(output / "future_mutation_report.json", receipts)
++                write_json_exclusive(
++                    output / "evidence_gaps.json",
++                    {"gaps": gaps, "synthetic_evidence_is_historical": False},
++                )
++                status = (
++                    "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE"
++                    if gaps
++                    else "SCHEMA_AND_BOUND_EVIDENCE_CHECKS_PASSED"
++                )
++                after = audit_existing_files(root, preserved)
++                write_json_exclusive(
++                    output / "safety_and_budget_audit.json",
++                    {
++                        "authorized": config["budgets"],
++                        "actual": {"data_quality_jobs": 1, **counters},
++                        "strict_data_quality": status,
++                        "new_alpha_trials": 0,
++                        "significance_recalculations": 0,
++                        "historical_pit_snapshots": None
++                        if products["historical_snapshots"] is None
++                        else len(products["historical_snapshots"]),
++                        "before": before,
++                        "after": after,
++                        "live_lock_literals": locks,
++                        "production_policy": "CASH",
++                        "research_conclusion": "NO_PROVEN_ALPHA",
++                        **dict.fromkeys(LOCKS, False),
++                        "promotion_admitted": False,
++                    },
++                )
++                write_json_exclusive(
++                    output / "source_and_version_bindings.json",
++                    {
++                        "generation": config["generation"],
++                        "head": BASE,
++                        "branch": "main",
++                        "reads": reader.reads,
++                        "modified_files": {
++                            name: {
++                                "before": baseline["files"][name]["sha256"],
++                                "after": sha256_file(root / name),
++                            }
++                            for name in MODIFIED_FILES
++                        },
++                        "new_files": {name: sha256_file(root / name) for name in NEW_FILES},
++                        "commits_created": 0,
++                        "pushes": 0,
++                        "branches_created": 0,
++                    },
++                )
++                report = "\n".join(
++                    [
++                        "# B2 PIT 数据契约与合成验证",
++                        "",
++                        "**NO_PROVEN_ALPHA / CASH；ML、纸面准入、实盘和订单提交全部关闭。**",
++                        "",
++                        f"Generation：`{config['generation']}`；身份：已有 main `{BASE}` + 冻结 R5 v3 + B0/B1 v2。",
++                        "历史策略回放、真实模型拟合、真实校准拟合、最终留出访问、真实订单全部为 0。",
++                        "",
++                        f"工程验证：{receipts['passed_tests']} 项限定纯测试通过；Ruff、格式和类型检查通过。实际 {len(records)} 次检查记录及失败尝试均保留。",
++                        f"严格数据质量状态：`{status}`；独占数据质量作业 1 次，不因缺件重开。",
++                        "",
++                        "新增事件级修订与同键冲突检查，区分公告、接收、修订和生效时间；重上市使用独立 instrument UID。",
++                        "连续历史按已登记依赖取最大值：40/80/160 日趋势分别需 241/481/961 根闭合四小时数据，42 个收益的波动窗口需 43 根。",
++                        "30 日 quote turnover 直接对带哈希明细求和；零量、缺口、proxy、短历史及未知规则不能打开新风险。",
++                        "新严格模式按交易状态变化重新证明连续 warm-up；不修改冻结 G1 的 gap、参数、费用或下单行为。",
++                        "仅返回新开风险资格，已有持仓身份原样保留；不删除、免费平仓或借用未来退市价格。",
++                        "",
++                        "future-mutation 只覆盖本批 PIT 的事件、流动性、规则和跨币资格快照；合成测试不代表真实行情、特征、风险、订单或成交前缀已经重验。",
++                        "旧 legacy 五币研究函数体保持冻结语义；旧回放测试未运行。新入口 pit-audit 只进入数据质量作业。",
++                        "",
++                        "实际数据表、来源和 schema 见 universe_events/liquidity_windows/rules_provenance/coverage_manifest；未收到用 records=null 表达，不把缺件变成空市场。",
++                        "缺全历史候选/退市证据或未登记流动性阈值时，历史覆盖率、独立全市场核验与成分差异保持未知；不把今天的币表或 base_volume×close 回填成真实 PIT。",
++                        f"保护范围内 {after['files_checked']} 个既有文件哈希未变；本批五个允许修改文件的原字节、八个实施文件与补丁均保存。",
++                        "",
++                        "下一步所需输入仅列于 evidence_gaps.json；取得真实来源及新 generation 后才能重新开展严格数据质量核验。本批不进入 B3 或任何收益/交易实验。",
++                        "",
++                    ]
++                )
++                with (output / "report.md").open("x", encoding="utf-8", newline="\n") as stream:
++                    stream.write(report)
++                if gaps:
++                    raise PITDataQualityError("AQ-PIT-STRICT-DATA-QUALITY-INSUFFICIENT-EVIDENCE")
++    except BaseException as error:
++        exit_code = 2
++        write_json_exclusive(
++            output / "failure.json",
++            {
++                "status": "FAILED_RETAINED_DO_NOT_REOPEN",
++                "error": f"{type(error).__name__}: {error}",
++                "kind": "PIT_DATA_QUALITY_NOT_ALPHA_TRIAL",
++                "actual": {"data_quality_jobs": 1, **counters},
++                "research_conclusion": "NO_PROVEN_ALPHA",
++                "production_policy": "CASH",
++            },
++        )
++        if not isinstance(error, PITDataQualityError):
++            seal_output(output)
++            raise
++    seal_output(output)
++    return output, exit_code
+--- /dev/null
++++ b/configs/research/alpha_v5_pit_contract.yaml
+@@ -0,0 +1,45 @@
++schema_version: aegis-pit-contract-b2-v1
++generation: alpha-r5-pit-contract-20260910-v1
++output: artifacts/alpha_v5/20260910_pit_contract_v1
++scope: B2_PIT_CONTRACTS_AND_SYNTHETIC_TESTS
++mode: PIT_DATA_QUALITY_ONLY
++branch_required: main
++source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
++taskbook: AegisQuant_整改与验证方案_20260909.md
++r5_frozen_root: artifacts/alpha_v5/20260908_research_churn_v3
++r5_manifest_sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
++b0_frozen_root: artifacts/alpha_v5/20260909_review_contract_v2
++b0_manifest_sha256: fccc6e6a60185811d37b4e8a40a7772da3209b46e95ea15e83cfef9d39519edf
++budgets:
++  data_quality_jobs: 1
++  historical_strategy_engine_runs: 0
++  real_return_model_fits: 0
++  real_calibration_fits: 0
++  final_holdout_accesses: 0
++  real_orders: 0
++input_root: data/research/pit
++inputs:
++  universe_events: {path: null, sha256: null}
++  liquidity_windows: {path: null, sha256: null}
++  rules_provenance: {path: null, sha256: null}
++  coverage_manifest: {path: null, sha256: null}
++period_start: '2022-04-01T00:00:00+00:00'
++period_end_exclusive: '2025-10-01T00:00:00+00:00'
++strict_data_quality: true
++allow_synthetic_historical_evidence: false
++minimum_history_4h_bars: 240
++minimum_trailing_30d_quote_volume: null
++maximum_liquidity_age_hours: 4
++warmup_requirements:
++  trend_40d: 241
++  trend_80d: 481
++  trend_160d: 961
++  volatility_42_returns: 43
++warmup_basis: src/aegisquant/research/strategies/cost_aware_trend.py::build_trend_features
++legacy_symbols: [BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT]
++research_conclusion: NO_PROVEN_ALPHA
++production_policy: CASH
++production_ml_enabled: false
++paper_trading_admitted: false
++live_trading: false
++order_submission_enabled: false
+--- /dev/null
++++ b/docs/research/alpha_v5_pit_contract.md
+@@ -0,0 +1,65 @@
++# B2：PIT 数据契约与合成验证
++
++本批在已有 main 上实现 B2，沿用 B0/B1 的零历史回放、零真实拟合、零最终留出访问和零订单约束。
++原 R5 v3、R4、B0/B1 v1/v2 的证据和失败记录不覆盖，G1 参数、交易逻辑、费用及安全开关不改。
++新 generation 为 `alpha-r5-pit-contract-20260910-v1`；配置为
++`configs/research/alpha_v5_pit_contract.yaml`，输出到独占目录
++`artifacts/alpha_v5/20260910_pit_contract_v1/`。不自动提交、归档、推送或进入下一批。
++
++## 兼容与新语义
++
++`UniverseMembership.evidence` 是可选证据包装。不提供时，旧 `membership_id` 的 canonical payload
++完全不变，旧调用无需补虚构字段。新证据明确业务事件 ID、不可复用的 instrument UID、展示符号、
++交易所、事件种类、发布时间、首次接收时间、修订和 source hash。事件修订先按当时可知信息选择，
++再应用生效时间。同事件同 revision 冲突失败；同一时刻不推断相互冲突事件的隐含优先级。
++
++已公告但未生效的事件保留为已知前缀；晚到的历史修订不能回写过去。
++有归档发布时间证据时，今天下载不自动抹掉历史可知性；只有接收证据时，不能把可知时间倒填到公告前。
++同名重上市必须使用新 UID；同 venue/symbol 同时对应两个可交易 UID 时失败。
++
++`eligible_universe_at` 默认保留 legacy count-only 路径。`strict_evidence=True` 或
++`audit_universe_at` 使用 B2 严格契约：全部入选、排除及未知结果有原因和内容哈希；只决定新开风险，
++不改变已有持仓，不免费退出或伪造退市回收价。真实严格路径不接受合成证据。
++
++## 连续历史、流动性与规则
++
++流动性窗口为 `(window_start, window_end]` 的闭合四小时事件，跨度恰好 30 日、180 个 UTC 网格点。
++明细逐行有 close/available time、真实 quote turnover 或逐笔 quote 求和的方法身份及 source hash。
++字符串金额通过 Decimal 处理并与明细精确求和对齐；`base_volume * close` 明确是 proxy。
++明细重复、哈希错误、提前可知、汇总不等或虚报连续根数失败；缺口和缺件不能填零后升级为完整证据。
++
++按当前 `build_trend_features` 的索引与收益依赖，40/80/160 日趋势分别至少需要 241/481/961 根，
++42 个收益的波动计算至少需要 43 根；新严格契约取所有登记依赖的最大值。
++240 根只表达 legacy 最小历史，不覆盖最长依赖。交易暂停恢复或新生命周期后保守地重新证明连续历史；
++这不修改冻结策略的 warm-up 实现。未来若接入 covariance，须另行登记其窗口，不能从当前参数猜测。
++
++`RuleProvenance` 包装现有 `HistoricalInstrumentRule`，复用 `HistoricalRuleBook` 的有效时间选择。
++增加当时可知时间、修订、公共现货规则 scope、源和 payload hash，以及价格/普通与市场数量规则、
++notional 与订单权限的原始过滤器引用。未知、proxy、过期或停用规则不能开新风险。
++本批只校验来源和资格契约，不替换执行模型，也不把这些字段称为已实证费用或完整成交验真。
++
++## 入口和证据不足
++
++```powershell
++.\.venv\Scripts\python.exe -m scripts.run_alpha_v5_research pit-audit --config configs/research/alpha_v5_pit_contract.yaml --preflight-dir <本批前置保全及测试记录目录>
++```
++
++新命令不进入 legacy `register/run/report` 分支。输出目录和任务 claim 独占创建；失败也消费唯一数据质量槽，
++保留 ERROR 日志及 manifest，不能删目录重跑。原 legacy 研究函数体保持不变，未执行它们的回放测试。
++
++默认没有真实 `universe_events`、`liquidity_windows`、`rules_provenance` 或全市场 coverage manifest；
++流动性阈值也未另行登记。因此数据质量作业应以 exit 2 和 `FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE`
++停止，工程测试可完成。未知数据用 `records=null` 加状态表达，绝不把缺件当空 universe 或 0 收益。
++合成示例阈值只用于测试，不回填为历史研究参数。实际文件只能来自明确登记的
++`data/research/pit` 路径及 hash；保护 holdout、symlink/junction 与凭据路径在打开前拒绝。
++
++当真实文件另行登记时，coverage manifest 必须绑定候选 UID（含退市资产）、开发期及每个归档源 hash。
++删除今日已退出资产、改源表或来源哈希错配会失败；未来新增不可知数据只影响新的来源文件身份，
++不改变旧时点的可知资格快照。源方全市场覆盖声明与独立市场普查仍分开，不因一个布尔字段自动取得晋级。
++
++产物包括四类 schema/来源表、`asof_snapshot_manifest.json`、`future_mutation_report.json`、缺口表、
++预算/安全检查、原文件备份、本批 implementation、差异补丁、实际测试记录与 `OUTPUT_MANIFEST.json`。
++future-mutation 仅验证 PIT 事件、流动性、规则和跨币资格快照；未重新验证价格特征、组合风险或订单/成交前缀。
++仅运行指定 B2 纯测试及既有纯 PIT 测试，不运行全仓 pytest，不把旧回放日志当本批通过。
++
++最终仍为 **NO_PROVEN_ALPHA / CASH**，ML、纸面准入、实盘及订单提交全部关闭。

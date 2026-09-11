@@ -1,0 +1,83 @@
+generation: alpha-r5-research-churn-20260908-v2
+predecessor: artifacts/alpha_v5/20260908_research_churn_v1
+generation_change: INPUT_PARTITION_FIX_BEFORE_ANY_ENGINE_RUN_NO_STRATEGY_PARAMETER_CHANGE
+taskbook: deep-research-report.md
+scope: FIRST_BATCH_RESEARCH_VALIDITY_AND_CHURN_ONLY
+evidence_tier: RETROSPECTIVE_DEVELOPMENT
+development:
+  start: '2021-01-01T00:00:00Z'
+  test_start: '2022-04-01T00:00:00Z'
+  end_exclusive: '2025-10-01T00:00:00Z'
+  classification: PREVIOUSLY_USED_DEVELOPMENT_DATA
+  source_manifest: artifacts/alpha_v4_multi_asset/source_manifest.json
+  partition: HASHED_DEVELOPMENT_ONLY_CSV_SELECTED_BEFORE_OHLCV_PARSING
+universe:
+  mode: LEGACY_FIXED_SURVIVOR_DIAGNOSTIC_ONLY
+  promotion_evidence_eligible: false
+  point_in_time_membership_manifest: null
+  minimum_history_4h_bars: 240
+  minimum_trailing_30d_quote_volume: null
+  include_delisted_required: true
+final_holdout:
+  status: NOT_ALLOCATED_INSUFFICIENT_EVIDENCE
+  start: null
+  end_exclusive: null
+  path: null
+  sha256: null
+  minimum_months: 12
+  development_access_allowed: false
+protected_data_roots: [artifacts/alpha_v4/holdout, artifacts/alpha_v5/holdout]
+new_return_model_fits: 0
+new_calibration_fits: 0
+parameter_selection_from_results: false
+initial_cash_per_symbol: '10000'
+primary_candidate: G1
+buffer:
+  relative_half_width: '0.10'
+  restore_half_width: '0.20'
+  reduce_half_width: '0.10'
+  absolute_weight_floor: '0.03'
+resize:
+  smoothing_half_life_days: 5
+  review_interval_hours: 48
+  minimum_weight_change: '0.03'
+  minimum_notional: '50'
+  cost_benefit_lambda: '1'
+risk_benefit:
+  definition: 'max(0, ((w_current-w_raw)^2-(w_proposed-w_raw)^2) * annual_vol^2 * review_years / 2)'
+  units: EQUITY_NORMALIZED_VARIANCE_TRACKING_UTILITY_PROXY
+  comparison: ACTUAL_ROUNDED_INCREMENT_COST_DIVIDED_BY_EQUITY
+  interpretation: NOT_EXPECTED_ALPHA_OR_VERIFIED_EXECUTION
+  hard_exits_and_caps_bypass: true
+review_clock: ELAPSED_SINCE_LAST_REVIEW_OR_SUBMITTED_ORDER
+arms:
+  G0: {kind: FROZEN_R4_F3, costs: ['1']}
+  G1: {kind: RESIZE_V2, costs: ['1', '1.5', '2']}
+  G1_H3: {kind: RESIZE_V2, smoothing_half_life_days: 3, costs: ['1']}
+  G1_H10: {kind: RESIZE_V2, smoothing_half_life_days: 10, costs: ['1']}
+  G1_R24: {kind: RESIZE_V2, review_interval_hours: 24, costs: ['1']}
+  G1_R72: {kind: RESIZE_V2, review_interval_hours: 72, costs: ['1']}
+  G1_PASSIVE: {kind: SAME_RISK_PASSIVE, costs: ['1', '1.5', '2']}
+neighbor_rule: FIXED_ONE_FACTOR_DIAGNOSTICS_NO_WINNER_SELECTION
+benchmark_evidence:
+  frozen: [CASH, F0, F3, F5]
+  matched_risk: [G1_PASSIVE]
+  risk_scope: INDEPENDENT_EQUAL_INITIAL_CASH_SLEEVES_NOT_PORTFOLIO_COVARIANCE_TARGET
+execution_evidence: CLOSED_BAR_PROXY_NOT_VERIFIED_FEE_RULE_ORDERBOOK_LATENCY
+churn_acceptance:
+  maximum_resize_fill_share: 0.50
+  maximum_turnover_relative_to_f0: 0.60
+  maximum_cost_relative_to_f0: 0.70
+  maximum_cagr_degradation_pp: 1.0
+  maximum_mdd_degradation_pp: 2.0
+statistics:
+  seed: 20260908
+  repetitions: 10000
+  correction: HOLM
+  comparisons: [G1-G0, G1-F0, G1-F5, G1-G1_PASSIVE, G1-CASH, G1_H3-G0, G1_H10-G0, G1_R24-G0, G1_R72-G0]
+production_policy: CASH
+selected_model_id: null
+production_ml_enabled: false
+paper_trading_admitted: false
+live_trading: false
+order_submission_enabled: false

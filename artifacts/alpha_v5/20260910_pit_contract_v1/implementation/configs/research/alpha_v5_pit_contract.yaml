@@ -1,0 +1,45 @@
+schema_version: aegis-pit-contract-b2-v1
+generation: alpha-r5-pit-contract-20260910-v1
+output: artifacts/alpha_v5/20260910_pit_contract_v1
+scope: B2_PIT_CONTRACTS_AND_SYNTHETIC_TESTS
+mode: PIT_DATA_QUALITY_ONLY
+branch_required: main
+source_head: d8c6d4013097f6323ab8b7a424c860ba0ccbd62b
+taskbook: AegisQuant_整改与验证方案_20260909.md
+r5_frozen_root: artifacts/alpha_v5/20260908_research_churn_v3
+r5_manifest_sha256: a57b381069473e4f86c3c161452fb4da6840d0401171d3f1fa7f5af160f946ce
+b0_frozen_root: artifacts/alpha_v5/20260909_review_contract_v2
+b0_manifest_sha256: fccc6e6a60185811d37b4e8a40a7772da3209b46e95ea15e83cfef9d39519edf
+budgets:
+  data_quality_jobs: 1
+  historical_strategy_engine_runs: 0
+  real_return_model_fits: 0
+  real_calibration_fits: 0
+  final_holdout_accesses: 0
+  real_orders: 0
+input_root: data/research/pit
+inputs:
+  universe_events: {path: null, sha256: null}
+  liquidity_windows: {path: null, sha256: null}
+  rules_provenance: {path: null, sha256: null}
+  coverage_manifest: {path: null, sha256: null}
+period_start: '2022-04-01T00:00:00+00:00'
+period_end_exclusive: '2025-10-01T00:00:00+00:00'
+strict_data_quality: true
+allow_synthetic_historical_evidence: false
+minimum_history_4h_bars: 240
+minimum_trailing_30d_quote_volume: null
+maximum_liquidity_age_hours: 4
+warmup_requirements:
+  trend_40d: 241
+  trend_80d: 481
+  trend_160d: 961
+  volatility_42_returns: 43
+warmup_basis: src/aegisquant/research/strategies/cost_aware_trend.py::build_trend_features
+legacy_symbols: [BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT]
+research_conclusion: NO_PROVEN_ALPHA
+production_policy: CASH
+production_ml_enabled: false
+paper_trading_admitted: false
+live_trading: false
+order_submission_enabled: false

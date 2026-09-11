@@ -1,0 +1,22 @@
+{
+  "status": "PROTOCOL_DEFINED_EMPIRICAL_MODEL_NOT_CALIBRATED",
+  "legacy_execution": "LINEAR_PROXY_V1",
+  "legacy_capacity": "LEGACY_SQRT_CAPACITY_V0",
+  "explicit_curves_share_forward_and_inverse": true,
+  "prices": [
+    "MID",
+    "BBO",
+    "DEPTH_VWAP",
+    "BAR_OPEN_PROXY",
+    "MAKER_LIMIT"
+  ],
+  "bar_volume_is_opening_liquidity_evidence": false,
+  "maker_queue_unknown": "NO_IDENTIFIED_FILL",
+  "strict_budget_scope": "ONE_INSTRUMENT_VENUE_CLOSED_CUMULATIVE_WINDOW_AT_EVENT_TIME",
+  "strict_budget_current_evidence_kind": "SYNTHETIC_ONLY",
+  "native_fee_accounting_policy": "SPOT_NATIVE_FEES_V2",
+  "native_fee_base": "FIFO_DISPOSAL_AT_FILL_MARK_REBATE_LOT_AT_FILL_MARK",
+  "third_fee_asset": "REQUIRES_FUNDED_CASH_AND_FX_OPEN_OTHER_INSTRUMENT_LOTS_FAIL_CLOSED",
+  "old_engine_default_changed": false,
+  "existing_g1_parameters_changed": false
+}

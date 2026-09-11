@@ -1,0 +1,132 @@
+{
+  "schema_version": "immutable-evidence-output-v1",
+  "files": {
+    "before/scripts/audit_alpha_profitability_root_causes.py": {
+      "sha256": "79d78534487fddc920258a07bbf63c81556e0a34ace6e376c18c4073e70a10a4",
+      "bytes": 17521
+    },
+    "before/src/aegisquant/research/validation/paired_bootstrap.py": {
+      "sha256": "b9039213443199c378ac451049912aae2c4a68097aa9898b61ea9e895a3b6200",
+      "bytes": 4279
+    },
+    "benchmark_contract.json": {
+      "sha256": "4ec589b5f71edc88800b12e263dbc58fc822740093f12fc3e246eb3bcdd3c9bc",
+      "bytes": 4034
+    },
+    "calendar_contract.json": {
+      "sha256": "b113033d35dafabd0d4732e257d422b96b1c75c9e9fbbe347e55763840928c35",
+      "bytes": 595
+    },
+    "cash_full_calendar.csv": {
+      "sha256": "2f502550e5ae5446d9f546dccfeded4489029f4ad5618ea13ea1dc037a480ce6",
+      "bytes": 376136
+    },
+    "changes_this_batch.patch": {
+      "sha256": "27dabe903f2b26073c150abeae65b68a1598b9dc2807a572598ec919fc00bc69",
+      "bytes": 73478
+    },
+    "evidence_gaps.json": {
+      "sha256": "7c1c9cc1e77ec70e4f80136ca71c1262b25863200df7bb5ae8fe8f0957caeb4d",
+      "bytes": 665
+    },
+    "experiment_events.jsonl": {
+      "sha256": "ce324ee4c3317a2c06e03abe91da7850267f0a276748a899b48ed48ec86c60bc",
+      "bytes": 962
+    },
+    "implementation/configs/research/alpha_v5_benchmark_contract.yaml": {
+      "sha256": "0b5a30ad7a6cbb59fe21e50e3074409e5f7bdbc4dafee4649557effe7ea7f206",
+      "bytes": 2414
+    },
+    "implementation/docs/research/alpha_v5_benchmark_contract.md": {
+      "sha256": "0ce2d680c8d8959ebb45e2d8f97610e7664b54ff29008b041ac3dae348978e60",
+      "bytes": 5124
+    },
+    "implementation/scripts/audit_alpha_profitability_root_causes.py": {
+      "sha256": "d52be8f409cb8dae27b22e61645a4294ddac0aeee292438c90e4cd3163e2bf02",
+      "bytes": 19798
+    },
+    "implementation/scripts/run_alpha_v5_benchmark_diagnostics.py": {
+      "sha256": "e30b39e19c27289be41b487436e39efee937dd97876f24821447f43e0dafc454",
+      "bytes": 1090
+    },
+    "implementation/src/aegisquant/research/validation/benchmark_contract.py": {
+      "sha256": "e6f335316d4f3a19a4962ee10c0b6ccc44c34713b7098b1085f3badff2220b85",
+      "bytes": 29455
+    },
+    "implementation/src/aegisquant/research/validation/paired_bootstrap.py": {
+      "sha256": "87c8e6472552b0f00f7042c2ece5dd713464d6c94924d014d1a3f92d890bb9ba",
+      "bytes": 6663
+    },
+    "implementation/tests/alpha_v5/test_benchmark_contract.py": {
+      "sha256": "7d3c0c0145ac4df3696ee85ea649199ae7139c0defbc38d739e60e9b76bb442e",
+      "bytes": 23320
+    },
+    "legacy_paired_statistics_original.json": {
+      "sha256": "c0eaf857759fa4d0a1bddc495a66e2ee56c5b59f001187efa60242d6ce597024",
+      "bytes": 3237
+    },
+    "legacy_statistics_identity.json": {
+      "sha256": "b4e06361c7581840134dca902b30fcaf522515aa3f2fd40a642a74ae28c9eea8",
+      "bytes": 9553
+    },
+    "preflight/baseline_workspace.json": {
+      "sha256": "43dc23603fa69a8cb28fc8d1e9fd115ca5b9168d3f921b62760e9bb505c02229",
+      "bytes": 2857857
+    },
+    "preflight/version_graph.txt": {
+      "sha256": "ea80bbda9956a47a52be98a98721fbd6bcfbccb5802ce435ffac2c6738e9f871",
+      "bytes": 2953
+    },
+    "preflight/workspace_before.patch": {
+      "sha256": "3c3833913f682cbe171e8ff785a8e1f309e6e7c409b141490569e895ddd70848",
+      "bytes": 47715
+    },
+    "preregistration.json": {
+      "sha256": "720eb747c6998a37bf70b1e66eee680c27c0e394ec84141afa89061deea7728f",
+      "bytes": 3193
+    },
+    "primary_comparisons.json": {
+      "sha256": "bb1995ba4ce39b7fcd94198a52ddeebaf8226dbc77d1f4033d2d5003a82e6ecf",
+      "bytes": 1503
+    },
+    "report.md": {
+      "sha256": "2c4efbbe83a9f780592f68722bdb590bea9c8eb4136a297feb7020511ce91f18",
+      "bytes": 2323
+    },
+    "risk_and_factor_attribution.json": {
+      "sha256": "eb685d23ef8238d5f5301c2b86e1ba22a95a9d27a66bcbeeb3545ee2942fbf98",
+      "bytes": 390
+    },
+    "run_claims/f3fb70b25952808e37ff16078b037264944bcd2c80dbb6f0e98084f63b427204": {
+      "sha256": "f3fb70b25952808e37ff16078b037264944bcd2c80dbb6f0e98084f63b427204",
+      "bytes": 55
+    },
+    "safety_and_budget_audit.json": {
+      "sha256": "132eaa922fabb9f6308c77bc50a05282c369910d0084cdfd571c43c8967f3c05",
+      "bytes": 1261
+    },
+    "same_fill_shadow_contract.json": {
+      "sha256": "b6ad8b715f6125441444f16e79ad24be8906ade44561e1dc339bf8c3c240e903",
+      "bytes": 13080
+    },
+    "source_and_version_bindings.json": {
+      "sha256": "8d361983dd53e5197a7a30b410eade4b3467ebe2cc20ebf11eb92c0fbb09fc2b",
+      "bytes": 3049
+    },
+    "validation/pytest_results.xml": {
+      "sha256": "bcab997a2b607f1889c1da7ff49a60e26d8f93a9d9d47f5eb965a2444238bb28",
+      "bytes": 6895
+    },
+    "validation/test_commands_and_results.txt": {
+      "sha256": "d41758ccc81bb41da74b72233406182a6660c95a4108520f06cc6c7b91132796",
+      "bytes": 16691
+    },
+    "validation/validation_records.json": {
+      "sha256": "b4e7865d16ee2df459faed0f7d75f49f3d2b285fc1fe3abf4ab66912c0ec4bbe",
+      "bytes": 37992
+    }
+  },
+  "content_sha256": "24b39a0d9f83919bb6d482ee6c03c23e2f59e52bf9eeef072cf3914b2e0dc94e",
+  "self_excluded": "OUTPUT_MANIFEST.json",
+  "write_policy": "EXCLUSIVE_GENERATION_NO_REOPEN"
+}

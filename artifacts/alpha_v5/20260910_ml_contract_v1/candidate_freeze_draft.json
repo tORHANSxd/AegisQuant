@@ -1,0 +1,8 @@
+{
+  "status": "NOT_ELIGIBLE",
+  "candidate": null,
+  "data_code_risk_cost_capacity_hashes": null,
+  "allowed_training_update_program": null,
+  "holdout_path": null,
+  "orders_authorized": false
+}

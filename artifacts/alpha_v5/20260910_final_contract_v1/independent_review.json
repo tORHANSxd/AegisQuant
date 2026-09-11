@@ -1,0 +1,21 @@
+{
+  "promotion_decision": "HOLD",
+  "status": "NO_PROVEN_ALPHA",
+  "gates": {
+    "same_risk_no_ml_and_cash_comparisons": null,
+    "verified_pit_data_and_complete_trials": null,
+    "funded_shared_ledger_and_tail_risk": null,
+    "execution_and_capacity": null,
+    "unused_twelve_month_claim_and_immutable_report": null,
+    "holm_corrected_incremental_evidence": null,
+    "original_profitability_and_stability_gates": null,
+    "frozen_model_weights_and_update_program": null
+  },
+  "immutable_report_sha256": null,
+  "independent_review_completed": false,
+  "production_policy": "CASH",
+  "production_ml_enabled": false,
+  "paper_trading_admitted": false,
+  "live_trading": false,
+  "order_submission_enabled": false
+}

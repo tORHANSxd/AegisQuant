@@ -1,0 +1,16 @@
+{
+  "first_generation_policy_unchanged": {
+    "buffer": true,
+    "resize": true,
+    "arms": true,
+    "risk_benefit": true,
+    "primary_candidate": true,
+    "statistics": true
+  },
+  "prior_failures_preserved": [
+    "v1 development interval guard",
+    "v2 strict Decimal JSON restore"
+  ],
+  "v2_legacy_baseline_partitions_passed": 70,
+  "new_strategy_engine_runs_before_v3": 0
+}

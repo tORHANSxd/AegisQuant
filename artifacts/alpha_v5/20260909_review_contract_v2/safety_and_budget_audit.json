@@ -1,0 +1,70 @@
+{
+  "authorized": {
+    "report_jobs": 1,
+    "historical_strategy_engine_runs": 0,
+    "real_return_model_fits": 0,
+    "real_calibration_fits": 0,
+    "final_holdout_accesses": 0,
+    "real_orders": 0
+  },
+  "actual": {
+    "report_jobs": 1,
+    "historical_strategy_engine_runs": 0,
+    "real_return_model_fits": 0,
+    "real_calibration_fits": 0,
+    "final_holdout_accesses": 0,
+    "real_orders": 0
+  },
+  "report_attempts_including_retained_failures": 2,
+  "retained_failed_report_jobs": 1,
+  "report_budget_scope": "ONE_EXCLUSIVE_REPORT_JOB_PER_GENERATION",
+  "network_accounts_used": false,
+  "runtime_forbidden_call_guard": true,
+  "safety_literals": {
+    "LIVE_TRADING": false,
+    "ORDER_SUBMISSION_ENABLED": false,
+    "LIVE_ADAPTERS": []
+  },
+  "existing_files_before_audit": {
+    "status": "VERIFIED",
+    "files_checked": 10478,
+    "changed": [],
+    "protected_holdout_contents_read": false,
+    "basis": "SHA256 before implementation and after audit"
+  },
+  "existing_files_after_audit": {
+    "status": "VERIFIED",
+    "files_checked": 10478,
+    "changed": [],
+    "protected_holdout_contents_read": false,
+    "basis": "SHA256 before implementation and after audit"
+  },
+  "new_alpha_trials": 0,
+  "validation_receipts": {
+    "status": "VERIFIED",
+    "source_sha256": {
+      "src/aegisquant/research/validation/evidence_contract.py": "109c8fd165409edfaf123a45aad1e1440d71466d50b3cab00030a75cc8c239b1",
+      "scripts/audit_alpha_v5_evidence.py": "7a0a4846319fc9473034cc054debe2a115a8f5636d2de1e35723be1198726d41",
+      "configs/research/alpha_v5_review_contract.yaml": "c1c083315b29ff11b4d8581f219e9fb206768f3d75e925cfbfe596ff8c222504",
+      "tests/alpha_v5/test_evidence_contract.py": "e6f5ac1eee24c85699bc62ddb21ff858fa0e5c1e983ebacdc59b26ec8c1b06a3",
+      "tests/alpha_v5/test_resize_semantics_contract.py": "50d7c426ef60b60bcb751f5e7d82098d607b31b992b1ac1c611dfb80a13edefe",
+      "docs/research/alpha_v5_review_contract.md": "2f6926bc057af00af05313502cf76905c1baef40db6d93a38de105b36d08f08f"
+    },
+    "latest_passed_checks": [
+      "ruff",
+      "format",
+      "pyright",
+      "pytest",
+      "formal_report_v1_failed",
+      "format_apply"
+    ],
+    "pytest_stdout": "................................................                         [100%]\n48 passed in 3.04s\n"
+  },
+  "significance_recalculations": 0,
+  "research_conclusion": "NO_PROVEN_ALPHA",
+  "production_policy": "CASH",
+  "production_ml_enabled": false,
+  "paper_trading_admitted": false,
+  "live_trading": false,
+  "order_submission_enabled": false
+}

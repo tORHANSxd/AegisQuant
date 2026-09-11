@@ -1,0 +1,100 @@
+{
+  "status": "DEVELOPMENT_UNCERTAINTY_ONLY",
+  "method": "common-index circular block bootstrap; maximum automatically estimated stationary length across returns and squared returns",
+  "reference": "https://arch.readthedocs.io/en/latest/bootstrap/generated/arch.bootstrap.optimal_block_length.html",
+  "block_length_days": 7,
+  "automatic_estimates": {
+    "BUY_HOLD": {
+      "return": 2.0,
+      "squared_return": 4.6779148983927055
+    },
+    "CASH": {
+      "return": 2.0,
+      "squared_return": 2.0
+    },
+    "F2": {
+      "return": 2.0,
+      "squared_return": 2.0
+    },
+    "F3": {
+      "return": 2.0,
+      "squared_return": 4.280207401923458
+    },
+    "F4": {
+      "return": 2.0,
+      "squared_return": 6.183149825420071
+    },
+    "F5": {
+      "return": 2.1293407546834042,
+      "squared_return": 2.1130927771646597
+    }
+  },
+  "repetitions": 10000,
+  "seed": 20260908,
+  "comparisons": {
+    "F3-F2": {
+      "observed_compound_return_difference": -0.007072296800752942,
+      "ci95_lower": -0.037807490230627946,
+      "ci95_upper": 0.00845969081273355,
+      "one_sided_mean_p_value": 0.7568243175682432,
+      "final_dollar_difference": -353.61484003772057,
+      "paired_sum_daily_dollar_ci95": [
+        -1530.3299485832488,
+        413.40870145894013
+      ],
+      "holm_adjusted_p_value": 1.0
+    },
+    "F4-F3": {
+      "observed_compound_return_difference": -0.03270493819669809,
+      "ci95_lower": -0.16928992321157485,
+      "ci95_upper": 0.04423664364336157,
+      "one_sided_mean_p_value": 0.7635236476352365,
+      "final_dollar_difference": -1635.2469098348447,
+      "paired_sum_daily_dollar_ci95": [
+        -7091.8756629902555,
+        2288.518320113644
+      ],
+      "holm_adjusted_p_value": 1.0
+    },
+    "F3-F5": {
+      "observed_compound_return_difference": -0.03946241097372288,
+      "ci95_lower": -0.3317020864984567,
+      "ci95_upper": 0.17011660890159497,
+      "one_sided_mean_p_value": 0.6557344265573443,
+      "final_dollar_difference": -1973.1205486861872,
+      "paired_sum_daily_dollar_ci95": [
+        -12356.607161640253,
+        9037.187661083046
+      ],
+      "holm_adjusted_p_value": 1.0
+    },
+    "F4-F5": {
+      "observed_compound_return_difference": -0.07216734917042097,
+      "ci95_lower": -0.46427825617921986,
+      "ci95_upper": 0.1727297851264436,
+      "one_sided_mean_p_value": 0.7201279872012799,
+      "final_dollar_difference": -3608.367458521032,
+      "paired_sum_daily_dollar_ci95": [
+        -17787.51938069656,
+        9353.836838877747
+      ],
+      "holm_adjusted_p_value": 1.0
+    },
+    "F3-CASH": {
+      "observed_compound_return_difference": 0.06137055506614128,
+      "ci95_lower": -0.08124919987974488,
+      "ci95_upper": 0.29135626477888854,
+      "one_sided_mean_p_value": 0.23047695230476953,
+      "final_dollar_difference": 3068.527753307011,
+      "paired_sum_daily_dollar_ci95": [
+        -4161.502747179473,
+        12923.752678054541
+      ],
+      "holm_adjusted_p_value": 1.0
+    }
+  },
+  "factor_interaction": null,
+  "dsr_pbo": "INSUFFICIENT_EVIDENCE_COMPLETE_INDEPENDENT_TRIAL_HISTORY_UNAVAILABLE",
+  "holdout": "NOT_ALLOCATED_NOT_ACCESSED",
+  "resampling_scope": "joint portfolio strategy columns formed from five same-clock sleeves; cross-asset and cross-strategy co-movement retained"
+}

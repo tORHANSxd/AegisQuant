@@ -1,0 +1,121 @@
+[
+  {
+    "check": "format_apply",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "src/aegisquant/research/validation/saved_run_audit.py",
+      "scripts/audit_alpha_v5_saved_runs.py",
+      "tests/alpha_v5/test_saved_run_audit.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.15308879996882752,
+    "source_sha256": {
+      "src/aegisquant/research/validation/saved_run_audit.py": "00f09cef4671a6f838fc1713c317c2a77c024eaa023de1097b3cdb1319d624b2",
+      "scripts/audit_alpha_v5_saved_runs.py": "98f8cda06841ef84239e6e04831667eaf0cea56c1b227b27b5a6ffb043613b95",
+      "configs/research/alpha_v5_saved_run_audit.yaml": "3c7d3faad9bce7b2a309621443b82fe1c9e7ef3fb446c1dd8aa2caa49a6a62d3",
+      "tests/alpha_v5/test_saved_run_audit.py": "498d2156797f37267cc77e2d4c74a0363096f0503096eb92bd2eff4cbb0eb787",
+      "docs/research/alpha_v5_saved_run_audit.md": "20e99c04501b6be07056ca22133661164a95aeb4893918d778cef6567f105fcd"
+    },
+    "stdout": "1 file reformatted, 2 files left unchanged\n",
+    "stderr": ""
+  },
+  {
+    "check": "ruff",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "src/aegisquant/research/validation/saved_run_audit.py",
+      "scripts/audit_alpha_v5_saved_runs.py",
+      "tests/alpha_v5/test_saved_run_audit.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.13654420000966638,
+    "source_sha256": {
+      "src/aegisquant/research/validation/saved_run_audit.py": "00f09cef4671a6f838fc1713c317c2a77c024eaa023de1097b3cdb1319d624b2",
+      "scripts/audit_alpha_v5_saved_runs.py": "98f8cda06841ef84239e6e04831667eaf0cea56c1b227b27b5a6ffb043613b95",
+      "configs/research/alpha_v5_saved_run_audit.yaml": "3c7d3faad9bce7b2a309621443b82fe1c9e7ef3fb446c1dd8aa2caa49a6a62d3",
+      "tests/alpha_v5/test_saved_run_audit.py": "498d2156797f37267cc77e2d4c74a0363096f0503096eb92bd2eff4cbb0eb787",
+      "docs/research/alpha_v5_saved_run_audit.md": "20e99c04501b6be07056ca22133661164a95aeb4893918d778cef6567f105fcd"
+    },
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "check": "format",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "ruff",
+      "format",
+      "--check",
+      "src/aegisquant/research/validation/saved_run_audit.py",
+      "scripts/audit_alpha_v5_saved_runs.py",
+      "tests/alpha_v5/test_saved_run_audit.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.11879949999274686,
+    "source_sha256": {
+      "src/aegisquant/research/validation/saved_run_audit.py": "00f09cef4671a6f838fc1713c317c2a77c024eaa023de1097b3cdb1319d624b2",
+      "scripts/audit_alpha_v5_saved_runs.py": "98f8cda06841ef84239e6e04831667eaf0cea56c1b227b27b5a6ffb043613b95",
+      "configs/research/alpha_v5_saved_run_audit.yaml": "3c7d3faad9bce7b2a309621443b82fe1c9e7ef3fb446c1dd8aa2caa49a6a62d3",
+      "tests/alpha_v5/test_saved_run_audit.py": "498d2156797f37267cc77e2d4c74a0363096f0503096eb92bd2eff4cbb0eb787",
+      "docs/research/alpha_v5_saved_run_audit.md": "20e99c04501b6be07056ca22133661164a95aeb4893918d778cef6567f105fcd"
+    },
+    "stdout": "3 files already formatted\n",
+    "stderr": ""
+  },
+  {
+    "check": "pyright",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pyright",
+      "src/aegisquant/research/validation/saved_run_audit.py",
+      "scripts/audit_alpha_v5_saved_runs.py",
+      "tests/alpha_v5/test_saved_run_audit.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.779267100035213,
+    "source_sha256": {
+      "src/aegisquant/research/validation/saved_run_audit.py": "00f09cef4671a6f838fc1713c317c2a77c024eaa023de1097b3cdb1319d624b2",
+      "scripts/audit_alpha_v5_saved_runs.py": "98f8cda06841ef84239e6e04831667eaf0cea56c1b227b27b5a6ffb043613b95",
+      "configs/research/alpha_v5_saved_run_audit.yaml": "3c7d3faad9bce7b2a309621443b82fe1c9e7ef3fb446c1dd8aa2caa49a6a62d3",
+      "tests/alpha_v5/test_saved_run_audit.py": "498d2156797f37267cc77e2d4c74a0363096f0503096eb92bd2eff4cbb0eb787",
+      "docs/research/alpha_v5_saved_run_audit.md": "20e99c04501b6be07056ca22133661164a95aeb4893918d778cef6567f105fcd"
+    },
+    "stdout": "0 errors, 0 warnings, 0 informations\nWARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).\nPlease install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`\n\n",
+    "stderr": ""
+  },
+  {
+    "check": "pytest",
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/alpha_v5/test_saved_run_audit.py",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-complete-20260910-casddv_6/pytest-01",
+      "--junitxml",
+      "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-saved-evidence-complete-20260910-casddv_6/pytest-01.xml"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 6.270595800015144,
+    "source_sha256": {
+      "src/aegisquant/research/validation/saved_run_audit.py": "00f09cef4671a6f838fc1713c317c2a77c024eaa023de1097b3cdb1319d624b2",
+      "scripts/audit_alpha_v5_saved_runs.py": "98f8cda06841ef84239e6e04831667eaf0cea56c1b227b27b5a6ffb043613b95",
+      "configs/research/alpha_v5_saved_run_audit.yaml": "3c7d3faad9bce7b2a309621443b82fe1c9e7ef3fb446c1dd8aa2caa49a6a62d3",
+      "tests/alpha_v5/test_saved_run_audit.py": "498d2156797f37267cc77e2d4c74a0363096f0503096eb92bd2eff4cbb0eb787",
+      "docs/research/alpha_v5_saved_run_audit.md": "20e99c04501b6be07056ca22133661164a95aeb4893918d778cef6567f105fcd"
+    },
+    "stdout": ".............................                                            [100%]\n29 passed in 4.83s\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,1767 @@
+[1] format-apply exit=0 seconds=0.14573980000568554
+[".venv/Scripts/python.exe", "-m", "ruff", "format", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+11 files reformatted
+
+
+[2] ruff exit=1 seconds=0.13520990003598854
+[".venv/Scripts/python.exe", "-m", "ruff", "check", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+I001 [*] Import block is un-sorted or un-formatted
+  --> src\aegisquant\backtest\costs.py:3:1
+   |
+ 1 |   """Versioned exact cost, funding and borrow calculations."""
+ 2 |
+ 3 | / from __future__ import annotations
+ 4 | |
+ 5 | | from collections.abc import Iterable, Mapping
+ 6 | | from dataclasses import dataclass
+ 7 | | from datetime import datetime
+ 8 | | from decimal import Decimal
+ 9 | | from itertools import pairwise
+10 | |
+11 | | from aegisquant.backtest.models import (
+12 | |     BacktestOrder,
+13 | |     CostBreakdown,
+14 | |     CostSchedule,
+15 | |     FillSlice,
+16 | |     FeeTerms,
+17 | |     FeeSettlement,
+18 | |     LiquidityRole,
+19 | | )
+20 | | from aegisquant.domain.execution import OrderSide
+21 | | from aegisquant.domain.identifiers import AssetId, InstrumentId, VenueId
+22 | | from aegisquant.domain.time import UtcDateTime
+23 | | from aegisquant.domain.values import Money, Price, canonical_result
+24 | | from aegisquant.portfolio.transition_costs import legacy_impact_model
+   | |_____________________________________________________________________^
+25 |
+26 |   BPS = Decimal("10000")
+   |
+help: Organize imports
+   |
+14 |     CostSchedule,
+15 +     FeeSettlement,
+16 +     FeeTerms,
+17 |     FillSlice,
+   -     FeeTerms,
+   -     FeeSettlement,
+18 |     LiquidityRole,
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> src\aegisquant\backtest\fills.py:3:1
+   |
+ 1 |   """Conservative bar, trade/quote and L2 fill decisions."""
+ 2 |
+ 3 | / from __future__ import annotations
+ 4 | |
+ 5 | | from dataclasses import dataclass
+ 6 | | from decimal import Decimal
+ 7 | |
+ 8 | | from pydantic import Field, field_validator, model_validator
+ 9 | |
+10 | | from aegisquant.backtest.models import (
+11 | |     BacktestOrder,
+12 | |     BarEvent,
+13 | |     ExitTrigger,
+14 | |     ExecutionReference,
+15 | |     FillPrecision,
+16 | |     FillSlice,
+17 | |     L2BookEvent,
+18 | |     LiquidityRole,
+19 | |     MarketEvent,
+20 | |     TradeQuoteEvent,
+21 | | )
+22 | | from aegisquant.data.hashing import canonical_sha256, ensure_sha256
+23 | | from aegisquant.domain.base import DomainModel
+24 | | from aegisquant.domain.execution import OrderSide, OrderType, TimeInForce
+25 | | from aegisquant.domain.identifiers import InstrumentId, VenueId
+26 | | from aegisquant.domain.time import UtcDateTime
+27 | | from aegisquant.domain.values import PositiveDecimal
+   | |____________________________________________________^
+help: Organize imports
+   |
+12 |     BarEvent,
+13 +     ExecutionReference,
+14 |     ExitTrigger,
+   -     ExecutionReference,
+15 |     FillPrecision,
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> src\aegisquant\research\validation\evidence_contract.py:3:1
+   |
+ 1 |   """Strict read-only evidence contracts and report assembly; no strategy execution entry."""
+ 2 |
+ 3 | / from __future__ import annotations
+ 4 | |
+ 5 | | import ast
+ 6 | | import csv
+ 7 | | import difflib
+ 8 | | import importlib.util
+ 9 | | import json
+10 | | import math
+11 | | import re
+12 | | import sys
+13 | | from collections import Counter, defaultdict
+14 | | from collections.abc import Callable, Generator, Mapping, Sequence
+15 | | from contextlib import contextmanager
+16 | | from dataclasses import asdict, dataclass, replace
+17 | | from datetime import UTC, datetime, timedelta
+18 | | from decimal import Decimal, localcontext
+19 | | from enum import StrEnum
+20 | | from itertools import pairwise
+21 | | from pathlib import Path
+22 | | from types import FrameType
+23 | | from typing import Any, cast
+24 | | from xml.etree import ElementTree
+25 | |
+26 | |
+27 | | import polars as pl
+28 | | import yaml
+29 | |
+30 | | from aegisquant.data.hashing import canonical_sha256, safe_relative_path, sha256_file
+31 | | from aegisquant.research.experiments.journal import ExperimentEventJournal
+32 | | from aegisquant.research.validation.experiment_registry import registered_run
+   | |_____________________________________________________________________________^
+33 |
+34 |   Row = Mapping[str, Any]
+   |
+help: Organize imports
+   |
+25 |
+   -
+26 | import polars as pl
+   |
+
+S314 Using `xml` to parse untrusted data is known to be vulnerable to XML attacks; use `defusedxml` equivalents
+    --> src\aegisquant\research\validation\evidence_contract.py:1760:9
+     |
+1758 |         )
+1759 |     tests = (
+1760 |         ElementTree.parse(checked_path(stage, "pytest_results.xml"))
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1761 |         .getroot()
+1762 |         .findall(".//testcase")
+     |
+
+RUF100 [*] Unused `noqa` directive (unused: `S314`)
+    --> src\aegisquant\research\validation\evidence_contract.py:1763:8
+     |
+1761 |         .getroot()
+1762 |         .findall(".//testcase")
+1763 |     )  # noqa: S314 -- local pytest receipt.
+     |        ^^^^^^^^^^^^
+1764 |     require(
+1765 |         bool(tests)
+     |
+help: Remove unused `noqa` directive
+     |
+1762 |         .findall(".//testcase")
+     -     )  # noqa: S314 -- local pytest receipt.
+1763 +     )
+1764 |     require(
+     |
+
+SIM117 Use a single `with` statement with multiple contexts instead of nested `with` statements
+    --> src\aegisquant\research\validation\evidence_contract.py:1785:9
+     |
+1783 |       run_id = config["generation"] + ":CONTRACT_REPORT"
+1784 |       try:
+1785 | /         with registered_run(
+1786 | |             output, run_id, planned_run_ids=[run_id], bindings={"kind": config["scope"]}
+1787 | |         ):  # noqa: SIM117 -- guard exits before journal append.
+1788 | |             with zero_budget_guard(output, root, counters):
+     | |___________________________________________________________^
+1789 |                   write_json_exclusive(
+1790 |                       output / "preregistration.json", {"config": config, "planned_run_ids": [run_id]}
+     |
+help: Combine `with` statements
+
+RUF100 [*] Unused `noqa` directive (unused: `SIM117`)
+    --> src\aegisquant\research\validation\evidence_contract.py:1787:13
+     |
+1785 |         with registered_run(
+1786 |             output, run_id, planned_run_ids=[run_id], bindings={"kind": config["scope"]}
+1787 |         ):  # noqa: SIM117 -- guard exits before journal append.
+     |             ^^^^^^^^^^^^^^
+1788 |             with zero_budget_guard(output, root, counters):
+1789 |                 write_json_exclusive(
+     |
+help: Remove unused `noqa` directive
+     |
+1786 |             output, run_id, planned_run_ids=[run_id], bindings={"kind": config["scope"]}
+     -         ):  # noqa: SIM117 -- guard exits before journal append.
+1787 +         ):
+1788 |             with zero_budget_guard(output, root, counters):
+     |
+
+F401 [*] `tests.p06.helpers.VENUE` imported but unused
+  --> tests\alpha_v5\test_execution_contract.py:59:47
+   |
+57 | from tests.p05 import helpers as accounting
+58 | from tests.p05.test_ledger_core import assert_balanced_by_asset
+59 | from tests.p06.helpers import BTC, NOW, USDT, VENUE, bars, l2_book, order, policy, trade_quote
+   |                                               ^^^^^
+60 | from tests.p11_helpers import construction_policy, signal
+   |
+help: Remove unused import: `tests.p06.helpers.VENUE`
+   |
+58 | from tests.p05.test_ledger_core import assert_balanced_by_asset
+   - from tests.p06.helpers import BTC, NOW, USDT, VENUE, bars, l2_book, order, policy, trade_quote
+59 + from tests.p06.helpers import BTC, NOW, USDT, bars, l2_book, order, policy, trade_quote
+60 | from tests.p11_helpers import construction_policy, signal
+   |
+
+Found 8 errors.
+[*] 6 fixable with the `--fix` option.
+
+
+[3] format exit=0 seconds=0.10908550000749528
+[".venv/Scripts/python.exe", "-m", "ruff", "format", "--check", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+11 files already formatted
+
+
+[4] pyright exit=1 seconds=4.748025599983521
+[".venv/Scripts/python.exe", "-m", "pyright", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\execution_contract.py
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\execution_contract.py:16:61 - error: "_circular_block_totals" is private and used outside of the module in which it is declared (reportPrivateUsage)
+d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:48:44 - error: "_capacity_weight" is private and used outside of the module in which it is declared (reportPrivateUsage)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:59:47 - error: Import "VENUE" is not accessed (reportUnusedImport)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "order" of type "BacktestOrder" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "BacktestOrder"
+      "AssetId" is not assignable to "BacktestOrder" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fill_slice" of type "FillSlice" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FillSlice"
+      "AssetId" is not assignable to "FillSlice" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "schedule" of type "CostSchedule" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "CostSchedule"
+      "AssetId" is not assignable to "CostSchedule" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "contract_multiplier" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "settlement_quantity" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "liquidation_penalty_bps" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "strict_evidence" of type "bool" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "bool"
+      "AssetId" is not assignable to "bool" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:163:46 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fee_account" of type "FeeAccountState | None" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FeeAccountState | None"
+      Type "AssetId" is not assignable to type "FeeAccountState | None"
+        "AssetId" is not assignable to "FeeAccountState"
+        "AssetId" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "order" of type "BacktestOrder" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "BacktestOrder"
+      "AssetId" is not assignable to "BacktestOrder" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fill_slice" of type "FillSlice" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FillSlice"
+      "AssetId" is not assignable to "FillSlice" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "schedule" of type "CostSchedule" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "CostSchedule"
+      "AssetId" is not assignable to "CostSchedule" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "contract_multiplier" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "settlement_quantity" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "liquidation_penalty_bps" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "strict_evidence" of type "bool" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "bool"
+      "AssetId" is not assignable to "bool" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:169:51 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fee_account" of type "FeeAccountState | None" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FeeAccountState | None"
+      Type "AssetId" is not assignable to type "FeeAccountState | None"
+        "AssetId" is not assignable to "FeeAccountState"
+        "AssetId" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:172:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "order" of type "BacktestOrder" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "BacktestOrder"
+      "AssetId" is not assignable to "BacktestOrder" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:172:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fill_slice" of type "FillSlice" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FillSlice"
+      "AssetId" is not assignable to "FillSlice" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:172:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "schedule" of type "CostSchedule" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "CostSchedule"
+      "AssetId" is not assignable to "CostSchedule" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:172:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:172:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:172:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "contract_multiplier" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:172:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "settlement_quantity" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:172:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "liquidation_penalty_bps" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:172:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fee_account" of type "FeeAccountState | None" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FeeAccountState | None"
+      Type "AssetId" is not assignable to type "FeeAccountState | None"
+        "AssetId" is not assignable to "FeeAccountState"
+        "AssetId" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:292:35 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "terms" of type "FeeTerms" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "FeeTerms"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "FeeTerms" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:292:35 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "fill_time" of type "UtcDateTime" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "UtcDateTime"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:292:35 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "role" of type "LiquidityRole" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "LiquidityRole"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "LiquidityRole" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:292:35 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "side" of type "OrderSide" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "OrderSide"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "OrderSide" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:292:35 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "quantity" of type "Decimal" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "Decimal"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:292:35 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "execution_price" of type "Decimal" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "Decimal"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:292:35 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "AssetId"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:292:35 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "AssetId"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:292:35 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "fx_available_at" of type "UtcDateTime" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "UtcDateTime"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:293:37 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "terms" of type "FeeTerms" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "FeeTerms"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "FeeTerms" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:293:37 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "fill_time" of type "UtcDateTime" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "UtcDateTime"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:293:37 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "role" of type "LiquidityRole" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "LiquidityRole"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "LiquidityRole" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:293:37 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "side" of type "OrderSide" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "OrderSide"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "OrderSide" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:293:37 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "quantity" of type "Decimal" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "Decimal"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:293:37 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "execution_price" of type "Decimal" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "Decimal"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:293:37 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "AssetId"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:293:37 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "AssetId"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:293:37 - error: Argument of type "Any | dict[AssetId, FiniteDecimal]" cannot be assigned to parameter "fx_available_at" of type "UtcDateTime" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, FiniteDecimal]" is not assignable to type "UtcDateTime"
+      "dict[AssetId, FiniteDecimal]" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "order" of type "BacktestOrder" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "BacktestOrder"
+      "AssetId" is not assignable to "BacktestOrder" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fill_slice" of type "FillSlice" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FillSlice"
+      "AssetId" is not assignable to "FillSlice" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "schedule" of type "CostSchedule" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "CostSchedule"
+      "AssetId" is not assignable to "CostSchedule" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "contract_multiplier" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "settlement_quantity" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "liquidation_penalty_bps" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "strict_evidence" of type "bool" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "bool"
+      "AssetId" is not assignable to "bool" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:358:36 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fee_account" of type "FeeAccountState | None" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FeeAccountState | None"
+      Type "AssetId" is not assignable to type "FeeAccountState | None"
+        "AssetId" is not assignable to "FeeAccountState"
+        "AssetId" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:360:11 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "order" of type "BacktestOrder" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "BacktestOrder"
+      "AssetId" is not assignable to "BacktestOrder" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:360:11 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fill_slice" of type "FillSlice" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FillSlice"
+      "AssetId" is not assignable to "FillSlice" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:360:11 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "schedule" of type "CostSchedule" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "CostSchedule"
+      "AssetId" is not assignable to "CostSchedule" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:360:11 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:360:11 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:360:11 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "contract_multiplier" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:360:11 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "settlement_quantity" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:360:11 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "liquidation_penalty_bps" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:360:11 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "strict_evidence" of type "bool" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "bool"
+      "AssetId" is not assignable to "bool" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:673:34 - error: Argument of type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" cannot be assigned to parameter "order" of type "BacktestOrder" in function "decide_fills"
+    Type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" is not assignable to type "BacktestOrder"
+      "BarEvent" is not assignable to "BacktestOrder" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:673:34 - error: Argument of type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" cannot be assigned to parameter "event" of type "MarketEvent" in function "decide_fills"
+    Type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" is not assignable to type "MarketEvent"
+      Type "BacktestOrder" is not assignable to type "MarketEvent"
+        "BacktestOrder" is not assignable to "BarEvent"
+        "BacktestOrder" is not assignable to "TradeQuoteEvent"
+        "BacktestOrder" is not assignable to "L2BookEvent" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:673:34 - error: Argument of type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" cannot be assigned to parameter "remaining" of type "Decimal" in function "decide_fills"
+    Type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" is not assignable to type "Decimal"
+      "BacktestOrder" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:673:34 - error: Argument of type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" cannot be assigned to parameter "participation_cap" of type "Decimal" in function "decide_fills"
+    Type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" is not assignable to type "Decimal"
+      "BacktestOrder" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:673:34 - error: Argument of type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" cannot be assigned to parameter "triggered" of type "bool" in function "decide_fills"
+    Type "BacktestOrder | BarEvent | TradeQuoteEvent | L2BookEvent | Decimal" is not assignable to type "bool"
+      "BacktestOrder" is not assignable to "bool" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "order" of type "BacktestOrder" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "BacktestOrder"
+      "AssetId" is not assignable to "BacktestOrder" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fill_slice" of type "FillSlice" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FillSlice"
+      "AssetId" is not assignable to "FillSlice" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "schedule" of type "CostSchedule" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "CostSchedule"
+      "AssetId" is not assignable to "CostSchedule" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "AssetId"
+      "BacktestOrder" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "contract_multiplier" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "settlement_quantity" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "liquidation_penalty_bps" of type "Decimal" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "Decimal"
+      "AssetId" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "strict_evidence" of type "bool" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "bool"
+      "AssetId" is not assignable to "bool" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:683:47 - error: Argument of type "BacktestOrder | FillSlice | CostSchedule | AssetId" cannot be assigned to parameter "fee_account" of type "FeeAccountState | None" in function "execution_price_and_cost"
+    Type "BacktestOrder | FillSlice | CostSchedule | AssetId" is not assignable to type "FeeAccountState | None"
+      Type "AssetId" is not assignable to type "FeeAccountState | None"
+        "AssetId" is not assignable to "FeeAccountState"
+        "AssetId" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "available_time" of type "UtcDateTime" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "UtcDateTime"
+      "Decimal" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "natr" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "quote_volume" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "order_notional" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "fee_bps" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "half_spread_bps" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "slippage_floor_bps" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "impact_coefficient_bps" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "latency_adverse_bps" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "exit_order_notional" of type "Decimal | None" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal | None"
+      Type "datetime" is not assignable to type "Decimal | None"
+        "datetime" is not assignable to "Decimal"
+        "datetime" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "exit_latency_adverse_bps" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "natr_slippage_coefficient" of type "Decimal" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "Decimal"
+      "datetime" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "impact_model" of type "ImpactModel | None" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "ImpactModel | None"
+      Type "Decimal" is not assignable to type "ImpactModel | None"
+        "Decimal" is not assignable to "ImpactModel"
+        "Decimal" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:696:49 - error: Argument of type "datetime | Decimal" cannot be assigned to parameter "liquidity_horizon_seconds" of type "int | None" in function "estimate_spot_transition_costs"
+    Type "datetime | Decimal" is not assignable to type "int | None"
+      Type "Decimal" is not assignable to type "int | None"
+        "Decimal" is not assignable to "int"
+        "Decimal" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:718:13 - error: Type of "append" is partially unknown
+    Type of "append" is "(object: Unknown, /) -> None" (reportUnknownMemberType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:747:12 - error: Return type, "list[Unknown]", is partially unknown (reportUnknownVariableType)
+100 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+[5] pytest exit=1 seconds=9.420756600040477
+[".venv/Scripts/python.exe", "-m", "pytest", "-o", "addopts=", "--basetemp", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b4-execution-20260910-1djnkcw2\\pytest-01", "tests/alpha_v5/test_execution_contract.py", "tests/alpha_v5/test_evidence_contract.py", "tests/alpha_v5/test_benchmark_contract.py::test_b3_cli_seals_read_only_report_without_replay_or_resampling", "tests/p05/test_ledger_core.py", "tests/portfolio/test_constraints.py", "tests/portfolio/test_signals_optimizer.py", "tests/p06/test_costs_margin.py::test_fee_spread_slippage_and_impact_match_hand_calculation", "tests/p06/test_costs_margin.py::test_historical_cost_schedule_changes_at_exact_effective_time", "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b4-execution-20260910-1djnkcw2\\pytest-01.xml", "-q"]
+FFFFFFFFFF......FFF............F........................................ [ 88%]
+.........                                                                [100%]
+================================== FAILURES ===================================
+______________ test_mid_and_bbo_charge_spread_exactly_once[BUY] _______________
+
+side = <OrderSide.BUY: 'BUY'>
+
+    @pytest.mark.parametrize("side", [OrderSide.BUY, OrderSide.SELL])
+    def test_mid_and_bbo_charge_spread_exactly_once(side: OrderSide) -> None:
+>       mid, schedule = execution_pair("MID", "100")
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:128: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'MID', price = '100', included = ()
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+______________ test_mid_and_bbo_charge_spread_exactly_once[SELL] ______________
+
+side = <OrderSide.SELL: 'SELL'>
+
+    @pytest.mark.parametrize("side", [OrderSide.BUY, OrderSide.SELL])
+    def test_mid_and_bbo_charge_spread_exactly_once(side: OrderSide) -> None:
+>       mid, schedule = execution_pair("MID", "100")
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:128: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'MID', price = '100', included = ()
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+____ test_depth_includes_visible_impact_and_explicit_residual_is_separate _____
+
+    def test_depth_includes_visible_impact_and_explicit_residual_is_separate() -> None:
+>       fill, schedule = execution_pair("DEPTH_VWAP", "101", ("SPREAD", "VISIBLE_DEPTH"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:146: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'DEPTH_VWAP', price = '101', included = ('SPREAD', 'VISIBLE_DEPTH')
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+________ test_reference_evidence_conflicts_fail[unknown_bbo_component] ________
+
+bad = 'unknown_bbo_component'
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            "unknown_bbo_component",
+            "mid_includes_spread",
+            "bar_is_real",
+            "mixed_version",
+            "wrong_horizon",
+        ],
+    )
+    def test_reference_evidence_conflicts_fail(bad: str) -> None:
+>       fill, schedule = execution_pair("MID", "100")
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'MID', price = '100', included = ()
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+_________ test_reference_evidence_conflicts_fail[mid_includes_spread] _________
+
+bad = 'mid_includes_spread'
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            "unknown_bbo_component",
+            "mid_includes_spread",
+            "bar_is_real",
+            "mixed_version",
+            "wrong_horizon",
+        ],
+    )
+    def test_reference_evidence_conflicts_fail(bad: str) -> None:
+>       fill, schedule = execution_pair("MID", "100")
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'MID', price = '100', included = ()
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+_____________ test_reference_evidence_conflicts_fail[bar_is_real] _____________
+
+bad = 'bar_is_real'
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            "unknown_bbo_component",
+            "mid_includes_spread",
+            "bar_is_real",
+            "mixed_version",
+            "wrong_horizon",
+        ],
+    )
+    def test_reference_evidence_conflicts_fail(bad: str) -> None:
+>       fill, schedule = execution_pair("MID", "100")
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'MID', price = '100', included = ()
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+____________ test_reference_evidence_conflicts_fail[mixed_version] ____________
+
+bad = 'mixed_version'
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            "unknown_bbo_component",
+            "mid_includes_spread",
+            "bar_is_real",
+            "mixed_version",
+            "wrong_horizon",
+        ],
+    )
+    def test_reference_evidence_conflicts_fail(bad: str) -> None:
+>       fill, schedule = execution_pair("MID", "100")
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'MID', price = '100', included = ()
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+____________ test_reference_evidence_conflicts_fail[wrong_horizon] ____________
+
+bad = 'wrong_horizon'
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            "unknown_bbo_component",
+            "mid_includes_spread",
+            "bar_is_real",
+            "mixed_version",
+            "wrong_horizon",
+        ],
+    )
+    def test_reference_evidence_conflicts_fail(bad: str) -> None:
+>       fill, schedule = execution_pair("MID", "100")
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'MID', price = '100', included = ()
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+__ test_impact_forward_inverse_and_capacity_use_one_horizon[LINEAR_PROXY_V1] __
+
+model = 'LINEAR_PROXY_V1'
+
+    @pytest.mark.parametrize("model", ["LINEAR_PROXY_V1", "SQRT_PROXY_V1"])
+    def test_impact_forward_inverse_and_capacity_use_one_horizon(model: str) -> None:
+        selected = curve(model, "100", "0.5")
+        for participation in map(D, ("0", "0.01", "0.25", "0.5")):
+            assert (
+                selected.participation_for_impact(selected.impact_bps(participation)) == participation
+            )
+        base = signal(
+            asset=BTC,
+            instrument="SYNTHETIC-BTC",
+            adv=D("10000"),
+            impact_bps=D("100"),
+            raw_score=D("1"),
+            confidence=D("1"),
+        )
+>       versioned = SignalInput.model_validate(
+            {**base.model_dump(), "impact_model": selected, "liquidity_horizon_seconds": 60}
+        )
+E       pydantic_core._pydantic_core.ValidationError: 14 validation errors for SignalInput
+E       signal_id.is-instance[SignalId]
+E         Input should be an instance of SignalId [type=is_instance_of, input_value={'value': 'signal-SYNTHETIC-BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       signal_id.function-after[SignalId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'signal-SYNTHETIC-BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       asset_id.is-instance[AssetId]
+E         Input should be an instance of AssetId [type=is_instance_of, input_value={'value': 'BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       asset_id.function-after[AssetId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SYNTHETIC-BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SYNTHETIC-BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       strategy_id.is-instance[StrategyId]
+E         Input should be an instance of StrategyId [type=is_instance_of, input_value={'value': 'strategy-core'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       strategy_id.function-after[StrategyId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'strategy-core'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       account_id.is-instance[AccountId]
+E         Input should be an instance of AccountId [type=is_instance_of, input_value={'value': 'paper-account'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       account_id.function-after[AccountId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'paper-account'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'paper-venue'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'paper-venue'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       stablecoin_id.is-instance[AssetId]
+E         Input should be an instance of AssetId [type=is_instance_of, input_value={'value': 'USDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       stablecoin_id.function-after[AssetId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'USDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:232: ValidationError
+___ test_impact_forward_inverse_and_capacity_use_one_horizon[SQRT_PROXY_V1] ___
+
+model = 'SQRT_PROXY_V1'
+
+    @pytest.mark.parametrize("model", ["LINEAR_PROXY_V1", "SQRT_PROXY_V1"])
+    def test_impact_forward_inverse_and_capacity_use_one_horizon(model: str) -> None:
+        selected = curve(model, "100", "0.5")
+        for participation in map(D, ("0", "0.01", "0.25", "0.5")):
+            assert (
+                selected.participation_for_impact(selected.impact_bps(participation)) == participation
+            )
+        base = signal(
+            asset=BTC,
+            instrument="SYNTHETIC-BTC",
+            adv=D("10000"),
+            impact_bps=D("100"),
+            raw_score=D("1"),
+            confidence=D("1"),
+        )
+>       versioned = SignalInput.model_validate(
+            {**base.model_dump(), "impact_model": selected, "liquidity_horizon_seconds": 60}
+        )
+E       pydantic_core._pydantic_core.ValidationError: 14 validation errors for SignalInput
+E       signal_id.is-instance[SignalId]
+E         Input should be an instance of SignalId [type=is_instance_of, input_value={'value': 'signal-SYNTHETIC-BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       signal_id.function-after[SignalId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'signal-SYNTHETIC-BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       asset_id.is-instance[AssetId]
+E         Input should be an instance of AssetId [type=is_instance_of, input_value={'value': 'BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       asset_id.function-after[AssetId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SYNTHETIC-BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SYNTHETIC-BTC'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       strategy_id.is-instance[StrategyId]
+E         Input should be an instance of StrategyId [type=is_instance_of, input_value={'value': 'strategy-core'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       strategy_id.function-after[StrategyId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'strategy-core'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       account_id.is-instance[AccountId]
+E         Input should be an instance of AccountId [type=is_instance_of, input_value={'value': 'paper-account'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       account_id.function-after[AccountId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'paper-account'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'paper-venue'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'paper-venue'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       stablecoin_id.is-instance[AssetId]
+E         Input should be an instance of AssetId [type=is_instance_of, input_value={'value': 'USDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       stablecoin_id.function-after[AssetId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'USDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:232: ValidationError
+_ test_fee_effective_time_is_not_decision_known_time_and_future_revisions_do_not_leak _
+
+    def test_fee_effective_time_is_not_decision_known_time_and_future_revisions_do_not_leak() -> None:
+>       _, base = execution_pair("MID", "100")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:319: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'MID', price = '100', included = ()
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+___ test_native_fee_contract_cannot_silently_use_old_quote_fee_engine_path ____
+
+    def test_native_fee_contract_cannot_silently_use_old_quote_fee_engine_path() -> None:
+>       fill, schedule = execution_pair("BBO", "100", ("SPREAD",))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\alpha_v5\test_execution_contract.py:345: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+kind = 'BBO', price = '100', included = ('SPREAD',)
+
+    def execution_pair(
+        kind: str, price: str, included: tuple[str, ...] = ()
+    ) -> tuple[FillSlice, CostSchedule]:
+        reference = ExecutionReference.model_validate(
+            {
+                "reference_price_kind": kind,
+                "included_cost_components": included,
+                "source_sha256": HASH,
+                "evidence_kind": "PROXY_ONLY" if kind == "BAR_OPEN_PROXY" else "SYNTHETIC_ONLY",
+                "participation_window_seconds": 60,
+                "window_quote_turnover": D("10000"),
+            }
+        )
+        fill = FillSlice(
+            quantity=D("1"),
+            reference_price=D(price),
+            available_liquidity=D("100"),
+            precision=FillPrecision.L2_DEPTH,
+            liquidity_role=LiquidityRole.TAKER,
+            source_event_id=BacktestEventId("synthetic-reference"),
+            event_time=NOW,
+            available_time=NOW,
+            reference=reference,
+        )
+>       schedule = CostSchedule.model_validate(
+            {
+                **policy().cost_schedules[0].model_dump(),
+                "maker_fee_bps": D("0"),
+                "taker_fee_bps": D("0"),
+                "half_spread_bps": D("10"),
+                "slippage_bps": D("0"),
+                "impact_coefficient_bps": D("0"),
+                "evidence": ExecutionCostEvidence(
+                    account_scope="SYNTHETIC_ACCOUNT",
+                    available_at=NOW,
+                    source_sha256=HASH,
+                    verified_kind="SYNTHETIC_ONLY",
+                    impact_model=curve(coefficient="0"),
+                ),
+            }
+        )
+E       pydantic_core._pydantic_core.ValidationError: 6 validation errors for CostSchedule
+E       cost_schedule_id.is-instance[CostScheduleId]
+E         Input should be an instance of CostScheduleId [type=is_instance_of, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       cost_schedule_id.function-after[CostScheduleId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'sim-btcusdt-cost-v1'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       venue_id.is-instance[VenueId]
+E         Input should be an instance of VenueId [type=is_instance_of, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       venue_id.function-after[VenueId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+E       instrument_id.is-instance[InstrumentId]
+E         Input should be an instance of InstrumentId [type=is_instance_of, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of
+E       instrument_id.function-after[InstrumentId(), constrained-str]
+E         Input should be a valid string [type=string_type, input_value={'value': 'SIM:SPOT:BTCUSDT'}, input_type=dict]
+E           For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+tests\alpha_v5\test_execution_contract.py:106: ValidationError
+_____ test_shared_depth_cannot_be_reused_and_fill_identity_is_idempotent ______
+
+    def test_shared_depth_cannot_be_reused_and_fill_identity_is_idempotent() -> None:
+        event = l2_book()
+        budget = EventLiquidityBudget(window(event), D("1"))
+        first = order(sequence=1, side=OrderSide.BUY)
+        one = budget.preview(order=first, event=event, remaining=D("1"), arrival_at=first.submitted_at)
+        assert one.slices[0].reference_price == D("100.01")
+        assert budget.used_quote_notional == 0
+        assert budget.commit(fill_id="f1", order=first, item=one.slices[0])
+        assert not budget.commit(fill_id="f1", order=first, item=one.slices[0])
+        second = order(sequence=2, side=OrderSide.BUY)
+        two = budget.preview(
+            order=second, event=event, remaining=D("1"), arrival_at=second.submitted_at
+        )
+>       assert two.slices[0].reference_price == D("100.02") and two.unfilled_quantity == 0
+               ^^^^^^^^^^^^^
+E       IndexError: tuple index out of range
+
+tests\alpha_v5\test_execution_contract.py:394: IndexError
+_________ test_shared_report_seals_missing_evidence_and_blocks_reuse __________
+
+tmp_path = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b4-execution-20260910-1djnkcw2/pytest-01/test_shared_report_seals_missi0')
+
+    def test_shared_report_seals_missing_evidence_and_blocks_reuse(tmp_path: Path) -> None:
+        root, stage = tmp_path / "synthetic-root", tmp_path / "synthetic-stage"
+        root.mkdir()
+        stage.mkdir()
+        config = yaml.safe_load(
+            (ROOT / "configs/research/alpha_v5_execution_contract.yaml").read_text(encoding="utf-8")
+        )
+    
+        def save(name: str, data: str) -> Path:
+            target = root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(data, encoding="utf-8")
+            return target
+    
+        for name in contract.FILES:
+            save(name, "SYNTHETIC CODE RECEIPT\n")
+        source_data = {
+            "r5_manifest": r5_fixture(),
+            "b3_manifest": {"synthetic": True},
+            "b2_safety": {"strict_data_quality": "FAILED_CLOSED_INSUFFICIENT_PIT_EVIDENCE"},
+        }
+        for name, binding in config["sources"].items():
+            binding["sha256"] = sha256_file(save(binding["path"], json.dumps(source_data[name])))
+        save(
+            "configs/research/aegis_alpha_v5.yaml", yaml.safe_dump(source_data["r5_manifest"]["config"])
+        )
+        save(
+            "src/aegisquant/bootstrap/live_lock.py",
+            "LIVE_TRADING: bool = False\nORDER_SUBMISSION_ENABLED: bool = False\nLIVE_ADAPTERS: tuple = ()\n",
+        )
+        baseline = dict(
+            root=str(root),
+            head=evidence.BASE,
+            branch="main",
+            allowed_modifications=list(contract.FILES[:8]),
+            files={
+                path.relative_to(root).as_posix(): dict(
+                    sha256=sha256_file(path), bytes=path.stat().st_size
+                )
+                for path in root.rglob("*")
+                if path.is_file()
+            },
+        )
+        (stage / "baseline_workspace.json").write_text(json.dumps(baseline), encoding="utf-8")
+        for name in contract.FILES[:8]:
+            target = stage / "before" / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((root / name).read_bytes())
+        for name in ("workspace_before.patch", "version_graph.txt", "test_commands_and_results.txt"):
+            (stage / name).write_text("SYNTHETIC RECEIPT\n", encoding="utf-8")
+        hashes = {name: sha256_file(root / name) for name in contract.FILES}
+        (stage / "validation_records.json").write_text(
+            json.dumps(
+                [
+                    dict(check=kind, command=["SYNTHETIC"], exit_code=0, source_sha256=hashes)
+                    for kind in ("ruff", "format", "pyright", "pytest")
+                ]
+            ),
+            encoding="utf-8",
+        )
+        (stage / "pytest_results.xml").write_text(
+            '<testsuite><testcase name="SYNTHETIC"/></testsuite>', encoding="utf-8"
+        )
+        contract.validate_config(config)
+>       output = evidence.run_zero_research_contract(
+            root=root,
+            config=config,
+            stage=stage,
+            git_state={"head": evidence.BASE, "branch": "main"},
+            files=contract.FILES,
+            build_documents=contract.build_documents,
+        )
+
+tests\alpha_v5\test_execution_contract.py:867: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\aegisquant\research\validation\evidence_contract.py:1842: in run_zero_research_contract
+    with (output / "changes_this_batch.patch").open(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/SXD/AppData/Local/Temp/aegis-b4-execution-20260910-1djnkcw2/pytest-01/test_shared_report_seals_missi0/synthetic-root/artifacts/alpha_v5/20260910_execution_contract_v1/changes_this_batch.patch')
+mode = 'x', buffering = -1, encoding = 'utf-8', errors = None, newline = '\\n'
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: illegal newline value: \n
+
+C:\Users\SXD\AppData\Roaming\uv\python\cpython-3.13.15-windows-x86_64-none\Lib\pathlib\_local.py:537: ValueError
+=========================== short test summary info ===========================
+FAILED tests/alpha_v5/test_execution_contract.py::test_mid_and_bbo_charge_spread_exactly_once[BUY]
+FAILED tests/alpha_v5/test_execution_contract.py::test_mid_and_bbo_charge_spread_exactly_once[SELL]
+FAILED tests/alpha_v5/test_execution_contract.py::test_depth_includes_visible_impact_and_explicit_residual_is_separate
+FAILED tests/alpha_v5/test_execution_contract.py::test_reference_evidence_conflicts_fail[unknown_bbo_component]
+FAILED tests/alpha_v5/test_execution_contract.py::test_reference_evidence_conflicts_fail[mid_includes_spread]
+FAILED tests/alpha_v5/test_execution_contract.py::test_reference_evidence_conflicts_fail[bar_is_real]
+FAILED tests/alpha_v5/test_execution_contract.py::test_reference_evidence_conflicts_fail[mixed_version]
+FAILED tests/alpha_v5/test_execution_contract.py::test_reference_evidence_conflicts_fail[wrong_horizon]
+FAILED tests/alpha_v5/test_execution_contract.py::test_impact_forward_inverse_and_capacity_use_one_horizon[LINEAR_PROXY_V1]
+FAILED tests/alpha_v5/test_execution_contract.py::test_impact_forward_inverse_and_capacity_use_one_horizon[SQRT_PROXY_V1]
+FAILED tests/alpha_v5/test_execution_contract.py::test_fee_effective_time_is_not_decision_known_time_and_future_revisions_do_not_leak
+FAILED tests/alpha_v5/test_execution_contract.py::test_native_fee_contract_cannot_silently_use_old_quote_fee_engine_path
+FAILED tests/alpha_v5/test_execution_contract.py::test_shared_depth_cannot_be_reused_and_fill_identity_is_idempotent
+FAILED tests/alpha_v5/test_execution_contract.py::test_shared_report_seals_missing_evidence_and_blocks_reuse
+14 failed, 67 passed in 8.10s
+
+
+[6] imports-fix exit=0 seconds=0.11515179998241365
+[".venv/Scripts/python.exe", "-m", "ruff", "check", "--fix", "--select", "I", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+Found 5 errors (5 fixed, 0 remaining).
+
+
+[7] format-apply exit=0 seconds=0.11083850002614781
+[".venv/Scripts/python.exe", "-m", "ruff", "format", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+2 files reformatted, 9 files left unchanged
+
+
+[8] ruff exit=0 seconds=0.12439249997260049
+[".venv/Scripts/python.exe", "-m", "ruff", "check", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+All checks passed!
+
+
+[9] format exit=0 seconds=0.11109110002871603
+[".venv/Scripts/python.exe", "-m", "ruff", "format", "--check", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+11 files already formatted
+
+
+[10] pyright exit=1 seconds=4.1990723999915645
+[".venv/Scripts/python.exe", "-m", "pyright", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:171:51 - error: Argument of type "Any | CostSchedule" cannot be assigned to parameter "order" of type "BacktestOrder" in function "execution_price_and_cost"
+    Type "Any | CostSchedule" is not assignable to type "BacktestOrder"
+      "CostSchedule" is not assignable to "BacktestOrder" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:171:51 - error: Argument of type "Any | CostSchedule" cannot be assigned to parameter "fill_slice" of type "FillSlice" in function "execution_price_and_cost"
+    Type "Any | CostSchedule" is not assignable to type "FillSlice"
+      "CostSchedule" is not assignable to "FillSlice" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:171:51 - error: Argument of type "Any | CostSchedule" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "Any | CostSchedule" is not assignable to type "AssetId"
+      "CostSchedule" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:171:51 - error: Argument of type "Any | CostSchedule" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "execution_price_and_cost"
+    Type "Any | CostSchedule" is not assignable to type "AssetId"
+      "CostSchedule" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:171:51 - error: Argument of type "Any | CostSchedule" cannot be assigned to parameter "contract_multiplier" of type "Decimal" in function "execution_price_and_cost"
+    Type "Any | CostSchedule" is not assignable to type "Decimal"
+      "CostSchedule" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:171:51 - error: Argument of type "Any | CostSchedule" cannot be assigned to parameter "settlement_quantity" of type "Decimal" in function "execution_price_and_cost"
+    Type "Any | CostSchedule" is not assignable to type "Decimal"
+      "CostSchedule" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:171:51 - error: Argument of type "Any | CostSchedule" cannot be assigned to parameter "liquidation_penalty_bps" of type "Decimal" in function "execution_price_and_cost"
+    Type "Any | CostSchedule" is not assignable to type "Decimal"
+      "CostSchedule" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:171:51 - error: Argument of type "Any | CostSchedule" cannot be assigned to parameter "strict_evidence" of type "bool" in function "execution_price_and_cost"
+    Type "Any | CostSchedule" is not assignable to type "bool"
+      "CostSchedule" is not assignable to "bool" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:171:51 - error: Argument of type "Any | CostSchedule" cannot be assigned to parameter "fee_account" of type "FeeAccountState | None" in function "execution_price_and_cost"
+    Type "Any | CostSchedule" is not assignable to type "FeeAccountState | None"
+      Type "CostSchedule" is not assignable to type "FeeAccountState | None"
+        "CostSchedule" is not assignable to "FeeAccountState"
+        "CostSchedule" is not assignable to "None" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:295:37 - error: Argument of type "Any | dict[AssetId, Decimal]" cannot be assigned to parameter "terms" of type "FeeTerms" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, Decimal]" is not assignable to type "FeeTerms"
+      "dict[AssetId, Decimal]" is not assignable to "FeeTerms" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:295:37 - error: Argument of type "Any | dict[AssetId, Decimal]" cannot be assigned to parameter "fill_time" of type "UtcDateTime" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, Decimal]" is not assignable to type "UtcDateTime"
+      "dict[AssetId, Decimal]" is not assignable to "datetime" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:295:37 - error: Argument of type "Any | dict[AssetId, Decimal]" cannot be assigned to parameter "role" of type "LiquidityRole" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, Decimal]" is not assignable to type "LiquidityRole"
+      "dict[AssetId, Decimal]" is not assignable to "LiquidityRole" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:295:37 - error: Argument of type "Any | dict[AssetId, Decimal]" cannot be assigned to parameter "side" of type "OrderSide" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, Decimal]" is not assignable to type "OrderSide"
+      "dict[AssetId, Decimal]" is not assignable to "OrderSide" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:295:37 - error: Argument of type "Any | dict[AssetId, Decimal]" cannot be assigned to parameter "quantity" of type "Decimal" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, Decimal]" is not assignable to type "Decimal"
+      "dict[AssetId, Decimal]" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:295:37 - error: Argument of type "Any | dict[AssetId, Decimal]" cannot be assigned to parameter "execution_price" of type "Decimal" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, Decimal]" is not assignable to type "Decimal"
+      "dict[AssetId, Decimal]" is not assignable to "Decimal" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:295:37 - error: Argument of type "Any | dict[AssetId, Decimal]" cannot be assigned to parameter "base_asset_id" of type "AssetId" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, Decimal]" is not assignable to type "AssetId"
+      "dict[AssetId, Decimal]" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:295:37 - error: Argument of type "Any | dict[AssetId, Decimal]" cannot be assigned to parameter "quote_asset_id" of type "AssetId" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, Decimal]" is not assignable to type "AssetId"
+      "dict[AssetId, Decimal]" is not assignable to "AssetId" (reportArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_execution_contract.py:295:37 - error: Argument of type "Any | dict[AssetId, Decimal]" cannot be assigned to parameter "fx_available_at" of type "UtcDateTime" in function "settle_execution_fee"
+    Type "Any | dict[AssetId, Decimal]" is not assignable to type "UtcDateTime"
+      "dict[AssetId, Decimal]" is not assignable to "datetime" (reportArgumentType)
+18 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+[11] pytest exit=0 seconds=7.769833699974697
+[".venv/Scripts/python.exe", "-m", "pytest", "-o", "addopts=", "--basetemp", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b4-execution-20260910-1djnkcw2\\pytest-02", "tests/alpha_v5/test_execution_contract.py", "tests/alpha_v5/test_evidence_contract.py", "tests/alpha_v5/test_benchmark_contract.py::test_b3_cli_seals_read_only_report_without_replay_or_resampling", "tests/p05/test_ledger_core.py", "tests/portfolio/test_constraints.py", "tests/portfolio/test_signals_optimizer.py", "tests/p06/test_costs_margin.py::test_fee_spread_slippage_and_impact_match_hand_calculation", "tests/p06/test_costs_margin.py::test_historical_cost_schedule_changes_at_exact_effective_time", "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b4-execution-20260910-1djnkcw2\\pytest-02.xml", "-q"]
+........................................................................ [ 88%]
+.........                                                                [100%]
+81 passed in 6.51s
+
+
+[12] format-apply exit=0 seconds=0.0982489999732934
+[".venv/Scripts/python.exe", "-m", "ruff", "format", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+11 files left unchanged
+
+
+[13] ruff exit=0 seconds=0.13596679997863248
+[".venv/Scripts/python.exe", "-m", "ruff", "check", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+All checks passed!
+
+
+[14] format exit=0 seconds=0.12385919998632744
+[".venv/Scripts/python.exe", "-m", "ruff", "format", "--check", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+11 files already formatted
+
+
+[15] pyright exit=0 seconds=4.657308100024238
+[".venv/Scripts/python.exe", "-m", "pyright", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+[16] pytest exit=0 seconds=8.669573299994227
+[".venv/Scripts/python.exe", "-m", "pytest", "-o", "addopts=", "--basetemp", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b4-execution-20260910-1djnkcw2\\pytest-03", "tests/alpha_v5/test_execution_contract.py", "tests/alpha_v5/test_evidence_contract.py", "tests/alpha_v5/test_benchmark_contract.py::test_b3_cli_seals_read_only_report_without_replay_or_resampling", "tests/p05/test_ledger_core.py", "tests/portfolio/test_constraints.py", "tests/portfolio/test_signals_optimizer.py", "tests/p06/test_costs_margin.py::test_fee_spread_slippage_and_impact_match_hand_calculation", "tests/p06/test_costs_margin.py::test_historical_cost_schedule_changes_at_exact_effective_time", "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b4-execution-20260910-1djnkcw2\\pytest-03.xml", "-q"]
+........................................................................ [ 88%]
+.........                                                                [100%]
+81 passed in 7.32s
+
+
+[17] format-apply exit=0 seconds=0.11308849998749793
+[".venv/Scripts/python.exe", "-m", "ruff", "format", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+1 file reformatted, 10 files left unchanged
+
+
+[18] ruff exit=0 seconds=0.12851800001226366
+[".venv/Scripts/python.exe", "-m", "ruff", "check", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+All checks passed!
+
+
+[19] format exit=0 seconds=0.12086939997971058
+[".venv/Scripts/python.exe", "-m", "ruff", "format", "--check", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+11 files already formatted
+
+
+[20] pyright exit=0 seconds=4.746694599976763
+[".venv/Scripts/python.exe", "-m", "pyright", "src/aegisquant/backtest/models.py", "src/aegisquant/backtest/fills.py", "src/aegisquant/backtest/costs.py", "src/aegisquant/portfolio/transition_costs.py", "src/aegisquant/portfolio/optimizer.py", "src/aegisquant/portfolio/models.py", "src/aegisquant/research/validation/evidence_contract.py", "src/aegisquant/accounting/ledger.py", "src/aegisquant/research/validation/execution_contract.py", "scripts/run_alpha_v5_execution_diagnostics.py", "tests/alpha_v5/test_execution_contract.py"]
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+[21] pytest exit=0 seconds=8.216415600036271
+[".venv/Scripts/python.exe", "-m", "pytest", "-o", "addopts=", "--basetemp", "C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b4-execution-20260910-1djnkcw2\\pytest-04", "tests/alpha_v5/test_execution_contract.py", "tests/alpha_v5/test_evidence_contract.py", "tests/alpha_v5/test_benchmark_contract.py::test_b3_cli_seals_read_only_report_without_replay_or_resampling", "tests/p05/test_ledger_core.py", "tests/portfolio/test_constraints.py", "tests/portfolio/test_signals_optimizer.py", "tests/p06/test_costs_margin.py::test_fee_spread_slippage_and_impact_match_hand_calculation", "tests/p06/test_costs_margin.py::test_historical_cost_schedule_changes_at_exact_effective_time", "--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b4-execution-20260910-1djnkcw2\\pytest-04.xml", "-q"]
+........................................................................ [ 84%]
+.............                                                            [100%]
+85 passed in 6.98s
+
+

@@ -1,0 +1,172 @@
+{
+  "checked_at": "2026-09-08T15:22:28.353962+00:00",
+  "generation": "alpha-r5-research-churn-20260908-v3",
+  "engineering_status": "PASS_WITH_UNCHANGED_FULL_FORMAT_BASELINE_EXCEPTION",
+  "research_conclusion": "NO_PROVEN_ALPHA",
+  "full_taskbook_completed": false,
+  "full_pytest": {
+    "tests": 1188,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "post_state_edit_contract_tests": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "pyright_summary": {
+    "filesAnalyzed": 745,
+    "errorCount": 0,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 36.137
+  },
+  "changed_python_format_files": 13,
+  "full_format_baseline_exception": {
+    "command": "ruff format --check (9 changed Python files and tests/alpha_v5)",
+    "started_at": "2026-09-08T15:10:35.6147549Z",
+    "finished_at": "2026-09-08T15:10:35.9170584Z",
+    "exit_code": 0,
+    "preexisting_full_format_exception": "scripts/run_alpha_v4_final_holdout.py",
+    "exception_head_blob": "10b891867b787c72ba8183d113a58faa6c72a011",
+    "exception_workspace_blob": "10b891867b787c72ba8183d113a58faa6c72a011",
+    "exception_unchanged": true
+  },
+  "execution_records": {
+    "full_pytest": {
+      "command": "python -m pytest -q --basetemp=.pytest_tmp_r5_final --junitxml=artifacts/alpha_v5/20260908_research_churn_v3/validation/full_pytest.xml",
+      "started_at": "2026-09-08T15:01:27.8983243Z",
+      "finished_at": "2026-09-08T15:03:15.7123890Z",
+      "exit_code": 0
+    },
+    "state_contract": {
+      "command": "python -m pytest tests/alpha_v4/test_failure_freeze.py -q --basetemp=.pytest_tmp_r5_closeout --junitxml=artifacts/alpha_v5/20260908_research_churn_v3/validation/state_contract.xml",
+      "started_at": "2026-09-08T15:20:49.7495293Z",
+      "finished_at": "2026-09-08T15:20:52.9303925Z",
+      "exit_code": 0
+    },
+    "pyright": {
+      "command": "python -m pyright --project pyproject.toml --outputjson",
+      "started_at": "2026-09-08T15:05:42.6113256Z",
+      "finished_at": "2026-09-08T15:06:19.7478701Z",
+      "exit_code": 0
+    },
+    "replay": {
+      "command": "python -m scripts.run_alpha_v5_research run",
+      "started_at": "2026-09-08T15:01:27.9009266Z",
+      "finished_at": "2026-09-08T15:17:18.9930830Z",
+      "exit_code": 0
+    },
+    "clock_integrity": {
+      "command": "python artifacts/alpha_v5/20260908_research_churn_v3/validation/check_clock_integrity.py",
+      "started_at": "2026-09-08T15:17:31.5824696Z",
+      "finished_at": "2026-09-08T15:17:32.8549146Z",
+      "exit_code": 0
+    },
+    "report": {
+      "command": "python -m scripts.run_alpha_v5_research report",
+      "started_at": "2026-09-08T15:17:42.2516105Z",
+      "finished_at": "2026-09-08T15:18:00.7177271Z",
+      "exit_code": 0
+    },
+    "ruff": {
+      "started_at": "2026-09-08T15:05:42.6166217Z",
+      "finished_at": "2026-09-08T15:05:43.0044681Z",
+      "lint_exit_code": 0,
+      "format_exit_code": 1
+    },
+    "ruff_changed_format": {
+      "command": "ruff format --check (9 changed Python files and tests/alpha_v5)",
+      "started_at": "2026-09-08T15:10:35.6147549Z",
+      "finished_at": "2026-09-08T15:10:35.9170584Z",
+      "exit_code": 0,
+      "preexisting_full_format_exception": "scripts/run_alpha_v4_final_holdout.py",
+      "exception_head_blob": "10b891867b787c72ba8183d113a58faa6c72a011",
+      "exception_workspace_blob": "10b891867b787c72ba8183d113a58faa6c72a011",
+      "exception_unchanged": true
+    }
+  },
+  "baseline_exact_partitions": 70,
+  "original_f3_exact_continuous_sleeves": 5,
+  "registered_continuous_engine_runs": 55,
+  "planned_slots_including_baseline": 56,
+  "succeeded_slots": 56,
+  "failed_slots_this_generation": 0,
+  "journal_events": 112,
+  "predecessor_failures_preserved": {
+    "first_generation_policy_unchanged": {
+      "buffer": true,
+      "resize": true,
+      "arms": true,
+      "risk_benefit": true,
+      "primary_candidate": true,
+      "statistics": true
+    },
+    "prior_failures_preserved": [
+      "v1 development interval guard",
+      "v2 strict Decimal JSON restore"
+    ],
+    "v2_legacy_baseline_partitions_passed": 70,
+    "new_strategy_engine_runs_before_v3": 0
+  },
+  "clock_integrity": {
+    "status": "PASS",
+    "curves": 61,
+    "4h_points_each": 7675,
+    "utc_daily_points_each": 1280
+  },
+  "churn_acceptance": {
+    "resize_fill_share_le_50pct": true,
+    "turnover_reduction_ge_40pct": true,
+    "cost_reduction_ge_30pct": true,
+    "cagr_degradation_le_1pp": true,
+    "mdd_degradation_le_2pp": true
+  },
+  "holm_adjusted_p_values": {
+    "G1-G0": 0.20087991200879912,
+    "G1-F0": 0.17188281171882813,
+    "G1-F5": 0.5558444155584441,
+    "G1-G1_PASSIVE": 0.411958804119588,
+    "G1-CASH": 0.22437756224377564,
+    "G1_H3-G0": 0.20087991200879912,
+    "G1_H10-G0": 0.195980401959804,
+    "G1_R24-G0": 0.20087991200879912,
+    "G1_R72-G0": 0.20087991200879912
+  },
+  "new_model_fits": 0,
+  "new_calibration_fits": 0,
+  "final_holdout_accesses": 0,
+  "dsr_pbo_status": "INSUFFICIENT_COMPLETE_HISTORICAL_INDEPENDENT_TRIAL_HISTORY",
+  "original_user_files_unchanged_sha256": {
+    "deep-research-report.md": "fbd6038da014075e68d88eaf6aa5ffdc8d435dcef4a1e04650942be2739ec5f6",
+    "scripts/run_recent_multi_asset_backtest.py": "60e80306e3dcc5bab28ecbcc3f3f8bd28e7757384e98a1bc85950fbf819763bf"
+  },
+  "other_recent_task_changes_preserved": true,
+  "branch": "main",
+  "head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+  "working_tree_status": " M AGENTS.md\n M CODEX_BOOTSTRAP.md\n M configs/research/alpha_v4_multi_asset.yaml\n M scripts/run_alpha_r4.py\n M scripts/run_alpha_v4_audit.py\n M src/aegisquant/portfolio/economic_gate.py\n M src/aegisquant/research/strategies/buffered_target.py\n M src/aegisquant/research/validation/cat_replay.py\n M state/ALPHA_V4_PROJECT_STATE.yaml\n M state/SPEC_INDEX.md\n?? artifacts/alpha_v5/\n?? artifacts/current_system_recent/\n?? configs/research/aegis_alpha_v5.yaml\n?? deep-research-report.md\n?? scripts/audit_alpha_profitability_root_causes.py\n?? scripts/report_recent_multi_asset_backtest.py\n?? scripts/run_alpha_v5_research.py\n?? scripts/run_recent_multi_asset_backtest.py\n?? src/aegisquant/research/datasets/pit_universe.py\n?? src/aegisquant/research/validation/experiment_registry.py\n?? tests/alpha_v5/\n?? tests/research/test_recent_multi_asset_backtest.py\n",
+  "temporary_cleanup": {
+    "status": "BLOCKED_BY_AUTOMATIC_APPROVAL_REVIEW",
+    "action": "Remove only seven task-created .pytest_tmp_r5_* test temporary directories",
+    "reason": "blocked by policy",
+    "directories_preserved": true,
+    "implementation_or_verification_affected": false
+  },
+  "report_sha256": "2b7aee7c0c63d54eef84bbac83c7d070394ff3f5c79149f3cdf1642977f11941",
+  "report_note": "Post-generation narrative additions explain saved metrics, cost path changes and closeout checks; execution source and preregistered parameters are unchanged.",
+  "local_archive": {
+    "command": "local_git_archive.py archive --project D:\\Personal\\Quantitative_Trading",
+    "started_at": "2026-09-08T15:22:42.7494612Z",
+    "finished_at": "2026-09-08T15:22:43.1678030Z",
+    "exit_code": 2,
+    "output": "{\"status\": \"error\", \"message\": \"独立归档只允许 main，实际分支为：refs/heads/codex-archive；保留旧归档，未创建分支或迁移历史。\"}\r\n",
+    "bare_repository": "D:/Workspace/git/Personal--Quantitative_Trading.git",
+    "new_commit_created": false
+  },
+  "source_and_frozen_evidence_hashes_rechecked_at_closeout": true,
+  "source_file_hashes_checked": 283,
+  "frozen_evidence_hashes_checked": 43,
+  "final_state_sha256": "8f32661a12e276e458c1d059bdc39f4924974cbef5c1b87503b690295331ca94"
+}

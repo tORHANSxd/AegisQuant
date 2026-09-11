@@ -1,0 +1,250 @@
+{
+  "status": "NOT_RECEIVED",
+  "schema": {
+    "$defs": {
+      "HistoricalInstrumentRule": {
+        "additionalProperties": false,
+        "properties": {
+          "instrument_rule_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "title": "Instrument Rule Id",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          },
+          "instrument_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "title": "Instrument Id",
+            "type": "string"
+          },
+          "venue_id": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$",
+            "title": "Venue Id",
+            "type": "string"
+          },
+          "effective_from": {
+            "format": "date-time",
+            "title": "Effective From",
+            "type": "string"
+          },
+          "effective_to": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Effective To"
+          },
+          "tick_size": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ],
+            "gt": "0",
+            "title": "Tick Size"
+          },
+          "step_size": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ],
+            "gt": "0",
+            "title": "Step Size"
+          },
+          "minimum_quantity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ],
+            "ge": "0",
+            "title": "Minimum Quantity"
+          },
+          "maximum_quantity": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                    "type": "string"
+                  }
+                ],
+                "gt": "0"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Maximum Quantity"
+          },
+          "minimum_notional": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              }
+            ],
+            "ge": "0",
+            "title": "Minimum Notional"
+          },
+          "trading_enabled": {
+            "title": "Trading Enabled",
+            "type": "boolean"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          },
+          "approximation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Approximation"
+          }
+        },
+        "required": [
+          "instrument_rule_id",
+          "version",
+          "instrument_id",
+          "venue_id",
+          "effective_from",
+          "tick_size",
+          "step_size",
+          "minimum_quantity",
+          "minimum_notional",
+          "trading_enabled",
+          "source"
+        ],
+        "title": "HistoricalInstrumentRule",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "description": "Decision-known provenance around the existing effective-time rule model.",
+    "properties": {
+      "record_id": {
+        "minLength": 1,
+        "title": "Record Id",
+        "type": "string"
+      },
+      "revision": {
+        "minimum": 1,
+        "title": "Revision",
+        "type": "integer"
+      },
+      "available_time": {
+        "format": "date-time",
+        "title": "Available Time",
+        "type": "string"
+      },
+      "revision_time": {
+        "anyOf": [
+          {
+            "format": "date-time",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Revision Time"
+      },
+      "account_scope": {
+        "const": "PUBLIC_SPOT_RULES",
+        "default": "PUBLIC_SPOT_RULES",
+        "title": "Account Scope",
+        "type": "string"
+      },
+      "verified_kind": {
+        "enum": [
+          "ARCHIVED_EXCHANGE_RULE",
+          "PROXY",
+          "UNKNOWN",
+          "SYNTHETIC"
+        ],
+        "title": "Verified Kind",
+        "type": "string"
+      },
+      "rule": {
+        "$ref": "#/$defs/HistoricalInstrumentRule"
+      },
+      "source_sha256": {
+        "title": "Source Sha256",
+        "type": "string"
+      },
+      "filter_payload_json": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Filter Payload Json"
+      },
+      "payload_sha256": {
+        "title": "Payload Sha256",
+        "type": "string"
+      }
+    },
+    "required": [
+      "record_id",
+      "revision",
+      "available_time",
+      "verified_kind",
+      "rule",
+      "source_sha256",
+      "payload_sha256"
+    ],
+    "title": "RuleProvenance",
+    "type": "object"
+  },
+  "source": {
+    "path": null,
+    "sha256": null
+  },
+  "records": null
+}

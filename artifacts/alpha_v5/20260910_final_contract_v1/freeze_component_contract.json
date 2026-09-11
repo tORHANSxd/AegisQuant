@@ -1,0 +1,18 @@
+{
+  "status": "NOT_ELIGIBLE",
+  "candidate": null,
+  "original_components_preserved": true,
+  "additional_components": [
+    "data_lineage",
+    "risk",
+    "rules",
+    "capacity",
+    "statistics",
+    "comparison_family",
+    "complete_trials",
+    "weights",
+    "training_update_program",
+    "independent_preaccess_review"
+  ],
+  "missing_extension_blocks_read": true
+}

@@ -1,0 +1,638 @@
+{
+  "status": "PASS",
+  "output": "baseline/20260908T150134644940",
+  "exact_order_and_fill_identity": true,
+  "complete_mtm_and_cash_chain": true,
+  "partitions": [
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202204-202207",
+      "status": "PASS",
+      "orders": 10,
+      "fills": 10,
+      "mtm_points": 547,
+      "final_cash": "9426.696696755967246500958799"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202207-202210",
+      "status": "PASS",
+      "orders": 17,
+      "fills": 17,
+      "mtm_points": 553,
+      "final_cash": "8976.826857190887846400001322"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202210-202301",
+      "status": "PASS",
+      "orders": 12,
+      "fills": 12,
+      "mtm_points": 553,
+      "final_cash": "8200.527384872199783565476868"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202301-202304",
+      "status": "PASS",
+      "orders": 42,
+      "fills": 42,
+      "mtm_points": 541,
+      "final_cash": "9044.261352448895590534075457"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202304-202307",
+      "status": "PASS",
+      "orders": 10,
+      "fills": 10,
+      "mtm_points": 547,
+      "final_cash": "8871.432751961097729234988673"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202307-202310",
+      "status": "PASS",
+      "orders": 23,
+      "fills": 23,
+      "mtm_points": 553,
+      "final_cash": "8649.030730303640843909445335"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202310-202401",
+      "status": "PASS",
+      "orders": 63,
+      "fills": 63,
+      "mtm_points": 553,
+      "final_cash": "11322.43776608655366035702218"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202401-202404",
+      "status": "PASS",
+      "orders": 53,
+      "fills": 53,
+      "mtm_points": 547,
+      "final_cash": "14285.39396798010434504031041"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202404-202407",
+      "status": "PASS",
+      "orders": 38,
+      "fills": 38,
+      "mtm_points": 547,
+      "final_cash": "13626.74156095292470525932649"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202407-202410",
+      "status": "PASS",
+      "orders": 24,
+      "fills": 24,
+      "mtm_points": 553,
+      "final_cash": "11837.66752860386210253144656"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202410-202501",
+      "status": "PASS",
+      "orders": 65,
+      "fills": 65,
+      "mtm_points": 553,
+      "final_cash": "13917.31697390073192690345974"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202501-202504",
+      "status": "PASS",
+      "orders": 20,
+      "fills": 20,
+      "mtm_points": 541,
+      "final_cash": "14089.44017378735473366335875"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202504-202507",
+      "status": "PASS",
+      "orders": 48,
+      "fills": 48,
+      "mtm_points": 547,
+      "final_cash": "15370.71323867248865774857924"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fold_id": "202507-202510",
+      "status": "PASS",
+      "orders": 54,
+      "fills": 54,
+      "mtm_points": 553,
+      "final_cash": "15144.54001830974958523870025"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202204-202207",
+      "status": "PASS",
+      "orders": 13,
+      "fills": 13,
+      "mtm_points": 547,
+      "final_cash": "9605.211111116926329295719079"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202207-202210",
+      "status": "PASS",
+      "orders": 23,
+      "fills": 23,
+      "mtm_points": 553,
+      "final_cash": "9123.697349492210769057725298"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202210-202301",
+      "status": "PASS",
+      "orders": 12,
+      "fills": 12,
+      "mtm_points": 553,
+      "final_cash": "8522.743828138223495612641156"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202301-202304",
+      "status": "PASS",
+      "orders": 43,
+      "fills": 43,
+      "mtm_points": 541,
+      "final_cash": "9062.821137158348414266255030"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202304-202307",
+      "status": "PASS",
+      "orders": 15,
+      "fills": 15,
+      "mtm_points": 547,
+      "final_cash": "8267.717609159589411877136063"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202307-202310",
+      "status": "PASS",
+      "orders": 21,
+      "fills": 21,
+      "mtm_points": 553,
+      "final_cash": "8057.673930427555692235999232"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202310-202401",
+      "status": "PASS",
+      "orders": 43,
+      "fills": 43,
+      "mtm_points": 553,
+      "final_cash": "9416.103758820345808819816704"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202401-202404",
+      "status": "PASS",
+      "orders": 43,
+      "fills": 43,
+      "mtm_points": 547,
+      "final_cash": "10681.67876307873517226468784"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202404-202407",
+      "status": "PASS",
+      "orders": 30,
+      "fills": 30,
+      "mtm_points": 547,
+      "final_cash": "9383.203816088214004035278758"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202407-202410",
+      "status": "PASS",
+      "orders": 9,
+      "fills": 9,
+      "mtm_points": 553,
+      "final_cash": "8834.947298943686707495537707"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202410-202501",
+      "status": "PASS",
+      "orders": 44,
+      "fills": 44,
+      "mtm_points": 553,
+      "final_cash": "8305.728909658371560116330778"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202501-202504",
+      "status": "PASS",
+      "orders": 5,
+      "fills": 5,
+      "mtm_points": 541,
+      "final_cash": "7853.053711034969474047633247"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202504-202507",
+      "status": "PASS",
+      "orders": 24,
+      "fills": 24,
+      "mtm_points": 547,
+      "final_cash": "7956.252333254248525789280545"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "fold_id": "202507-202510",
+      "status": "PASS",
+      "orders": 45,
+      "fills": 45,
+      "mtm_points": 553,
+      "final_cash": "9013.625081467276931057045004"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202204-202207",
+      "status": "PASS",
+      "orders": 15,
+      "fills": 15,
+      "mtm_points": 547,
+      "final_cash": "9734.320806717752762412662313"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202207-202210",
+      "status": "PASS",
+      "orders": 27,
+      "fills": 27,
+      "mtm_points": 553,
+      "final_cash": "9816.491431383268379071752925"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202210-202301",
+      "status": "PASS",
+      "orders": 28,
+      "fills": 28,
+      "mtm_points": 553,
+      "final_cash": "9177.646159759130343549711345"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202301-202304",
+      "status": "PASS",
+      "orders": 39,
+      "fills": 39,
+      "mtm_points": 541,
+      "final_cash": "9056.577938913726650194842251"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202304-202307",
+      "status": "PASS",
+      "orders": 7,
+      "fills": 7,
+      "mtm_points": 547,
+      "final_cash": "8815.243208771745404393826778"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202307-202310",
+      "status": "PASS",
+      "orders": 0,
+      "fills": 0,
+      "mtm_points": 553,
+      "final_cash": "8815.243208771745404393826778"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202310-202401",
+      "status": "PASS",
+      "orders": 38,
+      "fills": 38,
+      "mtm_points": 553,
+      "final_cash": "10222.74406343062949498148877"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202401-202404",
+      "status": "PASS",
+      "orders": 54,
+      "fills": 54,
+      "mtm_points": 547,
+      "final_cash": "13210.89904369343542653262101"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202404-202407",
+      "status": "PASS",
+      "orders": 53,
+      "fills": 53,
+      "mtm_points": 547,
+      "final_cash": "13851.13246901430075040395609"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202407-202410",
+      "status": "PASS",
+      "orders": 27,
+      "fills": 27,
+      "mtm_points": 553,
+      "final_cash": "12596.51887540175574920879572"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202410-202501",
+      "status": "PASS",
+      "orders": 55,
+      "fills": 55,
+      "mtm_points": 553,
+      "final_cash": "12841.78172579362031963466117"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202501-202504",
+      "status": "PASS",
+      "orders": 27,
+      "fills": 27,
+      "mtm_points": 541,
+      "final_cash": "12055.23802218736408992805125"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202504-202507",
+      "status": "PASS",
+      "orders": 45,
+      "fills": 45,
+      "mtm_points": 547,
+      "final_cash": "12424.20992872879675264816505"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "fold_id": "202507-202510",
+      "status": "PASS",
+      "orders": 67,
+      "fills": 67,
+      "mtm_points": 553,
+      "final_cash": "16666.08545334829773305169557"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202204-202207",
+      "status": "PASS",
+      "orders": 7,
+      "fills": 7,
+      "mtm_points": 547,
+      "final_cash": "9546.536254943911373414180535"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202207-202210",
+      "status": "PASS",
+      "orders": 12,
+      "fills": 12,
+      "mtm_points": 553,
+      "final_cash": "9065.487329779225340859909750"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202210-202301",
+      "status": "PASS",
+      "orders": 4,
+      "fills": 4,
+      "mtm_points": 553,
+      "final_cash": "7888.691940055744113543044447"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202301-202304",
+      "status": "PASS",
+      "orders": 28,
+      "fills": 28,
+      "mtm_points": 541,
+      "final_cash": "7971.239527518093094244220673"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202304-202307",
+      "status": "PASS",
+      "orders": 4,
+      "fills": 4,
+      "mtm_points": 547,
+      "final_cash": "7766.312545411374973692156855"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202307-202310",
+      "status": "PASS",
+      "orders": 28,
+      "fills": 28,
+      "mtm_points": 553,
+      "final_cash": "7783.190144509457112270804135"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202310-202401",
+      "status": "PASS",
+      "orders": 45,
+      "fills": 45,
+      "mtm_points": 553,
+      "final_cash": "11483.98758218964341880953719"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202401-202404",
+      "status": "PASS",
+      "orders": 48,
+      "fills": 48,
+      "mtm_points": 547,
+      "final_cash": "13371.97721385779375036928928"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202404-202407",
+      "status": "PASS",
+      "orders": 29,
+      "fills": 29,
+      "mtm_points": 547,
+      "final_cash": "11706.12445106099563039048609"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202407-202410",
+      "status": "PASS",
+      "orders": 19,
+      "fills": 19,
+      "mtm_points": 553,
+      "final_cash": "11357.34581515866621766862515"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202410-202501",
+      "status": "PASS",
+      "orders": 43,
+      "fills": 43,
+      "mtm_points": 553,
+      "final_cash": "12058.38471558813803602532971"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202501-202504",
+      "status": "PASS",
+      "orders": 7,
+      "fills": 7,
+      "mtm_points": 541,
+      "final_cash": "11547.82320946878055776757928"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202504-202507",
+      "status": "PASS",
+      "orders": 26,
+      "fills": 26,
+      "mtm_points": 547,
+      "final_cash": "11666.02438417891354863738987"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "fold_id": "202507-202510",
+      "status": "PASS",
+      "orders": 49,
+      "fills": 49,
+      "mtm_points": 553,
+      "final_cash": "12675.37728339394017141053604"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202204-202207",
+      "status": "PASS",
+      "orders": 6,
+      "fills": 6,
+      "mtm_points": 547,
+      "final_cash": "9632.603025938194017189463851"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202207-202210",
+      "status": "PASS",
+      "orders": 22,
+      "fills": 22,
+      "mtm_points": 553,
+      "final_cash": "9581.750644738983737264982810"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202210-202301",
+      "status": "PASS",
+      "orders": 25,
+      "fills": 25,
+      "mtm_points": 553,
+      "final_cash": "9035.672877891058849159805316"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202301-202304",
+      "status": "PASS",
+      "orders": 27,
+      "fills": 27,
+      "mtm_points": 541,
+      "final_cash": "8618.011243159891514234806922"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202304-202307",
+      "status": "PASS",
+      "orders": 19,
+      "fills": 19,
+      "mtm_points": 547,
+      "final_cash": "8782.403130210413177040965450"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202307-202310",
+      "status": "PASS",
+      "orders": 20,
+      "fills": 20,
+      "mtm_points": 553,
+      "final_cash": "7858.056628507232128478857486"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202310-202401",
+      "status": "PASS",
+      "orders": 43,
+      "fills": 43,
+      "mtm_points": 553,
+      "final_cash": "8481.242445798293534046960050"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202401-202404",
+      "status": "PASS",
+      "orders": 28,
+      "fills": 28,
+      "mtm_points": 547,
+      "final_cash": "8573.010544830820304037324180"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202404-202407",
+      "status": "PASS",
+      "orders": 4,
+      "fills": 4,
+      "mtm_points": 547,
+      "final_cash": "8394.597408745404202690740651"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202407-202410",
+      "status": "PASS",
+      "orders": 42,
+      "fills": 42,
+      "mtm_points": 553,
+      "final_cash": "8691.583594469753390611901625"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202410-202501",
+      "status": "PASS",
+      "orders": 25,
+      "fills": 25,
+      "mtm_points": 553,
+      "final_cash": "10206.67387935810271499795710"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202501-202504",
+      "status": "PASS",
+      "orders": 21,
+      "fills": 21,
+      "mtm_points": 541,
+      "final_cash": "10657.61627692140100994968551"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202504-202507",
+      "status": "PASS",
+      "orders": 22,
+      "fills": 22,
+      "mtm_points": 547,
+      "final_cash": "10141.18293413007402560663212"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "fold_id": "202507-202510",
+      "status": "PASS",
+      "orders": 38,
+      "fills": 38,
+      "mtm_points": 553,
+      "final_cash": "10604.51057073722130964584072"
+    }
+  ]
+}

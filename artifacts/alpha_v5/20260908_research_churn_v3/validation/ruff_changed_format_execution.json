@@ -1,0 +1,10 @@
+{
+  "command": "ruff format --check (9 changed Python files and tests/alpha_v5)",
+  "started_at": "2026-09-08T15:10:35.6147549Z",
+  "finished_at": "2026-09-08T15:10:35.9170584Z",
+  "exit_code": 0,
+  "preexisting_full_format_exception": "scripts/run_alpha_v4_final_holdout.py",
+  "exception_head_blob": "10b891867b787c72ba8183d113a58faa6c72a011",
+  "exception_workspace_blob": "10b891867b787c72ba8183d113a58faa6c72a011",
+  "exception_unchanged": true
+}

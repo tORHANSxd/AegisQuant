@@ -1,0 +1,7 @@
+{
+  "status": "PREPARATION_FAILED_BEFORE_DATA_DOWNLOAD",
+  "reason": "BufferPolicy timedelta was not JSON serializable; fixed serialization before any market history download or replay",
+  "model_fits": 0,
+  "engine_runs": 0,
+  "successor": "../20260908_v2"
+}

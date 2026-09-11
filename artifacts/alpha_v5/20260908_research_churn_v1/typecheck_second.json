@@ -1,0 +1,78 @@
+{
+    "version": "1.1.411",
+    "time": "1788878895103",
+    "generalDiagnostics": [
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_profitability_root_causes.py",
+            "severity": "error",
+            "message": "Argument of type \"PythonLiteral | None\" cannot be assigned to parameter \"x\" of type \"ConvertibleToFloat\" in function \"__new__\"\n  Type \"PythonLiteral | None\" is not assignable to type \"ConvertibleToFloat\"\n    Type \"date\" is not assignable to type \"ConvertibleToFloat\"\n      \"date\" is not assignable to \"str\"\n      \"date\" is incompatible with protocol \"Buffer\"\n        \"__buffer__\" is not present\n      \"date\" is incompatible with protocol \"SupportsFloat\"\n        \"__float__\" is not present\n      \"date\" is incompatible with protocol \"SupportsIndex\"\n  ...",
+            "range": {
+                "start": {
+                    "line": 170,
+                    "character": 51
+                },
+                "end": {
+                    "line": 170,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_profitability_root_causes.py",
+            "severity": "error",
+            "message": "Argument of type \"PythonLiteral | None\" cannot be assigned to parameter \"x\" of type \"ConvertibleToFloat\" in function \"__new__\"\n  Type \"PythonLiteral | None\" is not assignable to type \"ConvertibleToFloat\"\n    Type \"date\" is not assignable to type \"ConvertibleToFloat\"\n      \"date\" is not assignable to \"str\"\n      \"date\" is incompatible with protocol \"Buffer\"\n        \"__buffer__\" is not present\n      \"date\" is incompatible with protocol \"SupportsFloat\"\n        \"__float__\" is not present\n      \"date\" is incompatible with protocol \"SupportsIndex\"",
+            "range": {
+                "start": {
+                    "line": 170,
+                    "character": 51
+                },
+                "end": {
+                    "line": 170,
+                    "character": 81
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_profitability_root_causes.py",
+            "severity": "error",
+            "message": "Argument of type \"PythonLiteral | None\" cannot be assigned to parameter \"x\" of type \"ConvertibleToFloat\" in function \"__new__\"\n  Type \"PythonLiteral | None\" is not assignable to type \"ConvertibleToFloat\"\n    Type \"date\" is not assignable to type \"ConvertibleToFloat\"\n      \"date\" is not assignable to \"str\"\n      \"date\" is incompatible with protocol \"Buffer\"\n        \"__buffer__\" is not present\n      \"date\" is incompatible with protocol \"SupportsFloat\"\n        \"__float__\" is not present\n      \"date\" is incompatible with protocol \"SupportsIndex\"\n  ...",
+            "range": {
+                "start": {
+                    "line": 171,
+                    "character": 47
+                },
+                "end": {
+                    "line": 171,
+                    "character": 73
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "d:\\Personal\\Quantitative_Trading\\scripts\\audit_alpha_profitability_root_causes.py",
+            "severity": "error",
+            "message": "Argument of type \"PythonLiteral | None\" cannot be assigned to parameter \"x\" of type \"ConvertibleToFloat\" in function \"__new__\"\n  Type \"PythonLiteral | None\" is not assignable to type \"ConvertibleToFloat\"\n    Type \"date\" is not assignable to type \"ConvertibleToFloat\"\n      \"date\" is not assignable to \"str\"\n      \"date\" is incompatible with protocol \"Buffer\"\n        \"__buffer__\" is not present\n      \"date\" is incompatible with protocol \"SupportsFloat\"\n        \"__float__\" is not present\n      \"date\" is incompatible with protocol \"SupportsIndex\"",
+            "range": {
+                "start": {
+                    "line": 171,
+                    "character": 47
+                },
+                "end": {
+                    "line": 171,
+                    "character": 73
+                }
+            },
+            "rule": "reportArgumentType"
+        }
+    ],
+    "summary": {
+        "filesAnalyzed": 744,
+        "errorCount": 4,
+        "warningCount": 0,
+        "informationCount": 0,
+        "timeInSec": 56.919
+    }
+}
+

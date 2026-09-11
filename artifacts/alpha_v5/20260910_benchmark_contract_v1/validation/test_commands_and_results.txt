@@ -1,0 +1,270 @@
+1. format-apply
+['D:\\Personal\\Quantitative_Trading\\.venv\\Scripts\\python.exe', '-m', 'ruff', 'format', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.100311s
+3 files reformatted, 2 files left unchanged
+
+
+2. ruff
+['.venv/Scripts/python.exe', '-m', 'ruff', 'check', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=1 elapsed=0.140330s
+F401 [*] `collections.abc.Sequence` imported but unused
+  --> src\aegisquant\research\validation\benchmark_contract.py:9:38
+   |
+ 7 | import json
+ 8 | import re
+ 9 | from collections.abc import Mapping, Sequence
+   |                                      ^^^^^^^^
+10 | from dataclasses import asdict
+11 | from datetime import timedelta
+   |
+help: Remove unused import: `collections.abc.Sequence`
+   |
+8  | import re
+   - from collections.abc import Mapping, Sequence
+9  + from collections.abc import Mapping
+10 | from dataclasses import asdict
+   |
+
+SIM117 Use a single `with` statement with multiple contexts instead of nested `with` statements
+   --> src\aegisquant\research\validation\benchmark_contract.py:369:9
+    |
+367 |       run_id = config["generation"] + ":CONTRACT_REPORT"
+368 |       try:
+369 | /         with registered_run(
+370 | |             output,
+371 | |             run_id,
+372 | |             planned_run_ids=[run_id],
+373 | |             bindings={"kind": "B3_CONTRACT_REPORT_NOT_ALPHA_TRIAL"},
+374 | |         ):  # noqa: SIM117 -- journal remains outside the write guard.
+375 | |             with zero_budget_guard(output, root, counters):
+    | |___________________________________________________________^
+376 |                   write_json_exclusive(
+377 |                       output / "preregistration.json", {"config": config, "planned_run_ids": [run_id]}
+    |
+help: Combine `with` statements
+
+RUF100 [*] Unused `noqa` directive (unused: `SIM117`)
+   --> src\aegisquant\research\validation\benchmark_contract.py:374:13
+    |
+372 |             planned_run_ids=[run_id],
+373 |             bindings={"kind": "B3_CONTRACT_REPORT_NOT_ALPHA_TRIAL"},
+374 |         ):  # noqa: SIM117 -- journal remains outside the write guard.
+    |             ^^^^^^^^^^^^^^
+375 |             with zero_budget_guard(output, root, counters):
+376 |                 write_json_exclusive(
+    |
+help: Remove unused `noqa` directive
+    |
+373 |             bindings={"kind": "B3_CONTRACT_REPORT_NOT_ALPHA_TRIAL"},
+    -         ):  # noqa: SIM117 -- journal remains outside the write guard.
+374 +         ):
+375 |             with zero_budget_guard(output, root, counters):
+    |
+
+Found 3 errors.
+[*] 2 fixable with the `--fix` option.
+
+
+3. format
+['.venv/Scripts/python.exe', '-m', 'ruff', 'format', '--check', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.120321s
+5 files already formatted
+
+
+4. pyright
+['.venv/Scripts/python.exe', '-m', 'pyright', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=1 elapsed=4.941372s
+d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\benchmark_contract.py
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\benchmark_contract.py:9:38 - error: Import "Sequence" is not accessed (reportUnusedImport)
+  d:\Personal\Quantitative_Trading\src\aegisquant\research\validation\benchmark_contract.py:140:13 - error: Type of "append" is partially unknown
+    Type of "append" is "(object: Unknown, /) -> None" (reportUnknownMemberType)
+d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:232:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:232:14 - error: Argument missing for parameter "rows" (reportCallIssue)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:232:36 - error: Parameter "mode" is already assigned (reportCallIssue)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:235:5 - error: "__setitem__" method not defined on type "str" (reportIndexIssue)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:237:9 - error: Argument missing for parameter "rows" (reportCallIssue)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:237:33 - error: Parameter "mode" is already assigned (reportCallIssue)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:238:16 - error: Argument missing for parameter "rows" (reportCallIssue)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:238:38 - error: Parameter "mode" is already assigned (reportCallIssue)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:258:40 - error: Argument type is partially unknown
+    Argument corresponds to parameter "class_or_instance" in function "fields"
+    Argument type is "type[Unknown]" (reportUnknownArgumentType)
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:326:28 - error: Argument of type "dict[Literal['G1-CASH', 'G1-F5_MATCHED', 'G1-G1_PASSIVE', 'G1-SIMPLE_TREND'], float]" cannot be assigned to parameter "p_values" of type "dict[str, float]" in function "holm_adjust"
+    "dict[Literal['G1-CASH', 'G1-F5_MATCHED', 'G1-G1_PASSIVE', 'G1-SIMPLE_TREND'], float]" is not assignable to "dict[str, float]"
+      Type parameter "_KT@dict" is invariant, but "Literal['G1-CASH', 'G1-F5_MATCHED', 'G1-G1_PASSIVE', 'G1-SIMPLE_TREND']" is not the same as "str" (reportArgumentType)
+12 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+5. pytest
+['.venv/Scripts/python.exe', '-m', 'pytest', '-o', 'addopts=', '--basetemp', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-01', 'tests/unit/research/test_paired_bootstrap.py', 'tests/alpha_v5/test_benchmark_contract.py', '--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-01.xml', '-q']
+exit=1 elapsed=7.609814s
+......................F.....................                             [100%]
+================================== FAILURES ===================================
+______ test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding ______
+
+    def test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding() -> None:
+        fill = {
+            "time": START,
+            "quantity": "1",
+            "side": "BUY",
+            "reference_price": "100",
+            "inventory": "1",
+        }
+        rows = [
+            {
+                "arm": "G1",
+                "symbol": "TEST",
+                "cost": cost,
+                "total_cost": total,
+                "final_equity": wealth,
+                "fill_path": [fill],
+            }
+            for cost, total, wealth in (("1", "1", "109"), ("1.5", "1.5", "108.5"), ("2", "2", "108"))
+        ]
+>       result = audit_cost_path(rows, mode=CostMode.SAME_FILL_SHADOW)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: audit_cost_path() got multiple values for argument 'mode'
+
+tests\alpha_v5\test_benchmark_contract.py:232: TypeError
+=========================== short test summary info ===========================
+FAILED tests/alpha_v5/test_benchmark_contract.py::test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding
+1 failed, 43 passed in 6.16s
+
+
+6. format-apply
+['.venv/Scripts/python.exe', '-m', 'ruff', 'format', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.099644s
+5 files left unchanged
+
+
+7. ruff
+['.venv/Scripts/python.exe', '-m', 'ruff', 'check', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.138945s
+All checks passed!
+
+
+8. format
+['.venv/Scripts/python.exe', '-m', 'ruff', 'format', '--check', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.143493s
+5 files already formatted
+
+
+9. pyright
+['.venv/Scripts/python.exe', '-m', 'pyright', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=1 elapsed=4.318441s
+d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py
+  d:\Personal\Quantitative_Trading\tests\alpha_v5\test_benchmark_contract.py:258:40 - error: Argument type is partially unknown
+    Argument corresponds to parameter "class_or_instance" in function "fields"
+    Argument type is "type[Unknown]" (reportUnknownArgumentType)
+1 error, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+10. pytest
+['.venv/Scripts/python.exe', '-m', 'pytest', '-o', 'addopts=', '--basetemp', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-02', 'tests/unit/research/test_paired_bootstrap.py', 'tests/alpha_v5/test_benchmark_contract.py', '--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-02.xml', '-q']
+exit=1 elapsed=6.588887s
+......................F.....................                             [100%]
+================================== FAILURES ===================================
+______ test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding ______
+
+    def test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding() -> None:
+        fill = {
+            "time": START,
+            "quantity": "1",
+            "side": "BUY",
+            "reference_price": "100",
+            "inventory": "1",
+        }
+        rows: list[dict[str, Any]] = [
+            {
+                "arm": "G1",
+                "symbol": "TEST",
+                "cost": cost,
+                "total_cost": total,
+                "final_equity": wealth,
+                "fill_path": [fill],
+            }
+            for cost, total, wealth in (("1", "1", "109"), ("1.5", "1.5", "108.5"), ("2", "2", "108"))
+        ]
+        result = audit_cost_path(CostMode.SAME_FILL_SHADOW, rows)
+        assert result["status"] == "VERIFIED" and not result["funding_feasibility_claimed"]
+        broken = copy.deepcopy(rows)
+        broken[-1]["fill_path"][0]["quantity"] = "2"
+>       with pytest.raises(ValueError, match="SHADOW-PATH-CHANGED"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests\alpha_v5\test_benchmark_contract.py:236: Failed
+=========================== short test summary info ===========================
+FAILED tests/alpha_v5/test_benchmark_contract.py::test_b3_shadow_reuses_full_fill_identity_and_never_claims_funding
+1 failed, 43 passed in 5.23s
+
+
+11. ruff
+['.venv/Scripts/python.exe', '-m', 'ruff', 'check', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.117780s
+All checks passed!
+
+
+12. format
+['.venv/Scripts/python.exe', '-m', 'ruff', 'format', '--check', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.119849s
+5 files already formatted
+
+
+13. pyright
+['.venv/Scripts/python.exe', '-m', 'pyright', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=4.075549s
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+14. pytest
+['.venv/Scripts/python.exe', '-m', 'pytest', '-o', 'addopts=', '--basetemp', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-03', 'tests/unit/research/test_paired_bootstrap.py', 'tests/alpha_v5/test_benchmark_contract.py', '--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-03.xml', '-q']
+exit=0 elapsed=5.889915s
+............................................                             [100%]
+44 passed in 4.62s
+
+
+15. format-apply
+['.venv/Scripts/python.exe', '-m', 'ruff', 'format', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.092887s
+1 file reformatted, 4 files left unchanged
+
+
+16. ruff
+['.venv/Scripts/python.exe', '-m', 'ruff', 'check', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.146093s
+All checks passed!
+
+
+17. format
+['.venv/Scripts/python.exe', '-m', 'ruff', 'format', '--check', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=0.133639s
+5 files already formatted
+
+
+18. pyright
+['.venv/Scripts/python.exe', '-m', 'pyright', 'src/aegisquant/research/validation/paired_bootstrap.py', 'scripts/audit_alpha_profitability_root_causes.py', 'src/aegisquant/research/validation/benchmark_contract.py', 'scripts/run_alpha_v5_benchmark_diagnostics.py', 'tests/alpha_v5/test_benchmark_contract.py']
+exit=0 elapsed=4.026774s
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.413).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+
+
+19. pytest
+['.venv/Scripts/python.exe', '-m', 'pytest', '-o', 'addopts=', '--basetemp', 'C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-04', 'tests/unit/research/test_paired_bootstrap.py', 'tests/alpha_v5/test_benchmark_contract.py', '--junitxml=C:\\Users\\SXD\\AppData\\Local\\Temp\\aegis-b3-contract-20260910-fycl0z3t\\pytest-04.xml', '-q']
+exit=0 elapsed=5.949006s
+............................................                             [100%]
+44 passed in 4.61s
+
+

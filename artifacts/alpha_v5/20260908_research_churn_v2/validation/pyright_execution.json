@@ -1,0 +1,6 @@
+{
+  "command": "python -m pyright --project pyproject.toml --outputjson",
+  "started_at": "2026-09-08T14:56:35.7081119Z",
+  "finished_at": "2026-09-08T14:57:13.2934998Z",
+  "exit_code": 0
+}

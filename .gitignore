@@ -50,6 +50,11 @@ knowledge/social_archive/**
 models/**/*.bin
 models/**/*.safetensors
 
+# Local private imports (also excluded from the independent archive).
+incoming/joinquant/
+data/external/joinquant/raw_private/
+data/external/joinquant/normalized/
+
 # Generated scratch files
 *.tmp
 *.log

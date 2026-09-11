@@ -1,0 +1,78 @@
+{
+  "policy": "NESTED_EPISODE_INTERVAL_V2",
+  "tier": "PREVIOUSLY_USED_DEVELOPMENT_NOT_HOLDOUT",
+  "information_embargo_seconds": 14400,
+  "outer_months": 42,
+  "folds": [
+    {
+      "outer_fold": 1,
+      "train_start": "2021-01-01T00:00:00+00:00",
+      "test_start": "2022-04-01T00:00:00+00:00",
+      "test_end": "2023-06-01T00:00:00+00:00",
+      "inner_validation": [
+        {
+          "start": "2021-07-01T00:00:00+00:00",
+          "end": "2021-10-01T00:00:00+00:00"
+        },
+        {
+          "start": "2021-10-01T00:00:00+00:00",
+          "end": "2022-01-01T00:00:00+00:00"
+        },
+        {
+          "start": "2022-01-01T00:00:00+00:00",
+          "end": "2022-04-01T00:00:00+00:00"
+        }
+      ],
+      "samples": null,
+      "status": "NOT_COLLECTED"
+    },
+    {
+      "outer_fold": 2,
+      "train_start": "2021-01-01T00:00:00+00:00",
+      "test_start": "2023-06-01T00:00:00+00:00",
+      "test_end": "2024-08-01T00:00:00+00:00",
+      "inner_validation": [
+        {
+          "start": "2022-09-01T00:00:00+00:00",
+          "end": "2022-12-01T00:00:00+00:00"
+        },
+        {
+          "start": "2022-12-01T00:00:00+00:00",
+          "end": "2023-03-01T00:00:00+00:00"
+        },
+        {
+          "start": "2023-03-01T00:00:00+00:00",
+          "end": "2023-06-01T00:00:00+00:00"
+        }
+      ],
+      "samples": null,
+      "status": "NOT_COLLECTED"
+    },
+    {
+      "outer_fold": 3,
+      "train_start": "2021-01-01T00:00:00+00:00",
+      "test_start": "2024-08-01T00:00:00+00:00",
+      "test_end": "2025-10-01T00:00:00+00:00",
+      "inner_validation": [
+        {
+          "start": "2023-11-01T00:00:00+00:00",
+          "end": "2024-02-01T00:00:00+00:00"
+        },
+        {
+          "start": "2024-02-01T00:00:00+00:00",
+          "end": "2024-05-01T00:00:00+00:00"
+        },
+        {
+          "start": "2024-05-01T00:00:00+00:00",
+          "end": "2024-08-01T00:00:00+00:00"
+        }
+      ],
+      "samples": null,
+      "status": "NOT_COLLECTED"
+    }
+  ],
+  "statistical_sufficiency": "NOT_ESTABLISHED",
+  "source_span_sha256": null,
+  "rows_outside_development": null,
+  "manifest_sha256": "cd0919685cc5a4b5548fe79668a8aa1868acab5116cc47da9290ecffd81ee123"
+}

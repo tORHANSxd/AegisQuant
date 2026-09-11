@@ -1,0 +1,13 @@
+{
+  "status": "FAILED_RETAINED_DO_NOT_REOPEN",
+  "error": "ValueError: AQ-EVIDENCE-FILL-AMOUNT",
+  "actual_attempts": {
+    "historical_strategy_engine_runs": 0,
+    "real_return_model_fits": 0,
+    "real_calibration_fits": 0,
+    "final_holdout_accesses": 0,
+    "real_orders": 0
+  },
+  "research_conclusion": "NO_PROVEN_ALPHA",
+  "production_policy": "CASH"
+}

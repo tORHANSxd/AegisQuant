@@ -1,0 +1,62 @@
+{
+  "BTCUSDT": {
+    "source_path": "data/bronze/real_market_backtest/BTCUSDT_1h.csv",
+    "source_sha256": "96d99d52e9d4eb422d5018ae72ef7a62ac9ba887bb30d0102131f3635f75fc50",
+    "path": "artifacts/alpha_v5/20260908_research_churn_v3/development_data/BTCUSDT_1h.csv",
+    "sha256": "63d13b3bc96c805edc164918cc02bd83fe8d07aa4bce0e273f125ba2ffc148df",
+    "included_hourly_rows": 41602,
+    "excluded_outside_window_rows": 2208,
+    "complete_4h_bars": 10393,
+    "first_event": "2021-01-01 00:00:00+00:00",
+    "last_available": "2025-09-30 23:59:59.999000+00:00",
+    "missing_bars_filled": false
+  },
+  "ETHUSDT": {
+    "source_path": "data/bronze/real_market_backtest/ETHUSDT_1h.csv",
+    "source_sha256": "5470524b040cbc106c4eb80c77fb706d949a53173b619ec399f9aae87fe6c433",
+    "path": "artifacts/alpha_v5/20260908_research_churn_v3/development_data/ETHUSDT_1h.csv",
+    "sha256": "1961ba785b70c41c6e6c82e77b756f524786d91384a7c09ff09cdf66d0362e10",
+    "included_hourly_rows": 41602,
+    "excluded_outside_window_rows": 2208,
+    "complete_4h_bars": 10393,
+    "first_event": "2021-01-01 00:00:00+00:00",
+    "last_available": "2025-09-30 23:59:59.999000+00:00",
+    "missing_bars_filled": false
+  },
+  "BNBUSDT": {
+    "source_path": "data/bronze/alpha_v4_multi_asset/BNBUSDT_1h.csv",
+    "source_sha256": "45453780abb9776be461972d3951b62b6f334f52ae53edca3836db83b6b561c2",
+    "path": "artifacts/alpha_v5/20260908_research_churn_v3/development_data/BNBUSDT_1h.csv",
+    "sha256": "45453780abb9776be461972d3951b62b6f334f52ae53edca3836db83b6b561c2",
+    "included_hourly_rows": 41602,
+    "excluded_outside_window_rows": 0,
+    "complete_4h_bars": 10393,
+    "first_event": "2021-01-01 00:00:00+00:00",
+    "last_available": "2025-09-30 23:59:59.999000+00:00",
+    "missing_bars_filled": false
+  },
+  "SOLUSDT": {
+    "source_path": "data/bronze/alpha_v4_multi_asset/SOLUSDT_1h.csv",
+    "source_sha256": "5f24735678d944cce3220004d1c05e995f2c6409a22ffc7e32d7c2fc07af2e5e",
+    "path": "artifacts/alpha_v5/20260908_research_churn_v3/development_data/SOLUSDT_1h.csv",
+    "sha256": "5f24735678d944cce3220004d1c05e995f2c6409a22ffc7e32d7c2fc07af2e5e",
+    "included_hourly_rows": 41602,
+    "excluded_outside_window_rows": 0,
+    "complete_4h_bars": 10394,
+    "first_event": "2021-01-01 00:00:00+00:00",
+    "last_available": "2025-09-30 23:59:59.999000+00:00",
+    "missing_bars_filled": false
+  },
+  "XRPUSDT": {
+    "source_path": "data/bronze/alpha_v4_multi_asset/XRPUSDT_1h.csv",
+    "source_sha256": "abb39449f095168e8ff0797ffc97f6d97898ddb312a1ecd44938a5db1d182fcb",
+    "path": "artifacts/alpha_v5/20260908_research_churn_v3/development_data/XRPUSDT_1h.csv",
+    "sha256": "abb39449f095168e8ff0797ffc97f6d97898ddb312a1ecd44938a5db1d182fcb",
+    "included_hourly_rows": 41602,
+    "excluded_outside_window_rows": 0,
+    "complete_4h_bars": 10394,
+    "first_event": "2021-01-01 00:00:00+00:00",
+    "last_available": "2025-09-30 23:59:59.999000+00:00",
+    "missing_bars_filled": false
+  }
+}

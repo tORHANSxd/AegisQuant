@@ -53,6 +53,17 @@ Phase G 仅接入受限风险覆盖层。结果见 `artifacts/alpha_v4/reports/f
 
 ## 历史实现与规格身份
 
+最新用户授权任务为 `deep-research-report.md`，SHA-256
+`fbd6038da014075e68d88eaf6aa5ffdc8d435dcef4a1e04650942be2739ec5f6`，共 1,388 行。
+首批边界来自“Codex 应首先执行的补丁伪 diff”（第 1,250 行）：先研究有效性与 churn，后续 ML 分批推进。
+执行 generation 为 `alpha-r5-research-churn-20260908-v3`，配置 `configs/research/aegis_alpha_v5.yaml`，
+证据 `artifacts/alpha_v5/20260908_research_churn_v3/`。v1/v2 的入口失败及哈希链保留，所有策略和统计参数未变。
+首批已完成 70 个旧季度分区和 5 个原 F3 连续 sleeve 精确复现、55 次预登记回放、1,188 项全仓测试。
+G1 五项 churn 门槛通过，成交名义额/实际成本减少 58.54%/58.13%；盈利季度及 Holm 统计门槛仍失败。
+收尾报告为 `artifacts/alpha_v5/20260908_research_churn_v3/report.md`，验证在该目录 `validation/`。
+此 R5 研究扩展不改变 v4 规格身份，也不恢复旧工程 v5 状态机。缺少真实 PIT/执行历史及未使用留出，
+后续完整验收仍未满足，生产 CASH 与交易锁持续生效。
+
 此前明确授权的审计修复任务为 `AegisQuant_盈利验证修复任务书_R2_2026-09-08.md`，
 SHA-256 `15ad2e6541e9e5b29306a0ba5cdc60305f12f0ce0b137dfdcc4b610cabeabe49`。
 它替代前版审计计划；v4 的安全约束、未使用留出集要求与生产现金状态继续有效。
@@ -79,3 +90,10 @@ v5 和 v3.1 均为历史参考，不再作为当前 SSOT，也不据旧验收结
   - 7,023 行，P00–P18；状态 `state/PROJECT_PHASE_STATE.yaml`，证据 `reports/phases/`。
 
 旧规格文件、历史状态、历史证据及其完整性测试保持历史语义；不能覆盖当前状态或授权实盘。
+
+2026-09-11 单文件审阅入口：`AegisQuant_最新结果与代码审阅包_20260911.md`。
+最新 B0–B7 工程契约汇总：`artifacts/alpha_v5/20260910_final_contract_v1/report.md`。
+最新保存模拟记录核验：`artifacts/alpha_v5/20260910_saved_evidence_v2/report.md`，
+generation `alpha-r5-saved-evidence-20260910-v2`，215 个保存运行、17 组，
+`VERIFIED_STORED_SIMULATION`；没有新策略回放或真实执行校准。
+这些工程证据补充原研究，不替换 R5 G1 或近期冻结 R4 F3 的业绩身份；完整研究验收仍未完成。

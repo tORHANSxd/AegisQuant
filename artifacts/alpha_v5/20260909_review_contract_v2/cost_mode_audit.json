@@ -1,0 +1,367 @@
+{
+  "modes": {
+    "REDECIDE_FUNDED": "Cost can change decisions, cash and fills; no terminal monotonic assertion.",
+    "FROZEN_ORDERS_FUNDED": "Fixed order intents do not fix fills or funding; no terminal monotonic assertion.",
+    "SAME_FILL_SHADOW": "Same time/quantity/side/reference/inventory; adverse costs cannot improve shadow PnL; funding not asserted."
+  },
+  "r5_frozen_orders_funded_trial": "NOT_COLLECTED",
+  "same_fill_shadow_checks": [
+    {
+      "arm": "G0",
+      "symbol": "BNBUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G0",
+      "symbol": "BTCUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G0",
+      "symbol": "ETHUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G0",
+      "symbol": "SOLUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G0",
+      "symbol": "XRPUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1",
+      "symbol": "BNBUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1",
+      "symbol": "BTCUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1",
+      "symbol": "ETHUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1",
+      "symbol": "SOLUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1",
+      "symbol": "XRPUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H10",
+      "symbol": "BNBUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H10",
+      "symbol": "BTCUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H10",
+      "symbol": "ETHUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H10",
+      "symbol": "SOLUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H10",
+      "symbol": "XRPUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H3",
+      "symbol": "BNBUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H3",
+      "symbol": "BTCUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H3",
+      "symbol": "ETHUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H3",
+      "symbol": "SOLUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_H3",
+      "symbol": "XRPUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_PASSIVE",
+      "symbol": "BNBUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_PASSIVE",
+      "symbol": "BTCUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_PASSIVE",
+      "symbol": "ETHUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_PASSIVE",
+      "symbol": "SOLUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_PASSIVE",
+      "symbol": "XRPUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R24",
+      "symbol": "BNBUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R24",
+      "symbol": "BTCUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R24",
+      "symbol": "ETHUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R24",
+      "symbol": "SOLUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R24",
+      "symbol": "XRPUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R72",
+      "symbol": "BNBUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R72",
+      "symbol": "BTCUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R72",
+      "symbol": "ETHUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R72",
+      "symbol": "SOLUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    },
+    {
+      "arm": "G1_R72",
+      "symbol": "XRPUSDT",
+      "mode": "SAME_FILL_SHADOW",
+      "status": "NOT_VERIFIED",
+      "saved_table_arithmetic_status": "DERIVED_ONLY",
+      "monotonic_wealth_required": true,
+      "fill_path_identity": "NOT_VERIFIED",
+      "funding_feasibility_claimed": false
+    }
+  ],
+  "g1_vs_f0": {
+    "wealth_difference": "16060.45311570832",
+    "nominal_reported_cost_difference": "1693.0537393882996",
+    "cost_difference_fraction_of_wealth_difference": "0.1054175574742886222540933512",
+    "wealth_plus_reported_cost_difference": "14367.3993763200204",
+    "interpretation": "Each own path plus accounted costs; NOT a funded zero-cost replay or alpha."
+  }
+}

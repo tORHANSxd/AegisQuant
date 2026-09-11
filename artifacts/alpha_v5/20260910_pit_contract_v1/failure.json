@@ -1,0 +1,15 @@
+{
+  "status": "FAILED_RETAINED_DO_NOT_REOPEN",
+  "error": "PITDataQualityError: AQ-PIT-STRICT-DATA-QUALITY-INSUFFICIENT-EVIDENCE",
+  "kind": "PIT_DATA_QUALITY_NOT_ALPHA_TRIAL",
+  "actual": {
+    "data_quality_jobs": 1,
+    "historical_strategy_engine_runs": 0,
+    "real_return_model_fits": 0,
+    "real_calibration_fits": 0,
+    "final_holdout_accesses": 0,
+    "real_orders": 0
+  },
+  "research_conclusion": "NO_PROVEN_ALPHA",
+  "production_policy": "CASH"
+}

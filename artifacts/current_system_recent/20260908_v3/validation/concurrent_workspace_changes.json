@@ -1,0 +1,26 @@
+{
+  "registered_at": "2026-09-08T14:25:44.002228+00:00",
+  "source_head": "d8c6d4013097f6323ab8b7a424c860ba0ccbd62b",
+  "changes_not_made_by_this_task": [
+    {
+      "path": "src/aegisquant/portfolio/economic_gate.py",
+      "frozen": "3e89f4695e502e02b49b101a8c942fc7fed531719c541ebdd269622e0aa3d35c",
+      "current": "2b3f3244ea34705c6b59b10e4f663c8bbbbcf45fdfd48293c523254241247bfc"
+    },
+    {
+      "path": "src/aegisquant/research/strategies/buffered_target.py",
+      "frozen": "97a1d809ed1074a98671ea6883ca64b7e1b59c6de8711f5347be57e9dde147a7",
+      "current": "596b7fcdd31e48f7d0b35b9f477bbfd2e2c9c6fa8ce263af180079510b1837fc"
+    },
+    {
+      "path": "src/aegisquant/research/validation/cat_replay.py",
+      "frozen": "dc204d3f08c191a3b0be07ba26ce7ad7ad8d8dafc1890ca0c9456c90af15f586",
+      "current": "5d722264eb2b3d2f0366e425645fe759189ac468aa2f9f1b51dccafd30317e01"
+    },
+    {
+      "path": "configs/research/alpha_v4_multi_asset.yaml",
+      "frozen": "6c96d30344820bb47cb66864f8aee68bf710ea4f48dc9f4905ab63b0392cfcde",
+      "current": "abbd9aa6dd2dd2bb45968124b43129e0799843e610497ae3eb14ad033a53dd67"
+    }
+  ]
+}

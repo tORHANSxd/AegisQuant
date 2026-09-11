@@ -1,0 +1,3788 @@
+{
+  "status": "INCOMPLETE_GLOBAL_RESEARCH_HISTORY",
+  "r5_generations": [
+    {
+      "generation": "alpha-r5-research-churn-20260908-v1",
+      "journal_sha256": "2ec550fe6256318bc324d3d73e926992475c20da461991eb452c3f6ef3f3e1aa",
+      "registered_slots": 56,
+      "trials": [
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:baseline",
+          "kind": "REPRODUCTION",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v1:baseline:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v1:baseline",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T14:50:47.505348Z",
+              "trial_number": null,
+              "details": {
+                "calibration_fits": 0,
+                "holdout_accesses": 0,
+                "manifest_sha256": "1a12a5c41b5a2f08e2d6a77948996f002bd3e6f2e875925cb4150df5f2910f67",
+                "model_fits": 0
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v1:baseline:ERROR",
+              "run_id": "alpha-r5-research-churn-20260908-v1:baseline",
+              "event_type": "ERROR",
+              "recorded_at_utc": "2026-09-08T14:50:48.148058Z",
+              "trial_number": null,
+              "details": {
+                "calibration_fits": 0,
+                "holdout_accesses": 0,
+                "manifest_sha256": "1a12a5c41b5a2f08e2d6a77948996f002bd3e6f2e875925cb4150df5f2910f67",
+                "model_fits": 0,
+                "reason": "PermissionError: market observations exceed the registered development interval"
+              }
+            }
+          ],
+          "status": "ERROR",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G0:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G0:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G0:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G0:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G0:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:BTCUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:BTCUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:ETHUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:ETHUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:BNBUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:BNBUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:SOLUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:SOLUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:XRPUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1:XRPUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H3:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H3:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H3:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H3:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H3:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H10:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H10:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H10:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H10:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_H10:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R24:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R24:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R24:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R24:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R24:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R72:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R72:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R72:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R72:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_R72:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:BTCUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:BTCUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:ETHUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:ETHUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:BNBUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:BNBUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:SOLUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:SOLUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:XRPUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v1:G1_PASSIVE:XRPUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        }
+      ],
+      "history_classification": "ENGINEERING_PRECONDITION_FAILURE_BEFORE_NEW_STRATEGY_RESULTS"
+    },
+    {
+      "generation": "alpha-r5-research-churn-20260908-v2",
+      "journal_sha256": "0cf91d03797195801c70529b0d4d08cc14f0ddc724b39abb07d149f9cf4a0d77",
+      "registered_slots": 56,
+      "trials": [
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:baseline",
+          "kind": "REPRODUCTION",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v2:baseline:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v2:baseline",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T14:56:38.974386Z",
+              "trial_number": null,
+              "details": {
+                "calibration_fits": 0,
+                "holdout_accesses": 0,
+                "manifest_sha256": "c45048e5a1aa38f3d5286fec742f47ae79fe0cdf1b6674af275d420b447a279c",
+                "model_fits": 0
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v2:baseline:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v2:baseline",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T14:57:06.221130Z",
+              "trial_number": null,
+              "details": {
+                "baseline_result_sha256": "275f63f5418785fafe62abb4724955259ed4e7472c12c2420d3bcc8f215175e2",
+                "calibration_fits": 0,
+                "development_partitions_sha256": "9a2fc1c50c88fd4794ec61efb5057d7dfa1a7716ae253ecd00a5952aface58a1",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c45048e5a1aa38f3d5286fec742f47ae79fe0cdf1b6674af275d420b447a279c",
+                "model_fits": 0
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G0:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v2:G0:BTCUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v2:G0:BTCUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T14:57:06.838163Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "baseline_result_sha256": "275f63f5418785fafe62abb4724955259ed4e7472c12c2420d3bcc8f215175e2",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "9a2fc1c50c88fd4794ec61efb5057d7dfa1a7716ae253ecd00a5952aface58a1",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c45048e5a1aa38f3d5286fec742f47ae79fe0cdf1b6674af275d420b447a279c",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v2:G0:BTCUSDT:1:ERROR",
+              "run_id": "alpha-r5-research-churn-20260908-v2:G0:BTCUSDT:1",
+              "event_type": "ERROR",
+              "recorded_at_utc": "2026-09-08T14:57:06.845888Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "baseline_result_sha256": "275f63f5418785fafe62abb4724955259ed4e7472c12c2420d3bcc8f215175e2",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "9a2fc1c50c88fd4794ec61efb5057d7dfa1a7716ae253ecd00a5952aface58a1",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c45048e5a1aa38f3d5286fec742f47ae79fe0cdf1b6674af275d420b447a279c",
+                "model_fits": 0,
+                "reason": "ValidationError: 8 validation errors for EconomicGatePolicy\nlambda_cost\n  Input should be an instance of Decimal [type=is_instance_of, input_value='2', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of\np_enter\n  Input should be an instance of Decimal [type=is_instance_of, input_value='0.55', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of\np_full_size\n  Input should be an instance of Decimal [type=is_instance_of, input_value='0.70', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of\nuncertainty_weight\n  Input should be an instance of Decimal [type=is_instance_of, input_value='0.25', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of\nmodel_uncertainty_buffer\n  Input should be an instance of Decimal [type=is_instance_of, input_value='0', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of\nexecution_uncertainty_buffer\n  Input should be an instance of Decimal [type=is_instance_of, input_value='0.0002', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of\ntarget_volatility\n  Input should be an instance of Decimal [type=is_instance_of, input_value='0.20', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of\nmaximum_weight\n  Input should be an instance of Decimal [type=is_instance_of, input_value='1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/is_instance_of",
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "ERROR",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G0:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G0:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G0:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G0:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:BTCUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:BTCUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:ETHUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:ETHUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:BNBUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:BNBUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:SOLUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:SOLUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:XRPUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1:XRPUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H3:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H3:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H3:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H3:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H3:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H10:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H10:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H10:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H10:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_H10:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R24:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R24:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R24:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R24:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R24:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R72:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R72:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R72:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R72:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_R72:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:BTCUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:BTCUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:ETHUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:ETHUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:BNBUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:BNBUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:SOLUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:SOLUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:XRPUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v2:G1_PASSIVE:XRPUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [],
+          "status": "NOT_EXECUTED",
+          "observed_return_result": false
+        }
+      ],
+      "history_classification": "ENGINEERING_PRECONDITION_FAILURE_BEFORE_NEW_STRATEGY_RESULTS"
+    },
+    {
+      "generation": "alpha-r5-research-churn-20260908-v3",
+      "journal_sha256": "3f78b3b826b1e66cdd7c1aa8fe620491bb75646921f92331ade20af25beef54a",
+      "registered_slots": 56,
+      "trials": [
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:baseline",
+          "kind": "REPRODUCTION",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:baseline:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:baseline",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:01:30.897463Z",
+              "trial_number": null,
+              "details": {
+                "calibration_fits": 0,
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:baseline:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:baseline",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:01:57.493217Z",
+              "trial_number": null,
+              "details": {
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": false
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G0:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:BTCUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:BTCUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:01:58.123118Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:BTCUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:BTCUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:02:20.304540Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "artifacts_sha256": {
+                  "completion.json": "25d85cc37954c3a359027a8f9642df2e2c49a8233426b811e01d9182b861b320",
+                  "decision_trace.parquet": "346a9249433faf6105a125b2e85a96c2264bf6319e2f0cc3dfbffb96e16d3bb6",
+                  "equity.parquet": "2f4a84dadced91a14e526003987d4ae721745e6bdbbc08e927fffef10ee862e0",
+                  "result.json.gz": "311aa262af46f6e8156e84ef8ecb44cf64806697aa5657e40cc447dae4a70aa0"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G0:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:ETHUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:ETHUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:05:01.194218Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:ETHUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:ETHUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:05:20.335427Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "artifacts_sha256": {
+                  "completion.json": "50aef409b99796e9ce754395f51e6acdfb8abb8c4b98fe25cfd751fb14995851",
+                  "decision_trace.parquet": "6a18a94c2438e7bbdede9fd0dcdc9720f690dd06bb58fbc83dd19810b89af0ec",
+                  "equity.parquet": "0398a9a869976618c2387033e03c547917fca39afb3c7f39a36960f15fad4062",
+                  "result.json.gz": "83c4cf39340aa05deb6fd1eb6f062edf710a3a412a15334b67769b663f7b84c2"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G0:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:BNBUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:BNBUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:08:07.926620Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:BNBUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:BNBUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:08:28.646705Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "artifacts_sha256": {
+                  "completion.json": "8ce4e49eaea484b09b1ee3e5dd1220daf3e14d11150eb973fe852acf3bd49a2d",
+                  "decision_trace.parquet": "4b362eaa55c77f701cdd60625223d063bab8f958491feda7c84759a167b323c9",
+                  "equity.parquet": "3f5456b67b6e3fc9178ae6c75fae397d06a916c061a676be051678617ed7010f",
+                  "result.json.gz": "9051950ae783f630a1015142697b553712868d0d5ef9f4288300967e75087fab"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G0:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:SOLUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:SOLUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:11:11.015711Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:SOLUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:SOLUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:11:30.729771Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "artifacts_sha256": {
+                  "completion.json": "ad7cce58f1a16134902ec74c11216a81de57477a7a280ed8ce8fffb9aab4bfd0",
+                  "decision_trace.parquet": "f98388341d6d005a4529ef446bc5beee61cd96d3ed197a8df732ab998da9910e",
+                  "equity.parquet": "e58151f678ad86e58a746dd62577963de553d1ebd41c7991c24c31754094d173",
+                  "result.json.gz": "4ff2f685eb135c1f529b049177f4949ae4946a48ca7e510a16e7567d560eaa44"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G0:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:XRPUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:XRPUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:14:11.634585Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G0:XRPUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G0:XRPUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:14:32.270175Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G0",
+                "artifacts_sha256": {
+                  "completion.json": "c04850e35d2d9c07036c3286c5eff95ef15f3d2e08b8e6d0f3cb7ab7336edf85",
+                  "decision_trace.parquet": "5663220469cc34e925d2a81a0102544e244de0d901a29a9548946dc5d022189a",
+                  "equity.parquet": "2632effa4863ba4b17aa2598c244d0e38af8bc6538f17b9c7c4f685d8127ba83",
+                  "result.json.gz": "7d79f0cf14dd328525ccc1aef139ce90df3c6bee0673cd8f82962c15d2308013"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:02:20.306377Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:02:36.879970Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "0cabd0525c3f7b1774accef3ef9eb3c6ae5454e3dae8bd2fa85b9fe70d20b8fc",
+                  "decision_trace.parquet": "8e908b872933b33323facb6956732929a665f190ef66a2f55e34bdc3fdff5edd",
+                  "equity.parquet": "32fea328c2e1730c590f518920351e8899081fc870cb60784a2c0947522512d2",
+                  "result.json.gz": "c8970df3a26aa865e4551486ab8f62a5ad4996725791a80e889dc030ea679519"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:02:36.882314Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:02:53.469313Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "b5a57501f7582f0ccfc1d4527334dd62835b500fff3b3ec4de1dce61a591f054",
+                  "decision_trace.parquet": "2839a7055d1654b2ed695076271d41a4f4c260d8bbc0291744adf452b76e5380",
+                  "equity.parquet": "37aa338b5030c9a0ef380c7a136eac9248d9e4f58c4788865e71d888a77018a5",
+                  "result.json.gz": "143bbf394ca7fe82cdf03d84c1c9ab9e8193919b3de36c4071fe135988b8f1f2"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:02:53.471249Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BTCUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:03:10.157152Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "e8b9a2a5e21d4132396c859ebe0ce6fadaaf084953af88230df27fc5d6374a1d",
+                  "decision_trace.parquet": "6818e6819b3ef2ec136bad4be05688d2fe7c5eebe9990b1b43b0bb6d2dc3f4c0",
+                  "equity.parquet": "642bc50edb774d964fdf59d4e284bf1de5883d4a1f7b3b71f34b514605b7ff28",
+                  "result.json.gz": "9aa19c765e116447bd7fbfe55e6bf634be970081d6b3bc3ca54f980a68fb436d"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:05:20.337781Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:05:37.331117Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "64413b28299cabbb041e811e120fd1c406d94aa7a17ec2757ae97f03093d1d94",
+                  "decision_trace.parquet": "de19161090215e56d8bb146cd75a66a6f67c3752d703f7378eb9a12a6f7d2d92",
+                  "equity.parquet": "9eac3dd6f40fb5c887851bebbf9ba9434f6d6cf2c3f3f762233c0be1a35d11f4",
+                  "result.json.gz": "f1b0f29c181e08d79c0958c3a996652e70ba49681b49ab94529d33c0de79846b"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:05:37.333613Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:05:55.704363Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "8cf9b8e738c4c3bc8d02b58537df063740f68d2444c3b089d7e8f384eb1149e1",
+                  "decision_trace.parquet": "0f9f912fecc39a86221e5757223d4afe99522edb3b83f29e5ca6525530330e7e",
+                  "equity.parquet": "82e6ff79e1d91c38c9094eac31beb5cd4d13b04279b572505682dcde0cbd5d2b",
+                  "result.json.gz": "6dfa7e00dbfa8266be8b57366d201aec8fe344a1b8ee177f90e58ac0d2f06660"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:05:55.707169Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:ETHUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:06:14.584526Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "5ae344441a0c6b1601f8ab09bf6adb2953a0f7af0bbb9a8b25246c6d115d0469",
+                  "decision_trace.parquet": "1dfa41cc127ee10767cae34da903ed1d02e526dda85f482d4326d8378a90cfec",
+                  "equity.parquet": "18e97cdcd1dda9b88bbde20ae587aab09b66f5098dde041d6b633cd293f21550",
+                  "result.json.gz": "4f82dd183b902177e627490e2700cabaa30237eae5a2e1a1cdfecae5158a1e5e"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:08:28.650012Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:08:44.905647Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "38892092ae38808bea20e666ca61e51a24611810f5cb0af96a2a2b8463475c2d",
+                  "decision_trace.parquet": "45fa7bdf5b23b5055a2171b2e6b4beb6b5eccb54701bd01bb875987b6a05f11c",
+                  "equity.parquet": "28681b549abc66995b77dcd5ac5627db959452252dc76374f0da2e07d596970b",
+                  "result.json.gz": "f06f988b8be741bcc11560641bc253b587c1f8c1350b01f543eca05f8795b059"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:08:44.908866Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:09:00.978305Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "7012fec73869dc21b0d80d2e1eaa58cfce8f9172f3706833c8e0875bf722ea6d",
+                  "decision_trace.parquet": "5072e0640d987962804f5534b02cbcad6906ff26b2d8e3f48f5191bd479059ac",
+                  "equity.parquet": "8195e00c81409f0499e8c8e231524ef4981c518091309d7e40f4a9f613abe7f2",
+                  "result.json.gz": "7da2b6d8e48c11940f4a830242fb201ee9b247eb22622dd16206159a83ffcdca"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:09:00.981786Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:BNBUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:09:16.865483Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "c532af04633fd16ed608b3c3260be6d6327e8c8c0460a2316bf48afbdfb85cd7",
+                  "decision_trace.parquet": "3601ab979f2eedab702a3b9fbcc05cb63b47da67b17d714ae53ae04bc7dd8aff",
+                  "equity.parquet": "5beff29081a33c30e459a2e48b6248d1d3e7f60b1b5776171e678c56e79fdca8",
+                  "result.json.gz": "5d5a4a5b8832e57cfa8e932163cc28d04905111a475d96db7b39b48ed20c5374"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:11:30.733390Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:11:46.561206Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "04ca12689e8d47d340a998b565d1012492f5925ba4d4077bf177d4d24197c952",
+                  "decision_trace.parquet": "7f39d3dc381a97129f8b36d04edb750aea34daf1823c414086cb5aec66687787",
+                  "equity.parquet": "3b6d5879c0c12375c8890b6e311797414db5e81b90e44620fc9c0bbfd7f685dc",
+                  "result.json.gz": "33ae5a9b3b9d2b2a9a1d58991ec270ce07bcc27ec6acd31f04d0a41d66a46c1a"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:11:46.565646Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:12:02.568682Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "9b7d2f4d64fa714b7dabbc129d0af978029eb6a61828d63ec2012cfe76f5cc2c",
+                  "decision_trace.parquet": "ff0883aa873d0842c9590b2c7a1962b366ff6fcd1279dbbfa677b61ad6267225",
+                  "equity.parquet": "a9f6c61df82b591e9a30b3db917773707793e7d30d91583e6d92515f8a740e3f",
+                  "result.json.gz": "8b04f7a5ba20777e60108f3c9b32ecc3200318a56a47a0d397f915202ced55ce"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:12:02.572393Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:SOLUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:12:18.619906Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "d50cc1e2e7d24e394f163d0d98de0638af11554852f6a6f20eb94a9dc0359053",
+                  "decision_trace.parquet": "a94dbc9ff69a4b56f85e1925a636a07312feaf3641561513e7cc1773bdc45c68",
+                  "equity.parquet": "9745fd16b56d4e5c0f3b728183ae58f487c2955bbee76d88c916fc98aa746a6a",
+                  "result.json.gz": "d337db4235484a818d17c578e588e93e0e6feb9fb7b4f1ad6786fe1ac77abe95"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:14:32.274055Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:14:49.013755Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "1110421a7ba81d352139e14400be92b227b0c70bbd9864bc5ada4d8771b01f82",
+                  "decision_trace.parquet": "292a2704b6db1a5887a9b3f81bce082d6c79359f99ee7a8a6ddcc43f26333f86",
+                  "equity.parquet": "8b503f4d57da012d8c52bd88c5477f4ea6d56a501c826a238916d397ff014b7a",
+                  "result.json.gz": "16f4bb676f76df03ce251b9593be6af0373bf8792ea083a9c35395dd971c7272"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:14:49.017709Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:15:05.448888Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "47400e4eb7d61ce427e377fcad7c845081e7a96dcc2fc252819478e36dc43993",
+                  "decision_trace.parquet": "da2a9c8ff7346b4b5973eca9b30fd0b3fd91e030616a5ae9094ced8098c38565",
+                  "equity.parquet": "d9cc915033bec5eac974b9e9f9ff266559d779b7b9dbc57642e0d74f1c92209e",
+                  "result.json.gz": "f1474e083af76b69c05f08472f3ab22128e56305052d8e71ea2292a25c850f26"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:15:05.453000Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1:XRPUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:15:22.134398Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1",
+                "artifacts_sha256": {
+                  "completion.json": "6b7cc31cb69fe5a3f9dda13cb46d879e66fe4f29032ea0b84252c60b22242401",
+                  "decision_trace.parquet": "5c449a539e600b15fff673e962ce43d1dc2fb896aa1b1c863cb0a24ecf2aa7ab",
+                  "equity.parquet": "572ce2679c1b2090cd0e39254d96ae8c1b9177a4ba2e453e00fa5ced3c5f2712",
+                  "result.json.gz": "640e65623131e3dc84e30e09c88200c4519c1fb9c6d293420078d92941418098"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BTCUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BTCUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:03:10.158965Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BTCUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BTCUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:03:26.665194Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "artifacts_sha256": {
+                  "completion.json": "baf8c0b94153cae997a7bc26d77f8425cb282b670519b502ebd082359d7f3a25",
+                  "decision_trace.parquet": "de9f41220f75634c1d4dff056183d29074d96063a8d2ca8a263721d259bc1029",
+                  "equity.parquet": "d33c7c47a0c1abb5065685548eafa0a28013755e278a17e7abe29626fe457ccf",
+                  "result.json.gz": "12318594f03c825beee1de9752e01860c1391a17d9da8a49de1adacbe828e7ae"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:ETHUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:ETHUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:06:14.587174Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:ETHUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:ETHUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:06:31.673090Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "artifacts_sha256": {
+                  "completion.json": "8c320e5febaace32c8549124e58db1caa47bed13c1980c4d2b7c2ea03e0ffad6",
+                  "decision_trace.parquet": "0b1fa315b07a6f69b93ba1ee7c648534e1ca16b5b548053c0bd3f434c3da9096",
+                  "equity.parquet": "f9333bf68e30dc30e7fb452da6c5eebb78eae106a1650581138601f181804c26",
+                  "result.json.gz": "fafab74a964217327baee5ced23238c2149a2b9be867d855ae6421879dd0d2d5"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BNBUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BNBUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:09:16.868431Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BNBUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:BNBUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:09:33.078913Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "artifacts_sha256": {
+                  "completion.json": "066723e46b5bdae5797671cdfaf16c874b163826d2bda20d3cb507e70350b94d",
+                  "decision_trace.parquet": "6a4e8b290fa336e4ba5b81adbafa5307d4befce52b1e30f9c2234880ab892161",
+                  "equity.parquet": "8a2fb19ff85b125fb8896865fdd305c9cb7a37e8e8c9a30d8aabb11239de0b13",
+                  "result.json.gz": "e2a6afb6d64638384b6e76db404d10b1c816248073f627829c9fe8bb3e40acac"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:SOLUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:SOLUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:12:18.623571Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:SOLUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:SOLUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:12:34.351316Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "artifacts_sha256": {
+                  "completion.json": "164131711c04560989772f8388a8ab7e4ac077b626064c46e03d2884623e252b",
+                  "decision_trace.parquet": "79a039c664f428a21f6e316906f7588cefb498da5699b7ace3e411790a5037ad",
+                  "equity.parquet": "9f91e4b0db1ecabfb4a9e2543da6ed3410a87d8e36a6f9a99126db31173ac465",
+                  "result.json.gz": "6423a7e270eb243342f3bd3378079d380da4fabdf9a1ccf47f6294d9f6855460"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:XRPUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:XRPUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:15:22.138471Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H3:XRPUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H3:XRPUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:15:38.801314Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H3",
+                "artifacts_sha256": {
+                  "completion.json": "83abb128a26b25bbeeefd1b587a76f573fac41f947383e959e3e605f05dcd0e8",
+                  "decision_trace.parquet": "5b6fcaae937c7d394d63ffc06019e1ff28937b10174ca70a1b7e04b1a1ed68d4",
+                  "equity.parquet": "c8feb3669cac0913927601d117a5cdc1b6c23c30afa170efa5f3c5e09835d027",
+                  "result.json.gz": "7246ec0eacf297b0c2a1b518e89cf3c75647ac6f9c557a2c5aabde76093c6710"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BTCUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BTCUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:03:26.667293Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BTCUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BTCUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:03:42.282498Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "artifacts_sha256": {
+                  "completion.json": "6d18bac7cf68bbb201f8d87d61ecd2d4b5ea98842b47fd69cfba189bb9714566",
+                  "decision_trace.parquet": "3bad868c86f714cb11ec9293d0c3a523b65011ade6b7ae8341c9f95a987905e0",
+                  "equity.parquet": "8d2566e8c471bef8c8744cd62e272d6c0d701264ea115523cca68f06c3333ad7",
+                  "result.json.gz": "96bd2b6b0ff8a36cbe89227a5617809893b1cb7773266f325c1549e63646073a"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:ETHUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:ETHUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:06:31.675948Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:ETHUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:ETHUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:06:47.765562Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "artifacts_sha256": {
+                  "completion.json": "db79e94ff043b71e204f3ceb862996a8570b96b96e94b31d616cd9d111b8621c",
+                  "decision_trace.parquet": "e7378f00f13a439bf4cea344b430a5c0298f385cb1b100769a56ed47d5d89012",
+                  "equity.parquet": "05b55c6bf39a6fe7de78c5837e00ff51e0adac6a6dbc335ce28da43bc0801f6e",
+                  "result.json.gz": "8da4a71720b1e93103e5adceb98b2cc3bee5eb4892f13a9e71a929d7cfc2705b"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BNBUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BNBUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:09:33.082155Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BNBUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:BNBUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:09:49.563004Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "artifacts_sha256": {
+                  "completion.json": "98c4e6cbe516121320e2ebb5e6434e2ec456df6bc4d801b8f629ef36385ec820",
+                  "decision_trace.parquet": "6f5446af26a27a38467c7fddf2381fe488b601bbdfbedd589d72d6c4bbaef60f",
+                  "equity.parquet": "fdb50e4296cfa9c9b988f4e406ee61f6d5f61855bba8de23ce83186fd439913f",
+                  "result.json.gz": "fb6c6b346d6935523f19c038192af9804f8b6326583008dd47f30f6d3f9bf2dc"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:SOLUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:SOLUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:12:34.355312Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:SOLUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:SOLUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:12:50.215986Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "artifacts_sha256": {
+                  "completion.json": "b5b8084d3fa8eb739673a9195c7a370efa5d847a11c56ca1280042ea0d9033e1",
+                  "decision_trace.parquet": "6b307b8e6c98011f8f97c10cc8451d459e375f300e91c595079168166a38baba",
+                  "equity.parquet": "52d23f2ef19cc4aa4333e154704ed3e0c3b0b6ef1d1e0576b7aca81d52fc408d",
+                  "result.json.gz": "dcb3ddefe95aac4d2d929e0265344ab38a974b7a7ecd3fb96b936c3e399977a4"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:XRPUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:XRPUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:15:38.805958Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_H10:XRPUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_H10:XRPUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:15:55.000961Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_H10",
+                "artifacts_sha256": {
+                  "completion.json": "0a3d4b4ad62b3a2c5d543173450004fca4fe6d09e2dce386afa461cbaf26f9a5",
+                  "decision_trace.parquet": "5a5296ed004b3f861290bdd530231ec294bb300f02d62d453c9130e3b6d46c75",
+                  "equity.parquet": "e576e484a8f23b8ffa4e6db8624f9f5f89463429baf542cbcb0ab7c83f5e4796",
+                  "result.json.gz": "fd4aa49c7de33606547d57cf041e054cf4325d55d7f15e792a6d6b230d5ed53c"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BTCUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BTCUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:03:42.284698Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BTCUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BTCUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:03:57.671000Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "artifacts_sha256": {
+                  "completion.json": "7cfd0e441a786532a3ce20e42fcee13e571fd7dc9ea533556088f73fa3cb6668",
+                  "decision_trace.parquet": "053aa6928b1d3e6d37db7fc51092112705ca818c7da4511886b0419ad2557c58",
+                  "equity.parquet": "b932551dac7677b0007804a02af42ab9c0aff5b6fffe8bdaa8980c4ec62b8e73",
+                  "result.json.gz": "e84ffe032a7fb7dd5883a970b19e3b1a1765e4fc3fc8ce327c0d5aa22ed02b18"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:ETHUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:ETHUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:06:47.768474Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:ETHUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:ETHUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:07:03.640998Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "artifacts_sha256": {
+                  "completion.json": "bf02a81cec9d3543831f3cbdd1d8556e95bb5c77a24274e04dfde989dba9479b",
+                  "decision_trace.parquet": "02511ffffad3228fc2aa4d47bc0bcdfbbc837f74bcc1cb287782ce501f9b4ded",
+                  "equity.parquet": "64046db16dea65e49b46cfe5f87f52ec64875fde1a7de9b8f04de6ae1c78cbb6",
+                  "result.json.gz": "84273326fbef7f43281a7bd13b2eda8b56e9fe0075e69d3851f386b80c339814"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BNBUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BNBUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:09:49.567180Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BNBUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:BNBUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:10:05.195442Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "artifacts_sha256": {
+                  "completion.json": "35ce99f9cdc53ba8bc0c16e67885f96e452c447eba2cf5837141ca2ee83c7e67",
+                  "decision_trace.parquet": "4437b27273ed8f729a7775ffbf612d037acefc219d631c37adb202910c008f32",
+                  "equity.parquet": "5c7d27aa40611606b999d0246a73c6c234aa6563ba32d0e4d89b939819548b4b",
+                  "result.json.gz": "f0b8ee62ddc21f11f687c2737f65a68fb441b482e0e1c11cfa12121c401d52d1"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:SOLUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:SOLUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:12:50.219820Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:SOLUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:SOLUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:13:05.749697Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "artifacts_sha256": {
+                  "completion.json": "3289ad860ab0c0adb01732831079ef7075c67cab679b701c3dad12851bc7bc13",
+                  "decision_trace.parquet": "e92f06df2bf6a38d10f7573630029353b3075641a2d28904a34c9b26d79386ba",
+                  "equity.parquet": "ce633bf96d2d4241a2cb25eab8c4b0754bfd5cbeae62f27c912a9c65abb97595",
+                  "result.json.gz": "64ee6d150178878385cf44a2d7e113da1da5b2950eccb5e51079c55c84cfef36"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:XRPUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:XRPUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:15:55.006156Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R24:XRPUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R24:XRPUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:16:11.436312Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R24",
+                "artifacts_sha256": {
+                  "completion.json": "9891f667b5eee8eec78d7b9b66f123c0182bd313fda282b2666a244cbacd3ea4",
+                  "decision_trace.parquet": "55d21549b6242f1efc13ef9ebc24a905fecb3e19ef054552366d695ae1dbf3cf",
+                  "equity.parquet": "5eb974fe1f3f5819fda59bc36344cd231525cda02c3acbb06a7895e89033e822",
+                  "result.json.gz": "433c59e22a7546e131031f2f8ea0cdfaa02dacb7291b0873f0498bb65bbb40c2"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BTCUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BTCUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:03:57.673456Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BTCUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BTCUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:04:13.230499Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "artifacts_sha256": {
+                  "completion.json": "41637a280284de141ebee0df3e69aeca945a5e9c1e6a45d475dc5aeff9f688ce",
+                  "decision_trace.parquet": "cd5e62d145e1ce9825a8544e35ce0e77a7f7cedd889ce4af3a7f0ba70053bf16",
+                  "equity.parquet": "1bbee8c4943ca6dd9bffb285dd9a5edf7b7d461692f91b83c152f9f251e676a1",
+                  "result.json.gz": "8a9990b9cf947cc9b48563893da3c717591b071fd71d4efb973f591742872d22"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:ETHUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:ETHUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:07:03.643840Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:ETHUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:ETHUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:07:19.631728Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "artifacts_sha256": {
+                  "completion.json": "5ca6a58faada25da79c47ff3aede57c60ca536e38d19a01f2a30cb823fe50f33",
+                  "decision_trace.parquet": "3eca1d864f28abf16c05fffbb9db8a681ad43ae953b5d6f5a8580efb72b84c62",
+                  "equity.parquet": "da4e4df6aa8e576012413f17aa2949106968e9e5722f14e7003fcb08e61bdf05",
+                  "result.json.gz": "d602d4405629ac581c1aaaf65418b7fea8da1ea45b8dcfc7cc05da65bd0a4c65"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BNBUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BNBUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:10:05.199002Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BNBUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:BNBUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:10:21.161135Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "artifacts_sha256": {
+                  "completion.json": "d735530961eee1a03ce51b949e914991a807fbee06f630ec9a94ac06c5f58926",
+                  "decision_trace.parquet": "35ad6444d7e42dc72dfdcbd3c55ab7c5352bf0101b795bc26aa5ef11eb15173d",
+                  "equity.parquet": "9eafdee6844956747ac8ac6bb971d51b9d0d61695b51546804adb58858e27aef",
+                  "result.json.gz": "a7c975308d4134615479c5b33e63493fb0b591d7d0a027e612f3c1339d333673"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:SOLUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:SOLUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:13:05.753420Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:SOLUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:SOLUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:13:21.790175Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "artifacts_sha256": {
+                  "completion.json": "171d38b774988a6144273ecdc28112fc93f23701298310402297b7f6ace984ac",
+                  "decision_trace.parquet": "d3cf3ec0451e983d9cffa33e1bccbc29ca66b069d5512c16a0cab381de02e3ce",
+                  "equity.parquet": "082409e944533f7c8462712ac04b66bc5989b0791290c4e89ef2b3eae8cafd20",
+                  "result.json.gz": "28b79c05707d06c0152d23733233902d801348d06cad995a82737df757832ecd"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:XRPUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:XRPUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:16:11.440999Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_R72:XRPUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_R72:XRPUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:16:27.257371Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_R72",
+                "artifacts_sha256": {
+                  "completion.json": "25e2d3c6416b78aefa18f0a5bd7e81f6b074503ce3914fc772dc8566fcc3ae7d",
+                  "decision_trace.parquet": "992c4bd2a0b5d6ea6ef0f0982fd3f8def6427d95526a30d8680c0455e0b2c1f0",
+                  "equity.parquet": "99b9239cf3d60952c6a12df66130489b07188022862fdd386e713e982c2d5383",
+                  "result.json.gz": "2ee89d7be27ebc5bd0cb7786541def3e39bff61803d2b141a1f645a496805f05"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:04:13.232606Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:04:29.139146Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "8e71dcb24c14ecd21124bb7d9851a651723f05d2e0a949aabf34ec4a67a6bf42",
+                  "decision_trace.parquet": "a2c23829819679a6752937ff4e1169e0cc94afb8640d28f2188217bbfd1b09d8",
+                  "equity.parquet": "ce460586d5860803f561449d9681f988c3e8ed120ee616cd6549583f24246a48",
+                  "result.json.gz": "3a2caeb20b0045c253f63ed4b84a179ed35861701d28abb5b0e89d085b2fe7d7"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:04:29.141235Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:04:44.809566Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "4c504660fc455bdb437c7797798efc41798c61be5ebe8e24c526c9bacc547a67",
+                  "decision_trace.parquet": "7bb1b8f7e50f5bc019de7d96f4897cfd6eb5fe53455329eb75ff0985322b3a47",
+                  "equity.parquet": "bbb8372a0f3bc840131277083264ed286facad90c1eb6238c33976117dc22385",
+                  "result.json.gz": "13b9148c5f4f6d4eeba691f15f8229e2ae4025bcd6b53e596141cec7f0059190"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:04:44.812219Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BTCUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:05:00.652043Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "dec079097d4d8943be604c5ab1518c71682290e7e0a6af175606969847e7f50e",
+                  "decision_trace.parquet": "64a6ebd347462d99de3ef20cbf5abfead45ec9c7ae08e82c7a3d6aa814c6c954",
+                  "equity.parquet": "495985a6edae1e1fc719d3724d24f94756aedc0a5c8f436db313f09409dd05e5",
+                  "result.json.gz": "e0a951d6f80e95c7e53c2f60e395c0309ce73169ac36aaea2a701a915ac74fcc"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BTCUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:07:19.634986Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:07:35.603434Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "00fb7b79354e3223013877819f4bd39fc2f35f794e8da7517ddc4593014eeedc",
+                  "decision_trace.parquet": "eb7b7e058053d89724f6d05db85ebef547a6ee6dde342bf84ff01db76934221d",
+                  "equity.parquet": "bbdc502c69976fe387f4b371bc2099e803bed81d9250e1cef78dae1539fcd006",
+                  "result.json.gz": "5bae5d567b0536e8284f402fbee069bbaa3811d57ea4e12bc4198e583a12d220"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:07:35.606048Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:07:51.407831Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "e1ec5e8d3785249b07eba4b5021272f63bf2bbc23e1cc96970097290342733d5",
+                  "decision_trace.parquet": "f45d976d1492cda4ab2cbf91b0f9b5ee3982e71272c26e102030fa5396b69c4a",
+                  "equity.parquet": "1521afb76fd0a5dd2618befaa82d9448623b3c4070c1d179d5009d44968e9f13",
+                  "result.json.gz": "ce9596bc736421147c087bffa358b03f6613ca886a245a9ccd589106ac7a262d"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:07:51.410743Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:ETHUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:08:07.296209Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "f2f6ebabf1632d72bc8a84e51891a99c30bf421be1ff83ed0aeb36586f51aceb",
+                  "decision_trace.parquet": "de97a22fc1910ac1e0d7e6f20dee5d5b0ddb4c448ef6fcfb6330ef7a33bb253d",
+                  "equity.parquet": "81b94259af6753819f83ccb36e597f2660e6e2437b00824e853efbbd261b7f1f",
+                  "result.json.gz": "eb247648a0b25e242faf08f7c9f3fdf7d37a33cabe289b8a439e0a878f9327aa"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "ETHUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:10:21.164437Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:10:37.928707Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "634dc0658d878193f1d369656b13645c961eba9f0e5b0f579f709dc359bb303e",
+                  "decision_trace.parquet": "1a0cdea183fb559899e3eb6967ca3a166f61c36ad546a0cce8fee06339ebe286",
+                  "equity.parquet": "4436b05e0c7de2821008dd2a2f1fa8e4c90ce3901703ae858348ab49d20cc229",
+                  "result.json.gz": "b198af47c37b7dc4ae09640a4f92a69610c0ead3aa190746876d38fb67eb852c"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:10:37.932222Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:10:54.352953Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "517d811da7c63ac28c62af8ff8e90ec7cfe2289eb9ec2707b7d30e61e3cc6f21",
+                  "decision_trace.parquet": "ed17ff15be1b0d502bc3252fc33995b927dba036dd53674e3c3ecad66b3b63ee",
+                  "equity.parquet": "d0336bd1086760535d07da21488414026c47d932d7793c4b9b33056289d1d21e",
+                  "result.json.gz": "045a928043cae8f2d571d613d6b45cd2f4460feaa5f019df6b10e45bb2bc8973"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:10:54.356663Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:BNBUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:11:10.382919Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "301f3d1f15f99cac511b9dae61978ec3b9089ad8c674c6c3ba914c036fe94426",
+                  "decision_trace.parquet": "b4e5a11255bb2ced888ef0b8b02133bb05b69e6d64a6f76269cae4d1253475be",
+                  "equity.parquet": "bc4196d4cdc9356a5f8cc91d112b167ef703aa8f64a54f84318e8b42478dc8f7",
+                  "result.json.gz": "29cd1584e5b71b8e725e7fe69d1914e9bf26e508a12e19ce0125efe086f39052"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "BNBUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:13:21.794046Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:13:37.980903Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "e703080d0251194150ab205311435fcbfbe374f405428528c6c7deb5a81d3e84",
+                  "decision_trace.parquet": "56cce4c0914823001fb820f4ba992899f127516c18a5680971713e62cd395450",
+                  "equity.parquet": "a1ae1a6c6d4519f18b847ad000c7f228a8a79dd063f0a08d425b7f9c5e3cf3d4",
+                  "result.json.gz": "c8870bcf4fd43ecf33db2e074efaaf0e31e813cc40ca07b93ad2ead8615107fc"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:13:37.985498Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:13:54.736824Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "74abdff30c9495a0154225d2bc15ba8d11dd7a89de8b15390416198c04a517e3",
+                  "decision_trace.parquet": "c2506625741c65585830ad0c6c42e92e608a1ad6bca6abc670fae351b04ee5ab",
+                  "equity.parquet": "ce1aa9db6f42c1976574389253f8be40d102aa04ebc0a552dfaf003a3ff59167",
+                  "result.json.gz": "9282d22372f4e36a093e544c8d3dbad476590884b1b5de97deec0c414ab24f34"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:13:54.740854Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:SOLUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:14:10.949790Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "c333a6765138e6dcf1840c632e9882c480a8036b1e2688edc406805c9331a424",
+                  "decision_trace.parquet": "291fcf084e8f62438a120db39fdb6cb53b4749d19166c00862694f6d19f2910c",
+                  "equity.parquet": "ccc081a02b70fb2a3e2a90c0639a938ef2afc82892107b0adc7bf017f42f2680",
+                  "result.json.gz": "65fb4d20a3c4b9201daead561101a4468ac7d5ba99fd0c27479b485660c603df"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "SOLUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:16:27.261857Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:16:44.315573Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "17f68fe2fc57ae8e77ccfb112ad940ee88aa0c46a2ffd73bf7eb079aaea5c347",
+                  "decision_trace.parquet": "ef0e81ea0981d65d9aedd03987eb49ed40d5bc9ecf01d9a2b3ffe155a6c8e073",
+                  "equity.parquet": "049adc9410cd0120fe885aadec8647797cfb457a0bcc518b9ab51eddad743426",
+                  "result.json.gz": "44fb908c5d8a4753e1a6ff9bf6d5d2bbb565f3545a203f56078f81db4bf5d566"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1.5",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1.5:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1.5",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:16:44.320241Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1.5:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:1.5",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:17:01.417302Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "e5a1615d98bc42b6a1df7b89ef5ff43567df50f9ca783a3e045bc62daa3dc3be",
+                  "decision_trace.parquet": "92fe01ad11c5a52982e617c262d98cde009831488036fc4f9df8793f55c61b59",
+                  "equity.parquet": "98ab88f14a48ed7678d25cb958bc7e9d4df4b64bceb0171c53fea164cb78e7fc",
+                  "result.json.gz": "5f629c3e4185d72f5799ed0e12c10263fa72e740db355d901e52606bccf59142"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "1.5",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        },
+        {
+          "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:2",
+          "kind": "REGISTERED_DEVELOPMENT_SLEEVE",
+          "events": [
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:2:STARTED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:2",
+              "event_type": "STARTED",
+              "recorded_at_utc": "2026-09-08T15:17:01.422275Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            },
+            {
+              "event_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:2:SUCCEEDED",
+              "run_id": "alpha-r5-research-churn-20260908-v3:G1_PASSIVE:XRPUSDT:2",
+              "event_type": "SUCCEEDED",
+              "recorded_at_utc": "2026-09-08T15:17:18.334812Z",
+              "trial_number": null,
+              "details": {
+                "arm": "G1_PASSIVE",
+                "artifacts_sha256": {
+                  "completion.json": "6b7d58a7d42ab75bab4bad0e585bdf9001479829589f8bfbf25e1a16db749fe4",
+                  "decision_trace.parquet": "2c58693b2ec22d20df990fa15f21afc38ab7112c61932ee7957af8dd70c645ad",
+                  "equity.parquet": "2a7cb741cd997a0850d89a678603cf831c14cc5e2df6e26e050c109160359a2d",
+                  "result.json.gz": "0fc46dbc13fdd07d0b1ca49a28ded1e8409224964977eb75848381f1e4b68109"
+                },
+                "baseline_result_sha256": "c1ddcd2b0a10a4639da016ad157e96b3859c8c4c411705b0eac46ece4efaef62",
+                "calibration_fits": 0,
+                "cost": "2",
+                "development_partitions_sha256": "fad56c4f8d3172f47164943dc1ff6fa413e2a82069684c7f68be1142ad367ff9",
+                "holdout_accesses": 0,
+                "manifest_sha256": "c0cd147a1f32822324d9289fa39cefb942f1b19fd2d1f5efcd4eb3f63aa35cf4",
+                "model_fits": 0,
+                "symbol": "XRPUSDT"
+              }
+            }
+          ],
+          "status": "SUCCEEDED",
+          "observed_return_result": true
+        }
+      ],
+      "history_classification": "OBSERVED_DEVELOPMENT_RESULTS_AND_REPRODUCTIONS"
+    }
+  ],
+  "recent_failures": [
+    {
+      "source": "artifacts/current_system_recent/20260908_v1/failure.json",
+      "kind": "ENGINEERING_PRECONDITION_FAILURE",
+      "record": {
+        "status": "PREPARATION_FAILED_BEFORE_DATA_DOWNLOAD",
+        "reason": "BufferPolicy timedelta was not JSON serializable; fixed serialization before any market history download or replay",
+        "model_fits": 0,
+        "engine_runs": 0,
+        "successor": "../20260908_v2"
+      }
+    },
+    {
+      "source": "artifacts/current_system_recent/20260908_v2/failure.json",
+      "kind": "ENGINEERING_PRECONDITION_FAILURE",
+      "record": {
+        "status": "REPLAY_INITIALIZATION_FAILED_BEFORE_ENGINE_RUN",
+        "reason": "Strict Decimal gate config requires model_validate_json; fixed input adapter, no policy change",
+        "engine_runs": 0,
+        "data_download_complete": true,
+        "successor": "../20260908_v3"
+      }
+    }
+  ],
+  "review_report_failures": [
+    {
+      "generation": "alpha-r5-review-contract-20260909-v1",
+      "output": "artifacts/alpha_v5/20260909_review_contract_v1",
+      "output_manifest_sha256": "1372263b2712c81efcd1695de248abd1e1ba31958618eeb438425015ec4d5bd2",
+      "repair_reason": "Correct the new auditor to accept signed derived fills (BUY positive, SELL negative); no strategy or source-table change.",
+      "manifest_verification": {
+        "status": "VERIFIED",
+        "listed_files_verified": 13,
+        "manifest_sha256": "1372263b2712c81efcd1695de248abd1e1ba31958618eeb438425015ec4d5bd2"
+      },
+      "failure": {
+        "status": "FAILED_RETAINED_DO_NOT_REOPEN",
+        "error": "ValueError: AQ-EVIDENCE-FILL-AMOUNT",
+        "actual_attempts": {
+          "historical_strategy_engine_runs": 0,
+          "real_return_model_fits": 0,
+          "real_calibration_fits": 0,
+          "final_holdout_accesses": 0,
+          "real_orders": 0
+        },
+        "research_conclusion": "NO_PROVEN_ALPHA",
+        "production_policy": "CASH"
+      },
+      "events": [
+        {
+          "event_id": "alpha-r5-review-contract-20260909-v1:REPORT:STARTED",
+          "run_id": "alpha-r5-review-contract-20260909-v1:REPORT",
+          "event_type": "STARTED",
+          "recorded_at_utc": "2026-09-09T09:44:42.935931Z",
+          "trial_number": null,
+          "details": {
+            "kind": "EVIDENCE_REPORT_NOT_ALPHA_TRIAL"
+          }
+        },
+        {
+          "event_id": "alpha-r5-review-contract-20260909-v1:REPORT:ERROR",
+          "run_id": "alpha-r5-review-contract-20260909-v1:REPORT",
+          "event_type": "ERROR",
+          "recorded_at_utc": "2026-09-09T09:45:35.965164Z",
+          "trial_number": null,
+          "details": {
+            "kind": "EVIDENCE_REPORT_NOT_ALPHA_TRIAL",
+            "reason": "ValueError: AQ-EVIDENCE-FILL-AMOUNT"
+          }
+        }
+      ]
+    }
+  ],
+  "report_attempts_including_current": 2,
+  "retained_neighbors": [
+    "G1_H3",
+    "G1_H10",
+    "G1_R24",
+    "G1_R72"
+  ],
+  "frozen_comparisons": [
+    "G1-G0",
+    "G1-F0",
+    "G1-F5",
+    "G1-G1_PASSIVE",
+    "G1-CASH",
+    "G1_H3-G0",
+    "G1_H10-G0",
+    "G1_R24-G0",
+    "G1_R72-G0"
+  ],
+  "independent_trial_count": null,
+  "report_is_alpha_trial": false,
+  "bootstrap_draws_and_engine_runs_are_not_independent_trials": true
+}

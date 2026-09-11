@@ -1,5 +1,16 @@
 # AegisQuant 盈利导向重构 v4
 
+截至 2026-09-11，单文件审阅入口为
+[`最新结果与代码审阅包`](AegisQuant_最新结果与代码审阅包_20260911.md)。
+最新工程交付包括 B0–B7 的研究契约和合成验证，以及
+[`全部 17 组保存记录核验`](artifacts/alpha_v5/20260910_saved_evidence_v2/report.md)：
+215 个保存运行的订单、成交、账本与 MTM 对账通过，状态为 `VERIFIED_STORED_SIMULATION`。
+这不是新策略回测或真实执行验证；真实 PIT、费用/盘口/延迟、完整试验史和未使用留出仍缺。
+最新 G1 历史业绩仍来自
+[`R5 固定开发诊断`](artifacts/alpha_v5/20260908_research_churn_v3/report.md)，
+[`最近六个月报告`](artifacts/current_system_recent/20260908_v3/report.md) 则对应冻结 R4 F3。
+当前结论继续为 **NO_PROVEN_ALPHA / CASH**，所有交易开关关闭。
+
 当前最高优先级项目 SSOT 为
 [`AegisQuant_盈利导向重构任务书_v4.md`](AegisQuant_盈利导向重构任务书_v4.md)。
 研究目标为 AegisAlpha-CAT：低频 LONG/FLAT 趋势、经济过滤器、动态全成本门槛、波动率目标仓位
