@@ -258,7 +258,10 @@ research_extensions:
     output: artifacts/alpha_r4/20260908_v1
     report: artifacts/alpha_r4/20260908_v1/go_no_go.md
     validation: artifacts/alpha_r4/20260908_v1/validation/actual_test_execution.json
-    evidence_bundle: artifacts/alpha_r4/AegisQuant_R4_Evidence_20260908_v1.zip
+    evidence_bundle: null
+    evidence_bundle_status: REMOVED_BYTE_IDENTICAL_DUPLICATE_20260911
+    evidence_bundle_preserved_members: 1135
+    evidence_bundle_recovery_commit: 8b6f80040f123a50faf1391710aeeeb1f2beb152
     frozen_baseline: artifacts/current_system_backtest/20260908_v1
     evidence_tier: RETROSPECTIVE_DEVELOPMENT
     stage_history: [PLANNED, IMPLEMENTED, UNIT_TESTED, ENGINE_INTEGRATED, REPLAYED]
